@@ -118,11 +118,12 @@ function Carousel({
 }) {
   return (
     <div className="mt-8 relative">
-      <div
-        ref={railRef}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
-        style={{ scrollbarWidth: "none" } as any}
-      >
+    <div
+  ref={railRef}
+  className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2"
+  style={{ scrollbarWidth: "none" } as React.CSSProperties & { scrollbarWidth?: "auto" | "thin" | "none" }}
+>
+
         {items.map((t, i) => (
           <div key={i} className="snap-start shrink-0 w-[88%] sm:w-[60%] lg:w-[38%]">
             <Card item={t} index={i} />

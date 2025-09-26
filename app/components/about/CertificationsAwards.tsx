@@ -129,8 +129,9 @@ export default function CertificationsAwards({
       style={{
   background: "#ffffff",
   color: "#141517",
-  ["--stroke" as any]: "rgba(20,21,23,0.08)", 
-}}
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+} as React.CSSProperties & Record<"--stroke", string>}
+
     >
 
 

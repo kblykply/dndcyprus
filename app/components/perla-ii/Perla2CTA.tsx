@@ -23,10 +23,11 @@ export default function Perla2CTA({
       aria-label="La Joya Perla II — Call to Action"
       className="relative overflow-hidden"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+  background: "#ffffff",
+  color: "#141517",
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+} as React.CSSProperties & Record<"--stroke", string>}
+
     >
       {/* brand wash */}
       <div

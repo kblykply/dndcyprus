@@ -7,6 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
+
+type SortOption = "name-asc" | "price-desc" | "price-asc";
+
+const [sort, setSort] = useState<SortOption>("name-asc");
+
 type Status = "For Sale" | "Sold" | "Under Development";
 type Project = {
   id: string;
@@ -142,16 +147,19 @@ style={{
               className="text-xs rounded-full px-3 py-1 outline-none"
               style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
             />
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as any)}
-              className="text-xs rounded-full px-3 py-1 outline-none"
-              style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
-            >
-              <option value="name-asc">Ada göre (A→Z)</option>
-              <option value="price-desc">Fiyata göre (Yüksek→Düşük)</option>
-              <option value="price-asc">Fiyata göre (Düşük→Yüksek)</option>
-            </select>
+           <select
+  value={sort}
+  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+    setSort(e.target.value as SortOption)
+  }
+  className="text-xs rounded-full px-3 py-1 outline-none"
+  style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
+>
+  <option value="name-asc">Ada göre (A→Z)</option>
+  <option value="price-desc">Fiyata göre (Yüksek→Düşük)</option>
+  <option value="price-asc">Fiyata göre (Düşük→Yüksek)</option>
+</select>
+
           </div>
         </div>
 
