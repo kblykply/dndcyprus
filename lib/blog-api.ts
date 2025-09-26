@@ -30,10 +30,14 @@ function isPostArray(value: unknown): value is Post[] {
 }
 
 /** Fetch JSON with no-store cache (server component safe) */
+/** Fetch JSON with no-store cache (server component safe) */
 async function fetchJson<T>(path: string): Promise<T> {
-  const res = await fetch(absUrl(path), { cache: "no-store" });
+  // absUrl async olduğu için await gerekiyor
+  const url = path.startsWith("http") ? path : await absUrl(path);
+
+  const res = await fetch(url, { cache: "no-store", headers: { accept: "application/json" } });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
-  // We trust the endpoint to return JSON; T is caller-specified.
+
   return (await res.json()) as T;
 }
 
