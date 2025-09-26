@@ -26,12 +26,11 @@ export default function ProjectsCTA() {
     <section
       aria-label="Projeler CTA"
       className="relative overflow-hidden"
-      style={{
+       style={{
         background: "#ffffff",
         color: "#141517",
-        // if TS complains here, keep the `as any` or define a custom CSSProperties type
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+        ["--stroke"]: "rgba(20,21,23,0.08)",
+      } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle accent wash */}
       <div
