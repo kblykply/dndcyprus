@@ -125,7 +125,7 @@ export default function AynurSpotlight({
                     key={f.k + i}
                     className="rounded-xl px-3 py-3"
                     style={{
-                      background: "rgba(20,21,23,0.04)",
+                      background: "rgba(255, 255, 255, 0.04)",
                       border: `1px solid rgba(20,21,23,0.08)`,
                     }}
                   >

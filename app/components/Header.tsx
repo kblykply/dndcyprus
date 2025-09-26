@@ -384,7 +384,7 @@ useEffect(() => {
         </div>
 
         {/* Quick bar: language toggle (optional) */}
-        <div className="px-5 py-3 border-b border-white/10 flex items-center justify-between">
+        <div className="px-5 py-3  flex items-center justify-between">
           <span className="text-xs opacity-80">Dili değiştir:</span>
           <div className="flex items-center gap-2 text-xs">
             <Link href="#" className="px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 hover:bg-white/20">TR</Link>
@@ -439,25 +439,7 @@ useEffect(() => {
 
         
 
-          {/* Contact CTA block */}
-          <div className="mt-4 rounded-2xl p-4 bg-white/8 border border-white/15">
-            <div className="flex items-center gap-2 mb-3 text-sm/5">
-              <svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.07 22 2 13.93 2 3a1 1 0 011-1h3.49a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01z"/></svg>
-              <a href="tel:+905551112233" className="underline underline-offset-2">+90 555 111 22 33</a>
-            </div>
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              <a href="tel:+905551112233" className="px-3 py-2 rounded-xl bg-white/15 border border-white/20 text-center hover:bg-white/25">
-                Ara
-              </a>
-              <Link href="/contact" onClick={() => setMenuOpen(false)} className="px-3 py-2 rounded-xl bg-white/15 border border-white/20 text-center hover:bg-white/25">
-                İletişim
-              </Link>
-              <Link href="/book-a-visit" onClick={() => setMenuOpen(false)} className="col-span-2 px-3 py-2 rounded-xl bg-white/20 border border-white/25 text-center hover:bg-white/30">
-                Ziyaret Randevusu Al
-              </Link>
-            </div>
-          </div>
-
+         
      
         </nav>
 
