@@ -136,7 +136,7 @@ export default function ContactInfo({
           <span
             className="inline-flex items-center text-xs tracking-wider uppercase px-3 py-1 rounded-full"
             style={{
-              background: "rgba(20,21,23,0.05)",
+              background: "rgba(255, 255, 255, 0.05)",
               border: "1px solid var(--stroke)",
               color: TEAL,
               backdropFilter: "blur(8px)",
@@ -226,7 +226,7 @@ export default function ContactInfo({
                       href={o.email}
                       className="text-sm px-3 py-1 rounded-full"
                       style={{
-                        background: "rgba(20,21,23,0.05)",
+                        background: "rgba(255, 255, 255, 0.05)",
                         color: "rgba(20,21,23,0.85)",
                         border: "1px solid var(--stroke)",
                       }}
@@ -241,7 +241,7 @@ export default function ContactInfo({
                       rel="noreferrer"
                       className="text-sm px-3 py-1 rounded-full"
                       style={{
-                        background: "rgba(20,21,23,0.05)",
+                        background: "rgba(255, 255, 255, 0.05)",
                         color: ORANGE,
                         border: `1px solid ${ORANGE}55`,
                       }}
@@ -256,7 +256,7 @@ export default function ContactInfo({
                       rel="noreferrer"
                       className="text-sm px-3 py-1 rounded-full"
                       style={{
-                        background: "rgba(20,21,23,0.05)",
+                        background: "rgba(255, 255, 255, 0.05)",
                         color: "rgba(20,21,23,0.85)",
                         border: "1px solid var(--stroke)",
                       }}
@@ -294,7 +294,7 @@ export default function ContactInfo({
                   rel="noreferrer"
                   className="text-sm px-3 py-1 rounded-full"
                   style={{
-                    background: "rgba(20,21,23,0.05)",
+                    background: "rgba(255, 255, 255, 0.05)",
                     color: "rgba(20,21,23,0.85)",
                     border: "1px solid var(--stroke)",
                   }}

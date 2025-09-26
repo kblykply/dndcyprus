@@ -187,7 +187,7 @@ style={{
                 placeholder="Ara: başlık, etkinlik, yıl…"
                 className="text-xs rounded-full px-3 py-1 outline-none"
                 style={{
-                  background: "rgba(20,21,23,0.05)",
+                  background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid var(--stroke)",
                   color: "rgba(20,21,23,0.85)",
                 }}

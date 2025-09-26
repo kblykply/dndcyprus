@@ -116,7 +116,7 @@ export default function OzanJourney({
                       <span
                         className="text-[11px] px-2 py-0.5 rounded-full"
                         style={{
-                          background: "rgba(20,21,23,0.05)",
+                          background: "rgba(255, 255, 255, 0.05)",
                           color: "rgba(20,21,23,0.78)",
                           border: "1px solid var(--stroke)",
                         }}
@@ -164,7 +164,7 @@ export default function OzanJourney({
                             key={bi}
                             className="text-[11px] px-2 py-0.5 rounded-full"
                             style={{
-                              background: "rgba(20,21,23,0.05)",
+                              background: "rgba(255, 255, 255, 0.05)",
                               color: "rgba(20,21,23,0.85)",
                               border: "1px solid var(--stroke)",
                               backdropFilter: "blur(8px)",

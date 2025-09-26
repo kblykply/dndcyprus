@@ -78,7 +78,7 @@ export default function HomeCTA({
           viewport={{ once: false, amount: 0.35 }}
           className="inline-flex items-center text-xs tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
-            background: "rgba(20,21,23,0.05)",
+            background: "rgba(255, 255, 255, 0.05)",
             border: "1px solid var(--stroke)",
             color: TEAL,
             backdropFilter: "blur(8px)",
@@ -142,7 +142,7 @@ export default function HomeCTA({
               href={secondaryHref}
               className="rounded-xl px-6 py-3 text-sm font-medium"
               style={{
-                background: "rgba(20,21,23,0.05)",
+                background: "rgba(255, 255, 255, 0.05)",
                 color: "rgba(20,21,23,0.85)",
                 border: "1px solid var(--stroke)",
                 backdropFilter: "blur(8px)",

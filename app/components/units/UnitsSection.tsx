@@ -159,7 +159,7 @@ export default function UnitsSection() {
                 onChange={(e) => setQ(e.target.value)}
                 className="w-full rounded-full px-4 py-2.5 text-sm outline-none"
                 style={{
-                  background: "rgba(20,21,23,0.05)",
+                  background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid rgba(20,21,23,0.10)",
                   color: "rgba(20,21,23,0.9)",
                 }}
@@ -221,7 +221,7 @@ export default function UnitsSection() {
             <div
               className="flex items-center gap-2 rounded-full px-3 py-2 border"
               style={{
-                background: "rgba(20,21,23,0.05)",
+                background: "rgba(255, 255, 255, 0.05)",
                 borderColor: "rgba(20,21,23,0.10)",
               }}
               aria-label="Fiyat Aralığı"

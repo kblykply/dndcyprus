@@ -138,7 +138,7 @@
                     href={`mailto:${email}`}
                     className="text-xs px-3 py-1 rounded-full"
                     style={{
-                      background: "rgba(20,21,23,0.05)",
+                      background: "rgba(255, 255, 255, 0.05)",
                       color: "rgba(20,21,23,0.85)",
                       border: "1px solid var(--stroke)",
                     }}
@@ -166,7 +166,7 @@
                         rel="noreferrer"
                         className="text-xs px-3 py-1 rounded-full"
                         style={{
-                          background: "rgba(20,21,23,0.05)",
+                          background: "rgba(255, 255, 255, 0.05)",
                           color: "rgba(20,21,23,0.85)",
                           border: "1px solid var(--stroke)",
                         }}

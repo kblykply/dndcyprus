@@ -8,8 +8,13 @@ function isHttpUrl(src?: string) {
   return !!src && (src.startsWith("http://") || src.startsWith("https://"));
 }
 
-export default function BlogDetail({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
+export default async function BlogDetail({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   if (!post) {
@@ -21,7 +26,9 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
   }
 
   const { title, cover, date, author, content } = post;
-  const meta = [date ? new Date(date).toLocaleDateString() : "", author ? ` • ${author}` : ""].join("");
+  const meta =
+    [date ? new Date(date).toLocaleDateString() : "", author ? ` • ${author}` : ""]
+      .join("");
 
   return (
     <main className="min-h-svh bg-white text-black">
@@ -55,7 +62,7 @@ export default function BlogDetail({ params }: { params: { slug: string } }) {
       {/* Content */}
       <section className="mx-auto max-w-[1200px] px-5 md:px-8 py-14">
         <article
-          className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:text-black prose-p:text-black/80 prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-strong:text-black prose-blockquote:border-l-blue-400 prose-blockquote:text-black/70 prose-li:marker:text-blue-500"
+          className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:text-black prose-p:text黑/80 prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-strong:text-black prose-blockquote:border-l-blue-400 prose-blockquote:text-black/70 prose-li:marker:text-blue-500"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </section>
