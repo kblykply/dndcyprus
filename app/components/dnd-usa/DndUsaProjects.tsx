@@ -10,7 +10,6 @@ const ORANGE = "#f15c34";
 
 type SortOption = "name-asc" | "price-desc" | "price-asc";
 
-const [sort, setSort] = useState<SortOption>("name-asc");
 
 type Status = "For Sale" | "Sold" | "Under Development";
 type Project = {
@@ -38,8 +37,9 @@ export default function DndUsaProjects({
 }) {
   const [status, setStatus] = useState<"All" | Status>("All");
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState<"name-asc" | "price-desc" | "price-asc">("name-asc");
   const [visible, setVisible] = useState(initialVisible);
+  const [sort, setSort] = useState<SortOption>("name-asc");
+
 
   // helpers
   const toNumber = (p?: string) => {

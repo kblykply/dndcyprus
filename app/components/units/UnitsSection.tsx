@@ -194,16 +194,16 @@ export default function UnitsSection() {
 
           {/* Selects */}
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            <Select value={type} onChange={(v) => setType(v as any)} label="Tip (Hepsi)">
-              <option value="">Tip (Hepsi)</option>
+<Select value={type} onChange={setType} label="Tip (Hepsi)">
+                <option value="">Tip (Hepsi)</option>
               <option value="studio">Studio</option>
               <option value="1-plus-1">1+1</option>
               <option value="2-plus-1">2+1</option>
               <option value="3-plus-1">3+1</option>
             </Select>
 
-            <Select value={status} onChange={(v) => setStatus(v as any)} label="Durum (Hepsi)">
-              <option value="">Durum (Hepsi)</option>
+<Select value={status} onChange={setStatus} label="Durum (Hepsi)">
+                <option value="">Durum (Hepsi)</option>
               <option value="for-sale">Satılık</option>
               <option value="reserved">Rezerve</option>
               <option value="sold">Satıldı</option>
@@ -245,8 +245,9 @@ export default function UnitsSection() {
               />
             </div>
 
-            <Select value={sort} onChange={(v) => setSort(v as any)} label="Sırala">
-              <option value="price-desc">Fiyat (Yüksek → Düşük)</option>
+<Select value={sort} onChange={setSort} label="Sırala">
+  
+                <option value="price-desc">Fiyat (Yüksek → Düşük)</option>
               <option value="price-asc">Fiyat (Düşük → Yüksek)</option>
               <option value="name-asc">İsim (A → Z)</option>
             </Select>
@@ -276,14 +277,14 @@ function moneyToNumber(s?: string) {
 }
 
 /* ---------------- Little UI helpers ---------------- */
-function Select({
+function Select<T extends string>({
   value,
   onChange,
   label,
   children,
 }: {
-  value: string;
-  onChange: (v: string) => void;
+  value: T;
+  onChange: (v: T) => void;
   label: string;
   children: React.ReactNode;
 }) {
@@ -291,7 +292,7 @@ function Select({
     <div className="relative">
       <select
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value as T)}
         className="w-full rounded-full px-3 py-2.5 text-sm outline-none"
         style={{
           background: "rgba(20,21,23,0.05)",
@@ -305,6 +306,7 @@ function Select({
     </div>
   );
 }
+
 
 /* ---------------- Card ---------------- */
 function UnitCard({ item }: { item: UnitItem }) {
