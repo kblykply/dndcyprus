@@ -402,11 +402,12 @@ export default function LeadershipTeam({
   <section
     aria-label="Liderlik ve Ekip"
     className="relative overflow-hidden bg-white"
-    style={{
-      background: "#ffffff",
-      color: "#141517",
-      ["--stroke" as any]: "rgba(20,21,23,0.08)",
-    }}
+  style={{
+  background: "#ffffff",
+  color: "#141517",
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+} as React.CSSProperties & Record<"--stroke", string>}
+
   >
     {/* subtle accents */}
     <div

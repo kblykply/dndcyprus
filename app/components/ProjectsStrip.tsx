@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import type { CSSProperties } from "react";
 
 type Project = {
   name: string;
@@ -89,11 +90,12 @@ export default function ProjectsStrip() {
               </div>
 
               {/* Soft blur on the active column */}
-              <motion.div
-                className="absolute inset-0"
-                animate={{ backdropFilter: (isActive ? "blur(6px)" : "blur(0px)") as any }}
-                transition={{ duration: 0.25 }}
-              />
+             
+<motion.div
+  className="absolute inset-0"
+  animate={{ backdropFilter: (isActive ? "blur(6px)" : "blur(0px)") as CSSProperties["backdropFilter"] }}
+  transition={{ duration: 0.25 }}
+/>
 
               {/* Award ribbon (hydrate-safe: only render after mount; no window reads) */}
               <AnimatePresence>

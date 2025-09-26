@@ -53,23 +53,26 @@ export default function ContactForm() {
       if (!res.ok) throw new Error(await res.text());
       setStatus("success");
       form.reset();
-    } catch (err: any) {
-      setStatus("error");
-      setError("Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin.");
-    }
+   } catch (err: unknown) {
+  setStatus("error");
+  const msg = err instanceof Error ? err.message : String(err);
+  setError("Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin.");
+  // optionally log msg somewhere if needed
+}
+
   }
 
   return (
     <section
-      aria-label="İletişim Formu"
-      className="relative overflow-hidden"
-      style={{
-        background: "#ffffff",
-        color: "#141517",
-        // local tokens
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
-    >
+  aria-label="İletişim Formu"
+  className="relative overflow-hidden"
+  style={{
+    background: "#ffffff",
+    color: "#141517",
+    ["--stroke"]: "rgba(20,21,23,0.08)",
+  } as React.CSSProperties & Record<"--stroke", string>}
+>
+
       {/* subtle color accents */}
            <div
             aria-hidden

@@ -107,10 +107,11 @@ export default function ContactInfo({
       aria-label="İletişim Bilgileri"
       className="relative overflow-hidden"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+  background: "#ffffff",
+  color: "#141517",
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+} as React.CSSProperties & Record<"--stroke", string>}
+
     >
     
      <div

@@ -3,6 +3,9 @@
 
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+type SortOption = "price-desc" | "price-asc" | "name-asc";
+
+
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -38,7 +41,7 @@ export default function DndUsaForSale({
 }) {
   // UI state
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState<"price-desc" | "price-asc" | "name-asc">("price-desc");
+const [sort, setSort] = useState<SortOption>("price-desc");
   const [minPrice, setMinPrice] = useState<number | "">("");
   const [maxPrice, setMaxPrice] = useState<number | "">("");
   const [minBeds, setMinBeds] = useState<number | "">("");
@@ -98,7 +101,11 @@ export default function DndUsaForSale({
     <section
       aria-label="DND USA — For Sale"
       className="relative overflow-hidden"
-      style={{ background: "#fff", color: "#141517", ["--stroke" as any]: "rgba(20,21,23,0.08)" }}
+style={{
+  background: "#fff",
+  color: "#141517",
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+} as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
       <div
@@ -179,16 +186,18 @@ export default function DndUsaForSale({
           </div>
 
           <div className="lg:col-span-3">
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as any)}
-              className="w-full text-xs rounded-full px-3 py-2 outline-none"
-              style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
-            >
-              <option value="price-desc">Fiyat (Yüksek → Düşük)</option>
-              <option value="price-asc">Fiyat (Düşük → Yüksek)</option>
-              <option value="name-asc">İsim (A → Z)</option>
-            </select>
+           <select
+  value={sort}
+  onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+    setSort(e.target.value as SortOption)
+  }
+  className="w-full text-xs rounded-full px-3 py-2 outline-none"
+  style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
+>
+  <option value="price-desc">Fiyat (Yüksek → Düşük)</option>
+  <option value="price-asc">Fiyat (Düşük → Yüksek)</option>
+  <option value="name-asc">İsim (A → Z)</option>
+</select>
           </div>
         </div>
 

@@ -64,13 +64,14 @@ export default function MissionVisionValues({
     <section
       aria-label="Misyon, Vizyon ve Değerler"
       className="relative overflow-hidden bg-white"
-      style={{
-        background: "#ffffff",
-        color: "#141517",
-        // local light tokens
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-        ["--glass" as any]: "rgba(255,255,255,0.65)",
-      }}
+     style={{
+  background: "#ffffff",
+  color: "#141517",
+  // local light tokens
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+  ["--glass"]: "rgba(255,255,255,0.65)",
+} as React.CSSProperties & Record<"--stroke" | "--glass", string>}
+
     >
       {/* subtle color accents */}
         <div

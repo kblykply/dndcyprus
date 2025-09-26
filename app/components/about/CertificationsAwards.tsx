@@ -127,10 +127,10 @@ export default function CertificationsAwards({
       aria-label="Sertifikalar ve Ödüller"
       className="relative overflow-hidden bg-white"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+  background: "#ffffff",
+  color: "#141517",
+  ["--stroke" as any]: "rgba(20,21,23,0.08)", 
+}}
     >
 
 

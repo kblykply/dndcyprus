@@ -7,6 +7,11 @@ import { motion, Variants } from "framer-motion";
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
+type StyleWithVars = React.CSSProperties & {
+  ["--stroke"]?: string;
+  ["--glass"]?: string;
+};
+
 const container: Variants = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
@@ -29,16 +34,18 @@ const scaleIn: Variants = {
 };
 
 export default function CompanyOverview() {
+  const sectionStyle: StyleWithVars = {
+    background: "#ffffff",
+    color: "#141517",
+    "--stroke": "rgba(20,21,23,0.08)",
+    "--glass": "rgba(255,255,255,0.65)",
+  };
+
   return (
     <section
       aria-label="Şirket Hakkında"
       className="relative overflow-hidden bg-white"
-      style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-        ["--glass" as any]: "rgba(255,255,255,0.65)",
-      }}
+      style={sectionStyle}
     >
       <div
         aria-hidden

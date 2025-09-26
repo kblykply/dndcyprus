@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 const BACKEND =
   process.env.BLOG_BACKEND ?? "https://www.salihkaankoc.net/nata-core";
 
-// keep slugify in sync with [slug]/route.ts
 function slugify(input: string) {
   return (input || "")
     .toLowerCase()
@@ -19,7 +18,6 @@ function slugify(input: string) {
     .replace(/(^-|-$)+/g, "");
 }
 
-// clean inline styles & span tags from CMS HTML (same helper you used)
 function cleanHtml(html: string) {
   let out = html || "";
   out = out.replace(/ style="[^"]*"/gi, "");
@@ -31,12 +29,46 @@ function cleanHtml(html: string) {
   return out;
 }
 
+/* ---------- Types ---------- */
+type RawPost = {
+  id?: string | number;
+  title?: string;
+  name?: string;
+  slug?: string;
+  seoSlug?: string;
+  permalink?: string;
+  excerpt?: string;
+  summary?: string;
+  cover?: string;
+  image?: string;
+  category?: string;
+  tags?: string[];
+  published_at?: string;
+  created_at?: string;
+  readTime?: string;
+  author?: string;
+  content?: string;
+};
+
+type NormalizedPost = {
+  id?: string | number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  cover: string | null;
+  category: string | null;
+  tags: string[];
+  date: string | null;
+  readTime: string | null;
+  author: string | null;
+  content?: string;
+};
+
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function GET() {
   try {
-    // Fetch list from your backend
     const res = await fetch(`${BACKEND}/blog`, { cache: "no-store" });
     if (!res.ok) {
       return NextResponse.json(
@@ -45,11 +77,14 @@ export async function GET() {
       );
     }
 
-    const raw = await res.json();
-    const list: any[] = Array.isArray(raw) ? raw : Array.isArray(raw?.data) ? raw.data : [];
+    const raw: unknown = await res.json();
+    const list: RawPost[] = Array.isArray(raw)
+      ? raw
+      : Array.isArray((raw as { data?: RawPost[] })?.data)
+      ? (raw as { data: RawPost[] }).data
+      : [];
 
-    // Normalize for frontend
-    const posts = list.map((post) => {
+    const posts: NormalizedPost[] = list.map((post) => {
       const title = post.title ?? post.name ?? "";
       const slug =
         post.slug ??
@@ -68,17 +103,15 @@ export async function GET() {
         date: post.published_at ?? post.created_at ?? null,
         readTime: post.readTime ?? null,
         author: post.author ?? null,
-        // Optional: include cleaned short content if backend sends content
-        content:
-          typeof post.content === "string" ? cleanHtml(post.content) : undefined,
+        content: typeof post.content === "string" ? cleanHtml(post.content) : undefined,
       };
     });
 
     return NextResponse.json(posts, { status: 200 });
-  } catch (err: any) {
-    return NextResponse.json(
-      { message: err?.message ?? "Server error" },
-      { status: 500 }
-    );
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return NextResponse.json({ message: err.message }, { status: 500 });
+    }
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 }

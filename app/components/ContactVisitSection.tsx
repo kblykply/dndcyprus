@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { type CSSProperties } from "react";
 import { motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -24,7 +24,7 @@ type Props = {
   primaryHref?: string;
   secondaryText?: string;
   secondaryHref?: string;
-  bgImage?: string; // optional subtle background image
+  bgImage?: string;
 };
 
 export default function HomeCTA({
@@ -37,11 +37,18 @@ export default function HomeCTA({
   secondaryHref = "/projects",
   bgImage,
 }: Props) {
+  // ✅ CSS değişkeniyle type-safe style nesnesi
+  const sectionStyle: CSSProperties & { ["--stroke"]: string } = {
+    background: "#ffffff",
+    color: "#141517",
+    ["--stroke"]: "rgba(20,21,23,0.08)",
+  };
+
   return (
     <section
       aria-label="Ana Sayfa CTA"
       className="relative overflow-hidden bg-white"
-      style={{ background: "#ffffff", color: "#141517", ["--stroke" as any]: "rgba(20,21,23,0.08)" }}
+      style={sectionStyle}
     >
       {/* subtle gradient accents */}
       <div
@@ -120,12 +127,12 @@ export default function HomeCTA({
               border: `1px solid ${TEAL}55`,
               boxShadow: `0 12px 28px ${TEAL}44`,
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`)
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`)
-            }
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`;
+            }}
           >
             {primaryText}
           </a>

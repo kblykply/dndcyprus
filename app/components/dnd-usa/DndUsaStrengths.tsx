@@ -29,10 +29,11 @@ export default function DndUsaStrengths({
       aria-label="DND USA Strengths"
       className="relative overflow-hidden"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+  background: "#fff",
+  color: "#141517",
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+} as React.CSSProperties & Record<"--stroke", string>}
+
     >
       {/* background brand wash */}
         <div

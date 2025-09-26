@@ -44,7 +44,11 @@ export default function Perla2Facts({
     <section
       aria-label="La Joya Perla II — Öne Çıkan Bilgiler"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517", ["--stroke" as any]: "rgba(20,21,23,0.08)" }}
+style={{
+  background: "#fff",
+  color: "#141517",
+  ["--stroke"]: "rgba(20,21,23,0.08)",
+} as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle brand wash */}
       <div

@@ -37,10 +37,10 @@ export default function CallToAction({
       aria-label="Call to Action"
       className="relative overflow-hidden bg-white"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+  background: "#ffffff",
+  color: "#141517",
+  ["--stroke" as string]: "rgba(20,21,23,0.08)",
+}}
     >
 
 
