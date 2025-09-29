@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -9,7 +10,7 @@ const ORANGE = "#f15c34";
 
 const container: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.06 } },
 };
 
 const fadeUp: Variants = {
@@ -18,12 +19,12 @@ const fadeUp: Variants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.96 },
+  hidden: { opacity: 0, scale: 0.98 },
   show: {
     opacity: 1,
     scale: 1,
@@ -40,6 +41,12 @@ type MVVProps = {
   visionText?: string;
   valuesTitle?: string;
   values?: string[];
+  /** Full-bleed background image for the section */
+  bgSrc?: string;
+  /** Optional small images on the cards */
+  missionImg?: string;
+  visionImg?: string;
+  valuesImg?: string;
 };
 
 export default function MissionVisionValues({
@@ -59,33 +66,72 @@ export default function MissionVisionValues({
     "Zamanında Teslim",
     "İşbirliği & Güvenilir Tedarik",
   ],
+  bgSrc = "/perla-ii-in/2.jpg",
+  missionImg = "/La Joya - 2.png",
+  visionImg = "/La Joya - 2.png",
+  valuesImg = "/La Joya - 2.png",
 }: MVVProps) {
   return (
     <section
       aria-label="Misyon, Vizyon ve Değerler"
-      className="relative overflow-hidden bg-white"
-     style={{
-  background: "#ffffff",
-  color: "#141517",
-  // local light tokens
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-  ["--glass"]: "rgba(255,255,255,0.65)",
-} as React.CSSProperties & Record<"--stroke" | "--glass", string>}
-
+      className="relative overflow-hidden"
+      style={
+        {
+          ["--glass"]: "rgba(255,255,255,0.16)",
+          ["--glass-strong"]: "rgba(255,255,255,0.24)",
+          ["--stroke"]: "rgba(255,255,255,0.22)",
+          ["--ink"]: "rgba(255,255,255,0.92)",
+        } as React.CSSProperties & Record<"--glass" | "--glass-strong" | "--stroke" | "--ink", string>
+      }
     >
-      {/* subtle color accents */}
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src={bgSrc}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Vignette + readability gradients */}
         <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(30rem 20rem at 12% 100%, ${TEAL}12, transparent 70%),
-            radial-gradient(26rem 18rem at 88% 0%, ${ORANGE}12, transparent 70%)
-          `,
-        }}
-      />
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.55) 100%)",
+          }}
+        />
+        {/* Subtle color accents */}
+        <div
+          aria-hidden
+          className="absolute inset-0 mix-blend-screen opacity-60"
+          style={{
+            background: `
+              radial-gradient(42rem 26rem at 12% 92%, ${TEAL}44, transparent 65%),
+              radial-gradient(38rem 24rem at 88% 8%, ${ORANGE}33, transparent 65%)
+            `,
+          }}
+        />
+        {/* Soft noise for depth */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml;utf8,\
+              <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
+                <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/></filter>\
+                <rect width='120' height='120' filter='url(%23n)' opacity='0.05'/>\
+              </svg>\")",
+            backgroundSize: "240px 240px",
+            mixBlendMode: "soft-light",
+          }}
+        />
+      </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      {/* Content */}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
         {/* Header */}
         <motion.div
           variants={container}
@@ -96,12 +142,11 @@ export default function MissionVisionValues({
         >
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center text-xs tracking-wider uppercase px-3 py-1 rounded-full"
+            className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full backdrop-blur-md"
             style={{
-              background: "rgba(255, 255, 255, 0.05)",
+              background: "var(--glass)",
               border: "1px solid var(--stroke)",
-              backdropFilter: "blur(8px)",
-              color: TEAL,
+              color: "#fffff",
             }}
           >
             {kicker}
@@ -110,9 +155,18 @@ export default function MissionVisionValues({
           <motion.h2
             variants={fadeUp}
             className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+            style={{ color: "var(--ink)" }}
           >
             {title}
           </motion.h2>
+
+          <motion.p
+            variants={fadeUp}
+            className="mt-2 max-w-3xl text-base sm:text-lg"
+            style={{ color: "rgba(255,255,255,0.78)" }}
+          >
+            Değer odaklı yaklaşımımızı şeffaf, ölçülebilir ve sürdürülebilir ilkelerle destekliyoruz.
+          </motion.p>
         </motion.div>
 
         {/* Cards */}
@@ -120,208 +174,192 @@ export default function MissionVisionValues({
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: false, amount: 0.25 }}
           className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8"
         >
           {/* Mission */}
-          <motion.div variants={scaleIn} className="lg:col-span-4">
-            <div
-              className="rounded-2xl p-6 sm:p-8 h-full"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.6))",
-                border: "1px solid var(--stroke)",
-                boxShadow: "0 16px 40px rgba(0,0,0,0.06), inset 0 1px rgba(255,255,255,0.6)",
-                backdropFilter: "blur(12px)",
-              }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  className="inline-block h-2 w-2 rounded-full"
-                  style={{ background: TEAL }}
-                />
-                <h3 className="text-xl sm:text-2xl font-semibold">{missionTitle}</h3>
-              </div>
-              <p className="leading-relaxed" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <motion.div className="lg:col-span-4">
+            <GlassCard>
+              <CardHeader dotColor={TEAL} title={missionTitle} />
+              <p className="leading-relaxed text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.82)" }}>
                 {missionText}
               </p>
-
-              {/* IMAGE SLOT M (opsiyonel küçük görsel) */}
-              <div
-                className="mt-5 rounded-xl overflow-hidden border"
-                style={{ borderColor: "var(--stroke)", background: "#fff" }}
-              >
-                <img
-                  src="/La Joya - 2.png"
-                  alt="Misyon görseli"
-                  className="w-full h-40 object-cover"
-                />
-                <div className="px-4 py-2 flex items-center justify-between">
-                  <span className="text-sm" style={{ color: "rgba(20,21,23,0.65)" }}>
-                    Misyon
-                  </span>
-                  <span
-                    className="text-xs px-2 py-1 rounded-full"
-                    style={{
-                      background: `${TEAL}14`,
-                      color: TEAL,
-                      border: `1px solid ${TEAL}33`,
-                    }}
-                  >
-                    • görsel
-                  </span>
-                </div>
-              </div>
-            </div>
+            </GlassCard>
           </motion.div>
 
           {/* Vision */}
-          <motion.div variants={scaleIn} className="lg:col-span-4">
-            <div
-              className="rounded-2xl p-6 sm:p-8 h-full"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.6))",
-                border: "1px solid var(--stroke)",
-                boxShadow: "0 16px 40px rgba(0,0,0,0.06), inset 0 1px rgba(255,255,255,0.6)",
-                backdropFilter: "blur(12px)",
-              }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  className="inline-block h-2 w-2 rounded-full"
-                  style={{ background: ORANGE }}
-                />
-                <h3 className="text-xl sm:text-2xl font-semibold">{visionTitle}</h3>
-              </div>
-              <p className="leading-relaxed" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <motion.div  className="lg:col-span-4">
+            <GlassCard>
+              <CardHeader dotColor={ORANGE} title={visionTitle} />
+              <p className="leading-relaxed text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.82)" }}>
                 {visionText}
               </p>
-
-              {/* IMAGE SLOT V (opsiyonel küçük görsel) */}
-              <div
-                className="mt-5 rounded-xl overflow-hidden border"
-                style={{ borderColor: "var(--stroke)", background: "#fff" }}
-              >
-                <img
-                  src="/La Joya - 2.png"
-                  alt="Vizyon görseli"
-                  className="w-full h-40 object-cover"
-                />
-                <div className="px-4 py-2 flex items-center justify-between">
-                  <span className="text-sm" style={{ color: "rgba(20,21,23,0.65)" }}>
-                    Vizyon
-                  </span>
-                  <span
-                    className="text-xs px-2 py-1 rounded-full"
-                    style={{
-                      background: `${ORANGE}14`,
-                      color: ORANGE,
-                      border: `1px solid ${ORANGE}33`,
-                    }}
-                  >
-                    • görsel
-                  </span>
-                </div>
-              </div>
-            </div>
+            </GlassCard>
           </motion.div>
 
           {/* Values */}
-          <motion.div variants={scaleIn} className="lg:col-span-4">
-            <div
-              className="rounded-2xl p-6 sm:p-8 h-full"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.6))",
-                border: "1px solid var(--stroke)",
-                boxShadow: "0 16px 40px rgba(0,0,0,0.06), inset 0 1px rgba(255,255,255,0.6)",
-                backdropFilter: "blur(12px)",
-              }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <span
-                  className="inline-block h-2 w-2 rounded-full"
-                  style={{
-                    background: `linear-gradient(90deg, ${TEAL}, ${ORANGE})`,
-                  }}
-                />
-                <h3 className="text-xl sm:text-2xl font-semibold">{valuesTitle}</h3>
-              </div>
-
+          <motion.div  className="lg:col-span-4">
+            <GlassCard>
+              <CardHeader
+                dotGradient
+                title={valuesTitle}
+              />
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                 {values.map((val, i) => (
                   <li key={val} className="flex items-start gap-2">
                     <span
-                      className="mt-2 h-1.5 w-1.5 rounded-full"
+                      className="mt-[10px] h-1.5 w-1.5 rounded-full"
                       style={{ background: i % 2 === 0 ? TEAL : ORANGE }}
                     />
-                    <span style={{ color: "rgba(20,21,23,0.75)" }}>{val}</span>
+                    <span style={{ color: "rgba(255,255,255,0.86)" }}>{val}</span>
                   </li>
                 ))}
               </ul>
-
-              {/* IMAGE SLOT Values (kolaj/logolar opsiyonel) */}
-              <div
-                className="mt-5 rounded-xl overflow-hidden border"
-                style={{ borderColor: "var(--stroke)", background: "#fff" }}
-              >
-                <img
-                  src="/La Joya - 2.png"
-                  alt="Değerler görseli"
-                  className="w-full h-40 object-cover"
-                />
-                <div className="px-4 py-2 flex items-center justify-between">
-                  <span className="text-sm" style={{ color: "rgba(20,21,23,0.65)" }}>
-                    Değerler
-                  </span>
-                  <span
-                    className="text-xs px-2 py-1 rounded-full"
-                    style={{
-                      background: `${TEAL}14`,
-                      color: TEAL,
-                      border: `1px solid ${TEAL}33`,
-                    }}
-                  >
-                    • görsel
-                  </span>
-                </div>
-              </div>
-            </div>
+            </GlassCard>
           </motion.div>
         </motion.div>
 
-        {/* Accent CTA */}
+        {/* CTA */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.4 }}
+          viewport={{ once: false, amount: 0.35 }}
           className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between"
         >
-          <p style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.78)" }}>
             Değerlerimizi projelerinize nasıl taşıdığımızı görmek ister misiniz?
           </p>
+
           <a
             href="/projects"
-            className="inline-flex items-center justify-center rounded-xl px-5 py-3"
+            className="group inline-flex items-center justify-center rounded-xl px-5 py-3 border backdrop-blur-md transition-transform"
             style={{
-              background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,
+              background: `linear-gradient(180deg, ${TEAL}cc, ${TEAL}e6)`,
+              borderColor: "rgba(255,255,255,0.28)",
               color: "#fff",
-              boxShadow: `0 10px 28px ${TEAL}40`,
-              border: `1px solid ${TEAL}55`,
+              boxShadow: `0 12px 30px ${TEAL}50, inset 0 1px 0 rgba(255,255,255,0.35)`,
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`)
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`)
-            }
           >
-            Projeleri İncele
+            <span className="mr-2">Projeleri İncele</span>
+            <svg
+              className="size-4 transition-transform group-hover:translate-x-0.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
           </a>
         </motion.div>
       </div>
     </section>
+  );
+}
+
+/* ---------- Small composed pieces ---------- */
+
+function GlassCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="relative rounded-2xl p-6 sm:p-7 h-full overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08))",
+        border: "1px solid var(--stroke)",
+        boxShadow:
+          "0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.28)",
+        backdropFilter: "blur(14px)",
+      }}
+    >
+      {/* Glow edge */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-px rounded-[1rem]"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04))",
+          mask:
+            "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
+          WebkitMask:
+            "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+          padding: 1,
+          borderRadius: 16,
+        }}
+      />
+      {children}
+    </div>
+  );
+}
+
+function CardHeader({
+  title,
+  dotColor,
+  dotGradient,
+}: {
+  title: string;
+  dotColor?: string;
+  dotGradient?: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-2 mb-4">
+      <span
+        className="inline-block h-2 w-2 rounded-full"
+        style={{
+          background: dotGradient
+            ? `linear-gradient(90deg, ${TEAL}, ${ORANGE})`
+            : dotColor || TEAL,
+        }}
+      />
+      <h3
+        className="text-xl sm:text-2xl font-semibold"
+        style={{ color: "var(--ink)" }}
+      >
+        {title}
+      </h3>
+    </div>
+  );
+}
+
+function CardImage({
+  src,
+  label,
+  chipColor,
+}: {
+  src: string;
+  label: string;
+  chipColor: string;
+}) {
+  return (
+    <div
+      className="mt-5 rounded-xl overflow-hidden border"
+      style={{
+        borderColor: "var(--stroke)",
+        background: "rgba(255,255,255,0.06)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18)",
+      }}
+    >
+      {/* Use plain <img> to avoid extra Next config for public paths; swap to <Image> if preferred */}
+      <img src={src} alt={`${label} görseli`} className="w-full h-40 object-cover" />
+      <div className="px-4 py-2 flex items-center justify-between">
+        <span className="text-sm" style={{ color: "rgba(255,255,255,0.78)" }}>
+          {label}
+        </span>
+        <span
+          className="text-[10px] px-2 py-1 rounded-full"
+          style={{
+            background: `${chipColor}24`,
+            color: "#fff",
+            border: `1px solid ${chipColor}55`,
+          }}
+        >
+          • görsel
+        </span>
+      </div>
+    </div>
   );
 }

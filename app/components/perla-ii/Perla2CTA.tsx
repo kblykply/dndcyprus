@@ -12,34 +12,40 @@ export default function Perla2CTA({
   subtitle = "Sınırlı sayıdaki daire için satış ekibimizle hemen iletişime geçin.",
   buttonText = "Bilgi ve Teklif Al",
   buttonHref = "/contact",
+  bgImage = "/perla-ii/8.jpg", // ✅ add your CTA background here
 }: {
   title?: string;
   subtitle?: string;
   buttonText?: string;
   buttonHref?: string;
+  bgImage?: string;
 }) {
   return (
     <section
       aria-label="La Joya Perla II — Call to Action"
       className="relative overflow-hidden"
       style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
-
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        color: "#141517",
+        ["--stroke" as any]: "rgba(20,21,23,0.08)",
+      }}
     >
-      {/* brand wash */}
+      {/* brand wash overlay */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(32rem 22rem at 12% 0%, ${TEAL}12, transparent 70%),
-            radial-gradient(28rem 18rem at 88% 100%, ${ORANGE}14, transparent 70%)
+            radial-gradient(32rem 22rem at 12% 0%, ${TEAL}20, transparent 70%),
+            radial-gradient(28rem 18rem at 88% 100%, ${ORANGE}22, transparent 70%)
           `,
         }}
       />
+
+      {/* scrim for readability */}
+      <div className="absolute inset-0 bg-black/25" aria-hidden />
 
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
         <motion.h2
@@ -47,7 +53,7 @@ export default function Perla2CTA({
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.4 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="text-2xl sm:text-3xl font-semibold"
+          className="text-2xl sm:text-3xl font-semibold text-white"
         >
           {title}
         </motion.h2>
@@ -57,8 +63,7 @@ export default function Perla2CTA({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.4 }}
           transition={{ duration: 0.45, delay: 0.05 }}
-          className="mt-3 text-sm sm:text-base"
-          style={{ color: "rgba(20,21,23,0.72)" }}
+          className="mt-3 text-sm sm:text-base text-white/85"
         >
           {subtitle}
         </motion.p>

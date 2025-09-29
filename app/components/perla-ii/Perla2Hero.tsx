@@ -37,7 +37,7 @@ export default function Perla2Hero({
   location = "Bahçeler, İskele",
   statusTR = "Devam Eden",
   delivery = "Mayıs 2027",
-  heroImage = "/Perla II - 2.png",
+  heroImage = "/perla-ii/1.jpg",
   brochureHref = "/files/la-joya-perla-2-brosur.pdf",
   contactHref = "/contact",
   kicker = "DND Cyprus",

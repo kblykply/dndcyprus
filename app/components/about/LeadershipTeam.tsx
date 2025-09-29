@@ -23,6 +23,7 @@ export type Member = {
   bio?: string;
   socials?: Socials;
   accent?: "teal" | "orange";
+    sortOrder?: number; // 👈 add this
 };
 
 type Props = {
@@ -99,6 +100,8 @@ export default function LeadershipTeam({
     bio: "Şirketin kurucusu ve vizyoner lideri.",
     socials: {},
     accent: "teal",
+                sortOrder: 1,
+
   },
   {
     id: "aynur",
@@ -109,6 +112,8 @@ export default function LeadershipTeam({
     bio: "Yönetim ve stratejik planlama süreçlerinde sorumlu.",
     socials: {},
     accent: "orange",
+                    sortOrder: 2,
+
   },
   {
     id: "tugba",
@@ -119,6 +124,9 @@ export default function LeadershipTeam({
     bio: "Site operasyonlarının yönetimi.",
     socials: {},
     accent: "teal",
+        sortOrder: 14,
+
+
   },
   {
     id: "tugce",
@@ -129,6 +137,9 @@ export default function LeadershipTeam({
     bio: "Yönetim desteği ve organizasyonel koordinasyon.",
     socials: {},
     accent: "orange",
+        sortOrder: 15,
+
+
   },
   {
     id: "burcin",
@@ -139,6 +150,8 @@ export default function LeadershipTeam({
     bio: "İnşaat projelerinin koordinasyonu.",
     socials: {},
     accent: "teal",
+                        sortOrder: 3,
+
   },
   {
     id: "borhan",
@@ -149,6 +162,8 @@ export default function LeadershipTeam({
     bio: "Genel satış stratejilerinden sorumlu.",
     socials: {},
     accent: "orange",
+                        sortOrder: 4,
+
   },
   {
     id: "sabina",
@@ -159,6 +174,8 @@ export default function LeadershipTeam({
     bio: "Satış operasyonlarının lideri.",
     socials: {},
     accent: "teal",
+                        sortOrder: 6,
+
   },
   {
     id: "shadi",
@@ -169,6 +186,8 @@ export default function LeadershipTeam({
     bio: "Satış departmanında yönetici.",
     socials: {},
     accent: "orange",
+                        sortOrder: 7,
+
   },
   {
     id: "bob",
@@ -179,6 +198,20 @@ export default function LeadershipTeam({
     bio: "Müşteri ilişkileri ve satış temsilcisi.",
     socials: {},
     accent: "teal",
+                         sortOrder: 9,
+
+  },
+  {
+    id: "onur_y",
+    name: "Onur Yalçın",
+    role: "Mühendis",
+    category: "Engineering",
+    photo: "/teams/onuryalcin.png",
+    bio: "Proje mühendisliği sorumlusu.",
+    socials: {},
+    accent: "teal",
+                        sortOrder: 26,
+
   },
   {
     id: "shayan",
@@ -189,16 +222,19 @@ export default function LeadershipTeam({
     bio: "Satış sürecinde aktif temsilci.",
     socials: {},
     accent: "orange",
+            sortOrder: 10,
+
   },
   {
     id: "onur_p",
     name: "Onur Pekkaya",
-    role: "Türkiye Satış Müdürü",
+    role: "Türkiye Satış ve Pazarlama",
     category: "Sales",
-    photo: "/teams/onurpekkaya.png",
-    bio: "Satış sürecinde aktif temsilci.",
+    photo: "/teams/Onuryeni.png",
+    bio: "",
     socials: {},
     accent: "teal",
+        sortOrder: 8,
   },
   {
     id: "okan",
@@ -209,6 +245,8 @@ export default function LeadershipTeam({
     bio: "Satış faaliyetlerinde görevli.",
     socials: {},
     accent: "orange",
+        sortOrder: 13,
+
   },
   {
     id: "ava",
@@ -219,6 +257,8 @@ export default function LeadershipTeam({
     bio: "Satış sonrası hizmetler sorumlusu.",
     socials: {},
     accent: "teal",
+                        sortOrder: 11,
+
   },
   {
     id: "nevin",
@@ -229,6 +269,8 @@ export default function LeadershipTeam({
     bio: "Proje tasarımı ve uygulamasında görevli.",
     socials: {},
     accent: "orange",
+        sortOrder: 16,
+
   },
   {
     id: "meryem",
@@ -239,6 +281,8 @@ export default function LeadershipTeam({
     bio: "Mimari projelerde görevli.",
     socials: {},
     accent: "teal",
+        sortOrder: 17,
+
   },
   {
     id: "ebru",
@@ -249,6 +293,8 @@ export default function LeadershipTeam({
     bio: "Reklam ve tanıtım süreçlerinden sorumlu.",
     socials: {},
     accent: "orange",
+        sortOrder: 18,
+
   },
   {
     id: "berkay",
@@ -259,6 +305,8 @@ export default function LeadershipTeam({
     bio: "Video prodüksiyon ve görsel içerik uzmanı.",
     socials: {},
     accent: "teal",
+        sortOrder: 19,
+
   },
  
   {
@@ -270,6 +318,8 @@ export default function LeadershipTeam({
     bio: "Arsa satış sürecinden sorumlu.",
     socials: {},
     accent: "teal",
+    sortOrder: 12,
+
   },
   {
     id: "tanya",
@@ -280,6 +330,8 @@ export default function LeadershipTeam({
     bio: "Servis ve destek hizmetleri sorumlusu.",
     socials: {},
     accent: "orange",
+        sortOrder: 30,
+
   },
   {
     id: "caglanur",
@@ -290,6 +342,8 @@ export default function LeadershipTeam({
     bio: "Muhasebe süreçlerinin yürütülmesi.",
     socials: {},
     accent: "teal",
+        sortOrder: 23,
+
   },
   {
     id: "bulent",
@@ -300,6 +354,8 @@ export default function LeadershipTeam({
     bio: "Mali işler yönetiminden sorumlu.",
     socials: {},
     accent: "orange",
+                        sortOrder: 5,
+
   },
   {
     id: "gozde",
@@ -310,6 +366,8 @@ export default function LeadershipTeam({
     bio: "Finans yönetim süreçlerinden sorumlu.",
     socials: {},
     accent: "teal",
+        sortOrder: 20,
+
   },
   {
     id: "emine",
@@ -320,6 +378,8 @@ export default function LeadershipTeam({
     bio: "Muhasebe ve finans yönetimi.",
     socials: {},
     accent: "orange",
+        sortOrder: 21,
+
   },
   {
     id: "muhammed",
@@ -330,6 +390,8 @@ export default function LeadershipTeam({
     bio: "Muhasebe kayıt ve süreçleri.",
     socials: {},
     accent: "teal",
+        sortOrder: 22,
+
   },
   {
     id: "omer",
@@ -340,6 +402,8 @@ export default function LeadershipTeam({
     bio: "Teknik servis ve bakım sorumlusu.",
     socials: {},
     accent: "orange",
+        sortOrder: 28,
+
   },
   {
     id: "yusuf",
@@ -350,6 +414,8 @@ export default function LeadershipTeam({
     bio: "Mühendislik projelerinde görevli.",
     socials: {},
     accent: "teal",
+        sortOrder: 24,
+
   },
   {
     id: "rojina",
@@ -360,17 +426,10 @@ export default function LeadershipTeam({
     bio: "Mühendislik alanında görevli.",
     socials: {},
     accent: "orange",
+        sortOrder: 25,
+
   },
-  {
-    id: "onur_y",
-    name: "Onur Yalçın",
-    role: "Mühendis",
-    category: "Engineering",
-    photo: "/teams/onuryalcin.png",
-    bio: "Proje mühendisliği sorumlusu.",
-    socials: {},
-    accent: "teal",
-  },
+  
    {
     id: "hilal",
     name: "Syed Hilal Ahmed",
@@ -380,6 +439,8 @@ export default function LeadershipTeam({
     bio: "Proje mühendisliği sorumlusu.",
     socials: {},
     accent: "teal",
+        sortOrder:27,
+
   },
   
 ],
@@ -397,6 +458,16 @@ export default function LeadershipTeam({
     if (activeCat === "All") return members;
     return members.filter((m) => m.category === activeCat);
   }, [members, activeCat]);
+
+
+
+  const sorted = useMemo(() => {
+  return [...filtered].sort((a, b) => {
+    const ao = a.sortOrder ?? 9999;
+    const bo = b.sortOrder ?? 9999;
+    return ao - bo;
+  });
+}, [filtered]);
 
  return (
   <section
@@ -473,7 +544,8 @@ export default function LeadershipTeam({
         className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
       >
         <AnimatePresence initial={false} mode="popLayout">
-          {filtered.map((m) => {
+          
+          {sorted.map((m) => {
             const color = m.accent === "orange" ? ORANGE : TEAL;
             return (
               <motion.article
@@ -535,6 +607,8 @@ export default function LeadershipTeam({
               </motion.article>
             );
           })}
+
+          
         </AnimatePresence>
       </motion.div>
 

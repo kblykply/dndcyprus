@@ -24,7 +24,6 @@ export default function HomePage() {
       <DndUsaSustainability/>
       <DndUsaVision />
       <DndUsaMedia />
-      <DndUsaTestimonials />
       <DndUsaStrengths />
       <DndUsaPress />
       

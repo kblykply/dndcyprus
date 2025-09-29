@@ -8,6 +8,13 @@ import WhyChooseUs from "../components/about/WhyChooseUs";
 import ClientsPartners from "../components/about/ClientsPartners";
 import CertificationsAwards from "../components/about/CertificationsAwards";
 import CallToAction from "../components/about/CallToAction";
+import OzanSpotlight from "../components/about/OzanSpotlight";
+import AynurSpotlightAlt from "../components/about/AynurSpotlightAlt"
+
+import AboutDndHomes from "../components/about/AboutDndHomes";
+
+
+
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen text-white overflow-x-hidden">
@@ -24,13 +31,20 @@ export default function HomePage() {
   }}
   
   />
-    <CompanyOverview />  
-    <MissionVisionValues />
+<AboutDndHomes
+   videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
+  poster="/homesthumb.webp"
+  heading="DND Homes — Kıbrıs Vizyonu"
+  description="Projelerimizi ve yaşam konseptimizi keşfedin."
+/>
+<OzanSpotlight/>
     <TimelineMilestones />
-    <LeadershipTeam />
+    <AynurSpotlightAlt/>
+
+
+        <MissionVisionValues />
+
     <WhyChooseUs />
-    <ClientsPartners />
-    <CertificationsAwards />
     <CallToAction />
     
     </main>

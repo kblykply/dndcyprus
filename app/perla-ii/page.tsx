@@ -7,15 +7,27 @@ import Perla2Amenities from "../components/projects/Perla2Amenities";
 import Perla2Location from "../components/projects/Perla2Location";
 import Perla2Timeline from "../components/perla-ii/Perla2Timeline";
 import Perla2CTA from "../components/perla-ii/Perla2CTA";
+import PaymentPlansSection from "../components/perla-ii/PaymentPlansSection";
+import Hotspots from "../components/perla-ii/Hotspots";
+
+
+
 export default function HomePage() {
   return (
     <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
 <Perla2Hero />
-<Perla2Facts />
 <Perla2Overview />
+<Perla2Facts />
+
 <Perla2Gallery /> 
+
+<Hotspots/>
+
+
+
 <Perla2FloorPlans />
 <Perla2Amenities />
+<PaymentPlansSection/>
 <Perla2Location />
 <Perla2Timeline />
 <Perla2CTA />

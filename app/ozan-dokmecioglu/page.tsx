@@ -26,8 +26,6 @@ export default function HomePage() {
           poster: "/images/media/featured-poster.jpg",
         }}
       />
-      <OzanGallery />
-      <OzanTestimonials />
       <OzanCTA /> 
     </main>
   );

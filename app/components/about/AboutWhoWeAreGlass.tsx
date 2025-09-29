@@ -14,10 +14,11 @@ type ImageSet = {
 
 type Props = {
   images: ImageSet;
-  youtubeId?: string;      // if present, big tile is video
-  poster?: string;         // poster for the video tile
-  videoTitle?: string;     // accessible title for iframe
-  startAt?: number;        // start seconds
+  youtubeId?: string;
+  poster?: string;
+  videoTitle?: string;
+  startAt?: number;
+  kicker?: string;              // NEW
 };
 
 export default function AboutWhoWeAreGlass({
@@ -30,6 +31,7 @@ export default function AboutWhoWeAreGlass({
   poster,
   videoTitle = "Tanıtım Videosu",
   startAt = 0,
+  kicker = "Hakkımızda",        // NEW: default kicker
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { margin: "-15% 0px -15% 0px", amount: 0.35 });
@@ -91,8 +93,8 @@ export default function AboutWhoWeAreGlass({
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(34rem 22rem at 10% 100%, ${TEAL}12, transparent 70%),
-            radial-gradient(28rem 20rem at 90% 0%, ${ORANGE}12, transparent 70%)
+            radial-gradient(30rem 20rem at 12% 0%, ${TEAL}12, transparent 70%),
+            radial-gradient(26rem 18rem at 88% 100%, ${ORANGE}12, transparent 70%)
           `,
         }}
       />
@@ -107,16 +109,26 @@ export default function AboutWhoWeAreGlass({
         }}
       />
 
-<div className="relative z-10 mx-auto max-w-7xl lg:grid lg:grid-cols-5 lg:items-center gap-10">
-  
-          {/* Text card */}
+      <div className="relative z-10 mx-auto max-w-7xl lg:grid lg:grid-cols-5 lg:items-center gap-10">
+        {/* Text card */}
         <motion.div
           variants={rise}
           initial="hidden"
           animate={textCtrl}
           className="glass rounded-2xl border bg-white/70 p-7 shadow-[0_8px_40px_rgba(0,0,0,0.06)] md:p-9 lg:col-span-2"
         >
-          <div className="mb-5 h-[2px] w-12 rounded-full" style={{ backgroundColor: TEAL }} aria-hidden="true" />
+          {/* Kicker + line (same row) */}
+          <div className="mb-3 flex items-center gap-3">
+            <span
+              aria-hidden="true"
+              className="h-[2px] w-12 rounded-full flex-none"
+              style={{ backgroundColor: TEAL }}
+            />
+            <span className="text-[11px] md:text-[12px] font-semibold tracking-[0.22em] uppercase text-neutral-600">
+              {kicker}
+            </span>
+          </div>
+
           <h2 className="text-3xl font-semibold text-neutral-900 md:text-4xl">Biz Kimiz</h2>
           <p className="mt-3 text-[15px] text-neutral-700 md:text-base">
             DND Cyprus, Kıbrıs genelinde konut ve karma kullanımlı projeler geliştiren, tasarım odaklı bir
@@ -145,38 +157,36 @@ export default function AboutWhoWeAreGlass({
         </motion.div>
 
         {/* Visual area */}
-<motion.div
-  variants={fadeScale}
-  initial="hidden"
-  animate={gridCtrl}
-  className="relative lg:col-span-3 flex items-center" // <-- add flex + items-center
->
-  <div className="grid grid-cols-3 gap-4 lg:grid-cols-5 w-full">
-    <motion.figure
-      initial={{ opacity: 0, scale: reduced ? 1 : 0.985 }}
-      animate={figMainCtrl}
-      className="col-span-3 row-span-3 lg:col-span-7 lg:row-span-6 overflow-hidden rounded-2xl border bg-white/50 ring-1 ring-black/5 shadow-xl"
-    >
-      {youtubeId ? (
-        <VideoPlayer
-          id={youtubeId}
-          title={videoTitle}
-          startAt={startAt}
-          poster={poster ?? images.main}
-          autoPlayOnClick={!reduced}
-        />
-      ) : (
-        <img
-          src={images.main}
-          alt="Ekip / proje çalışması"
-          className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-        />
-      )}
-    </motion.figure>
-  </div>
-</motion.div>
-
-
+        <motion.div
+          variants={fadeScale}
+          initial="hidden"
+          animate={gridCtrl}
+          className="relative lg:col-span-3 flex items-center"
+        >
+          <div className="grid grid-cols-3 gap-4 lg:grid-cols-5 w-full">
+            <motion.figure
+              initial={{ opacity: 0, scale: reduced ? 1 : 0.985 }}
+              animate={figMainCtrl}
+              className="col-span-3 row-span-3 lg:col-span-7 lg:row-span-6 overflow-hidden rounded-2xl border bg-white/50 ring-1 ring-black/5 shadow-xl"
+            >
+              {youtubeId ? (
+                <VideoPlayer
+                  id={youtubeId}
+                  title={videoTitle}
+                  startAt={startAt}
+                  poster={poster ?? images.main}
+                  autoPlayOnClick={!reduced}
+                />
+              ) : (
+                <img
+                  src={images.main}
+                  alt="Ekip / proje çalışması"
+                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                />
+              )}
+            </motion.figure>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -192,7 +202,6 @@ function Dot() {
   );
 }
 
-/** Lightweight YouTube player with poster & play overlay */
 /** Lightweight YouTube player with poster & play overlay */
 function VideoPlayer({
   id,
@@ -256,13 +265,7 @@ function VideoPlayer({
           {/* Play button */}
           <span className="absolute inset-0 flex items-center justify-center">
             <span className="inline-flex items-center justify-center rounded-full p-5 md:p-6 bg-white/90 shadow-2xl ring-1 ring-white/60 transition-transform group-hover:scale-105">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill={TEAL}
-                aria-hidden="true"
-              >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill={TEAL} aria-hidden="true">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </span>
@@ -272,4 +275,3 @@ function VideoPlayer({
     </div>
   );
 }
-

@@ -140,8 +140,8 @@ export default function CertificationsAwards({
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(30rem 20rem at 12% 0%, ${TEAL}12, transparent 70%),
-            radial-gradient(26rem 18rem at 88% 100%, ${ORANGE}12, transparent 70%)
+            radial-gradient(30rem 20rem at 12% 100%, ${TEAL}12, transparent 70%),
+            radial-gradient(26rem 18rem at 88% 0%, ${ORANGE}12, transparent 70%)
           `,
         }}
       />

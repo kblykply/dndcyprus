@@ -18,6 +18,15 @@ const fadeUp: Variants = {
 };
 
 type POI = { label: string; note?: string };
+type DistanceItem = {
+  label: string;
+  /** provide exactly one of km or m */
+  km?: number;
+  m?: number;
+  note?: string;
+  accent?: "teal" | "orange";
+};
+
 type Props = {
   title?: string;
   subtitle?: string;
@@ -27,7 +36,21 @@ type Props = {
   embedSrc?: string;
   nearby?: POI[];
   grayscale?: boolean;
+  distances?: DistanceItem[];
 };
+
+function formatDistance(d: DistanceItem) {
+  if (typeof d.m === "number") return `${Math.round(d.m)} m`;
+  if (typeof d.km === "number") {
+    // Under 1 km → show meters
+    if (d.km < 1) return `${Math.round(d.km * 1000)} m`;
+    // 1–50 km → 1 decimal if needed
+    if (d.km < 50) return `${Number.isInteger(d.km) ? d.km.toFixed(0) : d.km.toFixed(1)} km`;
+    // 50+ km → integers
+    return `${Math.round(d.km)} km`;
+  }
+  return "";
+}
 
 export default function Perla2Location({
   title = "Konum",
@@ -43,6 +66,14 @@ export default function Perla2Location({
     { label: "İskele Merkezi" },
   ],
   grayscale = false,
+  distances = [
+    { label: "Okul", km: 1.5, accent: "teal" },
+    { label: "Ercan Havalimanı", km: 49, accent: "orange" },
+    { label: "Beach Club", m: 700, accent: "teal" },
+    { label: "Alışveriş Merkezi", km: 2.5, accent: "orange" },
+    { label: "Gazimağusa", km: 22, accent: "teal" },
+    { label: "Hastane", km: 3, accent: "orange" },
+  ],
 }: Props) {
   const mapsQuery = encodeURIComponent(`${lat},${lng}`);
   const mapsSearch = encodeURIComponent(address);
@@ -51,23 +82,18 @@ export default function Perla2Location({
   const appleDir = `https://maps.apple.com/?daddr=${mapsQuery}`;
 
   const iframeSrc =
-    embedSrc ||
-    `https://www.google.com/maps?q=${mapsQuery}&z=14&output=embed`;
+    embedSrc || `https://www.google.com/maps?q=${mapsQuery}&z=14&output=embed`;
 
   return (
     <section
       aria-label="La Joya Perla II — Konum"
       className="relative overflow-hidden"
       style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
-
+        background: "#ffffff",
+        color: "#141517",
+        ["--stroke"]: "rgba(20,21,23,0.08)",
+      } as React.CSSProperties & Record<"--stroke", string>}
     >
-      {/* subtle brand wash */}
-   
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* header */}
         <motion.div
@@ -78,10 +104,7 @@ export default function Perla2Location({
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p
-            className="mt-2 text-sm sm:text-base"
-            style={{ color: "rgba(20,21,23,0.65)" }}
-          >
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -95,10 +118,7 @@ export default function Perla2Location({
           custom={1}
           className="mt-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3"
         >
-          <div
-            className="text-sm sm:text-base"
-            style={{ color: "rgba(20,21,23,0.78)" }}
-          >
+          <div className="text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>
             <span className="font-semibold">Adres:</span> {address}
           </div>
 
@@ -172,6 +192,62 @@ export default function Perla2Location({
           </div>
         </motion.div>
 
+        {/* Distances grid */}
+        {distances?.length ? (
+          <motion.ul
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.35 }}
+            custom={3}
+            className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+          >
+            {distances.map((d, idx) => {
+              const val = formatDistance(d);
+              const accent = d.accent === "orange" ? ORANGE : TEAL;
+              return (
+                <motion.li
+                  key={`${d.label}-${idx}`}
+                  variants={fadeUp}
+                  custom={3 + idx * 0.04}
+                  className="group rounded-xl px-4 py-3 flex items-center gap-3"
+                  style={{
+                    border: "1px solid var(--stroke)",
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
+                    backdropFilter: "blur(10px)",
+                  }}
+                  title={d.note}
+                >
+                  {/* icon */}
+                  <span
+                    aria-hidden
+                    className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg"
+                    style={{
+                      background: `${accent}14`,
+                      border: `1px solid ${accent}33`,
+                      color: accent,
+                    }}
+                  >
+                    {/* simple location glyph */}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+                    </svg>
+                  </span>
+
+                  {/* text */}
+                  <div className="min-w-0">
+                    <div className="text-sm font-medium truncate">{d.label}</div>
+                    <div className="text-xs" style={{ color: "rgba(20,21,23,0.65)" }}>
+                      {val}
+                    </div>
+                  </div>
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+        ) : null}
+
         {/* Nearby chips */}
         {nearby?.length ? (
           <motion.div
@@ -179,7 +255,7 @@ export default function Perla2Location({
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.35 }}
-            custom={3}
+            custom={4}
             className="mt-6 flex flex-wrap gap-2"
           >
             {nearby.map((p) => (

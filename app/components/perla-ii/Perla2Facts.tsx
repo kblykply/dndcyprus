@@ -34,8 +34,8 @@ export default function Perla2Facts({
     { label: "Lokasyon", value: "Bahçeler, İskele", accent: "teal" },
     { label: "Teslim", value: "Mayıs 2027", accent: "orange" },
     { label: "Tip", value: "Konut (Rezidans)", accent: "teal" },
-    { label: "Birim Sayısı", value: "—", accent: "orange" }, // değiştirin
-    { label: "Arsa Alanı", value: "— m²", accent: "teal" },  // değiştirin
+    { label: "Birim Sayısı", value: "128", accent: "orange" }, // değiştirin
+    { label: "Arsa Alanı", value: "8.800m²", accent: "teal" },  // değiştirin
     { label: "Durum", value: "Devam Eden", accent: "orange" },
   ],
   withSeoJsonLd = true,
@@ -62,7 +62,7 @@ style={{
         }}
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-14 lg:py-18">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-18">
         {/* header */}
         <motion.div
           variants={fadeUp}

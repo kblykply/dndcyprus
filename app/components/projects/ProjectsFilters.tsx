@@ -34,19 +34,19 @@ const DATA: Project[] = [
   {
     id: "lagoon-verde",
     title: "Lagoon Verde",
-    status: "Upcoming",                 // “coming soon” / campaign posts
+    status: "Upcoming", // “coming soon” / campaign posts
     type: "Residential",
     location: "Long Beach, İskele",
-    cover: "/Lagoon - 1.png",
+    cover: "/lagoon-verde/1.jpg",
     href: "/projects/lagoon-verde",
   },
   {
     id: "la-joya-perla-ii",
     title: "La Joya Perla II",
-    status: "Ongoing",                  // launched, in sales/construction
+    status: "Ongoing", // launched, in sales/construction
     type: "Residential",
     location: "Bahçeler, İskele",
-    cover: "/Perla II - 2.png",
+    cover: "/perla-ii/2.jpg",
     href: "/perla-ii",
   },
   {
@@ -55,7 +55,7 @@ const DATA: Project[] = [
     status: "Ongoing",
     type: "Residential",
     location: "Bahçeler, İskele",
-    cover: "/Perla I - 1.png",
+    cover: "/perla/1.jpg",
     href: "/projects/la-joya-perla-i",
   },
   {
@@ -64,10 +64,9 @@ const DATA: Project[] = [
     status: "Ongoing",
     type: "Residential",
     location: "İskele",
-    cover: "/La Joya - 1.png",
+    cover: "/la-joya/2.jpg",
     href: "/projects/la-joya",
   },
-
 
   // Beach Club
   {
@@ -76,7 +75,7 @@ const DATA: Project[] = [
     status: "Upcoming",
     type: "Beach",
     location: "İskele",
-    cover: "/Mariachi - 1.png",
+    cover: "/mariachi/2.jpg",
     href: "/projects/mariachi-beach-club",
   },
 
@@ -87,7 +86,7 @@ const DATA: Project[] = [
     status: "Upcoming",
     type: "Land",
     location: "Geçitkale",
-    cover: "/gecitkale-1.png",
+    cover: "/gecitkaleimage.png",
     href: "/projects/gecitkale",
   },
 ];

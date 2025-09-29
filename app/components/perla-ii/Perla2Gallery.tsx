@@ -313,12 +313,17 @@ function Lightbox({
 
 /* ============ Default sample items (replace with your assets) ============ */
 const DEFAULT_ITEMS: MediaItem[] = [
-  { src: "/Perla II - 2.png", alt: "Ana cephe render", type: "image" },
-  { src: "/Perla II - 2.png", alt: "Peyzaj ve havuz alanı", type: "image" },
-  { src: "/Perla II - 2.png", alt: "Lobi ve ortak alan", type: "image" },
-  { src: "/Perla II - 2.png", alt: "Daire içi—oturma odası", type: "image" },
-  { src: "/Perla II - 2.png", alt: "Daire içi—mutfak", type: "image" },
-  { src: "/Perla II - 2.png", alt: "Daire içi—yatak odası", type: "image" },
+  { src: "/perla-ii/1.jpg", alt: "Ana cephe render", type: "image" },
+  { src: "/perla-ii/2.jpg", alt: "Peyzaj ve havuz alanı", type: "image" },
+  { src: "/perla-ii/3.jpg", alt: "Lobi ve ortak alan", type: "image" },
+  { src: "/perla-ii/4.jpg", alt: "Daire içi—oturma odası", type: "image" },
+  { src: "/perla-ii/5.jpg", alt: "Daire içi—mutfak", type: "image" },
+  { src: "/perla-ii/6.jpg", alt: "Daire içi—yatak odası", type: "image" },
+    { src: "/perla-ii/7.jpg", alt: "Daire içi—yatak odası", type: "image" },
+  { src: "/perla-ii/8.jpg", alt: "Daire içi—yatak odası", type: "image" },
+  { src: "/perla-ii/9.jpg", alt: "Daire içi—yatak odası", type: "image" },
+  { src: "/perla-ii/10.jpg", alt: "Daire içi—yatak odası", type: "image" },
+
   // optional video example:
   // { src: "/videos/perla2/teaser.mp4", type: "video", poster: "/images/projects/perla2/video-poster.jpg", alt: "Proje tanıtım videosu" },
 ];

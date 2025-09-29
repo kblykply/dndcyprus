@@ -25,7 +25,7 @@ type Props = {
 };
 
 export default function OzanBio({
-  title = "Biyografi / Erken Dönem",
+  title = "Ozan Dökmecioğlu",
   lead = "1971 yılında Mağusa’da doğan Ozan Dökmecioğlu, eğitimini Kuzey Kıbrıs’ta tamamladıktan sonra ODTÜ İşletme bölümünden mezun olmuş, 1995 yılında Harvard Üniversitesi’nde Investment Appraisal & Risk Analysis diplomasını almıştır. Uluslararası arenada Kraft Foods ve Kellogg gibi şirketlerde üst düzey finans ve yönetim rollerinde görev almış; yıllara dayanan bu kurumsal deneyimini DND markasını kurarak gayrimenkul geliştirme alanına taşımıştır.",
   points = [
     { label: "Doğum Yeri", value: "Mağusa, 1971", accent: "teal" },

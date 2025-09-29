@@ -41,14 +41,38 @@ type Props = {
 
 const FALLBACKS: ProjectSlide[] = [
   {
+    id: "lagoon-verde",
+    title: "Lagoon Verde",
+    subtitle:
+      "Modern mimari ve konforu tek çatı altında buluşturan yaşam alanları.",
+    badge: "Altın Ödül",
+    image: "/lagoon-verde/1.jpg",
+    ctaLabel: "Projeyi İncele",
+    ctaHref: "/projects/lagoon-verde",
+    tint: "#27959b", // teal
+    align: "left",
+  },
+  {
     id: "perla-ii",
     title: "Perla II",
     subtitle:
       "Denize birkaç adım, modern mimari ve yüksek yaşam standardı.",
     badge: "DND Cyprus",
-    image: "/Perla II - 1.png",
+    image: "/perla-ii/9.jpg",
     ctaLabel: "Projeyi İncele",
     ctaHref: "/projects/perla-ii",
+    tint: "#f15c34", // orange
+    align: "right",
+  },
+  {
+    id: "perla",
+    title: "Perla",
+    subtitle:
+      "Doğal dokuya saygılı, şık ve zamansız tasarım dili.",
+    badge: "Kıbrıs",
+    image: "/perla/9.jpg",
+    ctaLabel: "Detaylar",
+    ctaHref: "/projects/perla",
     tint: "#27959b",
     align: "left",
   },
@@ -56,26 +80,28 @@ const FALLBACKS: ProjectSlide[] = [
     id: "la-joya",
     title: "La Joya",
     subtitle:
-      "2025’te teslim—sahil hattında zarafet ve fonksiyonelliğin buluşması.",
+      "2025’te teslim — sahil hattında zarafet ve fonksiyonelliğin buluşması.",
     badge: "Yeni Lansman",
-    image: "/La Joya - 2.png",
+    image: "/la-joya/2.jpg",
     ctaLabel: "Detaylar",
     ctaHref: "/projects/la-joya",
     tint: "#f15c34",
     align: "right",
   },
   {
-    id: "boston",
-    title: "DND Homes Boston",
+    id: "mariachi-beach-club",
+    title: "Mariachi Beach Club",
     subtitle:
-      "Amerika’daki ilk prestijli konut geliştirmemizden deneyim ve kalite.",
-    image: "/Mariachi - 1.png",
-    ctaLabel: "Hakkında",
-    ctaHref: "/about",
+      "Eşsiz plaj deneyimi, sosyalleşme ve eğlenceyi bir arada sunuyor.",
+    badge: "Platin Ödül",
+    image: "/mariachi/2.jpg",
+    ctaLabel: "Projeyi İncele",
+    ctaHref: "/projects/mariachi-beach-club",
     tint: "#27959b",
     align: "left",
   },
 ];
+
 
 export default function ProjectsHeroFullSlider({
   projects,

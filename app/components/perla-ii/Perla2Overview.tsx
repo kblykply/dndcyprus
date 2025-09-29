@@ -22,7 +22,6 @@ type Props = {
   lead?: string;
   highlights?: string[];
   imagePrimary?: string;   // main visual (render/photo)
-  imageSecondary?: string; // optional extra visual
 };
 
 export default function Perla2Overview({
@@ -34,8 +33,7 @@ export default function Perla2Overview({
     "Yüzme havuzu, fitness, yeşil alanlar ve otopark",
     "Zamanında teslim ve şeffaf iletişim yaklaşımı",
   ],
-  imagePrimary = "/Perla II - 1.png",
-  imageSecondary = "/Perla II - 1.png",
+  imagePrimary = "/perla-ii/3.jpg",
 }: Props) {
   return (
     <section
@@ -47,6 +45,17 @@ style={{
   ["--stroke"]: "rgba(20,21,23,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
+
+        <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(30rem 20rem at 12% 100%, ${TEAL}10, transparent 70%),
+            radial-gradient(26rem 16rem at 88% 0%, ${ORANGE}12, transparent 70%)
+          `,
+        }}
+      />
    
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -156,26 +165,7 @@ style={{
               </div>
             </motion.div>
 
-            {imageSecondary ? (
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: false, amount: 0.3 }}
-                custom={1}
-                className="mt-4 rounded-2xl overflow-hidden"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
-                  border: "1px solid var(--stroke)",
-                  boxShadow:
-                    "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
-                  backdropFilter: "blur(10px)",
-                }}
-              >
           
-              </motion.div>
-            ) : null}
           </div>
         </div>
       </div>

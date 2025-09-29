@@ -29,6 +29,12 @@ type Props = {
   subtitle?: string;
   groups?: FeatureGroup[];
   brochureHref?: string;
+  /** Background image behind the section (full-bleed) */
+  bgImage?: string; // e.g. "/perla-ii/amenities-bg.jpg"
+  /** Optional darker overlay on top of image (0–1) */
+  overlayOpacity?: number; // default 0.35
+  /** Optional vertical padding controls */
+  padY?: { base?: string; lg?: string }; // e.g. { base: "py-16", lg: "lg:py-28" }
 };
 
 export default function Perla2Amenities({
@@ -36,22 +42,63 @@ export default function Perla2Amenities({
   subtitle = "Sosyal alanlardan teknik altyapıya kadar günlük yaşamı kolaylaştıran, değer katan özellikler.",
   brochureHref = "/files/la-joya-perla-2-brosur.pdf",
   groups = DEFAULT_GROUPS,
+  bgImage = "/perla-ii/4.jpg",
+  overlayOpacity = 0.20,
+  padY = { base: "py-16", lg: "lg:py-28" },
 }: Props) {
+  // typed CSS var for safe usage
+  const rootStyle = {
+    ["--stroke"]: "rgba(255,255,255,0.18)",
+  } as React.CSSProperties & Record<"--stroke", string>;
+
   return (
     <section
       aria-label="La Joya Perla II — Özellikler"
       className="relative overflow-hidden"
-style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
+      style={rootStyle}
     >
-      {/* subtle brand wash */}
- 
+      {/* Background image */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-center bg-cover"
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          transform: "translateZ(0)",
+        }}
+      />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        {/* header */}
+      {/* Color wash + dark overlay for readability */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            `radial-gradient(40rem 28rem at 15% 0%, ${TEAL}25, transparent 60%),
+             radial-gradient(46rem 32rem at 85% 100%, ${ORANGE}20, transparent 65%)`,
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: `rgba(0,0,0,${overlayOpacity})` }}
+      />
+
+      {/* Soft vignette for edge control */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          maskImage:
+            "radial-gradient(120% 120% at 50% 50%, black 55%, transparent 85%)",
+          WebkitMaskImage:
+            "radial-gradient(120% 120% at 50% 50%, black 55%, transparent 85%)",
+          background:
+            "linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0))",
+        }}
+      />
+
+      <div className={`relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${padY.base ?? "py-16"} ${padY.lg ?? "lg:py-28"}`}>
+        {/* Header */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -59,13 +106,15 @@ style={{
           viewport={{ once: false, amount: 0.35 }}
           className="max-w-2xl"
         >
-          <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]">
+            {title}
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-white/80">
             {subtitle}
           </p>
         </motion.div>
 
-        {/* groups grid */}
+        {/* Glass cards grid */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {groups.map((g, i) => {
             const color = g.accent === "orange" ? ORANGE : TEAL;
@@ -77,30 +126,57 @@ style={{
                 whileInView="show"
                 viewport={{ once: false, amount: 0.3 }}
                 custom={i + 1}
-                className="rounded-2xl p-6"
+                className="group relative rounded-2xl p-6"
                 style={{
-                  background: "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06))",
                   border: "1px solid var(--stroke)",
-                  boxShadow: "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
-                  backdropFilter: "blur(10px)",
+                  boxShadow:
+                    "0 12px 28px rgba(0,0,0,0.22), inset 0 1px rgba(255,255,255,0.35)",
+                  backdropFilter: "blur(14px)",
+                  WebkitBackdropFilter: "blur(14px)",
                 }}
               >
+                {/* Accent glow on hover */}
                 <div
-                  className="inline-flex items-center text-[11px] px-2 py-0.5 rounded-full"
-                  style={{ background: `${color}14`, color, border: `1px solid ${color}33` }}
+                  aria-hidden
+                  className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background:
+                      `radial-gradient(18rem 12rem at 20% -10%, ${color}22, transparent 55%),
+                       radial-gradient(22rem 14rem at 120% 110%, ${color}18, transparent 60%)`,
+                  }}
+                />
+
+                <div
+                  className="relative inline-flex items-center text-[11px] px-2 py-0.5 rounded-full"
+                 style={{
+    background: "rgba(0,0,0,0.55)",   // semi-transparent dark bg
+    color,
+    border: `1px solid ${color}55`,
+    boxShadow: `0 2px 8px rgba(0,0,0,0.3)`,
+    backdropFilter: "blur(6px)",       // glass effect
+  }}
                 >
                   {g.title}
                 </div>
 
-                <ul className="mt-3 space-y-2">
+                <ul className="relative mt-3 space-y-2">
                   {g.items.map((it, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <span
                         aria-hidden
                         className="mt-1 inline-block h-2.5 w-2.5 rounded-full"
-                        style={{ background: idx % 2 === 0 ? color : "rgba(20,21,23,0.4)" }}
+                        style={{
+                          background:
+                            idx % 2 === 0 ? color : "rgba(255,255,255,0.55)",
+                          boxShadow:
+                            idx % 2 === 0
+                              ? `0 0 0 3px ${color}26`
+                              : "0 0 0 3px rgba(255,255,255,0.12)",
+                        }}
                       />
-                      <span className="text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>
+                      <span className="text-sm sm:text-base text-white/90">
                         {it}
                       </span>
                     </li>
@@ -111,7 +187,7 @@ style={{
           })}
         </div>
 
-        {/* bottom note + brochure */}
+        {/* Bottom note + brochure */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -120,19 +196,19 @@ style={{
           custom={groups.length + 2}
           className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
         >
-          <p className="text-xs" style={{ color: "rgba(20,21,23,0.55)" }}>
+          <p className="text-xs text-white/70">
             * Özellikler tip ve bloklara göre farklılık gösterebilir. Güncel liste için satış ekibimizle iletişime geçiniz.
           </p>
 
           {brochureHref ? (
             <a
               href={brochureHref}
-              className="rounded-xl px-5 py-2.5 text-sm font-medium"
+              className="inline-flex items-center justify-center rounded-xl px-5 py-2.5 text-sm font-medium transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white/40"
               style={{
                 background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,
                 color: "#fff",
-                border: `1px solid ${TEAL}55`,
-                boxShadow: `0 10px 28px ${TEAL}40`,
+                border: `1px solid ${TEAL}66`,
+                boxShadow: `0 10px 28px ${TEAL}55, inset 0 1px rgba(255,255,255,0.42)`,
               }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`)
