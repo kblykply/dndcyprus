@@ -135,7 +135,7 @@ export default function OzanSpotlight({
               <Link
                 href="/contact"
                 className="px-6 py-2.5 rounded-full text-sm font-medium"
-                style={{ background: `${ORANGE}14`, color: ORANGE, border: `1px solid ${ORANGE}33` }}
+                style={{ background: `${ORANGE}0`, color: ORANGE, border: `1px solid ${ORANGE}33` }}
               >
                 İletişime Geç
               </Link>

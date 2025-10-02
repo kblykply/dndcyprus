@@ -9,6 +9,7 @@ import Perla2Timeline from "../components/perla-ii/Perla2Timeline";
 import Perla2CTA from "../components/perla-ii/Perla2CTA";
 import PaymentPlansSection from "../components/perla-ii/PaymentPlansSection";
 import Hotspots from "../components/perla-ii/Hotspots";
+import Charts from "../components/perla-ii/Charts";
 
 
 
@@ -26,8 +27,9 @@ export default function HomePage() {
 
 
 <Perla2FloorPlans />
+<Charts />
+
 <Perla2Amenities />
-<PaymentPlansSection/>
 <Perla2Location />
 <Perla2Timeline />
 <Perla2CTA />

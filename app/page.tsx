@@ -11,6 +11,15 @@ import DNDProcessSection from "./components/DNDProcessSection";
 import InvestorResidentAdvantagesSection from "./components/InvestorResidentAdvantagesSection";
 import NewsBlogSection from "./components/NewsBlogSection";
 import ContactVisitSection from "./components/ContactVisitSection";
+import BrandsLogoSliderGlass  from "./components/BrandsSection";
+import Payment from  "./components/Payment";
+
+
+
+
+
+
+
 
 
 export default function HomePage() {
@@ -20,12 +29,18 @@ export default function HomePage() {
             <AwardsSection />
                         <ProjectsStrip />
                                                 <StoryTimeline/>
+                                                                                                <Payment/>
+                 <WhyDNDSection />
+
+
+
                         <BeachClubPerksSection />
-                        <WhyDNDSection />
+                          <BrandsLogoSliderGlass
+ 
+    />
                         <StatsStrip />
                         
-                        <RegionsLifestyleSection />
-
+    
                         <NewsBlogSection />
                         <ContactVisitSection />
     

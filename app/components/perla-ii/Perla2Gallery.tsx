@@ -11,14 +11,13 @@ type MediaItem = {
   src: string;
   alt?: string;
   type?: "image" | "video";
-  poster?: string; // for videos
+  poster?: string;
 };
 
 type Props = {
   title?: string;
   subtitle?: string;
   items?: MediaItem[];
-  /** how many items to show before "Daha Fazla" */
   initialCount?: number;
 };
 
@@ -43,14 +42,12 @@ export default function Perla2Gallery({
     <section
       aria-label="La Joya Perla II — Galeri"
       className="relative overflow-hidden"
-style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
+      style={{
+        background: "#fff",
+        color: "#141517",
+        ["--stroke"]: "rgba(20,21,23,0.08)",
+      } as React.CSSProperties & Record<"--stroke", string>}
     >
- 
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Header */}
         <div className="max-w-2xl">
@@ -71,8 +68,7 @@ style={{
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
                 border: "1px solid var(--stroke)",
-                boxShadow:
-                  "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
+                boxShadow: "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
                 backdropFilter: "blur(10px)",
               }}
             >
@@ -92,7 +88,6 @@ style={{
                     loading="lazy"
                   />
                 )}
-                {/* Hover indicator */}
                 <span
                   className="absolute right-3 bottom-3 text-[11px] px-2 py-0.5 rounded-full"
                   style={{
@@ -121,12 +116,12 @@ style={{
                 border: `1px solid ${TEAL}55`,
                 boxShadow: `0 10px 28px ${TEAL}40`,
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`)
-              }
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`;
+              }}
             >
               Daha Fazla Göster
             </button>
@@ -135,13 +130,7 @@ style={{
       </div>
 
       {/* Lightbox */}
-      <Lightbox
-        open={open}
-        onClose={() => setOpen(false)}
-        items={items}
-        index={index}
-        setIndex={setIndex}
-      />
+      <Lightbox open={open} onClose={() => setOpen(false)} items={items} index={index} setIndex={setIndex} />
     </section>
   );
 }
@@ -192,12 +181,14 @@ function Lightbox({
     startX.current = null;
   };
 
-  // prevent background scroll when open
+  // lock background scroll
   useEffect(() => {
     if (!open) return;
     const prev = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "hidden";
-    return () => { document.documentElement.style.overflow = prev; };
+    document.documentElement.style.overflow = "visible";
+    return () => {
+      document.documentElement.style.overflow = prev;
+    };
   }, [open]);
 
   return (
@@ -208,54 +199,50 @@ function Lightbox({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          style={{
-            background: "rgba(0,0,0,0.75)",
-            color: "#fff",
-          }}
+          style={{ background: "rgba(0,0,0,0.8)", color: "#fff" }}
           onClick={onClose}
         >
-          {/* content panel */}
+          {/* CONTENT */}
           <motion.div
-            className="relative w-[92vw] max-w-5xl"
+            className="relative"
             initial={{ opacity: 0, y: 10, scale: 0.98, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -6, scale: 0.98, filter: "blur(4px)" }}
-            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
             aria-modal="true"
             role="dialog"
           >
-            {/* media */}
+            {/* MEDIA — no fixed aspect, so no side black bars */}
             <div
-              className="rounded-2xl overflow-hidden"
+              className="rounded-2xl overflow-hidden flex items-center justify-center"
               style={{
-                background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.2)",
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.22)",
                 backdropFilter: "blur(8px)",
               }}
             >
-              <div className="aspect-[16/10] bg-black">
-                {items[index]?.type === "video" ? (
-                  <video
-                    controls
-                    poster={items[index]?.poster}
-                    className="w-full h-full object-contain bg-black"
-                  >
-                    <source src={items[index]?.src} />
-                  </video>
-                ) : (
-                  <img
-                    src={items[index]?.src}
-                    alt={items[index]?.alt || "Galeri"}
-                    className="w-full h-full object-contain bg-black"
-                  />
-                )}
-              </div>
+              {items[index]?.type === "video" ? (
+                <video
+                  controls
+                  poster={items[index]?.poster}
+                  className="block max-w-[92vw] max-h-[82vh]"
+                >
+                  <source src={items[index]?.src} />
+                </video>
+              ) : (
+                <img
+                  src={items[index]?.src}
+                  alt={items[index]?.alt || "Galeri"}
+                  className="block w-auto h-auto max-w-[92vw] max-h-[82vh] select-none"
+                  draggable={false}
+                />
+              )}
             </div>
 
-            {/* controls */}
+            {/* FOOTER CONTROLS */}
             <div className="mt-3 flex items-center justify-between">
               <button
                 onClick={goPrev}
@@ -290,7 +277,7 @@ function Lightbox({
               </button>
             </div>
 
-            {/* close button */}
+            {/* CLOSE */}
             <button
               onClick={onClose}
               aria-label="Kapat"
@@ -319,11 +306,8 @@ const DEFAULT_ITEMS: MediaItem[] = [
   { src: "/perla-ii/4.jpg", alt: "Daire içi—oturma odası", type: "image" },
   { src: "/perla-ii/5.jpg", alt: "Daire içi—mutfak", type: "image" },
   { src: "/perla-ii/6.jpg", alt: "Daire içi—yatak odası", type: "image" },
-    { src: "/perla-ii/7.jpg", alt: "Daire içi—yatak odası", type: "image" },
+  { src: "/perla-ii/7.jpg", alt: "Daire içi—yatak odası", type: "image" },
   { src: "/perla-ii/8.jpg", alt: "Daire içi—yatak odası", type: "image" },
   { src: "/perla-ii/9.jpg", alt: "Daire içi—yatak odası", type: "image" },
   { src: "/perla-ii/10.jpg", alt: "Daire içi—yatak odası", type: "image" },
-
-  // optional video example:
-  // { src: "/videos/perla2/teaser.mp4", type: "video", poster: "/images/projects/perla2/video-poster.jpg", alt: "Proje tanıtım videosu" },
 ];

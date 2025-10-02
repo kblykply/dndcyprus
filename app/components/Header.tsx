@@ -23,37 +23,37 @@ type NavGroup = {
 // Example: some parents are direct links, others are pure dropdowns
 const NAV: NavGroup[] = [
   {
-    label: "Kurumsal",
-    items: [
-      { label: "Hakkımızda", href: "/about" },
-      { label: "Liderlik", href: "/about#leadership" },
-      { label: "Sertifikalar", href: "/about#awards" },
-    ],
+    label: "Ana\u00A0Sayfa", // prevents line break
+    href: "/",
   },
   {
     label: "Projeler",
-    href: "/projects", // parent label goes directly to /projects
-    items: [
-      { label: "Tüm Projeler", href: "/projects" },
-      { label: "Daireler (Units)", href: "/units" },
-    ],
+    href: "/projects",
   },
+  {
+    label: "Hakkımızda",
+    href: "/about",
+    items: [{ label: "Ekibimiz", href: "/team" }],
+  },
+
   {
     label: "İletişim",
-    href: "/contact", // parent label goes directly to /contact
-    items: [
-      { label: "Bize Ulaşın", href: "/contact" },
-      { label: "Ofisler", href: "/contact#offices" },
-    ],
+    href: "/contact",
+    
   },
   {
-    label: "Diğer",
-    items: [
-      { label: "Blog", href: "/blog" },
-      { label: "Ozan Dökmecioğlu", href: "/ozan-dokmecioglu" },
+    label: "Yazılar",
+    href: "/contact",
+        items: [
+      { label: "Haberler", href: "/news" },
+      { label: "Bloglar", href: "/blog" },
     ],
+    
   },
+
 ];
+
+
 
 function useNormalizedPathname() {
   const raw = usePathname() || "/";
@@ -71,7 +71,9 @@ export default function Header() {
   const isPerla = pathname === "/perla-ii" || pathname.startsWith("/perla-ii/");
   const isProjects = pathname === "/projects" || pathname.startsWith("/projects/");
   const isAbout = pathname === "/about" || pathname.startsWith("/about/");
-  const isTransparentRoute = isHome || isPerla || isProjects || isAbout;
+    const isContact = pathname === "/contact" || pathname.startsWith("/contact/");
+
+  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact ;
 
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);

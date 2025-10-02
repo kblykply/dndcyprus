@@ -16,7 +16,7 @@ type Variant = {
   image: string;         // main preview image path
   pdf?: string;          // optional brochure / plan PDF
   areas: AreaRow[];
-  gallery?: string[];    // <- lightbox gallery
+  gallery?: string[];    // lightbox gallery
   totals?: {
     kapali?: string;     // "Toplam Kapalı Alan"
     kullanim?: string;   // "Toplam Kullanım Alanı"
@@ -28,9 +28,8 @@ type Plan = {
   title: string;         // "1+1", "2+1"...
   size?: string;         // "56–78 m²"
   note?: string;         // "Sınırlı sayıda"
-  startPrice?: string;   // <- "£129,000'dan başlayan"
-  // block?: string;      // <- no longer rendered (kept here only if you still use it elsewhere)
-  // floors?: string;     // <- no longer rendered
+  /** @deprecated Kept for backward compatibility but NEVER rendered */
+  startPrice?: string;   // ignored
   variants: Variant[];   // one or more variants (e.g., GRAND)
 };
 
@@ -68,6 +67,18 @@ export default function Perla2FloorPlans({
       const total = variant.gallery?.length ?? 0;
       return total ? { open: true, idx: (s.idx - 1 + total) % total } : s;
     });
+
+  // keyboard support for lightbox
+  React.useEffect(() => {
+    if (!lightbox.open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightbox.open, nextImage, prevImage]);
 
   return (
     <section
@@ -114,7 +125,7 @@ export default function Perla2FloorPlans({
           })}
         </div>
 
-        {/* Variant Tabs + Start Price chip (NO Blok/Kat) */}
+        {/* Variant Tabs (NO price chip) */}
         <div className="mt-4 flex items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Varyantlar">
             {plan.variants.map((v, i) => {
@@ -140,6 +151,7 @@ export default function Perla2FloorPlans({
             })}
           </div>
 
+          {/* Right side: ONLY informational note, NEVER price */}
           <div className="hidden sm:flex items-center gap-2 text-xs">
             {plan.note ? (
               <span
@@ -147,15 +159,6 @@ export default function Perla2FloorPlans({
                 style={{ background: `${ORANGE}14`, color: ORANGE, borderColor: `${ORANGE}33` }}
               >
                 {plan.note}
-              </span>
-            ) : null}
-            {plan.startPrice ? (
-              <span
-                className="px-2 py-0.5 rounded-full border"
-                style={{ borderColor: `${TEAL}33`, background: `${TEAL}0f`, color: TEAL }}
-                aria-label="Başlangıç fiyatı"
-              >
-                Başlangıç fiyatı: <b className="ml-1">{plan.startPrice}</b>
               </span>
             ) : null}
           </div>
@@ -167,7 +170,6 @@ export default function Perla2FloorPlans({
             key={`${planIdx}-${variantIdx}`}
             id={`plan-panel-${planIdx}`}
             role="tabpanel"
-            aria-labelledby=""
             initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
@@ -196,15 +198,15 @@ export default function Perla2FloorPlans({
                 <div className="text-sm opacity-80">
                   {plan.title}
                   {plan.size ? <span className="ml-1">• {plan.size}</span> : null}
-                  {plan.startPrice ? <span className="ml-1">• {plan.startPrice}</span> : null}
+                  {/* NEVER render price */}
                 </div>
                 <div className="shrink-0 flex items-center gap-2">
                   <a
                     href={variant.image}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xs px-3 py-1 rounded-full"
-                    style={{ background: `${TEAL}14`, color: TEAL, border: `1px solid ${TEAL}33` }}
+                    className="text-xs px-3 py-1 rounded-full border"
+                    style={{ background: `${TEAL}14`, color: TEAL, borderColor: `${TEAL}33` }}
                   >
                     Büyüt
                   </a>
@@ -394,17 +396,32 @@ export default function Perla2FloorPlans({
 /* ---------------- Sample Data (edit with your real assets) ---------------- */
 const DEFAULT_PLANS: Plan[] = [
   {
-    id: "p-1plus1",
-    title: "1+1",
-    size: "56–78 m²",
-    note: "Yüksek talep",
-    startPrice: "£129,000'dan başlayan",
+    id: "p-1plus0",
+    title: "1+0",
+    size: "33,6 m² kapalı • 45,6 m² kullanım",
     variants: [
       {
-        name: "GRAND",
-        note: "Örnek yerleşim",
-        image: "/Perla-II-11-Loft-Residence-Grand.webp",
-        pdf: "/files/perla2/1plus1-grand.pdf",
+        name: "Studio Residence (Grand)",
+image: "/Perla-II-21-Luxury-Suite.webp",
+        areas: [
+          { label: "Oturma Odası - Mutfak", value: "26 m²" },
+          { label: "WC - Banyo", value: "4 m²" },
+          { label: "Balkon", value: "3,6 m²" },
+          { label: "Bahçe", value: "6 m²" },
+          { label: "Ortak Kullanım Alanı", value: "6 m²" },
+        ],
+        totals: { kapali: "33,6 m²", kullanim: "45,6 m²" },
+gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
+    ],
+  },
+  {
+    id: "p-1plus1",
+    title: "1+1",
+    size: "43,5 m² kapalı • 73,5 m² kullanım",
+    variants: [
+      {
+        name: "Loft Residence (Grand)",
+       image: "/Perla-II-21-Luxury-Suite.webp",
         areas: [
           { label: "Oturma Odası - Mutfak", value: "23 m²" },
           { label: "WC - Banyo", value: "4 m²" },
@@ -414,69 +431,76 @@ const DEFAULT_PLANS: Plan[] = [
           { label: "Ortak Kullanım Alanı", value: "7 m²" },
         ],
         totals: { kapali: "43,5 m²", kullanim: "73,5 m²" },
-        gallery: [
-          "/perla-ii-in/1.jpg",
-          "/perla-ii-in/2.jpg",
-          "/perla-ii-in/3.jpg",
-          "/perla-ii-in/4.jpg",
-        ],
-      },
+gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
     ],
   },
   {
-    id: "p-2plus1",
+    id: "p-2plus1-suite",
     title: "2+1",
-    size: "82–105 m²",
-    startPrice: "£179,000'dan başlayan",
+    size: "61 m² kapalı • 126 m² kullanım",
     variants: [
       {
-        name: "DELUXE",
-        image: "/Perla-II-21-Luxury-Suite.webp",
-        pdf: "/files/perla2/2plus1-deluxe.pdf",
+        name: "Luxury Suite",
+       image: "/Perla-II-21-Luxury-Suite.webp",
         areas: [
-          { label: "Oturma Odası - Mutfak", value: "28 m²" },
-          { label: "WC - Banyo", value: "4,5 m²" },
-          { label: "Ebeveyn Yatak Odası", value: "14 m²" },
-          { label: "Yatak Odası", value: "11 m²" },
-          { label: "Balkon", value: "5 m²" },
-          { label: "Ortak Kullanım Alanı", value: "8 m²" },
+          { label: "Oturma Odası - Mutfak", value: "27 m²" },
+          { label: "WC - Banyo", value: "4 m²" },
+          { label: "Koridor", value: "2 m²" },
+          { label: "Yatak Odası 1", value: "12 m²" },
+          { label: "Yatak Odası 2", value: "13 m²" },
+          { label: "Balkon", value: "3 m²" },
+          { label: "Çatı Terası Alanı", value: "58 m²" },
+          { label: "Ortak Kullanım Alanı", value: "7 m²" },
         ],
-        totals: { kapali: "57,5 m²", kullanim: "70,5 m²" },
-        gallery: [
-           "/perla-ii-in/5.jpg",
-          "/perla-ii-in/6.jpg",
-          "/perla-ii-in/7.jpg",
-          "/perla-ii-in/8.jpg",
-        ],
-      },
+        totals: { kapali: "61 m²", kullanim: "126 m²" },
+gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
     ],
   },
   {
-    id: "p-3plus1",
-    title: "3+1",
-    size: "120–145 m²",
-    startPrice: "£255,000'dan başlayan",
+    id: "p-2plus1-garden-grand",
+    title: "2+1",
+    size: "67,5 m² kapalı • 112 m² kullanım",
     variants: [
       {
-        name: "CORNER",
-        image: "/Perla-II-11-Loft-Residence-Grand.webp",
-        pdf: "/files/perla2/3plus1-corner.pdf",
+        name: "Luxury Garden Suite (Grand)",
+       image: "/Perla-II-21-Luxury-Suite.webp",
         areas: [
-          { label: "Salon - Mutfak", value: "32 m²" },
-          { label: "WC - Banyo", value: "5 m²" },
-          { label: "Ebeveyn Yatak Odası", value: "16 m²" },
-          { label: "Yatak Odası 2", value: "12 m²" },
-          { label: "Yatak Odası 3", value: "10 m²" },
-          { label: "Balkon", value: "6 m²" },
+          { label: "Oturma Odası - Mutfak", value: "30 m²" },
+          { label: "WC - Banyo", value: "4,5 m²" },
+          { label: "Koridor", value: "2,5 m²" },
+          { label: "Yatak Odası 1", value: "11,5 m²" },
+          { label: "Yatak Odası 2", value: "11,5 m²" },
+          { label: "Teras", value: "7,5 m²" },
+          { label: "Bahçe Alanı", value: "23,5 m²" },
+          { label: "Havuz Alanı", value: "9 m²" },
+          { label: "Ortak Kullanım Alanı", value: "12 m²" },
         ],
-        totals: { kapali: "75 m²", kullanim: "93 m²" },
-        gallery: [
-            "/perla-ii-in/1.jpg",
-          "/perla-ii-in/2.jpg",
-          "/perla-ii-in/3.jpg",
-          "/perla-ii-in/4.jpg",
+        totals: { kapali: "67,5 m²", kullanim: "112 m²" },
+gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
+    ],
+  },
+  {
+    id: "p-2plus1-garden-premier",
+    title: "2+1",
+    size: "67,5 m² kapalı • 135 m² kullanım",
+    variants: [
+      {
+        name: "Luxury Garden Suite (Premier)",
+        image: "/Perla-II-21-Luxury-Suite.webp",
+        areas: [
+          { label: "Oturma Odası - Mutfak", value: "30 m²" },
+          { label: "WC - Banyo", value: "4,5 m²" },
+          { label: "Koridor", value: "2,5 m²" },
+          { label: "Yatak Odası 1", value: "11,5 m²" },
+          { label: "Yatak Odası 2", value: "11,5 m²" },
+          { label: "Teras", value: "7,5 m²" },
+          { label: "Bahçe Alanı", value: "43 m²" },
+          { label: "Havuz Alanı", value: "12,5 m²" },
+          { label: "Ortak Kullanım Alanı", value: "12 m²" },
         ],
-      },
+        totals: { kapali: "67,5 m²", kullanim: "135 m²" },
+gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
     ],
   },
 ];
+

@@ -89,8 +89,8 @@
               className="absolute inset-0 pointer-events-none"
               style={{
               background: `
-                  radial-gradient(28rem 20rem at 15% 0%, ${TEAL}12, transparent 70%),
-                  radial-gradient(26rem 16rem at 85% 100%, ${ORANGE}14, transparent 70%)
+                  radial-gradient(28rem 20rem at 15% 100%, ${TEAL}12, transparent 70%),
+                  radial-gradient(26rem 16rem at 85% 0%, ${ORANGE}14, transparent 70%)
               `,
               }}
           />  

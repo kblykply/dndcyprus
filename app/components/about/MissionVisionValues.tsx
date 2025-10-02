@@ -8,29 +8,19 @@ import { motion, Variants } from "framer-motion";
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
+/* ---------- Animation only for headings/CTA (boxes are static) ---------- */
+
 const container: Variants = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.06 } },
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  },
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.98 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+/* ---------- Types ---------- */
 
 type MVVProps = {
   kicker?: string;
@@ -43,10 +33,6 @@ type MVVProps = {
   values?: string[];
   /** Full-bleed background image for the section */
   bgSrc?: string;
-  /** Optional small images on the cards */
-  missionImg?: string;
-  visionImg?: string;
-  valuesImg?: string;
 };
 
 export default function MissionVisionValues({
@@ -67,9 +53,6 @@ export default function MissionVisionValues({
     "İşbirliği & Güvenilir Tedarik",
   ],
   bgSrc = "/perla-ii-in/2.jpg",
-  missionImg = "/La Joya - 2.png",
-  visionImg = "/La Joya - 2.png",
-  valuesImg = "/La Joya - 2.png",
 }: MVVProps) {
   return (
     <section
@@ -132,12 +115,12 @@ export default function MissionVisionValues({
 
       {/* Content */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-        {/* Header */}
+        {/* Header (can animate) */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="text-left"
         >
           <motion.span
@@ -146,7 +129,8 @@ export default function MissionVisionValues({
             style={{
               background: "var(--glass)",
               border: "1px solid var(--stroke)",
-              color: "#fffff",
+              color: "#ffffff",
+              willChange: "transform, opacity",
             }}
           >
             {kicker}
@@ -155,7 +139,7 @@ export default function MissionVisionValues({
           <motion.h2
             variants={fadeUp}
             className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
-            style={{ color: "var(--ink)" }}
+            style={{ color: "var(--ink)", willChange: "transform, opacity" }}
           >
             {title}
           </motion.h2>
@@ -163,47 +147,38 @@ export default function MissionVisionValues({
           <motion.p
             variants={fadeUp}
             className="mt-2 max-w-3xl text-base sm:text-lg"
-            style={{ color: "rgba(255,255,255,0.78)" }}
+            style={{ color: "rgba(255,255,255,0.78)", willChange: "transform, opacity" }}
           >
             Değer odaklı yaklaşımımızı şeffaf, ölçülebilir ve sürdürülebilir ilkelerle destekliyoruz.
           </motion.p>
         </motion.div>
 
-        {/* Cards */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.25 }}
-          className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8"
-        >
+        {/* Cards (NO animations here) */}
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Mission */}
-          <motion.div className="lg:col-span-4">
+          <div className="lg:col-span-4">
             <GlassCard>
               <CardHeader dotColor={TEAL} title={missionTitle} />
               <p className="leading-relaxed text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.82)" }}>
                 {missionText}
               </p>
             </GlassCard>
-          </motion.div>
+          </div>
 
           {/* Vision */}
-          <motion.div  className="lg:col-span-4">
+          <div className="lg:col-span-4">
             <GlassCard>
               <CardHeader dotColor={ORANGE} title={visionTitle} />
               <p className="leading-relaxed text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.82)" }}>
                 {visionText}
               </p>
             </GlassCard>
-          </motion.div>
+          </div>
 
           {/* Values */}
-          <motion.div  className="lg:col-span-4">
+          <div className="lg:col-span-4">
             <GlassCard>
-              <CardHeader
-                dotGradient
-                title={valuesTitle}
-              />
+              <CardHeader dotGradient title={valuesTitle} />
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                 {values.map((val, i) => (
                   <li key={val} className="flex items-start gap-2">
@@ -216,16 +191,17 @@ export default function MissionVisionValues({
                 ))}
               </ul>
             </GlassCard>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        {/* CTA */}
+        {/* CTA (optional small animation is fine; remove motion if you want zero animations globally) */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between"
+          style={{ willChange: "transform, opacity" }}
         >
           <p className="text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.78)" }}>
             Değerlerimizi projelerinize nasıl taşıdığımızı görmek ister misiniz?
@@ -248,6 +224,7 @@ export default function MissionVisionValues({
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
+              aria-hidden="true"
             >
               <path d="M5 12h14" />
               <path d="m12 5 7 7-7 7" />
@@ -266,12 +243,12 @@ function GlassCard({ children }: { children: React.ReactNode }) {
     <div
       className="relative rounded-2xl p-6 sm:p-7 h-full overflow-hidden"
       style={{
-        background:
-          "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08))",
+        background: "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.08))",
         border: "1px solid var(--stroke)",
-        boxShadow:
-          "0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.28)",
-        backdropFilter: "blur(14px)",
+        boxShadow: "0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.28)",
+        backdropFilter: "blur(14px)",          // static glassmorphism
+        WebkitBackdropFilter: "blur(14px)",    // Safari support
+        willChange: "auto",                    // no animation hints for boxes
       }}
     >
       {/* Glow edge */}
@@ -279,12 +256,9 @@ function GlassCard({ children }: { children: React.ReactNode }) {
         aria-hidden
         className="pointer-events-none absolute inset-px rounded-[1rem]"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04))",
-          mask:
-            "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
-          WebkitMask:
-            "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
+          background: "linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04))",
+          mask: "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
+          WebkitMask: "linear-gradient(#000, #000) content-box, linear-gradient(#000, #000)",
           WebkitMaskComposite: "xor",
           maskComposite: "exclude",
           padding: 1,
@@ -315,51 +289,9 @@ function CardHeader({
             : dotColor || TEAL,
         }}
       />
-      <h3
-        className="text-xl sm:text-2xl font-semibold"
-        style={{ color: "var(--ink)" }}
-      >
+      <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: "var(--ink)" }}>
         {title}
       </h3>
-    </div>
-  );
-}
-
-function CardImage({
-  src,
-  label,
-  chipColor,
-}: {
-  src: string;
-  label: string;
-  chipColor: string;
-}) {
-  return (
-    <div
-      className="mt-5 rounded-xl overflow-hidden border"
-      style={{
-        borderColor: "var(--stroke)",
-        background: "rgba(255,255,255,0.06)",
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18)",
-      }}
-    >
-      {/* Use plain <img> to avoid extra Next config for public paths; swap to <Image> if preferred */}
-      <img src={src} alt={`${label} görseli`} className="w-full h-40 object-cover" />
-      <div className="px-4 py-2 flex items-center justify-between">
-        <span className="text-sm" style={{ color: "rgba(255,255,255,0.78)" }}>
-          {label}
-        </span>
-        <span
-          className="text-[10px] px-2 py-1 rounded-full"
-          style={{
-            background: `${chipColor}24`,
-            color: "#fff",
-            border: `1px solid ${chipColor}55`,
-          }}
-        >
-          • görsel
-        </span>
-      </div>
     </div>
   );
 }

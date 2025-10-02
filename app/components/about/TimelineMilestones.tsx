@@ -34,7 +34,7 @@ export default function TimelineHorizontal({
   title = "Yolculuğumuz",
   subtitle = "Önemli kilometre taşlarımızı gezinerek keşfedin.",
   milestones = DEFAULT_MILESTONES,
-  bgSrc = "/lagoon-verde/8.jpg",
+  bgSrc = "/lagoon-verde/5.jpg",
   bgAlt = "DND projeleri arka plan",
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);

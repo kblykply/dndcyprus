@@ -152,7 +152,7 @@ export default function Perla2Amenities({
                   className="relative inline-flex items-center text-[11px] px-2 py-0.5 rounded-full"
                  style={{
     background: "rgba(0,0,0,0.55)",   // semi-transparent dark bg
-    color,
+    color : "rgba(255, 255, 255, 0.86)",
     border: `1px solid ${color}55`,
     boxShadow: `0 2px 8px rgba(0,0,0,0.3)`,
     backdropFilter: "blur(6px)",       // glass effect

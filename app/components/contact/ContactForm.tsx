@@ -18,14 +18,13 @@ export default function ContactForm() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // honeypot (bots will often fill this hidden field)
+    // honeypot
     if (data.get("company")) {
-      setStatus("success"); // silently succeed
+      setStatus("success");
       form.reset();
       return;
     }
 
-    // simple client validation
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const phone = String(data.get("phone") || "").trim();
@@ -53,126 +52,168 @@ export default function ContactForm() {
       if (!res.ok) throw new Error(await res.text());
       setStatus("success");
       form.reset();
-   } catch (err: unknown) {
-  setStatus("error");
-  const msg = err instanceof Error ? err.message : String(err);
-  setError("Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin.");
-  // optionally log msg somewhere if needed
-}
-
+    } catch (err: unknown) {
+      setStatus("error");
+      setError("Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin.");
+    }
   }
 
   return (
     <section
-  aria-label="İletişim Formu"
-  className="relative overflow-hidden"
-  style={{
-    background: "#ffffff",
-    color: "#141517",
-    ["--stroke"]: "rgba(20,21,23,0.08)",
-  } as React.CSSProperties & Record<"--stroke", string>}
->
+      aria-label="İletişim Formu"
+      className="relative overflow-hidden"
+      style={
+        {
+          background: "#ffffff",
+          color: "#141517",
+          ["--stroke" as any]: "rgba(20,21,23,0.08)",
+        } as React.CSSProperties
+      }
+    >
+      {/* Decorative background (soft blobs + subtle grid) */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(34rem 28rem at 8% 0%, ${TEAL}12, transparent 60%),
+            radial-gradient(36rem 28rem at 100% 100%, ${ORANGE}12, transparent 60%)
+          `,
+          maskImage:
+            "radial-gradient(1200px 800px at 50% 0%, black, transparent 85%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-40"
+        style={{
+          backgroundImage:
+            "linear-gradient(0deg, rgba(20,21,23,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(20,21,23,0.03) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
-      {/* subtle color accents */}
-           <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none"
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+            Bize Yazın
+          </h2>
+          <p
+            className="mt-3 text-sm sm:text-base"
+            style={{ color: "rgba(20,21,23,0.65)" }}
+          >
+            Sorularınız ve teklif talepleriniz için formu doldurun. En kısa
+            sürede dönüş yaparız.
+          </p>
+        </div>
+
+        {/* 2-column layout on large screens */}
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-8">
+          {/* FORM CARD */}
+          <form
+            onSubmit={onSubmit}
+            aria-busy={status === "loading"}
+            className="rounded-2xl p-6 sm:p-8"
             style={{
-            background: `
-                radial-gradient(28rem 20rem at 15% 0%, ${TEAL}12, transparent 70%),
-                radial-gradient(26rem 16rem at 85% 100%, ${ORANGE}14, transparent 70%)
-            `,
-            }}
-        />
-
-      <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16">
-        <h2 className="text-2xl sm:text-3xl font-semibold">Bize Yazın</h2>
-        <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
-          Sorularınız ve teklif talepleriniz için formu doldurun. En kısa sürede dönüş yaparız.
-        </p>
-
-        <form onSubmit={onSubmit} className="mt-8">
-          <div
-            className="rounded-2xl p-6 sm:p-7 space-y-5"
-            style={{
-              background: "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.7))",
               border: "1px solid var(--stroke)",
-              boxShadow: "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
-              backdropFilter: "blur(12px)",
+              boxShadow:
+                "0 18px 44px rgba(0,0,0,0.07), inset 0 1px rgba(255,255,255,0.65)",
+              backdropFilter: "blur(14px)",
             }}
           >
+            {/* banner area */}
+            {error ? (
+              <div
+                role="alert"
+                className="mb-5 text-sm rounded-xl px-3.5 py-3"
+                style={{
+                  background: `${ORANGE}14`,
+                  color: ORANGE,
+                  border: `1px solid ${ORANGE}33`,
+                }}
+              >
+                {error}
+              </div>
+            ) : status === "success" ? (
+              <div
+                role="status"
+                className="mb-5 text-sm rounded-xl px-3.5 py-3"
+                style={{
+                  background: `${TEAL}14`,
+                  color: TEAL,
+                  border: `1px solid ${TEAL}33`,
+                }}
+              >
+                Teşekkürler! Mesajınız alındı. En kısa sürede size dönüş
+                yapacağız.
+              </div>
+            ) : null}
+
             {/* Honeypot (hidden) */}
             <div className="hidden">
               <label htmlFor="company">Şirket</label>
               <input id="company" name="company" type="text" autoComplete="organization" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="name" className="text-sm font-medium">Ad Soyad *</label>
-                <input
-                  id="name" name="name" required
-                  className="mt-1 w-full rounded-lg px-3 py-2 outline-none"
-                  style={{
-                    background: "#fff",
-                    border: "1px solid var(--stroke)",
-                  }}
-                  placeholder="Adınız ve soyadınız"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="text-sm font-medium">E-posta *</label>
-                <input
-                  id="email" name="email" type="email" required
-                  className="mt-1 w-full rounded-lg px-3 py-2 outline-none"
-                  style={{ background: "#fff", border: "1px solid var(--stroke)" }}
-                  placeholder="ornek@eposta.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="text-sm font-medium">Telefon</label>
-                <input
-                  id="phone" name="phone" type="tel"
-                  className="mt-1 w-full rounded-lg px-3 py-2 outline-none"
-                  style={{ background: "#fff", border: "1px solid var(--stroke)" }}
-                  placeholder="+90 ..."
-                />
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="text-sm font-medium">Konu *</label>
-                <input
-                  id="subject" name="subject" required
-                  className="mt-1 w-full rounded-lg px-3 py-2 outline-none"
-                  style={{ background: "#fff", border: "1px solid var(--stroke)" }}
-                  placeholder="Teklif / İş birliği / Genel"
-                />
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <Field
+                id="name"
+                label="Ad Soyad *"
+                placeholder="Adınız ve soyadınız"
+                required
+                type="text"
+              />
+              <Field
+                id="email"
+                label="E-posta *"
+                placeholder="ornek@eposta.com"
+                required
+                type="email"
+              />
+              <Field
+                id="phone"
+                label="Telefon"
+                placeholder="+90 ..."
+                type="tel"
+              />
+              <Field
+                id="subject"
+                label="Konu *"
+                placeholder="Teklif / İş birliği / Genel"
+                required
+                type="text"
+              />
             </div>
 
-            <div>
-              <label htmlFor="message" className="text-sm font-medium">Mesaj *</label>
+            <div className="mt-5">
+              <Label htmlFor="message">Mesaj *</Label>
               <textarea
-                id="message" name="message" required rows={6}
-                className="mt-1 w-full rounded-lg px-3 py-2 outline-none resize-y"
-                style={{ background: "#fff", border: "1px solid var(--stroke)" }}
+                id="message"
+                name="message"
+                required
+                rows={8}
+                className="mt-1.5 w-full rounded-xl px-3.5 py-3 outline-none transition-shadow"
+                style={{
+                  background: "#fff",
+                  border: "1px solid var(--stroke)",
+                  boxShadow:
+                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)",
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 4px rgba(39,149,155,0.15)";
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)";
+                }}
                 placeholder="Projeniz veya talebiniz hakkında birkaç detay yazabilirsiniz."
               />
             </div>
 
-            {/* status / errors */}
-            {error ? (
-              <div
-                className="text-sm rounded-lg px-3 py-2"
-                style={{ background: `${ORANGE}14`, color: ORANGE, border: `1px solid ${ORANGE}33` }}
-              >
-                {error}
-              </div>
-            ) : null}
-
-            <div className="flex items-center justify-between gap-3">
+            <div className="mt-6 flex items-center justify-between gap-3">
               <p className="text-xs" style={{ color: "rgba(20,21,23,0.55)" }}>
                 * Zorunlu alanlar
               </p>
@@ -180,11 +221,11 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="rounded-xl px-5 py-2.5 text-sm font-medium disabled:opacity-60"
+                className="rounded-2xl px-5 sm:px-6 py-2.5 text-sm sm:text-[15px] font-medium disabled:opacity-60 relative overflow-hidden"
                 style={{
                   background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,
                   color: "#fff",
-                  boxShadow: `0 10px 28px ${TEAL}40`,
+                  boxShadow: `0 12px 30px ${TEAL}40`,
                   border: `1px solid ${TEAL}55`,
                 }}
                 onMouseEnter={(e) =>
@@ -194,20 +235,172 @@ export default function ContactForm() {
                   (e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`)
                 }
               >
-                {status === "loading" ? "Gönderiliyor..." : status === "success" ? "Gönderildi ✓" : "Gönder"}
+                {status === "loading" ? (
+                  <span className="inline-flex items-center gap-2">
+                    <Spinner /> Gönderiliyor...
+                  </span>
+                ) : status === "success" ? (
+                  "Gönderildi ✓"
+                ) : (
+                  "Gönder"
+                )}
               </button>
             </div>
-          </div>
-        </form>
+          </form>
 
-        {/* success note under form */}
-        {status === "success" ? (
-          <div className="mt-4 text-sm"
-               style={{ color: "rgba(20,21,23,0.7)" }}>
-            Teşekkürler! Mesajınız alındı. En kısa sürede size dönüş yapacağız.
-          </div>
-        ) : null}
+          {/* SIDE INFO / VISUAL CARD */}
+          <aside
+            className="rounded-2xl p-6 sm:p-7 lg:p-8"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.65))",
+              border: "1px solid var(--stroke)",
+              boxShadow:
+                "0 18px 44px rgba(0,0,0,0.06), inset 0 1px rgba(255,255,255,0.6)",
+              backdropFilter: "blur(12px)",
+            }}
+          >
+            <div
+              className="relative overflow-hidden rounded-xl"
+              style={{
+                background: `linear-gradient(135deg, ${TEAL} 0%, ${ORANGE} 100%)`,
+                boxShadow: `0 24px 48px ${TEAL}33`,
+              }}
+            >
+              {/* translucent glass layer */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06))",
+                  backdropFilter: "blur(8px)",
+                }}
+              />
+              {/* content */}
+              <div className="relative p-6 sm:p-7 text-white">
+                <p className="text-xs uppercase tracking-wider/loose opacity-90">
+                  Hızlı İletişim
+                </p>
+                <h3 className="mt-1.5 text-xl font-semibold">
+                  Sizinle Bağlantı Kuralım
+                </h3>
+                <p className="mt-2 text-sm text-white/90">
+                  Talebinizi iletin, ekibimiz en kısa sürede dönüş yapsın. Dilerseniz
+                  doğrudan da iletişime geçebilirsiniz.
+                </p>
+
+                <div className="mt-4 space-y-2 text-sm">
+                  <div className="rounded-lg px-3 py-2 bg-white/10">
+                    <span className="opacity-80">E-posta:</span>{" "}
+                    <a className="underline-offset-2 hover:underline" href="mailto:info@dndcyprus.com">
+                      info@dndcyprus.com
+                    </a>
+                  </div>
+                  <div className="rounded-lg px-3 py-2 bg-white/10">
+                    <span className="opacity-80">Telefon:</span>{" "}
+                    <a className="underline-offset-2 hover:underline" href="tel:+90xxxxxxxxxx">
+                      +90 xxx xxx xx xx
+                    </a>
+                  </div>
+                  <div className="rounded-lg px-3 py-2 bg-white/10">
+                    <span className="opacity-80">WhatsApp:</span>{" "}
+                    <a className="underline-offset-2 hover:underline" href="https://wa.me/90xxxxxxxxxx" target="_blank">
+                      Hızlı Mesaj Gönderin
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-5 rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-[13px]">
+                  <strong className="font-medium">Aydınlatma:</strong>{" "}
+                  Bilgileriniz KVKK kapsamında korunur; yalnızca talebinizi
+                  karşılamak amacıyla kullanılacaktır.
+                </div>
+              </div>
+            </div>
+
+            {/* mini bullets */}
+            <ul className="mt-6 space-y-3 text-sm" style={{ color: "rgba(20,21,23,0.8)" }}>
+              <li className="rounded-lg border border-[var(--stroke)] px-3 py-2 bg-white">
+                <span className="font-medium">Tahmini dönüş:</span> 24–48 saat
+              </li>
+              <li className="rounded-lg border border-[var(--stroke)] px-3 py-2 bg-white">
+                <span className="font-medium">Çalışma saatleri:</span> Hafta içi 09:00–18:00
+              </li>
+            </ul>
+          </aside>
+        </div>
       </div>
     </section>
+  );
+}
+
+/* ---------- Small UI bits ---------- */
+
+function Label(props: React.ComponentProps<"label">) {
+  return (
+    <label
+      {...props}
+      className={"text-sm font-medium " + (props.className ?? "")}
+      style={{ color: "rgba(20,21,23,0.9)" }}
+    />
+  );
+}
+
+function Field({
+  id,
+  label,
+  placeholder,
+  required,
+  type = "text",
+}: {
+  id: string;
+  label: string;
+  placeholder?: string;
+  required?: boolean;
+  type?: string;
+}) {
+  return (
+    <div>
+      <Label htmlFor={id}>
+        {label}
+        {required ? "" : ""}
+      </Label>
+      <input
+        id={id}
+        name={id}
+        required={required}
+        type={type}
+        className="mt-1.5 w-full rounded-xl px-3.5 py-2.5 outline-none transition-shadow"
+        style={{
+          background: "#fff",
+          border: "1px solid var(--stroke)",
+          boxShadow:
+            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)",
+        }}
+        onFocus={(e) => {
+          e.currentTarget.style.boxShadow =
+            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 4px rgba(39,149,155,0.15)";
+        }}
+        onBlur={(e) => {
+          e.currentTarget.style.boxShadow =
+            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)";
+        }}
+        placeholder={placeholder}
+        autoComplete="on"
+      />
+    </div>
+  );
+}
+
+function Spinner() {
+  return (
+    <span
+      aria-hidden="true"
+      className="inline-block h-4 w-4 animate-spin rounded-full border-2 align-[-2px]"
+      style={{
+        borderColor: "#fff",
+        borderRightColor: "transparent",
+      }}
+    />
   );
 }
