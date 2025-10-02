@@ -7,6 +7,9 @@ const ORANGE = "#f15c34";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
+// CSS değişkeni için tip:
+type CSSVars = React.CSSProperties & { "--stroke"?: string };
+
 export default function ContactForm() {
   const [status, setStatus] = useState<FormState>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -58,7 +61,7 @@ export default function ContactForm() {
     }
   }
 
-  return (
+   return (
     <section
       aria-label="İletişim Formu"
       className="relative overflow-hidden"
@@ -66,8 +69,8 @@ export default function ContactForm() {
         {
           background: "#ffffff",
           color: "#141517",
-          ["--stroke" as any]: "rgba(20,21,23,0.08)",
-        } as React.CSSProperties
+          "--stroke": "rgba(20,21,23,0.08)",
+        } as CSSVars
       }
     >
       {/* Decorative background (soft blobs + subtle grid) */}

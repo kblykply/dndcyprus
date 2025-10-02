@@ -16,7 +16,8 @@ type Milestone = {
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
-const EASE = [0.22, 1, 0.36, 1];
+// Tipli cubic-bezier: Framer Motion 'ease' => number[] kabul eder.
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const MILESTONES: Milestone[] = [
   { year: "2017", title: "DND Homes Kuruluşu", summary: "Şirketin ilk merkezi Boston’da kuruldu.", image: "/dnd-boston-ofis.png", badge: "Kuruluş" },
@@ -63,7 +64,7 @@ export default function StoryTimeline() {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.35, ease: EASE as any }}
+        transition={{ duration: 0.35, ease: EASE }}
       >
         {/* LEFT */}
         <div className="relative">
@@ -129,7 +130,7 @@ export default function StoryTimeline() {
                     }}
                     initial={{ width: 0 }}
                     animate={{ width: `${progress * 100}%` }}
-                    transition={{ duration: 0.5, ease: EASE as any }}
+                    transition={{ duration: 0.5, ease: EASE }}
                   />
                 </div>
 
@@ -176,7 +177,7 @@ export default function StoryTimeline() {
                   key={`out-${prevIndexRef.current}`}
                   className="absolute inset-0"
                   initial={{ opacity: 1, scale: 1 }}
-                  animate={{ opacity: 0, scale: 1.02, transition: { duration: 0.6, ease: EASE as any } }}
+                  animate={{ opacity: 0, scale: 1.02, transition: { duration: 0.6, ease: EASE } }}
                   exit={{ opacity: 0 }}
                 >
                   <Image
@@ -191,7 +192,7 @@ export default function StoryTimeline() {
                   key={`in-${index}`}
                   className="absolute inset-0"
                   initial={{ opacity: 0, scale: 1.02 }}
-                  animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE as any } }}
+                  animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } }}
                   exit={{ opacity: 1 }}
                 >
                   <Image
