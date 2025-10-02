@@ -24,13 +24,15 @@ export default function Perla2CTA({
     <section
       aria-label="La Joya Perla II — Call to Action"
       className="relative overflow-hidden"
-      style={{
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+     style={
+  {
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    color: "#141517",
+    "--stroke": "rgba(20,21,23,0.08)",
+  } as React.CSSProperties & Record<string, string>
+}
     >
       {/* brand wash overlay */}
       <div
