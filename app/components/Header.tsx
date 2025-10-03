@@ -72,8 +72,10 @@ export default function Header() {
   const isProjects = pathname === "/projects" || pathname.startsWith("/projects/");
   const isAbout = pathname === "/about" || pathname.startsWith("/about/");
     const isContact = pathname === "/contact" || pathname.startsWith("/contact/");
+        const isLagoon = pathname === "/lagoon-verde" || pathname.startsWith("/lagoon-verde/");
 
-  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact ;
+
+  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon;
 
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);

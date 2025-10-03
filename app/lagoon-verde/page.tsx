@@ -1,0 +1,37 @@
+import Perla2Hero from "../components/lagoon-verde/Perla2Hero";
+import Perla2Facts from "../components/lagoon-verde/Perla2Facts";
+import Perla2Overview from "../components/lagoon-verde/Perla2Overview";
+import Perla2Gallery from "../components/lagoon-verde/Perla2Gallery";
+import Perla2FloorPlans from "../components/lagoon-verde/Perla2FloorPlans";
+import Perla2Amenities from "../components/lagoon-verde/Perla2Amenities";
+import Perla2Location from "../components/lagoon-verde/Perla2Location";
+import Perla2Timeline from "../components/lagoon-verde/Perla2Timeline";
+import Perla2CTA from "../components/lagoon-verde/Perla2CTA";
+import Hotspots from "../components/lagoon-verde/Hotspots";
+import Charts from "../components/lagoon-verde/Charts";
+
+
+
+export default function HomePage() {
+  return (
+    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
+<Perla2Hero />
+<Perla2Overview />
+<Perla2Facts />
+
+<Perla2Gallery /> 
+
+<Hotspots/>
+
+
+
+<Perla2FloorPlans />
+<Charts />
+
+<Perla2Amenities />
+<Perla2Location />
+<Perla2Timeline />
+<Perla2CTA />
+    </main>
+  );
+}

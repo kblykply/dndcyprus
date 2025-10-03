@@ -38,7 +38,7 @@ const DATA: Project[] = [
     type: "Residential",
     location: "Long Beach, İskele",
     cover: "/lagoon-verde/1.jpg",
-    href: "/projects/lagoon-verde",
+    href: "/lagoon-verde",
   },
   {
     id: "la-joya-perla-ii",
