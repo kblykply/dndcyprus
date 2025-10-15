@@ -1,324 +1,196 @@
-// app/components/projects/Perla2Gallery.tsx
+// app/components/mariachi/MariachiGalleryExpanding.tsx
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useMemo, useState } from "react";
+import { motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
+const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
-type MediaItem = {
-  src: string;
-  alt?: string;
-  type?: "image" | "video";
-  poster?: string;
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 16, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.45, ease: EASE },
+  },
 };
 
-type Props = {
+type GalleryItem = {
+  src: string;   // public/ yolundan görsel
+  alt?: string;
+  label?: string; // (opsiyonel) alt cam şerit etiketi
+};
+
+export default function MariachiGalleryExpanding({
+  title = "Galeri",
+  subtitle = "Lagoon Verde Görselleri",
+  items,
+}: {
   title?: string;
   subtitle?: string;
-  items?: MediaItem[];
-  initialCount?: number;
-};
+  items?: GalleryItem[];
+}) {
+  // 5 görsel için örnek veri — kendi yollarınızla değiştirin
+  const data: GalleryItem[] = useMemo(
+    () =>
+      items ?? [
+        { src: "/perla/1.jpg", alt: "Havuz" },
+        { src: "/perla/7.jpg", alt: "Plaj" },
+        { src: "/perla/3.jpg", alt: "Cabanalar" },
+        { src: "/perla/6.jpg", alt: "DJ Gecesi" },
+        { src: "/perla/8.jpg", alt: "Kokteyller" }, 
 
-export default function Perla2Gallery({
-  title = "Galeri",
-  subtitle = "Proje görselleri ve renderlardan seçkiler.",
-  items = DEFAULT_ITEMS,
-  initialCount = 6,
-}: Props) {
-  const [limit, setLimit] = useState(Math.min(initialCount, items.length));
-  const [open, setOpen] = useState(false);
-  const [index, setIndex] = useState(0);
+    
+      ],
+    [items]
+  );
 
-  const visible = useMemo(() => items.slice(0, limit), [items, limit]);
+  // Hover / Tap aktif panel
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [active, setActive] = useState<number | null>(null);
 
-  const openAt = (i: number) => {
-    setIndex(i);
-    setOpen(true);
+  // Kart için büyüme oranı
+  const growth = (i: number) => {
+    // Tap ile seçilmişse onu esas al
+    if (active !== null) return i === active ? 3.2 : 0.8;
+    // Hover varsa ona göre
+    if (hovered !== null) return i === hovered ? 3.2 : 0.8;
+    // Varsayılan
+    return 1;
   };
 
   return (
     <section
-      aria-label="La Joya Perla II — Galeri"
+      aria-label="Mariachi Beach Club — Galeri"
       className="relative overflow-hidden"
-      style={{
-        background: "#fff",
-        color: "#141517",
-        ["--stroke"]: "rgba(20,21,23,0.08)",
-      } as React.CSSProperties & Record<"--stroke", string>}
+      style={{ background: "#ffffff", color: "#141517" }}
+      data-bg="light"
     >
+      {/* Sayfa arka plan dekoru — gradyanlı aura (cam hissi) */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-[28rem] w-[28rem] rounded-full blur-3xl opacity-30"
         style={{
-          background: `
-            radial-gradient(30rem 20rem at 12% 100%, ${TEAL}10, transparent 70%),
-            radial-gradient(26rem 16rem at 88% 0%, ${ORANGE}12, transparent 70%)
-          `,
+          background:
+            "radial-gradient(60% 60% at 50% 50%, rgba(39,149,155,0.22), transparent 70%)",
         }}
       />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        {/* Header */}
-        <div className="max-w-2xl">
-          <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-24 right-1/4 h-[26rem] w-[26rem] rounded-full blur-3xl opacity-30"
+        style={{
+          background:
+            "radial-gradient(60% 60% at 50% 50%, rgba(241,92,52,0.16), transparent 70%)",
+        }}
+      />
+
+      {/* Başlık */}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.35 }}
+          className="max-w-3xl"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+            {title}
+          </h2>
+          <p className="mt-3 text-base sm:text-lg" style={{ color: "#141517CC" }}>
             {subtitle}
           </p>
-        </div>
-
-        {/* Grid */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {visible.map((m, i) => (
-            <button
-              key={m.src + i}
-              onClick={() => openAt(i)}
-              className="group rounded-2xl overflow-hidden text-left"
-              style={{
-                background: "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
-                border: "1px solid var(--stroke)",
-                boxShadow: "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
-              <div className="relative aspect-[16/10] bg-white overflow-hidden">
-                {m.type === "video" ? (
-                  <img
-                    src={m.poster || "/images/video-poster.jpg"}
-                    alt={m.alt || "Video"}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
-                ) : (
-                  <img
-                    src={m.src}
-                    alt={m.alt || "Galeri görseli"}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
-                )}
-                {m.type === "video" && (
-                  <span
-                    className="absolute right-3 bottom-3 text-[11px] px-2 py-0.5 rounded-full"
-                    style={{
-                      background: "rgba(20,21,23,0.55)",
-                      color: "#fff",
-                      border: "1px solid rgba(255,255,255,0.35)",
-                      backdropFilter: "blur(6px)",
-                    }}
-                  >
-                    Videoyu Gör
-                  </span>
-                )}
-              </div>
-            </button>
-          ))}
-        </div>
-
-        {/* Load more */}
-        {limit < items.length && (
-          <div className="mt-10 text-center">
-            <button
-              onClick={() => setLimit((n) => Math.min(n + 6, items.length))}
-              className="rounded-xl px-5 py-2.5 text-sm font-medium"
-              style={{
-                background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,
-                color: "#fff",
-                border: `1px solid ${TEAL}55`,
-                boxShadow: `0 10px 28px ${TEAL}40`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`;
-              }}
-            >
-              Daha Fazla Göster
-            </button>
-          </div>
-        )}
+        </motion.div>
       </div>
 
-      {/* Lightbox */}
-      <Lightbox open={open} onClose={() => setOpen(false)} items={items} index={index} setIndex={setIndex} />
+      {/* ==== FULL-WIDTH (full-bleed) GALERİ ==== */}
+      <div
+        className="relative w-screen left-1/2 -translate-x-1/2 mt-8"
+        // not: bu "full-bleed" hilesi, sayfa container'ından taşarak tam ekran genişlik verir
+      >
+        <div
+          className="group relative mx-auto"
+          onMouseLeave={() => setHovered(null)}
+          style={{ maxWidth: "100vw" }}
+        >
+          {/* Track */}
+          <div
+            className="flex items-stretch"
+            style={{
+              height: "60svh",
+            }}
+          >
+            {data.map((g, i) => {
+              const grow = growth(i);
+              return (
+                <div
+                  key={g.src + i}
+                  className="relative basis-0 min-w-0 overflow-hidden"
+                  onMouseEnter={() => setHovered(i)}
+                  onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
+                  role="button"
+                  aria-label={g.alt || `Galeri görseli ${i + 1}`}
+                  style={{
+                    flexGrow: grow,
+                    transition: "flex-grow .55s cubic-bezier(0.22,1,0.36,1)",
+                    cursor: "pointer",
+                  }}
+                >
+                  {/* Görsel */}
+                  <img
+                    src={g.src}
+                    alt={g.alt || ""}
+                    className="h-full w-full object-cover select-none"
+                    draggable={false}
+                    style={{
+                      transform: grow > 1 ? "scale(1.06)" : "scale(1.02)",
+                      transition: "transform .6s cubic-bezier(0.22,1,0.36,1)",
+                    }}
+                  />
+
+                  {/* Üst cam parıltı */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        grow > 1
+                          ? "radial-gradient(60% 50% at 50% 0%, rgba(39,149,155,0.22), transparent 60%)"
+                          : "radial-gradient(60% 40% at 50% 0%, rgba(255,255,255,0.08), transparent 60%)",
+                      transition: "opacity .45s ease",
+                    }}
+                  />
+
+                  {/* Alt cam şerit (etiket) */}
+                  {g.label ? (
+                    <div
+                      className="absolute left-4 right-4 bottom-4 rounded-2xl px-4 py-2 backdrop-blur-md"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
+                        border: "1px solid rgba(255,255,255,0.26)",
+                        color: "#fff",
+                        boxShadow: "0 10px 24px rgba(0,0,0,0.25)",
+                      }}
+                    >
+                      <div className="text-sm font-medium drop-shadow">{g.label}</div>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Küçük ipucu */}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10 lg:pb-14">
+        <p className="mt-5 text-xs" style={{ color: "#14151799" }}>
+          *Mobilde bir görsele dokunarak büyütüp sabitleyebilir, tekrar dokunarak varsayılan görünüme dönebilirsiniz.
+        </p>
+      </div>
     </section>
   );
 }
-
-/* ================= Lightbox ================= */
-
-function Lightbox({
-  open,
-  onClose,
-  items,
-  index,
-  setIndex,
-}: {
-  open: boolean;
-  onClose: () => void;
-  items: MediaItem[];
-  index: number;
-  setIndex: (n: number) => void;
-}) {
-  const hasPrev = index > 0;
-  const hasNext = index < items.length - 1;
-  const startX = useRef<number | null>(null);
-
-  const goPrev = useCallback(() => hasPrev && setIndex(index - 1), [hasPrev, index, setIndex]);
-  const goNext = useCallback(() => hasNext && setIndex(index + 1), [hasNext, index, setIndex]);
-
-  // keyboard navigation
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, goPrev, goNext, onClose]);
-
-  // touch swipe
-  const onTouchStart = (e: React.TouchEvent) => {
-    startX.current = e.touches[0].clientX;
-  };
-  const onTouchEnd = (e: React.TouchEvent) => {
-    if (startX.current == null) return;
-    const dx = e.changedTouches[0].clientX - startX.current;
-    if (dx > 40) goPrev();
-    if (dx < -40) goNext();
-    startX.current = null;
-  };
-
-  // lock background scroll while open
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = "visible";
-    return () => {
-      document.documentElement.style.overflow = prev;
-    };
-  }, [open]);
-
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          style={{ background: "rgba(0,0,0,0.8)", color: "#fff" }}
-          onClick={onClose}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Galeri büyütülmüş görünüm"
-        >
-          {/* CONTENT */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, y: 10, scale: 0.98, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -6, scale: 0.98, filter: "blur(4px)" }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-          >
-            {/* MEDIA FRAME */}
-            <div
-              className="relative rounded-2xl overflow-hidden flex items-center justify-center"
-              style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.22)",
-                backdropFilter: "blur(8px)",
-              }}
-            >
-              {items[index]?.type === "video" ? (
-                <video
-                  controls
-                  poster={items[index]?.poster}
-                  className="block max-w-[92vw] max-h-[82vh]"
-                >
-                  <source src={items[index]?.src} />
-                </video>
-              ) : (
-                <img
-                  src={items[index]?.src}
-                  alt={items[index]?.alt || "Galeri"}
-                  className="block w-auto h-auto max-w-[92vw] max-h-[82vh] select-none"
-                  draggable={false}
-                />
-              )}
-
-              {/* CLOSE BUTTON — pinned to frame top-right */}
-              <button
-                onClick={onClose}
-                aria-label="Kapat"
-                className="absolute top-3 right-3 text-xs px-2.5 py-1 rounded-full"
-                style={{
-                  background: "rgba(0,0,0,0.6)",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.35)",
-                  backdropFilter: "blur(6px)",
-                }}
-              >
-                ✕ Kapat
-              </button>
-
-              {/* LEFT / RIGHT ARROWS (only if multiple items) */}
-              {items.length > 1 && (
-                <>
-                  <button
-                    onClick={goPrev}
-                    disabled={!hasPrev}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-sm bg-black/60 text-white border border-white/20 hover:bg-black/70 disabled:opacity-40"
-                    aria-label="Önceki"
-                  >
-                    ‹
-                  </button>
-                  <button
-                    onClick={goNext}
-                    disabled={!hasNext}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-sm bg-black/60 text-white border border-white/20 hover:bg-black/70 disabled:opacity-40"
-                    aria-label="Sonraki"
-                  >
-                    ›
-                  </button>
-                </>
-              )}
-            </div>
-
-            {/* FOOTER CONTROLS */}
-            <div className="mt-3 flex items-center justify-between">
-              <div className="text-xs opacity-85">
-                {items[index]?.alt || "Galeri Görseli"}
-              </div>
-              <div className="text-xs opacity-80">
-                {index + 1} / {items.length}
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-/* ============ Default sample items (replace with your assets) ============ */
-const DEFAULT_ITEMS: MediaItem[] = [
-  { src: "/lagoon-verde/1.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/2.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/3.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/5.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/6.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/7.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/8.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/11.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/13.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/14.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/15.jpg", alt: "Ana cephe render", type: "image" },
-  { src: "/lagoon-verde/17.jpg", alt: "Ana cephe render", type: "image" },
-];

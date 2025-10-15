@@ -47,7 +47,13 @@ export default function Perla2FloorPlans({
 }: Props) {
   const [planIdx, setPlanIdx] = React.useState(0);
   const [variantIdx, setVariantIdx] = React.useState(0);
-  const [lightbox, setLightbox] = React.useState<{ open: boolean; idx: number }>({ open: false, idx: 0 });
+
+  // Lightbox owns the images it should show (main-only or gallery)
+  const [lightbox, setLightbox] = React.useState<{
+    open: boolean;
+    idx: number;
+    images: string[];
+  }>({ open: false, idx: 0, images: [] });
 
   const plan = plans[planIdx];
   const variant = plan.variants[variantIdx];
@@ -55,18 +61,33 @@ export default function Perla2FloorPlans({
   // reset variant when plan changes
   React.useEffect(() => setVariantIdx(0), [planIdx]);
 
-  const openLightboxAt = (idx: number) => setLightbox({ open: true, idx });
-  const closeLightbox = () => setLightbox({ open: false, idx: 0 });
-  const nextImage = () =>
+  // ---- Openers ----
+  // Büyüt -> open ONLY the main floor plan image
+  const openMainImage = () =>
+    setLightbox({ open: true, idx: 0, images: [variant.image] });
+
+  // Thumbnails -> open gallery (if any)
+  const openGalleryAt = (i: number) => {
+    const gallery = variant.gallery ?? [];
+    if (gallery.length === 0) return;
+    setLightbox({ open: true, idx: i, images: gallery });
+  };
+
+  const closeLightbox = () => setLightbox({ open: false, idx: 0, images: [] });
+
+  const nextImage = React.useCallback(() => {
     setLightbox((s) => {
-      const total = variant.gallery?.length ?? 0;
-      return total ? { open: true, idx: (s.idx + 1) % total } : s;
+      const total = s.images.length;
+      return total > 0 ? { ...s, idx: (s.idx + 1) % total } : s;
     });
-  const prevImage = () =>
+  }, []);
+
+  const prevImage = React.useCallback(() => {
     setLightbox((s) => {
-      const total = variant.gallery?.length ?? 0;
-      return total ? { open: true, idx: (s.idx - 1 + total) % total } : s;
+      const total = s.images.length;
+      return total > 0 ? { ...s, idx: (s.idx - 1 + total) % total } : s;
     });
+  }, []);
 
   // keyboard support for lightbox
   React.useEffect(() => {
@@ -99,7 +120,7 @@ export default function Perla2FloorPlans({
           </p>
         </div>
 
-        {/* Plan Tabs (1+1 / 2+1 / 3+1 ...) */}
+        {/* Plan Tabs */}
         <div className="mt-6 flex flex-wrap items-center gap-2" role="tablist" aria-label="Daire Tipleri">
           {plans.map((p, i) => {
             const active = i === planIdx;
@@ -201,15 +222,14 @@ export default function Perla2FloorPlans({
                   {/* NEVER render price */}
                 </div>
                 <div className="shrink-0 flex items-center gap-2">
-                  <a
-                    href={variant.image}
-                    target="_blank"
-                    rel="noreferrer"
+                  <button
+                    onClick={openMainImage}
                     className="text-xs px-3 py-1 rounded-full border"
                     style={{ background: `${TEAL}14`, color: TEAL, borderColor: `${TEAL}33` }}
+                    aria-label="Görseli büyüt"
                   >
                     Büyüt
-                  </a>
+                  </button>
                   {variant.pdf ? (
                     <a
                       href={variant.pdf}
@@ -294,7 +314,7 @@ export default function Perla2FloorPlans({
                   </div>
                 ) : null}
 
-                {/* ---- Gallery (with Lightbox) ---- */}
+                {/* ---- Gallery (opens gallery-only in lightbox) ---- */}
                 {variant.gallery && variant.gallery.length > 0 ? (
                   <div className="mt-6">
                     <div className="mb-2 text-xs font-medium opacity-70">Galeri</div>
@@ -302,7 +322,7 @@ export default function Perla2FloorPlans({
                       {variant.gallery.map((src, i) => (
                         <li key={src}>
                           <button
-                            onClick={() => openLightboxAt(i)}
+                            onClick={() => openGalleryAt(i)}
                             className="group block w-full aspect-square overflow-hidden rounded-xl border"
                             style={{ borderColor: "var(--stroke)" }}
                             aria-label={`Galeri görseli ${i + 1}`}
@@ -330,9 +350,9 @@ export default function Perla2FloorPlans({
         </p>
       </div>
 
-      {/* ---- Lightbox Overlay ---- */}
+      {/* ---- Minimal, Professional Lightbox Overlay ---- */}
       <AnimatePresence>
-        {lightbox.open && variant.gallery && variant.gallery.length > 0 ? (
+        {lightbox.open && lightbox.images.length > 0 ? (
           <motion.div
             key="lightbox"
             initial={{ opacity: 0 }}
@@ -345,45 +365,71 @@ export default function Perla2FloorPlans({
             aria-label="Galeri büyütülmüş görünüm"
             onClick={closeLightbox}
           >
+            {/* Center stage */}
             <div
-              className="absolute inset-0 flex items-center justify-center p-4"
+              className="absolute inset-0 flex flex-col items-center justify-center p-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative max-w-5xl w-full">
-                <img
-                  src={variant.gallery[lightbox.idx]}
-                  alt=""
-                  className="w-full h-auto rounded-xl shadow-2xl"
-                />
-                {/* Controls */}
-                <button
-                  onClick={closeLightbox}
-                  className="absolute -top-3 -right-3 rounded-full px-3 py-1.5 text-xs font-medium"
-                  style={{ background: `${ORANGE}`, color: "#fff" }}
-                  aria-label="Kapat"
+              {/* Wrapper holding image + close + arrows */}
+              <div className="relative w-full max-w-6xl" style={{ maxHeight: "85vh" }}>
+                {/* IMAGE FRAME */}
+                <div
+                  className="relative w-full h-full flex items-center justify-center overflow-hidden rounded-xl shadow-2xl bg-black/40"
+                  style={{ minHeight: "40vh" }}
                 >
-                  Kapat
-                </button>
-                {variant.gallery.length > 1 ? (
-                  <>
-                    <button
-                      onClick={prevImage}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-xs font-medium"
-                      style={{ background: `${TEAL}`, color: "#fff" }}
-                      aria-label="Önceki"
-                    >
-                      ‹
-                    </button>
-                    <button
-                      onClick={nextImage}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-xs font-medium"
-                      style={{ background: `${TEAL}`, color: "#fff" }}
-                      aria-label="Sonraki"
-                    >
-                      ›
-                    </button>
-                  </>
-                ) : null}
+                  <img
+                    src={lightbox.images[lightbox.idx]}
+                    alt=""
+                    className="select-none"
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "85vh",
+                      objectFit: "contain",
+                    }}
+                    draggable={false}
+                  />
+
+                  {/* CLOSE BUTTON: pinned to image frame’s top-right */}
+                  <button
+                    onClick={closeLightbox}
+                    className="absolute top-3 right-3 z-10 rounded-full px-3 py-1.5 text-sm font-medium bg-black/60 text-white border border-white/20 hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/40"
+                    aria-label="Kapat"
+                  >
+                    ✕ Kapat
+                  </button>
+
+                  {/* LEFT / RIGHT ARROWS (only if multiple images) */}
+                  {lightbox.images.length > 1 && (
+                    <>
+                      <button
+                        onClick={prevImage}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-sm bg-black/60 text-white border border-white/20 hover:bg-black/70"
+                        aria-label="Önceki"
+                      >
+                        ‹
+                      </button>
+                      <button
+                        onClick={nextImage}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-sm bg-black/60 text-white border border-white/20 hover:bg-black/70"
+                        aria-label="Sonraki"
+                      >
+                        ›
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {/* Counter / Caption Row */}
+                <div className="mt-3 flex items-center justify-between text-white/85 text-xs">
+                  <div>
+                    {plan.title} — {variant.name}
+                  </div>
+                  <div className="opacity-80">
+                    {lightbox.images.length > 1
+                      ? `${lightbox.idx + 1} / ${lightbox.images.length}`
+                      : "Plan Görseli"}
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -393,114 +439,113 @@ export default function Perla2FloorPlans({
   );
 }
 
+
 /* ---------------- Sample Data (edit with your real assets) ---------------- */
 const DEFAULT_PLANS: Plan[] = [
   {
-    id: "p-1plus0",
+    id: "ljp2-1plus0",
     title: "1+0",
-    size: "33,6 m² kapalı • 45,6 m² kullanım",
+    size: "33,60 m² kapalı • 45,60 m² kullanım",
     variants: [
       {
         name: "Studio Residence (Grand)",
-image: "/Perla-II-21-Luxury-Suite.webp",
+        image: "/perla-ii-plans/7.png",
         areas: [
-          { label: "Oturma Odası - Mutfak", value: "26 m²" },
+          { label: "Salon + Mutfak", value: "26 m²" },
           { label: "WC - Banyo", value: "4 m²" },
-          { label: "Balkon", value: "3,6 m²" },
+          { label: "Balkon", value: "3,60 m²" },
           { label: "Bahçe", value: "6 m²" },
-          { label: "Ortak Kullanım Alanı", value: "6 m²" },
+          { label: "Ortak Kullanım Alanı", value: "6 m²" }
         ],
-        totals: { kapali: "33,6 m²", kullanim: "45,6 m²" },
-gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
-    ],
+        totals: { kapali: "33,60 m²", kullanim: "45,60 m²" },
+        gallery: []
+      }
+    ]
   },
   {
-    id: "p-1plus1",
+    id: "ljp2-1plus1-loft",
     title: "1+1",
     size: "43,5 m² kapalı • 73,5 m² kullanım",
     variants: [
       {
-        name: "Loft Residence (Grand)",
-       image: "/Perla-II-21-Luxury-Suite.webp",
+        name: "1+1 Loft Residence (Grand)",
+        image: "/perla-ii-plans/8.png",
         areas: [
-          { label: "Oturma Odası - Mutfak", value: "23 m²" },
+          { label: "Salon + Mutfak", value: "23 m²" },
           { label: "WC - Banyo", value: "4 m²" },
           { label: "Yatak Odası", value: "13,5 m²" },
           { label: "Balkon", value: "3 m²" },
-          { label: "Çatı Terası Alanı", value: "23 m²" },
-          { label: "Ortak Kullanım Alanı", value: "7 m²" },
+          { label: "Çatı Terası", value: "23 m²" },
+          { label: "Ortak Kullanım Alanı", value: "7 m²" }
         ],
         totals: { kapali: "43,5 m²", kullanim: "73,5 m²" },
-gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
-    ],
+        gallery: []
+      }
+    ]
   },
   {
-    id: "p-2plus1-suite",
+    id: "ljp2-2plus1-roof",
     title: "2+1",
     size: "61 m² kapalı • 126 m² kullanım",
     variants: [
       {
-        name: "Luxury Suite",
-       image: "/Perla-II-21-Luxury-Suite.webp",
+        name: "2+1 Luxury Suite",
+        image: "/perla-ii-plans/9.png",
         areas: [
-          { label: "Oturma Odası - Mutfak", value: "27 m²" },
+          { label: "Salon + Mutfak", value: "27 m²" },
           { label: "WC - Banyo", value: "4 m²" },
           { label: "Koridor", value: "2 m²" },
           { label: "Yatak Odası 1", value: "12 m²" },
           { label: "Yatak Odası 2", value: "13 m²" },
           { label: "Balkon", value: "3 m²" },
-          { label: "Çatı Terası Alanı", value: "58 m²" },
-          { label: "Ortak Kullanım Alanı", value: "7 m²" },
+          { label: "Çatı Terası", value: "58 m²" },
+          { label: "Ortak Kullanım Alanı", value: "7 m²" }
         ],
         totals: { kapali: "61 m²", kullanim: "126 m²" },
-gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
-    ],
+        gallery: []
+      }
+    ]
   },
   {
-    id: "p-2plus1-garden-grand",
+    id: "ljp2-2plus1-garden",
     title: "2+1",
-    size: "67,5 m² kapalı • 112 m² kullanım",
+    size: "67,5 m² kapalı • 112–135 m² kullanım",
     variants: [
       {
-        name: "Luxury Garden Suite (Grand)",
-       image: "/Perla-II-21-Luxury-Suite.webp",
+        name: "2+1 Luxury Garden Suite (Grand)",
+        image: "/perla-ii-plans/10.png",
         areas: [
-          { label: "Oturma Odası - Mutfak", value: "30 m²" },
+          { label: "Salon + Mutfak", value: "30 m²" },
           { label: "WC - Banyo", value: "4,5 m²" },
           { label: "Koridor", value: "2,5 m²" },
           { label: "Yatak Odası 1", value: "11,5 m²" },
           { label: "Yatak Odası 2", value: "11,5 m²" },
           { label: "Teras", value: "7,5 m²" },
-          { label: "Bahçe Alanı", value: "23,5 m²" },
-          { label: "Havuz Alanı", value: "9 m²" },
-          { label: "Ortak Kullanım Alanı", value: "12 m²" },
+          { label: "Bahçe", value: "23,5 m²" },
+          { label: "Havuz", value: "9 m²" },
+          { label: "Ortak Kullanım Alanı", value: "12 m²" }
         ],
         totals: { kapali: "67,5 m²", kullanim: "112 m²" },
-gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
-    ],
-  },
-  {
-    id: "p-2plus1-garden-premier",
-    title: "2+1",
-    size: "67,5 m² kapalı • 135 m² kullanım",
-    variants: [
+        gallery: []
+      },
       {
-        name: "Luxury Garden Suite (Premier)",
-        image: "/Perla-II-21-Luxury-Suite.webp",
+        name: "2+1 Luxury Garden Suite (Premier)",
+        image: "/perla-ii-plans/11.png",
         areas: [
-          { label: "Oturma Odası - Mutfak", value: "30 m²" },
+          { label: "Salon + Mutfak", value: "30 m²" },
           { label: "WC - Banyo", value: "4,5 m²" },
           { label: "Koridor", value: "2,5 m²" },
           { label: "Yatak Odası 1", value: "11,5 m²" },
           { label: "Yatak Odası 2", value: "11,5 m²" },
           { label: "Teras", value: "7,5 m²" },
-          { label: "Bahçe Alanı", value: "43 m²" },
-          { label: "Havuz Alanı", value: "12,5 m²" },
-          { label: "Ortak Kullanım Alanı", value: "12 m²" },
+          { label: "Bahçe", value: "43 m²" },
+          { label: "Havuz", value: "12,5 m²" },
+          { label: "Ortak Kullanım Alanı", value: "12 m²" }
         ],
         totals: { kapali: "67,5 m²", kullanim: "135 m²" },
-gallery: ["/perla-ii-in/1.jpg", "/perla-ii-in/2.jpg", "/perla-ii-in/3.jpg", "/perla-ii-in/4.jpg"],      },
-    ],
-  },
+        gallery: []
+      }
+    ]
+  }
 ];
 

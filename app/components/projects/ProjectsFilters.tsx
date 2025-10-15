@@ -56,7 +56,7 @@ const DATA: Project[] = [
     type: "Residential",
     location: "Bahçeler, İskele",
     cover: "/perla/1.jpg",
-    href: "/projects/la-joya-perla-i",
+    href: "/perla",
   },
   {
     id: "la-joya",
@@ -65,7 +65,7 @@ const DATA: Project[] = [
     type: "Residential",
     location: "İskele",
     cover: "/la-joya/2.jpg",
-    href: "/projects/la-joya",
+    href: "/la-joya",
   },
 
   // Beach Club
@@ -76,7 +76,7 @@ const DATA: Project[] = [
     type: "Beach",
     location: "İskele",
     cover: "/mariachi/2.jpg",
-    href: "/projects/mariachi-beach-club",
+    href: "/mariachi",
   },
 
   // Land

@@ -24,10 +24,20 @@ type Angle = {
 export default function InteriorMaterialsHotspotsBase() {
   /* ------- Define your angles here ------- */
   const ANGLES: Angle[] = [
+
+        {
+      id: "angle-c",
+      name: "Yatak Odası",
+      imageSrc: "/perla-in/1.jpg",
+      imageAlt: "Interior render – Angle C",
+      hotspots: [
+        
+      ],
+    },
     {
       id: "angle-a",
       name: "Salon",
-      imageSrc: "/lagoon-verde-interior/2plus1/6.jpg",
+      imageSrc: "/perla-in/2.jpg",
       imageAlt: "Interior render – Angle A",
       hotspots: [
        
@@ -36,21 +46,13 @@ export default function InteriorMaterialsHotspotsBase() {
     {
       id: "angle-b",
       name: "Mutfak",
-      imageSrc: "/lagoon-verde-interior/2plus1/8.jpg",
+      imageSrc: "/perla-in/3.jpg",
       imageAlt: "Interior render – Angle B",
       hotspots: [
        
       ],
     },
-    {
-      id: "angle-c",
-      name: "Yatak Odası",
-      imageSrc: "/lagoon-verde-interior/2plus1/5.jpg",
-      imageAlt: "Interior render – Angle C",
-      hotspots: [
-        
-      ],
-    },
+
   ];
 
   /* ------- State ------- */

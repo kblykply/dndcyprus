@@ -233,10 +233,10 @@ const DEFAULT_GROUPS: FeatureGroup[] = [
     title: "Konut & Yaşam",
     accent: "teal",
     items: [
-      "Studio, 1+1 ve 2+1 seçenekleri",
-      "Geniş balkon, teras ve çatı terasları",
-      "Kaliteli iç mekân malzemeleri",
-      "Otopark imkânı",
+      "Studio, 1+1 Loft ve 2+1 Luxury Suite seçenekleri",
+      "Balkonlar ve geniş çatı terasları",
+      "Açık & kapalı yüzme havuzları",
+      "Kapalı yeraltı otoparkı",
     ],
   },
   {
@@ -244,10 +244,10 @@ const DEFAULT_GROUPS: FeatureGroup[] = [
     title: "Sosyal Alanlar",
     accent: "orange",
     items: [
-      "Lagün ve ada havuzları",
-      "Aquapark ve mini golf",
-      "Fitness, spa & güzellik merkezi",
-      "Havuz bar & restoran, süpermarket ve eczane",
+      "Sand pool konsepti (İskele’de ilk)",
+      "Spa & GYM; amfitiyatro & açık hava sineması",
+      "Aqua park ve basketbol sahası",
+      "Restoran, havuz bar, mini market, unisex kuaför; çocuk kulübü & oyun alanı",
     ],
   },
   {
@@ -255,10 +255,8 @@ const DEFAULT_GROUPS: FeatureGroup[] = [
     title: "Güvenlik",
     accent: "teal",
     items: [
-      "24/7 güvenlik",
-      "Giriş kontrolü",
-      "Kamera altyapısı",
-      "Acil durum planlaması",
+      "Kapalı yeraltı otoparkı (güvenli park imkânı)",
+      "Çocuk oyun alanlarında güvenlik odaklı tasarım vurgusu",
     ],
   },
   {
@@ -266,21 +264,10 @@ const DEFAULT_GROUPS: FeatureGroup[] = [
     title: "Teknik Altyapı",
     accent: "orange",
     items: [
-      "Akıllı ev altyapısı",
-      "Yedek jeneratör",
-      "Yüksek hızlı internet & uydu TV",
-      "Yerden ısıtma ve merkezi soğutma",
-    ],
-  },
-  {
-    id: "sustainability",
-    title: "Sürdürülebilirlik",
-    accent: "teal",
-    items: [
-      "Doğaya entegre yerleşim yaklaşımı",
-      "Cittaslow felsefesinden ilham",
-      "Enerji verimli yaşam alanları",
-      "Su ve kaynak verimliliği odaklı tasarım",
+      "Merkezi ısıtma/soğutma ve yerden ısıtma",
+      "Merkezi jeneratör (kesintisiz enerji)",
+      "Merkezi internet sistemi",
+      "Merkezi uydu ve akıllı ev sistemleri",
     ],
   },
   {
@@ -288,11 +275,12 @@ const DEFAULT_GROUPS: FeatureGroup[] = [
     title: "Konum & Erişim",
     accent: "orange",
     items: [
-      "Long Beach’e ~5–7 dk",
-      "Mariachi Beach Club’a ~7 dk (üyelik ayrıcalığı)",
-      "Market, restoran ve günlük ihtiyaç noktaları site içinde",
-      "Gazimağusa merkeze ~15 dk",
+      "Denize 700 m",
+      "Mariachi Beach Club 700 m — sakinlere üyelik ve indirimli hizmetler",
+      "Famagusta 22 km; Hastane 3 km",
+      "Ercan Havalimanı 49 km; Okul 1,5 km",
     ],
   },
 ];
+
 

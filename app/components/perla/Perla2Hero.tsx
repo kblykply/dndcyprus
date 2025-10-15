@@ -32,13 +32,13 @@ type Props = {
 };
 
 export default function Perla2Hero({
-  title = "Lagon Verde",
-  tagline = "Bahçeler, İskele’de modern yaşam ve yatırım fırsatı.",
-  location = "Bahçeler, İskele",
-  statusTR = "Devam Eden",
-  delivery = "Aralık 2028",
-  heroImage = "/lagoon-verde/5.jpg",
-  brochureHref = "/files/la-joya-perla-2-brosur.pdf",
+title = "La Joya Perla",
+tagline = "Bahçeler, İskele’de denize 700 m, yıl boyu lüks ve konfor.",
+location = "Bahçeler, İskele",
+statusTR = "Devam Eden",
+delivery = "Kasım 2026",
+heroImage = "/perla/7.jpg", 
+brochureHref = "https://dndcyprus.com/katalog/perla/perla-katalog.pdf",
   contactHref = "/contact",
   kicker = "DND Cyprus",
   topScrimHeight = 104, // ~header height; tweak if needed

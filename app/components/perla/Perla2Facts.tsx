@@ -31,13 +31,14 @@ export default function Perla2Facts({
 title = "Öne Çıkan Bilgiler",
 subtitle = "Projenin temel özelliklerine hızlıca göz atın.",
 facts = [
-  { label: "Lokasyon", value: "Bahçeler, İskele (Ötüken)", accent: "teal" },
-  { label: "Teslim", value: "2028", accent: "orange" },
-  { label: "Tip", value: "Konut / Rezidans & Resort", accent: "teal" },
-  { label: "Birim Sayısı", value: "128", accent: "orange" },
-  { label: "Arsa Alanı", value: "43.179 m²", accent: "teal" },
+  { label: "Lokasyon", value: "Bahçeler, İskele", accent: "teal" },
+  { label: "Teslim", value: "Kasım 2026", accent: "orange" },
+  { label: "Tip", value: "Konut / Rezidans", accent: "teal" },
+  { label: "Birim Sayısı", value: "384", accent: "orange" },
+  { label: "Arsa Alanı", value: "25.053 m²", accent: "teal" },
   { label: "Durum", value: "Devam Eden", accent: "orange" },
-],
+]
+,
 
   withSeoJsonLd = true,
 }: Props) {

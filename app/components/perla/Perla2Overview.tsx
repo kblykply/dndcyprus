@@ -25,16 +25,18 @@ type Props = {
 };
 
 export default function Perla2Overview({
-  title = "Genel Bakış",
-lead = "Lagoon Verde; eşsiz lagün havuzu konsepti, modern mimarisi ve zengin sosyal donatıları ile Bahçeler, İskele’de tatil ve yaşamı yeniden tanımlayan prestijli bir konut projesidir. Denize ve şehir imkanlarına yakın konumu, yatırım ve oturum için dengeli bir seçenek sunar.",
+ title = "Genel Bakış",
+lead = "Bahçeler, İskele’de konumlanan La Joya Perla; denize 700 m mesafe, İskele’de ilk kez uygulanan doğal görünümlü ‘sand pool’ konsepti, açık-kapalı havuzlar ve zengin sosyal alanlarıyla yıl boyu lüks ve konforu bir arada sunar.",
 highlights = [
-  "Geniş lagün havuzu ve adalı havuz konsepti",
-  "Fitness, çocuk oyun alanı, güzellik merkezi ve mini golf",
-  "Aquapark, havuz bar, restoran, süpermarket ve eczane",
-  "7 dakika uzaklıkta Mariachi Beach Club üyeliği ve ayrıcalıklar",
+  "İskele’de ilk ‘sand pool’ (doğal kum plajı etkisi) + açık/kapalı yüzme havuzları",
+  "Spa & GYM, restoran ve havuz bar; açık hava sineması & amfitiyatro",
+  "Çocuk kulübü ve oyun alanları, basketbol sahası; site içi mini market & unisex kuaför",
+  "Mariachi Beach Club’a üyelik ve ayrıcalıklar (yaklaşık 700 m)",
 ],
 
-  imagePrimary = "/lagoon-verde/3.jpg",
+
+
+  imagePrimary = "/perla/3.jpg",
 }: Props) {
   return (
     <section

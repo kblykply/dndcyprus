@@ -53,26 +53,28 @@ function formatDistance(d: DistanceItem) {
 }
 
 export default function Perla2Location({
-  title = "Konum",
+ title = "Konum",
 subtitle = "Bahçeler, İskele — denize ve günlük ihtiyaçlara yakın konum.",
 address = "Bahçeler, İskele, Kuzey Kıbrıs",
-lat = 35.228781,
-lng = 33.880673,
-embedSrc = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15764!2d33.880673!3d35.228781!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDEzJzQzLjYiTiAzM8KwNTInNTAuNCJF!5e0!3m2!1sen!2s!4v1696462350000",  
+lat = 35.285425,
+lng = 33.921694,
+embedSrc = "https://www.google.com/maps?q=35.285425,33.921694&z=15&output=embed",
 nearby = [
+  { label: "Mariachi Beach Club" },
   { label: "Long Beach" },
   { label: "Market & Restoranlar" },
-  { label: "Sahil Yürüyüş Yolu" },
   { label: "İskele Merkezi" },
 ],
 grayscale = false,
 distances = [
-  { label: "Long Beach", km: 5, accent: "teal" },
   { label: "Mariachi Beach Club", m: 700, accent: "orange" },
-  { label: "Hastane", km: 10, accent: "teal" },
-  { label: "Gazimağusa (Famagusta)", km: 15, accent: "orange" },
-  { label: "Ercan Havalimanı", km: 45, accent: "teal" },
+  { label: "Okul", km: 1.5, accent: "teal" },
+  { label: "Alışveriş Merkezi", km: 2.5, accent: "orange" },
+  { label: "Hastane", km: 3, accent: "teal" },
+  { label: "Gazimağusa (Famagusta)", km: 22, accent: "orange" },
+  { label: "Ercan Havalimanı", km: 49, accent: "teal" },
 ],
+
 }: Props) {
   const mapsQuery = encodeURIComponent(`${lat},${lng}`);
   const mapsSearch = encodeURIComponent(address);

@@ -443,89 +443,97 @@ export default function Perla2FloorPlans({
 /* ---------------- Sample Data (edit with your real assets) ---------------- */
 const DEFAULT_PLANS: Plan[] = [
   {
-    id: "lv-1plus0",
+    id: "ljp-1plus0",
     title: "1+0",
-    size: "39,18 m² kapalı • 51,18 m² kullanım",
+    size: "33,60–38,90 m² kapalı • 45,60–50,90 m² kullanım",
     variants: [
       {
-        name: "Studio Residence",
-        image: "/lagoon-verde-interior/floor-plans/studio.webp",
+        name: "Studio Residence (Grand)",
+        image: "/perla-plans/1.png",
         areas: [
-          { label: "Oturma Odası", value: "29,36 m²" },
-          { label: "WC - Banyo", value: "5,48 m²" },
-          { label: "Teras", value: "4,34 m²" },
+          { label: "Salon + Mutfak", value: "26 m²" },
+          { label: "WC - Banyo", value: "4 m²" },
+          { label: "Balkon", value: "3,60 m²" },
+          { label: "Bahçe", value: "6 m²" },
           { label: "Ortak Kullanım Alanı", value: "6 m²" },
-          { label: "Bahçe", value: "6 m²" }
         ],
-        totals: { kapali: "39,18 m²", kullanim: "51,18 m²" },
-gallery: ["/lagoon-verde-interior/studio/1.jpg","/lagoon-verde-interior/studio/3.jpg","/lagoon-verde-interior/studio/4.jpg","/lagoon-verde-interior/studio/5.jpg","/lagoon-verde-interior/studio/6.jpg",],   
-      }
-    ]
+        totals: { kapali: "33,60 m²", kullanim: "45,60 m²" },
+        gallery: [],
+      },
+      {
+        name: "Studio Residence (Premier)",
+        image: "/perla-plans/1.png",
+        areas: [
+          { label: "Salon + Mutfak", value: "29,25 m²" },
+          { label: "WC - Banyo", value: "5,45 m²" },
+          { label: "Balkon", value: "4,20 m²" },
+          { label: "Bahçe", value: "6 m²" },
+          { label: "Ortak Kullanım Alanı", value: "6 m²" },
+        ],
+        totals: { kapali: "38,90 m²", kullanim: "50,90 m²" },
+        gallery: [],
+      },
+    ],
   },
   {
-    id: "lv-1plus1-loft",
+    id: "ljp-1plus1-loft",
     title: "1+1",
-    size: "50,13 m² kapalı • 87,05 m² kullanım",
+    size: "43,5–49,57 m² kapalı • 73,5–81,95 m² kullanım",
+    
     variants: [
       {
-        name: "Loft Residence",
-        image: "/lagoon-verde-interior/floor-plans/loft.webp",
+        name: "Loft Residence (Grand)",
+        image: "/perla-plans/2.png",
         areas: [
-          { label: "Oturma Odası", value: "25,57 m²" },
-          { label: "WC - Banyo", value: "5,48 m²" },
-          { label: "Balkon", value: "3,53 m²" },
-          { label: "Yatak Odası", value: "15,55 m²" },
-          { label: "Çatı Terası", value: "30,92 m²" },
-          { label: "Ortak Kullanım Alanı", value: "6 m²" }
+          { label: "Salon + Mutfak", value: "23 m²" },
+          { label: "WC - Banyo", value: "4 m²" },
+          { label: "Yatak Odası", value: "13,5 m²" },
+          { label: "Balkon", value: "3 m²" },
+          { label: "Çatı Terası", value: "23 m²" },
+          { label: "Ortak Kullanım Alanı", value: "7 m²" },
         ],
-        totals: { kapali: "50,13 m²", kullanim: "87,05 m²" },
-gallery: ["/lagoon-verde-interior/loft/1.jpg","/lagoon-verde-interior/loft/3.jpg","/lagoon-verde-interior/loft/4.jpg","/lagoon-verde-interior/loft/5.jpg","/lagoon-verde-interior/loft/6.jpg",],   
-      }
-    ]
+        totals: { kapali: "43,5 m²", kullanim: "73,5 m²" },
+        gallery: [],
+      },
+      {
+        name: "Loft Residence (Premier)",
+        image: "/perla-plans/2.png",
+        areas: [
+          { label: "Salon + Mutfak", value: "25,38 m²" },
+          { label: "WC - Banyo", value: "5,45 m²" },
+          { label: "Yatak Odası", value: "15,24 m²" },
+          { label: "Balkon", value: "3,5 m²" },
+          { label: "Çatı Terası", value: "25,38 m²" },
+          { label: "Ortak Kullanım Alanı", value: "7 m²" },
+        ],
+        totals: { kapali: "49,57 m²", kullanim: "81,95 m²" },
+        gallery: [],
+      },
+    ],
   },
   {
-    id: "lv-2plus1-roof",
+    id: "ljp-2plus1-luxury",
     title: "2+1",
-    size: "70,50 m² kapalı • 149,4 m² kullanım",
+    size: "61 m² kapalı • 126 m² kullanım",
     variants: [
       {
-        name: "Roof Residence",
-        image: "/lagoon-verde-interior/floor-plans/2plus1roof.webp",
+        name: "Luxury Suite Residence",
+        image: "/perla-plans/3.png",
         areas: [
-          { label: "Oturma Odası", value: "33,35 m²" },
-          { label: "WC - Banyo", value: "4,77 m²" },
-          { label: "Yatak Odası 1", value: "13,77 m²" },
-          { label: "Yatak Odası 2", value: "15,08 m²" },
-          { label: "Balkon", value: "3,53 m²" },
-          { label: "Çatı Terası", value: "66,90 m²" },
-          { label: "Ortak Kullanım Alanı", value: "12 m²" }
+          { label: "Salon + Mutfak", value: "27 m²" },
+          { label: "WC - Banyo", value: "4 m²" },
+          { label: "Koridor", value: "2 m²" },
+          { label: "Yatak Odası 1", value: "12 m²" },
+          { label: "Yatak Odası 2", value: "13 m²" },
+          { label: "Balkon", value: "3 m²" },
+          { label: "Çatı Terası", value: "58 m²" },
+          { label: "Ortak Kullanım Alanı", value: "7 m²" },
         ],
-        totals: { kapali: "70,50 m²", kullanim: "149,4 m²" },
-gallery: ["/lagoon-verde-interior/2plus1/1.jpg","/lagoon-verde-interior/2plus1/3.jpg","/lagoon-verde-interior/2plus1/4.jpg","/lagoon-verde-interior/2plus1/5.jpg","/lagoon-verde-interior/2plus1/6.jpg","/lagoon-verde-interior/2plus1/7.jpg","/lagoon-verde-interior/2plus1/8.jpg","/lagoon-verde-interior/2plus1/9.jpg",],   
-      }
-    ]
+        totals: { kapali: "61 m²", kullanim: "126 m²" },
+        gallery: [],
+      },
+    ],
   },
-  {
-    id: "lv-2plus1-garden",
-    title: "2+1",
-    size: "78,37 m² kapalı • 102,37 m² kullanım",
-    variants: [
-      {
-        name: "Garden Residence",
-        image: "/lagoon-verde-interior/floor-plans/2plus1.webp",
-        areas: [
-          { label: "Oturma Odası", value: "37,42 m²" },
-          { label: "WC - Banyo", value: "5,15 m²" },
-          { label: "Yatak Odası 1", value: "13,36 m²" },
-          { label: "Yatak Odası 2", value: "13,36 m²" },
-          { label: "Teras", value: "9,08 m²" },
-          { label: "Bahçe", value: "12 m²" },
-          { label: "Ortak Kullanım Alanı", value: "12 m²" }
-        ],
-        totals: { kapali: "78,37 m²", kullanim: "102,37 m²" },
-gallery: ["/lagoon-verde-interior/2plus1/1.jpg","/lagoon-verde-interior/2plus1/3.jpg","/lagoon-verde-interior/2plus1/4.jpg","/lagoon-verde-interior/2plus1/5.jpg","/lagoon-verde-interior/2plus1/6.jpg","/lagoon-verde-interior/2plus1/7.jpg","/lagoon-verde-interior/2plus1/8.jpg","/lagoon-verde-interior/2plus1/9.jpg",],   
-      }
-    ]
-  }
 ];
+
 

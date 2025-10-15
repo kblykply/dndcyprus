@@ -29,6 +29,18 @@ const NAV: NavGroup[] = [
   {
     label: "Projeler",
     href: "/projects",
+        items: [
+      { label: "Lagoon Verde", href: "/lagoon-verde" },
+      { label: "La Joya Perla II", href: "/perla-ii" },
+            { label: "La Joya Perla", href: "/perla" },
+
+
+      { label: "La Joya", href: "/la-joya" },
+      { label: "Mariachi Beach Club", href: "/mariachi" },
+
+      
+    ],
+    
   },
   {
     label: "Hakkımızda",
@@ -74,8 +86,13 @@ export default function Header() {
     const isContact = pathname === "/contact" || pathname.startsWith("/contact/");
         const isLagoon = pathname === "/lagoon-verde" || pathname.startsWith("/lagoon-verde/");
 
+        const iPerla = pathname === "/perla" || pathname.startsWith("/perla/");
+                const isLaJoya = pathname === "/la-joya" || pathname.startsWith("/la-joya/");
+                                const isMariachi = pathname === "/mariachi" || pathname.startsWith("/mariachi/");
 
-  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon;
+
+
+  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi;
 
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);
