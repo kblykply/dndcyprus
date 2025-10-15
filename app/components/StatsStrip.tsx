@@ -57,7 +57,7 @@ function StatsStrip({
   plannedHomes = 30000,
   regionsCount = 8  ,
   awardsCount = 4,
-  imageUrl = "/uu.JPG",
+  imageUrl = "/uu.jpg",
   showRegions = false,
 }: StatsStripProps) {
   const sectionRef = useRef<HTMLDivElement>(null);

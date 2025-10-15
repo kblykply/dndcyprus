@@ -17,7 +17,7 @@ const PROJECTS: Project[] = [
   { name: "Lagoon Verde",       region: "İskele",   blurb: "Modern mimari ve konforu tek çatı altında buluşturan yaşam alanları.", img: "/lagoon-verde/1.jpg" },
   { name: "La Joya Perla II",   region: "Long Beach", blurb: "Denizle iç içe, sosyal yaşamı zenginleştiren bir konsept.",         img: "/perla-ii/1.jpg" },
   { name: "La Joya Perla I",    region: "Girne",    blurb: "Doğal dokuya saygılı, şık ve zamansız tasarım dili.",                 img: "/perla/9.jpg" },
-  { name: "La Joya",            region: "Tatlısu",  blurb: "Sahil hattında butik bir yaşam deneyimi.",                             img: "/la-joya/3.jpg " },
+  { name: "La Joya",            region: "Tatlısu",  blurb: "Sahil hattında butik bir yaşam deneyimi.",                             img: "/la-joya/3.jpg" },
   { name: "Mariachi Beach Club",region: "Esentepe", blurb: "Akdeniz ışığını yakalayan minimal ve çağdaş çizgiler.",               img: "/mariachi/2.jpg" },
 ];
 
