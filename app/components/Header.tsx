@@ -55,11 +55,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Yazılar",
-    href: "/contact",
-        items: [
-      { label: "Haberler", href: "/news" },
-      { label: "Bloglar", href: "/blog" },
-    ],
+    href: "/blog",
     
   },
 

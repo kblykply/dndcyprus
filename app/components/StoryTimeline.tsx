@@ -14,9 +14,9 @@ type Milestone = {
   badge?: string;
 };
 
+// Kept for future use if needed, not actively used to keep colors minimal
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
-// Tipli cubic-bezier: Framer Motion 'ease' => number[] kabul eder.
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const MILESTONES: Milestone[] = [
@@ -68,47 +68,45 @@ export default function StoryTimeline() {
       >
         {/* LEFT */}
         <div className="relative">
-          {/* watermark year (light grey) */}
+          {/* watermark year (very light neutral) */}
           <div
             aria-hidden
-            className="select-none pointer-events-none absolute -top-16 -right-2 text-8xl md:text-9xl font-black tracking-tight text-black/6 z-100"
+            className="select-none pointer-events-none absolute -top-16 -right-2 text-8xl md:text-9xl font-black tracking-tight text-black/5 z-100"
           >
             {current.year}
           </div>
 
           <div className="relative rounded-3xl border border-black/10 bg-white shadow-md z-10">
             <div className="relative p-7 md:p-10">
-              <span
-                className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium"
-                style={{
-                  background: `${TEAL}10`,
-                  borderColor: `${TEAL}30`,
-                  color: TEAL,
-                }}
-              >
-                Şirket Hikayemiz
-              </span>
+              {/* Neutral section label */}
+             <span
+  className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium"
+  style={{
+    background: `${TEAL}14`,     // subtle teal tint (#27959b14)
+    border: `1px solid ${TEAL}33`,// thin teal border
+    color: TEAL,                  // teal text
+  }}
+>
+  Şirket Hikayemiz
+</span>
 
               <div className="mt-4 flex items-center gap-2">
-                <span
-                  className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide"
-                  style={{
-                    background: `${TEAL}12`,
-                    color: TEAL,
-                    border: `1px solid ${TEAL}33`,
-                  }}
-                >
-                  {current.year}
-                </span>
+                {/* Neutral year tag */}
+          <span
+  className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide"
+  style={{
+    background: `${ORANGE}14`,      // subtle orange tint
+    border: `1px solid ${ORANGE}33`,// thin orange border
+    color: ORANGE,                  // orange text
+  }}
+>
+  {current.year}
+</span>
+
+
+                {/* Neutralized badge (optional) */}
                 {current.badge && (
-                  <span
-                    className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide"
-                    style={{
-                      background: `${ORANGE}12`,
-                      color: ORANGE,
-                      border: `1px solid ${ORANGE}33`,
-                    }}
-                  >
+                  <span className="inline-flex items-center rounded-md border border-black/10 bg-white px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-black/70">
                     {current.badge}
                   </span>
                 )}
@@ -120,14 +118,11 @@ export default function StoryTimeline() {
               <p className="mt-3 text-black/70 leading-relaxed">{current.summary}</p>
 
               <div className="mt-7 space-y-4">
-                {/* progress bar */}
+                {/* progress bar (neutral) */}
                 <div className="relative">
                   <div className="h-1.5 rounded-full bg-black/10" />
                   <motion.div
-                    className="absolute top-0 left-0 h-1.5 rounded-full"
-                    style={{
-                      background: `linear-gradient(90deg, ${TEAL}, ${ORANGE})`,
-                    }}
+                    className="absolute top-0 left-0 h-1.5 rounded-full bg-black/50"
                     initial={{ width: 0 }}
                     animate={{ width: `${progress * 100}%` }}
                     transition={{ duration: 0.5, ease: EASE }}
@@ -135,6 +130,7 @@ export default function StoryTimeline() {
                 </div>
 
                 <div className="flex items-center justify-between">
+                  {/* Neutral dots */}
                   <div className="flex items-center gap-2">
                     {MILESTONES.map((m, i) => {
                       const active = i === index;
@@ -143,17 +139,16 @@ export default function StoryTimeline() {
                           key={`${m.year}-${i}`}
                           onClick={() => goTo(i)}
                           aria-label={`${m.year} – ${m.title}`}
-                          className="h-3 w-3 rounded-full transition-all"
-                          style={{
-                            background: active
-                              ? `linear-gradient(180deg, ${TEAL}, ${ORANGE})`
-                              : "rgba(0,0,0,0.25)",
-                            transform: active ? "scale(1.15)" : "scale(1)",
-                          }}
+                          aria-current={active ? "step" : undefined}
+                          className={`h-2.5 w-2.5 rounded-full transition-all ${
+                            active ? "bg-black ring-2 ring-black/20" : "bg-black/25"
+                          }`}
+                          style={{ transform: active ? "scale(1.05)" : "scale(1)" }}
                         />
                       );
                     })}
                   </div>
+
                   <div className="flex items-center gap-2">
                     <GlassIconButton onClick={prev} ariaLabel="Önceki">
                       <FiChevronLeft className="h-5 w-5" />

@@ -3,6 +3,7 @@
 
 import { useMemo, useState } from "react";
 import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import type { BlogPost } from "./NewsBlogSection";
 
@@ -28,6 +29,10 @@ const item: Variants = {
     transition: { type: "spring", stiffness: 220, damping: 24, mass: 0.7 },
   },
 };
+
+function isHttpUrl(src?: string) {
+  return !!src && (src.startsWith("http://") || src.startsWith("https://"));
+}
 
 type Props = {
   initialPosts?: BlogPost[];
@@ -70,10 +75,10 @@ export default function NewsBlogListClient({
       data-bg="light"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        {/* top hairline like Spotlight */}
+        {/* top hairline */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[rgba(20,21,23,0.08)]" />
 
-        {/* subtle radial accents to keep DND vibe, very light */}
+        {/* subtle radial accents */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10"
@@ -83,7 +88,7 @@ export default function NewsBlogListClient({
           }}
         />
 
-        {/* Kicker chip (matches Spotlight) */}
+        {/* Kicker chip */}
         <motion.span
           variants={item}
           initial="hidden"
@@ -124,8 +129,8 @@ export default function NewsBlogListClient({
           )}
         </div>
 
-        {/* Grid */}
-        <motion.div
+        {/* Grid -> uses new Card style */}
+        <motion.ul
           variants={wrap}
           initial="hidden"
           whileInView="show"
@@ -145,119 +150,59 @@ export default function NewsBlogListClient({
               });
 
             return (
-              <motion.article
-                key={slug || `post-${idx}`}
-                variants={item}
-                className="
-                  group relative flex flex-col rounded-2xl overflow-hidden
-                  bg-white
-                  border border-[rgba(20,21,23,0.08)]
-                  shadow-[0_4px_18px_rgba(0,0,0,0.05)]
-                  transition-[transform,box-shadow,border-color] duration-300
-                  hover:-translate-y-1 hover:shadow-[0_14px_34px_rgba(0,0,0,0.08)]
-                  hover:border-[rgba(20,21,23,0.12)]
-                "
-              >
-                <Link href={href} className="relative block">
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <img
-                      src={img}
-                      alt={p.title || "Yazı görseli"}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                      loading="lazy"
-                    />
-                    {/* soft top-to-bottom fade */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/0 to-transparent pointer-events-none" />
-                    {!!p.category && (
-                      <span
-                        className="
-                          absolute left-3 top-3 text-[11px] px-2 py-0.5 rounded-full
-                          bg-white border border-white/70 backdrop-blur
-                          text-black/80 font-medium shadow-sm
-                        "
-                      >
-                        {p.category}
-                      </span>
+              <motion.li key={slug || `post-${idx}`} variants={item} className="h-full">
+                <Link
+                  href={href}
+                  className="group h-full flex flex-col overflow-hidden rounded-2xl border border-black/10
+                             bg-white/70 backdrop-blur-xl shadow transition hover:shadow-lg"
+                >
+                  {/* Thumb (fixed ratio) */}
+                  <div className="relative aspect-[16/10] shrink-0">
+                    {img ? (
+                      <Image
+                        src={img}
+                        alt={p.title || "Yazı görseli"}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                        unoptimized={isHttpUrl(img)}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        priority={false}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 grid place-items-center text-xs text-black/40">
+                        No cover
+                      </div>
                     )}
                   </div>
-                </Link>
 
-                {/* Body */}
-                <div className="p-5 md:p-6 flex flex-col gap-2">
-                  <Link href={href} className="group">
-                    <h3 className="text-lg md:text-xl font-semibold leading-snug tracking-tight">
+                  {/* Body */}
+                  <div className="flex-1 p-4 flex flex-col">
+                    <div className="text-xs text-black/60">
+                      {date}
+                      {p.readTime ? ` • ${p.readTime} dk` : ""}
+                      {p.author ? ` • ${p.author}` : ""}
+                    </div>
+
+                    {/* Reserve height for 2 lines so rows align */}
+                    <h3 className="mt-2 text-lg font-semibold line-clamp-2 min-h-[3.2rem]">
                       {p.title}
                     </h3>
-                  </Link>
 
-                  {p.excerpt && (
-                    <p className="text-[13px] leading-6 text-[rgba(20,21,23,0.72)] line-clamp-3">
-                      {p.excerpt}
-                    </p>
-                  )}
+                    {p.excerpt ? (
+                      <p className="mt-1 text-sm text-black/70 line-clamp-2">
+                        {p.excerpt}
+                      </p>
+                    ) : null}
 
-                  {(date || p.readTime || p.author) && (
-                    <div className="mt-1 flex flex-wrap items-center gap-2 text-xs" style={{ color: "rgba(20,21,23,0.55)" }}>
-                      {date && <span>{date}</span>}
-                      {p.readTime && (
-                        <>
-                          <span className="opacity-40">•</span>
-                          <span>{p.readTime} dk okuma</span>
-                        </>
-                      )}
-                      {p.author && (
-                        <>
-                          <span className="opacity-40">•</span>
-                          <span>{p.author}</span>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                {/* Footer CTA (styled like Spotlight buttons) */}
-                <div className="px-5 md:px-6 pb-5 md:pb-6 mt-auto">
-               <Link
-  href={href}
-  className="inline-flex items-center gap-2 text-sm font-medium rounded-full px-3.5 py-1.5 transition-transform hover:-translate-y-0.5"
-  style={{
-    background: "#fff",
-    color: TEAL,
-    border: `1px solid ${TEAL}33`,
-    boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-  }}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.background = `${TEAL}`;
-    e.currentTarget.style.color = "#fff";
-    e.currentTarget.style.border = `1px solid ${TEAL}`;
-    e.currentTarget.style.boxShadow = `0 8px 20px ${TEAL}44`;
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.background = "#fff";
-    e.currentTarget.style.color = TEAL;
-    e.currentTarget.style.border = `1px solid ${TEAL}33`;
-    e.currentTarget.style.boxShadow = "0 2px 6px rgba(0,0,0,0.06)";
-  }}
->
-  Devamını Oku <span aria-hidden>→</span>
-</Link>
-
-                </div>
-
-                {/* subtle hover glow accent */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    boxShadow: `inset 0 0 0 1px rgba(255,255,255,.6), 0 30px 60px -40px ${TEAL}22, 0 26px 52px -44px ${ORANGE}22`,
-                  }}
-                />
-              </motion.article>
+                    {/* If you add footer later, push it down with mt-auto */}
+                  </div>
+                </Link>
+              </motion.li>
             );
           })}
-        </motion.div>
+        </motion.ul>
 
-        {/* Load more (Spotlight-like buttons) */}
+        {/* Load more */}
         {canLoadMore && (
           <div className="mt-12 md:mt-14 flex justify-center gap-3">
             <button

@@ -9,6 +9,8 @@ import Perla2Timeline from "../components/la-joya/Perla2Timeline";
 import Perla2CTA from "../components/la-joya/Perla2CTA";
 import Hotspots from "../components/la-joya/Hotspots";
 import Charts from "../components/la-joya/Charts";
+import MariachiPerks from "../components/mariachi/MariachiPerks";
+
 
 
 
@@ -19,6 +21,8 @@ export default function HomePage() {
 <Perla2Overview />
 <Perla2Facts />
 
+
+
 <Perla2Gallery /> 
 
 <Hotspots/>
@@ -26,6 +30,8 @@ export default function HomePage() {
 
 
 <Perla2FloorPlans />
+
+<MariachiPerks />
 <Charts />
 
 <Perla2Amenities />

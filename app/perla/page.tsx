@@ -9,6 +9,7 @@ import Perla2Timeline from "../components/perla/Perla2Timeline";
 import Perla2CTA from "../components/perla/Perla2CTA";
 import Hotspots from "../components/perla/Hotspots";
 import Charts from "../components/perla/Charts";
+import MariachiPerks from "../components/mariachi/MariachiPerks";
 
 
 
@@ -26,6 +27,10 @@ export default function HomePage() {
 
 
 <Perla2FloorPlans />
+
+
+<MariachiPerks /> 
+
 <Charts />
 
 <Perla2Amenities />
