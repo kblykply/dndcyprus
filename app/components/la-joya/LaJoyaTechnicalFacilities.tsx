@@ -1,4 +1,4 @@
-// app/components/mariachi/MariachiHighlights.tsx
+// app/components/mariachi/LaJoyaTechnicalFacilities.tsx
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -9,12 +9,19 @@ import {
   useMotionValue,
   animate,
 } from "framer-motion";
-import { Waves, Umbrella, Martini, Music4, Sparkles, Sun } from "lucide-react";
+import {
+  Wind,
+  Zap,
+  Home,
+  RadioTower,
+  Waves,
+  Sparkles,
+  Thermometer,
+} from "lucide-react";
 
 const TEAL = "#27959b";
-const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
-const GAP = 20; // px – hem stil hem ölçümde kullanıyoruz
+const GAP = 20;
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16, filter: "blur(6px)" },
@@ -29,7 +36,6 @@ const fadeUp: Variants = {
 type Highlight = {
   title: string;
   desc?: string;
-  /** Kart arka plan görseli (public/ yolundan) */
   image: string;
   icon?: React.ReactNode;
 };
@@ -37,68 +43,58 @@ type Highlight = {
 type Props = {
   title?: string;
   subtitle?: string;
-  items?: Highlight[];
   autoPlay?: boolean;
   intervalMs?: number;
 };
 
-export default function MariachiHighlights({
-  title = "Olanaklar & Ayrıcalıklar",
-  subtitle = "Gün boyu plaj keyfi, cabana konforu, restoran & havuz barı ve akşam DJ performansları.",
-  items,
+export default function LaJoyaTechnicalFacilities({
+  title = "Teknik Donanımlar",
+  subtitle = "La Joya’daki ayrıcalıklar size konforlu ve modern bir yaşam sunar.",
   autoPlay = true,
   intervalMs = 4800,
 }: Props) {
-  /** ------- Data ------- */
+  /* ---- Veri (TR) ---- */
   const data: Highlight[] = useMemo(
-    () =>
-      items ?? [
-        {
-          title: "Havuz & Plaj",
-          desc: "Geniş güneşlenme alanları, duş ve havlu servisi.",
-          image: "/mariachi/2.jpg",
-          icon: <Waves className="h-5 w-5" />,
-        },
-        {
-          title: "Cabanalar",
-          desc: "Gün boyu gölgede konfor; rezervasyon önerilir.",
-          image: "/mariachi/6.jpg",
-          icon: <Umbrella className="h-5 w-5" />,
-        },
-        {
-          title: "Restoran & Havuz Barı",
-          desc: "Gündüz ferah tatlar, akşam imza kokteyller.",
-          image: "/mariachi/3.jpg",
-          icon: <Martini className="h-5 w-5" />,
-        },
-        {
-          title: "DJ Geceleri",
-          desc: "Sunset’ten geç saate uzanan canlı performanslar.",
-          image: "/dj.jpg",
-          icon: <Music4 className="h-5 w-5" />,
-        },
-        {
-          title: "Spa & Wellness",
-          desc: "Masaj ve bakım hizmetleri (projeye göre).",
-          image: "/spa.jpg",
-          icon: <Sparkles className="h-5 w-5" />,
-        },
-        {
-          title: "Kıyı Deneyimi",
-          desc: "Akdeniz esintisi ve sahil yürüyüşleri.",
-          image: "/sea.jpg",
-          icon: <Sun className="h-5 w-5" />,
-        },
-      ],
-    [items]
+    () => [
+      {
+        title: "Merkezi Isıtma/Soğutma",
+        desc:
+          "merkezi ısıtma/soğutma sistemiyle ideal sıcaklık her zaman elinizin altında.",
+        image: "/ac.jpg",
+        icon: <Wind className="h-5 w-5" />,
+      },
+      {
+        title: "Merkezi Jeneratör",
+        desc:
+          "Kesintisiz enerji sağlayan merkezi jeneratör ile olası elektrik kesintilerinde endişeye gerek yok.",
+        image: "/ampul.jpg",
+        icon: <Zap className="h-5 w-5" />,
+      },
+      {
+        title: "Akıllı Ev Sistemleri",
+        desc:
+          "Evinizi uzaktan kontrol edebileceğiniz akıllı ev sistemi günlük yaşamı kolaylaştırır.",
+        image: "/smarthome.jpg",
+        icon: <Home className="h-5 w-5" />,
+      },
+   
+  
+    
+      {
+        title: "Banyolarda Yerden Isıtma",
+        desc:
+          "Zemin ısıtma sistemiyle banyoda maksimum konfor ve her zaman sıcak bir atmosfer.",
+        image: "/bathroom.jpg",
+        icon: <Thermometer className="h-5 w-5" />,
+      },
+    ],
+    []
   );
 
-  const total = data.length;
-
-  /** ------- Motion / State ------- */
+  /* ---- Motion/State ---- */
   const x = useMotionValue(0);
-  const [index, setIndex] = useState(0); // sayfa indeksi (slide indeksi değil)
-  const [step, setStep] = useState(0); // px olarak bir kart + gap
+  const [index, setIndex] = useState(0);
+  const [step, setStep] = useState(0);
   const [visibleCount, setVisibleCount] = useState(1);
   const [maxIndex, setMaxIndex] = useState(0);
   const [limits, setLimits] = useState<{ left: number; right: number }>({
@@ -107,21 +103,17 @@ export default function MariachiHighlights({
   });
   const hoverRef = useRef(false);
   const draggingRef = useRef(false);
-
-  /** ------- Refs for layout ------- */
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
-  /** ------- Helpers ------- */
   const clamp = (v: number, min: number, max: number) =>
     Math.max(min, Math.min(max, v));
 
-  /** ------- Measure / Layout ------- */
+  /* ---- Ölçüm ---- */
   const measure = () => {
     const vp = viewportRef.current;
     const track = trackRef.current;
     if (!vp || !track) return;
-
     const slides = Array.from(track.children) as HTMLElement[];
     if (!slides.length) return;
 
@@ -129,32 +121,23 @@ export default function MariachiHighlights({
     const stepPx = firstWidth + GAP;
     setStep(stepPx);
 
-    // Toplam track genişliği
     const trackWidth =
-      slides.reduce((sum, el) => sum + el.getBoundingClientRect().width, 0) +
+      slides.reduce((s, el) => s + el.getBoundingClientRect().width, 0) +
       GAP * (slides.length - 1);
 
     const vpWidth = vp.getBoundingClientRect().width;
-
-    // Aynı anda görülen kart sayısını hesapla (yaklaşık)
-    const visible =
-      Math.max(1, Math.floor((vpWidth + GAP - 1 /* epsilon */) / stepPx)) || 1;
+    const visible = Math.max(1, Math.floor((vpWidth + GAP - 1) / stepPx)) || 1;
     setVisibleCount(visible);
 
-    // En sola gidilebilecek maksimum negatif x
     const maxNegative = Math.min(0, vpWidth - trackWidth);
     setLimits({ left: maxNegative, right: 0 });
 
-    // Sayfa sayısı = maxIndex + 1
     const newMaxIndex = Math.max(0, slides.length - visible);
-    setMaxIndex(newMaxIndex);
-
-    // Mevcut index geçerliyse hizala; değilse düzelt
     const safeIndex = clamp(index, 0, newMaxIndex);
+    setMaxIndex(newMaxIndex);
     if (safeIndex !== index) setIndex(safeIndex);
 
-    const target = clamp(-safeIndex * stepPx, maxNegative, 0);
-    x.set(target);
+    x.set(clamp(-safeIndex * stepPx, maxNegative, 0));
   };
 
   useEffect(() => {
@@ -167,24 +150,18 @@ export default function MariachiHighlights({
       window.removeEventListener("resize", measure);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [total]);
+  }, [data.length]);
 
-  /** ------- Navigation ------- */
+  /* ---- Navigasyon ---- */
   const goTo = (i: number) => {
     const vp = viewportRef.current;
-    const track = trackRef.current;
-    if (!vp || !track || !step) return;
-
+    if (!vp || !step) return;
     const targetIndex = clamp(i, 0, maxIndex);
     setIndex(targetIndex);
     const target = clamp(-targetIndex * step, limits.left, limits.right);
     animate(x, target, { duration: 0.55, ease: EASE });
   };
 
-  const prev = () => goTo(index - 1);
-  const next = () => goTo(index + 1);
-
-  /** ------- Drag / Swipe ------- */
   const onDragStart = () => {
     draggingRef.current = true;
     hoverRef.current = true;
@@ -195,37 +172,32 @@ export default function MariachiHighlights({
     const current = x.get();
     const nearest = clamp(Math.round(Math.abs(current) / step), 0, maxIndex);
     goTo(nearest);
-    // hover bırak
-    setTimeout(() => {
-      hoverRef.current = false;
-    }, 80);
+    setTimeout(() => (hoverRef.current = false), 80);
   };
 
-  /** ------- Autoplay ------- */
+  /* ---- Autoplay ---- */
   useEffect(() => {
     if (!autoPlay || maxIndex <= 0) return;
     const id = setInterval(() => {
       if (hoverRef.current || draggingRef.current) return;
-      const nextIndex = index >= maxIndex ? 0 : index + 1;
-      goTo(nextIndex);
+      goTo(index >= maxIndex ? 0 : index + 1);
     }, intervalMs);
     return () => clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoPlay, intervalMs, index, maxIndex, step]);
 
-  /** ------- UI ------- */
-  const totalPages = Math.max(1, maxIndex + 1); // dot sayısı
+  const totalPages = Math.max(1, maxIndex + 1);
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Öne Çıkanlar"
+      aria-label="La Joya — Teknik Donanımlar"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
       onMouseEnter={() => (hoverRef.current = true)}
       onMouseLeave={() => (hoverRef.current = false)}
     >
-      {/* Estetik aura (cam hissi, gri yok) */}
+      {/* Auralar */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-[26rem] w-[26rem] rounded-full blur-3xl opacity-30"
@@ -261,17 +233,7 @@ export default function MariachiHighlights({
 
         {/* Carousel */}
         <div className="mt-8 relative select-none">
-          {/* Oklar */}
-      
-
-          {/* Viewport (scrollbar YOK) */}
-          <div
-            ref={viewportRef}
-            className="overflow-hidden"
-            // Mobile kaydırmada dikey kaydırmayı engelleme: yatay drag, dikey scroll serbest
-            style={{ touchAction: "pan-y" }}
-          >
-            {/* Track – drag/swipe açık, no scrollbar */}
+          <div ref={viewportRef} className="overflow-hidden" style={{ touchAction: "pan-y" }}>
             <motion.div
               ref={trackRef}
               className="flex will-change-transform"
@@ -284,9 +246,8 @@ export default function MariachiHighlights({
               onDragEnd={onDragEnd}
               role="group"
               aria-roledescription="carousel"
-              aria-label="Öne çıkanlar listesi"
+              aria-label="Teknik donanım listesi"
             >
-              {/** Kartlar */}
               {data.map((card, i) => {
                 const isActive = i >= index && i < index + visibleCount;
                 return (
@@ -300,7 +261,7 @@ export default function MariachiHighlights({
                       initial="hidden"
                       whileInView="show"
                       viewport={{ once: false, amount: 0.2 }}
-                      className="relative h-[360px] sm:h-[420px] rounded-[24px] overflow-hidden"
+                      className="relative h-[380px] sm:h-[420px] rounded-[24px] overflow-hidden"
                       style={{
                         boxShadow: isActive
                           ? `0 20px 50px rgba(0,0,0,0.15), 0 10px 26px ${TEAL}12`
@@ -309,13 +270,13 @@ export default function MariachiHighlights({
                         transition: "transform .35s cubic-bezier(0.22,1,0.36,1)",
                       }}
                     >
-                      {/* Arka plan görseli */}
+                      {/* Kapak */}
                       <div
                         className="absolute inset-0 bg-cover bg-center"
                         style={{ backgroundImage: `url(${card.image})` }}
                         aria-hidden
                       />
-                      {/* Üstten aşağı hafif koyuluk (okunabilirlik) */}
+                      {/* Koyuluk */}
                       <div
                         className="absolute inset-0"
                         style={{
@@ -324,9 +285,9 @@ export default function MariachiHighlights({
                         }}
                         aria-hidden
                       />
-                      {/* Alt cam panel */}
+                      {/* Alt cam panel (AUTO HEIGHT) */}
                       <div
-                        className="absolute h-[160px] left-4 right-4 bottom-4 rounded-2xl p-4 sm:p-5 backdrop-blur-md"
+                        className="absolute inset-x-4 bottom-4 rounded-2xl p-4 sm:p-5 backdrop-blur-md"
                         style={{
                           background:
                             "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
@@ -343,15 +304,15 @@ export default function MariachiHighlights({
                               boxShadow: `0 6px 14px ${TEAL}1f`,
                             }}
                           >
-                            {card.icon} <span>Öne Çıkan</span>
+                            {card.icon} <span>Özellik</span>
                           </span>
                         ) : null}
 
-                        <h3 className="mt-2 text-xl font-semibold text-white drop-shadow">
+                        <h3 className="mt-2 text-[18px] sm:text-xl font-semibold text-white drop-shadow">
                           {card.title}
                         </h3>
                         {card.desc ? (
-                          <p className="mt-1.5 text-sm leading-relaxed text-white/90">
+                          <p className="mt-1.5 text-[13.5px] sm:text-sm leading-relaxed text-white/90 break-words">
                             {card.desc}
                           </p>
                         ) : null}
@@ -363,7 +324,7 @@ export default function MariachiHighlights({
             </motion.div>
           </div>
 
-          {/* Dots (sayfa bazlı) */}
+          {/* Noktalar */}
           <div className="mt-6 flex items-center justify-center gap-2">
             {Array.from({ length: totalPages }).map((_, i) => {
               const isActive = i === index;

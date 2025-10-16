@@ -224,23 +224,7 @@ export default function MariachiPerks() {
                     )}
 
                     {/* Label WITHOUT any backdrop-blur */}
-                    <div
-                      className="absolute left-4 right-4 bottom-4 rounded-xl p-4 sm:p-5 ring-1 ring-white/20 shadow-[0_6px_24px_rgba(0,0,0,0.25)] backdrop-blur-sm"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
-                      }}
-                    >
-                      <div className="flex items-center gap-2 text-[12px] uppercase tracking-wide">
-                        <ShieldCheck className="h-4 w-4" style={{ color: TEAL }} />
-                        <span className="font-medium" style={{ color: TEAL }}>
-                          Partner Mekan
-                        </span>
-                      </div>
-                      <p className="mt-1.5 text-white/95 text-sm">
-                        Plaj, havuz barı ve akşam DJ performansları — tek adreste.
-                      </p>
-                    </div>
+                 
                   </div>
                 </motion.div>
 

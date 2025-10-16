@@ -21,44 +21,41 @@ type Props = {
   title?: string;
   lead?: string;
   highlights?: string[];
-  imagePrimary?: string;   // main visual (render/photo)
+  imagePrimary?: string;       // fallback image
+  embedUrl?: string | null;    // YouTube watch or embed URL; null => use image
 };
 
 export default function Perla2Overview({
-title = "Genel Bakış",
-lead = "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir projedir. Mariachi Beach Club’a özel üyelik ayrıcalıkları, açık yüzme havuzları, restoran & pool bar, spor salonu ve akıllı ev/merkezi sistemlerle tatil konforunu günlük yaşama taşır.",
-highlights = [
-  "Denize 500 m; Mariachi Beach Club üyeliği ve indirimli hizmetler",
-  "Yatay mimari: 74 konut (1+1 loft, 2+1 penthouse, stüdyo penthouse)",
-  "Loft dairelerde doğrudan havuz erişimi; çatı teraslı dairelerde jakuzi",
-  "Yüzme havuzları, gym, restoran & pool bar, açık otopark ve teknik altyapı (merkezi ısıtma/soğutma, jeneratör, akıllı ev)",
-],
-
-
+  title = "Genel Bakış",
+  lead = "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir projedir. Mariachi Beach Club’a özel üyelik ayrıcalıkları, açık yüzme havuzları, restoran & pool bar, spor salonu ve akıllı ev/merkezi sistemlerle tatil konforunu günlük yaşama taşır.",
+  highlights = [
+    "Denize 500 m; Mariachi Beach Club üyeliği ve indirimli hizmetler",
+    "Yatay mimari: 74 konut (1+1 loft, 2+1 penthouse, stüdyo penthouse)",
+    "Loft dairelerde doğrudan havuz erişimi; çatı teraslı dairelerde jakuzi",
+    "Yüzme havuzları, gym, restoran & pool bar, açık otopark ve teknik altyapı (merkezi ısıtma/soğutma, jeneratör, akıllı ev)",
+  ],
   imagePrimary = "/la-joya/3.jpg",
+  embedUrl = "https://www.youtube.com/watch?v=hMbzVAJMzXo",
 }: Props) {
+  // Normalize to an embed URL with autoplay/mute/loop
+  const YT_ID =
+    /(?:v=|\.be\/)([A-Za-z0-9_-]{6,})/.exec(embedUrl ?? "")?.[1] ?? null;
+  const finalEmbed = YT_ID
+    ? `https://www.youtube-nocookie.com/embed/${YT_ID}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${YT_ID}`
+    : null;
+
   return (
     <section
       aria-label="La Joya Perla II — Genel Bakış"
-      className="relative overflow-hidden"
-style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
+      className="relative overflow-hidden pb-12 lg:pb-16" // extra bottom padding
+      style={{
+        background: "#fff",
+        color: "#141517",
+        ["--stroke"]: "rgba(20,21,23,0.08)",
+      } as React.CSSProperties & Record<"--stroke", string>}
     >
-
-        <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(30rem 20rem at 12% 100%, ${TEAL}10, transparent 70%),
-            radial-gradient(26rem 16rem at 88% 0%, ${ORANGE}12, transparent 70%)
-          `,
-        }}
-      />
-   
+      {/* soft radial accents */}
+  
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -110,7 +107,7 @@ style={{
               ))}
             </div>
 
-            {/* Micro chips (optional, edit freely) */}
+            {/* Micro chips */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -151,25 +148,45 @@ style={{
               style={{
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
-                border: "1px solid var(--stroke)",
                 boxShadow:
                   "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-[16/10] bg-white">
-                <img
-                  src={imagePrimary}
-                  alt="Proje genel görünüm"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+              <div className="aspect-video bg-black">
+                {finalEmbed ? (
+                  <iframe
+                    title="La Joya Perla II tanıtım videosu"
+                    src={finalEmbed}
+                    className="w-full h-full"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    referrerPolicy="origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                ) : (
+                  <img
+                    src={imagePrimary}
+                    alt="Proje genel görünüm"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                )}
               </div>
             </motion.div>
-
-          
           </div>
         </div>
+      </div>
+
+      {/* subtle underglow line with spacing below */}
+      <div className="relative z-10 mt-10 mb-0">
+        <div
+          aria-hidden
+          className="mx-auto h-[2px] w-[92%] max-w-7xl"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(20,21,23,0.14), transparent)",
+          }}
+        />
       </div>
     </section>
   );

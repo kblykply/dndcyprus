@@ -230,7 +230,7 @@ export default function LeadershipTeam({
     name: "Onur Pekkaya",
     role: "Türkiye Satış ve Pazarlama",
     category: "Sales",
-    photo: "/teams/Onuryeni.png",
+    photo: "/teams/onur.png",
     bio: "",
     socials: {},
     accent: "teal",
