@@ -148,6 +148,7 @@ export default function Perla2Overview({
               style={{
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
+                border: "1px solid var(--stroke)",
                 boxShadow:
                   "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
                 backdropFilter: "blur(10px)",

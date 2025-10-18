@@ -21,45 +21,41 @@ type Props = {
   title?: string;
   lead?: string;
   highlights?: string[];
-  imagePrimary?: string;   // main visual (render/photo)
+  imagePrimary?: string;       // fallback image
+  embedUrl?: string | null;    // YouTube watch or embed URL; null => use image
 };
 
 export default function Perla2Overview({
- title = "Genel Bakış",
-lead = "Bahçeler, İskele’de konumlanan La Joya Perla; denize 700 m mesafe, İskele’de ilk kez uygulanan doğal görünümlü ‘sand pool’ konsepti, açık-kapalı havuzlar ve zengin sosyal alanlarıyla yıl boyu lüks ve konforu bir arada sunar.",
-highlights = [
-  "İskele’de ilk ‘sand pool’ (doğal kum plajı etkisi) + açık/kapalı yüzme havuzları",
-  "Spa & GYM, restoran ve havuz bar; açık hava sineması & amfitiyatro",
-  "Çocuk kulübü ve oyun alanları, basketbol sahası; site içi mini market & unisex kuaför",
-  "Mariachi Beach Club’a üyelik ve ayrıcalıklar (yaklaşık 700 m)",
-],
-
-
-
+  title = "Genel Bakış",
+  lead = "Bahçeler, İskele’de konumlanan La Joya Perla; denize 700 m mesafe, İskele’de ilk kez uygulanan doğal görünümlü ‘sand pool’ konsepti, açık-kapalı havuzlar ve zengin sosyal alanlarıyla yıl boyu lüks ve konforu bir arada sunar.",
+  highlights = [
+    "İskele’de ilk ‘sand pool’ (doğal kum plajı etkisi) + açık/kapalı yüzme havuzları",
+    "Spa & GYM, restoran ve havuz bar; açık hava sineması & amfitiyatro",
+    "Çocuk kulübü ve oyun alanları, basketbol sahası; site içi mini market & unisex kuaför",
+    "Mariachi Beach Club’a üyelik ve ayrıcalıklar (yaklaşık 700 m)",
+  ],
   imagePrimary = "/perla/3.jpg",
+  embedUrl = "https://www.youtube.com/watch?v=uNnqGH_QFVw",
 }: Props) {
+  // Normalize to privacy-enhanced embed with autoplay/mute/loop
+  const YT_ID =
+    /(?:v=|\.be\/)([A-Za-z0-9_-]{6,})/.exec(embedUrl ?? "")?.[1] ?? null;
+  const finalEmbed = YT_ID
+    ? `https://www.youtube-nocookie.com/embed/${YT_ID}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${YT_ID}`
+    : null;
+
   return (
     <section
-      aria-label="La Joya Perla II — Genel Bakış"
-      className="relative overflow-hidden"
-style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
+      aria-label="La Joya Perla — Genel Bakış"
+      className="relative overflow-hidden pb-12 lg:pb-16"
+      style={{
+        background: "#fff",
+        color: "#141517",
+        ["--stroke"]: "rgba(20,21,23,0.08)",
+      } as React.CSSProperties & Record<"--stroke", string>}
     >
-
-        <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(30rem 20rem at 12% 100%, ${TEAL}10, transparent 70%),
-            radial-gradient(26rem 16rem at 88% 0%, ${ORANGE}12, transparent 70%)
-          `,
-        }}
-      />
-   
+      {/* soft radial accents */}
+      
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -104,14 +100,17 @@ style={{
                     className="mt-1 inline-block h-2.5 w-2.5 rounded-full"
                     style={{ background: i % 2 === 0 ? TEAL : ORANGE }}
                   />
-                  <span className="text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>
+                  <span
+                    className="text-sm sm:text-base"
+                    style={{ color: "rgba(20,21,23,0.78)" }}
+                  >
                     {h}
                   </span>
                 </motion.div>
               ))}
             </div>
 
-            {/* Micro chips (optional, edit freely) */}
+            {/* Micro chips */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -158,19 +157,40 @@ style={{
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-[16/10] bg-white">
-                <img
-                  src={imagePrimary}
-                  alt="Proje genel görünüm"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+              <div className="aspect-video bg-black">
+                {finalEmbed ? (
+                  <iframe
+                    title="La Joya Perla tanıtım videosu"
+                    src={finalEmbed}
+                    className="w-full h-full"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    referrerPolicy="origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                ) : (
+                  <img
+                    src={imagePrimary}
+                    alt="Proje genel görünüm"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                )}
               </div>
             </motion.div>
-
-          
           </div>
         </div>
+      </div>
+
+      {/* subtle underglow line with spacing below */}
+      <div className="relative z-10 mt-10 mb-12">
+        <div
+          aria-hidden
+          className="mx-auto h-[2px] w-[92%] max-w-7xl"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(20,21,23,0.14), transparent)",
+          }}
+        />
       </div>
     </section>
   );

@@ -11,6 +11,7 @@ import Hotspots from "../components/perla/Hotspots";
 import Charts from "../components/perla/Charts";
 import MariachiPerks from "../components/mariachi/MariachiPerks";
 
+import LaJoyaTechnicalFacilities from "../components/la-joya/LaJoyaTechnicalFacilities";
 
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
 <Perla2Facts />
 
 <Perla2Gallery /> 
+<LaJoyaTechnicalFacilities />
 
 <Hotspots/>
 

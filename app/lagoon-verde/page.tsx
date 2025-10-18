@@ -10,6 +10,7 @@ import Perla2CTA from "../components/lagoon-verde/Perla2CTA";
 import Hotspots from "../components/lagoon-verde/Hotspots";
 import Charts from "../components/lagoon-verde/Charts";
 import MariachiPerks from "../components/mariachi/MariachiPerks";
+import LaJoyaTechnicalFacilities from "../components/la-joya/LaJoyaTechnicalFacilities";
 
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
 <Perla2Facts />
 
 <Perla2Gallery /> 
+<LaJoyaTechnicalFacilities />
 
 <Hotspots/>
 

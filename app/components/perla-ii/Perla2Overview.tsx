@@ -21,7 +21,8 @@ type Props = {
   title?: string;
   lead?: string;
   highlights?: string[];
-  imagePrimary?: string;   // main visual (render/photo)
+  imagePrimary?: string;       // fallback image (when no embed)
+  embedUrl?: string | null;    // YouTube watch/embed URL; null => use image
 };
 
 export default function Perla2Overview({
@@ -34,29 +35,26 @@ export default function Perla2Overview({
     "Zamanında teslim ve şeffaf iletişim yaklaşımı",
   ],
   imagePrimary = "/perla-ii/3.jpg",
+  embedUrl = "https://www.youtube.com/watch?v=rhNxT0eZw_0",
 }: Props) {
+  // Normalize to privacy-enhanced embed with autoplay/mute/loop
+  const YT_ID =
+    /(?:v=|\.be\/)([A-Za-z0-9_-]{6,})/.exec(embedUrl ?? "")?.[1] ?? null;
+  const finalEmbed = YT_ID
+    ? `https://www.youtube-nocookie.com/embed/${YT_ID}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${YT_ID}`
+    : null;
+
   return (
     <section
       aria-label="La Joya Perla II — Genel Bakış"
-      className="relative overflow-hidden"
-style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
+      className="relative overflow-hidden pb-12 lg:pb-16"
+      style={{
+        background: "#fff",
+        color: "#141517",
+        ["--stroke"]: "rgba(20,21,23,0.08)",
+      } as React.CSSProperties & Record<"--stroke", string>}
     >
-
-        <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(30rem 20rem at 12% 100%, ${TEAL}10, transparent 70%),
-            radial-gradient(26rem 16rem at 88% 0%, ${ORANGE}12, transparent 70%)
-          `,
-        }}
-      />
-   
+    
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -108,7 +106,7 @@ style={{
               ))}
             </div>
 
-            {/* Micro chips (optional, edit freely) */}
+            {/* Micro chips */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -155,19 +153,40 @@ style={{
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-[16/10] bg-white">
-                <img
-                  src={imagePrimary}
-                  alt="Proje genel görünüm"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+              <div className="aspect-video bg-black">
+                {finalEmbed ? (
+                  <iframe
+                    title="La Joya Perla II tanıtım videosu"
+                    src={finalEmbed}
+                    className="w-full h-full"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    referrerPolicy="origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                ) : (
+                  <img
+                    src={imagePrimary}
+                    alt="Proje genel görünüm"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                )}
               </div>
             </motion.div>
-
-          
           </div>
         </div>
+      </div>
+
+      {/* subtle underglow line with spacing below */}
+      <div className="relative z-10 mt-10 mb-12">
+        <div
+          aria-hidden
+          className="mx-auto h-[2px] w-[92%] max-w-7xl"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(20,21,23,0.14), transparent)",
+          }}
+        />
       </div>
     </section>
   );

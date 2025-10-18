@@ -49,7 +49,7 @@ type Props = {
 
 export default function LaJoyaTechnicalFacilities({
   title = "Teknik Donanımlar",
-  subtitle = "La Joya’daki ayrıcalıklar size konforlu ve modern bir yaşam sunar.",
+  subtitle = "Projemizdeki ayrıcalıklar size konforlu ve modern bir yaşam sunar.",
   autoPlay = true,
   intervalMs = 4800,
 }: Props) {

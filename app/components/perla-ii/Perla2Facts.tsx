@@ -51,17 +51,7 @@ style={{
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle brand wash */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(30rem 20rem at 12% 0%, ${TEAL}10, transparent 70%),
-            radial-gradient(26rem 16rem at 88% 100%, ${ORANGE}12, transparent 70%)
-          `,
-        }}
-      />
-
+ 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-18">
         {/* header */}
         <motion.div
