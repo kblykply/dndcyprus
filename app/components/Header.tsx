@@ -85,10 +85,11 @@ export default function Header() {
         const iPerla = pathname === "/perla" || pathname.startsWith("/perla/");
                 const isLaJoya = pathname === "/la-joya" || pathname.startsWith("/la-joya/");
                                 const isMariachi = pathname === "/mariachi" || pathname.startsWith("/mariachi/");
+                                const gecitkale = pathname === "/gecitkale" || pathname.startsWith("/gecitkale/");
 
 
 
-  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi;
+  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi || gecitkale;
 
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);

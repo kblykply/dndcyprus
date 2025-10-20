@@ -86,7 +86,7 @@ const DATA: Project[] = [
     status: "Upcoming",
     type: "Land",
     location: "Geçitkale",
-    cover: "/gecitkaleimage.png",
+    cover: "/gecitkaleimage.jpg",
     href: "/projects/gecitkale",
   },
 ];

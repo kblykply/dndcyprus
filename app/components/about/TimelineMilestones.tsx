@@ -25,8 +25,9 @@ type Props = {
   title?: string;
   subtitle?: string;
   milestones?: Milestone[];
-  bgSrc?: string;     // background image (like your example)
+  bgSrc?: string; // background image
   bgAlt?: string;
+  compact?: boolean; // shorter layout switch
 };
 
 export default function TimelineHorizontal({
@@ -36,6 +37,7 @@ export default function TimelineHorizontal({
   milestones = DEFAULT_MILESTONES,
   bgSrc = "/lagoon-verde/5.jpg",
   bgAlt = "DND projeleri arka plan",
+  compact = true, // default to shorter section
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { margin: "-20% 0px -20% 0px", amount: 0.3 });
@@ -65,17 +67,32 @@ export default function TimelineHorizontal({
     [D, ease, reduced]
   );
 
+  // Compact sizing
+  const minH = compact ? "min-h-[52vh]" : "min-h-[70vh]";
+  const containerPY = compact ? "py-14 lg:py-16" : "py-20 lg:py-28";
+  const railMt = compact ? "mt-8 md:mt-10" : "mt-12 md:mt-16";
+  const railH = compact ? "h-[2px]" : "h-[3px]";
+  const slidePad = compact ? "pt-12 pb-12" : "pt-20 pb-20";
+
   return (
     <section
       ref={sectionRef}
       id="timeline"
-      className="relative isolate min-h-[70vh] overflow-hidden text-white"
+      className={`relative isolate ${minH} overflow-hidden text-white`}
       aria-label="DND Timeline"
     >
-      {/* Background image */}
+      {/* Background image (blurred) */}
       <div className="absolute inset-0 -z-20">
-        <Image src={bgSrc} alt={bgAlt} fill sizes="100vw" className="object-cover" />
-        {/* Scrim for readability — same vibe as your example */}
+        <Image
+          src={bgSrc}
+          alt={bgAlt}
+          fill
+          sizes="100vw"
+          className="object-cover scale-[1.06] will-change-transform"
+          style={{ filter: "blur(8px)" }}
+          aria-hidden
+        />
+        {/* Scrim for readability */}
         <div className="absolute inset-0 bg-black/35 md:bg-black/30" aria-hidden />
         {/* Brand glows */}
         <div
@@ -105,8 +122,8 @@ export default function TimelineHorizontal({
       </div>
 
       {/* Content container */}
-      <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-12 lg:py-28">
-        {/* Header (matches your example component style) */}
+      <div className={`relative mx-auto max-w-7xl px-6 md:px-12 ${containerPY}`}>
+        {/* Header */}
         <motion.div
           variants={rise}
           initial="hidden"
@@ -129,12 +146,12 @@ export default function TimelineHorizontal({
         </motion.div>
 
         {/* Timeline rail */}
-        <div className="relative mt-12 md:mt-16">
+        <div className={`relative ${railMt}`}>
           <motion.div
             variants={fadeScale}
             initial="hidden"
             animate={inView ? "show" : "hidden"}
-            className="absolute left-0 right-0 top-1/2 h-[3px] rounded-full"
+            className={`absolute left-0 right-0 top-1/2 ${railH} rounded-full`}
             style={{
               background:
                 "linear-gradient(90deg, rgba(255,255,255,0.28), rgba(255,255,255,0.14))",
@@ -144,11 +161,11 @@ export default function TimelineHorizontal({
           <Swiper
             modules={[Navigation]}
             navigation
-            spaceBetween={32}
+            spaceBetween={compact ? 28 : 32}
             slidesPerView={1}
             breakpoints={{
-              768: { slidesPerView: 2, spaceBetween: 36 },
-              1280: { slidesPerView: 3, spaceBetween: 40 },
+              768: { slidesPerView: 2, spaceBetween: compact ? 30 : 36 },
+              1280: { slidesPerView: 3, spaceBetween: compact ? 32 : 40 },
             }}
           >
             {milestones.map((m, i) => {
@@ -157,7 +174,7 @@ export default function TimelineHorizontal({
               const above = i % 2 === 0;
 
               return (
-                <SwiperSlide key={`${m.year}-${i}`} className="pt-20 pb-20">
+                <SwiperSlide key={`${m.year}-${i}`} className={slidePad}>
                   <motion.div
                     variants={rise}
                     initial="hidden"
@@ -165,35 +182,41 @@ export default function TimelineHorizontal({
                     viewport={{ once: true, amount: 0.35 }}
                     className="relative flex flex-col items-center"
                   >
-                    {/* Connector dot with brand glow */}
+                    {/* Connector dot */}
                     <div
-                      className="absolute top-1/2 z-10 h-5 w-5 rounded-full border-4"
+                      className={`absolute top-1/2 z-10 ${compact ? "h-4 w-4" : "h-5 w-5"} rounded-full border-4`}
                       style={{
                         background: "rgba(255,255,255,0.95)",
                         borderColor: c,
-                        boxShadow: `0 0 0 8px ${c}24, 0 6px 24px ${c}33`,
+                        boxShadow: `0 0 0 ${compact ? 6 : 8}px ${c}24, 0 6px 24px ${c}33`,
                       }}
                     />
 
-                    {/* Glass card — same glass recipe as your example */}
+                    {/* Glass card */}
                     <div
                       className={[
                         "w-full max-w-sm overflow-hidden rounded-2xl border ring-1 shadow-[0_8px_40px_rgba(0,0,0,0.25)]",
                         "bg-white/10 supports-[backdrop-filter]:backdrop-blur-xl",
                         "border-white/20 ring-white/10",
-                        above ? "mb-auto -translate-y-10" : "mt-auto translate-y-10",
+                        above
+                          ? compact
+                            ? "mb-auto -translate-y-6"
+                            : "mb-auto -translate-y-10"
+                          : compact
+                          ? "mt-auto translate-y-6"
+                          : "mt-auto translate-y-10",
                       ].join(" ")}
                       style={{ WebkitBackdropFilter: "blur(18px)" }}
                     >
                       {m.image && (
-                        <div className="h-44 w-full relative overflow-hidden">
+                        <div className={`${compact ? "h-36" : "h-44"} w-full relative overflow-hidden`}>
                           <img
                             src={m.image}
                             alt={m.title}
                             className="h-full w-full object-cover"
                             style={{ filter: "saturate(1.02) contrast(1.02) brightness(0.95)" }}
                           />
-                          {/* subtle gloss */}
+                          {/* Subtle gloss */}
                           <div
                             className="pointer-events-none absolute inset-0"
                             style={{
@@ -209,7 +232,7 @@ export default function TimelineHorizontal({
                           className="inline-flex text-[11px] px-3 py-1 rounded-full border"
                           style={{
                             background: "rgba(255,255,255,0.06)",
-                            color: "#ffff",
+                            color: "#fff",
                             borderColor: `${c}44`,
                           }}
                         >
@@ -251,7 +274,7 @@ export const DEFAULT_MILESTONES: Milestone[] = [
     year: "2017",
     title: "DND Homes Kuruluşu",
     description: "Şirketin ilk merkezi Boston’da kuruldu.",
-    image: "/dnd-boston-ofis.png",
+    image: "/dnd-boston-ofis.jpg",
     color: "teal",
   },
   {

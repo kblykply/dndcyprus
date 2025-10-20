@@ -60,7 +60,7 @@ export default function StoryTimeline() {
       tabIndex={0}
     >
       <motion.div
-        className="mx-auto max-w-6xl px-6 grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14"
+        className="mx-auto max-w-7xl px-6 grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.35 }}

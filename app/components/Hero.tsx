@@ -159,7 +159,7 @@ const projects: Record<Tab, ProjectItem[]> = {
     { id: 7, title: "La Joya", subtitle: "Doğayla iç içe yaşam", images: ["/la-joya/13.jpg", "/la-joya/16.jpg"], floors: 1, area: 420, bedrooms: 2 },
   ],
   "Arsa Projeleri": [
-    { id: 5, title: "Geçitkale", subtitle: "Yatırıma uygun arazi", images: ["/gecitkaleimage.png", "/gecitkaleimage.png"], floors: 0, area: 900, bedrooms: 0 },
+    { id: 5, title: "Geçitkale", subtitle: "Yatırıma uygun arazi", images: ["/gecitkaleimage.jpg", "/gecitkaleimage.jpg"], floors: 0, area: 900, bedrooms: 0 },
   ],
   İşletmeler: [
     { id: 8, title: "Mariachi Beach Club", subtitle: "Doğayla iç içe yaşam", images: ["/mariachi/9.jpg", "/mariachi/12.jpg"], floors: 1, area: 420, bedrooms: 2 },

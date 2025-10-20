@@ -7,7 +7,7 @@ const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 type ImageSet = {
-  main: string;      // fallback if no youtubeId
+  main: string;
   sideTop: string;
   sideBottom: string;
 };
@@ -18,7 +18,7 @@ type Props = {
   poster?: string;
   videoTitle?: string;
   startAt?: number;
-  kicker?: string;              // NEW
+  kicker?: string;
 };
 
 export default function AboutWhoWeAreGlass({
@@ -31,7 +31,7 @@ export default function AboutWhoWeAreGlass({
   poster,
   videoTitle = "Tanıtım Videosu",
   startAt = 0,
-  kicker = "Hakkımızda",        // NEW: default kicker
+  kicker = "Hakkımızda",
 }: Props) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { margin: "-15% 0px -15% 0px", amount: 0.35 });
@@ -41,8 +41,6 @@ export default function AboutWhoWeAreGlass({
   const textCtrl = useAnimation();
   const gridCtrl = useAnimation();
   const figMainCtrl = useAnimation();
-  const figTopCtrl = useAnimation();
-  const figBotCtrl = useAnimation();
 
   // Variants
   const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -69,16 +67,12 @@ export default function AboutWhoWeAreGlass({
       textCtrl.start("show");
       gridCtrl.start("show");
       figMainCtrl.start({ opacity: 1, scale: 1, transition: { duration: D, ease, delay: reduced ? 0 : 0.05 } });
-      figTopCtrl.start({ opacity: 1, y: 0, transition: { duration: D, ease, delay: reduced ? 0 : 0.1 } });
-      figBotCtrl.start({ opacity: 1, y: 0, transition: { duration: D, ease, delay: reduced ? 0 : 0.15 } });
     } else {
       textCtrl.set("hidden");
       gridCtrl.set("hidden");
       figMainCtrl.set({ opacity: 0, scale: reduced ? 1 : 0.985 });
-      figTopCtrl.set({ opacity: 0, y: reduced ? 0 : 14 });
-      figBotCtrl.set({ opacity: 0, y: reduced ? 0 : 14 });
     }
-  }, [inView, textCtrl, gridCtrl, figMainCtrl, figTopCtrl, figBotCtrl, D, ease, reduced]);
+  }, [inView, textCtrl, gridCtrl, figMainCtrl, D, ease, reduced]);
 
   return (
     <section
@@ -88,16 +82,7 @@ export default function AboutWhoWeAreGlass({
       aria-label="Biz Kimiz bölümü"
     >
       {/* brand glows */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(30rem 20rem at 12% 0%, ${TEAL}12, transparent 70%),
-            radial-gradient(26rem 18rem at 88% 100%, ${ORANGE}12, transparent 70%)
-          `,
-        }}
-      />
+    
       {/* faint grid */}
       <div
         aria-hidden="true"
@@ -109,15 +94,16 @@ export default function AboutWhoWeAreGlass({
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl lg:grid lg:grid-cols-5 lg:items-center gap-10">
-        {/* Text card */}
+      {/* 50/50 layout */}
+      <div className="relative z-10 mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:items-center gap-10">
+        {/* Left (text) */}
         <motion.div
           variants={rise}
           initial="hidden"
           animate={textCtrl}
-          className="glass rounded-2xl border bg-white/70 p-7 shadow-[0_8px_40px_rgba(0,0,0,0.06)] md:p-9 lg:col-span-2"
+          className="glass rounded-2xl border bg-white/70 p-7 shadow-[0_8px_40px_rgba(0,0,0,0.06)] md:p-9"
         >
-          {/* Kicker + line (same row) */}
+          {/* Kicker + line */}
           <div className="mb-3 flex items-center gap-3">
             <span
               aria-hidden="true"
@@ -156,36 +142,34 @@ export default function AboutWhoWeAreGlass({
           </div>
         </motion.div>
 
-        {/* Visual area */}
+        {/* Right (visual) */}
         <motion.div
           variants={fadeScale}
           initial="hidden"
           animate={gridCtrl}
-          className="relative lg:col-span-3 flex items-center"
+          className="relative flex items-center"
         >
-          <div className="grid grid-cols-3 gap-4 lg:grid-cols-5 w-full">
-            <motion.figure
-              initial={{ opacity: 0, scale: reduced ? 1 : 0.985 }}
-              animate={figMainCtrl}
-              className="col-span-3 row-span-3 lg:col-span-7 lg:row-span-6 overflow-hidden rounded-2xl border bg-white/50 ring-1 ring-black/5 shadow-xl"
-            >
-              {youtubeId ? (
-                <VideoPlayer
-                  id={youtubeId}
-                  title={videoTitle}
-                  startAt={startAt}
-                  poster={poster ?? images.main}
-                  autoPlayOnClick={!reduced}
-                />
-              ) : (
-                <img
-                  src={images.main}
-                  alt="Ekip / proje çalışması"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                />
-              )}
-            </motion.figure>
-          </div>
+          <motion.figure
+            initial={{ opacity: 0, scale: reduced ? 1 : 0.985 }}
+            animate={figMainCtrl}
+            className="w-full overflow-hidden rounded-2xl border bg-white/50 ring-1 ring-black/5 shadow-xl"
+          >
+            {youtubeId ? (
+              <VideoPlayer
+                id={youtubeId}
+                title={videoTitle}
+                startAt={startAt}
+                poster={poster ?? images.main}
+                autoPlayOnClick={!reduced}
+              />
+            ) : (
+              <img
+                src={images.main}
+                alt="Ekip / proje çalışması"
+                className="block h-full w-full object-cover"
+              />
+            )}
+          </motion.figure>
         </motion.div>
       </div>
     </section>
