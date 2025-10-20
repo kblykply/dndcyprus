@@ -87,7 +87,7 @@ const DATA: Project[] = [
     type: "Land",
     location: "Geçitkale",
     cover: "/gecitkaleimage.jpg",
-    href: "/projects/gecitkale",
+    href: "/gecitkale",
   },
 ];
 

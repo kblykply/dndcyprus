@@ -17,13 +17,24 @@ const fadeUp: Variants = {
   },
 };
 
-type Bullet = { text: string; accent?: "teal" | "orange" };
+type Bullet = {
+  text: string;
+  accent?: "teal" | "orange";
+  /** Optional small visual for the card */
+  image?: string;
+  /** Accessible alt; keep short */
+  alt?: string;
+};
 
 type SectionData = {
   heading: string;
   lead: string;
   tone: "light" | "dark";
+  /** Subtle page background image (blurred) */
   backgroundImage?: string;
+  /** Main hero visual on the RIGHT column */
+  mainImage?: string;
+  mainImageAlt?: string;
   bullets: Bullet[];
   scenarioNote?: string;
   disclaimer?: string;
@@ -36,11 +47,33 @@ const DATA: SectionData = {
     "Geçitkale Etap II; Fasıl 96 kapsamında, tek katlı/ikiz villa ve çok katlı apartman tipolojilerine uygun planlanan, yeni konut bölgeleriyle çevrili gelişen bir lokasyondadır.",
   tone: "dark",
   backgroundImage: "/gecitkaleimage.jpg", // ensure this exists under /public/land/
+  mainImage: "/gecitkaleimage.jpg", // RIGHT hero image (text overlayed)
+  mainImageAlt: "Geçitkale Etap II genel görünüm",
   bullets: [
-    { text: "Zonlama: Fasıl 96 — izinli tipolojiler: tek katlı villa, ikiz villa, çok katlı apartman.", accent: "teal" },
-    { text: "Ortalama bir arsa için inşaat izni: ~5 kata kadar (bilgi amaçlı).", accent: "orange" },
-    { text: "Konum avantajı: Long Beach 12 dk, Gazimağusa 18 dk, Ercan Havalimanı 25 dk.", accent: "teal" },
-    { text: "Bölgede altyapı çalışmaları devam ediyor; parselasyon ve tapu süreçleri hazır.", accent: "orange" },
+    {
+      text: "Zonlama: Fasıl 96 — izinli tipolojiler: tek katlı villa, ikiz villa, çok katlı apartman.",
+      accent: "teal",
+      image: "/villa.jpg",
+      alt: "Zonlama şeması",
+    },
+    {
+      text: "Ortalama bir arsa için inşaat izni: ~5 kata kadar (bilgi amaçlı).",
+      accent: "orange",
+      image: "/lagoon-verde/2.jpg",
+      alt: "Kat yüksekliği simgesi",
+    },
+    {
+      text: "Konum avantajı: Long Beach 12 dk, Gazimağusa 18 dk, Ercan Havalimanı 25 dk.",
+      accent: "teal",
+      image: "/land/cards/location.jpg",
+      alt: "Harita konum simgesi",
+    },
+    {
+      text: "Bölgede altyapı çalışmaları devam ediyor; parselasyon ve tapu süreçleri hazır.",
+      accent: "orange",
+      image: "/land/cards/infrastructure.jpg",
+      alt: "Altyapı görseli",
+    },
   ],
   scenarioNote:
     "Etap I referansı: ortalama parselde 5–6 katlı, 15 daireli apartman senaryosu mümkündür (örnek, kurumsal onaya tabidir).",
@@ -49,7 +82,18 @@ const DATA: SectionData = {
 };
 
 export default function LandOverviewDevelopment() {
-  const { heading, lead, tone, backgroundImage, bullets, scenarioNote, disclaimer } = DATA;
+  const {
+    heading,
+    lead,
+    tone,
+    backgroundImage,
+    mainImage,
+    mainImageAlt,
+    bullets,
+    scenarioNote,
+    disclaimer,
+  } = DATA;
+
   const isLight = tone === "light";
   const hasBg = Boolean(backgroundImage);
 
@@ -58,7 +102,6 @@ export default function LandOverviewDevelopment() {
       aria-label="Land Project — Overview & Development"
       className="relative overflow-hidden"
       style={{
-        // transparent if bg image is present so it doesn't cover the image
         background: hasBg ? "transparent" : isLight ? "#ffffff" : "#0b0c0d",
         color: isLight ? "#141517" : "#ffffff",
       }}
@@ -74,9 +117,8 @@ export default function LandOverviewDevelopment() {
               aria-hidden
               className="w-full h-full object-cover"
               style={{
-                // keep subtle; avoid over-darkening
                 filter: "blur(10px) saturate(115%) brightness(0.9)",
-                transform: "scale(1.06)", // hide blur edges
+                transform: "scale(1.06)",
               }}
             />
           </div>
@@ -122,13 +164,13 @@ export default function LandOverviewDevelopment() {
 
         {/* Two-column layout */}
         <div className="grid lg:grid-cols-12 gap-6">
-          {/* Left: Highlights */}
+          {/* Left: Highlights with CARD IMAGES */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}
-            className="lg:col-span-7 rounded-3xl border p-5 sm:p-6"
+            className="lg:col-span-7 rounded-3xl border p-5 sm:p-6 lg:self-center"
             style={{
               background: isLight ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.08)",
               borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.22)",
@@ -142,59 +184,145 @@ export default function LandOverviewDevelopment() {
                 return (
                   <div
                     key={i}
-                    className="rounded-2xl p-4 border"
+                    className="relative overflow-hidden rounded-2xl border group"
                     style={{
-                      background: isLight ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,0.25)",
                       borderColor: accent ? `${accent}66` : isLight ? "rgba(20,21,23,0.12)" : "rgba(255,255,255,0.25)",
                       boxShadow: accent ? `0 10px 24px ${accent}22` : undefined,
-                      backdropFilter: "blur(10px) saturate(140%)",
                     }}
                   >
-                    <div
-                      aria-hidden
-                      className="h-0.5 mb-2 rounded-full"
-                      style={{ background: accent ?? (isLight ? "rgba(20,21,23,0.15)" : "rgba(255,255,255,0.25)") }}
-                    />
-                    <p
-                      className="text-sm sm:text-base"
-                      style={{ color: isLight ? "rgba(20,21,23,0.88)" : "rgba(255,255,255,0.92)" }}
-                    >
-                      {b.text}
-                    </p>
+                    <div className="relative aspect-[16/10]">
+                      {b.image ? (
+                        <img
+                          src={b.image}
+                          alt={b.alt ?? ""}
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div
+                          className="absolute inset-0"
+                          aria-hidden
+                          style={{
+                            background: accent
+                              ? `linear-gradient(135deg, ${accent}66, ${accent}22)`
+                              : isLight
+                              ? "linear-gradient(135deg, rgba(20,21,23,0.12), rgba(20,21,23,0.06))"
+                              : "linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06))",
+                          }}
+                        />
+                      )}
+
+                      {/* readability overlay */}
+                      <div
+                        aria-hidden
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.65) 100%)",
+                        }}
+                      />
+
+                      {/* top-left chip */}
+                      <div className="absolute left-3 top-3">
+                        <span
+                          className="inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium"
+                          style={{
+                            background: accent ? `${accent}33` : "rgba(0,0,0,0.25)",
+                            color: "#fff",
+                            boxShadow: accent ? `0 4px 12px ${accent}44` : undefined,
+                          }}
+                        >
+                          {b.accent === "teal" ? "Fasıl 96" : "Bilgi"}
+                        </span>
+                      </div>
+
+                      {/* bottom text */}
+                      <div className="absolute inset-x-0 bottom-0 p-4">
+                        <p className="text-sm sm:text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.95)" }}>
+                          {b.text}
+                        </p>
+                      </div>
+
+                      {/* hover glow */}
+                      <div
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                        style={{
+                          background: accent
+                            ? `radial-gradient(28rem 14rem at 85% 90%, ${accent}22, transparent 70%)`
+                            : `radial-gradient(28rem 14rem at 85% 90%, ${ORANGE}22, transparent 70%)`,
+                        }}
+                      />
+                    </div>
                   </div>
                 );
               })}
             </div>
           </motion.div>
 
-          {/* Right: Scenario */}
+          {/* RIGHT: MAIN IMAGE WITH TEXT OVERLAY */}
           <motion.aside
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}
-            className="lg:col-span-5 rounded-3xl border p-5 sm:p-6"
+            className="lg:col-span-5 rounded-3xl border overflow-hidden relative group"
             style={{
-              background: isLight ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.08)",
               borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.22)",
               boxShadow: isLight ? "0 12px 36px rgba(0,0,0,.12)" : "0 12px 36px rgba(0,0,0,.35)",
-              backdropFilter: "blur(12px) saturate(140%)",
             }}
           >
-            <div className="flex items-center gap-2 mb-3">
-              <div className="h-2 w-2 rounded-full" style={{ background: TEAL, boxShadow: `0 0 0 6px ${TEAL}22` }} aria-hidden />
-              <h3 className="text-base sm:text-lg font-semibold">Örnek Gelişim Senaryosu</h3>
+            {/* Main visual */}
+            <div className="relative aspect-[4/3] lg:aspect-[5/6]">
+              <img
+                src={mainImage ?? backgroundImage ?? ""}
+                alt={mainImageAlt ?? "Proje görseli"}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+
+              {/* Overlay gradient for readability */}
+              <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.60) 85%)",
+                }}
+              />
+
+              {/* Floating chips / decorations */}
+              <div className="absolute left-4 top-4 flex items-center gap-2">
+                <span
+                  className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium"
+                  style={{ background: `${TEAL}1a`, color: "white", boxShadow: `0 4px 18px ${TEAL}33` }}
+                >
+                  Örnek Gelişim Senaryosu
+                </span>
+              </div>
+
+              {/* Text overlay */}
+              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                <h3 className="text-base sm:text-lg font-semibold mb-2">Örnek Gelişim Senaryosu</h3>
+                {scenarioNote && (
+                  <p className="text-sm sm:text-base" style={{ color: "rgba(255,255,255,0.92)" }}>
+                    {scenarioNote}
+                  </p>
+                )}
+                {disclaimer && (
+                  <p className="mt-3 text-[11px] sm:text-xs" style={{ color: "rgba(255,255,255,0.80)" }}>
+                    {disclaimer}
+                  </p>
+                )}
+              </div>
+
+              {/* Hover polish */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{
+                  background: `radial-gradient(40rem 20rem at 80% 90%, ${ORANGE}22, transparent 70%)`,
+                }}
+              />
             </div>
-
-            <p className="text-sm sm:text-base" style={{ color: isLight ? "rgba(20,21,23,0.85)" : "rgba(255,255,255,0.90)" }}>
-              {scenarioNote}
-            </p>
-
-            {disclaimer ? (
-              <p className="mt-4 text-xs" style={{ color: isLight ? "rgba(20,21,23,0.70)" : "rgba(255,255,255,0.78)" }}>
-                {disclaimer}
-              </p>
-            ) : null}
           </motion.aside>
         </div>
 

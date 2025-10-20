@@ -123,7 +123,7 @@ export default function LandLocationAccess() {
               {/* Mode toggle */}
               <div className="absolute right-3 top-3 z-20 flex gap-1 backdrop-blur-md rounded-full border px-1 py-1"
                 style={{
-                  background: isLight ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.35)",
+                  background: isLight ? "rgba(0, 0, 0, 0.7)" : "rgba(0,0,0,0.35)",
                   borderColor: isLight ? "rgba(20,21,23,0.15)" : "rgba(255,255,255,0.28)",
                 }}
               >

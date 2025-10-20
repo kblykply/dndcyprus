@@ -112,7 +112,7 @@ export default function StoryTimeline() {
                 )}
               </div>
 
-              <h3 className="mt-3 text-2xl md:text-3xl font-semibold text-gray-600">
+              <h3 className="mt-3 text-2xl md:text-3xl font-semibold text-gray-600 tracking-tight text-zinc-950 dark:text-white text-balance">
                 {current.title}
               </h3>
               <p className="mt-3 text-black/70 leading-relaxed">{current.summary}</p>
