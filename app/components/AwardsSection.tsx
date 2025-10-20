@@ -3,11 +3,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useInView,
-  useAnimationControls,
-} from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 /* ------- Types & Data ------- */
 type AwardSlide = {
@@ -55,9 +51,9 @@ const SLIDES: AwardSlide[] = [
 
 /* ------- Helpers ------- */
 const POS = {
-  left:  { x: -170, scale: 1.1,  opacity: 0.9, zIndex: 2 },
-  center:{ x:   0,  scale: 1.45, opacity: 1,   zIndex: 3 },
-  right: { x: 170,  scale: 1.1,  opacity: 0.9, zIndex: 2 },
+  left: { x: -170, scale: 1.1, opacity: 0.9, zIndex: 2 },
+  center: { x: 0, scale: 1.45, opacity: 1, zIndex: 3 },
+  right: { x: 170, scale: 1.1, opacity: 0.9, zIndex: 2 },
 };
 const ENTER_OFFSET = 260;
 
@@ -79,12 +75,14 @@ export default function AwardsSection() {
 
   // ----- drag state & thresholds -----
   const [isDragging, setIsDragging] = useState(false);
-  const SWIPE_DISTANCE = 60;   // px
-  const SWIPE_VELOCITY = 400;  // px/s
+  const SWIPE_DISTANCE = 60; // px
+  const SWIPE_VELOCITY = 400; // px/s
 
   // Direction for ribbons
   const prevRef = useRef(index);
-  useEffect(() => { prevRef.current = index; }, [index]);
+  useEffect(() => {
+    prevRef.current = index;
+  }, [index]);
   const dir =
     (index - prevRef.current + total) % total === 1 ||
     (prevRef.current === total - 1 && index === 0)
@@ -99,30 +97,23 @@ export default function AwardsSection() {
     if (inView) setEnterWave((n) => n + 1);
   }, [inView]);
 
-  // TEXT controls
-  const textControls = useAnimationControls();
-  useEffect(() => {
-    const run = async () => {
-      await textControls.set("hidden");
-      requestAnimationFrame(() => {
-        textControls.start("visible");
-      });
-    };
-    run();
-  }, [index, enterWave, textControls]);
-
   // Keyboard support
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
-      else if (e.key === "ArrowRight") { e.preventDefault(); next(); }
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prev();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        next();
+      }
     },
     [next, prev]
   );
 
   return (
     <section
-      className="w-full h-[100svh] flex items-center bg-white dark:bg-neutral-950"
+      className="w-full h-[100svh] flex items-center bg-white dark:bg-white [color-scheme:light]"
       onKeyDown={onKeyDown}
       tabIndex={0} // focusable for arrow keys
       aria-label="Ödüller bölümü"
@@ -152,7 +143,9 @@ export default function AwardsSection() {
                 // where a freshly mounted item should come from
                 const enterFromX =
                   role === "center"
-                    ? (dir > 0 ? ENTER_OFFSET : -ENTER_OFFSET)
+                    ? dir > 0
+                      ? ENTER_OFFSET
+                      : -ENTER_OFFSET
                     : role === "left"
                     ? -ENTER_OFFSET
                     : ENTER_OFFSET;
@@ -198,7 +191,7 @@ export default function AwardsSection() {
               })}
             </motion.div>
 
-            {/* Dots güncelleme */}
+            {/* Dots */}
             <div className="mt-6 flex items-center justify-center md:justify-start gap-2">
               {SLIDES.map((s, i) => (
                 <button
@@ -207,33 +200,33 @@ export default function AwardsSection() {
                   onClick={() => setIndex(i)}
                   className={`h-2.5 rounded-full transition-all ${
                     i === index
-                      ? "w-7 bg-zinc-900 dark:bg-zinc-100"
-                      : "w-2.5 bg-zinc-400 hover:bg-zinc-500 dark:bg-zinc-600 dark:hover:bg-zinc-500"
+                      ? "w-7 bg-zinc-900"
+                      : "w-2.5 bg-zinc-400 hover:bg-zinc-500"
                   }`}
                 />
               ))}
             </div>
           </div>
 
-          {/* RIGHT — text (high-contrast, theme-safe) */}
+          {/* RIGHT — text (forced light theme) */}
           <div className="md:col-span-6">
             <motion.div
               key={`${index}-${enterWave}`}
               initial={{ y: 16, opacity: 1, filter: "blur(8px)" }}
               animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 0.45, ease: "easeOut" }}
-              className="min-h-[260px] will-change-transform antialiased text-zinc-900 dark:text-zinc-100"
+              className="min-h-[260px] will-change-transform antialiased text-zinc-900"
             >
               <motion.h3
                 initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
                 animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 0.42, ease: "easeOut", delay: 0.03 }}
-                className="text-2xl md:text-4xl font-semibold tracking-tight text-zinc-950 dark:text-white text-balance"
+                className="text-2xl md:text-4xl font-semibold tracking-tight text-zinc-950 text-balance"
               >
                 {current.title}
               </motion.h3>
 
-              <div className="mt-4 md:mt-5 space-y-4 text-base md:text-lg leading-relaxed text-zinc-800 dark:text-zinc-300">
+              <div className="mt-4 md:mt-5 space-y-4 text-base md:text-lg leading-relaxed text-zinc-800">
                 {current.paragraphs.map((p, i) => (
                   <motion.p
                     key={i}
@@ -253,7 +246,7 @@ export default function AwardsSection() {
                       ease: "easeOut",
                       delay: 0.06 + current.paragraphs.length * 0.05,
                     }}
-                    className="font-semibold text-zinc-900 dark:text-zinc-100"
+                    className="font-semibold text-zinc-900"
                   >
                     {current.emphasis}
                   </motion.p>
@@ -266,9 +259,7 @@ export default function AwardsSection() {
                   initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
                   animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                   transition={{ duration: 0.38, ease: "easeOut", delay: 0.14 }}
-                  className="inline-flex items-center gap-2 mt-6 text-base md:text-lg font-medium
-                             underline decoration-zinc-500/50 hover:decoration-current
-                             text-zinc-950 dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400/60 rounded-sm"
+                  className="inline-flex items-center gap-2 mt-6 text-base md:text-lg font-medium underline decoration-zinc-500/50 hover:decoration-current text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400/60 rounded-sm"
                 >
                   {current.cta.label}
                 </motion.a>

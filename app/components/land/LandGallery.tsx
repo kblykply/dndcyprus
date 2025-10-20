@@ -26,7 +26,7 @@ type GalleryItem = {
 
 export default function MariachiGalleryExpanding({
   title = "Galeri",
-  subtitle = "Lagoon Verde Görselleri",
+  subtitle = "Dron Görselleri",
   items,
 }: {
   title?: string;
@@ -37,11 +37,13 @@ export default function MariachiGalleryExpanding({
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/lagoon-verde/1.jpg", alt: "Havuz" },
-        { src: "/lagoon-verde/2.jpg", alt: "Plaj" },
-        { src: "/lagoon-verde/3.jpg", alt: "Cabanalar" },
-        { src: "/lagoon-verde/6.jpg", alt: "DJ Gecesi" },
-        { src: "/lagoon-verde/5.jpg", alt: "Kokteyller" },
+        { src: "/gecitkale/gecitkale-1.jpg", alt: "Havuz" },
+        { src: "/gecitkale/gecitkale-2.jpg", alt: "Deniz manzarası" },
+        { src: "/gecitkale/gecitkale-3.jpg", alt: "Sahil" },
+        { src: "/gecitkale/gecitkale-4.jpg", alt: "Gün batımı" },
+        { src: "/gecitkale/gecitkale-5.jpg", alt: "Doğa" },
+
+  
     
       ],
     [items]
