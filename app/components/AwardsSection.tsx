@@ -22,7 +22,7 @@ type AwardSlide = {
 const SLIDES: AwardSlide[] = [
   {
     id: 1,
-    title: "Platin Ödül – Mariachi Beach Club",
+    title: "Platin Ödül – Mariachi Beach Club - 2025 PropertyNC",
     paragraphs: [
       "<strong>Mariachi Beach Club</strong> için cesur vizyonumuz, 2025 PropertyNC Ödülleri’nde En İyi Önerilen Yeni Ticari Proje dalında ödül aldı.",
       "Dünya standartlarında eğlence, tasarım ve topluluk, Kuzey Kıbrıs sahillerine geliyor.",
@@ -198,7 +198,7 @@ export default function AwardsSection() {
               })}
             </motion.div>
 
-            {/* Dots */}
+            {/* Dots güncelleme */}
             <div className="mt-6 flex items-center justify-center md:justify-start gap-2">
               {SLIDES.map((s, i) => (
                 <button
