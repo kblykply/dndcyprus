@@ -46,7 +46,7 @@ export default function AboutDndHomes({
     <section
       ref={sectionRef}
       id="dnd-homes"
-      className="relative isolate px-6 py-16 md:px-12 lg:py-24"
+      className="relative isolate px-6 py-16 md:px-12 lg:py-24 [color-scheme:light]"
       aria-label="DND Homes Video Kartı"
     >
       <div className="mx-auto max-w-7xl">
@@ -57,11 +57,18 @@ export default function AboutDndHomes({
           animate={inView ? "show" : "hidden"}
           className={[
             "relative overflow-hidden rounded-2xl",
-            "bg-white/10 supports-[backdrop-filter]:backdrop-blur-xl",
-            "border border-white/20 ring-1 ring-white/10",
-            "shadow-[0_8px_40px_rgba(0,0,0,0.25)]",
+            // Force a solid light surface so dark themes/extensions can't invert it
+            "bg-white",
+            // Keep a soft glass feel when blur is supported, but still light
+            "supports-[backdrop-filter]:bg-white/85 supports-[backdrop-filter]:backdrop-blur-xl",
+            // Use neutral (black-based) borders on light backgrounds
+            "border border-black/10 ring-1 ring-black/5",
+            "shadow-[0_8px_40px_rgba(0,0,0,0.12)]",
           ].join(" ")}
         >
+          {/* White base floor (guarantees light look regardless of page/theme) */}
+          <div className="absolute inset-0 -z-10 bg-white" aria-hidden />
+
           <VideoHeroCard
             id={videoId}
             title={videoTitle}
@@ -142,7 +149,7 @@ export default function AboutDndHomes({
 
             {/* Badge (top-right) */}
             <div className="absolute right-4 top-4 md:right-6 md:top-6">
-              <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-black ring-1 ring-white/80">
+              <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-black ring-1 ring-black/10">
                 Video
               </span>
             </div>
@@ -240,7 +247,7 @@ function VideoHeroCard({
           className="group absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           aria-label={`${title} videoyu oynat`}
         >
-          <span className="inline-flex items-center justify-center rounded-full p-5 md:p-6 bg-white/90 shadow-2xl ring-1 ring-white/60 transition-transform group-hover:scale-105">
+          <span className="inline-flex items-center justify-center rounded-full p-5 md:p-6 bg-white/90 shadow-2xl ring-1 ring-black/10 transition-transform group-hover:scale-105">
             <svg width="28" height="28" viewBox="0 0 24 24" fill={TEAL} aria-hidden="true">
               <path d="M8 5v14l11-7z" />
             </svg>
