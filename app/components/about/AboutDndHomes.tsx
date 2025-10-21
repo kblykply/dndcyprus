@@ -46,7 +46,7 @@ export default function AboutDndHomes({
     <section
       ref={sectionRef}
       id="dnd-homes"
-      className="relative isolate px-6 py-16 md:px-12 lg:py-24 [color-scheme:light]"
+      className="relative isolate px-6 py-16 md:px-12 lg:py-24 [color-scheme:light] bg-white"
       aria-label="DND Homes Video Kartı"
     >
       <div className="mx-auto max-w-7xl">
@@ -57,11 +57,8 @@ export default function AboutDndHomes({
           animate={inView ? "show" : "hidden"}
           className={[
             "relative overflow-hidden rounded-2xl",
-            // Force a solid light surface so dark themes/extensions can't invert it
             "bg-white",
-            // Keep a soft glass feel when blur is supported, but still light
             "supports-[backdrop-filter]:bg-white/85 supports-[backdrop-filter]:backdrop-blur-xl",
-            // Use neutral (black-based) borders on light backgrounds
             "border border-black/10 ring-1 ring-black/5",
             "shadow-[0_8px_40px_rgba(0,0,0,0.12)]",
           ].join(" ")}
@@ -100,7 +97,7 @@ export default function AboutDndHomes({
             {/* Glass content stack (bottom-left) */}
             <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 text-white pointer-events-auto">
               {/* Heading + description in a blur card */}
-              <div className="max-w-3xl rounded-xl bg-black/35 px-4 py-3 ring-1 ring-white/20 backdrop-blur-md">
+              <div className="max-w-3xl rounded-xl bg-black/30 px-4 py-3 ring-1 ring-white/20 backdrop-blur-md">
                 <h2 className="text-lg font-semibold md:text-2xl leading-snug text-pretty">
                   {heading}
                 </h2>
@@ -109,7 +106,7 @@ export default function AboutDndHomes({
                 </p>
               </div>
 
-              {/* Bullet chips (each is its own blur card) */}
+              {/* Bullet chips */}
               <ul className="mt-3 grid gap-2 sm:grid-cols-2 max-w-4xl">
                 <BlurChip>
                   <Dot /> Boston kökenli marka; Massachusetts’te 120 tamamlanmış proje
@@ -128,8 +125,8 @@ export default function AboutDndHomes({
                 </BlurChip>
               </ul>
 
-              {/* CTAs in a small blur bar */}
-              <div className="mt-3 inline-flex flex-wrap gap-2 rounded-xl bg-black/30 px-2.5 py-2 ring-1 ring-white/15 backdrop-blur-md">
+              {/* CTAs */}
+              <div className="mt-3 inline-flex flex-wrap gap-2 rounded-xl bg-black/25 px-2.5 py-2 ring-1 ring-white/15 backdrop-blur-md">
                 <Link
                   href="https://dnd-homes.com/"
                   target="_blank"
@@ -162,7 +159,7 @@ export default function AboutDndHomes({
 
 function BlurChip({ children }: { children: React.ReactNode }) {
   return (
-    <li className="break-words leading-normal rounded-xl bg-black/30 px-3 py-2 text-xs md:text-sm ring-1 ring-white/15 backdrop-blur-md flex items-start gap-2">
+    <li className="break-words leading-normal rounded-xl bg-black/25 px-3 py-2 text-xs md:text-sm ring-1 ring-white/15 backdrop-blur-md flex items-start gap-2">
       {children}
     </li>
   );
@@ -196,6 +193,12 @@ function VideoHeroCard({
 }) {
   const [play, setPlay] = useState(false);
 
+  // Robust poster fallback chain (prevents black while loading/404)
+  const ytMax = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+  const ytHQ = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  const [imgSrc, setImgSrc] = useState<string>(poster || ytMax);
+  const [imgLoaded, setImgLoaded] = useState(false);
+
   const src =
     `https://www.youtube-nocookie.com/embed/${id}?` +
     `${autoPlayOnClick && play ? "autoplay=1&" : ""}` +
@@ -207,22 +210,40 @@ function VideoHeroCard({
       {!play && (
         <>
           <Image
-            src={poster || `/api/og/video/${id}.jpg`}
+            src={imgSrc}
             alt={title}
             fill
             sizes="(min-width: 1024px) 1000px, 100vw"
             className="object-cover"
             priority={false}
+            unoptimized
+            onLoadingComplete={() => setImgLoaded(true)}
+            onError={() => {
+              // Try next best image; if already HQ, do nothing further
+              setImgLoaded(false);
+              setImgSrc((prev) => (prev === ytMax ? ytHQ : prev));
+            }}
           />
-          {/* Scrim for base contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/35 to-black/10" />
+          {/* Scrim for base contrast (only show after image is ready) */}
+          <div
+            className={[
+              "absolute inset-0 transition-opacity duration-300 pointer-events-none",
+              imgLoaded ? "opacity-100" : "opacity-0",
+            ].join(" ")}
+            // Light, bottom-weighted scrim so the frame never looks black
+            style={{
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.35) 18%, rgba(0,0,0,0.08) 46%, rgba(0,0,0,0) 70%)",
+            }}
+            aria-hidden
+          />
         </>
       )}
 
       {/* Iframe (when playing) */}
       {play && (
         <iframe
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full bg-white"
           src={src}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
