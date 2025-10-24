@@ -43,6 +43,7 @@ type SwiperWithNav = SwiperType & {
 
 // === Your Instagram post/reel URLs ===
 const IG_URLS = [
+   "https://www.instagram.com/reel/DNIOMH0MjBT/",
   "https://www.instagram.com/p/DQGqJSyDMM7/",
   "https://www.instagram.com/p/DPD0UpLjKdL/",
   "https://www.instagram.com/p/DOVeAdtDJDv/",
