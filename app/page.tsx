@@ -13,7 +13,7 @@ import NewsBlogSection from "./components/NewsBlogSection";
 import ContactVisitSection from "./components/ContactVisitSection";
 import BrandsLogoSliderGlass  from "./components/BrandsSection";
 import Payment from  "./components/Payment";
-
+import IgEmbedGallery from "./components/IgPost";
 
 
 
@@ -40,7 +40,8 @@ export default function HomePage() {
     />
                         <StatsStrip />
                         
-    
+                <IgEmbedGallery />
+
                         <NewsBlogSection />
                         <ContactVisitSection />
     
