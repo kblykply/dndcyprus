@@ -43,13 +43,44 @@ const extractYouTubeId = (url: string) => {
 };
 const ytThumb = (id: string) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
 const toMinSec = (secs?: number) => {
-  if (!secs || !isFinite(secs)) return "–:–";
+  if (secs === undefined || !Number.isFinite(secs)) return "–:–";
   const m = Math.floor(secs / 60);
   const s = Math.floor(secs % 60);
   return `${m}:${s.toString().padStart(2, "0")}`;
 };
 
 /* ---------------- Types ---------------- */
+// Basit, yerel YouTube Iframe API tipleri (paket eklemeden çalışır)
+type YTVideoData = { author?: string };
+interface YTPlayer {
+  playVideo(): void;
+  pauseVideo(): void;
+  seekTo(seconds: number, allowSeekAhead: boolean): void;
+  mute(): void;
+  unMute(): void;
+  destroy(): void;
+  getDuration(): number;
+  getVideoData(): YTVideoData;
+}
+type YTReadyEvent = { target: YTPlayer };
+type YTPlayerOptions = {
+  videoId: string;
+  width?: string | number;
+  height?: string | number;
+  playerVars?: Record<string, unknown>;
+  events?: { onReady?: (ev: YTReadyEvent) => void };
+};
+interface YTGlobal {
+  Player: new (elementId: string | HTMLElement, options: YTPlayerOptions) => YTPlayer;
+}
+interface WindowWithYT extends Window {
+  YT?: YTGlobal;
+  onYouTubeIframeAPIReady?: () => void;
+}
+
+// CSS değişkenlerini güvenle verebilmek için yardımcı tip
+type CSSVars = React.CSSProperties & { [key: `--${string}`]: string | number };
+
 type CTALink = { label: string; href: string };
 type SlideContent = {
   customHeadline: string;
@@ -58,7 +89,6 @@ type SlideContent = {
   primaryCta?: CTALink | null;
   secondaryCta?: CTALink | null;
 };
-
 type SlideInput = {
   id: number;
   videoUrl: string;
@@ -74,12 +104,15 @@ export type ProjectVideoSliderProps = {
 };
 
 /* ---------------- YouTube API Loader ---------------- */
-let ytApiPromise: Promise<any> | null = null;
-function ensureYouTubeAPI() {
+let ytApiPromise: Promise<YTGlobal | null> | null = null;
+
+function ensureYouTubeAPI(): Promise<YTGlobal | null> {
   if (typeof window === "undefined") return Promise.resolve(null);
-  if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+  const w = window as WindowWithYT;
+  if (w.YT && w.YT.Player) return Promise.resolve(w.YT);
+
   if (!ytApiPromise) {
-    ytApiPromise = new Promise((resolve) => {
+    ytApiPromise = new Promise<YTGlobal | null>((resolve) => {
       const existing = document.getElementById("youtube-iframe-api");
       if (!existing) {
         const tag = document.createElement("script");
@@ -87,9 +120,10 @@ function ensureYouTubeAPI() {
         tag.src = "https://www.youtube.com/iframe_api";
         document.body.appendChild(tag);
       }
-      (window as any).onYouTubeIframeAPIReady = () => resolve((window as any).YT);
+      w.onYouTubeIframeAPIReady = () => resolve((window as WindowWithYT).YT ?? null);
       const check = () => {
-        if ((window as any).YT && (window as any).YT.Player) resolve((window as any).YT);
+        const ww = window as WindowWithYT;
+        if (ww.YT && ww.YT.Player) resolve(ww.YT);
         else setTimeout(check, 120);
       };
       check();
@@ -104,11 +138,11 @@ export default function ProjectVideoSlider({
   className = "",
   slides = DEFAULT_SLIDES,
 }: ProjectVideoSliderProps) {
-  const playersRef = useRef<any[]>([]);
+  const playersRef = useRef<(YTPlayer | null)[]>([]);
   const swiperRef = useRef<SwiperType | null>(null);
   const [autoplayStopped, setAutoplayStopped] = useState(false);
 
-  const registerPlayer = useCallback((index: number, player: any | null) => {
+  const registerPlayer = useCallback((index: number, player: YTPlayer | null) => {
     playersRef.current[index] = player;
   }, []);
 
@@ -133,6 +167,12 @@ export default function ProjectVideoSlider({
       setAutoplayStopped(true);
     } catch {}
   }, [autoplayStopped]);
+
+  const paginationVars: CSSVars = {
+    "--swiper-pagination-color": "#ffffff",
+    "--swiper-pagination-bullet-inactive-color": "rgba(255,255,255,0.5)",
+    "--swiper-pagination-bullet-inactive-opacity": 1,
+  };
 
   return (
     <section
@@ -164,20 +204,20 @@ export default function ProjectVideoSlider({
         slidesPerView={1}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        loop={true}
-          autoHeight                 // 👈 EKLENDİ
+        loop
+        autoHeight
         autoplay={
           autoplayStopped
             ? false
             : {
                 delay: autoplayMs,
-                disableOnInteraction: false, // unmute/fullscreen manually stops it below
+                disableOnInteraction: false, // unmute/fullscreen manuel durduruyor
                 pauseOnMouseEnter: false,
               }
         }
         pagination={{ clickable: true }}
         keyboard={{ enabled: true, onlyInViewport: true }}
-        noSwiping={true}
+        noSwiping
         noSwipingClass="swiper-no-swiping"
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
@@ -185,14 +225,7 @@ export default function ProjectVideoSlider({
         }}
         onSlideChange={(swiper) => playOnly(swiper.realIndex)}
         className="relative"
-        style={
-          {
-            // white dots + arrows
-            ["--swiper-pagination-color" as any]: "#ffffff",
-            ["--swiper-pagination-bullet-inactive-color" as any]: "rgba(255,255,255,0.5)",
-            ["--swiper-pagination-bullet-inactive-opacity" as any]: "1",
-          } as React.CSSProperties
-        }
+        style={paginationVars}
       >
         {slides.map((s, idx) => {
           const vid = extractYouTubeId(s.videoUrl);
@@ -231,25 +264,24 @@ function SlideContentBlock({
   bgImage: string;
   badge: string;
   content: SlideContent;
-  onPlayerReady: (player: any | null) => void;
+  onPlayerReady: (player: YTPlayer | null) => void;
   onNeedStopAutoplay: () => void;
 }) {
   const [author, setAuthor] = useState<string>("");
   const [duration, setDuration] = useState<string>("–:–");
 
-  const handleMeta = useCallback((p: any) => {
+  const handleMeta = useCallback((p: YTPlayer) => {
     try {
       const data = p.getVideoData?.() || {};
       setAuthor(data.author || "");
       const d = p.getDuration?.();
-      if (d) setDuration(toMinSec(d));
+      if (typeof d === "number" && d > 0) setDuration(toMinSec(d));
     } catch {}
   }, []);
 
   return (
-    <div className="relative min-h-[560px] md:min-h-[640px]">  {/* 👈 min-h eklendi */}
-    
-          {/* Background */}
+    <div className="relative min-h-[560px] md:min-h-[640px]">
+      {/* Background */}
       <div aria-hidden className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${bgImage})` }} />
       {/* Readability + subtle vignette */}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/55 to-black/60" />
@@ -353,19 +385,19 @@ function YouTubePanel({
 }: {
   videoId: string;
   index: number;
-  onReady: (player: any) => void;
+  onReady: (player: YTPlayer | null) => void;
   onNeedStopAutoplay: () => void;
 }) {
   const containerId = useMemo(() => `yt-player-${index}-${videoId}`, [index, videoId]);
   const [muted, setMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<YTPlayer | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   // Watch fullscreen changes to update UI and stop autoplay
   useEffect(() => {
     const onFsChange = () => {
-      const active = !!document.fullscreenElement && panelRef.current?.contains(document.fullscreenElement);
+      const active = !!document.fullscreenElement && !!panelRef.current?.contains(document.fullscreenElement);
       setIsFullscreen(active);
       if (active) onNeedStopAutoplay();
     };
@@ -377,7 +409,7 @@ function YouTubePanel({
     let mounted = true;
     ensureYouTubeAPI().then((YT) => {
       if (!mounted || !YT) return;
-      const loopParams = { loop: 1, playlist: videoId };
+      const loopParams: { loop: 1; playlist: string } = { loop: 1, playlist: videoId };
       const player = new YT.Player(containerId, {
         videoId,
         width: "100%",
@@ -385,7 +417,7 @@ function YouTubePanel({
         playerVars: {
           autoplay: 1,
           mute: 1,
-          controls: 0, // we keep controls hidden; custom UI below
+          controls: 0, // custom UI
           rel: 0,
           playsinline: 1,
           modestbranding: 1,
@@ -393,7 +425,7 @@ function YouTubePanel({
           ...loopParams,
         },
         events: {
-          onReady: (ev: any) => {
+          onReady: (ev: YTReadyEvent) => {
             playerRef.current = ev.target;
             try {
               ev.target.mute();
@@ -408,7 +440,6 @@ function YouTubePanel({
       try {
         playerRef.current?.destroy?.();
       } catch {}
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     };
   }, [containerId, videoId, onReady]);
 
@@ -419,11 +450,11 @@ function YouTubePanel({
       if (muted) {
         p.unMute?.();
         p.playVideo?.();
-        onNeedStopAutoplay(); // stop slider autoplay on unmute
+        onNeedStopAutoplay(); // unmute -> slider autoplay durur
       } else {
         p.mute?.();
       }
-      setMuted(!muted);
+      setMuted((m) => !m);
     } catch {}
   }, [muted, onNeedStopAutoplay]);
 
@@ -434,8 +465,6 @@ function YouTubePanel({
       } else {
         await document.exitFullscreen();
       }
-      // Autoplay will be stopped by the fullscreenchange listener,
-      // but call defensively here too.
       onNeedStopAutoplay();
     } catch {}
   }, [onNeedStopAutoplay]);
