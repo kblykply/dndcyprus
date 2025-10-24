@@ -13,8 +13,10 @@ import "swiper/css/pagination";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
-// Replace with your light/white texture image (kept subtle)
 const BG_IMAGE = "/ins.jpg";
+
+/** Fixed viewport height for the IG card (clips long captions at the bottom) */
+const VIEWPORT_H_PX = 560; // ← increase/decrease to show more/less
 
 declare global {
   interface Window {
@@ -33,7 +35,6 @@ const fadeUp: Variants = {
   },
 };
 
-// Swiper with navigation helpers
 type SwiperWithNav = SwiperType & {
   navigation?: {
     init: () => void;
@@ -41,9 +42,8 @@ type SwiperWithNav = SwiperType & {
   };
 };
 
-// === Your Instagram post/reel URLs ===
 const IG_URLS = [
-   "https://www.instagram.com/reel/DNIOMH0MjBT/",
+  "https://www.instagram.com/reel/DNIOMH0MjBT/",
   "https://www.instagram.com/p/DQGqJSyDMM7/",
   "https://www.instagram.com/p/DPD0UpLjKdL/",
   "https://www.instagram.com/p/DOVeAdtDJDv/",
@@ -74,12 +74,11 @@ export default function InstagramSpotlight() {
           backgroundColor: "#fff",
         }}
       >
-        {/* optional subtle white overlay to keep it bright */}
         <div className="pointer-events-none absolute inset-0" style={{ background: "rgba(255,255,255,0.75)" }} />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="mt-0 grid gap-10 lg:grid-cols-2 items-stretch min-h-[64vh] lg:min-h-[72vh]">
-            {/* LEFT: content (kicker over header) */}
+            {/* LEFT */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -121,7 +120,7 @@ export default function InstagramSpotlight() {
               </div>
             </motion.div>
 
-            {/* RIGHT: Single-post carousel (dragging disabled) */}
+            {/* RIGHT — vertically centered viewport; long captions clipped */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -129,8 +128,8 @@ export default function InstagramSpotlight() {
               viewport={{ once: false, amount: 0.35 }}
               className="relative order-1 lg:order-2"
             >
-              <div className="relative h-full w-full">
-                {/* Nav buttons BEFORE Swiper so they exist at init */}
+              <div className="relative h-full w-full grid place-items-center">
+                {/* Nav buttons */}
                 <button
                   aria-label="Previous post"
                   className="ig-prev absolute left-3 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full grid place-items-center backdrop-blur-sm hover:scale-105 transition pointer-events-auto"
@@ -172,11 +171,11 @@ export default function InstagramSpotlight() {
                     window?.instgrm?.Embeds?.process?.();
                   }}
                   onSlideChange={() => window?.instgrm?.Embeds?.process?.()}
-                  className="rounded-none"
+                  className="!h-auto w-full"
                 >
                   {IG_URLS.map((url) => (
-                    <SwiperSlide key={url} className="flex items-center justify-center">
-                      <EmbedBox url={url} />
+                    <SwiperSlide key={url} className="grid place-items-center !h-auto py-2">
+                      <EmbedViewport url={url} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -184,13 +183,21 @@ export default function InstagramSpotlight() {
             </motion.div>
           </div>
         </div>
+
+        {/* tighten default IG margins */}
+        <style jsx global>{`
+          .instagram-media { margin: 0 !important; min-width: 0 !important; width: 100% !important; }
+          .instagram-media iframe { margin: 0 !important; }
+        `}</style>
       </section>
     </>
   );
 }
 
-/* ---------------- Cropped, rounded Instagram embed ---------------- */
-function EmbedBox({ url }: { url: string }) {
+/** A fixed-height viewport that clips the IG iframe bottom (where captions live).
+ *  The viewport itself is centered in the column, so the card never “sticks” to the top.
+ */
+function EmbedViewport({ url }: { url: string }) {
   const { ref, inView } = useInView<HTMLDivElement>(true);
   const [processed, setProcessed] = useState(false);
 
@@ -202,9 +209,13 @@ function EmbedBox({ url }: { url: string }) {
   }, [inView, processed]);
 
   return (
-    <div className="mx-auto" style={{ maxWidth: 325, width: "100%" }}>
-      <div className="relative aspect-[9/16] overflow-hidden rounded-2xl ring-1 ring-black/5">
-        <div ref={ref} className="absolute inset-0 flex items-start justify-center">
+    <div
+      className="relative w-[310px] sm:w-[340px] md:w-[320px]"
+      style={{ height: VIEWPORT_H_PX }}
+    >
+      {/* Clip anything that exceeds the viewport height (caption/footer) */}
+      <div className="absolute inset-0 overflow-hidden rounded-2xl ring-1 ring-black/10 bg-white">
+        <div ref={ref} className="w-full">
           {inView ? (
             <blockquote
               key={`${url}-nocaption`}
@@ -217,15 +228,25 @@ function EmbedBox({ url }: { url: string }) {
               <a href={url} aria-label="View on Instagram" />
             </blockquote>
           ) : (
-            <div className="h-full w-full animate-pulse bg-black/5" />
+            <div className="w-full h-full animate-pulse bg-black/5" />
           )}
         </div>
+
+        {/* soft fade at bottom edge for a cleaner crop */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-16"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%)",
+          }}
+        />
       </div>
     </div>
   );
 }
 
-/* ---------------- Tiny in-view hook ---------------- */
+/* Tiny in-view hook */
 function useInView<T extends HTMLElement>(once = true) {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
