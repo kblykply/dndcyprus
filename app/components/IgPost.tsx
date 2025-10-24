@@ -16,7 +16,11 @@ const ORANGE = "#f15c34";
 const BG_IMAGE = "/ins.jpg";
 
 /** Fixed viewport height for the IG card (clips long captions at the bottom) */
-const VIEWPORT_H_PX = 560; // ← increase/decrease to show more/less
+const VIEWPORT_H_PX = 590; // ← increase/decrease to show more/less
+
+/** Keep a 9:16 viewport width for tall reels, then zoom the iframe a bit to kill side bars */
+const VIEWPORT_W_PX = Math.round((9 / 16) * VIEWPORT_H_PX); // ≈332 when height=590
+const ZOOM_CROP = 1.14; // 1.00–1.30 -> increase until side bars disappear
 
 declare global {
   interface Window {
@@ -43,6 +47,7 @@ type SwiperWithNav = SwiperType & {
 };
 
 const IG_URLS = [
+  "https://www.instagram.com/p/DP0mSn8gK1h/",
   "https://www.instagram.com/reel/DNIOMH0MjBT/",
   "https://www.instagram.com/p/DQGqJSyDMM7/",
   "https://www.instagram.com/p/DPD0UpLjKdL/",
@@ -74,7 +79,10 @@ export default function InstagramSpotlight() {
           backgroundColor: "#fff",
         }}
       >
-        <div className="pointer-events-none absolute inset-0" style={{ background: "rgba(255,255,255,0.75)" }} />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "rgba(255,255,255,0.75)" }}
+        />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="mt-0 grid gap-10 lg:grid-cols-2 items-stretch min-h-[64vh] lg:min-h-[72vh]">
@@ -88,7 +96,11 @@ export default function InstagramSpotlight() {
             >
               <span
                 className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full mb-3"
-                style={{ border: "1px solid rgba(20,21,23,0.08)", color: TEAL, background: "#ffffff" }}
+                style={{
+                  border: "1px solid rgba(20,21,23,0.08)",
+                  color: TEAL,
+                  background: "#ffffff",
+                }}
               >
                 Instagram
               </span>
@@ -96,8 +108,12 @@ export default function InstagramSpotlight() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
                 Instagram sayfamıza göz atın
               </h2>
-              <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.72)" }}>
-                Düzenli paylaşımlar ile en yeni projelerimizi, haberlerimizi ve güncellemelerimizi takip edin.
+              <p
+                className="mt-3 text-base sm:text-lg"
+                style={{ color: "rgba(20,21,23,0.72)" }}
+              >
+                Düzenli paylaşımlar ile en yeni projelerimizi, haberlerimizi ve
+                güncellemelerimizi takip edin.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
@@ -113,7 +129,11 @@ export default function InstagramSpotlight() {
                 <a
                   href="/contact"
                   className="px-6 py-2.5 rounded-full text-sm font-medium"
-                  style={{ background: `${ORANGE}0`, color: ORANGE, border: `1px solid ${ORANGE}33` }}
+                  style={{
+                    background: `${ORANGE}0`,
+                    color: ORANGE,
+                    border: `1px solid ${ORANGE}33`,
+                  }}
                 >
                   İletişime Geç
                 </a>
@@ -136,7 +156,13 @@ export default function InstagramSpotlight() {
                   style={{ background: "#ffffff", boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M15 18l-6-6 6-6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M15 18l-6-6 6-6"
+                      stroke="#141517"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
                 <button
@@ -145,7 +171,13 @@ export default function InstagramSpotlight() {
                   style={{ background: "#ffffff", boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M9 6l6 6-6 6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M9 6l6 6-6 6"
+                      stroke="#141517"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
 
@@ -194,8 +226,8 @@ export default function InstagramSpotlight() {
   );
 }
 
-/** A fixed-height viewport that clips the IG iframe bottom (where captions live).
- *  The viewport itself is centered in the column, so the card never “sticks” to the top.
+/** A fixed 9:16-ish viewport that center-crops the IG iframe by slightly scaling it.
+ *  The viewport is centered in the column, so the card never “sticks” to the top.
  */
 function EmbedViewport({ url }: { url: string }) {
   const { ref, inView } = useInView<HTMLDivElement>(true);
@@ -209,27 +241,43 @@ function EmbedViewport({ url }: { url: string }) {
   }, [inView, processed]);
 
   return (
-    <div
-      className="relative w-[310px] sm:w-[340px] md:w-[320px]"
-      style={{ height: VIEWPORT_H_PX }}
-    >
-      {/* Clip anything that exceeds the viewport height (caption/footer) */}
+    <div className="relative" style={{ height: VIEWPORT_H_PX, width: VIEWPORT_W_PX }}>
+      {/* Clip anything that exceeds the viewport (caption/footer + scaled sides) */}
       <div className="absolute inset-0 overflow-hidden rounded-2xl ring-1 ring-black/10 bg-white">
-        <div ref={ref} className="w-full">
-          {inView ? (
-            <blockquote
-              key={`${url}-nocaption`}
-              className="instagram-media"
-              data-instgrm-permalink={url}
-              data-instgrm-captioned="false"
-              data-instgrm-version="14"
-              style={{ background: "#fff", border: 0, margin: 0, padding: 0, maxWidth: "100%", minWidth: 0 }}
-            >
-              <a href={url} aria-label="View on Instagram" />
-            </blockquote>
-          ) : (
-            <div className="w-full h-full animate-pulse bg-black/5" />
-          )}
+        {/* Center the IG card and scale it to remove left/right black bars */}
+        <div className="absolute inset-0 grid place-items-center">
+          <div
+            ref={ref}
+            className="[&_.instagram-media]:!m-0"
+            style={{
+              transform: `scale(${ZOOM_CROP})`,
+              transformOrigin: "center center",
+              width: `${100 / ZOOM_CROP}%`,
+              height: `${100 / ZOOM_CROP}%`,
+            }}
+          >
+            {inView ? (
+              <blockquote
+                key={`${url}-nocaption`}
+                className="instagram-media"
+                data-instgrm-permalink={url}
+                data-instgrm-captioned="false"
+                data-instgrm-version="14"
+                style={{
+                  background: "#fff",
+                  border: 0,
+                  margin: 0,
+                  padding: 0,
+                  maxWidth: "100%",
+                  minWidth: 0,
+                }}
+              >
+                <a href={url} aria-label="View on Instagram" />
+              </blockquote>
+            ) : (
+              <div className="w-full h-full animate-pulse" style={{ background: "rgba(0,0,0,0.05)" }} />
+            )}
+          </div>
         </div>
 
         {/* soft fade at bottom edge for a cleaner crop */}
