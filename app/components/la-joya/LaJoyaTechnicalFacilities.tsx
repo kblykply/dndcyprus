@@ -60,21 +60,21 @@ export default function LaJoyaTechnicalFacilities({
         title: "Merkezi Isıtma/Soğutma",
         desc:
           "merkezi ısıtma/soğutma sistemiyle ideal sıcaklık her zaman elinizin altında.",
-        image: "/ac.jpg",
+        image: "/tec/klima.jpg",
         icon: <Wind className="h-5 w-5" />,
       },
       {
         title: "Merkezi Jeneratör",
         desc:
           "Kesintisiz enerji sağlayan merkezi jeneratör ile olası elektrik kesintilerinde endişeye gerek yok.",
-        image: "/ampul.jpg",
+        image: "/tec/jenerator.jpg",
         icon: <Zap className="h-5 w-5" />,
       },
       {
         title: "Akıllı Ev Sistemleri",
         desc:
           "Evinizi uzaktan kontrol edebileceğiniz akıllı ev sistemi günlük yaşamı kolaylaştırır.",
-        image: "/smarthome.jpg",
+        image: "/tec/smart.jpg",
         icon: <Home className="h-5 w-5" />,
       },
    
@@ -84,7 +84,7 @@ export default function LaJoyaTechnicalFacilities({
         title: "Banyolarda Yerden Isıtma",
         desc:
           "Zemin ısıtma sistemiyle banyoda maksimum konfor ve her zaman sıcak bir atmosfer.",
-        image: "/bathroom.jpg",
+        image: "/tec/yer.jpg",
         icon: <Thermometer className="h-5 w-5" />,
       },
     ],
