@@ -202,7 +202,7 @@ function EmbedBox({ url }: { url: string }) {
   }, [inView, processed]);
 
   return (
-    <div className="mx-auto" style={{ maxWidth: 420, width: "100%" }}>
+    <div className="mx-auto" style={{ maxWidth: 325, width: "100%" }}>
       <div className="relative aspect-[9/16] overflow-hidden rounded-2xl ring-1 ring-black/5">
         <div ref={ref} className="absolute inset-0 flex items-start justify-center">
           {inView ? (
