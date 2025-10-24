@@ -405,43 +405,47 @@ function YouTubePanel({
     return () => document.removeEventListener("fullscreenchange", onFsChange);
   }, [onNeedStopAutoplay]);
 
-  useEffect(() => {
-    let mounted = true;
-    ensureYouTubeAPI().then((YT) => {
-      if (!mounted || !YT) return;
-      const loopParams: { loop: 1; playlist: string } = { loop: 1, playlist: videoId };
-      const player = new YT.Player(containerId, {
-        videoId,
-        width: "100%",
-        height: "100%",
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0, // custom UI
-          rel: 0,
-          playsinline: 1,
-          modestbranding: 1,
-          iv_load_policy: 3,
-          ...loopParams,
+useEffect(() => {
+  let mounted = true;
+
+  ensureYouTubeAPI().then((YT) => {
+    if (!mounted || !YT) return;
+    const loopParams: { loop: 1; playlist: string } = { loop: 1, playlist: videoId };
+    const player = new YT.Player(containerId, {
+      videoId,
+      width: "100%",
+      height: "100%",
+      playerVars: {
+        autoplay: 1,
+        mute: 1,
+        controls: 0,
+        rel: 0,
+        playsinline: 1,
+        modestbranding: 1,
+        iv_load_policy: 3,
+        ...loopParams,
+      },
+      events: {
+        onReady: (ev) => {
+          playerRef.current = ev.target;
+          try {
+            ev.target.mute();
+            ev.target.playVideo();
+          } catch {}
+          onReady(ev.target);
         },
-        events: {
-          onReady: (ev: YTReadyEvent) => {
-            playerRef.current = ev.target;
-            try {
-              ev.target.mute();
-              ev.target.playVideo();
-            } catch {}
-            onReady(ev.target);
-          },
-        },
-      });
+      },
     });
-    return () => {
-      try {
-        playerRef.current?.destroy?.();
-      } catch {}
-    };
-  }, [containerId, videoId, onReady]);
+  });
+
+  return () => {
+    mounted = false; // <<< önemli: prefer-const uyarısını da çözer
+    try {
+      playerRef.current?.destroy?.();
+    } catch {}
+  };
+}, [containerId, videoId, onReady]);
+
 
   const toggleMute = useCallback(() => {
     const p = playerRef.current;
