@@ -33,6 +33,14 @@ const fadeUp: Variants = {
   },
 };
 
+// Swiper with navigation helpers
+type SwiperWithNav = SwiperType & {
+  navigation?: {
+    init: () => void;
+    update: () => void;
+  };
+};
+
 // === Your Instagram post/reel URLs ===
 const IG_URLS = [
   "https://www.instagram.com/p/DQGqJSyDMM7/",
@@ -58,7 +66,6 @@ export default function InstagramSpotlight() {
         className="relative overflow-hidden bg-white"
         style={{
           color: "#141517",
-          // light, non-intrusive section bg image
           backgroundImage: `url(${BG_IMAGE})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -71,7 +78,7 @@ export default function InstagramSpotlight() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="mt-0 grid gap-10 lg:grid-cols-2 items-stretch min-h-[64vh] lg:min-h-[72vh]">
-            {/* LEFT: content (kicker sits OVER the header here) */}
+            {/* LEFT: content (kicker over header) */}
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -79,7 +86,6 @@ export default function InstagramSpotlight() {
               viewport={{ once: false, amount: 0.35 }}
               className="flex flex-col justify-center order-2 lg:order-1 pb-6 lg:pb-8"
             >
-              {/* Kicker moved here, above the H2 */}
               <span
                 className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full mb-3"
                 style={{ border: "1px solid rgba(20,21,23,0.08)", color: TEAL, background: "#ffffff" }}
@@ -130,13 +136,7 @@ export default function InstagramSpotlight() {
                   style={{ background: "#ffffff", boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M15 18l-6-6 6-6"
-                      stroke="#141517"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M15 18l-6-6 6-6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
                 <button
@@ -145,13 +145,7 @@ export default function InstagramSpotlight() {
                   style={{ background: "#ffffff", boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M9 6l6 6-6 6"
-                      stroke="#141517"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M9 6l6 6-6 6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
 
@@ -160,11 +154,9 @@ export default function InstagramSpotlight() {
                   slidesPerView={1}
                   centeredSlides
                   loop
-                  // dragging disabled:
                   allowTouchMove={false}
                   simulateTouch={false}
                   grabCursor={false}
-                  // keep keyboard + arrows
                   keyboard={{ enabled: true }}
                   pagination={{ clickable: true }}
                   navigation={{
@@ -173,12 +165,9 @@ export default function InstagramSpotlight() {
                     disabledClass: "opacity-40 pointer-events-none",
                   }}
                   onInit={(s) => {
-                    try {
-                      // @ts-ignore
-                      s.navigation.init();
-                      // @ts-ignore
-                      s.navigation.update();
-                    } catch {}
+                    const swiper = s as SwiperWithNav;
+                    swiper.navigation?.init();
+                    swiper.navigation?.update();
                     window?.instgrm?.Embeds?.process?.();
                   }}
                   onSlideChange={() => window?.instgrm?.Embeds?.process?.()}
@@ -213,7 +202,6 @@ function EmbedBox({ url }: { url: string }) {
 
   return (
     <div className="mx-auto" style={{ maxWidth: 420, width: "100%" }}>
-      {/* Rounded + overflow-hidden to make the post itself rounded */}
       <div className="relative aspect-[9/16] overflow-hidden rounded-2xl ring-1 ring-black/5">
         <div ref={ref} className="absolute inset-0 flex items-start justify-center">
           {inView ? (
@@ -223,14 +211,7 @@ function EmbedBox({ url }: { url: string }) {
               data-instgrm-permalink={url}
               data-instgrm-captioned="false"
               data-instgrm-version="14"
-              style={{
-                background: "#fff",
-                border: 0,
-                margin: 0,
-                padding: 0,
-                maxWidth: "100%",
-                minWidth: 0,
-              }}
+              style={{ background: "#fff", border: 0, margin: 0, padding: 0, maxWidth: "100%", minWidth: 0 }}
             >
               <a href={url} aria-label="View on Instagram" />
             </blockquote>
