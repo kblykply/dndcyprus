@@ -360,15 +360,15 @@ function SlideContentBlock({
 
           {/* Right: video */}
           <motion.div variants={fadeUp} className="lg:col-span-6">
-            <YouTubePanel
-              videoId={id}
-              index={index}
-              onReady={(player) => {
-                onPlayerReady(player);
-                handleMeta(player);
-              }}
-              onNeedStopAutoplay={onNeedStopAutoplay}
-            />
+         <YouTubePanel
+  videoId={id}
+  index={index}
+  onReady={(player) => {
+    onPlayerReady(player);
+    if (player) handleMeta(player); // <<< null guard
+  }}
+  onNeedStopAutoplay={onNeedStopAutoplay}
+/>
           </motion.div>
         </motion.div>
       </div>
