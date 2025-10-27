@@ -3,9 +3,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { Waves, BadgePercent, ShieldCheck, Info, ArrowRight } from "lucide-react";
+import { Waves, BadgePercent, Info, ArrowRight } from "lucide-react";
 
 /** ---- INTERNAL DEFAULTS ---- */
 const MARIACHI_DEFAULTS = {
@@ -26,6 +26,9 @@ type Perk = { title: string; desc?: string; icon?: React.ReactNode };
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
+
+/** Zoom used to crop away the side bars of the original video inside the player */
+const ZOOM_CROP = 1.55; // tweak 1.00–1.35 as needed (1.00 = no crop)
 
 const WRAP: Variants = {
   hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
@@ -145,7 +148,7 @@ export default function MariachiPerks() {
               backgroundSize: "cover",
               backgroundPosition: "center",
               filter: "blur(18px)",
-              transform: "scale(1.06)", // hide blur edge
+              transform: "scale(1.06)",
             }}
           />
           {/* 2) Frost tint on top of blur */}
@@ -191,7 +194,7 @@ export default function MariachiPerks() {
             {/* LEFT: Video + CTA (vertically centered on lg) */}
             {(hasEmbed || hasVideo) && (
               <div className="flex flex-col lg:self-center">
-                {/* Transparent card (no backdrop blur) */}
+                {/* Transparent card */}
                 <motion.div
                   variants={WRAP}
                   initial="hidden"
@@ -199,20 +202,28 @@ export default function MariachiPerks() {
                   viewport={{ amount: 0.25, once: false }}
                   className="relative overflow-hidden rounded-2xl ring-1 ring-white/20 bg-transparent shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
                 >
-                  <div className="relative w-full aspect-video">
+                  {/* Aspect-ratio frame that crops the player content */}
+                  <div className="relative w-full aspect-video overflow-hidden">
                     {hasEmbed ? (
-                      <iframe
-                        title="Mariachi Beach Club tanıtım videosu"
-                        src={embedUrl!}
-                        className="absolute inset-0 h-full w-full block"
-                        allow="autoplay; encrypted-media; picture-in-picture"
-                        referrerPolicy="origin-when-cross-origin"
-                        allowFullScreen
-                      />
+                      // YOUTUBE IFRAME — zoom to crop side bars
+                      <div
+                        className="absolute inset-0 origin-center"
+                        style={{ transform: `scale(${ZOOM_CROP})` }}
+                      >
+                        <iframe
+                          title="Mariachi Beach Club tanıtım videosu"
+                          src={embedUrl!}
+                          className="h-full w-full block"
+                          allow="autoplay; encrypted-media; picture-in-picture"
+                          referrerPolicy="origin-when-cross-origin"
+                          allowFullScreen
+                        />
+                      </div>
                     ) : (
+                      // MP4 VIDEO — object-cover + optional extra zoom
                       <video
                         ref={videoRef}
-                        className="absolute inset-0 h-full w-full object-cover block"
+                        className="absolute inset-0 h-full w-full object-cover"
                         src={videoSrc!}
                         poster={videoPoster}
                         muted
@@ -220,11 +231,9 @@ export default function MariachiPerks() {
                         loop
                         preload="metadata"
                         aria-label="Mariachi Beach Club tanıtım videosu"
+                        style={{ transform: `scale(${ZOOM_CROP})`, transformOrigin: "center" }}
                       />
                     )}
-
-                    {/* Label WITHOUT any backdrop-blur */}
-                 
                   </div>
                 </motion.div>
 
@@ -250,13 +259,13 @@ export default function MariachiPerks() {
               </div>
             )}
 
-            {/* RIGHT: Perks — transparent with subtle border */}
+            {/* RIGHT: Perks */}
             <motion.div
               variants={WRAP}
               initial="hidden"
               whileInView="show"
               viewport={{ amount: 0.25, once: false }}
-              className="relative rounded-2xl p-5 sm:p-6 lg:p-7 ring-1 ring-white/20 bg-transparent shadow-[0_20px_50px_rgba(0,0,0,0.35)] backdrop-blur "
+              className="relative rounded-2xl p-5 sm:p-6 lg:p-7 ring-1 ring-white/20 bg-transparent shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
             >
               <div className="grid grid-cols-1 gap-4">
                 {perks.map((perk, i) => (
