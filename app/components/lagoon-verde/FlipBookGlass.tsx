@@ -361,7 +361,7 @@ export function FlipBookGlassBase({
 }
 
 /* Quick wrapper so you can just <FlipBookGlass /> */
-const DEFAULT_PAGES = Array.from({ length: 8 }).map(
+const DEFAULT_PAGES = Array.from({ length: 35 }).map(
   (_, i) => `/lagoonflip/l-${String(i + 1).padStart(2, "0")}.webp`
 );
 
