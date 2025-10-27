@@ -7,19 +7,46 @@ import NextImage from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { Download } from "lucide-react";
 
+// ==========================
+// Types for react-pageflip
+// ==========================
+/** Minimal API we use from the underlying pageFlip instance. */
+export type PageFlipApi = {
+  flipNext: () => void;
+  flipPrev: () => void;
+  flip: (pageIndex: number) => void;
+  getCurrentPageIndex?: () => number;
+  getPageCount?: () => number;
+};
+
+/** Ref handle exposed by the HTMLFlipBook component. */
+export type HTMLFlipBookHandle = {
+  pageFlip: () => PageFlipApi | undefined;
+};
+
+/** Flip event shape emitted by onFlip. */
+export type FlipEvent = { data: number };
+
 // npm i react-pageflip
 const HTMLFlipBook = dynamic(() => import("react-pageflip"), { ssr: false });
 
-type Props = {
+// ==========================
+// Component props
+// ==========================
+export type Props = {
   pages: string[];
   pdfUrl?: string;
   bgImage?: string | null;
   kicker?: string;
   title?: string;
-  pageAspect?: number;   // single-page aspect ratio w/h — your pages ≈ 1914/1400
-  maxWidth?: number;     // normal-mode max card width
-  vhMaxRatio?: number;   // desktop/tablet section height fraction
-  mobileVhMaxRatio?: number; // mobile section height fraction
+  /** single-page aspect ratio w/h — your pages ≈ 1914/1400 */
+  pageAspect?: number;
+  /** normal-mode max card width */
+  maxWidth?: number;
+  /** desktop/tablet section height fraction */
+  vhMaxRatio?: number;
+  /** mobile section height fraction */
+  mobileVhMaxRatio?: number;
 };
 
 const TEAL = "#27959b";
@@ -47,10 +74,10 @@ export function FlipBookGlassBase({
   vhMaxRatio = 0.88,
   mobileVhMaxRatio = 0.58, // shorter mobile section
 }: Props) {
-  const bookRef = useRef<any>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const bookRef = useRef<HTMLFlipBookHandle | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState<number>(0);
 
   // IMPORTANT: initial state must match SSR (do NOT read window here)
   const [containerW, setContainerW] = useState<number>(maxWidth);
@@ -68,7 +95,7 @@ export function FlipBookGlassBase({
 
     let ro: ResizeObserver | null = null;
     if (containerRef.current) {
-      ro = new ResizeObserver((entries) => {
+      ro = new ResizeObserver((entries: ResizeObserverEntry[]) => {
         for (const e of entries) setContainerW(Math.round(e.contentRect.width));
       });
       ro.observe(containerRef.current);
@@ -115,7 +142,7 @@ export function FlipBookGlassBase({
       h = Math.round(maxH);
       w = Math.round(h * pageAspect);
     }
-    return { singleW: w, singleH: h, twoUp, sectionRatio };
+    return { singleW: w, singleH: h, twoUp, sectionRatio } as const;
   }, [containerW, maxWidth, vvh, isMobile, pageAspect, vhMaxRatio, mobileVhMaxRatio]);
 
   // Keyboard navigation (desktop)
@@ -249,7 +276,9 @@ export function FlipBookGlassBase({
 
           {/* BOOK AREA */}
           <div className="flex-1 grid place-items-center touch-pan-y">
-            {/* @ts-expect-error: 3rd-party types */}
+            {/* We intentionally skip strict generic typing here because the library's
+                published types are limited; instead we type the ref & events. */}
+            {/* @ts-expect-error: 3rd-party component lacks full TS generics */}
             <HTMLFlipBook
               ref={bookRef}
               className="flipbook"
@@ -264,7 +293,7 @@ export function FlipBookGlassBase({
               mobileScrollSupport={true}
               drawShadow={true}
               maxShadowOpacity={0.28}
-              onFlip={(e: any) => setPage(e.data)}
+              onFlip={(e: FlipEvent) => setPage(e.data)}
             >
               {pages.map((src, i) => (
                 <div
