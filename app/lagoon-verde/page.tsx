@@ -11,7 +11,7 @@ import Hotspots from "../components/lagoon-verde/Hotspots";
 import Charts from "../components/lagoon-verde/Charts";
 import MariachiPerks from "../components/mariachi/MariachiPerks";
 import LaJoyaTechnicalFacilities from "../components/la-joya/LaJoyaTechnicalFacilities";
-
+import FlipBookGlass from "../components/lagoon-verde/FlipBookGlass";
 
 export default function HomePage() {
   return (
@@ -33,6 +33,8 @@ export default function HomePage() {
 
 <Perla2Amenities />
 <Perla2Location />
+<FlipBookGlass />
+
 <Perla2Timeline />
 <Perla2CTA />
     </main>
