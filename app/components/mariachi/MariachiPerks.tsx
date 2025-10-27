@@ -28,7 +28,7 @@ const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 /** Zoom used to crop away the side bars of the original video inside the player */
-const ZOOM_CROP = 1.55; // tweak 1.00–1.35 as needed (1.00 = no crop)
+const ZOOM_CROP = 1.60; // tweak 1.00–1.35 as needed (1.00 = no crop)
 
 const WRAP: Variants = {
   hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
