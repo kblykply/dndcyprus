@@ -64,11 +64,23 @@ export default function LagoonVerde360Section() {
         document.msFullscreenElement;
       setIsFs(Boolean(fsEl));
     };
-    document.addEventListener("fullscreenchange", onFsChange);
-    document.addEventListener("webkitfullscreenchange" as any, onFsChange);
+
+    // Listen to standard + vendor-prefixed events (no `any`)
+    const fsEvents = [
+      "fullscreenchange",
+      "webkitfullscreenchange",
+      "mozfullscreenchange",
+      "MSFullscreenChange",
+    ] as const;
+
+    fsEvents.forEach((ev) =>
+      document.addEventListener(ev, onFsChange as EventListener)
+    );
+
     return () => {
-      document.removeEventListener("fullscreenchange", onFsChange);
-      document.removeEventListener("webkitfullscreenchange" as any, onFsChange);
+      fsEvents.forEach((ev) =>
+        document.removeEventListener(ev, onFsChange as EventListener)
+      );
     };
   }, []);
 
