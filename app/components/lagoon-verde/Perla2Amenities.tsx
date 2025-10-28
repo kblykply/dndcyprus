@@ -30,6 +30,26 @@ const fadeUp: Variants = {
   },
 };
 
+// ---- Type helpers for fullscreen vendor prefixes & CSS vars ----
+declare global {
+  interface Document {
+    webkitExitFullscreen?: () => Promise<void> | void;
+    mozCancelFullScreen?: () => Promise<void> | void;
+    msExitFullscreen?: () => Promise<void> | void;
+    webkitFullscreenElement?: Element | null;
+    mozFullScreenElement?: Element | null;
+    msFullscreenElement?: Element | null;
+  }
+  interface HTMLElement {
+    webkitRequestFullscreen?: () => Promise<void> | void;
+    mozRequestFullScreen?: () => Promise<void> | void;
+    msRequestFullscreen?: () => Promise<void> | void;
+  }
+}
+
+/** Allow CSS custom properties without `any` */
+type CSSVars = React.CSSProperties & { [key in `--${string}`]?: string | number };
+
 export default function LagoonVerde360Section() {
   const [isPlaying, setIsPlaying] = useState(false); // lazy mount iframe
   const [isFs, setIsFs] = useState(false);
@@ -39,21 +59,16 @@ export default function LagoonVerde360Section() {
     const onFsChange = () => {
       const fsEl =
         document.fullscreenElement ||
-        // @ts-expect-error vendor prefixes
         document.webkitFullscreenElement ||
-        // @ts-expect-error vendor prefixes
         document.mozFullScreenElement ||
-        // @ts-expect-error vendor prefixes
         document.msFullscreenElement;
       setIsFs(Boolean(fsEl));
     };
     document.addEventListener("fullscreenchange", onFsChange);
-    // @ts-expect-error vendor prefixes
-    document.addEventListener("webkitfullscreenchange", onFsChange);
+    document.addEventListener("webkitfullscreenchange" as any, onFsChange);
     return () => {
       document.removeEventListener("fullscreenchange", onFsChange);
-      // @ts-expect-error vendor prefixes
-      document.removeEventListener("webkitfullscreenchange", onFsChange);
+      document.removeEventListener("webkitfullscreenchange" as any, onFsChange);
     };
   }, []);
 
@@ -62,11 +77,8 @@ export default function LagoonVerde360Section() {
     if (!el) return;
     const req =
       el.requestFullscreen ||
-      // @ts-expect-error vendor prefixes
       el.webkitRequestFullscreen ||
-      // @ts-expect-error vendor prefixes
       el.mozRequestFullScreen ||
-      // @ts-expect-error vendor prefixes
       el.msRequestFullscreen;
     req?.call(el);
   };
@@ -74,23 +86,22 @@ export default function LagoonVerde360Section() {
   const exitFullscreen = () => {
     const exit =
       document.exitFullscreen ||
-      // @ts-expect-error vendor prefixes
       document.webkitExitFullscreen ||
-      // @ts-expect-error vendor prefixes
       document.mozCancelFullScreen ||
-      // @ts-expect-error vendor prefixes
       document.msExitFullscreen;
     exit?.call(document);
+  };
+
+  const sectionStyle: CSSVars = {
+    minHeight: "70vh",
+    "--stroke": "rgba(255,255,255,0.18)",
   };
 
   return (
     <section
       aria-label="Lagoon Verde — 360° Sanal Tur"
       className="relative overflow-hidden"
-      style={{
-        minHeight: "70vh",
-        ["--stroke" as any]: "rgba(255,255,255,0.18)",
-      }}
+      style={sectionStyle}
     >
       {/* Background image */}
       {!!BG_IMAGE && (
@@ -258,9 +269,9 @@ export default function LagoonVerde360Section() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs"
                 style={{
-                    background: "rgba(255,255,255,0.12)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "rgba(255,255,255,0.92)",
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  color: "rgba(255,255,255,0.92)",
                 }}
               >
                 <ExternalLink size={14} />
