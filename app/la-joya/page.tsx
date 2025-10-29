@@ -12,6 +12,7 @@ import Charts from "../components/la-joya/Charts";
 import MariachiPerks from "../components/mariachi/MariachiPerks";
 import LaJoyaTechnicalFacilities from "../components/la-joya/LaJoyaTechnicalFacilities";
 
+import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
 
 
 export default function HomePage() {
@@ -38,6 +39,15 @@ export default function HomePage() {
 <Perla2Location />
 <Perla2Timeline />
 <Perla2CTA />
+
+
+ <QuarterLogoBadge
+          logoSrc="/logos/lajoya.png"
+          alt="Your Project"
+          href="/"
+          size={180}         // tweak the visible radius
+          // hideOnMobile     // uncomment if you want to hide on small screens
+        />
     </main>
   );
 }
