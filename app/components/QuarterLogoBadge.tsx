@@ -31,10 +31,20 @@ export default function QuarterLogoBadge({
   // Derived sizes
   const circleSize = size * 2; // full circle diameter to reveal a quarter
   const logoBox = Math.round(size * 0.58); // area we give to the logo inside the quarter
-  const logoPadding = Math.max(10, Math.round(size * 0.08)); // keep some breathing room
+  const logoPadding = Math.max(10, Math.round(size * 0.08)); // breathing room
 
-  const Wrapper = href ? Link : "div";
-  const wrapperProps = href ? { href } : {};
+  // Shared style/class for the clickable area (div or Link)
+  const clickableClass = "absolute bottom-0 left-0";
+  const clickableStyle: React.CSSProperties = {
+    paddingLeft: logoPadding,
+    paddingBottom: logoPadding,
+    width: logoBox + logoPadding * 2,
+    height: logoBox + logoPadding * 2,
+    pointerEvents: "auto",
+    display: "flex",
+    alignItems: "flex-end",
+    justifyContent: "flex-start",
+  };
 
   return (
     <div
@@ -49,12 +59,11 @@ export default function QuarterLogoBadge({
         // Respect safe-area on iOS
         bottom: "max(0px, env(safe-area-inset-bottom))",
         left: "max(0px, env(safe-area-inset-left))",
-        pointerEvents: "none", // allow clicks only on the clickable content we enable below
+        pointerEvents: "none", // allow clicks only on the inner element
       }}
-      aria-hidden={!href} // decorative if no link
+      aria-hidden={!href}
     >
-      {/* The quarter shape: a full white circle whose center is at the page corner.
-          Only the top-right quadrant is visible inside this bottom-left square. */}
+      {/* Quarter shape (white) */}
       <div
         className="absolute bottom-0 left-0 rounded-full bg-white shadow-xl border border-black/5"
         style={{
@@ -64,47 +73,54 @@ export default function QuarterLogoBadge({
         }}
       />
 
-      {/* Clickable logo sits inside the visible quarter area */}
-      <Wrapper
-        {...wrapperProps}
-        className="absolute bottom-0 left-0"
-        style={{
-          // place the logo near the corner, with padding
-          paddingLeft: logoPadding,
-          paddingBottom: logoPadding,
-          width: logoBox + logoPadding * 2,
-          height: logoBox + logoPadding * 2,
-          pointerEvents: "auto",
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "flex-start",
-        }}
-        aria-label={alt}
-      >
-        <div
-          className="relative"
-          style={{
-            width: logoBox,
-            height: logoBox,
-            // subtle hover scale if it's a link
-            transition: href ? "transform 180ms ease" : undefined,
-          }}
+      {/* Clickable logo area */}
+      {href ? (
+        <Link
+          href={href}
+          aria-label={alt}
+          className={clickableClass}
+          style={clickableStyle}
         >
-          {href && (
-            <span className="sr-only">
-              {alt || "Open project"}
-            </span>
-          )}
-          <Image
-            src={logoSrc}
-            alt={alt}
-            fill
-            priority={false}
-            sizes={`${logoBox}px`}
-            style={{ objectFit: "contain" }}
-          />
+          <div
+            className="relative"
+            style={{
+              width: logoBox,
+              height: logoBox,
+              transition: "transform 180ms ease",
+            }}
+          >
+            <span className="sr-only">{alt || "Open project"}</span>
+            <Image
+              src={logoSrc}
+              alt={alt}
+              fill
+              priority={false}
+              sizes={`${logoBox}px`}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+        </Link>
+      ) : (
+        <div
+          aria-label={alt}
+          className={clickableClass}
+          style={clickableStyle}
+        >
+          <div
+            className="relative"
+            style={{ width: logoBox, height: logoBox }}
+          >
+            <Image
+              src={logoSrc}
+              alt={alt}
+              fill
+              priority={false}
+              sizes={`${logoBox}px`}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
-      </Wrapper>
+      )}
     </div>
   );
 }
