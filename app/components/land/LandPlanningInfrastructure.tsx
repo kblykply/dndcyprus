@@ -55,44 +55,39 @@ export default function LandPlanningInfrastructure({
         {
           title: "Zonlama Dayanağı",
           desc: "Fasıl 96 kapsamında gelişim — yerel mevzuata uygun planlama.",
-          image: "/land/cards/zonlama.jpg",
+          image: "/zon.jpg",
           tag: "Planlama",
           accent: "teal",
         },
         {
           title: "İzinli Tipolojiler",
           desc: "Tek katlı villa, ikiz villa ve çok katlı apartman senaryoları.",
-          image: "/land/cards/tipolojiler.jpg",
+          image: "/vil.jpg",
           tag: "Planlama",
           accent: "orange",
         },
         {
           title: "Yükseklik Bilgisi",
           desc: "Bilgi amaçlı: ortalama bir parselde ~5 kata kadar imkân.",
-          image: "/land/cards/yukseklik.jpg",
+          image: "/apart.jpg",
           tag: "Planlama",
           accent: "teal",
         },
         {
           title: "Altyapı Çalışmaları",
           desc: "Bölgede yol, elektrik ve su altyapısı için çalışmalar sürüyor.",
-          image: "/land/cards/altyapi.jpg",
+          image: "/water.jpg",
           tag: "Altyapı",
           accent: "orange",
         },
         {
           title: "Parsel & Tapu",
           desc: "Parselasyon ve tapu süreçlerinde hazır/ilerlemiş durum.",
-          image: "/land/cards/tapu.jpg",
+          image: "/tapu.jpg",
           tag: "Altyapı",
           accent: "teal",
         },
-        {
-          title: "Etap I Referansı",
-          desc: "Benzer bölgede elektrik, su ve yol altyapısı planlandı.",
-          image: "/land/cards/etap1.jpg",
-          tag: "Altyapı",
-        },
+       
       ],
     [items]
   );

@@ -53,7 +53,7 @@ const DATA: SectionData = {
     {
       text: "Zonlama: Fasıl 96 — izinli tipolojiler: tek katlı villa, ikiz villa, çok katlı apartman.",
       accent: "teal",
-      image: "/villa.jpg",
+      image: "/lagoon-verde/1.jpg",
       alt: "Zonlama şeması",
     },
     {
@@ -65,13 +65,13 @@ const DATA: SectionData = {
     {
       text: "Konum avantajı: Long Beach 12 dk, Gazimağusa 18 dk, Ercan Havalimanı 25 dk.",
       accent: "teal",
-      image: "/land/cards/location.jpg",
+      image: "/ercan.jpg",
       alt: "Harita konum simgesi",
     },
     {
       text: "Bölgede altyapı çalışmaları devam ediyor; parselasyon ve tapu süreçleri hazır.",
       accent: "orange",
-      image: "/land/cards/infrastructure.jpg",
+      image: "/elec.jpg",
       alt: "Altyapı görseli",
     },
   ],

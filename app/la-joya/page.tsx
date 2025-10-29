@@ -35,7 +35,6 @@ export default function HomePage() {
 <MariachiPerks />
 <Charts />
 
-<Perla2Amenities />
 <Perla2Location />
 <Perla2Timeline />
 <Perla2CTA />

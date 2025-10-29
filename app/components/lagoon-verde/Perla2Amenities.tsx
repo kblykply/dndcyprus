@@ -16,8 +16,8 @@ const VIEW_HEIGHT = "clamp(460px, 86vh, 1100px)";
 const BORDER_RADIUS = 20;
 
 // Visuals
-const BG_IMAGE = "/lagoon-verde/7.jpg";
-const POSTER_IMAGE = "/lagoon-verde/2.jpg";
+const BG_IMAGE = "/lagoon-verde/1.jpg";
+const POSTER_IMAGE = "/lagoon-verde-interior/2plus1/6.jpg";
 const OVERLAY_IMAGE = ""; // e.g. "/overlays/noise.png" or leave "" to disable
 
 const fadeUp: Variants = {

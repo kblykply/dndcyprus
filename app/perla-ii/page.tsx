@@ -13,7 +13,7 @@ import MariachiPerks from "../components/mariachi/MariachiPerks";
 
 import LaJoyaTechnicalFacilities from "../components/la-joya/LaJoyaTechnicalFacilities";
 
-
+import FlipBookGlass from "../components/perla-ii/FlipBookGlass";
 
 export default function HomePage() {
   return (
@@ -35,7 +35,12 @@ export default function HomePage() {
 <Charts />
 
 <Perla2Amenities />
+
+
+
 <Perla2Location />
+<FlipBookGlass />
+
 <Perla2Timeline />
 <Perla2CTA />
     </main>

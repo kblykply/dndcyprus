@@ -145,25 +145,50 @@ export default function OurBrands({
 
 // ====== Card ======
 function BrandCard({ item }: { item: BrandItem }) {
+  const CardShell = ({ children }: { children: React.ReactNode }) => (
+    <motion.div
+      whileHover={{ y: -4, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="group relative h-28 sm:h-32 lg:h-36 rounded-2xl border bg-white/70 backdrop-blur-sm shadow-[0_6px_24px_rgba(0,0,0,.06)] overflow-hidden"
+      style={{ borderColor: "rgba(20,21,23,0.08)" }}
+    >
+      {/* Hover glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(60%_60% at 50% 50%, ${ORANGE}12, transparent 70%)`,
+        }}
+      />
+      {children}
+      {/* Focus ring */}
+      <span
+        className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-focus-within:ring-black/15 group-focus:ring-black/15"
+        aria-hidden
+      />
+    </motion.div>
+  );
+
+  const Logo = () => (
+    <div className="relative z-10 h-full w-full grid place-items-center p-4">
+      <img
+        src={item.logo}
+        alt={item.name}
+        loading="lazy"
+        className={[
+          // Colorful by default; turns grayscale on hover
+          "max-h-12 sm:max-h-14 lg:max-h-16 w-auto object-contain transition-all duration-300",
+          "group-hover:grayscale",
+          item.invertOnWhite ? "invert" : "",
+        ].join(" ")}
+      />
+    </div>
+  );
+
   if (item.href) {
-    // Link dalı: href zorunlu ve tipli
     return (
       <Link href={item.href} aria-label={item.name}>
-        <motion.div
-          whileHover={{ y: -4, scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="group relative h-28 sm:h-32 lg:h-36 rounded-2xl border bg-white/70 backdrop-blur-sm shadow-[0_6px_24px_rgba(0,0,0,.06)] overflow-hidden"
-          style={{ borderColor: "rgba(20,21,23,0.08)" }}
-        >
-          {/* Hover glow */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: `radial-gradient(60%_60% at 50% 50%, ${ORANGE}12, transparent 70%)`,
-            }}
-          />
-
+        <CardShell>
           {/* Tag / ribbon */}
           {item.tag && (
             <div
@@ -177,47 +202,15 @@ function BrandCard({ item }: { item: BrandItem }) {
               {item.tag}
             </div>
           )}
-
-          {/* Logo */}
-          <div className="relative z-10 h-full w-full grid place-items-center p-4">
-            <img
-              src={item.logo}
-              alt={item.name}
-              loading="lazy"
-              className={[
-                "max-h-12 sm:max-h-14 lg:max-h-16 w-auto object-contain transition-all duration-300",
-                "grayscale group-hover:grayscale-0",
-                item.invertOnWhite ? "invert" : "",
-              ].join(" ")}
-            />
-          </div>
-
-          {/* Focus ring */}
-          <span
-            className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-focus-within:ring-black/15 group-focus:ring-black/15"
-            aria-hidden
-          />
-        </motion.div>
+          <Logo />
+        </CardShell>
       </Link>
     );
   }
 
-  // div dalı
   return (
     <div aria-label={item.name}>
-      <motion.div
-        whileHover={{ y: -4, scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="group relative h-28 sm:h-32 lg:h-36 rounded-2xl border bg-white/70 backdrop-blur-sm shadow-[0_6px_24px_rgba(0,0,0,.06)] overflow-hidden"
-        style={{ borderColor: "rgba(20,21,23,0.08)" }}
-      >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          style={{
-            background: `radial-gradient(60%_60% at 50% 50%, ${ORANGE}12, transparent 70%)`,
-          }}
-        />
+      <CardShell>
         {item.tag && (
           <div
             className="absolute left-2 top-2 z-10 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wide"
@@ -230,24 +223,8 @@ function BrandCard({ item }: { item: BrandItem }) {
             {item.tag}
           </div>
         )}
-        <div className="relative z-10 h-full w-full grid place-items-center p-4">
-          <img
-            src={item.logo}
-            alt={item.name}
-            loading="lazy"
-            className={[
-              "max-h-12 sm:max-h-14 lg:max-h-16 w-auto object-contain transition-all duration-300",
-              "grayscale group-hover:grayscale-0",
-              item.invertOnWhite ? "invert" : "",
-            ].join(" ")}
-          />
-        </div>
-        <span
-          className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-focus-within:ring-black/15 group-focus:ring-black/15"
-          aria-hidden
-        />
-      </motion.div>
+        <Logo />
+      </CardShell>
     </div>
   );
 }
-

@@ -37,9 +37,7 @@ export default function LandKeyFacts({
     { label: "Tapu", value: "Türk Koçan", accent: "teal" },
     { label: "Zonlama", value: "Fasıl 96", accent: "orange" },
     { label: "Maks. Yükseklik", value: "Bilgi amaçlı: ~5 kat", accent: "teal" },
-    { label: "Yoğunluk (KAKS)", value: "—", accent: "orange" },
-    { label: "Kaplama (TAKS)", value: "—", accent: "teal" },
-    { label: "Çekme Mesafeleri", value: "—", accent: "orange" },
+
   ],
   note = "*Bilgi amaçlıdır; imar/ruhsat parametreleri parsel özelinde ve yetkili kurum kararlarına göre değişebilir.",
   withSeoJsonLd = false,

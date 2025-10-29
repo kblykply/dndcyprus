@@ -372,7 +372,7 @@ export default function LeadershipTeam({
   {
     id: "emine",
     name: "Emine Akkuş",
-    role: "Muhasebe Finans Müdürü",
+    role: "Muhasebe Müdürü",
     category: "Finance",
     photo: "/teams/emine.png",
     bio: "Muhasebe ve finans yönetimi.",
