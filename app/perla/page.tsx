@@ -47,7 +47,12 @@ export default function HomePage() {
 
 <FlipBookGlass />
 
-<Perla2Timeline />
+<Perla2Timeline
+
+eyebrow="Kasım 2024 Güncellemesi" title="La Joya Perla – Son İnşaat Güncellemesi" description="Kasım 2026 Teslim edilecek La Joya Perla Projesinde inşaat hızla ilerliyor." video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=v_Pogz8TpxnfIBqR", type: "youtube", title: "La Joya Perla  — Update", }} cta={{ label: "Tüm güncellemeleri gör", href: "https://www.youtube.com/@dndcyprus/videos" }}
+
+/>
+
 <Perla2CTA />
 
 

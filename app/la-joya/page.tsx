@@ -42,7 +42,12 @@ export default function HomePage() {
 <Charts />
 
 <Perla2Location />
-<Perla2Timeline />
+<Perla2Timeline
+
+eyebrow="Kasım 2024 Güncellemesi" title="La Joya  – Son İnşaat Güncellemesi" description="Yakında Teslim edilecek La Joya Projesinde inşaat hızla ilerliyor." video={{ src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=z9erV672JTOhKtKz", type: "youtube", title: "La Joya  — Update", }} cta={{ label: "Tüm güncellemeleri gör", href: "https://www.youtube.com/@dndcyprus/videos" }}
+
+/>
+
 <Perla2CTA />
 
 
