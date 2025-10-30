@@ -12,7 +12,7 @@ export default function BlogDetail({
   params,
 }: {
   params: { slug: string };
-}) {
+}) {   
   const { slug } = params;
 
   const post = BLOG_POSTS.find((p) => p.slug === slug);
