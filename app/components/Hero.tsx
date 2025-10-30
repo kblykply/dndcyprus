@@ -85,7 +85,7 @@ function ProjectCard({ item }: { item: ProjectItem }) {
 
 /* ---------------- Typewriter ---------------- */
 const MESSAGES = [
-  "Biz ev değil, daha iyi bir yaşam inşa ediyoruz",
+  "Biz ev değil, daha iyi bir yaşam inşaa ediyoruz",
   "Mimariyi doğayla buluşturuyoruz",
   "Yatırımınıza değer katan projeler üretiyoruz",
 ];

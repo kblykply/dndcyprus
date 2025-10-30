@@ -15,6 +15,7 @@ import {
   Flag,
   Leaf,
   Clapperboard,
+  Coffee,
 } from "lucide-react";
 
 const TEAL = "#27959b";
@@ -52,8 +53,14 @@ const DEFAULT_ITEMS: Amenity[] = [
   { label: "Pool Bar & Restaurant", desc: "Havuz kenarında ferahlatıcı içecekler ve gurme lezzetler.", icon: Utensils, accent: "orange" },
   { label: "Aqua Park", desc: "Kaydıraklar ve tematik havuzlarla her yaşa uygun su eğlencesi.", icon: Waves, accent: "teal" },
   { label: "Mini Golf", desc: "Her yaşa uygun yaratıcı parkurlarda keyifli bir deneyim.", icon: Flag, accent: "orange" },
-  { label: "Çiftçi Pazarı", desc: "Taze yerel ürünler, organik seçenekler ve el yapımı lezzetler.", icon: Leaf, accent: "teal" },
+  { label: "Köy Pazarı", desc: "Taze yerel ürünler, organik seçenekler ve el yapımı lezzetler.", icon: Leaf, accent: "teal" },
   { label: "Amfitiyatro", desc: "Açık havada canlı performanslar ve yıldızlar altında film geceleri.", icon: Clapperboard, accent: "orange" },
+  { 
+  label: "Verde Cafe",
+  desc: "Üçüncü nesil demlemeler, taze atıştırmalıklar ve sakin teras alanıyla gün boyu keyifli molalar.",
+  icon: Coffee,
+  accent: "teal" // istersen "orange" yapabilirsin
+},
 ];
 
 function AccentIcon({

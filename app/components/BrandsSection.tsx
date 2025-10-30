@@ -53,7 +53,7 @@ export type OurBrandsProps = {
 
 // ====== Component ======
 export default function OurBrands({
-  title = "Our Brands & Projects",
+  title = "Markalar & Projeler",
   subtitle =
     "DND Cyprus çatısı altındaki ödüllü projeler ve alt markalar. Güven, tasarım ve sürdürülebilirlik odağında.",
   note = "*Logo örnekleri gerçek proje linkleri ile bağlanmıştır.",
@@ -107,7 +107,7 @@ export default function OurBrands({
               className="inline-block text-[12px] uppercase tracking-wide px-3 py-1 rounded-full mb-3"
               style={{ background: `${TEAL}14`, color: TEAL, border: `1px solid ${TEAL}33` }}
             >
-              OurBrands
+              Markalarımız
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
               {title}
