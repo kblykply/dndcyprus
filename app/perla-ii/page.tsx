@@ -47,7 +47,7 @@ export default function HomePage() {
 <Charts />
 
 <Perla2Amenities />
-
+//ufak değişiklik 
 
 
 <Perla2Location />
