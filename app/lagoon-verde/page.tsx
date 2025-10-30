@@ -20,10 +20,15 @@ export default function HomePage() {
   return (
     <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
 <Perla2Hero />
+
+<Perla2Gallery /> 
+
+
+
+
 <Perla2Overview />
 <Perla2Facts />
 
-<Perla2Gallery /> 
 <LaJoyaTechnicalFacilities />
 
 <Hotspots/>

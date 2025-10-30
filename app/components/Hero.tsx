@@ -153,7 +153,7 @@ function Typewriter({
 }
 
 /* ---------------- Data ---------------- */
-const TAB_LABELS = ["Rezidans Projeleri", "Arsa Projeleri", "İşletmeler"] as const;
+const TAB_LABELS = ["Rezidans Projeleri", "Arsa Projeleri", "Mariachi Beach Club"] as const;
 type Tab = (typeof TAB_LABELS)[number];
 
 const projects: Record<Tab, ProjectItem[]> = {
@@ -211,7 +211,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       href: "/gecitkale", // ← NEW
     },
   ],
-  İşletmeler: [
+  "Mariachi Beach Club": [
     {
       id: 8,
       title: "Mariachi Beach Club",

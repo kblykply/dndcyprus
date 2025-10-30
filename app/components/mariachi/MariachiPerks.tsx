@@ -15,7 +15,7 @@ const MARIACHI_DEFAULTS = {
   videoSrc: null as string | null,
   videoPoster: undefined as string | undefined,
   bgImage: "/mariachi/7.jpg",
-  title: "Mariachi Beach Club Avantajları",
+  title: "DND Ev Sahiplerine Mariachi Beach Club Avantajları",
   subtitle: "Gündüz deniz & güneş, akşam ritim — tek adreste.",
   note: "Kimlik doğrulaması gerekebilir. Kampanya tarihleri ve gün koşulları değişebilir.",
   overlayOpacity: 0.45,

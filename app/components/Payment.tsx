@@ -549,7 +549,7 @@ const DEFAULT_SLIDES: SlideInput[] = [
     backgroundImage: "/daireici.jpg",
     badge: "Video",
     content: {
-      customHeadline: "La Joya Apartman Turu",
+      customHeadline: "La Joya Rezidans Turu",
       tagline: "Denizle iç içe, yalın ve modern hatların buluştuğu bir sahne.",
       bullets: [
         "Sahil ritmini alan minimal mimari",

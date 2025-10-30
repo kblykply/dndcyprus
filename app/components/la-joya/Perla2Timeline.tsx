@@ -1,227 +1,178 @@
-// app/components/projects/Perla2Timeline.tsx
+// app/components/projects/Perla2LastUpdate.tsx
 "use client";
 
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
-type Phase = {
-  id: string;
-  title: string;
-  date: string;
-  status: "done" | "current" | "next";
-  desc?: string;
+/* ------------------------------------------------------------------
+   Perla2LastUpdate – Only the latest construction update (video + text)
+   ------------------------------------------------------------------ */
+
+type Video = {
+  src: string;
+  type?: "youtube" | "vimeo" | "mp4";
+  title?: string;
+  poster?: string;
 };
-type Update = { date: string; text: string };
 
 type Props = {
-  title?: string;
-  subtitle?: string;
-  phases?: Phase[];
-  updates?: Update[];
-  overall?: number;
-  /** optional construction update video */
-  video?: { src: string; type?: "youtube" | "vimeo" | "mp4"; title?: string };
+  eyebrow?: string; // ör: "Ekim 2025 Güncellemesi"
+  title?: string; // ör: "Son İnşaat Güncellemesi"
+  description?: string; // kısa açıklama paragrafı
+  video: Video; // zorunlu
+  cta?: { label: string; href: string };
 };
 
-export default function Perla2Timeline({
-  title = "La Joya İnşaat Zaman Çizelgesi",
-  subtitle = "Planlanan aşamalar ve güncel durum. Tarihler tanıtım amaçlıdır; resmi teslim programı satış ekibinden teyit edilmelidir.",
-  overall = 55,
-  phases = DEFAULT_PHASES,
-  updates = DEFAULT_UPDATES,
+export default function Perla2LastUpdate({
+  eyebrow = "Kasım 2024 Güncellemesi",
+  title = "La Joya Son İnşaat Güncellemesi",
+  description =
+    "Yakında Teslim edilecek La Joya Projesinde inşaat hızla ilerliyor. ",
   video = {
-    src: "https://www.youtube.com/embed/YSy7WB056Fg?si=Fx0EFJ50fgHkwstW",
+    src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=pZzQhqiXy4Xp4pSd",
     type: "youtube",
-    title: "Son İnşaat Güncellemesi",
+    title: "La Joya Perla II – İnşaat Güncellemesi",
   },
+  cta,
 }: Props) {
-  const clamp = (n: number) => Math.max(0, Math.min(100, n));
-
   return (
     <section
-      aria-label="La Joya Perla II — İnşaat Zaman Çizelgesi ve Durum"
+      aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
       className="relative overflow-hidden"
       style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
-
+        background: "#ffffff",
+        color: "#141517",
+        ["--stroke" as any]: "rgba(20,21,23,0.08)",
+      }}
     >
-      {/* subtle wash */}
-        
+      {/* Subtle brand wash */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            `radial-gradient(800px 400px at 10% 0%, ${TEAL}07 0%, transparent 55%),` +
+            `radial-gradient(800px 400px at 100% 100%, ${ORANGE}10 0%, transparent 55%)`,
+        }}
+      />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        {/* header */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.35 }}
-          transition={{ duration: 0.45 }}
-          className="max-w-2xl"
-        >
-          <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
-            {subtitle}
-          </p>
-        </motion.div>
-
-        {/* progress bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.35 }}
-          transition={{ duration: 0.45, delay: 0.05 }}
-          className="mt-6"
-        >
-          <div className="flex items-center justify-between text-xs"
-               style={{ color: "rgba(20,21,23,0.65)" }}>
-            <span>Genel İlerleme</span>
-            <span>{clamp(overall)}%</span>
-          </div>
-          <div className="mt-2 h-2 rounded-full overflow-hidden" style={{ background: "rgba(20,21,23,0.08)" }}>
-            <div
-              className="h-full"
-              style={{
-                width: `${clamp(overall)}%`,
-                background: `linear-gradient(90deg, ${TEAL}, ${ORANGE})`,
-              }}
-            />
-          </div>
-        </motion.div>
-
-        {/* timeline + updates + video */}
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* Timeline */}
-          <div className="lg:col-span-2">
-            <ol className="relative pl-6">
-              <span className="absolute left-2 top-0 bottom-0 w-0.5"
-                    style={{ background: "rgba(20,21,23,0.12)" }} />
-              {phases.map((p, i) => {
-                const isCurrent = p.status === "current";
-                const isDone = p.status === "done";
-                const dotColor =
-                  isCurrent ? ORANGE : isDone ? TEAL : "rgba(20,21,23,0.35)";
-                return (
-                  <motion.li
-                    key={p.id}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.45, delay: i * 0.06 }}
-                    className="relative ml-0 mb-6 last:mb-0"
-                  >
-                    <span className="absolute -left-[7px] top-2 h-3.5 w-3.5 rounded-full"
-                          style={{ background: dotColor }} />
-                    <div
-                      className="rounded-2xl p-4"
-                      style={{
-                        background: "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
-                        border: "1px solid var(--stroke)",
-                        backdropFilter: "blur(10px)",
-                      }}
-                    >
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-[11px] px-2 py-0.5 rounded-full"
-                              style={{ background: `${dotColor}14`, color: dotColor }}>
-                          {p.title}
-                        </span>
-                        <span className="text-[11px] px-2 py-0.5 rounded-full"
-                              style={{ background: "rgba(20,21,23,0.05)" }}>
-                          {p.date}
-                        </span>
-                      </div>
-                      {p.desc && (
-                        <p className="mt-2 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
-                          {p.desc}
-                        </p>
-                      )}
-                    </div>
-                  </motion.li>
-                );
-              })}
-            </ol>
-          </div>
-
-          {/* Updates + Video */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* updates list */}
-            <div className="rounded-2xl p-5"
-                 style={{
-                   background: "linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65))",
-                   border: "1px solid var(--stroke)",
-                   backdropFilter: "blur(10px)",
-                 }}>
-              <div className="flex items-center justify-between">
-                <h3 className="text-base font-semibold">Güncellemeler</h3>
-                <span className="text-[11px] px-2 py-0.5 rounded-full"
-                      style={{ background: `${TEAL}14`, color: TEAL }}>
-                  {updates.length}
-                </span>
-              </div>
-              <ul className="mt-3 space-y-3">
-                {updates.map((u, i) => (
-                  <li key={i} className="rounded-xl p-3"
-                      style={{ background: "rgba(20,21,23,0.04)" }}>
-                    <div className="text-[11px]" style={{ color: "rgba(20,21,23,0.55)" }}>{u.date}</div>
-                    <div className="text-sm" style={{ color: "rgba(20,21,23,0.85)" }}>{u.text}</div>
-                  </li>
-                ))}
-              </ul>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Video */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.35 }}
+            transition={{ duration: 0.45 }}
+            className="rounded-2xl overflow-hidden border"
+            style={{ borderColor: "var(--stroke)" as any, backdropFilter: "blur(10px)" }}
+          >
+            <div className="aspect-[16/9] bg-black">
+              {video.type === "mp4" ? (
+                <video
+                  controls
+                  className="w-full h-full object-cover"
+                  poster={video.poster}
+                  preload="metadata"
+                >
+                  <source src={video.src} type="video/mp4" />
+                </video>
+              ) : (
+                <iframe
+                  src={video.src}
+                  title={video.title || "Son İnşaat Güncellemesi"}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              )}
             </div>
+          </motion.div>
 
-            {/* latest update video */}
-            {video?.src && (
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.45, delay: 0.1 }}
-                className="rounded-2xl overflow-hidden"
-                style={{
-                  background: "rgba(255,255,255,0.82)",
-                  border: "1px solid var(--stroke)",
-                  backdropFilter: "blur(10px)",
-                }}
+          {/* Copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.35 }}
+            transition={{ duration: 0.45, delay: 0.06 }}
+          >
+            {eyebrow && (
+              <span
+                className="inline-block text-[11px] px-2 py-0.5 rounded-full tracking-wide"
+                style={{ background: `${TEAL}14`, color: TEAL }}
               >
-                <div className="aspect-[16/9] bg-black">
-                  {video.type === "mp4" ? (
-                    <video controls className="w-full h-full object-cover">
-                      <source src={video.src} type="video/mp4" />
-                    </video>
-                  ) : (
-                    <iframe
-                      src={video.src}
-                      title={video.title || "Son İnşaat Güncellemesi"}
-                      className="w-full h-full border-0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  )}
-                </div>
-              </motion.div>
+                {eyebrow}
+              </span>
             )}
-          </div>
+            <h2 className="mt-2 text-2xl sm:text-3xl font-semibold">{title}</h2>
+            {description && (
+              <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.75)" }}>
+                {description}
+              </p>
+            )}
+
+            <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full" style={{ background: TEAL }} />
+                Kayıt, şantiye sorumlusunun haftalık saha turundan alınmıştır.
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full" style={{ background: ORANGE }} />
+                Tarihler tanıtım amaçlıdır; resmi teslim programı satış ekibinden teyit edilmelidir.
+              </li>
+            </ul>
+
+            {cta && (
+              <div className="mt-6">
+                <Link
+                  href={cta.href}
+                  className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl border"
+                  style={{
+                    borderColor: "var(--stroke)" as any,
+                    background: "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
+                  }}
+                >
+                  {cta.label}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="h-4 w-4"
+                  >
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+            )}
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
 
-/* === Sample data === */
-const DEFAULT_PHASES: Phase[] = [
-  { id: "1", title: "Satış Lansmanı", date: "2024 Q3", status: "done" },
-  { id: "2", title: "Kazı & Temel", date: "2025 Q1–Q2", status: "done" },
-  { id: "3", title: "Kaba İnşaat", date: "2025 Q3–2026 Q1", status: "current" },
-  { id: "4", title: "Mekanik & Elektrik", date: "2026 Q2–Q3", status: "next" },
-  { id: "5", title: "İç Mekân & Cephe", date: "2026 Q3–Q4", status: "next" },
-  { id: "6", title: "Peyzaj & Teslim", date: "2027 Mayıs", status: "next" },
-];
+/* ------------------------------
+   Usage (example)
+   ------------------------------
 
-const DEFAULT_UPDATES: Update[] = [
-  { date: "2025-08", text: "Kaba inşaat %55 seviyesine ulaştı." },
-  { date: "2025-06", text: "Temel imalatları tamamlandı." },
-];
+<Perla2LastUpdate
+  eyebrow="Ekim 2025 Güncellemesi"
+  title="La Joya Perla II – Son İnşaat Güncellemesi"
+  description="Kaba inşaat %55 seviyesinde. Mekanik/elektrik altyapı geçişleri planlandığı gibi ilerliyor. Sahil yaya aksı peyzajı için örnek uygulamalar test ediliyor."
+  video={{
+    src: "https://www.youtube.com/embed/YSy7WB056Fg?si=Fx0EFJ50fgHkwstW",
+    type: "youtube",
+    title: "La Joya Perla II — Update",
+  }}
+  cta={{ label: "Tüm güncellemeleri gör →", href: "/projects/perla2#updates" }}
+/>
+
+*/
