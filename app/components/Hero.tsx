@@ -174,7 +174,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       subtitle: "Denize ve şehir imkanlarına yakın konum",
       images: ["/perla-ii/9.jpg", "/perla-ii/5.jpg"],
       floors: 5,
-      area: 8.8,
+      area: 8.799,
       bedrooms: 128,
       href: "/perla-ii", // ← NEW
     },
