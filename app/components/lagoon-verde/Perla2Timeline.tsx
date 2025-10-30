@@ -8,6 +8,9 @@ import Link from "next/link";
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
+/** Allow CSS variables like --stroke on style objects */
+type CSSVars = React.CSSProperties & { ["--stroke"]?: string };
+
 /* ------------------------------------------------------------------
    Perla2LastUpdate – Only the latest construction update (video + text)
    ------------------------------------------------------------------ */
@@ -42,15 +45,19 @@ export default function Perla2LastUpdate({
   comingSoon = true,
   placeholderText = "İnşaat Gelişmeleri Çok Yakında Paylaşılacak",
 }: Props) {
+  const sectionStyle: CSSVars = {
+    background: "#ffffff",
+    color: "#141517",
+    "--stroke": "rgba(20,21,23,0.08)",
+  };
+
+  const varStroke = "var(--stroke)";
+
   return (
     <section
       aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
       className="relative overflow-hidden"
-      style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+      style={sectionStyle}
     >
       {/* Subtle brand wash */}
       <div
@@ -81,7 +88,7 @@ export default function Perla2LastUpdate({
               viewport={{ once: false, amount: 0.35 }}
               transition={{ duration: 0.45 }}
               className="rounded-2xl overflow-hidden border"
-              style={{ borderColor: "var(--stroke)" as any, backdropFilter: "blur(10px)" }}
+              style={{ borderColor: varStroke, backdropFilter: "blur(10px)" }}
             >
               <div className="aspect-[16/9] bg-black">
                 {video.type === "mp4" ? (
@@ -146,8 +153,9 @@ export default function Perla2LastUpdate({
                     href={cta.href}
                     className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl border"
                     style={{
-                      borderColor: "var(--stroke)" as any,
-                      background: "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
+                      borderColor: varStroke,
+                      background:
+                        "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
                     }}
                     aria-disabled={comingSoon}
                     tabIndex={comingSoon ? -1 : 0}
@@ -158,7 +166,7 @@ export default function Perla2LastUpdate({
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth={2}
                       className="h-4 w-4"
                     >
                       <path d="M5 12h14M13 5l7 7-7 7" />
@@ -183,7 +191,7 @@ export default function Perla2LastUpdate({
               transition={{ duration: 0.4 }}
               className="text-center rounded-2xl border shadow-xl px-6 py-5 sm:px-8 sm:py-6"
               style={{
-                borderColor: "var(--stroke)" as any,
+                borderColor: varStroke,
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.74))",
                 backdropFilter: "blur(10px)",

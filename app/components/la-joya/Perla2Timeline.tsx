@@ -8,6 +8,9 @@ import Link from "next/link";
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
+/** Allow CSS variables (e.g. --stroke) on inline styles without using `any`. */
+type CSSVars = React.CSSProperties & { ["--stroke"]?: string };
+
 /* ------------------------------------------------------------------
    Perla2LastUpdate – Only the latest construction update (video + text)
    ------------------------------------------------------------------ */
@@ -30,8 +33,7 @@ type Props = {
 export default function Perla2LastUpdate({
   eyebrow = "Kasım 2024 Güncellemesi",
   title = "La Joya Son İnşaat Güncellemesi",
-  description =
-    "Yakında Teslim edilecek La Joya Projesinde inşaat hızla ilerliyor. ",
+  description = "Yakında Teslim edilecek La Joya Projesinde inşaat hızla ilerliyor. ",
   video = {
     src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=pZzQhqiXy4Xp4pSd",
     type: "youtube",
@@ -39,15 +41,19 @@ export default function Perla2LastUpdate({
   },
   cta,
 }: Props) {
+  const sectionStyle: CSSVars = {
+    background: "#ffffff",
+    color: "#141517",
+    "--stroke": "rgba(20,21,23,0.08)",
+  };
+
+  const varStroke = "var(--stroke)";
+
   return (
     <section
       aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
       className="relative overflow-hidden"
-      style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke" as any]: "rgba(20,21,23,0.08)",
-      }}
+      style={sectionStyle}
     >
       {/* Subtle brand wash */}
       <div
@@ -69,7 +75,7 @@ export default function Perla2LastUpdate({
             viewport={{ once: false, amount: 0.35 }}
             transition={{ duration: 0.45 }}
             className="rounded-2xl overflow-hidden border"
-            style={{ borderColor: "var(--stroke)" as any, backdropFilter: "blur(10px)" }}
+            style={{ borderColor: varStroke, backdropFilter: "blur(10px)" }}
           >
             <div className="aspect-[16/9] bg-black">
               {video.type === "mp4" ? (
@@ -134,8 +140,9 @@ export default function Perla2LastUpdate({
                   href={cta.href}
                   className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl border"
                   style={{
-                    borderColor: "var(--stroke)" as any,
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
+                    borderColor: varStroke,
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
                   }}
                 >
                   {cta.label}
@@ -144,7 +151,7 @@ export default function Perla2LastUpdate({
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth={2}
                     className="h-4 w-4"
                   >
                     <path d="M5 12h14M13 5l7 7-7 7" />
@@ -159,20 +166,4 @@ export default function Perla2LastUpdate({
   );
 }
 
-/* ------------------------------
-   Usage (example)
-   ------------------------------
 
-<Perla2LastUpdate
-  eyebrow="Ekim 2025 Güncellemesi"
-  title="La Joya Perla II – Son İnşaat Güncellemesi"
-  description="Kaba inşaat %55 seviyesinde. Mekanik/elektrik altyapı geçişleri planlandığı gibi ilerliyor. Sahil yaya aksı peyzajı için örnek uygulamalar test ediliyor."
-  video={{
-    src: "https://www.youtube.com/embed/YSy7WB056Fg?si=Fx0EFJ50fgHkwstW",
-    type: "youtube",
-    title: "La Joya Perla II — Update",
-  }}
-  cta={{ label: "Tüm güncellemeleri gör →", href: "/projects/perla2#updates" }}
-/>
-
-*/
