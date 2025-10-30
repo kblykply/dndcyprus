@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { PageProps } from "next";
 import { BLOG_POSTS } from "../../../lib/blog";
 
 export const dynamic = "force-static";
@@ -8,12 +9,10 @@ function isHttpUrl(src?: string) {
   return !!src && (src.startsWith("http://") || src.startsWith("https://"));
 }
 
-export default function BlogDetail({
-  params,
-}: {
-  params: { slug: string };
-}) {   
-  const { slug } = params;
+export default async function BlogDetail(
+  { params }: PageProps<{ slug: string }>
+) {
+  const { slug } = await params;
 
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
@@ -88,7 +87,7 @@ export default function BlogDetail({
                 "rounded-3xl overflow-hidden border border-black/10 shadow-2xl bg-white",
                 // Irregular wrap (Chromium/Safari; Firefox falls back)
                 "[shape-outside:polygon(0_0,100%_0,85%_100%,0_100%)]",
-                "[clip-path:polygon(0_0,100%_0,85%_100%,0_100%)]",
+                "[clip-path:polygon(0_0,100%_0,85%_100%)]",
                 "[shape-margin:16px]",
               ].join(" ")}
             >
