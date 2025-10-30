@@ -153,11 +153,7 @@ export default function InteriorMaterialsHotspotsBase() {
             })}
           </div>
 
-          {/* Right fixed detail panel */}
-          <RightFixedPanel
-            hotspot={currentHotspot}
-            onClose={() => setLockedId(null)}
-          />
+       
         </div>
       </div>
     </section>

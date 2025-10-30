@@ -38,7 +38,7 @@ location = "Long Beach, İskele",
 statusTR = "Devam Eden",
 delivery = "Kasım 2025",
 heroImage = "/la-joya/2.jpg",
-brochureHref = "https://dndcyprus.com/katalog/la-joya/lajoya-katalog.pdf",
+brochureHref = "#",
 
   contactHref = "/contact",
   kicker = "DND Cyprus",

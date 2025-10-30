@@ -38,7 +38,7 @@ export default function Perla2Hero({
   statusTR = "Devam Eden",
   delivery = "Aralık 2028",
   heroImage = "/lagoon-verde/5.jpg",
-  brochureHref = "/files/la-joya-perla-2-brosur.pdf",
+  brochureHref = "#",
   contactHref = "/contact",
   kicker = "DND Cyprus",
   topScrimHeight = 104, // ~header height; tweak if needed

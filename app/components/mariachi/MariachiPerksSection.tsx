@@ -41,7 +41,7 @@ export default function MariachiUnifiedPerks({
   sideBadge = "Mariachi Beach Club",
   sideTitle = "Denizin yanında ayrıcalıklı günler",
   sideSubtitle = "Rezidans sakinlerine özel: ücretsiz giriş + yiyecek & içecekte %10 indirim.",
-  sideHref = "/gallery", // leave empty to remove CTA
+  sideHref = "#gallery", // leave empty to remove CTA
   sideSticky = true,     // keeps the card visible while scrolling on desktop
 }: {
   title?: string;

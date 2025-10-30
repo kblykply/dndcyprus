@@ -64,6 +64,7 @@ export default function MariachiGalleryExpanding({
     <section
       aria-label="Mariachi Beach Club — Galeri"
       className="relative overflow-hidden"
+      id ="gallery"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
     >
