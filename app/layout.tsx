@@ -38,7 +38,7 @@ export default function RootLayout({
         {children}
 
         <Footer/>
-              <WhatsAppFab phone="+905551112233" />
+              <WhatsAppFab phone="+90 548 888 03 63" />
 
       </body>
     </html>

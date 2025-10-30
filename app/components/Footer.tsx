@@ -27,43 +27,46 @@
     logoSrc = "/DND-LOGO-2.svg",
     companyName = "DND Cyprus",
     tagline = "Güvenilir, şeffaf ve sürdürülebilir çözümler.",
-    addressLines = ["Örnek Cad. No:12", "Lefkoşa, Kuzey Kıbrıs"],
+    addressLines = ["Alasya Park Sitesi 2. Etap, Dükkan No: 2-3 Uluçam Yolu, Sakarya – Gazimağusa"],
     email = "info@dndcyprus.com",
-    phone = "+90 555 555 55 55",
-    nav = [
-      {
-        title: "Kurumsal",
-        links: [
-          { label: "Hakkımızda", href: "/about" },
-          { label: "Liderlik & Ekip", href: "/about#team" },
-          { label: "Sertifikalar & Ödüller", href: "/about#certs" },
-          { label: "İş Ortakları", href: "/about#partners" },
-        ],
-      },
-      {
-        title: "Hizmetler",
-        links: [
-          { label: "İnşaat", href: "/services#construction" },
-          { label: "Gayrimenkul Geliştirme", href: "/services#development" },
-          { label: "Proje Yönetimi", href: "/services#management" },
-          { label: "Yatırım Danışmanlığı", href: "/services#investment" },
-        ],
-      },
-      {
-        title: "Projeler",
-        links: [
-          { label: "Öne Çıkanlar", href: "/projects" },
-          { label: "Devam Eden", href: "/projects?status=ongoing" },
-          { label: "Tamamlanan", href: "/projects?status=completed" },
-          { label: "Basında", href: "/news" },
-        ],
-      },
+    phone = "+90 392 444 03 63",
+ nav = [
+
+
+  {
+    title: "Projeler",
+    links: [
+      { label: "Tüm Projeler", href: "/projects" },
+      { label: "Lagoon Verde", href: "/lagoon-verde" },
+      { label: "La Joya Perla II", href: "/perla-ii" },
+      { label: "La Joya Perla", href: "/perla" },
+      { label: "La Joya", href: "/la-joya" },
+      { label: "Mariachi Beach Club", href: "/mariachi" },
     ],
+  },
+  {
+    title: "Genel",
+    links: [
+      { label: "Ana\u00A0Sayfa", href: "/" },
+      { label: "İletişim", href: "/contact" },
+      { label: "Yazılar", href: "/blog" },
+    ],
+  },
+  
+  {
+    title: "Hakkımızda",
+    links: [
+      { label: "Hakkımızda", href: "/about" },
+      { label: "Ekibimiz", href: "/team" },
+    ],
+  },
+],
+
     socials = [
-      { label: "LinkedIn", href: "https://linkedin.com" },
-      { label: "Instagram", href: "https://instagram.com" },
-      { label: "X", href: "https://x.com" },
-      { label: "YouTube", href: "https://youtube.com" },
+      { label: "LinkedIn", href: "https://cy.linkedin.com/company/dndcyprus" },
+      { label: "Instagram", href: "https://www.instagram.com/dndcyprus/" },
+      { label: "Facebook", href: "https://www.facebook.com/dndcyprus/?locale=tr_TR" },
+      { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
     ],
     copyrightOwner = "DND Cyprus",
     privacyHref = "/privacy",

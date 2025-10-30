@@ -63,7 +63,7 @@ export default function SocialIcons() {
         ].join(" ")}
       >
         <a
-          href="#"
+          href="https://www.facebook.com/dndcyprus/?locale=tr_TR"
           target="_blank"
           className="hover:opacity-70 transition-opacity"
           aria-label="Facebook"
@@ -71,7 +71,7 @@ export default function SocialIcons() {
           <FaFacebookF />
         </a>
         <a
-          href="#"
+          href="https://www.instagram.com/dndcyprus/"
           target="_blank"
           className="hover:opacity-70 transition-opacity"
           aria-label="Instagram"
@@ -79,7 +79,7 @@ export default function SocialIcons() {
           <FaInstagram />
         </a>
         <a
-          href="#"
+          href="https://cy.linkedin.com/company/dndcyprus"
           target="_blank"
           className="hover:opacity-70 transition-opacity"
           aria-label="LinkedIn"
