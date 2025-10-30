@@ -77,7 +77,7 @@ export default function BeachClubPerksSection() {
       "
     >
       <motion.h2 variants={item} className="text-3xl md:text-4xl font-semibold tracking-tight">
-        Beach Life, DND Style.
+        Mariachi Beach Club
       </motion.h2>
       <motion.p variants={item} className="mt-4 text-black/70 max-w-2xl mx-auto">
         La Joya, La Joya Perla ve Perla II konut sahipleri, <strong>Mariachi Beach Club</strong>’a özel erişimle havuz, gastronomi ve sahil yaşamının keyfini çıkarır.
@@ -85,10 +85,10 @@ export default function BeachClubPerksSection() {
 
       <motion.div variants={item} className="mt-8">
         <a
-          href="/mariachi-beach-club"
+          href="/mariachi"
           className="inline-flex items-center rounded-full px-6 py-3 bg-black text-white font-medium hover:bg-neutral-800 transition"
         >
-          Beach Club’ı Keşfet →
+          Mariachi'yi Keşfet →
         </a>
       </motion.div>
     </motion.div>

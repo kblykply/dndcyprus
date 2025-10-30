@@ -58,13 +58,13 @@ export default function OurBrands({
     "DND Cyprus çatısı altındaki ödüllü projeler ve alt markalar. Güven, tasarım ve sürdürülebilirlik odağında.",
   note = "*Logo örnekleri gerçek proje linkleri ile bağlanmıştır.",
   brands = [
-    { name: "DND Group", logo: "/logos/dndgroup.png", href: "/about#group" },
-    { name: "DND Homes", logo: "/logos/dndhomes.png", href: "/dndhomesprojects" },
+    { name: "DND Group", logo: "/logos/dndgroup.png", href: "/contact" },
+    { name: "DND Homes", logo: "/logos/dndhomes.png", href: "http://dnd-homes.com/" },
     { name: "Lagoon Verde", logo: "/logos/lagoon.png", href: "/lagoon-verde", tag: "Altın Ödül" },
     { name: "La Joya", logo: "/logos/lajoya.png", href: "/la-joya" },
-    { name: "Mariachi Beach Club", logo: "/logos/mariachi.png", href: "/projects/mariachi", tag: "Platin Ödül" },
-    { name: "Perla", logo: "/logos/perla.png", href: "/projects/perla" },
-    { name: "Perla II", logo: "/logos/perlaii.png", href: "/projects/perla-ii" },
+    { name: "Mariachi Beach Club", logo: "/logos/mariachi.png", href: "/mariachi", tag: "Platin Ödül" },
+    { name: "Perla", logo: "/logos/perla.png", href: "/perla" },
+    { name: "Perla II", logo: "/logos/perlaii.png", href: "/perla-ii" },
   ],
 }: OurBrandsProps) {
   return (

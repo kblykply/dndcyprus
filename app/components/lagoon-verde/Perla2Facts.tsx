@@ -34,7 +34,7 @@ facts = [
   { label: "Lokasyon", value: "Bahçeler, İskele (Ötüken)", accent: "teal" },
   { label: "Teslim", value: "2028", accent: "orange" },
   { label: "Tip", value: "Konut / Rezidans & Resort", accent: "teal" },
-  { label: "Birim Sayısı", value: "128", accent: "orange" },
+  { label: "Birim Sayısı", value: "354", accent: "orange" },
   { label: "Arsa Alanı", value: "43.179 m²", accent: "teal" },
   { label: "Durum", value: "Devam Eden", accent: "orange" },
 ],

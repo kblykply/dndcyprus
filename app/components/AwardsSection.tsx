@@ -24,7 +24,7 @@ const SLIDES: AwardSlide[] = [
       "Dünya standartlarında eğlence, tasarım ve topluluk, Kuzey Kıbrıs sahillerine geliyor.",
     ],
     emphasis: "Kıbrıs’ta ABD Kalitesi.",
-    cta: { label: "Daha Fazla →", href: "#" },
+    cta: { label: "Daha Fazla →", href: "/mariachi" },
     ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png",
   },
   {
@@ -34,7 +34,7 @@ const SLIDES: AwardSlide[] = [
       "DND Homes, 2025 yılında En İyi Yeni Girişim kategorisinde <strong>Altın Ödül</strong>’e layık görüldü.",
       "Proje, Kuzey Kıbrıs emlak sektöründe tasarım mükemmeliyeti ve müşteri memnuniyeti için yeni bir standart belirliyor.",
     ],
-    cta: { label: "Daha Fazla →", href: "#" },
+    cta: { label: "Daha Fazla →", href: "https://dnd-homes.com" },
     ribbon: "/BEST-NEWCOMER.png",
   },
   {
@@ -44,24 +44,35 @@ const SLIDES: AwardSlide[] = [
       "Lagoon Verde, En İyi Sosyo-Kültürel Gelişim kategorisinde <strong>Altın Ödül</strong> ile onurlandırıldı.",
       "Bu ödül, refah, sürdürülebilirlik ve çevreyle uyumu önceliklendiren toplum odaklı bir projeyi kutluyor.",
     ],
-    cta: { label: "Daha Fazla →", href: "#" },
+    cta: { label: "Daha Fazla →", href: "/lagoon-verde" },
     ribbon: "/BEST-SOCIOCULTURAL-GOLD.png",
   },
 ];
 
 /* ------- Helpers ------- */
-const POS = {
-  left: { x: -170, scale: 1.1, opacity: 0.9, zIndex: 2 },
-  center: { x: 0, scale: 1.45, opacity: 1, zIndex: 3 },
-  right: { x: 170, scale: 1.1, opacity: 0.9, zIndex: 2 },
-};
-const ENTER_OFFSET = 260;
-
 function orderedTriple(index: number) {
   const total = SLIDES.length;
   const left = (index - 1 + total) % total;
   const right = (index + 1) % total;
   return [SLIDES[left], SLIDES[index], SLIDES[right]] as const;
+}
+
+// Small hook to measure element size (for adaptive positions on mobile)
+function useElementSize<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0]?.contentRect;
+      if (cr) setSize({ width: cr.width, height: cr.height });
+    });
+    ro.observe(ref.current);
+    return () => ro.disconnect();
+  }, []);
+
+  return [ref, size] as const;
 }
 
 export default function AwardsSection() {
@@ -111,22 +122,49 @@ export default function AwardsSection() {
     [next, prev]
   );
 
+  // Measure carousel to adapt ribbon positions on small screens
+  const [carouselRef, { width: carouselW }] = useElementSize<HTMLDivElement>();
+
+  // Base horizontal offset for left/right ribbons, responsive to container width.
+  // Keeps ribbons fully visible on narrow phones.
+  const baseX = useMemo(() => {
+    if (!carouselW) return 170;
+    // Clamp between 90px (tiny phones) and 170px (desktop), roughly 28% of container.
+    return Math.max(90, Math.min(170, carouselW * 0.28));
+  }, [carouselW]);
+
+  // Slightly smaller scales on very small widths so content doesn't overflow.
+  const centerScale = carouselW && carouselW < 400 ? 1.3 : 1.45;
+  const sideScale = carouselW && carouselW < 400 ? 1.04 : 1.1;
+
+  const POS = useMemo(
+    () => ({
+      left: { x: -baseX, scale: sideScale, opacity: 0.9, zIndex: 2 },
+      center: { x: 0, scale: centerScale, opacity: 1, zIndex: 3 },
+      right: { x: baseX, scale: sideScale, opacity: 0.9, zIndex: 2 },
+    }),
+    [baseX, centerScale, sideScale]
+  );
+
+  const ENTER_OFFSET = Math.round(baseX * 1.4);
+
   return (
     <section
-      className="w-full h-[100svh] flex items-center bg-white dark:bg-white [color-scheme:light]"
+      className="w-full h-auto md:h-[100svh] flex items-center bg-white dark:bg-white [color-scheme:light]"
       onKeyDown={onKeyDown}
       tabIndex={0} // focusable for arrow keys
       aria-label="Ödüller bölümü"
     >
       <div
         ref={sectionRef}
-        className="relative max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-20 w-full"
+        className="relative max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-20 w-full"
       >
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center min-h-[520px]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
           {/* LEFT — ribbons (draggable) */}
           <div className="md:col-span-6">
             <motion.div
-              className="relative w-[520px] h-[440px] mx-auto overflow-visible select-none [touch-action:pan-y] cursor-grab active:cursor-grabbing"
+              ref={carouselRef}
+              className="relative w-full max-w-[520px] h-[320px] sm:h-[380px] md:h-[440px] mx-auto overflow-visible select-none [touch-action:pan-y] cursor-grab active:cursor-grabbing"
               onPanStart={() => setIsDragging(true)}
               onPanEnd={(e, info) => {
                 const dx = info.offset.x;
@@ -135,7 +173,10 @@ export default function AwardsSection() {
                 else if (dx > SWIPE_DISTANCE || vx > SWIPE_VELOCITY) prev();
                 requestAnimationFrame(() => setIsDragging(false));
               }}
+              aria-roledescription="carousel"
+              aria-label="Ödüller şeridi"
             >
+              <span className="sr-only">Kaydırarak değiştirin</span>
               {trio.map((item, i) => {
                 const role = i === 0 ? "left" : i === 1 ? "center" : "right";
                 const target = POS[role as keyof typeof POS];
@@ -149,6 +190,15 @@ export default function AwardsSection() {
                     : role === "left"
                     ? -ENTER_OFFSET
                     : ENTER_OFFSET;
+
+                // Responsive ribbon boxes using clamp() + calc() to keep ratio on small screens
+                const centerW = "clamp(116px, 42vw, 180px)";
+                const centerH = "calc(clamp(116px, 42vw, 180px) * 1.4444)"; // 260/180
+                const sideW = "clamp(88px, 28vw, 128px)";
+                const sideH = "calc(clamp(88px, 28vw, 128px) * 1.4844)"; // 190/128
+
+                const boxW = role === "center" ? centerW : sideW;
+                const boxH = role === "center" ? centerH : sideH;
 
                 return (
                   <motion.button
@@ -167,19 +217,19 @@ export default function AwardsSection() {
                   >
                     <div
                       className={[
-                        "relative transition-[filter] duration-300",
+                        "relative transition-[filter,opacity] duration-300",
                         role === "center" ? "drop-shadow-xl" : "opacity-90 hover:opacity-100",
                       ].join(" ")}
                       style={{
-                        width: role === "center" ? 180 : 128,
-                        height: role === "center" ? 260 : 190,
+                        width: boxW as unknown as number, // TSX accepts string; cast for TS appeasement
+                        height: boxH as unknown as number,
                       }}
                     >
                       <Image
                         src={item.ribbon}
                         alt={item.title}
                         fill
-                        sizes="220px"
+                        sizes="(max-width: 768px) 42vw, 220px"
                         priority={item.id === SLIDES[0].id}
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}
@@ -198,11 +248,8 @@ export default function AwardsSection() {
                   key={s.id}
                   aria-label={`Slayt ${i + 1}'e git`}
                   onClick={() => setIndex(i)}
-                  className={`h-2.5 rounded-full transition-all ${
-                    i === index
-                      ? "w-7 bg-zinc-900"
-                      : "w-2.5 bg-zinc-400 hover:bg-zinc-500"
-                  }`}
+                  className={`h-3 rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400/70
+                  ${i === index ? "w-8 bg-zinc-900" : "w-3 bg-zinc-400 hover:bg-zinc-500"}`}
                 />
               ))}
             </div>
@@ -215,18 +262,19 @@ export default function AwardsSection() {
               initial={{ y: 16, opacity: 1, filter: "blur(8px)" }}
               animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 0.45, ease: "easeOut" }}
-              className="min-h-[260px] will-change-transform antialiased text-zinc-900"
+              className="min-h-[220px] md:min-h-[260px] will-change-transform antialiased text-zinc-900"
+              aria-live="polite"
             >
               <motion.h3
                 initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
                 animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 0.42, ease: "easeOut", delay: 0.03 }}
-                className="text-2xl md:text-4xl font-semibold tracking-tight text-zinc-950 text-balance"
+                className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950 text-balance"
               >
                 {current.title}
               </motion.h3>
 
-              <div className="mt-4 md:mt-5 space-y-4 text-base md:text-lg leading-relaxed text-zinc-800">
+              <div className="mt-3 sm:mt-4 md:mt-5 space-y-3 sm:space-y-4 text-base sm:text-lg leading-relaxed text-zinc-800">
                 {current.paragraphs.map((p, i) => (
                   <motion.p
                     key={i}
@@ -259,7 +307,7 @@ export default function AwardsSection() {
                   initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
                   animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                   transition={{ duration: 0.38, ease: "easeOut", delay: 0.14 }}
-                  className="inline-flex items-center gap-2 mt-6 text-base md:text-lg font-medium underline decoration-zinc-500/50 hover:decoration-current text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400/60 rounded-sm"
+                  className="inline-flex items-center gap-2 mt-5 sm:mt-6 text-base sm:text-lg font-medium underline decoration-zinc-500/50 hover:decoration-current text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400/60 rounded-sm"
                 >
                   {current.cta.label}
                 </motion.a>

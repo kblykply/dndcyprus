@@ -133,7 +133,7 @@ function ensureYouTubeAPI(): Promise<YTGlobal | null> {
 }
 
 /* ---------------- Main Component ---------------- */
-export default function ProjectVideoSlider({
+export default function   ProjectVideoSlider({
   autoplayMs = 10000,
   className = "",
   slides = DEFAULT_SLIDES,
@@ -556,7 +556,7 @@ const DEFAULT_SLIDES: SlideInput[] = [
         "Geniş sosyal alanlar ve yürüyüş rotaları",
         "Gün batımında doğal ışık senaryosu",
       ],
-      primaryCta: { label: "Projeyi İncele", href: "/projects" },
+      primaryCta: { label: "Projeyi İncele", href: "/la-joya" },
       secondaryCta: { label: "İletişime Geç", href: "/contact" },
     },
   },
@@ -573,8 +573,8 @@ const DEFAULT_SLIDES: SlideInput[] = [
         "Konfor odaklı planlama ve dolaşım",
         "Zengin servis ve tesis seçenekleri",
       ],
-      primaryCta: { label: "Tüm Olanaklar", href: "/amenities" },
-      secondaryCta: { label: "Satış Ekibi", href: "/contact" },
+      primaryCta: { label: "Daha Fazla", href: "/gecitkale" },
+      secondaryCta: { label: "Satış Ekibi", href: "/team" },
     },
   },
   {
@@ -590,7 +590,7 @@ const DEFAULT_SLIDES: SlideInput[] = [
         "Yüksek doluluk hedefi ve yönetim",
         "Uzun vadeli değer odaklı yaklaşım",
       ],
-      primaryCta: { label: "Ödeme Planı", href: "/contact" },
+      primaryCta: { label: "Hakkımızda", href: "/contact" },
       secondaryCta: { label: "Diğer Projeler", href: "/projects" },
     },
   },

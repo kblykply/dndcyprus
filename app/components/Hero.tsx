@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link"; // ← NEW
 import BackgroundVideo from "./BackgroundVideo";
 
 /* ---------------- Variants (used only on tab switch) ---------------- */
@@ -36,6 +37,7 @@ type ProjectItem = {
   floors: number;
   area: number;
   bedrooms: number;
+  href?: string; // ← NEW: link target for “Daha Fazla”
 };
 
 /* ---------------- Card ---------------- */
@@ -60,17 +62,20 @@ function ProjectCard({ item }: { item: ProjectItem }) {
         </div>
 
         <div className="mt-8 flex flex-col items-center opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-          <button
-            className="px-5 py-2 text-sm font-medium rounded-full 
-                       bg-white/15 text-white border border-white/25 
-                       backdrop-blur-md shadow-sm hover:bg-white/25 transition mb-3"
-          >
-            Daha Fazla
-          </button>
+          {item.href ? (
+            <Link
+              href={item.href}
+              className="px-5 py-2 text-sm font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-md shadow-sm hover:bg-white/25 transition mb-3 outline-none focus:ring-2 focus:ring-white/60"
+              aria-label={`${item.title} – Daha Fazla`}
+            >
+              Daha Fazla
+            </Link>
+          ) : null}
+
           <div className="flex gap-4 justify-center text-sm text-white/80">
             <span>Daire Tipi: {item.floors}</span>
             <span>Alan: {item.area} m²</span>
-            <span>Oda: {item.bedrooms}</span>
+            <span>Birim: {item.bedrooms}</span>
           </div>
         </div>
       </div>
@@ -153,16 +158,70 @@ type Tab = (typeof TAB_LABELS)[number];
 
 const projects: Record<Tab, ProjectItem[]> = {
   "Rezidans Projeleri": [
-    { id: 1, title: "Lagoon Verde", subtitle: "Lamine kirişten yapılmış konut", images: ["/lagoon-verde/5.jpg", "/lagoon-verde/7.jpg"], floors: 2, area: 584, bedrooms: 3 },
-    { id: 2, title: "La Joya Perla II", subtitle: "Doğayla iç içe yaşam", images: ["/perla-ii/9.jpg", "/perla-ii/5.jpg"], floors: 1, area: 420, bedrooms: 2 },
-    { id: 3, title: "La Joya Perla I", subtitle: "Doğayla iç içe yaşam", images: ["/perla/9.jpg", "/perla/4.jpg"], floors: 1, area: 420, bedrooms: 2 },
-    { id: 7, title: "La Joya", subtitle: "Doğayla iç içe yaşam", images: ["/la-joya/13.jpg", "/la-joya/16.jpg"], floors: 1, area: 420, bedrooms: 2 },
+    {
+      id: 1,
+      title: "Lagoon Verde",
+      subtitle: "Eşsiz lagün havuzu konsepti",
+      images: ["/lagoon-verde/5.jpg", "/lagoon-verde/7.jpg"],
+      floors: 4,
+      area: 43.179,
+      bedrooms: 354,
+      href: "/lagoon-verde", // ← NEW
+    },
+    {
+      id: 2,
+      title: "La Joya Perla II",
+      subtitle: "Denize ve şehir imkanlarına yakın konum",
+      images: ["/perla-ii/9.jpg", "/perla-ii/5.jpg"],
+      floors: 5,
+      area: 8.8,
+      bedrooms: 128,
+      href: "/perla-ii", // ← NEW
+    },
+    {
+      id: 3,
+      title: "La Joya Perla I",
+      subtitle: "Doğal görünümlü ‘sand pool’ konsepti",
+      images: ["/perla/9.jpg", "/perla/4.jpg"],
+      floors: 5,
+      area: 25.053,
+      bedrooms: 384,
+      href: "/perla", // ← NEW
+    },
+    {
+      id: 7,
+      title: "La Joya",
+      subtitle: "Tatil konsepli butik yaşam",
+      images: ["/la-joya/13.jpg", "/la-joya/16.jpg"],
+      floors: 3,
+      area: 6.36,
+      bedrooms: 74,
+      href: "/la-joya", // ← NEW
+    },
   ],
   "Arsa Projeleri": [
-    { id: 5, title: "Geçitkale", subtitle: "Yatırıma uygun arazi", images: ["/gecitkaleimage.jpg", "/gecitkaleimage.jpg"], floors: 0, area: 900, bedrooms: 0 },
+    {
+      id: 5,
+      title: "Geçitkale",
+      subtitle: "Yatırıma uygun arazi",
+      images: ["/gecitkaleimage.jpg", "/gecitkaleimage.jpg"],
+      floors: 0,
+      area: 9.841,
+      bedrooms: 0,
+      href: "/gecitkale", // ← NEW
+    },
   ],
   İşletmeler: [
-    { id: 8, title: "Mariachi Beach Club", subtitle: "Doğayla iç içe yaşam", images: ["/mariachi/9.jpg", "/mariachi/12.jpg"], floors: 1, area: 420, bedrooms: 2 },
+    {
+      id: 8,
+      title: "Mariachi Beach Club",
+      subtitle: "Doğayla iç içe yaşam",
+      images: ["/mariachi/9.jpg", "/mariachi/12.jpg"],
+      floors: 1,
+      area: 5.001,
+      bedrooms: 2,
+      href: "/mariachi", // ← NEW
+    },
   ],
 };
 
@@ -201,42 +260,94 @@ export default function Hero() {
         </div>
 
         {/* Tabs */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-full max-w-5xl">
-          <div className="flex gap-6 text-lg font-medium border-b border-white/30 justify-center">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => handleTabClick(tab)}
-                className={`px-2 pb-1 transition ${activeTab === tab ? "border-b-2 border-white" : "text-white/70"}`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
+     {/* Tabs */}
+<div className="absolute bottom-4 sm:bottom-6 inset-x-0 w-full px-3 z-20 pointer-events-auto">
+  {/* SCROLL CONTAINER */}
+  <div
+    className={[
+      "w-full",
+      // mobile: horizontal scroll; desktop: no scroll
+      "overflow-x-auto lg:overflow-visible",
+      "[-webkit-overflow-scrolling:touch]",
+      "snap-x snap-mandatory scroll-px-3",
+      "[scrollbar-width:'none'] [-ms-overflow-style:'none'] [&::-webkit-scrollbar]:hidden",
+      // desktop centering
+      "lg:flex lg:justify-center",
+    ].join(" ")}
+  >
+    {/* CONTENT */}
+    <div
+      className={[
+        "inline-flex min-w-max",
+        "gap-4 sm:gap-6",
+        "text-[15px] sm:text-lg font-medium",
+        "border-b border-white/30",
+        // ensure content is treated as a shrink-to-fit block at lg for clean centering
+        "lg:min-w-0 lg:w-fit",
+      ].join(" ")}
+    >
+      {tabs.map((tab) => (
+        <button
+          key={tab}
+          onClick={() => handleTabClick(tab)}
+          className={`px-3 sm:px-2 pb-1 shrink-0 snap-center transition ${
+            activeTab === tab ? "border-b-2 border-white" : "text-white/70"
+          }`}
+        >
+          {tab}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+
+
       </section>
 
       {/* PROJECTS */}
-      <section className="relative z-10 text-black mt-6 pb-14">
-        <div className="w-full max-w-6xl px-4 mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab} // remount on tab change
-              className={useCarousel ? "flex gap-6 cursor-grab active:cursor-grabbing" : "grid grid-cols-1 md:grid-cols-2 gap-6"}
-              variants={listVariants}
-              // Don't animate on first load. Animate only after a tab click.
-              initial={hasInteracted ? "hidden" : false}
-              animate="visible"
-              exit={hasInteracted ? { opacity: 0, y: -8, transition: { duration: 0.15 } } : undefined}
-              {...dragProps}
-            >
-              {items.map((item) => (
-                <ProjectCard key={item.id} item={item} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </section>
+     <section className="relative z-10 text-black mt-6 pb-14">
+  <div className="w-full max-w-7xl px-4 md:px-6 mx-auto">
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={activeTab} // remount on tab change
+        className={
+          useCarousel
+            ? [
+                "flex cursor-grab active:cursor-grabbing",
+                // responsive gaps
+                "gap-4 sm:gap-5 md:gap-6 xl:gap-8",
+                // responsive child card widths (only sizing)
+                "[&>*]:shrink-0",
+                "[&>*]:basis-[88%]",
+                "sm:[&>*]:basis-[70%]",
+                "md:[&>*]:basis-[48%]",
+                "lg:[&>*]:basis-[31%]",
+                "xl:[&>*]:basis-[24%]",
+              ].join(" ")
+            : [
+                // responsive grid column counts + gaps (only sizing)
+                "grid grid-cols-1",
+                "sm:grid-cols-2",
+                "lg:grid-cols-3",
+                "gap-4 sm:gap-6 xl:gap-8",
+              ].join(" ")
+        }
+        variants={listVariants}
+        // Don't animate on first load. Animate only after a tab click.
+        initial={hasInteracted ? "hidden" : false}
+        animate="visible"
+        exit={hasInteracted ? { opacity: 0, y: -8, transition: { duration: 0.15 } } : undefined}
+        {...dragProps}
+      >
+        {items.map((item) => (
+          <ProjectCard key={item.id} item={item} />
+        ))}
+      </motion.div>
+    </AnimatePresence>
+  </div>
+</section>
+
     </main>
   );
 }
