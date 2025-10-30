@@ -30,6 +30,10 @@ function isHttpUrl(src?: string) {
   return !!src && (src.startsWith("http://") || src.startsWith("https://"));
 }
 
+// Safe, loose access helper without `any`
+const loose = (o: unknown): Record<string, unknown> =>
+  typeof o === "object" && o !== null ? (o as Record<string, unknown>) : {};
+
 type Props = {
   initialPosts?: BlogPost[];
   pageSize?: number;
@@ -77,19 +81,23 @@ export default function NewsBlogListClient({
 
   // Drag/click guard + global selection toggle
   const isDraggingRef = useRef(false);
-  const prevBodyUserSelect = useRef<string>("");
+  const prevUserSelect = useRef<string>("");
+  const prevWebkitUserSelect = useRef<string>("");
 
   const disableGlobalSelect = useCallback(() => {
-    prevBodyUserSelect.current = document.body.style.userSelect;
+    prevUserSelect.current = document.body.style.userSelect;
+    prevWebkitUserSelect.current = document.body.style.getPropertyValue("-webkit-user-select");
     document.body.style.userSelect = "none";
-    // @ts-ignore
-    document.body.style.WebkitUserSelect = "none";
+    document.body.style.setProperty("-webkit-user-select", "none");
   }, []);
 
   const enableGlobalSelect = useCallback(() => {
-    document.body.style.userSelect = prevBodyUserSelect.current || "";
-    // @ts-ignore
-    document.body.style.WebkitUserSelect = "";
+    document.body.style.userSelect = prevUserSelect.current || "";
+    if (prevWebkitUserSelect.current) {
+      document.body.style.setProperty("-webkit-user-select", prevWebkitUserSelect.current);
+    } else {
+      document.body.style.removeProperty("-webkit-user-select");
+    }
   }, []);
 
   useEffect(() => {
@@ -247,9 +255,12 @@ export default function NewsBlogListClient({
             className="mx-auto mt-10 md:mt-12 max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {shown.map((p, idx) => {
+              const extras = loose(p);
               const img = p.cover || placeholderImage;
-              const slug = p.slug ?? String((p as any).id ?? "");
-              const href = slug ? `/blog/${slug}` : "#";
+              const slug =
+                p.slug ??
+                (typeof extras.id === "string" || typeof extras.id === "number" ? String(extras.id) : "");
+              const href = slug ? `/blog/${slug}` : "/blog";
               const date =
                 p.date &&
                 new Date(p.date).toLocaleDateString("tr-TR", {
@@ -257,6 +268,8 @@ export default function NewsBlogListClient({
                   month: "short",
                   day: "2-digit",
                 });
+              const readTime = typeof extras.readTime === "number" ? (extras.readTime as number) : undefined;
+              const author = typeof extras.author === "string" ? (extras.author as string) : undefined;
 
               return (
                 <motion.li key={slug || `post-${idx}`} variants={item} className="h-full">
@@ -264,9 +277,7 @@ export default function NewsBlogListClient({
                     href={href}
                     draggable={false}
                     onDragStart={(e) => e.preventDefault()}
-                    className="group h-full flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white/70 backdrop-blur-xl shadow transition hover:shadow-lg select-none"
-                    // @ts-ignore - Safari anchor drag
-                    style={{ WebkitUserDrag: "none" }}
+                    className="group h-full flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white/70 backdrop-blur-xl shadow transition hover:shadow-lg select-none [-webkit-user-drag:none]"
                   >
                     {/* Thumb */}
                     <div className="relative aspect-[16/10] shrink-0">
@@ -292,8 +303,8 @@ export default function NewsBlogListClient({
                     <div className="flex-1 p-4 flex flex-col select-none">
                       <div className="text-xs text-black/60">
                         {date}
-                        {(p as any).readTime ? ` • ${(p as any).readTime} dk` : ""}
-                        {p.author ? ` • ${p.author}` : ""}
+                        {typeof readTime === "number" ? ` • ${readTime} dk` : ""}
+                        {author ? ` • ${author}` : ""}
                       </div>
                       <h3 className="mt-2 text-lg font-semibold line-clamp-2 min-h-[3.2rem]">
                         {p.title}
@@ -325,13 +336,15 @@ export default function NewsBlogListClient({
                 x,
                 touchAction: "pan-y",
                 userSelect: "none",
-                WebkitUserSelect: "none",
               }}
             >
               {shown.map((p, idx) => {
+                const extras = loose(p);
                 const img = p.cover || placeholderImage;
-                const slug = p.slug ?? String((p as any).id ?? "");
-                const href = slug ? `/blog/${slug}` : "#";
+                const slug =
+                  p.slug ??
+                  (typeof extras.id === "string" || typeof extras.id === "number" ? String(extras.id) : "");
+                const href = slug ? `/blog/${slug}` : "/blog";
                 const date =
                   p.date &&
                   new Date(p.date).toLocaleDateString("tr-TR", {
@@ -339,6 +352,8 @@ export default function NewsBlogListClient({
                     month: "short",
                     day: "2-digit",
                   });
+                const readTime = typeof extras.readTime === "number" ? (extras.readTime as number) : undefined;
+                const author = typeof extras.author === "string" ? (extras.author as string) : undefined;
 
                 return (
                   <li
@@ -360,9 +375,7 @@ export default function NewsBlogListClient({
                           e.stopPropagation();
                         }
                       }}
-                      className="group h-full flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white/70 backdrop-blur-xl shadow transition hover:shadow-lg select-none"
-                      // @ts-ignore
-                      style={{ WebkitUserDrag: "none" }}
+                      className="group h-full flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white/70 backdrop-blur-xl shadow transition hover:shadow-lg select-none [-webkit-user-drag:none]"
                     >
                       {/* Thumb */}
                       <div className="relative aspect-[16/10] shrink-0">
@@ -388,8 +401,8 @@ export default function NewsBlogListClient({
                       <div className="flex-1 p-4 flex flex-col select-none">
                         <div className="text-xs text-black/60">
                           {date}
-                          {(p as any).readTime ? ` • ${(p as any).readTime} dk` : ""}
-                          {p.author ? ` • ${p.author}` : ""}
+                          {typeof readTime === "number" ? ` • ${readTime} dk` : ""}
+                          {author ? ` • ${author}` : ""}
                         </div>
                         <h3 className="mt-2 text-lg font-semibold line-clamp-2 min-h-[3.2rem]">
                           {p.title}
