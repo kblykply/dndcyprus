@@ -48,14 +48,14 @@ type Props = {
 
 export default function MariachiBeachClubHero({
   title = "Mariachi Beach Club",
-  subtitle = "Akdeniz güneşiyle Latin ritmini buluşturan; cabana konforu, gün boyu plaj keyfi ve akşam DJ performanslarıyla ayrıcalıklı bir deneyim.",
+  subtitle = "Akdeniz güneşiyle Latin ritmini buluşturan; pavilyon konforu, gün boyu plaj keyfi ve akşam DJ performanslarıyla ayrıcalıklı bir deneyim.",
   badge = "Plaj Kulübü",
   videoSrc = "/mariachi/hero.mp4",
   bgImage = "/mariachi/7.jpg",
   overlayOpacity = 0.35,
-  primaryCta = { label: "Cabana Rezervasyonu", href: "/reservations" },
-  secondaryCta = { label: "Menüyü Görüntüle", href: "/menu" },
-  highlights = ["Havuz & Plaj", "Cabanalar", "Restoran & Havuz Barı", "DJ Geceleri"],
+  primaryCta = { label: "Pavilyon Rezervasyonu", href: "/contact" },
+  secondaryCta = { label: "Menüyü Görüntüle", href: "/contact" },
+  highlights = ["Havuz & Plaj", "Pavilyonlar", "Restoran & Havuz Barı", "DJ Geceleri"],
 }: Props) {
   return (
     <section

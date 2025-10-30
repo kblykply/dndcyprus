@@ -53,7 +53,7 @@ function formatDistance(d: DistanceItem) {
 }
 
 export default function Perla2Location({
-  title = "Konum",
+  title = "La Joya Konum",
 subtitle = "Long Beach, İskele — denize ve günlük ihtiyaçlara yakın konum.",
 address = "Long Beach, İskele, Kuzey Kıbrıs",
 lat = 35.272493,

@@ -26,7 +26,7 @@ type Props = {
 };
 
 export default function Perla2Overview({
-  title = "Genel Bakış",
+  title = "La Joya Genel Bakış",
   lead = "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir projedir. Mariachi Beach Club’a özel üyelik ayrıcalıkları, açık yüzme havuzları, restoran & pool bar, spor salonu ve akıllı ev/merkezi sistemlerle tatil konforunu günlük yaşama taşır.",
   highlights = [
     "Denize 500 m; Mariachi Beach Club üyeliği ve indirimli hizmetler",

@@ -286,80 +286,82 @@ export default function MariachiHighlights({
               aria-roledescription="carousel"
               aria-label="Öne çıkanlar listesi"
             >
-              {/** Kartlar */}
-              {data.map((card, i) => {
-                const isActive = i >= index && i < index + visibleCount;
-                return (
-                  <div
-                    key={card.title + i}
-                    className="shrink-0 basis-[82%] sm:basis-[56%] md:basis-[44%] lg:basis-[32%]"
-                    data-slide={i}
-                  >
-                    <motion.div
-                      variants={fadeUp}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: false, amount: 0.2 }}
-                      className="relative h-[360px] sm:h-[420px] rounded-[24px] overflow-hidden"
-                      style={{
-                        boxShadow: isActive
-                          ? `0 20px 50px rgba(0,0,0,0.15), 0 10px 26px ${TEAL}12`
-                          : "0 14px 32px rgba(0,0,0,0.10)",
-                        transform: isActive ? "scale(1.02)" : "scale(0.98)",
-                        transition: "transform .35s cubic-bezier(0.22,1,0.36,1)",
-                      }}
-                    >
-                      {/* Arka plan görseli */}
-                      <div
-                        className="absolute inset-0 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${card.image})` }}
-                        aria-hidden
-                      />
-                      {/* Üstten aşağı hafif koyuluk (okunabilirlik) */}
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.08))",
-                        }}
-                        aria-hidden
-                      />
-                      {/* Alt cam panel */}
-                      <div
-                        className="absolute h-[160px] left-4 right-4 bottom-4 rounded-2xl p-4 sm:p-5 backdrop-blur-md"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
-                          border: "1px solid rgba(255,255,255,0.26)",
-                        }}
-                      >
-                        {card.icon ? (
-                          <span
-                            className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wide px-2.5 py-1 rounded-full"
-                            style={{
-                              background: "#fff",
-                              border: `1px solid ${TEAL}33`,
-                              color: TEAL,
-                              boxShadow: `0 6px 14px ${TEAL}1f`,
-                            }}
-                          >
-                            {card.icon} <span>Öne Çıkan</span>
-                          </span>
-                        ) : null}
+           {/** Kartlar */}
+{data.map((card, i) => {
+  const isActive = i >= index && i < index + visibleCount;
+  return (
+    <div
+      key={card.title + i}
+      // only change ↓ this line
+      className="shrink-0 basis-full sm:basis-[56%] md:basis-[44%] lg:basis-[32%]"
+      data-slide={i}
+    >
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.2 }}
+        className="relative h-[360px] sm:h-[420px] rounded-[24px] overflow-hidden"
+        style={{
+          boxShadow: isActive
+            ? `0 20px 50px rgba(0,0,0,0.15), 0 10px 26px ${TEAL}12`
+            : "0 14px 32px rgba(0,0,0,0.10)",
+          transform: isActive ? "scale(1.02)" : "scale(0.98)",
+          transition: "transform .35s cubic-bezier(0.22,1,0.36,1)",
+        }}
+      >
+        {/* Arka plan görseli */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${card.image})` }}
+          aria-hidden
+        />
+        {/* Üstten aşağı hafif koyuluk (okunabilirlik) */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.08))",
+          }}
+          aria-hidden
+        />
+        {/* Alt cam panel */}
+        <div
+          className="absolute h-[160px] left-4 right-4 bottom-4 rounded-2xl p-4 sm:p-5 backdrop-blur-md"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
+            border: "1px solid rgba(255,255,255,0.26)",
+          }}
+        >
+          {card.icon ? (
+            <span
+              className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wide px-2.5 py-1 rounded-full"
+              style={{
+                background: "#fff",
+                border: `1px solid ${TEAL}33`,
+                color: TEAL,
+                boxShadow: `0 6px 14px ${TEAL}1f`,
+              }}
+            >
+              {card.icon} <span>Öne Çıkan</span>
+            </span>
+          ) : null}
 
-                        <h3 className="mt-2 text-xl font-semibold text-white drop-shadow">
-                          {card.title}
-                        </h3>
-                        {card.desc ? (
-                          <p className="mt-1.5 text-sm leading-relaxed text-white/90">
-                            {card.desc}
-                          </p>
-                        ) : null}
-                      </div>
-                    </motion.div>
-                  </div>
-                );
-              })}
+          <h3 className="mt-2 text-xl font-semibold text-white drop-shadow">
+            {card.title}
+          </h3>
+          {card.desc ? (
+            <p className="mt-1.5 text-sm leading-relaxed text-white/90">
+              {card.desc}
+            </p>
+          ) : null}
+        </div>
+      </motion.div>
+    </div>
+  );
+})}
+
             </motion.div>
           </div>
 

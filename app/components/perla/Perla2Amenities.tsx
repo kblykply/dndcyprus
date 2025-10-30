@@ -192,7 +192,7 @@ export default function LagoonVerde360Section() {
               variants={fadeUp}
               className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight"
             >
-              La Joya Perla II — 360° Tur
+              La Joya Perla — 360° Tur
             </motion.h2>
             <motion.p
               variants={fadeUp}

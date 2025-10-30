@@ -34,7 +34,7 @@ export default function ContactCTA({
   title = "Hadi Hayallerinizi Birlikte Hayata Geçirelim",
   subtitle = "DND Cyprus ekibi, yatırımlarınız için size destek olmaya hazır.",
   buttonText = "Hemen İletişime Geçin",
-  buttonHref = "/contact",
+  buttonHref = "#form",
   bgImage = "/daireici.jpg",
   overlayOpacity = 0.35,
   fullHeight = false,

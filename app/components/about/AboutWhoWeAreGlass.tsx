@@ -78,11 +78,22 @@ export default function AboutWhoWeAreGlass({
     <section
       ref={sectionRef}
       id="biz-kimiz"
-      className="relative isolate bg-white px-6 py-24 md:px-12"
+      className="relative isolate bg-white px-4 sm:px-6 md:px-12 py-14 md:py-20 lg:py-24"
       aria-label="Biz Kimiz bölümü"
     >
-      {/* brand glows */}
-    
+      {/* brand glows (subtle, non-intrusive) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-60 md:opacity-80"
+        style={{
+          background: `
+            radial-gradient(36rem 22rem at 4% -10%, ${TEAL}22, transparent 70%),
+            radial-gradient(36rem 22rem at 100% 110%, ${ORANGE}18, transparent 70%)
+          `,
+          mixBlendMode: "screen",
+        }}
+      />
+
       {/* faint grid */}
       <div
         aria-hidden="true"
@@ -95,13 +106,13 @@ export default function AboutWhoWeAreGlass({
       />
 
       {/* 50/50 layout */}
-      <div className="relative z-10 mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:items-center gap-10">
+      <div className="relative z-10 mx-auto max-w-7xl grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
         {/* Left (text) */}
         <motion.div
           variants={rise}
           initial="hidden"
           animate={textCtrl}
-          className="glass rounded-2xl border bg-white/70 p-7 shadow-[0_8px_40px_rgba(0,0,0,0.06)] md:p-9"
+          className="glass rounded-2xl border bg-white/70 p-5 sm:p-7 md:p-9 shadow-[0_8px_40px_rgba(0,0,0,0.06)]"
         >
           {/* Kicker + line */}
           <div className="mb-3 flex items-center gap-3">
@@ -115,29 +126,31 @@ export default function AboutWhoWeAreGlass({
             </span>
           </div>
 
-          <h2 className="text-3xl font-semibold text-neutral-900 md:text-4xl">Biz Kimiz</h2>
-          <p className="mt-3 text-[15px] text-neutral-700 md:text-base">
+          <h2 className="text-[clamp(1.5rem,4.2vw,2.25rem)] font-semibold text-neutral-900">
+            Biz Kimiz
+          </h2>
+          <p className="mt-3 text-[clamp(0.95rem,2.5vw,1rem)] text-neutral-700">
             DND Cyprus, Kıbrıs genelinde konut ve karma kullanımlı projeler geliştiren, tasarım odaklı bir
             gayrimenkul şirketidir.
           </p>
-          <ul className="mt-6 space-y-3 text-sm text-neutral-700 md:text-[15px]">
+          <ul className="mt-6 space-y-3 text-[clamp(0.9rem,2.4vw,0.95rem)] text-neutral-700">
             <li className="flex gap-2"><Dot /> Konseptten teslimata güvenilir iş ortaklarıyla süreç yönetimi.</li>
             <li className="flex gap-2"><Dot /> Öne çıkan bölgelerde, denize ve şehre yakın lokasyon seçimi.</li>
             <li className="flex gap-2"><Dot /> Satış, satış sonrası ve uzun vadeli müşteri desteğinde şeffaflık.</li>
           </ul>
 
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
             <a
               href="/projects"
-              className="glass-thin inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-neutral-900 ring-1 ring-[var(--glass-border)] transition-transform hover:scale-[1.02]"
+              className="glass-thin inline-flex w-full sm:w-auto items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-neutral-900 ring-1 ring-[var(--glass-border)] transition-transform hover:scale-[1.02]"
             >
               Projelerimizi Görün
             </a>
             <a
-              href="#vizyon"
-              className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-neutral-700 hover:underline"
+              href="/team"
+              className="inline-flex w-full sm:w-auto items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-neutral-700 hover:underline"
             >
-              Vizyon &amp; Misyon
+              Ekibimiz
             </a>
           </div>
         </motion.div>
@@ -165,8 +178,11 @@ export default function AboutWhoWeAreGlass({
             ) : (
               <img
                 src={images.main}
-                alt="Ekip / proje çalışması"
+                alt="Ekip veya proje görseli"
                 className="block h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                sizes="(min-width: 1024px) 640px, 100vw"
               />
             )}
           </motion.figure>
@@ -232,16 +248,18 @@ function VideoPlayer({
             alt={title}
             className="h-full w-full object-cover opacity-95 transition-opacity group-hover:opacity-100"
             loading="lazy"
+            decoding="async"
+            sizes="(min-width: 1024px) 640px, 100vw"
           />
           {/* dark gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
-          {/* Text overlay */}
-          <div className="absolute bottom-8 left-8 right-8 text-left">
-            <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+          {/* Text overlay (hide on mobile to avoid crowding) */}
+          <div className="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 text-left hidden sm:block">
+            <h3 className="text-[clamp(1.125rem,2.4vw,1.75rem)] font-bold text-white drop-shadow-lg">
               {heading}
             </h3>
-            <p className="mt-2 text-sm md:text-base text-white/90 max-w-xl">
+            <p className="mt-2 text-[clamp(0.9rem,1.8vw,1rem)] text-white/90 max-w-xl">
               {description}
             </p>
           </div>

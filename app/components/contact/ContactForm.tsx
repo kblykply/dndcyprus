@@ -65,6 +65,7 @@ export default function ContactForm() {
     <section
       aria-label="İletişim Formu"
       className="relative overflow-hidden"
+      id ="form"
       style={
         {
           background: "#ffffff",
@@ -302,12 +303,12 @@ export default function ContactForm() {
                   <div className="rounded-lg px-3 py-2 bg-white/10">
                     <span className="opacity-80">Telefon:</span>{" "}
                     <a className="underline-offset-2 hover:underline" href="tel:+90xxxxxxxxxx">
-                      +90 xxx xxx xx xx
+                      +90 392 444 03 63
                     </a>
                   </div>
                   <div className="rounded-lg px-3 py-2 bg-white/10">
                     <span className="opacity-80">WhatsApp:</span>{" "}
-                    <a className="underline-offset-2 hover:underline" href="https://wa.me/90xxxxxxxxxx" target="_blank">
+                    <a className="underline-offset-2 hover:underline" href="https://wa.me/905488880363" target="_blank">
                       Hızlı Mesaj Gönderin
                     </a>
                   </div>
@@ -327,7 +328,7 @@ export default function ContactForm() {
                 <span className="font-medium">Tahmini dönüş:</span> 24–48 saat
               </li>
               <li className="rounded-lg border border-[var(--stroke)] px-3 py-2 bg-white">
-                <span className="font-medium">Çalışma saatleri:</span> Hafta içi 09:00–18:00
+                <span className="font-medium">Çalışma saatleri:</span> Hafta içi 08:30–17:30
               </li>
             </ul>
           </aside>

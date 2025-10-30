@@ -27,11 +27,11 @@ export default function MariachiVideoSpotlight({
   embedUrl = "https://www.youtube.com/embed/AobeR8p2Aq4?si=Z_AaUhavwKNYLgNX",
   videoSrc = "",
   poster = "/mariachi/1.jpg",
-  primaryCta = { label: "Cabana Rezervasyonu", href: "/reservations" },
-  secondaryCta = { label: "Tüm Videolar", href: "/videos" },
+  primaryCta = { label: "Pavilyon Rezervasyonu", href: "/contact" },
+  secondaryCta = { label: "Tüm Videolar", href: "https://www.youtube.com/@dndcyprus" },
   highlights = [
     { k: "Deneyim", v: "Gün boyu & Gece" },
-    { k: "Alanlar", v: "Plaj • Havuz • Cabanalar" },
+    { k: "Alanlar", v: "Plaj • Havuz • Pavilyonlar" },
     { k: "Yiyecek/İçecek", v: "Restoran & Havuz Barı" },
   ],
 }: {

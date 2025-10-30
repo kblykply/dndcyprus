@@ -199,8 +199,7 @@ export default function LagoonVerde360Section() {
               className="mt-3 max-w-3xl mx-auto text-sm sm:text-base"
               style={{ color: "rgba(255,255,255,0.85)" }}
             >
-              Projeyi panoramik olarak keşfedin. Yüklenme yalnızca “Play” ile
-              başlar — sayfa performansı için optimize edildi.
+              Projeyi panoramik olarak keşfedin.
             </motion.p>
           </div>
 

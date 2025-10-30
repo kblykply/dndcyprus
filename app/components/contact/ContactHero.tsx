@@ -39,11 +39,11 @@ export default function ContactHeroGlass({
   title = "Bize Ulaşın",
   subtitle = "Projelerimiz ve yatırım fırsatları hakkında daha fazla bilgi almak için bizimle iletişime geçin.",
   bgImage = "/lagoon-verde/1.jpg",
-  primary = { label: "Mesaj Gönder", href: "/iletisim/form" },
-  secondary = { label: "Projelerimiz", href: "/projeler" },
+  primary = { label: "Mesaj Gönder", href: "#form" },
+  secondary = { label: "Projelerimiz", href: "/projects" },
   quick = {
-    phone: "+90 392 444 44 44",
-    whatsapp: "+90 533 000 00 00",
+    phone: "+90 392 444 03 63",
+    whatsapp: "+90 548 888 03 63",
     email: "info@dndcyprus.com",
   },
 }: Props) {

@@ -25,7 +25,7 @@ type GalleryItem = {
 };
 
 export default function MariachiGalleryExpanding({
-  title = "Galeri",
+  title = "La Joya Perla Galeri",
   subtitle = "Lagoon Verde Görselleri",
   items,
 }: {

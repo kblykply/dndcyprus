@@ -26,7 +26,7 @@ type Props = {
 };
 
 export default function Perla2Overview({
-  title = "Genel Bakış",
+  title = "La Joya Perla Genel Bakış",
   lead = "Bahçeler, İskele’de konumlanan La Joya Perla; denize 700 m mesafe, İskele’de ilk kez uygulanan doğal görünümlü ‘sand pool’ konsepti, açık-kapalı havuzlar ve zengin sosyal alanlarıyla yıl boyu lüks ve konforu bir arada sunar.",
   highlights = [
     "İskele’de ilk ‘sand pool’ (doğal kum plajı etkisi) + açık/kapalı yüzme havuzları",

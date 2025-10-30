@@ -148,7 +148,7 @@ const DEFAULT_ITEMS: Amenity[] = [
 
 export default function Perla2AmenitiesSection({
   kicker = "ÖNE ÇIKANLAR",
-  title = "Proje Olanakları",
+  title = "La Joya Perla Proje Olanakları",
   subtitle = "La Joya Perla kompleksi içerisinde konforunuz ve keyfiniz için tasarlanmış pek çok olanak yer alıyor.",
   items = DEFAULT_ITEMS,
 }: Props) {

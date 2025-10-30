@@ -106,7 +106,7 @@ export default function InteriorMaterialsHotspotsBase() {
       {/* Heading */}
       <header className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-          İç Mekan & Tasarım
+          Lagoon Verde İç Mekan & Tasarım
         </h2>
         <p className="mt-1 text-white/80">
           Tatil Yaşamının  ve estetiğin buluştuğu <strong>Lagoon Verde</strong> sizlerle.
@@ -154,10 +154,7 @@ export default function InteriorMaterialsHotspotsBase() {
           </div>
 
           {/* Right fixed detail panel */}
-          <RightFixedPanel
-            hotspot={currentHotspot}
-            onClose={() => setLockedId(null)}
-          />
+      
         </div>
       </div>
     </section>
@@ -165,73 +162,6 @@ export default function InteriorMaterialsHotspotsBase() {
 }
 
 /* ---------------- Fixed Right Panel ---------------- */
-function RightFixedPanel({
-  hotspot,
-  onClose,
-}: {
-  hotspot: Hotspot | null;
-  onClose: () => void;
-}) {
-  return (
-    <div className="pointer-events-none absolute right-4 top-1/2 z-50 -translate-y-1/2">
-      <AnimatePresence initial={false} mode="wait">
-        {hotspot ? (
-          <motion.div
-            key={hotspot.id}
-            initial={{ opacity: 0, x: 24, scale: 0.98 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 12, scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 320, damping: 26 }}
-            className="pointer-events-auto w-[420px] max-w-[70vw] overflow-hidden rounded-2xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
-          >
-            <button
-              onClick={onClose}
-              aria-label="Kapat"
-              className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full bg-white/85 text-neutral-900 ring-1 ring-black/10"
-            >
-              ×
-            </button>
-
-            {/* Fade the image when switching pins */}
-            <div className="relative">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={hotspot.thumbSrc}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="relative aspect-[4/3]"
-                >
-                  <Image
-                    src={hotspot.thumbSrc}
-                    alt={hotspot.label}
-                    fill
-                    className="object-cover"
-                    sizes="420px"
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Minimal caption – remove if you want image only */}
-            <div className="px-4 py-2 text-sm text-white/80">{hotspot.label}</div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="placeholder"
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 12 }}
-            className="pointer-events-none w-[360px] max-w-[60vw] rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl px-4 py-3 text-white/75"
-          >
-            Detaylı bilgi için iletişişme geçin.
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
 
 /* ---------------- Hotspot Marker ---------------- */
 function HotspotMarker({

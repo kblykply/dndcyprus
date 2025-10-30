@@ -8,7 +8,7 @@ import Link from "next/link";
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
-// 1) ease'i tuple olarak sabitle
+// Typed cubic-bezier ease
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
   show: {
@@ -17,11 +17,10 @@ const fadeUp: Variants = {
     filter: "blur(0px)",
     transition: {
       duration: 0.55,
-      ease: [0.22, 1, 0.36, 1] as const, // ✅ typed cubic-bezier
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   },
 };
-
 
 type Props = {
   title?: string;
@@ -45,13 +44,13 @@ export default function AynurSpotlightAlt({
     { k: "Uzmanlık", v: "Mimarlık & Yöneticilik" },
     { k: "Yaklaşım", v: "Sürdürülebilirlik" },
   ],
-  profileHref = "/about#leadership",
+  profileHref = "/projects",
   contactHref = "/contact",
 }: Props) {
   return (
-        <section
+    <section
       aria-label="Aynur Zorba Gülol — Spotlight"
-      className="relative overflow-visible bg-white"  // ⬅ remove -mb-8 / lg:-mb-12
+      className="relative overflow-visible bg-white pb-16 sm:pb-20 lg:pb-0"
       style={{ color: "#141517" }}
       data-bg="light"
     >
@@ -68,22 +67,23 @@ export default function AynurSpotlightAlt({
       />
 
       {/* CONTENT WRAPPER */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24 pb-0 min-h-[88vh] lg:min-h-[95vh]">
-        {/* Absolutized portrait */}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 md:pt-20 lg:pt-24 pb-0 min-h-0 sm:min-h-[88vh] lg:min-h-[95vh]">
+        {/* Absolutized portrait (hidden on mobile) */}
         <img
           src={image}
           alt={title}
           className="
+            hidden md:block
             pointer-events-none select-none
             absolute bottom-0 right-0 z-10
-            h-[70vh] sm:h-[76vh] lg:h-[calc(95vh-4rem)]
+            h-[68vh] lg:h-[calc(95vh-4rem)]
             w-auto max-w-none object-contain object-bottom
             drop-shadow-[0_20px_45px_rgba(0,0,0,.18)]
           "
         />
 
         {/* TEXT GRID */}
-        <div className="relative z-20 grid lg:grid-cols-12 gap-10 items-start">
+        <div className="relative z-20 grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* TEXT */}
           <motion.div
             variants={fadeUp}
@@ -93,22 +93,24 @@ export default function AynurSpotlightAlt({
             className="lg:col-span-7"
           >
             <span
-              className="inline-block text-[12px] uppercase tracking-wide px-3 py-1 rounded-full mb-4"
+              className="inline-block text-[11px] sm:text-[12px] uppercase tracking-wide px-3 py-1 rounded-full mb-4"
               style={{ background: `${TEAL}14`, color: TEAL, border: `1px solid ${TEAL}33` }}
             >
               Yönetim Kadrosu
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+            <h2 className="text-[clamp(1.75rem,4.5vw,3rem)] font-semibold leading-tight">
               {title}
             </h2>
             <div className="mt-1 text-sm sm:text-base text-black/60">{role}</div>
 
-            <p className="mt-4 text-base sm:text-lg text-black/70 max-w-[60ch]">{subtitle}</p>
+            <p className="mt-4 text-[clamp(1rem,2.4vw,1.125rem)] text-black/70 max-w-[65ch]">
+              {subtitle}
+            </p>
 
             {quote && (
               <blockquote
-                className="mt-6 text-lg italic font-medium text-black/85 border-l-4 pl-4"
+                className="mt-6 text-[clamp(1rem,2.6vw,1.25rem)] italic font-medium text-black/85 border-l-4 pl-4"
                 style={{ borderColor: ORANGE }}
               >
                 {quote}
@@ -132,13 +134,13 @@ export default function AynurSpotlightAlt({
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4">
               <Link
                 href={profileHref}
-                className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5"
-                style={{ background: TEAL, color: "#fff", boxShadow: `0 10px 24px ${TEAL}33` }}
+                className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5 text-white"
+                style={{ background: TEAL, boxShadow: `0 10px 24px ${TEAL}33` }}
               >
-                Detaylı Profil
+                Projeler
               </Link>
               <Link
                 href={contactHref}

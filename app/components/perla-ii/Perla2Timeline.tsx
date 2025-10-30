@@ -27,7 +27,7 @@ type Props = {
 };
 
 export default function Perla2Timeline({
-  title = "İnşaat Zaman Çizelgesi",
+  title = "La Joya Perla II İnşaat Zaman Çizelgesi",
   subtitle = "Planlanan aşamalar ve güncel durum. Tarihler tanıtım amaçlıdır; resmi teslim programı satış ekibinden teyit edilmelidir.",
   overall = 55,
   phases = DEFAULT_PHASES,

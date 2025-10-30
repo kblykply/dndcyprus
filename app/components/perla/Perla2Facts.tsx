@@ -28,7 +28,7 @@ type Props = {
 };
 
 export default function Perla2Facts({
-title = "Öne Çıkan Bilgiler",
+title = "La Joya Perla Öne Çıkan Bilgiler",
 subtitle = "Projenin temel özelliklerine hızlıca göz atın.",
 facts = [
   { label: "Lokasyon", value: "Bahçeler, İskele", accent: "teal" },

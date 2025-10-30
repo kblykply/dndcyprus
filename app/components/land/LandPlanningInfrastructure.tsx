@@ -246,138 +246,140 @@ export default function LandPlanningInfrastructure({
           </p>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="mt-8 relative select-none">
-          {/* Viewport */}
-          <div
-            ref={viewportRef}
-            className="overflow-hidden"
-            style={{ touchAction: "pan-y" }}
-          >
-            {/* Track (drag/swipe) */}
-            <motion.div
-              ref={trackRef}
-              className="flex will-change-transform"
-              style={{ x, columnGap: GAP }}
-              drag="x"
-              dragConstraints={limits}
-              dragElastic={0.08}
-              dragMomentum={false}
-              onDragStart={onDragStart}
-              onDragEnd={onDragEnd}
-              role="group"
-              aria-roledescription="carousel"
-              aria-label="Planlama & Altyapı kartları"
+          {/* Carousel */}
+          <div className="mt-8 relative select-none">
+            {/* Viewport */}
+            <div
+              ref={viewportRef}
+              className="overflow-hidden"
+              style={{ touchAction: "pan-y" }}
             >
-              {data.map((card, i) => {
-                const isActive = i >= index && i < index + visibleCount;
-                const accent =
-                  card.accent === "orange" ? ORANGE : TEAL;
+              {/* Track (drag/swipe) */}
+              <motion.div
+                ref={trackRef}
+                className="flex will-change-transform"
+                style={{ x, columnGap: GAP }}
+                drag="x"
+                dragConstraints={limits}
+                dragElastic={0.08}
+                dragMomentum={false}
+                onDragStart={onDragStart}
+                onDragEnd={onDragEnd}
+                role="group"
+                aria-roledescription="carousel"
+                aria-label="Planlama & Altyapı kartları"
+              >
+                {data.map((card, i) => {
+                  const isActive = i >= index && i < index + visibleCount;
+                  const accent =
+                    card.accent === "orange" ? ORANGE : TEAL;
 
+             return (
+  <div
+    key={card.title + i}
+    // full width on mobile, multi-card on larger screens
+    className="shrink-0 basis-full sm:basis-[56%] md:basis-[44%] lg:basis-[32%]"
+    data-slide={i}
+  >
+    <motion.div
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.2 }}
+      className="relative h-[360px] sm:h-[420px] rounded-[24px] overflow-hidden"
+      style={{
+        boxShadow: isActive
+          ? `0 20px 50px rgba(0,0,0,0.15), 0 10px 26px ${accent}12`
+          : "0 14px 32px rgba(0,0,0,0.10)",
+        transform: isActive ? "scale(1.02)" : "scale(0.98)",
+        transition: "transform .35s cubic-bezier(0.22,1,0.36,1)",
+      }}
+    >
+      {/* BG image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${card.image})` }}
+        aria-hidden
+      />
+      {/* Readability wash */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.08))",
+        }}
+        aria-hidden
+      />
+      {/* Glass footer */}
+      <div
+        className="absolute h-[160px] left-4 right-4 bottom-4 rounded-2xl p-4 sm:p-5 backdrop-blur-md"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
+          border: "1px solid rgba(255,255,255,0.26)",
+          color: "#fff",
+        }}
+      >
+        {/* Tag pill */}
+        <span
+          className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wide px-2.5 py-1 rounded-full"
+          style={{
+            background: "#fff",
+            border: `1px solid ${accent}33`,
+            color: accent,
+            boxShadow: `0 6px 14px ${accent}1f`,
+          }}
+        >
+          <span
+            aria-hidden
+            className="h-1.5 w-1.5 rounded-full"
+            style={{ background: accent }}
+          />
+          {card.tag}
+        </span>
+
+        <h3 className="mt-2 text-xl font-semibold text-white drop-shadow">
+          {card.title}
+        </h3>
+        {card.desc ? (
+          <p className="mt-1.5 text-sm leading-relaxed text-white/90">
+            {card.desc}
+          </p>
+        ) : null}
+      </div>
+    </motion.div>
+  </div>
+);
+
+                })}
+              </motion.div>
+            </div>
+
+            {/* Dots (page-based) */}
+            <div className="mt-6 flex items-center justify-center gap-2">
+              {Array.from({ length: totalPages }).map((_, i) => {
+                const isActive = i === index;
                 return (
-                  <div
-                    key={card.title + i}
-                    className="shrink-0 basis-[82%] sm:basis-[56%] md:basis-[44%] lg:basis-[32%]"
-                    data-slide={i}
-                  >
-                    <motion.div
-                      variants={fadeUp}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: false, amount: 0.2 }}
-                      className="relative h-[360px] sm:h-[420px] rounded-[24px] overflow-hidden"
-                      style={{
-                        boxShadow: isActive
-                          ? `0 20px 50px rgba(0,0,0,0.15), 0 10px 26px ${accent}12`
-                          : "0 14px 32px rgba(0,0,0,0.10)",
-                        transform: isActive ? "scale(1.02)" : "scale(0.98)",
-                        transition: "transform .35s cubic-bezier(0.22,1,0.36,1)",
-                      }}
-                    >
-                      {/* BG image */}
-                      <div
-                        className="absolute inset-0 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${card.image})` }}
-                        aria-hidden
-                      />
-                      {/* Readability wash */}
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.08))",
-                        }}
-                        aria-hidden
-                      />
-                      {/* Glass footer */}
-                      <div
-                        className="absolute h-[160px] left-4 right-4 bottom-4 rounded-2xl p-4 sm:p-5 backdrop-blur-md"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
-                          border: "1px solid rgba(255,255,255,0.26)",
-                          color: "#fff",
-                        }}
-                      >
-                        {/* Tag pill */}
-                        <span
-                          className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wide px-2.5 py-1 rounded-full"
-                          style={{
-                            background: "#fff",
-                            border: `1px solid ${accent}33`,
-                            color: accent,
-                            boxShadow: `0 6px 14px ${accent}1f`,
-                          }}
-                        >
-                          <span
-                            aria-hidden
-                            className="h-1.5 w-1.5 rounded-full"
-                            style={{ background: accent }}
-                          />
-                          {card.tag}
-                        </span>
-
-                        <h3 className="mt-2 text-xl font-semibold text-white drop-shadow">
-                          {card.title}
-                        </h3>
-                        {card.desc ? (
-                          <p className="mt-1.5 text-sm leading-relaxed text-white/90">
-                            {card.desc}
-                          </p>
-                        ) : null}
-                      </div>
-                    </motion.div>
-                  </div>
+                  <button
+                    type="button"
+                    key={`dot-${i}`}
+                    onClick={() => goTo(i)}
+                    aria-label={`Sayfa ${i + 1}`}
+                    aria-current={isActive ? "true" : undefined}
+                    className="h-2.5 rounded-full transition-all"
+                    style={{
+                      width: isActive ? 28 : 8,
+                      background: isActive ? TEAL : "#fff",
+                      border: `1px solid ${
+                        isActive ? `${TEAL}66` : "rgba(20,21,23,0.1)"
+                      }`,
+                      boxShadow: isActive ? `0 6px 12px ${TEAL}22` : "none",
+                    }}
+                  />
                 );
               })}
-            </motion.div>
+            </div>
           </div>
-
-          {/* Dots (page-based) */}
-          <div className="mt-6 flex items-center justify-center gap-2">
-            {Array.from({ length: totalPages }).map((_, i) => {
-              const isActive = i === index;
-              return (
-                <button
-                  type="button"
-                  key={`dot-${i}`}
-                  onClick={() => goTo(i)}
-                  aria-label={`Sayfa ${i + 1}`}
-                  aria-current={isActive ? "true" : undefined}
-                  className="h-2.5 rounded-full transition-all"
-                  style={{
-                    width: isActive ? 28 : 8,
-                    background: isActive ? TEAL : "#fff",
-                    border: `1px solid ${
-                      isActive ? `${TEAL}66` : "rgba(20,21,23,0.1)"
-                    }`,
-                    boxShadow: isActive ? `0 6px 12px ${TEAL}22` : "none",
-                  }}
-                />
-              );
-            })}
-          </div>
-        </div>
       </div>
     </section>
   );

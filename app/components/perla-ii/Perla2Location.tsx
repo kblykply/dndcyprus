@@ -53,7 +53,7 @@ function formatDistance(d: DistanceItem) {
 }
 
 export default function Perla2Location({
-  title = "Konum",
+  title = "La Joya Perla II Konum",
   subtitle = "Bahçeler, İskele — denize ve günlük ihtiyaçlara yakın konum.",
   address = "Bahçeler, İskele, Kuzey Kıbrıs",
   lat = 35.2869,

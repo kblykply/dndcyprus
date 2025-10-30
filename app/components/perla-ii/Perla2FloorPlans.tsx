@@ -41,7 +41,7 @@ type Props = {
 
 /* ---------------- Component ---------------- */
 export default function Perla2FloorPlans({
-  title = "Kat Planları",
+  title = "La Joya Perla II Kat Planları",
   subtitle = "Daire tiplerine ait örnek planlar. Detaylı tipoloji ve ölçüler için satış ekibimizle iletişime geçiniz.",
   plans = DEFAULT_PLANS,
 }: Props) {

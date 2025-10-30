@@ -27,13 +27,13 @@ export default function MariachiUnifiedPerks({
   subtitle = "DND Cyprus projelerinde yaşayan herkes için Mariachi Beach Club’da tek tip avantajlar.",
   note = "Tüm DND rezidans sakinlerine: Mariachi Beach Club’a ÜCRETSİZ GİRİŞ + %10 İNDİRİM",
   logos = [
-    { name: "La Joya", src: "/logos/lajoya.png", href: "/projects/la-joya" },
-    { name: "La Joya Perla", src: "/logos/perla.png", href: "/projects/la-joya-perla" },
-    { name: "La Joya Perla II", src: "/logos/perlaii.png", href: "/projects/perla-ii" },
-    { name: "Lagoon Verde", src: "/logos/lagoon.png", href: "/projects/lagoon-verde" },
+    { name: "La Joya", src: "/logos/lajoya.png", href: "/la-joya" },
+    { name: "La Joya Perla", src: "/logos/perla.png", href: "/perla" },
+    { name: "La Joya Perla II", src: "/logos/perlaii.png", href: "/perla-ii" },
+    { name: "Lagoon Verde", src: "/logos/lagoon.png", href: "/lagoon-verde" },
   ],
-  primaryCta = { label: "Rezervasyon Yap", href: "/reservations" },
-  secondaryCta = { label: "Ayrıcalıkları Doğrula", href: "/membership" },
+  primaryCta = { label: "Rezervasyon Yap", href: "/contact" },
+  secondaryCta = { label: "Ayrıcalıkları Doğrula", href: "/contact" },
 
   /** Right-side image card props */
   sideImage = "/mariachi/2.jpg",

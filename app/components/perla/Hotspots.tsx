@@ -108,7 +108,7 @@ export default function InteriorMaterialsHotspotsBase() {
       {/* Heading */}
       <header className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-          İç Mekan & Tasarım
+         La Joya Perla İç Mekan & Tasarım
         </h2>
         <p className="mt-1 text-white/80">
           Tatil Yaşamının  ve estetiğin buluştuğu <strong>Lagoon Verde</strong> sizlerle.
@@ -155,11 +155,6 @@ export default function InteriorMaterialsHotspotsBase() {
             })}
           </div>
 
-          {/* Right fixed detail panel */}
-          <RightFixedPanel
-            hotspot={currentHotspot}
-            onClose={() => setLockedId(null)}
-          />
         </div>
       </div>
     </section>

@@ -1,12 +1,9 @@
 import AboutHero from "../components/about/AboutHero";
 import AboutUs from "../components/about/AboutWhoWeAreGlass";
-import CompanyOverview from "../components/CompanyOverview";
 import MissionVisionValues from "../components/about/MissionVisionValues";
 import TimelineMilestones from "../components/about/TimelineMilestones";
-import LeadershipTeam from "../components/about/LeadershipTeam";
 import WhyChooseUs from "../components/about/WhyChooseUs";
-import ClientsPartners from "../components/about/ClientsPartners";
-import CertificationsAwards from "../components/about/CertificationsAwards";
+
 import CallToAction from "../components/about/CallToAction";
 import OzanSpotlight from "../components/about/OzanSpotlight";
 import AynurSpotlightAlt from "../components/about/AynurSpotlightAlt"

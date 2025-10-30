@@ -1,21 +1,15 @@
-// app/sections/Perla2AmenitiesSection.tsx
+// app/sections/LaJoyaAmenitiesSection.tsx
 "use client";
 
 import React from "react";
 import { motion, type Variants } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import {
+  Wine,
   Utensils,
-  ShoppingCart,
-  LifeBuoy,
-  Flag,
-  Car,
   Waves,
   Dumbbell,
-  Scissors,
-  Baby,
-  Puzzle,
-  Trophy,
+  Car,
 } from "lucide-react";
 
 const TEAL = "#27959b";
@@ -39,6 +33,7 @@ type Amenity = {
 };
 
 type Props = {
+  kicker?: string;
   title?: string;
   subtitle?: string;
   items?: Amenity[];
@@ -46,69 +41,33 @@ type Props = {
 
 const DEFAULT_ITEMS: Amenity[] = [
   {
+    label: "Pool Bar",
+    desc: "Ferahlatıcı içkilerle gününüzü renklendirin, lüksün ve eğlencenin tadını çıkarın.",
+    icon: Wine,
+    accent: "teal",
+  },
+  {
     label: "Restoran",
-    desc: "Lezzetli bir deneyim için özenle hazırlanmış şef menüsünün tadını çıkarın.",
+    desc: "Lezzetli bir deneyim için özenle hazırlanan şef menüsünün tadını çıkarın.",
     icon: Utensils,
-    accent: "teal",
-  },
-  {
-    label: "Mini Market",
-    desc: "Günlük ihtiyaçlarınıza site içinden, hızlı ve kolay erişim.",
-    icon: ShoppingCart,
     accent: "orange",
   },
   {
-    label: "Aqua Park",
-    desc: "Aksiyon ve eğlenceyi bir araya getirin; enerji dolu günlerin tadını çıkarın.",
-    icon: LifeBuoy,
-    accent: "teal",
-  },
-  {
-    label: "Tenis Kortu",
-    desc: "Spor tutkunları için tasarlanan kortlarda keyifli maçlara katılın.",
-    icon: Flag,
-    accent: "orange",
-  },
-  {
-    label: "Kapalı Yeraltı Garajı",
-    desc: "Aracınızı güvenle park edin; hava koşullarından etkilenmeyin.",
-    icon: Car,
-    accent: "teal",
-  },
-  {
-    label: "Açık & Kapalı Yüzme Havuzu",
-    desc: "Her mevsim tatil hissi: açık ve kapalı havuz seçenekleri.",
+    label: "Yüzme Havuzu",
+    desc: "Açık yüzme havuzlarında tatil keyfinizi en üst düzeye çıkarın.",
     icon: Waves,
-    accent: "orange",
+    accent: "teal",
   },
   {
-    label: "Spa & Spor Salonu",
-    desc: "Zindeliğinizi ve konforunuzu ön planda tutan spa ve fitness olanakları.",
+    label: "Spor Salonu",
+    desc: "La Joya içerisindeki spor salonu ile zindeliğinizi ve sağlığınızı koruyun.",
     icon: Dumbbell,
-    accent: "teal",
-  },
-  {
-    label: "Unisex Kuaför",
-    desc: "La Joya Perla II’de şıklığınızı tamamlayan profesyonel hizmet.",
-    icon: Scissors,
     accent: "orange",
   },
   {
-    label: "Kids Club",
-    desc: "Çocuklar için güvenli, eğlenceli ve eğitici bir kulüp deneyimi.",
-    icon: Baby,
-    accent: "teal",
-  },
-  {
-    label: "Çocuk Oyun Alanı",
-    desc: "Özel tasarlanmış açık alanlarda güvenli ve keyifli oyun saatleri.",
-    icon: Puzzle,
-    accent: "orange",
-  },
-  {
-    label: "Basketbol Sahası",
-    desc: "Takım ruhunu güçlendiren, keyifli maçlar için açık saha.",
-    icon: Trophy,
+    label: "Açık Otopark",
+    desc: "Açık otopark alanlarıyla pratik ve konforlu bir yaşama sahip olun.",
+    icon: Car,
     accent: "teal",
   },
 ];
@@ -136,14 +95,15 @@ function AccentIcon({
   );
 }
 
-export default function Perla2AmenitiesSection({
-  title = "La Joya Perla II — Olanaklar",
-  subtitle = "La Joya Perla II kompleksi içerisinde konforunuz ve keyfiniz için tasarlanmış birçok tesis bulunmaktadır.",
+export default function LaJoyaAmenitiesSection({
+  kicker = "ÖNE ÇIKANLAR",
+  title = "La joya Proje Olanakları",
+  subtitle = "La Joya kompleksi içerisinde konforunuz için pek çok olanak yer alıyor.",
   items = DEFAULT_ITEMS,
 }: Props) {
   return (
     <section
-      aria-label="La Joya Perla II — Olanaklar"
+      aria-label="La Joya — Öne Çıkan Proje Olanakları"
       className="relative overflow-hidden"
       style={
         {
@@ -154,7 +114,7 @@ export default function Perla2AmenitiesSection({
       }
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        {/* Header (Perla2 rhythm) */}
+        {/* Header */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -162,7 +122,19 @@ export default function Perla2AmenitiesSection({
           viewport={{ once: false, amount: 0.35 }}
           className="max-w-2xl"
         >
-          <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
+          {/* Kicker pill */}
+          <span
+            className="inline-flex items-center rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide"
+            style={{
+              background: `${TEAL}10`,
+              border: `1px solid ${TEAL}33`,
+              color: TEAL,
+            }}
+          >
+            {kicker}
+          </span>
+
+          <h2 className="mt-3 text-2xl sm:text-3xl font-semibold">{title}</h2>
           <p
             className="mt-2 text-sm sm:text-base"
             style={{ color: "rgba(20,21,23,0.65)" }}
@@ -171,7 +143,7 @@ export default function Perla2AmenitiesSection({
           </p>
         </motion.div>
 
-        {/* Larger, centered cards */}
+        {/* Amenity cards */}
         <motion.ul
           variants={fadeUp}
           initial="hidden"

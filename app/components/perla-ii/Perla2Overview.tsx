@@ -26,7 +26,7 @@ type Props = {
 };
 
 export default function Perla2Overview({
-  title = "Genel Bakış",
+  title = "La joya Perla II Genel Bakış",
   lead = "La Joya Perla II; mimarisi, planlaması ve sosyal olanakları ile Bahçeler, İskele’de modern yaşamı yeniden tanımlayan bir konut projesidir. Denize ve şehir imkanlarına yakın konumu, yatırım ve oturum için dengeli bir seçenek sunar.",
   highlights = [
     "Uzun sahil şeridine, market ve restoranlara kolay erişim",

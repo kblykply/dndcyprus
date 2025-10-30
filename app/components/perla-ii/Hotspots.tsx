@@ -106,7 +106,7 @@ export default function InteriorMaterialsHotspotsBase() {
       {/* Heading */}
       <header className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-          Materyaller ve Detaylar
+          La joya Perla II Materyaller ve Detaylar
         </h2>
         <p className="mt-1 text-white/80">
           Şıklığın ve konforun buluştuğu <strong>Perla II </strong> sizlerle.
@@ -153,11 +153,7 @@ export default function InteriorMaterialsHotspotsBase() {
             })}
           </div>
 
-          {/* Right fixed detail panel */}
-          <RightFixedPanel
-            hotspot={currentHotspot}
-            onClose={() => setLockedId(null)}
-          />
+    
         </div>
       </div>
     </section>
