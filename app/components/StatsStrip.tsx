@@ -1,13 +1,18 @@
 // app/components/StatsStrip.tsx
 "use client";
 
-import { motion, useAnimation, useInView, Variants } from "framer-motion";
+import { motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 /* Motion */
 const wrap: Variants = {
   hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { when: "beforeChildren", staggerChildren: 0.06, duration: 0.22 } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { when: "beforeChildren", staggerChildren: 0.06, duration: 0.22 },
+  },
 };
 const item: Variants = {
   hidden: { opacity: 0, y: 12 },
@@ -22,9 +27,9 @@ function useCountUp(target: number, enabled: boolean, durationMs = 1400, suffix 
 
   useEffect(() => {
     if (!enabled) {
-      setValue(0);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       startRef.current = null;
+      setValue(0);
       return;
     }
     const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -55,23 +60,40 @@ type StatsStripProps = {
 
 function StatsStrip({
   plannedHomes = 30000,
-  regionsCount = 8  ,
+  regionsCount = 8,
   awardsCount = 4,
   imageUrl = "/uu.jpg",
   showRegions = false,
 }: StatsStripProps) {
+  const prefersReducedMotion = useReducedMotion();
+
+  // Animate once
   const sectionRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(sectionRef, { amount: 0.5, margin: "-10% 0px -10% 0px" });
+  const inView = useInView(sectionRef, { amount: 0.18, margin: "0px 0px -12% 0px" });
   const controls = useAnimation();
+  const [revealed, setRevealed] = useState(false);
+
+  // Avoid initial SSR "hidden" flash until mounted
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    if (inView) controls.start("show");
-    else controls.set("hidden");
-  }, [inView, controls]);
+    if (revealed) return;
+    if (prefersReducedMotion) {
+      controls.set("show");
+      setRevealed(true);
+      return;
+    }
+    if (inView) {
+      controls.start("show");
+      setRevealed(true);
+    }
+  }, [inView, controls, revealed, prefersReducedMotion]);
 
-  const homes = useCountUp(plannedHomes, inView, 1500, "+");
-  const regions = useCountUp(regionsCount, inView, 1100, "+");
-  const awards = useCountUp(awardsCount, inView, 900, "+");
+  // Counters start once
+  const homes = useCountUp(plannedHomes, revealed, 1500, "+");
+  const regions = useCountUp(regionsCount, revealed, 1100, "+");
+  const awards = useCountUp(awardsCount, revealed, 900, "+");
 
   const CARD =
     "relative rounded-3xl p-7 md:p-8 bg-white/15 backdrop-blur-xl border border-white/20 " +
@@ -84,10 +106,12 @@ function StatsStrip({
         <motion.div
           ref={sectionRef}
           variants={wrap}
-          initial="hidden"
+          initial={mounted ? "hidden" : false}
           animate={controls}
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
         >
+          {/* don't hide pre-mount to avoid hydration issues */}
+
           {/* LEFT: Stats */}
           <div className="lg:col-span-6 flex min-w-0">
             <div className="w-full">
@@ -113,17 +137,12 @@ function StatsStrip({
                 <motion.article variants={item} className={CARD}>
                   <div className="text-sm font-medium text-white/80">Bölgesel Yayılım</div>
                   <div className="mt-2 text-5xl md:text-5xl font-semibold tracking-tight tabular-nums">{regions}</div>
-                  <div className="mt-2 text-sm md:text-base text-white/70">
-                    Doğu & kuzey kıyı şeridi genelinde
-                  </div>
+                  <div className="mt-2 text-sm md:text-base text-white/70">Doğu & kuzey kıyı şeridi genelinde</div>
                   <div className="mt-4 text-[11px] uppercase tracking-[0.18em] text-white/50">Kaynak: dndcyprus.com</div>
                 </motion.article>
 
                 {/* Awards (full width on small screens) */}
-                <motion.article
-                  variants={item}
-                  className={`${CARD} sm:col-span-2`}
-                >
+                <motion.article variants={item} className={`${CARD} sm:col-span-2`}>
                   <div className="text-sm font-medium text-white/80">Ödüller</div>
                   <div className="mt-2 text-5xl md:text-6xl font-semibold tracking-tight tabular-nums">{awards}</div>
                   <div className="mt-2 text-sm md:text-base text-white/70">Tanınma & başarılar (detaylar aşağıda)</div>
