@@ -1,19 +1,4 @@
-
-import Hero from "./components/Hero";
-import AwardsSection from "./components/AwardsSection";
-import ProjectsStrip from "./components/ProjectsStrip";
-import StoryTimeline from "./components/StoryTimeline";
-import BeachClubPerksSection from "./components/BeachClubPerksSection";
-import WhyDNDSection from "./components/WhyDNDSection";
-import StatsStrip from "./components/StatsStrip";
-import NewsBlogSection from "./components/NewsBlogSection";
-import ContactVisitSection from "./components/ContactVisitSection";
-import BrandsLogoSliderGlass  from "./components/BrandsSection";
-import Payment from  "./components/Payment";
-import IgEmbedGallery from "./components/IgPost";
-
-// app/(site)/page.tsx  (or wherever you render the section)
-import PressSection, { type PressItem } from "./components/PressSection";
+import PressSection, { type PressItem } from "../components/PressSection";
 
 const PRESS_ITEMS: PressItem[] = [
   {
@@ -61,34 +46,11 @@ const PRESS_ITEMS: PressItem[] = [
 
 
 
-
-
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen text-white overflow-x-hidden">
-      <Hero />
-            <AwardsSection />
-                        <ProjectsStrip />
-                                                <StoryTimeline/>
-                                                                                                <Payment/>
-                 <WhyDNDSection />
-
-
-
-                        <BeachClubPerksSection />
-                          <BrandsLogoSliderGlass
- 
-    />
-                        <StatsStrip />
-                        
-                <IgEmbedGallery />
+    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
    <PressSection items={PRESS_ITEMS} />
-                        <ContactVisitSection />
 
-
-
-
-    
 
     </main>
   );
