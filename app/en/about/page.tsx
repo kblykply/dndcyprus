@@ -1,14 +1,14 @@
-import AboutHero from "../components/about/AboutHero";
-import AboutUs from "../components/about/AboutWhoWeAreGlass";
-import MissionVisionValues from "../components/about/MissionVisionValues";
-import TimelineMilestones from "../components/about/TimelineMilestones";
-import WhyChooseUs from "../components/about/WhyChooseUs";
+import AboutHero from "../../components/about/AboutHero";
+import AboutUs from "../../components/about/AboutWhoWeAreGlass";
+import MissionVisionValues from "../../components/about/MissionVisionValues";
+import TimelineMilestones from "../../components/about/TimelineMilestones";
+import WhyChooseUs from "../../components/about/WhyChooseUs";
 
-import CallToAction from "../components/about/CallToAction";
-import OzanSpotlight from "../components/about/OzanSpotlight";
-import AynurSpotlightAlt from "../components/about/AynurSpotlightAlt"
+import CallToAction from "../../components/about/CallToAction";
+import OzanSpotlight from "../../components/about/OzanSpotlight";
+import AynurSpotlightAlt from "../../components/about/AynurSpotlightAlt"
 
-import AboutDndHomes from "../components/about/AboutDndHomes";
+import AboutDndHomes from "../../components/about/AboutDndHomes";
 
 
 
