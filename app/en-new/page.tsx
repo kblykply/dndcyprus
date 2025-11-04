@@ -1,16 +1,16 @@
 
-import Hero from "./components/Hero";
-import AwardsSection from "./components/AwardsSection";
-import ProjectsStrip from "./components/ProjectsStrip";
-import StoryTimeline from "./components/StoryTimeline";
-import BeachClubPerksSection from "./components/BeachClubPerksSection";
-import WhyDNDSection from "./components/WhyDNDSection";
-import StatsStrip from "./components/StatsStrip";
-import NewsBlogSection from "./components/NewsBlogSection";
-import ContactVisitSection from "./components/ContactVisitSection";
-import BrandsLogoSliderGlass  from "./components/BrandsSection";
-import Payment from  "./components/Payment";
-import IgEmbedGallery from "./components/IgPost";
+import Hero from "../components/en/Hero";
+import AwardsSection from "../components/en/AwardsSection";
+import ProjectsStrip from "../components/en/ProjectsStrip";
+import StoryTimeline from "../components/en/StoryTimeline";
+import BeachClubPerksSection from "../components/en/BeachClubPerksSection";
+import WhyDNDSection from "../components/en/WhyDNDSection";
+import StatsStrip from "../components/en/StatsStrip";
+import NewsBlogSection from "../components/en/NewsBlogSection";
+import ContactVisitSection from "../components/en/ContactVisitSection";
+import BrandsLogoSliderGlass  from "../components/en/BrandsSection";
+import Payment from  "../components/en/Payment";
+import IgEmbedGallery from "../components/en/IgPost";
 
 
 

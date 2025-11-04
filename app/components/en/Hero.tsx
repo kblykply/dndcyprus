@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link"; // ← NEW
-import BackgroundVideo from "./BackgroundVideo";
+import BackgroundVideo from "../BackgroundVideo";
 
 /* ---------------- Variants (used only on tab switch) ---------------- */
 const listVariants: Variants = {
@@ -68,14 +68,15 @@ function ProjectCard({ item }: { item: ProjectItem }) {
               className="px-5 py-2 text-sm font-medium rounded-full bg-white/15 text-white border border-white/25 backdrop-blur-md shadow-sm hover:bg-white/25 transition mb-3 outline-none focus:ring-2 focus:ring-white/60"
               aria-label={`${item.title} – Daha Fazla`}
             >
-              Daha Fazla
+              See More
             </Link>
           ) : null}
 
           <div className="flex gap-4 justify-center text-sm text-white/80">
-            <span>Daire Tipi: {item.floors}</span>
-            <span>Alan: {item.area} m²</span>
-            <span>Birim: {item.bedrooms}</span>
+           <span>Apartment Type: {item.floors}</span>
+<span>Area: {item.area} m²</span>
+<span>Unit: {item.bedrooms}</span>
+
           </div>
         </div>
       </div>
@@ -85,10 +86,11 @@ function ProjectCard({ item }: { item: ProjectItem }) {
 
 /* ---------------- Typewriter ---------------- */
 const MESSAGES = [
-  "Biz ev değil, daha iyi bir yaşam inşaa ediyoruz",
-  "Mimariyi doğayla buluşturuyoruz",
-  "Yatırımınıza değer katan projeler üretiyoruz",
+  "We build not just houses, but better lives",
+  "We bring architecture and nature together",
+  "We create projects that add value to your investment",
 ];
+
 
 function Typewriter({
   messages = MESSAGES,
@@ -153,77 +155,79 @@ function Typewriter({
 }
 
 /* ---------------- Data ---------------- */
-const TAB_LABELS = ["Rezidans Projeleri", "Arsa Projeleri", "Mariachi Beach Club"] as const;
+const TAB_LABELS = ["Residence Projects", "Land Projects", "Mariachi Beach Club"] as const;
 type Tab = (typeof TAB_LABELS)[number];
 
 const projects: Record<Tab, ProjectItem[]> = {
-  "Rezidans Projeleri": [
+  "Residence Projects": [
     {
       id: 1,
       title: "Lagoon Verde",
-      subtitle: "Eşsiz lagün havuzu konsepti",
+      subtitle: "Unique lagoon pool concept",
       images: ["/lagoon-verde/5.jpg", "/lagoon-verde/7.jpg"],
       floors: 4,
       area: 43.179,
       bedrooms: 354,
-      href: "/lagoon-verde", // ← NEW
+      href: "/en/lagoon-verde",
     },
     {
       id: 2,
       title: "La Joya Perla II",
-      subtitle: "Denize ve şehir imkanlarına yakın konum",
+      subtitle: "Close to the sea and city amenities",
       images: ["/perla-ii/9.jpg", "/perla-ii/5.jpg"],
       floors: 5,
       area: 8.799,
       bedrooms: 128,
-      href: "/perla-ii", // ← NEW
+      href: "/en/perla-ii",
     },
     {
       id: 3,
       title: "La Joya Perla I",
-      subtitle: "Doğal görünümlü ‘sand pool’ konsepti",
+      subtitle: "Natural-looking ‘sand pool’ concept",
       images: ["/perla/9.jpg", "/perla/4.jpg"],
       floors: 5,
       area: 25.053,
       bedrooms: 384,
-      href: "/perla", // ← NEW
+      href: "/en/perla",
     },
     {
       id: 7,
       title: "La Joya",
-      subtitle: "Tatil konsepli butik yaşam",
+      subtitle: "Boutique lifestyle with a holiday concept",
       images: ["/la-joya/13.jpg", "/la-joya/16.jpg"],
       floors: 3,
       area: 6.36,
       bedrooms: 74,
-      href: "/la-joya", // ← NEW
+      href: "/en/la-joya",
     },
   ],
-  "Arsa Projeleri": [
+  "Land Projects": [
     {
       id: 5,
       title: "Geçitkale",
-      subtitle: "Yatırıma uygun arazi",
+      subtitle: "Investment-ready land",
       images: ["/gecitkaleimage.jpg", "/gecitkaleimage.jpg"],
       floors: 0,
       area: 9.841,
       bedrooms: 0,
-      href: "/gecitkale", // ← NEW
+      href: "/en/gecitkale",
     },
   ],
   "Mariachi Beach Club": [
     {
       id: 8,
       title: "Mariachi Beach Club",
-      subtitle: "Doğayla iç içe yaşam",
+      subtitle: "Life intertwined with nature",
       images: ["/mariachi/9.jpg", "/mariachi/12.jpg"],
       floors: 0,
       area: 5.001,
       bedrooms: 0,
-      href: "/mariachi", // ← NEW
+      href: "/en/mariachi",
     },
   ],
 };
+
+
 
 const tabs: readonly Tab[] = TAB_LABELS;
 
