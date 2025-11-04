@@ -612,30 +612,7 @@ export default function LeadershipTeam({
         </AnimatePresence>
       </motion.div>
 
-      {/* CTA */}
-      <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
-        <p style={{ color: "rgba(20,21,23,0.65)" }}>
-          Ekibimize katılmak ister misiniz? Açık pozisyonları inceleyin.
-        </p>
-        <a
-          href="/careers"
-          className="inline-flex items-center justify-center rounded-xl px-5 py-3"
-          style={{
-            background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,
-            color: "#fff",
-            boxShadow: `0 10px 28px ${TEAL}40`,
-            border: `1px solid ${TEAL}55`,
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`)
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`)
-          }
-        >
-          Kariyer Fırsatları
-        </a>
-      </div>
+  
     </div>
   </section>
 );
