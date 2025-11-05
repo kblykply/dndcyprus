@@ -34,7 +34,6 @@ export default function LandKeyFacts({
   facts = [
     { label: "Alan", value: "9,840 m²", accent: "teal" },
     { label: "Cephe", value: "42 m", accent: "orange" },
-    { label: "Tapu", value: "Türk Koçan", accent: "teal" },
     { label: "Zonlama", value: "Fasıl 96", accent: "orange" },
     { label: "Maks. Yükseklik", value: "Bilgi amaçlı: ~5 kat", accent: "teal" },
 
