@@ -87,7 +87,7 @@ export default function BackgroundVideo() {
           muted={isMuted}
           playsInline
         >
-          <source src="/awardvideo.mp4" type="video/mp4" />
+          <source src="/lajoyavideo.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/40" />
       </div>
