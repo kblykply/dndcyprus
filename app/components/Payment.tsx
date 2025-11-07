@@ -552,8 +552,8 @@ const DEFAULT_SLIDES: SlideInput[] = [
     customHeadline: "La Joya Açıldı!",
     tagline: "Akdeniz kıyısında yeni bir yaşam resmi açılışla başladı.",
     bullets: [
-      "Resmi açılış: 31 Ekim 2025, İskele",
-      "Ev sahipleri, danışmanlar ve iş ortaklarıyla kutlama",
+      "Resmi açılış: 1 Kasım 2025, İskele",
+      "Ev sahipleri, iş ortakları ve ekibimizle kutlama",
       "Yalın mimari çizgiler, sosyal alanlar ve sahil atmosferi"
     ],
     primaryCta: { label: "La Joya’yı Keşfet", href: "/la-joya" },
