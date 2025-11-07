@@ -47,6 +47,8 @@ type SwiperWithNav = SwiperType & {
 };
 
 const IG_URLS = [
+    "https://www.instagram.com/p/DQoFlJHjIa5/",
+
   "https://www.instagram.com/p/DP0mSn8gK1h/",
   "https://www.instagram.com/reel/DNIOMH0MjBT/",
   "https://www.instagram.com/p/DQGqJSyDMM7/",

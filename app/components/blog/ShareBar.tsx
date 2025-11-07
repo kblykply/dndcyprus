@@ -15,7 +15,7 @@ export default function ShareBar({ title }: Props) {
   const open = useCallback((shareUrl: string) => {
     if (!shareUrl) return;
     window.open(shareUrl, "_blank", "noopener,noreferrer");
-  }, []);
+  }, []); 
 
   const copy = useCallback(async (btn: HTMLButtonElement | null) => {
     try {

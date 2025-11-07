@@ -6,7 +6,6 @@ import StoryTimeline from "./components/StoryTimeline";
 import BeachClubPerksSection from "./components/BeachClubPerksSection";
 import WhyDNDSection from "./components/WhyDNDSection";
 import StatsStrip from "./components/StatsStrip";
-import NewsBlogSection from "./components/NewsBlogSection";
 import ContactVisitSection from "./components/ContactVisitSection";
 import BrandsLogoSliderGlass  from "./components/BrandsSection";
 import Payment from  "./components/Payment";

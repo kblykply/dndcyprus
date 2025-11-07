@@ -544,6 +544,24 @@ function StatPill({ label, value }: { label: string; value: string }) {
 /* ---------------- Example Slides (replace BGs with yours) ---------------- */
 const DEFAULT_SLIDES: SlideInput[] = [
   {
+  id: 4,
+  videoUrl: "https://www.youtube.com/watch?v=GKH4VSPH57E",
+  backgroundImage: "/lajoyaimage.jpg", // elinizdeki uygun bir görselle değişebilirsiniz
+  badge: "Video",
+  content: {
+    customHeadline: "La Joya Açıldı!",
+    tagline: "Akdeniz kıyısında yeni bir yaşam resmi açılışla başladı.",
+    bullets: [
+      "Resmi açılış: 31 Ekim 2025, İskele",
+      "Ev sahipleri, danışmanlar ve iş ortaklarıyla kutlama",
+      "Yalın mimari çizgiler, sosyal alanlar ve sahil atmosferi"
+    ],
+    primaryCta: { label: "La Joya’yı Keşfet", href: "/la-joya" },
+    secondaryCta: { label: "İletişime Geç", href: "/contact" }
+  }
+}
+,
+  {
     id: 1,
     videoUrl: "https://www.youtube.com/watch?v=hMbzVAJMzXo",
     backgroundImage: "/daireici.jpg",
