@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BLOG_POSTS } from "../../../lib/blog";
+import { BLOG_POSTS } from "../../../../lib/blog";
 
 export const dynamic = "force-static";
 
