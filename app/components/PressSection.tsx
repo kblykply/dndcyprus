@@ -94,8 +94,8 @@ function InViewReveal({
 // ------------------------------------------------------------
 export default function PressSection({
   items,
- title = 'DND Cyprus in the Press',
-description = 'News coverage and press releases featuring our brand.',
+ title = "Basında DND Cyprus",
+description = "Markamızın yer aldığı haberler ve basın duyuruları.",
 
   pressKitHref,
   showAsSeenIn = true,
@@ -249,8 +249,7 @@ description = 'News coverage and press releases featuring our brand.',
               className="inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
               style={{ color: TEAL }}
             >
-              All News
-              <ChevronRight className="h-4 w-4" />
+Tüm Haberler              <ChevronRight className="h-4 w-4" />
             </Link>
           ) : (
             hasMoreThanLimit && (
@@ -316,7 +315,7 @@ function PressCard({ item }: { item: PressItem }) {
           className="mt-3 inline-flex items-center gap-1 text-sm font-medium"
           style={{ color: TEAL }}
         >
-          More Details <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          Habere Git <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
         </div>
       </div>
     </a>
