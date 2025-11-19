@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import SocialIcons from "./components/SocialIcons";
+import type { ReactNode } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,8 +25,13 @@ export const metadata: Metadata = {
     "Kıbrıs'ın önde gelen gayrimenkul geliştiricisi DND Cyprus ile tanışın. Yenilikçi konut ve ticari projelerimizle yaşam alanlarını yeniden tanımlıyoruz.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const stored = cookies().get("locale")?.value;
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const cookieStore = await cookies();
+  const stored = cookieStore.get("locale")?.value;
   const lang = stored === "en" ? "en" : "tr"; // default TR
 
   return (
@@ -33,7 +39,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${montserrat.variable} antialiased`}>
         <SocialIcons />
         {children}
-        
       </body>
     </html>
   );
