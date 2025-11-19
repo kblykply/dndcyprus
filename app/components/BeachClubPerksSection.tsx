@@ -85,7 +85,7 @@ export default function BeachClubPerksSection() {
 
       <motion.div variants={item} className="mt-8">
         <a
-          href="/mariachi"
+          href="/tr/mariachi"
           className="inline-flex items-center rounded-full px-6 py-3 bg-black text-white font-medium hover:bg-neutral-800 transition"
         >
           Mariachi’yi Keşfet →

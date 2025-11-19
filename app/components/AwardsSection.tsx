@@ -24,7 +24,7 @@ const SLIDES: AwardSlide[] = [
       "Dünya standartlarında eğlence, tasarım ve topluluk, Kuzey Kıbrıs sahillerine geliyor.",
     ],
     emphasis: "Kıbrıs’ta ABD Kalitesi.",
-    cta: { label: "Daha Fazla →", href: "/mariachi" },
+    cta: { label: "Daha Fazla →", href: "/tr/mariachi" },
     ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png",
   },
   {
@@ -44,7 +44,7 @@ const SLIDES: AwardSlide[] = [
       "Lagoon Verde, En İyi Sosyo-Kültürel Gelişim kategorisinde <strong>Altın Ödül</strong> ile onurlandırıldı.",
       "Bu ödül, refah, sürdürülebilirlik ve çevreyle uyumu önceliklendiren toplum odaklı bir projeyi kutluyor.",
     ],
-    cta: { label: "Daha Fazla →", href: "/lagoon-verde" },
+    cta: { label: "Daha Fazla →", href: "/tr/lagoon-verde" },
     ribbon: "/BEST-SOCIOCULTURAL-GOLD.png",
   },
 ];

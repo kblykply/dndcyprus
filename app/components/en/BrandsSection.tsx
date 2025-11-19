@@ -59,13 +59,13 @@ subtitle =
 note = "*Logo samples are linked to the actual project pages.",
 
   brands = [
-    { name: "DND Group", logo: "/logos/dndgroup.png", href: "/contact" },
+    { name: "DND Group", logo: "/logos/dndgroup.png", href: "/en/contact" },
     { name: "DND Homes", logo: "/logos/dndhomes.png", href: "http://dnd-homes.com/" },
-    { name: "Lagoon Verde", logo: "/logos/lagoon.png", href: "/lagoon-verde", tag: "Altın Ödül" },
-    { name: "La Joya", logo: "/logos/lajoya.png", href: "/la-joya" },
-    { name: "Mariachi Beach Club", logo: "/logos/mariachi.png", href: "/mariachi", tag: "Platin Ödül" },
-    { name: "Perla", logo: "/logos/perla.png", href: "/perla" },
-    { name: "Perla II", logo: "/logos/perlaii.png", href: "/perla-ii" },
+    { name: "Lagoon Verde", logo: "/logos/lagoon.png", href: "/en/lagoon-verde", tag: "Altın Ödül" },
+    { name: "La Joya", logo: "/logos/lajoya.png", href: "/en/la-joya" },
+    { name: "Mariachi Beach Club", logo: "/logos/mariachi.png", href: "/en/mariachi", tag: "Platin Ödül" },
+    { name: "Perla", logo: "/logos/perla.png", href: "/en/perla" },
+    { name: "Perla II", logo: "/logos/perlaii.png", href: "/en/perla-ii" },
   ],
 }: OurBrandsProps) {
   return (

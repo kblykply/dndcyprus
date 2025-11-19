@@ -85,7 +85,7 @@ La Joya, La Joya Perla, and Perla II residents enjoy exclusive access to the <st
 
       <motion.div variants={item} className="mt-8">
         <a
-          href="/mariachi-beach-club"
+          href="/en/mariachi-beach-club"
           className="inline-flex items-center rounded-full px-6 py-3 bg-black text-white font-medium hover:bg-neutral-800 transition"
         >
           Discover Mariachi →

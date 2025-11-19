@@ -1,14 +1,14 @@
-import AboutHero from "../../components/about/AboutHero";
-import AboutUs from "../../components/about/AboutWhoWeAreGlass";
-import MissionVisionValues from "../../components/about/MissionVisionValues";
-import TimelineMilestones from "../../components/about/TimelineMilestones";
-import WhyChooseUs from "../../components/about/WhyChooseUs";
+import AboutHero from "../../components/en/about/AboutHero";
+import AboutUs from "../../components/en/about/AboutWhoWeAreGlass";
+import MissionVisionValues from "../../components/en/about/MissionVisionValues";
+import TimelineMilestones from "../../components/en/about/TimelineMilestones";
+import WhyChooseUs from "../../components/en/about/WhyChooseUs";
 
-import CallToAction from "../../components/about/CallToAction";
-import OzanSpotlight from "../../components/about/OzanSpotlight";
-import AynurSpotlightAlt from "../../components/about/AynurSpotlightAlt"
+import CallToAction from "../../components/en/about/CallToAction";
+import OzanSpotlight from "../../components/en/about/OzanSpotlight";
+import AynurSpotlightAlt from "../../components/en/about/AynurSpotlightAlt"
 
-import AboutDndHomes from "../../components/about/AboutDndHomes";
+import AboutDndHomes from "../../components/en/about/AboutDndHomes";
 
 
 
@@ -31,8 +31,9 @@ export default function HomePage() {
 <AboutDndHomes
    videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
   poster="/homesthumb.webp"
-  heading="DND Homes — Kıbrıs Vizyonu"
-  description="Projelerimizi ve yaşam konseptimizi keşfedin."
+heading = "DND Homes — Cyprus Vision"
+description = "Discover our projects and living concept."
+
 />
 <OzanSpotlight/>
     <TimelineMilestones />

@@ -239,7 +239,7 @@ export default function LeadershipTeam({
   {
     id: "okan",
     name: "Okan Afşar",
-    role: "Satış Temsilcisi",
+    role: "Satış Manager",
     category: "Sales",
     photo: "/teams/okan.png",
     bio: "Satış faaliyetlerinde görevli.",

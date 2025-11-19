@@ -317,8 +317,8 @@ function SlideContentBlock({
 
             {(author || duration) && (
               <div className="mt-5 grid grid-cols-2 gap-3 max-w-md">
-                <StatPill label="Süre" value={duration} />
-                <StatPill label="Kaynak" value={author || "YouTube"} />
+                <StatPill label="Duration" value={duration} />
+                <StatPill label="Source" value={author || "YouTube"} />
               </div>
             )}
 
@@ -543,6 +543,25 @@ function StatPill({ label, value }: { label: string; value: string }) {
 
 /* ---------------- Example Slides (replace BGs with yours) ---------------- */
 const DEFAULT_SLIDES: SlideInput[] = [
+
+   {
+  id: 4,
+  videoUrl: "https://www.youtube.com/watch?v=GKH4VSPH57E",
+  backgroundImage: "/lajoyaimage.jpg", // you can replace this with a suitable visual you have
+  badge: "Video",
+  content: {
+    customHeadline: "La Joya is Now Open!",
+    tagline: "A new life on the Mediterranean coast has begun with the official opening.",
+    bullets: [
+      "Official opening: November 1, 2025, İskele",
+      "Celebration with our homeowners, business partners, and team",
+      "Minimal architectural lines, social spaces, and a beachfront atmosphere"
+    ],
+    primaryCta: { label: "Discover La Joya", href: "/en/la-joya" },
+    secondaryCta: { label: "Contact Us", href: "/en/contact" }
+  }
+}
+,
   {
     id: 1,
     videoUrl: "https://www.youtube.com/watch?v=hMbzVAJMzXo",

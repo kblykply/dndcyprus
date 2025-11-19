@@ -556,8 +556,8 @@ const DEFAULT_SLIDES: SlideInput[] = [
       "Ev sahipleri, iş ortakları ve ekibimizle kutlama",
       "Yalın mimari çizgiler, sosyal alanlar ve sahil atmosferi"
     ],
-    primaryCta: { label: "La Joya’yı Keşfet", href: "/la-joya" },
-    secondaryCta: { label: "İletişime Geç", href: "/contact" }
+    primaryCta: { label: "La Joya’yı Keşfet", href: "/tr/la-joya" },
+    secondaryCta: { label: "İletişime Geç", href: "/tr/contact" }
   }
 }
 ,
@@ -574,8 +574,8 @@ const DEFAULT_SLIDES: SlideInput[] = [
         "Geniş sosyal alanlar ve yürüyüş rotaları",
         "Gün batımında doğal ışık senaryosu",
       ],
-      primaryCta: { label: "Projeyi İncele", href: "/la-joya" },
-      secondaryCta: { label: "İletişime Geç", href: "/contact" },
+      primaryCta: { label: "Projeyi İncele", href: "/tr/la-joya" },
+      secondaryCta: { label: "İletişime Geç", href: "/tr/contact" },
     },
   },
   {
@@ -591,8 +591,8 @@ const DEFAULT_SLIDES: SlideInput[] = [
         "Konfor odaklı planlama ve dolaşım",
         "Zengin servis ve tesis seçenekleri",
       ],
-      primaryCta: { label: "Daha Fazla", href: "/gecitkale" },
-      secondaryCta: { label: "Satış Ekibi", href: "/team" },
+      primaryCta: { label: "Daha Fazla", href: "/tr/gecitkale" },
+      secondaryCta: { label: "Satış Ekibi", href: "/tr/team" },
     },
   },
   {
@@ -608,8 +608,8 @@ const DEFAULT_SLIDES: SlideInput[] = [
         "Yüksek doluluk hedefi ve yönetim",
         "Uzun vadeli değer odaklı yaklaşım",
       ],
-      primaryCta: { label: "Hakkımızda", href: "/contact" },
-      secondaryCta: { label: "Diğer Projeler", href: "/projects" },
+      primaryCta: { label: "Hakkımızda", href: "/tr/contact" },
+      secondaryCta: { label: "Diğer Projeler", href: "/tr/projects" },
     },
   },
 ];

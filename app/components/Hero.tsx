@@ -166,7 +166,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       floors: 4,
       area: 43.179,
       bedrooms: 354,
-      href: "/lagoon-verde", // ← NEW
+      href: "/tr/lagoon-verde", // ← NEW
     },
     {
       id: 2,
@@ -176,7 +176,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       floors: 5,
       area: 8.799,
       bedrooms: 128,
-      href: "/perla-ii", // ← NEW
+      href: "/tr/perla-ii", // ← NEW
     },
     {
       id: 3,
@@ -186,7 +186,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       floors: 5,
       area: 25.053,
       bedrooms: 384,
-      href: "/perla", // ← NEW
+      href: "/tr/perla", // ← NEW
     },
     {
       id: 7,
@@ -196,7 +196,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       floors: 3,
       area: 6.36,
       bedrooms: 74,
-      href: "/la-joya", // ← NEW
+      href: "/tr/la-joya", // ← NEW
     },
   ],
   "Arsa Projeleri": [
@@ -208,7 +208,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       floors: 0,
       area: 9.841,
       bedrooms: 0,
-      href: "/gecitkale", // ← NEW
+      href: "/tr/gecitkale", // ← NEW
     },
   ],
   "Mariachi Beach Club": [
@@ -220,7 +220,7 @@ const projects: Record<Tab, ProjectItem[]> = {
       floors: 0,
       area: 5.001,
       bedrooms: 0,
-      href: "/mariachi", // ← NEW
+      href: "/tr/mariachi", // ← NEW
     },
   ],
 };

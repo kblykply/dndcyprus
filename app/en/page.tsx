@@ -1,24 +1,23 @@
 
-import Hero from "../components/Hero";
-import AwardsSection from "../components/AwardsSection";
-import ProjectsStrip from "../components/ProjectsStrip";
-import StoryTimeline from "../components/StoryTimeline";
-import BeachClubPerksSection from "../components/BeachClubPerksSection";
-import WhyDNDSection from "../components/WhyDNDSection";
-import StatsStrip from "../components/StatsStrip";
-import ContactVisitSection from "../components/ContactVisitSection";
-import BrandsLogoSliderGlass  from "../components/BrandsSection";
-import Payment from  "../components/Payment";
-import IgEmbedGallery from "../components/IgPost";
-
-// app/(site)/page.tsx  (or wherever you render the section)
+import Hero from "../components/en/Hero";
+import AwardsSection from "../components/en/AwardsSection";
+import ProjectsStrip from "../components/en/ProjectsStrip";
+import StoryTimeline from "../components/en/StoryTimeline";
+import BeachClubPerksSection from "../components/en/BeachClubPerksSection";
+import WhyDNDSection from "../components/en/WhyDNDSection";
+import StatsStrip from "../components/en/StatsStrip";
+import NewsBlogSection from "../components/en/NewsBlogSection";
+import ContactVisitSection from "../components/en/ContactVisitSection";
+import BrandsLogoSliderGlass  from "../components/en/BrandsSection";
+import Payment from  "../components/en/Payment";
+import IgEmbedGallery from "../components/en/IgPost";
 import PressSection, { type PressItem } from "../components/PressSection";
 
 const PRESS_ITEMS: PressItem[] = [
   {
     id: "mha-2025-11-04",
     outlet: "Mağusa Haber Ajansı (MHA)",
-    title: "DND MÜJDEYİ VERDİ: LA JOYA TAMAMLANDI",
+    title: "DND Announced the Good News: La Joya is Completed",
     url: "https://www.mhahaber.com/dnd-mujdeyi-verdi-la-joya-tamamlandi",
     date: "2025-11-04",
     cover: "/news/mhacover.webp",
@@ -28,17 +27,17 @@ const PRESS_ITEMS: PressItem[] = [
     id: "kibrispostasi-2025-11-04",
     outlet: "Kıbrıs Postası",
     title:
-      "Hayaller gerçek oldu: DND Cyprus, La Joya Rezidansları ve Tatil Köyü’nün tamamlandığını duyurdu",
+      "Dreams Came True: DND Cyprus Announces the Completion of La Joya Residences and Holiday Village",
     url: "https://www.kibrispostasi.com/c35-KIBRIS_HABERLERI/n580748-hayaller-gercek-oldu-dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu",
     date: "2025-11-04",
     cover: "/news/kpcover.jpg",
-    tags: ["La Joya", "İskele Long Beach"],
+    tags: ["La Joya", "Iskele Long Beach"],
   },
   {
     id: "yeniduzen-2025-11-04",
     outlet: "YENİDÜZEN",
     title:
-      "DND Cyprus, La Joya Rezidansları ve Tatil Köyü’nün tamamlandığını duyurdu",
+      "DND Cyprus Announces the Completion of La Joya Residences and Holiday Village",
     url: "https://www.yeniduzen.com/dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu-188492h.htm",
     date: "2025-11-04",
     cover: "/news/ydcover.jpg",
@@ -48,13 +47,14 @@ const PRESS_ITEMS: PressItem[] = [
     id: "haberkibris-2025-11-04",
     outlet: "Haber Kıbrıs",
     title:
-      "DND Cyprus, La Joya Rezidansları ve Tatil Köyü’nün tamamlandığını duyurdu",
+      "DND Cyprus Announces the Completion of La Joya Residences and Holiday Village",
     url: "https://haberkibris.com/dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu-0957-2025-11-04.html",
     date: "2025-11-04",
     cover: "/news/hkcover.jpg",
     tags: ["La Joya"],
   },
 ];
+
 
 
 
@@ -81,9 +81,10 @@ export default function HomePage() {
                         <StatsStrip />
                         
                 <IgEmbedGallery />
+
    <PressSection items={PRESS_ITEMS} />
                         <ContactVisitSection />
-
+    
 
 
 

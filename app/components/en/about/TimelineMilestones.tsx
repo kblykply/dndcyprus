@@ -1,0 +1,317 @@
+// app/components/TimelineHorizontal.tsx
+"use client";
+
+import Image from "next/image";
+import React, { useMemo, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+
+const TEAL = "#27959b";
+const ORANGE = "#f15c34";
+
+type Milestone = {
+  year: string;
+  title: string;
+  description: string;
+  image?: string;
+  color?: "teal" | "orange";
+};
+
+type Props = {
+  kicker?: string;
+  title?: string;
+  subtitle?: string;
+  milestones?: Milestone[];
+  bgSrc?: string; // background image
+  bgAlt?: string;
+  compact?: boolean; // shorter layout switch
+};
+
+export default function TimelineHorizontal({
+kicker = "DND Cyprus",
+title = "Our Journey",
+subtitle = "Explore our key milestones.",
+
+  milestones = DEFAULT_MILESTONES,
+  bgSrc = "/lagoon-verde/5.jpg",
+  bgAlt = "DND projeleri arka plan",
+  compact = true, // default to shorter section
+}: Props) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const inView = useInView(sectionRef, { margin: "-20% 0px -20% 0px", amount: 0.3 });
+  const reduced = useReducedMotion();
+
+  const ease = [0.22, 1, 0.36, 1] as const;
+  const D = reduced ? 0.001 : 0.6;
+
+  const rise = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: reduced ? 0 : 18, filter: "blur(6px)" },
+      show: {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transition: { duration: D, ease },
+      },
+    }),
+    [D, ease, reduced]
+  );
+
+  const fadeScale = useMemo(
+    () => ({
+      hidden: { opacity: 0, scale: reduced ? 1 : 0.985 },
+      show: { opacity: 1, scale: 1, transition: { duration: D, ease, delay: 0.05 } },
+    }),
+    [D, ease, reduced]
+  );
+
+  // Compact sizing
+  const minH = compact ? "min-h-[52vh]" : "min-h-[70vh]";
+  const containerPY = compact ? "py-14 lg:py-16" : "py-20 lg:py-28";
+  const railMt = compact ? "mt-8 md:mt-10" : "mt-12 md:mt-16";
+  const railH = compact ? "h-[2px]" : "h-[3px]";
+  const slidePad = compact ? "pt-12 pb-12" : "pt-20 pb-20";
+
+  return (
+    <section
+      ref={sectionRef}
+      id="timeline"
+      className={`relative isolate ${minH} overflow-hidden text-white`}
+      aria-label="DND Timeline"
+    >
+      {/* Background image (blurred) */}
+      <div className="absolute inset-0 -z-20">
+        <Image
+          src={bgSrc}
+          alt={bgAlt}
+          fill
+          sizes="100vw"
+          className="object-cover scale-[1.06] will-change-transform"
+          style={{ filter: "blur(8px)" }}
+          aria-hidden
+        />
+        {/* Scrim for readability */}
+        <div className="absolute inset-0 bg-black/35 md:bg-black/30" aria-hidden />
+        {/* Brand glows */}
+        <div
+          className="absolute inset-0"
+          aria-hidden
+          style={{
+            background: `
+              radial-gradient(34rem 22rem at 10% 0%, ${TEAL}18, transparent 70%),
+              radial-gradient(28rem 18rem at 90% 100%, ${ORANGE}16, transparent 70%)
+            `,
+            mixBlendMode: "screen",
+            opacity: 0.9,
+          }}
+        />
+        {/* Subtle noise */}
+        <div
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          style={{
+            backgroundImage:
+              "url('data:image/svg+xml;utf8,\
+              <svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22>\
+              <filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%221%22 stitchTiles=%22stitch%22/></filter>\
+              <rect width=%2240%22 height=%2240%22 filter=%22url(%23n)%22 opacity=%220.15%22/></svg>')",
+          }}
+          aria-hidden
+        />
+      </div>
+
+      {/* Content container */}
+      <div className={`relative mx-auto max-w-7xl px-6 md:px-12 ${containerPY}`}>
+        {/* Header */}
+        <motion.div
+          variants={rise}
+          initial="hidden"
+          animate={inView ? "show" : "hidden"}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <div className="mb-3 flex items-center justify-center gap-3">
+            <span
+              className="h-[2px] w-12 rounded-full flex-none"
+              style={{ backgroundColor: TEAL }}
+              aria-hidden
+            />
+            <span className="text-[11px] md:text-[12px] font-semibold tracking-[0.22em] uppercase text-white/80">
+              {kicker}
+            </span>
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-semibold leading-tight">{title}</h2>
+          <p className="mt-3 text-[15px] md:text-base text-white/90">{subtitle}</p>
+        </motion.div>
+
+        {/* Timeline rail */}
+        <div className={`relative ${railMt}`}>
+          <motion.div
+            variants={fadeScale}
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            className={`absolute left-0 right-0 top-1/2 ${railH} rounded-full`}
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(255,255,255,0.28), rgba(255,255,255,0.14))",
+            }}
+          />
+
+          <Swiper
+            modules={[Navigation]}
+            navigation
+            spaceBetween={compact ? 28 : 32}
+            slidesPerView={1}
+            breakpoints={{
+              768: { slidesPerView: 2, spaceBetween: compact ? 30 : 36 },
+              1280: { slidesPerView: 3, spaceBetween: compact ? 32 : 40 },
+            }}
+          >
+            {milestones.map((m, i) => {
+              const keyColor = m.color ?? (i % 2 ? "orange" : "teal");
+              const c = keyColor === "orange" ? ORANGE : TEAL;
+              const above = i % 2 === 0;
+
+              return (
+                <SwiperSlide key={`${m.year}-${i}`} className={slidePad}>
+                  <motion.div
+                    variants={rise}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.35 }}
+                    className="relative flex flex-col items-center"
+                  >
+                    {/* Connector dot */}
+                    <div
+                      className={`absolute top-1/2 z-10 ${compact ? "h-4 w-4" : "h-5 w-5"} rounded-full border-4`}
+                      style={{
+                        background: "rgba(255,255,255,0.95)",
+                        borderColor: c,
+                        boxShadow: `0 0 0 ${compact ? 6 : 8}px ${c}24, 0 6px 24px ${c}33`,
+                      }}
+                    />
+
+                    {/* Glass card */}
+                    <div
+                      className={[
+                        "w-full max-w-sm overflow-hidden rounded-2xl border ring-1 shadow-[0_8px_40px_rgba(0,0,0,0.25)]",
+                        "bg-white/10 supports-[backdrop-filter]:backdrop-blur-xl",
+                        "border-white/20 ring-white/10",
+                        above
+                          ? compact
+                            ? "mb-auto -translate-y-6"
+                            : "mb-auto -translate-y-10"
+                          : compact
+                          ? "mt-auto translate-y-6"
+                          : "mt-auto translate-y-10",
+                      ].join(" ")}
+                      style={{ WebkitBackdropFilter: "blur(18px)" }}
+                    >
+                      {m.image && (
+                        <div className={`${compact ? "h-36" : "h-44"} w-full relative overflow-hidden`}>
+                          <img
+                            src={m.image}
+                            alt={m.title}
+                            className="h-full w-full object-cover"
+                            style={{ filter: "saturate(1.02) contrast(1.02) brightness(0.95)" }}
+                          />
+                          {/* Subtle gloss */}
+                          <div
+                            className="pointer-events-none absolute inset-0"
+                            style={{
+                              background:
+                                "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0))",
+                            }}
+                          />
+                        </div>
+                      )}
+
+                      <div className="p-5">
+                        <span
+                          className="inline-flex text-[11px] px-3 py-1 rounded-full border"
+                          style={{
+                            background: "rgba(255,255,255,0.06)",
+                            color: "#fff",
+                            borderColor: `${c}44`,
+                          }}
+                        >
+                          {m.year}
+                        </span>
+                        <h3 className="mt-2 text-lg font-semibold text-white">{m.title}</h3>
+                        <p className="mt-2 text-sm text-white/85 leading-relaxed">
+                          {m.description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </div>
+
+      {/* Swiper nav color tweaks to fit dark glass theme */}
+      <style jsx global>{`
+        .swiper-button-prev,
+        .swiper-button-next {
+          color: rgba(255, 255, 255, 0.9);
+          text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+        }
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+          font-size: 18px;
+          font-weight: 700;
+        }
+      `}</style>
+    </section>
+  );
+}
+
+export const DEFAULT_MILESTONES: Milestone[] = [
+  {
+    year: "2017",
+    title: "Founding of DND Homes",
+    description: "The company's first headquarters was established in Boston.",
+    image: "/dnd-boston-ofis.jpg",
+    color: "teal",
+  },
+  {
+    year: "2017",
+    title: "First Project in the United States",
+    description: "The 12 Longfellow Road, Lexington project was launched.",
+    image: "/12lex.jpg",
+    color: "orange",
+  },
+  {
+    year: "2018",
+    title: "Ozan Dökmecioğlu Award",
+    description: 'Named "CFO of the Year" by the Boston Business Journal.',
+    image: "/ozan-dokmecioglu-cfo-of-the-year.jpg",
+    color: "teal",
+  },
+  {
+    year: "2023",
+    title: "Founding of DND Cyprus",
+    description: "A new operations center was opened in Cyprus.",
+    image: "/kurulus.JPG",
+    color: "orange",
+  },
+  {
+    year: "2025",
+    title: "Property NC Awards",
+    description: 'Awarded the "Best Emerging Company" prize.',
+    image: "/property_awards_2025-747.jpg",
+    color: "teal",
+  },
+  {
+    year: "2025",
+    title: "Delivery of First Project La Joya",
+    description: "The La Joya project was completed and delivered.",
+    image: "/la-joya/2.jpg",
+    color: "orange",
+  },
+];
+
