@@ -29,7 +29,7 @@ type Card = {
   title: string;
   desc?: string;
   image: string;               // public/ path
-  tag: "Planlama" | "Altyapı"; // pill label
+  tag: "Planning" | "Infrastructure"; // pill label
   accent?: "teal" | "orange";
 };
 
