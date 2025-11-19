@@ -49,7 +49,7 @@
       links: [
         { label: "Home", href: "/en" },
         { label: "Contact", href: "/en/contact" },
-        { label: "Blog", href: "/en/blog" },
+        { label: "News", href: "/en/press" },
       ],
     },
 

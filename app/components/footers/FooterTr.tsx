@@ -49,7 +49,7 @@
     links: [
       { label: "Ana\u00A0Sayfa", href: "/tr/" },
       { label: "İletişim", href: "/tr/contact" },
-      { label: "Yazılar", href: "/tr/blog" },
+      { label: "Haberler", href: "/tr/press" },
     ],
   },
   
