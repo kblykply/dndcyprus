@@ -6,6 +6,7 @@ import "../globals.css";
 import Header from "../components/headers/HeaderTr";
 import Footer from "../components/footers/FooterTr";
 import WhatsAppFab from "../components/whatsapp/WhatsappTr";
+import SocialIcons from "../components/SocialIcons";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,6 +46,8 @@ export default function TRLayout({ children }: { children: React.ReactNode }) {
         {children}
                         <WhatsAppFab phone="+90 548 888 03 63" />
         
+        
+        <SocialIcons />
       </main>
 
       <Footer />

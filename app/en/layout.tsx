@@ -7,6 +7,7 @@ import "../globals.css";
 import HeaderEn from "../components/headers/HeaderEn"; // English header
 import Footer from "../components/footers/FooterEn";              // Generic or EN footer
 import WhatsAppFab from "../components/whatsapp/WhatsappEn";
+import SocialIcons from "../components/SocialIcons";
 
 export const metadata: Metadata = {
   title: "DND Cyprus — English",
@@ -44,6 +45,8 @@ export default function ENLayout({ children }: { children: ReactNode }) {
       <main id="main" className="min-h-[60vh]">
         {children}
                 <WhatsAppFab phone="+90 548 888 03 63" />
+
+        <SocialIcons />
 
       </main>
 

@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
-import SocialIcons from "./components/SocialIcons";
 import type { ReactNode } from "react";
 
 const inter = Inter({
@@ -37,7 +36,6 @@ export default async function RootLayout({
   return (
     <html lang={lang}>
       <body className={`${inter.variable} ${montserrat.variable} antialiased`}>
-        <SocialIcons />
         {children}
       </body>
     </html>
