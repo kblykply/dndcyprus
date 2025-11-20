@@ -10,13 +10,15 @@ type SearchParams = {
   next?: string;
 };
 
-export default function AdminLoginPage({
+export default async function AdminLoginPage({
   searchParams,
 }: {
-  searchParams?: SearchParams;
+  searchParams?: Promise<SearchParams>;
 }) {
-  const hasError = searchParams?.error === "1";
-  const nextPath = searchParams?.next || "/admin/leads";
+  // Promise olan searchParams'i çöz
+  const params = (await searchParams) ?? {};
+  const hasError = params.error === "1";
+  const nextPath = params.next || "/admin/leads";
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
@@ -39,11 +41,7 @@ export default function AdminLoginPage({
           </div>
         )}
 
-        <form
-          method="POST"
-          action="/api/admin-login"
-          className="space-y-4"
-        >
+        <form method="POST" action="/api/admin-login" className="space-y-4">
           <input type="hidden" name="next" value={nextPath} />
 
           <div>
