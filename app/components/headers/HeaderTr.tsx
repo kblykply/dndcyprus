@@ -126,10 +126,11 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
                 const isLaJoya = pathname === "/la-joya" || pathname.startsWith("/la-joya/");
                                 const isMariachi = pathname === "/mariachi" || pathname.startsWith("/mariachi/");
                                 const gecitkale = pathname === "/gecitkale" || pathname.startsWith("/gecitkale/");
+                                const dndturkiye = pathname === "/dndturkiye" || pathname.startsWith("/dndturkiye/");
 
 
 
-  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi || gecitkale;
+  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi || gecitkale || dndturkiye ;
 
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);

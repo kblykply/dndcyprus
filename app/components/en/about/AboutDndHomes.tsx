@@ -168,7 +168,7 @@ description = "DND Homes develops high-end residences in prime locations in Mass
 <SecondaryCTA href="/en/projects">
   North Cyprus Projects
 </SecondaryCTA>
-
+              
             </div>
           </div>
         </div>

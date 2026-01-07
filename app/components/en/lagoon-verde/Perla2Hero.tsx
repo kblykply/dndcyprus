@@ -181,7 +181,7 @@ delivery = "December 2028",
                 backdropFilter: "blur(8px)",
               }}
             >
-             Download Brochure (PDF)
+             Download Brochure (PDF)  
             </a>
           )}
         </motion.div>

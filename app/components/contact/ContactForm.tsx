@@ -64,7 +64,7 @@ export default function ContactForm() {
    return (
     <section
       aria-label="İletişim Formu"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden bg-white"
       id ="form"
       style={
         {
@@ -73,6 +73,7 @@ export default function ContactForm() {
           "--stroke": "rgba(20,21,23,0.08)",
         } as CSSVars
       }
+      
     >
       {/* Decorative background (soft blobs + subtle grid) */}
       <div

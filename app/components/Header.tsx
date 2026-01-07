@@ -86,6 +86,7 @@ export default function Header() {
                 const isLaJoya = pathname === "/la-joya" || pathname.startsWith("/la-joya/");
                                 const isMariachi = pathname === "/mariachi" || pathname.startsWith("/mariachi/");
                                 const gecitkale = pathname === "/gecitkale" || pathname.startsWith("/gecitkale/");
+                                const dndturkiye = pathname === "/dndturkiye" || pathname.startsWith("/dndturkiye/");
 
 
 
