@@ -54,6 +54,11 @@ const NAV: NavGroup[] = [
     href: "/tr/contact",
     
   },
+     {
+    label: "DND\u00A0Istanbul",
+    href: "/tr/dndturkiye",
+    
+  },
   {
     label: "Haberler",
     href: "/tr/press",

@@ -64,7 +64,7 @@ export default function ContactForm() {
   return (
     <section
       aria-label="Contact Form"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden bg-white"
       id="form"
       style={
         {

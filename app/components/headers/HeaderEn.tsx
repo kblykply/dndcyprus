@@ -48,6 +48,11 @@ const NAV: NavGroup[] = [
     href: "/en/about",
     items: [{ label: "Ekibimiz", href: "/en/team" }],
   },
+   {
+    label: "DND\u00A0Istanbul",
+    href: "/en/dndturkiye",
+    
+  },
 
   {
     label: "Contact",
@@ -133,10 +138,11 @@ const handleSwitch = (target: "tr" | "en") => {
                 const isLaJoya = pathname === "/la-joya" || pathname.startsWith("/la-joya/");
                                 const isMariachi = pathname === "/mariachi" || pathname.startsWith("/mariachi/");
                                 const gecitkale = pathname === "/gecitkale" || pathname.startsWith("/gecitkale/");
+                                const dndturkiye = pathname === "/dndturkiye" || pathname.startsWith("/dndturkiye/");
 
 
 
-  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi || gecitkale;
+  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi || gecitkale || dndturkiye;
 
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);

@@ -47,24 +47,26 @@ type Props = {
 };
 
 export default function TurkiyeOfficeLocationTimes({
-  kicker = "Türkiye Ofisi",
-  title = "Konum & Çalışma Saatleri",
-  subtitle = "Türkiye ekibimizle dilediğiniz gibi online görüşebilir veya ofiste randevu planlayabilirsiniz.",
+  kicker = "Turkey Office",
+  title = "Location & Working Hours",
+  subtitle =
+    "You can meet our Turkey team online anytime, or plan an in-office appointment.",
   image = "/dndturkiye/office.jpeg",
-  imageAlt = "DND Türkiye Ofisi",
-  city = "İstanbul",
-  address = "Defne 05Ada, Bahçeşehir 1. Kısım, Dalgıçkuşu Sk. Villa 2, 34488 Başakşehir/İstanbul",
+  imageAlt = "DND Turkey Office",
+  city = "Istanbul",
+  address =
+    "Defne 05Ada, Bahçeşehir 1. Kısım, Dalgıçkuşu Sk. Villa 2, 34488 Başakşehir/Istanbul",
 
   mapEmbedSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126721.87407630496!2d28.53773139726562!3d41.0638687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7ae9b35ed53%3A0x9c37d6a4d5a018f4!2sDND%20Group%20T%C3%BCrkiye%20Ofisi!5e1!3m2!1str!2str!4v1767826874396!5m2!1str!2str",
 
   workTimes = [
-    { day: "Pazartesi", hours: "09:00 – 18:00" },
-    { day: "Salı", hours: "09:00 – 18:00" },
-    { day: "Çarşamba", hours: "09:00 – 18:00" },
-    { day: "Perşembe", hours: "09:00 – 18:00" },
-    { day: "Cuma", hours: "09:00 – 18:00" },
-    { day: "Cumartesi", hours: "Randevu ile" },
-    { day: "Pazar", hours: "Kapalı" },
+    { day: "Monday", hours: "09:00 – 18:00" },
+    { day: "Tuesday", hours: "09:00 – 18:00" },
+    { day: "Wednesday", hours: "09:00 – 18:00" },
+    { day: "Thursday", hours: "09:00 – 18:00" },
+    { day: "Friday", hours: "09:00 – 18:00" },
+    { day: "Saturday", hours: "By appointment" },
+    { day: "Sunday", hours: "Closed" },
   ],
   phone = "+90 392 444 03 63",
   phoneHref = "tel:+903924440363",
@@ -75,7 +77,7 @@ export default function TurkiyeOfficeLocationTimes({
 }: Props) {
   return (
     <section
-      aria-label="Türkiye Ofisi Konum ve Çalışma Saatleri"
+      aria-label="Turkey Office Location and Working Hours"
       className="relative bg-white"
       style={{ color: "#141517" }}
       data-bg="light"
@@ -140,7 +142,7 @@ export default function TurkiyeOfficeLocationTimes({
                 className="w-full h-[260px] lg:h-[300px] border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                aria-label="DND Türkiye Ofisi Google Haritası"
+                aria-label="DND Turkey Office Google Map"
               />
 
               {/* Map label */}
@@ -153,7 +155,7 @@ export default function TurkiyeOfficeLocationTimes({
                     borderColor: `${TEAL}33`,
                   }}
                 >
-                  Harita
+                  Map
                 </span>
               </div>
             </div>
@@ -194,8 +196,6 @@ export default function TurkiyeOfficeLocationTimes({
 
             {/* Cards row */}
             <div className="mt-8 grid gap-4 md:grid-cols-1">
-         
-
               {/* Work times + contact card */}
               <motion.div
                 variants={fadeUp}
@@ -208,10 +208,10 @@ export default function TurkiyeOfficeLocationTimes({
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <div className="text-[11px] uppercase tracking-wide text-black/50">
-                      Çalışma Saatleri
+                      Working Hours
                     </div>
                     <div className="mt-1 text-lg font-semibold text-slate-900">
-                      Müsait olduğunuz zamanı seçin
+                      Choose a time that works for you
                     </div>
                   </div>
                   <span
@@ -222,7 +222,7 @@ export default function TurkiyeOfficeLocationTimes({
                       borderColor: `${TEAL}33`,
                     }}
                   >
-                    Destek
+                    Support
                   </span>
                 </div>
 
@@ -245,7 +245,7 @@ export default function TurkiyeOfficeLocationTimes({
                   style={{ borderColor: "rgba(20,21,23,0.08)" }}
                 >
                   <div className="text-[11px] uppercase tracking-wide text-black/50">
-                    Hızlı İletişim
+                    Quick Contact
                   </div>
 
                   <div className="mt-3 flex flex-wrap gap-3 text-sm">
@@ -269,7 +269,7 @@ export default function TurkiyeOfficeLocationTimes({
                         border: `1px solid ${ORANGE}33`,
                       }}
                     >
-                      Ara
+                      Call
                     </a>
 
                     <span className="inline-flex items-center gap-2 text-black/55">
@@ -278,12 +278,12 @@ export default function TurkiyeOfficeLocationTimes({
                         style={{ background: ORANGE }}
                         aria-hidden
                       />
-                      24 saat içinde geri dönüş
+                      Response within 24 hours
                     </span>
                   </div>
 
                   <div className="mt-3 text-xs text-black/45">
-                    Telefon:{" "}
+                    Phone:{" "}
                     <span className="font-medium text-black/70">{phone}</span> •
                     WhatsApp:{" "}
                     <span className="font-medium text-black/70">{whatsapp}</span>
