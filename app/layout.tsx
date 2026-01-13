@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   title: "DND Cyprus",
   description:
     "Kıbrıs'ın önde gelen gayrimenkul geliştiricisi DND Cyprus ile tanışın. Yenilikçi konut ve ticari projelerimizle yaşam alanlarını yeniden tanımlıyoruz.",
+
+  // ✅ Facebook Domain Verification
+  other: {
+    "facebook-domain-verification": "w1ojaqwwotv6uzovm0on3w6lkrq03n",
+  },
 };
 
 export default async function RootLayout({
