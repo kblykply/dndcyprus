@@ -38,7 +38,7 @@ export default function ContactCTAMariachi({
   subtitle =
     "Bahçeler, İskele — Akdeniz güneşiyle Latin ruhunun buluştuğu beş yıldızlı plaj & havuz deneyimi. Restoran (Latino menü), 2 bar, 4 jakuzili havuz ve canlı DJ performansları.",
   buttonText = "Rezervasyon Yap",
-  buttonHref = "/contact",
+  buttonHref = "/tr/contact",
   bgImage = "/mariachi/1.jpg", // kendi görsel yolunuzu koyun (public/)
   overlayOpacity = 0.42,
   fullHeight = true,
