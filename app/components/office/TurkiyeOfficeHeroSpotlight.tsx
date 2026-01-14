@@ -27,7 +27,7 @@ type Props = {
 export default function DefaultHero({
   bg = "/dndturkiye/hero.jpeg",
   kicker = "DND Cyprus",
-title = "DND Türkiye Ofisi",
+title = "DND Istanbulnpm r Ofisi",
 subtitle = "Türkiye merkezli danışmanlık ekibimiz, Kıbrıs projelerimiz için yatırımcı adaylarına şeffaf, planlı ve uçtan uca destek sunar."
 ,
 
