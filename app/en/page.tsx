@@ -12,7 +12,7 @@ import BrandsLogoSliderGlass  from "../components/en/BrandsSection";
 import Payment from  "../components/en/Payment";
 import IgEmbedGallery from "../components/en/IgPost";
 import PressSection, { type PressItem } from "../components/PressSection";
-
+import ProjectsHeroFullSlider from "../components/en/projects/ProjectsHero";
 const PRESS_ITEMS: PressItem[] = [
   {
     id: "mha-2025-11-04",
@@ -65,7 +65,8 @@ const PRESS_ITEMS: PressItem[] = [
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen text-white overflow-x-hidden">
-      <Hero />
+            <ProjectsHeroFullSlider />
+
             <AwardsSection />
                         <ProjectsStrip />
                                                 <StoryTimeline/>

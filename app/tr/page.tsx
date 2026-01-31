@@ -10,7 +10,7 @@ import ContactVisitSection from "../components/ContactVisitSection";
 import BrandsLogoSliderGlass  from "../components/BrandsSection";
 import Payment from  "../components/Payment";
 import IgEmbedGallery from "../components/IgPost";
-
+import ProjectsHeroFullSlider from "../components/projects/ProjectsHero";
 // app/(site)/page.tsx  (or wherever you render the section)
 import PressSection, { type PressItem } from "../components/PressSection";
 
@@ -65,7 +65,7 @@ const PRESS_ITEMS: PressItem[] = [
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen text-white overflow-x-hidden">
-      <Hero />
+      <ProjectsHeroFullSlider  />
             <AwardsSection />
                         <ProjectsStrip />
                                                 <StoryTimeline/>

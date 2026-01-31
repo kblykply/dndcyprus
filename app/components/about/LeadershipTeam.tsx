@@ -128,19 +128,7 @@ export default function LeadershipTeam({
 
 
   },
-  {
-    id: "tugce",
-    name: "Tuğçe Çinçar",
-    role: "Yönetici Asistan",
-    category: "Operations",
-    photo: "/teams/tugce.png",
-    bio: "Yönetim desteği ve organizasyonel koordinasyon.",
-    socials: {},
-    accent: "orange",
-        sortOrder: 15,
-
-
-  },
+  
   {
     id: "burcin",
     name: "Burçin Gül",
@@ -297,11 +285,11 @@ export default function LeadershipTeam({
 
   },
   {
-    id: "berkay",
-    name: "Berkay İncedal",
+    id: "Parmida",
+    name: "Parmida Mesgari",
     role: "Videographer",
     category: "Marketing",
-    photo: "/teams/berkay.png",
+    photo: "/teams/parmida.png",
     bio: "Video prodüksiyon ve görsel içerik uzmanı.",
     socials: {},
     accent: "teal",
@@ -334,17 +322,18 @@ export default function LeadershipTeam({
 
   },
   {
-    id: "caglanur",
-    name: "Çağlanur Evren",
-    role: "Muhasebe Sorumlusu",
-    category: "Finance",
-    photo: "/teams/cagla.png",
-    bio: "Muhasebe süreçlerinin yürütülmesi.",
+    id: "emine-gungor",
+    name: "Emine Güngör",
+    role: "La Joya Servis Personeli",
+    category: "Operations",
+    photo: "/teams/emineg.png",
+    bio: "Servis ve destek hizmetleri sorumlusu.",
     socials: {},
-    accent: "teal",
-        sortOrder: 23,
+    accent: "orange",
+        sortOrder: 31,
 
   },
+  
   {
     id: "bulent",
     name: "Bülent Çınar",
@@ -378,7 +367,7 @@ export default function LeadershipTeam({
     bio: "Muhasebe ve finans yönetimi.",
     socials: {},
     accent: "orange",
-        sortOrder: 21,
+        sortOrder: 5.1,
 
   },
   {
