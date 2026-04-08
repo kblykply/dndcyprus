@@ -38,7 +38,7 @@ const DATA: Project[] = [
     type: "Residential",
     location: "Long Beach, İskele",
     cover: "/lagoon-verde/1.jpg",
-    href: "/lagoon-verde",
+    href: "/tr/lagoon-verde",
   },
   {
     id: "la-joya-perla-ii",
@@ -47,7 +47,7 @@ const DATA: Project[] = [
     type: "Residential",
     location: "Bahçeler, İskele",
     cover: "/perla-ii/2.jpg",
-    href: "/perla-ii",
+    href: "/tr/perla-ii",
   },
   {
     id: "la-joya-perla-i",
@@ -56,7 +56,7 @@ const DATA: Project[] = [
     type: "Residential",
     location: "Bahçeler, İskele",
     cover: "/perla/1.jpg",
-    href: "/perla",
+    href: "/tr/perla",
   },
   {
     id: "la-joya",
@@ -65,7 +65,7 @@ const DATA: Project[] = [
     type: "Residential",
     location: "İskele",
     cover: "/la-joya/2.jpg",
-    href: "/la-joya",
+    href: "/tr/la-joya",
   },
 
   // Beach Club
@@ -76,7 +76,7 @@ const DATA: Project[] = [
     type: "Beach",
     location: "İskele",
     cover: "/mariachi/2.jpg",
-    href: "/mariachi",
+    href: "/tr/mariachi",
   },
 
   // Land
@@ -87,7 +87,7 @@ const DATA: Project[] = [
     type: "Land",
     location: "Geçitkale",
     cover: "/gecitkaleimage.jpg",
-    href: "/gecitkale",
+    href: "/tr/gecitkale",
   },
 ];
 

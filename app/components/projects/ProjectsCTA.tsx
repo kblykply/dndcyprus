@@ -158,7 +158,7 @@ export default function ProjectsCTA() {
             className="mt-8 flex flex-wrap gap-3"
           >
             <a
-              href="/contact"
+              href="/tr/contact"
               className="rounded-xl px-6 py-3 text-sm font-medium text-white transition-transform duration-300 will-change-transform"
               style={{
                 background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,
@@ -179,7 +179,7 @@ export default function ProjectsCTA() {
             </a>
 
             <a
-              href="/about"
+              href="/tr/about"
               className="
                 rounded-xl px-6 py-3 text-sm font-medium
                 text-white/90 transition hover:text-white

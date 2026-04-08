@@ -40,7 +40,7 @@ export default function ContactHeroGlass({
   subtitle = "Projelerimiz ve yatırım fırsatları hakkında daha fazla bilgi almak için bizimle iletişime geçin.",
   bgImage = "/lagoon-verde/1.jpg",
   primary = { label: "Mesaj Gönder", href: "#form" },
-  secondary = { label: "Projelerimiz", href: "/projects" },
+  secondary = { label: "Projelerimiz", href: "/tr/projects" },
   quick = {
     phone: "+90 392 444 03 63",
     whatsapp: "+90 548 888 03 63",

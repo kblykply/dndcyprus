@@ -48,7 +48,7 @@ const FALLBACKS: ProjectSlide[] = [
     badge: "Altın Ödül",
     image: "/lagoon-verde/1.jpg",
     ctaLabel: "Projeyi İncele",
-    ctaHref: "/lagoon-verde",
+    ctaHref: "/tr/lagoon-verde",
     tint: "#27959b", // teal
     align: "left",
   },
@@ -60,7 +60,7 @@ const FALLBACKS: ProjectSlide[] = [
     badge: "Göz Alıcı Tasarım",
     image: "/perla-ii/9.jpg",
     ctaLabel: "Projeyi İncele",
-    ctaHref: "/perla-ii",
+    ctaHref: "/tr/perla-ii",
     tint: "#f15c34", // orange
     align: "right",
   },
@@ -72,7 +72,7 @@ const FALLBACKS: ProjectSlide[] = [
     badge: "Kıbrısın İncisi",
     image: "/perla/9.jpg",
     ctaLabel: "Detaylar",
-    ctaHref: "/perla",
+    ctaHref: "/tr/perla",
     tint: "#27959b",
     align: "left",
   },
@@ -84,7 +84,7 @@ const FALLBACKS: ProjectSlide[] = [
     badge: "Teslim 2025",
     image: "/la-joya/2.jpg",
     ctaLabel: "Detaylar",
-    ctaHref: "/la-joya",
+    ctaHref: "/tr/la-joya",
     tint: "#f15c34",
     align: "right",
   },
@@ -96,7 +96,7 @@ const FALLBACKS: ProjectSlide[] = [
     badge: "Platin Ödül",
     image: "/mariachi/2.jpg",
     ctaLabel: "Projeyi İncele",
-    ctaHref: "/mariachi",
+    ctaHref: "/tr/mariachi",
     tint: "#27959b",
     align: "left",
   },
@@ -248,7 +248,7 @@ export default function ProjectsHeroFullSlider({
     </a>
   )}
   <a
-    href="#projects-list"
+    href="/tr/projects"
     className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm md:text-base font-semibold bg-white/10 text-white border border-white/25 backdrop-blur"
   >
     Tüm Projeler
