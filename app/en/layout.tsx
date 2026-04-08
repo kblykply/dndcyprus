@@ -10,7 +10,7 @@ import WhatsAppFab from "../components/whatsapp/WhatsappEn";
 import SocialIcons from "../components/SocialIcons";
 
 export const metadata: Metadata = {
-  title: "DND Cyprus — English",
+  title: "DND Cyprus",
   description:
     "Discover DND Cyprus, a leading real-estate developer in Cyprus with innovative residential and commercial projects.",
 };
