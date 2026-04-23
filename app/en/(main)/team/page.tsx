@@ -1,4 +1,4 @@
-import LeadershipTeam from "../../components/en/about/LeadershipTeam";
+import LeadershipTeam from "../../../components/en/about/LeadershipTeam";
 
 
 
