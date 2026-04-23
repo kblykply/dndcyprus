@@ -12,6 +12,10 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import PdfJsViewer from "@/app/components/pdf/PdfJsViewer";
+
+
+
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
@@ -159,15 +163,9 @@ function InstagramEmbed({ url }: { url: string }) {
 }
 
 function MediaRenderer({ item }: { item: MenuItem }) {
-  if (item.type === "pdf") {
-    return (
-      <iframe
-        src={item.src}
-        title={item.title}
-        className="h-[72vh] w-full rounded-[20px] bg-white"
-      />
-    );
-  }
+if (item.type === "pdf") {
+  return <PdfJsViewer file={item.src} />;
+}
 
   if (item.type === "image") {
     return (
@@ -284,7 +282,7 @@ export default function LagoonVerdeMediaHubLight({
         title: "KKTC Catalog",
         type: "pdf",
         thumb: "/kktc.png",
-        src: "/docs/kktc-catalog.pdf",
+        src: "/kktckat.pdf",
         description: "Destination catalog.",
       },
       {
@@ -300,7 +298,7 @@ export default function LagoonVerdeMediaHubLight({
         title: "DND Cyprus Website",
         type: "link",
         thumb: "/dndweb.png",
-        src: "https://dndcyprus.com",
+        src: "https://dndcyprus.com/en",
         description: "Official website link.",
       },
       {
