@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence, type Variants, type Easing } from "framer-motion";
 import {
   FileText,
@@ -11,10 +11,6 @@ import {
   ExternalLink,
   Sparkles,
 } from "lucide-react";
-
-import PdfJsViewer from "@/app/components/pdf/PdfJsViewer";
-
-
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -144,7 +140,7 @@ function InstagramEmbed({ url }: { url: string }) {
   }, [url]);
 
   return (
-    <div className="flex justify-center w-full overflow-auto">
+    <div className="flex w-full justify-center overflow-auto">
       <blockquote
         className="instagram-media w-full"
         data-instgrm-permalink={extractInstagramPermalink(url)}
@@ -163,10 +159,6 @@ function InstagramEmbed({ url }: { url: string }) {
 }
 
 function MediaRenderer({ item }: { item: MenuItem }) {
-if (item.type === "pdf") {
-  return <PdfJsViewer file={item.src} />;
-}
-
   if (item.type === "image") {
     return (
       <div className="overflow-hidden rounded-[20px] bg-[#f6f7f8]">
@@ -181,7 +173,7 @@ if (item.type === "pdf") {
 
   if (item.type === "youtube") {
     return (
-      <div className="overflow-hidden rounded-[20px] bg-black aspect-video">
+      <div className="aspect-video overflow-hidden rounded-[20px] bg-black">
         <iframe
           className="h-full w-full"
           src={item.src}
@@ -246,88 +238,87 @@ if (item.type === "pdf") {
 export default function LagoonVerdeMediaHubLight({
   title = "DND Media Hub",
   subtitle = "Explore catalogs, brochures, videos, campaigns and digital materials.",
-  logoSrc = "/DND-LOGO-2.svg",
+  logoSrc = "/DND.png",
 }: Props) {
   const [active, setActive] = useState<MenuItem | null>(null);
 
   const items = useMemo<MenuItem[]>(
-    () => [
-      
-      {
-        id: "lagoon-brochure",
-        title: "Lagoon Verde Brochure",
-        type: "pdf",
-        thumb: "/lagoonflip/l-01.webp",
-        src: "/bro.pdf",
-        description: "Brochure version for quick presentation.",
-      },
-      {
-        id: "lagoon-video",
-        title: "Lagoon Verde Video",
-        type: "youtube",
-        thumb: "/lagoon-verde/2.jpg",
-        src: "https://www.youtube.com/embed/bKNPhMFNzGY?si=bAsOzWd2Kr6O8Fy-",
-        description: "Main project video.",
-      },
-      {
-        id: "kktc-video",
-        title: "KKTC Video",
-        type: "youtube",
-        thumb: "/lala.jpg",
-        src: "https://www.youtube.com/embed/JNKcu1APZO0?si=qDPxGjdF1uxJakR0",
-        description: "North Cyprus lifestyle video.",
-      },
-      {
-        id: "kktc-catalog",
-        title: "KKTC Catalog",
-        type: "pdf",
-        thumb: "/kktc.png",
-        src: "/kktckat.pdf",
-        description: "Destination catalog.",
-      },
-      {
-        id: "la-joya-polish",
-        title: "La Joya Polish Video",
-        type: "instagram",
-        thumb: "/lajoyaimage.jpg",
-        src: "https://www.instagram.com/reel/DSKNkREjLbD",
-        description: "Instagram Reel embed.",
-      },
-      {
-        id: "dnd-website",
-        title: "DND Cyprus Website",
-        type: "link",
-        thumb: "/dndweb.png",
-        src: "https://dndcyprus.com/en",
-        description: "Official website link.",
-      },
-      {
-        id: "property-awards",
-        title: "Property Awards Video",
-        type: "instagram",
-        thumb: "/property_awards_2025-747.jpg",
-        src: "https://www.instagram.com/reel/DJLqfFSA4dP",
-        description: "Awards-related Instagram video.",
-      },
-      {
-        id: "payment-plan",
-        title: "Lagoon Verde Payment Plan",
-        type: "pdf",
-        thumb: "/lagoon-verde/1.jpg",
-        src: "/paymentt.pdf",
-        description: "Payment plan PDF.",
-      },
-      {
-        id: "campaign",
-        title: "Campaign",
-        type: "image",
-        thumb: "/campain.png",
-        src: "/campain.png",
-        description: "Campaign visual.",
-      },
-    ],
-    []
-  );
+  () => [
+    {
+      id: "lagoon-brochure",
+      title: "Lagoon Verde Brochure",
+      type: "pdf",
+      thumb: "/lagoonflip/l-01.webp",
+      src: "/bro.pdf",
+      description: "Брошюра Lagoon Verde",
+    },
+    {
+      id: "lagoon-video",
+      title: "Lagoon Verde Video",
+      type: "youtube",
+      thumb: "/lagoon-verde/2.jpg",
+      src: "https://www.youtube.com/embed/bKNPhMFNzGY?si=bAsOzWd2Kr6O8Fy-",
+      description: "Видео Lagoon Verde",
+    },
+    {
+      id: "kktc-video",
+      title: "KKTC Video",
+      type: "youtube",
+      thumb: "/lala.jpg",
+      src: "https://www.youtube.com/embed/JNKcu1APZO0?si=qDPxGjdF1uxJakR0",
+      description: "Видео о Северном Кипре",
+    },
+    {
+      id: "kktc-catalog",
+      title: "KKTC Catalog",
+      type: "pdf",
+      thumb: "/kktc.png",
+      src: "/kktckat.pdf",
+      description: "Каталог Северного Кипра",
+    },
+    {
+      id: "la-joya-polish",
+      title: "La Joya Polish Video",
+      type: "instagram",
+      thumb: "/lajoyaimage.jpg",
+      src: "https://www.instagram.com/reel/DSKNkREjLbD/",
+      description: "Видео La Joya (Польша)",
+    },
+    {
+      id: "dnd-website",
+      title: "DND Cyprus Website",
+      type: "link",
+      thumb: "/dndweb.png",
+      src: "https://dndcyprus.com/en",
+      description: "Сайт DND Cyprus",
+    },
+    {
+      id: "property-awards",
+      title: "Property Awards Video",
+      type: "instagram",
+      thumb: "/property_awards_2025-747.jpg",
+      src: "https://www.instagram.com/reel/DJLqfFSA4dP/",
+      description: "Видео Property Awards",
+    },
+    {
+      id: "payment-plan",
+      title: "Lagoon Verde Payment Plan",
+      type: "pdf",
+      thumb: "/lagoon-verde/1.jpg",
+      src: "/paymentt.pdf",
+      description: "План оплаты Lagoon Verde",
+    },
+    {
+      id: "campaign",
+      title: "Campaign",
+      type: "image",
+      thumb: "/campain.png",
+      src: "/campain.png",
+      description: "Рекламная кампания",
+    },
+  ],
+  []
+);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -345,13 +336,21 @@ export default function LagoonVerdeMediaHubLight({
     };
   }, [active]);
 
+  const handleItemClick = (item: MenuItem) => {
+    if (item.type === "pdf") {
+      window.open(item.src, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    setActive(item);
+  };
+
   return (
     <section
       className="relative overflow-hidden py-14 sm:py-16 lg:py-20"
       style={{ background: "#ffffff", color: "#141517" }}
       aria-label="Lagoon Verde media menu"
     >
-      {/* soft background auras */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -388,13 +387,13 @@ export default function LagoonVerdeMediaHubLight({
               />
               <img
                 src={logoSrc}
-                alt="Lagoon Verde"
-                className="relative mx-auto h-16 w-auto sm:h-20 lg:h-24 object-contain"
+                alt="DND Cyprus"
+                className="relative mx-auto h-16 w-auto object-contain sm:h-20 lg:h-24"
               />
             </div>
           </div>
 
-          <h2 className="mt-8 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-[#141517]">
+          <h2 className="mt-8 text-3xl font-semibold tracking-tight text-[#141517] sm:text-4xl lg:text-5xl">
             {title}
           </h2>
 
@@ -413,10 +412,9 @@ export default function LagoonVerdeMediaHubLight({
               whileInView="show"
               viewport={{ once: false, amount: 0.12 }}
               transition={{ delay: i * 0.02 }}
-              onClick={() => setActive(item)}
+              onClick={() => handleItemClick(item)}
               className={cn(
-                "group relative overflow-hidden rounded-[28px] text-left min-h-[280px] sm:min-h-[320px]",
-                "border bg-white"
+                "group relative min-h-[280px] overflow-hidden rounded-[28px] border bg-white text-left sm:min-h-[320px]"
               )}
               style={{
                 borderColor: "#e8ecef",
@@ -467,7 +465,7 @@ export default function LagoonVerdeMediaHubLight({
                 </div>
 
                 <div>
-                  <h3 className="text-[22px] sm:text-[24px] font-semibold leading-tight text-white">
+                  <h3 className="text-[22px] font-semibold leading-tight text-white sm:text-[24px]">
                     {item.title}
                   </h3>
                   {item.description ? (
@@ -490,7 +488,7 @@ export default function LagoonVerdeMediaHubLight({
             initial="hidden"
             animate="show"
             exit="exit"
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-[rgba(20,21,23,0.42)] p-3 sm:p-5"
+className="fixed inset-0 z-[999] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 sm:p-5"
             onClick={() => setActive(null)}
           >
             <motion.div
@@ -515,7 +513,10 @@ export default function LagoonVerdeMediaHubLight({
                 }}
               />
 
-              <div className="relative flex items-start justify-between gap-4 border-b px-5 py-4 sm:px-6" style={{ borderColor: "#edf1f3" }}>
+              <div
+                className="relative flex items-start justify-between gap-4 border-b px-5 py-4 sm:px-6"
+                style={{ borderColor: "#edf1f3" }}
+              >
                 <div>
                   <div
                     className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.16em]"
@@ -529,7 +530,7 @@ export default function LagoonVerdeMediaHubLight({
                     {getBadge(active.type)}
                   </div>
 
-                  <h3 className="mt-3 text-xl sm:text-2xl font-semibold text-[#141517]">
+                  <h3 className="mt-3 text-xl font-semibold text-[#141517] sm:text-2xl">
                     {active.title}
                   </h3>
                   {active.description ? (
