@@ -1,9 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import * as pdfjsLib from "pdfjs-dist";
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
 type Props = {
   file: string;
@@ -20,6 +17,8 @@ export default function PdfJsViewer({ file }: Props) {
     let cancelled = false;
 
     async function renderPdf() {
+      if (typeof window === "undefined") return;
+
       const container = containerRef.current;
       if (!container) return;
 
@@ -29,6 +28,10 @@ export default function PdfJsViewer({ file }: Props) {
       container.innerHTML = "";
 
       try {
+        const pdfjsLib = await import("pdfjs-dist");
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+
         const loadingTask = pdfjsLib.getDocument(file);
         const pdf = await loadingTask.promise;
 
@@ -43,9 +46,8 @@ export default function PdfJsViewer({ file }: Props) {
           const viewport = page.getViewport({ scale });
 
           const pageWrap = document.createElement("div");
-          pageWrap.style.margin = "0 0 24px";
-          pageWrap.style.display = "flex";
-          pageWrap.style.justifyContent = "center";
+          pageWrap.style.margin = "0 auto 24px";
+          pageWrap.style.width = "fit-content";
 
           const canvas = document.createElement("canvas");
           const context = canvas.getContext("2d");
@@ -56,9 +58,9 @@ export default function PdfJsViewer({ file }: Props) {
 
           canvas.width = Math.floor(viewport.width);
           canvas.height = Math.floor(viewport.height);
-          canvas.style.width = "100%";
-          canvas.style.height = "auto";
-          canvas.style.maxWidth = `${Math.floor(viewport.width)}px`;
+          canvas.style.width = `${Math.floor(viewport.width)}px`;
+          canvas.style.height = `${Math.floor(viewport.height)}px`;
+          canvas.style.display = "block";
           canvas.style.borderRadius = "18px";
           canvas.style.boxShadow = "0 12px 40px rgba(20,21,23,0.08)";
           canvas.style.background = "#fff";
@@ -96,13 +98,17 @@ export default function PdfJsViewer({ file }: Props) {
     <div className="w-full">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#e7ecef] bg-white px-4 py-3">
         <div className="text-sm text-[#141517B3]">
-          {loading ? "Loading PDF..." : `${numPages} page${numPages === 1 ? "" : "s"}`}
+          {loading
+            ? "Loading PDF..."
+            : `${numPages} page${numPages === 1 ? "" : "s"} • ${Math.round(
+                scale * 100
+              )}%`}
         </div>
 
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setScale((s) => Math.max(0.8, +(s - 0.2).toFixed(2)))}
+            onClick={() => setScale((s) => Math.max(0.6, +(s - 0.25).toFixed(2)))}
             className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#141517] hover:bg-[#f7f9fa]"
           >
             Zoom Out
@@ -110,7 +116,7 @@ export default function PdfJsViewer({ file }: Props) {
 
           <button
             type="button"
-            onClick={() => setScale((s) => Math.min(2.4, +(s + 0.2).toFixed(2)))}
+            onClick={() => setScale((s) => Math.min(3, +(s + 0.25).toFixed(2)))}
             className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#141517] hover:bg-[#f7f9fa]"
           >
             Zoom In
@@ -135,7 +141,7 @@ export default function PdfJsViewer({ file }: Props) {
 
       <div
         ref={containerRef}
-        className="max-h-[75vh] overflow-y-auto rounded-[24px] bg-[#f6f8f9] p-3 sm:p-4"
+        className="max-h-[75vh] overflow-auto rounded-[24px] bg-[#f6f8f9] p-3 sm:p-4"
       />
 
       {loading && !error ? (
