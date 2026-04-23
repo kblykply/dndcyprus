@@ -8,8 +8,11 @@ type Props = {
 
 export default function PdfJsViewer({ file }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const pagesRef = useRef<HTMLDivElement | null>(null);
+
   const [numPages, setNumPages] = useState(0);
-  const [scale, setScale] = useState(1.2);
+  const [renderScale] = useState(1.1);
+  const [zoom, setZoom] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -19,17 +22,16 @@ export default function PdfJsViewer({ file }: Props) {
     async function renderPdf() {
       if (typeof window === "undefined") return;
 
-      const container = containerRef.current;
-      if (!container) return;
+      const pagesEl = pagesRef.current;
+      if (!pagesEl) return;
 
       setLoading(true);
       setError("");
       setNumPages(0);
-      container.innerHTML = "";
+      pagesEl.innerHTML = "";
 
       try {
         const pdfjsLib = await import("pdfjs-dist");
-
         pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
         const loadingTask = pdfjsLib.getDocument(file);
@@ -43,7 +45,7 @@ export default function PdfJsViewer({ file }: Props) {
           const page = await pdf.getPage(pageNumber);
           if (cancelled) return;
 
-          const viewport = page.getViewport({ scale });
+          const viewport = page.getViewport({ scale: renderScale });
 
           const pageWrap = document.createElement("div");
           pageWrap.style.margin = "0 auto 24px";
@@ -66,7 +68,7 @@ export default function PdfJsViewer({ file }: Props) {
           canvas.style.background = "#fff";
 
           pageWrap.appendChild(canvas);
-          container.appendChild(pageWrap);
+          pagesEl.appendChild(pageWrap);
 
           await page.render({
             canvas,
@@ -92,34 +94,32 @@ export default function PdfJsViewer({ file }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [file, scale]);
+  }, [file, renderScale]);
 
   return (
     <div className="w-full">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#e7ecef] bg-white px-4 py-3">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#e7ecef] bg-white px-4 py-3">
         <div className="text-sm text-[#141517B3]">
           {loading
             ? "Loading PDF..."
-            : `${numPages} page${numPages === 1 ? "" : "s"} • ${Math.round(
-                scale * 100
-              )}%`}
+            : `${numPages} page${numPages === 1 ? "" : "s"} • ${Math.round(zoom * 100)}%`}
         </div>
 
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={() => setScale((s) => Math.max(0.6, +(s - 0.25).toFixed(2)))}
+            onClick={() => setZoom((z) => Math.max(0.8, +(z - 0.2).toFixed(2)))}
             className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#141517] hover:bg-[#f7f9fa]"
           >
-            Zoom Out
+            -
           </button>
 
           <button
             type="button"
-            onClick={() => setScale((s) => Math.min(3, +(s + 0.25).toFixed(2)))}
+            onClick={() => setZoom((z) => Math.min(2.5, +(z + 0.2).toFixed(2)))}
             className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#141517] hover:bg-[#f7f9fa]"
           >
-            Zoom In
+            +
           </button>
 
           <a
@@ -141,8 +141,21 @@ export default function PdfJsViewer({ file }: Props) {
 
       <div
         ref={containerRef}
-        className="max-h-[75vh] overflow-auto rounded-[24px] bg-[#f6f8f9] p-3 sm:p-4"
-      />
+        className="max-h-[58vh] overflow-auto rounded-[24px] bg-[#f6f8f9] p-3 sm:p-4"
+        style={{
+          touchAction: "pan-x pan-y pinch-zoom",
+        }}
+      >
+        <div
+          ref={pagesRef}
+          style={{
+            width: "fit-content",
+            margin: "0 auto",
+            transform: `scale(${zoom})`,
+            transformOrigin: "top center",
+          }}
+        />
+      </div>
 
       {loading && !error ? (
         <div className="mt-4 text-sm text-[#14151799]">Rendering pages...</div>
