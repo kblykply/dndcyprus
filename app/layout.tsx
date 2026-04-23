@@ -2,8 +2,8 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Inter, Montserrat } from "next/font/google";
-import "./globals.css";
 import type { ReactNode } from "react";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,8 +22,6 @@ export const metadata: Metadata = {
   title: "DND Cyprus",
   description:
     "Kıbrıs'ın önde gelen gayrimenkul geliştiricisi DND Cyprus ile tanışın. Yenilikçi konut ve ticari projelerimizle yaşam alanlarını yeniden tanımlıyoruz.",
-
-  // ✅ Facebook Domain Verification
   other: {
     "facebook-domain-verification": "w1ojaqwwotv6uzovm0on3w6lkrq03n",
   },
@@ -36,7 +34,7 @@ export default async function RootLayout({
 }) {
   const cookieStore = await cookies();
   const stored = cookieStore.get("locale")?.value;
-  const lang = stored === "en" ? "en" : "tr"; // default TR
+  const lang = stored === "en" ? "en" : "tr";
 
   return (
     <html lang={lang}>
