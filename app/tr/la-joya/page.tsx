@@ -12,6 +12,17 @@ import MariachiPerks from "../../components/mariachi/MariachiPerks";
 import LaJoyaTechnicalFacilities from "../../components/la-joya/LaJoyaTechnicalFacilities";
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "tr",
+  path: "/la-joya",
+  title: "La Joya Long Beach İskele | Loft ve Penthouse – DND Cyprus",
+  description:
+    "Long Beach, İskele'de denize 500 m La Joya: 74 konutluk yatay mimari, 1+1 loft, 2+1 ve stüdyo penthouse, havuz, gym ve Mariachi Beach Club üyeliği. Bilgi alın.",
+  image: "/og/la-joya.jpg",
+  imageAlt: "La Joya havuz kenarındaki loft konutlar",
+});
 
 
 export default function HomePage() {
@@ -53,7 +64,7 @@ eyebrow="Kasım 2024 Güncellemesi" title="La Joya  – Son İnşaat Güncelleme
  <QuarterLogoBadge
           logoSrc="/logos/lajoya.png"
           alt="Your Project"
-          href="/"
+          href="/tr"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens
         />

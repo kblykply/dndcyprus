@@ -2,6 +2,7 @@
   "use client";
 
   import React, { useEffect, useMemo, useRef, useState } from "react";
+  import Image from "next/image";
   import {
     motion,
     type Variants,
@@ -103,6 +104,9 @@ intervalMs = 4800,
     const hoverRef = useRef(false);
     const draggingRef = useRef(false);
     const viewportRef = useRef<HTMLDivElement | null>(null);
+    const sectionRef = useRef<HTMLElement | null>(null);
+    // Bölüm yaklaşınca tüm slayt görselleri yüklensin (overflow içindeki kaydırılmış slaytlar lazy'de beklemesin)
+    const [nearView, setNearView] = useState(false);
     const trackRef = useRef<HTMLDivElement | null>(null);
 
     const clamp = (v: number, min: number, max: number) =>
@@ -151,6 +155,26 @@ intervalMs = 4800,
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.length]);
 
+    useEffect(() => {
+      if (nearView) return;
+      const el = sectionRef.current;
+      if (!el || typeof IntersectionObserver === "undefined") {
+        setNearView(true);
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            setNearView(true);
+            io.disconnect();
+          }
+        },
+        { rootMargin: "600px 0px" }
+      );
+      io.observe(el);
+      return () => io.disconnect();
+    }, [nearView]);
+
     /* ---- Navigasyon ---- */
     const goTo = (i: number) => {
       const vp = viewportRef.current;
@@ -189,7 +213,8 @@ intervalMs = 4800,
 
     return (
       <section
-        aria-label="La Joya — Teknik Donanımlar"
+        ref={sectionRef}
+        aria-label="Technical Features"
         className="relative overflow-hidden"
         style={{ background: "#ffffff", color: "#141517" }}
         data-bg="light"
@@ -245,7 +270,7 @@ intervalMs = 4800,
       onDragEnd={onDragEnd}
       role="group"
       aria-roledescription="carousel"
-      aria-label="Teknik donanım listesi"
+      aria-label="Technical features list"
     >
       {data.map((card, i) => {
         const isActive = i >= index && i < index + visibleCount;
@@ -271,10 +296,15 @@ intervalMs = 4800,
               }}
             >
               {/* Kapak */}
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${card.image})` }}
+              <Image
+                src={card.image}
+                alt=""
                 aria-hidden
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 767px) 56vw, (max-width: 1023px) 44vw, 400px"
+                className="object-cover object-center"
+                loading={nearView ? "eager" : "lazy"}
+                draggable={false}
               />
               {/* Koyuluk */}
               <div
@@ -333,7 +363,7 @@ intervalMs = 4800,
           type="button"
           key={`dot-${i}`}
           onClick={() => goTo(i)}
-          aria-label={`Sayfa ${i + 1}`}
+          aria-label={`Page ${i + 1}`}
           aria-current={isActive ? "true" : undefined}
           className="h-2.5 rounded-full transition-all"
           style={{

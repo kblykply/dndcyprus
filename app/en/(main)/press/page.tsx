@@ -1,4 +1,13 @@
 import PressSection, { type PressItem } from "../../../components/en/PressSection";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "/press",
+  title: "Press Coverage & News | DND Cyprus",
+  description:
+    "DND Cyprus in the press: coverage from Kıbrıs Postası, Yenidüzen, Haber Kıbrıs and more, including the completion of La Joya Residences and Holiday Village.",
+});
 
 const PRESS_ITEMS: PressItem[] = [
   {

@@ -8,11 +8,20 @@ datasource db {
 }
 
 model ContactMessage {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  phone     String?
-  subject   String
-  message   String
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  phone       String?
+  subject     String
+  message     String
+  // Reklam ölçümü ve kaynak takibi (20260915120000_lead_attribution)
+  project     String?
+  unitType    String?
+  form        String?
+  source      String?
+  campaign    String?
+  pageUrl     String?
+  eventId     String?
+  attribution Json?
+  createdAt   DateTime @default(now())
 }

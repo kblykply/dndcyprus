@@ -176,7 +176,7 @@ export default function WhyChooseUs({
             Daha fazlasını öğrenmek için bizimle iletişime geçin.
           </p>
           <a
-            href="/contact"
+            href="/tr/contact"
             className="inline-flex items-center justify-center rounded-xl px-5 py-3"
             style={{
               background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,

@@ -100,35 +100,7 @@ offices = [
     { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
   ],
 }: Props) {
-  // SEO JSON-LD
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "DND Cyprus",
-    url: "https://dndcyprus.com",
-    email: offices.find((o) => o.email)?.email?.replace("mailto:", ""),
-    telephone: offices.find((o) => o.phone)?.phone?.replace("tel:", ""),
-    sameAs: socials?.map((s) => s.href),
-    department: offices.map((o) => ({
-      "@type": "LocalBusiness",
-      name: `DND Cyprus — ${o.label}`,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: o.addressLines?.join(", "),
-        addressLocality: o.city,
-        addressCountry: o.country,
-      },
-      telephone: o.phone?.replace("tel:", ""),
-      email: o.email?.replace("mailto:", ""),
-      openingHours: o.hours?.join(", "),
-      url: o.mapUrl,
-      image: o.image,
-      geo:
-        o.coords && o.coords.length === 2
-          ? { "@type": "GeoCoordinates", latitude: o.coords[0], longitude: o.coords[1] }
-          : undefined,
-    })),
-  };
+  // Kuruluş JSON-LD'si artık site geneli layout'ta (tr/layout, en/(main)/layout) basılıyor
 
   return (
     <section
@@ -320,8 +292,6 @@ View on Map
         )}
       </div>
 
-      <script type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </section>
   );
 }

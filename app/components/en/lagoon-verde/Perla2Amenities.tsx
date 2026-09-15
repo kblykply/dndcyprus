@@ -111,7 +111,7 @@ export default function LagoonVerde360Section() {
 
   return (
     <section
-      aria-label="Lagoon Verde — 360° Sanal Tur"
+      aria-label="Lagoon Verde — 360° Virtual Tour"
       className="relative overflow-hidden"
       style={sectionStyle}
     >
@@ -121,9 +121,9 @@ export default function LagoonVerde360Section() {
           <Image
             src={BG_IMAGE}
             alt=""
+            aria-hidden
             fill
             sizes="100vw"
-            priority
             className="object-cover object-center"
           />
         </div>
@@ -221,18 +221,19 @@ Explore the project in panoramic view.
               {/* Poster until Play */}
               {!isPlaying && (
                 <button
+                  type="button"
                   onClick={() => setIsPlaying(true)}
+                  data-track="tour_start"
                   className="group relative h-full w-full"
                   style={{ cursor: "pointer" }}
-                  aria-label="360 Turu Başlat"
+                  aria-label="Start 360 Tour"
                 >
                   <Image
                     src={POSTER_IMAGE}
                     alt=""
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 1400px) 100vw, 1400px"
                     className="object-cover object-center"
-                    priority={false}
                   />
                   <div className="absolute inset-0 bg-black/40 transition-opacity group-hover:bg-black/30" />
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
@@ -263,10 +264,10 @@ Start 360 Tour
                   <button
                     onClick={isFs ? exitFullscreen : enterFullscreen}
                     className="absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-xl bg-black/60 px-3 py-2 text-xs text-white backdrop-blur-md hover:bg-black/70"
-                    aria-label={isFs ? "Fullscreen'den çık" : "Fullscreen"}
+                    aria-label={isFs ? "Exit fullscreen" : "Fullscreen"}
                   >
                     {isFs ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-                    {isFs ? "Çık" : "Fullscreen"}
+                    {isFs ? "Exit" : "Fullscreen"}
                   </button>
                 </>
               )}
@@ -278,6 +279,7 @@ Start 360 Tour
                 href={TOUR_SRC}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track="tour_start"
                 className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs"
                 style={{
                   background: "rgba(255,255,255,0.12)",

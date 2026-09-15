@@ -17,6 +17,17 @@ import FlipBookGlass from "../../../components/en/perla/FlipBookGlass";
 
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "/perla",
+  title: "La Joya Perla Iskele – Apartments by the Sea | DND Cyprus",
+  description:
+    "La Joya Perla in Bahçeler, Iskele, 700 m from the sea: studio, 1+1 loft and 2+1 apartments, sand pool, indoor pool, spa and Mariachi Beach Club perks. Enquire.",
+  image: "/og/perla.jpg",
+  imageAlt: "La Joya Perla sand pool and residence blocks",
+});
 
 export default function HomePage() {
   return (
@@ -60,7 +71,7 @@ eyebrow="Kasım 2024 Update" title="La Joya Perla – Latest Construction Update
  <QuarterLogoBadge
           logoSrc="/logos/perla.png"
           alt="Your Project"
-          href="/"
+          href="/en"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens
         />

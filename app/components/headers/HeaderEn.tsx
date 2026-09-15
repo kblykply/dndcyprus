@@ -25,7 +25,7 @@ type NavGroup = {
 const NAV: NavGroup[] = [
   {
     label: "Home\u00A0Page", // prevents line break
-    href: "/en/",
+    href: "/en",
   },
   {
     label: "Projects",
@@ -46,7 +46,7 @@ const NAV: NavGroup[] = [
   {
     label: "About\u00A0Us",
     href: "/en/about",
-    items: [{ label: "Ekibimiz", href: "/en/team" }],
+    items: [{ label: "Our Team", href: "/en/team" }],
   },
    {
     label: "DND\u00A0Istanbul",
@@ -269,7 +269,7 @@ const handleSwitch = (target: "tr" | "en") => {
     <>
       <header ref={headerRef} className={[headerBase, headerSkin, hideClass].join(" ")}>
         {/* Logo */}
-        <Link href="/" className="inline-block" prefetch={false}>
+        <Link href="/en" className="inline-block" prefetch={false}>
           <Image
             src={onTransparent ? "/DND-LOGO-LIGHT.svg" : "/DND-LOGO-2.svg"}
             alt="DND Cyprus"
@@ -518,7 +518,7 @@ const handleSwitch = (target: "tr" | "en") => {
             >
               {/* Top row: logo + home + close */}
               <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-white/15">
-                <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-3" prefetch={false}>
+                <Link href="/en" onClick={() => setMenuOpen(false)} className="flex items-center gap-3" prefetch={false}>
                   <div className="relative w-22 h-22 rounded-xl overflow-hidden ">
                     <Image src="/DND-LOGO-LIGHT.svg" alt="DND Cyprus" fill className="object-contain p-1" />
                   </div>
@@ -526,13 +526,13 @@ const handleSwitch = (target: "tr" | "en") => {
 
                 <div className="flex items-center gap-2">
                   <Link
-                    href="/"
+                    href="/en"
                     prefetch={false}
                     onClick={() => setMenuOpen(false)}
                     className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-sm"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" className="shrink-0"><path fill="currentColor" d="M12 3.172 3 10h2v9h5v-6h4v6h5v-9h2z"/></svg>
-                    Anasayfa
+                    Home
                   </Link>
                   <button
                     className="px-3 py-2 rounded-xl bg-white/15 border border-white/20 hover:bg-white hover:text-black transition"

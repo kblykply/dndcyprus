@@ -37,6 +37,8 @@ type ProjectSlide = {
 type Props = {
   projects?: ProjectSlide[];
   autoplayMs?: number;
+  /** Sayfanın tek H1'i (görsel olarak gizli; slayt başlıkları h2). Boş verilirse basılmaz. */
+  heading?: string;
 };
 
 const FALLBACKS: ProjectSlide[] = [
@@ -107,11 +109,13 @@ const FALLBACKS: ProjectSlide[] = [
 export default function ProjectsHeroFullSlider({
   projects,
   autoplayMs = 5200,
+  heading = "Residential projects in North Cyprus – DND Cyprus",
 }: Props) {
   const slides = useMemo(() => projects?.length ? projects : FALLBACKS, [projects]);
 
   return (
     <section className="relative w-full h-[100svh]">
+      {heading ? <h1 className="sr-only">{heading}</h1> : null}
       <Swiper
         modules={[
           Navigation,

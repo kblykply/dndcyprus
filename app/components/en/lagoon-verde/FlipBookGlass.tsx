@@ -35,7 +35,12 @@ const HTMLFlipBook = dynamic(() => import("react-pageflip"), { ssr: false });
 // ==========================
 export type Props = {
   pages: string[];
+  /** Verilmezse PDF bağlantısı gizlenir */
   pdfUrl?: string;
+  /** Bölüm id'si (çapa hedefi, ör. #catalog) */
+  id?: string;
+  /** Sayfa alt metni öneki: "<önek> N" */
+  pageAltPrefix?: string;
   bgImage?: string | null;
   kicker?: string;
   title?: string;
@@ -66,9 +71,11 @@ const fadeUp: Variants = {
 export function FlipBookGlassBase({
   pages,
   pdfUrl,
+  id = "catalog",
+  pageAltPrefix = "Lagoon Verde brochure – page",
   bgImage = "/lagoon-verde/2.jpg",
   kicker = "DND CYPRUS",
-  title = "Tanıtım Kataloğu",
+  title = "Catalog",
   pageAspect = 1914 / 1400,
   maxWidth = 2000,
   vhMaxRatio = 0.88,
@@ -89,9 +96,9 @@ export function FlipBookGlassBase({
       setVvh(window.visualViewport?.height ?? window.innerHeight);
     };
     updateVvh();
-    window.addEventListener("resize", updateVvh);
-    window.addEventListener("orientationchange", updateVvh);
-    window.visualViewport?.addEventListener("resize", updateVvh);
+    window.addEventListener("resize", updateVvh, { passive: true });
+    window.addEventListener("orientationchange", updateVvh, { passive: true });
+    window.visualViewport?.addEventListener("resize", updateVvh, { passive: true });
 
     let ro: ResizeObserver | null = null;
     if (containerRef.current) {
@@ -108,14 +115,28 @@ export function FlipBookGlassBase({
     };
   }, []);
 
-  // Preload next page (safe on client)
+  // Not: ham .webp ön yüklemesi kaldırıldı (optimize edilmiş görselle çift indirme yapıyordu).
+  // Bölüm görünüme yaklaşınca açık sayfanın yakınları loading="eager" ile önceden yüklenir.
+  const [nearView, setNearView] = useState(false);
   useEffect(() => {
-    const next = page + 1;
-    if (pages[next] && typeof window !== "undefined") {
-      const pre = new window.Image();
-      pre.src = pages[next];
+    if (nearView) return;
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setNearView(true);
+      return;
     }
-  }, [page, pages]);
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setNearView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [nearView]);
 
   const isMobile = containerW < 768;
 
@@ -164,8 +185,9 @@ export function FlipBookGlassBase({
 
   return (
     <section
-      aria-label="Flipbook"
-      className="relative isolate overflow-hidden"
+      id={id}
+      aria-label={title || "Flipbook"}
+      className="relative isolate overflow-hidden scroll-mt-24 md:scroll-mt-28"
       style={{ minHeight: sectionMinH }}
     >
       {/* Background */}
@@ -174,8 +196,8 @@ export function FlipBookGlassBase({
           <NextImage
             src={bgImage}
             alt=""
+            aria-hidden
             fill
-            priority
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -266,7 +288,8 @@ export function FlipBookGlassBase({
               <a
                 href={pdfUrl}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
+                data-track="brochure_download"
                 className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs sm:text-sm hover:bg-white/10"
               >
                 <Download size={16} /> PDF
@@ -302,14 +325,16 @@ export function FlipBookGlassBase({
                 >
                   <NextImage
                     src={src}
-                    alt={`Flipbook page ${i + 1}`}
+                    alt={`${pageAltPrefix} ${i + 1}`}
                     fill
+                    // Tek sayfa en fazla ~50vw (masaüstü, en çok ~1000px), mobilde ~100vw
                     sizes={
                       dims.twoUp
-                        ? "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                        ? "(max-width: 767px) 100vw, (max-width: 2000px) 50vw, 1000px"
                         : "100vw"
                     }
-                    priority={i < 2}
+                    // İlk 2 sayfa hemen; bölüm yakınken açık sayfanın komşuları da; diğerleri tembel
+                    loading={i < 2 || (nearView && Math.abs(i - page) <= 3) ? "eager" : "lazy"}
                     style={{ objectFit: "contain", backgroundColor: "transparent" }}
                   />
                 </div>
@@ -365,11 +390,13 @@ const DEFAULT_PAGES = Array.from({ length: 35 }).map(
   (_, i) => `/lagoonflip/l-${String(i + 1).padStart(2, "0")}.webp`
 );
 
-export default function FlipBookGlass() {
+// İngilizce Lagoon Verde PDF'i henüz yok: bağlantı gizli.
+// Hazır olunca sayfada <FlipBookGlass pdfUrl="/lagoonbro-en.pdf" /> kullanın.
+export default function FlipBookGlass({ pdfUrl }: { pdfUrl?: string } = {}) {
   return (
     <FlipBookGlassBase
       pages={DEFAULT_PAGES}
-      pdfUrl="/brochure/brochure.pdf"
+      pdfUrl={pdfUrl}
       title="Lagoon Verde Catalog"
       kicker="DND CYPRUS"
       maxWidth={2000}

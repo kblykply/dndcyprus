@@ -208,7 +208,7 @@ export default function MissionVisionValues({
           </p>
 
           <a
-            href="/projects"
+            href="/tr/projects"
             className="group inline-flex items-center justify-center rounded-xl px-5 py-3 border backdrop-blur-md transition-transform"
             style={{
               background: `linear-gradient(180deg, ${TEAL}cc, ${TEAL}e6)`,

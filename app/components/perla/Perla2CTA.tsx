@@ -36,7 +36,7 @@ export default function ContactCTA({
   title = "La Joya Perla",
   subtitle = "Bahçeler, İskele — denize ve günlük ihtiyaçlara yakın konum. Studio, 1+1 ve 2+1 seçenekleri; geniş balkon, teras ve çatı terasları.",
   buttonText = "Fiyat Al",
-  buttonHref = "/cantact",
+  buttonHref = "/tr/contact",
   bgImage = "/perla/4.jpg", // <— kendi görsel yolunuzu koyun
   overlayOpacity = 0.4,
   fullHeight = false,

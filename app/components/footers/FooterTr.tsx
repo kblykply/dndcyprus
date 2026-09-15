@@ -47,7 +47,7 @@
   {
     title: "Genel",
     links: [
-      { label: "Ana\u00A0Sayfa", href: "/tr/" },
+      { label: "Ana\u00A0Sayfa", href: "/tr" },
       { label: "İletişim", href: "/tr/contact" },
       { label: "Haberler", href: "/tr/press" },
     ],

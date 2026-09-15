@@ -37,7 +37,7 @@ export default function ContactCTALagoonVerde({
 subtitle =
   "Long Beach, İskele — 500 m from the sea. Low-rise 1+1 loft, 2+1 penthouse and 1+0 studio options; direct pool access from lofts, rooftop terraces & jacuzzi in penthouses.",
 buttonText = "Get a Price",
-buttonHref = "/contact",
+buttonHref = "/en/contact",
 bgImage = "/la-joya/5.jpg", // use your own image path (public/)
 overlayOpacity = 0.4,
 fullHeight = false,

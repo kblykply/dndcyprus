@@ -1,14 +1,16 @@
 // app/kullanim-kosullari/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 
-export const dynamic = "force-static";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  locale: "en",
+  path: "/terms",
   title: "Terms of Use | DND Cyprus",
   description:
-    "Terms of use for the DND Cyprus website, including conditions of use, disclaimers, intellectual property and dispute provisions.",
-};
+    "Terms of use for the DND Cyprus website: scope of the service, user obligations, intellectual property, limitation of liability and TRNC governing law.",
+});
 
 export default function TermsPage() {
   const updatedAt = "30 October 2025";
@@ -67,7 +69,7 @@ export default function TermsPage() {
             <p>
               These Terms of Use (“Terms”) govern the use of the services and content (collectively, the “Service”)
               provided on the{" "}
-              <Link href="/" className="underline underline-offset-4">
+              <Link href="/en" className="underline underline-offset-4">
                 dndcyprus.com
               </Link>{" "}
               domain and its subpages. By using the Service, you are deemed to have accepted these Terms and any related
@@ -165,7 +167,7 @@ export default function TermsPage() {
               We may use any feedback or suggestions that you submit to the Company for the purpose of improving the
               Service, without incurring any obligation to you. Content submitted through forms is processed in order to
               evaluate your application and respond to you (for further details, the{" "}
-              <Link href="/gizlilik-politikasi" className="underline underline-offset-4">
+              <Link href="/en/privacy" className="underline underline-offset-4">
                 Privacy Policy
               </Link>{" "}
               applies).

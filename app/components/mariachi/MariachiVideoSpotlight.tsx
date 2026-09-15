@@ -27,7 +27,7 @@ export default function MariachiVideoSpotlight({
   embedUrl = "https://www.youtube.com/embed/AobeR8p2Aq4?si=Z_AaUhavwKNYLgNX",
   videoSrc = "",
   poster = "/mariachi/1.jpg",
-  primaryCta = { label: "Pavilyon Rezervasyonu", href: "/contact" },
+  primaryCta = { label: "Pavilyon Rezervasyonu", href: "/tr/contact" },
   secondaryCta = { label: "Tüm Videolar", href: "https://www.youtube.com/@dndcyprus" },
   highlights = [
     { k: "Deneyim", v: "Gün boyu & Gece" },

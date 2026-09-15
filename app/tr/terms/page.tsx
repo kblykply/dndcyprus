@@ -1,14 +1,17 @@
 // app/kullanim-kosullari/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  locale: "tr",
+  path: "/terms",
   title: "Kullanım Koşulları | DND Cyprus",
   description:
-    "DND Cyprus web sitesinin kullanım şartları, sorumluluk redleri, fikri mülkiyet ve uyuşmazlık hükümleri.",
-};
+    "DND Cyprus sitesinin kullanım koşulları: hizmetin kapsamı, kullanıcı yükümlülükleri, fikri mülkiyet, sorumluluk sınırları ve KKTC hukukuna tabi uyuşmazlıklar.",
+});
 
 export default function TermsPage() {
   const updatedAt = "30 Ekim 2025";
@@ -66,7 +69,7 @@ export default function TermsPage() {
             <h2>1. Kapsam ve Kabul</h2>
             <p>
               Bu Kullanım Koşulları (“Koşullar”),{" "}
-              <Link href="/" className="underline underline-offset-4">
+              <Link href="/tr" className="underline underline-offset-4">
                 dndcyprus.com
               </Link>{" "}
               alan adı ve alt sayfalarında sunulan hizmet ve içeriklerin
@@ -170,7 +173,7 @@ export default function TermsPage() {
               bir yükümlülük doğurmaksızın Hizmetin geliştirilmesi amacıyla
               kullanabiliriz. Formlar yoluyla sunduğunuz içerikleri, başvurunuzu
               değerlendirmek ve size dönüş yapmak için işleriz (ayrıntılar için{" "}
-              <Link href="/gizlilik-politikasi" className="underline underline-offset-4">
+              <Link href="/tr/privacy" className="underline underline-offset-4">
                 Gizlilik Politikası
               </Link>{" "}
               geçerlidir).

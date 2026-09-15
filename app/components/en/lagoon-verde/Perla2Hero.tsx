@@ -2,19 +2,19 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
+// Hero metinleri JS gecikse de görünür kalsın: opaklık 0'dan başlamaz, yalnızca hafif y kayması
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
-  show: {
-    opacity: 1,
+  hidden: { y: 14 },
+  show: (i: number = 0) => ({
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  },
+    transition: { duration: 0.55, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] },
+  }),
 };
 
 type Props = {
@@ -24,8 +24,12 @@ type Props = {
   statusTR?: string;
   delivery?: string;
   heroImage?: string;   // background image
+  heroAlt?: string;
+  /** .pdf ise yeni sekmede açılır; "#catalog" gibi bir çapa ise sayfada kaydırır */
   brochureHref?: string;
+  brochureLabel?: string;
   contactHref?: string;
+  contactLabel?: string;
   kicker?: string;
   /** Optional: override top-scrim height (px) if your header is taller/shorter */
   topScrimHeight?: number;
@@ -33,27 +37,46 @@ type Props = {
 
 export default function Perla2Hero({
   title = "Lagoon Verde",
-tagline = "Modern living and investment opportunity in Bahçeler, Iskele.",
-location = "Bahçeler, Iskele",
-statusTR = "Ongoing",
-delivery = "December 2028",
-
+  tagline = "Modern living and investment opportunity in Bahçeler, Iskele.",
+  location = "Bahçeler, Iskele",
+  statusTR = "Ongoing",
+  delivery = "December 2028",
   heroImage = "/lagoon-verde/5.jpg",
-  brochureHref = "#",
-  contactHref = "/contact",
+  heroAlt = "Lagoon Verde beach-entry lagoon pool with palm trees and residence blocks",
+  // İngilizce PDF yok: katalog (flipbook) bölümüne kaydırır. PDF gelirse "/lagoonbro-en.pdf" verin.
+  brochureHref = "#catalog",
+  brochureLabel = "View Brochure",
+  contactHref = "#fiyat-al",
+  contactLabel = "Contact Us",
   kicker = "DND Cyprus",
   topScrimHeight = 104, // ~header height; tweak if needed
 }: Props) {
+  const isPdf = /\.pdf($|\?)/i.test(brochureHref ?? "");
+
   return (
    <section
   aria-label={`${title} — Hero`}
-  className="relative min-h-[120vh] flex items-center"
+  // Mobilde görünen alan tam 1 ekran (header payı eklenir); masaüstünde eskisi gibi 120vh
+  className="relative min-h-[calc(100svh_+_var(--hero-offset))] md:min-h-[120vh] flex items-center"
   // Pull the hero under the sticky header so the image + scrim appear behind it
-  style={{ marginTop: `-${topScrimHeight}px`, paddingTop: `${topScrimHeight}px` }}
+  style={
+    {
+      marginTop: `-${topScrimHeight}px`,
+      paddingTop: `${topScrimHeight}px`,
+      ["--hero-offset"]: `${topScrimHeight}px`,
+    } as React.CSSProperties & Record<"--hero-offset", string>
+  }
 >
-  {/* Background image (z-0) */}
+  {/* Background image (z-0) — sayfada önceden yüklenen (priority) tek görsel */}
   <div className="absolute inset-0 z-0">
-    <img src={heroImage} alt={title} className="w-full h-full object-cover" />
+    <Image
+      src={heroImage}
+      alt={heroAlt}
+      fill
+      priority
+      sizes="100vw"
+      className="object-cover"
+    />
   </div>
 
   {/* --- Overlays for readability --- */}
@@ -93,15 +116,15 @@ delivery = "December 2028",
         style={{ background: `${ORANGE}20` }}
       />
 
-      {/* Content */}
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-24 text-center text-white z-20">
+      {/* Content — animasyon mount'ta başlar (whileInView beklemez) */}
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center text-white z-20">
         {/* Kicker */}
         {kicker && (
           <motion.span
             variants={fadeUp}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            animate="show"
+            custom={0}
             className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
             style={{
               background: "rgba(255,255,255,0.12)",
@@ -117,8 +140,8 @@ delivery = "December 2028",
         <motion.h1
           variants={fadeUp}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          animate="show"
+          custom={1}
           className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight"
         >
           {title}
@@ -128,8 +151,8 @@ delivery = "December 2028",
         <motion.p
           variants={fadeUp}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          animate="show"
+          custom={2}
           className="mt-3 max-w-2xl mx-auto text-base sm:text-lg"
           style={{ color: "rgba(255,255,255,0.88)" }}
         >
@@ -140,25 +163,26 @@ delivery = "December 2028",
         <motion.div
           variants={fadeUp}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          animate="show"
+          custom={3}
           className="mt-5 flex flex-wrap justify-center gap-2"
         >
           <Chip text={statusTR} color={ORANGE} />
           <Chip text={location} color="rgba(255,255,255,0.85)" neutral />
-          <Chip text={`Teslim: ${delivery}`} color={TEAL} />
+          <Chip text={`Delivery: ${delivery}`} color={TEAL} />
         </motion.div>
 
         {/* CTAs */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
-          className="mt-8 flex flex-wrap justify-center gap-3"
+          animate="show"
+          custom={4}
+          className="mt-6 md:mt-8 flex flex-wrap justify-center gap-3"
         >
           <a
             href={contactHref}
+            data-track="price_request_click"
             className="rounded-full px-7 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5"
             style={{
               background: TEAL,
@@ -167,12 +191,15 @@ delivery = "December 2028",
               boxShadow: `0 12px 28px ${TEAL}55`,
             }}
           >
-           Contact Us
+            {contactLabel}
           </a>
 
           {brochureHref && (
             <a
               href={brochureHref}
+              target={isPdf ? "_blank" : undefined}
+              rel={isPdf ? "noopener" : undefined}
+              data-track={isPdf ? "brochure_download" : undefined}
               className="rounded-full px-7 py-3 text-sm font-medium"
               style={{
                 background: "rgba(255,255,255,0.12)",
@@ -181,7 +208,7 @@ delivery = "December 2028",
                 backdropFilter: "blur(8px)",
               }}
             >
-             Download Brochure (PDF)  
+              {brochureLabel}
             </a>
           )}
         </motion.div>

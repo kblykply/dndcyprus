@@ -17,6 +17,17 @@ import FlipBookGlass from "../../components/perla/FlipBookGlass";
 
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "tr",
+  path: "/perla",
+  title: "La Joya Perla İskele | Denize 700 m Daireler – DND Cyprus",
+  description:
+    "Bahçeler, İskele'de denize 700 m La Joya Perla: stüdyo, 1+1 loft ve 2+1 daireler, sand pool, kapalı havuz, spa ve Mariachi Beach Club ayrıcalığı. Bilgi alın.",
+  image: "/og/perla.jpg",
+  imageAlt: "La Joya Perla sand pool ve rezidans blokları",
+});
 
 export default function HomePage() {
   return (
@@ -60,7 +71,7 @@ eyebrow="Kasım 2024 Güncellemesi" title="La Joya Perla – Son İnşaat Günce
  <QuarterLogoBadge
           logoSrc="/logos/perla.png"
           alt="Your Project"
-          href="/"
+          href="/tr"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens
         />

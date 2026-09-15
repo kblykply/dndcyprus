@@ -3,6 +3,7 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
+import LazyYouTube from "@/app/components/LazyYouTube";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -39,16 +40,16 @@ highlights = [
   imagePrimary = "/lagoon-verde/3.jpg",
   embedUrl = "https://www.youtube.com/watch?v=bKNPhMFNzGY",
 }: Props) {
-  // Normalize YouTube URL to privacy-enhanced embed with autoplay/mute/loop
+  // YouTube kimliği; iframe LazyYouTube ile görünüme yaklaşınca yüklenir (autoplay/mute/loop korunur)
   const YT_ID =
-    /(?:v=|\.be\/)([A-Za-z0-9_-]{6,})/.exec(embedUrl ?? "")?.[1] ?? null;
-  const finalEmbed = YT_ID
-    ? `https://www.youtube-nocookie.com/embed/${YT_ID}?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${YT_ID}`
-    : null;
+    /(?:v=|\.be\/|embed\/)([A-Za-z0-9_-]{6,})/.exec(embedUrl ?? "")?.[1] ?? null;
+  const ytQuery = YT_ID
+    ? `autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${YT_ID}`
+    : "";
 
   return (
     <section
-      aria-label="Lagoon Verde — Genel Bakış"
+      aria-label="Lagoon Verde — Overview"
       className="relative overflow-hidden pb-12 lg:pb-16"
       style={{
         background: "#fff",
@@ -158,21 +159,22 @@ highlights = [
               }}
             >
               <div className="aspect-video bg-black">
-                {finalEmbed ? (
-                  <iframe
-                    title="Lagoon Verde tanıtım videosu"
-                    src={finalEmbed}
-                    className="w-full h-full"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    referrerPolicy="origin-when-cross-origin"
-                    allowFullScreen
+                {YT_ID ? (
+                  <LazyYouTube
+                    videoId={YT_ID}
+                    query={ytQuery}
+                    title="Lagoon Verde promotional video"
+                    posterAlt="Lagoon Verde promotional video thumbnail"
+                    playLabel="Play the Lagoon Verde promotional video"
                   />
                 ) : (
                   <img
                     src={imagePrimary}
-                    alt="Lagoon Verde genel görünüm"
+                    alt="Lagoon Verde general view"
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    width={1536}
+                    height={1024}
                   />
                 )}
               </div>

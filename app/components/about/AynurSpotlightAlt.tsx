@@ -44,8 +44,8 @@ export default function AynurSpotlightAlt({
     { k: "Uzmanlık", v: "Mimarlık & Yöneticilik" },
     { k: "Yaklaşım", v: "Sürdürülebilirlik" },
   ],
-  profileHref = "/projects",
-  contactHref = "/contact",
+  profileHref = "/tr/projects",
+  contactHref = "/tr/contact",
 }: Props) {
   return (
     <section

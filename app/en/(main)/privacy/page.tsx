@@ -1,24 +1,26 @@
-// app/gizlilik-politikasi/page.tsx
-import type { Metadata } from "next";
+// app/en/(main)/privacy/page.tsx
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
+import ConsentPreferencesButton from "@/app/components/analytics/ConsentPreferencesButton";
 
-export const dynamic = "force-static";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | DND Cyprus",
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "/privacy",
+  title: "Privacy and Cookie Policy | DND Cyprus",
   description:
-    "On this page you can find for which purposes DND Cyprus processes your personal data, which legal bases we rely on, and what your rights are.",
-};
+    "How DND Cyprus processes personal data, which cookies we use (Google Analytics, Google Ads, Meta Pixel), how to manage your cookie consent and what your rights are.",
+});
 
 export default function PrivacyPolicyPage() {
-  const updatedAt = "30 October 2025"; // Update this date whenever the text is revised.
+  const updatedAt = "15 September 2026"; // Update this date whenever the text is revised.
 
   return (
     <main className="min-h-svh bg-white text-neutral-900">
       <header className="border-b border-neutral-200 bg-white/60 backdrop-blur-sm">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
           <h1 className="text-2xl font-semibold tracking-tight">
-            Privacy Policy
+            Privacy and Cookie Policy
           </h1>
           <span className="text-sm text-neutral-500">
             Last updated: {updatedAt}
@@ -46,6 +48,7 @@ export default function PrivacyPolicyPage() {
                 ["saklama-sureleri", "Retention Periods"],
                 ["paylasim-aktarim", "Sharing & Transfers"],
                 ["cerezler", "Cookies"],
+                ["cerez-reklam", "Cookies and advertising measurement"],
                 ["haklariniz", "Your Rights"],
                 ["guvenlik", "Data Security"],
                 ["cocuklar", "Children’s Privacy"],
@@ -67,12 +70,12 @@ export default function PrivacyPolicyPage() {
         </nav>
 
         {/* Content */}
-        <div className="prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24">
+        <div className="prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24 [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:scroll-mt-24 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:font-semibold [&_p]:mt-3 [&_p]:leading-relaxed [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-1.5 [&_ul]:pl-5">
           <section id="kapsam">
             <h2>Scope</h2>
             <p>
               This Privacy Policy relates to personal data processed on the{" "}
-              <Link href="/" className="underline underline-offset-4">
+              <Link href="/en" className="underline underline-offset-4">
                 dndcyprus.com
               </Link>{" "}
               domain and its subpages (hereafter the “Service”). This document
@@ -132,9 +135,10 @@ export default function PrivacyPolicyPage() {
                 duration of visit, device information and identifiers.
               </li>
               <li>
-                <strong>Cookie Data:</strong> Strictly necessary cookies, cookie
-                notice/consent preferences, and functionality cookies (e.g.,
-                language selection, session preferences).
+                <strong>Cookie Data:</strong> Strictly necessary cookies, your
+                cookie preference and, only if you consent, analytics and
+                advertising measurement cookies (see “Cookies and advertising
+                measurement”).
               </li>
               <li>
                 <strong>Third-Party Interactions:</strong> Where you interact
@@ -212,32 +216,136 @@ export default function PrivacyPolicyPage() {
                 residence. In such cases, we implement appropriate technical and
                 contractual safeguards.
               </li>
+              <li>
+                <strong>Advertising and Measurement Partners:</strong> Google
+                (Google Analytics, Google Ads) and Meta Platforms
+                (Facebook/Instagram), only where you have given the relevant
+                consent in the cookie banner.
+              </li>
             </ul>
           </section>
 
           <section id="cerezler">
             <h2>Cookies</h2>
             <p>
-              The Service may use <strong>strictly necessary</strong>,{" "}
-              <strong>notice/consent</strong> and{" "}
-              <strong>functionality</strong> cookies that help maintain your
-              session and remember your preferences. You can restrict or delete
-              cookies via your browser settings. Refusing cookies may affect the
-              operation of some features.
+              The Service uses <strong>strictly necessary</strong> cookies to
+              work and to remember your preferences.{" "}
+              <strong>Analytics</strong> and <strong>advertising</strong>{" "}
+              cookies are only used if you consent in the cookie banner. You can
+              change your choice at any time and you can also restrict or delete
+              cookies via your browser settings.
             </p>
             <details className="mt-3 rounded-lg border border-neutral-200 p-4">
               <summary className="cursor-pointer font-medium">
                 Cookie management (summary)
               </summary>
               <ul className="mt-3">
+                <li>The cookie banner on the site or the “Change cookie preferences” button on this page</li>
                 <li>Browser settings &gt; Privacy/Site Settings &gt; Cookies</li>
                 <li>Options to block or clear third-party cookies</li>
-                <li>
-                  You can change the categories you have consented to at any
-                  time
-                </li>
               </ul>
             </details>
+          </section>
+
+          <section id="cerez-reklam">
+            <h2>Cookies and advertising measurement</h2>
+            <p>
+              We use the tools below to measure how our website is used and to
+              see the results of our Google and Meta (Facebook/Instagram)
+              advertising campaigns. Apart from strictly necessary cookies,
+              these tools only use cookies or send data{" "}
+              <strong>if you consent in the cookie banner</strong>.
+            </p>
+
+            <h3>Tools we use</h3>
+            <ul>
+              <li>
+                <strong>Google Analytics 4 (analytics consent):</strong> shows,
+                as aggregated statistics, which pages are visited, where visitors
+                come from and interactions such as brochure downloads, virtual
+                tours and contact clicks.
+              </li>
+              <li>
+                <strong>Google Ads conversion tracking (advertising consent):</strong>{" "}
+                measures actions such as submitting a form or contacting us via
+                WhatsApp or phone after clicking a Google ad. With{" "}
+                <strong>enhanced conversions</strong>, when you submit a form your
+                email address and phone number are converted in your browser into
+                a one-way SHA-256 hash, sent to Google and used only to match the
+                conversion with an ad click.
+              </li>
+              <li>
+                <strong>Meta Pixel (advertising consent):</strong> measures the
+                results of our Facebook and Instagram ads (page views, form
+                submissions, contact clicks) and helps show our ads to people who
+                may be interested. It is not loaded unless you give advertising
+                consent.
+              </li>
+              <li>
+                <strong>Meta Conversions API (advertising consent):</strong> when
+                you submit a form, our server sends the same “form submitted”
+                event directly to Meta so that measurement is not affected by
+                browser blocking and is not double-counted with the Pixel. Your
+                email and phone number are SHA-256 hashed; your IP address,
+                browser information, page address and Meta cookie identifiers
+                (_fbp/_fbc) are also sent. Nothing is sent if you have not given
+                advertising consent.
+              </li>
+            </ul>
+            <p>
+              Without your consent, Google tags do not read or write cookies;
+              they may only send limited cookieless technical signals (e.g.
+              consent state, page address, browser type), which Google may use
+              for aggregated conversion modelling (Google Consent Mode). In that
+              case ad-click information may be carried in the page address
+              instead of a cookie. When you submit a form, information about the
+              campaign that brought you to the site (the content of dnd_ft/dnd_lt
+              below and the page address) is stored together with your request.
+              Google and Meta may process data on servers outside your country.
+            </p>
+
+            <h3>Cookie list</h3>
+            <div className="mt-3 overflow-x-auto rounded-lg border border-neutral-200">
+              <table className="min-w-full text-left text-sm">
+                <thead className="bg-neutral-50 text-neutral-600">
+                  <tr>
+                    <th className="px-3 py-2 font-medium">Cookie</th>
+                    <th className="px-3 py-2 font-medium">Provider</th>
+                    <th className="px-3 py-2 font-medium">Purpose</th>
+                    <th className="px-3 py-2 font-medium">Duration</th>
+                    <th className="px-3 py-2 font-medium">Category</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral-200 align-top">
+                  {[
+                    ["dnd_consent", "DND Cyprus", "Stores your cookie choice (analytics/advertising consent).", "180 days", "Necessary"],
+                    ["locale", "DND Cyprus", "Remembers your language when you open the home address.", "1 year", "Necessary"],
+                    ["dnd_ft, dnd_lt", "DND Cyprus", "The campaign that first and last brought you to the site: UTM parameters, ad click ID (gclid/fbclid), landing page and referring site. Contains no name, email or phone number.", "90 days", "Analytics or Advertising"],
+                    ["_ga, _ga_<ID>", "Google", "Google Analytics 4: distinguishes visitors and sessions.", "Up to 2 years", "Analytics"],
+                    ["_gcl_au, _gcl_aw", "Google", "Google Ads: matches an ad click with a form or contact action.", "90 days", "Advertising"],
+                    ["_fbp", "Meta", "Meta Pixel: identifies the browser for ad measurement.", "90 days", "Advertising"],
+                    ["_fbc", "Meta", "Stores the Facebook/Instagram ad click ID (fbclid).", "90 days", "Advertising"],
+                  ].map(([name, provider, purpose, duration, category]) => (
+                    <tr key={name}>
+                      <td className="px-3 py-2 font-mono text-xs whitespace-nowrap">{name}</td>
+                      <td className="px-3 py-2 whitespace-nowrap">{provider}</td>
+                      <td className="px-3 py-2 min-w-[14rem]">{purpose}</td>
+                      <td className="px-3 py-2 whitespace-nowrap">{duration}</td>
+                      <td className="px-3 py-2 whitespace-nowrap">{category}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Changing or withdrawing consent</h3>
+            <p>
+              You can change or withdraw your consent at any time with the button
+              below. When you withdraw it, we delete the related cookies from your
+              browser and the Meta Pixel stops sending events. Withdrawal does not
+              affect processing carried out before it.
+            </p>
+            <ConsentPreferencesButton locale="en" />
           </section>
 
           <section id="haklariniz">

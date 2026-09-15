@@ -39,7 +39,7 @@ export default function CallToAction({
   title = "Birlikte Geleceği İnşa Edelim",
   subtitle = "Projeleriniz için güvenilir ve yenilikçi bir çözüm ortağı arıyorsanız, bizimle iletişime geçin.",
   buttonLabel = "İletişime Geçin",
-  buttonHref = "/contact",
+  buttonHref = "/tr/contact",
   bgSrc = "/lagoon-verde/1.jpg",
   bgAlt = "Arka plan",
   vignetteStrength = 0.45,

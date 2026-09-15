@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import Image from "next/image";
 import { motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -38,12 +39,11 @@ subtitle = "Lagoon Verde Images",
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/lagoon-verde/1.jpg", alt: "Havuz" },
-        { src: "/lagoon-verde/2.jpg", alt: "Plaj" },
-        { src: "/lagoon-verde/3.jpg", alt: "Cabanalar" },
-        { src: "/lagoon-verde/6.jpg", alt: "DJ Gecesi" },
-        { src: "/lagoon-verde/5.jpg", alt: "Kokteyller" },
-    
+        { src: "/lagoon-verde/1.jpg", alt: "Sun loungers with parasols on the lagoon pool shore, residence blocks behind" },
+        { src: "/lagoon-verde/2.jpg", alt: "Two-storey residences facing the pool among palm trees" },
+        { src: "/lagoon-verde/3.jpg", alt: "Residence facades and sun loungers lining the pool" },
+        { src: "/lagoon-verde/6.jpg", alt: "Lagoon pool at sunset with water slides and residence blocks" },
+        { src: "/lagoon-verde/5.jpg", alt: "Beach-entry lagoon pool with palm trees and a poolside restaurant" },
       ],
     [items]
   );
@@ -64,7 +64,7 @@ subtitle = "Lagoon Verde Images",
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="Lagoon Verde — Gallery"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -131,7 +131,7 @@ subtitle = "Lagoon Verde Images",
                   onMouseEnter={() => setHovered(i)}
                   onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
                   role="button"
-                  aria-label={g.alt || `Galeri görseli ${i + 1}`}
+                  aria-label={g.alt || `Gallery image ${i + 1}`}
                   style={{
                     flexGrow: grow,
                     transition: "flex-grow .55s cubic-bezier(0.22,1,0.36,1)",
@@ -139,10 +139,14 @@ subtitle = "Lagoon Verde Images",
                   }}
                 >
                   {/* Görsel */}
-                  <img
+                  {/* next/image + lazy: ham JPG preload (Link başlığı) oluşmaz */}
+                  <Image
                     src={g.src}
                     alt={g.alt || ""}
-                    className="h-full w-full object-cover select-none"
+                    fill
+                    // Dar/uzun panelde object-cover için yükseklik de belirleyici
+                    sizes="(max-width: 767px) 120vw, 60vw"
+                    className="object-cover select-none"
                     draggable={false}
                     style={{
                       transform: grow > 1 ? "scale(1.06)" : "scale(1.02)",

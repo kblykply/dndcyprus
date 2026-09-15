@@ -37,7 +37,7 @@ export default function ContactCTALagoonVerde({
 subtitle =
   "Long Beach, İskele — denize 500 m. Yatay mimarili 1+1 Loft, 2+1 Penthouse ve 1+0 Stüdyo seçenekleri; loftlarda havuza direkt erişim, penthouselarda çatı terası & jakuzi.",
 buttonText = "Fiyat Al",
-buttonHref = "/contact",
+buttonHref = "/tr/contact",
 bgImage = "/la-joya/5.jpg", // kendi görsel yolunuzu koyun (public/)
 overlayOpacity = 0.4,
 fullHeight = false,

@@ -85,7 +85,7 @@ distances = [
 
   return (
     <section
-      aria-label="La Joya Perla II — Konum"
+      aria-label="Lagoon Verde — Konum"
       className="relative overflow-hidden"
       style={{
         background: "#ffffff",
@@ -182,7 +182,7 @@ distances = [
         >
           <div className="aspect-[16/9]">
             <iframe
-              title="Proje Konumu"
+              title="Lagoon Verde konum haritası"
               src={iframeSrc}
               loading="lazy"
               className="w-full h-full border-0"

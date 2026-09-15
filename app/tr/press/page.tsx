@@ -1,4 +1,13 @@
 import PressSection, { type PressItem } from "../../components/PressSection";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "tr",
+  path: "/press",
+  title: "Basın Haberleri ve Duyurular | DND Cyprus",
+  description:
+    "Basında DND Cyprus: La Joya Rezidansları ve Tatil Köyü'nün tamamlanması başta olmak üzere Kıbrıs Postası, Yenidüzen ve Haber Kıbrıs'taki haberleri okuyun.",
+});
 
 const PRESS_ITEMS: PressItem[] = [
   {
@@ -49,7 +58,7 @@ const PRESS_ITEMS: PressItem[] = [
 export default function HomePage() {
   return (
     <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
-   <PressSection items={PRESS_ITEMS} />
+   <PressSection items={PRESS_ITEMS} moreHref="/tr/press" />
 
 
     </main>

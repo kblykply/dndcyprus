@@ -39,7 +39,7 @@ statusTR = "Devam Eden",
 delivery = "Kasım 2026",
 heroImage = "/perla/7.jpg", 
 brochureHref = "#",
-  contactHref = "/contact",
+  contactHref = "/tr/contact",
   kicker = "DND Cyprus",
   topScrimHeight = 104, // ~header height; tweak if needed
 }: Props) {

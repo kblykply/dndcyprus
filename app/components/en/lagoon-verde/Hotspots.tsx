@@ -28,7 +28,7 @@ export default function InteriorMaterialsHotspotsBase() {
       id: "angle-a",
       name: "Living Room",
       imageSrc: "/lagoon-verde-interior/2plus1/6.jpg",
-      imageAlt: "Interior render – Angle A",
+      imageAlt: "Lagoon Verde 2+1 apartment living room visual: sectional sofa, round coffee table and wooden shelving",
       hotspots: [
        
       ],
@@ -37,7 +37,7 @@ export default function InteriorMaterialsHotspotsBase() {
       id: "angle-b",
       name: "Kitchen",
       imageSrc: "/lagoon-verde-interior/2plus1/8.jpg",
-      imageAlt: "Interior render – Angle B",
+      imageAlt: "Lagoon Verde 2+1 apartment kitchen visual: grey cabinetry and a round dining table",
       hotspots: [
        
       ],
@@ -46,7 +46,7 @@ export default function InteriorMaterialsHotspotsBase() {
       id: "angle-c",
       name: "Bedroom",
       imageSrc: "/lagoon-verde-interior/2plus1/5.jpg",
-      imageAlt: "Interior render – Angle C",
+      imageAlt: "Lagoon Verde 2+1 apartment bedroom visual: double bed and built-in wardrobe",
       hotspots: [
         
       ],
@@ -96,7 +96,6 @@ export default function InteriorMaterialsHotspotsBase() {
               fill
               className="object-cover"
               sizes="100vw"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/60 pointer-events-none" />
           </motion.div>

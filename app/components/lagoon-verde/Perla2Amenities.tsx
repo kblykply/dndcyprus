@@ -121,9 +121,9 @@ export default function LagoonVerde360Section() {
           <Image
             src={BG_IMAGE}
             alt=""
+            aria-hidden
             fill
             sizes="100vw"
-            priority
             className="object-cover object-center"
           />
         </div>
@@ -221,7 +221,9 @@ export default function LagoonVerde360Section() {
               {/* Poster until Play */}
               {!isPlaying && (
                 <button
+                  type="button"
                   onClick={() => setIsPlaying(true)}
+                  data-track="tour_start"
                   className="group relative h-full w-full"
                   style={{ cursor: "pointer" }}
                   aria-label="360 Turu Başlat"
@@ -230,9 +232,8 @@ export default function LagoonVerde360Section() {
                     src={POSTER_IMAGE}
                     alt=""
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 1400px) 100vw, 1400px"
                     className="object-cover object-center"
-                    priority={false}
                   />
                   <div className="absolute inset-0 bg-black/40 transition-opacity group-hover:bg-black/30" />
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
@@ -254,7 +255,7 @@ export default function LagoonVerde360Section() {
                 <>
                   <iframe
                     src={TOUR_SRC}
-                    title="Lagoon Verde 360 Tour"
+                    title="Lagoon Verde 360° sanal tur"
                     style={{ width: "100%", height: "100%", border: 0, display: "block" }}
                     allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; magnetometer"
                     allowFullScreen
@@ -263,10 +264,10 @@ export default function LagoonVerde360Section() {
                   <button
                     onClick={isFs ? exitFullscreen : enterFullscreen}
                     className="absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-xl bg-black/60 px-3 py-2 text-xs text-white backdrop-blur-md hover:bg-black/70"
-                    aria-label={isFs ? "Fullscreen'den çık" : "Fullscreen"}
+                    aria-label={isFs ? "Tam ekrandan çık" : "Tam ekran"}
                   >
                     {isFs ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-                    {isFs ? "Çık" : "Fullscreen"}
+                    {isFs ? "Çık" : "Tam ekran"}
                   </button>
                 </>
               )}
@@ -278,6 +279,7 @@ export default function LagoonVerde360Section() {
                 href={TOUR_SRC}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track="tour_start"
                 className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs"
                 style={{
                   background: "rgba(255,255,255,0.12)",

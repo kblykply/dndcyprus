@@ -149,7 +149,7 @@ subtitle = "A wide range of amenities at Lagoon Verde designed for your comfort 
 }: Props) {
   return (
     <section
-      aria-label="Lagoon Verde — Olanaklar"
+      aria-label="Lagoon Verde — Amenities"
       className="relative overflow-hidden"
       style={{
         background: "#ffffff",

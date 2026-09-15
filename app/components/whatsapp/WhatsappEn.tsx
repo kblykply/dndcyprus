@@ -1,7 +1,10 @@
-// app/components/WhatsAppFab.tsx
+// app/components/whatsapp/WhatsappEn.tsx
 "use client";
 
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
+import { usePathname } from "next/navigation";
+import { projectFromPath } from "@/lib/analytics";
+import { attributionRef } from "@/lib/attribution";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -15,18 +18,32 @@ const LIGHT_SELECTORS = '[data-bg="light"], .light-section, .bg-white';
 
 export default function WhatsAppFab({
   phone,
-  defaultMessage = "Merhaba! Bilgi almak istiyorum.",
+  defaultMessage = "Hello! I would like to get more information.",
   label = "Chat on WhatsApp",
 }: Props) {
   const [mounted, setMounted] = useState(false);
   const [isLightBg, setIsLightBg] = useState(false);
   const raf = useRef<number | null>(null);
 
+  const pathname = usePathname() || "";
+  const [message, setMessage] = useState(defaultMessage);
+
+  // Proje sayfasında proje adıyla mesaj + kampanya referansı (yalnızca utm_source/utm_campaign)
+  const refreshMessage = useCallback(() => {
+    const project = projectFromPath(pathname);
+    const base = project ? `Hello! I would like to get information about ${project.name}.` : defaultMessage;
+    setMessage(base + attributionRef());
+  }, [pathname, defaultMessage]);
+
+  useEffect(() => {
+    refreshMessage();
+  }, [refreshMessage]);
+
   const href = useMemo(() => {
-    const msg = encodeURIComponent(defaultMessage);
+    const msg = encodeURIComponent(message);
     const clean = phone.replace(/[^\d+]/g, "");
     return `https://wa.me/${clean.replace(/^\+/, "")}?text=${msg}`;
-  }, [phone, defaultMessage]);
+  }, [phone, message]);
 
   useEffect(() => setMounted(true), []);
 
@@ -99,6 +116,8 @@ export default function WhatsAppFab({
 
       <a
         href={href}
+        onPointerDown={refreshMessage}
+        onFocus={refreshMessage}
         target="_blank"
         rel="noopener noreferrer"
         className={[

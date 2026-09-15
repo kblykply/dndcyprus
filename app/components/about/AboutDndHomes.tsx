@@ -113,7 +113,7 @@ export default function AboutDndHomes({
               {/* CTAs */}
               <div className="mt-3 inline-flex flex-wrap gap-2 rounded-xl bg-black/25 px-2.5 py-2 ring-1 ring-white/15 backdrop-blur-md">
                 <PrimaryCTA href="https://dnd-homes.com/">DND Homes Web Sitesi</PrimaryCTA>
-                <SecondaryCTA href="/projects">Kuzey Kıbrıs Projeleri</SecondaryCTA>
+                <SecondaryCTA href="/tr/projects">Kuzey Kıbrıs Projeleri</SecondaryCTA>
               </div>
             </div>
 
@@ -163,7 +163,7 @@ export default function AboutDndHomes({
               <PrimaryCTA href="https://dnd-homes.com/" invert>
                 DND Homes Web Sitesi
               </PrimaryCTA>
-              <SecondaryCTA href="/projects">Kuzey Kıbrıs Projeleri</SecondaryCTA>
+              <SecondaryCTA href="/tr/projects">Kuzey Kıbrıs Projeleri</SecondaryCTA>
             </div>
           </div>
         </div>

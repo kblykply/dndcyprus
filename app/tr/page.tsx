@@ -13,6 +13,15 @@ import IgEmbedGallery from "../components/IgPost";
 import ProjectsHeroFullSlider from "../components/projects/ProjectsHero";
 // app/(site)/page.tsx  (or wherever you render the section)
 import PressSection, { type PressItem } from "../components/PressSection";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "tr",
+  path: "",
+  title: "Kuzey Kıbrıs'ta Satılık Daireler ve Projeler | DND Cyprus",
+  description:
+    "Ödüllü geliştirici DND Cyprus; İskele'de Lagoon Verde, La Joya Perla ve Perla II gibi denize yakın projeler ve Mariachi Beach Club ayrıcalığı sunar. Keşfedin.",
+});
 
 const PRESS_ITEMS: PressItem[] = [
   {
@@ -81,7 +90,7 @@ export default function HomePage() {
                         <StatsStrip />
                         
                 <IgEmbedGallery />
-   <PressSection items={PRESS_ITEMS} />
+   <PressSection items={PRESS_ITEMS} moreHref="/tr/press" />
                         <ContactVisitSection />
 
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { submitLead } from "@/lib/lead-submit";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -45,17 +46,21 @@ export default function ContactForm() {
     }
 
     setStatus("loading");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, subject, message }),
-      });
+    // Ortak gönderim: kaynak bilgisi + generate_lead ölçümü
+    const result = await submitLead({
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      form: "contact",
+      company: String(data.get("company") || ""),
+    });
 
-      if (!res.ok) throw new Error(await res.text());
+    if (result.ok) {
       setStatus("success");
       form.reset();
-    } catch (err: unknown) {
+    } else {
       setStatus("error");
       setError("There was a problem sending your message. Please try again.");
     }

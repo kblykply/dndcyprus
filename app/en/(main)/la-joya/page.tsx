@@ -12,6 +12,17 @@ import MariachiPerks from "../../../components/en/mariachi/MariachiPerks";
 import LaJoyaTechnicalFacilities from "../../../components/en/la-joya/LaJoyaTechnicalFacilities";
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "/la-joya",
+  title: "La Joya Long Beach Iskele – Lofts & Penthouses | DND Cyprus",
+  description:
+    "La Joya in Long Beach, Iskele, 500 m from the sea: 74 low-rise homes with 1+1 lofts, 2+1 and studio penthouses, pools, gym and Mariachi Beach Club membership.",
+  image: "/og/la-joya.jpg",
+  imageAlt: "La Joya poolside loft residences",
+});
 
 
 export default function HomePage() {
@@ -53,7 +64,7 @@ eyebrow="November 2024 Update" title="La Joya – Latest Construction Update" de
  <QuarterLogoBadge
           logoSrc="/logos/lajoya.png"
           alt="Your Project"
-          href="/"
+          href="/en"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens
         />

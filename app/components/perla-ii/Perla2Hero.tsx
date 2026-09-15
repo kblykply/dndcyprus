@@ -39,7 +39,7 @@ export default function Perla2Hero({
   delivery = "Mayıs 2027",
   heroImage = "/perla-ii/1.jpg",
   brochureHref = "#",
-  contactHref = "/contact",
+  contactHref = "/tr/contact",
   kicker = "DND Cyprus",
   topScrimHeight = 104, // ~header height; tweak if needed
 }: Props) {

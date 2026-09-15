@@ -17,6 +17,17 @@ import FlipBookGlass from "../../../components/en/perla-ii/FlipBookGlass";
 
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "/perla-ii",
+  title: "La Joya Perla II Iskele – Apartments for Sale | DND Cyprus",
+  description:
+    "La Joya Perla II in Bahçeler, Iskele: studio, 1+1 loft and 2+1 suites with roof terraces or gardens, plus a pool, fitness and green areas. Request floor plans.",
+  image: "/og/perla-ii.jpg",
+  imageAlt: "La Joya Perla II roof terraces and garden pool apartments",
+});
 
 
 export default function HomePage() {
@@ -53,7 +64,7 @@ export default function HomePage() {
 
 <Perla2Timeline
 
-eyebrow="Ekim 2025 Güncellemesi" title="La Joya Perla II – Son İnşaat Güncellemesi" description="Kaba inşaat %55 seviyesinde. Mekanik/elektrik altyapı geçişleri planlandığı gibi ilerliyor. Sahil yaya aksı peyzajı için örnek uygulamalar test ediliyor." video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=Fx0EFJ50fgHkwstW", type: "youtube", title: "La Joya Perla II — Update", }} cta={{ label: "Tüm güncellemeleri gör →", href: "/projects/perla2#updates" }}
+eyebrow="Ekim 2025 Güncellemesi" title="La Joya Perla II – Son İnşaat Güncellemesi" description="Kaba inşaat %55 seviyesinde. Mekanik/elektrik altyapı geçişleri planlandığı gibi ilerliyor. Sahil yaya aksı peyzajı için örnek uygulamalar test ediliyor." video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=Fx0EFJ50fgHkwstW", type: "youtube", title: "La Joya Perla II — Update", }} cta={{ label: "Tüm güncellemeleri gör →", href: "/en/perla-ii" }}
 
 />
 <Perla2CTA />
@@ -62,7 +73,7 @@ eyebrow="Ekim 2025 Güncellemesi" title="La Joya Perla II – Son İnşaat Günc
  <QuarterLogoBadge
           logoSrc="/logos/perlaii.png"
           alt="Your Project"
-          href="/"
+          href="/en"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens
         />

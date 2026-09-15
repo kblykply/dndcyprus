@@ -262,7 +262,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
     <>
       <header ref={headerRef} className={[headerBase, headerSkin, hideClass].join(" ")}>
         {/* Logo */}
-        <Link href="/tr/" className="inline-block" prefetch={false}>
+        <Link href="/tr" className="inline-block" prefetch={false}>
           <Image
             src={onTransparent ? "/DND-LOGO-LIGHT.svg" : "/DND-LOGO-2.svg"}
             alt="DND Cyprus"
@@ -511,7 +511,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
             >
               {/* Top row: logo + home + close */}
               <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-white/15">
-                <Link href="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-3" prefetch={false}>
+                <Link href="/tr" onClick={() => setMenuOpen(false)} className="flex items-center gap-3" prefetch={false}>
                   <div className="relative w-22 h-22 rounded-xl overflow-hidden ">
                     <Image src="/DND-LOGO-LIGHT.svg" alt="DND Cyprus" fill className="object-contain p-1" />
                   </div>
@@ -519,7 +519,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
 
                 <div className="flex items-center gap-2">
                   <Link
-                    href="/"
+                    href="/tr"
                     prefetch={false}
                     onClick={() => setMenuOpen(false)}
                     className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 text-sm"

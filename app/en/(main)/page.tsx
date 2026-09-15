@@ -13,6 +13,15 @@ import Payment from  "../../components/en/Payment";
 import IgEmbedGallery from "../../components/en/IgPost";
 import PressSection, { type PressItem } from "../../components/PressSection";
 import ProjectsHeroFullSlider from "../../components/en/projects/ProjectsHero";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "",
+  title: "North Cyprus Property Developer & Apartments | DND Cyprus",
+  description:
+    "Award-winning developer DND Cyprus builds seaside homes in Iskele: Lagoon Verde, La Joya Perla and Perla II, with Mariachi Beach Club perks. See our projects.",
+});
 const PRESS_ITEMS: PressItem[] = [
   {
     id: "mha-2025-11-04",

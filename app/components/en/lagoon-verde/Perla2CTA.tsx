@@ -37,7 +37,7 @@ export default function ContactCTALagoonVerde({
 subtitle =
   "Ötüken, Iskele — immersed in nature, in a location close to Long Beach. Studio, 1+1 Loft, and 2+1 options with spacious terraces and roof terraces.",
 buttonText = "Get a Price",
-buttonHref = "/en/contact",
+buttonHref = "#fiyat-al", // sayfadaki teklif formu
 bgImage = "/lagoon-verde/7.jpg", // use your own image path (public/)
 overlayOpacity = 0.4,
 fullHeight = false,
@@ -53,7 +53,7 @@ highlights = [
 }: Props) {
   return (
     <section
-      aria-label="Lagoon Verde — İletişim & Broşür"
+      aria-label="Lagoon Verde — Contact"
       className={`relative overflow-hidden ${fullHeight ? "min-h-screen" : "min-h-[70vh]"}`}
       style={
         {
@@ -67,8 +67,8 @@ highlights = [
           <Image
             src={bgImage}
             alt=""
+            aria-hidden
             fill
-            priority
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -137,7 +137,7 @@ highlights = [
             <motion.ul
               variants={fadeUp}
               className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
-              aria-label="Proje öne çıkanlar"
+              aria-label="Project highlights"
             >
               {highlights.map((h) => (
                 <li
@@ -158,6 +158,7 @@ highlights = [
           <motion.div variants={fadeUp} className="mt-8 flex justify-center">
             <a
               href={buttonHref}
+              data-track="price_request_click"
               className="inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-semibold transition-transform duration-300 will-change-transform focus:outline-none focus:ring-2 focus:ring-white/40"
               style={{
                 background: `linear-gradient(180deg, ${TEAL}, ${TEAL})`,

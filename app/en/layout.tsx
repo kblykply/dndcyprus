@@ -2,8 +2,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+// Başlık sayfalarda verilir; kök layout "DND Cyprus" varsayılanını taşır
 export const metadata: Metadata = {
-  title: "DND Cyprus",
   description: "Premium real estate projects in North Cyprus",
 };
 

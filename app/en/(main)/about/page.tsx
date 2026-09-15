@@ -9,6 +9,15 @@ import OzanSpotlight from "../../../components/en/about/OzanSpotlight";
 import AynurSpotlightAlt from "../../../components/en/about/AynurSpotlightAlt"
 
 import AboutDndHomes from "../../../components/en/about/AboutDndHomes";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "/about",
+  title: "About Us – North Cyprus Real Estate Developer | DND Cyprus",
+  description:
+    "DND Cyprus is the Cyprus arm of Boston-founded DND Homes. Led by Ozan Dökmecioğlu, we develop award-winning, design-led residences in Iskele. Meet our story.",
+});
 
 
 

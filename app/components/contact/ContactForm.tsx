@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { submitLead } from "@/lib/lead-submit";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -45,17 +46,21 @@ export default function ContactForm() {
     }
 
     setStatus("loading");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, subject, message }),
-      });
+    // Ortak gönderim: kaynak bilgisi + generate_lead ölçümü
+    const result = await submitLead({
+      name,
+      email,
+      phone,
+      subject,
+      message,
+      form: "contact",
+      company: String(data.get("company") || ""),
+    });
 
-      if (!res.ok) throw new Error(await res.text());
+    if (result.ok) {
       setStatus("success");
       form.reset();
-    } catch (err: unknown) {
+    } else {
       setStatus("error");
       setError("Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin.");
     }
@@ -303,7 +308,7 @@ export default function ContactForm() {
                   </div>
                   <div className="rounded-lg px-3 py-2 bg-white/10">
                     <span className="opacity-80">Telefon:</span>{" "}
-                    <a className="underline-offset-2 hover:underline" href="tel:+90xxxxxxxxxx">
+                    <a className="underline-offset-2 hover:underline" href="tel:+903924440363">
                       +90 392 444 03 63
                     </a>
                   </div>

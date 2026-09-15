@@ -29,7 +29,7 @@ const DATA = {
   zoningNote: "Zonlama: Fasıl 96",
   heightNote: "Gelişim: ~5 kata kadar (bilgi amaçlı)",
   heroImage: "/gecitkaleimage.jpg", // put your image in /public/land/
-  contactHref: "/contact",
+  contactHref: "/tr/contact",
   brochureHref: "/downloads/gecitkale-ozet.pdf", // set '' or null to hide
 };
 

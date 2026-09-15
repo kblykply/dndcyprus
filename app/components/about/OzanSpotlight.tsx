@@ -126,14 +126,14 @@ export default function OzanSpotlight({
 
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
-                href="/about"
+                href="/tr/about"
                 className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5"
                 style={{ background: TEAL, color: "#fff", boxShadow: `0 10px 22px ${TEAL}33` }}
               >
                 Hakkımızda
               </Link>
               <Link
-                href="/team"
+                href="/tr/team"
                 className="px-6 py-2.5 rounded-full text-sm font-medium"
                 style={{ background: `${ORANGE}0`, color: ORANGE, border: `1px solid ${ORANGE}33` }}
               >

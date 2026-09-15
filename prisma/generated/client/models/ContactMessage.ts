@@ -41,6 +41,13 @@ export type ContactMessageMinAggregateOutputType = {
   phone: string | null
   subject: string | null
   message: string | null
+  project: string | null
+  unitType: string | null
+  form: string | null
+  source: string | null
+  campaign: string | null
+  pageUrl: string | null
+  eventId: string | null
   createdAt: Date | null
 }
 
@@ -51,6 +58,13 @@ export type ContactMessageMaxAggregateOutputType = {
   phone: string | null
   subject: string | null
   message: string | null
+  project: string | null
+  unitType: string | null
+  form: string | null
+  source: string | null
+  campaign: string | null
+  pageUrl: string | null
+  eventId: string | null
   createdAt: Date | null
 }
 
@@ -61,6 +75,14 @@ export type ContactMessageCountAggregateOutputType = {
   phone: number
   subject: number
   message: number
+  project: number
+  unitType: number
+  form: number
+  source: number
+  campaign: number
+  pageUrl: number
+  eventId: number
+  attribution: number
   createdAt: number
   _all: number
 }
@@ -81,6 +103,13 @@ export type ContactMessageMinAggregateInputType = {
   phone?: true
   subject?: true
   message?: true
+  project?: true
+  unitType?: true
+  form?: true
+  source?: true
+  campaign?: true
+  pageUrl?: true
+  eventId?: true
   createdAt?: true
 }
 
@@ -91,6 +120,13 @@ export type ContactMessageMaxAggregateInputType = {
   phone?: true
   subject?: true
   message?: true
+  project?: true
+  unitType?: true
+  form?: true
+  source?: true
+  campaign?: true
+  pageUrl?: true
+  eventId?: true
   createdAt?: true
 }
 
@@ -101,6 +137,14 @@ export type ContactMessageCountAggregateInputType = {
   phone?: true
   subject?: true
   message?: true
+  project?: true
+  unitType?: true
+  form?: true
+  source?: true
+  campaign?: true
+  pageUrl?: true
+  eventId?: true
+  attribution?: true
   createdAt?: true
   _all?: true
 }
@@ -198,6 +242,14 @@ export type ContactMessageGroupByOutputType = {
   phone: string | null
   subject: string
   message: string
+  project: string | null
+  unitType: string | null
+  form: string | null
+  source: string | null
+  campaign: string | null
+  pageUrl: string | null
+  eventId: string | null
+  attribution: runtime.JsonValue | null
   createdAt: Date
   _count: ContactMessageCountAggregateOutputType | null
   _avg: ContactMessageAvgAggregateOutputType | null
@@ -231,6 +283,14 @@ export type ContactMessageWhereInput = {
   phone?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
   subject?: Prisma.StringFilter<"ContactMessage"> | string
   message?: Prisma.StringFilter<"ContactMessage"> | string
+  project?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  unitType?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  form?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  source?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  campaign?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  pageUrl?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  eventId?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  attribution?: Prisma.JsonNullableFilter<"ContactMessage">
   createdAt?: Prisma.DateTimeFilter<"ContactMessage"> | Date | string
 }
 
@@ -241,6 +301,14 @@ export type ContactMessageOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   subject?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  project?: Prisma.SortOrderInput | Prisma.SortOrder
+  unitType?: Prisma.SortOrderInput | Prisma.SortOrder
+  form?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
+  campaign?: Prisma.SortOrderInput | Prisma.SortOrder
+  pageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  eventId?: Prisma.SortOrderInput | Prisma.SortOrder
+  attribution?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -254,6 +322,14 @@ export type ContactMessageWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
   subject?: Prisma.StringFilter<"ContactMessage"> | string
   message?: Prisma.StringFilter<"ContactMessage"> | string
+  project?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  unitType?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  form?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  source?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  campaign?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  pageUrl?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  eventId?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  attribution?: Prisma.JsonNullableFilter<"ContactMessage">
   createdAt?: Prisma.DateTimeFilter<"ContactMessage"> | Date | string
 }, "id">
 
@@ -264,6 +340,14 @@ export type ContactMessageOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   subject?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  project?: Prisma.SortOrderInput | Prisma.SortOrder
+  unitType?: Prisma.SortOrderInput | Prisma.SortOrder
+  form?: Prisma.SortOrderInput | Prisma.SortOrder
+  source?: Prisma.SortOrderInput | Prisma.SortOrder
+  campaign?: Prisma.SortOrderInput | Prisma.SortOrder
+  pageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  eventId?: Prisma.SortOrderInput | Prisma.SortOrder
+  attribution?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ContactMessageCountOrderByAggregateInput
   _avg?: Prisma.ContactMessageAvgOrderByAggregateInput
@@ -282,6 +366,14 @@ export type ContactMessageScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
   subject?: Prisma.StringWithAggregatesFilter<"ContactMessage"> | string
   message?: Prisma.StringWithAggregatesFilter<"ContactMessage"> | string
+  project?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  unitType?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  form?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  source?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  campaign?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  pageUrl?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  eventId?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  attribution?: Prisma.JsonNullableWithAggregatesFilter<"ContactMessage">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContactMessage"> | Date | string
 }
 
@@ -291,6 +383,14 @@ export type ContactMessageCreateInput = {
   phone?: string | null
   subject: string
   message: string
+  project?: string | null
+  unitType?: string | null
+  form?: string | null
+  source?: string | null
+  campaign?: string | null
+  pageUrl?: string | null
+  eventId?: string | null
+  attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -301,6 +401,14 @@ export type ContactMessageUncheckedCreateInput = {
   phone?: string | null
   subject: string
   message: string
+  project?: string | null
+  unitType?: string | null
+  form?: string | null
+  source?: string | null
+  campaign?: string | null
+  pageUrl?: string | null
+  eventId?: string | null
+  attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -310,6 +418,14 @@ export type ContactMessageUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  project?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  form?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  campaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -320,6 +436,14 @@ export type ContactMessageUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  project?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  form?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  campaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -330,6 +454,14 @@ export type ContactMessageCreateManyInput = {
   phone?: string | null
   subject: string
   message: string
+  project?: string | null
+  unitType?: string | null
+  form?: string | null
+  source?: string | null
+  campaign?: string | null
+  pageUrl?: string | null
+  eventId?: string | null
+  attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -339,6 +471,14 @@ export type ContactMessageUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  project?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  form?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  campaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -349,6 +489,14 @@ export type ContactMessageUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subject?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
+  project?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  form?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  campaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eventId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -359,6 +507,14 @@ export type ContactMessageCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  project?: Prisma.SortOrder
+  unitType?: Prisma.SortOrder
+  form?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  campaign?: Prisma.SortOrder
+  pageUrl?: Prisma.SortOrder
+  eventId?: Prisma.SortOrder
+  attribution?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -373,6 +529,13 @@ export type ContactMessageMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  project?: Prisma.SortOrder
+  unitType?: Prisma.SortOrder
+  form?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  campaign?: Prisma.SortOrder
+  pageUrl?: Prisma.SortOrder
+  eventId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -383,6 +546,13 @@ export type ContactMessageMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   subject?: Prisma.SortOrder
   message?: Prisma.SortOrder
+  project?: Prisma.SortOrder
+  unitType?: Prisma.SortOrder
+  form?: Prisma.SortOrder
+  source?: Prisma.SortOrder
+  campaign?: Prisma.SortOrder
+  pageUrl?: Prisma.SortOrder
+  eventId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -419,6 +589,14 @@ export type ContactMessageSelect<ExtArgs extends runtime.Types.Extensions.Intern
   phone?: boolean
   subject?: boolean
   message?: boolean
+  project?: boolean
+  unitType?: boolean
+  form?: boolean
+  source?: boolean
+  campaign?: boolean
+  pageUrl?: boolean
+  eventId?: boolean
+  attribution?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["contactMessage"]>
 
@@ -429,6 +607,14 @@ export type ContactMessageSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   phone?: boolean
   subject?: boolean
   message?: boolean
+  project?: boolean
+  unitType?: boolean
+  form?: boolean
+  source?: boolean
+  campaign?: boolean
+  pageUrl?: boolean
+  eventId?: boolean
+  attribution?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["contactMessage"]>
 
@@ -439,6 +625,14 @@ export type ContactMessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   phone?: boolean
   subject?: boolean
   message?: boolean
+  project?: boolean
+  unitType?: boolean
+  form?: boolean
+  source?: boolean
+  campaign?: boolean
+  pageUrl?: boolean
+  eventId?: boolean
+  attribution?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["contactMessage"]>
 
@@ -449,10 +643,18 @@ export type ContactMessageSelectScalar = {
   phone?: boolean
   subject?: boolean
   message?: boolean
+  project?: boolean
+  unitType?: boolean
+  form?: boolean
+  source?: boolean
+  campaign?: boolean
+  pageUrl?: boolean
+  eventId?: boolean
+  attribution?: boolean
   createdAt?: boolean
 }
 
-export type ContactMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "subject" | "message" | "createdAt", ExtArgs["result"]["contactMessage"]>
+export type ContactMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "subject" | "message" | "project" | "unitType" | "form" | "source" | "campaign" | "pageUrl" | "eventId" | "attribution" | "createdAt", ExtArgs["result"]["contactMessage"]>
 
 export type $ContactMessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ContactMessage"
@@ -464,6 +666,14 @@ export type $ContactMessagePayload<ExtArgs extends runtime.Types.Extensions.Inte
     phone: string | null
     subject: string
     message: string
+    project: string | null
+    unitType: string | null
+    form: string | null
+    source: string | null
+    campaign: string | null
+    pageUrl: string | null
+    eventId: string | null
+    attribution: runtime.JsonValue | null
     createdAt: Date
   }, ExtArgs["result"]["contactMessage"]>
   composites: {}
@@ -894,6 +1104,14 @@ export interface ContactMessageFieldRefs {
   readonly phone: Prisma.FieldRef<"ContactMessage", 'String'>
   readonly subject: Prisma.FieldRef<"ContactMessage", 'String'>
   readonly message: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly project: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly unitType: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly form: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly source: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly campaign: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly pageUrl: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly eventId: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly attribution: Prisma.FieldRef<"ContactMessage", 'Json'>
   readonly createdAt: Prisma.FieldRef<"ContactMessage", 'DateTime'>
 }
     

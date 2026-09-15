@@ -6,12 +6,15 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { Waves, BadgePercent, Info, ArrowRight } from "lucide-react";
+import LazyYouTube from "@/app/components/LazyYouTube";
 
 /** ---- INTERNAL DEFAULTS ---- */
 const MARIACHI_DEFAULTS = {
   logoSrc: "/logos/mariachi.png",
-  embedUrl:
-    "https://www.youtube-nocookie.com/embed/AobeR8p2Aq4?autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=AobeR8p2Aq4&playsinline=1&modestbranding=1",
+  // YouTube: iframe görünüme yaklaşınca yüklenir (LazyYouTube)
+  youtubeId: "AobeR8p2Aq4",
+  embedQuery:
+    "autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=AobeR8p2Aq4&playsinline=1&modestbranding=1",
   videoSrc: null as string | null,
   videoPoster: undefined as string | undefined,
   bgImage: "/mariachi/7.jpg",
@@ -19,7 +22,7 @@ const MARIACHI_DEFAULTS = {
   subtitle: "Gündüz deniz & güneş, akşam ritim — tek adreste.",
   note: "Kimlik doğrulaması gerekebilir. Kampanya tarihleri ve gün koşulları değişebilir.",
   overlayOpacity: 0.45,
-  mariachiHref: "/mariachi",
+  mariachiHref: "/tr/mariachi",
 };
 
 type Perk = { title: string; desc?: string; icon?: React.ReactNode };
@@ -47,7 +50,8 @@ const ITEM: Variants = {
 export default function MariachiPerks() {
   const {
     logoSrc,
-    embedUrl,
+    youtubeId,
+    embedQuery,
     videoSrc,
     videoPoster,
     bgImage,
@@ -61,7 +65,7 @@ export default function MariachiPerks() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const hasLogo = !!logoSrc?.trim();
-  const hasEmbed = !!embedUrl?.trim();
+  const hasEmbed = !!youtubeId?.trim();
   const hasVideo = !!videoSrc?.trim();
   const hasBg = !!bgImage?.trim();
   const hasLink = !!mariachiHref?.trim();
@@ -104,11 +108,9 @@ export default function MariachiPerks() {
     >
       {/* Background + dark overlay (page backdrop) */}
       {hasBg && (
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bgImage})` }}
-        />
+        <div aria-hidden className="absolute inset-0">
+          <Image src={bgImage} alt="" fill sizes="100vw" className="object-cover object-center" />
+        </div>
       )}
       <div
         aria-hidden
@@ -142,15 +144,19 @@ export default function MariachiPerks() {
           {/* 1) Blurred clone of section bg underneath content */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -inset-6 -z-10 rounded-[28px]"
-            style={{
-              backgroundImage: `linear-gradient(180deg, rgba(6,10,16,${overlayOpacity}), rgba(6,10,16,${overlayOpacity})), url(${bgImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              filter: "blur(18px)",
-              transform: "scale(1.06)",
-            }}
-          />
+            className="pointer-events-none absolute -inset-6 -z-10 rounded-[28px] overflow-hidden"
+            style={{ filter: "blur(18px)", transform: "scale(1.06)" }}
+          >
+            {hasBg && (
+              <Image src={bgImage} alt="" fill sizes="100vw" className="object-cover object-center" />
+            )}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(180deg, rgba(6,10,16,${overlayOpacity}), rgba(6,10,16,${overlayOpacity}))`,
+              }}
+            />
+          </div>
           {/* 2) Frost tint on top of blur */}
           <div
             aria-hidden
@@ -177,7 +183,6 @@ export default function MariachiPerks() {
                   width={220}
                   height={56}
                   className="h-12 sm:h-14 w-auto object-contain"
-                  priority
                 />
               )}
             </motion.div>
@@ -205,20 +210,16 @@ export default function MariachiPerks() {
                   {/* Aspect-ratio frame that crops the player content */}
                   <div className="relative w-full aspect-video overflow-hidden">
                     {hasEmbed ? (
-                      // YOUTUBE IFRAME — zoom to crop side bars
-                      <div
-                        className="absolute inset-0 origin-center"
-                        style={{ transform: `scale(${ZOOM_CROP})` }}
-                      >
-                        <iframe
-                          title="Mariachi Beach Club tanıtım videosu"
-                          src={embedUrl!}
-                          className="h-full w-full block"
-                          allow="autoplay; encrypted-media; picture-in-picture"
-                          referrerPolicy="origin-when-cross-origin"
-                          allowFullScreen
-                        />
-                      </div>
+                      // YOUTUBE — zoom to crop side bars (kapak + iframe birlikte ölçeklenir)
+                      <LazyYouTube
+                        videoId={youtubeId}
+                        query={embedQuery}
+                        zoom={ZOOM_CROP}
+                        className="absolute inset-0"
+                        title="Mariachi Beach Club tanıtım videosu"
+                        posterAlt="Mariachi Beach Club tanıtım videosu kapak görseli"
+                        playLabel="Mariachi Beach Club videosunu oynat"
+                      />
                     ) : (
                       // MP4 VIDEO — object-cover + optional extra zoom
                       <video

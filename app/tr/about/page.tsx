@@ -9,6 +9,15 @@ import OzanSpotlight from "../../components/about/OzanSpotlight";
 import AynurSpotlightAlt from "../../components/about/AynurSpotlightAlt"
 
 import AboutDndHomes from "../../components/about/AboutDndHomes";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "tr",
+  path: "/about",
+  title: "Hakkımızda | Kıbrıs Gayrimenkul Geliştiricisi – DND Cyprus",
+  description:
+    "DND Cyprus; Boston'da kurulan DND Homes'un Kıbrıs yapılanması. Ozan Dökmecioğlu liderliğinde İskele'de ödüllü, tasarım odaklı konut projeleri geliştiriyoruz.",
+});
 
 
 

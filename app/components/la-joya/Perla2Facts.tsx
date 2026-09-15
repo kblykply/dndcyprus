@@ -3,9 +3,29 @@
 
 import React from "react";
 import { motion, Variants } from "framer-motion";
+import { SITE_URL } from "@/lib/seo";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
+
+// Proje yapısal verisi (schema.org ApartmentComplex) — yalnızca bu projeye ait
+const PROJECT_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "ApartmentComplex",
+  name: "La Joya",
+  url: `${SITE_URL}/tr/la-joya`,
+  description:
+    "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir projedir.",
+  image: `${SITE_URL}/la-joya/2.jpg`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Long Beach",
+    addressRegion: "İskele",
+    addressCountry: "CY",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 35.272493, longitude: 33.911998 },
+  numberOfAccommodationUnits: { "@type": "QuantitativeValue", value: 74 },
+};
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
@@ -44,7 +64,7 @@ facts = [
 }: Props) {
   return (
     <section
-      aria-label="La Joya Perla II — Öne Çıkan Bilgiler"
+      aria-label={title}
       className="relative overflow-hidden"
 style={{
   background: "#fff",
@@ -125,27 +145,12 @@ style={{
         </motion.p>
       </div>
 
-      {/* lightweight SEO JSON-LD */}
+      {/* SEO JSON-LD (veri dosyanın başındaki PROJECT_JSON_LD sabitinde) */}
       {withSeoJsonLd && (
         <script
           type="application/ld+json"
-          // keep it simple; update values as gerçek rakamlar netleştiğinde
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ApartmentComplex",
-              name: "La Joya Perla II",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Bahçeler",
-                addressRegion: "İskele",
-                addressCountry: "CY",
-              },
-              url: "https://www.yoursite.com/projects/la-joya-perla-ii",
-              openingDate: "2027-05-01",
-              slogan: "Modern yaşam ve yatırım fırsatı",
-              numberOfRooms: "Varies",
-            }),
+            __html: JSON.stringify(PROJECT_JSON_LD).replace(/</g, "\\u003c"),
           }}
         />
       )}

@@ -53,8 +53,8 @@ export default function MariachiBeachClubHero({
   videoSrc = "/mariachi/hero.mp4",
   bgImage = "/mariachi/7.jpg",
   overlayOpacity = 0.35,
-  primaryCta = { label: "Pavilyon Rezervasyonu", href: "/contact" },
-  secondaryCta = { label: "Menüyü Görüntüle", href: "/contact" },
+  primaryCta = { label: "Pavilyon Rezervasyonu", href: "/tr/contact" },
+  secondaryCta = { label: "Menüyü Görüntüle", href: "/tr/contact" },
   highlights = ["Havuz & Plaj", "Pavilyonlar", "Restoran & Havuz Barı", "DJ Geceleri"],
 }: Props) {
   return (

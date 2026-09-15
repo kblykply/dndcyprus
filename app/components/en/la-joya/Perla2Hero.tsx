@@ -40,7 +40,7 @@ delivery = "November 2025",
 heroImage = "/la-joya/2.jpg",
 brochureHref = "#",
 
-contactHref = "/contact",
+contactHref = "/en/contact",
 kicker = "DND Cyprus",
 
   topScrimHeight = 104, // ~header height; tweak if needed

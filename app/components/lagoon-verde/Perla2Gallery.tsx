@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import Image from "next/image";
 import { motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -37,12 +38,11 @@ export default function MariachiGalleryExpanding({
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/lagoon-verde/1.jpg", alt: "Havuz" },
-        { src: "/lagoon-verde/2.jpg", alt: "Plaj" },
-        { src: "/lagoon-verde/3.jpg", alt: "Cabanalar" },
-        { src: "/lagoon-verde/6.jpg", alt: "DJ Gecesi" },
-        { src: "/lagoon-verde/5.jpg", alt: "Kokteyller" },
-    
+        { src: "/lagoon-verde/1.jpg", alt: "Lagün havuzu kıyısında şemsiyeli şezlonglar ve arkada rezidans blokları" },
+        { src: "/lagoon-verde/2.jpg", alt: "Palmiyeler arasında havuza bakan iki katlı rezidanslar" },
+        { src: "/lagoon-verde/3.jpg", alt: "Havuz boyunca uzanan rezidans cepheleri ve şezlonglar" },
+        { src: "/lagoon-verde/6.jpg", alt: "Gün batımında lagün havuzu, su kaydırakları ve rezidans blokları" },
+        { src: "/lagoon-verde/5.jpg", alt: "Kumsal girişli lagün havuzu, palmiyeler ve havuz kenarı restoran" },
       ],
     [items]
   );
@@ -63,7 +63,7 @@ export default function MariachiGalleryExpanding({
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="Lagoon Verde — Galeri"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -138,10 +138,14 @@ export default function MariachiGalleryExpanding({
                   }}
                 >
                   {/* Görsel */}
-                  <img
+                  {/* next/image + lazy: ham JPG preload (Link başlığı) oluşmaz */}
+                  <Image
                     src={g.src}
                     alt={g.alt || ""}
-                    className="h-full w-full object-cover select-none"
+                    fill
+                    // Dar/uzun panelde object-cover için yükseklik de belirleyici
+                    sizes="(max-width: 767px) 120vw, 60vw"
+                    className="object-cover select-none"
                     draggable={false}
                     style={{
                       transform: grow > 1 ? "scale(1.06)" : "scale(1.02)",

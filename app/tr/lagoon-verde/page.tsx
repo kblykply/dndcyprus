@@ -5,7 +5,6 @@ import Perla2Gallery from "../../components/lagoon-verde/Perla2Gallery";
 import Perla2FloorPlans from "../../components/lagoon-verde/Perla2FloorPlans";
 import Perla2Amenities from "../../components/lagoon-verde/Perla2Amenities";
 import Perla2Location from "../../components/lagoon-verde/Perla2Location";
-import Perla2Timeline from "../../components/lagoon-verde/Perla2Timeline";
 import Perla2CTA from "../../components/lagoon-verde/Perla2CTA";
 import Hotspots from "../../components/lagoon-verde/Hotspots";
 import Charts from "../../components/lagoon-verde/Charts";
@@ -15,6 +14,7 @@ import FlipBookGlass from "../../components/lagoon-verde/FlipBookGlass";
 
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import LeadForm from "@/app/components/lead/LeadForm";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -54,20 +54,27 @@ export default function HomePage() {
 <Perla2Location />
 <FlipBookGlass />
 
-<Perla2Timeline
-
-eyebrow="Ekim 2025 Güncellemesi" title="La Joya Perla II – Son İnşaat Güncellemesi" description="Kaba inşaat %55 seviyesinde. Mekanik/elektrik altyapı geçişleri planlandığı gibi ilerliyor. Sahil yaya aksı peyzajı için örnek uygulamalar test ediliyor." video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=Fx0EFJ50fgHkwstW", type: "youtube", title: "La Joya Perla II — Update", }} cta={{ label: "Tüm güncellemeleri gör →", href: "/projects/perla2#updates" }}
-
+{/* Teklif formu — hero ve alt CTA "#fiyat-al" çapasına kaydırır */}
+<LeadForm
+  locale="tr"
+  project="lagoon-verde"
+  projectName="Lagoon Verde"
+  unitTypes={[
+    "1+0 Studio Residence",
+    "1+1 Loft Residence",
+    "2+1 Roof Residence",
+    "2+1 Garden Residence",
+  ]}
 />
 
 <Perla2CTA />
 
  <QuarterLogoBadge
           logoSrc="/logos/lagoon.png"
-          alt="Your Project"
-          href="/"
+          alt="Lagoon Verde"
+          href="/tr"
           size={180}         // tweak the visible radius
-          // hideOnMobile     // uncomment if you want to hide on small screens
+          hideOnMobile       // mobilde içeriğin üstüne binmesin
         />
     </main>
   );

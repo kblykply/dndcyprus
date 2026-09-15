@@ -260,7 +260,7 @@ export default function NewsBlogListClient({
               const slug =
                 p.slug ??
                 (typeof extras.id === "string" || typeof extras.id === "number" ? String(extras.id) : "");
-              const href = slug ? `/blog/${slug}` : "/blog";
+              const href = slug ? `/tr/blog/${slug}` : "/tr/blog";
               const date =
                 p.date &&
                 new Date(p.date).toLocaleDateString("tr-TR", {
@@ -344,7 +344,7 @@ export default function NewsBlogListClient({
                 const slug =
                   p.slug ??
                   (typeof extras.id === "string" || typeof extras.id === "number" ? String(extras.id) : "");
-                const href = slug ? `/blog/${slug}` : "/blog";
+                const href = slug ? `/tr/blog/${slug}` : "/tr/blog";
                 const date =
                   p.date &&
                   new Date(p.date).toLocaleDateString("tr-TR", {
@@ -468,7 +468,7 @@ export default function NewsBlogListClient({
               Daha Fazla Yükle
             </button>
             <Link
-              href="/blog"
+              href="/tr/blog"
               className="rounded-full px-7 py-2.5 text-sm font-medium transition-transform hover:-translate-y-0.5"
               style={{
                 background: "rgba(20,21,23,0.06)",

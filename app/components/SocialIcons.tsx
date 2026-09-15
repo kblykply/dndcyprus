@@ -13,6 +13,8 @@ export default function SocialIcons() {
     if (!icon) return;
 
     const rect = icon.getBoundingClientRect();
+    // Mobilde gizli (display:none) → hesaplama yapma
+    if (rect.width === 0 && rect.height === 0) return;
     const centerY = rect.top + rect.height / 2;
 
     const candidates = Array.from(
@@ -36,7 +38,7 @@ export default function SocialIcons() {
     // Recompute on mount, scroll, resize (and a short interval to cover route/layout shifts)
     recalc();
     window.addEventListener("scroll", recalc, { passive: true });
-    window.addEventListener("resize", recalc);
+    window.addEventListener("resize", recalc, { passive: true });
     const guard = window.setInterval(recalc, 400);
 
     return () => {
@@ -49,7 +51,8 @@ export default function SocialIcons() {
   return (
     <div
       id="social-icons"
-      className="fixed left-3 top-1/2 -translate-y-1/2 z-[9999] pointer-events-none"
+      // md altı ekranlarda gizli: başlıkların üstüne binmesin
+      className="hidden md:block fixed left-3 top-1/2 -translate-y-1/2 z-[9999] pointer-events-none"
     >
       <div
         className={[
@@ -65,6 +68,7 @@ export default function SocialIcons() {
         <a
           href="https://www.facebook.com/dndcyprus/?locale=tr_TR"
           target="_blank"
+          rel="noopener noreferrer"
           className="hover:opacity-70 transition-opacity"
           aria-label="Facebook"
         >
@@ -73,6 +77,7 @@ export default function SocialIcons() {
         <a
           href="https://www.instagram.com/dndcyprus/"
           target="_blank"
+          rel="noopener noreferrer"
           className="hover:opacity-70 transition-opacity"
           aria-label="Instagram"
         >
@@ -81,6 +86,7 @@ export default function SocialIcons() {
         <a
           href="https://cy.linkedin.com/company/dndcyprus"
           target="_blank"
+          rel="noopener noreferrer"
           className="hover:opacity-70 transition-opacity"
           aria-label="LinkedIn"
         >

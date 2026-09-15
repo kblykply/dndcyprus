@@ -1,6 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BLOG_POSTS } from "../../../lib/blog";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "tr",
+  path: "/blog",
+  title: "Blog | Haberler, Ödüller ve Röportajlar – DND Cyprus",
+  description:
+    "DND Cyprus blogu: PropertyNC ödülleri, Ozan Dökmecioğlu röportajları, DND Homes büyüme planı ve Kuzey Kıbrıs gayrimenkul dünyasından güncel haberler.",
+  singleLanguage: true,
+});
 
 export const dynamic = "force-static"; // no runtime fetch needed
 
@@ -55,7 +65,7 @@ function Card({ post }: { post: BlogPost }) {
 
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/tr/blog/${post.slug}`}
       className="h-full flex flex-col overflow-hidden rounded-2xl border border-black/10
                  bg-white/70 backdrop-blur-xl shadow transition hover:shadow-lg"
     >

@@ -141,13 +141,13 @@ export default function AboutWhoWeAreGlass({
 
           <div className="mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
             <a
-              href="/projects"
+              href="/tr/projects"
               className="glass-thin inline-flex w-full sm:w-auto items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-neutral-900 ring-1 ring-[var(--glass-border)] transition-transform hover:scale-[1.02]"
             >
               Projelerimizi Görün
             </a>
             <a
-              href="/team"
+              href="/tr/team"
               className="inline-flex w-full sm:w-auto items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-neutral-700 hover:underline"
             >
               Ekibimiz

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { BLOG_POSTS } from "../../../../lib/blog";
+import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
@@ -9,6 +11,49 @@ function isHttpUrl(src?: string) {
 }
 
 type BlogPageProps = { params: Promise<{ slug: string }> };
+
+// Yazı verisi lib/blog.ts içinde sabit; ağ çağrısı yok
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
+
+  if (!post) {
+    return pageMetadata({
+      locale: "tr",
+      path: `/blog/${slug}`,
+      title: "Yazı bulunamadı | DND Cyprus",
+      description:
+        "Aradığınız blog yazısı bulunamadı. DND Cyprus blogundaki diğer haber ve röportajlara göz atabilirsiniz.",
+      singleLanguage: true,
+      noindex: true,
+    });
+  }
+
+  const title = post.title.includes("DND") ? post.title : `${post.title} | DND Cyprus`;
+  const meta = pageMetadata({
+    locale: "tr",
+    path: `/blog/${post.slug}`,
+    title,
+    description: post.excerpt,
+    singleLanguage: true,
+  });
+
+  // Kapak 1200×630 olmadığından boyut verilmez; yazı "article" olarak işaretlenir
+  const cover = post.cover && !isHttpUrl(post.cover) ? post.cover : undefined;
+  return {
+    ...meta,
+    openGraph: {
+      ...meta.openGraph,
+      type: "article",
+      publishedTime: post.date,
+      ...(cover ? { images: [{ url: cover, alt: post.title }] } : {}),
+    },
+    twitter: {
+      ...meta.twitter,
+      ...(cover ? { images: [cover] } : {}),
+    },
+  };
+}
 
 export default async function BlogDetail({ params }: BlogPageProps) {
   const { slug } = await params;
@@ -45,7 +90,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
       <section className="border-b border-black/10 bg-white/70 backdrop-blur-md">
         <div className="mx-auto max-w-[1200px] px-5 md:px-8 py-10">
           <Link
-            href="/blog"
+            href="/tr/blog"
             className="inline-flex items-center gap-2 text-sm text-black/60 hover:text-black"
           >
             ← Blog
@@ -130,7 +175,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl md:text-2xl font-semibold">Other posts</h2>
               <Link
-                href="/blog"
+                href="/tr/blog"
                 className="text-sm text-black/60 hover:text-black underline decoration-1"
               >
                 View all
@@ -147,7 +192,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
                 return (
                   <Link
                     key={p.slug}
-                    href={`/blog/${p.slug}`}
+                    href={`/tr/blog/${p.slug}`}
                     className="group block rounded-2xl overflow-hidden border border-black/10 bg-white hover:shadow-xl transition-shadow"
                   >
                     <div className="relative aspect-[16/9] bg-gradient-to-br from-black/[0.04] to-black/[0.08]">

@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -103,7 +104,7 @@ export default function Perla2FloorPlans({
 
   return (
     <section
-      aria-label="La Joya Perla II — Kat Planları"
+      aria-label="Lagoon Verde — Kat Planları"
       className="relative overflow-hidden"
       style={{
         background: "#fff",
@@ -131,6 +132,8 @@ export default function Perla2FloorPlans({
                 aria-selected={active}
                 aria-controls={`plan-panel-${i}`}
                 onClick={() => setPlanIdx(i)}
+                data-track="floorplan_view"
+                data-track-label={`${p.title} ${p.variants[0]?.name ?? ""}`.trim()}
                 className={`px-3.5 py-1.5 rounded-full text-sm border transition ${active ? "font-semibold" : ""}`}
                 style={{
                   background: active ? `${TEAL}14` : "rgba(255,255,255,0.6)",
@@ -210,9 +213,11 @@ export default function Perla2FloorPlans({
               <div className="aspect-[4/3] bg-white">
                 <img
                   src={variant.image}
-                  alt={`${plan.title} — ${variant.name} kat planı`}
+                  alt={`Lagoon Verde ${plan.title} — ${variant.name} kat planı`}
                   className="w-full h-full object-contain"
                   loading="lazy"
+                  width={800}
+                  height={600}
                 />
               </div>
               <div className="p-4 flex items-center justify-between gap-3">
@@ -323,15 +328,16 @@ export default function Perla2FloorPlans({
                         <li key={src}>
                           <button
                             onClick={() => openGalleryAt(i)}
-                            className="group block w-full aspect-square overflow-hidden rounded-xl border"
+                            className="group relative block w-full aspect-square overflow-hidden rounded-xl border"
                             style={{ borderColor: "var(--stroke)" }}
-                            aria-label={`Galeri görseli ${i + 1}`}
+                            aria-label={`${plan.title} ${variant.name} – galeri görseli ${i + 1}`}
                           >
-                            <img
+                            <Image
                               src={src}
                               alt=""
-                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-                              loading="lazy"
+                              fill
+                              sizes="(max-width: 640px) 33vw, 160px"
+                              className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                             />
                           </button>
                         </li>
@@ -379,7 +385,11 @@ export default function Perla2FloorPlans({
                 >
                   <img
                     src={lightbox.images[lightbox.idx]}
-                    alt=""
+                    alt={
+                      lightbox.images.length > 1
+                        ? `Lagoon Verde ${plan.title} ${variant.name} – görsel ${lightbox.idx + 1}`
+                        : `Lagoon Verde ${plan.title} — ${variant.name} kat planı`
+                    }
                     className="select-none"
                     style={{
                       maxWidth: "100%",

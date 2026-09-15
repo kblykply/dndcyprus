@@ -40,7 +40,7 @@ delivery = "Kasım 2025",
 heroImage = "/la-joya/2.jpg",
 brochureHref = "#",
 
-  contactHref = "/contact",
+  contactHref = "/tr/contact",
   kicker = "DND Cyprus",
   topScrimHeight = 104, // ~header height; tweak if needed
 }: Props) {
