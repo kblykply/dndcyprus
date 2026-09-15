@@ -36,6 +36,7 @@ export default function BlogIndex() {
 
   return (
     <main className="min-h-svh bg-white text-black">
+      <h1 className="sr-only">DND Cyprus Blog</h1>
       {/* hero */}
    
 

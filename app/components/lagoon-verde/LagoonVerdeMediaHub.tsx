@@ -393,9 +393,9 @@ export default function LagoonVerdeMediaHubLight({
             </div>
           </div>
 
-          <h2 className="mt-8 text-3xl font-semibold tracking-tight text-[#141517] sm:text-4xl lg:text-5xl">
+          <h1 className="mt-8 text-3xl font-semibold tracking-tight text-[#141517] sm:text-4xl lg:text-5xl">
             {title}
-          </h2>
+          </h1>
 
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#141517B3] sm:text-base">
             {subtitle}

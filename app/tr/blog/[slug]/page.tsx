@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     locale: "tr",
     path: `/blog/${post.slug}`,
     title,
-    description: post.excerpt,
+    description: blogDescription(post.excerpt, post.content),
     singleLanguage: true,
   });
 
@@ -226,4 +226,15 @@ export default async function BlogDetail({ params }: BlogPageProps) {
       )}
     </main>
   );
+}
+
+/** Özet 120 karakterden kısaysa yazının ilk cümleleriyle ~155 karaktere tamamlanır */
+function blogDescription(excerpt: string, html: string) {
+  const base = (excerpt || "").trim();
+  if (base.length >= 120) return base;
+  const text = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const combined = base && !text.startsWith(base) ? `${base} ${text}` : text || base;
+  if (combined.length <= 158) return combined;
+  const cut = combined.slice(0, 155);
+  return `${cut.slice(0, cut.lastIndexOf(" "))}…`;
 }

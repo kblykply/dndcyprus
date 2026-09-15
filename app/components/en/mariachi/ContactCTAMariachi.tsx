@@ -119,12 +119,12 @@ highlights = [
             boxShadow: `0 20px 60px rgba(0,0,0,0.35)`,
           }}
         >
-          <motion.h1
+          <motion.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-center"
           >
             {title}
-          </motion.h1>
+          </motion.h2>
 
           <motion.p
             variants={fadeUp}

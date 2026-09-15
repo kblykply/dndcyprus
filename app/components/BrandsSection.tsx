@@ -86,13 +86,6 @@ export default function OurBrands({
         }}
       />
 
-      {/* Subtle noise overlay (optional) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply"
-        style={{ backgroundImage: "url('/noise.png')" }}
-      />
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-24">
         <motion.div
           variants={containerStagger}

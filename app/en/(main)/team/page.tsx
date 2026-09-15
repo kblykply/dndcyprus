@@ -14,6 +14,7 @@ export const metadata = pageMetadata({
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen text-white overflow-x-hidden">
+      <h1 className="sr-only">The DND Cyprus Team</h1>
       <LeadershipTeam />
    
     

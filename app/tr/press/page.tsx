@@ -58,6 +58,7 @@ const PRESS_ITEMS: PressItem[] = [
 export default function HomePage() {
   return (
     <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
+      <h1 className="sr-only">Basında DND Cyprus</h1>
    <PressSection items={PRESS_ITEMS} moreHref="/tr/press" />
 
 

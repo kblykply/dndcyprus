@@ -37,7 +37,7 @@ export default function ContactCTA({
 subtitle =
   "Bahçeler, İskele — a location close to the sea and daily amenities. Studio, 1+1 and 2+1 options with spacious balconies, terraces and rooftop terraces.",
 buttonText = "Get a Price",
-buttonHref = "/contact", // fixed: was "/cantact"
+buttonHref = "/en/contact",
 bgImage = "/perla/4.jpg", // ← replace with your own image path if needed
 overlayOpacity = 0.4,
 fullHeight = false,
