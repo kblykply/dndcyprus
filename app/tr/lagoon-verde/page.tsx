@@ -15,6 +15,17 @@ import FlipBookGlass from "../../components/lagoon-verde/FlipBookGlass";
 
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "tr",
+  path: "/lagoon-verde",
+  title: "Lagoon Verde İskele | Bahçeler'de Satılık Daireler – DND Cyprus",
+  description:
+    "İskele Bahçeler'de lagün havuzlu Lagoon Verde: studio, 1+1 ve 2+1 daireler, aquapark, fitness ve Mariachi Beach Club ayrıcalığı. Kat planları ve fiyat için ulaşın.",
+  image: "/og/lagoon-verde.jpg",
+  imageAlt: "Lagoon Verde lagün havuzu ve rezidans blokları",
+});
 
 export default function HomePage() {
   return (

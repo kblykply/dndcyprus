@@ -1,8 +1,9 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { Inter, Montserrat } from "next/font/google";
 import type { ReactNode } from "react";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,9 +20,19 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "DND Cyprus",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_NAME,
   description:
     "Kıbrıs'ın önde gelen gayrimenkul geliştiricisi DND Cyprus ile tanışın. Yenilikçi konut ve ticari projelerimizle yaşam alanlarını yeniden tanımlıyoruz.",
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: SITE_NAME }],
+  },
+  twitter: { card: "summary_large_image" },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   other: {
     "facebook-domain-verification": "w1ojaqwwotv6uzovm0on3w6lkrq03n",
   },
@@ -32,9 +43,10 @@ export default async function RootLayout({
 }: {
   children: ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const stored = cookieStore.get("locale")?.value;
-  const lang = stored === "en" ? "en" : "tr";
+  // Dil, adres yolundan gelir (middleware x-dnd-locale başlığını yazar).
+  // Eskiden çerezden okunuyordu; /en sayfaları çerezsiz ziyaretçiye lang="tr" gidiyordu.
+  const h = await headers();
+  const lang = h.get("x-dnd-locale") === "en" ? "en" : "tr";
 
   return (
     <html lang={lang}>

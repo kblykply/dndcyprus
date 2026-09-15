@@ -1,8 +1,8 @@
 // middleware.ts
 import { NextResponse, type NextRequest } from "next/server";
+import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "./lib/admin-session";
 
 const LOCALE_COOKIE = "locale";
-const ADMIN_SESSION_COOKIE = "admin_session";
 
 const SUPPORTED = ["tr", "en"] as const;
 const DEFAULT: (typeof SUPPORTED)[number] = "tr";
@@ -17,65 +17,63 @@ function pickLocale(req: NextRequest): "tr" | "en" {
   return DEFAULT;
 }
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+/** <html lang> için yolun dilini kök layout'a iletir */
+function localeOfPath(pathname: string): "tr" | "en" {
+  if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
+  return "tr";
+}
 
-  const session = req.cookies.get(ADMIN_SESSION_COOKIE)?.value;
-  const isLoggedIn = !!session; // sadece cookie varsa logged in
+export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
   /* ---------------- ADMIN GUARD ---------------- */
   if (pathname.startsWith("/admin")) {
-    // login ve logout sayfaları özel:
-    if (
-      pathname.startsWith("/admin/login") ||
-      pathname.startsWith("/admin/logout")
-    ) {
-      // login sayfasına zaten login olmuşken gelirsen leads'e at
+    // Eskiden çerezin yalnızca varlığına bakılıyordu; artık imza doğrulanıyor.
+    const isLoggedIn = await verifyAdminSession(req.cookies.get(ADMIN_SESSION_COOKIE)?.value);
+
+    if (pathname.startsWith("/admin/login") || pathname.startsWith("/admin/logout")) {
       if (pathname.startsWith("/admin/login") && isLoggedIn) {
         const url = req.nextUrl.clone();
         url.pathname = "/admin/leads";
+        url.search = "";
         return NextResponse.redirect(url);
       }
       return NextResponse.next();
     }
 
-    // diğer tüm /admin sayfaları için login zorunlu
     if (!isLoggedIn) {
       const loginUrl = req.nextUrl.clone();
       loginUrl.pathname = "/admin/login";
+      loginUrl.search = "";
       loginUrl.searchParams.set("next", pathname);
-      return NextResponse.redirect(loginUrl);
-    }
-
-    return NextResponse.next();
-  }
-
-  /* ---------------- LOCALE REDIRECT ---------------- */
-  if (
-    pathname.startsWith("/en") ||
-    pathname.startsWith("/api") ||
-    pathname.match(/\.[a-zA-Z0-9]+$/)
-  ) {
-    return NextResponse.next();
-  }
-
-  if (pathname === "/") {
-    const locale = pickLocale(req);
-    if (locale === "en") {
-      const url = req.nextUrl.clone();
-      url.pathname = "/en";
-      const res = NextResponse.redirect(url);
-      res.cookies.set(LOCALE_COOKIE, locale, {
-        path: "/",
-        maxAge: 60 * 60 * 24 * 365,
-      });
+      const res = NextResponse.redirect(loginUrl);
+      res.cookies.delete(ADMIN_SESSION_COOKIE);
       return res;
     }
+
+    return NextResponse.next();
   }
 
-  return NextResponse.next();
+  /* ---------------- ROOT → /tr veya /en ---------------- */
+  // "/" eskiden içerik veriyordu ve /en ile aynıydı (yinelenen içerik).
+  if (pathname === "/") {
+    const locale = pickLocale(req);
+    const url = req.nextUrl.clone();
+    url.pathname = `/${locale}`;
+    const res = NextResponse.redirect(url);
+    if (locale === "en") {
+      res.cookies.set(LOCALE_COOKIE, locale, { path: "/", maxAge: 60 * 60 * 24 * 365 });
+    }
+    return res;
+  }
+
+  /* ---------------- DİL BAŞLIĞI ---------------- */
+  const headers = new Headers(req.headers);
+  headers.set("x-dnd-locale", localeOfPath(pathname));
+  return NextResponse.next({ request: { headers } });
 }
 
 export const config = {
-  matcher: ["/", "/admin/:path*"],
+  // _next, api ve uzantılı dosyalar (pdf, jpg, tours/…/index.html) hariç tüm sayfalar
+  matcher: ["/((?!_next/|api/|.*\\.[a-zA-Z0-9]+$).*)"],
 };

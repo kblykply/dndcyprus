@@ -1,9 +1,18 @@
 // app/admin/leads/page.tsx
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminLeadsPage() {
+  // Middleware'e ek ikinci kontrol: veriye yalnız geçerli oturumla erişilir
+  const cookieStore = await cookies();
+  if (!(await verifyAdminSession(cookieStore.get(ADMIN_SESSION_COOKIE)?.value))) {
+    redirect("/admin/login?next=/admin/leads");
+  }
+
   const leads = await prisma.contactMessage.findMany({
     orderBy: { createdAt: "desc" },
   });

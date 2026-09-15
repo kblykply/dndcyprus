@@ -15,6 +15,17 @@ import FlipBookGlass from "../../../components/en/lagoon-verde/FlipBookGlass";
 
 
 import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  locale: "en",
+  path: "/lagoon-verde",
+  title: "Lagoon Verde Iskele – Apartments for Sale | DND Cyprus",
+  description:
+    "Lagoon Verde in Bahçeler, Iskele: studio, 1+1 and 2+1 apartments with a lagoon pool, aqua park, fitness and Mariachi Beach Club perks. Get floor plans and prices.",
+  image: "/og/lagoon-verde.jpg",
+  imageAlt: "Lagoon Verde lagoon pool and residence blocks",
+});
 
 export default function HomePage() {
   return (
