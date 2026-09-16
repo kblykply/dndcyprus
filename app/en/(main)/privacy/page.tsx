@@ -266,6 +266,13 @@ export default function PrivacyPolicyPage() {
                 tours and contact clicks.
               </li>
               <li>
+                <strong>Microsoft Clarity (analytics consent):</strong> creates
+                heatmaps showing where people click and how far they scroll, and
+                anonymised session recordings, to help us make the site easier
+                to use. Text typed into form fields is masked and not recorded.
+                It is not loaded unless you give analytics consent.
+              </li>
+              <li>
                 <strong>Google Ads conversion tracking (advertising consent):</strong>{" "}
                 measures actions such as submitting a form or contacting us via
                 WhatsApp or phone after clicking a Google ad. With{" "}
@@ -322,6 +329,8 @@ export default function PrivacyPolicyPage() {
                     ["locale", "DND Cyprus", "Remembers your language when you open the home address.", "1 year", "Necessary"],
                     ["dnd_ft, dnd_lt", "DND Cyprus", "The campaign that first and last brought you to the site: UTM parameters, ad click ID (gclid/fbclid), landing page and referring site. Contains no name, email or phone number.", "90 days", "Analytics or Advertising"],
                     ["_ga, _ga_<ID>", "Google", "Google Analytics 4: distinguishes visitors and sessions.", "Up to 2 years", "Analytics"],
+                    ["_clck, _clsk", "Microsoft", "Microsoft Clarity: links a visitor and the page views within the same session.", "1 year / 1 day", "Analytics"],
+                    ["CLID, MUID", "Microsoft (clarity.ms, bing.com)", "Microsoft Clarity: third-party identifier used to distinguish sessions across sites.", "1 year", "Analytics"],
                     ["_gcl_au, _gcl_aw", "Google", "Google Ads: matches an ad click with a form or contact action.", "90 days", "Advertising"],
                     ["_fbp", "Meta", "Meta Pixel: identifies the browser for ad measurement.", "90 days", "Advertising"],
                     ["_fbc", "Meta", "Stores the Facebook/Instagram ad click ID (fbclid).", "90 days", "Advertising"],
@@ -342,7 +351,7 @@ export default function PrivacyPolicyPage() {
             <p>
               You can change or withdraw your consent at any time with the button
               below. When you withdraw it, we delete the related cookies from your
-              browser and the Meta Pixel stops sending events. Withdrawal does not
+              browser; Meta Pixel and Microsoft Clarity stop sending data. Withdrawal does not
               affect processing carried out before it.
             </p>
             <ConsentPreferencesButton locale="en" />

@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   // DİĞER ADMIN SAYFALARI → NAV + İÇERİK
   return (
-    <div className="flex min-h-screen bg-slate-100">
+    <div className="flex min-h-screen bg-slate-100" data-clarity-mask="true">
       {/* Sidebar */}
       <aside className="hidden w-64 border-r border-slate-200 bg-white md:block">
         <AdminNav />

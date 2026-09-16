@@ -19,6 +19,7 @@ export const ANALYTICS_ENV = {
   adsPhoneLabel: envId(process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_LABEL, /^[\w-]+$/),
   metaPixelId: envId(process.env.NEXT_PUBLIC_META_PIXEL_ID, /^\d+$/),
   gtmId: envId(process.env.NEXT_PUBLIC_GTM_ID, /^GTM-[A-Z0-9]+$/i),
+  clarityId: envId(process.env.NEXT_PUBLIC_CLARITY_ID, /^[a-z0-9]{6,20}$/i),
 };
 
 /* ---------------- Tipler ---------------- */
@@ -44,6 +45,7 @@ declare global {
     gtag?: Gtag;
     fbq?: Fbq;
     _fbq?: Fbq;
+    clarity?: ((...args: unknown[]) => void) & { q?: unknown[] };
     dndConsent?: { open: () => void; get: () => ConsentState | null };
   }
 }
@@ -192,6 +194,16 @@ export function saveConsent(choice: ConsentChoice): ConsentState {
   if (!next.analytics && prev?.analytics) {
     deleteCookies((n) => n === "_ga" || n.startsWith("_ga_") || n === "_gid");
   }
+  // Microsoft Clarity yalnız analitik izniyle çalışır; geri çekilirse çerezlerini siler
+  if (window.clarity) {
+    if (next.analytics) {
+      window.clarity("consentv2", { ad_Storage: next.ads ? "granted" : "denied", analytics_Storage: "granted" });
+    } else {
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "denied" });
+      window.clarity("consent", false);
+      deleteCookies((n) => n === "_clck" || n === "_clsk");
+    }
+  }
   if (!next.analytics && !next.ads) {
     deleteCookies((n) => n === "dnd_ft" || n === "dnd_lt");
   }
@@ -293,6 +305,21 @@ export function loadMetaPixel() {
   n("consent", "grant");
   n("init", ANALYTICS_ENV.metaPixelId);
   injectScript("dnd-meta-pixel", "https://connect.facebook.net/en_US/fbevents.js");
+  return true;
+}
+
+/** Microsoft Clarity (ısı haritası, oturum kaydı) yalnızca analitik izni verildiyse yüklenir. */
+export function loadClarity() {
+  const id = ANALYTICS_ENV.clarityId;
+  if (!isBrowser() || !id || !hasConsent("analytics")) return false;
+  if (window.clarity) return false;
+  const c = function (...args: unknown[]) {
+    (c.q = c.q || []).push(args);
+  } as ((...args: unknown[]) => void) & { q?: unknown[] };
+  window.clarity = c;
+  injectScript("dnd-clarity", `https://www.clarity.ms/tag/${id}`);
+  // Consent API v2: izin durumunu ilk çağrıda bildir (AB/UK için zorunlu)
+  c("consentv2", { ad_Storage: hasConsent("ads") ? "granted" : "denied", analytics_Storage: "granted" });
   return true;
 }
 

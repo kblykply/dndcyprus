@@ -10,6 +10,7 @@ import {
   isTrackEventName,
   loadGoogleTags,
   loadGtm,
+  loadClarity,
   loadMetaPixel,
   metaPageViewOnly,
   onConsentChange,
@@ -29,6 +30,7 @@ export default function AnalyticsRoot({ needsConsent = false }: { needsConsent?:
     loadGoogleTags(); // izin yoksa Consent Mode çerezsiz çalıştırır
     loadGtm();
     loadMetaPixel(); // yalnızca reklam izni varsa
+    loadClarity(); // yalnızca analitik izni varsa
   }, [admin]);
 
   useEffect(() => {
@@ -37,6 +39,7 @@ export default function AnalyticsRoot({ needsConsent = false }: { needsConsent?:
       persistAttribution();
       // İzin bu sayfada verildiyse Pixel şimdi yüklenir ve bu sayfa sayılır
       if (next.ads && !prev?.ads && loadMetaPixel()) metaPageViewOnly();
+      if (next.analytics && !prev?.analytics) loadClarity();
     });
   }, []);
 

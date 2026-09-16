@@ -33,6 +33,7 @@ Kopyalanabilir örnek dosya: repo kökündeki `.env.example`.
 | `NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_LABEL` | "WhatsApp tiklamasi" dönüşümü | **`YIJrCP3_yfkcEPma4d9E`** (hazır) |
 | `NEXT_PUBLIC_GOOGLE_ADS_PHONE_LABEL` | "Telefon tiklamasi" dönüşümü | **`8wYdCODOyvkcEPma4d9E`** (hazır) |
 | `NEXT_PUBLIC_META_PIXEL_ID` | Meta Events Manager → Veri kaynakları → Pixel → Kimlik (yalnızca rakam) | `1234567890123456` |
+| `NEXT_PUBLIC_CLARITY_ID` | clarity.microsoft.com → proje → Settings → Setup → proje kimliği | `abc12def34` |
 | `NEXT_PUBLIC_GTM_ID` (isteğe bağlı) | tagmanager.google.com → Container kimliği | `GTM-ABC1234` |
 | `META_CAPI_TOKEN` (sunucu, **gizli**) | Events Manager → Pixel → Ayarlar → Dönüşüm API'si → "Erişim anahtarı oluştur" | `EAAG…` (uzun metin) |
 | `META_GRAPH_API_VERSION` (sunucu) | developers.facebook.com/docs/graph-api/changelog → güncel sürüm | `v2X.0` biçiminde |
@@ -111,14 +112,22 @@ Yeni bir tıklamayı ölçmek için tıklanan öğeye `data-track="<olay_adı>"`
 6. Kampanyalarda dönüşüm konumu "Web sitesi", optimizasyon olayı **Lead**. İhtiyaç olursa `BrochureDownload`, `PriceRequest`, `VirtualTour` için özel dönüşüm oluşturun.
 7. Tekilleştirme: Pixel `Lead` olayı `eventID`, CAPI `event_id` ile aynı UUID'yi taşır; Events Manager'da "Tarayıcı ve Sunucu – tekilleştirildi" görünmelidir.
 
-## 8. GTM (isteğe bağlı)
+## 8. Microsoft Clarity
+
+- Proje: clarity.microsoft.com → **New project** → site `https://www.dndcyprus.com` → kimliği `NEXT_PUBLIC_CLARITY_ID` yapın. Kurulum yöntemi sorulursa kodu siteye eklemeyin; kod zaten yüklüyor.
+- Clarity **yalnızca analitik izni** verilince yüklenir ve `consentv2` ile izin durumu bildirilir (AB/UK/İsviçre için 31 Ekim 2025'ten beri zorunlu). İzin geri çekilirse `clarity('consent', false)` ile çerezleri silinir.
+- Clarity ayarlarında **Masking: Balanced** (varsayılan) kalsın; form alanları maskelenir. Yönetici paneli `data-clarity-mask="true"` ile tamamen maskeli.
+- Clarity → Settings → **Google Analytics integration** ile GA4 mülkü (419770616) bağlanabilir.
+- Kontrol: analitik izni verdikten sonra Network sekmesinde `clarity.ms/collect` isteği; izin yokken hiç istek yok.
+
+## 9. GTM (isteğe bağlı)
 
 `NEXT_PUBLIC_GTM_ID` tanımlıysa GTM de yüklenir ve aynı `dataLayer`'ı kullanır (`{event: 'generate_lead', project, form, event_id}` vb.).
 
 - **GA4, Google Ads ve Meta Pixel etiketlerini GTM içinde tekrar kurmayın** — kod zaten gönderiyor, çift sayım olur.
 - GTM'i yalnızca ek pazarlama etiketleri (ör. LinkedIn, TikTok, Hotjar) için kullanın ve her etikete GTM'in yerleşik izin kontrolünü (Consent Settings → `ad_storage` / `analytics_storage`) ekleyin.
 
-## 9. UTM şablonları
+## 10. UTM şablonları
 
 **Meta** (reklam düzeyi → İzleme → URL parametreleri):
 
@@ -137,7 +146,7 @@ utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_content={creative
 - UTM değerlerine asla e-posta/telefon gibi kişisel veri koymayın (`@` içeren değerler kod tarafından atılır).
 - WhatsApp butonu mesajın sonuna yalnızca `utm_source` ve `utm_campaign`'den oluşan kısa bir referans ekler: `(Ref: facebook-lagoonverde_tr_lead_2026-09)`. Satış ekibi WhatsApp lead'lerinin kaynağını buradan görebilir.
 
-## 10. Veritabanı güncellemesi (migration)
+## 11. Veritabanı güncellemesi (migration)
 
 Yeni migration: `prisma/migrations/20260915120000_lead_attribution/migration.sql` — `ContactMessage` tablosuna boş bırakılabilir `project`, `unitType`, `form`, `source`, `campaign`, `pageUrl`, `eventId`, `attribution (JSONB)` kolonlarını `ADD COLUMN IF NOT EXISTS` ile ekler (tekrar çalıştırmak güvenlidir).
 
@@ -171,7 +180,7 @@ DATABASE_URL="…" npx prisma migrate resolve --applied 20260915120000_lead_attr
 
 Kontrol: `/admin/leads` sayfasındaki sarı uyarı kaybolmalı, yeni kayıtlarda Proje/Tip/Kaynak dolu gelmelidir.
 
-## 11. Test listesi
+## 12. Test listesi
 
 **İzin**
 - [ ] Gizli pencerede ilk ziyaret: bant görünür; DevTools → Application → Cookies'te `_ga`, `_fbp`, `_gcl_*` yok.

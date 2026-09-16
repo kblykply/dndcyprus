@@ -13,7 +13,7 @@ const TEAL = "#27959b";
 const TEXT = {
   tr: {
     title: "Çerez tercihleri",
-    body: "Zorunlu çerezlerin yanında, izninizle Google Analytics, Google Ads ve Meta ile ziyaretleri ve reklam sonuçlarını ölçüyoruz. Tercihinizi istediğiniz zaman değiştirebilirsiniz.",
+    body: "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Google Ads ve Meta ile ziyaretleri ve reklam sonuçlarını ölçüyoruz. Tercihinizi istediğiniz zaman değiştirebilirsiniz.",
     policy: "Gizlilik ve Çerez Politikası",
     policyHref: "/tr/privacy#cerez-reklam",
     acceptAll: "Tümünü kabul et",
@@ -26,13 +26,13 @@ const TEXT = {
     necessaryDesc: "Sitenin çalışması ve çerez tercihinizin saklanması için gerekir.",
     alwaysOn: "Her zaman açık",
     analytics: "Analitik",
-    analyticsDesc: "Ziyaret istatistikleri (Google Analytics 4).",
+    analyticsDesc: "Ziyaret istatistikleri ve site kullanım analizi (Google Analytics 4, Microsoft Clarity).",
     ads: "Reklam",
     adsDesc: "Reklam ölçümü ve kişiselleştirme (Google Ads, Meta Pixel ve Dönüşüm API'si).",
   },
   en: {
     title: "Cookie preferences",
-    body: "Besides necessary cookies, with your permission we use Google Analytics, Google Ads and Meta to measure visits and ad results. You can change your choice at any time.",
+    body: "Besides necessary cookies, with your permission we use Google Analytics, Microsoft Clarity, Google Ads and Meta to measure visits and ad results. You can change your choice at any time.",
     policy: "Privacy and Cookie Policy",
     policyHref: "/en/privacy#cerez-reklam",
     acceptAll: "Accept all",
@@ -45,7 +45,7 @@ const TEXT = {
     necessaryDesc: "Required for the site to work and to remember your cookie choice.",
     alwaysOn: "Always on",
     analytics: "Analytics",
-    analyticsDesc: "Visit statistics (Google Analytics 4).",
+    analyticsDesc: "Visit statistics and site usage analysis (Google Analytics 4, Microsoft Clarity).",
     ads: "Advertising",
     adsDesc: "Ad measurement and personalisation (Google Ads, Meta Pixel and Conversions API).",
   },

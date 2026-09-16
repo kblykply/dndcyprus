@@ -257,6 +257,14 @@ export default function PrivacyPolicyPage() {
                 etkileşimleri toplu istatistik olarak gösterir.
               </li>
               <li>
+                <strong>Microsoft Clarity (Analitik izni):</strong> Sayfalarda
+                nereye tıklandığını ve ne kadar kaydırıldığını gösteren ısı
+                haritaları ile anonimleştirilmiş oturum kayıtları oluşturur;
+                siteyi kullanımı kolaylaştırmak için kullanılır. Form alanlarına
+                yazılanlar maskelenir ve kaydedilmez. Analitik izni vermediğiniz
+                sürece yüklenmez.
+              </li>
+              <li>
                 <strong>Google Ads dönüşüm ölçümü (Reklam izni):</strong> Bir
                 Google reklamını tıkladıktan sonra form gönderme, WhatsApp veya
                 telefonla iletişim gibi işlemleri ölçer.{" "}
@@ -314,6 +322,8 @@ export default function PrivacyPolicyPage() {
                     ["locale", "DND Cyprus", "Ana adrese girildiğinde dil tercihini hatırlar.", "1 yıl", "Zorunlu"],
                     ["dnd_ft, dnd_lt", "DND Cyprus", "Siteye ilk ve son geldiğiniz kampanyanın bilgisi: UTM parametreleri, reklam tıklama kimliği (gclid/fbclid), giriş sayfası ve yönlendiren site. Ad, e-posta veya telefon içermez.", "90 gün", "Analitik veya Reklam"],
                     ["_ga, _ga_<ID>", "Google", "Google Analytics 4: ziyaretçileri ve oturumları ayırt eder.", "2 yıla kadar", "Analitik"],
+                    ["_clck, _clsk", "Microsoft", "Microsoft Clarity: ziyaretçiyi ve aynı oturumdaki sayfa görüntülemelerini ilişkilendirir.", "1 yıl / 1 gün", "Analitik"],
+                    ["CLID, MUID", "Microsoft (clarity.ms, bing.com)", "Microsoft Clarity: farklı sitelerdeki oturumları ayırt etmek için üçüncü taraf tanımlayıcı.", "1 yıl", "Analitik"],
                     ["_gcl_au, _gcl_aw", "Google", "Google Ads: reklam tıklamasını form/iletişim işlemiyle eşleştirir.", "90 gün", "Reklam"],
                     ["_fbp", "Meta", "Meta Pixel: tarayıcıyı tanımlar, reklam ölçümü yapar.", "90 gün", "Reklam"],
                     ["_fbc", "Meta", "Facebook/Instagram reklam tıklamasının kimliğini (fbclid) saklar.", "90 gün", "Reklam"],
@@ -334,7 +344,7 @@ export default function PrivacyPolicyPage() {
             <p>
               İzninizi dilediğiniz zaman aşağıdaki butonla değiştirebilir veya
               geri çekebilirsiniz. Geri çektiğinizde ilgili çerezleri
-              tarayıcınızdan sileriz ve Meta Pixel olay göndermeyi durdurur.
+              tarayıcınızdan sileriz; Meta Pixel ve Microsoft Clarity veri göndermeyi durdurur.
               Geri çekme, o zamana kadar yapılan işlemleri etkilemez.
             </p>
             <ConsentPreferencesButton locale="tr" />
