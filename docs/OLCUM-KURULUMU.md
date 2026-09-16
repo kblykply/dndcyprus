@@ -23,9 +23,11 @@ Her entegrasyon, ilgili ortam değişkeni boşsa (veya biçimi hatalıysa) tamam
 
 `NEXT_PUBLIC_*` değerleri derleme sırasında koda gömülür: değiştirdikten sonra **yeniden deploy** gerekir.
 
+Kopyalanabilir örnek dosya: repo kökündeki `.env.example`.
+
 | Değişken | Nereden alınır | Örnek biçim |
 |---|---|---|
-| `NEXT_PUBLIC_GA4_ID` | GA4 → Yönetici → Veri akışları → Web akışı → Ölçüm kimliği | `G-AB12CD34EF` |
+| `NEXT_PUBLIC_GA4_ID` | GA4 → Yönetici → Veri akışları → Web akışı → Ölçüm kimliği | **`G-M944YNCLQ2`** (dndcyprus.com mülkü, hazır) |
 | `NEXT_PUBLIC_GOOGLE_ADS_ID` | Google Ads → Hedefler → Dönüşümler → dönüşüm işlemi → Etiket kurulumu → "Etiketi kendiniz yükleyin" → `send_to` değerinin `/` öncesi | `AW-123456789` |
 | `NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL` | "Form – Fiyat talebi" dönüşümünün `send_to` değerinde `/` sonrası | `AbCdEfGhIjKlMnOp` |
 | `NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_LABEL` | "WhatsApp tıklaması" dönüşümünün etiketi | `QrStUvWxYz12345` |
