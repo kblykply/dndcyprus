@@ -28,10 +28,10 @@ Kopyalanabilir örnek dosya: repo kökündeki `.env.example`.
 | Değişken | Nereden alınır | Örnek biçim |
 |---|---|---|
 | `NEXT_PUBLIC_GA4_ID` | GA4 → Yönetici → Veri akışları → Web akışı → Ölçüm kimliği | **`G-M944YNCLQ2`** (dndcyprus.com mülkü, hazır) |
-| `NEXT_PUBLIC_GOOGLE_ADS_ID` | Google Ads → Hedefler → Dönüşümler → dönüşüm işlemi → Etiket kurulumu → "Etiketi kendiniz yükleyin" → `send_to` değerinin `/` öncesi | `AW-123456789` |
-| `NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL` | "Form – Fiyat talebi" dönüşümünün `send_to` değerinde `/` sonrası | `AbCdEfGhIjKlMnOp` |
-| `NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_LABEL` | "WhatsApp tıklaması" dönüşümünün etiketi | `QrStUvWxYz12345` |
-| `NEXT_PUBLIC_GOOGLE_ADS_PHONE_LABEL` | "Telefon tıklaması" dönüşümünün etiketi | `Z9y8X7w6V5u4T3s` |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` | Google Ads hesabı 933-136-4415 (DND Cyprus) | **`AW-18454433145`** (hazır) |
+| `NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL` | "Form - Fiyat talebi" dönüşümü | **`qrAYCMTtzfkcEPma4d9E`** (hazır) |
+| `NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_LABEL` | "WhatsApp tiklamasi" dönüşümü | **`YIJrCP3_yfkcEPma4d9E`** (hazır) |
+| `NEXT_PUBLIC_GOOGLE_ADS_PHONE_LABEL` | "Telefon tiklamasi" dönüşümü | **`8wYdCODOyvkcEPma4d9E`** (hazır) |
 | `NEXT_PUBLIC_META_PIXEL_ID` | Meta Events Manager → Veri kaynakları → Pixel → Kimlik (yalnızca rakam) | `1234567890123456` |
 | `NEXT_PUBLIC_GTM_ID` (isteğe bağlı) | tagmanager.google.com → Container kimliği | `GTM-ABC1234` |
 | `META_CAPI_TOKEN` (sunucu, **gizli**) | Events Manager → Pixel → Ayarlar → Dönüşüm API'si → "Erişim anahtarı oluştur" | `EAAG…` (uzun metin) |
