@@ -23,6 +23,15 @@ import ConsentBanner from "./ConsentBanner";
 
 export default function AnalyticsRoot({ needsConsent = false }: { needsConsent?: boolean }) {
   const pathname = usePathname() || "";
+
+  // The standalone menu needs neither tracking nor a consent overlay.
+  if (pathname === "/tr/qr" || pathname === "/tr/qr/") return null;
+
+  return <SiteAnalytics needsConsent={needsConsent} />;
+}
+
+function SiteAnalytics({ needsConsent }: { needsConsent: boolean }) {
+  const pathname = usePathname() || "";
   const admin = isAdminPath(pathname);
 
   useEffect(() => {
