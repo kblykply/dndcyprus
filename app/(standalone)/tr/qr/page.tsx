@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const title = "Joy Cafe Haftalık Menü";
 const description = "La Joya Resort & Residences Joy Cafe haftalık yemek menüsü.";
-const menuImage = "/qr/joy-cafe-menu.webp";
+const menuImage = "/qr/joy-cafe-menu.webp?v=20260921";
 
 export const metadata: Metadata = {
   title,
