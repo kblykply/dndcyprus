@@ -68,7 +68,7 @@
       { label: "Facebook", href: "https://www.facebook.com/dndcyprus/?locale=tr_TR" },
       { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
     ],
-    copyrightOwner = "DND Cyprus",
+    copyrightOwner = "CY-DND HOMES LTD.",
     privacyHref = "/tr/privacy",
     termsHref = "/tr/terms",
   }: Props) {
@@ -209,7 +209,7 @@
           <div className="mt-10 pt-6 border-t" style={{ borderColor: "var(--stroke)" }}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="text-xs" style={{ color: "rgba(20,21,23,0.60)" }}>
-                © {year} {copyrightOwner}. Tüm hakları saklıdır.
+                © {year} {copyrightOwner} Tüm hakları saklıdır.
               </div>
               <div className="flex items-center gap-3 text-xs">
                 <a
