@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const title = "Joy Cafe Haftalık Menü";
 const description = "La Joya Resort & Residences Joy Cafe haftalık yemek menüsü.";
-const menuImage = "/qr/joy-cafe-menu.webp?v=20260921";
+const menuImage = "/qr/image.png?v=20261009";
 
 export const metadata: Metadata = {
   title,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description,
     url: "/tr/qr",
     locale: "tr_TR",
-    images: [{ url: menuImage, width: 1600, height: 1600, alt: title }],
+    images: [{ url: menuImage, width: 1280, height: 1280, alt: title }],
   },
   twitter: { card: "summary_large_image", title, description, images: [menuImage] },
 };
@@ -25,9 +25,9 @@ export default function QrMenuPage() {
     <main className="min-h-svh bg-[#f5f4ef]">
       <Image
         src={menuImage}
-        alt="Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL. Sipariş: +90 539 134 0363."
-        width={1600}
-        height={1600}
+        alt="Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL. Sipariş: +90 548 889 03 63."
+        width={1280}
+        height={1280}
         preload
         // Keep the full-resolution menu legible when visitors pinch to zoom.
         unoptimized
