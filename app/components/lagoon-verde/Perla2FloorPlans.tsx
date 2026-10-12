@@ -3,7 +3,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -194,9 +194,9 @@ export default function Perla2FloorPlans({
             key={`${planIdx}-${variantIdx}`}
             id={`plan-panel-${planIdx}`}
             role="tabpanel"
-            initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 grid items-start gap-8 lg:grid-cols-2"
           >
@@ -468,7 +468,7 @@ const DEFAULT_PLANS: Plan[] = [
           { label: "Bahçe", value: "6 m²" }
         ],
         totals: { kapali: "39,18 m²", kullanim: "51,18 m²" },
-gallery: ["/lagoon-verde-interior/studio/1.jpg","/lagoon-verde-interior/studio/3.jpg","/lagoon-verde-interior/studio/4.jpg","/lagoon-verde-interior/studio/5.jpg","/lagoon-verde-interior/studio/6.jpg",],   
+gallery: ["/lagoon-verde-interior/studio/1.jpg","/lagoon-verde-interior/studio/3.jpg","/lagoon-verde-interior/studio/4.jpg","/lagoon-verde-interior/studio/5.jpg","/lagoon-verde-interior/studio/6.jpg",],
       }
     ]
   },
@@ -489,7 +489,7 @@ gallery: ["/lagoon-verde-interior/studio/1.jpg","/lagoon-verde-interior/studio/3
           { label: "Ortak Kullanım Alanı", value: "6 m²" }
         ],
         totals: { kapali: "50,13 m²", kullanim: "87,05 m²" },
-gallery: ["/lagoon-verde-interior/loft/1.jpg","/lagoon-verde-interior/loft/3.jpg","/lagoon-verde-interior/loft/4.jpg","/lagoon-verde-interior/loft/5.jpg","/lagoon-verde-interior/loft/6.jpg",],   
+gallery: ["/lagoon-verde-interior/loft/1.jpg","/lagoon-verde-interior/loft/3.jpg","/lagoon-verde-interior/loft/4.jpg","/lagoon-verde-interior/loft/5.jpg","/lagoon-verde-interior/loft/6.jpg",],
       }
     ]
   },
@@ -511,7 +511,7 @@ gallery: ["/lagoon-verde-interior/loft/1.jpg","/lagoon-verde-interior/loft/3.jpg
           { label: "Ortak Kullanım Alanı", value: "12 m²" }
         ],
         totals: { kapali: "70,50 m²", kullanim: "149,4 m²" },
-gallery: ["/lagoon-verde-interior/2plus1/1.jpg","/lagoon-verde-interior/2plus1/3.jpg","/lagoon-verde-interior/2plus1/4.jpg","/lagoon-verde-interior/2plus1/5.jpg","/lagoon-verde-interior/2plus1/6.jpg","/lagoon-verde-interior/2plus1/7.jpg","/lagoon-verde-interior/2plus1/8.jpg","/lagoon-verde-interior/2plus1/9.jpg",],   
+gallery: ["/lagoon-verde-interior/2plus1/1.jpg","/lagoon-verde-interior/2plus1/3.jpg","/lagoon-verde-interior/2plus1/4.jpg","/lagoon-verde-interior/2plus1/5.jpg","/lagoon-verde-interior/2plus1/6.jpg","/lagoon-verde-interior/2plus1/7.jpg","/lagoon-verde-interior/2plus1/8.jpg","/lagoon-verde-interior/2plus1/9.jpg",],
       }
     ]
   },
@@ -533,7 +533,7 @@ gallery: ["/lagoon-verde-interior/2plus1/1.jpg","/lagoon-verde-interior/2plus1/3
           { label: "Ortak Kullanım Alanı", value: "12 m²" }
         ],
         totals: { kapali: "78,37 m²", kullanim: "102,37 m²" },
-gallery: ["/lagoon-verde-interior/2plus1/1.jpg","/lagoon-verde-interior/2plus1/3.jpg","/lagoon-verde-interior/2plus1/4.jpg","/lagoon-verde-interior/2plus1/5.jpg","/lagoon-verde-interior/2plus1/6.jpg","/lagoon-verde-interior/2plus1/7.jpg","/lagoon-verde-interior/2plus1/8.jpg","/lagoon-verde-interior/2plus1/9.jpg",],   
+gallery: ["/lagoon-verde-interior/2plus1/1.jpg","/lagoon-verde-interior/2plus1/3.jpg","/lagoon-verde-interior/2plus1/4.jpg","/lagoon-verde-interior/2plus1/5.jpg","/lagoon-verde-interior/2plus1/6.jpg","/lagoon-verde-interior/2plus1/7.jpg","/lagoon-verde-interior/2plus1/8.jpg","/lagoon-verde-interior/2plus1/9.jpg",],
       }
     ]
   }

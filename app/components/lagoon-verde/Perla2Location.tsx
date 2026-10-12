@@ -2,17 +2,16 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import { m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] },
   }),
 };
@@ -58,7 +57,7 @@ subtitle = "Bahçeler, İskele — denize ve günlük ihtiyaçlara yakın konum.
 address = "Bahçeler, İskele, Kuzey Kıbrıs",
 lat = 35.228781,
 lng = 33.880673,
-embedSrc = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15764!2d33.880673!3d35.228781!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDEzJzQzLjYiTiAzM8KwNTInNTAuNCJF!5e0!3m2!1sen!2s!4v1696462350000",  
+embedSrc = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15764!2d33.880673!3d35.228781!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDEzJzQzLjYiTiAzM8KwNTInNTAuNCJF!5e0!3m2!1sen!2s!4v1696462350000",
 nearby = [
   { label: "Long Beach" },
   { label: "Market & Restoranlar" },

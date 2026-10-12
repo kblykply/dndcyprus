@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 
 /* ---------------- Types ---------------- */
 export type Hotspot = {
@@ -31,7 +31,7 @@ export default function InteriorMaterialsHotspotsBase() {
       imageSrc: "/perla-in/1.jpg",
       imageAlt: "Interior render – Angle C",
       hotspots: [
-        
+
       ],
     },
     {
@@ -40,7 +40,7 @@ export default function InteriorMaterialsHotspotsBase() {
       imageSrc: "/perla-in/2.jpg",
       imageAlt: "Interior render – Angle A",
       hotspots: [
-       
+
       ],
     },
     {
@@ -49,7 +49,7 @@ export default function InteriorMaterialsHotspotsBase() {
       imageSrc: "/perla-in/3.jpg",
       imageAlt: "Interior render – Angle B",
       hotspots: [
-       
+
       ],
     },
 
@@ -98,7 +98,6 @@ export default function InteriorMaterialsHotspotsBase() {
               fill
               className="object-cover"
               sizes="100vw"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/60 pointer-events-none" />
           </motion.div>

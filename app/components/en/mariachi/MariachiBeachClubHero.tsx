@@ -1,6 +1,4 @@
 // app/components/mariachi/MariachiBeachClubHero.tsx
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { motion, type Variants, type Easing, rgbUnit } from "framer-motion";
@@ -10,11 +8,10 @@ const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.55, ease: EASE },
   },
 };
@@ -112,16 +109,11 @@ highlights = ["Pool & Beach", "Pavilions", "Restaurant & Pool Bar", "DJ Nights"]
 
       {/* İçerik sarmalayıcı: 100vh ve dikey ortalama */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-[100svh] md:min-h-screen flex items-center pt-24 pb-16 sm:pt-28 sm:pb-24">
-        <motion.div
-          variants={containerStagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+        <div
           className="max-w-3xl"
         >
           {/* Cam efekti panel */}
-          <motion.div
-            variants={fadeUp}
+          <div
             className="rounded-3xl p-6 sm:p-8 backdrop-blur-xl border shadow-[0_20px_60px_rgba(0,0,0,.45)]"
             style={{
               background:
@@ -184,8 +176,8 @@ highlights = ["Pool & Beach", "Pavilions", "Restaurant & Pool Bar", "DJ Nights"]
                 {secondaryCta.label}
               </Link>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

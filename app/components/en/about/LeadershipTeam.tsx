@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { motion, Variants, AnimatePresence } from "framer-motion";
+import { m as motion, Variants, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -39,7 +39,7 @@ const containerHead: Variants = {
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1, y: 0, filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },

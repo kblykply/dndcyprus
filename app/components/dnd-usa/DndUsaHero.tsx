@@ -1,8 +1,6 @@
 // app/components/dnd-usa/DndUsaHero.tsx
-"use client";
-
+import Image from "next/image";
 import React from "react";
-import { motion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -28,7 +26,10 @@ export default function DndUsaHero({
     >
       {/* Background image */}
       <div className="absolute inset-0">
-        <img
+        <Image
+          fill
+          preload
+          sizes="100vw"
           src={bg}
           alt="DND USA Projects"
           className="w-full h-full object-cover"
@@ -63,10 +64,7 @@ export default function DndUsaHero({
 
       {/* Content */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-[78vh] flex items-end pb-10">
-        <motion.div
-          initial={{ opacity: 0, y: 22, filter: "blur(6px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        <div
           className="w-full"
         >
           {/* Glass panel */}
@@ -140,7 +138,7 @@ export default function DndUsaHero({
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Bottom soft divider (curved) */}

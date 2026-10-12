@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 import { PlayCircle, Maximize2, Minimize2, ExternalLink } from "lucide-react";
 
 const TEAL = "#27959b";    // lagoon vibe
@@ -21,11 +21,10 @@ const POSTER_IMAGE = "/perla-ii-in/6.jpg";
 const OVERLAY_IMAGE = ""; // e.g. "/overlays/noise.png" or leave "" to disable
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -123,7 +122,6 @@ export default function LagoonVerde360Section() {
             alt=""
             fill
             sizes="100vw"
-            priority
             className="object-cover object-center"
           />
         </div>
@@ -232,7 +230,6 @@ export default function LagoonVerde360Section() {
                     fill
                     sizes="100vw"
                     className="object-cover object-center"
-                    priority={false}
                   />
                   <div className="absolute inset-0 bg-black/40 transition-opacity group-hover:bg-black/30" />
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">

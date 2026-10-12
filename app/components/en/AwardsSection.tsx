@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { m as motion, useInView } from "framer-motion";
 
 /* ------- Types & Data ------- */
 type AwardSlide = {
@@ -231,7 +231,6 @@ export default function AwardsSection() {
                         alt={item.title}
                         fill
                         sizes="(max-width: 768px) 42vw, 220px"
-                        priority={item.id === SLIDES[0].id}
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}
                         className="object-contain select-none pointer-events-none"
@@ -260,14 +259,14 @@ export default function AwardsSection() {
           <div className="md:col-span-6">
             <motion.div
               key={`${index}-${enterWave}`}
-              initial={{ y: 16, opacity: 1, filter: "blur(8px)" }}
+              initial={{ y: 16, opacity: 1 }}
               animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 0.45, ease: "easeOut" }}
               className="min-h-[220px] md:min-h-[260px] will-change-transform antialiased text-zinc-900"
               aria-live="polite"
             >
               <motion.h3
-                initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
+                initial={{ y: 10, opacity: 1 }}
                 animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 0.42, ease: "easeOut", delay: 0.03 }}
                 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950 text-balance"
@@ -279,7 +278,7 @@ export default function AwardsSection() {
                 {current.paragraphs.map((p, i) => (
                   <motion.p
                     key={i}
-                    initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
+                    initial={{ y: 10, opacity: 1 }}
                     animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                     transition={{ duration: 0.38, ease: "easeOut", delay: 0.06 + i * 0.05 }}
                     dangerouslySetInnerHTML={{ __html: p }}
@@ -288,7 +287,7 @@ export default function AwardsSection() {
 
                 {current.emphasis && (
                   <motion.p
-                    initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
+                    initial={{ y: 10, opacity: 1 }}
                     animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                     transition={{
                       duration: 0.38,
@@ -305,7 +304,7 @@ export default function AwardsSection() {
               {current.cta && (
                 <motion.a
                   href={current.cta.href}
-                  initial={{ y: 10, opacity: 1, filter: "blur(6px)" }}
+                  initial={{ y: 10, opacity: 1 }}
                   animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
                   transition={{ duration: 0.38, ease: "easeOut", delay: 0.14 }}
                   className="inline-flex items-center gap-2 mt-5 sm:mt-6 text-base sm:text-lg font-medium underline decoration-zinc-500/50 hover:decoration-current text-zinc-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400/60 rounded-sm"

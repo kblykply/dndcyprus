@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import type { Variants, Easing } from "framer-motion";
 import Link from "next/link";
 
@@ -13,11 +13,10 @@ const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.55, ease: EASE },
   },
 };
@@ -70,6 +69,7 @@ quote = "“Discipline, transparency, and sustainable growth — the foundation 
           >
             <div className="relative w-full h-full">
               <img
+                loading="lazy"
                 src={image}
                 alt={title}
                 draggable={false}
@@ -154,9 +154,9 @@ quote = "“Discipline, transparency, and sustainable growth — the foundation 
                       title="Partner/Geçmiş Logo"
                     >
                       <img
+                loading="lazy"
                         src={src}
                         alt="Partner/Geçmiş Logo"
-                        loading="lazy"
                         draggable={false}
                         className="h-8 sm:h-9 w-auto max-h-10 object-contain filter grayscale hover:grayscale-0 transition will-change-filter select-none"
                       />

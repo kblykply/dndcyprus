@@ -94,7 +94,6 @@ export default function QuarterLogoBadge({
               src={logoSrc}
               alt={alt}
               fill
-              priority={false}
               sizes={`${logoBox}px`}
               style={{ objectFit: "contain" }}
             />
@@ -114,7 +113,6 @@ export default function QuarterLogoBadge({
               src={logoSrc}
               alt={alt}
               fill
-              priority={false}
               sizes={`${logoBox}px`}
               style={{ objectFit: "contain" }}
             />

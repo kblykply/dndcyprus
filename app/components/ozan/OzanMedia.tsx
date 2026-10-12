@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -68,11 +68,11 @@ style={{
             `,
             }}
         />
-   
+
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.5 }}
@@ -87,7 +87,7 @@ style={{
         {/* featured video (optional) */}
         {featuredVideo ? (
           <motion.div
-            initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: false, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.06 }}
@@ -150,7 +150,7 @@ style={{
             return (
               <motion.article
                 key={m.id}
-                initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
@@ -260,9 +260,9 @@ function VideoLightbox({
         >
           <motion.div
             className="relative w-[92vw] max-w-5xl"
-            initial={{ opacity: 0, y: 10, scale: 0.98, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -6, scale: 0.98, filter: "blur(4px)" }}
+            exit={{ opacity: 0, y: -6, scale: 0.98 }}
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
             aria-modal="true"

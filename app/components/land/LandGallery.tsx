@@ -2,18 +2,17 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { motion, type Variants, type Easing } from "framer-motion";
+import { m as motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.45, ease: EASE },
   },
 };
@@ -43,8 +42,8 @@ export default function MariachiGalleryExpanding({
         { src: "/gecitkale/gecitkale-4.jpg", alt: "Gün batımı" },
         { src: "/gecitkale/gecitkale-5.jpg", alt: "Doğa" },
 
-  
-    
+
+
       ],
     [items]
   );

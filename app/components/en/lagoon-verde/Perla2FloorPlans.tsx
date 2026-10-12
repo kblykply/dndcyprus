@@ -3,7 +3,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -196,9 +196,9 @@ subtitle =
             key={`${planIdx}-${variantIdx}`}
             id={`plan-panel-${planIdx}`}
             role="tabpanel"
-            initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 grid items-start gap-8 lg:grid-cols-2"
           >

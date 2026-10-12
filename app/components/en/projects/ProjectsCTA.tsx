@@ -1,9 +1,6 @@
 // app/components/ProjectsCTA.tsx
-"use client";
-
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import type { Variants, Easing } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -13,11 +10,10 @@ const ORANGE = "#f15c34";
 const EASE_OUT: Easing = [0.22, 1, 0.36, 1];
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 22 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: EASE_OUT },
   },
 };
@@ -38,7 +34,6 @@ export default function ProjectsCTA() {
       <Image
         src="/lagoon-verde/1.jpg" // ← change to your image path
         alt=""
-        priority
         fill
         sizes="100vw"
         className="absolute inset-0 -z-20 object-cover object-center"
@@ -112,11 +107,7 @@ export default function ProjectsCTA() {
           />
 
          {/* Content */}
-<motion.span
-  variants={fadeUp}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: false, amount: 0.4 }}
+<span
   className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
   style={{
     background: "rgba(255, 255, 255, 0.08)",
@@ -126,35 +117,23 @@ export default function ProjectsCTA() {
   }}
 >
   DND Cyprus
-</motion.span>
+</span>
 
-<motion.h2
-  variants={fadeUp}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: false, amount: 0.4 }}
+<h2
   className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-white"
 >
   Learn More About Our Projects
-</motion.h2>
+</h2>
 
-<motion.p
-  variants={fadeUp}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: false, amount: 0.4 }}
+<p
   className="mt-3 max-w-2xl text-base sm:text-lg"
   style={{ color: "rgba(255,255,255,0.82)" }}
 >
   If you are interested in our ongoing or upcoming projects, our sales team will be happy
   to provide you with detailed information and opportunities.
-</motion.p>
+</p>
 
-<motion.div
-  variants={fadeUp}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: false, amount: 0.4 }}
+<div
   className="mt-8 flex flex-wrap gap-3"
 >
   <a
@@ -166,14 +145,8 @@ export default function ProjectsCTA() {
       boxShadow: `0 16px 40px ${TEAL}44`,
       transform: "translateZ(0)",
     }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`;
-      e.currentTarget.style.boxShadow = `0 18px 44px ${ORANGE}44`;
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`;
-      e.currentTarget.style.boxShadow = `0 16px 40px ${TEAL}44`;
-    }}
+    data-cta-hover=""
+
   >
     Contact Us
   </a>
@@ -189,7 +162,7 @@ export default function ProjectsCTA() {
   >
     About Us
   </a>
-</motion.div>
+</div>
 
         </div>
       </div>

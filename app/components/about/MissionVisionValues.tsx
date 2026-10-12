@@ -3,7 +3,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -73,7 +73,6 @@ export default function MissionVisionValues({
           src={bgSrc}
           alt=""
           fill
-          priority
           sizes="100vw"
           className="object-cover object-center"
         />

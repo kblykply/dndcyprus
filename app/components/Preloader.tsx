@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { AnimatePresence, m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -24,7 +24,7 @@ const backdropVariants: Variants = {
 };
 
 const cardVariants: Variants = {
-  initial: { opacity: 0, scale: 0.96, y: 10, filter: "blur(6px)" },
+  initial: { opacity: 0, scale: 0.96, y: 10 },
   animate: {
     opacity: 1, scale: 1, y: 0, filter: "blur(0px)",
     transition: { duration: 0.36, ease: [0.22, 1, 0.36, 1] },

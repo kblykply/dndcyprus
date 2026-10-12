@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-12",
+  "method": "Local Next.js production build, Chrome Lighthouse, default simulated mobile throttling or desktop preset; single samples, not production field data.",
+  "changes": [
+    "Public routes use language-specific static roots and daily revalidation.",
+    "Presentational components render on the server.",
+    "Motion features load separately after initial render.",
+    "Media and catalog code load near the viewport; only active catalog pages and videos are mounted.",
+    "Gallery and project-card images load near their image boxes instead of several screens ahead.",
+    "Floating controls share geometry measurements without periodic polling.",
+    "Large thumbnail derivatives use content hashes and immutable caching.",
+    "Web Vitals events require analytics consent and a configured GA4 ID."
+  ],
+  "baseline": {
+    "/tr": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 56,
+      "lcpMs": 18733.5671,
+      "fcpMs": 10213.883600000001,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 13770801
+    },
+    "/tr/perla-ii": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 58,
+      "lcpMs": 28660.87659999999,
+      "fcpMs": 6861.0239,
+      "totalBlockingTimeMs": 5.999999999998181,
+      "cls": 0.000139988042982138,
+      "transferBytes": 6661339
+    }
+  },
+  "afterMobile": {
+    "/tr": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 83,
+      "lcpMs": 4738.32,
+      "fcpMs": 1355.328,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 734269
+    },
+    "/tr/perla-ii": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 84,
+      "lcpMs": 4435.540999999999,
+      "fcpMs": 1205.2705,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 889654
+    },
+    "/en": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 81,
+      "lcpMs": 4736.992,
+      "fcpMs": 2107.1952,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 737118
+    },
+    "/tr/contact": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 87,
+      "lcpMs": 4062.2729999999992,
+      "fcpMs": 1206.1365,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 1261170
+    }
+  },
+  "afterDesktop": {
+    "/tr": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 99,
+      "lcpMs": 934.3927999999999,
+      "fcpMs": 364.7976,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.00007409450427574934,
+      "transferBytes": 852730
+    },
+    "/tr/perla-ii": {
+      "lighthouseVersion": "13.5.0",
+      "performanceScore": 99,
+      "lcpMs": 869.64075,
+      "fcpMs": 325.509,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.00007409450427574934,
+      "transferBytes": 1194186
+    }
+  },
+  "initialScriptsBefore": {
+    "/tr": {
+      "status": 200,
+      "cache": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "htmlBytes": 151412,
+      "scriptCount": 16,
+      "scriptBytes": 949003
+    },
+    "/en": {
+      "status": 200,
+      "cache": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "htmlBytes": 151202,
+      "scriptCount": 16,
+      "scriptBytes": 949161
+    },
+    "/tr/perla-ii": {
+      "status": 200,
+      "cache": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "htmlBytes": 127853,
+      "scriptCount": 15,
+      "scriptBytes": 852206
+    },
+    "/tr/contact": {
+      "status": 200,
+      "cache": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "htmlBytes": 52123,
+      "scriptCount": 13,
+      "scriptBytes": 768566
+    }
+  },
+  "initialScriptsAfter": {
+    "/tr": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 127915,
+      "scriptCount": 17,
+      "scriptBytes": 890171
+    },
+    "/en": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 126771,
+      "scriptCount": 18,
+      "scriptBytes": 890385
+    },
+    "/tr/perla-ii": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 148498,
+      "scriptCount": 16,
+      "scriptBytes": 797137
+    },
+    "/en/perla-ii": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 147300,
+      "scriptCount": 17,
+      "scriptBytes": 797163
+    },
+    "/tr/contact": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 69316,
+      "scriptCount": 13,
+      "scriptBytes": 672627
+    },
+    "/en/contact": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 67675,
+      "scriptCount": 14,
+      "scriptBytes": 672667
+    },
+    "/tr/qr": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 18292,
+      "scriptCount": 10,
+      "scriptBytes": 610198
+    }
+  },
+  "verification": {
+    "productionBuild": "passed",
+    "unitTests": 76,
+    "publicRoutesChecked": 34,
+    "browserChecks": {
+      "status": "passed",
+      "publicRoutes": 10,
+      "checks": [
+        "TR/EN HTML language and footer",
+        "No mobile horizontal overflow",
+        "Mobile menu opens and closes",
+        "Gallery images load when scrolled into view",
+        "Catalog mounts near viewport and loads only nearby pages",
+        "Contact form submits to mocked API, with no real lead creation",
+        "Saved consent stays hidden and preferences reopen",
+        "Consent text exists in static HTML",
+        "QR page excludes marketing chrome",
+        "Unauthenticated admin redirects to login",
+        "No runtime/hydration errors or missing local assets"
+      ]
+    },
+    "unitTestContext": "76 tests passed in the working tree; the committed performance suite contains 3 tests. Other pre-existing test work remains local.",
+    "isolatedCommitScope": {
+      "productionBuild": "passed (Next.js webpack)",
+      "performanceTests": 3,
+      "contactAndOrganizationJsonLd": "passed for both languages"
+    }
+  },
+  "limitations": [
+    "Local mobile LCP remains above the 2.5 second target; live deployment and field measurements remain necessary.",
+    "Local GA4/GTM IDs are absent. Production environment configuration was not inspected.",
+    "Cross-language navigation uses separate root layouts and a full document navigation.",
+    "Existing customer/admin/API data remain dynamic and are not publicly cached."
+  ]
+}

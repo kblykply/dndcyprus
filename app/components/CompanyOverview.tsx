@@ -3,7 +3,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -21,11 +21,10 @@ const container: Variants = {
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -169,7 +168,6 @@ export default function CompanyOverview() {
                     src="/A7405743_.jpg"
                     alt="DND New Year Gala"
                     fill
-                    priority
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 640px"
                   />
@@ -276,7 +274,7 @@ export default function CompanyOverview() {
               </p>
 
               {/* IMAGE SLOT B */}
-      
+
 
               <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                 {[

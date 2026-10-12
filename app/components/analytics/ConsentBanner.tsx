@@ -51,7 +51,7 @@ const TEXT = {
   },
 } as const;
 
-/** initialOpen: sunucu, izin çerezi olmadığını gördüyse bant ilk HTML ile gelir (JS beklenmez, LCP gecikmez) */
+/** Public HTML is shared; the browser restores each visitor's consent choice. */
 export default function ConsentBanner({ initialOpen = false }: { initialOpen?: boolean }) {
   const pathname = usePathname() || "";
   const t = TEXT[localeFromPath(pathname)];
@@ -60,6 +60,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
   const bodyId = `${uid}-body`;
 
   const [open, setOpen] = useState(initialOpen);
+  const [restored, setRestored] = useState(false);
   const [view, setView] = useState<"summary" | "prefs">("summary");
   const [hasChoice, setHasChoice] = useState(false);
   const [draft, setDraft] = useState<ConsentChoice>({ analytics: false, ads: false });
@@ -76,11 +77,11 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
   }, []);
 
   useEffect(() => {
-    // Sunucu çerezi göremediyse bant zaten açık gelir; tarayıcıdaki gerçek duruma göre düzelt
+    // Restore consent locally without making public HTML depend on cookies.
     const c = readConsent();
     setHasChoice(!!c);
-    // Statik sayfalarda sunucu çerezi göremez; seçim yapılmışsa bandı kapat
     setOpen(!c);
+    setRestored(true);
 
     window.dndConsent = { open: openPreferences, get: readConsent };
     return () => {
@@ -111,6 +112,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
 
   return (
     <div
+      data-consent-initial={restored ? undefined : ""}
       ref={panelRef}
       role="dialog"
       aria-modal="false"

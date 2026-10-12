@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 import Link from "next/link";
 
 const TEAL = "#27959b";
@@ -10,11 +10,10 @@ const ORANGE = "#f15c34";
 
 // Typed cubic-bezier ease
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 22 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.55,
       ease: [0.22, 1, 0.36, 1] as const,
@@ -144,7 +143,7 @@ Management Team
                 className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5 text-white"
                 style={{ background: TEAL, boxShadow: `0 10px 24px ${TEAL}33` }}
               >
-                Projects 
+                Projects
               </Link>
               <Link
                 href={contactHref}

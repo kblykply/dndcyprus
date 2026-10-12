@@ -2,9 +2,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import Image from "next/image";
+import Image from "@/app/components/performance/DeferredFillImage";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 
 type Project = {
   name: string;
@@ -86,7 +86,6 @@ export default function ProjectsStrip() {
               src={activeProject.img}
               alt={activeProject.name}
               fill
-              priority
               sizes="100vw"
               className="object-cover"
             />
@@ -140,7 +139,6 @@ export default function ProjectsStrip() {
                     fill
                     sizes="(max-width:1024px) 90vw"
                     className="object-cover"
-                    priority={false}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/35 to-transparent" />
 
@@ -149,7 +147,7 @@ export default function ProjectsStrip() {
                     {mounted && ribbon && isActive && (
                       <motion.div
                         key={`${p.name}-mobile-award`}
-                        initial={{ opacity: 0, x: 80, y: -80, scale: 0.9, rotate: -5, filter: "blur(6px)" }}
+                        initial={{ opacity: 0, x: 80, y: -80, scale: 0.9, rotate: -5 }}
                         animate={{
                           opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, filter: "blur(0px)",
                           transition: { type: "spring", stiffness: 260, damping: 22 }
@@ -240,14 +238,13 @@ export default function ProjectsStrip() {
                   {mounted && ribbon && isActive && (
                     <motion.div
                       key={`${p.name}-award`}
-                      initial={{ opacity: 0, x: 160, y: -160, scale: 0.9, rotate: -5, filter: "blur(6px)" }}
+                      initial={{ opacity: 0, x: 160, y: -160, scale: 0.9, rotate: -5 }}
                       animate={{
                         opacity: 1,
                         x: 0,
                         y: 0,
                         scale: 1,
                         rotate: 0,
-                        filter: "blur(0px)",
                         transition: { type: "spring", stiffness: 260, damping: 22 },
                       }}
                       exit={{ opacity: 0, x: 160, y: -160, scale: 0.95, transition: { duration: 0.22, ease: "easeOut" } }}

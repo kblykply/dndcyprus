@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -63,12 +63,12 @@ style={{
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
-    
+
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.5 }}
@@ -136,7 +136,7 @@ style={{
           <div className="lg:col-span-5 space-y-6">
             {/* quote */}
             <motion.blockquote
-              initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.35 }}
               transition={{ duration: 0.45 }}
@@ -209,7 +209,7 @@ function Card({
   const color = accent === "orange" ? ORANGE : TEAL;
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: false, amount: 0.35 }}
       transition={{ duration: 0.45 }}

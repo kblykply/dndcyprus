@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Globe2, ShieldCheck, Users, Award } from "lucide-react";
 
 const TEAL = "#27959b";
@@ -45,12 +45,12 @@ export default function DndUsaStrengths({
                 radial-gradient(26rem 16rem at 85% 0%, ${ORANGE}14, transparent 70%)
             `,
             }}
-        />  
+        />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.6 }}
@@ -73,7 +73,7 @@ export default function DndUsaStrengths({
             return (
               <motion.div
                 key={s.title}
-                initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.35 }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}

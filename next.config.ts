@@ -33,6 +33,15 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  async headers() {
+    // Only generated content-addressed assets get immutable caching. Existing
+    // brochure/menu URLs can still be updated without stale year-long caches.
+    return [{
+      source: "/optimized/:path*",
+      headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+    }];
+  },
+
   async redirects() {
     return LEGACY_REDIRECTS.map(([source, destination]) => ({
       source,

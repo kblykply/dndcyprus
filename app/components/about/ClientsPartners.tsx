@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { motion, Variants, AnimatePresence } from "framer-motion";
+import { m as motion, Variants, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -24,7 +24,7 @@ type Props = {
 };
 
 const head: Variants = {
-  hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 16 },
   show:   { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.45 } },
 };
 
@@ -85,7 +85,7 @@ export default function ClientsPartners({
           `,
         }}
       />
-      
+
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Header */}
         <motion.div

@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { Waves, BadgePercent, Info, ArrowRight } from "lucide-react";
 import LazyYouTube from "@/app/components/LazyYouTube";
@@ -34,11 +34,10 @@ const ORANGE = "#f15c34";
 const ZOOM_CROP = 1.60; // tweak 1.00–1.35 as needed (1.00 = no crop)
 
 const WRAP: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.06 },
   },
 };

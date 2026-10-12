@@ -1,18 +1,16 @@
 // app/components/projects/Perla2Hero.tsx
-"use client";
-
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import Image from "next/image";
+import type { Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
+  hidden: { y: 22 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -52,7 +50,7 @@ export default function Perla2Hero({
 >
   {/* Background image (z-0) */}
   <div className="absolute inset-0 z-0">
-    <img src={heroImage} alt={title} className="w-full h-full object-cover" />
+    <Image src={heroImage} alt={title} fill preload sizes="100vw" className="object-cover" />
   </div>
 
   {/* --- Overlays for readability --- */}
@@ -96,11 +94,7 @@ export default function Perla2Hero({
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-24 text-center text-white z-20">
         {/* Kicker */}
         {kicker && (
-          <motion.span
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+          <span
             className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
             style={{
               background: "rgba(255,255,255,0.12)",
@@ -109,51 +103,35 @@ export default function Perla2Hero({
             }}
           >
             {kicker}
-          </motion.span>
+          </span>
         )}
 
         {/* Title */}
-        <motion.h1
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+        <h1
           className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight"
         >
           {title}
-        </motion.h1>
+        </h1>
 
         {/* Tagline */}
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+        <p
           className="mt-3 max-w-2xl mx-auto text-base sm:text-lg"
           style={{ color: "rgba(255,255,255,0.88)" }}
         >
           {tagline}
-        </motion.p>
+        </p>
 
         {/* Chips */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+        <div
           className="mt-5 flex flex-wrap justify-center gap-2"
         >
           <Chip text={statusTR} color={ORANGE} />
           <Chip text={location} color="rgba(255,255,255,0.85)" neutral />
           <Chip text={`Teslim: ${delivery}`} color={TEAL} />
-        </motion.div>
+        </div>
 
         {/* CTAs */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+        <div
           className="mt-8 flex flex-wrap justify-center gap-3"
         >
           <a
@@ -183,7 +161,7 @@ export default function Perla2Hero({
               Broşür İndir (PDF)
             </a>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

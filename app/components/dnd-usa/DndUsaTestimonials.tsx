@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -64,7 +64,7 @@ export default function DndUsaTestimonials({
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.5 }}
@@ -157,7 +157,7 @@ function Card({ item, index }: { item: Testimonial; index: number }) {
   const color = item.accent === "orange" ? ORANGE : TEAL;
   return (
     <motion.blockquote
-      initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: false, amount: 0.35 }}
       transition={{ duration: 0.45, delay: (index % 6) * 0.05 }}

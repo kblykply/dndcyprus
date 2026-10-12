@@ -1,19 +1,17 @@
 // app/components/ContactHeroGlass.tsx
-"use client";
-
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import Image from "next/image";
+import type { Variants } from "framer-motion";
 import Link from "next/link";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
+  hidden: { y: 24 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -52,27 +50,17 @@ secondary = { label: "Our Projects", href: "/en/projects" },
   return (
     <section
       className="relative h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
     >
+      <Image src={bgImage} alt="" fill preload sizes="100vw" className="object-cover" />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Glassmorphic Panel */}
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        animate="show"
+      <div
         className="relative z-10 max-w-3xl mx-auto text-center px-6 py-10 rounded-2xl
                    backdrop-blur-md bg-white/15 border border-white/20 shadow-xl"
       >
-              <motion.span
-                variants={fadeUp}
-                initial="hidden"
-                animate="show"
+              <span
                 className="inline-block text-xs tracking-wider uppercase mb-3 px-3 py-1 rounded-full"
                 style={{
                   background: `${TEAL}30`,
@@ -81,7 +69,7 @@ secondary = { label: "Our Projects", href: "/en/projects" },
                 }}
               >
                 {kicker}
-              </motion.span>
+              </span>
         <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
           {title}
         </h1>
@@ -120,7 +108,7 @@ secondary = { label: "Our Projects", href: "/en/projects" },
             {quick.email && <span>{quick.email}</span>}
           </div>
         )}
-      </motion.div>
+      </div>
     </section>
   );
 }

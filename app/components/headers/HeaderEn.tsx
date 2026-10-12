@@ -2,15 +2,16 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useLightBackground } from "../performance/useLightBackground";
+import { useEffect, useState, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { FaPhoneAlt, FaBars } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 /* ---------------- Config ---------------- */
-const LIGHT_SELECTORS = '[data-bg="light"], .light-section, .bg-white';
+
 
 /* ---------------- Types ---------------- */
 type NavLeaf = { label: string; href: string };
@@ -39,9 +40,9 @@ const NAV: NavGroup[] = [
       { label: "La Joya", href: "/en/la-joya" },
       { label: "Mariachi Beach Club", href: "/en/mariachi" },
 
-      
+
     ],
-    
+
   },
   {
     label: "About\u00A0Us",
@@ -51,18 +52,18 @@ const NAV: NavGroup[] = [
    {
     label: "DND\u00A0Istanbul",
     href: "/en/dndturkiye",
-    
+
   },
 
   {
     label: "Contact",
     href: "/en/contact",
-    
+
   },
   {
     label: "News",
     href: "/en/press",
-    
+
   },
 
 ];
@@ -147,7 +148,7 @@ const handleSwitch = (target: "tr" | "en") => {
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isOnLight, setIsOnLight] = useState(false);
+  const isOnLight = useLightBackground("floating-hamburger", showFab);
   const [openDrop, setOpenDrop] = useState<number | null>(null);
   const [openAcc, setOpenAcc] = useState<number | null>(null);
   const [headerH, setHeaderH] = useState<number>(0);
@@ -215,37 +216,6 @@ const handleSwitch = (target: "tr" | "en") => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isTransparentRoute, menuOpen, FAB_SHOW_AT, HIDE_DOWN_AT, NEAR_TOP]);
 
-  /* Contrast detection for floating FAB */
-  const recalcBg = useCallback(() => {
-    const fab = document.getElementById("floating-hamburger");
-    if (!fab) return;
-    const rect = fab.getBoundingClientRect();
-    const centerY = rect.top + rect.height / 2;
-    const candidates = Array.from(
-      document.querySelectorAll(LIGHT_SELECTORS)
-    ) as HTMLElement[];
-    let onLight = false;
-    for (const el of candidates) {
-      const r = el.getBoundingClientRect();
-      if (centerY >= r.top && centerY <= r.bottom && r.height > 0 && r.width > 0) {
-        onLight = true;
-        break;
-      }
-    }
-    setIsOnLight(onLight);
-  }, []);
-  useEffect(() => {
-    recalcBg();
-    window.addEventListener("scroll", recalcBg, { passive: true });
-    window.addEventListener("resize", recalcBg);
-    const interval = setInterval(recalcBg, 500);
-    return () => {
-      window.removeEventListener("scroll", recalcBg);
-      window.removeEventListener("resize", recalcBg);
-      clearInterval(interval);
-    };
-  }, [recalcBg]);
-
   /* Header classes */
   const positionClass = isTransparentRoute ? "fixed top-0" : "sticky top-0";
   const headerBase =
@@ -276,7 +246,6 @@ const handleSwitch = (target: "tr" | "en") => {
             width={140}
             height={50}
             className="h-auto w-[120px]"
-            priority
           />
         </Link>
 

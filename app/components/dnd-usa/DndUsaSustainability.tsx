@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Leaf, Recycle, Award, ShieldCheck } from "lucide-react";
 
 const TEAL = "#27959b";
@@ -47,12 +47,12 @@ export default function DndUsaSustainability({
                 radial-gradient(26rem 16rem at 85% 0%, ${ORANGE}14, transparent 70%)
             `,
             }}
-        />  
+        />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid gap-10 lg:grid-cols-2 items-center">
         {/* text content */}
         <motion.div
-          initial={{ opacity: 0, x: -24, filter: "blur(6px)" }}
+          initial={{ opacity: 0, x: -24 }}
           whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.6 }}
@@ -72,7 +72,7 @@ export default function DndUsaSustainability({
               return (
                 <motion.li
                   key={i}
-                  initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+                  initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   viewport={{ once: false, amount: 0.3 }}
                   transition={{ duration: 0.45, delay: i * 0.05 }}
@@ -102,7 +102,7 @@ export default function DndUsaSustainability({
 
         {/* image */}
         <motion.div
-          initial={{ opacity: 0, x: 24, filter: "blur(6px)" }}
+          initial={{ opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.6, delay: 0.1 }}

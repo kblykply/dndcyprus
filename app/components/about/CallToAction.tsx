@@ -3,17 +3,16 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -62,7 +61,6 @@ export default function CallToAction({
             src={bgSrc}
             alt={bgAlt}
             fill
-            priority
             sizes="100vw"
             className="object-cover"
           />

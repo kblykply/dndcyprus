@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
-import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import { useEffect, useState, useRef } from "react";
+import { useLightBackground } from "./performance/useLightBackground";
+import { useReducedMotion } from "framer-motion";
 
-const LIGHT_SELECTORS = '[data-bg="light"], .light-section, .bg-white';
+
 
 export default function BackgroundVideo() {
   const [scale, setScale] = useState(1.06);
   const [isMuted, setIsMuted] = useState(true);
-  const [isOnLight, setIsOnLight] = useState(false);
+  const isOnLight = useLightBackground("mute-btn");
+  const reducedMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Adjust scale for aspect ratio
@@ -24,42 +26,6 @@ export default function BackgroundVideo() {
     window.addEventListener("resize", fit, { passive: true });
     return () => window.removeEventListener("resize", fit);
   }, []);
-
-  // Detect background lightness (same logic as SocialIcons)
-  const recalc = useCallback(() => {
-    const icon = document.getElementById("mute-btn");
-    if (!icon) return;
-
-    const rect = icon.getBoundingClientRect();
-    const centerY = rect.top + rect.height / 2;
-
-    const candidates = Array.from(
-      document.querySelectorAll(LIGHT_SELECTORS)
-    ) as HTMLElement[];
-
-    let onLight = false;
-    for (const el of candidates) {
-      const r = el.getBoundingClientRect();
-      if (centerY >= r.top && centerY <= r.bottom && r.height > 0 && r.width > 0) {
-        onLight = true;
-        break;
-      }
-    }
-
-    setIsOnLight(onLight);
-  }, []);
-
-  useEffect(() => {
-    recalc();
-    window.addEventListener("scroll", recalc, { passive: true });
-    window.addEventListener("resize", recalc);
-    const guard = window.setInterval(recalc, 400);
-    return () => {
-      window.removeEventListener("scroll", recalc);
-      window.removeEventListener("resize", recalc);
-      clearInterval(guard);
-    };
-  }, [recalc]);
 
   const toggleMute = () => {
     setIsMuted((prev) => {
@@ -82,18 +48,20 @@ export default function BackgroundVideo() {
           ref={videoRef}
           className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full object-cover pointer-events-none will-change-transform"
           style={{ transform: `translate(-50%, -50%) scale(${scale})` }}
-          autoPlay
+          autoPlay={!reducedMotion}
+          preload="none"
+          poster="/homesthumb.webp"
           loop
           muted={isMuted}
           playsInline
         >
-          <source src="/awardvideo.mp4" type="video/mp4" />
+          <source src="/optimized/awardvideo.486051c079.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Floating Mute Button */}
-  
+
     </>
   );
 }

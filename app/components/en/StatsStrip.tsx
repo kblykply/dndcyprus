@@ -1,7 +1,9 @@
 // app/components/StatsStrip.tsx
 "use client";
 
-import { motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
+import Image from "next/image";
+
+import { m as motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -172,8 +174,8 @@ function StatsStrip({
               <div className="relative rounded-3xl p-2 bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg w-full flex">
                 <div
                   className="relative flex-1 min-h-[460px] rounded-2xl overflow-hidden bg-center bg-cover"
-                  style={{ backgroundImage: `url('${imageUrl}')` }}
                 >
+                  <Image src={imageUrl} alt="" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
                   <div className="absolute inset-0 bg-black/20" />
                 </div>
               </div>

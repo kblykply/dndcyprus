@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m as motion, useInView, useReducedMotion } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 
 const TEAL = "#27959b";
@@ -36,7 +36,7 @@ export default function AboutDndHomes({
 
   const rise = useMemo(
     () => ({
-      hidden: { opacity: 0, y: reduced ? 0 : 16, filter: "blur(6px)" },
+      hidden: { opacity: 0, y: reduced ? 0 : 16 },
       show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: D, ease } },
     }),
     [D, ease, reduced]
@@ -292,7 +292,6 @@ function VideoHeroCard({
             fill
             sizes="(min-width: 1024px) 1000px, 100vw"
             className="object-cover"
-            priority={false}
             unoptimized
             onLoadingComplete={() => setImgLoaded(true)}
             onError={() => {

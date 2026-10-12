@@ -1,9 +1,6 @@
     // app/components/about/OzanHero.tsx
-    "use client";
-
     import React from "react";
-    import { motion } from "framer-motion";
-    import Image from "next/image";
+        import Image from "next/image";
 
     const TEAL = "#27959b";
     const ORANGE = "#f15c34";
@@ -29,10 +26,7 @@
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center">
             {/* portrait */}
-        <motion.div
-    initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        <div
     className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden ring-4 ring-[rgba(39,149,155,0.55)]"
     >
     <Image
@@ -43,38 +37,29 @@
         className="w-full h-full object-cover"
         priority
     />
-    </motion.div>
+    </div>
 
             {/* name & role */}
-            <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            <h1
             className="mt-6 text-2xl sm:text-3xl font-semibold tracking-tight"
             >
             Ozan Dökmecioğlu
-            </motion.h1>
-            <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            </h1>
+            <p
             className="mt-2 text-sm sm:text-base"
             style={{ color: "rgba(20,21,23,0.65)" }}
             >
             Kurucu & Yönetim Kurulu Başkanı, DND Cyprus
-            </motion.p>
+            </p>
 
             {/* tagline */}
-            <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            <p
             className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
             style={{ color: "rgba(20,21,23,0.78)" }}
             >
             Yatırım ve inşaat sektöründe vizyoner liderliğiyle, DND Cyprus’un
             uluslararası başarı hikâyesini yönlendiriyor.
-            </motion.p>
+            </p>
         </div>
         </section>
     );

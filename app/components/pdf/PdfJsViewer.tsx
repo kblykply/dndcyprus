@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { RenderTask } from "pdfjs-dist";
 
 type Props = {
   file: string;
@@ -11,90 +12,112 @@ export default function PdfJsViewer({ file }: Props) {
   const pagesRef = useRef<HTMLDivElement | null>(null);
 
   const [numPages, setNumPages] = useState(0);
-  const [renderScale] = useState(1.1);
   const [zoom, setZoom] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     let cancelled = false;
+    let observer: IntersectionObserver | undefined;
+    let destroyDocument: (() => void) | undefined;
+    const visible = new Set<HTMLElement>();
+    const tasks = new Map<HTMLElement, RenderTask>();
+    const pending = new Set<HTMLElement>();
+    let queue = Promise.resolve();
 
-    async function renderPdf() {
-      if (typeof window === "undefined") return;
-
+    async function openPdf() {
       const pagesEl = pagesRef.current;
-      if (!pagesEl) return;
-
+      const container = containerRef.current;
+      if (!pagesEl || !container) return;
       setLoading(true);
       setError("");
       setNumPages(0);
-      pagesEl.innerHTML = "";
-
+      pagesEl.replaceChildren();
       try {
-        const pdfjsLib = await import("pdfjs-dist");
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
-
-        const loadingTask = pdfjsLib.getDocument(file);
-        const pdf = await loadingTask.promise;
-
+        const pdfjs = await import("pdfjs-dist");
         if (cancelled) return;
-
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        const loadingTask = pdfjs.getDocument(file);
+        destroyDocument = () => { void loadingTask.destroy().catch(() => {}); };
+        const pdf = await loadingTask.promise;
+        if (cancelled) return;
         setNumPages(pdf.numPages);
+        const availableWidth = Math.max(240, container.clientWidth - 32);
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
 
-        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
-          const page = await pdf.getPage(pageNumber);
-          if (cancelled) return;
-
-          const viewport = page.getViewport({ scale: renderScale });
-
-          const pageWrap = document.createElement("div");
-          pageWrap.style.margin = "0 auto 24px";
-          pageWrap.style.width = "fit-content";
-
+        const render = async (row: HTMLElement) => {
+          if (cancelled || !visible.has(row) || row.querySelector("canvas")) return;
+          const page = await pdf.getPage(Number(row.dataset.page));
+          if (cancelled || !visible.has(row)) return;
+          const base = page.getViewport({ scale: 1 });
+          const scale = Math.min(1.1, availableWidth / base.width);
+          const viewport = page.getViewport({ scale: scale * pixelRatio });
           const canvas = document.createElement("canvas");
           const context = canvas.getContext("2d");
-
-          if (!context) {
-            throw new Error("Canvas context could not be created.");
-          }
-
-          canvas.width = Math.floor(viewport.width);
-          canvas.height = Math.floor(viewport.height);
-          canvas.style.width = `${Math.floor(viewport.width)}px`;
-          canvas.style.height = `${Math.floor(viewport.height)}px`;
-          canvas.style.display = "block";
-          canvas.style.borderRadius = "18px";
-          canvas.style.boxShadow = "0 12px 40px rgba(20,21,23,0.08)";
-          canvas.style.background = "#fff";
-
-          pageWrap.appendChild(canvas);
-          pagesEl.appendChild(pageWrap);
-
-          await page.render({
-            canvas,
-            canvasContext: context,
-            viewport,
-          }).promise;
+          if (!context) throw new Error("Canvas is unavailable");
+          canvas.width = Math.ceil(viewport.width);
+          canvas.height = Math.ceil(viewport.height);
+          canvas.style.cssText = "display:block;width:100%;height:100%;border-radius:18px;background:white";
+          row.appendChild(canvas);
+          const task = page.render({ canvas, canvasContext: context, viewport });
+          tasks.set(row, task);
+          try { await task.promise; }
+          finally { tasks.delete(row); }
+        };
+        const enqueue = (row: HTMLElement) => {
+          if (pending.has(row)) return;
+          pending.add(row);
+          queue = queue.then(() => render(row)).catch((error: unknown) => {
+            if (!cancelled && visible.has(row) && !(error instanceof Error && error.name === "RenderingCancelledException")) {
+              setError("A PDF page could not be rendered. You can open the original file.");
+            }
+          }).finally(() => { pending.delete(row); });
+        };
+        if ("IntersectionObserver" in window) {
+          observer = new IntersectionObserver((entries) => {
+            for (const entry of entries) {
+              const row = entry.target as HTMLElement;
+              if (entry.isIntersecting) { visible.add(row); enqueue(row); }
+              else {
+                visible.delete(row);
+                tasks.get(row)?.cancel();
+                const canvas = row.querySelector("canvas");
+                if (canvas) { canvas.width = 0; canvas.height = 0; canvas.remove(); }
+              }
+            }
+          }, { root: container, rootMargin: "600px 0px" });
         }
-
-        if (!cancelled) {
-          setLoading(false);
+        // Reserve page dimensions, then rasterize only pages near the viewer.
+        for (let index = 1; index <= pdf.numPages; index++) {
+          const page = await pdf.getPage(index);
+          if (cancelled) return;
+          const base = page.getViewport({ scale: 1 });
+          const width = Math.min(base.width * 1.1, availableWidth);
+          const row = document.createElement("div");
+          row.dataset.page = String(index);
+          row.setAttribute("aria-label", `Page ${index}`);
+          row.style.cssText = `margin:0 auto 24px;width:${width}px;height:${width * base.height / base.width}px;background:#fff;border-radius:18px`;
+          pagesEl.appendChild(row);
+          if (observer) observer.observe(row);
+          else { visible.add(row); enqueue(row); }
         }
-      } catch (err) {
-        console.error(err);
-        if (!cancelled) {
-          setError("PDF could not be loaded.");
-          setLoading(false);
-        }
+        if (!cancelled) setLoading(false);
+      } catch {
+        if (!cancelled) { setError("PDF could not be loaded."); setLoading(false); }
       }
     }
-
-    renderPdf();
-
+    void openPdf();
     return () => {
       cancelled = true;
+      observer?.disconnect();
+      for (const task of tasks.values()) task.cancel();
+      for (const canvas of pagesRef.current?.querySelectorAll("canvas") ?? []) {
+        canvas.width = 0;
+        canvas.height = 0;
+      }
+      destroyDocument?.();
     };
-  }, [file, renderScale]);
+  }, [file]);
 
   return (
     <div className="w-full">

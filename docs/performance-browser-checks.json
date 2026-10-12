@@ -1,0 +1,92 @@
+[
+  {
+    "path": "/tr",
+    "lang": "tr",
+    "title": "Kuzey Kıbrıs'ta konut projeleri – DND Cyprus",
+    "deferredFrames": 0,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/en",
+    "lang": "en",
+    "title": "Residential projects in North Cyprus – DND Cyprus",
+    "deferredFrames": 0,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/tr/perla-ii",
+    "lang": "tr",
+    "title": "La Joya Perla II",
+    "deferredFrames": 2,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/en/perla-ii",
+    "lang": "en",
+    "title": "La Joya Perla II",
+    "deferredFrames": 2,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/tr/contact",
+    "lang": "tr",
+    "title": "Bize Ulaşın",
+    "deferredFrames": 2,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/en/contact",
+    "lang": "en",
+    "title": "Get in Touch",
+    "deferredFrames": 2,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/tr/lagoon-verde",
+    "lang": "tr",
+    "title": "Lagoon Verde",
+    "deferredFrames": 1,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/en/lagoon-verde",
+    "lang": "en",
+    "title": "Lagoon Verde",
+    "deferredFrames": 1,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/tr/about",
+    "lang": "tr",
+    "title": "DND Cyprus",
+    "deferredFrames": 0,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  },
+  {
+    "path": "/en/about",
+    "lang": "en",
+    "title": "DND Cyprus",
+    "deferredFrames": 0,
+    "initialVideoScript": false,
+    "initialCatalogImages": 0,
+    "overflow": false
+  }
+]

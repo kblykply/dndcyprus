@@ -2,7 +2,7 @@
 "use client";
 
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 
 type Props = {

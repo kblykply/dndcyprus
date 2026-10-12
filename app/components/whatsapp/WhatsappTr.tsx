@@ -1,11 +1,12 @@
 // app/components/whatsapp/WhatsappTr.tsx
 "use client";
 
-import { useMemo, useEffect, useState, useRef, useCallback } from "react";
+import { useMemo, useEffect, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
+import { useLightBackground } from "../performance/useLightBackground";
 import { projectFromPath } from "@/lib/analytics";
 import { attributionRef } from "@/lib/attribution";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 
 type Props = {
@@ -14,7 +15,6 @@ type Props = {
   label?: string;
 };
 
-const LIGHT_SELECTORS = '[data-bg="light"], .light-section, .bg-white';
 
 export default function WhatsAppFab({
   phone,
@@ -22,8 +22,7 @@ export default function WhatsAppFab({
   label = "WhatsApp ile sohbet et",
 }: Props) {
   const [mounted, setMounted] = useState(false);
-  const [isLightBg, setIsLightBg] = useState(false);
-  const raf = useRef<number | null>(null);
+  const isLightBg = useLightBackground("whatsapp-fab", mounted);
 
   const pathname = usePathname() || "";
   const [message, setMessage] = useState(defaultMessage);
@@ -46,54 +45,6 @@ export default function WhatsAppFab({
   }, [phone, message]);
 
   useEffect(() => setMounted(true), []);
-
-  // Same detection model as SocialIcons: check if the FAB center is inside a "light" section
-  const recalc = useCallback(() => {
-    if (raf.current) cancelAnimationFrame(raf.current);
-    raf.current = requestAnimationFrame(() => {
-      const host = document.getElementById("whatsapp-fab");
-      if (!host) return;
-
-      const r = host.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-
-      const candidates = Array.from(
-        document.querySelectorAll(LIGHT_SELECTORS)
-      ) as HTMLElement[];
-
-      let onLight = false;
-      for (const el of candidates) {
-        const er = el.getBoundingClientRect();
-        if (
-          er.width > 0 &&
-          er.height > 0 &&
-          cx >= er.left &&
-          cx <= er.right &&
-          cy >= er.top &&
-          cy <= er.bottom
-        ) {
-          onLight = true;
-          break;
-        }
-      }
-
-      setIsLightBg(onLight);
-    });
-  }, []);
-
-  useEffect(() => {
-    recalc();
-    window.addEventListener("scroll", recalc, { passive: true });
-    window.addEventListener("resize", recalc);
-    const guard = window.setInterval(recalc, 500); // cover layout shifts
-    return () => {
-      window.removeEventListener("scroll", recalc);
-      window.removeEventListener("resize", recalc);
-      clearInterval(guard);
-      if (raf.current) cancelAnimationFrame(raf.current);
-    };
-  }, [recalc]);
 
   if (!mounted) return null;
 

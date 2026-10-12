@@ -17,12 +17,6 @@ function pickLocale(req: NextRequest): "tr" | "en" {
   return DEFAULT;
 }
 
-/** <html lang> için yolun dilini kök layout'a iletir */
-function localeOfPath(pathname: string): "tr" | "en" {
-  if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
-  return "tr";
-}
-
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -67,10 +61,7 @@ export async function middleware(req: NextRequest) {
     return res;
   }
 
-  /* ---------------- DİL BAŞLIĞI ---------------- */
-  const headers = new Headers(req.headers);
-  headers.set("x-dnd-locale", localeOfPath(pathname));
-  return NextResponse.next({ request: { headers } });
+  return NextResponse.next();
 }
 
 export const config = {

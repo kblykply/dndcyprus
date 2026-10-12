@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Script from "next/script";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper/types";
@@ -30,11 +30,10 @@ declare global {
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.55, ease: EASE },
   },
 };

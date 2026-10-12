@@ -1,19 +1,19 @@
 // app/components/mariachi/MariachiGalleryExpanding.tsx
 "use client";
 
+import Image from "@/app/components/performance/DeferredFillImage";
 import React, { useMemo, useState } from "react";
-import { motion, type Variants, type Easing } from "framer-motion";
+import { m as motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.45, ease: EASE },
   },
 };
@@ -41,9 +41,9 @@ export default function MariachiGalleryExpanding({
         { src: "/perla/7.jpg", alt: "Plaj" },
         { src: "/perla/3.jpg", alt: "Cabanalar" },
         { src: "/perla/6.jpg", alt: "DJ Gecesi" },
-        { src: "/perla/8.jpg", alt: "Kokteyller" }, 
+        { src: "/perla/8.jpg", alt: "Kokteyller" },
 
-    
+
       ],
     [items]
   );
@@ -139,10 +139,12 @@ export default function MariachiGalleryExpanding({
                   }}
                 >
                   {/* Görsel */}
-                  <img
+                  <Image
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     src={g.src}
                     alt={g.alt || ""}
-                    className="h-full w-full object-cover select-none"
+                    className="object-cover select-none"
                     draggable={false}
                     style={{
                       transform: grow > 1 ? "scale(1.06)" : "scale(1.02)",

@@ -1,8 +1,5 @@
 // app/components/about/OzanCTA.tsx
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -41,32 +38,20 @@ export default function OzanCTA({
       />
 
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.5 }}
+        <h2
           className="text-2xl sm:text-3xl lg:text-4xl font-semibold"
         >
           {title}
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.55, delay: 0.05 }}
+        <p
           className="mt-3 text-sm sm:text-base max-w-2xl mx-auto"
           style={{ color: "rgba(20,21,23,0.72)" }}
         >
           {subtitle}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+        <div
           className="mt-8 flex flex-wrap justify-center gap-4"
         >
           <a
@@ -91,7 +76,7 @@ export default function OzanCTA({
           >
             {secondaryLabel}
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

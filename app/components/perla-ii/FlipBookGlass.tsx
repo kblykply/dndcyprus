@@ -4,7 +4,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import NextImage from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 import { Download } from "lucide-react";
 
 // ==========================
@@ -50,11 +50,10 @@ const ORANGE = "#f15c34";
 const PAGE_RADIUS_PX = 20;
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -71,12 +70,13 @@ export function FlipBookGlassBase({
   maxWidth = 2000,
   vhMaxRatio = 0.88,
   mobileVhMaxRatio = 0.58,
-  imgQuality = 92,
+  imgQuality = 75,
 }: Props) {
   const bookRef = useRef<HTMLFlipBookHandle | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [page, setPage] = useState<number>(0);
+  const [measured, setMeasured] = useState(false);
 
   // SSR-safe defaults
   const [containerW, setContainerW] = useState<number>(maxWidth);
@@ -105,7 +105,7 @@ export function FlipBookGlassBase({
     let ro: ResizeObserver | null = null;
     if (containerRef.current) {
       ro = new ResizeObserver((entries) => {
-        for (const e of entries) setContainerW(Math.round(e.contentRect.width));
+        for (const e of entries) { setContainerW(Math.round(e.contentRect.width)); setMeasured(true); }
       });
       ro.observe(containerRef.current);
     }
@@ -116,16 +116,6 @@ export function FlipBookGlassBase({
       ro?.disconnect();
     };
   }, []);
-
-  // Preload next spread
-  useEffect(() => {
-    const next = page + 1;
-    const nextSrc = virtualPages[next]?.src;
-    if (nextSrc && typeof window !== "undefined") {
-      const pre = new window.Image();
-      pre.src = nextSrc;
-    }
-  }, [page, virtualPages]);
 
   const isMobile = containerW < 768;
 
@@ -174,7 +164,7 @@ export function FlipBookGlassBase({
       {/* Background */}
       {bgImage && (
         <div className="absolute inset-0 z-0">
-          <NextImage src={bgImage} alt="" fill priority sizes="100vw" className="object-cover object-center" />
+          <NextImage src={bgImage} alt="" fill sizes="100vw" className="object-cover object-center" />
           <div className="absolute inset-0 bg-black/40" />
         </div>
       )}
@@ -297,15 +287,14 @@ export function FlipBookGlassBase({
                     className="relative h-full w-full rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-xl bg-transparent"
                   >
                     <div className="absolute inset-0" style={{ width: "200%", left: offsetLeft }}>
-                      <NextImage
+                      {measured && Math.abs(i - page) <= 4 && <NextImage
                         src={src}
                         alt={`Perla II flipbook ${half} – page ${i + 1}`}
                         fill
-                        priority={i < 4}
                         quality={imgQuality}
                         sizes={imgSizes}
                         className="pointer-events-none object-cover"
-                      />
+                      />}
                     </div>
                   </div>
                 );
@@ -371,7 +360,7 @@ export default function FlipBookGlass() {
       maxWidth={2000}
       vhMaxRatio={0.88}
       mobileVhMaxRatio={0.58}
-      imgQuality={95}
+      imgQuality={75}
     />
   );
 }

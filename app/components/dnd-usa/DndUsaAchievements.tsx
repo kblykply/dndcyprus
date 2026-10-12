@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -58,7 +58,7 @@ style={{
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-18 lg:py-24">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.5 }}
@@ -78,7 +78,7 @@ style={{
             return (
               <motion.div
                 key={m.label + i}
-                initial={{ opacity: 0, y: 14, filter: "blur(4px)" }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.35 }}
                 transition={{ duration: 0.45, delay: i * 0.05 }}
@@ -104,7 +104,7 @@ style={{
 
         {/* highlight award */}
         <motion.div
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.5, delay: 0.05 }}
@@ -155,7 +155,7 @@ style={{
             return (
               <motion.article
                 key={(a.title || "a") + i}
-                initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{ duration: 0.45, delay: i * 0.05 }}
@@ -193,7 +193,7 @@ style={{
         {/* partner/client logos */}
         {partners.length ? (
           <motion.div
-            initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: false, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.08 }}
@@ -233,7 +233,7 @@ style={{
         {/* press */}
         {press.length ? (
           <motion.div
-            initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: false, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.1 }}

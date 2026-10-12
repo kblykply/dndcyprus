@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 
 /* ---------------- Types ---------------- */
 export type Hotspot = {
@@ -91,7 +91,6 @@ const ANGLES: Angle[] = [
               fill
               className="object-cover"
               sizes="100vw"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/15 to-black/60 pointer-events-none" />
           </motion.div>
@@ -149,7 +148,7 @@ const ANGLES: Angle[] = [
             })}
           </div>
 
-    
+
         </div>
       </div>
     </section>

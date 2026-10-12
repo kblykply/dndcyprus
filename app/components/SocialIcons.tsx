@@ -1,52 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useLightBackground } from "./performance/useLightBackground";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
-const LIGHT_SELECTORS = '[data-bg="light"], .light-section, .bg-white';
 
 export default function SocialIcons() {
-  const [isOnLight, setIsOnLight] = useState(false);
-
-  const recalc = useCallback(() => {
-    const icon = document.getElementById("social-icons");
-    if (!icon) return;
-
-    const rect = icon.getBoundingClientRect();
-    // Mobilde gizli (display:none) → hesaplama yapma
-    if (rect.width === 0 && rect.height === 0) return;
-    const centerY = rect.top + rect.height / 2;
-
-    const candidates = Array.from(
-      document.querySelectorAll(LIGHT_SELECTORS)
-    ) as HTMLElement[];
-
-    let onLight = false;
-    for (const el of candidates) {
-      const r = el.getBoundingClientRect();
-      // If the icon’s vertical center sits inside a light section, treat as light
-      if (centerY >= r.top && centerY <= r.bottom && r.height > 0 && r.width > 0) {
-        onLight = true;
-        break;
-      }
-    }
-
-    setIsOnLight(onLight);
-  }, []);
-
-  useEffect(() => {
-    // Recompute on mount, scroll, resize (and a short interval to cover route/layout shifts)
-    recalc();
-    window.addEventListener("scroll", recalc, { passive: true });
-    window.addEventListener("resize", recalc, { passive: true });
-    const guard = window.setInterval(recalc, 400);
-
-    return () => {
-      window.removeEventListener("scroll", recalc);
-      window.removeEventListener("resize", recalc);
-      clearInterval(guard);
-    };
-  }, [recalc]);
+  const isOnLight = useLightBackground("social-icons");
 
   return (
     <div

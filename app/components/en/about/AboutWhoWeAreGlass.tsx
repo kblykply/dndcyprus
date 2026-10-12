@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
+import { m as motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const TEAL = "#27959b";

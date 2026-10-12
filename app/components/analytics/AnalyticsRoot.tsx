@@ -20,6 +20,7 @@ import {
 } from "@/lib/analytics";
 import { captureAttribution, persistAttribution } from "@/lib/attribution";
 import ConsentBanner from "./ConsentBanner";
+import WebVitals from "./WebVitals";
 
 export default function AnalyticsRoot({ needsConsent = false }: { needsConsent?: boolean }) {
   const pathname = usePathname() || "";
@@ -39,7 +40,10 @@ function SiteAnalytics({ needsConsent }: { needsConsent: boolean }) {
     loadGoogleTags(); // izin yoksa Consent Mode çerezsiz çalıştırır
     loadGtm();
     loadMetaPixel(); // yalnızca reklam izni varsa
-    loadClarity(); // yalnızca analitik izni varsa
+    // Session recording is not needed to paint the page. Critical attribution
+    // tags above still initialize immediately, preserving conversion events.
+    const timer = window.setTimeout(() => loadClarity(), 2500);
+    return () => window.clearTimeout(timer);
   }, [admin]);
 
   useEffect(() => {
@@ -71,6 +75,7 @@ function SiteAnalytics({ needsConsent }: { needsConsent: boolean }) {
         <RouteTracker />
       </Suspense>
       <ConsentBanner initialOpen={needsConsent} />
+      <WebVitals />
     </>
   );
 }

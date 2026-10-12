@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -65,12 +65,12 @@ export default function DndUsaVision({
                 radial-gradient(26rem 16rem at 85% 100%, ${ORANGE}14, transparent 70%)
             `,
             }}
-        />  
+        />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.5 }}
@@ -88,7 +88,7 @@ export default function DndUsaVision({
           {PILLARS.map((p, i) => (
             <motion.div
               key={p.title}
-              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: false, amount: 0.35 }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
@@ -123,7 +123,7 @@ export default function DndUsaVision({
         {/* quote + mini metrics */}
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
           <motion.blockquote
-            initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: false, amount: 0.35 }}
             transition={{ duration: 0.5 }}
@@ -148,7 +148,7 @@ export default function DndUsaVision({
           </motion.blockquote>
 
           <motion.div
-            initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: false, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.08 }}

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { FaPhoneAlt, FaBars } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 /* ---------------- Config ---------------- */
@@ -38,9 +38,9 @@ const NAV: NavGroup[] = [
       { label: "La Joya", href: "/la-joya" },
       { label: "Mariachi Beach Club", href: "/mariachi" },
 
-      
+
     ],
-    
+
   },
   {
     label: "Hakkımızda",
@@ -51,12 +51,12 @@ const NAV: NavGroup[] = [
   {
     label: "İletişim",
     href: "/contact",
-    
+
   },
   {
     label: "Yazılar",
     href: "/blog",
-    
+
   },
 
 ];
@@ -224,7 +224,6 @@ export default function Header() {
             width={140}
             height={50}
             className="h-auto w-[120px]"
-            priority
           />
         </Link>
 

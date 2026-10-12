@@ -1,8 +1,5 @@
 // app/components/dnd-usa/DndUsaCTA.tsx
-"use client";
-
 import React from "react";
-import { motion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -34,36 +31,24 @@ export default function DndUsaCTA({
                 radial-gradient(26rem 16rem at 85% 0%, ${ORANGE}14, transparent 70%)
             `,
             }}
-        />  
+        />
 
       <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.5 }}
+        <h2
           className="text-2xl sm:text-3xl lg:text-4xl font-semibold"
         >
           {title}
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.55, delay: 0.1 }}
+        <p
           className="mt-3 text-sm sm:text-base"
           style={{ color: "rgba(20,21,23,0.7)" }}
         >
           {subtitle}
-        </motion.p>
+        </p>
 
         {/* buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <div
           className="mt-6 flex flex-wrap justify-center gap-4"
         >
           <a
@@ -88,7 +73,7 @@ export default function DndUsaCTA({
           >
             {secondary.label}
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

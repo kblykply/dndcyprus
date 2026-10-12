@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Building2, Ruler, Briefcase, Home } from "lucide-react";
 
 const TEAL = "#27959b";
@@ -57,7 +57,7 @@ export default function DndUsaServices() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.4 }}
           transition={{ duration: 0.6 }}

@@ -1,0 +1,56 @@
+{
+  "measuredAt": "2026-10-12T09:17:07.585Z",
+  "origin": "http://127.0.0.1:3100",
+  "units": "uncompressed bytes; initial HTML script dependencies only",
+  "routes": {
+    "/tr": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 127915,
+      "scriptCount": 17,
+      "scriptBytes": 890171
+    },
+    "/en": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 126771,
+      "scriptCount": 18,
+      "scriptBytes": 890385
+    },
+    "/tr/perla-ii": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 148498,
+      "scriptCount": 16,
+      "scriptBytes": 797137
+    },
+    "/en/perla-ii": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 147300,
+      "scriptCount": 17,
+      "scriptBytes": 797163
+    },
+    "/tr/contact": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 69316,
+      "scriptCount": 13,
+      "scriptBytes": 672627
+    },
+    "/en/contact": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 67675,
+      "scriptCount": 14,
+      "scriptBytes": 672667
+    },
+    "/tr/qr": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 18292,
+      "scriptCount": 10,
+      "scriptBytes": 610198
+    }
+  }
+}

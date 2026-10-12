@@ -1,8 +1,6 @@
 // app/components/projects/Perla2Facts.tsx
-"use client";
-
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { SITE_URL } from "@/lib/seo";
 
 const TEAL = "#27959b";
@@ -28,11 +26,10 @@ const PROJECT_JSON_LD = {
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] },
   }),
 };
@@ -72,36 +69,26 @@ style={{
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle brand wash */}
- 
+
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-18">
         {/* header */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
-          custom={0}
+        <div
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
           <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
             {subtitle}
           </p>
-        </motion.div>
+        </div>
 
         {/* facts grid */}
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {facts.map((f, i) => {
             const color = f.accent === "orange" ? ORANGE : TEAL;
             return (
-              <motion.div
+              <div
                 key={f.label + i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: false, amount: 0.3 }}
-                custom={i + 1}
                 className="rounded-2xl p-5"
                 style={{
                   background:
@@ -125,25 +112,20 @@ style={{
                 <div className="mt-2 text-base sm:text-lg font-semibold">
                   {f.value}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* note / disclaimer (optional) */}
-        <motion.p
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
-          custom={facts.length + 2}
+        <p
           className="mt-6 text-xs"
           style={{ color: "rgba(20,21,23,0.55)" }}
         >
 
  * Information is for promotional purposes only. For final technical and sales details, please contact our sales team.
 
-        </motion.p>
+        </p>
       </div>
 
       {/* SEO JSON-LD (veri dosyanın başındaki PROJECT_JSON_LD sabitinde) */}

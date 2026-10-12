@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Home, ClipboardList, Hammer, Building, Handshake } from "lucide-react";
 
 const TEAL = "#27959b";
@@ -51,7 +51,7 @@ export default function DndUsaProcess({
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* header */}
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: false, amount: 0.35 }}
           transition={{ duration: 0.6 }}
@@ -74,7 +74,7 @@ export default function DndUsaProcess({
             return (
               <motion.div
                 key={s.id}
-                initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: false, amount: 0.35 }}
                 transition={{ duration: 0.5, delay: (i % 6) * 0.05 }}

@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m as motion, useInView, useReducedMotion } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -49,11 +49,10 @@ subtitle = "Explore our key milestones.",
 
   const rise = useMemo(
     () => ({
-      hidden: { opacity: 0, y: reduced ? 0 : 18, filter: "blur(6px)" },
+      hidden: { opacity: 0, y: reduced ? 0 : 18 },
       show: {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
         transition: { duration: D, ease },
       },
     }),

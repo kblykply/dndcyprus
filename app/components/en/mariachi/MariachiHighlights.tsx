@@ -3,7 +3,7 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
-  motion,
+  m as motion,
   type Variants,
   type Easing,
   useMotionValue,
@@ -17,11 +17,10 @@ const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 const GAP = 20; // px – hem stil hem ölçümde kullanıyoruz
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.45, ease: EASE },
   },
 };
@@ -264,7 +263,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
         {/* Carousel */}
         <div className="mt-8 relative select-none">
           {/* Oklar */}
-      
+
 
           {/* Viewport (scrollbar YOK) */}
           <div

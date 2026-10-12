@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 import { PlayCircle, Maximize2, Minimize2, ExternalLink } from "lucide-react";
 
 const TEAL = "#27959b";    // lagoon vibe
@@ -21,11 +21,10 @@ const POSTER_IMAGE = "/lagoon-verde-interior/2plus1/6.jpg";
 const OVERLAY_IMAGE = ""; // e.g. "/overlays/noise.png" or leave "" to disable
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -199,7 +198,7 @@ export default function LagoonVerde360Section() {
               className="mt-3 max-w-3xl mx-auto text-sm sm:text-base"
               style={{ color: "rgba(255,255,255,0.85)" }}
             >
-              Projeyi panoramik olarak keşfedin.  
+              Projeyi panoramik olarak keşfedin.
             </motion.p>
           </div>
 

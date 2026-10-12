@@ -4,7 +4,7 @@
   import React, { useEffect, useMemo, useRef, useState } from "react";
   import Image from "next/image";
   import {
-    motion,
+    m as motion,
     type Variants,
     type Easing,
     useMotionValue,
@@ -25,11 +25,10 @@
   const GAP = 20;
 
   const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 16, filter: "blur(6px)" },
+    hidden: { opacity: 0, y: 16 },
     show: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: { duration: 0.45, ease: EASE },
     },
   };
@@ -78,9 +77,9 @@
           image: "/tec/smart.jpg",
           icon: <Home className="h-5 w-5" />,
         },
-    
-    
-      
+
+
+
         {
           title: "Banyolarda Yerden Isıtma",
           desc:

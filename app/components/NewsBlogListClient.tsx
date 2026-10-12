@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect, useRef, useCallback } from "react";
-import { motion, type Variants, useMotionValue, animate } from "framer-motion";
+import { m as motion, type Variants, useMotionValue, animate } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import type { BlogPost } from "./NewsBlogSection";
@@ -12,11 +12,10 @@ const EASE_CB = [0.22, 1, 0.36, 1] as const;
 const GAP_PX = 24; // Tailwind gap-6
 
 const wrap: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { when: "beforeChildren", staggerChildren: 0.06, duration: 0.28, ease: EASE_CB },
   },
 };
@@ -290,7 +289,6 @@ export default function NewsBlogListClient({
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.03] pointer-events-none"
                           unoptimized={isHttpUrl(img)}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          priority={false}
                         />
                       ) : (
                         <div className="absolute inset-0 grid place-items-center text-xs text-black/40">
@@ -388,7 +386,6 @@ export default function NewsBlogListClient({
                             className="object-cover transition-transform duration-500 group-hover:scale-[1.03] pointer-events-none"
                             unoptimized={isHttpUrl(img)}
                             sizes="(max-width: 640px) 85vw, (max-width: 1024px) 70vw, (max-width:1280px) 55vw, 33vw"
-                            priority={false}
                           />
                         ) : (
                           <div className="absolute inset-0 grid place-items-center text-xs text-black/40">

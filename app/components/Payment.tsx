@@ -3,7 +3,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, useReducedMotion, type Variants } from "framer-motion";
 import { Volume2, VolumeX, Maximize2, Minimize2, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Swiper
@@ -19,11 +19,10 @@ const ORANGE = "#f15c34";
 
 /* ---------------- Motion ---------------- */
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
@@ -121,10 +120,12 @@ function ensureYouTubeAPI(): Promise<YTGlobal | null> {
         document.body.appendChild(tag);
       }
       w.onYouTubeIframeAPIReady = () => resolve((window as WindowWithYT).YT ?? null);
+      const deadline = Date.now() + 10000;
       const check = () => {
         const ww = window as WindowWithYT;
         if (ww.YT && ww.YT.Player) resolve(ww.YT);
-        else setTimeout(check, 120);
+        else if (Date.now() < deadline) setTimeout(check, 120);
+        else resolve(null);
       };
       check();
     });
@@ -141,6 +142,8 @@ export default function   ProjectVideoSlider({
   const playersRef = useRef<(YTPlayer | null)[]>([]);
   const swiperRef = useRef<SwiperType | null>(null);
   const [autoplayStopped, setAutoplayStopped] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const reducedMotion = useReducedMotion();
 
   const registerPlayer = useCallback((index: number, player: YTPlayer | null) => {
     playersRef.current[index] = player;
@@ -150,7 +153,7 @@ export default function   ProjectVideoSlider({
     playersRef.current.forEach((p, i) => {
       if (!p) return;
       try {
-        if (i === activeIndex) {
+        if (i === activeIndex && !reducedMotion) {
           p.playVideo?.();
         } else {
           p.pauseVideo?.();
@@ -158,7 +161,7 @@ export default function   ProjectVideoSlider({
         }
       } catch {}
     });
-  }, []);
+  }, [reducedMotion]);
 
   const stopAutoplay = useCallback(() => {
     if (autoplayStopped) return;
@@ -207,7 +210,7 @@ export default function   ProjectVideoSlider({
         loop
         autoHeight
         autoplay={
-          autoplayStopped
+          autoplayStopped || reducedMotion
             ? false
             : {
                 delay: autoplayMs,
@@ -223,7 +226,7 @@ export default function   ProjectVideoSlider({
           swiperRef.current = swiper;
           playOnly(swiper.realIndex);
         }}
-        onSlideChange={(swiper) => playOnly(swiper.realIndex)}
+        onSlideChange={(swiper) => { setActiveSlide(swiper.realIndex); playOnly(swiper.realIndex); }}
         className="relative"
         style={paginationVars}
       >
@@ -233,6 +236,7 @@ export default function   ProjectVideoSlider({
           return (
             <SwiperSlide key={s.id}>
               <SlideContentBlock
+                active={idx === activeSlide}
                 index={idx}
                 id={vid}
                 bgImage={bg}
@@ -251,6 +255,7 @@ export default function   ProjectVideoSlider({
 
 /* ---------------- Slide ---------------- */
 function SlideContentBlock({
+  active,
   index,
   id,
   bgImage,
@@ -259,6 +264,7 @@ function SlideContentBlock({
   onPlayerReady,
   onNeedStopAutoplay,
 }: {
+  active: boolean;
   index: number;
   id: string;
   bgImage: string;
@@ -360,7 +366,7 @@ function SlideContentBlock({
 
           {/* Right: video */}
           <motion.div variants={fadeUp} className="lg:col-span-6">
-         <YouTubePanel
+         {active ? <YouTubePanel
   videoId={id}
   index={index}
   onReady={(player) => {
@@ -368,7 +374,7 @@ function SlideContentBlock({
     if (player) handleMeta(player); // <<< null guard
   }}
   onNeedStopAutoplay={onNeedStopAutoplay}
-/>
+/> : <div className="aspect-video overflow-hidden rounded-2xl bg-black"><img src={ytThumb(id)} alt={content.customHeadline} loading="lazy" decoding="async" className="h-full w-full object-cover" /></div>}
           </motion.div>
         </motion.div>
       </div>
@@ -393,6 +399,9 @@ function YouTubePanel({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useRef<YTPlayer | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const reducedMotion = useReducedMotion();
+  const readyCallback = useRef(onReady);
+  useEffect(() => { readyCallback.current = onReady; }, [onReady]);
 
   // Watch fullscreen changes to update UI and stop autoplay
   useEffect(() => {
@@ -416,7 +425,7 @@ useEffect(() => {
       width: "100%",
       height: "100%",
       playerVars: {
-        autoplay: 1,
+        autoplay: reducedMotion ? 0 : 1,
         mute: 1,
         controls: 0,
         rel: 0,
@@ -427,24 +436,28 @@ useEffect(() => {
       },
       events: {
         onReady: (ev) => {
+          if (!mounted) { ev.target.destroy(); return; }
           playerRef.current = ev.target;
           try {
             ev.target.mute();
-            ev.target.playVideo();
+            if (!reducedMotion) ev.target.playVideo();
           } catch {}
-          onReady(ev.target);
+          readyCallback.current(ev.target);
         },
       },
     });
+    playerRef.current = player;
   });
 
   return () => {
     mounted = false; // <<< önemli: prefer-const uyarısını da çözer
     try {
       playerRef.current?.destroy?.();
+      playerRef.current = null;
+      readyCallback.current(null);
     } catch {}
   };
-}, [containerId, videoId, onReady]);
+}, [containerId, videoId, reducedMotion]);
 
 
   const toggleMute = useCallback(() => {

@@ -1,7 +1,8 @@
 // app/components/BeachClubPerksSection.tsx
 "use client";
 
-import { motion, Variants, useAnimation, useInView } from "framer-motion";
+import Image from "next/image";
+import { m as motion, Variants, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 /* ---------- Motion (transform + opacity only) ---------- */
@@ -53,7 +54,9 @@ export default function BeachClubPerksSection() {
 <section className="relative py-16 md:py-24 bg-white text-black">
   {/* Background image */}
   <div className="absolute inset-0">
-    <img
+    <Image
+      fill
+      sizes="100vw"
       src="/mariachi/3.jpg" // <-- place your Mariachi image in /public/images/
       alt="Mariachi Beach Club background"
       className="w-full h-full object-cover"

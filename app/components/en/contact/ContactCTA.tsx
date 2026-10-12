@@ -1,18 +1,15 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -57,7 +54,6 @@ buttonText = "Contact Us Now",
             src={bgImage}
             alt=""
             fill
-            priority
             sizes="100vw"
             className="object-cover object-center"
           />
@@ -91,11 +87,7 @@ buttonText = "Contact Us Now",
       {/* Content */}
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
         {/* Glass card */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+        <div
           className="mx-auto max-w-3xl rounded-2xl p-8 sm:p-10 lg:p-12 shadow-[0_12px_48px_rgba(0,0,0,0.25)] ring-1"
           style={{
             background:
@@ -107,23 +99,20 @@ buttonText = "Contact Us Now",
             boxShadow: `0 20px 60px rgba(0,0,0,0.35)`,
           }}
         >
-          <motion.h2
-            variants={fadeUp}
+          <h2
             className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-center"
           >
             {title}
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            variants={fadeUp}
+          <p
             className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-center"
             style={{ color: "rgba(255,255,255,0.85)" }}
           >
             {subtitle}
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={fadeUp}
+          <div
             className="mt-8 flex justify-center"
           >
             <a
@@ -135,22 +124,12 @@ buttonText = "Contact Us Now",
                 border: `1px solid ${TEAL}66`,
                 boxShadow: `0 16px 36px ${TEAL}40`,
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`;
-                e.currentTarget.style.boxShadow = `0 20px 44px ${ORANGE}44`;
-                e.currentTarget.style.border = `1px solid ${ORANGE}66`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`;
-                e.currentTarget.style.boxShadow = `0 16px 36px ${TEAL}40`;
-                e.currentTarget.style.border = `1px solid ${TEAL}66`;
-              }}
+              data-cta-hover=""
+
             >
               {buttonText}
             </a>
-          </motion.div>
+          </div>
 
           {/* subtle underglow line */}
           <div
@@ -161,7 +140,7 @@ buttonText = "Contact Us Now",
                 "linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)",
             }}
           />
-        </motion.div>
+        </div>
       </div>
 
       {/* Decorative corner orbs (outside card) */}

@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import { m as motion, Variants } from "framer-motion";
 import { CheckCircle } from "lucide-react"; // you can swap with your own icons or images
 
 const TEAL = "#27959b";
@@ -29,7 +29,7 @@ const container: Variants = {
 };
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1, y: 0, filter: "blur(0px)",
     transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
@@ -86,7 +86,7 @@ export default function WhyChooseUs({
         }}
       />
       {/* subtle color accents */}
-     
+
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Header */}
         <motion.div

@@ -1,8 +1,6 @@
 // app/components/AboutHero.tsx
-"use client";
-
+import Image from "next/image";
 import React from "react";
-import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -35,7 +33,10 @@ export default function AboutHero({
     >
       {/* Background */}
       <div className="absolute inset-0">
-        <img
+        <Image
+          fill
+          preload
+          sizes="100vw"
           src={bg}
           alt={title}
           className="w-full h-full object-cover"
@@ -64,10 +65,7 @@ export default function AboutHero({
           }}
         >
           {kicker && (
-            <motion.span
-              variants={fadeUp}
-              initial="hidden"
-              animate="show"
+            <span
               className="inline-block text-xs tracking-wider uppercase mb-3 px-3 py-1 rounded-full"
               style={{
                 background: `${TEAL}30`,
@@ -76,27 +74,21 @@ export default function AboutHero({
               }}
             >
               {kicker}
-            </motion.span>
+            </span>
           )}
 
-          <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
+          <h1
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg"
           >
             {title}
-          </motion.h1>
+          </h1>
 
           {subtitle && (
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              animate="show"
+            <p
               className="mt-4 text-base sm:text-lg text-white/90 max-w-2xl mx-auto"
             >
               {subtitle}
-            </motion.p>
+            </p>
           )}
         </div>
       </div>

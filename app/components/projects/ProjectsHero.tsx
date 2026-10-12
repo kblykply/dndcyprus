@@ -1,7 +1,8 @@
 // app/components/ProjectsHeroFullSlider.tsx
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -112,6 +113,9 @@ export default function ProjectsHeroFullSlider({
 }: Props) {
   const slides = useMemo(() => projects?.length ? projects : FALLBACKS, [projects]);
 
+  const [visited, setVisited] = useState<Set<number>>(() => new Set([0]));
+  const reducedMotion = useReducedMotion();
+
   return (
     <section className="relative w-full h-[100svh]">
       {heading ? <h1 className="sr-only">{heading}</h1> : null}
@@ -128,10 +132,11 @@ export default function ProjectsHeroFullSlider({
           HashNavigation,
         ]}
         effect="fade"
-        speed={900}
+        speed={reducedMotion ? 0 : 900}
+        onSlideChange={(swiper) => setVisited((previous) => new Set([...previous, swiper.realIndex]))}
         loop
         hashNavigation={{ watchState: true }}
-        autoplay={{ delay: autoplayMs, disableOnInteraction: false }}
+        autoplay={reducedMotion ? false : { delay: autoplayMs, disableOnInteraction: false }}
         keyboard={{ enabled: true }}
         mousewheel={{ forceToAxis: true }}
         navigation
@@ -150,14 +155,15 @@ export default function ProjectsHeroFullSlider({
               <div className="relative h-[100svh] w-full">
                 {/* Background image */}
                 <div className="absolute inset-0 -z-10">
-                  <Image
+                  {visited.has(i) && <Image
                     src={s.image}
                     alt={s.title}
                     fill
-                    priority={i === 0}
+                    preload={i === 0}
+                    loading={i === 0 ? undefined : "eager"}
                     sizes="100vw"
                     className="object-cover"
-                  />
+                  />}
                   {/* Ken Burns subtle zoom */}
                   <div className="absolute inset-0 scale-105 animate-[kenburns_12s_ease-in-out_infinite_alternate]" />
                   {/* Vignette + gradient for legibility */}

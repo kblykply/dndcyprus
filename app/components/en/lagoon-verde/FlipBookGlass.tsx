@@ -4,7 +4,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import NextImage from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 import { Download } from "lucide-react";
 
 // ==========================
@@ -59,11 +59,10 @@ const ORANGE = "#f15c34";
 const PAGE_RADIUS_PX = 20;
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -71,7 +70,7 @@ const fadeUp: Variants = {
 export function FlipBookGlassBase({
   pages,
   pdfUrl,
-  id = "catalog",
+  id = "catalog-content",
   pageAltPrefix = "Lagoon Verde brochure – page",
   bgImage = "/lagoon-verde/2.jpg",
   kicker = "DND CYPRUS",
@@ -85,6 +84,7 @@ export function FlipBookGlassBase({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [page, setPage] = useState<number>(0);
+  const [measured, setMeasured] = useState(false);
 
   // IMPORTANT: initial state must match SSR (do NOT read window here)
   const [containerW, setContainerW] = useState<number>(maxWidth);
@@ -103,7 +103,7 @@ export function FlipBookGlassBase({
     let ro: ResizeObserver | null = null;
     if (containerRef.current) {
       ro = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-        for (const e of entries) setContainerW(Math.round(e.contentRect.width));
+        for (const e of entries) { setContainerW(Math.round(e.contentRect.width)); setMeasured(true); }
       });
       ro.observe(containerRef.current);
     }
@@ -323,7 +323,7 @@ export function FlipBookGlassBase({
                   key={i}
                   className="relative h-full w-full rounded-[20px] overflow-hidden ring-1 ring-white/15 shadow-xl bg-transparent"
                 >
-                  <NextImage
+                  {measured && Math.abs(i - page) <= 3 && <NextImage
                     src={src}
                     alt={`${pageAltPrefix} ${i + 1}`}
                     fill
@@ -336,7 +336,7 @@ export function FlipBookGlassBase({
                     // İlk 2 sayfa hemen; bölüm yakınken açık sayfanın komşuları da; diğerleri tembel
                     loading={i < 2 || (nearView && Math.abs(i - page) <= 3) ? "eager" : "lazy"}
                     style={{ objectFit: "contain", backgroundColor: "transparent" }}
-                  />
+                  />}
                 </div>
               ))}
             </HTMLFlipBook>

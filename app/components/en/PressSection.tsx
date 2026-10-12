@@ -2,7 +2,7 @@
 'use client';
 
 import { useMemo, useEffect, useRef, useState } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { m as motion, useAnimation, useInView } from 'framer-motion';
 import { ExternalLink, Calendar, Building2, ChevronRight } from 'lucide-react';
 import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -213,7 +213,6 @@ description = 'News coverage and press releases featuring our brand.',
                         fill
                         sizes="(min-width:1024px) 380px, 100vw"
                         className="object-cover transition-transform duration-[1200ms] ease-out will-change-transform group-hover:scale-[1.06]"
-                        priority
                       />
                     ) : (
                       <div className="h-full w-full bg-gradient-to-br from-slate-100 to-slate-200" />
@@ -268,7 +267,7 @@ description = 'News coverage and press releases featuring our brand.',
           )}
         </div>
 
-     
+
       </div>
     </section>
   );

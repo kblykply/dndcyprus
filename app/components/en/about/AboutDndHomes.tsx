@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { m as motion, useInView, useReducedMotion } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 
 const TEAL = "#27959b";
@@ -37,7 +37,7 @@ description = "DND Homes develops high-end residences in prime locations in Mass
 
   const rise = useMemo(
     () => ({
-      hidden: { opacity: 0, y: reduced ? 0 : 16, filter: "blur(6px)" },
+      hidden: { opacity: 0, y: reduced ? 0 : 16 },
       show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: D, ease } },
     }),
     [D, ease, reduced]
@@ -168,7 +168,7 @@ description = "DND Homes develops high-end residences in prime locations in Mass
 <SecondaryCTA href="/en/projects">
   North Cyprus Projects
 </SecondaryCTA>
-              
+
             </div>
           </div>
         </div>
@@ -297,7 +297,6 @@ function VideoHeroCard({
             fill
             sizes="(min-width: 1024px) 1000px, 100vw"
             className="object-cover"
-            priority={false}
             unoptimized
             onLoadingComplete={() => setImgLoaded(true)}
             onError={() => {

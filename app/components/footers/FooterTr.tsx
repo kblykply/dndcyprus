@@ -1,5 +1,4 @@
   // app/components/Footer.tsx
-  "use client";
 
   import React from "react";
 
@@ -52,7 +51,7 @@
       { label: "Haberler", href: "/tr/press" },
     ],
   },
-  
+
   {
     title: "Hakkımızda",
     links: [
@@ -96,7 +95,7 @@
                   radial-gradient(26rem 16rem at 85% 0%, ${ORANGE}14, transparent 70%)
               `,
               }}
-          />  
+          />
 
         {/* top divider */}
         <div className="relative h-px w-full" style={{ background: "var(--stroke)" }} />

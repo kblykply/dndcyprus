@@ -3,17 +3,16 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { m as motion, type Variants } from "framer-motion";
 
 const TEAL = "#27959b";    // lagoon vibe
 const ORANGE = "#f15c34";  // sunset accent
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 20 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -71,7 +70,6 @@ highlights = [
             src={bgImage}
             alt=""
             fill
-            priority
             sizes="100vw"
             className="object-cover object-center"
           />

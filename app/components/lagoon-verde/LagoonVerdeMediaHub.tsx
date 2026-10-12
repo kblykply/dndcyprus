@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence, type Variants, type Easing } from "framer-motion";
+import { m as motion, AnimatePresence, type Variants, type Easing } from "framer-motion";
 import {
   FileText,
   Image as ImageIcon,
@@ -17,11 +17,10 @@ const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 18 },
   show: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.48, ease: EASE },
   },
 };
@@ -33,12 +32,11 @@ const modalWrap: Variants = {
 };
 
 const modalCard: Variants = {
-  hidden: { opacity: 0, y: 26, scale: 0.97, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 26, scale: 0.97 },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: "blur(0px)",
     transition: { duration: 0.34, ease: EASE },
   },
   exit: {
@@ -272,7 +270,7 @@ export default function LagoonVerdeMediaHubLight({
       id: "kktc-catalog",
       title: "KKTC Catalog",
       type: "pdf",
-      thumb: "/kktc.png",
+      thumb: "/optimized/kktc.ff08e0f764.webp",
       src: "/kktckat.pdf",
       description: "Каталог Северного Кипра",
     },
@@ -288,7 +286,7 @@ export default function LagoonVerdeMediaHubLight({
       id: "dnd-website",
       title: "DND Cyprus Website",
       type: "link",
-      thumb: "/dndweb.png",
+      thumb: "/optimized/dndweb.33a891333c.webp",
       src: "https://dndcyprus.com/en",
       description: "Сайт DND Cyprus",
     },

@@ -1,18 +1,19 @@
 // app/components/projects/Perla2Overview.tsx
 "use client";
 
+import LazyYouTube from "@/app/components/LazyYouTube";
+
 import React from "react";
-import { motion, Variants } from "framer-motion";
+import { m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
+  hidden: { opacity: 0, y: 18 },
   show: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.48, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] },
   }),
 };
@@ -55,7 +56,7 @@ export default function Perla2Overview({
       } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* soft radial accents */}
-  
+
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -156,13 +157,12 @@ export default function Perla2Overview({
             >
               <div className="aspect-video bg-black">
                 {finalEmbed ? (
-                  <iframe
+                  <LazyYouTube
+                    videoId={YT_ID!}
                     title="La Joya Perla II tanıtım videosu"
-                    src={finalEmbed}
-                    className="w-full h-full"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    referrerPolicy="origin-when-cross-origin"
-                    allowFullScreen
+                    posterAlt="La Joya Perla II tanıtım videosu"
+                    className="relative w-full h-full"
+                    query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${YT_ID}`}
                   />
                 ) : (
                   <img
