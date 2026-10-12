@@ -28,7 +28,7 @@
   companyName = "DND Cyprus",
   tagline = "Reliable, transparent, and sustainable solutions.",
   addressLines = [
-    "Alasya Park Site 2nd Phase, Shop No: 2-3, Ulucam Road, Sakarya – Gazimağusa",
+    "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa",
   ],
   email = "info@dndcyprus.com",
   phone = "+90 392 444 03 63",
@@ -210,7 +210,7 @@
           <div className="mt-10 pt-6 border-t" style={{ borderColor: "var(--stroke)" }}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="text-xs" style={{ color: "rgba(20,21,23,0.60)" }}>
-                © {year} {copyrightOwner} Tüm hakları saklıdır.
+                © {year} {copyrightOwner} All rights reserved.
               </div>
               <div className="flex items-center gap-3 text-xs">
                 <a
