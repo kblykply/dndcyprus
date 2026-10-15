@@ -41,7 +41,7 @@ const extractYouTubeId = (url: string) => {
   } catch {}
   return url;
 };
-const ytThumb = (id: string) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+const ytThumb = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 const toMinSec = (secs?: number) => {
   if (secs === undefined || !Number.isFinite(secs)) return "–:–";
   const m = Math.floor(secs / 60);
@@ -68,7 +68,7 @@ type YTPlayerOptions = {
   width?: string | number;
   height?: string | number;
   playerVars?: Record<string, unknown>;
-  events?: { onReady?: (ev: YTReadyEvent) => void };
+  events?: { onReady?: (ev: YTReadyEvent) => void; onStateChange?: (ev: { data: number }) => void };
 };
 interface YTGlobal {
   Player: new (elementId: string | HTMLElement, options: YTPlayerOptions) => YTPlayer;
@@ -267,7 +267,6 @@ function SlideContentBlock({
   index,
   id,
   video,
-  bgImage,
   badge,
   content,
   onPlayerReady,
@@ -297,11 +296,16 @@ function SlideContentBlock({
 
   return (
     <div className="relative min-h-[560px] md:min-h-[640px]">
-      {/* Background */}
-      <div aria-hidden className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${bgImage})` }} />
-      {/* Readability + subtle vignette */}
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/55 to-black/60" />
-      <div aria-hidden className="pointer-events-none absolute inset-0 [box-shadow:inset_0_0_150px_rgba(0,0,0,.45)]" />
+      {/* Arka plan: bölüm artık ana sayfa kaydırıcısının hemen altında; fotoğraf zemin onun devamı
+          gibi görünüyordu. Marka renklerinde sade koyu degrade (turkuaz zemin, hafif turuncu ışık). */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(60% 70% at 12% 20%, ${TEAL}38 0%, transparent 60%), radial-gradient(55% 65% at 92% 85%, ${ORANGE}26 0%, transparent 60%), linear-gradient(135deg, #0b1517 0%, #0f2226 55%, #141012 100%)`,
+        }}
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/10" />
 
       {/* Content */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-12 lg:pb-20">
@@ -413,6 +417,8 @@ function YouTubePanel({
 }) {
   const containerId = useMemo(() => `yt-player-${index}-${videoId}`, [index, videoId]);
   const [muted, setMuted] = useState(true);
+  // YouTube küçük/sessiz oynatıcıda düşük kaliteyle başlıyor: ilk saniyelerde HD kapak karesi üstte kalır
+  const [revealed, setRevealed] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useRef<YTPlayer | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -449,9 +455,14 @@ useEffect(() => {
         playsinline: 1,
         modestbranding: 1,
         iv_load_policy: 3,
+        vq: "hd1080",
         ...loopParams,
       },
       events: {
+        onStateChange: (ev) => {
+          // 1 = oynuyor; kalite yükselsin diye kısa bir süre sonra kapak karesi kalkar
+          if (ev.data === 1) setTimeout(() => { if (mounted) setRevealed(true); }, 2200);
+        },
         onReady: (ev) => {
           if (!mounted) { ev.target.destroy(); return; }
           playerRef.current = ev.target;
@@ -511,6 +522,13 @@ useEffect(() => {
     >
       <div className="relative aspect-video w-full swiper-no-swiping">
         <div id={containerId} className="h-full w-full" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          aria-hidden
+          src={ytThumb(videoId)}
+          alt=""
+          className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${revealed ? "opacity-0" : "opacity-100"}`}
+        />
         {/* Kontroller gizli; videoya tıklanınca YouTube duraklatıp kanalın diğer videolarını
             (ör. eski Geçitkale videosu) öneren rafı açıyordu. Tıklamayı burada karşılıyoruz. */}
         <div aria-hidden className="absolute inset-0" />

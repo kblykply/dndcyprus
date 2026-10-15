@@ -182,11 +182,11 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
                   >
                     Öne Çıkan Haber
                   </span>
-                  <h3 className="mt-2 text-xl font-semibold text-gray-900 group-hover:underline underline-offset-2">
+                  <h3 className="mt-2 text-xl font-semibold leading-snug text-gray-900 group-hover:underline underline-offset-2 sm:text-2xl lg:text-[1.7rem]">
                     {featured.title}
                   </h3>
                   {featured.excerpt && (
-                    <p className="mt-2 line-clamp-2 text-sm text-gray-600">{featured.excerpt}</p>
+                    <p className="mt-3 line-clamp-6 text-[15px] leading-relaxed text-gray-600 sm:text-base">{featured.excerpt}</p>
                   )}
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-gray-500">
                     <span className="inline-flex items-center gap-1">
@@ -201,6 +201,12 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
                       </span>
                     ))}
                   </div>
+                  <span
+                    className="mt-5 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-transform group-hover:-translate-y-0.5"
+                    style={{ background: TEAL, boxShadow: `0 10px 22px ${TEAL}33` }}
+                  >
+                    Habere Git <ExternalLink className="h-4 w-4" />
+                  </span>
                 </div>
 
                 {/* Visual with smooth zoom */}

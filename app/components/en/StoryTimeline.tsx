@@ -92,7 +92,7 @@ export default function StoryTimeline() {
   return (
     <section
       id="story"
-      className="relative w-full bg-white py-20 md:py-28"
+      className="relative w-full bg-white pt-20 pb-10 md:pt-28 md:pb-14"
       onKeyDown={onKeyDown}
       tabIndex={0}
     >
@@ -105,15 +105,15 @@ export default function StoryTimeline() {
       >
         {/* LEFT */}
         <div className="relative">
-          {/* watermark year (very light neutral) */}
-          <div
-            aria-hidden
-            className="select-none pointer-events-none absolute -top-16 -right-2 text-8xl md:text-9xl font-black tracking-tight text-black/5 z-100"
-          >
-            {current.year}
-          </div>
 
-          <div className="relative rounded-3xl border border-black/10 bg-white shadow-md z-10">
+          <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-md z-10">
+            {/* Yıl filigranı kartın içinde (eskiden kartın üst kenarına taşıp yarım kesik görünüyordu) */}
+            <div
+              aria-hidden
+              className="select-none pointer-events-none absolute right-5 top-3 text-7xl md:right-8 md:top-4 md:text-8xl font-black leading-none tracking-tight text-black/[0.05]"
+            >
+              {current.year}
+            </div>
             <div className="relative p-7 md:p-10">
               {/* Neutral section label */}
              <span
