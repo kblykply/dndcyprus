@@ -16,7 +16,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "Kuzey Kıbrıs’ta sterlinle borçlanmadan ev sahibi olma fırsatı!",
     url: "https://www.bestlifemagazin.com/kuzey-kibris-ta-sterlinle-borclanmadan-ev-sahibi-olma-firsati/6618/",
     date: "2026-10-14",
-    cover: "/news/bestlife-tl-konut-modeli-v2.webp",
+    cover: "/news/bestlife-tl-konut-modeli-v3.webp",
     tags: ["Lagoon Verde", "TL Ödeme Modeli"],
   },
   {
@@ -25,7 +25,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "DND Cyprus’tan yerli halka Türk lirasıyla konut finansmanı",
     url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
     date: "2026-10-14",
-    cover: "/news/tl-konut-finansmani-v2.webp",
+    cover: "/news/tl-konut-finansmani-v3.webp",
     tags: ["TL Ödeme Modeli", "DND Cyprus"],
   },
   {
