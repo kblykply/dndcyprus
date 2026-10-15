@@ -14,8 +14,8 @@ export default function ProjectCTA({ slug, locale }: { slug: ProjectPage["slug"]
       projectName={p.name}
       unitTypes={p.unitTypes[locale]}
       image={p.ctaImage}
-      kicker={locale === "tr" ? "Satış ofisi" : "Sales office"}
-      title={<>{p.name}: <b>{locale === "tr" ? "fiyat ve kat planı bilgisi alın." : "get prices and floor plans."}</b></>}
+      kicker={`${locale === "tr" ? "Satış ofisi" : "Sales office"} · ${p.name}`}
+      title={locale === "tr" ? <>Fiyat ve <b>kat planı alın.</b></> : <>Prices and <b>floor plans.</b></>}
       lead={p.ctaLead[locale]}
       highlights={p.highlights[locale]}
       showOffices={false}
