@@ -15,7 +15,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade, Keyboard } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper/types";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 /* ---------------- Motion ---------------- */
@@ -188,7 +188,7 @@ export default function   ProjectVideoSlider({
     <section
       aria-label="Proje Video Sunum Slider"
       className={`relative w-full px-3 py-8 sm:px-6 sm:py-12 lg:px-8 ${className}`}
-      style={{ background: "#fff" }}
+      style={{ background: "transparent" }}
     >
       {/* Ana sayfa kaydırıcısının hemen altında: tam genişlik koyu şerit yerine beyaz zeminde
           köşeleri yuvarlak koyu kart (fotoğraftan koyuya sert geçiş olmasın) */}

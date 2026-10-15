@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion, Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {

@@ -49,7 +49,7 @@ const fmtDate = (iso: string) =>
 const byDateDesc = (a: PressItem, b: PressItem) =>
   new Date(b.date).getTime() - new Date(a.date).getTime();
 
-const TEAL = '#27959b';
+const TEAL = '#0d6570';
 
 // ------------------------------------------------------------
 // In-view re-trigger wrapper (replays animation every time)
@@ -159,7 +159,7 @@ description = 'News coverage and press releases featuring our brand.',
               {description && (
                 <p
                   className="mt-3 text-base sm:text-lg"
-                  style={{ color: 'rgba(20,21,23,0.72)' }}
+                  style={{ color: 'rgba(13,35,38,0.72)' }}
                 >
                   {description}
                 </p>
@@ -197,7 +197,7 @@ description = 'News coverage and press releases featuring our brand.',
                   <span
                     className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
                     style={{
-                      border: '1px solid rgba(20,21,23,0.08)',
+                      border: '1px solid rgba(13,35,38,0.08)',
                       color: TEAL,
                       background: '#ffffff',
                     }}
@@ -315,7 +315,7 @@ function PressCard({
       onMouseEnter={onActivate}
       onFocus={onActivate}
       className={`group relative block overflow-hidden rounded-2xl border bg-white text-gray-900 transition ${
-        active ? 'border-[#27959b] shadow-md ring-2 ring-[#27959b]/25' : 'border-gray-200 shadow-sm hover:shadow-md'
+        active ? 'border-[#0d6570] shadow-md ring-2 ring-[#0d6570]/25' : 'border-gray-200 shadow-sm hover:shadow-md'
       }`}
     >
       {/* Visual with hover zoom */}

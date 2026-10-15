@@ -6,7 +6,7 @@ import Image from "next/image";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, Variants, AnimatePresence } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Socials = {
@@ -33,6 +33,7 @@ type Props = {
   title?: string;
   subtitle?: string;
   members?: Member[];
+  showHeader?: boolean;
 };
 
 // ✅ Presence variants for filter add/remove
@@ -48,9 +49,9 @@ function Badge({ label, active, color, onClick }: { label: string; active?: bool
       onClick={onClick}
       className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
       style={{
-        background: active ? `${color ?? TEAL}` : "rgba(20,21,23,0.05)",
-        color: active ? "#fff" : "rgba(20,21,23,0.75)",
-        border: active ? `1px solid ${(color ?? TEAL)}AA` : "1px solid rgba(20,21,23,0.08)",
+        background: active ? `${color ?? TEAL}` : "rgba(13,35,38,0.05)",
+        color: active ? "#fff" : "rgba(13,35,38,0.75)",
+        border: active ? `1px solid ${(color ?? TEAL)}AA` : "1px solid rgba(13,35,38,0.08)",
         boxShadow: active ? `0 6px 18px ${(color ?? TEAL)}40` : "none",
         backdropFilter: "blur(8px)",
       }}
@@ -68,7 +69,7 @@ function SocialLink({ href, label }: { href?: string; label: string }) {
       target="_blank"
       rel="noreferrer"
       className="text-xs underline underline-offset-4 hover:opacity-80"
-      style={{ color: "rgba(20,21,23,0.7)" }}
+      style={{ color: "rgba(13,35,38,0.7)" }}
     >
       {label}
     </a>
@@ -80,6 +81,7 @@ export default function LeadershipTeam({
 title = "Our Team",
 subtitle =
   "Behind the rise of every project, our team’s professionalism is our strongest foundation.",
+  showHeader = true,
 members = [
   {
     id: "ozan",
@@ -415,9 +417,9 @@ members = [
     aria-label="Liderlik ve Ekip"
     className="relative overflow-hidden bg-white"
   style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
   >
@@ -435,7 +437,7 @@ members = [
 
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       {/* Header */}
-      <div
+      {showHeader && (<div
         className="text-left"
       >
         <span
@@ -454,13 +456,13 @@ members = [
           {title}
         </h2>
 
-        <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.65)" }}>
+        <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.65)" }}>
           {subtitle}
         </p>
-      </div>
+      </div>)}
 
       {/* Filters (sticky on mobile for easy nav) */}
-      <div className="mt-8 sticky top-2 z-10 -mx-4 px-4 bg-white/80 backdrop-blur supports-[backdrop-filter]:backdrop-blur rounded-2xl border border-[var(--stroke)]">
+      <div className="mt-8 sticky top-20 z-10 -mx-4 px-4 bg-white/80 backdrop-blur supports-[backdrop-filter]:backdrop-blur rounded-2xl border border-[var(--stroke)]">
         <div className="flex gap-2 overflow-x-auto py-3 no-scrollbar">
           {categories.map((cat) => (
             <Badge

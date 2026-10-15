@@ -8,7 +8,7 @@ import { portraitSource } from "@/lib/optimized-portraits";
 import type { Variants, Easing } from "framer-motion";
 import Link from "next/link";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 // Define cubic-bezier as a const tuple so TS understands the Easing type
@@ -41,7 +41,7 @@ quote = "“Discipline, transparency, and sustainable growth — the foundation 
     <section
       aria-label="Ozan Dökmecioğlu — Spotlight"
       className="relative overflow-hidden -mb-6 lg:-mb-10"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       data-bg="light"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 lg:pt-16 pb-0">
@@ -53,7 +53,7 @@ quote = "“Discipline, transparency, and sustainable growth — the foundation 
           className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
-            border: "1px solid rgba(20,21,23,0.08)",
+            border: "1px solid rgba(13,35,38,0.08)",
             color: TEAL,
           }}
         >
@@ -92,14 +92,14 @@ quote = "“Discipline, transparency, and sustainable growth — the foundation 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
               {title}
             </h2>
-            <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.72)" }}>
+            <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.72)" }}>
               {subtitle}
             </p>
 
             {quote && (
               <blockquote
                 className="mt-5 text-lg italic font-medium border-l-4 pl-4"
-                style={{ borderColor: TEAL, color: "rgba(20,21,23,0.85)" }}
+                style={{ borderColor: TEAL, color: "rgba(13,35,38,0.85)" }}
               >
                 {quote}
               </blockquote>
@@ -117,10 +117,10 @@ quote = "“Discipline, transparency, and sustainable growth — the foundation 
                   className="rounded-xl px-3 py-3"
                   style={{
                     background: "rgba(255, 255, 255, 0.04)",
-                    border: `1px solid rgba(20,21,23,0.08)`,
+                    border: `1px solid rgba(13,35,38,0.08)`,
                   }}
                 >
-                  <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(20,21,23,0.55)" }}>
+                  <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(13,35,38,0.55)" }}>
                     {f.k}
                   </div>
                   <div className="text-sm font-medium">{f.v}</div>

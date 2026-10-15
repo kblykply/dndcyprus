@@ -14,7 +14,7 @@ type Milestone = {
   badge?: string;
 };
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const GAP = 24; // kartlar arası boşluk (gap-6)
@@ -215,7 +215,7 @@ function RoundButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={ariaLabel}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-zinc-900 shadow-sm transition hover:border-[#27959b] hover:text-[#27959b] disabled:pointer-events-none disabled:opacity-35"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-zinc-900 shadow-sm transition hover:border-[#0d6570] hover:text-[#0d6570] disabled:pointer-events-none disabled:opacity-35"
     >
       {children}
     </button>

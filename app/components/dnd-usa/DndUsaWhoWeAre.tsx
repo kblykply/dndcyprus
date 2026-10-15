@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 export default function DndUsaWhoWeAre() {
@@ -12,7 +12,7 @@ export default function DndUsaWhoWeAre() {
     <section
       aria-label="DND USA — Who We Are"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
     >
      {/* brand wash */}
       <div
@@ -43,7 +43,7 @@ export default function DndUsaWhoWeAre() {
           />
           <p
             className="mt-4 text-base sm:text-lg leading-relaxed"
-            style={{ color: "rgba(20,21,23,0.72)" }}
+            style={{ color: "rgba(13,35,38,0.72)" }}
           >
             DND Homes USA, Massachusetts’te konut geliştirme alanında faaliyet
             gösteren ve Kuzey Kıbrıs’taki köklü inşaat deneyimini Amerika’ya
@@ -91,7 +91,7 @@ export default function DndUsaWhoWeAre() {
               </h3>
               <p
                 className="mt-2 text-sm leading-relaxed"
-                style={{ color: "rgba(20,21,23,0.72)" }}
+                style={{ color: "rgba(13,35,38,0.72)" }}
               >
                 {h.text}
               </p>

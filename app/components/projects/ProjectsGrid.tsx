@@ -3,7 +3,7 @@
 
 import React, { useMemo, useState } from "react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Project = {
@@ -56,9 +56,9 @@ export default function ProjectsGrid({
       aria-label="Projeler Galerisi"
       className="relative overflow-hidden"
       style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -78,7 +78,7 @@ export default function ProjectsGrid({
         {/* header */}
         <div className="max-w-2xl">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">{title}</h2>
-          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </div>
@@ -123,7 +123,7 @@ export default function ProjectsGrid({
                 <div className="p-4">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <div className="text-sm uppercase tracking-wide" style={{ color: "rgba(20,21,23,0.55)" }}>
+                      <div className="text-sm uppercase tracking-wide" style={{ color: "rgba(13,35,38,0.55)" }}>
                         {p.location}{p.tag ? ` • ${p.tag}` : ""}
                       </div>
                       <h3 className="text-base font-semibold">{p.title}</h3>
@@ -133,7 +133,7 @@ export default function ProjectsGrid({
                     <span
                       aria-hidden
                       className="translate-x-0 group-hover:translate-x-0.5 transition-transform text-sm"
-                      style={{ color: "rgba(20,21,23,0.55)" }}
+                      style={{ color: "rgba(13,35,38,0.55)" }}
                     >
                       →
                     </span>

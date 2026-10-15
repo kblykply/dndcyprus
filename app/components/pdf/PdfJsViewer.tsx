@@ -122,7 +122,7 @@ export default function PdfJsViewer({ file }: Props) {
   return (
     <div className="w-full">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#e7ecef] bg-white px-4 py-3">
-        <div className="text-sm text-[#141517B3]">
+        <div className="text-sm text-[#0d2326B3]">
           {loading
             ? "Loading PDF..."
             : `${numPages} page${numPages === 1 ? "" : "s"} • ${Math.round(zoom * 100)}%`}
@@ -132,7 +132,7 @@ export default function PdfJsViewer({ file }: Props) {
           <button
             type="button"
             onClick={() => setZoom((z) => Math.max(0.8, +(z - 0.2).toFixed(2)))}
-            className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#141517] hover:bg-[#f7f9fa]"
+            className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#0d2326] hover:bg-[#f7f9fa]"
           >
             -
           </button>
@@ -140,7 +140,7 @@ export default function PdfJsViewer({ file }: Props) {
           <button
             type="button"
             onClick={() => setZoom((z) => Math.min(2.5, +(z + 0.2).toFixed(2)))}
-            className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#141517] hover:bg-[#f7f9fa]"
+            className="rounded-full border border-[#dfe6ea] px-3 py-1.5 text-sm text-[#0d2326] hover:bg-[#f7f9fa]"
           >
             +
           </button>
@@ -149,7 +149,7 @@ export default function PdfJsViewer({ file }: Props) {
             href={file}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-[#27959b] px-4 py-1.5 text-sm text-white"
+            className="rounded-full bg-[#0d6570] px-4 py-1.5 text-sm text-white"
           >
             Open Original
           </a>
@@ -181,7 +181,7 @@ export default function PdfJsViewer({ file }: Props) {
       </div>
 
       {loading && !error ? (
-        <div className="mt-4 text-sm text-[#14151799]">Rendering pages...</div>
+        <div className="mt-4 text-sm text-[#0d232699]">Rendering pages...</div>
       ) : null}
     </div>
   );

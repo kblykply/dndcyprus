@@ -6,7 +6,7 @@ import LazyYouTube from "@/app/components/LazyYouTube";
 import React from "react";
 import { m as motion, Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -52,9 +52,9 @@ highlights = [
       aria-label="La Joya Perla — Overview"
       className="relative overflow-hidden pb-12 lg:pb-16"
       style={{
-        background: "#fff",
-        color: "#141517",
-        ["--stroke"]: "rgba(20,21,23,0.08)",
+        background: "transparent",
+        color: "#0d2326",
+        ["--stroke"]: "rgba(13,35,38,0.08)",
       } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* soft radial accents */}
@@ -81,7 +81,7 @@ highlights = [
               viewport={{ once: false, amount: 0.35 }}
               custom={1}
               className="mt-3 text-base sm:text-lg leading-relaxed"
-              style={{ color: "rgba(20,21,23,0.75)" }}
+              style={{ color: "rgba(13,35,38,0.75)" }}
             >
               {lead}
             </motion.p>
@@ -105,7 +105,7 @@ highlights = [
                   />
                   <span
                     className="text-sm sm:text-base"
-                    style={{ color: "rgba(20,21,23,0.78)" }}
+                    style={{ color: "rgba(13,35,38,0.78)" }}
                   >
                     {h}
                   </span>
@@ -191,7 +191,7 @@ highlights = [
           className="mx-auto h-[2px] w-[92%] max-w-7xl"
           style={{
             background:
-              "linear-gradient(90deg, transparent, rgba(20,21,23,0.14), transparent)",
+              "linear-gradient(90deg, transparent, rgba(13,35,38,0.14), transparent)",
           }}
         />
       </div>

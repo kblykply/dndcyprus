@@ -82,7 +82,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
     .slice(0, 3);
 
   return (
-    <main className="min-h-svh bg-white text-black">
+    <main className="min-h-svh pt-24 md:pt-28">
       <JsonLd data={blogPostingJsonLd(post)} />
       {/* Header */}
       <section className="border-b border-black/10 bg-white/70 backdrop-blur-md">

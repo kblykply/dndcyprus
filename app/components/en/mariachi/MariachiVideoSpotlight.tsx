@@ -7,7 +7,7 @@ import Link from "next/link";
 import { m as motion } from "framer-motion";
 import type { Variants, Easing } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
@@ -92,14 +92,14 @@ highlights = [
     <section
       aria-label="Mariachi Beach Club — Promotional Video"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       data-bg="light"
     >
       {/* Decor lights */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-30"
-        style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(39,149,155,0.20), transparent 70%)" }}
+        style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.20), transparent 70%)" }}
       />
       <div
         aria-hidden
@@ -136,13 +136,13 @@ highlights = [
             <div
               aria-hidden
               className="absolute -inset-3 rounded-[28px] blur-2xl"
-              style={{ background: "linear-gradient(135deg, rgba(39,149,155,0.18), rgba(241,92,52,0.12))", opacity: 0.7 }}
+              style={{ background: "linear-gradient(135deg, rgba(13,101,112,0.18), rgba(241,92,52,0.12))", opacity: 0.7 }}
             />
             <div
               className="relative w-full aspect-video rounded-[22px] overflow-hidden bg-white"
               style={{
                 border: `1px solid ${TEAL}29`,
-                boxShadow: "0 18px 40px rgba(0,0,0,0.10), 0 10px 24px rgba(39,149,155,0.12)",
+                boxShadow: "0 18px 40px rgba(0,0,0,0.10), 0 10px 24px rgba(13,101,112,0.12)",
               }}
             >
               {autoplayEmbedUrl ? (
@@ -188,7 +188,7 @@ highlights = [
             className="flex flex-col justify-center order-1 lg:order-2 lg:col-span-5"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">{title}</h2>
-            <p className="mt-3 text-base sm:text-lg" style={{ color: "#141517CC" }}>{subtitle}</p>
+            <p className="mt-3 text-base sm:text-lg" style={{ color: "#0d2326CC" }}>{subtitle}</p>
 
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
               {highlights.map((f, i) => (
@@ -198,7 +198,7 @@ highlights = [
                   style={{ border: `1px solid ${TEAL}26`, boxShadow: "0 8px 24px rgba(0,0,0,0.06)" }}
                 >
                   <div className="text-[11px] uppercase tracking-wide" style={{ color: TEAL }}>{f.k}</div>
-                  <div className="text-sm font-medium" style={{ color: "#141517" }}>{f.v}</div>
+                  <div className="text-sm font-medium" style={{ color: "#0d2326" }}>{f.v}</div>
                 </div>
               ))}
             </div>

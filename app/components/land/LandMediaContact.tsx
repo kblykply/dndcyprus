@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { m as motion, type Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -91,7 +91,7 @@ export default function LandMediaContact() {
     <section
       aria-label="Land Project — Media & Contact"
       className="relative overflow-hidden"
-      style={{ background: isLight ? "#0b0c0d0d" : "#0b0c0d", color: isLight ? "#141517" : "#ffffff" }}
+      style={{ background: isLight ? "#0b0c0d0d" : "#0b0c0d", color: isLight ? "#0d2326" : "#ffffff" }}
       data-bg={isLight ? "light" : "dark"}
     >
       {/* subtle brand wash */}
@@ -125,7 +125,7 @@ export default function LandMediaContact() {
               whileInView="show"
               viewport={{ once: false, amount: 0.3 }}
               className="mt-2 text-sm sm:text-base mx-auto max-w-3xl"
-              style={{ color: isLight ? "rgba(20,21,23,0.70)" : "rgba(255,255,255,0.88)" }}
+              style={{ color: isLight ? "rgba(13,35,38,0.70)" : "rgba(255,255,255,0.88)" }}
             >
               {subhead}
             </motion.p>
@@ -145,7 +145,7 @@ export default function LandMediaContact() {
                 className="relative rounded-2xl overflow-hidden border"
                 style={{
                   background: isLight ? "rgba(255,255,255,0.50)" : "rgba(255,255,255,0.08)",
-                  borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.18)",
+                  borderColor: isLight ? "rgba(13,35,38,0.10)" : "rgba(255,255,255,0.18)",
                 }}
               >
                 <div className="aspect-video relative">
@@ -177,7 +177,7 @@ export default function LandMediaContact() {
                       className="absolute left-3 right-3 bottom-3 rounded-xl p-3 sm:p-4 backdrop-blur-md border"
                       style={{
                         background: isLight ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.45)",
-                        borderColor: isLight ? "rgba(20,21,23,0.12)" : "rgba(255,255,255,0.25)",
+                        borderColor: isLight ? "rgba(13,35,38,0.12)" : "rgba(255,255,255,0.25)",
                         color: "#fff",
                       }}
                     >
@@ -215,7 +215,7 @@ export default function LandMediaContact() {
                   onClick={() => setOpenIndex(i)}
                   className="group relative rounded-xl overflow-hidden border focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   style={{
-                    borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.18)",
+                    borderColor: isLight ? "rgba(13,35,38,0.10)" : "rgba(255,255,255,0.18)",
                   }}
                 >
                   <img
@@ -249,13 +249,13 @@ export default function LandMediaContact() {
               className="rounded-2xl p-5 sm:p-6 border backdrop-blur-md shadow-[0_10px_28px_rgba(0,0,0,.18)]"
               style={{
                 background: isLight ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.08)",
-                borderColor: isLight ? "rgba(20,21,23,0.12)" : "rgba(255,255,255,0.20)",
+                borderColor: isLight ? "rgba(13,35,38,0.12)" : "rgba(255,255,255,0.20)",
               }}
             >
               <h3 className="text-lg font-semibold">İletişim</h3>
               <p
                 className="mt-1 text-sm"
-                style={{ color: isLight ? "rgba(20,21,23,0.75)" : "rgba(255,255,255,0.85)" }}
+                style={{ color: isLight ? "rgba(13,35,38,0.75)" : "rgba(255,255,255,0.85)" }}
               >
                 Detaylı bilgi ve yerinde keşif randevusu için ekibimizle iletişime geçin.
               </p>
@@ -297,8 +297,8 @@ export default function LandMediaContact() {
                     className="rounded-full px-5 py-2.5 text-sm font-medium"
                     style={{
                       background: "transparent",
-                      color: isLight ? "#141517" : "#fff",
-                      border: isLight ? "1px solid rgba(20,21,23,0.20)" : "1px solid rgba(255,255,255,0.35)",
+                      color: isLight ? "#0d2326" : "#fff",
+                      border: isLight ? "1px solid rgba(13,35,38,0.20)" : "1px solid rgba(255,255,255,0.35)",
                     }}
                   >
                     Ara
@@ -313,7 +313,7 @@ export default function LandMediaContact() {
                 className="rounded-2xl p-5 sm:p-6 border backdrop-blur-md"
                 style={{
                   background: isLight ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.08)",
-                  borderColor: isLight ? "rgba(20,21,23,0.12)" : "rgba(255,255,255,0.20)",
+                  borderColor: isLight ? "rgba(13,35,38,0.12)" : "rgba(255,255,255,0.20)",
                 }}
               >
                 <h3 className="text-lg font-semibold mb-3">İndirilebilir Dokümanlar</h3>
@@ -337,7 +337,7 @@ export default function LandMediaContact() {
                 </ul>
                 <p
                   className="mt-3 text-xs"
-                  style={{ color: isLight ? "rgba(20,21,23,0.65)" : "rgba(255,255,255,0.75)" }}
+                  style={{ color: isLight ? "rgba(13,35,38,0.65)" : "rgba(255,255,255,0.75)" }}
                 >
                   *Detaylı teknik çizimler ve resmi yazışmalar talep üzerine paylaşılır.
                 </p>

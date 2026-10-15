@@ -27,7 +27,7 @@ export function DeferredInstagram({ locale }: { locale: Locale }) {
   return (
     <div ref={ref} className="min-h-[1000px] lg:min-h-[720px] bg-white">
       {near ? <Component /> : (
-        <div className="mx-auto max-w-7xl px-6 py-12 text-[#141517]">
+        <div className="mx-auto max-w-7xl px-6 py-12 text-[#0d2326]">
           <a href="https://www.instagram.com/dndcyprus/" target="_blank" rel="noopener noreferrer">
             {locale === "en" ? "Follow DND Cyprus on Instagram" : "DND Cyprus’u Instagram’da takip edin"}
           </a>

@@ -1,3 +1,4 @@
+import PageHero from "@/app/components/azure/PageHero";
 import LeadershipTeam from "@/app/components/en/about/LeadershipTeam";
 import { pageMetadata } from "@/lib/seo";
 
@@ -13,9 +14,9 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen text-white overflow-x-hidden">
-      <h1 className="sr-only">The DND Cyprus Team</h1>
-      <LeadershipTeam />
+    <main className="relative w-full min-h-screen overflow-x-hidden">
+      <PageHero size="short" kicker="DND Cyprus" title={<>Our Team</>} lead="Behind the rise of every project, our team’s professionalism is our strongest foundation." image="/azure/about-beach.jpg" />
+      <LeadershipTeam showHeader={false} />
    
     
     </main>

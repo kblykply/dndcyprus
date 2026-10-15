@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
   const updatedAt = "15 September 2026"; // Update this date whenever the text is revised.
 
   return (
-    <main className="min-h-svh bg-white text-neutral-900">
+    <main className="min-h-svh pt-24 md:pt-28">
       <header className="border-b border-neutral-200 bg-white/60 backdrop-blur-sm">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
           <h1 className="text-2xl font-semibold tracking-tight">

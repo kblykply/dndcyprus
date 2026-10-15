@@ -5,7 +5,7 @@ import React, { useMemo, useState } from "react";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants, type Easing } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
@@ -65,7 +65,7 @@ export default function MariachiGalleryExpanding({
       aria-label="Mariachi Beach Club — Galeri"
       className="relative overflow-hidden"
       id ="gallery"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       data-bg="light"
     >
       {/* Sayfa arka plan dekoru — gradyanlı aura (cam hissi) */}
@@ -74,7 +74,7 @@ export default function MariachiGalleryExpanding({
         className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-[28rem] w-[28rem] rounded-full blur-3xl opacity-30"
         style={{
           background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(39,149,155,0.22), transparent 70%)",
+            "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.22), transparent 70%)",
         }}
       />
       <div
@@ -98,7 +98,7 @@ export default function MariachiGalleryExpanding({
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
             {title}
           </h2>
-          <p className="mt-3 text-base sm:text-lg" style={{ color: "#141517CC" }}>
+          <p className="mt-3 text-base sm:text-lg" style={{ color: "#0d2326CC" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -159,7 +159,7 @@ export default function MariachiGalleryExpanding({
                     style={{
                       background:
                         grow > 1
-                          ? "radial-gradient(60% 50% at 50% 0%, rgba(39,149,155,0.22), transparent 60%)"
+                          ? "radial-gradient(60% 50% at 50% 0%, rgba(13,101,112,0.22), transparent 60%)"
                           : "radial-gradient(60% 40% at 50% 0%, rgba(255,255,255,0.08), transparent 60%)",
                       transition: "opacity .45s ease",
                     }}
@@ -189,7 +189,7 @@ export default function MariachiGalleryExpanding({
 
       {/* Küçük ipucu */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10 lg:pb-14">
-        <p className="mt-5 text-xs" style={{ color: "#14151799" }}>
+        <p className="mt-5 text-xs" style={{ color: "#0d232699" }}>
           *Mobilde bir görsele dokunarak büyütüp sabitleyebilir, tekrar dokunarak varsayılan görünüme dönebilirsiniz.
         </p>
       </div>

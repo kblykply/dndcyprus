@@ -6,7 +6,7 @@ import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import React, { useMemo, useState } from "react";
 import { m as motion, type Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -81,7 +81,7 @@ export default function LandLocationAccess() {
       className="relative"
       style={{
         background: isLight ? "#ffffff" : "#0b0c0d",
-        color: isLight ? "#141517" : "#ffffff",
+        color: isLight ? "#0d2326" : "#ffffff",
       }}
       data-bg={isLight ? "light" : "dark"}
     >
@@ -105,7 +105,7 @@ export default function LandLocationAccess() {
               viewport={{ once: false, amount: 0.3 }}
               className="mt-2 text-sm sm:text-base"
               style={{
-                color: isLight ? "rgba(20,21,23,0.65)" : "rgba(255,255,255,0.85)",
+                color: isLight ? "rgba(13,35,38,0.65)" : "rgba(255,255,255,0.85)",
               }}
             >
               {subhead}
@@ -124,13 +124,13 @@ export default function LandLocationAccess() {
             className="lg:col-span-7"
           >
             <div className="relative rounded-2xl overflow-hidden border"
-              style={{ borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.18)" }}
+              style={{ borderColor: isLight ? "rgba(13,35,38,0.10)" : "rgba(255,255,255,0.18)" }}
             >
               {/* Mode toggle */}
               <div className="absolute right-3 top-3 z-20 flex gap-1 backdrop-blur-md rounded-full border px-1 py-1"
                 style={{
                   background: isLight ? "rgba(0, 0, 0, 0.7)" : "rgba(0,0,0,0.35)",
-                  borderColor: isLight ? "rgba(20,21,23,0.15)" : "rgba(255,255,255,0.28)",
+                  borderColor: isLight ? "rgba(13,35,38,0.15)" : "rgba(255,255,255,0.28)",
                 }}
               >
                 <ToggleButton active={mode === "standard"} onClick={() => setMode("standard")}>
@@ -218,14 +218,14 @@ export default function LandLocationAccess() {
               <div className="mt-6 rounded-2xl p-4 border backdrop-blur-md"
                 style={{
                   background: isLight ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.08)",
-                  borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.18)",
+                  borderColor: isLight ? "rgba(13,35,38,0.10)" : "rgba(255,255,255,0.18)",
                 }}
               >
-                <div className="text-sm font-semibold mb-2" style={{ color: isLight ? "#141517" : "#fff" }}>
+                <div className="text-sm font-semibold mb-2" style={{ color: isLight ? "#0d2326" : "#fff" }}>
                   Access & Surroundings
                 </div>
                 <ul className="list-disc pl-5 space-y-1 text-sm"
-                  style={{ color: isLight ? "rgba(20,21,23,0.75)" : "rgba(255,255,255,0.85)" }}
+                  style={{ color: isLight ? "rgba(13,35,38,0.75)" : "rgba(255,255,255,0.85)" }}
                 >
                   {accessNotes.map((n, i) => (
                     <li key={i}>{n}</li>
@@ -289,7 +289,7 @@ function DriveTimeCard({
         boxShadow: `0 10px 24px ${accent}22`,
       }}
     >
-      <div className="text-[11px] uppercase tracking-wide" style={{ color: isLight ? "rgba(20,21,23,0.55)" : "rgba(255,255,255,0.75)" }}>
+      <div className="text-[11px] uppercase tracking-wide" style={{ color: isLight ? "rgba(13,35,38,0.55)" : "rgba(255,255,255,0.75)" }}>
         {label}
       </div>
       <div className="text-lg sm:text-xl font-semibold" style={{ color: accent }}>

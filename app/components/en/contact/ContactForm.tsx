@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { submitLead } from "@/lib/lead-submit";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type FormState = "idle" | "loading" | "success" | "error";
@@ -73,9 +73,9 @@ export default function ContactForm() {
       id="form"
       style={
         {
-          background: "#ffffff",
-          color: "#141517",
-          "--stroke": "rgba(20,21,23,0.08)",
+          background: "transparent",
+          color: "#0d2326",
+          "--stroke": "rgba(13,35,38,0.08)",
         } as CSSVars
       }
     >
@@ -97,7 +97,7 @@ export default function ContactForm() {
         className="absolute inset-0 opacity-40"
         style={{
           backgroundImage:
-            "linear-gradient(0deg, rgba(20,21,23,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(20,21,23,0.03) 1px, transparent 1px)",
+            "linear-gradient(0deg, rgba(13,35,38,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(13,35,38,0.03) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
       />
@@ -109,7 +109,7 @@ export default function ContactForm() {
           </h2>
           <p
             className="mt-3 text-sm sm:text-base"
-            style={{ color: "rgba(20,21,23,0.65)" }}
+            style={{ color: "rgba(13,35,38,0.65)" }}
           >
             Fill out the form for your questions and quote requests. We&apos;ll get
             back to you as soon as possible.
@@ -213,15 +213,15 @@ export default function ContactForm() {
                   background: "#fff",
                   border: "1px solid var(--stroke)",
                   boxShadow:
-                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)",
+                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(13,101,112,0)",
                 }}
                 onFocus={(e) => {
                   e.currentTarget.style.boxShadow =
-                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 4px rgba(39,149,155,0.15)";
+                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 4px rgba(13,101,112,0.15)";
                 }}
                 onBlur={(e) => {
                   e.currentTarget.style.boxShadow =
-                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)";
+                    "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(13,101,112,0)";
                 }}
                 placeholder="You can share a few details about your project or request."
               />
@@ -230,7 +230,7 @@ export default function ContactForm() {
             <div className="mt-6 flex items-center justify-between gap-3">
               <p
                 className="text-xs"
-                style={{ color: "rgba(20,21,23,0.55)" }}
+                style={{ color: "rgba(13,35,38,0.55)" }}
               >
                 * Required fields
               </p>
@@ -348,7 +348,7 @@ export default function ContactForm() {
             {/* mini bullets */}
             <ul
               className="mt-6 space-y-3 text-sm"
-              style={{ color: "rgba(20,21,23,0.8)" }}
+              style={{ color: "rgba(13,35,38,0.8)" }}
             >
               <li className="rounded-lg border border-[var(--stroke)] px-3 py-2 bg-white">
                 <span className="font-medium">Estimated response:</span>{" "}
@@ -373,7 +373,7 @@ function Label(props: React.ComponentProps<"label">) {
     <label
       {...props}
       className={"text-sm font-medium " + (props.className ?? "")}
-      style={{ color: "rgba(20,21,23,0.9)" }}
+      style={{ color: "rgba(13,35,38,0.9)" }}
     />
   );
 }
@@ -407,15 +407,15 @@ function Field({
           background: "#fff",
           border: "1px solid var(--stroke)",
           boxShadow:
-            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)",
+            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(13,101,112,0)",
         }}
         onFocus={(e) => {
           e.currentTarget.style.boxShadow =
-            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 4px rgba(39,149,155,0.15)";
+            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 4px rgba(13,101,112,0.15)";
         }}
         onBlur={(e) => {
           e.currentTarget.style.boxShadow =
-            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(39,149,155,0)";
+            "inset 0 1px rgba(0,0,0,0.02), 0 0 0 0px rgba(13,101,112,0)";
         }}
         placeholder={placeholder}
         autoComplete="on"

@@ -6,7 +6,7 @@ import { m as motion } from "framer-motion";
 import type { Variants } from "framer-motion"; // ✅ add this
 import Link from "next/link";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 // cubic-bezier tuple (well-typed)
@@ -54,7 +54,7 @@ export default function AynurSpotlight({
     <section
       aria-label="Aynur Zorba Güloğlu — Spotlight"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       data-bg="light"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -67,7 +67,7 @@ export default function AynurSpotlight({
           className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
-            border: "1px solid rgba(20,21,23,0.08)",
+            border: "1px solid rgba(13,35,38,0.08)",
             color: TEAL,
           }}
         >
@@ -103,14 +103,14 @@ export default function AynurSpotlight({
             </h2>
             <div className="mt-1 text-sm sm:text-base text-black/60">{role}</div>
 
-            <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.72)" }}>
+            <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.72)" }}>
               {subtitle}
             </p>
 
             {quote && (
               <blockquote
                 className="mt-5 text-lg italic font-medium border-l-4 pl-4"
-                style={{ borderColor: TEAL, color: "rgba(20,21,23,0.85)" }}
+                style={{ borderColor: TEAL, color: "rgba(13,35,38,0.85)" }}
               >
                 {quote}
               </blockquote>
@@ -125,10 +125,10 @@ export default function AynurSpotlight({
                     className="rounded-xl px-3 py-3"
                     style={{
                       background: "rgba(255, 255, 255, 0.04)",
-                      border: `1px solid rgba(20,21,23,0.08)`,
+                      border: `1px solid rgba(13,35,38,0.08)`,
                     }}
                   >
-                    <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(20,21,23,0.55)" }}>
+                    <div className="text-[11px] uppercase tracking-wide" style={{ color: "rgba(13,35,38,0.55)" }}>
                       {f.k}
                     </div>
                     <div className="text-sm font-medium">{f.v}</div>
@@ -160,9 +160,9 @@ export default function AynurSpotlight({
                   rel="noopener noreferrer"
                   className="px-6 py-2.5 rounded-full text-sm font-medium"
                   style={{
-                    background: "rgba(20,21,23,0.06)",
-                    border: "1px solid rgba(20,21,23,0.12)",
-                    color: "rgba(20,21,23,0.85)",
+                    background: "rgba(13,35,38,0.06)",
+                    border: "1px solid rgba(13,35,38,0.12)",
+                    color: "rgba(13,35,38,0.85)",
                   }}
                 >
                   LinkedIn

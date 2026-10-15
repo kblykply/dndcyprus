@@ -3,7 +3,7 @@ import React from "react";
 import type { Variants } from "framer-motion";
 import { SITE_URL } from "@/lib/seo";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 // Proje yapısal verisi (schema.org ApartmentComplex) — yalnızca bu projeye ait
@@ -63,9 +63,9 @@ facts = [
       aria-label={title}
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle brand wash */}
@@ -77,7 +77,7 @@ style={{
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </div>
@@ -120,7 +120,7 @@ style={{
         {/* note / disclaimer (optional) */}
         <p
           className="mt-6 text-xs"
-          style={{ color: "rgba(20,21,23,0.55)" }}
+          style={{ color: "rgba(13,35,38,0.55)" }}
         >
           * Bilgiler tanıtım amaçlıdır. Nihai teknik ve satış detayları için satış ekibimizle iletişime geçiniz.
         </p>

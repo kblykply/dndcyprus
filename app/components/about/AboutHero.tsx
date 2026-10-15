@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import type { Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp: Variants = {

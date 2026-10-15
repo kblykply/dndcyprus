@@ -6,7 +6,7 @@ import { portraitSource } from "@/lib/optimized-portraits";
 import { m as motion, type Variants } from "framer-motion";
 import Link from "next/link";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 // Typed cubic-bezier ease
@@ -51,7 +51,7 @@ export default function AynurSpotlightAlt({
     <section
       aria-label="Aynur Zorba Güloğlu — Spotlight"
       className="relative overflow-visible bg-white pb-16 sm:pb-20 lg:pb-0"
-      style={{ color: "#141517" }}
+      style={{ color: "#0d2326" }}
       data-bg="light"
     >
       {/* Soft corner glows */}
@@ -125,7 +125,7 @@ export default function AynurSpotlightAlt({
                 <div
                   key={f.k + i}
                   className="rounded-xl p-3 bg-white/70 backdrop-blur-sm border text-sm shadow-[0_6px_20px_rgba(0,0,0,.04)]"
-                  style={{ borderColor: "rgba(20,21,23,0.08)" }}
+                  style={{ borderColor: "rgba(13,35,38,0.08)" }}
                 >
                   <div className="text-[11px] uppercase tracking-wide text-black/55">
                     {f.k}

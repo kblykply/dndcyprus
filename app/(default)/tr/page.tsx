@@ -1,21 +1,21 @@
 import { DeferredInstagram, DeferredPayment } from "@/app/components/performance/DeferredMedia";
-
-import Hero from "@/app/components/Hero";
-import AwardsSection from "@/app/components/AwardsSection";
-import ProjectsStrip from "@/app/components/ProjectsStrip";
-import StoryTimeline from "@/app/components/StoryTimeline";
-import BeachClubPerksSection from "@/app/components/BeachClubPerksSection";
-import WhyDNDSection from "@/app/components/WhyDNDSection";
-import StatsStrip from "@/app/components/StatsStrip";
-import ContactVisitSection from "@/app/components/ContactVisitSection";
-import BrandsLogoSliderGlass  from "@/app/components/BrandsSection";
-
-
-import ProjectsHeroFullSlider from "@/app/components/projects/ProjectsHero";
-// app/(site)/page.tsx  (or wherever you render the section)
-import PressSection, { type PressItem } from "@/app/components/PressSection";
+import { type PressItem } from "@/app/components/PressSection";
 import PaymentModelPopup from "@/app/components/PaymentModelPopup";
 import { pageMetadata } from "@/lib/seo";
+import { HOME } from "@/lib/azure/home";
+
+// Azure tasarımı — ana sayfa bölümleri
+import HomeHero from "@/app/components/azure/home/HomeHero";
+import AwardsStrip from "@/app/components/azure/home/AwardsStrip";
+import Bento from "@/app/components/azure/home/Bento";
+import Story from "@/app/components/azure/home/Story";
+import ProjectsCarousel from "@/app/components/azure/home/ProjectsCarousel";
+import LocationPanel from "@/app/components/azure/home/LocationPanel";
+import Leadership from "@/app/components/azure/home/Leadership";
+import Timeline from "@/app/components/azure/home/Timeline";
+import PressFaq from "@/app/components/azure/home/PressFaq";
+import SectionHead from "@/app/components/azure/home/SectionHead";
+import ContactCard from "@/app/components/azure/ContactCard";
 
 export const metadata = pageMetadata({
   locale: "tr",
@@ -101,40 +101,25 @@ const PRESS_ITEMS: PressItem[] = [
   },
 ];
 
-
-
-
-
-
-
 export default function HomePage() {
+  const t = HOME.tr;
   return (
-    <main className="relative w-full min-h-screen text-white overflow-x-hidden">
+    <>
       <PaymentModelPopup />
-      <ProjectsHeroFullSlider  />
-            <DeferredPayment locale="tr" />
-            <AwardsSection />
-                        <ProjectsStrip />
-                                                <StoryTimeline/>
-                 <WhyDNDSection />
-
-
-
-                        <BeachClubPerksSection />
-                          <BrandsLogoSliderGlass
- 
-    />
-                        <StatsStrip />
-                        
-                <DeferredInstagram locale="tr" />
-   <PressSection items={PRESS_ITEMS} moreHref="/tr/press" />
-                        <ContactVisitSection />
-
-
-
-
-    
-
-    </main>
+      <HomeHero locale="tr" />
+      <AwardsStrip locale="tr" />
+      <Bento locale="tr" />
+      <SectionHead kicker={t.videos.kicker} title={t.videos.title}>
+        <DeferredPayment locale="tr" />
+      </SectionHead>
+      <Story locale="tr" />
+      <ProjectsCarousel locale="tr" />
+      <LocationPanel locale="tr" />
+      <Leadership locale="tr" />
+      <Timeline locale="tr" />
+      <PressFaq locale="tr" items={PRESS_ITEMS} />
+      <div className="az-section tight flush rv"><DeferredInstagram locale="tr" /></div>
+      <ContactCard locale="tr" mode="home" kicker={t.contact.kicker} title={t.contact.title} lead={t.contact.lead} highlights={t.contact.highlights} image="/azure/p2-9.jpg" id="iletisim" />
+    </>
   );
 }

@@ -5,7 +5,7 @@ import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import type { Variants } from "framer-motion";
 import { MotionDiv, MotionUl, MotionLi, MotionP } from "@/app/components/performance/MotionElements";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 // ====== Motion variants (typed) ======
@@ -71,7 +71,7 @@ export default function OurBrands({
     <section
       aria-label="Our Brands & Projects"
       className="relative overflow-hidden bg-white"
-      style={{ color: "#141517" }}
+      style={{ color: "#0d2326" }}
       data-bg="light"
     >
       {/* Soft corner glows matching DND style */}
@@ -143,7 +143,7 @@ function BrandCard({ item }: { item: BrandItem }) {
       whileHover={{ y: -4, scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className="group relative h-28 sm:h-32 lg:h-36 rounded-2xl border bg-white/70 backdrop-blur-sm shadow-[0_6px_24px_rgba(0,0,0,.06)] overflow-hidden"
-      style={{ borderColor: "rgba(20,21,23,0.08)" }}
+      style={{ borderColor: "rgba(13,35,38,0.08)" }}
     >
       {/* Hover glow */}
       <div

@@ -1,20 +1,20 @@
 import { DeferredInstagram, DeferredPayment } from "@/app/components/performance/DeferredMedia";
-
-import Hero from "@/app/components/en/Hero";
-import AwardsSection from "@/app/components/en/AwardsSection";
-import ProjectsStrip from "@/app/components/en/ProjectsStrip";
-import StoryTimeline from "@/app/components/en/StoryTimeline";
-import BeachClubPerksSection from "@/app/components/en/BeachClubPerksSection";
-import WhyDNDSection from "@/app/components/en/WhyDNDSection";
-import StatsStrip from "@/app/components/en/StatsStrip";
-import NewsBlogSection from "@/app/components/en/NewsBlogSection";
-import ContactVisitSection from "@/app/components/en/ContactVisitSection";
-import BrandsLogoSliderGlass  from "@/app/components/en/BrandsSection";
-
-
-import PressSection, { type PressItem } from "@/app/components/en/PressSection";
-import ProjectsHeroFullSlider from "@/app/components/en/projects/ProjectsHero";
+import { type PressItem } from "@/app/components/PressSection";
 import { pageMetadata } from "@/lib/seo";
+import { HOME } from "@/lib/azure/home";
+
+// Azure tasarımı — ana sayfa bölümleri
+import HomeHero from "@/app/components/azure/home/HomeHero";
+import AwardsStrip from "@/app/components/azure/home/AwardsStrip";
+import Bento from "@/app/components/azure/home/Bento";
+import Story from "@/app/components/azure/home/Story";
+import ProjectsCarousel from "@/app/components/azure/home/ProjectsCarousel";
+import LocationPanel from "@/app/components/azure/home/LocationPanel";
+import Leadership from "@/app/components/azure/home/Leadership";
+import Timeline from "@/app/components/azure/home/Timeline";
+import PressFaq from "@/app/components/azure/home/PressFaq";
+import SectionHead from "@/app/components/azure/home/SectionHead";
+import ContactCard from "@/app/components/azure/ContactCard";
 
 export const metadata = pageMetadata({
   locale: "en",
@@ -23,6 +23,7 @@ export const metadata = pageMetadata({
   description:
     "Award-winning developer DND Cyprus builds seaside homes in Iskele: Lagoon Verde, La Joya Perla and Perla II, with Mariachi Beach Club perks. See our projects.",
 });
+
 const PRESS_ITEMS: PressItem[] = [
   {
     id: "bestlife-2026-10-14",
@@ -99,42 +100,24 @@ const PRESS_ITEMS: PressItem[] = [
   },
 ];
 
-
-
-
-
-
-
-
 export default function HomePage() {
+  const t = HOME.en;
   return (
-    <main className="relative w-full min-h-screen text-white overflow-x-hidden">
-            <ProjectsHeroFullSlider />
-
-            <DeferredPayment locale="en" />
-            <AwardsSection />
-                        <ProjectsStrip />
-                                                <StoryTimeline/>
-                 <WhyDNDSection />
-
-
-
-                        <BeachClubPerksSection />
-                          <BrandsLogoSliderGlass
- 
-    />
-                        <StatsStrip />
-                        
-                <DeferredInstagram locale="en" />
-
-   <PressSection items={PRESS_ITEMS} />
-                        <ContactVisitSection />
-    
-
-
-
-    
-
-    </main>
+    <>
+      <HomeHero locale="en" />
+      <AwardsStrip locale="en" />
+      <Bento locale="en" />
+      <SectionHead kicker={t.videos.kicker} title={t.videos.title}>
+        <DeferredPayment locale="en" />
+      </SectionHead>
+      <Story locale="en" />
+      <ProjectsCarousel locale="en" />
+      <LocationPanel locale="en" />
+      <Leadership locale="en" />
+      <Timeline locale="en" />
+      <PressFaq locale="en" items={PRESS_ITEMS} />
+      <div className="az-section tight flush rv"><DeferredInstagram locale="en" /></div>
+      <ContactCard locale="en" mode="home" kicker={t.contact.kicker} title={t.contact.title} lead={t.contact.lead} highlights={t.contact.highlights} image="/azure/p2-9.jpg" id="iletisim" />
+    </>
   );
 }

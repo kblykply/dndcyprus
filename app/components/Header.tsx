@@ -207,9 +207,9 @@ export default function Header() {
   const hideClass = isTransparentRoute && hideHeader ? "-translate-y-full" : "translate-y-0";
 
   const onTransparent = isTransparentRoute;
-  const linkColor = onTransparent ? "rgba(255,255,255,0.88)" : "rgba(20,21,23,0.88)";
+  const linkColor = onTransparent ? "rgba(255,255,255,0.88)" : "rgba(13,35,38,0.88)";
   const linkHover = onTransparent ? "#ffffff" : "#000000";
-  const subColor = onTransparent ? "rgba(255,255,255,0.82)" : "rgba(20,21,23,0.72)";
+  const subColor = onTransparent ? "rgba(255,255,255,0.82)" : "rgba(13,35,38,0.72)";
   const dividerClass = onTransparent ? "bg-white/35" : "bg-black/15";
 
   return (
@@ -301,7 +301,7 @@ export default function Header() {
                         className="p-2"
                         style={{
                           background: onTransparent
-                            ? "rgba(20,21,23,0.78)"
+                            ? "rgba(13,35,38,0.78)"
                             : "linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94))",
                           border: onTransparent
                             ? "1px solid rgba(255,255,255,0.2)"
@@ -315,7 +315,7 @@ export default function Header() {
                             prefetch={false}
                             className="block px-3 py-2 rounded-xl transition-colors hover:opacity-100"
                             style={{
-                              color: onTransparent ? "rgba(255,255,255,0.95)" : "rgba(20,21,23,0.88)",
+                              color: onTransparent ? "rgba(255,255,255,0.95)" : "rgba(13,35,38,0.88)",
                             }}
                           >
                             {item.label}

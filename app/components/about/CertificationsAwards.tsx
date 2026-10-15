@@ -5,7 +5,7 @@ import React, { useMemo, useState } from "react";
 import { m as motion, Variants, AnimatePresence } from "framer-motion";
 import { Award, ShieldCheck, FileDown } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type ItemType = "Certification" | "Award";
@@ -127,9 +127,9 @@ export default function CertificationsAwards({
       aria-label="Sertifikalar ve Ödüller"
       className="relative overflow-hidden bg-white"
       style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -170,7 +170,7 @@ export default function CertificationsAwards({
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
             {title}
           </h2>
-          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
 
@@ -203,8 +203,8 @@ export default function CertificationsAwards({
                   onClick={() => setTab(t)}
                   className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
                   style={{
-                    background: isActive ? color : "rgba(20,21,23,0.05)",
-                    color: isActive ? "#fff" : "rgba(20,21,23,0.75)",
+                    background: isActive ? color : "rgba(13,35,38,0.05)",
+                    color: isActive ? "#fff" : "rgba(13,35,38,0.75)",
                     border: isActive ? `1px solid ${color}AA` : "1px solid var(--stroke)",
                     boxShadow: isActive ? `0 6px 18px ${color}40` : "none",
                     backdropFilter: "blur(8px)",
@@ -256,11 +256,11 @@ export default function CertificationsAwards({
 
                   <div className="p-5">
                     <h3 className="text-lg font-semibold">{i.title}</h3>
-                    <div className="mt-1 text-sm" style={{ color: "rgba(20,21,23,0.7)" }}>
+                    <div className="mt-1 text-sm" style={{ color: "rgba(13,35,38,0.7)" }}>
                       {i.issuer} {i.year ? `• ${i.year}` : ""}
                     </div>
                     {i.note ? (
-                      <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(20,21,23,0.65)" }}>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(13,35,38,0.65)" }}>
                         {i.note}
                       </p>
                     ) : null}
@@ -278,7 +278,7 @@ export default function CertificationsAwards({
                           Belgeyi İndir
                         </a>
                       ) : (
-                        <span className="text-xs" style={{ color: "rgba(20,21,23,0.5)" }}>
+                        <span className="text-xs" style={{ color: "rgba(13,35,38,0.5)" }}>
                           *Belge bağlantısı mevcut değil
                         </span>
                       )}
@@ -292,7 +292,7 @@ export default function CertificationsAwards({
 
         {/* CTA */}
         <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
-          <p style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p style={{ color: "rgba(13,35,38,0.65)" }}>
             Sertifikalarımız ve ödüllerimiz hakkında detaylı bilgi almak için bize ulaşın.
           </p>
           <a

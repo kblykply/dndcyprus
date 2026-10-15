@@ -1,3 +1,4 @@
+import PageHero from "@/app/components/azure/PageHero";
 import Image from "next/image";
 import Link from "next/link";
 import { BLOG_POSTS } from "@/lib/blog";
@@ -35,8 +36,8 @@ export default function BlogIndex() {
   );
 
   return (
-    <main className="min-h-svh bg-white text-black">
-      <h1 className="sr-only">DND Cyprus Blog</h1>
+    <main className="min-h-svh">
+      <PageHero size="short" kicker="DND Cyprus" title={<>Yazılar</>} lead="Röportajlar, ödüller ve etkinliklerden notlar." image="/azure/about-homes.jpg" />
       {/* hero */}
    
 

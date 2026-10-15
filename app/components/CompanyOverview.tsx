@@ -5,7 +5,7 @@ import React from "react";
 import Image from "next/image";
 import { m as motion, Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type StyleWithVars = React.CSSProperties & {
@@ -40,12 +40,12 @@ const scaleIn: Variants = {
 
 export default function CompanyOverview() {
   const sectionStyle: StyleWithVars = {
-    background: "#ffffff",
-    color: "#141517",
-    "--stroke": "rgba(20,21,23,0.10)",
+    background: "transparent",
+    color: "#0d2326",
+    "--stroke": "rgba(13,35,38,0.10)",
     "--glass": "rgba(255,255,255,0.66)",
-    "--ink": "#141517",
-    "--muted": "rgba(20,21,23,0.65)",
+    "--ink": "#0d2326",
+    "--muted": "rgba(13,35,38,0.65)",
   };
 
   return (
@@ -140,7 +140,7 @@ export default function CompanyOverview() {
                       "inset 0 1px rgba(255,255,255,0.6), 0 10px 28px rgba(0,0,0,0.06)",
                     backdropFilter: "blur(10px)",
                     WebkitBackdropFilter: "blur(10px)",
-                    color: "#141517",
+                    color: "#0d2326",
                   }}
                 >
                   {b}

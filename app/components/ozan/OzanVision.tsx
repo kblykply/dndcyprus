@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const principles = [
@@ -36,7 +36,7 @@ export default function OzanVision({
     <section
       aria-label="Ozan Dökmecioğlu — Liderlik Felsefesi & Vizyon"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
     >
       {/* subtle brand wash */}
 
@@ -62,7 +62,7 @@ export default function OzanVision({
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
           <p
             className="mt-2 text-sm sm:text-base"
-            style={{ color: "rgba(20,21,23,0.65)" }}
+            style={{ color: "rgba(13,35,38,0.65)" }}
           >
             {subtitle}
           </p>
@@ -81,7 +81,7 @@ export default function OzanVision({
               style={{
                 background:
                   "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.62))",
-                border: "1px solid rgba(20,21,23,0.08)",
+                border: "1px solid rgba(13,35,38,0.08)",
                 backdropFilter: "blur(10px)",
                 boxShadow:
                   "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
@@ -95,7 +95,7 @@ export default function OzanVision({
               </h3>
               <p
                 className="mt-2 text-sm leading-relaxed"
-                style={{ color: "rgba(20,21,23,0.78)" }}
+                style={{ color: "rgba(13,35,38,0.78)" }}
               >
                 {p.desc}
               </p>

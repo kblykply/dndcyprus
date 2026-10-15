@@ -5,7 +5,7 @@ import React from "react";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -103,7 +103,7 @@ export default function LandOverviewDevelopment() {
       className="relative overflow-hidden"
       style={{
         background: hasBg ? "transparent" : isLight ? "#ffffff" : "#0b0c0d",
-        color: isLight ? "#141517" : "#ffffff",
+        color: isLight ? "#0d2326" : "#ffffff",
       }}
       data-bg={isLight ? "light" : "dark"}
     >
@@ -155,7 +155,7 @@ export default function LandOverviewDevelopment() {
             viewport={{ once: false, amount: 0.3 }}
             className="mt-2 mx-auto max-w-3xl text-sm sm:text-base"
             style={{
-              color: isLight ? "rgba(20,21,23,0.70)" : "rgba(255,255,255,0.88)",
+              color: isLight ? "rgba(13,35,38,0.70)" : "rgba(255,255,255,0.88)",
             }}
           >
             {lead}
@@ -173,7 +173,7 @@ export default function LandOverviewDevelopment() {
             className="lg:col-span-7 rounded-3xl border p-5 sm:p-6 lg:self-center"
             style={{
               background: isLight ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.08)",
-              borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.22)",
+              borderColor: isLight ? "rgba(13,35,38,0.10)" : "rgba(255,255,255,0.22)",
               boxShadow: isLight ? "0 12px 36px rgba(0,0,0,.12)" : "0 12px 36px rgba(0,0,0,.35)",
               backdropFilter: "blur(12px) saturate(140%)",
             }}
@@ -186,7 +186,7 @@ export default function LandOverviewDevelopment() {
                     key={i}
                     className="relative overflow-hidden rounded-2xl border group"
                     style={{
-                      borderColor: accent ? `${accent}66` : isLight ? "rgba(20,21,23,0.12)" : "rgba(255,255,255,0.25)",
+                      borderColor: accent ? `${accent}66` : isLight ? "rgba(13,35,38,0.12)" : "rgba(255,255,255,0.25)",
                       boxShadow: accent ? `0 10px 24px ${accent}22` : undefined,
                     }}
                   >
@@ -205,7 +205,7 @@ export default function LandOverviewDevelopment() {
                             background: accent
                               ? `linear-gradient(135deg, ${accent}66, ${accent}22)`
                               : isLight
-                              ? "linear-gradient(135deg, rgba(20,21,23,0.12), rgba(20,21,23,0.06))"
+                              ? "linear-gradient(135deg, rgba(13,35,38,0.12), rgba(13,35,38,0.06))"
                               : "linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06))",
                           }}
                         />
@@ -267,7 +267,7 @@ export default function LandOverviewDevelopment() {
             viewport={{ once: false, amount: 0.25 }}
             className="lg:col-span-5 rounded-3xl border overflow-hidden relative group"
             style={{
-              borderColor: isLight ? "rgba(20,21,23,0.10)" : "rgba(255,255,255,0.22)",
+              borderColor: isLight ? "rgba(13,35,38,0.10)" : "rgba(255,255,255,0.22)",
               boxShadow: isLight ? "0 12px 36px rgba(0,0,0,.12)" : "0 12px 36px rgba(0,0,0,.35)",
             }}
           >
@@ -333,7 +333,7 @@ export default function LandOverviewDevelopment() {
             className="mx-auto h-[2px] w-[92%]"
             style={{
               background: isLight
-                ? "linear-gradient(90deg, transparent, rgba(20,21,23,0.18), transparent)"
+                ? "linear-gradient(90deg, transparent, rgba(13,35,38,0.18), transparent)"
                 : "linear-gradient(90deg, transparent, rgba(255,255,255,0.20), transparent)",
             }}
           />

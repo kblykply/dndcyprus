@@ -1,7 +1,7 @@
 // app/components/dnd-usa/DndUsaCTA.tsx
 import React from "react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 export default function DndUsaCTA({
@@ -19,7 +19,7 @@ export default function DndUsaCTA({
     <section
       aria-label="DND USA — CTA"
       className="relative overflow-hidden"
-      style={{ background: "#fff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
     >
       {/* background wash */}
        <div
@@ -42,7 +42,7 @@ export default function DndUsaCTA({
 
         <p
           className="mt-3 text-sm sm:text-base"
-          style={{ color: "rgba(20,21,23,0.7)" }}
+          style={{ color: "rgba(13,35,38,0.7)" }}
         >
           {subtitle}
         </p>

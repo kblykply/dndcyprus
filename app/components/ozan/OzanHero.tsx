@@ -2,7 +2,7 @@
     import React from "react";
         import Image from "next/image";
 
-    const TEAL = "#27959b";
+    const TEAL = "#0d6570";
     const ORANGE = "#f15c34";
 
     export default function OzanHero() {
@@ -10,7 +10,7 @@
         <section
         aria-label="Ozan Dökmecioğlu — Hero"
         className="relative overflow-hidden h-[100vh]"
-        style={{ background: "#ffffff", color: "#141517" }}
+        style={{ background: "transparent", color: "#0d2326" }}
         >
         {/* subtle brand wash */}
         <div
@@ -27,7 +27,7 @@
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center">
             {/* portrait */}
         <div
-    className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden ring-4 ring-[rgba(39,149,155,0.55)]"
+    className="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden ring-4 ring-[rgba(13,101,112,0.55)]"
     >
     <Image
         src="/Ozanbey.png" // replace with real portrait
@@ -47,7 +47,7 @@
             </h1>
             <p
             className="mt-2 text-sm sm:text-base"
-            style={{ color: "rgba(20,21,23,0.65)" }}
+            style={{ color: "rgba(13,35,38,0.65)" }}
             >
             Kurucu & Yönetim Kurulu Başkanı, DND Cyprus
             </p>
@@ -55,7 +55,7 @@
             {/* tagline */}
             <p
             className="mt-4 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed"
-            style={{ color: "rgba(20,21,23,0.78)" }}
+            style={{ color: "rgba(13,35,38,0.78)" }}
             >
             Yatırım ve inşaat sektöründe vizyoner liderliğiyle, DND Cyprus’un
             uluslararası başarı hikâyesini yönlendiriyor.

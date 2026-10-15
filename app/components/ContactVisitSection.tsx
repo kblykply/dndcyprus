@@ -5,7 +5,7 @@ import React from "react";
 import Image from "next/image";
 import type { Variants } from "framer-motion";
 
-const TEAL = "#27959b";    // lagoon vibe
+const TEAL = "#0d6570";    // lagoon vibe
 const ORANGE = "#f15c34";  // sunset accent
 
 const fadeUp: Variants = {

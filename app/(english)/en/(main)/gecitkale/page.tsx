@@ -1,6 +1,6 @@
+import PageHero from "@/app/components/azure/PageHero";
 
 
-import LandHero from "@/app/components/en/land/LandHero";
 import LandKeyFacts from "@/app/components/en/land/LandKeyFacts";
 import LandLocationAccess from "@/app/components/en/land/LandLocationAccess";
 import LandPlanningInfrastructure from "@/app/components/en/land/LandPlanningInfrastructure";
@@ -20,9 +20,9 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-hidden">
       
-<LandHero />
+<PageHero size="compact" kicker="DND Cyprus" title={<>Geçitkale</>} lead="A plot located in an emerging area, offering development potential suitable for villa, twin-house and apartment typologies." image="/gecitkaleimage.jpg" imageAlt="Geçitkale" tags={["Land for Sale", "Geçitkale, İskele", "Zoning: Fasıl 96"]} chips={[{ big: "~5 floors", label: "Development potential" }]} ctas={[{ label: "Contact us", href: "/en/contact" }]} />
 <GecitkaleOverview />
 
 <LandKeyFacts />

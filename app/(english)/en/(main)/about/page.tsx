@@ -1,4 +1,4 @@
-import AboutHero from "@/app/components/en/about/AboutHero";
+import PageHero from "@/app/components/azure/PageHero";
 import AboutUs from "@/app/components/en/about/AboutWhoWeAreGlass";
 import MissionVisionValues from "@/app/components/en/about/MissionVisionValues";
 import TimelineMilestones from "@/app/components/en/about/TimelineMilestones";
@@ -23,8 +23,8 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen text-white overflow-x-hidden">
-      <AboutHero />
+    <main className="relative w-full min-h-screen overflow-x-hidden">
+      <PageHero size="compact" kicker="About Us" title={<>DND <b>Cyprus</b></>} lead="With our innovative vision, deep-rooted experience, and commitment to quality construction, we are building the future of Cyprus." image="/azure/about-uu.jpg" imageAlt="DND Cyprus" />
     <AboutUs
     
       youtubeId="jxjWP9L0SwQ"        // replace with your real ID

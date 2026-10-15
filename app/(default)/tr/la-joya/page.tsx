@@ -1,17 +1,16 @@
-import Perla2Hero from "@/app/components/la-joya/Perla2Hero";
+import ProjectHero from "@/app/components/azure/ProjectHero";
 import Perla2Facts from "@/app/components/la-joya/Perla2Facts";
 import Perla2Overview from "@/app/components/la-joya/Perla2Overview";
 import Perla2Gallery from "@/app/components/la-joya/Perla2Gallery";
 import Perla2FloorPlans from "@/app/components/la-joya/Perla2FloorPlans";
 import Perla2Location from "@/app/components/la-joya/Perla2Location";
 import Perla2Timeline from "@/app/components/la-joya/Perla2Timeline";
-import Perla2CTA from "@/app/components/la-joya/Perla2CTA";
+import ProjectCTA from "@/app/components/azure/ProjectCTA";
 import Hotspots from "@/app/components/la-joya/Hotspots";
 import Charts from "@/app/components/la-joya/Charts";
 import MariachiPerks from "@/app/components/mariachi/MariachiPerks";
 import LaJoyaTechnicalFacilities from "@/app/components/la-joya/LaJoyaTechnicalFacilities";
 
-import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -27,8 +26,8 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
-<Perla2Hero />
+    <main className="relative w-full min-h-screen overflow-x-hidden">
+<ProjectHero slug="la-joya" locale="tr" />
 
 
 <Perla2Gallery /> 
@@ -58,16 +57,7 @@ eyebrow="2025’te Tamamlandı" title="La Joya – Tamamlanan Proje" description
 
 />
 
-<Perla2CTA />
-
-
- <QuarterLogoBadge
-          logoSrc="/logos/lajoya.png"
-          alt="La Joya"
-          href="/tr"
-          size={180}         // tweak the visible radius
-          // hideOnMobile     // uncomment if you want to hide on small screens
-        />
+<ProjectCTA slug="la-joya" locale="tr" />
     </main>
   );
 }

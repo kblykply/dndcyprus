@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion, Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -40,9 +40,9 @@ export default function OzanBio({
       aria-label="Ozan Dökmecioğlu — Biyografi"
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle brand wash */}
@@ -78,7 +78,7 @@ style={{
               viewport={{ once: false, amount: 0.35 }}
               custom={1}
               className="mt-3 text-base sm:text-lg leading-relaxed"
-              style={{ color: "rgba(20,21,23,0.78)" }}
+              style={{ color: "rgba(13,35,38,0.78)" }}
             >
               {lead}
             </motion.p>
@@ -150,7 +150,7 @@ style={{
           viewport={{ once: false, amount: 0.35 }}
           custom={3}
           className="mt-6 text-xs"
-          style={{ color: "rgba(20,21,23,0.55)" }}
+          style={{ color: "rgba(13,35,38,0.55)" }}
         >
           * Bu sayfa, kamuya açık kaynaklardan derlenen bilgilerle hazırlanmıştır.
         </motion.p>

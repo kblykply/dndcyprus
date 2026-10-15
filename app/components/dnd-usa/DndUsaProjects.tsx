@@ -4,7 +4,7 @@
 import React, { useMemo, useState } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 
@@ -88,9 +88,9 @@ export default function DndUsaProjects({
       aria-label="DND USA Projects Showcase"
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
@@ -116,15 +116,15 @@ style={{
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{title}</h2>
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
-          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.7)" }}>{subtitle}</p>
+          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.7)" }}>{subtitle}</p>
         </motion.div>
 
         {/* filter bar */}
         <div className="mt-6 flex flex-wrap items-center gap-2">
           {(["All", "For Sale", "Under Development", "Sold"] as const).map(f => {
             const active = f === status;
-            const color = active ? TEAL : "rgba(20,21,23,0.85)";
-            const bg = active ? `${TEAL}14` : "rgba(20,21,23,0.05)";
+            const color = active ? TEAL : "rgba(13,35,38,0.85)";
+            const bg = active ? `${TEAL}14` : "rgba(13,35,38,0.05)";
             const border = active ? `1px solid ${TEAL}33` : "1px solid var(--stroke)";
             return (
               <button
@@ -145,7 +145,7 @@ style={{
               onChange={(e) => { setQuery(e.target.value); setVisible(initialVisible); }}
               placeholder="Ara: isim, konum, fiyat…"
               className="text-xs rounded-full px-3 py-1 outline-none"
-              style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
+              style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.85)" }}
             />
            <select
   value={sort}
@@ -153,7 +153,7 @@ style={{
     setSort(e.target.value as SortOption)
   }
   className="text-xs rounded-full px-3 py-1 outline-none"
-  style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
+  style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.85)" }}
 >
   <option value="name-asc">Ada göre (A→Z)</option>
   <option value="price-desc">Fiyata göre (Yüksek→Düşük)</option>
@@ -168,7 +168,7 @@ style={{
           <AnimatePresence>
             {shown.map((p, i) => {
               const disabled = p.status === "Sold";
-              const color = disabled ? "rgba(20,21,23,0.7)" : (p.accent === "orange" ? ORANGE : TEAL);
+              const color = disabled ? "rgba(13,35,38,0.7)" : (p.accent === "orange" ? ORANGE : TEAL);
               return (
                 <motion.article
                   key={p.id}
@@ -204,18 +204,18 @@ style={{
                   {/* body */}
                   <div className="p-4 sm:p-5 flex flex-col flex-1">
                     <h3 className="text-sm sm:text-base font-semibold">{p.name}</h3>
-                    <div className="text-[11px] mt-0.5" style={{ color: "rgba(20,21,23,0.65)" }}>
+                    <div className="text-[11px] mt-0.5" style={{ color: "rgba(13,35,38,0.65)" }}>
                       {p.location}
                     </div>
 
                     <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[11px]">
                       {p.price && (
-                        <span className="px-2 py-0.5 rounded-full" style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                        <span className="px-2 py-0.5 rounded-full" style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                           {p.price}
                         </span>
                       )}
                       {p.sqft && (
-                        <span className="px-2 py-0.5 rounded-full" style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                        <span className="px-2 py-0.5 rounded-full" style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                           {p.sqft}
                         </span>
                       )}
@@ -248,7 +248,7 @@ style={{
               Daha Fazla Yükle
             </button>
           ) : filtered.length === 0 ? (
-            <div className="text-sm" style={{ color: "rgba(20,21,23,0.65)" }}>
+            <div className="text-sm" style={{ color: "rgba(13,35,38,0.65)" }}>
               Sonuç bulunamadı. Filtreden “All”’ı seçmeyi deneyin.
             </div>
           ) : null}

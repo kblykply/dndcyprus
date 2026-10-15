@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { BlogPost } from "./NewsBlogSection";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE_CB = [0.22, 1, 0.36, 1] as const;
 const GAP_PX = 24; // Tailwind gap-6
@@ -187,12 +187,12 @@ kicker = "Blog & News",
     <section
       aria-label="News & Blog"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       data-bg="light"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* top hairline */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[rgba(20,21,23,0.08)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[rgba(13,35,38,0.08)]" />
 
         {/* subtle radial accents */}
         <div
@@ -200,7 +200,7 @@ kicker = "Blog & News",
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(60% 60% at 8% 12%, rgba(39,149,155,0.05), transparent 60%), radial-gradient(50% 50% at 90% 10%, rgba(241,92,52,0.05), transparent 60%)",
+              "radial-gradient(60% 60% at 8% 12%, rgba(13,101,112,0.05), transparent 60%), radial-gradient(50% 50% at 90% 10%, rgba(241,92,52,0.05), transparent 60%)",
           }}
         />
 
@@ -213,7 +213,7 @@ kicker = "Blog & News",
           className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
-            border: "1px solid rgba(20,21,23,0.08)",
+            border: "1px solid rgba(13,35,38,0.08)",
             color: TEAL,
           }}
         >
@@ -238,7 +238,7 @@ kicker = "Blog & News",
               whileInView="show"
               viewport={{ once: false, amount: 0.35 }}
               className="mt-2 text-sm sm:text-base"
-              style={{ color: "rgba(20,21,23,0.72)" }}
+              style={{ color: "rgba(13,35,38,0.72)" }}
             >
               {subtitle}
             </motion.p>
@@ -422,7 +422,7 @@ kicker = "Blog & News",
                 disabled={index <= 0}
                 className="pointer-events-auto rounded-full border border-black/10 bg-white/70 backdrop-blur px-3 py-2 shadow disabled:opacity-40"
                 aria-label="Previous"
-                style={{ color: "rgba(20,21,23,0.85)" }}
+                style={{ color: "rgba(13,35,38,0.85)" }}
               >
                 ←
               </button>
@@ -431,7 +431,7 @@ kicker = "Blog & News",
                 disabled={index >= maxIndex}
                 className="pointer-events-auto rounded-full border border-black/10 bg-white/70 backdrop-blur px-3 py-2 shadow disabled:opacity-40"
                 aria-label="Next"
-                style={{ color: "rgba(20,21,23,0.85)" }}
+                style={{ color: "rgba(13,35,38,0.85)" }}
               >
                 →
               </button>
@@ -446,7 +446,7 @@ kicker = "Blog & News",
                   aria-label={`Page ${i + 1}`}
                   className="h-2 w-2 rounded-full transition"
                   style={{
-                    background: i === index ? ORANGE : "rgba(20,21,23,0.18)",
+                    background: i === index ? ORANGE : "rgba(13,35,38,0.18)",
                     transform: i === index ? "scale(1.15)" : "scale(1)",
                   }}
                 />
@@ -469,9 +469,9 @@ kicker = "Blog & News",
               href="/tr/blog"
               className="rounded-full px-7 py-2.5 text-sm font-medium transition-transform hover:-translate-y-0.5"
               style={{
-                background: "rgba(20,21,23,0.06)",
-                border: "1px solid rgba(20,21,23,0.12)",
-                color: "rgba(20,21,23,0.85)",
+                background: "rgba(13,35,38,0.06)",
+                border: "1px solid rgba(13,35,38,0.12)",
+                color: "rgba(13,35,38,0.85)",
               }}
             >
               All Articles

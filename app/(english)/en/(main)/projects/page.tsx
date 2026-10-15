@@ -1,6 +1,6 @@
-import ProjectsHero from "@/app/components/en/projects/ProjectsHero";
+import PageHero from "@/app/components/azure/PageHero";
+import ContactCard from "@/app/components/azure/ContactCard";
 import ProjectsFilters from "@/app/components/en/projects/ProjectsFilters";
-import ProjectsCTA from "@/app/components/en/projects/ProjectsCTA";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -12,11 +12,11 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-hidden">
 
-<ProjectsHero />
+<PageHero size="compact" kicker="Projects" title={<>Six addresses, <b>one standard.</b></>} lead="Lagoon Verde, La Joya, La Joya Perla, Perla II, Mariachi Beach Club and the Geçitkale land: compare all DND Cyprus projects in one place." image="/azure/lv-7.jpg" imageAlt="DND Cyprus" chips={[{ big: "6", label: "Projects" }, { big: "2", label: "Awards · 2025" }]} />
 <ProjectsFilters />
-<ProjectsCTA />
+<ContactCard locale="en" mode="home" id="iletisim" kicker="DND Cyprus" title={<>Learn more <b>about our projects.</b></>} lead="If you are interested in our ongoing or upcoming projects, our sales team will be glad to share detailed information and opportunities." image="/azure/p1-9.jpg" />
     </main>
   );
 }

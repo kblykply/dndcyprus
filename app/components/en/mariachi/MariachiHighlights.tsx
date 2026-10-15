@@ -12,7 +12,7 @@ import {
 } from "framer-motion";
 import { Waves, Umbrella, Martini, Music4, Sparkles, Sun } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 const GAP = 20; // px – hem stil hem ölçümde kullanıyoruz
@@ -222,7 +222,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
     <section
       aria-label="Mariachi Beach Club — Highlights"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       data-bg="light"
       onMouseEnter={() => (hoverRef.current = true)}
       onMouseLeave={() => (hoverRef.current = false)}
@@ -233,7 +233,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
         className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-[26rem] w-[26rem] rounded-full blur-3xl opacity-30"
         style={{
           background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(39,149,155,0.20), transparent 70%)",
+            "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.20), transparent 70%)",
         }}
       />
       <div
@@ -256,7 +256,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
             {title}
           </h2>
-          <p className="mt-3 text-base sm:text-lg" style={{ color: "#141517CC" }}>
+          <p className="mt-3 text-base sm:text-lg" style={{ color: "#0d2326CC" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -380,7 +380,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
                     width: isActive ? 28 : 8,
                     background: isActive ? TEAL : "#fff",
                     border: `1px solid ${
-                      isActive ? `${TEAL}66` : "rgba(20,21,23,0.1)"
+                      isActive ? `${TEAL}66` : "rgba(13,35,38,0.1)"
                     }`,
                     boxShadow: isActive ? `0 6px 12px ${TEAL}22` : "none",
                   }}

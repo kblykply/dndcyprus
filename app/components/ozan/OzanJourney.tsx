@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Step = {
@@ -40,9 +40,9 @@ export default function OzanJourney({
       aria-label="Ozan Dökmecioğlu — Profesyonel Yolculuk"
       className="relative overflow-hidden"
       style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -68,7 +68,7 @@ export default function OzanJourney({
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -81,7 +81,7 @@ export default function OzanJourney({
               <span
                 aria-hidden
                 className="absolute left-2 top-0 bottom-0 w-0.5"
-                style={{ background: "rgba(20,21,23,0.12)" }}
+                style={{ background: "rgba(13,35,38,0.12)" }}
               />
               {steps.map((s, i) => (
                 <motion.li
@@ -117,7 +117,7 @@ export default function OzanJourney({
                         className="text-[11px] px-2 py-0.5 rounded-full"
                         style={{
                           background: "rgba(255, 255, 255, 0.05)",
-                          color: "rgba(20,21,23,0.78)",
+                          color: "rgba(13,35,38,0.78)",
                           border: "1px solid var(--stroke)",
                         }}
                       >
@@ -152,7 +152,7 @@ export default function OzanJourney({
                     <h3 className="mt-2 text-base sm:text-lg font-semibold">{s.title}</h3>
 
                     {s.summary && (
-                      <p className="mt-1 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
+                      <p className="mt-1 text-sm" style={{ color: "rgba(13,35,38,0.75)" }}>
                         {s.summary}
                       </p>
                     )}
@@ -165,7 +165,7 @@ export default function OzanJourney({
                             className="text-[11px] px-2 py-0.5 rounded-full"
                             style={{
                               background: "rgba(255, 255, 255, 0.05)",
-                              color: "rgba(20,21,23,0.85)",
+                              color: "rgba(13,35,38,0.85)",
                               border: "1px solid var(--stroke)",
                               backdropFilter: "blur(8px)",
                             }}
@@ -202,13 +202,13 @@ export default function OzanJourney({
                       className="mt-1 inline-block h-2.5 w-2.5 rounded-full"
                       style={{ background: i % 2 === 0 ? TEAL : ORANGE }}
                     />
-                    <span className="text-sm" style={{ color: "rgba(20,21,23,0.78)" }}>
+                    <span className="text-sm" style={{ color: "rgba(13,35,38,0.78)" }}>
                       {h}
                     </span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-3 text-[11px]" style={{ color: "rgba(20,21,23,0.55)" }}>
+              <p className="mt-3 text-[11px]" style={{ color: "rgba(13,35,38,0.55)" }}>
                 * Bilgiler vitrindir; resmi özgeçmiş için kurumsal kaynakları referans alınız.
               </p>
             </div>

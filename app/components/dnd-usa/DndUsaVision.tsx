@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Pillar = { title: string; desc: string; color: string };
@@ -53,7 +53,7 @@ export default function DndUsaVision({
     <section
       aria-label="DND USA — Liderlik Felsefesi & Vizyon"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
     >
       {/* brand gradient wash */}
        <div
@@ -78,7 +78,7 @@ export default function DndUsaVision({
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{title}</h2>
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
-          <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.72)" }}>
+          <p className="mt-3 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.72)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -113,7 +113,7 @@ export default function DndUsaVision({
                 İlke
               </div>
               <h3 className="mt-3 text-lg font-semibold">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(20,21,23,0.75)" }}>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(13,35,38,0.75)" }}>
                 {p.desc}
               </p>
             </motion.div>
@@ -137,11 +137,11 @@ export default function DndUsaVision({
             }}
           >
             <span className="text-3xl leading-none" style={{ color: ORANGE }}>“</span>
-            <p className="mt-2 text-base sm:text-lg leading-relaxed" style={{ color: "rgba(20,21,23,0.86)" }}>
+            <p className="mt-2 text-base sm:text-lg leading-relaxed" style={{ color: "rgba(13,35,38,0.86)" }}>
               {quote.text}
             </p>
             {quote.author ? (
-              <footer className="mt-3 text-xs" style={{ color: "rgba(20,21,23,0.6)" }}>
+              <footer className="mt-3 text-xs" style={{ color: "rgba(13,35,38,0.6)" }}>
                 — {quote.author}
               </footer>
             ) : null}

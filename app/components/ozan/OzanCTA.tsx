@@ -1,7 +1,7 @@
 // app/components/about/OzanCTA.tsx
 import React from "react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 export default function OzanCTA({
@@ -23,7 +23,7 @@ export default function OzanCTA({
     <section
       aria-label="Call to Action"
       className="relative overflow-hidden"
-      style={{ background: "#fff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
     >
       {/* brand gradient wash */}
       <div
@@ -46,7 +46,7 @@ export default function OzanCTA({
 
         <p
           className="mt-3 text-sm sm:text-base max-w-2xl mx-auto"
-          style={{ color: "rgba(20,21,23,0.72)" }}
+          style={{ color: "rgba(13,35,38,0.72)" }}
         >
           {subtitle}
         </p>

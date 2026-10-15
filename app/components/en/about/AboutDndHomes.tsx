@@ -5,7 +5,7 @@ import Link from "next/link";
 import { m as motion, useInView, useReducedMotion } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Props = {

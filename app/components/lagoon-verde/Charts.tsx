@@ -18,7 +18,7 @@ import {
   Coffee,
 } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -96,9 +96,9 @@ export default function LagoonVerdeAmenitiesSection({
       aria-label="Lagoon Verde — Olanaklar"
       className="relative overflow-hidden"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke"]: "rgba(20,21,23,0.08)",
+        background: "transparent",
+        color: "#0d2326",
+        ["--stroke"]: "rgba(13,35,38,0.08)",
       } as React.CSSProperties & Record<"--stroke", string>}
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -111,7 +111,7 @@ export default function LagoonVerdeAmenitiesSection({
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -147,7 +147,7 @@ export default function LagoonVerdeAmenitiesSection({
                 </div>
                 <div
                   className="mt-1.5 text-sm sm:text-base leading-relaxed"
-                  style={{ color: "rgba(20,21,23,0.65)" }}
+                  style={{ color: "rgba(13,35,38,0.65)" }}
                 >
                   {it.desc}
                 </div>

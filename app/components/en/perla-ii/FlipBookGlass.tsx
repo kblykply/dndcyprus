@@ -45,7 +45,7 @@ export type Props = {
   imgQuality?: number;            // Next/Image quality
 };
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const PAGE_RADIUS_PX = 20;
 

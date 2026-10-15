@@ -4,7 +4,7 @@ import Image from "next/image";
 import type { Variants } from "framer-motion";
 import Link from "next/link";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {

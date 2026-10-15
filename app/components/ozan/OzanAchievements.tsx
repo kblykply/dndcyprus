@@ -5,7 +5,7 @@ import React from "react";
 import { m as motion } from "framer-motion";
 import Image from "next/image";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Metric = { label: string; value: string; note?: string };
@@ -32,7 +32,7 @@ export default function OzanAchievements({
    <section
   aria-label="Ozan Dökmecioğlu — Başarılar"
   className="relative overflow-hidden"
-  style={{ background: "#ffffff", color: "#141517" }}
+  style={{ background: "transparent", color: "#0d2326" }}
 >
      <div
             aria-hidden

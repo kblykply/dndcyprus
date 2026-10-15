@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import type { Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 // Hero metinleri JS gecikse de görünür kalsın: opaklık 0'dan başlamaz, yalnızca hafif y kayması

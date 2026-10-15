@@ -6,7 +6,7 @@ import Image from "next/image";
 import { m as motion, type Variants } from "framer-motion";
 import { PlayCircle, Maximize2, Minimize2, ExternalLink } from "lucide-react";
 
-const TEAL = "#27959b";    // lagoon vibe
+const TEAL = "#0d6570";    // lagoon vibe
 const ORANGE = "#f15c34";  // sunset accent
 
 // ---- Defaults live in the section (as requested) ----

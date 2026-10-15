@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Metric = { label: string; value: string; note?: string };
@@ -38,9 +38,9 @@ export default function DndUsaAchievements({
       aria-label="DND USA — Başarılar & Öne Çıkanlar"
       className="relative overflow-hidden"
 style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.10)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.10)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
@@ -66,7 +66,7 @@ style={{
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{title}</h2>
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
-          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.70)" }}>
+          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.70)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -93,7 +93,7 @@ style={{
                 <div className="text-xl sm:text-2xl font-semibold leading-none">{m.value}</div>
                 <div className="mt-1 text-xs" style={{ color }}>{m.label}</div>
                 {m.note ? (
-                  <div className="mt-0.5 text-[11px]" style={{ color: "rgba(20,21,23,0.6)" }}>
+                  <div className="mt-0.5 text-[11px]" style={{ color: "rgba(13,35,38,0.6)" }}>
                     {m.note}
                   </div>
                 ) : null}
@@ -127,7 +127,7 @@ style={{
               <h3 className="mt-2 text-lg sm:text-xl font-semibold">
                 ABD Pazarında Ölçeklenebilir Konut Geliştirme Yetkinliği
               </h3>
-              <p className="mt-1 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
+              <p className="mt-1 text-sm" style={{ color: "rgba(13,35,38,0.75)" }}>
                 Tasarımdan satışa uçtan uca kalite ve sürdürülebilirlik kriterleriyle teslim edilen projeler.
               </p>
             </div>
@@ -140,7 +140,7 @@ style={{
               </span>
               <span
                 className="text-[11px] px-2.5 py-1 rounded-full"
-                style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}
+                style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}
               >
                 DND USA
               </span>
@@ -176,14 +176,14 @@ style={{
                   ) : null}
                   {a.org ? (
                     <span className="text-[11px] px-2 py-0.5 rounded-full"
-                          style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                          style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                       {a.org}
                     </span>
                   ) : null}
                 </div>
                 <h4 className="mt-2 text-base sm:text-lg font-semibold">{a.title}</h4>
                 {a.note ? (
-                  <p className="mt-1 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>{a.note}</p>
+                  <p className="mt-1 text-sm" style={{ color: "rgba(13,35,38,0.75)" }}>{a.note}</p>
                 ) : null}
               </motion.article>
             );
@@ -252,7 +252,7 @@ style={{
                 {press.length}
               </span>
             </div>
-            <ul className="mt-3 divide-y" style={{ borderColor: "rgba(20,21,23,0.1)" }}>
+            <ul className="mt-3 divide-y" style={{ borderColor: "rgba(13,35,38,0.1)" }}>
               {press.map((p, i) => (
                 <li key={p.title + i} className="py-3">
                   {p.href ? (

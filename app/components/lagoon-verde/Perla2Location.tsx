@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion, Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -87,9 +87,9 @@ distances = [
       aria-label="Lagoon Verde — Konum"
       className="relative overflow-hidden"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke"]: "rgba(20,21,23,0.08)",
+        background: "transparent",
+        color: "#0d2326",
+        ["--stroke"]: "rgba(13,35,38,0.08)",
       } as React.CSSProperties & Record<"--stroke", string>}
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
@@ -102,7 +102,7 @@ distances = [
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -116,7 +116,7 @@ distances = [
           custom={1}
           className="mt-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3"
         >
-          <div className="text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>
+          <div className="text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.78)" }}>
             <span className="font-semibold">Adres:</span> {address}
           </div>
 
@@ -141,7 +141,7 @@ distances = [
               className="text-xs px-3 py-1 rounded-full"
               style={{
                 background: "rgba(255, 255, 255, 0.05)",
-                color: "rgba(20,21,23,0.85)",
+                color: "rgba(13,35,38,0.85)",
                 border: "1px solid var(--stroke)",
               }}
             >
@@ -236,7 +236,7 @@ distances = [
                   {/* text */}
                   <div className="min-w-0">
                     <div className="text-sm font-medium truncate">{d.label}</div>
-                    <div className="text-xs" style={{ color: "rgba(20,21,23,0.65)" }}>
+                    <div className="text-xs" style={{ color: "rgba(13,35,38,0.65)" }}>
                       {val}
                     </div>
                   </div>
@@ -262,7 +262,7 @@ distances = [
                 className="text-xs px-3 py-1 rounded-full"
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
-                  color: "rgba(20,21,23,0.85)",
+                  color: "rgba(13,35,38,0.85)",
                   border: "1px solid var(--stroke)",
                   backdropFilter: "blur(8px)",
                 }}

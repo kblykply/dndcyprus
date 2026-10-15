@@ -5,7 +5,7 @@ import React from "react";
 import { m as motion } from "framer-motion";
 import { Leaf, Recycle, Award, ShieldCheck } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Point = {
@@ -31,9 +31,9 @@ export default function DndUsaSustainability({
       aria-label="DND USA — Sustainability & Quality"
       className="relative overflow-hidden"
     style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -61,7 +61,7 @@ export default function DndUsaSustainability({
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
           <p
             className="mt-3 text-sm sm:text-base max-w-lg"
-            style={{ color: "rgba(20,21,23,0.72)" }}
+            style={{ color: "rgba(13,35,38,0.72)" }}
           >
             {subtitle}
           </p>
@@ -90,7 +90,7 @@ export default function DndUsaSustainability({
                   </div>
                   <div>
                     <h3 className="text-sm font-semibold">{p.title}</h3>
-                    <p className="text-xs mt-1" style={{ color: "rgba(20,21,23,0.7)" }}>
+                    <p className="text-xs mt-1" style={{ color: "rgba(13,35,38,0.7)" }}>
                       {p.desc}
                     </p>
                   </div>

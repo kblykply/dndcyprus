@@ -6,7 +6,7 @@ import Image from "next/image";
 import DeferredIframe from "@/app/components/performance/DeferredIframe";
 import { m as motion, Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Office = {
@@ -107,9 +107,9 @@ offices = [
       aria-label="Contact Information"
       className="relative overflow-hidden"
       style={{
-        background: "#ffffff",
-        color: "#141517",
-        ["--stroke"]: "rgba(20,21,23,0.08)",
+        background: "transparent",
+        color: "#0d2326",
+        ["--stroke"]: "rgba(13,35,38,0.08)",
       } as React.CSSProperties & Record<"--stroke", string>}
     >
 
@@ -136,7 +136,7 @@ offices = [
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
             {title}
           </h2>
-          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -215,7 +215,7 @@ offices = [
                 )}
 
                 {/* Address */}
-                <div className="mt-4 text-sm" style={{ color: "rgba(20,21,23,0.7)" }}>
+                <div className="mt-4 text-sm" style={{ color: "rgba(13,35,38,0.7)" }}>
                   {o.addressLines.map((line, i) => (
                     <div key={i}>{line}</div>
                   ))}
@@ -225,11 +225,11 @@ offices = [
                 {o.hours?.length && (
                   <div className="mt-3">
                     <div className="text-xs uppercase tracking-wide"
-                         style={{ color: "rgba(20,21,23,0.55)" }}>
+                         style={{ color: "rgba(13,35,38,0.55)" }}>
                       Office Hours
                     </div>
                     <div className="mt-1 space-y-0.5 text-sm"
-                         style={{ color: "rgba(20,21,23,0.7)" }}>
+                         style={{ color: "rgba(13,35,38,0.7)" }}>
                       {o.hours.map((h) => <div key={h}>{h}</div>)}
                     </div>
                   </div>
@@ -277,7 +277,7 @@ View on Map
                       viewport={{ once: false, amount: 0.35 }} className="mt-10">
             <div className="flex items-center justify-between gap-4 mb-3">
               <h4 className="text-sm uppercase tracking-wider"
-                  style={{ color: "rgba(20,21,23,0.6)" }}>
+                  style={{ color: "rgba(13,35,38,0.6)" }}>
                 Social Media
               </h4>
               <div className="h-px flex-1" style={{ background: "var(--stroke)" }} />

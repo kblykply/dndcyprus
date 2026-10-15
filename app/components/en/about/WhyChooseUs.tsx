@@ -5,7 +5,7 @@ import React from "react";
 import { m as motion, Variants } from "framer-motion";
 import { CheckCircle } from "lucide-react"; // you can swap with your own icons or images
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Strength = {
@@ -73,9 +73,9 @@ strengths = [
       aria-label="Why Choose Us / Our Strengths"
       className="relative overflow-hidden bg-white"
     style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -123,7 +123,7 @@ strengths = [
           <motion.p
             variants={fadeUp}
             className="mt-2 text-base sm:text-lg"
-            style={{ color: "rgba(20,21,23,0.65)" }}
+            style={{ color: "rgba(13,35,38,0.65)" }}
           >
             {subtitle}
           </motion.p>
@@ -161,7 +161,7 @@ strengths = [
                 </div>
 
                 <h3 className="text-lg font-semibold mb-1">{s.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(20,21,23,0.65)" }}>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(13,35,38,0.65)" }}>
                   {s.description}
                 </p>
               </motion.div>
@@ -177,7 +177,7 @@ strengths = [
           viewport={{ once: false, amount: 0.4 }}
           className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between"
         >
-          <p style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p style={{ color: "rgba(13,35,38,0.65)" }}>
 Get in touch with us to learn more.
           </p>
           <a

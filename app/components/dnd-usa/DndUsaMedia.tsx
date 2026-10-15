@@ -4,7 +4,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type MediaType = "Röportaj" | "Konuşma" | "Makale" | "Video";
@@ -66,9 +66,9 @@ export default function DndUsaMedia({
       aria-label="DND USA — Basında & Konuşmalar"
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
@@ -94,7 +94,7 @@ style={{
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{title}</h2>
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
-          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.7)" }}>
+          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.7)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -137,19 +137,19 @@ style={{
                 </span>
                 {featured.outlet && (
                   <span className="text-[11px] px-2 py-0.5 rounded-full"
-                        style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                        style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                     {featured.outlet}
                   </span>
                 )}
                 {featured.date && (
                   <span className="text-[11px] px-2 py-0.5 rounded-full"
-                        style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                        style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                     {featured.date}
                   </span>
                 )}
               </div>
               <h3 className="mt-2 text-base sm:text-lg font-semibold">{featured.title}</h3>
-              {featured.note && <p className="mt-1 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>{featured.note}</p>}
+              {featured.note && <p className="mt-1 text-sm" style={{ color: "rgba(13,35,38,0.75)" }}>{featured.note}</p>}
             </div>
           </motion.div>
         )}
@@ -164,8 +164,8 @@ style={{
         >
           {filters.map((f) => {
             const active = f === filter;
-            const color = active ? TEAL : "rgba(20,21,23,0.85)";
-            const bg = active ? `${TEAL}14` : "rgba(20,21,23,0.05)";
+            const color = active ? TEAL : "rgba(13,35,38,0.85)";
+            const bg = active ? `${TEAL}14` : "rgba(13,35,38,0.05)";
             const border = active ? `1px solid ${TEAL}33` : "1px solid var(--stroke)";
             return (
               <button
@@ -189,7 +189,7 @@ style={{
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid var(--stroke)",
-                  color: "rgba(20,21,23,0.85)",
+                  color: "rgba(13,35,38,0.85)",
                 }}
               />
             </div>
@@ -226,13 +226,13 @@ style={{
                   <div className="flex items-center gap-2">
                     {m.outlet ? (
                       <span className="text-[11px] px-2 py-0.5 rounded-full"
-                            style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                            style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                         {m.outlet}
                       </span>
                     ) : null}
                     {m.date ? (
                       <span className="text-[11px] px-2 py-0.5 rounded-full"
-                            style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                            style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                         {m.date}
                       </span>
                     ) : null}
@@ -244,7 +244,7 @@ style={{
 
                 {/* note */}
                 {m.note ? (
-                  <p className="mt-1 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
+                  <p className="mt-1 text-sm" style={{ color: "rgba(13,35,38,0.75)" }}>
                     {m.note}
                   </p>
                 ) : null}

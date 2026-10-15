@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, m as motion, Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Props = {
@@ -90,7 +90,7 @@ export default function Preloader({
             animate: { opacity: 1 },
             exit:    { opacity: 1 },
           }}
-          style={{ background: "#ffffff", color: "#141517" }}
+          style={{ background: "#ffffff", color: "#0d2326" }}
         >
           {/* gradient wash animates with backdrop */}
           <motion.div
@@ -114,7 +114,7 @@ export default function Preloader({
             transition={{ duration: cardMs / 1000, ease: [0.22, 1, 0.36, 1] }}
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65))",
-              border: "1px solid rgba(20,21,23,0.08)",
+              border: "1px solid rgba(13,35,38,0.08)",
               boxShadow: "0 24px 60px rgba(0,0,0,0.08), inset 0 1px rgba(255,255,255,0.6)",
               backdropFilter: "blur(12px)",
             }}
@@ -130,11 +130,11 @@ export default function Preloader({
               <div className="text-lg font-semibold">{brand}</div>
             )}
 
-            <div className="mt-3 text-sm" style={{ color: "rgba(20,21,23,0.65)" }}>
+            <div className="mt-3 text-sm" style={{ color: "rgba(13,35,38,0.65)" }}>
               Yükleniyor…
             </div>
 
-            <div className="mt-4 h-1.5 w-full rounded-full overflow-hidden" style={{ background: "rgba(20,21,23,0.08)" }}>
+            <div className="mt-4 h-1.5 w-full rounded-full overflow-hidden" style={{ background: "rgba(13,35,38,0.08)" }}>
               <div
                 className="h-full rounded-full animate-[bar_1.25s_ease-in-out_infinite]"
                 style={{ background: `linear-gradient(90deg, ${TEAL}, ${ORANGE})`, width: "40%" }}

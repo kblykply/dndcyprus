@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type LinkItem = { label: string; href: string };
@@ -57,9 +57,9 @@ export default function OzanPersonal({
       aria-label="Ozan Dökmecioğlu — Kişisel Yön"
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
@@ -75,7 +75,7 @@ style={{
           className="max-w-3xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.72)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.72)" }}>
             {intro}
           </p>
         </motion.div>
@@ -149,11 +149,11 @@ style={{
               }}
             >
               <span className="text-3xl leading-none" style={{ color: ORANGE }}>“</span>
-              <p className="mt-2 text-base sm:text-lg leading-relaxed" style={{ color: "rgba(20,21,23,0.85)" }}>
+              <p className="mt-2 text-base sm:text-lg leading-relaxed" style={{ color: "rgba(13,35,38,0.85)" }}>
                 {quote.text}
               </p>
               {quote.author ? (
-                <footer className="mt-3 text-xs" style={{ color: "rgba(20,21,23,0.6)" }}>
+                <footer className="mt-3 text-xs" style={{ color: "rgba(13,35,38,0.6)" }}>
                   — {quote.author}
                 </footer>
               ) : null}
@@ -262,7 +262,7 @@ function BulletList({ items }: { items: string[] }) {
             className="mt-1 inline-block h-2.5 w-2.5 rounded-full"
             style={{ background: i % 2 === 0 ? TEAL : ORANGE }}
           />
-          <span className="text-sm" style={{ color: "rgba(20,21,23,0.8)" }}>
+          <span className="text-sm" style={{ color: "rgba(13,35,38,0.8)" }}>
             {x}
           </span>
         </li>

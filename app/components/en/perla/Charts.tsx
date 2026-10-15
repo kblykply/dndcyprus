@@ -20,7 +20,7 @@ import {
   Wine, // pool bar
 } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -159,9 +159,9 @@ subtitle = "Within the La Joya Perla complex, you’ll find many amenities desig
       className="relative overflow-hidden"
       style={
         {
-          background: "#ffffff",
-          color: "#141517",
-          ["--stroke"]: "rgba(20,21,23,0.08)",
+          background: "transparent",
+          color: "#0d2326",
+          ["--stroke"]: "rgba(13,35,38,0.08)",
         } as React.CSSProperties & Record<"--stroke", string>
       }
     >
@@ -179,7 +179,7 @@ subtitle = "Within the La Joya Perla complex, you’ll find many amenities desig
             style={{
               background: "#f4f6f8",
               border: "1px solid var(--stroke)",
-              color: "rgba(20,21,23,0.75)",
+              color: "rgba(13,35,38,0.75)",
             }}
           >
             {kicker}
@@ -189,7 +189,7 @@ subtitle = "Within the La Joya Perla complex, you’ll find many amenities desig
           </h2>
           <p
             className="mt-2 text-base sm:text-lg leading-relaxed"
-            style={{ color: "rgba(20,21,23,0.65)" }}
+            style={{ color: "rgba(13,35,38,0.65)" }}
           >
             {subtitle}
           </p>
@@ -226,7 +226,7 @@ subtitle = "Within the La Joya Perla complex, you’ll find many amenities desig
                 </div>
                 <div
                   className="mt-1.5 text-sm sm:text-base leading-relaxed"
-                  style={{ color: "rgba(20,21,23,0.65)" }}
+                  style={{ color: "rgba(13,35,38,0.65)" }}
                 >
                   {it.desc}
                 </div>

@@ -1,5 +1,5 @@
 import { DeferredCatalog } from "@/app/components/performance/DeferredMedia";
-import Perla2Hero from "@/app/components/en/perla/Perla2Hero";
+import ProjectHero from "@/app/components/azure/ProjectHero";
 import Perla2Facts from "@/app/components/en/perla/Perla2Facts";
 import Perla2Overview from "@/app/components/en/perla/Perla2Overview";
 import Perla2Gallery from "@/app/components/en/perla/Perla2Gallery";
@@ -7,7 +7,7 @@ import Perla2FloorPlans from "@/app/components/en/perla/Perla2FloorPlans";
 import Perla2Amenities from "@/app/components/en/perla/Perla2Amenities";
 import Perla2Location from "@/app/components/en/perla/Perla2Location";
 import Perla2Timeline from "@/app/components/en/perla/Perla2Timeline";
-import Perla2CTA from "@/app/components/en/perla/Perla2CTA";
+import ProjectCTA from "@/app/components/azure/ProjectCTA";
 import Hotspots from "@/app/components/en/perla/Hotspots";
 import Charts from "@/app/components/en/perla/Charts";
 import MariachiPerks from "@/app/components/en/mariachi/MariachiPerks";
@@ -17,7 +17,6 @@ import LaJoyaTechnicalFacilities from "@/app/components/en/la-joya/LaJoyaTechnic
 
 
 
-import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -32,8 +31,8 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
-<Perla2Hero />
+    <main className="relative w-full min-h-screen overflow-x-hidden">
+<ProjectHero slug="perla" locale="en" />
 
 
 <Perla2Gallery /> 
@@ -65,17 +64,7 @@ eyebrow="November 2024 Update" title="La Joya Perla – Latest Construction Upda
 
 />
 
-<Perla2CTA />
-
-
-
- <QuarterLogoBadge
-          logoSrc="/logos/perla.png"
-          alt="La Joya Perla"
-          href="/en"
-          size={180}         // tweak the visible radius
-          // hideOnMobile     // uncomment if you want to hide on small screens
-        />
+<ProjectCTA slug="perla" locale="en" />
     </main>
   );
 }

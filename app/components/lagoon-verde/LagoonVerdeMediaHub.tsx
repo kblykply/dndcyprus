@@ -13,7 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
@@ -200,17 +200,17 @@ function MediaRenderer({ item }: { item: MenuItem }) {
             className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl"
             style={{
               background: `linear-gradient(135deg, ${TEAL}18, ${ORANGE}14)`,
-              border: "1px solid rgba(39,149,155,0.12)",
+              border: "1px solid rgba(13,101,112,0.12)",
             }}
           >
             <Globe className="h-8 w-8" style={{ color: TEAL }} />
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-semibold text-[#141517]">
+          <h3 className="text-2xl sm:text-3xl font-semibold text-[#0d2326]">
             {item.title}
           </h3>
 
-          <p className="mt-3 text-sm sm:text-base text-[#141517B3]">
+          <p className="mt-3 text-sm sm:text-base text-[#0d2326B3]">
             {item.description || "Open this external website in a new tab."}
           </p>
 
@@ -221,7 +221,7 @@ function MediaRenderer({ item }: { item: MenuItem }) {
             className="mt-6 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-white transition-transform hover:scale-[1.02]"
             style={{
               background: `linear-gradient(135deg, ${TEAL}, ${ORANGE})`,
-              boxShadow: "0 14px 36px rgba(39,149,155,0.16)",
+              boxShadow: "0 14px 36px rgba(13,101,112,0.16)",
             }}
           >
             Visit Website <ExternalLink className="h-4 w-4" />
@@ -347,7 +347,7 @@ export default function LagoonVerdeMediaHubLight({
   return (
     <section
       className="relative overflow-hidden py-14 sm:py-16 lg:py-20"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       aria-label="Lagoon Verde media menu"
     >
       <div
@@ -355,7 +355,7 @@ export default function LagoonVerdeMediaHubLight({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(40% 28% at 50% 4%, rgba(39,149,155,0.08), transparent 70%), radial-gradient(22% 20% at 90% 18%, rgba(241,92,52,0.06), transparent 70%)",
+            "radial-gradient(40% 28% at 50% 4%, rgba(13,101,112,0.08), transparent 70%), radial-gradient(22% 20% at 90% 18%, rgba(241,92,52,0.06), transparent 70%)",
         }}
       />
 
@@ -373,7 +373,7 @@ export default function LagoonVerdeMediaHubLight({
               style={{
                 borderColor: "#e9eef0",
                 boxShadow:
-                  "0 18px 50px rgba(20,21,23,0.06), 0 2px 10px rgba(20,21,23,0.03)",
+                  "0 18px 50px rgba(13,35,38,0.06), 0 2px 10px rgba(13,35,38,0.03)",
               }}
             >
               <div
@@ -381,7 +381,7 @@ export default function LagoonVerdeMediaHubLight({
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(39,149,155,0.05), rgba(241,92,52,0.03), rgba(255,255,255,0.6))",
+                    "linear-gradient(135deg, rgba(13,101,112,0.05), rgba(241,92,52,0.03), rgba(255,255,255,0.6))",
                 }}
               />
               <img
@@ -392,11 +392,11 @@ export default function LagoonVerdeMediaHubLight({
             </div>
           </div>
 
-          <h1 className="mt-8 text-3xl font-semibold tracking-tight text-[#141517] sm:text-4xl lg:text-5xl">
+          <h1 className="mt-8 text-3xl font-semibold tracking-tight text-[#0d2326] sm:text-4xl lg:text-5xl">
             {title}
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#141517B3] sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#0d2326B3] sm:text-base">
             {subtitle}
           </p>
         </motion.div>
@@ -418,7 +418,7 @@ export default function LagoonVerdeMediaHubLight({
               style={{
                 borderColor: "#e8ecef",
                 boxShadow:
-                  "0 20px 60px rgba(20,21,23,0.06), 0 4px 18px rgba(20,21,23,0.04)",
+                  "0 20px 60px rgba(13,35,38,0.06), 0 4px 18px rgba(13,35,38,0.04)",
               }}
             >
               <DeferredFillImage src={item.thumb} alt="" fill quality={65}
@@ -430,7 +430,7 @@ export default function LagoonVerdeMediaHubLight({
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(to top, rgba(20,21,23,0.78) 10%, rgba(20,21,23,0.22) 54%, rgba(20,21,23,0.04) 100%)",
+                    "linear-gradient(to top, rgba(13,35,38,0.78) 10%, rgba(13,35,38,0.22) 54%, rgba(13,35,38,0.04) 100%)",
                 }}
               />
 
@@ -441,8 +441,8 @@ export default function LagoonVerdeMediaHubLight({
                     style={{
                       background: "#ffffff",
                       color: TEAL,
-                      border: "1px solid rgba(39,149,155,0.14)",
-                      boxShadow: "0 6px 18px rgba(20,21,23,0.06)",
+                      border: "1px solid rgba(13,101,112,0.14)",
+                      boxShadow: "0 6px 18px rgba(13,35,38,0.06)",
                     }}
                   >
                     {getIcon(item.type)}
@@ -485,7 +485,7 @@ export default function LagoonVerdeMediaHubLight({
             initial="hidden"
             animate="show"
             exit="exit"
-className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 sm:p-5"
+className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(13,35,38,0.42)] p-3 sm:p-5"
             onClick={() => setActive(null)}
           >
             <motion.div
@@ -498,7 +498,7 @@ className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 
               style={{
                 borderColor: "#e8ecef",
                 boxShadow:
-                  "0 30px 120px rgba(20,21,23,0.16), 0 10px 32px rgba(20,21,23,0.08)",
+                  "0 30px 120px rgba(13,35,38,0.16), 0 10px 32px rgba(13,35,38,0.08)",
               }}
             >
               <div
@@ -506,7 +506,7 @@ className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 
                 className="pointer-events-none absolute inset-0"
                 style={{
                   background:
-                    "radial-gradient(40% 28% at 20% 0%, rgba(39,149,155,0.05), transparent 70%), radial-gradient(30% 24% at 80% 0%, rgba(241,92,52,0.04), transparent 70%)",
+                    "radial-gradient(40% 28% at 20% 0%, rgba(13,101,112,0.05), transparent 70%), radial-gradient(30% 24% at 80% 0%, rgba(241,92,52,0.04), transparent 70%)",
                 }}
               />
 
@@ -520,18 +520,18 @@ className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 
                     style={{
                       background: "#f6f8f9",
                       border: "1px solid #e6ecee",
-                      color: "#141517CC",
+                      color: "#0d2326CC",
                     }}
                   >
                     {getIcon(active.type)}
                     {getBadge(active.type)}
                   </div>
 
-                  <h3 className="mt-3 text-xl font-semibold text-[#141517] sm:text-2xl">
+                  <h3 className="mt-3 text-xl font-semibold text-[#0d2326] sm:text-2xl">
                     {active.title}
                   </h3>
                   {active.description ? (
-                    <p className="mt-1 text-sm text-[#14151799]">{active.description}</p>
+                    <p className="mt-1 text-sm text-[#0d232699]">{active.description}</p>
                   ) : null}
                 </div>
 
@@ -543,7 +543,7 @@ className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 
                   style={{
                     borderColor: "#e7ebee",
                     background: "#f8fafb",
-                    color: "#141517",
+                    color: "#0d2326",
                   }}
                 >
                   <X className="h-5 w-5" />

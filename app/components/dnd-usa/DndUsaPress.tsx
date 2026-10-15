@@ -4,7 +4,7 @@
 import React from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type PressItem = {
@@ -31,9 +31,9 @@ export default function DndUsaPress({
       aria-label="DND USA — Press & Recognition"
       className="relative overflow-hidden"
       style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -62,7 +62,7 @@ export default function DndUsaPress({
             {title}
           </h2>
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
-          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.72)" }}>
+          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.72)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -98,14 +98,14 @@ export default function DndUsaPress({
                   <h3 className="mt-4 text-base font-semibold">{p.title}</h3>
                   <p
                     className="mt-2 text-sm flex-1"
-                    style={{ color: "rgba(20,21,23,0.7)" }}
+                    style={{ color: "rgba(13,35,38,0.7)" }}
                   >
                     {p.desc}
                   </p>
                   {p.date && (
                     <div
                       className="mt-3 text-xs"
-                      style={{ color: "rgba(20,21,23,0.55)" }}
+                      style={{ color: "rgba(13,35,38,0.55)" }}
                     >
                       {p.date}
                     </div>

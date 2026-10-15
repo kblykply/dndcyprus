@@ -20,7 +20,7 @@ import {
   Wine, // pool bar
 } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -157,9 +157,9 @@ export default function Perla2AmenitiesSection({
       className="relative overflow-hidden"
       style={
         {
-          background: "#ffffff",
-          color: "#141517",
-          ["--stroke"]: "rgba(20,21,23,0.08)",
+          background: "transparent",
+          color: "#0d2326",
+          ["--stroke"]: "rgba(13,35,38,0.08)",
         } as React.CSSProperties & Record<"--stroke", string>
       }
     >
@@ -177,7 +177,7 @@ export default function Perla2AmenitiesSection({
             style={{
               background: "#f4f6f8",
               border: "1px solid var(--stroke)",
-              color: "rgba(20,21,23,0.75)",
+              color: "rgba(13,35,38,0.75)",
             }}
           >
             {kicker}
@@ -187,7 +187,7 @@ export default function Perla2AmenitiesSection({
           </h2>
           <p
             className="mt-2 text-base sm:text-lg leading-relaxed"
-            style={{ color: "rgba(20,21,23,0.65)" }}
+            style={{ color: "rgba(13,35,38,0.65)" }}
           >
             {subtitle}
           </p>
@@ -224,7 +224,7 @@ export default function Perla2AmenitiesSection({
                 </div>
                 <div
                   className="mt-1.5 text-sm sm:text-base leading-relaxed"
-                  style={{ color: "rgba(20,21,23,0.65)" }}
+                  style={{ color: "rgba(13,35,38,0.65)" }}
                 >
                   {it.desc}
                 </div>

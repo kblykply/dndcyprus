@@ -4,7 +4,7 @@
 import React, {useMemo, useState, useEffect, useCallback} from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Kind = "image" | "video";
@@ -81,9 +81,9 @@ export default function OzanGallery({
       aria-label="Ozan Dökmecioğlu — Galeri / Medya"
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
 
@@ -109,7 +109,7 @@ style={{
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -125,8 +125,8 @@ style={{
           >
             {(["Tümü", "Fotoğraf", "Video"] as const).map((f) => {
               const active = f === filter;
-              const color = active ? TEAL : "rgba(20,21,23,0.85)";
-              const bg = active ? `${TEAL}14` : "rgba(20,21,23,0.05)";
+              const color = active ? TEAL : "rgba(13,35,38,0.85)";
+              const bg = active ? `${TEAL}14` : "rgba(13,35,38,0.05)";
               const border = active ? `1px solid ${TEAL}33` : "1px solid var(--stroke)";
               return (
                 <button
@@ -148,7 +148,7 @@ style={{
                 style={{
                   background: "rgba(255, 255, 255, 0.05)",
                   border: "1px solid var(--stroke)",
-                  color: "rgba(20,21,23,0.85)",
+                  color: "rgba(13,35,38,0.85)",
                 }}
               />
             </div>
@@ -223,7 +223,7 @@ style={{
                       {m.date && (
                         <span
                           className="text-[11px] px-2 py-0.5 rounded-full"
-                          style={{ background: "rgba(255,255,255,0.75)", color: "#141517", border: "1px solid var(--stroke)" }}
+                          style={{ background: "rgba(255,255,255,0.75)", color: "#0d2326", border: "1px solid var(--stroke)" }}
                         >
                           {m.date}
                         </span>

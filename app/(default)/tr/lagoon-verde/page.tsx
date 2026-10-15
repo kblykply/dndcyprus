@@ -1,12 +1,12 @@
 import { DeferredCatalog } from "@/app/components/performance/DeferredMedia";
-import Perla2Hero from "@/app/components/lagoon-verde/Perla2Hero";
+import ProjectHero from "@/app/components/azure/ProjectHero";
 import Perla2Facts from "@/app/components/lagoon-verde/Perla2Facts";
 import Perla2Overview from "@/app/components/lagoon-verde/Perla2Overview";
 import Perla2Gallery from "@/app/components/lagoon-verde/Perla2Gallery";
 import Perla2FloorPlans from "@/app/components/lagoon-verde/Perla2FloorPlans";
 import Perla2Amenities from "@/app/components/lagoon-verde/Perla2Amenities";
 import Perla2Location from "@/app/components/lagoon-verde/Perla2Location";
-import Perla2CTA from "@/app/components/lagoon-verde/Perla2CTA";
+import ProjectCTA from "@/app/components/azure/ProjectCTA";
 import Hotspots from "@/app/components/lagoon-verde/Hotspots";
 import Charts from "@/app/components/lagoon-verde/Charts";
 import MariachiPerks from "@/app/components/mariachi/MariachiPerks";
@@ -14,8 +14,6 @@ import LaJoyaTechnicalFacilities from "@/app/components/la-joya/LaJoyaTechnicalF
 
 
 
-import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
-import LeadForm from "@/app/components/lead/LeadForm";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -30,8 +28,8 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
-<Perla2Hero />
+    <main className="relative w-full min-h-screen overflow-x-hidden">
+<ProjectHero slug="lagoon-verde" locale="tr" />
 
 <Perla2Gallery /> 
 
@@ -55,28 +53,8 @@ export default function HomePage() {
 <Perla2Location />
 <DeferredCatalog locale="tr" project="lagoon-verde" />
 
-{/* Teklif formu — hero ve alt CTA "#fiyat-al" çapasına kaydırır */}
-<LeadForm
-  locale="tr"
-  project="lagoon-verde"
-  projectName="Lagoon Verde"
-  unitTypes={[
-    "1+0 Studio Residence",
-    "1+1 Loft Residence",
-    "2+1 Roof Residence",
-    "2+1 Garden Residence",
-  ]}
-/>
 
-<Perla2CTA />
-
- <QuarterLogoBadge
-          logoSrc="/logos/lagoon.png"
-          alt="Lagoon Verde"
-          href="/tr"
-          size={180}         // tweak the visible radius
-          hideOnMobile       // mobilde içeriğin üstüne binmesin
-        />
+<ProjectCTA slug="lagoon-verde" locale="tr" />
     </main>
   );
 }

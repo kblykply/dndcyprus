@@ -4,7 +4,7 @@
 import React, { useMemo, useState } from "react";
 import { m as motion, Variants, AnimatePresence } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type LogoItem = {
@@ -66,9 +66,9 @@ export default function ClientsPartners({
       aria-label="Müşteriler ve İş Ortakları"
       className="relative overflow-hidden bg-white"
       style={{
-  background: "#ffffff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -109,7 +109,7 @@ export default function ClientsPartners({
           <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
             {title}
           </h2>
-          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -126,8 +126,8 @@ export default function ClientsPartners({
                   onClick={() => setActive(cat)}
                   className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
                   style={{
-                    background: isActive ? color : "rgba(20,21,23,0.05)",
-                    color: isActive ? "#fff" : "rgba(20,21,23,0.75)",
+                    background: isActive ? color : "rgba(13,35,38,0.05)",
+                    color: isActive ? "#fff" : "rgba(13,35,38,0.75)",
                     border: isActive ? `1px solid ${color}AA` : "1px solid var(--stroke)",
                     boxShadow: isActive ? `0 6px 18px ${color}40` : "none",
                     backdropFilter: "blur(8px)",
@@ -178,7 +178,7 @@ export default function ClientsPartners({
         <div className="mt-10 hidden sm:block">
           <div
             className="rounded-2xl py-4 px-6 overflow-hidden"
-            style={{ background: "rgba(20,21,23,0.04)", border: "1px solid var(--stroke)" }}
+            style={{ background: "rgba(13,35,38,0.04)", border: "1px solid var(--stroke)" }}
           >
             <div className="flex items-center gap-8 animate-[slide_20s_linear_infinite] whitespace-nowrap"
                  style={{ maskImage: "linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)" }}>
@@ -204,7 +204,7 @@ export default function ClientsPartners({
 
         {/* CTA */}
         <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
-          <p style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p style={{ color: "rgba(13,35,38,0.65)" }}>
             Siz de DND Cyprus iş ortakları arasında yer alın.
           </p>
           <a

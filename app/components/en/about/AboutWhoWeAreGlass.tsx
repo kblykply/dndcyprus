@@ -6,7 +6,7 @@ import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type ImageSet = {

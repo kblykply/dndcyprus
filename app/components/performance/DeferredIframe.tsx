@@ -26,9 +26,9 @@ export default function DeferredIframe({ activation = "visible", poster, buttonL
           {poster && <DeferredFillImage fill src={poster} alt="" quality={65}
             sizes="(min-width: 1280px) 680px, (min-width: 1024px) 58vw, 100vw" className="object-cover" />}
           <button type="button" onClick={() => setOpened(true)}
-            className="absolute inset-0 flex items-center justify-center bg-black/15 focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-[#27959b]"
+            className="absolute inset-0 flex items-center justify-center bg-black/15 focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-[#0d6570]"
             aria-label={buttonLabel}>
-            <span className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#141517] shadow-lg">{buttonLabel}</span>
+            <span className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#0d2326] shadow-lg">{buttonLabel}</span>
           </button>
         </>
       )}

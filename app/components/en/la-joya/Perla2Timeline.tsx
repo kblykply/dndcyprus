@@ -5,7 +5,7 @@ import React from "react";
 import { m as motion } from "framer-motion";
 import Link from "next/link";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 /** Allow CSS variables (e.g. --stroke) on inline styles without using `any`. */
@@ -43,9 +43,9 @@ cta,
 
 }: Props) {
   const sectionStyle: CSSVars = {
-    background: "#ffffff",
-    color: "#141517",
-    "--stroke": "rgba(20,21,23,0.08)",
+    background: "transparent",
+    color: "#0d2326",
+    "--stroke": "rgba(13,35,38,0.08)",
   };
 
   const varStroke = "var(--stroke)";
@@ -119,12 +119,12 @@ cta,
             )}
             <h2 className="mt-2 text-2xl sm:text-3xl font-semibold">{title}</h2>
             {description && (
-              <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.75)" }}>
+              <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.75)" }}>
                 {description}
               </p>
             )}
 
-            <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
+            <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(13,35,38,0.75)" }}>
              <li className="flex items-start gap-2">
   <span
     className="mt-1 inline-block h-1.5 w-1.5 rounded-full"

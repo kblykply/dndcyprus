@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./azure.css";
 
 /* Extra scripts load only when the page actually uses those characters. */
 @font-face {
@@ -18,28 +19,35 @@
   unicode-range: U+0400-04FF;
 }
 
-
-
-
-
+/* Azure: sea-light canvas, ink text. Light only. */
 :root {
-  --background: #0b0b0c;
-  --foreground: #f2f3f5;
-  --muted: #ffffff;
-  --muted-40: rgba(255,255,255,0.4);
-  --glass-bg: rgba(255,255,255,0.12);
-  --glass-border: rgba(255,255,255,0.22);
-}
+  --sky: #eef5f6;
+  --sky-2: #e2eef0;
+  --foam: #ffffff;
+  --sand: #f4ecdd;
+  --sea: #0d6570;
+  --sea-deep: #063a42;
+  --aqua: #2aa9b3;
+  --aqua-20: rgba(42, 169, 179, 0.2);
+  --coral: #f15c34;
+  --coral-dark: #d6471f;
+  --ink: #0d2326;
+  --ink-60: rgba(13, 35, 38, 0.64);
+  --ink-40: rgba(13, 35, 38, 0.42);
+  --line: rgba(13, 35, 38, 0.1);
+  --glass: rgba(255, 255, 255, 0.58);
+  --glass-b: rgba(255, 255, 255, 0.75);
+  --r: 28px;
+  --gutter: clamp(16px, 3.5vw, 56px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #ffffff;
-    --foreground: #141517;
-    --muted: #0b0b0c;
-    --muted-40: rgba(20,21,23,0.4);
-    --glass-bg: rgba(255,255,255,0.6);
-    --glass-border: rgba(17,17,17,0.08);
-  }
+  --background: var(--sky);
+  --foreground: var(--ink);
+  --muted: var(--ink);
+  --muted-40: var(--ink-40);
+  --glass-bg: var(--glass);
+  --glass-border: rgba(255, 255, 255, 0.8);
+  color-scheme: light;
 }
 
 /* Tailwind theme variables */
@@ -50,49 +58,67 @@
   --font-display: var(--font-display);
 }
 
+/* Azure köşe dili: eski rounded-xl/2xl/3xl sınıfları da yumuşak kutular olsun */
+@theme {
+  --radius-xl: 16px;
+  --radius-2xl: 22px;
+  --radius-3xl: 28px;
+}
+
 html, body {
   height: 100%;
 }
 
 body {
-  --font-sans: "DND Sans Cyrillic", var(--font-sans-core);
-  --font-display: "DND Display Cyrillic", var(--font-display-core);
-  background: var(--background);
-  color: var(--foreground);
+  --font-sans: var(--font-sans-core), "DND Sans Cyrillic", "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-display-core), "DND Display Cyrillic", "Helvetica Neue", Arial, sans-serif;
+  background: var(--sky);
+  color: var(--ink);
   font-family: var(--font-sans), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
-/* Headings use Montserrat */
+::selection { background: var(--aqua); color: #fff; }
+
+/* Başlıklar Outfit, hafif ağırlık, sıkı aralık (Azure). Katmansız kural olduğu için
+   eski bileşenlerdeki font-semibold/bold yardımcılarını da yumuşatır. */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display), sans-serif;
-  letter-spacing: 0.2px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
+h4, h5, h6 { line-height: 1.2; letter-spacing: -0.01em; }
+h1 b, h2 b, h3 b, h1 strong, h2 strong, h3 strong { font-weight: 500; }
 
-/* Glassmorphism utilities */
+/* Eski bölümler: beyaz zemin yerine gök kanvas üzerinde dursun */
+section.bg-white, main.bg-white, div.bg-white[data-bg="light"] { background: transparent; }
+
+/* Glassmorphism utilities (eski bileşenler için, Azure tonlarında) */
 .glass {
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.22);
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-
-
 .glass-thin {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.7);
 }
 
 /* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
+html { scroll-behavior: smooth; }
 
 .user-none {
-  -webkit-user-drag: none;  /* Safari/Chrome */
+  -webkit-user-drag: none;
   user-drag: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -131,9 +157,9 @@ html[data-dnd-consent="saved"] [data-consent-initial] { display: none; }
 
 [data-cta-hover]:hover, [data-cta-hover]:focus-visible {
   transform: translateY(-2px);
-  background: #f15c34 !important;
-  box-shadow: 0 20px 44px #f15c3444 !important;
-  border-color: #f15c3466 !important;
+  background: var(--coral) !important;
+  box-shadow: 0 20px 44px rgba(241,92,52,0.27) !important;
+  border-color: rgba(241,92,52,0.4) !important;
 }
 
 /* The hero uses a small native carousel; media carousels retain Swiper. */
@@ -164,7 +190,6 @@ html[data-dnd-consent="saved"] [data-consent-initial] { display: none; }
 }
 .hero-carousel-dot-active::after { width: 26px; opacity: 1; }
 @media (max-width: 479px) {
-  /* Reserve the right corner for the fixed WhatsApp control. */
   .hero-carousel-pagination { padding-right: 4.5rem; }
 }
 .hero-carousel button:focus-visible { outline: 2px solid white; outline-offset: 4px; }

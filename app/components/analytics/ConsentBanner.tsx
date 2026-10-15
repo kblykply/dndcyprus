@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { localeFromPath, readConsent, saveConsent, type ConsentChoice } from "@/lib/analytics";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 
 const TEXT = {
   tr: {
@@ -125,11 +125,11 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
         "fixed z-[9999] inset-x-3 bottom-[calc(env(safe-area-inset-bottom)+5.5rem)]",
         "sm:inset-x-auto sm:left-20 sm:bottom-6 sm:w-[26rem]",
         "max-h-[calc(100svh-7rem)] overflow-y-auto rounded-2xl p-3.5 sm:p-5 outline-none",
-        "text-[#141517] focus-visible:ring-4 focus-visible:ring-[#27959b]/25",
+        "text-[#0d2326] focus-visible:ring-4 focus-visible:ring-[#0d6570]/25",
       ].join(" ")}
       style={{
         background: "linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.9))",
-        border: "1px solid rgba(20,21,23,0.08)",
+        border: "1px solid rgba(13,35,38,0.08)",
         boxShadow: "0 18px 44px rgba(0,0,0,0.14), inset 0 1px rgba(255,255,255,0.65)",
         backdropFilter: "blur(14px)",
         WebkitBackdropFilter: "blur(14px)",
@@ -143,14 +143,14 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="-mr-1 -mt-1 rounded-full px-2 py-1 text-xs text-[rgba(20,21,23,0.6)] hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-[#27959b]"
+            className="-mr-1 -mt-1 rounded-full px-2 py-1 text-xs text-[rgba(13,35,38,0.6)] hover:bg-black/5 focus-visible:outline-2 focus-visible:outline-[#0d6570]"
           >
             {t.close}
           </button>
         ) : null}
       </div>
 
-      <p id={bodyId} className="mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]">
+      <p id={bodyId} className="mt-1.5 text-[13px] leading-relaxed text-[rgba(13,35,38,0.72)]">
         {view === "summary" ? t.body : null}{" "}
         <Link href={t.policyHref} prefetch={false} className="font-medium underline underline-offset-2" style={{ color: TEAL }}>
           {t.policy}
@@ -179,7 +179,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
         <button
           type="button"
           onClick={() => decide({ analytics: false, ads: false })}
-          className="min-h-11 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.04] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
+          className="min-h-11 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.04] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6570]"
           style={{ border: `1px solid ${TEAL}66`, color: TEAL, background: "#fff" }}
         >
           {t.necessaryOnly}
@@ -187,7 +187,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
         <button
           type="button"
           onClick={() => decide({ analytics: true, ads: true })}
-          className="min-h-11 rounded-xl px-3 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
+          className="min-h-11 rounded-xl px-3 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6570]"
           style={{ background: TEAL, border: `1px solid ${TEAL}`, boxShadow: `0 10px 24px ${TEAL}33` }}
         >
           {t.acceptAll}
@@ -203,7 +203,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
               setDraft({ analytics: !!c?.analytics, ads: !!c?.ads });
               setView("prefs");
             }}
-            className="min-h-11 rounded-lg px-3 py-1.5 text-[13px] font-medium underline underline-offset-2 text-[rgba(20,21,23,0.7)] hover:text-[#141517] focus-visible:outline-2 focus-visible:outline-[#27959b]"
+            className="min-h-11 rounded-lg px-3 py-1.5 text-[13px] font-medium underline underline-offset-2 text-[rgba(13,35,38,0.7)] hover:text-[#0d2326] focus-visible:outline-2 focus-visible:outline-[#0d6570]"
           >
             {t.preferences}
           </button>
@@ -211,8 +211,8 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
           <button
             type="button"
             onClick={() => decide(draft)}
-            className="min-h-11 w-full rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
-            style={{ background: "rgba(20,21,23,0.04)", border: "1px solid rgba(20,21,23,0.1)" }}
+            className="min-h-11 w-full rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6570]"
+            style={{ background: "rgba(13,35,38,0.04)", border: "1px solid rgba(13,35,38,0.1)" }}
           >
             {t.save}
           </button>
@@ -239,13 +239,13 @@ function PrefRow({
   return (
     <li
       className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5"
-      style={{ background: "#fff", border: "1px solid rgba(20,21,23,0.08)" }}
+      style={{ background: "#fff", border: "1px solid rgba(13,35,38,0.08)" }}
     >
       <div className="min-w-0">
         <p id={`${id}-l`} className="text-[13px] font-medium">
           {title}
         </p>
-        <p id={`${id}-d`} className="text-[12px] leading-snug text-[rgba(20,21,23,0.6)]">
+        <p id={`${id}-d`} className="text-[12px] leading-snug text-[rgba(13,35,38,0.6)]">
           {desc}
         </p>
       </div>
@@ -261,8 +261,8 @@ function PrefRow({
           aria-labelledby={`${id}-l`}
           aria-describedby={`${id}-d`}
           onClick={() => onChange?.(!checked)}
-          className="relative h-6 w-11 shrink-0 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
-          style={{ background: checked ? TEAL : "rgba(20,21,23,0.18)" }}
+          className="relative h-6 w-11 shrink-0 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6570]"
+          style={{ background: checked ? TEAL : "rgba(13,35,38,0.18)" }}
         >
           <span
             aria-hidden

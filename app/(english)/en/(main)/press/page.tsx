@@ -1,3 +1,4 @@
+import PageHero from "@/app/components/azure/PageHero";
 import PressSection, { type PressItem } from "@/app/components/en/PressSection";
 import { pageMetadata } from "@/lib/seo";
 
@@ -91,9 +92,9 @@ const PRESS_ITEMS: PressItem[] = [
 
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
-      <h1 className="sr-only">DND Cyprus in the Press</h1>
-   <PressSection items={PRESS_ITEMS} moreHref="" initialLimit={PRESS_ITEMS.length} />
+    <main className="relative w-full min-h-screen overflow-x-hidden">
+      <PageHero size="short" kicker="DND Cyprus in the press" title={<>News</>} lead="News coverage and press announcements featuring our brand." image="/azure/p2-3.jpg" />
+   <PressSection items={PRESS_ITEMS} title="All news" description="" moreHref="" initialLimit={PRESS_ITEMS.length} />
 
 
     </main>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants, type Easing, rgbUnit } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
@@ -99,7 +99,7 @@ highlights = ["Pool & Beach", "Pavilions", "Restaurant & Pool Bar", "DJ Nights"]
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(120% 70% at 70% 0%, rgba(39,149,155,0.25), transparent 60%)",
+              "radial-gradient(120% 70% at 70% 0%, rgba(13,101,112,0.25), transparent 60%)",
           }}
         />
         <div

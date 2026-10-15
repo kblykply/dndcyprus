@@ -1,5 +1,17 @@
-import localFont from "next/font/local";
+import { Outfit, Albert_Sans } from "next/font/google";
 
-// Both language roots share one font instance and its generated stylesheet.
-export const inter = localFont({ src: "./inter-latin.woff2", weight: "100 900", variable: "--font-sans-core", display: "optional" });
-export const montserrat = localFont({ src: "./montserrat-latin.woff2", weight: "300 500", variable: "--font-display-core", display: "optional" });
+// Azure tasarımı: başlıklar Outfit, metinler Albert Sans. Her iki dil kökü aynı örnekleri paylaşır;
+// değişken adları eski (Inter/Montserrat) kurulumla aynı tutuldu, globals.css bunları okur.
+export const inter = Albert_Sans({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans-core",
+  display: "swap",
+});
+
+export const montserrat = Outfit({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-display-core",
+  display: "swap",
+});

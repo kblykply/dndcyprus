@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "Aradığınız sayfa bulunamadı. DND Cyprus projelerine veya iletişim sayfasına dönebilirsiniz. / Page not found.",
 };
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const LINKS = [
@@ -22,7 +22,7 @@ const LINKS = [
 export default function NotFound() {
   return (
     <main
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-white px-6 py-16 text-[#141517]"
+      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-white px-6 py-16 text-[#0d2326]"
     >
       {/* hafif marka renkleri */}
       <div
@@ -50,10 +50,10 @@ export default function NotFound() {
         </p>
 
         <h1 className="mt-4 text-2xl font-semibold sm:text-3xl">Aradığınız sayfa bulunamadı</h1>
-        <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+        <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
           Sayfa taşınmış ya da kaldırılmış olabilir. Aşağıdaki bağlantılarla devam edebilirsiniz.
         </p>
-        <p lang="en" className="mt-2 text-sm" style={{ color: "rgba(20,21,23,0.55)" }}>
+        <p lang="en" className="mt-2 text-sm" style={{ color: "rgba(13,35,38,0.55)" }}>
           Page not found — it may have been moved or removed.
         </p>
 

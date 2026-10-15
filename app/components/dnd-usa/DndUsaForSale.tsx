@@ -7,7 +7,7 @@ type SortOption = "price-desc" | "price-asc" | "name-asc";
 
 
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Listing = {
@@ -102,9 +102,9 @@ const [sort, setSort] = useState<SortOption>("price-desc");
       aria-label="DND USA — For Sale"
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
@@ -130,7 +130,7 @@ style={{
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{title}</h2>
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
-          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.7)" }}>{subtitle}</p>
+          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.7)" }}>{subtitle}</p>
         </motion.div>
 
         {/* filters */}
@@ -141,13 +141,13 @@ style={{
               onChange={(e) => { setQuery(e.target.value); setVisible(initialVisible); }}
               placeholder="Ara: isim, konum…"
               className="w-full text-xs rounded-full px-3 py-2 outline-none"
-              style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
+              style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.85)" }}
             />
           </div>
 
           <div className="lg:col-span-5 flex flex-wrap gap-3">
             <div className="flex items-center gap-1 text-xs">
-              <span style={{ color: "rgba(20,21,23,0.72)" }}>Fiyat</span>
+              <span style={{ color: "rgba(13,35,38,0.72)" }}>Fiyat</span>
               <input
                 type="number"
                 min={0}
@@ -155,7 +155,7 @@ style={{
                 value={minPrice}
                 onChange={(e) => { setMinPrice(e.target.value === "" ? "" : Number(e.target.value)); setVisible(initialVisible); }}
                 className="w-28 rounded-full px-3 py-1 outline-none"
-                style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)" }}
+                style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)" }}
               />
               <span>–</span>
               <input
@@ -165,17 +165,17 @@ style={{
                 value={maxPrice}
                 onChange={(e) => { setMaxPrice(e.target.value === "" ? "" : Number(e.target.value)); setVisible(initialVisible); }}
                 className="w-28 rounded-full px-3 py-1 outline-none"
-                style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)" }}
+                style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)" }}
               />
             </div>
 
             <div className="flex items-center gap-1 text-xs">
-              <span style={{ color: "rgba(20,21,23,0.72)" }}>Yatak Odası</span>
+              <span style={{ color: "rgba(13,35,38,0.72)" }}>Yatak Odası</span>
               <select
                 value={minBeds}
                 onChange={(e) => { const v = e.target.value; setMinBeds(v === "" ? "" : Number(v)); setVisible(initialVisible); }}
                 className="rounded-full px-3 py-1 outline-none"
-                style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
+                style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.85)" }}
               >
                 <option value="">Hepsi</option>
                 <option value="3">3+ </option>
@@ -192,7 +192,7 @@ style={{
     setSort(e.target.value as SortOption)
   }
   className="w-full text-xs rounded-full px-3 py-2 outline-none"
-  style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.85)" }}
+  style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.85)" }}
 >
   <option value="price-desc">Fiyat (Yüksek → Düşük)</option>
   <option value="price-asc">Fiyat (Düşük → Yüksek)</option>
@@ -244,28 +244,28 @@ style={{
                   {/* body */}
                   <div className="p-5 flex flex-col flex-1">
                     <h3 className="text-base sm:text-lg font-semibold">{l.name}</h3>
-                    <div className="text-xs mt-1" style={{ color: "rgba(20,21,23,0.65)" }}>{l.location}</div>
+                    <div className="text-xs mt-1" style={{ color: "rgba(13,35,38,0.65)" }}>{l.location}</div>
 
                     <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px]">
                       <span className="px-2 py-0.5 rounded-full"
-                            style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                            style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                         {l.price}
                       </span>
                       {l.sqft && (
                         <span className="px-2 py-0.5 rounded-full"
-                              style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                              style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                           {l.sqft}
                         </span>
                       )}
                       {typeof l.beds === "number" && (
                         <span className="px-2 py-0.5 rounded-full"
-                              style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                              style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                           {l.beds} bd
                         </span>
                       )}
                       {typeof l.baths === "number" && (
                         <span className="px-2 py-0.5 rounded-full"
-                              style={{ background: "rgba(20,21,23,0.06)", border: "1px solid var(--stroke)" }}>
+                              style={{ background: "rgba(13,35,38,0.06)", border: "1px solid var(--stroke)" }}>
                           {l.baths} ba
                         </span>
                       )}
@@ -273,7 +273,7 @@ style={{
 
                     {/* mortgage estimate */}
                     {showMortgage && !isNaN(monthly) && (
-                      <div className="mt-2 text-[11px]" style={{ color: "rgba(20,21,23,0.7)" }}>
+                      <div className="mt-2 text-[11px]" style={{ color: "rgba(13,35,38,0.7)" }}>
                         ~ ${formatMoney(monthly)}/ay tahmini mortgage (20% peşinat, 30y, {Math.round((defaultMonthlyRate)*1000)/10}%)
                       </div>
                     )}
@@ -314,7 +314,7 @@ style={{
               Daha Fazla Yükle
             </button>
           ) : filtered.length === 0 ? (
-            <div className="text-sm" style={{ color: "rgba(20,21,23,0.65)" }}>
+            <div className="text-sm" style={{ color: "rgba(13,35,38,0.65)" }}>
               Sonuç bulunamadı. Filtreleri gevşetmeyi deneyin.
             </div>
           ) : null}

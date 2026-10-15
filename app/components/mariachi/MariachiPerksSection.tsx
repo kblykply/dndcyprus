@@ -7,7 +7,7 @@ import Link from "next/link";
 import { m as motion, type Variants, type Easing } from "framer-motion";
 import { BadgePercent, ShieldCheck } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
@@ -63,14 +63,14 @@ export default function MariachiUnifiedPerks({
     <section
       aria-label="Mariachi Beach Club — Sakin Ayrıcalıkları (Tek Tip)"
       className="relative overflow-hidden"
-      style={{ background: "#ffffff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
       data-bg="light"
     >
       {/* soft auras */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-[28rem] w-[28rem] rounded-full blur-3xl opacity-30"
-        style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(39,149,155,0.22), transparent 70%)" }}
+        style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.22), transparent 70%)" }}
       />
       <div
         aria-hidden
@@ -98,12 +98,12 @@ export default function MariachiUnifiedPerks({
               </span>
 
               <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">{title}</h2>
-              <p className="mt-3 text-base sm:text-lg" style={{ color: "#141517CC" }}>{subtitle}</p>
+              <p className="mt-3 text-base sm:text-lg" style={{ color: "#0d2326CC" }}>{subtitle}</p>
 
               <div
                 className="mt-5 rounded-2xl px-4 py-3 backdrop-blur-md"
                 style={{
-                  background: "linear-gradient(135deg, rgba(39,149,155,0.16), rgba(241,92,52,0.12))",
+                  background: "linear-gradient(135deg, rgba(13,101,112,0.16), rgba(241,92,52,0.12))",
                   border: "1px solid rgba(255,255,255,0.26)",
                   boxShadow: "0 10px 24px rgba(0,0,0,0.06)",
                 }}
@@ -111,7 +111,7 @@ export default function MariachiUnifiedPerks({
                 <div className="flex flex-wrap items-center gap-2 text-sm">
                   <BadgePercent className="h-4 w-4" style={{ color: ORANGE }} />
                   <strong style={{ color: ORANGE }}>{note}</strong>
-                  <span className="text-[#141517B3]">(*Yerinde kimlik / residence doğrulaması gerekebilir.)</span>
+                  <span className="text-[#0d2326B3]">(*Yerinde kimlik / residence doğrulaması gerekebilir.)</span>
                 </div>
               </div>
             </motion.div>
@@ -124,7 +124,7 @@ export default function MariachiUnifiedPerks({
               viewport={{ once: false, amount: 0.2 }}
               className="mt-10"
             >
-              <p className="text-sm font-medium flex items-center gap-2" style={{ color: "#141517B3" }}>
+              <p className="text-sm font-medium flex items-center gap-2" style={{ color: "#0d2326B3" }}>
                 <ShieldCheck className="h-4 w-4" style={{ color: TEAL }} />
                 Aşağıdaki projelerin tüm sakinleri için geçerlidir:
               </p>
@@ -202,7 +202,7 @@ export default function MariachiUnifiedPerks({
               <div
                 className="absolute inset-0"
                 aria-hidden
-                style={{ background: "linear-gradient(135deg, rgba(39,149,155,0.20), rgba(241,92,52,0.14))" }}
+                style={{ background: "linear-gradient(135deg, rgba(13,101,112,0.20), rgba(241,92,52,0.14))" }}
               />
             )}
 
@@ -254,7 +254,7 @@ export default function MariachiUnifiedPerks({
         </div>
 
         {/* footnote */}
-        <p className="mt-8 text-xs" style={{ color: "#14151799" }}>
+        <p className="mt-8 text-xs" style={{ color: "#0d232699" }}>
           *Ayrıcalıklar kampanya ve sezon koşullarına göre güncellenebilir. Yerinde kimlik &amp; residence doğrulaması gerekebilir.
         </p>
       </div>

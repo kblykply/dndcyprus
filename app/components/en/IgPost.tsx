@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import IgPhone, { type IgPost } from "@/app/components/social/IgPhone";
 import { m as motion, type Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const BG_IMAGE = "/ins.jpg";
 
@@ -53,7 +53,7 @@ export default function InstagramSpotlight() {
         aria-label="Instagram — Spotlight"
         className="relative overflow-hidden bg-white"
         style={{
-          color: "#141517",
+          color: "#0d2326",
           backgroundImage: `url(${BG_IMAGE})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -79,7 +79,7 @@ export default function InstagramSpotlight() {
   <span
     className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full mb-3"
     style={{
-      border: "1px solid rgba(20,21,23,0.08)",
+      border: "1px solid rgba(13,35,38,0.08)",
       color: TEAL,
       background: "#ffffff",
     }}
@@ -92,7 +92,7 @@ export default function InstagramSpotlight() {
   </h2>
   <p
     className="mt-4 text-base sm:text-lg lg:text-xl lg:leading-relaxed"
-    style={{ color: "rgba(20,21,23,0.72)" }}
+    style={{ color: "rgba(13,35,38,0.72)" }}
   >
     Follow our latest projects, news, and updates through regular posts.
   </p>
@@ -102,19 +102,19 @@ export default function InstagramSpotlight() {
       <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
       </span>
-      <span className="text-[15px] sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>New projects, campaigns and payment offers</span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(13,35,38,0.78)" }}>New projects, campaigns and payment offers</span>
     </li>
     <li className="flex items-center gap-3">
       <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
       </span>
-      <span className="text-[15px] sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>Fresh updates from our sites and handovers</span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(13,35,38,0.78)" }}>Fresh updates from our sites and handovers</span>
     </li>
     <li className="flex items-center gap-3">
       <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
       </span>
-      <span className="text-[15px] sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>Reels from La Joya, Lagoon Verde and Mariachi</span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(13,35,38,0.78)" }}>Reels from La Joya, Lagoon Verde and Mariachi</span>
     </li>
   </ul>
 
@@ -162,7 +162,7 @@ export default function InstagramSpotlight() {
                     style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M15 18l-6-6 6-6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M15 18l-6-6 6-6" stroke="#0d2326" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </button>
                   <IgPhone post={IG_POSTS[idx]} labels={IG_LABELS} />
@@ -174,7 +174,7 @@ export default function InstagramSpotlight() {
                     style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M9 6l6 6-6 6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M9 6l6 6-6 6" stroke="#0d2326" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </button>
                 </div>

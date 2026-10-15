@@ -5,7 +5,7 @@ import React from "react";
 import Image from "next/image";
 import { m as motion, AnimatePresence } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 /* ---------------- Types ---------------- */
@@ -107,16 +107,16 @@ export default function Perla2FloorPlans({
       aria-label="La Joya — Kat Planları"
       className="relative overflow-hidden"
       style={{
-        background: "#fff",
-        color: "#141517",
-        ["--stroke"]: "rgba(20,21,23,0.08)",
+        background: "transparent",
+        color: "#0d2326",
+        ["--stroke"]: "rgba(13,35,38,0.08)",
       } as React.CSSProperties & Record<"--stroke", string>}
     >
       <div className="relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Header */}
         <div className="max-w-2xl">
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </div>
@@ -135,7 +135,7 @@ export default function Perla2FloorPlans({
                 className={`px-3.5 py-1.5 rounded-full text-sm border transition ${active ? "font-semibold" : ""}`}
                 style={{
                   background: active ? `${TEAL}14` : "rgba(255,255,255,0.6)",
-                  color: active ? TEAL : "rgba(20,21,23,0.85)",
+                  color: active ? TEAL : "rgba(13,35,38,0.85)",
                   border: `1px solid ${active ? `${TEAL}33` : "var(--stroke)"}`,
                   backdropFilter: "blur(8px)",
                 }}
@@ -162,7 +162,7 @@ export default function Perla2FloorPlans({
                   className={`px-3 py-1 rounded-full text-xs border transition ${active ? "font-semibold" : ""}`}
                   style={{
                     background: active ? `${ORANGE}14` : "rgba(255,255,255,0.6)",
-                    color: active ? ORANGE : "rgba(20,21,23,0.85)",
+                    color: active ? ORANGE : "rgba(13,35,38,0.85)",
                     border: `1px solid ${active ? `${ORANGE}33` : "var(--stroke)"}`,
                     backdropFilter: "blur(8px)",
                   }}
@@ -241,7 +241,7 @@ export default function Perla2FloorPlans({
                       className="text-xs px-3 py-1 rounded-full"
                       style={{
                         background: "rgba(255, 255, 255, 0.05)",
-                        color: "rgba(20,21,23,0.85)",
+                        color: "rgba(13,35,38,0.85)",
                         border: "1px solid var(--stroke)",
                         backdropFilter: "blur(8px)",
                       }}
@@ -285,7 +285,7 @@ export default function Perla2FloorPlans({
                     <div
                       key={r.label}
                       className="flex items-center justify-between border-b pb-2"
-                      style={{ borderColor: "rgba(20,21,23,0.08)" }}
+                      style={{ borderColor: "rgba(13,35,38,0.08)" }}
                     >
                       <dt className="text-sm">{r.label}</dt>
                       <dd className="text-sm font-medium">{r.value}</dd>
@@ -350,7 +350,7 @@ export default function Perla2FloorPlans({
         </AnimatePresence>
 
         {/* disclaimer */}
-        <p className="mt-8 text-xs" style={{ color: "rgba(20,21,23,0.55)" }}>
+        <p className="mt-8 text-xs" style={{ color: "rgba(13,35,38,0.55)" }}>
           * Görseller ve ölçüler temsilidir. Tip, ölçü ve yerleşimler projeye bağlı olarak değişebilir.
         </p>
       </div>

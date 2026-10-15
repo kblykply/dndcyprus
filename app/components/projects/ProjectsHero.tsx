@@ -16,7 +16,7 @@ type ProjectSlide = {
   ctaLabel?: string;
   ctaHref?: string;
   // optional per-slide tint color for accents
-  tint?: string;        // e.g. "#27959b" or "#f15c34"
+  tint?: string;        // e.g. "#0d6570" or "#f15c34"
   align?: "left" | "right"; // content alignment (auto if omitted)
 };
 
@@ -37,7 +37,7 @@ const FALLBACKS: ProjectSlide[] = [
     image: "/lagoon-verde/1.jpg",
     ctaLabel: "Projeyi İncele",
     ctaHref: "/tr/lagoon-verde",
-    tint: "#27959b", // teal
+    tint: "#0d6570", // teal
     align: "left",
   },
   {
@@ -61,7 +61,7 @@ const FALLBACKS: ProjectSlide[] = [
     image: "/perla/9.jpg",
     ctaLabel: "Detaylar",
     ctaHref: "/tr/perla",
-    tint: "#27959b",
+    tint: "#0d6570",
     align: "left",
   },
   {
@@ -85,7 +85,7 @@ const FALLBACKS: ProjectSlide[] = [
     image: "/mariachi/2.jpg",
     ctaLabel: "Projeyi İncele",
     ctaHref: "/tr/mariachi",
-    tint: "#27959b",
+    tint: "#0d6570",
     align: "left",
   },
 ];
@@ -110,7 +110,7 @@ export default function ProjectsHeroFullSlider({
           const alignRight = s.align
             ? s.align === "right"
             : i % 2 === 1; // alternate by default
-          const tint = s.tint || "#27959b";
+          const tint = s.tint || "#0d6570";
 
           return (
             <div key={s.id} data-hash={String(s.id)} className="h-full">

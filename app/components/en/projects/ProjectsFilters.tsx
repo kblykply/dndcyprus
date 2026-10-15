@@ -4,7 +4,7 @@
 import React, { useMemo, useState } from "react";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 /**
@@ -126,9 +126,9 @@ export default function ProjectsFilters() {
       aria-label="Project filters and list"
       className="relative"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle accent wash */}
@@ -155,8 +155,8 @@ style={{
                 onClick={() => setFilters((v) => ({ ...v, status: t.key }))}
                 className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
                 style={{
-                  background: active ? color : "rgba(20,21,23,0.05)",
-                  color: active ? "#fff" : "rgba(20,21,23,0.78)",
+                  background: active ? color : "rgba(13,35,38,0.05)",
+                  color: active ? "#fff" : "rgba(13,35,38,0.78)",
                   border: active ? `1px solid ${color}AA` : "1px solid var(--stroke)",
                   boxShadow: active ? `0 6px 18px ${color}40` : "none",
                   backdropFilter: "blur(8px)",
@@ -171,7 +171,7 @@ style={{
         {/* Type Chips + Search */}
         <div className="mt-4 flex flex-col lg:flex-row gap-3 lg:items-center lg:justify-between">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs uppercase tracking-wide" style={{ color: "rgba(20,21,23,0.55)" }}>
+            <span className="text-xs uppercase tracking-wide" style={{ color: "rgba(13,35,38,0.55)" }}>
               Type:
             </span>
             {TYPE_CHIPS.map((t) => {
@@ -182,8 +182,8 @@ style={{
                   onClick={() => setFilters((v) => ({ ...v, type: t.key }))}
                   className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
                   style={{
-                    background: active ? `${TEAL}` : "rgba(20,21,23,0.05)",
-                    color: active ? "#fff" : "rgba(20,21,23,0.78)",
+                    background: active ? `${TEAL}` : "rgba(13,35,38,0.05)",
+                    color: active ? "#fff" : "rgba(13,35,38,0.78)",
                     border: active ? `1px solid ${TEAL}AA` : "1px solid var(--stroke)",
                     boxShadow: active ? `0 6px 18px ${TEAL}40` : "none",
                     backdropFilter: "blur(8px)",
@@ -233,7 +233,7 @@ style={{
                 />
               </div>
               <div className="p-4">
-                <div className="text-sm uppercase tracking-wide" style={{ color: "rgba(20,21,23,0.55)" }}>
+                <div className="text-sm uppercase tracking-wide" style={{ color: "rgba(13,35,38,0.55)" }}>
                   {p.location} • {labelStatusTR(p.status)}
                 </div>
                 <div className="text-base font-semibold">{p.title}</div>
@@ -246,7 +246,7 @@ style={{
         {filtered.length === 0 && (
           <div
             className="mt-8 rounded-xl px-4 py-3 text-sm"
-            style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.6)" }}
+            style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.6)" }}
           >
             No results found. Try a different filter or search.
           </div>

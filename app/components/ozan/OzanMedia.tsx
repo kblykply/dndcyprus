@@ -4,7 +4,7 @@
 import React, { useMemo, useState } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type MediaType = "Röportaj" | "Konuşma" | "Makale" | "Video";
@@ -51,9 +51,9 @@ export default function OzanMedia({
       aria-label="Ozan Dökmecioğlu — Basında & Konuşmalar"
       className="relative overflow-hidden"
 style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* brand wash */}
@@ -79,7 +79,7 @@ style={{
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -127,8 +127,8 @@ style={{
         >
           {filters.map((f) => {
             const active = f === filter;
-            const color = active ? TEAL : "rgba(20,21,23,0.78)";
-            const bg = active ? `${TEAL}14` : "rgba(20,21,23,0.05)";
+            const color = active ? TEAL : "rgba(13,35,38,0.78)";
+            const bg = active ? `${TEAL}14` : "rgba(13,35,38,0.05)";
             const border = active ? `1px solid ${TEAL}33` : "1px solid var(--stroke)";
             return (
               <button
@@ -173,7 +173,7 @@ style={{
                   {m.date ? (
                     <span
                       className="text-[11px] px-2 py-0.5 rounded-full"
-                      style={{ background: "rgba(20,21,23,0.05)", border: "1px solid var(--stroke)", color: "rgba(20,21,23,0.78)" }}
+                      style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.78)" }}
                     >
                       {m.date}
                     </span>
@@ -190,7 +190,7 @@ style={{
                       <img src={m.logo} alt={m.outlet || "Medya"} className="h-5 w-auto object-contain opacity-80" />
                     ) : null}
                     {m.outlet ? (
-                      <span className="text-xs" style={{ color: "rgba(20,21,23,0.7)" }}>
+                      <span className="text-xs" style={{ color: "rgba(13,35,38,0.7)" }}>
                         {m.outlet}
                       </span>
                     ) : null}
@@ -199,7 +199,7 @@ style={{
 
                 {/* note */}
                 {m.note ? (
-                  <p className="mt-2 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
+                  <p className="mt-2 text-sm" style={{ color: "rgba(13,35,38,0.75)" }}>
                     {m.note}
                   </p>
                 ) : null}

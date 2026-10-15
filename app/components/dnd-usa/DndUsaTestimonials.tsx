@@ -4,7 +4,7 @@
 import React, { useRef } from "react";
 import { m as motion } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Testimonial = {
@@ -43,9 +43,9 @@ export default function DndUsaTestimonials({
       aria-label="DND USA — Alıntılar & Referanslar"
       className="relative overflow-hidden"
      style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -72,7 +72,7 @@ export default function DndUsaTestimonials({
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{title}</h2>
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
-          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.7)" }}>
+          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.7)" }}>
             {subtitle}
           </p>
         </motion.div>
@@ -188,7 +188,7 @@ function Card({ item, index }: { item: Testimonial; index: number }) {
         <div className="min-w-0">
           <div className="text-sm font-semibold">{item.author}</div>
           {(item.role || item.company) && (
-            <div className="text-[11px]" style={{ color: "rgba(20,21,23,0.7)" }}>
+            <div className="text-[11px]" style={{ color: "rgba(13,35,38,0.7)" }}>
               {[item.role, item.company].filter(Boolean).join(" • ")}
             </div>
           )}
@@ -203,7 +203,7 @@ function Card({ item, index }: { item: Testimonial; index: number }) {
       </div>
 
       {/* quote */}
-      <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(20,21,23,0.86)" }}>
+      <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(13,35,38,0.86)" }}>
         “{item.quote}”
       </p>
     </motion.blockquote>

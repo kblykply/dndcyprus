@@ -28,7 +28,7 @@ note: "ID verification may be required. Campaign dates and applicable days are s
 
 type Perk = { title: string; desc?: string; icon?: React.ReactNode };
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 /** Zoom used to crop away the side bars of the original video inside the player */
@@ -127,7 +127,7 @@ export default function MariachiPerks() {
         className="pointer-events-none absolute -top-36 left-1/2 -translate-x-1/2 h-[28rem] w-[28rem] rounded-full blur-3xl opacity-40"
         style={{
           background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(39,149,155,0.28), transparent 70%)",
+            "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.28), transparent 70%)",
         }}
       />
       <div

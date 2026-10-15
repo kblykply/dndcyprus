@@ -3,7 +3,7 @@
 
   import React from "react";
 
-  const TEAL = "#27959b";
+  const TEAL = "#0d6570";
   const ORANGE = "#f15c34";
 
   type LinkItem = { label: string; href: string };
@@ -79,9 +79,9 @@
         className="relative overflow-hidden bg-white"
   style={
   {
-    background: "#ffffff",
-    color: "#141517",
-    ["--stroke" as string]: "rgba(20,21,23,0.08)",
+    background: "transparent",
+    color: "#0d2326",
+    ["--stroke" as string]: "rgba(13,35,38,0.08)",
   } as React.CSSProperties
 }
 
@@ -110,12 +110,12 @@
                   <img src={logoSrc} alt={companyName} className="h-9 w-auto" />
                 ) : null}
               </div>
-              <p className="mt-3 text-sm" style={{ color: "rgba(20,21,23,0.65)" }}>
+              <p className="mt-3 text-sm" style={{ color: "rgba(13,35,38,0.65)" }}>
                 {tagline}
               </p>
 
               {addressLines?.length ? (
-                <div className="mt-4 text-sm" style={{ color: "rgba(20,21,23,0.70)" }}>
+                <div className="mt-4 text-sm" style={{ color: "rgba(13,35,38,0.70)" }}>
                   {addressLines.map((l) => (
                     <div key={l}>{l}</div>
                   ))}
@@ -142,7 +142,7 @@
                     className="text-xs px-3 py-1 rounded-full"
                     style={{
                       background: "rgba(255, 255, 255, 0.05)",
-                      color: "rgba(20,21,23,0.85)",
+                      color: "rgba(13,35,38,0.85)",
                       border: "1px solid var(--stroke)",
                     }}
                   >
@@ -156,7 +156,7 @@
                 <div className="mt-4">
                   <div
                     className="text-xs uppercase tracking-wide mb-2"
-                    style={{ color: "rgba(20,21,23,0.55)" }}
+                    style={{ color: "rgba(13,35,38,0.55)" }}
                   >
                     Sosyal
                   </div>
@@ -170,7 +170,7 @@
                         className="text-xs px-3 py-1 rounded-full"
                         style={{
                           background: "rgba(255, 255, 255, 0.05)",
-                          color: "rgba(20,21,23,0.85)",
+                          color: "rgba(13,35,38,0.85)",
                           border: "1px solid var(--stroke)",
                         }}
                       >
@@ -193,7 +193,7 @@
                         <a
                           href={l.href}
                           className="text-sm hover:opacity-80"
-                          style={{ color: "rgba(20,21,23,0.70)" }}
+                          style={{ color: "rgba(13,35,38,0.70)" }}
                         >
                           {l.label}
                         </a>
@@ -208,22 +208,22 @@
           {/* bottom bar */}
           <div className="mt-10 pt-6 border-t" style={{ borderColor: "var(--stroke)" }}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div className="text-xs" style={{ color: "rgba(20,21,23,0.60)" }}>
+              <div className="text-xs" style={{ color: "rgba(13,35,38,0.60)" }}>
                 © {year} {copyrightOwner} Tüm hakları saklıdır.
               </div>
               <div className="flex items-center gap-3 text-xs">
                 <a
                   href={privacyHref}
                   className="underline underline-offset-4 hover:opacity-80"
-                  style={{ color: "rgba(20,21,23,0.70)" }}
+                  style={{ color: "rgba(13,35,38,0.70)" }}
                 >
                   Gizlilik
                 </a>
-                <span style={{ color: "rgba(20,21,23,0.40)" }}>•</span>
+                <span style={{ color: "rgba(13,35,38,0.40)" }}>•</span>
                 <a
                   href={termsHref}
                   className="underline underline-offset-4 hover:opacity-80"
-                  style={{ color: "rgba(20,21,23,0.70)" }}
+                  style={{ color: "rgba(13,35,38,0.70)" }}
                 >
                   Şartlar
                 </a>

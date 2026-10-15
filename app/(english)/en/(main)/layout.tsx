@@ -3,11 +3,10 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import "@/app/globals.css";
 
-import HeaderEn from "@/app/components/headers/HeaderEn"; // English header
-import Footer from "@/app/components/footers/FooterEn";              // Generic or EN footer
-import WhatsAppFab from "@/app/components/whatsapp/WhatsappEn";
-import SocialIcons from "@/app/components/SocialIcons";
-
+import AzureHeader from "@/app/components/azure/AzureHeader";
+import AzureFooter from "@/app/components/azure/AzureFooter";
+import AzureFx from "@/app/components/azure/AzureFx";
+import WhatsAppAzure from "@/app/components/azure/WhatsAppAzure";
 
 // Başlık sayfalarda (pageMetadata) verilir; burada yalnızca varsayılan açıklama kalır
 export const metadata: Metadata = {
@@ -15,35 +14,27 @@ export const metadata: Metadata = {
     "Discover DND Cyprus, a leading real-estate developer in Cyprus with innovative residential and commercial projects.",
 };
 
-
-
-
-
 export default function ENLayout({ children }: { children: ReactNode }) {
   return (
     <div>
       {/* Accessibility: skip link */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200]"
       >
         Skip to content
       </a>
 
+      <AzureFx />
 
+      <AzureHeader locale="en" />
 
-      <HeaderEn />
-
-      {/* If HeaderEn is fixed, give top padding (e.g., pt-[72px]) to avoid overlap */}
-      <main id="main" className="min-h-[60vh]">
+      <main id="main" className="az-page min-h-[60vh]">
         {children}
-                <WhatsAppFab phone="+90 548 888 03 63" />
-
-        <SocialIcons />
-
+        <WhatsAppAzure locale="en" />
       </main>
 
-      <Footer />
+      <AzureFooter locale="en" />
     </div>
   );
 }

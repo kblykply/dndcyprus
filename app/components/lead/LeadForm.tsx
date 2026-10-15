@@ -8,7 +8,7 @@ import React, { useId, useRef, useState } from "react";
 import { submitLead } from "@/lib/lead-submit";
 import { attributionRef } from "@/lib/attribution";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 const WHATSAPP = "905488880363";
 
@@ -191,9 +191,9 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
   }
 
   const inputBase =
-    "mt-1.5 w-full rounded-xl bg-white px-3.5 py-2.5 text-[15px] outline-none transition-shadow focus:shadow-[0_0_0_4px_rgba(39,149,155,0.15)]";
+    "mt-1.5 w-full rounded-xl bg-white px-3.5 py-2.5 text-[15px] outline-none transition-shadow focus:shadow-[0_0_0_4px_rgba(13,101,112,0.15)]";
   const borderFor = (n: FieldName) => ({
-    border: `1px solid ${show(n) ? `${ORANGE}99` : "rgba(20,21,23,0.1)"}`,
+    border: `1px solid ${show(n) ? `${ORANGE}99` : "rgba(13,35,38,0.1)"}`,
   });
 
   return (
@@ -201,7 +201,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
       id={id}
       aria-labelledby={fid("heading")}
       className="relative overflow-hidden bg-white scroll-mt-24"
-      style={{ color: "#141517" }}
+      style={{ color: "#0d2326" }}
     >
       <div
         aria-hidden
@@ -220,12 +220,12 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
           <h2 id={fid("heading")} className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
             {t.heading}
           </h2>
-          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {t.intro(projectName)}
           </p>
           <ul className="mt-6 space-y-2.5">
             {t.bullets.map((b) => (
-              <li key={b} className="flex items-center gap-3 text-sm sm:text-[15px]" style={{ color: "rgba(20,21,23,0.82)" }}>
+              <li key={b} className="flex items-center gap-3 text-sm sm:text-[15px]" style={{ color: "rgba(13,35,38,0.82)" }}>
                 <span
                   aria-hidden
                   className="grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs text-white"
@@ -244,7 +244,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
           className="rounded-2xl p-5 sm:p-8"
           style={{
             background: "linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75))",
-            border: "1px solid rgba(20,21,23,0.08)",
+            border: "1px solid rgba(13,35,38,0.08)",
             boxShadow: "0 18px 44px rgba(0,0,0,0.07), inset 0 1px rgba(255,255,255,0.65)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
@@ -260,7 +260,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
                 ✓
               </span>
               <h3 className="mt-4 text-xl font-semibold">{t.successTitle}</h3>
-              <p className="mx-auto mt-2 max-w-sm text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.7)" }}>
+              <p className="mx-auto mt-2 max-w-sm text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.7)" }}>
                 {t.success}
               </p>
               <a
@@ -353,7 +353,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
                     className={inputBase}
                     style={borderFor("phone")}
                   />
-                  <p id={fid("phone-hint")} className="mt-1 text-xs" style={{ color: "rgba(20,21,23,0.55)" }}>
+                  <p id={fid("phone-hint")} className="mt-1 text-xs" style={{ color: "rgba(13,35,38,0.55)" }}>
                     {t.phoneHint}
                   </p>
                   <FieldError id={fid("phone-err")} show={show("phone")} text={t.errors.phone} />
@@ -399,7 +399,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
                     className={`${inputBase} appearance-none pr-10`}
                     style={{
                       ...borderFor("unitType"),
-                      color: values.unitType ? "#141517" : "rgba(20,21,23,0.5)",
+                      color: values.unitType ? "#0d2326" : "rgba(13,35,38,0.5)",
                       backgroundImage:
                         "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%2327959b' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
                       backgroundRepeat: "no-repeat",
@@ -410,7 +410,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
                       {t.unitTypePh}
                     </option>
                     {options.map((o) => (
-                      <option key={o} value={o} style={{ color: "#141517" }}>
+                      <option key={o} value={o} style={{ color: "#0d2326" }}>
                         {o}
                       </option>
                     ))}
@@ -431,7 +431,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
                     value={values.message}
                     onChange={(e) => set("message", e.target.value)}
                     className={`${inputBase} resize-y`}
-                    style={{ border: "1px solid rgba(20,21,23,0.1)" }}
+                    style={{ border: "1px solid rgba(13,35,38,0.1)" }}
                   />
                 </div>
               </div>
@@ -453,7 +453,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
                     className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded"
                     style={{ accentColor: TEAL }}
                   />
-                  <label htmlFor={fid("consent")} className="text-[13px] leading-relaxed" style={{ color: "rgba(20,21,23,0.78)" }}>
+                  <label htmlFor={fid("consent")} className="text-[13px] leading-relaxed" style={{ color: "rgba(13,35,38,0.78)" }}>
                     {t.consentPre}
                     <Link
                       href={t.privacyHref}
@@ -473,7 +473,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="mt-6 w-full rounded-2xl px-6 py-3 text-[15px] font-medium text-white transition-colors disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
+                className="mt-6 w-full rounded-2xl px-6 py-3 text-[15px] font-medium text-white transition-colors disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6570]"
                 style={{ background: TEAL, border: `1px solid ${TEAL}55`, boxShadow: `0 12px 30px ${TEAL}40` }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = ORANGE)}
                 onMouseLeave={(e) => (e.currentTarget.style.background = TEAL)}
@@ -490,7 +490,7 @@ export default function LeadForm({ locale, project, projectName, unitTypes, id =
                   t.submit
                 )}
               </button>
-              <p className="mt-3 text-center text-xs" style={{ color: "rgba(20,21,23,0.55)" }}>
+              <p className="mt-3 text-center text-xs" style={{ color: "rgba(13,35,38,0.55)" }}>
                 {t.privacyNote}
               </p>
             </form>

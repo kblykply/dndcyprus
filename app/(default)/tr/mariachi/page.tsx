@@ -1,10 +1,9 @@
-import MariachiBeachClubHero from "@/app/components/mariachi/MariachiBeachClubHero";
+import PageHero from "@/app/components/azure/PageHero";
 import MariachiVideoSpotlight from "@/app/components/mariachi/MariachiVideoSpotlight";
 import MariachiHighlights from "@/app/components/mariachi/MariachiHighlights";
 import MariachiPerksSection from "@/app/components/mariachi/MariachiPerksSection";
 import MariachiGalleryExpanding from "@/app/components/mariachi/MariachiGalleryExpanding";
 import ContactCTAMariachi from "@/app/components/mariachi/ContactCTAMariachi";
-import QuarterLogoBadge from "@/app/components/QuarterLogoBadge";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -20,23 +19,14 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
-<MariachiBeachClubHero />
+    <main className="relative w-full min-h-screen overflow-x-hidden">
+<PageHero size="full" kicker="DND Cyprus" title={<>Mariachi <b>Beach Club</b></>} lead="Akdeniz güneşiyle Latin ritmini buluşturan; pavilyon konforu, gün boyu plaj keyfi ve akşam DJ performanslarıyla ayrıcalıklı bir deneyim." image="/azure/mb-6.jpg" imageAlt="Mariachi Beach Club" logo="/logos/mariachi.png" goldTag="Platin Ödül · PropertyNC 2025" tags={["Plaj Kulübü", "Havuz & Plaj", "Pavilyonlar", "DJ Geceleri"]} chips={[{ big: "4", label: "Jakuzili havuz" }, { big: "%10", label: "DND sakinlerine indirim" }, { big: "2", label: "Bar" }]} ctas={[{ label: "Pavilyon Rezervasyonu", href: "/tr/contact" }, { label: "Menüyü Görüntüle", href: "/tr/contact", variant: "ghost" }]} />
 <MariachiVideoSpotlight />
 <MariachiHighlights />
 <MariachiGalleryExpanding />
 
 <MariachiPerksSection />
 <ContactCTAMariachi />
-
-
- <QuarterLogoBadge
-          logoSrc="/logos/mariachi.png"
-          alt="Mariachi Beach Club"
-          href="/tr"
-          size={180}         // tweak the visible radius
-          // hideOnMobile     // uncomment if you want to hide on small screens
-        />
     </main>
   );
 }

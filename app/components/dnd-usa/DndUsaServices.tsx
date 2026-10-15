@@ -5,7 +5,7 @@ import React from "react";
 import { m as motion } from "framer-motion";
 import { Building2, Ruler, Briefcase, Home } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const SERVICES = [
@@ -40,7 +40,7 @@ export default function DndUsaServices() {
     <section
       aria-label="DND USA Services"
       className="relative overflow-hidden"
-      style={{ background: "#fff", color: "#141517" }}
+      style={{ background: "transparent", color: "#0d2326" }}
     >
       {/* brand wash */}
           <div
@@ -69,7 +69,7 @@ export default function DndUsaServices() {
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
           <p
             className="mt-3 text-base sm:text-lg"
-            style={{ color: "rgba(20,21,23,0.72)" }}
+            style={{ color: "rgba(13,35,38,0.72)" }}
           >
             DND USA, tasarımdan satışa kadar geniş bir yelpazede hizmet
             sunarak gayrimenkul yatırımlarınızı güvenle şekillendirir.
@@ -97,7 +97,7 @@ export default function DndUsaServices() {
               <h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
               <p
                 className="mt-2 text-sm leading-relaxed"
-                style={{ color: "rgba(20,21,23,0.72)" }}
+                style={{ color: "rgba(13,35,38,0.72)" }}
               >
                 {s.desc}
               </p>

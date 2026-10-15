@@ -5,7 +5,7 @@ import React from "react";
 import { m as motion } from "framer-motion";
 import { Home, ClipboardList, Hammer, Building, Handshake } from "lucide-react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 type Step = {
@@ -30,9 +30,9 @@ export default function DndUsaProcess({
       aria-label="DND USA — Process"
       className="relative overflow-hidden"
       style={{
-  background: "#fff",
-  color: "#141517",
-  ["--stroke"]: "rgba(20,21,23,0.08)",
+  background: "transparent",
+  color: "#0d2326",
+  ["--stroke"]: "rgba(13,35,38,0.08)",
 } as React.CSSProperties & Record<"--stroke", string>}
 
     >
@@ -61,7 +61,7 @@ export default function DndUsaProcess({
           <div className="mt-2 h-1 w-14 rounded-full" style={{ background: TEAL }} />
           <p
             className="mt-3 text-sm sm:text-base"
-            style={{ color: "rgba(20,21,23,0.72)" }}
+            style={{ color: "rgba(13,35,38,0.72)" }}
           >
             {subtitle}
           </p>
@@ -100,7 +100,7 @@ export default function DndUsaProcess({
                 <h3 className="text-base font-semibold">{s.title}</h3>
                 <p
                   className="mt-2 text-sm"
-                  style={{ color: "rgba(20,21,23,0.72)" }}
+                  style={{ color: "rgba(13,35,38,0.72)" }}
                 >
                   {s.desc}
                 </p>

@@ -1,7 +1,6 @@
-import ContactHero from "@/app/components/en/contact/ContactHero";
+import PageHero from "@/app/components/azure/PageHero";
+import ContactCard from "@/app/components/azure/ContactCard";
 import ContactInfo from "@/app/components/en/contact/ContactInfo";
-import ContactForm from "@/app/components/en/contact/ContactForm";
-import ContactCTA from "@/app/components/en/contact/ContactCTA";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -13,12 +12,11 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-hidden">
 
-<ContactHero />
+<PageHero size="short" kicker="Contact" title={<>Get in <b>touch.</b></>} lead="Contact us to learn more about our projects and investment opportunities." image="/azure/lv-3.jpg" imageAlt="DND Cyprus" ctas={[{ label: "Send Message", href: "#form" }, { label: "Our Projects", href: "/en/projects", variant: "ghost" }]} />
 <ContactInfo />
-<ContactForm />
-<ContactCTA />
+<ContactCard locale="en" mode="contact" id="form" title={<>Let’s bring your dreams <b>to life together.</b></>} lead="The DND Cyprus team is ready to support your investment. Leave a message and we will get back to you shortly." image="/azure/lvin-s1.jpg" showOffices={false} />
     
     </main>
   );

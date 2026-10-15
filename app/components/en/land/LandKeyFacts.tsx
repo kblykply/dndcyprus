@@ -2,7 +2,7 @@
 import React from "react";
 import type { Variants } from "framer-motion";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 const fadeUp: Variants = {
@@ -43,9 +43,9 @@ note = "*For information purposes only; zoning/permit parameters may vary per pa
       aria-label="Geçitkale — Key Facts"
       className="relative overflow-hidden"
       style={{
-        background: "#fff",
-        color: "#141517",
-        ["--stroke"]: "rgba(20,21,23,0.08)",
+        background: "transparent",
+        color: "#0d2326",
+        ["--stroke"]: "rgba(13,35,38,0.08)",
       } as React.CSSProperties & Record<"--stroke", string>}
     >
       {/* subtle brand wash (very light) */}
@@ -66,7 +66,7 @@ note = "*For information purposes only; zoning/permit parameters may vary per pa
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.65)" }}>
+          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
             {subtitle}
           </p>
         </div>
@@ -108,7 +108,7 @@ note = "*For information purposes only; zoning/permit parameters may vary per pa
         {note ? (
           <p
             className="mt-6 text-xs"
-            style={{ color: "rgba(20,21,23,0.55)" }}
+            style={{ color: "rgba(13,35,38,0.55)" }}
           >
             {note}
           </p>

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 
-const TEAL = "#27959b";
+const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
 export default function DndUsaHero({
@@ -22,7 +22,7 @@ export default function DndUsaHero({
     <section
       aria-label="DND USA Hero"
       className="relative overflow-hidden h-[81vh]"
-      style={{ color: "#141517", background: "#ffffff" }}
+      style={{ color: "#0d2326", background: "#ffffff" }}
     >
       {/* Background image */}
       <div className="absolute inset-0">
@@ -72,7 +72,7 @@ export default function DndUsaHero({
             className="max-w-3xl rounded-3xl p-6 sm:p-8"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.82))",
-              border: "1px solid rgba(20,21,23,0.10)",
+              border: "1px solid rgba(13,35,38,0.10)",
               boxShadow: "0 24px 64px rgba(0,0,0,0.12)",
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
@@ -87,7 +87,7 @@ export default function DndUsaHero({
                 DND USA
               </span>
               <span className="text-[11px] px-2 py-0.5 rounded-full"
-                style={{ background: "rgba(20,21,23,0.06)", border: "1px solid rgba(20,21,23,0.10)", color: "rgba(20,21,23,0.70)" }}>
+                style={{ background: "rgba(13,35,38,0.06)", border: "1px solid rgba(13,35,38,0.10)", color: "rgba(13,35,38,0.70)" }}>
                 Massachusetts
               </span>
             </div>
@@ -95,7 +95,7 @@ export default function DndUsaHero({
             <h1 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
               {title}
             </h1>
-            <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(20,21,23,0.75)" }}>
+            <p className="mt-3 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.75)" }}>
               {subtitle}
             </p>
 
