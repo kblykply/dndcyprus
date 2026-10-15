@@ -127,97 +127,85 @@ export default function StoryTimeline() {
           </ol>
         </nav>
 
-        {/* İçerik: görsel + metin */}
-        <div className="mt-10 grid grid-cols-1 items-stretch gap-6 md:grid-cols-12 md:gap-8">
-          <div className="relative md:col-span-7">
-            <div className="relative h-full overflow-hidden rounded-3xl shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/5">
-              <div className="relative aspect-[16/10] md:aspect-auto md:h-full md:min-h-[380px]">
-                <AnimatePresence initial={false} mode="sync">
+        {/* İçerik: tam genişlik görsel pano, metin görselin üstünde (boş beyaz kart yerine) */}
+        <div className="relative mt-10 overflow-hidden rounded-3xl shadow-[0_24px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/5">
+          <div className="relative h-[520px] sm:h-[480px] md:h-[500px]">
+            <AnimatePresence initial={false} mode="sync">
+              <motion.div
+                key={`out-${prevIndexRef.current}`}
+                className="absolute inset-0"
+                initial={{ opacity: 1, scale: 1 }}
+                animate={{ opacity: 0, scale: 1.02, transition: { duration: 0.6, ease: EASE } }}
+                exit={{ opacity: 0 }}
+              >
+                <Image
+                  src={MILESTONES[prevIndexRef.current].image}
+                  alt=""
+                  fill
+                  quality={70}
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 1216px, 100vw"
+                />
+              </motion.div>
+              <motion.div
+                key={`in-${index}`}
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } }}
+                exit={{ opacity: 1 }}
+              >
+                <Image
+                  src={MILESTONES[index].image}
+                  alt={MILESTONES[index].title}
+                  fill
+                  quality={70}
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 1216px, 100vw"
+                />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* okunabilirlik: telefonda alttan, masaüstünde soldan koyu geçiş */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/5 md:bg-gradient-to-r md:from-black/80 md:via-black/45 md:to-transparent" />
+
+            <div className="absolute inset-0 flex items-end md:items-center">
+              <div className="w-full max-w-xl p-6 text-white sm:p-10 md:p-12">
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: `${ORANGE}cc` }}>
+                    {current.badge ?? current.year}
+                  </span>
+                  <span className="ml-auto text-sm tabular-nums text-white/60 md:ml-3">
+                    {String(index + 1).padStart(2, "0")} / {String(len).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.div
-                    key={`out-${prevIndexRef.current}`}
-                    className="absolute inset-0"
-                    initial={{ opacity: 1, scale: 1 }}
-                    animate={{ opacity: 0, scale: 1.02, transition: { duration: 0.6, ease: EASE } }}
-                    exit={{ opacity: 0 }}
+                    key={`txt-${index}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.28, ease: EASE }}
                   >
-                    <Image
-                      src={MILESTONES[prevIndexRef.current].image}
-                      alt=""
-                      fill
-                      quality={65}
-                      className="object-cover"
-                      sizes="(min-width: 1280px) 720px, (min-width: 768px) 58vw, calc(100vw - 48px)"
-                    />
-                  </motion.div>
-                  <motion.div
-                    key={`in-${index}`}
-                    className="absolute inset-0"
-                    initial={{ opacity: 0, scale: 1.02 }}
-                    animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } }}
-                    exit={{ opacity: 1 }}
-                  >
-                    <Image
-                      src={MILESTONES[index].image}
-                      alt={MILESTONES[index].title}
-                      fill
-                      quality={65}
-                      className="object-cover"
-                      sizes="(min-width: 1280px) 720px, (min-width: 768px) 58vw, calc(100vw - 48px)"
-                    />
+                    <p className="mt-4 text-6xl font-black leading-none tracking-tight text-white md:text-7xl">{current.year}</p>
+                    <span aria-hidden className="mt-3 block h-1 w-14 rounded-full" style={{ background: TEAL }} />
+                    <h3 className="mt-4 text-2xl font-semibold tracking-tight text-balance md:text-4xl">{current.title}</h3>
+                    <p className="mt-3 text-base leading-relaxed text-white/80 md:text-lg">{current.summary}</p>
                   </motion.div>
                 </AnimatePresence>
-                <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent" />
-                <span className="absolute bottom-4 left-5 text-5xl font-black leading-none tracking-tight text-white/90 drop-shadow md:text-6xl">
-                  {current.year}
-                </span>
-              </div>
-            </div>
-          </div>
 
-          <div className="md:col-span-5">
-            <div className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.3)] ring-1 ring-black/5 md:p-9">
-              <div className="flex items-center gap-2">
-                <span
-                  className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide"
-                  style={{ background: `${ORANGE}14`, border: `1px solid ${ORANGE}33`, color: ORANGE }}
-                >
-                  {current.year}
-                </span>
-                {current.badge && (
-                  <span className="inline-flex items-center rounded-md border border-black/10 bg-white px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-black/70">
-                    {current.badge}
-                  </span>
-                )}
-                <span className="ml-auto text-sm tabular-nums text-black/40">
-                  {String(index + 1).padStart(2, "0")} / {String(len).padStart(2, "0")}
-                </span>
-              </div>
-
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  className="flex flex-1 flex-col justify-center py-4"
-                  key={`txt-${index}`}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.25, ease: EASE }}
-                >
-                  <h3 className="text-2xl font-semibold tracking-tight text-zinc-950 text-balance md:text-3xl">{current.title}</h3>
-                  <p className="mt-3 text-base leading-relaxed text-black/65 md:text-lg">{current.summary}</p>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="flex items-center justify-between">
-                <div className="h-1.5 w-28 overflow-hidden rounded-full bg-black/10">
-                  <motion.div className="h-full rounded-full" style={{ background: TEAL }} initial={false} animate={{ width: `${progress * 100}%` }} transition={{ duration: 0.5, ease: EASE }} />
-                </div>
-                <div className="flex items-center gap-2">
-                  <GlassIconButton onClick={prev} ariaLabel="Önceki">
-                    <FiChevronLeft className="h-5 w-5" />
-                  </GlassIconButton>
-                  <GlassIconButton onClick={next} ariaLabel="Sonraki">
-                    <FiChevronRight className="h-5 w-5" />
-                  </GlassIconButton>
+                <div className="mt-8 flex items-center gap-4">
+                  <div className="h-1.5 w-32 overflow-hidden rounded-full bg-white/20">
+                    <motion.div className="h-full rounded-full" style={{ background: TEAL }} initial={false} animate={{ width: `${progress * 100}%` }} transition={{ duration: 0.5, ease: EASE }} />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <GlassIconButton onClick={prev} ariaLabel="Önceki">
+                      <FiChevronLeft className="h-5 w-5" />
+                    </GlassIconButton>
+                    <GlassIconButton onClick={next} ariaLabel="Sonraki">
+                      <FiChevronRight className="h-5 w-5" />
+                    </GlassIconButton>
+                  </div>
                 </div>
               </div>
             </div>
@@ -241,9 +229,9 @@ function GlassIconButton({
     <button
       onClick={onClick}
       aria-label={ariaLabel}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-xl
-                 border border-black/10 bg-white text-black
-                 hover:bg-black/5 transition shadow-md"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full
+                 border border-white/25 bg-white/10 text-white backdrop-blur-md
+                 transition hover:bg-white/20"
     >
       {children}
     </button>

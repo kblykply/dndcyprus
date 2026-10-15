@@ -119,6 +119,16 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
   const featured = featuredFirst ? list[0] : undefined;
   const rest = featuredFirst ? list.slice(1) : list;
 
+  // Alttaki bir habere gelince (mouse/klavye) üstteki büyük kartta o haber gösterilir;
+  // bölümden çıkınca varsayılan öne çıkan habere döner.
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [seenIds, setSeenIds] = useState<string[]>([]);
+  const shown = (activeId && list.find((i) => i.id === activeId)) || featured;
+  const activate = (id: string) => {
+    setActiveId(id);
+    setSeenIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  };
+
   const limitForRest = featured ? Math.max(0, initialLimit - 1) : initialLimit;
   const visibleRest = showAll ? rest : rest.slice(0, limitForRest);
   const totalCount = list.length;
@@ -130,8 +140,12 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
     : 'bg-white';
   const sectionClass = `${sectionBleed} isolate ${className ?? ''}`.trim();
 
+  // Görsel geçişi yumuşak olsun diye ilk birkaç haberin kapağı üst üste hazır bekler
+  const stackIds = new Set([...list.slice(0, 4).map((i) => i.id), ...seenIds]);
+  const coverStack = list.filter((i) => i.cover && stackIds.has(i.id));
+
   return (
-    <section className={sectionClass}>
+    <section className={sectionClass} onMouseLeave={() => setActiveId(null)}>
       {/* Inner container keeps nice reading width but the white background spans full viewport */}
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
@@ -162,17 +176,23 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
         </InViewReveal>
 
         {/* Featured */}
-        {featured && (
+        {featured && shown && (
           <InViewReveal y={18}>
             <a
-              href={featured.url}
+              href={shown.url}
               target="_blank"
               rel="noopener noreferrer nofollow"
               className="group relative mb-10 block overflow-hidden rounded-3xl border border-gray-200 bg-white p-4 sm:p-6 text-gray-900 shadow-sm transition hover:shadow-md"
             >
               {/* İki eşit sütun: yazı bloğu görselle aynı yükseklikte (üst ve alt kenarlar hizalı) */}
               <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8">
-                <div className="order-2 flex flex-col md:order-1">
+                <motion.div
+                  key={shown.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className="order-2 flex flex-col md:order-1"
+                >
                   <span
                     className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
                     style={{
@@ -183,41 +203,43 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
                   >
                     Öne Çıkan Haber
                   </span>
-                  <h3 className="mt-4 line-clamp-2 text-xl font-semibold leading-snug text-gray-900 group-hover:underline underline-offset-2 sm:text-2xl">
-                    {featured.title}
+                  <h3 className="mt-4 line-clamp-2 min-h-[2lh] text-xl font-semibold leading-snug text-gray-900 group-hover:underline underline-offset-2 sm:text-2xl">
+                    {shown.title}
                   </h3>
-                  {featured.excerpt && (
-                    <p className="mt-3 line-clamp-3 text-[15px] leading-relaxed text-gray-600 sm:text-base">{featured.excerpt}</p>
-                  )}
+                  <p className="mt-3 line-clamp-3 min-h-[3lh] text-[15px] leading-relaxed text-gray-600 sm:text-base">{shown.excerpt}</p>
                   <div className="mt-auto pt-5">
                     <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
                       <span className="inline-flex items-center gap-1">
-                        <Building2 className="h-3.5 w-3.5" /> {featured.outlet}
+                        <Building2 className="h-3.5 w-3.5" /> {shown.outlet}
                       </span>
                       <span className="inline-flex items-center gap-1">
-                        <Calendar className="h-3.5 w-3.5" /> {fmtTR(featured.date)}
+                        <Calendar className="h-3.5 w-3.5" /> {fmtTR(shown.date)}
                       </span>
                     </div>
                     <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: TEAL }}>
                       Devamını oku <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </div>
-                </div>
+                </motion.div>
 
-                {/* Visual with smooth zoom */}
+                {/* Visual with smooth zoom; kapaklar üst üste, gösterilen görünür */}
                 <div className="order-1 md:order-2">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl ring-1 ring-black/5">
-                    {featured.cover ? (
-                      <Image
-                        src={featured.cover}
-                        alt={featured.title}
-                        fill
-                        sizes="(min-width:1024px) 600px, 100vw"
-                        className="object-cover transition-transform duration-[1200ms] ease-out will-change-transform group-hover:scale-[1.06]"
-                      />
-                    ) : (
-                      <div className="h-full w-full bg-gradient-to-br from-slate-100 to-slate-200" />
-                    )}
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 ring-1 ring-black/5">
+                    {coverStack.map((it) => {
+                      const on = it.id === shown.id;
+                      return (
+                        <Image
+                          key={it.id}
+                          src={it.cover!}
+                          alt={on ? it.title : ''}
+                          aria-hidden={!on}
+                          fill
+                          sizes="(min-width:1024px) 600px, 100vw"
+                          className={`object-cover will-change-transform group-hover:scale-[1.06] ${on ? 'opacity-100' : 'opacity-0'}`}
+                          style={{ transition: 'opacity 450ms ease, scale 1200ms ease-out' }}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -230,7 +252,11 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {visibleRest.map((item, i) => (
               <InViewReveal key={item.id} delay={i * 0.06} y={14}>
-                <PressCard item={item} />
+                <PressCard
+                  item={item}
+                  active={activeId === item.id}
+                  onActivate={() => activate(item.id)}
+                />
               </InViewReveal>
             ))}
           </div>
@@ -269,13 +295,25 @@ Tüm Haberler              <ChevronRight className="h-4 w-4" />
   );
 }
 
-function PressCard({ item }: { item: PressItem }) {
+function PressCard({
+  item,
+  active,
+  onActivate,
+}: {
+  item: PressItem;
+  active: boolean;
+  onActivate: () => void;
+}) {
   return (
     <a
       href={item.url}
       target="_blank"
       rel="noopener noreferrer nofollow"
-      className="group relative block overflow-hidden rounded-2xl border border-gray-200 bg-white text-gray-900 shadow-sm transition hover:shadow-md"
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
+      className={`group relative block overflow-hidden rounded-2xl border bg-white text-gray-900 transition ${
+        active ? 'border-[#27959b] shadow-md ring-2 ring-[#27959b]/25' : 'border-gray-200 shadow-sm hover:shadow-md'
+      }`}
     >
       {/* Visual with hover zoom */}
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-2xl ring-1 ring-black/5">
