@@ -61,9 +61,9 @@ offices = [
     id: "hq",
     label: "DND Cyprus Head Office",
     addressLines: [
-      "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa",
+      "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Famagusta, Cyprus, 99450",
     ],
-    city: "Nicosia",
+    city: "Famagusta",
     country: "North Cyprus",
     phone: "+90 392 444 03 63",
     phoneDisplay: "+90 392 444 03 63",

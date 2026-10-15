@@ -11,6 +11,33 @@ export const metadata = pageMetadata({
 
 const PRESS_ITEMS: PressItem[] = [
   {
+    id: "bestlife-2026-10-14",
+    outlet: "Bestlife Magazin",
+    title: "Kuzey Kıbrıs’ta sterlinle borçlanmadan ev sahibi olma fırsatı!",
+    url: "https://www.bestlifemagazin.com/kuzey-kibris-ta-sterlinle-borclanmadan-ev-sahibi-olma-firsati/6618/",
+    date: "2026-10-14",
+    cover: "/news/bestlife-tl-konut-modeli.webp",
+    tags: ["Lagoon Verde", "TL Ödeme Modeli"],
+  },
+  {
+    id: "cekicmagazin-2026-10-14",
+    outlet: "Çekiç Magazin",
+    title: "DND Cyprus’tan yerli halka Türk lirasıyla konut finansmanı",
+    url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
+    date: "2026-10-14",
+    cover: "/news/tl-konut-finansmani.webp",
+    tags: ["TL Ödeme Modeli", "DND Cyprus"],
+  },
+  {
+    id: "50fifty-2026-10-14",
+    outlet: "50fifty Magazin",
+    title: "DND Cyprus’tan yerli halka Türk lirasıyla konut finansmanı",
+    url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
+    date: "2026-10-14",
+    cover: "/news/tl-konut-finansmani.webp",
+    tags: ["TL Ödeme Modeli", "DND Cyprus"],
+  },
+  {
     id: "mha-2025-11-04",
     outlet: "Mağusa Haber Ajansı (MHA)",
     title: "DND MÜJDEYİ VERDİ: LA JOYA TAMAMLANDI",

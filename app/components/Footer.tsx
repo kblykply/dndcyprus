@@ -27,7 +27,7 @@
     logoSrc = "/DND-LOGO-2.svg",
     companyName = "DND Cyprus",
     tagline = "Güvenilir, şeffaf ve sürdürülebilir çözümler.",
-    addressLines = ["Alasya Park Sitesi 2. Etap, Dükkan No: 2-3 Uluçam Yolu, Sakarya – Gazimağusa"],
+    addressLines = ["Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa, Kıbrıs, 99450"],
     email = "info@dndcyprus.com",
     phone = "+90 392 444 03 63",
  nav = [

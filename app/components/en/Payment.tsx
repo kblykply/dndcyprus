@@ -91,7 +91,13 @@ type SlideContent = {
 };
 type SlideInput = {
   id: number;
-  videoUrl: string;
+  /** YouTube adresi; videoSrc verilmişse kullanılmaz */
+  videoUrl?: string;
+  /** Sitede barındırılan mp4 (ör. Instagram reel'leri YouTube'da olmadığı için) */
+  videoSrc?: string;
+  poster?: string;
+  durationSec?: number;
+  source?: string;
   backgroundImage?: string;
   badge?: string;
   content: SlideContent;
@@ -232,14 +238,15 @@ export default function   ProjectVideoSlider({
         style={paginationVars}
       >
         {slides.map((s, idx) => {
-          const vid = extractYouTubeId(s.videoUrl);
-          const bg = s.backgroundImage || ytThumb(vid);
+          const vid = s.videoSrc ? "" : extractYouTubeId(s.videoUrl ?? "");
+          const bg = s.backgroundImage || s.poster || ytThumb(vid);
           return (
             <SwiperSlide key={s.id}>
               <SlideContentBlock
                 active={idx === activeSlide}
                 index={idx}
                 id={vid}
+                video={s.videoSrc ? { src: s.videoSrc, poster: s.poster, durationSec: s.durationSec, source: s.source } : undefined}
                 bgImage={bg}
                 badge={s.badge ?? "Video"}
                 content={s.content}
@@ -259,6 +266,7 @@ function SlideContentBlock({
   active,
   index,
   id,
+  video,
   bgImage,
   badge,
   content,
@@ -268,14 +276,15 @@ function SlideContentBlock({
   active: boolean;
   index: number;
   id: string;
+  video?: HostedVideo;
   bgImage: string;
   badge: string;
   content: SlideContent;
   onPlayerReady: (player: YTPlayer | null) => void;
   onNeedStopAutoplay: () => void;
 }) {
-  const [author, setAuthor] = useState<string>("");
-  const [duration, setDuration] = useState<string>("–:–");
+  const [author, setAuthor] = useState<string>(video?.source ?? "");
+  const [duration, setDuration] = useState<string>(toMinSec(video?.durationSec));
 
   const handleMeta = useCallback((p: YTPlayer) => {
     try {
@@ -367,7 +376,14 @@ function SlideContentBlock({
 
           {/* Right: video */}
           <motion.div variants={fadeUp} className="lg:col-span-6">
-         {active ? <YouTubePanel
+         {video ? (active ? <HostedVideoPanel
+  video={video}
+  onReady={(player) => {
+    onPlayerReady(player);
+    if (player) handleMeta(player);
+  }}
+  onNeedStopAutoplay={onNeedStopAutoplay}
+/> : <div className="aspect-video overflow-hidden rounded-2xl bg-black">{video.poster ? <img src={video.poster} alt={content.customHeadline} loading="lazy" decoding="async" className="h-full w-full object-contain" /> : null}</div>) : active ? <YouTubePanel
   videoId={id}
   index={index}
   onReady={(player) => {
@@ -493,8 +509,11 @@ useEffect(() => {
       className="relative rounded-2xl overflow-hidden border bg-white/5 backdrop-blur-md shadow-[0_6px_24px_rgba(0,0,0,.45)] swiper-no-swiping"
       style={{ borderColor: "rgba(255,255,255,0.15)" }}
     >
-      <div className="aspect-video w-full swiper-no-swiping">
+      <div className="relative aspect-video w-full swiper-no-swiping">
         <div id={containerId} className="h-full w-full" />
+        {/* Kontroller gizli; videoya tıklanınca YouTube duraklatıp kanalın diğer videolarını
+            (ör. eski Geçitkale videosu) öneren rafı açıyordu. Tıklamayı burada karşılıyoruz. */}
+        <div aria-hidden className="absolute inset-0" />
       </div>
 
       {/* Bottom-left: Mute/Unmute */}
@@ -534,6 +553,148 @@ useEffect(() => {
           border: `1px solid rgba(255,255,255,.35)`,
         }}
         title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+      >
+        {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+        {isFullscreen ? "Exit" : "Fullscreen"}
+      </button>
+    </div>
+  );
+}
+
+/* ---------------- Hosted (mp4) Video Panel ---------------- */
+type HostedVideo = { src: string; poster?: string; durationSec?: number; source?: string };
+
+function HostedVideoPanel({
+  video,
+  onReady,
+  onNeedStopAutoplay,
+}: {
+  video: HostedVideo;
+  onReady: (player: YTPlayer | null) => void;
+  onNeedStopAutoplay: () => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const [muted, setMuted] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const readyCallback = useRef(onReady);
+  useEffect(() => { readyCallback.current = onReady; }, [onReady]);
+
+  useEffect(() => {
+    const onFsChange = () => {
+      const active = !!document.fullscreenElement && !!panelRef.current?.contains(document.fullscreenElement);
+      setIsFullscreen(active);
+      if (active) onNeedStopAutoplay();
+    };
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, [onNeedStopAutoplay]);
+
+  // YouTube oynatıcısıyla aynı arayüz: slider aktif slaytı oynatıp diğerlerini durdurabilsin
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const player: YTPlayer = {
+      playVideo: () => { el.play().catch(() => {}); },
+      pauseVideo: () => el.pause(),
+      seekTo: (sec) => { el.currentTime = sec; },
+      mute: () => { el.muted = true; },
+      unMute: () => { el.muted = false; },
+      destroy: () => el.pause(),
+      getDuration: () => (Number.isFinite(el.duration) ? el.duration : video.durationSec ?? 0),
+      getVideoData: () => ({ author: video.source }),
+    };
+    if (!reducedMotion) player.playVideo();
+    readyCallback.current(player);
+    return () => {
+      el.pause();
+      readyCallback.current(null);
+    };
+  }, [video.src, video.durationSec, video.source, reducedMotion]);
+
+  const toggleMute = useCallback(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (muted) {
+      el.muted = false;
+      el.play().catch(() => {});
+      onNeedStopAutoplay();
+    } else {
+      el.muted = true;
+    }
+    setMuted((m) => !m);
+  }, [muted, onNeedStopAutoplay]);
+
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await panelRef.current?.requestFullscreen?.();
+      } else {
+        await document.exitFullscreen();
+      }
+      onNeedStopAutoplay();
+    } catch {}
+  }, [onNeedStopAutoplay]);
+
+  return (
+    <div
+      ref={panelRef}
+      className="relative rounded-2xl overflow-hidden border bg-black shadow-[0_6px_24px_rgba(0,0,0,.45)] swiper-no-swiping"
+      style={{ borderColor: "rgba(255,255,255,0.15)" }}
+    >
+      <div className="relative aspect-video w-full swiper-no-swiping">
+        {video.poster && (
+          // Dikey (9:16) videoda yan boşlukları aynı karenin bulanık hâli doldurur
+          <img aria-hidden src={video.poster} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl" />
+        )}
+        <video
+          ref={videoRef}
+          src={video.src}
+          poster={video.poster}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="relative h-full w-full object-contain"
+        />
+      </div>
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleMute();
+        }}
+        aria-pressed={!muted}
+        className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium shadow-lg backdrop-blur-md swiper-no-swiping"
+        style={{
+          background: muted ? `${ORANGE}1A` : `${TEAL}1A`,
+          color: "#fff",
+          border: `1px solid ${muted ? `${ORANGE}66` : `${TEAL}66`}`,
+        }}
+        title={muted ? "Unmute" : "Mute"}
+      >
+        {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+        {muted ? "Unmute" : "Mute"}
+      </button>
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFullscreen();
+        }}
+        aria-pressed={isFullscreen}
+        className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium shadow-lg backdrop-blur-md swiper-no-swiping"
+        style={{
+          background: `rgba(0,0,0,.25)`,
+          color: "#fff",
+          border: `1px solid rgba(255,255,255,.35)`,
+        }}
+        title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
       >
         {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
         {isFullscreen ? "Exit" : "Fullscreen"}
@@ -591,23 +752,6 @@ const DEFAULT_SLIDES: SlideInput[] = [
       ],
       primaryCta: { label: "Explore Project", href: "/en/la-joya" },
       secondaryCta: { label: "Contact Us", href: "/en/contact" },
-    },
-  },
-  {
-    id: 2,
-    videoUrl: "https://www.youtube.com/watch?v=fpGuMq5qIEk&pp=0gcJCQYKAYcqIYzv",
-    backgroundImage: "/gecitkale/gecitkale-1.jpg",
-    badge: "Video",
-    content: {
-      customHeadline: "Geçitkale Land Project Overview",
-      tagline: "A calm rhythm surrounded by greenery and water elements.",
-      bullets: [
-        "Landscape design that enhances outdoor living",
-        "Comfort-oriented planning and circulation",
-        "Rich service and facility options",
-      ],
-      primaryCta: { label: "Learn More", href: "/en/gecitkale" },
-      secondaryCta: { label: "Sales Team", href: "/en/team" },
     },
   },
   {

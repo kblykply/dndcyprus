@@ -249,7 +249,7 @@ export default function TermsPage() {
             <h2>18. İletişim</h2>
             <address className="not-italic rounded-lg border border-neutral-200 bg-neutral-50 p-4">
               <div className="font-medium">DND Cyprus</div>
-              <div>Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa</div>
+              <div>Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa, Kıbrıs, 99450</div>
               <div>
                 E-posta:{" "}
                 <a href="mailto:info@dndcyprus.com" className="underline underline-offset-4">

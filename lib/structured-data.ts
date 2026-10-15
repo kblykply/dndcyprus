@@ -15,6 +15,7 @@ export const ORGANIZATION_JSON_LD = {
     "@type": "PostalAddress",
     streetAddress: "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya",
     addressLocality: "Gazimağusa",
+    postalCode: "99450",
     addressCountry: "CY",
   },
   sameAs: [

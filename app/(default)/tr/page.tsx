@@ -14,6 +14,7 @@ import BrandsLogoSliderGlass  from "@/app/components/BrandsSection";
 import ProjectsHeroFullSlider from "@/app/components/projects/ProjectsHero";
 // app/(site)/page.tsx  (or wherever you render the section)
 import PressSection, { type PressItem } from "@/app/components/PressSection";
+import PaymentModelPopup from "@/app/components/PaymentModelPopup";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -25,6 +26,33 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  {
+    id: "bestlife-2026-10-14",
+    outlet: "Bestlife Magazin",
+    title: "Kuzey Kıbrıs’ta sterlinle borçlanmadan ev sahibi olma fırsatı!",
+    url: "https://www.bestlifemagazin.com/kuzey-kibris-ta-sterlinle-borclanmadan-ev-sahibi-olma-firsati/6618/",
+    date: "2026-10-14",
+    cover: "/news/bestlife-tl-konut-modeli.webp",
+    tags: ["Lagoon Verde", "TL Ödeme Modeli"],
+  },
+  {
+    id: "cekicmagazin-2026-10-14",
+    outlet: "Çekiç Magazin",
+    title: "DND Cyprus’tan yerli halka Türk lirasıyla konut finansmanı",
+    url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
+    date: "2026-10-14",
+    cover: "/news/tl-konut-finansmani.webp",
+    tags: ["TL Ödeme Modeli", "DND Cyprus"],
+  },
+  {
+    id: "50fifty-2026-10-14",
+    outlet: "50fifty Magazin",
+    title: "DND Cyprus’tan yerli halka Türk lirasıyla konut finansmanı",
+    url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
+    date: "2026-10-14",
+    cover: "/news/tl-konut-finansmani.webp",
+    tags: ["TL Ödeme Modeli", "DND Cyprus"],
+  },
   {
     id: "mha-2025-11-04",
     outlet: "Mağusa Haber Ajansı (MHA)",
@@ -75,11 +103,12 @@ const PRESS_ITEMS: PressItem[] = [
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen text-white overflow-x-hidden">
+      <PaymentModelPopup />
       <ProjectsHeroFullSlider  />
+            <DeferredPayment locale="tr" />
             <AwardsSection />
                         <ProjectsStrip />
                                                 <StoryTimeline/>
-                                                                                                <DeferredPayment locale="tr" />
                  <WhyDNDSection />
 
 

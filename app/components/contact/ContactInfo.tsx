@@ -60,8 +60,8 @@ export default function ContactInfo({
     {
       id: "hq",
       label: "DND Cyprus Merkez Ofis",
-      addressLines: ["Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa"],
-      city: "Lefkoşa",
+      addressLines: ["Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa, Kıbrıs, 99450"],
+      city: "Gazimağusa",
       country: "Kuzey Kıbrıs",
       phone: "+90 392 444 03 63",
       phoneDisplay: "+90 392 444 03 63",

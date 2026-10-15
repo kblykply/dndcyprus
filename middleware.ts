@@ -11,9 +11,21 @@ function pickLocale(req: NextRequest): "tr" | "en" {
   const saved = req.cookies.get(LOCALE_COOKIE)?.value;
   if (saved === "en" || saved === "tr") return saved;
 
-  const al = (req.headers.get("accept-language") || "").toLowerCase();
-  if (al.includes("en")) return "en";
-  if (al.includes("tr")) return "tr";
+  // Accept-Language sırası/q değeri önemlidir: "tr-TR,tr;q=0.9,en;q=0.8" Türkçe tercih eder.
+  // Eskiden başlıkta herhangi bir yerde "en" geçmesi /en'e yolluyordu.
+  const prefs = (req.headers.get("accept-language") || "")
+    .toLowerCase()
+    .split(",")
+    .map((part, i) => {
+      const [tag, ...params] = part.trim().split(";");
+      const q = params.map((p) => p.trim()).find((p) => p.startsWith("q="));
+      return { lang: tag.split("-")[0], q: q ? Number(q.slice(2)) || 0 : 1, i };
+    })
+    .filter((p) => p.lang && p.q > 0)
+    .sort((a, b) => b.q - a.q || a.i - b.i);
+  for (const { lang } of prefs) {
+    if (lang === "tr" || lang === "en") return lang;
+  }
   return DEFAULT;
 }
 
