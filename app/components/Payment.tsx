@@ -728,7 +728,7 @@ const DEFAULT_SLIDES: SlideInput[] = [
     badge: "Yeni Ödeme Modeli",
     content: {
       customHeadline: "Maaşınız TL, Taksitiniz de TL",
-      tagline: "Kuzey Kıbrıs'ta yerli halk için geliştirdiğimiz yeni konut finansman modeliyle ev sahibi olmak artık daha kolay.",
+      tagline: "Size özel yeni konut finansman modeliyle ev sahibi olmak artık daha kolay.",
       bullets: [
         "Banka yok, faiz yok, kefil yok",
         "Kur farkı ve vade farkı yok; 60 aya kadar vade",

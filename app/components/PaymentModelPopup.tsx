@@ -137,7 +137,7 @@ export default function PaymentModelPopup() {
             Maaşınız TL, taksitiniz de TL
           </h2>
           <p className="text-sm text-white/80 sm:text-base">
-            Yerli halk için geliştirdiğimiz yeni konut finansman modeliyle Lagoon Verde&apos;de 60 aya kadar
+            Size özel yeni konut finansman modeliyle Lagoon Verde&apos;de 60 aya kadar
             faizsiz ve vade farksız ödeme.
           </p>
           <ul className="space-y-2 text-sm sm:text-base">
