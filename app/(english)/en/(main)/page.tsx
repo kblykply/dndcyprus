@@ -48,7 +48,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "DND Cyprus Brings Turkish Lira Home Financing to Local Residents",
     url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
     date: "2026-10-14",
-    cover: "/news/tl-konut-finansmani.webp",
+    cover: "/news/tl-odeme-plani.webp",
     tags: ["TL Payment Model", "DND Cyprus"],
   },
   {
