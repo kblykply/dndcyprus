@@ -187,16 +187,22 @@ export default function   ProjectVideoSlider({
   return (
     <section
       aria-label="Project video carousel"
-      className={`relative w-full overflow-hidden bg-black ${className}`}
-      style={{ color: "#fff" }}
-      data-bg="dark"
+      className={`relative w-full px-3 py-8 sm:px-6 sm:py-12 lg:px-8 ${className}`}
+      style={{ background: "#fff" }}
     >
+      {/* Ana sayfa kaydırıcısının hemen altında: tam genişlik koyu şerit yerine beyaz zeminde
+          köşeleri yuvarlak koyu kart (fotoğraftan koyuya sert geçiş olmasın) */}
+      <div
+        className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#0b1517] shadow-[0_24px_60px_-30px_rgba(0,0,0,0.45)]"
+        style={{ color: "#fff" }}
+        data-bg="dark"
+      >
       {/* Custom white nav arrows */}
       <button
         type="button"
         aria-label="Previous slide"
         onClick={() => swiperRef.current?.slidePrev()}
-        className="absolute z-20 min-h-11 min-w-11 left-[calc(50%-3.5rem)] md:left-4 bottom-16 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
+        className="absolute z-20 hidden md:block min-h-11 min-w-11 md:left-4 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
       >
         <ChevronLeft size={22} />
       </button>
@@ -204,7 +210,7 @@ export default function   ProjectVideoSlider({
         type="button"
         aria-label="Next slide"
         onClick={() => swiperRef.current?.slideNext()}
-        className="absolute z-20 min-h-11 min-w-11 right-[calc(50%-3.5rem)] md:right-4 bottom-16 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
+        className="absolute z-20 hidden md:block min-h-11 min-w-11 md:right-4 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
       >
         <ChevronRight size={22} />
       </button>
@@ -257,6 +263,7 @@ export default function   ProjectVideoSlider({
           );
         })}
       </Swiper>
+      </div>
     </section>
   );
 }
