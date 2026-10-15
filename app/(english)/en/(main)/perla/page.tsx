@@ -1,22 +1,4 @@
-import { DeferredCatalog } from "@/app/components/performance/DeferredMedia";
-import ProjectHero from "@/app/components/azure/ProjectHero";
-import Perla2Facts from "@/app/components/en/perla/Perla2Facts";
-import Perla2Overview from "@/app/components/en/perla/Perla2Overview";
-import Perla2Gallery from "@/app/components/en/perla/Perla2Gallery";
-import Perla2FloorPlans from "@/app/components/en/perla/Perla2FloorPlans";
-import Perla2Amenities from "@/app/components/en/perla/Perla2Amenities";
-import Perla2Location from "@/app/components/en/perla/Perla2Location";
-import Perla2Timeline from "@/app/components/en/perla/Perla2Timeline";
-import ProjectCTA from "@/app/components/azure/ProjectCTA";
-import Hotspots from "@/app/components/en/perla/Hotspots";
-import Charts from "@/app/components/en/perla/Charts";
-import MariachiPerks from "@/app/components/en/mariachi/MariachiPerks";
-
-import LaJoyaTechnicalFacilities from "@/app/components/en/la-joya/LaJoyaTechnicalFacilities";
-
-
-
-
+import AzureProject from "@/app/components/azure/project/AzureProject";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -29,42 +11,13 @@ export const metadata = pageMetadata({
   imageAlt: "La Joya Perla sand pool and residence blocks",
 });
 
-export default function HomePage() {
+// Azure proje şablonu: hero, galeri, genel bakış, bilgiler, teknik donanım, iç mekân, kat planları,
+// Mariachi, olanaklar, 360° tur, konum, katalog, son güncelleme ve talep formu.
+// İçerik: lib/azure/projects/perla.tsx
+export default function Page() {
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden">
-<ProjectHero slug="perla" locale="en" />
-
-
-<Perla2Gallery /> 
-
-<Perla2Overview />
-<Perla2Facts />
-
-<LaJoyaTechnicalFacilities />
-
-<Hotspots/>
-
-
-
-<Perla2FloorPlans />
-
-
-<MariachiPerks /> 
-
-<Charts />
-
-<Perla2Amenities />
-<Perla2Location />
-
-<DeferredCatalog locale="en" project="perla" />
-
-<Perla2Timeline
-
-eyebrow="November 2024 Update" title="La Joya Perla – Latest Construction Update" description="Construction at the La Joya Perla project, scheduled for delivery in November 2026, is progressing rapidly. " video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=v_Pogz8TpxnfIBqR", type: "youtube", title: "La Joya Perla  — Update", }} cta={{ label: "View all updates", href: "https://www.youtube.com/@dndcyprus/videos" }}
-
-/>
-
-<ProjectCTA slug="perla" locale="en" />
+      <AzureProject slug="perla" locale="en" />
     </main>
   );
 }

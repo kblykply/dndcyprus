@@ -1,22 +1,4 @@
-import { DeferredCatalog } from "@/app/components/performance/DeferredMedia";
-import ProjectHero from "@/app/components/azure/ProjectHero";
-import Perla2Facts from "@/app/components/en/perla-ii/Perla2Facts";
-import Perla2Overview from "@/app/components/en/perla-ii/Perla2Overview";
-import Perla2Gallery from "@/app/components/en/perla-ii/Perla2Gallery";
-import Perla2FloorPlans from "@/app/components/en/perla-ii/Perla2FloorPlans";
-import Perla2Amenities from "@/app/components/en/perla-ii/Perla2Amenities";
-import Perla2Location from "@/app/components/en/perla-ii/Perla2Location";
-import Perla2Timeline from "@/app/components/en/perla-ii/Perla2Timeline";
-import ProjectCTA from "@/app/components/azure/ProjectCTA";
-import Hotspots from "@/app/components/en/perla-ii/Hotspots";
-import Charts from "@/app/components/en/perla-ii/Charts";
-import MariachiPerks from "@/app/components/en/mariachi/MariachiPerks";
-
-import LaJoyaTechnicalFacilities from "@/app/components/en/la-joya/LaJoyaTechnicalFacilities";
-
-
-
-
+import AzureProject from "@/app/components/azure/project/AzureProject";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -29,45 +11,13 @@ export const metadata = pageMetadata({
   imageAlt: "La Joya Perla II roof terraces and garden pool apartments",
 });
 
-
-export default function HomePage() {
+// Azure proje şablonu: hero, galeri, genel bakış, bilgiler, teknik donanım, iç mekân, kat planları,
+// Mariachi, olanaklar, 360° tur, konum, katalog, son güncelleme ve talep formu.
+// İçerik: lib/azure/projects/perla-ii.tsx
+export default function Page() {
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden">
-<ProjectHero slug="perla-ii" locale="en" />
-
-
-
-
-<Perla2Gallery /> 
-
-
-
-
-<Perla2Overview />
-<Perla2Facts />
-
-<LaJoyaTechnicalFacilities />
-
-<Hotspots/>
-
-
-
-<Perla2FloorPlans />
-
-<MariachiPerks />
-<Charts />
-
-<Perla2Amenities />
-
-<Perla2Location />
-<DeferredCatalog locale="en" project="perla-ii" />
-
-<Perla2Timeline
-
-eyebrow="October 2025 Update" title="La Joya Perla II – Latest Construction Update" description="Structural construction is 55% complete. Mechanical and electrical infrastructure work is progressing as planned. Sample landscaping designs for the coastal pedestrian route are being tested." video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=Fx0EFJ50fgHkwstW", type: "youtube", title: "La Joya Perla II — Update", }} cta={{ label: "View all updates →", href: "/en/perla-ii" }}
-
-/>
-<ProjectCTA slug="perla-ii" locale="en" />
+      <AzureProject slug="perla-ii" locale="en" />
     </main>
   );
 }

@@ -1,16 +1,4 @@
-import ProjectHero from "@/app/components/azure/ProjectHero";
-import Perla2Facts from "@/app/components/la-joya/Perla2Facts";
-import Perla2Overview from "@/app/components/la-joya/Perla2Overview";
-import Perla2Gallery from "@/app/components/la-joya/Perla2Gallery";
-import Perla2FloorPlans from "@/app/components/la-joya/Perla2FloorPlans";
-import Perla2Location from "@/app/components/la-joya/Perla2Location";
-import Perla2Timeline from "@/app/components/la-joya/Perla2Timeline";
-import ProjectCTA from "@/app/components/azure/ProjectCTA";
-import Hotspots from "@/app/components/la-joya/Hotspots";
-import Charts from "@/app/components/la-joya/Charts";
-import MariachiPerks from "@/app/components/mariachi/MariachiPerks";
-import LaJoyaTechnicalFacilities from "@/app/components/la-joya/LaJoyaTechnicalFacilities";
-
+import AzureProject from "@/app/components/azure/project/AzureProject";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -23,41 +11,13 @@ export const metadata = pageMetadata({
   imageAlt: "La Joya havuz kenarındaki loft konutlar",
 });
 
-
-export default function HomePage() {
+// Azure proje şablonu: hero, galeri, genel bakış, bilgiler, teknik donanım, iç mekân, kat planları,
+// Mariachi, olanaklar, konum, son güncelleme ve talep formu.
+// İçerik: lib/azure/projects/la-joya.tsx
+export default function Page() {
   return (
     <main className="relative w-full min-h-screen overflow-x-hidden">
-<ProjectHero slug="la-joya" locale="tr" />
-
-
-<Perla2Gallery /> 
-
-
-
-<Perla2Overview />
-<Perla2Facts />
-
-
-
-<LaJoyaTechnicalFacilities />
-
-<Hotspots/>
-
-
-
-<Perla2FloorPlans />
-
-<MariachiPerks />
-<Charts />
-
-<Perla2Location />
-<Perla2Timeline
-
-eyebrow="2025’te Tamamlandı" title="La Joya – Tamamlanan Proje" description="La Joya projesi 2025 yılında tamamlanmıştır. Aşağıdaki Kasım 2024 videosu, tamamlanma öncesindeki inşaat sürecinin arşiv kaydıdır." video={{ src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=z9erV672JTOhKtKz", type: "youtube", title: "La Joya — Kasım 2024 İnşaat Arşivi", }} cta={{ label: "Tüm videoları gör", href: "https://www.youtube.com/@dndcyprus/videos" }}
-
-/>
-
-<ProjectCTA slug="la-joya" locale="tr" />
+      <AzureProject slug="la-joya" locale="tr" />
     </main>
   );
 }
