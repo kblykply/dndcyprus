@@ -244,7 +244,7 @@ export default function AwardsSection() {
             </motion.div>
 
             {/* Dots */}
-            <div className="mt-6 flex items-center justify-center md:justify-start gap-2">
+            <div className="mt-6 flex items-center justify-center gap-2">
               {SLIDES.map((s, i) => (
                 <button
                   key={s.id}

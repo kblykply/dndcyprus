@@ -14,7 +14,6 @@ type Milestone = {
   badge?: string;
 };
 
-// Kept for future use if needed, not actively used to keep colors minimal
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -55,154 +54,172 @@ export default function StoryTimeline() {
   return (
     <section
       id="story"
-      className="relative w-full bg-white pt-20 pb-10 md:pt-28 md:pb-14"
+      data-bg="light"
+      className="relative w-full overflow-hidden py-16 md:py-24"
+      style={{ background: `linear-gradient(180deg, ${TEAL}0f 0%, #ffffff 85%)` }}
       onKeyDown={onKeyDown}
       tabIndex={0}
     >
+      {/* yumuşak marka ışıkları */}
+      <div aria-hidden className="pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full blur-3xl" style={{ background: `${TEAL}1f` }} />
+      <div aria-hidden className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full blur-3xl" style={{ background: `${ORANGE}14` }} />
+
       <motion.div
-        className="mx-auto max-w-7xl px-6 grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14"
+        className="relative mx-auto max-w-7xl px-6"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
+        viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.35, ease: EASE }}
       >
-        {/* LEFT */}
-        <div className="relative">
-
-          <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-md z-10">
-            {/* Yıl filigranı kartın içinde (eskiden kartın üst kenarına taşıp yarım kesik görünüyordu) */}
-            <div
-              aria-hidden
-              className="select-none pointer-events-none absolute right-5 top-3 text-7xl md:right-8 md:top-4 md:text-8xl font-black leading-none tracking-tight text-black/[0.05]"
-            >
-              {current.year}
-            </div>
-            <div className="relative p-7 md:p-10">
-              {/* Neutral section label */}
-             <span
-  className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium"
-  style={{
-    background: `${TEAL}14`,     // subtle teal tint (#27959b14)
-    border: `1px solid ${TEAL}33`,// thin teal border
-    color: TEAL,                  // teal text
-  }}
->
-  Şirket Hikayemiz
-</span>
-
-              <div className="mt-4 flex items-center gap-2">
-                {/* Neutral year tag */}
+        {/* Başlık */}
+        <div className="max-w-2xl">
           <span
-  className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide"
-  style={{
-    background: `${ORANGE}14`,      // subtle orange tint
-    border: `1px solid ${ORANGE}33`,// thin orange border
-    color: ORANGE,                  // orange text
-  }}
->
-  {current.year}
-</span>
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wider"
+            style={{ background: `${TEAL}14`, border: `1px solid ${TEAL}33`, color: TEAL }}
+          >
+            Şirket Hikayemiz
+          </span>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">2017’den bugüne DND</h2>
+          <p className="mt-2 text-base text-black/60 md:text-lg">Boston’dan Kuzey Kıbrıs’a uzanan yolculuğumuzun kilometre taşları.</p>
+        </div>
 
+        {/* Yatay zaman çizelgesi */}
+        <nav aria-label="Kilometre taşları" className="relative mt-10">
+          <div aria-hidden className="absolute left-0 right-0 top-[11px] h-[2px] rounded-full bg-black/10" />
+          <motion.div
+            aria-hidden
+            className="absolute left-0 top-[11px] h-[2px] rounded-full"
+            style={{ background: TEAL }}
+            initial={false}
+            animate={{ width: `${(index / (len - 1)) * 100}%` }}
+            transition={{ duration: 0.5, ease: EASE }}
+          />
+          <ol className="relative grid grid-cols-6 gap-1">
+            {MILESTONES.map((m, i) => {
+              const active = i === index;
+              const done = i < index;
+              return (
+                <li key={`${m.year}-${i}`} className="flex flex-col items-center text-center">
+                  <button
+                    type="button"
+                    onClick={() => goTo(i)}
+                    aria-label={`${m.year} – ${m.title}`}
+                    aria-current={active ? "step" : undefined}
+                    className="group flex flex-col items-center"
+                  >
+                    <span
+                      className="grid h-6 w-6 place-items-center rounded-full border-2 bg-white transition-all"
+                      style={{
+                        borderColor: active || done ? TEAL : "rgba(0,0,0,0.18)",
+                        boxShadow: active ? `0 0 0 6px ${TEAL}22` : undefined,
+                      }}
+                    >
+                      <span className="h-2.5 w-2.5 rounded-full transition-colors" style={{ background: active || done ? TEAL : "transparent" }} />
+                    </span>
+                    <span className={`mt-2 text-sm font-semibold transition-colors md:text-base ${active ? "" : "text-black/45 group-hover:text-black/70"}`} style={active ? { color: TEAL } : undefined}>
+                      {m.year}
+                    </span>
+                    <span className={`mt-0.5 hidden text-xs md:block ${active ? "text-black/70" : "text-black/40"}`}>{m.badge}</span>
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
 
-                {/* Neutralized badge (optional) */}
+        {/* İçerik: görsel + metin */}
+        <div className="mt-10 grid grid-cols-1 items-stretch gap-6 md:grid-cols-12 md:gap-8">
+          <div className="relative md:col-span-7">
+            <div className="relative h-full overflow-hidden rounded-3xl shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/5">
+              <div className="relative aspect-[16/10] md:aspect-auto md:h-full md:min-h-[380px]">
+                <AnimatePresence initial={false} mode="sync">
+                  <motion.div
+                    key={`out-${prevIndexRef.current}`}
+                    className="absolute inset-0"
+                    initial={{ opacity: 1, scale: 1 }}
+                    animate={{ opacity: 0, scale: 1.02, transition: { duration: 0.6, ease: EASE } }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <Image
+                      src={MILESTONES[prevIndexRef.current].image}
+                      alt=""
+                      fill
+                      quality={65}
+                      className="object-cover"
+                      sizes="(min-width: 1280px) 720px, (min-width: 768px) 58vw, calc(100vw - 48px)"
+                    />
+                  </motion.div>
+                  <motion.div
+                    key={`in-${index}`}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } }}
+                    exit={{ opacity: 1 }}
+                  >
+                    <Image
+                      src={MILESTONES[index].image}
+                      alt={MILESTONES[index].title}
+                      fill
+                      quality={65}
+                      className="object-cover"
+                      sizes="(min-width: 1280px) 720px, (min-width: 768px) 58vw, calc(100vw - 48px)"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/45 to-transparent" />
+                <span className="absolute bottom-4 left-5 text-5xl font-black leading-none tracking-tight text-white/90 drop-shadow md:text-6xl">
+                  {current.year}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="md:col-span-5">
+            <div className="flex h-full flex-col rounded-3xl bg-white p-7 shadow-[0_20px_50px_-28px_rgba(0,0,0,0.3)] ring-1 ring-black/5 md:p-9">
+              <div className="flex items-center gap-2">
+                <span
+                  className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide"
+                  style={{ background: `${ORANGE}14`, border: `1px solid ${ORANGE}33`, color: ORANGE }}
+                >
+                  {current.year}
+                </span>
                 {current.badge && (
                   <span className="inline-flex items-center rounded-md border border-black/10 bg-white px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-black/70">
                     {current.badge}
                   </span>
                 )}
+                <span className="ml-auto text-sm tabular-nums text-black/40">
+                  {String(index + 1).padStart(2, "0")} / {String(len).padStart(2, "0")}
+                </span>
               </div>
 
- <h3 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-zinc-950 text-balance">           
-  
-  
-       {current.title}
-              </h3>
-              <p className="mt-3 text-black/70 leading-relaxed">{current.summary}</p>
-
-              <div className="mt-7 space-y-4">
-                {/* progress bar (neutral) */}
-                <div className="relative">
-                  <div className="h-1.5 rounded-full bg-black/10" />
-                  <motion.div
-                    className="absolute top-0 left-0 h-1.5 rounded-full bg-black/50"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress * 100}%` }}
-                    transition={{ duration: 0.5, ease: EASE }}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  {/* Neutral dots */}
-                  <div className="flex items-center gap-2">
-                    {MILESTONES.map((m, i) => {
-                      const active = i === index;
-                      return (
-                        <button
-                          key={`${m.year}-${i}`}
-                          onClick={() => goTo(i)}
-                          aria-label={`${m.year} – ${m.title}`}
-                          aria-current={active ? "step" : undefined}
-                          className={`h-2.5 w-2.5 rounded-full transition-all ${
-                            active ? "bg-black ring-2 ring-black/20" : "bg-black/25"
-                          }`}
-                          style={{ transform: active ? "scale(1.05)" : "scale(1)" }}
-                        />
-                      );
-                    })}
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <GlassIconButton onClick={prev} ariaLabel="Önceki">
-                      <FiChevronLeft className="h-5 w-5" />
-                    </GlassIconButton>
-                    <GlassIconButton onClick={next} ariaLabel="Sonraki">
-                      <FiChevronRight className="h-5 w-5" />
-                    </GlassIconButton>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT */}
-        <div className="relative">
-          <div className="relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-lg">
-            <div className="relative aspect-[16/11]">
-              <AnimatePresence initial={false} mode="sync">
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
-                  key={`out-${prevIndexRef.current}`}
-                  className="absolute inset-0"
-                  initial={{ opacity: 1, scale: 1 }}
-                  animate={{ opacity: 0, scale: 1.02, transition: { duration: 0.6, ease: EASE } }}
-                  exit={{ opacity: 0 }}
+                  className="flex flex-1 flex-col justify-center py-4"
+                  key={`txt-${index}`}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.25, ease: EASE }}
                 >
-                  <Image
-                    src={MILESTONES[prevIndexRef.current].image}
-                    alt=""
-                    fill
-                    quality={65}
-                    className="object-cover"
-                    sizes="(min-width: 1280px) 588px, (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
-                  />
-                </motion.div>
-                <motion.div
-                  key={`in-${index}`}
-                  className="absolute inset-0"
-                  initial={{ opacity: 0, scale: 1.02 }}
-                  animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } }}
-                  exit={{ opacity: 1 }}
-                >
-                  <Image
-                    src={MILESTONES[index].image}
-                    alt={MILESTONES[index].title}
-                    fill
-                    quality={65}
-                    className="object-cover"
-                    sizes="(min-width: 1280px) 588px, (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
-                  />
+                  <h3 className="text-2xl font-semibold tracking-tight text-zinc-950 text-balance md:text-3xl">{current.title}</h3>
+                  <p className="mt-3 text-base leading-relaxed text-black/65 md:text-lg">{current.summary}</p>
                 </motion.div>
               </AnimatePresence>
+
+              <div className="flex items-center justify-between">
+                <div className="h-1.5 w-28 overflow-hidden rounded-full bg-black/10">
+                  <motion.div className="h-full rounded-full" style={{ background: TEAL }} initial={false} animate={{ width: `${progress * 100}%` }} transition={{ duration: 0.5, ease: EASE }} />
+                </div>
+                <div className="flex items-center gap-2">
+                  <GlassIconButton onClick={prev} ariaLabel="Önceki">
+                    <FiChevronLeft className="h-5 w-5" />
+                  </GlassIconButton>
+                  <GlassIconButton onClick={next} ariaLabel="Sonraki">
+                    <FiChevronRight className="h-5 w-5" />
+                  </GlassIconButton>
+                </div>
+              </div>
             </div>
           </div>
         </div>

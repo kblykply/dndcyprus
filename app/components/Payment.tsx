@@ -221,7 +221,6 @@ export default function   ProjectVideoSlider({
         effect="fade"
         fadeEffect={{ crossFade: true }}
         loop
-        autoHeight
         autoplay={
           autoplayStopped || reducedMotion
             ? false
@@ -247,7 +246,7 @@ export default function   ProjectVideoSlider({
           const vid = s.videoSrc ? "" : extractYouTubeId(s.videoUrl ?? "");
           const bg = s.backgroundImage || s.poster || ytThumb(vid);
           return (
-            <SwiperSlide key={s.id}>
+            <SwiperSlide key={s.id} className="!h-auto">
               <SlideContentBlock
                 active={idx === activeSlide}
                 index={idx}
@@ -302,7 +301,7 @@ function SlideContentBlock({
   }, []);
 
   return (
-    <div className="relative min-h-[560px] md:min-h-[640px]">
+    <div className="relative flex h-full min-h-[560px] flex-col justify-center md:min-h-[640px]">
       {/* Arka plan: bölüm artık ana sayfa kaydırıcısının hemen altında; fotoğraf zemin onun devamı
           gibi görünüyordu. Marka renklerinde sade koyu degrade (turkuaz zemin, hafif turuncu ışık). */}
       <div
@@ -315,7 +314,7 @@ function SlideContentBlock({
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/10" />
 
       {/* Content */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-12 lg:pb-20">
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-12 lg:pb-20">
         <motion.div
           variants={containerStagger}
           initial="hidden"

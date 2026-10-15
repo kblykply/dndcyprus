@@ -170,10 +170,11 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
               rel="noopener noreferrer nofollow"
               className="group relative mb-10 block overflow-hidden rounded-3xl border border-gray-200 bg-white p-4 sm:p-6 text-gray-900 shadow-sm transition hover:shadow-md"
             >
-              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3">
-                <div className="order-2 md:order-1 md:col-span-2">
+              {/* İki eşit sütun: yazı bloğu görselle aynı yükseklikte (üst ve alt kenarlar hizalı) */}
+              <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8">
+                <div className="order-2 flex flex-col md:order-1">
                   <span
-                    className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full mb-3"
+                    className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
                     style={{
                       border: '1px solid rgba(20,21,23,0.08)',
                       color: TEAL,
@@ -182,31 +183,25 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
                   >
                     Öne Çıkan Haber
                   </span>
-                  <h3 className="mt-2 text-xl font-semibold leading-snug text-gray-900 group-hover:underline underline-offset-2 sm:text-2xl lg:text-[1.7rem]">
+                  <h3 className="mt-4 line-clamp-2 text-xl font-semibold leading-snug text-gray-900 group-hover:underline underline-offset-2 sm:text-2xl">
                     {featured.title}
                   </h3>
                   {featured.excerpt && (
-                    <p className="mt-3 line-clamp-6 text-[15px] leading-relaxed text-gray-600 sm:text-base">{featured.excerpt}</p>
+                    <p className="mt-3 line-clamp-3 text-[15px] leading-relaxed text-gray-600 sm:text-base">{featured.excerpt}</p>
                   )}
-                  <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-gray-500">
-                    <span className="inline-flex items-center gap-1">
-                      <Building2 className="h-3.5 w-3.5" /> {featured.outlet}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" /> {fmtTR(featured.date)}
-                    </span>
-                    {featured.tags?.map((t) => (
-                      <span key={t} className="rounded-full bg-black/5 px-2 py-0.5 text-[11px]">
-                        #{t}
+                  <div className="mt-auto pt-5">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
+                      <span className="inline-flex items-center gap-1">
+                        <Building2 className="h-3.5 w-3.5" /> {featured.outlet}
                       </span>
-                    ))}
+                      <span className="inline-flex items-center gap-1">
+                        <Calendar className="h-3.5 w-3.5" /> {fmtTR(featured.date)}
+                      </span>
+                    </div>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: TEAL }}>
+                      Devamını oku <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
                   </div>
-                  <span
-                    className="mt-5 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-transform group-hover:-translate-y-0.5"
-                    style={{ background: TEAL, boxShadow: `0 10px 22px ${TEAL}33` }}
-                  >
-                    Habere Git <ExternalLink className="h-4 w-4" />
-                  </span>
                 </div>
 
                 {/* Visual with smooth zoom */}
@@ -217,18 +212,14 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
                         src={featured.cover}
                         alt={featured.title}
                         fill
-                        sizes="(min-width:1024px) 380px, 100vw"
+                        sizes="(min-width:1024px) 600px, 100vw"
                         className="object-cover transition-transform duration-[1200ms] ease-out will-change-transform group-hover:scale-[1.06]"
                       />
                     ) : (
                       <div className="h-full w-full bg-gradient-to-br from-slate-100 to-slate-200" />
                     )}
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/0 via-black/0 to-black/0" />
                   </div>
                 </div>
-              </div>
-              <div className="pointer-events-none absolute right-4 top-4 hidden rounded-full border border-gray-200 bg-white p-2 text-gray-800 shadow-sm group-hover:translate-x-0.5 md:inline-flex">
-                <ExternalLink className="h-4 w-4" />
               </div>
             </a>
           </InViewReveal>

@@ -67,14 +67,14 @@ export default function InstagramSpotlight() {
         />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="mt-0 grid gap-10 lg:grid-cols-2 items-stretch min-h-[64vh] lg:min-h-[72vh]">
+          <div className="mt-0 grid gap-10 lg:grid-cols-2 lg:items-start">
         {/* LEFT */}
 <motion.div
   variants={fadeUp}
   initial="hidden"
   whileInView="show"
   viewport={{ once: false, amount: 0.35 }}
-  className="flex flex-col justify-center order-2 lg:order-1 pb-6 lg:pb-8"
+  className="flex flex-col justify-center order-2 lg:order-1 lg:h-[533px] lg:justify-between"
 >
   <span
     className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full mb-3"
@@ -87,17 +87,38 @@ export default function InstagramSpotlight() {
     Instagram
   </span>
 
-  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+  <h2 className="text-3xl sm:text-4xl lg:text-[3.4rem] font-semibold leading-[1.08] tracking-tight">
     Check Out Our Instagram Page
   </h2>
   <p
-    className="mt-3 text-base sm:text-lg"
+    className="mt-4 text-base sm:text-lg lg:text-xl lg:leading-relaxed"
     style={{ color: "rgba(20,21,23,0.72)" }}
   >
     Follow our latest projects, news, and updates through regular posts.
   </p>
 
-  <div className="mt-7 flex flex-wrap gap-3">
+  <ul className="mt-6 space-y-3">
+    <li className="flex items-center gap-3">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>New projects, campaigns and payment offers</span>
+    </li>
+    <li className="flex items-center gap-3">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>Fresh updates from our sites and handovers</span>
+    </li>
+    <li className="flex items-center gap-3">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(20,21,23,0.78)" }}>Reels from La Joya, Lagoon Verde and Mariachi</span>
+    </li>
+  </ul>
+
+  <div className="mt-8 flex flex-wrap gap-3 lg:mt-0">
     <a
       href="https://www.instagram.com/dndcyprus/"
       target="_blank"
@@ -130,7 +151,7 @@ export default function InstagramSpotlight() {
               viewport={{ once: false, amount: 0.35 }}
               className="relative order-1 lg:order-2"
             >
-              <div className="relative flex h-full w-full flex-col items-center justify-center py-4">
+              <div className="relative flex w-full flex-col items-center">
                 {/* Telefon sabit; oklar hemen yanında */}
                 <div className="relative">
                   <button

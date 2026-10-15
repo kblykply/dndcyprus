@@ -156,7 +156,7 @@ function ReelScreen({ post, labels }: { post: IgPost; labels: IgPhoneLabels }) {
             href="https://www.instagram.com/dndcyprus/"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-md border border-white/70 px-2 py-0.5 text-[11px] font-semibold"
+            className="whitespace-nowrap rounded-md border border-white/70 px-2 py-0.5 text-[11px] font-semibold"
           >
             {labels.follow}
           </a>
