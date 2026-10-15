@@ -1,23 +1,10 @@
 // app/components/land/LandKeyFacts.tsx
-import React from "react";
-import type { Variants } from "framer-motion";
-
-const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
+import type { ReactNode } from "react";
 
 type Fact = { label: string; value: string; accent?: "teal" | "orange" };
 
 type Props = {
-  title?: string;
+  title?: ReactNode;
   subtitle?: string;
   facts?: Fact[];
   note?: string;
@@ -26,92 +13,48 @@ type Props = {
 };
 
 export default function LandKeyFacts({
-  title = "Öne Çıkan Bilgiler",
+  title = <>Öne Çıkan <b>Bilgiler</b></>,
   subtitle = "Arsaya dair temel parametreler. Nihai uygulama ilgili kurumların onayına tabidir.",
   facts = [
     { label: "Alan", value: "9,840 m²", accent: "teal" },
     { label: "Cephe", value: "42 m", accent: "orange" },
     { label: "Zonlama", value: "Fasıl 96", accent: "orange" },
     { label: "Maks. Yükseklik", value: "Bilgi amaçlı: ~5 kat", accent: "teal" },
-
   ],
   note = "*Bilgi amaçlıdır; imar/ruhsat parametreleri parsel özelinde ve yetkili kurum kararlarına göre değişebilir.",
   withSeoJsonLd = false,
 }: Props) {
   return (
-    <section
-      aria-label="Geçitkale — Öne Çıkan Bilgiler"
-      className="relative overflow-hidden"
-      style={{
-        background: "transparent",
-        color: "#0d2326",
-        ["--stroke"]: "rgba(13,35,38,0.08)",
-      } as React.CSSProperties & Record<"--stroke", string>}
-    >
-      {/* subtle brand wash (very light) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(50rem 22rem at -10% 0%, ${TEAL}0F, transparent 70%),
-            radial-gradient(50rem 22rem at 110% 100%, ${ORANGE}0F, transparent 70%)
-          `,
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-18">
-        {/* header */}
-        <div
-          className="max-w-2xl"
-        >
-          <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
-          <p className="mt-2 text-sm sm:text-base" style={{ color: "rgba(13,35,38,0.65)" }}>
-            {subtitle}
-          </p>
+    <section className="az-section" aria-label="Geçitkale — Öne Çıkan Bilgiler">
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">Arsa Bilgileri</span>
+          <h2 className="az-h2 sm rv d1">{title}</h2>
+          <p className="az-lead rv d2">{subtitle}</p>
         </div>
 
-        {/* facts grid */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {facts.map((f, i) => {
-            const color = f.accent === "orange" ? ORANGE : TEAL;
-            return (
+        <div className="grid grid-cols-1 gap-4 min-[560px]:grid-cols-2 min-[1000px]:grid-cols-4">
+          {facts.map((f, i) => (
+            <div key={f.label + i} className={`az-tile rv d${i % 4}`} style={{ minHeight: 170 }}>
+              <div className="k">{f.label}</div>
               <div
-                key={f.label + i}
-                className="rounded-2xl p-5"
                 style={{
-                  background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
-                  border: "1px solid var(--stroke)",
-                  boxShadow:
-                    "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
-                  backdropFilter: "blur(10px)",
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(26px, 2.4vw, 40px)",
+                  lineHeight: 1.05,
+                  letterSpacing: "-.02em",
+                  color: f.accent === "orange" ? "var(--coral)" : "var(--sea)",
+                  textWrap: "balance",
                 }}
               >
-                <div
-                  className="inline-flex items-center text-[11px] px-2 py-0.5 rounded-full"
-                  style={{
-                    background: `${color}14`,
-                    color,
-                    border: `1px solid ${color}33`,
-                  }}
-                >
-                  {f.label}
-                </div>
-                <div className="mt-2 text-base sm:text-lg font-semibold">{f.value}</div>
+                {f.value}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
-        {/* note / disclaimer */}
         {note ? (
-          <p
-            className="mt-6 text-xs"
-            style={{ color: "rgba(13,35,38,0.55)" }}
-          >
-            {note}
-          </p>
+          <p className="rv d2" style={{ marginTop: 16, fontSize: 12, color: "var(--ink-40)" }}>{note}</p>
         ) : null}
       </div>
 

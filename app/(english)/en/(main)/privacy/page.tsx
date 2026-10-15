@@ -17,12 +17,12 @@ export default function PrivacyPolicyPage() {
 
   return (
     <main className="min-h-svh pt-24 md:pt-28">
-      <header className="border-b border-neutral-200 bg-white/60 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <h1 className="text-2xl font-semibold tracking-tight">
+      <header>
+        <div className="mx-auto flex max-w-5xl flex-wrap items-end justify-between gap-3 px-6 py-6">
+          <h1 className="text-3xl md:text-4xl tracking-tight">
             Privacy and Cookie Policy
           </h1>
-          <span className="text-sm text-neutral-500">
+          <span className="text-sm text-[var(--ink-40)]">
             Last updated: {updatedAt}
           </span>
         </div>
@@ -34,8 +34,8 @@ export default function PrivacyPolicyPage() {
           aria-label="Table of contents"
           className="md:sticky md:top-24 md:self-start"
         >
-          <div className="rounded-xl border border-neutral-200 p-4">
-            <p className="mb-3 text-sm font-medium text-neutral-600">
+          <div className="rounded-[22px] border border-white/90 bg-white p-4 shadow-[0_10px_30px_rgba(13,35,38,0.05)]">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--sea)]">
               Table of contents
             </p>
             <ul className="space-y-2 text-sm">
@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
               ].map(([href, label]) => (
                 <li key={href}>
                   <a
-                    className="hover:text-neutral-900 text-neutral-600 transition"
+                    className="text-[var(--ink-60)] transition hover:text-[var(--ink)]"
                     href={`#${href}`}
                   >
                     {label}
@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
         </nav>
 
         {/* Content */}
-        <div className="prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24 [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:scroll-mt-24 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:font-semibold [&_p]:mt-3 [&_p]:leading-relaxed [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-1.5 [&_ul]:pl-5">
+        <div className="rounded-[28px] border border-white/90 bg-white p-6 md:p-10 shadow-[0_10px_40px_rgba(13,35,38,0.06)] prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24 [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:scroll-mt-24 [&_h2]:text-2xl [&_h2]:tracking-tight [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:text-lg [&_p]:mt-3 [&_p]:leading-relaxed [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-1.5 [&_ul]:pl-5">
           <section id="kapsam">
             <h2>Scope</h2>
             <p>
@@ -92,7 +92,7 @@ export default function PrivacyPolicyPage() {
               Within the scope of this policy, the “Company” or “DND Cyprus”
               refers to the entity with the following contact details:
             </p>
-            <address className="not-italic rounded-lg border border-neutral-200 bg-neutral-50 p-4">
+            <address className="not-italic rounded-[16px] border border-[var(--line)] bg-[var(--sky)] p-4">
               <div className="font-medium">DND Cyprus</div>
               <div>
                 Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Famagusta, Cyprus, 99450
@@ -114,7 +114,7 @@ export default function PrivacyPolicyPage() {
                 </a>
               </div>
             </address>
-            <p className="mt-3 text-sm text-neutral-600">
+            <p className="mt-3 text-sm text-[var(--ink-60)]">
               (The address and contact details have been updated based on the
               information published on the previous website.)
             </p>
@@ -234,7 +234,7 @@ export default function PrivacyPolicyPage() {
               change your choice at any time and you can also restrict or delete
               cookies via your browser settings.
             </p>
-            <details className="mt-3 rounded-lg border border-neutral-200 p-4">
+            <details className="mt-3 rounded-[16px] border border-[var(--line)] p-4">
               <summary className="cursor-pointer font-medium">
                 Cookie management (summary)
               </summary>
@@ -311,9 +311,9 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h3>Cookie list</h3>
-            <div className="mt-3 overflow-x-auto rounded-lg border border-neutral-200">
+            <div className="mt-3 overflow-x-auto rounded-[16px] border border-[var(--line)]">
               <table className="min-w-full text-left text-sm">
-                <thead className="bg-neutral-50 text-neutral-600">
+                <thead className="bg-[var(--sky)] text-[var(--ink-60)]">
                   <tr>
                     <th className="px-3 py-2 font-medium">Cookie</th>
                     <th className="px-3 py-2 font-medium">Provider</th>
@@ -322,7 +322,7 @@ export default function PrivacyPolicyPage() {
                     <th className="px-3 py-2 font-medium">Category</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-neutral-200 align-top">
+                <tbody className="divide-y divide-[var(--line)] align-top">
                   {[
                     ["dnd_consent", "DND Cyprus", "Stores your cookie choice (analytics/advertising consent).", "180 days", "Necessary"],
                     ["locale", "DND Cyprus", "Remembers your language when you open the home address.", "1 year", "Necessary"],
@@ -435,9 +435,9 @@ export default function PrivacyPolicyPage() {
             </p>
           </section>
 
-          <hr className="my-10 border-neutral-200" />
+          <hr className="my-10 border-[var(--line)]" />
 
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm text-[var(--ink-40)]">
             This text is for information purposes only and does not constitute
             legal advice. Applicable local legislation and, where relevant, the
             provisions of the GDPR prevail.

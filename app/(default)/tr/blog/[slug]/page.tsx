@@ -85,18 +85,18 @@ export default async function BlogDetail({ params }: BlogPageProps) {
     <main className="min-h-svh pt-24 md:pt-28">
       <JsonLd data={blogPostingJsonLd(post)} />
       {/* Header */}
-      <section className="border-b border-black/10 bg-white/70 backdrop-blur-md">
+      <section className="">
         <div className="mx-auto max-w-[1200px] px-5 md:px-8 py-10">
           <Link
             href="/tr/blog"
-            className="inline-flex items-center gap-2 text-sm text-black/60 hover:text-black"
+            className="az-btn glass sm"
           >
             ← Blog
           </Link>
-          <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight">
+          <h1 className="mt-6 text-4xl md:text-5xl max-w-[22ch]">
             {title}
           </h1>
-          {meta ? <div className="mt-3 text-sm text-black/60">{meta}</div> : null}
+          {meta ? <div className="mt-3 text-sm text-[var(--ink-60)]">{meta}</div> : null}
         </div>
       </section>
 
@@ -104,7 +104,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
       <section className="mx-auto max-w-[1200px] px-5 md:px-8 py-14">
         {/* Mobile cover (normal block) */}
         {cover ? (
-          <div className="md:hidden mb-8 rounded-3xl overflow-hidden border border-black/10 shadow-2xl bg-white">
+          <div className="md:hidden mb-8 rounded-[28px] overflow-hidden border border-white/90 shadow-[0_20px_60px_rgba(13,35,38,0.14)] bg-white">
             <div className="relative aspect-[16/9]">
               <Image
                 src={cover}
@@ -126,7 +126,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
               className={[
                 "hidden md:block float-right relative",
                 "w-[min(42%,460px)] h-[520px] ml-8 mb-6",
-                "rounded-3xl overflow-hidden border border-black/10 shadow-2xl bg-white",
+                "rounded-[28px] overflow-hidden border border-white/90 shadow-[0_20px_60px_rgba(13,35,38,0.14)] bg-white",
                 // Irregular wrap (Chromium/Safari; Firefox falls back)
                 "[shape-outside:polygon(0_0,100%_0,85%_100%,0_100%)]",
                 "[clip-path:polygon(0_0,100%_0,85%_100%,0_100%)]",
@@ -150,14 +150,14 @@ export default async function BlogDetail({ params }: BlogPageProps) {
               "prose prose-lg md:prose-xl max-w-none",
               // Readability
               "[text-align:justify] hyphens-auto antialiased leading-relaxed",
-              "prose-headings:font-semibold prose-headings:text-black",
-              "prose-p:text-black/80 prose-strong:text-black",
+              "prose-headings:text-[var(--ink)]",
+              "prose-p:text-[var(--ink)]/80 prose-strong:text-[var(--ink)]",
               "prose-a:underline hover:prose-a:opacity-80 prose-a:decoration-1",
-              "prose-blockquote:border-l-blue-400 prose-blockquote:text-black/70",
-              "prose-li:marker:text-blue-500",
+              "prose-blockquote:border-l-[var(--aqua)] prose-blockquote:text-[var(--ink-60)]",
+              "prose-li:marker:text-[var(--sea)]",
               "prose-img:rounded-2xl",
               // Subtle drop cap for the first paragraph
-              "first:[&>p]:first-letter:text-6xl first:[&>p]:first-letter:font-bold",
+              "first:[&>p]:first-letter:text-6xl first:[&>p]:first-letter:font-medium first:[&>p]:first-letter:text-[var(--sea)]",
               "first:[&>p]:first-letter:float-left first:[&>p]:first-letter:leading-[0.8]",
               "first:[&>p]:first-letter:mr-2 first:[&>p]:first-letter:mt-1",
             ].join(" ")}
@@ -168,15 +168,15 @@ export default async function BlogDetail({ params }: BlogPageProps) {
 
       {/* Other posts */}
       {others.length > 0 && (
-        <section className="border-t border-black/10 bg-white">
+        <section className="border-t border-[var(--line)]">
           <div className="mx-auto max-w-[1200px] px-5 md:px-8 py-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl md:text-2xl font-semibold">Other posts</h2>
+              <h2 className="text-2xl md:text-3xl">Diğer yazılar</h2>
               <Link
                 href="/tr/blog"
-                className="text-sm text-black/60 hover:text-black underline decoration-1"
+                className="az-btn glass sm"
               >
-                View all
+                Tümünü gör
               </Link>
             </div>
 
@@ -191,7 +191,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
                   <Link
                     key={p.slug}
                     href={`/tr/blog/${p.slug}`}
-                    className="group block rounded-2xl overflow-hidden border border-black/10 bg-white hover:shadow-xl transition-shadow"
+                    className="group block rounded-[22px] overflow-hidden border border-white/90 bg-white shadow-[0_10px_30px_rgba(13,35,38,0.05)] hover:shadow-[0_16px_40px_rgba(13,35,38,0.1)] transition-shadow"
                   >
                     <div className="relative aspect-[16/9] bg-gradient-to-br from-black/[0.04] to-black/[0.08]">
                       {p.cover ? (
@@ -206,11 +206,11 @@ export default async function BlogDetail({ params }: BlogPageProps) {
                       ) : null}
                     </div>
                     <div className="p-5">
-                      <h3 className="text-base md:text-lg font-semibold leading-snug group-hover:underline decoration-1">
+                      <h3 className="text-base md:text-lg leading-snug group-hover:underline decoration-1">
                         {p.title}
                       </h3>
                       {info ? (
-                        <p className="mt-2 text-xs md:text-sm text-black/60">
+                        <p className="mt-2 text-xs md:text-sm text-[var(--ink-60)]">
                           {info}
                         </p>
                       ) : null}

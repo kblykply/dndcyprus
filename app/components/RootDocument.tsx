@@ -8,7 +8,7 @@ import "@/app/globals.css";
 // making every public page depend on request headers or consent cookies.
 export default function RootDocument({ children, lang, fontClass }: { children: ReactNode; lang: "tr" | "en"; fontClass: string }) {
   return (
-    <html lang={lang}>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `try{var m=document.cookie.match(/(?:^|; )${CONSENT_COOKIE}=([^;]*)/);if(m){var c=JSON.parse(decodeURIComponent(m[1]));if(c&&c.v===1&&typeof c.analytics==='boolean'&&typeof c.ads==='boolean')document.documentElement.dataset.dndConsent='saved';}}catch(e){}` }} />
         <Script id="consent-default" strategy="beforeInteractive">{CONSENT_DEFAULT_SCRIPT}</Script>

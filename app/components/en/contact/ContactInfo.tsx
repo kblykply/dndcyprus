@@ -1,13 +1,7 @@
-// app/components/ContactInfo.tsx
-"use client";
-
-import React from "react";
+// app/components/en/contact/ContactInfo.tsx
+import type { ReactNode } from "react";
 import Image from "next/image";
 import DeferredIframe from "@/app/components/performance/DeferredIframe";
-import { m as motion, Variants } from "framer-motion";
-
-const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
 
 type Office = {
   id: string;
@@ -31,19 +25,10 @@ type Office = {
 
 type Props = {
   kicker?: string;
-  title?: string;
+  title?: ReactNode;
   subtitle?: string;
   offices?: Office[];
   socials?: { label: string; href: string }[];
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
-  },
 };
 
 // Google embed with native pin
@@ -52,47 +37,48 @@ function buildGmapsEmbedSrc(coords: [number, number]) {
   return `https://www.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
 }
 
+const LABEL_STYLE = { fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", fontWeight: 600, color: "var(--sea)" } as const;
+
 export default function ContactInfo({
-kicker = "DND Cyprus",
-title = "Contact Information",
-subtitle = "Reach out to us with any questions. We’ll get back to you as soon as possible.",
-offices = [
-  {
-    id: "hq",
-    label: "DND Cyprus Head Office",
-    addressLines: [
-      "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Famagusta, Cyprus, 99450",
-    ],
-    city: "Famagusta",
-    country: "North Cyprus",
-    phone: "+90 392 444 03 63",
-    phoneDisplay: "+90 392 444 03 63",
-    email: "mailto:info@dndcyprus.com",
-    hours: ["Weekdays 08:30–17:30, Saturday 08:30–13:00"],
-    mapUrl: "https://maps.app.goo.gl/xwGdVsU3TxJymkVK8",
-    whatsapp: "https://wa.me/905488880363",
-    image: "/dndofis.JPG",
-    imageAlt: "DND Cyprus Head Office",
-    coords: [35.1856, 33.3823],
-  },
-  {
-    id: "sales",
-    label: "Lagoon Verde Sales Office",
-    addressLines: ["Sahil Yolu 45", "Iskele, North Cyprus"],
-    city: "Iskele",
-    country: "North Cyprus",
-    phone: "+90 392 444 03 63",
-    phoneDisplay: "+90 392 444 03 63",
-    email: "mailto:info@dndcyprus.com",
-    hours: ["Weekdays 08:30–17:30, Saturday 08:30–13:00"],
-    mapUrl: "https://maps.app.goo.gl/V2ainR6Rs2JkLaN27",
-    image: "/ofis.jpg",
-    imageAlt: "DND Cyprus Sales Office",
-    mapEmbedUrl:
-      "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
-  },
-]
-,
+  kicker = "DND Cyprus",
+  title = <>Contact <b>Information</b></>,
+  subtitle = "Reach out to us with any questions. We’ll get back to you as soon as possible.",
+  offices = [
+    {
+      id: "hq",
+      label: "DND Cyprus Head Office",
+      addressLines: [
+        "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Famagusta, Cyprus, 99450",
+      ],
+      city: "Famagusta",
+      country: "North Cyprus",
+      phone: "+90 392 444 03 63",
+      phoneDisplay: "+90 392 444 03 63",
+      email: "mailto:info@dndcyprus.com",
+      hours: ["Weekdays 08:30–17:30, Saturday 08:30–13:00"],
+      mapUrl: "https://maps.app.goo.gl/xwGdVsU3TxJymkVK8",
+      whatsapp: "https://wa.me/905488880363",
+      image: "/dndofis.JPG",
+      imageAlt: "DND Cyprus Head Office",
+      coords: [35.1856, 33.3823],
+    },
+    {
+      id: "sales",
+      label: "Lagoon Verde Sales Office",
+      addressLines: ["Sahil Yolu 45", "Iskele, North Cyprus"],
+      city: "Iskele",
+      country: "North Cyprus",
+      phone: "+90 392 444 03 63",
+      phoneDisplay: "+90 392 444 03 63",
+      email: "mailto:info@dndcyprus.com",
+      hours: ["Weekdays 08:30–17:30, Saturday 08:30–13:00"],
+      mapUrl: "https://maps.app.goo.gl/V2ainR6Rs2JkLaN27",
+      image: "/ofis.jpg",
+      imageAlt: "DND Cyprus Sales Office",
+      mapEmbedUrl:
+        "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+    },
+  ],
   socials = [
     { label: "LinkedIn", href: "https://cy.linkedin.com/company/dndcyprus" },
     { label: "Instagram", href: "https://www.instagram.com/dndcyprus/" },
@@ -100,201 +86,116 @@ offices = [
     { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
   ],
 }: Props) {
-  // Kuruluş JSON-LD'si artık site geneli layout'ta (tr/layout, en/(main)/layout) basılıyor
+  // Organization JSON-LD is now emitted in the site-wide layouts (tr/layout, en/(main)/layout)
 
   return (
-    <section
-      aria-label="Contact Information"
-      className="relative overflow-hidden"
-      style={{
-        background: "transparent",
-        color: "#0d2326",
-        ["--stroke"]: "rgba(13,35,38,0.08)",
-      } as React.CSSProperties & Record<"--stroke", string>}
-    >
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        {/* Header */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
-          className="max-w-2xl"
-        >
-          <span
-            className="inline-flex items-center text-xs tracking-wider uppercase px-3 py-1 rounded-full"
-            style={{
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid var(--stroke)",
-              color: TEAL,
-              backdropFilter: "blur(8px)",
-            }}
-          >
-            {kicker}
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-            {title}
-          </h2>
-          <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(13,35,38,0.65)" }}>
-            {subtitle}
-          </p>
-        </motion.div>
+    <section className="az-section" aria-label="Contact Information">
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">{kicker}</span>
+          <h2 className="az-h2 sm rv d1">{title}</h2>
+          <p className="az-lead rv d2">{subtitle}</p>
+        </div>
 
         {/* Offices */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-4 min-[900px]:grid-cols-2">
           {offices.map((o, idx) => {
-            const accent = idx % 2 === 0 ? TEAL : ORANGE;
-            const mapSrc =
-              o.mapEmbedUrl ||
-              (o.coords ? buildGmapsEmbedSrc(o.coords) : null);
+            const mapSrc = o.mapEmbedUrl || (o.coords ? buildGmapsEmbedSrc(o.coords) : null);
 
             return (
-              <motion.article
-                key={o.id}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: false, amount: 0.3 }}
-                className="rounded-2xl p-6 sm:p-7"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6))",
-                  border: "1px solid var(--stroke)",
-                  boxShadow:
-                    "0 12px 28px rgba(0,0,0,0.05), inset 0 1px rgba(255,255,255,0.6)",
-                  backdropFilter: "blur(12px)",
-                }}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-lg font-semibold">{o.label}</h3>
-                  <span
-                    className="text-[10px] px-2 py-0.5 rounded-full"
-                    style={{
-                      background: `${accent}14`,
-                      color: accent,
-                      border: `1px solid ${accent}33`,
-                    }}
-                  >
-                    Ofis
-                  </span>
-                </div>
-
+              <article key={o.id} className={`az-card rv d${(idx % 3) + 1}`}>
                 {/* Image + Map */}
                 {(o.image || mapSrc) && (
-                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-3 p-3 sm:grid-cols-2">
                     {o.image && (
-                      <div className="relative h-44 rounded-xl overflow-hidden border"
-                           style={{ borderColor: "var(--stroke)" }}>
+                      <div className="relative h-48 overflow-hidden rounded-[22px]" style={{ background: "var(--sky-2)" }}>
                         <Image
                           src={o.image}
                           alt={o.imageAlt || o.label}
                           width={800}
                           height={600}
-                          sizes="(max-width: 639px) calc(100vw - 84px), (max-width: 767px) calc((100vw - 104px) / 2), (max-width: 1279px) calc((100vw - 208px) / 4), 256px"
+                          sizes="(max-width: 639px) calc(100vw - 56px), (max-width: 899px) calc(50vw - 40px), 360px"
                           quality={65}
-                          className="h-44 w-full object-cover"
+                          className="h-full w-full object-cover"
                         />
                       </div>
                     )}
                     {mapSrc && (
-                      <div className="relative rounded-xl overflow-hidden border"
-                           style={{ borderColor: "var(--stroke)" }}>
+                      <div className="relative h-48 overflow-hidden rounded-[22px]" style={{ background: "var(--sky-2)" }}>
                         <DeferredIframe
                           src={mapSrc}
                           buttonLabel="Show map"
                           title={`${o.label} Map`}
                           referrerPolicy="no-referrer-when-downgrade"
-                          className="w-full h-44"
-                          style={{ border: 0 }}
-                          aria-label={`${o.label} Harita`}
+                          className="absolute inset-0 h-full w-full border-0"
+                          aria-label={`${o.label} Map`}
                         />
                       </div>
                     )}
                   </div>
                 )}
 
-                {/* Address */}
-                <div className="mt-4 text-sm" style={{ color: "rgba(13,35,38,0.7)" }}>
-                  {o.addressLines.map((line, i) => (
-                    <div key={i}>{line}</div>
-                  ))}
-                </div>
-
-                {/* Hours */}
-                {o.hours?.length && (
-                  <div className="mt-3">
-                    <div className="text-xs uppercase tracking-wide"
-                         style={{ color: "rgba(13,35,38,0.55)" }}>
-                      Office Hours
-                    </div>
-                    <div className="mt-1 space-y-0.5 text-sm"
-                         style={{ color: "rgba(13,35,38,0.7)" }}>
-                      {o.hours.map((h) => <div key={h}>{h}</div>)}
-                    </div>
+                <div className="px-6 pb-6 pt-3 sm:px-8 sm:pb-8">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 style={{ fontSize: "clamp(22px, 2vw, 28px)" }}>{o.label}</h3>
+                    <div className="az-tags" style={{ marginTop: 0 }}><span>Office</span></div>
                   </div>
-                )}
 
-                {/* Contacts */}
-                <div className="mt-4 flex flex-wrap items-center gap-2">
-                  {o.phone && (
-                    <a href={`tel:${o.phone.replace(/^tel:/, "").replace(/[^\d+]/g, "")}`}
-                       className="text-sm px-3 py-1 rounded-full"
-                       style={{ background: `${accent}14`, color: accent, border: `1px solid ${accent}33` }}>
-                      {o.phoneDisplay || o.phone.replace("tel:", "")}
-                    </a>
-                  )}
-                  {o.email && (
-                    <a href={o.email}
-                       className="text-sm px-3 py-1 rounded-full"
-                       style={{ background: "rgba(255,255,255,0.05)", border: "1px solid var(--stroke)" }}>
-                      {o.email.replace("mailto:", "")}
-                    </a>
-                  )}
-                  {o.whatsapp && (
-                    <a href={o.whatsapp} target="_blank" rel="noreferrer"
-                       className="text-sm px-3 py-1 rounded-full"
-                       style={{ background: "rgba(255,255,255,0.05)", color: ORANGE, border: `1px solid ${ORANGE}55` }}>
-                      WhatsApp
-                    </a>
-                  )}
-                  {o.mapUrl && (
-                    <a href={o.mapUrl} target="_blank" rel="noreferrer"
-                       className="text-sm px-3 py-1 rounded-full"
-                       style={{ background: "rgba(255,255,255,0.05)", border: "1px solid var(--stroke)" }}>
-View on Map
-                    </a>
-                  )}
+                  {/* Address */}
+                  <p className="mt-3" style={{ fontSize: 15, color: "var(--ink-60)" }}>
+                    {o.addressLines.map((line, i) => <span key={i} className="block">{line}</span>)}
+                  </p>
+
+                  {/* Hours */}
+                  {o.hours?.length ? (
+                    <div className="mt-4">
+                      <div style={LABEL_STYLE}>Office Hours</div>
+                      <div className="mt-1 text-sm" style={{ color: "var(--ink-60)" }}>
+                        {o.hours.map((h) => <div key={h}>{h}</div>)}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {/* Contacts */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {o.phone && (
+                      <a className="az-btn sea sm" href={`tel:${o.phone.replace(/^tel:/, "").replace(/[^\d+]/g, "")}`}>
+                        {o.phoneDisplay || o.phone.replace("tel:", "")}
+                      </a>
+                    )}
+                    {o.email && (
+                      <a className="az-btn glass sm" href={o.email}>{o.email.replace("mailto:", "")}</a>
+                    )}
+                    {o.whatsapp && (
+                      <a className="az-btn glass sm" href={o.whatsapp} target="_blank" rel="noopener noreferrer" style={{ color: "var(--coral)" }}>
+                        WhatsApp
+                      </a>
+                    )}
+                    {o.mapUrl && (
+                      <a className="az-btn glass sm" href={o.mapUrl} target="_blank" rel="noopener noreferrer">View on Map</a>
+                    )}
+                  </div>
                 </div>
-              </motion.article>
+              </article>
             );
           })}
         </div>
 
         {/* Socials */}
-        {socials?.length && (
-          <motion.div variants={fadeUp} initial="hidden" whileInView="show"
-                      viewport={{ once: false, amount: 0.35 }} className="mt-10">
-            <div className="flex items-center justify-between gap-4 mb-3">
-              <h4 className="text-sm uppercase tracking-wider"
-                  style={{ color: "rgba(13,35,38,0.6)" }}>
-                Social Media
-              </h4>
-              <div className="h-px flex-1" style={{ background: "var(--stroke)" }} />
+        {socials?.length ? (
+          <div className="rv d2" style={{ marginTop: 28 }}>
+            <div className="mb-3 flex items-center gap-4">
+              <h4 style={{ ...LABEL_STYLE, fontFamily: "var(--font-sans)" }}>Social Media</h4>
+              <div className="h-px flex-1" style={{ background: "var(--line)" }} />
             </div>
             <div className="flex flex-wrap gap-2">
               {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer"
-                   className="text-sm px-3 py-1 rounded-full"
-                   style={{ background: "rgba(255,255,255,0.05)", border: "1px solid var(--stroke)" }}>
-                  {s.label}
-                </a>
+                <a key={s.label} className="az-btn glass sm" href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
               ))}
             </div>
-          </motion.div>
-        )}
+          </div>
+        ) : null}
       </div>
-
     </section>
   );
 }

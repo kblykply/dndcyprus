@@ -1,27 +1,13 @@
 // app/components/mariachi/MariachiGalleryExpanding.tsx
 "use client";
 
-import React, { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
-import { m as motion, type Variants, type Easing } from "framer-motion";
-
-const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
-const EASE: Easing = [0.22, 1, 0.36, 1] as const;
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: EASE },
-  },
-};
 
 type GalleryItem = {
-  src: string;   // public/ yolundan görsel
+  src: string;    // public/ yolundan görsel
   alt?: string;
-  label?: string; // (opsiyonel) alt cam şerit etiketi
+  label?: string; // (opsiyonel) cam etiket; yoksa alt metni kullanılır
 };
 
 export default function MariachiGalleryExpanding({
@@ -29,19 +15,18 @@ export default function MariachiGalleryExpanding({
   subtitle = "Mariachi Beach Club Görselleri",
   items,
 }: {
-  title?: string;
+  title?: ReactNode;
   subtitle?: string;
   items?: GalleryItem[];
 }) {
-  // 5 görsel için örnek veri — kendi yollarınızla değiştirin
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/mariachi/1.jpg", alt: "Havuz" },
-        { src: "/mariachi/2.jpg", alt: "Plaj" },
-        { src: "/mariachi/3.jpg", alt: "Cabanalar" },
-        { src: "/mariachi/4.jpg", alt: "DJ Gecesi" },
-        { src: "/mariachi/5.jpg", alt: "Kokteyller" },
+        { src: "/azure/mb-1.jpg", alt: "Havuz" },
+        { src: "/azure/mb-2.jpg", alt: "Plaj" },
+        { src: "/azure/mb-6.jpg", alt: "Cabanalar" },
+        { src: "/azure/dj.jpg", alt: "DJ Gecesi" },
+        { src: "/azure/mb-5.jpg", alt: "Kokteyller" },
       ],
     [items]
   );
@@ -50,146 +35,82 @@ export default function MariachiGalleryExpanding({
   const [hovered, setHovered] = useState<number | null>(null);
   const [active, setActive] = useState<number | null>(null);
 
-  // Kart için büyüme oranı
+  // Panel büyüme oranı
   const growth = (i: number) => {
-    // Tap ile seçilmişse onu esas al
     if (active !== null) return i === active ? 3.2 : 0.8;
-    // Hover varsa ona göre
     if (hovered !== null) return i === hovered ? 3.2 : 0.8;
-    // Varsayılan
     return 1;
   };
 
   return (
-    <section
-      aria-label="Mariachi Beach Club — Galeri"
-      className="relative overflow-hidden"
-      id ="gallery"
-      style={{ background: "transparent", color: "#0d2326" }}
-      data-bg="light"
-    >
-      {/* Sayfa arka plan dekoru — gradyanlı aura (cam hissi) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-[28rem] w-[28rem] rounded-full blur-3xl opacity-30"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.22), transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-24 right-1/4 h-[26rem] w-[26rem] rounded-full blur-3xl opacity-30"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(241,92,52,0.16), transparent 70%)",
-        }}
-      />
-
-      {/* Başlık */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
-          className="max-w-3xl"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-            {title}
-          </h2>
-          <p className="mt-3 text-base sm:text-lg" style={{ color: "#0d2326CC" }}>
-            {subtitle}
-          </p>
-        </motion.div>
-      </div>
-
-      {/* ==== FULL-WIDTH (full-bleed) GALERİ ==== */}
-      <div
-        className="relative w-screen left-1/2 -translate-x-1/2 mt-8"
-        // not: bu "full-bleed" hilesi, sayfa container'ından taşarak tam ekran genişlik verir
-      >
-        <div
-          className="group relative mx-auto"
-          onMouseLeave={() => setHovered(null)}
-          style={{ maxWidth: "100vw" }}
-        >
-          {/* Track */}
-          <div
-            className="flex items-stretch"
-            style={{
-              height: "60svh",
-            }}
-          >
-            {data.map((g, i) => {
-              const grow = growth(i);
-              return (
-                <div
-                  key={g.src + i}
-                  className="relative basis-0 min-w-0 overflow-hidden"
-                  onMouseEnter={() => setHovered(i)}
-                  onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
-                  role="button"
-                  aria-label={g.alt || `Galeri görseli ${i + 1}`}
-                  style={{
-                    flexGrow: grow,
-                    transition: "flex-grow .55s cubic-bezier(0.22,1,0.36,1)",
-                    cursor: "pointer",
-                  }}
-                >
-                  {/* Görsel */}
-                  <DeferredFillImage
-                    fill
-                    quality={65}
-                    sizes="max(50vw, 90vh)"
-                    src={g.src}
-                    alt={g.alt || ""}
-                    className="h-full w-full object-cover select-none"
-                    draggable={false}
-                    style={{
-                      transform: grow > 1 ? "scale(1.06)" : "scale(1.02)",
-                      transition: "transform .6s cubic-bezier(0.22,1,0.36,1)",
-                    }}
-                  />
-
-                  {/* Üst cam parıltı */}
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background:
-                        grow > 1
-                          ? "radial-gradient(60% 50% at 50% 0%, rgba(13,101,112,0.22), transparent 60%)"
-                          : "radial-gradient(60% 40% at 50% 0%, rgba(255,255,255,0.08), transparent 60%)",
-                      transition: "opacity .45s ease",
-                    }}
-                  />
-
-                  {/* Alt cam şerit (etiket) */}
-                  {g.label ? (
-                    <div
-                      className="absolute left-4 right-4 bottom-4 rounded-2xl px-4 py-2 backdrop-blur-md"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
-                        border: "1px solid rgba(255,255,255,0.26)",
-                        color: "#fff",
-                        boxShadow: "0 10px 24px rgba(0,0,0,0.25)",
-                      }}
-                    >
-                      <div className="text-sm font-medium drop-shadow">{g.label}</div>
-                    </div>
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
+    <section className="az-section" id="gallery" aria-label="Mariachi Beach Club — Galeri">
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">Fotoğraflar</span>
+          <h2 className="az-h2 sm rv d1">{title}</h2>
+          <p className="az-lead rv d2">{subtitle}</p>
         </div>
-      </div>
 
-      {/* Küçük ipucu */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10 lg:pb-14">
-        <p className="mt-5 text-xs" style={{ color: "#0d232699" }}>
+        {/* Genişleyen galeri: az-wrap içinde, 28px çerçeveli paneller. Mobilde dikey yığılır. */}
+        <div
+          className="rv d1 flex flex-col gap-3 h-[min(680px,80svh)] min-[900px]:flex-row min-[900px]:h-[clamp(340px,56vh,600px)]"
+          onMouseLeave={() => setHovered(null)}
+        >
+          {data.map((g, i) => {
+            const grow = growth(i);
+            const label = g.label || g.alt || `Galeri görseli ${i + 1}`;
+            return (
+              <div
+                key={g.src + i}
+                role="button"
+                tabIndex={0}
+                aria-label={label}
+                aria-pressed={active === i}
+                onMouseEnter={() => setHovered(i)}
+                onFocus={() => setHovered(i)}
+                onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(active === i ? null : i); }
+                }}
+                className="relative min-h-0 min-w-0 basis-0 cursor-pointer overflow-hidden rounded-[28px]"
+                style={{
+                  flexGrow: grow,
+                  transition: "flex-grow .55s var(--ease)",
+                  background: "var(--sea-deep)",
+                  boxShadow: "0 14px 40px rgba(13,35,38,.1)",
+                }}
+              >
+                <DeferredFillImage
+                  fill
+                  quality={65}
+                  sizes="(max-width: 899px) 100vw, 50vw"
+                  src={g.src}
+                  alt={g.alt || ""}
+                  className="h-full w-full select-none object-cover"
+                  draggable={false}
+                  style={{
+                    transform: grow > 1 ? "scale(1.06)" : "scale(1.02)",
+                    transition: "transform .6s var(--ease)",
+                  }}
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: "linear-gradient(180deg, rgba(6,58,66,0) 55%, rgba(6,58,66,.6) 100%)" }}
+                />
+                <span
+                  className="az-st pointer-events-none absolute bottom-4 left-4"
+                  style={{ opacity: grow > 1 ? 1 : 0, transition: "opacity .4s" }}
+                  aria-hidden
+                >
+                  {label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        <p className="rv d2" style={{ marginTop: 14, fontSize: 12, color: "var(--ink-40)" }}>
           *Mobilde bir görsele dokunarak büyütüp sabitleyebilir, tekrar dokunarak varsayılan görünüme dönebilirsiniz.
         </p>
       </div>

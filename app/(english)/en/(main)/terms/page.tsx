@@ -38,22 +38,22 @@ export default function TermsPage() {
 
   return (
     <main className="min-h-svh pt-24 md:pt-28">
-      <header className="border-b border-neutral-200 bg-white/60 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <h1 className="text-2xl font-semibold tracking-tight">Terms of Use</h1>
-          <span className="text-sm text-neutral-500">Effective as of: {updatedAt}</span>
+      <header>
+        <div className="mx-auto flex max-w-5xl flex-wrap items-end justify-between gap-3 px-6 py-6">
+          <h1 className="text-3xl md:text-4xl tracking-tight">Terms of Use</h1>
+          <span className="text-sm text-[var(--ink-40)]">Effective as of: {updatedAt}</span>
         </div>
       </header>
 
       <article className="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-6 py-10 md:grid-cols-[240px_1fr]">
         {/* TOC */}
         <nav aria-label="Table of contents" className="md:sticky md:top-24 md:self-start">
-          <div className="rounded-xl border border-neutral-200 p-4">
-            <p className="mb-3 text-sm font-medium text-neutral-600">Table of contents</p>
+          <div className="rounded-[22px] border border-white/90 bg-white p-4 shadow-[0_10px_30px_rgba(13,35,38,0.05)]">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--sea)]">Table of contents</p>
             <ul className="space-y-2 text-sm">
               {toc.map(([id, label]) => (
                 <li key={id}>
-                  <a href={`#${id}`} className="text-neutral-600 transition hover:text-neutral-900">
+                  <a href={`#${id}`} className="text-[var(--ink-60)] transition hover:text-[var(--ink)]">
                     {label}
                   </a>
                 </li>
@@ -63,7 +63,7 @@ export default function TermsPage() {
         </nav>
 
         {/* CONTENT */}
-        <div className="prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24">
+        <div className="rounded-[28px] border border-white/90 bg-white p-6 md:p-10 shadow-[0_10px_40px_rgba(13,35,38,0.06)] prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24">
           <section id="giris">
             <h2>1. Scope and Acceptance</h2>
             <p>
@@ -236,7 +236,7 @@ export default function TermsPage() {
 
           <section id="iletisim">
             <h2>18. Contact</h2>
-            <address className="not-italic rounded-lg border border-neutral-200 bg-neutral-50 p-4">
+            <address className="not-italic rounded-[16px] border border-[var(--line)] bg-[var(--sky)] p-4">
               <div className="font-medium">DND Cyprus</div>
               <div>Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Famagusta, Cyprus, 99450</div>
               <div>
@@ -250,13 +250,13 @@ export default function TermsPage() {
                 </a>
               </div>
             </address>
-            <p className="mt-3 text-sm text-neutral-600">
+            <p className="mt-3 text-sm text-[var(--ink-60)]">
               The contact information on this page is based on the details published on our official website.
             </p>
           </section>
 
-          <hr className="my-10 border-neutral-200" />
-          <p className="text-sm text-neutral-500">
+          <hr className="my-10 border-[var(--line)]" />
+          <p className="text-sm text-[var(--ink-40)]">
             This text is a general template for information purposes only and does not constitute legal advice. Please
             review it with your legal counsel to ensure that it is appropriate for your business model and local
             legislation.

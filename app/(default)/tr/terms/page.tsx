@@ -39,22 +39,22 @@ export default function TermsPage() {
 
   return (
     <main className="min-h-svh pt-24 md:pt-28">
-      <header className="border-b border-neutral-200 bg-white/60 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <h1 className="text-2xl font-semibold tracking-tight">Kullanım Koşulları</h1>
-          <span className="text-sm text-neutral-500">Yürürlük: {updatedAt}</span>
+      <header>
+        <div className="mx-auto flex max-w-5xl flex-wrap items-end justify-between gap-3 px-6 py-6">
+          <h1 className="text-3xl md:text-4xl tracking-tight">Kullanım Koşulları</h1>
+          <span className="text-sm text-[var(--ink-40)]">Yürürlük: {updatedAt}</span>
         </div>
       </header>
 
       <article className="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-6 py-10 md:grid-cols-[240px_1fr]">
         {/* TOC */}
         <nav aria-label="İçindekiler" className="md:sticky md:top-24 md:self-start">
-          <div className="rounded-xl border border-neutral-200 p-4">
-            <p className="mb-3 text-sm font-medium text-neutral-600">İçindekiler</p>
+          <div className="rounded-[22px] border border-white/90 bg-white p-4 shadow-[0_10px_30px_rgba(13,35,38,0.05)]">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-[var(--sea)]">İçindekiler</p>
             <ul className="space-y-2 text-sm">
               {toc.map(([id, label]) => (
                 <li key={id}>
-                  <a href={`#${id}`} className="text-neutral-600 transition hover:text-neutral-900">
+                  <a href={`#${id}`} className="text-[var(--ink-60)] transition hover:text-[var(--ink)]">
                     {label}
                   </a>
                 </li>
@@ -64,7 +64,7 @@ export default function TermsPage() {
         </nav>
 
         {/* CONTENT */}
-        <div className="prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24">
+        <div className="rounded-[28px] border border-white/90 bg-white p-6 md:p-10 shadow-[0_10px_40px_rgba(13,35,38,0.06)] prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24">
           <section id="giris">
             <h2>1. Kapsam ve Kabul</h2>
             <p>
@@ -247,7 +247,7 @@ export default function TermsPage() {
 
           <section id="iletisim">
             <h2>18. İletişim</h2>
-            <address className="not-italic rounded-lg border border-neutral-200 bg-neutral-50 p-4">
+            <address className="not-italic rounded-[16px] border border-[var(--line)] bg-[var(--sky)] p-4">
               <div className="font-medium">DND Cyprus</div>
               <div>Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa, Kıbrıs, 99450</div>
               <div>
@@ -261,14 +261,14 @@ export default function TermsPage() {
                 </a>
               </div>
             </address>
-            <p className="mt-3 text-sm text-neutral-600">
+            <p className="mt-3 text-sm text-[var(--ink-60)]">
               Bu sayfadaki iletişim bilgileri resmî sitemizde yayımlanan bilgiler
               esas alınarak sunulmuştur.
             </p>
           </section>
 
-          <hr className="my-10 border-neutral-200" />
-          <p className="text-sm text-neutral-500">
+          <hr className="my-10 border-[var(--line)]" />
+          <p className="text-sm text-[var(--ink-40)]">
             Bu metin bilgilendirme amaçlı genel bir şablondur ve hukuki tavsiye
             değildir. İş modeliniz ve yerel mevzuata uygunluk için hukuk
             danışmanınızla gözden geçiriniz.

@@ -1,389 +1,88 @@
-// app/components/land/LandPlanningInfrastructure.tsx
+// app/components/en/land/LandPlanningInfrastructure.tsx
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
-import {
-  m as motion,
-  type Variants,
-  type Easing,
-  useMotionValue,
-  animate,
-} from "framer-motion";
-
-const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
-const EASE: Easing = [0.22, 1, 0.36, 1] as const;
-const GAP = 20;
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: EASE },
-  },
-};
 
 type Card = {
   title: string;
   desc?: string;
-  image: string;               // public/ path
+  image: string;                      // public/ path
   tag: "Planning" | "Infrastructure"; // pill label
   accent?: "teal" | "orange";
 };
 
 type Props = {
-  title?: string;
+  title?: ReactNode;
   subtitle?: string;
-  items?: Card[];      // override to fully control cards
-  autoPlay?: boolean;
-  intervalMs?: number;
+  items?: Card[]; // override to fully control cards
 };
 
+const DEFAULT_ITEMS: Card[] = [
+  { title: "Zoning Basis", desc: "Development under Chapter 96 — planning in line with local regulations.", image: "/zon.jpg", tag: "Planning", accent: "teal" },
+  { title: "Permitted Typologies", desc: "Single-storey villas, semi-detached villas and multi-storey apartment scenarios.", image: "/vil.jpg", tag: "Planning", accent: "orange" },
+  { title: "Height Information", desc: "For information purposes: on an average plot, development up to ~5 floors is possible.", image: "/apart.jpg", tag: "Planning", accent: "teal" },
+  { title: "Infrastructure Works", desc: "Ongoing works in the area for road, electricity and water infrastructure.", image: "/water.jpg", tag: "Infrastructure", accent: "orange" },
+  { title: "Parcel & Title Deed", desc: "Parceling and title deed processes are prepared / at an advanced stage.", image: "/tapu.jpg", tag: "Infrastructure", accent: "teal" },
+];
+
 export default function LandPlanningInfrastructure({
- title = "Planning & Infrastructure",
-subtitle =
-  "Zoning principles and the plot’s readiness status are summarized with visuals. Final approvals are subject to the relevant authorities.",
- items,
-  autoPlay = true,
-  intervalMs = 5000,
+  title = <>Planning & <b>Infrastructure</b></>,
+  subtitle = "Zoning principles and the plot’s readiness status are summarized with visuals. Final approvals are subject to the relevant authorities.",
+  items,
 }: Props) {
-  /* ---------- Data (defaults) ---------- */
-  const data: Card[] = useMemo(
-    () =>
-  items ?? [
-  {
-    title: "Zoning Basis",
-    desc: "Development under Chapter 96 — planning in line with local regulations.",
-    image: "/zon.jpg",
-    tag: "Planning",
-    accent: "teal",
-  },
-  {
-    title: "Permitted Typologies",
-    desc: "Single-storey villas, semi-detached villas and multi-storey apartment scenarios.",
-    image: "/vil.jpg",
-    tag: "Planning",
-    accent: "orange",
-  },
-  {
-    title: "Height Information",
-    desc: "For information purposes: on an average plot, development up to ~5 floors is possible.",
-    image: "/apart.jpg",
-    tag: "Planning",
-    accent: "teal",
-  },
-  {
-    title: "Infrastructure Works",
-    desc: "Ongoing works in the area for road, electricity and water infrastructure.",
-    image: "/water.jpg",
-    tag: "Infrastructure",
-    accent: "orange",
-  },
-  {
-    title: "Parcel & Title Deed",
-    desc: "Parceling and title deed processes are prepared / at an advanced stage.",
-    image: "/tapu.jpg",
-    tag: "Infrastructure",
-    accent: "teal",
-  },
-],
+  const data = items ?? DEFAULT_ITEMS;
 
-    [items]
-  );
-
-  const total = data.length;
-
-  /* ---------- Motion / State ---------- */
-  const x = useMotionValue(0);
-  const [index, setIndex] = useState(0); // page index (not slide index)
-  const [step, setStep] = useState(0);   // px (one card + gap)
-  const [visibleCount, setVisibleCount] = useState(1);
-  const [maxIndex, setMaxIndex] = useState(0);
-  const [limits, setLimits] = useState<{ left: number; right: number }>({
-    left: 0,
-    right: 0,
-  });
-  const hoverRef = useRef(false);
-  const draggingRef = useRef(false);
-
-  /* ---------- Refs ---------- */
-  const viewportRef = useRef<HTMLDivElement | null>(null);
-  const trackRef = useRef<HTMLDivElement | null>(null);
-
-  /* ---------- Helpers ---------- */
-  const clamp = (v: number, min: number, max: number) =>
-    Math.max(min, Math.min(max, v));
-
-  /* ---------- Measure / Layout ---------- */
-  const measure = () => {
-    const vp = viewportRef.current;
-    const track = trackRef.current;
-    if (!vp || !track) return;
-
-    const slides = Array.from(track.children) as HTMLElement[];
-    if (!slides.length) return;
-
-    const firstWidth = slides[0].getBoundingClientRect().width;
-    const stepPx = firstWidth + GAP;
-    setStep(stepPx);
-
-    const trackWidth =
-      slides.reduce((sum, el) => sum + el.getBoundingClientRect().width, 0) +
-      GAP * (slides.length - 1);
-
-    const vpWidth = vp.getBoundingClientRect().width;
-
-    const visible =
-      Math.max(1, Math.floor((vpWidth + GAP - 1) / stepPx)) || 1;
-    setVisibleCount(visible);
-
-    const maxNegative = Math.min(0, vpWidth - trackWidth);
-    setLimits({ left: maxNegative, right: 0 });
-
-    const newMaxIndex = Math.max(0, slides.length - visible);
-    setMaxIndex(newMaxIndex);
-
-    const safeIndex = clamp(index, 0, newMaxIndex);
-    if (safeIndex !== index) setIndex(safeIndex);
-
-    const target = clamp(-safeIndex * stepPx, maxNegative, 0);
-    x.set(target);
-  };
-
+  // Same scroll logic as the home projects carousel (scroll-snap + arrows + dots)
+  const car = useRef<HTMLDivElement>(null);
+  const [i, setI] = useState(0);
+  const step = () => (car.current?.querySelector<HTMLElement>(".az-pc")?.getBoundingClientRect().width ?? 300) + 16;
+  const go = (d: number) => car.current?.scrollBy({ left: d * step(), behavior: "smooth" });
   useEffect(() => {
-    measure();
-    const ro = new ResizeObserver(measure);
-    if (viewportRef.current) ro.observe(viewportRef.current);
-    window.addEventListener("resize", measure, { passive: true });
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [total]);
-
-  /* ---------- Navigation ---------- */
-  const goTo = (i: number) => {
-    const targetIndex = clamp(i, 0, maxIndex);
-    setIndex(targetIndex);
-    const target = clamp(-targetIndex * step, limits.left, limits.right);
-    animate(x, target, { duration: 0.55, ease: EASE });
-  };
-  const prev = () => goTo(index - 1);
-  const next = () => goTo(index + 1);
-
-  /* ---------- Drag / Swipe ---------- */
-  const onDragStart = () => {
-    draggingRef.current = true;
-    hoverRef.current = true;
-  };
-  const onDragEnd = () => {
-    draggingRef.current = false;
-    if (!step) return;
-    const current = x.get();
-    const nearest = clamp(Math.round(Math.abs(current) / step), 0, maxIndex);
-    goTo(nearest);
-    setTimeout(() => (hoverRef.current = false), 80);
-  };
-
-  /* ---------- Autoplay ---------- */
-  useEffect(() => {
-    if (!autoPlay || maxIndex <= 0) return;
-    const id = setInterval(() => {
-      if (hoverRef.current || draggingRef.current) return;
-      const nextIndex = index >= maxIndex ? 0 : index + 1;
-      goTo(nextIndex);
-    }, intervalMs);
-    return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoPlay, intervalMs, index, maxIndex, step]);
-
-  /* ---------- UI ---------- */
-  const totalPages = Math.max(1, maxIndex + 1);
+    const el = car.current; if (!el) return;
+    const onScroll = () => setI(Math.round(el.scrollLeft / step()));
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <section
-      aria-label="Planning &amp; Infrastructure — Image Carousel"
-      className="relative overflow-hidden"
-      style={{ background: "transparent", color: "#0d2326" }}
-      data-bg="light"
-      onMouseEnter={() => (hoverRef.current = true)}
-      onMouseLeave={() => (hoverRef.current = false)}
-    >
-      {/* Aura accents */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-[26rem] w-[26rem] rounded-full blur-3xl opacity-30"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.20), transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-24 right-1/4 h-[24rem] w-[24rem] rounded-full blur-3xl opacity-30"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 50%, rgba(241,92,52,0.16), transparent 70%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 lg:pt-16 pb-12 lg:pb-16">
-        {/* Header */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
-          className="max-w-3xl"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
-            {title}
-          </h2>
-          <p className="mt-3 text-base sm:text-lg" style={{ color: "#0d2326CC" }}>
-            {subtitle}
-          </p>
-        </motion.div>
-
-          {/* Carousel */}
-          <div className="mt-8 relative select-none">
-            {/* Viewport */}
-            <div
-              ref={viewportRef}
-              className="overflow-hidden"
-              style={{ touchAction: "pan-y" }}
-            >
-              {/* Track (drag/swipe) */}
-              <motion.div
-                ref={trackRef}
-                className="flex will-change-transform"
-                style={{ x, columnGap: GAP }}
-                drag="x"
-                dragConstraints={limits}
-                dragElastic={0.08}
-                dragMomentum={false}
-                onDragStart={onDragStart}
-                onDragEnd={onDragEnd}
-                role="group"
-                aria-roledescription="carousel"
-                aria-label="Planning &amp; Infrastructure cards"
-              >
-                {data.map((card, i) => {
-                  const isActive = i >= index && i < index + visibleCount;
-                  const accent =
-                    card.accent === "orange" ? ORANGE : TEAL;
-
-             return (
-  <div
-    key={card.title + i}
-    // full width on mobile, multi-card on larger screens
-    className="shrink-0 basis-full sm:basis-[56%] md:basis-[44%] lg:basis-[32%]"
-    data-slide={i}
-  >
-    <motion.div
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: false, amount: 0.2 }}
-      className="relative h-[360px] sm:h-[420px] rounded-[24px] overflow-hidden"
-      style={{
-        boxShadow: isActive
-          ? `0 20px 50px rgba(0,0,0,0.15), 0 10px 26px ${accent}12`
-          : "0 14px 32px rgba(0,0,0,0.10)",
-        transform: isActive ? "scale(1.02)" : "scale(0.98)",
-        transition: "transform .35s cubic-bezier(0.22,1,0.36,1)",
-      }}
-    >
-      {/* BG image */}
-      <DeferredFillImage
-        src={card.image}
-        alt=""
-        fill
-        quality={65}
-        sizes="(max-width: 639px) 85vw, (max-width: 1023px) 45vw, 384px"
-        className="object-cover"
-      />
-      {/* Readability wash */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.08))",
-        }}
-        aria-hidden
-      />
-      {/* Glass footer */}
-      <div
-        className="absolute h-[160px] left-4 right-4 bottom-4 rounded-2xl p-4 sm:p-5 backdrop-blur-md"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.10))",
-          border: "1px solid rgba(255,255,255,0.26)",
-          color: "#fff",
-        }}
-      >
-        {/* Tag pill */}
-        <span
-          className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-wide px-2.5 py-1 rounded-full"
-          style={{
-            background: "#fff",
-            border: `1px solid ${accent}33`,
-            color: accent,
-            boxShadow: `0 6px 14px ${accent}1f`,
-          }}
-        >
-          <span
-            aria-hidden
-            className="h-1.5 w-1.5 rounded-full"
-            style={{ background: accent }}
-          />
-          {card.tag}
-        </span>
-
-        <h3 className="mt-2 text-xl font-semibold text-white drop-shadow">
-          {card.title}
-        </h3>
-        {card.desc ? (
-          <p className="mt-1.5 text-sm leading-relaxed text-white/90">
-            {card.desc}
-          </p>
-        ) : null}
+    <section className="az-section flush" aria-label="Planning & Infrastructure — Image Cards">
+      <div className="az-head row" style={{ padding: "0 var(--gutter)", marginBottom: 30 }}>
+        <div>
+          <span className="az-kicker rv">Zoning & Readiness</span>
+          <h2 className="az-h2 sm rv d1">{title}</h2>
+          <p className="az-lead rv d2">{subtitle}</p>
+        </div>
+        <div className="az-ctrl rv d2">
+          <button type="button" aria-label="Previous" onClick={() => go(-1)}>←</button>
+          <button type="button" aria-label="Next" onClick={() => go(1)}>→</button>
+        </div>
       </div>
-    </motion.div>
-  </div>
-);
 
-                })}
-              </motion.div>
+      <div className="az-car" ref={car} role="group" aria-roledescription="carousel" aria-label="Planning & Infrastructure cards">
+        {data.map((card, k) => (
+          <article key={card.title + k} className="az-pc">
+            <DeferredFillImage
+              fill
+              src={card.image}
+              alt=""
+              quality={65}
+              sizes="(max-width: 639px) 85vw, (max-width: 1023px) 45vw, 440px"
+              className="object-cover"
+              aria-hidden
+            />
+            <div className="top">
+              <span className={`az-st${card.accent === "orange" ? " gold" : ""}`}>{card.tag}</span>
             </div>
-
-            {/* Dots (page-based) */}
-            <div className="mt-6 flex items-center justify-center gap-2">
-              {Array.from({ length: totalPages }).map((_, i) => {
-                const isActive = i === index;
-                return (
-                  <button
-                    type="button"
-                    key={`dot-${i}`}
-                    onClick={() => goTo(i)}
-                    aria-label={`Page ${i + 1}`}
-                    aria-current={isActive ? "true" : undefined}
-                    className="h-2.5 rounded-full transition-all"
-                    style={{
-                      width: isActive ? 28 : 8,
-                      background: isActive ? TEAL : "#fff",
-                      border: `1px solid ${
-                        isActive ? `${TEAL}66` : "rgba(13,35,38,0.1)"
-                      }`,
-                      boxShadow: isActive ? `0 6px 12px ${TEAL}22` : "none",
-                    }}
-                  />
-                );
-              })}
+            <div className="in">
+              <h3>{card.title}</h3>
+              {card.desc ? <p>{card.desc}</p> : null}
             </div>
-          </div>
+          </article>
+        ))}
+      </div>
+      <div className="az-cdots" aria-hidden>
+        {data.map((c, k) => <i key={c.title + k} className={k === i ? "on" : undefined} />)}
       </div>
     </section>
   );

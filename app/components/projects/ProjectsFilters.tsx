@@ -1,11 +1,9 @@
-// app/components/ProjectsFilters.tsx
+// app/components/projects/ProjectsFilters.tsx
 "use client";
 
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import Link from "next/link";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
-
-const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
 
 /**
  * Status reflects the current public info:
@@ -24,7 +22,7 @@ type Project = {
   type: Exclude<ProjectType, "All">;
   location: string;
   cover: string; // /public image path
-  href: string;  // static detail page you’ll create
+  href: string;  // static detail page
 };
 
 type Filters = { status: ProjectStatus; type: ProjectType; q: string };
@@ -35,10 +33,10 @@ const DATA: Project[] = [
   {
     id: "lagoon-verde",
     title: "Lagoon Verde",
-    status: "Upcoming", // “coming soon” / campaign posts
+    status: "Ongoing", // “coming soon” / campaign posts
     type: "Residential",
     location: "Long Beach, İskele",
-    cover: "/lagoon-verde/1.jpg",
+    cover: "/azure/lv-7.jpg",
     href: "/tr/lagoon-verde",
   },
   {
@@ -47,7 +45,7 @@ const DATA: Project[] = [
     status: "Ongoing", // launched, in sales/construction
     type: "Residential",
     location: "Bahçeler, İskele",
-    cover: "/perla-ii/2.jpg",
+    cover: "/azure/p2-9.jpg",
     href: "/tr/perla-ii",
   },
   {
@@ -56,7 +54,7 @@ const DATA: Project[] = [
     status: "Ongoing",
     type: "Residential",
     location: "Bahçeler, İskele",
-    cover: "/perla/1.jpg",
+    cover: "/azure/p1-9.jpg",
     href: "/tr/perla",
   },
   {
@@ -65,7 +63,7 @@ const DATA: Project[] = [
     status: "Completed",
     type: "Residential",
     location: "İskele",
-    cover: "/la-joya/2.jpg",
+    cover: "/azure/lj-5.jpg",
     href: "/tr/la-joya",
   },
 
@@ -76,7 +74,7 @@ const DATA: Project[] = [
     status: "Upcoming",
     type: "Beach",
     location: "İskele",
-    cover: "/mariachi/2.jpg",
+    cover: "/azure/mb-2.jpg",
     href: "/tr/mariachi",
   },
 
@@ -93,11 +91,11 @@ const DATA: Project[] = [
 ];
 
 /* ================== UI META ================== */
-const STATUS_TABS: { key: ProjectStatus; label: string; accent?: "teal" | "orange" }[] = [
-  { key: "All",      label: "Tümü",        accent: "teal" },
-  { key: "Ongoing",  label: "Devam Eden",  accent: "orange" },
-  { key: "Upcoming", label: "Yakında",     accent: "teal" },
-  { key: "Completed",label: "Tamamlanan",  accent: "orange" },
+const STATUS_TABS: { key: ProjectStatus; label: string }[] = [
+  { key: "All",       label: "Tümü" },
+  { key: "Ongoing",   label: "Devam Eden" },
+  { key: "Upcoming",  label: "Yakında" },
+  { key: "Completed", label: "Tamamlanan" },
 ];
 
 const TYPE_CHIPS: { key: ProjectType; label: string }[] = [
@@ -106,6 +104,8 @@ const TYPE_CHIPS: { key: ProjectType; label: string }[] = [
   { key: "Beach",       label: "Beach Club" },
   { key: "Land",        label: "Arazi" },
 ];
+
+const CTA = "Detaylara bak";
 
 /* ================== COMPONENT ================== */
 export default function ProjectsFilters() {
@@ -122,44 +122,67 @@ export default function ProjectsFilters() {
   }, [filters]);
 
   return (
-    <section
-      aria-label="Proje Filtreleri ve Liste"
-      className="relative"
-style={{
-  background: "transparent",
-  color: "#0d2326",
-  ["--stroke"]: "rgba(13,35,38,0.08)",
-} as React.CSSProperties & Record<"--stroke", string>}
-    >
-      {/* subtle accent wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(28rem 16rem at 12% 0%, ${TEAL}10, transparent 70%),
-            radial-gradient(24rem 14rem at 88% 100%, ${ORANGE}12, transparent 70%)
-          `,
-        }}
-      />
+    <section className="az-section tight" aria-label="Proje Filtreleri ve Liste">
+      <div className="az-wrap">
+        {/* Filtre çubuğu: durum sekmeleri (pill) + arama */}
+        <div
+          className="az-panel rv"
+          style={{ padding: 14, display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "space-between", background: "var(--glass)" }}
+        >
+          <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Durum">
+            {STATUS_TABS.map((t) => {
+              const active = filters.status === t.key;
+              return (
+                <button
+                  key={t.key}
+                  type="button"
+                  aria-pressed={active}
+                  className={`az-btn sm ${active ? "sea" : "glass"}`}
+                  onClick={() => setFilters((v) => ({ ...v, status: t.key }))}
+                >
+                  {t.label}
+                </button>
+              );
+            })}
+          </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
-        {/* Status Tabs */}
-        <div className="flex flex-wrap items-center gap-2">
-          {STATUS_TABS.map((t) => {
-            const active = filters.status === t.key;
-            const color = t.accent === "orange" ? ORANGE : TEAL;
+          <div className="az-field" style={{ flex: "1 1 240px", maxWidth: 360 }}>
+            <label htmlFor="project-search" className="sr-only">Projelerde Ara</label>
+            <input
+              id="project-search"
+              type="search"
+              style={{ border: "1px solid var(--line)" }}
+              placeholder="Projelerde ara…"
+              value={filters.q}
+              onChange={(e) => setFilters((v) => ({ ...v, q: e.target.value }))}
+            />
+          </div>
+        </div>
+
+        {/* Tür çipleri */}
+        <div className="az-tags rv d1" role="group" aria-label="Tür" style={{ alignItems: "center" }}>
+          <span style={{ background: "transparent", border: 0, padding: "7px 0", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 600, color: "var(--ink-40)" }}>
+            Tür:
+          </span>
+          {TYPE_CHIPS.map((t) => {
+            const active = filters.type === t.key;
             return (
               <button
                 key={t.key}
-                onClick={() => setFilters((v) => ({ ...v, status: t.key }))}
-                className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
+                type="button"
+                aria-pressed={active}
+                onClick={() => setFilters((v) => ({ ...v, type: t.key }))}
                 style={{
-                  background: active ? color : "rgba(13,35,38,0.05)",
-                  color: active ? "#fff" : "rgba(13,35,38,0.78)",
-                  border: active ? `1px solid ${color}AA` : "1px solid var(--stroke)",
-                  boxShadow: active ? `0 6px 18px ${color}40` : "none",
-                  backdropFilter: "blur(8px)",
+                  padding: "7px 12px",
+                  borderRadius: 999,
+                  background: active ? "var(--sea)" : "var(--glass)",
+                  border: `1px solid ${active ? "var(--sea)" : "rgba(255,255,255,.9)"}`,
+                  color: active ? "#fff" : "var(--ink)",
+                  fontSize: 12,
+                  fontWeight: 500,
+                  fontFamily: "inherit",
+                  cursor: "pointer",
+                  transition: "background .3s, color .3s",
                 }}
               >
                 {t.label}
@@ -168,86 +191,35 @@ style={{
           })}
         </div>
 
-        {/* Type Chips + Search */}
-        <div className="mt-4 flex flex-col lg:flex-row gap-3 lg:items-center lg:justify-between">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs uppercase tracking-wide" style={{ color: "rgba(13,35,38,0.55)" }}>
-              Tür:
-            </span>
-            {TYPE_CHIPS.map((t) => {
-              const active = filters.type === t.key;
-              return (
-                <button
-                  key={t.key}
-                  onClick={() => setFilters((v) => ({ ...v, type: t.key }))}
-                  className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
-                  style={{
-                    background: active ? `${TEAL}` : "rgba(13,35,38,0.05)",
-                    color: active ? "#fff" : "rgba(13,35,38,0.78)",
-                    border: active ? `1px solid ${TEAL}AA` : "1px solid var(--stroke)",
-                    boxShadow: active ? `0 6px 18px ${TEAL}40` : "none",
-                    backdropFilter: "blur(8px)",
-                  }}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="w-full lg:w-[320px]">
-            <label htmlFor="project-search" className="sr-only">Projelerde Ara</label>
-            <input
-              id="project-search"
-              placeholder="Projelerde ara…"
-              value={filters.q}
-              onChange={(e) => setFilters((v) => ({ ...v, q: e.target.value }))}
-              className="w-full rounded-xl px-3 py-2 text-sm outline-none"
-              style={{ background: "#fff", border: "1px solid var(--stroke)" }}
-            />
-          </div>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Proje kartları (ana sayfadaki .az-pc stili) */}
+        <div className="mt-6 grid grid-cols-1 gap-4 min-[640px]:grid-cols-2 min-[1000px]:grid-cols-3">
           {filtered.map((p) => (
-            <a
-              key={p.id}
-              href={p.href}
-              className="rounded-2xl overflow-hidden block group"
-              style={{
-                background: "#fff",
-                border: "1px solid var(--stroke)",
-                boxShadow: "0 10px 24px rgba(0,0,0,0.04)",
-              }}
-            >
-              <div className="relative aspect-[16/10] bg-white overflow-hidden">
-                <DeferredFillImage
-                  fill
-                  quality={65}
-                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) calc((100vw - 72px) / 2), 384px"
-                  src={p.cover}
-                  alt={p.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
+            <Link key={p.id} className="az-pc" href={p.href} prefetch={false}>
+              <DeferredFillImage
+                fill
+                quality={65}
+                sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 999px) 50vw, 480px"
+                src={p.cover}
+                alt=""
+                className="object-cover"
+                aria-hidden
+              />
+              <div className="top">
+                <span className="az-st">{labelStatusTR(p.status)}</span>
+                <span className="az-st">{labelTypeTR(p.type)}</span>
               </div>
-              <div className="p-4">
-                <div className="text-sm uppercase tracking-wide" style={{ color: "rgba(13,35,38,0.55)" }}>
-                  {p.location} • {labelStatusTR(p.status)}
-                </div>
-                <div className="text-base font-semibold">{p.title}</div>
+              <div className="in">
+                <small>{p.location}</small>
+                <h3>{p.title}</h3>
+                <div className="glassrow">{CTA} <i>→</i></div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 
-        {/* Empty state */}
+        {/* Boş durum */}
         {filtered.length === 0 && (
-          <div
-            className="mt-8 rounded-xl px-4 py-3 text-sm"
-            style={{ background: "rgba(13,35,38,0.05)", border: "1px solid var(--stroke)", color: "rgba(13,35,38,0.6)" }}
-          >
+          <div className="az-panel" role="status" style={{ marginTop: 16, fontSize: 14, color: "var(--ink-60)" }}>
             Sonuç bulunamadı. Farklı bir filtre veya arama deneyin.
           </div>
         )}
@@ -262,5 +234,13 @@ function labelStatusTR(s: Exclude<ProjectStatus, "All">) {
     case "Ongoing": return "Devam Eden";
     case "Upcoming": return "Yakında";
     case "Completed": return "Tamamlanan";
+  }
+}
+
+function labelTypeTR(t: Exclude<ProjectType, "All">) {
+  switch (t) {
+    case "Residential": return "Konut";
+    case "Beach": return "Beach Club";
+    case "Land": return "Arazi";
   }
 }

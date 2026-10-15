@@ -47,13 +47,12 @@ function Badge({ label, active, color, onClick }: { label: string; active?: bool
   return (
     <button
       onClick={onClick}
-      className="text-xs sm:text-sm px-3 py-1 rounded-full transition-colors"
+      className="text-[13px] font-medium px-3.5 py-2 rounded-full transition-colors whitespace-nowrap"
       style={{
-        background: active ? `${color ?? TEAL}` : "rgba(13,35,38,0.05)",
-        color: active ? "#fff" : "rgba(13,35,38,0.75)",
-        border: active ? `1px solid ${(color ?? TEAL)}AA` : "1px solid rgba(13,35,38,0.08)",
-        boxShadow: active ? `0 6px 18px ${(color ?? TEAL)}40` : "none",
-        backdropFilter: "blur(8px)",
+        background: active ? "var(--sea)" : "rgba(255,255,255,0.7)",
+        color: active ? "#fff" : "var(--ink-60)",
+        border: active ? "1px solid var(--sea)" : "1px solid rgba(255,255,255,0.9)",
+        boxShadow: active ? "0 8px 24px rgba(13,101,112,0.28)" : "none",
       }}
     >
       {label}
@@ -460,7 +459,7 @@ export default function LeadershipTeam({
       }}
     />
 
-    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <div className="relative mx-auto max-w-[1560px] px-[var(--gutter)] py-10 lg:py-14">
       {/* Header */}
       {showHeader && (<div
         className="text-left"
@@ -487,14 +486,14 @@ export default function LeadershipTeam({
       </div>)}
 
       {/* Filters (sticky on mobile for easy nav) */}
-      <div className="mt-8 sticky top-20 z-10 -mx-4 px-4 bg-white/80 backdrop-blur supports-[backdrop-filter]:backdrop-blur rounded-2xl border border-[var(--stroke)]">
-        <div className="flex gap-2 overflow-x-auto py-3 no-scrollbar">
+      <div className="mt-2 sticky top-20 z-10 rounded-full border border-white/90 bg-white/75 px-3 shadow-[0_10px_30px_rgba(13,35,38,0.06)] backdrop-blur supports-[backdrop-filter]:backdrop-blur">
+        <div className="flex gap-2 overflow-x-auto py-2 no-scrollbar">
           {categories.map((cat) => (
             <Badge
               key={cat}
               label={cat}
               active={activeCat === cat}
-              color={cat === "Leadership" ? TEAL : cat === "Architecture" ? ORANGE : undefined}
+              color={undefined}
               onClick={() => setActiveCat(cat)}
             />
           ))}
@@ -504,12 +503,11 @@ export default function LeadershipTeam({
       {/* FULL-IMAGE GRID */}
       <motion.div
         layout
-        className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
+        className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
       >
         <AnimatePresence initial={false} mode="popLayout">
           
           {sorted.map((m, index) => {
-            const color = m.accent === "orange" ? ORANGE : TEAL;
             const photoProps = {
               fill: true,
               src: m.photo || "/teams/okan.png",
@@ -526,7 +524,7 @@ export default function LeadershipTeam({
                 initial={index === 0 ? false : "hidden"}
                 animate="show"
                 exit="exit"
-                className="group relative overflow-hidden rounded-3xl ring-1 ring-[var(--stroke)] shadow-[0_16px_40px_rgba(0,0,0,0.06)]"
+                className="group relative overflow-hidden rounded-[28px] border border-white/90 bg-white shadow-[0_10px_40px_rgba(13,35,38,0.06)] transition-shadow hover:shadow-[0_30px_70px_rgba(13,35,38,0.14)]"
               >
                 {/* Image */}
                 <div className="relative aspect-[3/5] w-full">
@@ -539,19 +537,18 @@ export default function LeadershipTeam({
 
                   {/* Category pill */}
                   <span
-                    className="absolute left-3 top-3 text-[10px] px-2 py-0.5 rounded-full backdrop-blur-sm"
-                    style={{ background: `${color}22`, color, border: `1px solid ${color}44` }}
+                    className="az-st absolute left-3 top-3"
                   >
                     {m.category}
                   </span>
 
                   {/* Info box on image */}
                   <div className="absolute inset-x-0 bottom-0 p-5 ">
-                    <div className="rounded-2xl bg-white/65 dark:bg-white/90 backdrop-blur-md p-4 ring-1 ring-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.18)] group-hover:translate-y-0 translate-y-1 transition-transform h-[110px]">
-                      <h3 className="text-sm font-semibold text-gray-900">{m.name}</h3>
-                      <div className="text-xs mt-0.5 text-gray-700">{m.role}</div>
+                    <div className="rounded-[18px] bg-white/85 backdrop-blur-md p-4 ring-1 ring-white/70 shadow-[0_8px_24px_rgba(13,35,38,0.14)] group-hover:translate-y-0 translate-y-1 transition-transform h-[110px]">
+                      <h3 className="text-[15px] leading-tight text-[var(--ink)]">{m.name}</h3>
+                      <div className="text-[11px] mt-1 uppercase tracking-[0.08em] font-semibold text-[var(--sea)]">{m.role}</div>
                       {m.bio ? (
-                        <p className="mt-1.5 text-xs leading-relaxed text-gray-600 line-clamp-2">
+                        <p className="mt-1.5 text-xs leading-relaxed text-[var(--ink-60)] line-clamp-2">
                           {m.bio}
                         </p>
                       ) : null}
@@ -569,7 +566,7 @@ export default function LeadershipTeam({
                   {/* subtle ring on hover */}
                   <div
                     className="pointer-events-none absolute inset-0 rounded-3xl ring-1 opacity-0 group-hover:opacity-100 transition"
-                    style={{ ringColor: `${color}55` } as React.CSSProperties}
+                    style={{ boxShadow: "inset 0 0 0 1px rgba(13,101,112,0.35)" }}
                   />
                 </div>
               </motion.article>

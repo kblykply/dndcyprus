@@ -152,7 +152,7 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
         <InViewReveal y={16}>
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-gray-900">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-[var(--ink)]">
                 {title}
               </h2>
               {description && (
@@ -167,7 +167,7 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
             {pressKitHref && (
               <a
                 href={pressKitHref}
-                className="inline-flex items-center rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 shadow-sm transition hover:shadow-md hover:-translate-y-0.5"
+                className="az-btn glass sm"
               >
                 <Building2 className="mr-2 h-4 w-4" /> Basın Kiti
               </a>
@@ -182,7 +182,7 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
               href={shown.url}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="group relative mb-10 block overflow-hidden rounded-3xl border border-gray-200 bg-white p-4 sm:p-6 text-gray-900 shadow-sm transition hover:shadow-md"
+              className="group relative mb-10 block overflow-hidden rounded-[36px] border border-white/90 bg-white p-4 sm:p-6 text-[var(--ink)] shadow-[0_20px_60px_rgba(13,35,38,0.08)] transition hover:shadow-[0_30px_70px_rgba(13,35,38,0.14)]"
             >
               {/* İki eşit sütun: yazı bloğu görselle aynı yükseklikte (üst ve alt kenarlar hizalı) */}
               <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8">
@@ -193,23 +193,14 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className="order-2 flex flex-col md:order-1"
                 >
-                  <span
-                    className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
-                    style={{
-                      border: '1px solid rgba(13,35,38,0.08)',
-                      color: TEAL,
-                      background: '#ffffff',
-                    }}
-                  >
-                    Öne Çıkan Haber
-                  </span>
-                  <h3 className="mt-4 line-clamp-2 min-h-[2lh] text-xl font-semibold leading-snug text-gray-900 group-hover:underline underline-offset-2 sm:text-2xl">
+                  <span className="az-kicker">Öne Çıkan Haber</span>
+                  <h3 className="mt-4 line-clamp-2 min-h-[2lh] text-xl font-semibold leading-snug text-[var(--ink)] group-hover:underline underline-offset-2 sm:text-2xl">
                     {shown.title}
                   </h3>
-                  <p className="mt-3 line-clamp-3 min-h-[3lh] text-[15px] leading-relaxed text-gray-600 sm:text-base">{shown.excerpt}</p>
+                  <p className="mt-3 line-clamp-3 min-h-[3lh] text-[15px] leading-relaxed text-[var(--ink-60)] sm:text-base">{shown.excerpt}</p>
                   <div className="mt-auto pt-5">
                     {/* tek satır: uzun kaynak adı kısalır, kart yüksekliği haberden habere değişmez */}
-                    <div className="flex items-center gap-3 text-xs text-gray-500">
+                    <div className="flex items-center gap-3 text-xs text-[var(--ink-40)]">
                       <span className="inline-flex min-w-0 items-center gap-1">
                         <Building2 className="h-3.5 w-3.5 shrink-0" /> <span className="truncate">{shown.outlet}</span>
                       </span>
@@ -225,7 +216,7 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
 
                 {/* Visual with smooth zoom; kapaklar üst üste, gösterilen görünür */}
                 <div className="order-1 md:order-2">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 ring-1 ring-black/5">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[22px] bg-[var(--sky-2)]">
                     {coverStack.map((it) => {
                       const on = it.id === shown.id;
                       return (
@@ -269,8 +260,7 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
             <Link
               href={moreHref}
               aria-label="Tüm haberleri gör"
-              className="inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
-              style={{ color: TEAL }}
+              className="az-btn glass sm"
             >
 Tüm Haberler              <ChevronRight className="h-4 w-4" />
             </Link>
@@ -280,8 +270,7 @@ Tüm Haberler              <ChevronRight className="h-4 w-4" />
                 type="button"
                 onClick={() => setShowAll(true)}
                 aria-expanded={showAll}
-                className="inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
-                style={{ color: TEAL }}
+                className="az-btn glass sm"
               >
                 Tüm Haberler
                 <ChevronRight className="h-4 w-4" />
@@ -312,12 +301,12 @@ function PressCard({
       rel="noopener noreferrer nofollow"
       onMouseEnter={onActivate}
       onFocus={onActivate}
-      className={`group relative block overflow-hidden rounded-2xl border bg-white text-gray-900 transition ${
-        active ? 'border-[#0d6570] shadow-md ring-2 ring-[#0d6570]/25' : 'border-gray-200 shadow-sm hover:shadow-md'
+      className={`group relative block overflow-hidden rounded-[22px] border bg-white text-[var(--ink)] transition ${
+        active ? 'border-[#0d6570] shadow-[0_16px_40px_rgba(13,35,38,0.12)]' : 'border-white/90 shadow-[0_10px_30px_rgba(13,35,38,0.05)] hover:shadow-[0_16px_40px_rgba(13,35,38,0.1)]'
       }`}
     >
       {/* Visual with hover zoom */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-t-2xl ring-1 ring-black/5">
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
         {item.cover ? (
           <Image
             src={item.cover}
@@ -335,16 +324,16 @@ function PressCard({
 
       <div className="p-4 sm:p-5">
         <div className="flex items-center justify-between gap-2">
-          <span className="inline-flex items-center rounded-full bg-black/5 px-2.5 py-1 text-[11px] font-medium text-gray-700">
+          <span className="inline-flex items-center rounded-full bg-[var(--sky-2)] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--sea)]">
             {item.outlet}
           </span>
-          <span className="text-xs text-gray-500">{fmtTR(item.date)}</span>
+          <span className="text-xs text-[var(--ink-40)]">{fmtTR(item.date)}</span>
         </div>
-        <h4 className="mt-2 line-clamp-2 text-base font-semibold text-gray-900 group-hover:underline underline-offset-2">
+        <h4 className="mt-2 line-clamp-2 text-base font-semibold text-[var(--ink)] group-hover:underline underline-offset-2">
           {item.title}
         </h4>
         {item.excerpt && (
-          <p className="mt-1 line-clamp-2 text-sm text-gray-600">{item.excerpt}</p>
+          <p className="mt-1 line-clamp-2 text-sm text-[var(--ink-60)]">{item.excerpt}</p>
         )}
         <div
           className="mt-3 inline-flex items-center gap-1 text-sm font-medium"

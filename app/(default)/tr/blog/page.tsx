@@ -37,14 +37,14 @@ export default function BlogIndex() {
 
   return (
     <main className="min-h-svh">
-      <PageHero size="short" kicker="DND Cyprus" title={<>Yazılar</>} lead="Röportajlar, ödüller ve etkinliklerden notlar." image="/azure/about-homes.jpg" />
+      <PageHero size="short" kicker="DND Cyprus" title={<>Yazılar</>} lead="Röportajlar, ödüller ve etkinliklerden notlar." image="/azure/p1-3.jpg" />
       {/* hero */}
    
 
       {/* grid */}
       <section className="mx-auto max-w-[1450px] px-5 md:px-8 py-10 md:py-14">
         {posts.length === 0 ? (
-          <div className="text-black/60">Şu an için blog yazısı bulunamadı.</div>
+          <div className="text-[var(--ink-60)]">Şu an için blog yazısı bulunamadı.</div>
         ) : (
          // ...inside your list:
 <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -68,8 +68,7 @@ function Card({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/tr/blog/${post.slug}`}
-      className="h-full flex flex-col overflow-hidden rounded-2xl border border-black/10
-                 bg-white/70 backdrop-blur-xl shadow transition hover:shadow-lg"
+      className="group h-full flex flex-col overflow-hidden rounded-[28px] border border-white/90 bg-white shadow-[0_10px_40px_rgba(13,35,38,0.06)] transition hover:shadow-[0_30px_70px_rgba(13,35,38,0.14)]"
     >
       {/* Thumb keeps ratio but doesn't affect height growth */}
       <div className="relative aspect-[16/10] shrink-0">
@@ -90,20 +89,20 @@ function Card({ post }: { post: BlogPost }) {
       </div>
 
       {/* Content grows to fill remaining height */}
-      <div className="flex-1 p-4 flex flex-col">
-        <div className="text-xs text-black/60">
+      <div className="flex-1 p-5 flex flex-col">
+        <div className="text-[11px] uppercase tracking-[0.08em] font-semibold text-[var(--sea)]">
           {date}
           {post.readTime ? ` • ${post.readTime} dk` : ""}
           {post.author ? ` • ${post.author}` : ""}
         </div>
 
         {/* Reserve space for 2 lines so rows align */}
-        <h2 className="mt-2 text-lg font-semibold line-clamp-2 min-h-[3.2rem]">
+        <h2 className="mt-2 text-[20px] leading-snug line-clamp-2 min-h-[2.6rem]">
           {post.title}
         </h2>
 
         {post.excerpt ? (
-          <p className="mt-1 text-sm text-black/70 line-clamp-2">
+          <p className="mt-1 text-sm text-[var(--ink-60)] line-clamp-2">
             {post.excerpt}
           </p>
         ) : null}

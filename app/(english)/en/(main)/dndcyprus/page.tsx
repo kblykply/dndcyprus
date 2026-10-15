@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 
 export default function Page() {
   return (
-    <main>
+    <main className="pt-16 md:pt-20">
       <LagoonVerdeMediaHub
 
       />

@@ -1,26 +1,6 @@
-// app/components/home/AynurSpotlightAlt.tsx
-"use client";
-
-import React from "react";
-import { portraitSource } from "@/lib/optimized-portraits";
-import { m as motion, type Variants } from "framer-motion";
+// app/components/about/AynurSpotlightAlt.tsx
 import Link from "next/link";
-
-const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
-
-// Typed cubic-bezier ease
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 22 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.55,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
+import { portraitSource } from "@/lib/optimized-portraits";
 
 type Props = {
   title?: string;
@@ -33,12 +13,13 @@ type Props = {
   contactHref?: string;
 };
 
+// Azure: solda kicker / isim / rol / alıntı / bilgi kartları / pill butonlar, sağda 3:4 çerçeveli portre.
 export default function AynurSpotlightAlt({
   title = "Aynur Zorba Güloğlu",
   role = "DND Cyprus Direktörü",
   subtitle = "Operasyonel mükemmeliyet, müşteri deneyimi ve sürdürülebilir projeler için stratejik liderlik sağlıyor.",
   quote = "“Güven, şeffaflık ve ekip ruhu — başarılarımızın temelinde bunlar var.”",
-  image = "/aynurhanimhome.PNG",
+  image = "/azure/aynur.jpg",
   highlights = [
     { k: "Odak", v: "Operasyonel Liderlik" },
     { k: "Uzmanlık", v: "Mimarlık & Yöneticilik" },
@@ -48,114 +29,59 @@ export default function AynurSpotlightAlt({
   contactHref = "/tr/contact",
 }: Props) {
   return (
-    <section
-      aria-label="Aynur Zorba Güloğlu — Spotlight"
-      className="relative overflow-visible bg-white pb-16 sm:pb-20 lg:pb-0"
-      style={{ color: "#0d2326" }}
-      data-bg="light"
-    >
-      {/* Soft corner glows */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: `
-            radial-gradient(40rem 28rem at 0% 100%, ${TEAL}10, transparent 70%),
-            radial-gradient(40rem 28rem at 100% 0%, ${ORANGE}10, transparent 70%)
-          `,
-        }}
-      />
-
-      {/* CONTENT WRAPPER */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 md:pt-20 lg:pt-24 pb-0 min-h-0 sm:min-h-[88vh] lg:min-h-[95vh]">
-        {/* Absolutized portrait (hidden on mobile) */}
-        <img
-          loading="lazy"
-          decoding="async"
-          src={portraitSource(image)}
-          alt={title}
-          className="
-            hidden md:block
-            pointer-events-none select-none
-            absolute bottom-0 right-0 z-10
-            h-[68vh] lg:h-[calc(95vh-4rem)]
-            w-auto max-w-none object-contain object-bottom
-            drop-shadow-[0_20px_45px_rgba(0,0,0,.18)]
-          "
-        />
-
-        {/* TEXT GRID */}
-        <div className="relative z-20 grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          {/* TEXT */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
-            className="lg:col-span-7"
-          >
-            <span
-              className="inline-block text-[11px] sm:text-[12px] uppercase tracking-wide px-3 py-1 rounded-full mb-4"
-              style={{ background: `${TEAL}14`, color: TEAL, border: `1px solid ${TEAL}33` }}
-            >
-              Yönetim Kadrosu
-            </span>
-
-            <h2 className="text-[clamp(1.75rem,4.5vw,3rem)] font-semibold leading-tight">
-              {title}
-            </h2>
-            <div className="mt-1 text-sm sm:text-base text-black/60">{role}</div>
-
-            <p className="mt-4 text-[clamp(1rem,2.4vw,1.125rem)] text-black/70 max-w-[65ch]">
-              {subtitle}
-            </p>
+    <section id="direktor" className="az-section" aria-label="Aynur Zorba Güloğlu — Spotlight">
+      <div className="az-wrap">
+        <div className="grid grid-cols-1 items-center gap-8 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:gap-14">
+          <div>
+            <span className="az-kicker rv">Yönetim Kadrosu</span>
+            <h2 className="az-h2 sm rv d1">{title}</h2>
+            <div className="rv d1 mt-2 text-[12px] font-semibold uppercase tracking-[0.12em]" style={{ color: "var(--sea)" }}>
+              {role}
+            </div>
+            <p className="az-lead rv d2">{subtitle}</p>
 
             {quote && (
               <blockquote
-                className="mt-6 text-[clamp(1rem,2.6vw,1.25rem)] italic font-medium text-black/85 border-l-4 pl-4"
-                style={{ borderColor: ORANGE }}
+                className="rv d2 mt-6 border-l-2 pl-4 text-[17px] leading-relaxed"
+                style={{ borderColor: "var(--coral)", color: "var(--ink)" }}
               >
                 {quote}
               </blockquote>
             )}
 
-            {/* HIGHLIGHTS */}
-            <div className="mt-7 grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <dl className="rv d3 m-0 mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {highlights.map((f, i) => (
                 <div
                   key={f.k + i}
-                  className="rounded-xl p-3 bg-white/70 backdrop-blur-sm border text-sm shadow-[0_6px_20px_rgba(0,0,0,.04)]"
-                  style={{ borderColor: "rgba(13,35,38,0.08)" }}
+                  className="rounded-[18px] bg-white px-4 py-3"
+                  style={{ border: "1px solid rgba(255,255,255,.9)", boxShadow: "0 6px 18px rgba(13,35,38,.05)" }}
                 >
-                  <div className="text-[11px] uppercase tracking-wide text-black/55">
-                    {f.k}
-                  </div>
-                  <div className="font-medium">{f.v}</div>
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.08em]" style={{ color: "var(--sea)" }}>{f.k}</dt>
+                  <dd className="m-0 mt-1 text-[14px] font-medium">{f.v}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
 
-            {/* CTAs */}
-            <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4">
-              <Link
-                href={profileHref}
-                className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5 text-white"
-                style={{ background: TEAL, boxShadow: `0 10px 24px ${TEAL}33` }}
-              >
-                Projeler
-              </Link>
-              <Link
-                href={contactHref}
-                className="px-6 py-2.5 rounded-full text-sm font-medium"
-                style={{ background: `${ORANGE}14`, color: ORANGE, border: `1px solid ${ORANGE}33` }}
-              >
-                İletişime Geç
-              </Link>
+            <div className="rv d3 mt-7 flex flex-wrap gap-3">
+              <Link className="az-btn sea sm" href={profileHref} prefetch={false}>Projeler</Link>
+              <Link className="az-btn glass sm" href={contactHref} prefetch={false}>İletişime Geç</Link>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Spacer for portrait */}
-          <div className="hidden lg:block lg:col-span-5" aria-hidden />
+          <figure
+            className="rv d1 relative order-first m-0 w-full max-w-full overflow-hidden rounded-[28px] min-[900px]:order-none"
+            style={{ aspectRatio: "3 / 4", background: "var(--sky-2)", border: "1px solid rgba(255,255,255,.9)", boxShadow: "0 24px 60px rgba(13,35,38,.12)" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={portraitSource(image)}
+              alt={title}
+              loading="lazy"
+              decoding="async"
+              draggable={false}
+              className="absolute inset-0 h-full w-full select-none object-cover object-top"
+            />
+          </figure>
         </div>
       </div>
     </section>

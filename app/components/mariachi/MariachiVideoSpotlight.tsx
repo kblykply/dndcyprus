@@ -2,31 +2,17 @@
 "use client";
 
 import DeferredIframe from "@/app/components/performance/DeferredIframe";
-import React, { useMemo } from "react";
+import { useMemo, type ReactNode } from "react";
 import Link from "next/link";
-import { m as motion } from "framer-motion";
-import type { Variants, Easing } from "framer-motion";
-
-const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
-const EASE: Easing = [0.22, 1, 0.36, 1] as const;
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: EASE },
-  },
-};
 
 export default function MariachiVideoSpotlight({
-  title = "Tanıtım Videosu",
+  title = <>Tanıtım <b>Videosu</b></>,
+  iframeTitle = "Tanıtım Videosu",
   subtitle = "Mariachi Beach Club atmosferini kısa bir videoda keşfedin: cabanalar, havuz & plaj, gün boyu keyif ve akşam DJ performansları.",
-  badge = "VIDEO",
+  badge = "Video",
   embedUrl = "https://www.youtube.com/embed/AobeR8p2Aq4?si=Z_AaUhavwKNYLgNX",
   videoSrc = "",
-  poster = "/mariachi/1.jpg",
+  poster = "/azure/mb-2.jpg",
   primaryCta = { label: "Pavilyon Rezervasyonu", href: "/tr/contact" },
   secondaryCta = { label: "Tüm Videolar", href: "https://www.youtube.com/@dndcyprus" },
   highlights = [
@@ -35,7 +21,8 @@ export default function MariachiVideoSpotlight({
     { k: "Yiyecek/İçecek", v: "Restoran & Havuz Barı" },
   ],
 }: {
-  title?: string;
+  title?: ReactNode;
+  iframeTitle?: string;
   subtitle?: string;
   badge?: string;
   embedUrl?: string | null;
@@ -86,76 +73,33 @@ export default function MariachiVideoSpotlight({
     }
   }, [embedUrl]);
 
+  const isExternal = (href: string) => href.startsWith("http");
+
   return (
-    <section
-      aria-label="Mariachi Beach Club — Tanıtım Videosu"
-      className="relative overflow-hidden"
-      style={{ background: "transparent", color: "#0d2326" }}
-      data-bg="light"
-    >
-      {/* Decor lights */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-30"
-        style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(13,101,112,0.20), transparent 70%)" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-28 -right-28 h-96 w-96 rounded-full blur-3xl opacity-30"
-        style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(241,92,52,0.15), transparent 70%)" }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 lg:pt-16 pb-12 lg:pb-18">
-        <motion.span
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
-          className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
-          style={{
-            background: "#fff",
-            border: `1px solid ${TEAL}33`,
-            color: TEAL,
-            boxShadow: `0 6px 14px ${TEAL}1f`,
-          }}
-        >
-          {badge}
-        </motion.span>
-
-        <div className="mt-6 grid gap-10 lg:grid-cols-12 items-stretch">
-          {/* LEFT: Video */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
-            className="relative order-2 lg:order-1 lg:col-span-7"
-          >
+    <section className="az-section" aria-label="Mariachi Beach Club — Tanıtım Videosu">
+      <div className="az-wrap">
+        <div className="az-card rv grid grid-cols-1 min-[900px]:grid-cols-[1.25fr_1fr]">
+          {/* Video (koyu oynatıcı kutusu, kartın içinde çerçeveli) */}
+          <div className="self-center p-3 sm:p-4 min-[900px]:p-5">
             <div
-              aria-hidden
-              className="absolute -inset-3 rounded-[28px] blur-2xl"
-              style={{ background: "linear-gradient(135deg, rgba(13,101,112,0.18), rgba(241,92,52,0.12))", opacity: 0.7 }}
-            />
-            <div
-              className="relative w-full aspect-video rounded-[22px] overflow-hidden bg-white"
-              style={{
-                border: `1px solid ${TEAL}29`,
-                boxShadow: "0 18px 40px rgba(0,0,0,0.10), 0 10px 24px rgba(13,101,112,0.12)",
-              }}
+              className="relative aspect-video overflow-hidden rounded-[22px] max-w-full"
+              style={{ background: "var(--sea-deep)", boxShadow: "0 20px 50px rgba(13,35,38,.18)" }}
             >
               {autoplayEmbedUrl ? (
-                <DeferredIframe activation="click" poster={poster} buttonLabel="Videoyu oynat"
+                <DeferredIframe
+                  activation="click"
+                  poster={poster}
+                  buttonLabel="Videoyu oynat"
                   src={autoplayEmbedUrl}
-                  title={title}
+                  title={iframeTitle}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full"
+                  className="absolute inset-0 h-full w-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
               ) : videoSrc ? (
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
-                  // 🔽 Autoplay-friendly attributes
                   autoPlay
                   muted
                   playsInline
@@ -167,57 +111,36 @@ export default function MariachiVideoSpotlight({
                   <source src={videoSrc} />
                 </video>
               ) : (
-                <img
-                  src={poster}
-                  alt="Mariachi Beach Club Tanıtım"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  decoding="async"
-                />
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={poster} alt="Mariachi Beach Club Tanıtım" className="absolute inset-0 h-full w-full object-cover" decoding="async" />
               )}
             </div>
-          </motion.div>
+          </div>
 
-          {/* RIGHT: Text */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
-            className="flex flex-col justify-center order-1 lg:order-2 lg:col-span-5"
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">{title}</h2>
-            <p className="mt-3 text-base sm:text-lg" style={{ color: "#0d2326CC" }}>{subtitle}</p>
+          {/* Metin */}
+          <div className="self-center px-6 pb-7 pt-3 sm:px-8 sm:pb-8 min-[900px]:py-10 min-[900px]:pr-10 min-[900px]:pl-4">
+            <span className="az-kicker">{badge}</span>
+            <h2 className="az-h2 sm">{title}</h2>
+            <p className="az-lead">{subtitle}</p>
 
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {highlights.map((f, i) => (
-                <div
-                  key={f.k + i}
-                  className="rounded-2xl px-4 py-3 bg-white"
-                  style={{ border: `1px solid ${TEAL}26`, boxShadow: "0 8px 24px rgba(0,0,0,0.06)" }}
-                >
-                  <div className="text-[11px] uppercase tracking-wide" style={{ color: TEAL }}>{f.k}</div>
-                  <div className="text-sm font-medium" style={{ color: "#0d2326" }}>{f.v}</div>
+                <div key={f.k + i} className="rounded-[18px] px-4 py-3" style={{ background: "var(--sky)" }}>
+                  <div style={{ fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 600, color: "var(--sea)" }}>{f.k}</div>
+                  <div style={{ fontSize: 14, fontWeight: 500, marginTop: 4 }}>{f.v}</div>
                 </div>
               ))}
             </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                href={primaryCta.href}
-                className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5"
-                style={{ background: TEAL, color: "#fff", boxShadow: `0 12px 28px ${TEAL}55` }}
-              >
-                {primaryCta.label}
-              </Link>
-              <Link
-                href={secondaryCta.href}
-                className="px-6 py-2.5 rounded-full text-sm font-medium"
-                style={{ background: "#fff", color: ORANGE, border: `1px solid ${ORANGE}55`, boxShadow: `0 8px 20px ${ORANGE}14` }}
-              >
-                {secondaryCta.label}
-              </Link>
+              {isExternal(primaryCta.href)
+                ? <a className="az-btn sea" href={primaryCta.href} target="_blank" rel="noopener noreferrer">{primaryCta.label}</a>
+                : <Link className="az-btn sea" href={primaryCta.href} prefetch={false}>{primaryCta.label}</Link>}
+              {isExternal(secondaryCta.href)
+                ? <a className="az-btn glass" href={secondaryCta.href} target="_blank" rel="noopener noreferrer">{secondaryCta.label}</a>
+                : <Link className="az-btn glass" href={secondaryCta.href} prefetch={false}>{secondaryCta.label}</Link>}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
