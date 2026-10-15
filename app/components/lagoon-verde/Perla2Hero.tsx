@@ -66,11 +66,11 @@ export default function Perla2Hero({
 >
   {/* Background image (z-0) — sayfada önceden yüklenen (priority) tek görsel */}
   <div className="absolute inset-0 z-0">
-    <Image
+    <Image quality={65}
       src={heroImage}
       alt={heroAlt}
       fill
-      priority
+      preload
       sizes="100vw"
       className="object-cover"
     />

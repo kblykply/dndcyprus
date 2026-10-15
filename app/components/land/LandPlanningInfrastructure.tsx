@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import {
   m as motion,
   type Variants,
@@ -295,10 +296,13 @@ export default function LandPlanningInfrastructure({
       }}
     >
       {/* BG image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${card.image})` }}
-        aria-hidden
+      <DeferredFillImage
+        src={card.image}
+        alt=""
+        fill
+        quality={65}
+        sizes="(max-width: 639px) 85vw, (max-width: 1023px) 45vw, 384px"
+        className="object-cover"
       />
       {/* Readability wash */}
       <div

@@ -1,0 +1,18 @@
+{
+  "measuredAt": "2026-10-15T09:20:07.795Z",
+  "buildId": "DzIvYS9rTIxJoA_uNSzG1",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "checks": "native horizontal touch swipe changes slide; vertical touch scroll remains available"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "checks": "native horizontal touch swipe changes slide; vertical touch scroll remains available"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

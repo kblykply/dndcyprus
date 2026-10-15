@@ -1,0 +1,50 @@
+{
+  "measuredAt": "2026-10-12T18:13:29.652Z",
+  "origin": "http://127.0.0.1:3100",
+  "phase": "round4-media",
+  "method": "Lighthouse 13.5 default simulated mobile throttling; first visit; laboratory data. Sample counts recorded per route.",
+  "sampleCounts": {
+    "/tr/mariachi": 1,
+    "/tr/gecitkale": 1
+  },
+  "buildId": "ze0fzkMhRoah8Bt6Z8IGw",
+  "samples": [
+    {
+      "route": "/tr/mariachi",
+      "sample": 1,
+      "score": 88,
+      "lcpMs": 3830.1549999999997,
+      "fcpMs": 1205.155,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 589829,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Mariachi Beach Club",
+          "selector": "div.relative > div.max-w-3xl > div.rounded-3xl > h1.mt-3"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/gecitkale",
+      "sample": 2,
+      "score": 90,
+      "lcpMs": 3679.331,
+      "fcpMs": 1204.331,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 528742,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "status": "passed"
+}

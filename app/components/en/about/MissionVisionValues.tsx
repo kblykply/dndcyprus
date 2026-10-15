@@ -59,7 +59,7 @@ values = [
 }: MVVProps) {
   return (
     <section
-      aria-label="Misyon, Vizyon ve Değerler"
+      aria-label="Mission, Vision &amp; Values"
       className="relative overflow-hidden"
       style={
         {

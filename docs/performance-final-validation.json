@@ -1,0 +1,34 @@
+{
+  "measuredAt": "2026-10-14T10:26:38.276Z",
+  "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+  "productionBuild": {
+    "status": "passed",
+    "typecheck": "passed",
+    "generatedRoutes": 43
+  },
+  "unitTests": {
+    "command": "npm test",
+    "status": "passed",
+    "total": 76,
+    "failed": 0,
+    "mode": "mocked API/database integrations; no real leads submitted"
+  },
+  "lint": {
+    "command": "npm run lint -- --format json --output-file docs/performance-final-eslint-2026-10-14.json",
+    "status": "passed with warnings",
+    "files": 328,
+    "errors": 0,
+    "warnings": 221
+  },
+  "changesThisAudit": [
+    "TR/EN contact phone links now use tel: instead of broken internal paths.",
+    "Lint command updated from removed next lint to scoped ESLint CLI.",
+    "Audit tools extended with separate report destinations, public route/asset inventory, navigation/gallery/plan checks and stats visibility checks.",
+    "TR/EN media hub popups now appear above floating navigation controls so their close button receives the click."
+  ],
+  "followupBuild": {
+    "status": "passed",
+    "buildId": "N6NMIedtYoOBee4OjeYHA",
+    "reason": "Media popup stacking fix only; no content or image optimization changes"
+  }
+}

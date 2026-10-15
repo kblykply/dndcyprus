@@ -64,7 +64,7 @@ export function FlipBookGlassBase({
   pages,
   pdfUrl,
   bgImage = "/perla-ii/1.jpg",
-  kicker = "LA JOYA PERLA II",
+  kicker = "LA JOYA PERLA",
   title = "Tanıtım Kataloğu",
   pageAspect = 842 / 596,
   maxWidth = 2000,
@@ -289,7 +289,7 @@ export function FlipBookGlassBase({
                     <div className="absolute inset-0" style={{ width: "200%", left: offsetLeft }}>
                       {measured && Math.abs(i - page) <= 4 && <NextImage
                         src={src}
-                        alt={`Perla II flipbook ${half} – page ${i + 1}`}
+                        alt={`La Joya Perla flipbook ${half} – page ${i + 1}`}
                         fill
                         quality={imgQuality}
                         sizes={imgSizes}
@@ -355,8 +355,8 @@ export default function FlipBookGlass() {
     <FlipBookGlassBase
       pages={DEFAULT_SPREADS}
       pdfUrl="/brochure/perla2.pdf"
-      title="La Joya Perla II Kataloğu"
-      kicker="LA JOYA PERLA II"
+      title="La Joya Perla Kataloğu"
+      kicker="LA JOYA PERLA"
       maxWidth={2000}
       vhMaxRatio={0.88}
       mobileVhMaxRatio={0.58}

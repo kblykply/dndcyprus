@@ -13,7 +13,7 @@ const PROJECT_JSON_LD = {
   name: "La Joya",
   url: `${SITE_URL}/en/la-joya`,
   description:
-    "La Joya is a boutique project of 74 residences with low-rise architecture, located just 500 m from the sea in Long Beach, İskele.",
+    "La Joya is a boutique residential project completed in 2025, with 74 low-rise homes located just 500 m from the sea in Long Beach, İskele.",
   image: `${SITE_URL}/la-joya/2.jpg`,
   address: {
     "@type": "PostalAddress",
@@ -49,11 +49,11 @@ title = "La Joya Key Facts",
 subtitle = "Take a quick look at the project’s core features.",
 facts = [
   { label: "Location", value: "Long Beach, İskele", accent: "teal" },
-  { label: "Delivery", value: "November 2025", accent: "orange" },
+  { label: "Completion Year", value: "2025", accent: "orange" },
   { label: "Type", value: "Residence & Beach Club", accent: "teal" },
   { label: "Number of Units", value: "74", accent: "orange" },
   { label: "Land Area", value: "6,360 m²", accent: "teal" },
-  { label: "Status", value: "In Progress", accent: "orange" }, // or "Ongoing"
+  { label: "Status", value: "Completed", accent: "orange" },
 ],
 
   withSeoJsonLd = true,

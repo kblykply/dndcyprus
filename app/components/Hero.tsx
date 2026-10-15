@@ -171,7 +171,7 @@ const projects: Record<Tab, ProjectItem[]> = {
     {
       id: 2,
       title: "La Joya Perla II",
-      subtitle: "Denize ve şehir imkanlarına yakın konum",
+      subtitle: "Denize ve şehir imkânlarına yakın konum",
       images: ["/perla-ii/9.jpg", "/perla-ii/5.jpg"],
       floors: 5,
       area: 8.799,
@@ -191,7 +191,7 @@ const projects: Record<Tab, ProjectItem[]> = {
     {
       id: 7,
       title: "La Joya",
-      subtitle: "Tatil konsepli butik yaşam",
+      subtitle: "2025’te tamamlanan, tatil konseptli butik yaşam",
       images: ["/la-joya/13.jpg", "/la-joya/16.jpg"],
       floors: 3,
       area: 6.36,

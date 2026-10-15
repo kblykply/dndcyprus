@@ -1,8 +1,9 @@
-"use client";
 
 import React from "react";
 import Link from "next/link";
-import { m as motion, type Variants } from "framer-motion";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
+import type { Variants } from "framer-motion";
+import { MotionDiv, MotionUl, MotionLi, MotionP } from "@/app/components/performance/MotionElements";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -86,7 +87,7 @@ export default function OurBrands({
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-24">
-        <motion.div
+        <MotionDiv
           variants={containerStagger}
           initial="hidden"
           whileInView="show"
@@ -94,7 +95,7 @@ export default function OurBrands({
           className="relative z-10"
         >
           {/* Header */}
-          <motion.div variants={fadeUp} className="max-w-3xl">
+          <MotionDiv variants={fadeUp} className="max-w-3xl">
             <span
               className="inline-block text-[12px] uppercase tracking-wide px-3 py-1 rounded-full mb-3"
               style={{ background: `${TEAL}14`, color: TEAL, border: `1px solid ${TEAL}33` }}
@@ -105,31 +106,31 @@ export default function OurBrands({
               {title}
             </h2>
             <p className="mt-3 text-black/65 text-base sm:text-lg">{subtitle}</p>
-          </motion.div>
+          </MotionDiv>
 
           {/* Grid */}
-          <motion.ul
+          <MotionUl
             variants={containerStagger}
             className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5"
             role="list"
           >
             {brands.map((b) => (
-              <motion.li key={b.name} variants={cardIn}>
+              <MotionLi key={b.name} variants={cardIn}>
                 <BrandCard item={b} />
-              </motion.li>
+              </MotionLi>
             ))}
-          </motion.ul>
+          </MotionUl>
 
           {/* Note */}
           {note && (
-            <motion.p
+            <MotionP
               variants={fadeUp}
               className="mt-6 text-xs text-black/50"
             >
               {note}
-            </motion.p>
+            </MotionP>
           )}
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );
@@ -138,7 +139,7 @@ export default function OurBrands({
 // ====== Card ======
 function BrandCard({ item }: { item: BrandItem }) {
   const CardShell = ({ children }: { children: React.ReactNode }) => (
-    <motion.div
+    <MotionDiv
       whileHover={{ y: -4, scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className="group relative h-28 sm:h-32 lg:h-36 rounded-2xl border bg-white/70 backdrop-blur-sm shadow-[0_6px_24px_rgba(0,0,0,.06)] overflow-hidden"
@@ -158,22 +159,26 @@ function BrandCard({ item }: { item: BrandItem }) {
         className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-focus-within:ring-black/15 group-focus:ring-black/15"
         aria-hidden
       />
-    </motion.div>
+    </MotionDiv>
   );
 
   const Logo = () => (
     <div className="relative z-10 h-full w-full grid place-items-center p-4">
-      <img
+      <div className="relative h-12 sm:h-14 lg:h-16 w-full">
+      <DeferredFillImage
         src={item.logo}
         alt={item.name}
-        loading="lazy"
+        fill
+        quality={75}
+        sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 45vw"
         className={[
           // Colorful by default; turns grayscale on hover
-          "max-h-12 sm:max-h-14 lg:max-h-16 w-auto object-contain transition-all duration-300",
+          "object-contain transition-all duration-300",
           "group-hover:grayscale",
           item.invertOnWhite ? "invert" : "",
         ].join(" ")}
       />
+      </div>
     </div>
   );
 

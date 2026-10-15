@@ -210,14 +210,14 @@ export default function Perla2FloorPlans({
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-[4/3] bg-white">
-                <img
+              <div className="relative aspect-[4/3] bg-white">
+                <Image
+                  fill
+                  sizes="(max-width: 1023px) calc(100vw - 48px), (max-width: 1279px) calc((100vw - 96px) / 2), 592px"
                   src={variant.image}
                   alt={`Lagoon Verde ${plan.title} — ${variant.name} kat planı`}
                   className="w-full h-full object-contain"
                   loading="lazy"
-                  width={800}
-                  height={600}
                 />
               </div>
               <div className="p-4 flex items-center justify-between gap-3">

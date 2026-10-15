@@ -1,0 +1,373 @@
+{
+  "measuredAt": "2026-10-12T12:20:27.091Z",
+  "method": "Local Next.js 16.1.1 production builds, Chrome 155 / Lighthouse 13.5.0 default simulated mobile throttling. Three homepage samples per configuration, median reported. Control reruns used the previous hero and stylesheet imports. Not production field data.",
+  "changes": [
+    "Replaced the hero Swiper dependency with a small native fade carousel, retaining arrows, dots, keyboard, touch, mouse drag, horizontal wheel, hash navigation and reduced-motion behavior.",
+    "Inactive slides are hidden outside transitions; autoplay pauses on focus, hover and hidden documents.",
+    "Consolidated Swiper CSS imports into the existing global stylesheet.",
+    "Deferred responsive Geçitkale and Mariachi galleries and Geçitkale planning cards.",
+    "Generated content-addressed WebP portraits with transparency and original dimensions; hidden mobile portrait no longer eagerly downloads."
+  ],
+  "home": {
+    "beforeSamples": [
+      {
+        "phase": "before",
+        "performanceScore": 92,
+        "lcpMs": 3313.4181,
+        "fcpMs": 1358.9454,
+        "totalBlockingTimeMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 697258,
+        "cssRequests": 6
+      },
+      {
+        "phase": "control1",
+        "performanceScore": 84,
+        "lcpMs": 4599.9396,
+        "fcpMs": 1358.3132,
+        "totalBlockingTimeMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 697403,
+        "cssRequests": 6
+      },
+      {
+        "phase": "control2",
+        "performanceScore": 84,
+        "lcpMs": 4520.77005,
+        "fcpMs": 1355.9343,
+        "totalBlockingTimeMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 697403,
+        "cssRequests": 6
+      }
+    ],
+    "afterSamples": [
+      {
+        "phase": "hidden",
+        "performanceScore": 85,
+        "lcpMs": 4291.264000000001,
+        "fcpMs": 1208.132,
+        "totalBlockingTimeMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 657332,
+        "cssRequests": 2
+      },
+      {
+        "phase": "final1",
+        "performanceScore": 85,
+        "lcpMs": 4289.447,
+        "fcpMs": 1207.2235,
+        "totalBlockingTimeMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 657338,
+        "cssRequests": 2
+      },
+      {
+        "phase": "final2",
+        "performanceScore": 85,
+        "lcpMs": 4360.1494,
+        "fcpMs": 1205.0747,
+        "totalBlockingTimeMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 657338,
+        "cssRequests": 2
+      }
+    ],
+    "beforeMedian": {
+      "performanceScore": 84,
+      "lcpMs": 4520.77005,
+      "fcpMs": 1358.3132,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 697403,
+      "cssRequests": 6
+    },
+    "afterMedian": {
+      "performanceScore": 85,
+      "lcpMs": 4291.264000000001,
+      "fcpMs": 1207.2235,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 657338,
+      "cssRequests": 2
+    }
+  },
+  "project": {
+    "before": {
+      "performanceScore": 83,
+      "lcpMs": 4663.4919,
+      "fcpMs": 1205.9964,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 881436,
+      "cssRequests": 6
+    },
+    "after": {
+      "performanceScore": 84,
+      "lcpMs": 4510.566000000001,
+      "fcpMs": 1205.283,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 841452,
+      "cssRequests": 2
+    },
+    "samplesPerConfiguration": 1
+  },
+  "initialResources": {
+    "units": "uncompressed bytes; initial HTML script and stylesheet dependencies only",
+    "before": {
+      "/tr": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 129105,
+        "scriptCount": 17,
+        "scriptBytes": 890087
+      },
+      "/en": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 127717,
+        "scriptCount": 18,
+        "scriptBytes": 890192
+      },
+      "/tr/perla-ii": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 150052,
+        "scriptCount": 16,
+        "scriptBytes": 797390
+      },
+      "/en/perla-ii": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 148845,
+        "scriptCount": 17,
+        "scriptBytes": 797373
+      },
+      "/tr/contact": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 71045,
+        "scriptCount": 13,
+        "scriptBytes": 672704
+      },
+      "/en/contact": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 69368,
+        "scriptCount": 14,
+        "scriptBytes": 672726
+      },
+      "/tr/qr": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 18292,
+        "scriptCount": 10,
+        "scriptBytes": 610201
+      }
+    },
+    "after": {
+      "/tr": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 127061,
+        "scriptCount": 16,
+        "scriptBytes": 767637,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 139866
+      },
+      "/en": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 125663,
+        "scriptCount": 17,
+        "scriptBytes": 767742,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 139858
+      },
+      "/tr/perla-ii": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 150052,
+        "scriptCount": 16,
+        "scriptBytes": 796946,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 139866
+      },
+      "/en/perla-ii": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 148845,
+        "scriptCount": 17,
+        "scriptBytes": 796929,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 139858
+      },
+      "/tr/contact": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 71045,
+        "scriptCount": 13,
+        "scriptBytes": 672704,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 139866
+      },
+      "/en/contact": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 69368,
+        "scriptCount": 14,
+        "scriptBytes": 672726,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 139858
+      },
+      "/tr/qr": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 18292,
+        "scriptCount": 10,
+        "scriptBytes": 610201,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 139866
+      }
+    }
+  },
+  "portraits": [
+    {
+      "original": "/aynurhanimhome.PNG",
+      "optimized": "/optimized/aynurhanimhome.a514b897cb1d.webp",
+      "beforeBytes": 505463,
+      "afterBytes": 85808,
+      "transparency": "preserved",
+      "dimensions": "preserved"
+    },
+    {
+      "original": "/ozanbeycropped.png",
+      "optimized": "/optimized/ozanbeycropped.07b7e617b44b.webp",
+      "beforeBytes": 131622,
+      "afterBytes": 20606,
+      "transparency": "preserved",
+      "dimensions": "preserved"
+    }
+  ],
+  "verification": {
+    "productionBuild": "passed",
+    "nativeCarousel": {
+      "status": "passed",
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "viewportWidths": [
+        390,
+        1440
+      ],
+      "checks": [
+        "First hero image only",
+        "Previous/next and dot navigation",
+        "Wrapping",
+        "Keyboard navigation",
+        "Hash navigation",
+        "Horizontal wheel and touch swipe",
+        "Inactive slides are inert",
+        "Autoplay and reduced motion",
+        "Desktop drag",
+        "Campaign query preservation"
+      ]
+    },
+    "media": {
+      "checked": [
+        {
+          "path": "/tr",
+          "width": 390,
+          "checks": "arrows, dots, wrapping, keyboard, hash, wheel, inactive focus, swipe (mobile)"
+        },
+        {
+          "path": "/tr",
+          "width": 1440,
+          "checks": "arrows, dots, wrapping, keyboard, hash, wheel, inactive focus, swipe (mobile)"
+        },
+        {
+          "path": "/en",
+          "width": 390,
+          "checks": "arrows, dots, wrapping, keyboard, hash, wheel, inactive focus, swipe (mobile)"
+        },
+        {
+          "path": "/en",
+          "width": 1440,
+          "checks": "arrows, dots, wrapping, keyboard, hash, wheel, inactive focus, swipe (mobile)"
+        },
+        {
+          "path": "/en",
+          "checks": "reduced motion and autoplay"
+        },
+        {
+          "path": "/tr/gecitkale",
+          "checks": "gallery deferral, loading and expansion"
+        },
+        {
+          "path": "/tr/mariachi",
+          "checks": "gallery deferral, loading and expansion"
+        },
+        {
+          "path": "/en/gecitkale",
+          "checks": "gallery deferral, loading and expansion"
+        },
+        {
+          "path": "/en/mariachi",
+          "checks": "gallery deferral, loading and expansion"
+        }
+      ],
+      "runtimeErrors": [],
+      "missingLocalAssets": []
+    },
+    "generalRegression": {
+      "status": "passed",
+      "publicRoutes": 10,
+      "checks": [
+        "HTML language and exact footer/address",
+        "No horizontal overflow",
+        "Mobile menu",
+        "Gallery and deferred catalogs",
+        "Contact submission to mocked API",
+        "Saved consent and preferences reopen",
+        "Consent exists in static HTML",
+        "Standalone QR behavior",
+        "Admin login redirect",
+        "No runtime errors or missing local assets"
+      ]
+    }
+  },
+  "rejectedExperiments": {
+    "fontPreloadReduction": {
+      "reason": "Delayed first content paint to about 2.26 seconds without improving LCP; original font configuration restored.",
+      "samples": {
+        "/tr": {
+          "performanceScore": 83,
+          "lcpMs": 4359.4457999999995,
+          "fcpMs": 2259.4458,
+          "totalBlockingTimeMs": 0,
+          "cls": 0.000139988042982138,
+          "transferBytes": 657056,
+          "cssRequests": 2
+        },
+        "/tr/perla-ii": {
+          "performanceScore": 82,
+          "lcpMs": 4508.2467,
+          "fcpMs": 2257.0685999999996,
+          "totalBlockingTimeMs": 0,
+          "cls": 0.0005563253138538015,
+          "transferBytes": 841068,
+          "cssRequests": 2
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Homepage baseline initially produced an unusually faster sample; all three baseline samples are retained and the median is used.",
+    "Mobile LCP still exceeds the 2.5 second target; live deployment and field measurements are needed.",
+    "Only homepage has three samples per configuration; project figures are single samples.",
+    "Initial script sizes are uncompressed dependency sizes, not total transferred page bytes.",
+    "Existing independent user/admin/analytics work remains outside this optimization scope."
+  ]
+}

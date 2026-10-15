@@ -61,7 +61,7 @@ export default function HomePage() {
 
 <Perla2Timeline
 
-eyebrow="Kasım 2024 Güncellemesi" title="La Joya Perla – Son İnşaat Güncellemesi" description="Kasım 2026 Teslim edilecek La Joya Perla Projesinde inşaat hızla ilerliyor." video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=v_Pogz8TpxnfIBqR", type: "youtube", title: "La Joya Perla  — Update", }} cta={{ label: "Tüm güncellemeleri gör", href: "https://www.youtube.com/@dndcyprus/videos" }}
+eyebrow="Kasım 2024 Güncellemesi" title="La Joya Perla – Son İnşaat Güncellemesi" description="Kasım 2026’da teslim edilecek La Joya Perla projesinde inşaat hızla ilerliyor." video={{ src: "https://www.youtube.com/embed/YSy7WB056Fg?si=v_Pogz8TpxnfIBqR", type: "youtube", title: "La Joya Perla  — Update", }} cta={{ label: "Tüm güncellemeleri gör", href: "https://www.youtube.com/@dndcyprus/videos" }}
 
 />
 
@@ -71,7 +71,7 @@ eyebrow="Kasım 2024 Güncellemesi" title="La Joya Perla – Son İnşaat Günce
 
  <QuarterLogoBadge
           logoSrc="/logos/perla.png"
-          alt="Your Project"
+          alt="La Joya Perla"
           href="/tr"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens

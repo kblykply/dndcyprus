@@ -1,0 +1,73 @@
+{
+  "measuredAt": "2026-10-14T11:39:23.364Z",
+  "status": "failed",
+  "checked": [],
+  "errors": [],
+  "missing": [],
+  "filterDiagnostic": {
+    "buttons": [
+      {
+        "text": "All",
+        "style": "background: rgba(20, 21, 23, 0.05); color: rgba(20, 21, 23, 0.75); border: 1px solid rgba(20, 21, 23, 0.08); box-shadow: none; backdrop-filter: blur(8px);"
+      },
+      {
+        "text": "Leadership",
+        "style": "background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)"
+      },
+      {
+        "text": "Engineering",
+        "style": "background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)"
+      },
+      {
+        "text": "Sales",
+        "style": "background: rgb(39, 149, 155); color: rgb(255, 255, 255); border: 1px solid rgba(39, 149, 155, 0.667); box-shadow: rgba(39, 149, 155, 0.25) 0px 6px 18px; backdrop-filter: blur(8px);"
+      },
+      {
+        "text": "Architecture",
+        "style": "background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)"
+      },
+      {
+        "text": "Marketing",
+        "style": "background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)"
+      },
+      {
+        "text": "Operations",
+        "style": "background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)"
+      },
+      {
+        "text": "Finance",
+        "style": "background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)"
+      }
+    ],
+    "cards": [
+      "LeadershipOzan DökmecioğluYönetim Kurulu BaşkanıŞirketin kurucusu ve vizyoner lideri.",
+      "<img src=\"/teams/aynurzorbagulol.png\" alt=\"Aynur Zorba Güloğlu\" class=\"object-cover transition-transform duration-700 group-hover:",
+      "<img src=\"/teams/burcingul.png\" alt=\"Burçin Gül\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" s",
+      "SalesBorhan GhasemzadehGenel Satış MüdürüGenel satış stratejilerinden sorumlu.",
+      "<img src=\"/teams/bulent.png\" alt=\"Bülent Çınar\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" st",
+      "<img src=\"/teams/emine.png\" alt=\"Emine Akkuş\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" styl",
+      "<img src=\"/teams/sabina.png\" alt=\"Sabina Rahimova\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\"",
+      "<img src=\"/teams/shadi.png\" alt=\"Shadi Maghfoori\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" ",
+      "<img src=\"/teams/onur.png\" alt=\"Onur Pekkaya\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" styl",
+      "<img src=\"/teams/bob.png\" alt=\"Bob Porpiev\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" style=",
+      "<img src=\"/teams/shayan.png\" alt=\"Shayan Karimi\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" s",
+      "<img src=\"/teams/ava.png\" alt=\"Ava Pasandideh\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" sty",
+      "<img src=\"/teams/mustafa.png\" alt=\"Mustafa Muhtaroğlu\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.",
+      "<img src=\"/teams/okan.png\" alt=\"Okan Afşar\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" style=",
+      "<img src=\"/teams/nevin.png\" alt=\"Nevin Timoroğlu\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" ",
+      "<img src=\"/teams/meryem.png\" alt=\"Meryem Hürmek\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" s",
+      "<img src=\"/teams/ebru.png\" alt=\"Ebru Atçı\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" style=\"",
+      "<img src=\"/teams/placeholder.svg\" alt=\"Parmida Mesgari\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1",
+      "<img src=\"/teams/gozde.png\" alt=\"Gözde Onar\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" style",
+      "<img src=\"/teams/mami.png\" alt=\"Muhammed Dinç\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" sty",
+      "<img src=\"/teams/yusuf.png\" alt=\"Yusuf Yalçın\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" sty",
+      "<img src=\"/teams/rojina.png\" alt=\"Rojina\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" style=\"p",
+      "<img src=\"/teams/onuryalcin.png\" alt=\"Onur Yalçın\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\"",
+      "<img src=\"/teams/hilal.png\" alt=\"Syed Hilal Ahmed\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\"",
+      "<img src=\"/teams/omer.png\" alt=\"Ömer Dursun\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" style",
+      "<img src=\"/teams/tanya.png\" alt=\"Tanya Yıldırım\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05]\" s",
+      "<img src=\"/teams/placeholder.svg\" alt=\"Emine Güngör\" class=\"object-cover transition-transform duration-700 group-hover:scale-[1.05"
+    ]
+  },
+  "failure": "TimeoutError: Waiting failed: 10000ms exceeded"
+}

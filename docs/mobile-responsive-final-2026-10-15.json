@@ -1,0 +1,657 @@
+{
+  "measuredAt": "2026-10-15T09:13:18.576Z",
+  "buildId": "xMQwwWcEuy1ihACX_E4OR",
+  "checked": [
+    {
+      "route": "/tr",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/projects",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/projects",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/lagoon-verde",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/lagoon-verde",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/perla",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/perla",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/la-joya",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/la-joya",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/mariachi",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/mariachi",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/gecitkale",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/gecitkale",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/about",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/about",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/team",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/team",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/contact",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/contact",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/dndcyprus",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/press",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/press",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/privacy",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/terms",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en/terms",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr/qr",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/projects",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/projects",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/lagoon-verde",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/lagoon-verde",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/perla",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/perla",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/la-joya",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/la-joya",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/mariachi",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/mariachi",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/gecitkale",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/gecitkale",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/about",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/about",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/team",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/team",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/contact",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/contact",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/dndcyprus",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/press",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/press",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/privacy",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/terms",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/en/terms",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr/qr",
+      "width": 390,
+      "height": 844,
+      "issues": []
+    },
+    {
+      "route": "/tr",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/projects",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/projects",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/lagoon-verde",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/lagoon-verde",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/perla",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/perla",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/la-joya",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/la-joya",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/mariachi",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/mariachi",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/gecitkale",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/gecitkale",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/about",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/about",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/team",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/team",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/contact",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/contact",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/dndcyprus",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/press",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/press",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/privacy",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/terms",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en/terms",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr/qr",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    }
+  ],
+  "errors": [],
+  "pageErrors": [],
+  "status": "passed"
+}

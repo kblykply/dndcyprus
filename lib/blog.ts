@@ -94,8 +94,10 @@ export const BLOG_POSTS: BlogPost[] = [
     <ul>
       <li><strong>Vizyon:</strong> “Eşsiz kalite ve konfor sunan yaşam alanları” anlayışını adaya taşımak.</li>
       <li><strong>Yatırım Kapsamı:</strong> Konut projelerine ek olarak <em>Bafra</em> ve <em>Yedikonuk</em>’ta 5 yıldızlı otel yatırımları ve İskele bölgesinde bir <em>beach club</em>.</li>
-      <li><strong>Takvim (seçili projeler):</strong> La Joya (74 ünite) <em>2025 sonu</em>, La Joya Perla (384 ünite) <em>2026 sonu</em>, La Joya Perla II (128 ünite) <em>2027 sonu</em>.</li>
+      <li><strong>2024 duyurusundaki takvim (seçili projeler):</strong> La Joya (74 ünite) <em>2025 sonu</em>, La Joya Perla (384 ünite) <em>2026 sonu</em>, La Joya Perla II (128 ünite) <em>2027 sonu</em>.</li>
     </ul>
+
+    <p><strong>Güncel proje durumu:</strong> La Joya projesi 2025 yılında tamamlanmıştır.</p>
 
     <blockquote>
       “Amacımız yenilikçi konut geliştirmede liderlik ederek <em>eşsiz kalite ve konfor</em> sağlayan evler üretmek.” — Ozan Dökmecioğlu

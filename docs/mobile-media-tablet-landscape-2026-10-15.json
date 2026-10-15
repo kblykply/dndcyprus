@@ -1,0 +1,40 @@
+{
+  "measuredAt": "2026-10-15T09:24:30.165Z",
+  "buildId": "DzIvYS9rTIxJoA_uNSzG1",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 768,
+      "height": 1024,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "tr",
+      "width": 844,
+      "height": 390,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "height": 1024,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

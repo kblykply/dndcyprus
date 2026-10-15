@@ -1,0 +1,256 @@
+{
+  "measuredAt": "2026-10-14T09:58:12.829Z",
+  "origin": "http://127.0.0.1:3100",
+  "phase": "oct14-saved-consent",
+  "device": "mobile",
+  "visit": "saved preferences; cold cache",
+  "method": "Lighthouse 13.5 default simulated mobile throttling; saved preferences; cold cache; laboratory data. Sample counts recorded per route.",
+  "sampleCounts": {
+    "/tr": 1,
+    "/en": 1
+  },
+  "buildId": "OawxbhWfAbw4W-q4dma9F",
+  "samples": [
+    {
+      "route": "/tr",
+      "sample": 1,
+      "score": 88,
+      "lcpMs": 3909.9403,
+      "fcpMs": 1209.9403,
+      "tbtMs": 2,
+      "cls": 0.000139988042982138,
+      "transferBytes": 533601,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Modern mimari ve konforu tek çatı altında buluşturan yaşam alanları.",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > p.mt-4"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 25.536
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 78.397
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 455
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 155
+          }
+        ],
+        "unusedJavaScriptBytes": 24334,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fb7bd5cb03e3f41f.js",
+            "type": "Script",
+            "transferBytes": 18142,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2FBEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png&w=256&q=75",
+            "type": "Image",
+            "transferBytes": 13402,
+            "priority": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 2,
+      "score": 88,
+      "lcpMs": 3908.5764,
+      "fcpMs": 1208.5764,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 536301,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Living spaces that bring modern architecture and comfort together under one roo…",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > p.mt-4"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 10.131
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 76.74
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 454
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240,
+            "wastedMs": 154
+          }
+        ],
+        "unusedJavaScriptBytes": 24334,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/af4e112e1d87d360.js",
+            "type": "Script",
+            "transferBytes": 18019,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2FBEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png&w=256&q=75",
+            "type": "Image",
+            "transferBytes": 13402,
+            "priority": "Low"
+          }
+        ]
+      }
+    }
+  ],
+  "status": "passed"
+}

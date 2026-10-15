@@ -1,0 +1,901 @@
+{
+  "measuredAt": "2026-10-15T09:29:39.597Z",
+  "origin": "http://127.0.0.1:3100",
+  "buildId": "1xDBqubpGQmxPvGS66w5v",
+  "baselineMode": false,
+  "pages": [
+    {
+      "route": "/tr",
+      "status": 200,
+      "title": "Kuzey Kıbrıs'ta Satılık Daireler ve Projeler | DND Cyprus",
+      "description": "Ödüllü geliştirici DND Cyprus; İskele'de Lagoon Verde, La Joya Perla ve Perla II gibi denize yakın projeler ve Mariachi Beach Club ayrıcalığı sunar. Keşfedin.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr",
+        "en": "https://www.dndcyprus.com/en",
+        "x-default": "https://www.dndcyprus.com/en"
+      },
+      "lang": "tr",
+      "h1": [
+        "Kuzey Kıbrıs'ta konut projeleri – DND Cyprus"
+      ],
+      "bodyTextHash": "c45591ef0cd61b3ef8f7b94307de68751bf9c15b79b8f87746075b6b94709d53",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en",
+      "status": 200,
+      "title": "North Cyprus Property Developer & Apartments | DND Cyprus",
+      "description": "Award-winning developer DND Cyprus builds seaside homes in Iskele: Lagoon Verde, La Joya Perla and Perla II, with Mariachi Beach Club perks. See our projects.",
+      "canonical": [
+        "https://www.dndcyprus.com/en"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr",
+        "en": "https://www.dndcyprus.com/en",
+        "x-default": "https://www.dndcyprus.com/en"
+      },
+      "lang": "en",
+      "h1": [
+        "Residential projects in North Cyprus – DND Cyprus"
+      ],
+      "bodyTextHash": "3a7338eaa360c34f5f2592664c79ab4601e18efbe6471eca3d51af1003bcfb40",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/projects",
+      "status": 200,
+      "title": "Projelerimiz | İskele'de Konut ve Beach Club – DND Cyprus",
+      "description": "Lagoon Verde, La Joya, La Joya Perla, Perla II, Mariachi Beach Club ve Geçitkale arsası: DND Cyprus projelerini tek sayfada karşılaştırın ve inceleyin.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/projects"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/projects",
+        "en": "https://www.dndcyprus.com/en/projects",
+        "x-default": "https://www.dndcyprus.com/en/projects"
+      },
+      "lang": "tr",
+      "h1": [
+        "Kuzey Kıbrıs'ta konut projeleri – DND Cyprus"
+      ],
+      "bodyTextHash": "92ba39c59e0be9b33530b7a27a096319042236b725b649d9781c6f87d8637394",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/projects",
+      "status": 200,
+      "title": "Our Projects – Iskele Homes & Beach Club | DND Cyprus",
+      "description": "Browse DND Cyprus projects in one place: Lagoon Verde, La Joya, La Joya Perla, Perla II, Mariachi Beach Club and Geçitkale land. Compare and find your home.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/projects"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/projects",
+        "en": "https://www.dndcyprus.com/en/projects",
+        "x-default": "https://www.dndcyprus.com/en/projects"
+      },
+      "lang": "en",
+      "h1": [
+        "Residential projects in North Cyprus – DND Cyprus"
+      ],
+      "bodyTextHash": "a1dbc2f1d9873327c8f87911106baa46a32c880f5433a0188f0c4fb4fb74f6fd",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/lagoon-verde",
+      "status": 200,
+      "title": "Lagoon Verde İskele | Bahçeler'de Satılık Daireler – DND Cyprus",
+      "description": "İskele Bahçeler'de lagün havuzlu Lagoon Verde: studio, 1+1 ve 2+1 daireler, aquapark, fitness ve Mariachi Beach Club ayrıcalığı. Kat planları ve fiyat için ulaşın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/lagoon-verde"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/lagoon-verde",
+        "en": "https://www.dndcyprus.com/en/lagoon-verde",
+        "x-default": "https://www.dndcyprus.com/en/lagoon-verde"
+      },
+      "lang": "tr",
+      "h1": [
+        "Lagoon Verde"
+      ],
+      "bodyTextHash": "2d5d09e1669bf1c2415aa8c58af9a2fdb6b4bf94c8fe9c40828d50e374dccf46",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/lagoon-verde",
+      "status": 200,
+      "title": "Lagoon Verde Iskele – Apartments for Sale | DND Cyprus",
+      "description": "Lagoon Verde in Bahçeler, Iskele: studio, 1+1 and 2+1 apartments with a lagoon pool, aqua park, fitness and Mariachi Beach Club perks. Get floor plans and prices.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/lagoon-verde"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/lagoon-verde",
+        "en": "https://www.dndcyprus.com/en/lagoon-verde",
+        "x-default": "https://www.dndcyprus.com/en/lagoon-verde"
+      },
+      "lang": "en",
+      "h1": [
+        "Lagoon Verde"
+      ],
+      "bodyTextHash": "16900255d02938aebc5ebf7bf1a684d9e6b7def4cb8d70583e4a208ab89a08fb",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/perla-ii",
+      "status": 200,
+      "title": "La Joya Perla II İskele | Satılık Daireler – DND Cyprus",
+      "description": "Bahçeler, İskele'de La Joya Perla II: stüdyo, 1+1 loft ve çatı teraslı ya da bahçeli 2+1 daireler; havuz, fitness ve yeşil alanlar. Kat planları için ulaşın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/perla-ii"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/perla-ii",
+        "en": "https://www.dndcyprus.com/en/perla-ii",
+        "x-default": "https://www.dndcyprus.com/en/perla-ii"
+      },
+      "lang": "tr",
+      "h1": [
+        "La Joya Perla II"
+      ],
+      "bodyTextHash": "a75a6bbe3ed9a7ef2a339c247f6f548a1ac02d1a892d63a071c4c47379a0c3b3",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/perla-ii",
+      "status": 200,
+      "title": "La Joya Perla II Iskele – Apartments for Sale | DND Cyprus",
+      "description": "La Joya Perla II in Bahçeler, Iskele: studio, 1+1 loft and 2+1 suites with roof terraces or gardens, plus a pool, fitness and green areas. Request floor plans.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/perla-ii"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/perla-ii",
+        "en": "https://www.dndcyprus.com/en/perla-ii",
+        "x-default": "https://www.dndcyprus.com/en/perla-ii"
+      },
+      "lang": "en",
+      "h1": [
+        "La Joya Perla II"
+      ],
+      "bodyTextHash": "7ab2cef910a426031138ea05185268d27ef7a0bf8e5f3b07c0ed11edf48d0728",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/perla",
+      "status": 200,
+      "title": "La Joya Perla İskele | Denize 700 m Daireler – DND Cyprus",
+      "description": "Bahçeler, İskele'de denize 700 m La Joya Perla: stüdyo, 1+1 loft ve 2+1 daireler, sand pool, kapalı havuz, spa ve Mariachi Beach Club ayrıcalığı. Bilgi alın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/perla"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/perla",
+        "en": "https://www.dndcyprus.com/en/perla",
+        "x-default": "https://www.dndcyprus.com/en/perla"
+      },
+      "lang": "tr",
+      "h1": [
+        "La Joya Perla"
+      ],
+      "bodyTextHash": "bb9b6476c9e163b803e788f319d574a49869f6085d5126a7514b238dfefeee43",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/perla",
+      "status": 200,
+      "title": "La Joya Perla Iskele – Apartments by the Sea | DND Cyprus",
+      "description": "La Joya Perla in Bahçeler, Iskele, 700 m from the sea: studio, 1+1 loft and 2+1 apartments, sand pool, indoor pool, spa and Mariachi Beach Club perks. Enquire.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/perla"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/perla",
+        "en": "https://www.dndcyprus.com/en/perla",
+        "x-default": "https://www.dndcyprus.com/en/perla"
+      },
+      "lang": "en",
+      "h1": [
+        "La Joya Perla"
+      ],
+      "bodyTextHash": "482a8b277a49ff285699200463b054c6adb62948fd8bb0f0392ec9c3b09d4c61",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/la-joya",
+      "status": 200,
+      "title": "La Joya Long Beach İskele | Loft ve Penthouse – DND Cyprus",
+      "description": "2025’te tamamlanan La Joya, Long Beach, İskele’de denize 500 m: 74 konut, loft ve penthouse daireler, havuz ve Mariachi Beach Club üyeliği. Bilgi alın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/la-joya"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/la-joya",
+        "en": "https://www.dndcyprus.com/en/la-joya",
+        "x-default": "https://www.dndcyprus.com/en/la-joya"
+      },
+      "lang": "tr",
+      "h1": [
+        "La Joya"
+      ],
+      "bodyTextHash": "d13daa75eafe8daa5e90c112deb80a001d11cdbc57fd7e02db540565d1babbb2",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/la-joya",
+      "status": 200,
+      "title": "La Joya Long Beach Iskele – Lofts & Penthouses | DND Cyprus",
+      "description": "Completed in 2025, La Joya in Long Beach, Iskele offers 74 low-rise homes, lofts and penthouses, 500 m from the sea, with Mariachi Beach Club membership.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/la-joya"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/la-joya",
+        "en": "https://www.dndcyprus.com/en/la-joya",
+        "x-default": "https://www.dndcyprus.com/en/la-joya"
+      },
+      "lang": "en",
+      "h1": [
+        "La Joya"
+      ],
+      "bodyTextHash": "b1f3aff9ae35356dc873a9c0c7cf8f1a488dcc3a725bec059cec37dca6f20023",
+      "schemas": [
+        "Organization",
+        "ApartmentComplex"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/mariachi",
+      "status": 200,
+      "title": "Mariachi Beach Club İskele | Plaj ve Havuz – DND Cyprus",
+      "description": "Bahçeler, İskele'de Mariachi Beach Club: plaj, 4 jakuzili havuz, pavilyonlar, Latino menülü restoran, 2 bar ve DJ performansları. Pavilyonunuzu ayırtın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/mariachi"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/mariachi",
+        "en": "https://www.dndcyprus.com/en/mariachi",
+        "x-default": "https://www.dndcyprus.com/en/mariachi"
+      },
+      "lang": "tr",
+      "h1": [
+        "Mariachi Beach Club"
+      ],
+      "bodyTextHash": "af62ad0ea0e1132750b48234a0aa1580f66940070f19f61f9d87d79c46cf9758",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/mariachi",
+      "status": 200,
+      "title": "Mariachi Beach Club Iskele – Beach, Pool & Bar | DND Cyprus",
+      "description": "Mariachi Beach Club in Bahçeler, Iskele: beach and pool with 4 jacuzzis, cabanas, a Latino-inspired restaurant, 2 bars and live DJ nights. Book your pavilion.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/mariachi"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/mariachi",
+        "en": "https://www.dndcyprus.com/en/mariachi",
+        "x-default": "https://www.dndcyprus.com/en/mariachi"
+      },
+      "lang": "en",
+      "h1": [
+        "Mariachi Beach Club"
+      ],
+      "bodyTextHash": "64de45914c9ad441726f801d722634207387871c8b13ec8179d8ed68225ada07",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/gecitkale",
+      "status": 200,
+      "title": "Geçitkale Satılık Arsa | İskele Yatırım Fırsatı – DND Cyprus",
+      "description": "Geçitkale, İskele'de Fasıl 96 imarlı 9.840 m² arsa: villa, ikiz villa ve apartmana uygun; Long Beach'e 12, Ercan Havalimanı'na 25 dk. Detaylar için ulaşın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/gecitkale"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/gecitkale",
+        "en": "https://www.dndcyprus.com/en/gecitkale",
+        "x-default": "https://www.dndcyprus.com/en/gecitkale"
+      },
+      "lang": "tr",
+      "h1": [
+        "Geçitkale"
+      ],
+      "bodyTextHash": "192ad74d149d12ccb19de95fb09262b65b9fb9524fd2e72303ee5f9d6660f848",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/gecitkale",
+      "status": 200,
+      "title": "Geçitkale Land for Sale in Iskele, North Cyprus | DND Cyprus",
+      "description": "A 9,840 m² plot in Geçitkale, Iskele, zoned under Fasıl 96 for villas, twin villas and apartments; 12 min to Long Beach, 25 min to Ercan Airport. Get details.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/gecitkale"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/gecitkale",
+        "en": "https://www.dndcyprus.com/en/gecitkale",
+        "x-default": "https://www.dndcyprus.com/en/gecitkale"
+      },
+      "lang": "en",
+      "h1": [
+        "Geçitkale"
+      ],
+      "bodyTextHash": "b0db49064ff3fe07c75b0e3f493e2e499054218f2437fcd394147b06facbd722",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/about",
+      "status": 200,
+      "title": "Hakkımızda | Kıbrıs Gayrimenkul Geliştiricisi – DND Cyprus",
+      "description": "DND Cyprus; Boston'da kurulan DND Homes'un Kıbrıs yapılanması. Ozan Dökmecioğlu liderliğinde İskele'de ödüllü, tasarım odaklı konut projeleri geliştiriyoruz.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/about"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/about",
+        "en": "https://www.dndcyprus.com/en/about",
+        "x-default": "https://www.dndcyprus.com/en/about"
+      },
+      "lang": "tr",
+      "h1": [
+        "DND Cyprus"
+      ],
+      "bodyTextHash": "2a87890b9092d1fb87a3a084fe67c3dfb36b8f39c00083ced02709077d34b788",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/about",
+      "status": 200,
+      "title": "About Us – North Cyprus Real Estate Developer | DND Cyprus",
+      "description": "DND Cyprus is the Cyprus arm of Boston-founded DND Homes. Led by Ozan Dökmecioğlu, we develop award-winning, design-led residences in Iskele. Meet our story.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/about"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/about",
+        "en": "https://www.dndcyprus.com/en/about",
+        "x-default": "https://www.dndcyprus.com/en/about"
+      },
+      "lang": "en",
+      "h1": [
+        "DND Cyprus"
+      ],
+      "bodyTextHash": "f6725a15a554a66ffec1a54680648d02719922d4ed98193079f39503bcefca4d",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/team",
+      "status": 200,
+      "title": "Ekibimiz | Yönetim, Satış ve Mühendislik – DND Cyprus",
+      "description": "DND Cyprus ekibiyle tanışın: yönetim, satış, satış sonrası, mimarlık, mühendislik ve finans kadromuz Kıbrıs projelerinizde yanınızda. Uzmanlarımıza ulaşın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/team"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/team",
+        "en": "https://www.dndcyprus.com/en/team",
+        "x-default": "https://www.dndcyprus.com/en/team"
+      },
+      "lang": "tr",
+      "h1": [
+        "DND Cyprus Ekibi"
+      ],
+      "bodyTextHash": "9ca21dd3d62cdcad48dbd894561ecf5fb306c9133dcd655467ff6e4b867b9cf0",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/team",
+      "status": 200,
+      "title": "Our Team – Leadership, Sales & Engineering | DND Cyprus",
+      "description": "Meet the DND Cyprus team: leadership, sales, after-sales, architecture, engineering and finance professionals supporting your North Cyprus property journey.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/team"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/team",
+        "en": "https://www.dndcyprus.com/en/team",
+        "x-default": "https://www.dndcyprus.com/en/team"
+      },
+      "lang": "en",
+      "h1": [
+        "The DND Cyprus Team"
+      ],
+      "bodyTextHash": "147826cd52d1ed0fd6455f9aaf65ddd6bb939880651bda2af4441af10dc528d4",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/contact",
+      "status": 200,
+      "title": "İletişim | Gazimağusa ve İskele Satış Ofisleri – DND Cyprus",
+      "description": "DND Cyprus merkez ofisi Gazimağusa'da, satış ofisimiz İskele'de. Projeler ve yatırım fırsatları için +90 392 444 03 63 veya info@dndcyprus.com ile ulaşın.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/contact"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/contact",
+        "en": "https://www.dndcyprus.com/en/contact",
+        "x-default": "https://www.dndcyprus.com/en/contact"
+      },
+      "lang": "tr",
+      "h1": [
+        "Bize Ulaşın"
+      ],
+      "bodyTextHash": "f0efbeb4f798f5dc0e8628c4767b6d826aad0d6a5e5843633188c1229cdd3f33",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/contact",
+      "status": 200,
+      "title": "Contact Us – Famagusta & Iskele Sales Offices | DND Cyprus",
+      "description": "Visit DND Cyprus at our Famagusta head office or Iskele sales office. Call +90 392 444 03 63 or email info@dndcyprus.com about our projects and investments.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/contact"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/contact",
+        "en": "https://www.dndcyprus.com/en/contact",
+        "x-default": "https://www.dndcyprus.com/en/contact"
+      },
+      "lang": "en",
+      "h1": [
+        "Get in Touch"
+      ],
+      "bodyTextHash": "22a91d5de22e30a60f7e9bb84c48c3ad766f4b0a59279ecdf55bb70f7bf3fe97",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "status": 200,
+      "title": "DND Medya Merkezi | Broşür, Katalog ve Videolar – DND Cyprus",
+      "description": "DND Cyprus medya merkezi: Lagoon Verde broşürü ve ödeme planı, KKTC kataloğu, La Joya ve Property Awards videoları ile kampanyaları tek yerde inceleyin.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/dndcyprus"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/dndcyprus",
+        "en": "https://www.dndcyprus.com/en/dndcyprus",
+        "x-default": "https://www.dndcyprus.com/en/dndcyprus"
+      },
+      "lang": "tr",
+      "h1": [
+        "DND Medya Merkezi"
+      ],
+      "bodyTextHash": "0881727b87c5fd1b1a2a7847b49222306e7e9e0b538ee8a684207547b6e569a2",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/dndcyprus",
+      "status": 200,
+      "title": "DND Media Hub – Brochures, Catalogs & Videos | DND Cyprus",
+      "description": "The DND Cyprus media hub: browse the Lagoon Verde brochure and payment plan, the North Cyprus catalog, La Joya and Property Awards videos, and campaigns.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/dndcyprus"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/dndcyprus",
+        "en": "https://www.dndcyprus.com/en/dndcyprus",
+        "x-default": "https://www.dndcyprus.com/en/dndcyprus"
+      },
+      "lang": "en",
+      "h1": [
+        "DND Media Hub"
+      ],
+      "bodyTextHash": "03d3bf963f15df053a38785a2443de5d9bb774c3e0578fb711b768674fd97401",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/press",
+      "status": 200,
+      "title": "Basın Haberleri ve Duyurular | DND Cyprus",
+      "description": "Basında DND Cyprus: La Joya Rezidansları ve Tatil Köyü'nün tamamlanması başta olmak üzere Kıbrıs Postası, Yenidüzen ve Haber Kıbrıs'taki haberleri okuyun.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/press"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/press",
+        "en": "https://www.dndcyprus.com/en/press",
+        "x-default": "https://www.dndcyprus.com/en/press"
+      },
+      "lang": "tr",
+      "h1": [
+        "Basında DND Cyprus"
+      ],
+      "bodyTextHash": "5b2c7a61ef3a717337406ab83b7341c56870be0d7335e3d69b85d8f062bc9d5d",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/press",
+      "status": 200,
+      "title": "Press Coverage & News | DND Cyprus",
+      "description": "DND Cyprus in the press: coverage from Kıbrıs Postası, Yenidüzen, Haber Kıbrıs and more, including the completion of La Joya Residences and Holiday Village.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/press"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/press",
+        "en": "https://www.dndcyprus.com/en/press",
+        "x-default": "https://www.dndcyprus.com/en/press"
+      },
+      "lang": "en",
+      "h1": [
+        "DND Cyprus in the Press"
+      ],
+      "bodyTextHash": "0657fb987f63128124758c53124a3e6766fa1868deb32f7011f5075609336d98",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/privacy",
+      "status": 200,
+      "title": "Gizlilik ve Çerez Politikası | DND Cyprus",
+      "description": "DND Cyprus'un kişisel verileri hangi amaçlarla işlediği, kullandığı çerezler (Google Analytics, Google Ads, Meta Pixel), çerez izninizi nasıl yönetebileceğiniz ve haklarınız.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/privacy"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/privacy",
+        "en": "https://www.dndcyprus.com/en/privacy",
+        "x-default": "https://www.dndcyprus.com/en/privacy"
+      },
+      "lang": "tr",
+      "h1": [
+        "Gizlilik ve Çerez Politikası"
+      ],
+      "bodyTextHash": "7a27946c99cb07ca8e8667e8e1738b93e4795bc51071b9565364260c023b7b5e",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/privacy",
+      "status": 200,
+      "title": "Privacy and Cookie Policy | DND Cyprus",
+      "description": "How DND Cyprus processes personal data, which cookies we use (Google Analytics, Google Ads, Meta Pixel), how to manage your cookie consent and what your rights are.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/privacy"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/privacy",
+        "en": "https://www.dndcyprus.com/en/privacy",
+        "x-default": "https://www.dndcyprus.com/en/privacy"
+      },
+      "lang": "en",
+      "h1": [
+        "Privacy and Cookie Policy"
+      ],
+      "bodyTextHash": "b19ac73ecbe3439d59caf3bac694e368ac50f093eb90d4d1dd25d0e8dacda2af",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/terms",
+      "status": 200,
+      "title": "Kullanım Koşulları | DND Cyprus",
+      "description": "DND Cyprus sitesinin kullanım koşulları: hizmetin kapsamı, kullanıcı yükümlülükleri, fikri mülkiyet, sorumluluk sınırları ve KKTC hukukuna tabi uyuşmazlıklar.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/terms"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/terms",
+        "en": "https://www.dndcyprus.com/en/terms",
+        "x-default": "https://www.dndcyprus.com/en/terms"
+      },
+      "lang": "tr",
+      "h1": [
+        "Kullanım Koşulları"
+      ],
+      "bodyTextHash": "05a6887e504545ef00cfec9ac082bcef3085073b2122287152694cd82d204b7e",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/en/terms",
+      "status": 200,
+      "title": "Terms of Use | DND Cyprus",
+      "description": "Terms of use for the DND Cyprus website: scope of the service, user obligations, intellectual property, limitation of liability and TRNC governing law.",
+      "canonical": [
+        "https://www.dndcyprus.com/en/terms"
+      ],
+      "languages": {
+        "tr": "https://www.dndcyprus.com/tr/terms",
+        "en": "https://www.dndcyprus.com/en/terms",
+        "x-default": "https://www.dndcyprus.com/en/terms"
+      },
+      "lang": "en",
+      "h1": [
+        "Terms of Use"
+      ],
+      "bodyTextHash": "3f37327b3b20e7692a30231b33e3e089d828056eeeecdc60c6d1b67b988a15c5",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/blog",
+      "status": 200,
+      "title": "Blog | Haberler, Ödüller ve Röportajlar – DND Cyprus",
+      "description": "DND Cyprus blogu: PropertyNC ödülleri, Ozan Dökmecioğlu röportajları, DND Homes büyüme planı ve Kuzey Kıbrıs gayrimenkul dünyasından güncel haberler.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/blog"
+      ],
+      "languages": {},
+      "lang": "tr",
+      "h1": [
+        "DND Cyprus Blog"
+      ],
+      "bodyTextHash": "07ad98692b0d03960fdfd1f5b6373a7e0a417e0f0a6a7d253eea6d1acf286ead",
+      "schemas": [
+        "Organization"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "status": 200,
+      "title": "USA Quality in Cyprus: Ozan Dökmecioğlu ile Röportaj | DND Cyprus",
+      "description": "PropertyNC ile yapılan söyleşide DND’nin vizyonu ve projeleri konuşuldu. 28 Ocak 2025 ’te yayımlanan söyleşide DND Cyprus, İskele’nin yükselen profilinde…",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/blog/dnd-usa-quality-in-cyprus-interview-2025"
+      ],
+      "languages": {},
+      "lang": "tr",
+      "h1": [
+        "USA Quality in Cyprus: Ozan Dökmecioğlu ile Röportaj"
+      ],
+      "bodyTextHash": "7b5e1bbefedd55fd52005e9b930a74d8297577208daba0378b720a5d097b51ef",
+      "schemas": [
+        "Organization",
+        "BlogPosting"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+      "status": 200,
+      "title": "DND Cyprus, 2025 PropertyNC Ödülleri’nde Altın Ödül Kazandı",
+      "description": "Şirket ‘Best Newcomer’ kategorisinde ödüle layık görüldü. Nisan 2025 ’te düzenlenen PropertyNC Awards ’da DND Cyprus, Best Newcomer (Gold) ödülünün sahibi…",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/blog/dnd-cyprus-gold-award-propertync-2025"
+      ],
+      "languages": {},
+      "lang": "tr",
+      "h1": [
+        "DND Cyprus, 2025 PropertyNC Ödülleri’nde Altın Ödül Kazandı"
+      ],
+      "bodyTextHash": "4d8c667ed98404503956304633f84ea1c9cb7bf1bbc580d8282906fb87095574",
+      "schemas": [
+        "Organization",
+        "BlogPosting"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+      "status": 200,
+      "title": "DND Cyprus, Yılbaşı Etkinliğiyle İş Ortaklarını Ağırladı",
+      "description": "Şirket, iş ortaklarıyla birlikte yeni yılı kutladığı özel bir etkinlik düzenledi. 11 Aralık 2023 ’te DND Cyprus; iş ortakları, acenteler ve sektör…",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/blog/dnd-cyprus-new-year-celebration-2023"
+      ],
+      "languages": {},
+      "lang": "tr",
+      "h1": [
+        "DND Cyprus, Yılbaşı Etkinliğiyle İş Ortaklarını Ağırladı"
+      ],
+      "bodyTextHash": "862a758a177b1e6aa423ccf8eea39876388642cf96a3d7fd67be17b126370593",
+      "schemas": [
+        "Organization",
+        "BlogPosting"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+      "status": 200,
+      "title": "DND Homes, Kuzey Kıbrıs’ta 30.000+ Konutluk Büyüme Planını Açıkladı",
+      "description": "DND Homes; İskele, Girne, Esentepe, Geçitkale ve Yedikonuk’ta 30.000’i aşkın konut hedefiyle Kuzey Kıbrıs’ta genişleme planlarını duyurdu.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+      ],
+      "languages": {},
+      "lang": "tr",
+      "h1": [
+        "DND Homes, Kuzey Kıbrıs’ta 30.000+ Konutluk Büyüme Planını Açıkladı"
+      ],
+      "bodyTextHash": "d7531b2209d3d10db7e5fa4702fdfc1fc2b168f1c58a2fd1a258920898164439",
+      "schemas": [
+        "Organization",
+        "BlogPosting"
+      ],
+      "robots": []
+    },
+    {
+      "route": "/tr/qr",
+      "status": 200,
+      "title": "Joy Cafe Haftalık Menü",
+      "description": "La Joya Resort & Residences Joy Cafe haftalık yemek menüsü.",
+      "canonical": [
+        "https://www.dndcyprus.com/tr/qr"
+      ],
+      "languages": {},
+      "lang": "tr",
+      "h1": [],
+      "bodyTextHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "schemas": [],
+      "robots": []
+    }
+  ],
+  "probes": [
+    {
+      "route": "/tr/blog/seo-missing-post",
+      "status": 404
+    },
+    {
+      "route": "/tr/blog/seo-missing-post?utm_source=test",
+      "status": 404
+    },
+    {
+      "route": "/en/blog/seo-missing-post",
+      "status": 404
+    },
+    {
+      "route": "/tr/dndturkiye",
+      "status": 404
+    },
+    {
+      "route": "/en/dndturkiye",
+      "status": 404
+    },
+    {
+      "route": "/tr?utm_source=test",
+      "status": 200,
+      "canonical": "https://www.dndcyprus.com/tr"
+    },
+    {
+      "route": "/en/projects?status=all",
+      "status": 200,
+      "canonical": "https://www.dndcyprus.com/en/projects"
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025?utm_source=test",
+      "status": 200,
+      "canonical": "https://www.dndcyprus.com/tr/blog/dnd-usa-quality-in-cyprus-interview-2025"
+    },
+    {
+      "route": "/admin/login",
+      "status": 200,
+      "xRobotsTag": "noindex, nofollow"
+    }
+  ],
+  "redirects": [
+    {
+      "route": "/contact",
+      "status": 308,
+      "location": "/tr/contact"
+    },
+    {
+      "route": "/about",
+      "status": 308,
+      "location": "/tr/about"
+    },
+    {
+      "route": "/projects",
+      "status": 308,
+      "location": "/tr/projects"
+    },
+    {
+      "route": "/perla-ii",
+      "status": 308,
+      "location": "/tr/perla-ii"
+    },
+    {
+      "route": "/la-joya",
+      "status": 308,
+      "location": "/tr/la-joya"
+    },
+    {
+      "route": "/projects/perla2",
+      "status": 308,
+      "location": "/tr/perla-ii"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "contentComparison": {
+    "comparedPages": 36,
+    "changed": []
+  },
+  "status": "passed"
+}

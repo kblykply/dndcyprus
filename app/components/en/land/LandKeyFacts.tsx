@@ -40,7 +40,7 @@ note = "*For information purposes only; zoning/permit parameters may vary per pa
 }: Props) {
   return (
     <section
-      aria-label="Geçitkale — Öne Çıkan Bilgiler"
+      aria-label="Geçitkale — Key Facts"
       className="relative overflow-hidden"
       style={{
         background: "#fff",

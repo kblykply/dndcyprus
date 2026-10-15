@@ -1,5 +1,6 @@
 // app/components/mariachi/MariachiBeachClubHero.tsx
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants, type Easing, rgbUnit } from "framer-motion";
 
@@ -47,7 +48,7 @@ export default function MariachiBeachClubHero({
   title = "Mariachi Beach Club",
   subtitle = "Akdeniz güneşiyle Latin ritmini buluşturan; pavilyon konforu, gün boyu plaj keyfi ve akşam DJ performanslarıyla ayrıcalıklı bir deneyim.",
   badge = "Plaj Kulübü",
-  videoSrc = "/mariachi/hero.mp4",
+  videoSrc = null,
   bgImage = "/mariachi/7.jpg",
   overlayOpacity = 0.35,
   primaryCta = { label: "Pavilyon Rezervasyonu", href: "/tr/contact" },
@@ -75,10 +76,14 @@ export default function MariachiBeachClubHero({
             <source src={videoSrc} />
           </video>
         ) : (
-          <div
-            aria-hidden
-            className="h-full w-full bg-cover bg-center"
-            style={{ backgroundImage: `url(${bgImage})` }}
+          <Image
+            src={bgImage}
+            alt={title}
+            fill
+            preload
+            quality={65}
+            sizes="100vw"
+            className="object-cover"
           />
         )}
         {/* Okunabilirlik katmanı */}

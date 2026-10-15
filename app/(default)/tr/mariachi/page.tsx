@@ -32,7 +32,7 @@ export default function HomePage() {
 
  <QuarterLogoBadge
           logoSrc="/logos/mariachi.png"
-          alt="Your Project"
+          alt="Mariachi Beach Club"
           href="/tr"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens

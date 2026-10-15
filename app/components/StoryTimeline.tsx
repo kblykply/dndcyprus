@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useCallback, useRef, useMemo } from "react";
-import Image from "next/image";
+import Image from "@/app/components/performance/DeferredFillImage";
 import { m as motion, AnimatePresence } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
@@ -181,8 +181,9 @@ export default function StoryTimeline() {
                     src={MILESTONES[prevIndexRef.current].image}
                     alt=""
                     fill
+                    quality={65}
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(min-width: 1280px) 588px, (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
                   />
                 </motion.div>
                 <motion.div
@@ -196,8 +197,9 @@ export default function StoryTimeline() {
                     src={MILESTONES[index].image}
                     alt={MILESTONES[index].title}
                     fill
+                    quality={65}
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(min-width: 1280px) 588px, (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
                   />
                 </motion.div>
               </AnimatePresence>

@@ -1,0 +1,64 @@
+{
+  "measuredAt": "2026-10-12T18:03:25.963Z",
+  "status": "passed",
+  "checked": [
+    {
+      "path": "/tr/team",
+      "width": 390,
+      "initialPhotos": 1,
+      "allPhotos": 27,
+      "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+    },
+    {
+      "path": "/tr/team",
+      "width": 1440,
+      "initialPhotos": 10,
+      "allPhotos": 27,
+      "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+    },
+    {
+      "path": "/en/team",
+      "width": 390,
+      "initialPhotos": 1,
+      "allPhotos": 27,
+      "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+    },
+    {
+      "path": "/en/team",
+      "width": 1440,
+      "initialPhotos": 10,
+      "allPhotos": 27,
+      "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+    },
+    {
+      "path": "/tr/about",
+      "checks": "deferred images, media activation, map toggle, no overflow"
+    },
+    {
+      "path": "/tr/mariachi",
+      "checks": "deferred images, media activation, map toggle, no overflow"
+    },
+    {
+      "path": "/tr/gecitkale",
+      "checks": "deferred images, media activation, map toggle, no overflow"
+    },
+    {
+      "path": "/en/about",
+      "checks": "deferred images, media activation, map toggle, no overflow"
+    },
+    {
+      "path": "/en/mariachi",
+      "checks": "deferred images, media activation, map toggle, no overflow"
+    },
+    {
+      "path": "/en/gecitkale",
+      "checks": "deferred images, media activation, map toggle, no overflow"
+    },
+    {
+      "path": "/tr/qr",
+      "checks": "1280-pixel menu, image preload, no fonts, no shared navigation or consent"
+    }
+  ],
+  "errors": [],
+  "missing": []
+}

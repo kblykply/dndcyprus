@@ -1,6 +1,8 @@
 // app/components/land/LandLocationAccess.tsx
 "use client";
 
+import DeferredIframe from "@/app/components/performance/DeferredIframe";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import React, { useMemo, useState } from "react";
 import { m as motion, type Variants } from "framer-motion";
 
@@ -142,8 +144,8 @@ export default function LandLocationAccess() {
 
               {/* Map iframe */}
               <div className="aspect-video relative z-10">
-                <iframe
-                  title="Proje Konumu"
+                <DeferredIframe buttonLabel="Show map"
+                  title="Project location"
                   src={embedUrl}
                   className="absolute inset-0 w-full h-full"
                   loading="lazy"
@@ -151,9 +153,9 @@ export default function LandLocationAccess() {
                 />
                 {/* Optional parcel overlay image (must be pre-aligned if used) */}
                 {boundaryOverlay ? (
-                  <img
+                  <DeferredFillImage fill quality={75} sizes="(min-width: 1280px) 592px, (min-width: 1024px) 50vw, 100vw"
                     src={boundaryOverlay}
-                    alt="Parsel sınırı overlay"
+                    alt="Plot boundary overlay"
                     className="pointer-events-none absolute inset-0 w-full h-full object-contain z-20 opacity-80 mix-blend-multiply"
                   />
                 ) : null}
@@ -220,7 +222,7 @@ export default function LandLocationAccess() {
                 }}
               >
                 <div className="text-sm font-semibold mb-2" style={{ color: isLight ? "#141517" : "#fff" }}>
-                  Erişim & Çevre Notları
+                  Access & Surroundings
                 </div>
                 <ul className="list-disc pl-5 space-y-1 text-sm"
                   style={{ color: isLight ? "rgba(20,21,23,0.75)" : "rgba(255,255,255,0.85)" }}

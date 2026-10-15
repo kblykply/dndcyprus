@@ -1,0 +1,47 @@
+{
+  "original": "/lagoon-verde/1.jpg",
+  "avif": [
+    {
+      "src": "/optimized/home-hero-480.c5ad0278cd27.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 13192
+    },
+    {
+      "src": "/optimized/home-hero-640.f04350c9f3ea.avif",
+      "width": 640,
+      "height": 427,
+      "bytes": 20828
+    },
+    {
+      "src": "/optimized/home-hero-750.2069c5efcb10.avif",
+      "width": 750,
+      "height": 500,
+      "bytes": 27040
+    },
+    {
+      "src": "/optimized/home-hero-828.e117bdb07ae2.avif",
+      "width": 828,
+      "height": 552,
+      "bytes": 31823
+    },
+    {
+      "src": "/optimized/home-hero-1080.bbc38153dfd2.avif",
+      "width": 1080,
+      "height": 720,
+      "bytes": 50087
+    },
+    {
+      "src": "/optimized/home-hero-1200.81b993a61b43.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 60401
+    },
+    {
+      "src": "/optimized/home-hero-1536.73f795ef81ef.avif",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 105667
+    }
+  ]
+}

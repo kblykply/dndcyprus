@@ -1,0 +1,1245 @@
+{
+  "measuredAt": "2026-10-14T10:13:31.662Z",
+  "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+  "origin": "http://127.0.0.1:3100",
+  "routes": [
+    {
+      "route": "/tr",
+      "status": 200,
+      "language": "tr",
+      "title": "Kuzey Kıbrıs&#x27;ta Satılık Daireler ve Projeler | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 141026,
+      "organization": true
+    },
+    {
+      "route": "/en",
+      "status": 200,
+      "language": "en",
+      "title": "North Cyprus Property Developer &amp; Apartments | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 140405,
+      "organization": true
+    },
+    {
+      "route": "/tr/projects",
+      "status": 200,
+      "language": "tr",
+      "title": "Projelerimiz | İskele&#x27;de Konut ve Beach Club – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/projects",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 71789,
+      "organization": true
+    },
+    {
+      "route": "/en/projects",
+      "status": 200,
+      "language": "en",
+      "title": "Our Projects – Iskele Homes &amp; Beach Club | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/projects",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 70712,
+      "organization": true
+    },
+    {
+      "route": "/tr/lagoon-verde",
+      "status": 200,
+      "language": "tr",
+      "title": "Lagoon Verde İskele | Bahçeler&#x27;de Satılık Daireler – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/lagoon-verde",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 162380,
+      "organization": true
+    },
+    {
+      "route": "/en/lagoon-verde",
+      "status": 200,
+      "language": "en",
+      "title": "Lagoon Verde Iskele – Apartments for Sale | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/lagoon-verde",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 161463,
+      "organization": true
+    },
+    {
+      "route": "/tr/perla-ii",
+      "status": 200,
+      "language": "tr",
+      "title": "La Joya Perla II İskele | Satılık Daireler – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/perla-ii",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 149544,
+      "organization": true
+    },
+    {
+      "route": "/en/perla-ii",
+      "status": 200,
+      "language": "en",
+      "title": "La Joya Perla II Iskele – Apartments for Sale | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/perla-ii",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 148835,
+      "organization": true
+    },
+    {
+      "route": "/tr/perla",
+      "status": 200,
+      "language": "tr",
+      "title": "La Joya Perla İskele | Denize 700 m Daireler – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/perla",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 150060,
+      "organization": true
+    },
+    {
+      "route": "/en/perla",
+      "status": 200,
+      "language": "en",
+      "title": "La Joya Perla Iskele – Apartments by the Sea | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/perla",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 149329,
+      "organization": true
+    },
+    {
+      "route": "/tr/la-joya",
+      "status": 200,
+      "language": "tr",
+      "title": "La Joya Long Beach İskele | Loft ve Penthouse – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/la-joya",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 132276,
+      "organization": true
+    },
+    {
+      "route": "/en/la-joya",
+      "status": 200,
+      "language": "en",
+      "title": "La Joya Long Beach Iskele – Lofts &amp; Penthouses | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/la-joya",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 132214,
+      "organization": true
+    },
+    {
+      "route": "/tr/mariachi",
+      "status": 200,
+      "language": "tr",
+      "title": "Mariachi Beach Club İskele | Plaj ve Havuz – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/mariachi",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 95351,
+      "organization": true
+    },
+    {
+      "route": "/en/mariachi",
+      "status": 200,
+      "language": "en",
+      "title": "Mariachi Beach Club Iskele – Beach, Pool &amp; Bar | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/mariachi",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 94415,
+      "organization": true
+    },
+    {
+      "route": "/tr/gecitkale",
+      "status": 200,
+      "language": "tr",
+      "title": "Geçitkale Satılık Arsa | İskele Yatırım Fırsatı – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/gecitkale",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 91525,
+      "organization": true
+    },
+    {
+      "route": "/en/gecitkale",
+      "status": 200,
+      "language": "en",
+      "title": "Geçitkale Land for Sale in Iskele, North Cyprus | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/gecitkale",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 90797,
+      "organization": true
+    },
+    {
+      "route": "/tr/about",
+      "status": 200,
+      "language": "tr",
+      "title": "Hakkımızda | Kıbrıs Gayrimenkul Geliştiricisi – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/about",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 109354,
+      "organization": true
+    },
+    {
+      "route": "/en/about",
+      "status": 200,
+      "language": "en",
+      "title": "About Us – North Cyprus Real Estate Developer | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/about",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 108295,
+      "organization": true
+    },
+    {
+      "route": "/tr/team",
+      "status": 200,
+      "language": "tr",
+      "title": "Ekibimiz | Yönetim, Satış ve Mühendislik – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/team",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 88506,
+      "organization": true
+    },
+    {
+      "route": "/en/team",
+      "status": 200,
+      "language": "en",
+      "title": "Our Team – Leadership, Sales &amp; Engineering | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/team",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 87454,
+      "organization": true
+    },
+    {
+      "route": "/tr/contact",
+      "status": 200,
+      "language": "tr",
+      "title": "İletişim | Gazimağusa ve İskele Satış Ofisleri – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/contact",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 70861,
+      "organization": true
+    },
+    {
+      "route": "/en/contact",
+      "status": 200,
+      "language": "en",
+      "title": "Contact Us – Famagusta &amp; Iskele Sales Offices | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/contact",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 69647,
+      "organization": true
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "status": 200,
+      "language": "tr",
+      "title": "DND Medya Merkezi | Broşür, Katalog ve Videolar – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/dndcyprus",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 69211,
+      "organization": true
+    },
+    {
+      "route": "/en/dndcyprus",
+      "status": 200,
+      "language": "en",
+      "title": "DND Media Hub – Brochures, Catalogs &amp; Videos | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/dndcyprus",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 42217,
+      "organization": false
+    },
+    {
+      "route": "/tr/press",
+      "status": 200,
+      "language": "tr",
+      "title": "Basın Haberleri ve Duyurular | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/press",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 57615,
+      "organization": true
+    },
+    {
+      "route": "/en/press",
+      "status": 200,
+      "language": "en",
+      "title": "Press Coverage &amp; News | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/press",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 56325,
+      "organization": true
+    },
+    {
+      "route": "/tr/privacy",
+      "status": 200,
+      "language": "tr",
+      "title": "Gizlilik ve Çerez Politikası | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/privacy",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 86178,
+      "organization": true
+    },
+    {
+      "route": "/en/privacy",
+      "status": 200,
+      "language": "en",
+      "title": "Privacy and Cookie Policy | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/privacy",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 84334,
+      "organization": true
+    },
+    {
+      "route": "/tr/terms",
+      "status": 200,
+      "language": "tr",
+      "title": "Kullanım Koşulları | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/terms",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 65517,
+      "organization": true
+    },
+    {
+      "route": "/en/terms",
+      "status": 200,
+      "language": "en",
+      "title": "Terms of Use | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/en/terms",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 64771,
+      "organization": true
+    },
+    {
+      "route": "/tr/blog",
+      "status": 200,
+      "language": "tr",
+      "title": "Blog | Haberler, Ödüller ve Röportajlar – DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/blog",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 53654,
+      "organization": true
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "status": 200,
+      "language": "tr",
+      "title": "USA Quality in Cyprus: Ozan Dökmecioğlu ile Röportaj | DND Cyprus",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 62570,
+      "organization": true
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+      "status": 200,
+      "language": "tr",
+      "title": "DND Cyprus, 2025 PropertyNC Ödülleri’nde Altın Ödül Kazandı",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 63065,
+      "organization": true
+    },
+    {
+      "route": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+      "status": 200,
+      "language": "tr",
+      "title": "DND Cyprus, Yılbaşı Etkinliğiyle İş Ortaklarını Ağırladı",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/blog/dnd-cyprus-new-year-celebration-2023",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 61156,
+      "organization": true
+    },
+    {
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+      "status": 200,
+      "language": "tr",
+      "title": "DND Homes, Kuzey Kıbrıs’ta 30.000+ Konutluk Büyüme Planını Açıkladı",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 61958,
+      "organization": true
+    },
+    {
+      "route": "/tr/qr",
+      "status": 200,
+      "language": "tr",
+      "title": "Joy Cafe Haftalık Menü",
+      "description": true,
+      "canonical": "https://www.dndcyprus.com/tr/qr",
+      "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 11338,
+      "organization": false
+    }
+  ],
+  "assets": [
+    {
+      "src": "/DND-LOGO-LIGHT.svg",
+      "exists": true,
+      "route": "/en/contact"
+    },
+    {
+      "src": "/lagoon-verde/1.jpg",
+      "exists": true,
+      "route": "/en/contact"
+    },
+    {
+      "src": "/BEST-SOCIOCULTURAL-GOLD.png",
+      "exists": true,
+      "route": "/en"
+    },
+    {
+      "src": "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png",
+      "exists": true,
+      "route": "/en"
+    },
+    {
+      "src": "/BEST-NEWCOMER.png",
+      "exists": true,
+      "route": "/en"
+    },
+    {
+      "src": "/perla-ii/1.jpg",
+      "exists": true,
+      "route": "/en/perla-ii"
+    },
+    {
+      "src": "/perla/9.jpg",
+      "exists": true,
+      "route": "/en"
+    },
+    {
+      "src": "/la-joya/3.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/mariachi/2.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/dnd-boston-ofis.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/optimized/ozanbeycropped.07b7e617b44b.webp",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/Keurig_Dr_Pepper.png",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/Kellogg's-Logo.png",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/Kraft_logo_2012.png",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/Cargill_logo.png",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/mariachi/3.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/logos/dndgroup.png",
+      "exists": true,
+      "route": "/en"
+    },
+    {
+      "src": "/logos/dndhomes.png",
+      "exists": true,
+      "route": "/en"
+    },
+    {
+      "src": "/logos/lagoon.png",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/logos/lajoya.png",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/logos/mariachi.png",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/logos/perla.png",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/logos/perlaii.png",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/uu.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/news/mhacover.webp",
+      "exists": true,
+      "route": "/en/press"
+    },
+    {
+      "src": "/news/kpcover.jpg",
+      "exists": true,
+      "route": "/en/press"
+    },
+    {
+      "src": "/news/ydcover.jpg",
+      "exists": true,
+      "route": "/en/press"
+    },
+    {
+      "src": "/news/hkcover.jpg",
+      "exists": true,
+      "route": "/en/press"
+    },
+    {
+      "src": "/lagoon-verde/2.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/DND-LOGO-2.svg",
+      "exists": true,
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+    },
+    {
+      "src": "/perla-ii/2.jpg",
+      "exists": true,
+      "route": "/en/perla-ii"
+    },
+    {
+      "src": "/perla/1.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/la-joya/2.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/gecitkaleimage.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/lagoon-verde/5.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/lagoon-verde/3.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/lagoon-verde/6.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/tec/klima.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/tec/jenerator.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/tec/smart.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/tec/yer.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/lagoon-verde-interior/2plus1/6.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/lagoon-verde-interior/floor-plans/studio.webp",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/lagoon-verde-interior/studio/1.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/lagoon-verde-interior/studio/3.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/lagoon-verde-interior/studio/4.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/lagoon-verde-interior/studio/5.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/lagoon-verde-interior/studio/6.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/mariachi/7.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/lagoon-verde/7.jpg",
+      "exists": true,
+      "route": "/en/lagoon-verde"
+    },
+    {
+      "src": "/perla-ii/3.jpg",
+      "exists": true,
+      "route": "/en/perla-ii"
+    },
+    {
+      "src": "/perla-ii/6.jpg",
+      "exists": true,
+      "route": "/en/perla-ii"
+    },
+    {
+      "src": "/perla-ii/5.jpg",
+      "exists": true,
+      "route": "/en/perla-ii"
+    },
+    {
+      "src": "/perla-ii-in/2.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/perla-ii-plans/7.png",
+      "exists": true,
+      "route": "/en/perla-ii"
+    },
+    {
+      "src": "/perla-ii-in/6.jpg",
+      "exists": true,
+      "route": "/en/perla-ii"
+    },
+    {
+      "src": "/perla/7.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/perla/3.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/perla/6.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/perla/8.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/perla-in/1.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/perla-plans/1.png",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/perla/4.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/perla-in/7.jpg",
+      "exists": true,
+      "route": "/en/perla"
+    },
+    {
+      "src": "/la-joya/1.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/la-joya/6.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/la-joya/5.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/la-joya-in/2.jpg",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/la-joya-plan/4.png",
+      "exists": true,
+      "route": "/en/la-joya"
+    },
+    {
+      "src": "/mariachi/1.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/mariachi/6.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/dj.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/spa.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/sea.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/mariachi/4.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/mariachi/5.jpg",
+      "exists": true,
+      "route": "/en/mariachi"
+    },
+    {
+      "src": "/gecitkale/gecitkale-1.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/gecitkale/gecitkale-2.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/gecitkale/gecitkale-3.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/gecitkale/gecitkale-4.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/gecitkale/gecitkale-5.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/ercan.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/elec.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/zon.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/vil.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/apart.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/water.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/tapu.jpg",
+      "exists": true,
+      "route": "/en/gecitkale"
+    },
+    {
+      "src": "/DND%20Beach%20Parti%2024-59.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/homesthumb.webp",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/12lex.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/ozan-dokmecioglu-cfo-of-the-year.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/kurulus.JPG",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/property_awards_2025-747.jpg",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/optimized/aynurhanimhome.a514b897cb1d.webp",
+      "exists": true,
+      "route": "/en/about"
+    },
+    {
+      "src": "/teams/ozan.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/aynurzorbagulol.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/burcingul.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/borhan.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/bulent.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/emine.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/sabina.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/shadi.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/onur.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/bob.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/shayan.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/ava.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/mustafa.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/okan.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/nevin.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/meryem.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/ebru.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/placeholder.svg",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/gozde.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/mami.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/yusuf.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/rojina.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/onuryalcin.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/hilal.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/omer.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/teams/tanya.png",
+      "exists": true,
+      "route": "/en/team"
+    },
+    {
+      "src": "/dndofis.JPG",
+      "exists": true,
+      "route": "/en/contact"
+    },
+    {
+      "src": "/ofis.jpg",
+      "exists": true,
+      "route": "/en/contact"
+    },
+    {
+      "src": "/daireici.jpg",
+      "exists": true,
+      "route": "/en/contact"
+    },
+    {
+      "src": "/DND.png",
+      "exists": true,
+      "route": "/en/dndcyprus"
+    },
+    {
+      "src": "/property_awards_2025-782.jpg",
+      "exists": true,
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+    },
+    {
+      "src": "/ozanbeyrop.jpg",
+      "exists": true,
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+    },
+    {
+      "src": "/yaho.jpg",
+      "exists": true,
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+    },
+    {
+      "src": "/dndwhoweare.jpg",
+      "exists": true,
+      "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+    },
+    {
+      "src": "/optimized/menu.50fdc17e37d7.webp",
+      "exists": true,
+      "route": "/tr/qr"
+    }
+  ],
+  "links": [
+    {
+      "target": "/tr",
+      "status": 200
+    },
+    {
+      "target": "/tr/projects",
+      "status": 200
+    },
+    {
+      "target": "/tr/about",
+      "status": 200
+    },
+    {
+      "target": "/tr/contact",
+      "status": 200
+    },
+    {
+      "target": "/tr/press",
+      "status": 200
+    },
+    {
+      "target": "/tr/lagoon-verde",
+      "status": 200
+    },
+    {
+      "target": "/tr/perla-ii",
+      "status": 200
+    },
+    {
+      "target": "/tr/perla",
+      "status": 200
+    },
+    {
+      "target": "/tr/la-joya",
+      "status": 200
+    },
+    {
+      "target": "/tr/mariachi",
+      "status": 200
+    },
+    {
+      "target": "/tr/team",
+      "status": 200
+    },
+    {
+      "target": "/tr/privacy",
+      "status": 200
+    },
+    {
+      "target": "/tr/terms",
+      "status": 200
+    },
+    {
+      "target": "/en",
+      "status": 200
+    },
+    {
+      "target": "/en/projects",
+      "status": 200
+    },
+    {
+      "target": "/en/about",
+      "status": 200
+    },
+    {
+      "target": "/en/contact",
+      "status": 200
+    },
+    {
+      "target": "/en/press",
+      "status": 200
+    },
+    {
+      "target": "/en/lagoon-verde",
+      "status": 200
+    },
+    {
+      "target": "/en/perla-ii",
+      "status": 200
+    },
+    {
+      "target": "/en/perla",
+      "status": 200
+    },
+    {
+      "target": "/en/la-joya",
+      "status": 200
+    },
+    {
+      "target": "/en/mariachi",
+      "status": 200
+    },
+    {
+      "target": "/en/team",
+      "status": 200
+    },
+    {
+      "target": "/en/privacy",
+      "status": 200
+    },
+    {
+      "target": "/en/terms",
+      "status": 200
+    },
+    {
+      "target": "/tr/gecitkale",
+      "status": 200
+    },
+    {
+      "target": "/en/gecitkale",
+      "status": 200
+    },
+    {
+      "target": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+      "status": 200
+    },
+    {
+      "target": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "status": 200
+    },
+    {
+      "target": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+      "status": 200
+    },
+    {
+      "target": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+      "status": 200
+    },
+    {
+      "target": "/tr/blog",
+      "status": 200
+    }
+  ],
+  "removedRoutes": [
+    {
+      "route": "/dndturkiye",
+      "status": 404
+    },
+    {
+      "route": "/tr/dndturkiye",
+      "status": 404
+    },
+    {
+      "route": "/en/dndturkiye",
+      "status": 404
+    }
+  ],
+  "redirects": [
+    {
+      "route": "/contact",
+      "status": 308,
+      "destination": "/tr/contact"
+    },
+    {
+      "route": "/about",
+      "status": 308,
+      "destination": "/tr/about"
+    },
+    {
+      "route": "/projects",
+      "status": 308,
+      "destination": "/tr/projects"
+    },
+    {
+      "route": "/perla-ii",
+      "status": 308,
+      "destination": "/tr/perla-ii"
+    },
+    {
+      "route": "/la-joya",
+      "status": 308,
+      "destination": "/tr/la-joya"
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "status": "passed",
+  "phoneLinkFixChecks": [
+    {
+      "locale": "tr",
+      "officeTelephone": "tel:+903924440363",
+      "status": "passed"
+    },
+    {
+      "locale": "en",
+      "officeTelephone": "tel:+903924440363",
+      "status": "passed"
+    }
+  ]
+}

@@ -59,7 +59,7 @@
         {
           title: "Merkezi Isıtma/Soğutma",
           desc:
-            "merkezi ısıtma/soğutma sistemiyle ideal sıcaklık her zaman elinizin altında.",
+            "Merkezi ısıtma/soğutma sistemiyle ideal sıcaklık her zaman elinizin altında.",
           image: "/tec/klima.jpg",
           icon: <Wind className="h-5 w-5" />,
         },

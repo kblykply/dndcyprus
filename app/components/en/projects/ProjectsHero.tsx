@@ -1,26 +1,11 @@
 // app/components/ProjectsHeroFullSlider.tsx
 "use client";
 
-import { useMemo, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useCallback, useMemo, useState } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination,
-  Autoplay,
-  Keyboard,
-  Mousewheel,
-  EffectFade,
-  Parallax,
-  A11y,
-  HashNavigation,
-} from "swiper/modules";
+import HeroCarousel from "@/app/components/performance/HeroCarousel";
+import heroAsset from "@/lib/home-hero-asset.json";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 
 type ProjectSlide = {
   id: string | number;
@@ -83,8 +68,8 @@ const FALLBACKS: ProjectSlide[] = [
     id: "la-joya",
     title: "La Joya",
     subtitle:
-      "Delivery in 2025 — where elegance and functionality meet on the coastline.",
-    badge: "Delivery 2025",
+      "Completed in 2025 — boutique coastal living at La Joya.",
+    badge: "Completed Project · 2025",
     image: "/la-joya/2.jpg",
     ctaLabel: "Details",
     ctaHref: "/en/la-joya",
@@ -115,36 +100,13 @@ export default function ProjectsHeroFullSlider({
   const slides = useMemo(() => projects?.length ? projects : FALLBACKS, [projects]);
 
   const [visited, setVisited] = useState<Set<number>>(() => new Set([0]));
-  const reducedMotion = useReducedMotion();
+  const ids = useMemo(() => slides.map(slide => String(slide.id)), [slides]);
+  const visit = useCallback((index: number) => setVisited(previous => previous.has(index) ? previous : new Set([...previous, index])), []);
 
   return (
-    <section className="relative w-full h-[100svh]">
+    <section className="relative w-full h-[100svh] min-h-[36rem]">
       {heading ? <h1 className="sr-only">{heading}</h1> : null}
-      <Swiper
-        modules={[
-          Navigation,
-          Pagination,
-          Autoplay,
-          Keyboard,
-          Mousewheel,
-          EffectFade,
-          Parallax,
-          A11y,
-          HashNavigation,
-        ]}
-        effect="fade"
-        speed={reducedMotion ? 0 : 900}
-        onSlideChange={(swiper) => setVisited((previous) => new Set([...previous, swiper.realIndex]))}
-        loop
-        hashNavigation={{ watchState: true }}
-        autoplay={reducedMotion ? false : { delay: autoplayMs, disableOnInteraction: false }}
-        keyboard={{ enabled: true }}
-        mousewheel={{ forceToAxis: true }}
-        navigation
-        pagination={{ clickable: true }}
-        parallax
-        className="h-full"
-      >
+      <HeroCarousel ids={ids} autoplayMs={autoplayMs} locale="en" onVisit={visit}>
         {slides.map((s, i) => {
           const alignRight = s.align
             ? s.align === "right"
@@ -152,19 +114,22 @@ export default function ProjectsHeroFullSlider({
           const tint = s.tint || "#27959b";
 
           return (
-            <SwiperSlide key={s.id} data-hash={String(s.id)}>
-              <div className="relative h-[100svh] w-full">
+            <div key={s.id} data-hash={String(s.id)} className="h-full">
+              <div className="relative h-full w-full">
                 {/* Background image */}
                 <div className="absolute inset-0 -z-10">
-                  {visited.has(i) && <Image
+                  {visited.has(i) && <picture>
+                    {i === 0 && s.image === heroAsset.original && <source type="image/avif" sizes="100vw" srcSet={heroAsset.avif.map(asset => `${asset.src} ${asset.width}w`).join(", ")} />}
+                    <Image quality={65}
                     src={s.image}
                     alt={s.title}
+                    draggable={false}
                     fill
-                    preload={i === 0}
-                    loading={i === 0 ? undefined : "eager"}
+                    fetchPriority={i === 0 ? "high" : "auto"}
+                    loading="eager"
                     sizes="100vw"
                     className="object-cover"
-                  />}
+                  /></picture>}
                   {/* Ken Burns subtle zoom */}
                   <div className="absolute inset-0 scale-105 animate-[kenburns_12s_ease-in-out_infinite_alternate]" />
                   {/* Vignette + gradient for legibility */}
@@ -277,68 +242,12 @@ export default function ProjectsHeroFullSlider({
                   </div>
                 </div>
               </div>
-            </SwiperSlide>
+            </div>
           );
         })}
-      </Swiper>
+      </HeroCarousel>
 
-      {/* Minimal global overrides for bullets & arrows */}
-  <style jsx global>{`
-  @keyframes kenburns {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.06);
-    }
-  }
-  .swiper {
-    --swiper-theme-color: #ffffff;
-  }
 
-  /* Navigation arrows */
-  .swiper-button-next,
-  .swiper-button-prev {
-    position: absolute;
-    padding: 9px;
-    top: auto;    /* disable default top alignment */
-    width: 34px;  /* smaller size */
-    height: 34px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-  }
-  .swiper-button-prev {
-    left: 20px; /* stick to bottom-left */
-  }
-  .swiper-button-next {
-    left: 64px; /* a bit right of prev */
-  }
-  .swiper-button-next:after,
-  .swiper-button-prev:after {
-    font-size: 12px; /* smaller arrow icon */
-    font-weight: 700;
-  }
-
-  /* Pagination dots */
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
-    opacity: 0.45;
-    background: rgba(255, 255, 255, 0.9);
-  }
-  .swiper-pagination-bullet-active {
-    width: 26px;
-    border-radius: 999px;
-    opacity: 1;
-  }
-  .swiper-pagination {
-    bottom: 22px !important;
-    right: 20px !important; /* keep dots bottom-right */
-    left: auto !important;
-  }
-`}</style>
 
     </section>
   );

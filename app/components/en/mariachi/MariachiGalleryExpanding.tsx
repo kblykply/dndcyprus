@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -37,11 +38,11 @@ subtitle = "Mariachi Beach Club Images",
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/mariachi/1.jpg", alt: "Havuz" },
-        { src: "/mariachi/2.jpg", alt: "Plaj" },
-        { src: "/mariachi/3.jpg", alt: "Cabanalar" },
-        { src: "/mariachi/4.jpg", alt: "DJ Gecesi" },
-        { src: "/mariachi/5.jpg", alt: "Kokteyller" },
+        { src: "/mariachi/1.jpg", alt: "Pool" },
+        { src: "/mariachi/2.jpg", alt: "Beach" },
+        { src: "/mariachi/3.jpg", alt: "Cabanas" },
+        { src: "/mariachi/4.jpg", alt: "DJ Night" },
+        { src: "/mariachi/5.jpg", alt: "Cocktails" },
       ],
     [items]
   );
@@ -62,7 +63,7 @@ subtitle = "Mariachi Beach Club Images",
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="Mariachi Beach Club — Gallery"
       className="relative overflow-hidden"
       id ="gallery"
       style={{ background: "#ffffff", color: "#141517" }}
@@ -130,7 +131,7 @@ subtitle = "Mariachi Beach Club Images",
                   onMouseEnter={() => setHovered(i)}
                   onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
                   role="button"
-                  aria-label={g.alt || `Galeri görseli ${i + 1}`}
+                  aria-label={g.alt || `Gallery image ${i + 1}`}
                   style={{
                     flexGrow: grow,
                     transition: "flex-grow .55s cubic-bezier(0.22,1,0.36,1)",
@@ -138,7 +139,10 @@ subtitle = "Mariachi Beach Club Images",
                   }}
                 >
                   {/* Görsel */}
-                  <img
+                  <DeferredFillImage
+                    fill
+                    quality={65}
+                    sizes="max(50vw, 90vh)"
                     src={g.src}
                     alt={g.alt || ""}
                     className="h-full w-full object-cover select-none"

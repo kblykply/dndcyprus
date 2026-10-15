@@ -33,13 +33,13 @@ type Props = {
 };
 
 export default function Perla2LastUpdate({
-  eyebrow = "Kasım 2024 Güncellemesi",
-  title = "La Joya Perla Son İnşaat Güncellemesi",
-  description = "Kasım 2026'da Teslim edilecek La Joya Perla Projesinde inşaat hızla ilerliyor. ",
+  eyebrow = "November 2024 Update",
+  title = "La Joya Perla Latest Construction Update",
+  description = "Construction at the La Joya Perla project, scheduled for delivery in November 2026, is progressing rapidly. ",
   video = {
     src: "https://www.youtube.com/embed/YSy7WB056Fg?si=-HLY_3T_kk2bIt_j",
     type: "youtube",
-    title: "La Joya Perla II – İnşaat Güncellemesi",
+    title: "La Joya Perla II – Construction Update",
   },
   cta,
   comingSoon = true,
@@ -55,7 +55,7 @@ export default function Perla2LastUpdate({
 
   return (
     <section
-      aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
+      aria-label="La Joya Perla II — Latest Construction Update"
       className="relative overflow-hidden"
       style={sectionStyle}
     >
@@ -103,7 +103,7 @@ export default function Perla2LastUpdate({
                 ) : (
                   <iframe
                     src={video.src}
-                    title={video.title || "Son İnşaat Güncellemesi"}
+                    title={video.title || "Latest Construction Update"}
                     className="w-full h-full border-0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
@@ -139,11 +139,11 @@ export default function Perla2LastUpdate({
               <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
                 <li className="flex items-start gap-2">
                   <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full" style={{ background: TEAL }} />
-                  Kayıt, şantiye sorumlusunun haftalık saha turundan alınmıştır.
+                  The recording was taken during the site supervisor’s weekly inspection.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full" style={{ background: ORANGE }} />
-                  Tarihler tanıtım amaçlıdır; resmi teslim programı satış ekibinden teyit edilmelidir.
+                  Dates are for promotional purposes; please confirm the official delivery schedule with our sales team.
                 </li>
               </ul>
 

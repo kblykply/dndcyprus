@@ -1,0 +1,45 @@
+{
+  "measuredAt": "2026-10-15T09:29:32.489Z",
+  "buildId": "1xDBqubpGQmxPvGS66w5v",
+  "checked": [
+    {
+      "route": "/tr",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/en",
+      "width": 320,
+      "height": 740,
+      "issues": []
+    },
+    {
+      "route": "/tr",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "issues": []
+    },
+    {
+      "route": "/tr",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/en",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    }
+  ],
+  "errors": [],
+  "pageErrors": [],
+  "status": "passed"
+}

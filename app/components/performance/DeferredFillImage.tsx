@@ -5,8 +5,8 @@ import { useNearViewport } from "./useNearViewport";
 
 // Native lazy loading can fetch images several screens ahead. Large galleries
 // and project cards wait until their actual image box approaches the viewport.
-export default function DeferredFillImage(props: ImageProps) {
-  const { ref, near } = useNearViewport<HTMLDivElement>("150px");
+export default function DeferredFillImage({ rootMargin = "150px", ...props }: ImageProps & { rootMargin?: string }) {
+  const { ref, near } = useNearViewport<HTMLDivElement>(rootMargin);
   const original = typeof props.src === "string" ? props.src
     : "default" in props.src ? props.src.default.src : props.src.src;
   return (

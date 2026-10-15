@@ -1,0 +1,88 @@
+{
+  "measuredAt": "2026-10-14T10:13:47.504Z",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "initialMaps": 0,
+      "maps": [
+        {
+          "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+          "title": "DND Cyprus Merkez Ofis Harita",
+          "height": 176
+        },
+        {
+          "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+          "title": "Lagoon Verde Satış Ofisi Harita",
+          "height": 176
+        }
+      ],
+      "address": "official unchanged",
+      "directMapLinks": 2,
+      "overflow": false
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "initialMaps": 0,
+      "maps": [
+        {
+          "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+          "title": "DND Cyprus Merkez Ofis Harita",
+          "height": 176
+        },
+        {
+          "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+          "title": "Lagoon Verde Satış Ofisi Harita",
+          "height": 176
+        }
+      ],
+      "address": "official unchanged",
+      "directMapLinks": 2,
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "initialMaps": 0,
+      "maps": [
+        {
+          "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+          "title": "DND Cyprus Head Office Map",
+          "height": 176
+        },
+        {
+          "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+          "title": "Lagoon Verde Sales Office Map",
+          "height": 176
+        }
+      ],
+      "address": "official unchanged",
+      "directMapLinks": 2,
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "initialMaps": 0,
+      "maps": [
+        {
+          "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+          "title": "DND Cyprus Head Office Map",
+          "height": 176
+        },
+        {
+          "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+          "title": "Lagoon Verde Sales Office Map",
+          "height": 176
+        }
+      ],
+      "address": "official unchanged",
+      "directMapLinks": 2,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "status": "passed"
+}

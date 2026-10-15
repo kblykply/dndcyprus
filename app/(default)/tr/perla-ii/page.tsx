@@ -73,7 +73,7 @@ eyebrow="Ekim 2025 Güncellemesi" title="La Joya Perla II – Son İnşaat Günc
 
  <QuarterLogoBadge
           logoSrc="/logos/perlaii.png"
-          alt="Your Project"
+          alt="La Joya Perla II"
           href="/tr"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens

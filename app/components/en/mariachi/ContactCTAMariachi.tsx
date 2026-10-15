@@ -51,7 +51,7 @@ highlights = [
 }: Props) {
   return (
     <section
-      aria-label="Mariachi Beach Club — İletişim & Rezervasyon"
+      aria-label="Mariachi Beach Club — Contact &amp; Reservations"
       className={`relative overflow-hidden ${fullHeight ? "min-h-[50vh]" : "min-h-[50vh]"}`}
       style={
         {
@@ -128,7 +128,7 @@ highlights = [
           {highlights?.length > 0 && (
             <ul
               className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
-              aria-label="Öne çıkanlar"
+              aria-label="Highlights"
             >
               {highlights.map((h) => (
                 <li

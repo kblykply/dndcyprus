@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -137,7 +138,10 @@ export default function MariachiGalleryExpanding({
                   }}
                 >
                   {/* Görsel */}
-                  <img
+                  <DeferredFillImage
+                    fill
+                    quality={65}
+                    sizes="max(50vw, 90vh)"
                     src={g.src}
                     alt={g.alt || ""}
                     className="h-full w-full object-cover select-none"

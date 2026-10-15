@@ -1,0 +1,56 @@
+{
+  "measuredAt": "2026-10-15T09:29:32.535Z",
+  "buildId": "1xDBqubpGQmxPvGS66w5v",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 320,
+      "height": 844,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-640.f04350c9f3ea.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "tr",
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-828.e117bdb07ae2.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "height": 844,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "height": 844,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-640.f04350c9f3ea.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-828.e117bdb07ae2.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 844,
+      "deviceScaleFactor": 2,
+      "initialSrc": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+      "checks": "one AVIF hero request; high fetch priority; working WebP fallback; awards deferred/loaded/switched; dynamically loaded Swiper base/fade styles and navigation"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

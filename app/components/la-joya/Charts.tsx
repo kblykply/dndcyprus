@@ -96,7 +96,7 @@ function AccentIcon({
 
 export default function LaJoyaAmenitiesSection({
   kicker = "ÖNE ÇIKANLAR",
-  title = "La joya Proje Olanakları",
+  title = "La Joya Proje Olanakları",
   subtitle = "La Joya kompleksi içerisinde konforunuz için pek çok olanak yer alıyor.",
   items = DEFAULT_ITEMS,
 }: Props) {

@@ -38,11 +38,11 @@ subtitle = "La Joya Perla II Images",
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/perla-ii/1.jpg", alt: "Havuz" },
-        { src: "/perla-ii/2.jpg", alt: "Plaj" },
-        { src: "/perla-ii/3.jpg", alt: "Cabanalar" },
-        { src: "/perla-ii/6.jpg", alt: "DJ Gecesi" },
-        { src: "/perla-ii/5.jpg", alt: "Kokteyller" },
+        { src: "/perla-ii/1.jpg", alt: "La Joya Perla II project image 1" },
+        { src: "/perla-ii/2.jpg", alt: "La Joya Perla II project image 2" },
+        { src: "/perla-ii/3.jpg", alt: "La Joya Perla II project image 3" },
+        { src: "/perla-ii/6.jpg", alt: "La Joya Perla II project image 4" },
+        { src: "/perla-ii/5.jpg", alt: "La Joya Perla II project image 5" },
 
 
 
@@ -67,7 +67,7 @@ subtitle = "La Joya Perla II Images",
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="La Joya Perla II — Gallery"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -134,7 +134,7 @@ subtitle = "La Joya Perla II Images",
                   onMouseEnter={() => setHovered(i)}
                   onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
                   role="button"
-                  aria-label={g.alt || `Galeri görseli ${i + 1}`}
+                  aria-label={g.alt || `Gallery image ${i + 1}`}
                   style={{
                     flexGrow: grow,
                     transition: "flex-grow .55s cubic-bezier(0.22,1,0.36,1)",

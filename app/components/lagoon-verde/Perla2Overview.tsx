@@ -27,7 +27,7 @@ type Props = {
 
 export default function Perla2Overview({
   title = "Lagoon Verde Genel Bakış",
-  lead = "Lagoon Verde; eşsiz lagün havuzu konsepti, modern mimarisi ve zengin sosyal donatıları ile Bahçeler, İskele’de tatil ve yaşamı yeniden tanımlayan prestijli bir konut projesidir. Denize ve şehir imkanlarına yakın konumu, yatırım ve oturum için dengeli bir seçenek sunar.",
+  lead = "Lagoon Verde; eşsiz lagün havuzu konsepti, modern mimarisi ve zengin sosyal donatıları ile Bahçeler, İskele’de tatil ve yaşamı yeniden tanımlayan prestijli bir konut projesidir. Denize ve şehir imkânlarına yakın konumu, yatırım ve oturum için dengeli bir seçenek sunar.",
   highlights = [
     "Geniş lagün havuzu ve adalı havuz konsepti",
     "Fitness, çocuk oyun alanı, güzellik merkezi ve mini golf",

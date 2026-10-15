@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -36,11 +37,11 @@ export default function MariachiGalleryExpanding({
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/gecitkale/gecitkale-1.jpg", alt: "Havuz" },
-        { src: "/gecitkale/gecitkale-2.jpg", alt: "Deniz manzarası" },
-        { src: "/gecitkale/gecitkale-3.jpg", alt: "Sahil" },
-        { src: "/gecitkale/gecitkale-4.jpg", alt: "Gün batımı" },
-        { src: "/gecitkale/gecitkale-5.jpg", alt: "Doğa" },
+        { src: "/gecitkale/gecitkale-1.jpg", alt: "Geçitkale proje görseli 1" },
+        { src: "/gecitkale/gecitkale-2.jpg", alt: "Geçitkale proje görseli 2" },
+        { src: "/gecitkale/gecitkale-3.jpg", alt: "Geçitkale proje görseli 3" },
+        { src: "/gecitkale/gecitkale-4.jpg", alt: "Geçitkale proje görseli 4" },
+        { src: "/gecitkale/gecitkale-5.jpg", alt: "Geçitkale proje görseli 5" },
 
 
 
@@ -64,7 +65,7 @@ export default function MariachiGalleryExpanding({
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="Geçitkale — Galeri"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -139,7 +140,10 @@ export default function MariachiGalleryExpanding({
                   }}
                 >
                   {/* Görsel */}
-                  <img
+                  <DeferredFillImage
+                    fill
+                    quality={65}
+                    sizes="max(50vw, 90vh)"
                     src={g.src}
                     alt={g.alt || ""}
                     className="h-full w-full object-cover select-none"

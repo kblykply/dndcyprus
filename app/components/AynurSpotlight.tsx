@@ -35,7 +35,7 @@ type Props = {
 };
 
 export default function AynurSpotlight({
-  title = "Aynur Zorba Gülol",
+  title = "Aynur Zorba Güloğlu",
   role = "DND Cyprus Direktörü",
   subtitle = "Operasyonel mükemmeliyet, müşteri deneyimi ve kurumsal sürdürülebilirlik odağında projeleri yönlendiriyor.",
   quote = "“Şeffaf süreçler, güçlü ekip işbirliği ve detaylara verilen önem, kalıcı değer üretir.”",
@@ -52,7 +52,7 @@ export default function AynurSpotlight({
 }: Props) {
   return (
     <section
-      aria-label="Aynur Zorba Gülol — Spotlight"
+      aria-label="Aynur Zorba Güloğlu — Spotlight"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"

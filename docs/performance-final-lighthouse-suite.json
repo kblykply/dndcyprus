@@ -1,0 +1,35 @@
+{
+  "measuredAt": "2026-10-14T10:19:07.244Z",
+  "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+  "tasks": [
+    {
+      "phase": "final-mobile",
+      "code": 0,
+      "output": "docs/performance-final-mobile-lighthouse.json"
+    },
+    {
+      "phase": "final-desktop",
+      "code": 0,
+      "output": "docs/performance-final-desktop-lighthouse.json"
+    },
+    {
+      "phase": "final-saved",
+      "code": 0,
+      "output": "docs/performance-final-saved-lighthouse.json"
+    }
+  ],
+  "status": "passed",
+  "followups": [
+    {
+      "phase": "final-hub",
+      "status": "passed",
+      "output": "docs/performance-final-hub-lighthouse.json"
+    },
+    {
+      "phase": "final-hub-verified",
+      "status": "passed",
+      "output": "docs/performance-final-hub-verified-lighthouse.json"
+    }
+  ],
+  "totalRuns": 35
+}

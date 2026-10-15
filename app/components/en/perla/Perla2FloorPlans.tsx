@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { m as motion, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -104,7 +105,7 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
 
   return (
     <section
-      aria-label="La Joya Perla II — Kat Planları"
+      aria-label="La Joya Perla — Floor Plans"
       className="relative overflow-hidden"
       style={{
         background: "#fff",
@@ -122,7 +123,7 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
         </div>
 
         {/* Plan Tabs */}
-        <div className="mt-6 flex flex-wrap items-center gap-2" role="tablist" aria-label="Daire Tipleri">
+        <div className="mt-6 flex flex-wrap items-center gap-2" role="tablist" aria-label="Apartment types">
           {plans.map((p, i) => {
             const active = i === planIdx;
             return (
@@ -149,7 +150,7 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
 
         {/* Variant Tabs (NO price chip) */}
         <div className="mt-4 flex items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Varyantlar">
+          <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Variants">
             {plan.variants.map((v, i) => {
               const active = i === variantIdx;
               return (
@@ -208,10 +209,12 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-[4/3] bg-white">
-                <img
+              <div className="relative aspect-[4/3] bg-white">
+                <Image
+                  fill
+                  sizes="(max-width: 1023px) calc(100vw - 48px), (max-width: 1279px) calc((100vw - 96px) / 2), 592px"
                   src={variant.image}
-                  alt={`${plan.title} — ${variant.name} kat planı`}
+                  alt={`${plan.title} — ${variant.name} floor plan`}
                   className="w-full h-full object-contain"
                   loading="lazy"
                 />
@@ -227,9 +230,9 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
                     onClick={openMainImage}
                     className="text-xs px-3 py-1 rounded-full border"
                     style={{ background: `${TEAL}14`, color: TEAL, borderColor: `${TEAL}33` }}
-                    aria-label="Görseli büyüt"
+                    aria-label="Enlarge image"
                   >
-                    Büyüt
+                    Enlarge
                   </button>
                   {variant.pdf ? (
                     <a
@@ -318,17 +321,19 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
                 {/* ---- Gallery (opens gallery-only in lightbox) ---- */}
                 {variant.gallery && variant.gallery.length > 0 ? (
                   <div className="mt-6">
-                    <div className="mb-2 text-xs font-medium opacity-70">Galeri</div>
+                    <div className="mb-2 text-xs font-medium opacity-70">Gallery</div>
                     <ul className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                       {variant.gallery.map((src, i) => (
                         <li key={src}>
                           <button
                             onClick={() => openGalleryAt(i)}
-                            className="group block w-full aspect-square overflow-hidden rounded-xl border"
+                            className="relative group block w-full aspect-square overflow-hidden rounded-xl border"
                             style={{ borderColor: "var(--stroke)" }}
-                            aria-label={`Galeri görseli ${i + 1}`}
+                            aria-label={`Gallery image ${i + 1}`}
                           >
-                            <img
+                            <Image
+                              fill
+                              sizes="(max-width: 639px) 28vw, (max-width: 1023px) 22vw, 144px"
                               src={src}
                               alt=""
                               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
@@ -363,7 +368,7 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
             className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
             role="dialog"
             aria-modal="true"
-            aria-label="Galeri büyütülmüş görünüm"
+            aria-label="Enlarged gallery view"
             onClick={closeLightbox}
           >
             {/* Center stage */}
@@ -394,9 +399,9 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
                   <button
                     onClick={closeLightbox}
                     className="absolute top-3 right-3 z-10 rounded-full px-3 py-1.5 text-sm font-medium bg-black/60 text-white border border-white/20 hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white/40"
-                    aria-label="Kapat"
+                    aria-label="Close"
                   >
-                    ✕ Kapat
+                    ✕ Close
                   </button>
 
                   {/* LEFT / RIGHT ARROWS (only if multiple images) */}
@@ -405,14 +410,14 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
                       <button
                         onClick={prevImage}
                         className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-sm bg-black/60 text-white border border-white/20 hover:bg-black/70"
-                        aria-label="Önceki"
+                        aria-label="Previous"
                       >
                         ‹
                       </button>
                       <button
                         onClick={nextImage}
                         className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full px-3 py-1.5 text-sm bg-black/60 text-white border border-white/20 hover:bg-black/70"
-                        aria-label="Sonraki"
+                        aria-label="Next"
                       >
                         ›
                       </button>
@@ -428,7 +433,7 @@ subtitle = "Sample plans for apartment types. For detailed typologies and dimens
                   <div className="opacity-80">
                     {lightbox.images.length > 1
                       ? `${lightbox.idx + 1} / ${lightbox.images.length}`
-                      : "Plan Görseli"}
+                      : "Floor Plan"}
                   </div>
                 </div>
               </div>

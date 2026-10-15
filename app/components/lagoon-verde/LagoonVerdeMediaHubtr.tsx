@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, AnimatePresence, type Variants, type Easing } from "framer-motion";
 import {
   FileText,
@@ -451,11 +452,9 @@ subtitle = "Katalogları, broşürleri, videoları, kampanyaları ve dijital iç
                   "0 20px 60px rgba(20,21,23,0.06), 0 4px 18px rgba(20,21,23,0.04)",
               }}
             >
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.04]"
-                style={{ backgroundImage: `url(${item.thumb})` }}
-              />
+              <DeferredFillImage src={item.thumb} alt="" fill quality={65}
+                sizes="(min-width: 1280px) 400px, (min-width: 640px) calc((100vw - 68px) / 2), calc(100vw - 32px)"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
 
               <div
                 aria-hidden
@@ -517,7 +516,7 @@ subtitle = "Katalogları, broşürleri, videoları, kampanyaları ve dijital iç
             initial="hidden"
             animate="show"
             exit="exit"
-className="fixed inset-0 z-[999] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 sm:p-5"
+className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(20,21,23,0.42)] p-3 sm:p-5"
             onClick={() => setActive(null)}
           >
             <motion.div

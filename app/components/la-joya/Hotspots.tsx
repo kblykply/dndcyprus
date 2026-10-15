@@ -220,7 +220,7 @@ function RightFixedPanel({
             exit={{ opacity: 0, x: 12 }}
             className="pointer-events-none w-[360px] max-w-[60vw] rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl px-4 py-3 text-white/75"
           >
-            Detaylı bilgi için iletişişme geçin.
+            Detaylı bilgi için iletişime geçin.
           </motion.div>
         )}
       </AnimatePresence>

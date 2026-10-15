@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { m as motion, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -103,7 +104,7 @@ export default function Perla2FloorPlans({
 
   return (
     <section
-      aria-label="La Joya Perla II — Kat Planları"
+      aria-label="La Joya — Kat Planları"
       className="relative overflow-hidden"
       style={{
         background: "#fff",
@@ -207,8 +208,10 @@ export default function Perla2FloorPlans({
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-[4/3] bg-white">
-                <img
+              <div className="relative aspect-[4/3] bg-white">
+                <Image
+                  fill
+                  sizes="(max-width: 1023px) calc(100vw - 48px), (max-width: 1279px) calc((100vw - 96px) / 2), 592px"
                   src={variant.image}
                   alt={`${plan.title} — ${variant.name} kat planı`}
                   className="w-full h-full object-contain"
@@ -323,11 +326,13 @@ export default function Perla2FloorPlans({
                         <li key={src}>
                           <button
                             onClick={() => openGalleryAt(i)}
-                            className="group block w-full aspect-square overflow-hidden rounded-xl border"
+                            className="relative group block w-full aspect-square overflow-hidden rounded-xl border"
                             style={{ borderColor: "var(--stroke)" }}
                             aria-label={`Galeri görseli ${i + 1}`}
                           >
-                            <img
+                            <Image
+                              fill
+                              sizes="(max-width: 639px) 28vw, (max-width: 1023px) 22vw, 144px"
                               src={src}
                               alt=""
                               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"

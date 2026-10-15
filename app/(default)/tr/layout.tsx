@@ -7,7 +7,8 @@ import Header from "@/app/components/headers/HeaderTr";
 import Footer from "@/app/components/footers/FooterTr";
 import WhatsAppFab from "@/app/components/whatsapp/WhatsappTr";
 import SocialIcons from "@/app/components/SocialIcons";
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { ORGANIZATION_JSON_LD } from "@/lib/structured-data";
+import JsonLd from "@/app/components/seo/JsonLd";
 
 
 
@@ -17,30 +18,7 @@ export const metadata: Metadata = {
     "Kıbrıs'ın önde gelen gayrimenkul geliştiricisi DND Cyprus ile tanışın. Yenilikçi konut ve ticari projelerimizle yaşam alanlarını yeniden tanımlıyoruz.",
 };
 
-// Site geneli kuruluş yapısal verisi (JSON-LD) — her sayfada bir kez basılır
-const ORGANIZATION_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": `${SITE_URL}/#organization`,
-  name: SITE_NAME,
-  legalName: "CY-DND HOMES LTD.",
-  url: SITE_URL,
-  logo: `${SITE_URL}/DND.png`,
-  email: "info@dndcyprus.com",
-  telephone: "+90 392 444 03 63",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya",
-    addressLocality: "Gazimağusa",
-    addressCountry: "CY",
-  },
-  sameAs: [
-    "https://cy.linkedin.com/company/dndcyprus",
-    "https://www.instagram.com/dndcyprus/",
-    "https://www.facebook.com/dndcyprus/",
-    "https://www.youtube.com/@dndcyprus",
-  ],
-};
+
 
 export default function TRLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -53,12 +31,7 @@ export default function TRLayout({ children }: { children: React.ReactNode }) {
         İçeriğe atla
       </a>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(ORGANIZATION_JSON_LD).replace(/</g, "\\u003c"),
-        }}
-      />
+      <JsonLd data={ORGANIZATION_JSON_LD} />
 
       {/* TR'ye özel Header */}
       <Header />

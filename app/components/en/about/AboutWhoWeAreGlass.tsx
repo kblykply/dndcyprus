@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
+
 import { m as motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -183,7 +186,7 @@ kicker = "About Us",
                 autoPlayOnClick={!reduced}
               />
             ) : (
-              <img
+              <Image width={1280} height={720} quality={65}
                 src={images.main}
                 alt="Ekip veya proje görseli"
                 className="block h-full w-full object-cover"
@@ -251,13 +254,13 @@ description = "Get to know our projects and our team up close.",
           className="group absolute inset-0 h-full w-full"
           aria-label={`${title} videoyu oynat`}
         >
-          <img
+          <DeferredFillImage fill quality={65}
             src={poster || `/api/og/video/${id}.jpg`}
             alt={title}
-            className="h-full w-full object-cover opacity-95 transition-opacity group-hover:opacity-100"
+            className="object-cover opacity-95 transition-opacity group-hover:opacity-100"
             loading="lazy"
             decoding="async"
-            sizes="(min-width: 1024px) 640px, 100vw"
+            sizes="(min-width: 1280px) 592px, (min-width: 1024px) 50vw, 100vw"
           />
           {/* dark gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />

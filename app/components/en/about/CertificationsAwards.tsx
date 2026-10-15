@@ -210,7 +210,7 @@ export default function CertificationsAwards({
                     backdropFilter: "blur(8px)",
                   }}
                 >
-                  {t === "All" ? "Tümü" : t === "Certification" ? "Sertifikalar" : "Ödüller"}
+                  {t === "All" ? "All" : t === "Certification" ? "Sertifikalar" : "Ödüller"}
                 </button>
               );
             })}

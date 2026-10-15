@@ -26,7 +26,7 @@ type GalleryItem = {
 
 export default function MariachiGalleryExpanding({
   title = "La Joya Galeri",
-  subtitle = "Lagoon Verde Görselleri",
+  subtitle = "La Joya Görselleri",
   items,
 }: {
   title?: string;
@@ -37,11 +37,11 @@ export default function MariachiGalleryExpanding({
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/la-joya/1.jpg", alt: "Havuz" },
-        { src: "/la-joya/2.jpg", alt: "Plaj" },
-        { src: "/la-joya/3.jpg", alt: "Cabanalar" },
-        { src: "/la-joya/6.jpg", alt: "DJ Gecesi" },
-        { src: "/la-joya/5.jpg", alt: "Kokteyller" },
+        { src: "/la-joya/1.jpg", alt: "La Joya proje görseli 1" },
+        { src: "/la-joya/2.jpg", alt: "La Joya proje görseli 2" },
+        { src: "/la-joya/3.jpg", alt: "La Joya proje görseli 3" },
+        { src: "/la-joya/6.jpg", alt: "La Joya proje görseli 4" },
+        { src: "/la-joya/5.jpg", alt: "La Joya proje görseli 5" },
 
 
       ],
@@ -64,7 +64,7 @@ export default function MariachiGalleryExpanding({
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="La Joya — Galeri"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"

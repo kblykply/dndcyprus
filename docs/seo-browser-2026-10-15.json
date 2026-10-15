@@ -1,0 +1,48 @@
+{
+  "measuredAt": "2026-10-15T08:19:58.947Z",
+  "status": "passed",
+  "checked": [
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "width": 390,
+      "checks": "one legal Organization; source-backed article schema where applicable; visible content; no hydration errors or horizontal overflow"
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "width": 1440,
+      "checks": "one legal Organization; source-backed article schema where applicable; visible content; no hydration errors or horizontal overflow"
+    },
+    {
+      "route": "/en/dndcyprus",
+      "width": 390,
+      "checks": "one legal Organization; source-backed article schema where applicable; visible content; no hydration errors or horizontal overflow"
+    },
+    {
+      "route": "/en/dndcyprus",
+      "width": 1440,
+      "checks": "one legal Organization; source-backed article schema where applicable; visible content; no hydration errors or horizontal overflow"
+    },
+    {
+      "analytics": false,
+      "ads": false,
+      "checks": "configured GA4 queue; consent-gated Web Vitals and Clarity; Meta remains disabled; metric paths exclude query strings",
+      "vitalEventsQueued": 0,
+      "externalRequests": "all blocked before sending",
+      "blockedHosts": [
+        "www.googletagmanager.com"
+      ]
+    },
+    {
+      "analytics": true,
+      "ads": false,
+      "checks": "configured GA4 queue; consent-gated Web Vitals and Clarity; Meta remains disabled; metric paths exclude query strings",
+      "vitalEventsQueued": 4,
+      "externalRequests": "all blocked before sending",
+      "blockedHosts": [
+        "www.googletagmanager.com",
+        "www.clarity.ms"
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,3 +1,5 @@
+import JsonLd from "@/app/components/seo/JsonLd";
+import { ORGANIZATION_JSON_LD } from "@/lib/structured-data";
 import MotionProvider from "@/app/components/performance/MotionProvider";
 // app/en/layout.tsx
 import type { Metadata } from "next";
@@ -13,5 +15,10 @@ export default function EnLayout({
 }: {
   children: ReactNode;
 }) {
-  return <MotionProvider>{children}</MotionProvider>;
+  return (
+    <MotionProvider>
+      <JsonLd data={ORGANIZATION_JSON_LD} />
+      {children}
+    </MotionProvider>
+  );
 }

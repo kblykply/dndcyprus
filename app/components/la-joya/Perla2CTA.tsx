@@ -50,7 +50,7 @@ highlights = [
 }: Props) {
   return (
     <section
-      aria-label="Lagoon Verde — İletişim & Broşür"
+      aria-label="La Joya — İletişim & Broşür"
       className={`relative overflow-hidden ${fullHeight ? "min-h-screen" : "min-h-[70vh]"}`}
       style={
         {

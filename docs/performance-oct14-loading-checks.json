@@ -1,0 +1,492 @@
+{
+  "measuredAt": "2026-10-14T09:51:01.542Z",
+  "status": "passed",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "deviceScaleFactor": 2,
+      "heroPriority": "high",
+      "timelineDeferred": true,
+      "milestoneImages": [
+        [
+          {
+            "alt": "DND Homes Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          },
+          {
+            "alt": "DND Kıbrıs Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          },
+          {
+            "alt": "DND Kıbrıs Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+          },
+          {
+            "alt": "Property NC Ödülleri",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          },
+          {
+            "alt": "DND Kıbrıs Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+          },
+          {
+            "alt": "Property NC Ödülleri",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+          },
+          {
+            "alt": "İlk Proje La Joya Teslimi",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=750&q=65"
+          }
+        ]
+      ],
+      "logos": [
+        {
+          "alt": "DND Group",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=384&q=75"
+        },
+        {
+          "alt": "DND Homes",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=384&q=75"
+        },
+        {
+          "alt": "Lagoon Verde",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=384&q=75"
+        },
+        {
+          "alt": "La Joya",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=384&q=75"
+        },
+        {
+          "alt": "Mariachi Beach Club",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=384&q=75"
+        },
+        {
+          "alt": "Perla",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=384&q=75"
+        },
+        {
+          "alt": "Perla II",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=384&q=75"
+        }
+      ],
+      "logoBytes": {
+        "original": 2200587,
+        "optimized": 53359
+      },
+      "consent": "fresh visible; saved hidden",
+      "overflow": false
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "deviceScaleFactor": 2,
+      "heroPriority": "high",
+      "timelineDeferred": true,
+      "milestoneImages": [
+        [
+          {
+            "alt": "DND Homes Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "DND Kıbrıs Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "DND Kıbrıs Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+          },
+          {
+            "alt": "Property NC Ödülleri",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "Amerika’daki İlk Proje",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Ödülü",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "DND Kıbrıs Kuruluşu",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+          },
+          {
+            "alt": "Property NC Ödülleri",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "İlk Proje La Joya Teslimi",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=1200&q=65"
+          }
+        ]
+      ],
+      "logos": [
+        {
+          "alt": "DND Group",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=640&q=75"
+        },
+        {
+          "alt": "DND Homes",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=640&q=75"
+        },
+        {
+          "alt": "Lagoon Verde",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=640&q=75"
+        },
+        {
+          "alt": "La Joya",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=640&q=75"
+        },
+        {
+          "alt": "Mariachi Beach Club",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=640&q=75"
+        },
+        {
+          "alt": "Perla",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=640&q=75"
+        },
+        {
+          "alt": "Perla II",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=640&q=75"
+        }
+      ],
+      "logoBytes": {
+        "original": 2200587,
+        "optimized": 92785
+      },
+      "consent": "fresh visible; saved hidden",
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "deviceScaleFactor": 2,
+      "heroPriority": "high",
+      "timelineDeferred": true,
+      "milestoneImages": [
+        [
+          {
+            "alt": "Founding of DND Homes",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Establishment of DND Cyprus",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Establishment of DND Cyprus",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+          },
+          {
+            "alt": "Property NC Awards",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Establishment of DND Cyprus",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+          },
+          {
+            "alt": "Property NC Awards",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+          },
+          {
+            "alt": "Delivery of the First Project – La Joya",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=750&q=65"
+          }
+        ]
+      ],
+      "logos": [
+        {
+          "alt": "DND Group",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=384&q=75"
+        },
+        {
+          "alt": "DND Homes",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=384&q=75"
+        },
+        {
+          "alt": "Lagoon Verde",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=384&q=75"
+        },
+        {
+          "alt": "La Joya",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=384&q=75"
+        },
+        {
+          "alt": "Mariachi Beach Club",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=384&q=75"
+        },
+        {
+          "alt": "Perla",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=384&q=75"
+        },
+        {
+          "alt": "Perla II",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=384&q=75"
+        }
+      ],
+      "logoBytes": {
+        "original": 2200587,
+        "optimized": 53359
+      },
+      "consent": "fresh visible; saved hidden",
+      "overflow": false
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "deviceScaleFactor": 2,
+      "heroPriority": "high",
+      "timelineDeferred": true,
+      "milestoneImages": [
+        [
+          {
+            "alt": "Founding of DND Homes",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Establishment of DND Cyprus",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Establishment of DND Cyprus",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+          },
+          {
+            "alt": "Property NC Awards",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+          }
+        ],
+        [
+          {
+            "alt": "First Project in the USA",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Ozan Dökmecioğlu Award",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Establishment of DND Cyprus",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+          },
+          {
+            "alt": "Property NC Awards",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+          },
+          {
+            "alt": "Delivery of the First Project – La Joya",
+            "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=1200&q=65"
+          }
+        ]
+      ],
+      "logos": [
+        {
+          "alt": "DND Group",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=640&q=75"
+        },
+        {
+          "alt": "DND Homes",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=640&q=75"
+        },
+        {
+          "alt": "Lagoon Verde",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=640&q=75"
+        },
+        {
+          "alt": "La Joya",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=640&q=75"
+        },
+        {
+          "alt": "Mariachi Beach Club",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=640&q=75"
+        },
+        {
+          "alt": "Perla",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=640&q=75"
+        },
+        {
+          "alt": "Perla II",
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=640&q=75"
+        }
+      ],
+      "logoBytes": {
+        "original": 2200587,
+        "optimized": 92785
+      },
+      "consent": "fresh visible; saved hidden",
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "missing": []
+}

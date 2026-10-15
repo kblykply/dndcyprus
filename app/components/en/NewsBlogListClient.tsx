@@ -284,7 +284,7 @@ kicker = "Blog & News",
                       {img ? (
                         <Image
                           src={img}
-                          alt={p.title || "Yazı görseli"}
+                          alt={p.title || "Article image"}
                           fill
                           draggable={false}
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.03] pointer-events-none"
@@ -381,7 +381,7 @@ kicker = "Blog & News",
                         {img ? (
                           <Image
                             src={img}
-                            alt={p.title || "Yazı görseli"}
+                            alt={p.title || "Article image"}
                             fill
                             draggable={false}
                             className="object-cover transition-transform duration-500 group-hover:scale-[1.03] pointer-events-none"
@@ -421,7 +421,7 @@ kicker = "Blog & News",
                 onClick={prev}
                 disabled={index <= 0}
                 className="pointer-events-auto rounded-full border border-black/10 bg-white/70 backdrop-blur px-3 py-2 shadow disabled:opacity-40"
-                aria-label="Önceki"
+                aria-label="Previous"
                 style={{ color: "rgba(20,21,23,0.85)" }}
               >
                 ←
@@ -430,7 +430,7 @@ kicker = "Blog & News",
                 onClick={next}
                 disabled={index >= maxIndex}
                 className="pointer-events-auto rounded-full border border-black/10 bg-white/70 backdrop-blur px-3 py-2 shadow disabled:opacity-40"
-                aria-label="Sonraki"
+                aria-label="Next"
                 style={{ color: "rgba(20,21,23,0.85)" }}
               >
                 →
@@ -443,7 +443,7 @@ kicker = "Blog & News",
                 <button
                   key={i}
                   onClick={() => goTo(i)}
-                  aria-label={`Sayfa ${i + 1}`}
+                  aria-label={`Page ${i + 1}`}
                   className="h-2 w-2 rounded-full transition"
                   style={{
                     background: i === index ? ORANGE : "rgba(20,21,23,0.18)",
@@ -474,7 +474,7 @@ kicker = "Blog & News",
                 color: "rgba(20,21,23,0.85)",
               }}
             >
-              Tüm Yazılar
+              All Articles
             </Link>
           </div>
         )}

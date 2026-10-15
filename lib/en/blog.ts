@@ -87,8 +87,10 @@ export const BLOG_POSTS: BlogPost[] = [
       <ul>
         <li><strong>Vision:</strong> To bring the concept of “living spaces that deliver unmatched quality and comfort” to the island.</li>
         <li><strong>Investment Scope:</strong> In addition to residential projects, the plan includes five-star hotel investments in <em>Bafra</em> and <em>Yedikonuk</em>, as well as a <em>beach club</em> in the Iskele area.</li>
-        <li><strong>Timeline (selected projects):</strong> La Joya (74 units) <em>end of 2025</em>, La Joya Perla (384 units) <em>end of 2026</em>, La Joya Perla II (128 units) <em>end of 2027</em>.</li>
+        <li><strong>Timeline announced in 2024 (selected projects):</strong> La Joya (74 units) <em>end of 2025</em>, La Joya Perla (384 units) <em>end of 2026</em>, La Joya Perla II (128 units) <em>end of 2027</em>.</li>
       </ul>
+
+      <p><strong>Current project status:</strong> The La Joya project was completed in 2025.</p>
 
       <blockquote>
         “Our goal is to lead innovative housing development and create homes that provide <em>exceptional quality and comfort</em>.” — Ozan Dökmecioğlu

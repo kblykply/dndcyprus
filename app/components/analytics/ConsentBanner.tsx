@@ -152,7 +152,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
 
       <p id={bodyId} className="mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]">
         {view === "summary" ? t.body : null}{" "}
-        <Link href={t.policyHref} className="font-medium underline underline-offset-2" style={{ color: TEAL }}>
+        <Link href={t.policyHref} prefetch={false} className="font-medium underline underline-offset-2" style={{ color: TEAL }}>
           {t.policy}
         </Link>
       </p>
@@ -179,7 +179,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
         <button
           type="button"
           onClick={() => decide({ analytics: false, ads: false })}
-          className="rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.04] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
+          className="min-h-11 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.04] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
           style={{ border: `1px solid ${TEAL}66`, color: TEAL, background: "#fff" }}
         >
           {t.necessaryOnly}
@@ -187,7 +187,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
         <button
           type="button"
           onClick={() => decide({ analytics: true, ads: true })}
-          className="rounded-xl px-3 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
+          className="min-h-11 rounded-xl px-3 py-2.5 text-[13px] font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
           style={{ background: TEAL, border: `1px solid ${TEAL}`, boxShadow: `0 10px 24px ${TEAL}33` }}
         >
           {t.acceptAll}
@@ -203,7 +203,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
               setDraft({ analytics: !!c?.analytics, ads: !!c?.ads });
               setView("prefs");
             }}
-            className="rounded-lg px-3 py-1.5 text-[13px] font-medium underline underline-offset-2 text-[rgba(20,21,23,0.7)] hover:text-[#141517] focus-visible:outline-2 focus-visible:outline-[#27959b]"
+            className="min-h-11 rounded-lg px-3 py-1.5 text-[13px] font-medium underline underline-offset-2 text-[rgba(20,21,23,0.7)] hover:text-[#141517] focus-visible:outline-2 focus-visible:outline-[#27959b]"
           >
             {t.preferences}
           </button>
@@ -211,7 +211,7 @@ export default function ConsentBanner({ initialOpen = false }: { initialOpen?: b
           <button
             type="button"
             onClick={() => decide(draft)}
-            className="w-full rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
+            className="min-h-11 w-full rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors hover:bg-black/[0.06] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27959b]"
             style={{ background: "rgba(20,21,23,0.04)", border: "1px solid rgba(20,21,23,0.1)" }}
           >
             {t.save}

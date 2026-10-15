@@ -15,7 +15,6 @@ const LEGACY_REDIRECTS: [source: string, destination: string][] = [
   ["/perla-ii", "/tr/perla-ii"],
   ["/la-joya", "/tr/la-joya"],
   ["/gecitkale", "/tr/gecitkale"],
-  ["/dndturkiye", "/tr/dndturkiye"],
   ["/projects/perla2", "/tr/perla-ii"],
   ["/brochure/brochure.pdf", "/lagoonbrotr.pdf"],
   ["/wp-content/uploads/LAGOON-DIJITAL-KATALOG.pdf", "/lagoonbrotr.pdf"],
@@ -23,6 +22,8 @@ const LEGACY_REDIRECTS: [source: string, destination: string][] = [
 
 const nextConfig: NextConfig = {
   images: {
+    // Photographic backgrounds use 65; plans and text-heavy images keep 75.
+    qualities: [65, 75],
     remotePatterns: [
       {
         protocol: "https",
@@ -39,6 +40,9 @@ const nextConfig: NextConfig = {
     return [{
       source: "/optimized/:path*",
       headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+    }, {
+      source: "/admin/:path*",
+      headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
     }];
   },
 

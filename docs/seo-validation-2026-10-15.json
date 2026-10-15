@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-10-15T08:20:54.534Z",
+  "clientDate": "2026-10-15",
+  "buildId": "q7N2_7Lo69LJ_eHfbK_uV",
+  "status": "implemented and validated locally; not committed or pushed",
+  "pages": 36,
+  "unchangedPages": 36,
+  "changedFields": 0,
+  "browserCases": 6,
+  "internalLinks": 33,
+  "imageReferences": 137,
+  "baselineFindings": 12,
+  "finalFindings": 0,
+  "unitTests": 78,
+  "unitFailures": 0,
+  "lintErrors": 0,
+  "lintWarnings": 221,
+  "changes": [
+    "Unknown blog slugs now return 404; four local posts prerender at build time.",
+    "Four BlogPosting JSON-LD blocks use existing titles, summaries, images and publication dates. Generic bylines do not create invented authors; no modification dates fabricated.",
+    "Shared Organization schema now covers all EN pages, including the immersive media hub, with one instance per page. Legal name and registered address preserved.",
+    "Four existing blog covers added to the image sitemap. General page modification dates are omitted because verified dates are not available.",
+    "Admin responses carry X-Robots-Tag: noindex, nofollow; existing robots rules preserved."
+  ],
+  "verified": [
+    "36 titles, descriptions, H1 lists and normalized server body text hashes unchanged.",
+    "Absolute self-canonicals, reciprocal TR/EN/x-default, sitemap alternates and query canonicals passed.",
+    "Legacy redirects, missing pages, organization data, local images and internal links passed.",
+    "Configured GA4 queues metrics only with analytics consent; metric paths exclude query parameters. Clarity follows analytics consent, Meta remains off when advertising consent is denied. All third-party requests blocked in browser tests."
+  ],
+  "limits": [
+    "Search Console ownership/index coverage and live Google canonical choices were not inspected. An empty Google site-verification key does not rule out existing DNS verification.",
+    "GA4 is measurement infrastructure, not a direct ranking boost; delivery to external providers was intentionally not tested.",
+    "Local structured-data and HTTP checks are not a Google Rich Results Test or a ranking guarantee.",
+    "Mobile LCP optimization and live field measurements remain separate follow-up work. Existing middleware convention warning remains."
+  ],
+  "evidence": [
+    "seo-results-2026-10-15.json",
+    "seo-browser-2026-10-15.json",
+    "seo-inventory-2026-10-15.json",
+    "seo-eslint-2026-10-15.json"
+  ]
+}

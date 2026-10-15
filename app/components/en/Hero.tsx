@@ -193,7 +193,7 @@ const projects: Record<Tab, ProjectItem[]> = {
     {
       id: 7,
       title: "La Joya",
-      subtitle: "Boutique lifestyle with a holiday concept",
+      subtitle: "Completed in 2025 — boutique living with a holiday concept",
       images: ["/la-joya/13.jpg", "/la-joya/16.jpg"],
       floors: 3,
       area: 6.36,

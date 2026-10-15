@@ -1,6 +1,7 @@
 // app/components/mariachi/MariachiVideoSpotlight.tsx
 "use client";
 
+import DeferredIframe from "@/app/components/performance/DeferredIframe";
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { m as motion } from "framer-motion";
@@ -56,7 +57,7 @@ export default function MariachiVideoSpotlight({
         url.searchParams.set("autoplay", "1");     // required
         url.searchParams.set("mute", "1");         // required for autoplay policies
         url.searchParams.set("playsinline", "1");  // iOS inline autoplay
-        url.searchParams.set("controls", "0");     // optional, looks cleaner
+        url.searchParams.set("controls", "1");     // optional, looks cleaner
         url.searchParams.set("rel", "0");          // no related vids at end
         url.searchParams.set("loop", "1");         // loop requires playlist=id
         const vid = url.pathname.split("/").pop() || "";
@@ -143,7 +144,7 @@ export default function MariachiVideoSpotlight({
               }}
             >
               {autoplayEmbedUrl ? (
-                <iframe
+                <DeferredIframe activation="click" poster={poster} buttonLabel="Videoyu oynat"
                   src={autoplayEmbedUrl}
                   title={title}
                   loading="lazy"

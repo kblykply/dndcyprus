@@ -1,0 +1,49 @@
+{
+  "sourceCommit": "bd8f81ddb5c74d5c8897b36ad88b440266245103",
+  "unicodeRanges": {
+    "latin": "0000-017F,0218-021B,0300-036F,2000-206F,20A0-20CF,2122,2190-21FF,2212,2215,FEFF,FFFD",
+    "cyrillic": "0400-04FF,0300-036F"
+  },
+  "fonts": [
+    {
+      "family": "inter",
+      "script": "latin",
+      "file": "inter-latin.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+      "sourceSha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "bytes": 74420,
+      "sha256": "47ca684f9ab2c6a73c25a38894a628d837706c70c6c511e0e552b1891b0bdf4f",
+      "glyphs": 524
+    },
+    {
+      "family": "inter",
+      "script": "cyrillic",
+      "file": "inter-cyrillic.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+      "sourceSha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "bytes": 40480,
+      "sha256": "8de5b617a173408c962c0cd4a935471dd2bcef21e760c256f1074236c6444650",
+      "glyphs": 314
+    },
+    {
+      "family": "montserrat",
+      "script": "latin",
+      "file": "montserrat-latin.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+      "sourceSha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+      "bytes": 42704,
+      "sha256": "cc4c8b8c07db8cba0f8e89c21b516fe6dd551b92393c26d3e70606a4a8fb4c04",
+      "glyphs": 430
+    },
+    {
+      "family": "montserrat",
+      "script": "cyrillic",
+      "file": "montserrat-cyrillic.woff2",
+      "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+      "sourceSha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+      "bytes": 32732,
+      "sha256": "0528e073a3fc35b3ea80d1b537ca21e8c04b001591e8b95861b9c234603fe739",
+      "glyphs": 268
+    }
+  ]
+}

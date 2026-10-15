@@ -1,0 +1,22 @@
+{
+  "measuredAt": "2026-10-14T11:52:37.524Z",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "cards": 11,
+      "checks": "media cards, campaign popup, video iframe activates on click, close receives physical click above navigation, no overflow",
+      "thirdPartyPlayback": "blocked; not validated"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "cards": 9,
+      "checks": "media cards, campaign popup, video iframe activates on click, close receives physical click above navigation, no overflow",
+      "thirdPartyPlayback": "blocked; not validated"
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "status": "passed"
+}

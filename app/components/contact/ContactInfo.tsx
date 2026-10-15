@@ -3,6 +3,7 @@
 
 import React from "react";
 import Image from "next/image";
+import DeferredIframe from "@/app/components/performance/DeferredIframe";
 import { m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -180,13 +181,15 @@ export default function ContactInfo({
                 {(o.image || mapSrc) && (
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {o.image && (
-                      <div className="relative rounded-xl overflow-hidden border"
+                      <div className="relative h-44 rounded-xl overflow-hidden border"
                            style={{ borderColor: "var(--stroke)" }}>
                         <Image
                           src={o.image}
                           alt={o.imageAlt || o.label}
                           width={800}
                           height={600}
+                          sizes="(max-width: 639px) calc(100vw - 84px), (max-width: 767px) calc((100vw - 104px) / 2), (max-width: 1279px) calc((100vw - 208px) / 4), 256px"
+                          quality={65}
                           className="h-44 w-full object-cover"
                         />
                       </div>
@@ -194,9 +197,10 @@ export default function ContactInfo({
                     {mapSrc && (
                       <div className="relative rounded-xl overflow-hidden border"
                            style={{ borderColor: "var(--stroke)" }}>
-                        <iframe
+                        <DeferredIframe
                           src={mapSrc}
-                          loading="lazy"
+                          buttonLabel="Haritayı göster"
+                          title={`${o.label} Harita`}
                           referrerPolicy="no-referrer-when-downgrade"
                           className="w-full h-44"
                           style={{ border: 0 }}
@@ -231,7 +235,7 @@ export default function ContactInfo({
                 {/* Contacts */}
                 <div className="mt-4 flex flex-wrap items-center gap-2">
                   {o.phone && (
-                    <a href={o.phone}
+                    <a href={`tel:${o.phone.replace(/^tel:/, "").replace(/[^\d+]/g, "")}`}
                        className="text-sm px-3 py-1 rounded-full"
                        style={{ background: `${accent}14`, color: accent, border: `1px solid ${accent}33` }}>
                       {o.phoneDisplay || o.phone.replace("tel:", "")}

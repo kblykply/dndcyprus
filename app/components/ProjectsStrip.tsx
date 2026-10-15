@@ -39,7 +39,7 @@ const PROJECTS: Project[] = [
   {
     name: "La Joya",
     region: "İskele",
-    blurb: "Sahil hattında butik bir yaşam deneyimi.",
+    blurb: "2025’te tamamlanan proje: sahil hattında butik bir yaşam deneyimi.",
     img: "/la-joya/3.jpg",
     href: "/tr/la-joya",
   },

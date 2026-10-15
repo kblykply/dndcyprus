@@ -1,0 +1,2388 @@
+{
+  "measuredAt": "2026-10-14T10:01:38.415Z",
+  "date": "2026-10-14",
+  "status": "verified locally; not pushed or deployed",
+  "origin": "http://localhost:3100",
+  "method": "Lighthouse 13.5 local production: 22 audits across stages, three TR homepage samples before/after; other route/profile results are single samples. Browser checks: TR/EN at 390/1440px, DPR 2. Decimal KB/MB. Cold cache saved-consent profile uses a fresh Chrome process with only necessary preferences seeded.",
+  "home": {
+    "before": {
+      "score": 88,
+      "lcpMs": 3912.0962,
+      "fcpMs": 1222.753,
+      "tbtMs": 5,
+      "cls": 0.000139988042982138,
+      "transferBytes": 581284,
+      "fontBytes": 164373
+    },
+    "after": {
+      "score": 88,
+      "lcpMs": 3907.1232,
+      "fcpMs": 1207.1232,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 550398,
+      "fontBytes": 164373
+    }
+  },
+  "mobile": [
+    {
+      "route": "/tr",
+      "samples": 3,
+      "score": 88,
+      "lcpMs": 3907.1232,
+      "fcpMs": 1207.1232,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 550398,
+      "fontBytes": 164373
+    },
+    {
+      "route": "/en",
+      "sample": 4,
+      "score": 88,
+      "lcpMs": 3906.3782,
+      "fcpMs": 1206.3782,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 553255,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+          "selector": "body.inter_49cffcb9-module__nixIWG__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 7.123
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 77.455
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 453
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240,
+            "wastedMs": 153
+          }
+        ],
+        "unusedJavaScriptBytes": 24456,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/af4e112e1d87d360.js",
+            "type": "Script",
+            "transferBytes": 18019,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2FBEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png&w=256&q=75",
+            "type": "Image",
+            "transferBytes": 13402,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 23550,
+        "Font": 164373,
+        "Image": 75064,
+        "Stylesheet": 22552,
+        "Script": 247031,
+        "Other": 4690,
+        "Fetch": 15995
+      },
+      "samples": 1
+    },
+    {
+      "route": "/tr/team",
+      "sample": 5,
+      "score": 91,
+      "lcpMs": 3458.6915,
+      "fcpMs": 1058.6915,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 471045,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Ozan Dökmecioğlu",
+          "selector": "div.mt-12 > article.group > div.relative > img.object-cover"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 14.658
+          },
+          {
+            "subpart": "resourceLoadDelay",
+            "label": "Resource load delay",
+            "duration": 4.436
+          },
+          {
+            "subpart": "resourceLoadDuration",
+            "label": "Resource load duration",
+            "duration": 8.048
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 66.666
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 454
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 154
+          }
+        ],
+        "unusedJavaScriptBytes": 25059,
+        "imageSavingsBytes": 16742,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fteams%2Fozan.png&w=750&q=75",
+            "type": "Image",
+            "transferBytes": 29526,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d07f562729b08e55.js",
+            "type": "Script",
+            "transferBytes": 11684,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/f85c27e3430bc364.js",
+            "type": "Script",
+            "transferBytes": 8220,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/b2e275ddee71259f.js",
+            "type": "Script",
+            "transferBytes": 7903,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 13941,
+        "Font": 164373,
+        "Image": 36017,
+        "Stylesheet": 22552,
+        "Script": 213634,
+        "Other": 4690,
+        "Fetch": 15838
+      },
+      "samples": 1
+    },
+    {
+      "route": "/tr/about",
+      "sample": 6,
+      "score": 87,
+      "lcpMs": 3982.20465,
+      "fcpMs": 1204.8031,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 601159,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 12.009999984741212
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 68.28800001525879
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 452
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 152
+          }
+        ],
+        "unusedJavaScriptBytes": 24600,
+        "imageSavingsBytes": 41114,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fuu.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 37750,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/a12a2f5361ff7c40.js",
+            "type": "Script",
+            "transferBytes": 32144,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fhomesthumb.webp&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 27858,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/ozanbeycropped.07b7e617b44b.webp",
+            "type": "Image",
+            "transferBytes": 20906,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed1b2f9ad8335498.js",
+            "type": "Script",
+            "transferBytes": 16426,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/02e6db86a340b63f.js",
+            "type": "Script",
+            "transferBytes": 15299,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 21013,
+        "Font": 164373,
+        "Image": 99589,
+        "Stylesheet": 22552,
+        "Script": 273104,
+        "Other": 4690,
+        "Fetch": 15838
+      },
+      "samples": 1
+    },
+    {
+      "route": "/tr/contact",
+      "sample": 1,
+      "score": 94,
+      "lcpMs": 3033.5797999999995,
+      "fcpMs": 1233.5798,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 545545,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 15.702
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 103.142
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 467
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 167
+          }
+        ],
+        "unusedJavaScriptBytes": 24623,
+        "imageSavingsBytes": 42565,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=640&q=65",
+            "type": "Image",
+            "transferBytes": 21899,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fofis.jpg&w=640&q=65",
+            "type": "Image",
+            "transferBytes": 20258,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d07f562729b08e55.js",
+            "type": "Script",
+            "transferBytes": 11684,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 15057,
+        "Font": 164373,
+        "Image": 91269,
+        "Stylesheet": 22552,
+        "Script": 221128,
+        "Fetch": 26476,
+        "Other": 4690
+      },
+      "samples": 1
+    },
+    {
+      "route": "/tr/perla-ii",
+      "sample": 8,
+      "score": 87,
+      "lcpMs": 3982.0091,
+      "fcpMs": 1207.0091,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 765585,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 6.471
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 85.834
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 454
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 154
+          }
+        ],
+        "unusedJavaScriptBytes": 25068,
+        "imageSavingsBytes": 54928,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Ftec%2Fjenerator.jpg&w=750&q=75",
+            "type": "Image",
+            "transferBytes": 66661,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fperla-ii%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 62521,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Ftec%2Fyer.jpg&w=750&q=75",
+            "type": "Image",
+            "transferBytes": 25187,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "https://i.ytimg.com/vi/rhNxT0eZw_0/hqdefault.jpg",
+            "type": "Image",
+            "transferBytes": 18965,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fb7bd5cb03e3f41f.js",
+            "type": "Script",
+            "transferBytes": 18142,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Ftec%2Fklima.jpg&w=750&q=75",
+            "type": "Image",
+            "transferBytes": 16669,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 26268,
+        "Font": 164373,
+        "Image": 233806,
+        "Stylesheet": 22552,
+        "Script": 291186,
+        "Other": 4690,
+        "Fetch": 22710
+      },
+      "samples": 1
+    },
+    {
+      "route": "/tr/qr",
+      "sample": 9,
+      "score": 88,
+      "lcpMs": 3905.4997000000003,
+      "fcpMs": 755.4997000000001,
+      "tbtMs": 7,
+      "cls": 0,
+      "transferBytes": 551604,
+      "fontBytes": 0,
+      "lcpNode": [
+        {
+          "label": "Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL…",
+          "selector": "body > main.qr-menu > img.qr-menu-image"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 6.993
+          },
+          {
+            "subpart": "resourceLoadDelay",
+            "label": "Resource load delay",
+            "duration": 3.683
+          },
+          {
+            "subpart": "resourceLoadDuration",
+            "label": "Resource load duration",
+            "duration": 8.375
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 27.392
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/034051df085d1e3e.css",
+            "totalBytes": 481,
+            "wastedMs": 153
+          }
+        ],
+        "unusedJavaScriptBytes": 29464,
+        "imageSavingsBytes": 324968,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/optimized/menu.50fdc17e37d7.webp",
+            "type": "Image",
+            "transferBytes": 411910,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/f85c27e3430bc364.js",
+            "type": "Script",
+            "transferBytes": 8220,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7340adf74ff47ec0.js",
+            "type": "Script",
+            "transferBytes": 7825,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/5cedbe3d28acc407.js",
+            "type": "Script",
+            "transferBytes": 7621,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/turbopack-addab8c1a62bc67e.js",
+            "type": "Script",
+            "transferBytes": 4417,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ff1a16fafef87110.js",
+            "type": "Script",
+            "transferBytes": 629,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/034051df085d1e3e.css",
+            "type": "Stylesheet",
+            "transferBytes": 481,
+            "priority": "VeryHigh"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 3106,
+        "Image": 411910,
+        "Stylesheet": 481,
+        "Script": 131417,
+        "Other": 4690
+      },
+      "samples": 1
+    },
+    {
+      "route": "/en/contact",
+      "sample": 2,
+      "score": 91,
+      "lcpMs": 3458.074,
+      "fcpMs": 1058.074,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 548356,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+          "selector": "body.inter_49cffcb9-module__nixIWG__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 9.11199998474121
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 65.15800001525879
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 454
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240,
+            "wastedMs": 154
+          }
+        ],
+        "unusedJavaScriptBytes": 24523,
+        "imageSavingsBytes": 42565,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=640&q=65",
+            "type": "Image",
+            "transferBytes": 21899,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fofis.jpg&w=640&q=65",
+            "type": "Image",
+            "transferBytes": 20258,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/f7b00863506d7ec3.js",
+            "type": "Script",
+            "transferBytes": 10917,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 14496,
+        "Font": 164373,
+        "Image": 91269,
+        "Stylesheet": 22552,
+        "Script": 224397,
+        "Other": 4690,
+        "Fetch": 26579
+      },
+      "samples": 1
+    }
+  ],
+  "desktop": [
+    {
+      "route": "/tr",
+      "sample": 1,
+      "score": 99,
+      "lcpMs": 906.4214999999999,
+      "fcpMs": 326.4215,
+      "tbtMs": 0,
+      "cls": 0.00006292210255961242,
+      "transferBytes": 640492,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Lagoon Verde",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > h2.mt-3"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 11.27
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 78.095
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 123
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240
+          }
+        ],
+        "unusedJavaScriptBytes": 24456,
+        "imageSavingsBytes": 16332,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=1920&q=65",
+            "type": "Image",
+            "transferBytes": 136656,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fb7bd5cb03e3f41f.js",
+            "type": "Script",
+            "transferBytes": 18142,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d07f562729b08e55.js",
+            "type": "Script",
+            "transferBytes": 11684,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 24168,
+        "Font": 164373,
+        "Image": 165158,
+        "Stylesheet": 22552,
+        "Script": 243713,
+        "Other": 4690,
+        "Fetch": 15838
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 2,
+      "score": 99,
+      "lcpMs": 912.0888,
+      "fcpMs": 332.0888,
+      "tbtMs": 0,
+      "cls": 0.0000615795464495228,
+      "transferBytes": 643347,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Living spaces that bring modern architecture and comfort together under one roo…",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > p.mt-4"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 10.093
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 104.745
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 126
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240
+          }
+        ],
+        "unusedJavaScriptBytes": 24670,
+        "imageSavingsBytes": 16332,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=1920&q=65",
+            "type": "Image",
+            "transferBytes": 136654,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/af4e112e1d87d360.js",
+            "type": "Script",
+            "transferBytes": 18019,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/f7b00863506d7ec3.js",
+            "type": "Script",
+            "transferBytes": 10917,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 23550,
+        "Font": 164373,
+        "Image": 165156,
+        "Stylesheet": 22552,
+        "Script": 247031,
+        "Other": 4690,
+        "Fetch": 15995
+      }
+    }
+  ],
+  "savedPreferences": [
+    {
+      "route": "/tr",
+      "sample": 1,
+      "score": 88,
+      "lcpMs": 3909.9403,
+      "fcpMs": 1209.9403,
+      "tbtMs": 2,
+      "cls": 0.000139988042982138,
+      "transferBytes": 533601,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Modern mimari ve konforu tek çatı altında buluşturan yaşam alanları.",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > p.mt-4"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 25.536
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 78.397
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 455
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 155
+          }
+        ],
+        "unusedJavaScriptBytes": 24334,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fb7bd5cb03e3f41f.js",
+            "type": "Script",
+            "transferBytes": 18142,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2FBEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png&w=256&q=75",
+            "type": "Image",
+            "transferBytes": 13402,
+            "priority": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 2,
+      "score": 88,
+      "lcpMs": 3908.5764,
+      "fcpMs": 1208.5764,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 536301,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Living spaces that bring modern architecture and comfort together under one roo…",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > p.mt-4"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 10.131
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 76.74
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 454
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240,
+            "wastedMs": 154
+          }
+        ],
+        "unusedJavaScriptBytes": 24334,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/af4e112e1d87d360.js",
+            "type": "Script",
+            "transferBytes": 18019,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2FBEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png&w=256&q=75",
+            "type": "Image",
+            "transferBytes": 13402,
+            "priority": "Low"
+          }
+        ]
+      }
+    }
+  ],
+  "changes": [
+    "First hero image requested with high priority; other slides load after visiting them.",
+    "Timeline images wait until 150px from viewport; photographic quality 65 and responsive sizes.",
+    "Seven home brand logos use responsive quality-75 images near viewport.",
+    "Contact maps activate near viewport; both offices, address and direct map links retained."
+  ],
+  "logoBytes": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "original": 2200587,
+      "optimized": 53359
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "original": 2200587,
+      "optimized": 92785
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "original": 2200587,
+      "optimized": 53359
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "original": 2200587,
+      "optimized": 92785
+    }
+  ],
+  "contact": {
+    "before": {
+      "route": "/tr/contact",
+      "sample": 7,
+      "score": 89,
+      "lcpMs": 3681.2661000000003,
+      "fcpMs": 1206.2661,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 1016849,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 5.362000015258789
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 65.99899998474122
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 453
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 153
+          }
+        ],
+        "unusedJavaScriptBytes": 24550,
+        "imageSavingsBytes": 42565,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "https://maps.googleapis.com/maps-api-v3/api/js/66/8b/places.js",
+            "type": "Script",
+            "transferBytes": 96496,
+            "priority": "Low"
+          },
+          {
+            "url": "https://maps.googleapis.com/maps-api-v3/api/js/66/8b/main.js",
+            "type": "Script",
+            "transferBytes": 86330,
+            "priority": "Low"
+          },
+          {
+            "url": "https://maps.gstatic.com/maps-api-v3/embed/js/66/8b/init_embed.js",
+            "type": "Script",
+            "transferBytes": 76631,
+            "priority": "High"
+          },
+          {
+            "url": "https://maps.googleapis.com/maps-api-v3/api/js/66/8b/util.js",
+            "type": "Script",
+            "transferBytes": 72603,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "https://maps.googleapis.com/maps-api-v3/api/js/66/8b/common.js",
+            "type": "Script",
+            "transferBytes": 38278,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "https://maps.googleapis.com/maps-api-v3/api/js/66/8b/controls.js",
+            "type": "Script",
+            "transferBytes": 26456,
+            "priority": "Low"
+          },
+          {
+            "url": "https://maps.googleapis.com/maps-api-v3/api/js/66/8b/map.js",
+            "type": "Script",
+            "transferBytes": 25880,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 17076,
+        "Font": 164373,
+        "Image": 116547,
+        "Stylesheet": 22552,
+        "Script": 664928,
+        "undefined": 36,
+        "Fetch": 26555,
+        "XHR": 92,
+        "Other": 4690
+      }
+    },
+    "after": {
+      "route": "/tr/contact",
+      "sample": 1,
+      "score": 94,
+      "lcpMs": 3033.5797999999995,
+      "fcpMs": 1233.5798,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 545545,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 15.702
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 103.142
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 467
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 167
+          }
+        ],
+        "unusedJavaScriptBytes": 24623,
+        "imageSavingsBytes": 42565,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=640&q=65",
+            "type": "Image",
+            "transferBytes": 21899,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fofis.jpg&w=640&q=65",
+            "type": "Image",
+            "transferBytes": 20258,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d07f562729b08e55.js",
+            "type": "Script",
+            "transferBytes": 11684,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 15057,
+        "Font": 164373,
+        "Image": 91269,
+        "Stylesheet": 22552,
+        "Script": 221128,
+        "Fetch": 26476,
+        "Other": 4690
+      }
+    }
+  },
+  "checks": {
+    "productionBuild": "passed",
+    "existingPerformanceTests": 3,
+    "loading": {
+      "measuredAt": "2026-10-14T09:51:01.542Z",
+      "status": "passed",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "DND Homes Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              },
+              {
+                "alt": "İlk Proje La Joya Teslimi",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=750&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=384&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=384&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=384&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=384&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=384&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 53359
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        },
+        {
+          "locale": "tr",
+          "width": 1440,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "DND Homes Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "İlk Proje La Joya Teslimi",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=1200&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=640&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=640&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=640&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=640&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=640&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 92785
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "Founding of DND Homes",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Delivery of the First Project – La Joya",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=750&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=384&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=384&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=384&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=384&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=384&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 53359
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 1440,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "Founding of DND Homes",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Delivery of the First Project – La Joya",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=1200&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=640&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=640&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=640&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=640&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=640&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 92785
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        }
+      ],
+      "errors": [],
+      "missing": []
+    },
+    "contact": {
+      "measuredAt": "2026-10-14T09:56:57.719Z",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Merkez Ofis Harita",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Satış Ofisi Harita",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        },
+        {
+          "locale": "tr",
+          "width": 1440,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Merkez Ofis Harita",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Satış Ofisi Harita",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Head Office Map",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Sales Office Map",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 1440,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Head Office Map",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Sales Office Map",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        }
+      ],
+      "errors": [],
+      "missing": [],
+      "status": "passed"
+    }
+  },
+  "next": [
+    {
+      "priority": 1,
+      "title": "Fontları kullanılan karakter gruplarına ayır",
+      "evidence": "İki font her ana sayfa açılışında 164 KB indiriliyor; 550 KB toplamın yaklaşık %30’u. Çerez tercihi kayıtlı, boş önbellekli ziyaretçide de LCP yaklaşık 3,91 saniye.",
+      "action": "Latin/Türkçe karakterleri öncelikli küçük dosyada tut; Rusça karakterleri unicode-range ile gerektiğinde yükle. Lehçe ve Türkçe karakterleri, sayı özelliklerini ve font lisanslarını koru. Değişikliği üç mobil ölçüm, FCP, CLS ve görsel karşılaştırmayla değerlendir.",
+      "acceptance": "Mevcut font görünümü korunmalı; font aktarımı azalmalı, FCP ve CLS kötüleşmemeli. Kesin LCP kazancı henüz ölçülmedi."
+    },
+    {
+      "priority": 2,
+      "title": "QR menüsünü metin okunaklılığını koruyarak küçült",
+      "evidence": "Menü görseli 412 KB; sayfa toplamı 552 KB, mobil LCP 3,91 saniye. Lighthouse yaklaşık 325 KB görsel tasarrufu tahmin ediyor; bu kalite kontrolü yapılmış bir sonuç değil.",
+      "action": "Daha düşük WebP kalitesi ve AVIF seçeneklerini deneyip küçük fiyat/yemek yazılarını gerçek cihaz boyutunda karşılaştır. Orijinal görsel bağlantısını koru. Daha sonra menüyü HTML metni olarak sunma seçeneğini değerlendir.",
+      "acceptance": "Bütün fiyatlar ve yemek adları aynı kalmalı ve rahat okunmalı; yalnızca puan için görüntü kalitesi düşürülmemeli."
+    },
+    {
+      "priority": 3,
+      "title": "İlk ekranın ortak JavaScript yükünü azalt",
+      "evidence": "Ana sayfanın Lighthouse ağ aktarımında Script toplamı yaklaşık 244 KB. İlk HTML’nin referans verdiği scriptlerin açılmış boyutu 759 KB; bu iki sayı farklı ölçümlerdir. TBT medyanı 0 ms, bu nedenle şu an ana gecikme CPU bloklaması değil.",
+      "action": "Paket analizinde ortak uygulama/animasyon kodunu ayır; ekran altında kullanılan büyük etkileşimleri ihtiyaç anında yükle. Statik bölüm içeriğini sunucuda tut. Menü, slayt, dokunma ve klavye davranışlarını koru.",
+      "acceptance": "İlk açılış script aktarımı azalmalı; bütün gezinme ve animasyon kontrolleri çalışmalı, SEO içeriği ilk HTML’de kalmalı."
+    },
+    {
+      "priority": 4,
+      "title": "Proje sayfalarının kalan görsellerini incele",
+      "evidence": "Perla II ilk açılışında 766 KB toplam, 234 KB görsel aktarımı var. Lighthouse ana fotoğraf ve logo için yaklaşık 55 KB tasarruf öneriyor.",
+      "action": "Mobil görsel varyantlarını, sıkıştırmayı ve ekran dışı görsellerin yüklenme zamanını karşılaştır. Plan ve yazı içeren görsellerin okunaklılığını koru.",
+      "acceptance": "TR/EN sayfalar, galeri ve plan açma davranışı çalışmalı; kalite ve LCP birlikte değerlendirilmeli."
+    },
+    {
+      "priority": 5,
+      "title": "Canlı ziyaretçi ölçümünü ve yayın sonrası kontrolü tamamla",
+      "evidence": "Bu sonuçlar local production derlemesinden. Gerçek ziyaretçi p75 LCP/INP/CLS verisi yok; canlı GA4 kimliği bu oturumda doğrulanmadı.",
+      "action": "Canlı analitik yapılandırmasını doğrula ve mevcut izinli Web Vitals altyapısını bağla. Yayından sonra aynı URL’leri mobil/masaüstü test et; mümkün olduğunda gerçek ziyaretçi verisini izle.",
+      "acceptance": "İzin koşulları korunmalı; laboratuvar TBT’si gerçek INP olarak sunulmamalı. Yerel ölçümler canlı sonuçlarla karıştırılmamalı."
+    }
+  ],
+  "limits": [
+    "Not field data; p75 and INP not measured.",
+    "Different builds are recorded per stage; final contact measurements follow the contact-only change. Other page assets did not change in that stage.",
+    "Before homepage LCP samples ranged from 2.48 to 4.60 seconds. Median LCP stayed about 3.91 seconds; no demonstrated homepage LCP improvement.",
+    "Logo savings apply when scrolling to brands, not to first-screen Lighthouse transfer.",
+    "Google Maps transfer can vary; contact before/after LCP and scores have one sample each.",
+    "No new commit, push or deployment in this turn."
+  ],
+  "sources": [
+    {
+      "title": "LCP optimization and 2.5-second target",
+      "url": "https://web.dev/articles/optimize-lcp"
+    },
+    {
+      "title": "Next.js Image sizes, quality and fetchPriority/preload",
+      "url": "https://nextjs.org/docs/app/api-reference/components/image"
+    }
+  ],
+  "artifacts": [
+    "performance-oct14-baseline-lighthouse.json",
+    "performance-oct14-after-lighthouse.json",
+    "performance-oct14-desktop-lighthouse.json",
+    "performance-oct14-contact-final-lighthouse.json",
+    "performance-oct14-saved-consent-lighthouse.json",
+    "performance-oct14-loading-checks.json",
+    "performance-oct14-contact-checks.json",
+    "performance-oct14-final-transfer.json"
+  ]
+}

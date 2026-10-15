@@ -3,6 +3,7 @@
 
 import React from "react";
 import Image from "next/image";
+import DeferredIframe from "@/app/components/performance/DeferredIframe";
 import { m as motion, Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -103,7 +104,7 @@ offices = [
 
   return (
     <section
-      aria-label="İletişim Bilgileri"
+      aria-label="Contact Information"
       className="relative overflow-hidden"
       style={{
         background: "#ffffff",
@@ -183,13 +184,15 @@ offices = [
                 {(o.image || mapSrc) && (
                   <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {o.image && (
-                      <div className="relative rounded-xl overflow-hidden border"
+                      <div className="relative h-44 rounded-xl overflow-hidden border"
                            style={{ borderColor: "var(--stroke)" }}>
                         <Image
                           src={o.image}
                           alt={o.imageAlt || o.label}
                           width={800}
                           height={600}
+                          sizes="(max-width: 639px) calc(100vw - 84px), (max-width: 767px) calc((100vw - 104px) / 2), (max-width: 1279px) calc((100vw - 208px) / 4), 256px"
+                          quality={65}
                           className="h-44 w-full object-cover"
                         />
                       </div>
@@ -197,9 +200,10 @@ offices = [
                     {mapSrc && (
                       <div className="relative rounded-xl overflow-hidden border"
                            style={{ borderColor: "var(--stroke)" }}>
-                        <iframe
+                        <DeferredIframe
                           src={mapSrc}
-                          loading="lazy"
+                          buttonLabel="Show map"
+                          title={`${o.label} Map`}
                           referrerPolicy="no-referrer-when-downgrade"
                           className="w-full h-44"
                           style={{ border: 0 }}
@@ -222,7 +226,7 @@ offices = [
                   <div className="mt-3">
                     <div className="text-xs uppercase tracking-wide"
                          style={{ color: "rgba(20,21,23,0.55)" }}>
-                      Çalışma Saatleri
+                      Office Hours
                     </div>
                     <div className="mt-1 space-y-0.5 text-sm"
                          style={{ color: "rgba(20,21,23,0.7)" }}>
@@ -234,7 +238,7 @@ offices = [
                 {/* Contacts */}
                 <div className="mt-4 flex flex-wrap items-center gap-2">
                   {o.phone && (
-                    <a href={o.phone}
+                    <a href={`tel:${o.phone.replace(/^tel:/, "").replace(/[^\d+]/g, "")}`}
                        className="text-sm px-3 py-1 rounded-full"
                        style={{ background: `${accent}14`, color: accent, border: `1px solid ${accent}33` }}>
                       {o.phoneDisplay || o.phone.replace("tel:", "")}

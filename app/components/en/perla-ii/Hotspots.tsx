@@ -177,7 +177,7 @@ function RightFixedPanel({
           >
             <button
               onClick={onClose}
-              aria-label="Kapat"
+              aria-label="Close"
               className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full bg-white/85 text-neutral-900 ring-1 ring-black/10"
             >
               ×
@@ -216,7 +216,7 @@ function RightFixedPanel({
             exit={{ opacity: 0, x: 12 }}
             className="pointer-events-none w-[360px] max-w-[60vw] rounded-2xl border border-white/15 bg-white/5 backdrop-blur-xl px-4 py-3 text-white/75"
           >
-            Detaylı bilgi için iletişişme geçin.
+            Contact us for more information.
           </motion.div>
         )}
       </AnimatePresence>

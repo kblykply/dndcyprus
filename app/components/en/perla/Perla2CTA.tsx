@@ -48,7 +48,7 @@ highlights = [
 }: Props) {
   return (
     <section
-      aria-label="La Joya Perla — İletişim & Broşür"
+      aria-label="La Joya Perla — Contact &amp; Brochure"
       className={`relative overflow-hidden ${fullHeight ? "min-h-screen" : "min-h-[70vh]"}`}
       style={
         {
@@ -124,7 +124,7 @@ highlights = [
           {highlights?.length > 0 && (
             <ul
               className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
-              aria-label="Proje öne çıkanlar"
+              aria-label="Project highlights"
             >
               {highlights.map((h) => (
                 <li

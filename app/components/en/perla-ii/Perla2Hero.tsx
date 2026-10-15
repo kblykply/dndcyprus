@@ -51,7 +51,7 @@ kicker = "DND Cyprus",
 >
   {/* Background image (z-0) */}
   <div className="absolute inset-0 z-0">
-    <Image src={heroImage} alt={title} fill preload sizes="100vw" className="object-cover" />
+    <Image quality={65} src={heroImage} alt={title} fill preload sizes="100vw" className="object-cover" />
   </div>
 
   {/* --- Overlays for readability --- */}

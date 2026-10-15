@@ -49,7 +49,7 @@ highlights = [
 
   return (
     <section
-      aria-label="La Joya Perla — Genel Bakış"
+      aria-label="La Joya Perla — Overview"
       className="relative overflow-hidden pb-12 lg:pb-16"
       style={{
         background: "#fff",
@@ -165,8 +165,8 @@ highlights = [
                 {finalEmbed ? (
                   <LazyYouTube
                     videoId={YT_ID!}
-                    title="La Joya Perla tanıtım videosu"
-                    posterAlt="La Joya Perla tanıtım videosu"
+                    title="La Joya Perla promotional video"
+                    posterAlt="La Joya Perla promotional video"
                     className="relative w-full h-full"
                     query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${YT_ID}`}
                   />

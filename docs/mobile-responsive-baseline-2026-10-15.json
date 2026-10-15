@@ -1,0 +1,491 @@
+{
+  "measuredAt": "2026-10-15T09:00:13.358Z",
+  "buildId": "q7N2_7Lo69LJ_eHfbK_uV",
+  "checked": [
+    {
+      "route": "/tr",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/contact",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/contact",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/privacy",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/contact",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/contact",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/privacy",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/contact",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/contact",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/privacy",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "route": "/tr",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/contact",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/contact",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/privacy",
+      "width": 320,
+      "height": 740,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/contact",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/contact",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/privacy",
+      "width": 768,
+      "height": 1024,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/contact",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/contact",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    },
+    {
+      "route": "/en/privacy",
+      "width": 844,
+      "height": 390,
+      "issues": [
+        {
+          "type": "no immediately reachable mobile menu"
+        }
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "status": "baseline findings recorded",
+  "note": "Cached HTTP 304 responses were accepted after correcting the audit status check; they are not application failures."
+}

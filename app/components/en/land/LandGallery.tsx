@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants, type Easing } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -37,11 +38,11 @@ subtitle = "Drone Images",
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/gecitkale/gecitkale-1.jpg", alt: "Havuz" },
-        { src: "/gecitkale/gecitkale-2.jpg", alt: "Deniz manzarası" },
-        { src: "/gecitkale/gecitkale-3.jpg", alt: "Sahil" },
-        { src: "/gecitkale/gecitkale-4.jpg", alt: "Gün batımı" },
-        { src: "/gecitkale/gecitkale-5.jpg", alt: "Doğa" },
+        { src: "/gecitkale/gecitkale-1.jpg", alt: "Geçitkale project image 1" },
+        { src: "/gecitkale/gecitkale-2.jpg", alt: "Geçitkale project image 2" },
+        { src: "/gecitkale/gecitkale-3.jpg", alt: "Geçitkale project image 3" },
+        { src: "/gecitkale/gecitkale-4.jpg", alt: "Geçitkale project image 4" },
+        { src: "/gecitkale/gecitkale-5.jpg", alt: "Geçitkale project image 5" },
 
 
 
@@ -65,7 +66,7 @@ subtitle = "Drone Images",
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="Geçitkale — Gallery"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -132,7 +133,7 @@ subtitle = "Drone Images",
                   onMouseEnter={() => setHovered(i)}
                   onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
                   role="button"
-                  aria-label={g.alt || `Galeri görseli ${i + 1}`}
+                  aria-label={g.alt || `Gallery image ${i + 1}`}
                   style={{
                     flexGrow: grow,
                     transition: "flex-grow .55s cubic-bezier(0.22,1,0.36,1)",
@@ -140,7 +141,10 @@ subtitle = "Drone Images",
                   }}
                 >
                   {/* Görsel */}
-                  <img
+                  <DeferredFillImage
+                    fill
+                    quality={65}
+                    sizes="max(50vw, 90vh)"
                     src={g.src}
                     alt={g.alt || ""}
                     className="h-full w-full object-cover select-none"

@@ -1,0 +1,70 @@
+{
+  "measuredAt": "2026-10-14T11:57:26.331Z",
+  "origin": "http://127.0.0.1:3100",
+  "units": "uncompressed bytes; initial HTML script and stylesheet dependencies only",
+  "routes": {
+    "/tr": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 155414,
+      "scriptCount": 15,
+      "scriptBytes": 752596,
+      "stylesheetCount": 2,
+      "stylesheetBytes": 135505
+    },
+    "/en": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 154798,
+      "scriptCount": 16,
+      "scriptBytes": 752678,
+      "stylesheetCount": 2,
+      "stylesheetBytes": 135505
+    },
+    "/tr/perla-ii": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 149544,
+      "scriptCount": 16,
+      "scriptBytes": 796958,
+      "stylesheetCount": 2,
+      "stylesheetBytes": 135505
+    },
+    "/en/perla-ii": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 148835,
+      "scriptCount": 17,
+      "scriptBytes": 796941,
+      "stylesheetCount": 2,
+      "stylesheetBytes": 135505
+    },
+    "/tr/contact": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 70861,
+      "scriptCount": 13,
+      "scriptBytes": 674778,
+      "stylesheetCount": 2,
+      "stylesheetBytes": 135505
+    },
+    "/en/contact": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 69647,
+      "scriptCount": 14,
+      "scriptBytes": 674788,
+      "stylesheetCount": 2,
+      "stylesheetBytes": 135505
+    },
+    "/tr/qr": {
+      "status": 200,
+      "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+      "htmlBytes": 2055,
+      "scriptCount": 0,
+      "scriptBytes": 0,
+      "stylesheetCount": 0,
+      "stylesheetBytes": 0
+    }
+  }
+}

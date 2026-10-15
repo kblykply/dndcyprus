@@ -38,7 +38,7 @@ description = "Construction at the La Joya Perla project, scheduled for delivery
   video = {
     src: "https://www.youtube.com/embed/YSy7WB056Fg?si=-HLY_3T_kk2bIt_j",
     type: "youtube",
-    title: "La Joya Perla II – Latest Construction Update",
+    title: "La Joya Perla – Latest Construction Update",
   },
   cta,
 }: Props) {
@@ -52,7 +52,7 @@ description = "Construction at the La Joya Perla project, scheduled for delivery
 
   return (
     <section
-      aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
+      aria-label="La Joya Perla — Latest Construction Update"
       className="relative overflow-hidden"
       style={sectionStyle}
     >
@@ -91,7 +91,7 @@ description = "Construction at the La Joya Perla project, scheduled for delivery
               ) : (
                 <iframe
                   src={video.src}
-                  title={video.title || "Son İnşaat Güncellemesi"}
+                  title={video.title || "Latest Construction Update"}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen

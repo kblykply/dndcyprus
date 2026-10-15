@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import Image from "next/image";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, useInView } from "framer-motion";
 
 /* ------- Types & Data ------- */
@@ -225,11 +225,13 @@ export default function AwardsSection() {
                         height: boxH as unknown as number,
                       }}
                     >
-                      <Image
+                      <DeferredFillImage
+                        rootMargin="0px"
                         src={item.ribbon}
                         alt={item.title}
                         fill
-                        sizes="(max-width: 768px) 42vw, 220px"
+                        // Tall ribbons occupy only part of their object-contain box.
+                        sizes={role === "center" ? "128px" : "72px"}
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}
                         className="object-contain select-none pointer-events-none"

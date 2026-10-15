@@ -1,0 +1,272 @@
+{
+  "measuredAt": "2026-10-14T09:54:06.602Z",
+  "origin": "http://127.0.0.1:3100",
+  "phase": "oct14-desktop",
+  "device": "desktop",
+  "visit": "first visit",
+  "method": "Lighthouse 13.5 desktop preset; first visit; laboratory data. Sample counts recorded per route.",
+  "sampleCounts": {
+    "/tr": 1,
+    "/en": 1
+  },
+  "buildId": "GL7pk3WEAjaaWZLPFQpw0",
+  "samples": [
+    {
+      "route": "/tr",
+      "sample": 1,
+      "score": 99,
+      "lcpMs": 906.4214999999999,
+      "fcpMs": 326.4215,
+      "tbtMs": 0,
+      "cls": 0.00006292210255961242,
+      "transferBytes": 640492,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Lagoon Verde",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > h2.mt-3"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 11.27
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 78.095
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 123
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240
+          }
+        ],
+        "unusedJavaScriptBytes": 24456,
+        "imageSavingsBytes": 16332,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=1920&q=65",
+            "type": "Image",
+            "transferBytes": 136656,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fb7bd5cb03e3f41f.js",
+            "type": "Script",
+            "transferBytes": 18142,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d07f562729b08e55.js",
+            "type": "Script",
+            "transferBytes": 11684,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 24168,
+        "Font": 164373,
+        "Image": 165158,
+        "Stylesheet": 22552,
+        "Script": 243713,
+        "Other": 4690,
+        "Fetch": 15838
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 2,
+      "score": 99,
+      "lcpMs": 912.0888,
+      "fcpMs": 332.0888,
+      "tbtMs": 0,
+      "cls": 0.0000615795464495228,
+      "transferBytes": 643347,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Living spaces that bring modern architecture and comfort together under one roo…",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > p.mt-4"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 10.093
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 104.745
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "totalBytes": 21312,
+            "wastedMs": 126
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240
+          }
+        ],
+        "unusedJavaScriptBytes": 24670,
+        "imageSavingsBytes": 16332,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=1920&q=65",
+            "type": "Image",
+            "transferBytes": 136654,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4513df5a6d192a53.css",
+            "type": "Stylesheet",
+            "transferBytes": 21312,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/af4e112e1d87d360.js",
+            "type": "Script",
+            "transferBytes": 18019,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/0a4cd96607a3b69d.js",
+            "type": "Script",
+            "transferBytes": 14966,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/f7b00863506d7ec3.js",
+            "type": "Script",
+            "transferBytes": 10917,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 23550,
+        "Font": 164373,
+        "Image": 165156,
+        "Stylesheet": 22552,
+        "Script": 247031,
+        "Other": 4690,
+        "Fetch": 15995
+      }
+    }
+  ],
+  "status": "passed"
+}

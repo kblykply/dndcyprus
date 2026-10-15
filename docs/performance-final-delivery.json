@@ -1,0 +1,39 @@
+{
+  "measuredAt": "2026-10-14T10:20:17.641Z",
+  "origin": "http://127.0.0.1:3100",
+  "assets": [
+    {
+      "path": "/_next/static/chunks/5cedbe3d28acc407.js",
+      "status": 200,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "encoding": "gzip",
+      "type": "application/javascript; charset=UTF-8",
+      "vary": "Accept-Encoding"
+    },
+    {
+      "path": "/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+      "status": 200,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "encoding": null,
+      "type": "font/woff2",
+      "vary": null
+    },
+    {
+      "path": "/optimized/menu.50fdc17e37d7.webp",
+      "status": 200,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "encoding": null,
+      "type": "image/webp",
+      "vary": null
+    },
+    {
+      "path": "/_next/image?url=%2Fperla%2F9.jpg&w=750&q=65",
+      "status": 200,
+      "cacheControl": "public, max-age=14400, must-revalidate",
+      "encoding": null,
+      "type": "image/webp",
+      "vary": "Accept"
+    }
+  ],
+  "status": "passed"
+}

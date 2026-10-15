@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -61,7 +62,7 @@ const DATA: Project[] = [
   {
     id: "la-joya",
     title: "La Joya",
-    status: "Ongoing",
+    status: "Completed",
     type: "Residential",
     location: "İskele",
     cover: "/la-joya/2.jpg",
@@ -220,8 +221,11 @@ style={{
                 boxShadow: "0 10px 24px rgba(0,0,0,0.04)",
               }}
             >
-              <div className="aspect-[16/10] bg-white overflow-hidden">
-                <img
+              <div className="relative aspect-[16/10] bg-white overflow-hidden">
+                <DeferredFillImage
+                  fill
+                  quality={65}
+                  sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) calc((100vw - 72px) / 2), 384px"
                   src={p.cover}
                   alt={p.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"

@@ -38,8 +38,9 @@ export type PressSectionProps = {
 // ------------------------------------------------------------
 // Utils
 // ------------------------------------------------------------
-const fmtTR = (iso: string) =>
-  new Intl.DateTimeFormat('tr-TR', {
+const fmtDate = (iso: string) =>
+  new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'UTC',
     year: 'numeric',
     month: 'long',
     day: '2-digit',
@@ -155,7 +156,7 @@ description = 'News coverage and press releases featuring our brand.',
                 href={pressKitHref}
                 className="inline-flex items-center rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 shadow-sm transition hover:shadow-md hover:-translate-y-0.5"
               >
-                <Building2 className="mr-2 h-4 w-4" /> Basın Kiti
+                <Building2 className="mr-2 h-4 w-4" /> Press Kit
               </a>
             )}
           </div>
@@ -180,7 +181,7 @@ description = 'News coverage and press releases featuring our brand.',
                       background: '#ffffff',
                     }}
                   >
-                    Öne Çıkan Haber
+                    Featured News
                   </span>
                   <h3 className="mt-2 text-xl font-semibold text-gray-900 group-hover:underline underline-offset-2">
                     {featured.title}
@@ -193,7 +194,7 @@ description = 'News coverage and press releases featuring our brand.',
                       <Building2 className="h-3.5 w-3.5" /> {featured.outlet}
                     </span>
                     <span className="inline-flex items-center gap-1">
-                      <Calendar className="h-3.5 w-3.5" /> {fmtTR(featured.date)}
+                      <Calendar className="h-3.5 w-3.5" /> {fmtDate(featured.date)}
                     </span>
                     {featured.tags?.map((t) => (
                       <span key={t} className="rounded-full bg-black/5 px-2 py-0.5 text-[11px]">
@@ -239,12 +240,12 @@ description = 'News coverage and press releases featuring our brand.',
           </div>
         )}
 
-        {/* Tüm Haberler (Link always visible if moreHref is provided) */}
+        {/* All News (Link always visible if moreHref is provided) */}
         <div className="mt-8 flex justify-center">
           {moreHref ? (
             <Link
               href={moreHref}
-              aria-label="Tüm haberleri gör"
+              aria-label="View all news"
               className="inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
               style={{ color: TEAL }}
             >
@@ -260,7 +261,7 @@ description = 'News coverage and press releases featuring our brand.',
                 className="inline-flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 shadow-sm transition hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 style={{ color: TEAL }}
               >
-                Tüm Haberler
+                All News
                 <ChevronRight className="h-4 w-4" />
               </button>
             )
@@ -303,7 +304,7 @@ function PressCard({ item }: { item: PressItem }) {
           <span className="inline-flex items-center rounded-full bg-black/5 px-2.5 py-1 text-[11px] font-medium text-gray-700">
             {item.outlet}
           </span>
-          <span className="text-xs text-gray-500">{fmtTR(item.date)}</span>
+          <span className="text-xs text-gray-500">{fmtDate(item.date)}</span>
         </div>
         <h4 className="mt-2 line-clamp-2 text-base font-semibold text-gray-900 group-hover:underline underline-offset-2">
           {item.title}

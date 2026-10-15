@@ -4,6 +4,7 @@
 import LazyYouTube from "@/app/components/LazyYouTube";
 
 import React from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -49,7 +50,7 @@ highlights = [
 
   return (
     <section
-      aria-label="Geçitkale — Genel Bakış"
+      aria-label="Geçitkale — Overview"
       className="relative overflow-hidden pb-12 lg:pb-16"
       style={{
         background: "#fff",
@@ -158,20 +159,20 @@ highlights = [
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-video bg-black">
+              <div className="relative aspect-video bg-black">
                 {finalEmbed ? (
                   <LazyYouTube
                     videoId={YT_ID!}
-                    title="Geçitkale tanıtım videosu"
-                    posterAlt="Geçitkale tanıtım videosu"
+                    title="Geçitkale promotional video"
+                    posterAlt="Geçitkale promotional video"
                     className="relative w-full h-full"
                     query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${YT_ID}`}
                   />
                 ) : (
-                  <img
+                  <DeferredFillImage fill quality={65} sizes="(min-width: 1280px) 592px, (min-width: 1024px) 50vw, 100vw"
                     src={imagePrimary}
-                    alt="Geçitkale arsa genel görünüm"
-                    className="w-full h-full object-cover"
+                    alt="General view of the Geçitkale plot"
+                    className="object-cover"
                     loading="lazy"
                   />
                 )}

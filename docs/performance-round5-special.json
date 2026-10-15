@@ -1,0 +1,41 @@
+{
+  "measuredAt": "2026-10-14T11:57:20.345Z",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "initialCovers": 3,
+      "allCovers": 11,
+      "checks": "optimized deferred media covers and no raw campaign download; reduced-motion beach section visible"
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "initialCovers": 6,
+      "allCovers": 11,
+      "checks": "optimized deferred media covers and no raw campaign download; reduced-motion beach section visible"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "initialCovers": 3,
+      "allCovers": 9,
+      "checks": "optimized deferred media covers and no raw campaign download; reduced-motion beach section visible"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "initialCovers": 6,
+      "allCovers": 9,
+      "checks": "optimized deferred media covers and no raw campaign download; reduced-motion beach section visible"
+    },
+    {
+      "route": "/tr/qr",
+      "checks": "one AVIF request; 1280px resolution; WebP fallback selection",
+      "currentSrc": "http://127.0.0.1:3100/optimized/menu.17a0ec550983.avif"
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "status": "passed"
+}

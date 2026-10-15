@@ -1,0 +1,3150 @@
+{
+  "measuredAt": "2026-10-14T10:35:22.764Z",
+  "clientDate": "2026-10-14",
+  "timezone": "Europe/Istanbul",
+  "status": "local audit complete; mobile optimization still needed; not pushed/deployed",
+  "origin": "http://localhost:3100",
+  "scope": {
+    "publicRoutes": 36,
+    "localImageReferences": 130,
+    "internalLinks": 33,
+    "unitTests": 76,
+    "browserCases": 41,
+    "lighthouseRuns": 35,
+    "lighthouseMobilePages": 21
+  },
+  "method": "Lighthouse 13.5 local production: simulated mobile, desktop preset, cold-cache saved-preferences profile. TR/EN home pages have three samples each; other route/profile results are single samples. Public HTTP inventory uses sitemap plus QR; browser scenarios block external providers and never submit real leads.",
+  "builds": {
+    "main": "4Es3zHr5GiwhBvpRTDxxh",
+    "final": "N6NMIedtYoOBee4OjeYHA",
+    "note": "Only media-popup stacking changed after the main measurements; both media pages were retested on the final build. Remaining page measurements use the main audit build."
+  },
+  "validation": {
+    "measuredAt": "2026-10-14T10:26:38.276Z",
+    "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+    "productionBuild": {
+      "status": "passed",
+      "typecheck": "passed",
+      "generatedRoutes": 43
+    },
+    "unitTests": {
+      "command": "npm test",
+      "status": "passed",
+      "total": 76,
+      "failed": 0,
+      "mode": "mocked API/database integrations; no real leads submitted"
+    },
+    "lint": {
+      "command": "npm run lint -- --format json --output-file docs/performance-final-eslint-2026-10-14.json",
+      "status": "passed with warnings",
+      "files": 328,
+      "errors": 0,
+      "warnings": 221
+    },
+    "changesThisAudit": [
+      "TR/EN contact phone links now use tel: instead of broken internal paths.",
+      "Lint command updated from removed next lint to scoped ESLint CLI.",
+      "Audit tools extended with separate report destinations, public route/asset inventory, navigation/gallery/plan checks and stats visibility checks.",
+      "TR/EN media hub popups now appear above floating navigation controls so their close button receives the click."
+    ],
+    "followupBuild": {
+      "status": "passed",
+      "buildId": "N6NMIedtYoOBee4OjeYHA",
+      "reason": "Media popup stacking fix only; no content or image optimization changes"
+    }
+  },
+  "inventory": {
+    "measuredAt": "2026-10-14T10:13:31.662Z",
+    "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+    "origin": "http://127.0.0.1:3100",
+    "routes": [
+      {
+        "route": "/tr",
+        "status": 200,
+        "language": "tr",
+        "title": "Kuzey Kıbrıs&#x27;ta Satılık Daireler ve Projeler | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 141026,
+        "organization": true
+      },
+      {
+        "route": "/en",
+        "status": 200,
+        "language": "en",
+        "title": "North Cyprus Property Developer &amp; Apartments | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 140405,
+        "organization": true
+      },
+      {
+        "route": "/tr/projects",
+        "status": 200,
+        "language": "tr",
+        "title": "Projelerimiz | İskele&#x27;de Konut ve Beach Club – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/projects",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 71789,
+        "organization": true
+      },
+      {
+        "route": "/en/projects",
+        "status": 200,
+        "language": "en",
+        "title": "Our Projects – Iskele Homes &amp; Beach Club | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/projects",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 70712,
+        "organization": true
+      },
+      {
+        "route": "/tr/lagoon-verde",
+        "status": 200,
+        "language": "tr",
+        "title": "Lagoon Verde İskele | Bahçeler&#x27;de Satılık Daireler – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/lagoon-verde",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 162380,
+        "organization": true
+      },
+      {
+        "route": "/en/lagoon-verde",
+        "status": 200,
+        "language": "en",
+        "title": "Lagoon Verde Iskele – Apartments for Sale | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/lagoon-verde",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 161463,
+        "organization": true
+      },
+      {
+        "route": "/tr/perla-ii",
+        "status": 200,
+        "language": "tr",
+        "title": "La Joya Perla II İskele | Satılık Daireler – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/perla-ii",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 149544,
+        "organization": true
+      },
+      {
+        "route": "/en/perla-ii",
+        "status": 200,
+        "language": "en",
+        "title": "La Joya Perla II Iskele – Apartments for Sale | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/perla-ii",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 148835,
+        "organization": true
+      },
+      {
+        "route": "/tr/perla",
+        "status": 200,
+        "language": "tr",
+        "title": "La Joya Perla İskele | Denize 700 m Daireler – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/perla",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 150060,
+        "organization": true
+      },
+      {
+        "route": "/en/perla",
+        "status": 200,
+        "language": "en",
+        "title": "La Joya Perla Iskele – Apartments by the Sea | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/perla",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 149329,
+        "organization": true
+      },
+      {
+        "route": "/tr/la-joya",
+        "status": 200,
+        "language": "tr",
+        "title": "La Joya Long Beach İskele | Loft ve Penthouse – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/la-joya",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 132276,
+        "organization": true
+      },
+      {
+        "route": "/en/la-joya",
+        "status": 200,
+        "language": "en",
+        "title": "La Joya Long Beach Iskele – Lofts &amp; Penthouses | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/la-joya",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 132214,
+        "organization": true
+      },
+      {
+        "route": "/tr/mariachi",
+        "status": 200,
+        "language": "tr",
+        "title": "Mariachi Beach Club İskele | Plaj ve Havuz – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/mariachi",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 95351,
+        "organization": true
+      },
+      {
+        "route": "/en/mariachi",
+        "status": 200,
+        "language": "en",
+        "title": "Mariachi Beach Club Iskele – Beach, Pool &amp; Bar | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/mariachi",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 94415,
+        "organization": true
+      },
+      {
+        "route": "/tr/gecitkale",
+        "status": 200,
+        "language": "tr",
+        "title": "Geçitkale Satılık Arsa | İskele Yatırım Fırsatı – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/gecitkale",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 91525,
+        "organization": true
+      },
+      {
+        "route": "/en/gecitkale",
+        "status": 200,
+        "language": "en",
+        "title": "Geçitkale Land for Sale in Iskele, North Cyprus | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/gecitkale",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 90797,
+        "organization": true
+      },
+      {
+        "route": "/tr/about",
+        "status": 200,
+        "language": "tr",
+        "title": "Hakkımızda | Kıbrıs Gayrimenkul Geliştiricisi – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/about",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 109354,
+        "organization": true
+      },
+      {
+        "route": "/en/about",
+        "status": 200,
+        "language": "en",
+        "title": "About Us – North Cyprus Real Estate Developer | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/about",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 108295,
+        "organization": true
+      },
+      {
+        "route": "/tr/team",
+        "status": 200,
+        "language": "tr",
+        "title": "Ekibimiz | Yönetim, Satış ve Mühendislik – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/team",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 88506,
+        "organization": true
+      },
+      {
+        "route": "/en/team",
+        "status": 200,
+        "language": "en",
+        "title": "Our Team – Leadership, Sales &amp; Engineering | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/team",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 87454,
+        "organization": true
+      },
+      {
+        "route": "/tr/contact",
+        "status": 200,
+        "language": "tr",
+        "title": "İletişim | Gazimağusa ve İskele Satış Ofisleri – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/contact",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 70861,
+        "organization": true
+      },
+      {
+        "route": "/en/contact",
+        "status": 200,
+        "language": "en",
+        "title": "Contact Us – Famagusta &amp; Iskele Sales Offices | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/contact",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 69647,
+        "organization": true
+      },
+      {
+        "route": "/tr/dndcyprus",
+        "status": 200,
+        "language": "tr",
+        "title": "DND Medya Merkezi | Broşür, Katalog ve Videolar – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/dndcyprus",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 69211,
+        "organization": true
+      },
+      {
+        "route": "/en/dndcyprus",
+        "status": 200,
+        "language": "en",
+        "title": "DND Media Hub – Brochures, Catalogs &amp; Videos | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/dndcyprus",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 42217,
+        "organization": false
+      },
+      {
+        "route": "/tr/press",
+        "status": 200,
+        "language": "tr",
+        "title": "Basın Haberleri ve Duyurular | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/press",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 57615,
+        "organization": true
+      },
+      {
+        "route": "/en/press",
+        "status": 200,
+        "language": "en",
+        "title": "Press Coverage &amp; News | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/press",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 56325,
+        "organization": true
+      },
+      {
+        "route": "/tr/privacy",
+        "status": 200,
+        "language": "tr",
+        "title": "Gizlilik ve Çerez Politikası | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/privacy",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 86178,
+        "organization": true
+      },
+      {
+        "route": "/en/privacy",
+        "status": 200,
+        "language": "en",
+        "title": "Privacy and Cookie Policy | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/privacy",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 84334,
+        "organization": true
+      },
+      {
+        "route": "/tr/terms",
+        "status": 200,
+        "language": "tr",
+        "title": "Kullanım Koşulları | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/terms",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 65517,
+        "organization": true
+      },
+      {
+        "route": "/en/terms",
+        "status": 200,
+        "language": "en",
+        "title": "Terms of Use | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/en/terms",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 64771,
+        "organization": true
+      },
+      {
+        "route": "/tr/blog",
+        "status": 200,
+        "language": "tr",
+        "title": "Blog | Haberler, Ödüller ve Röportajlar – DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/blog",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 53654,
+        "organization": true
+      },
+      {
+        "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+        "status": 200,
+        "language": "tr",
+        "title": "USA Quality in Cyprus: Ozan Dökmecioğlu ile Röportaj | DND Cyprus",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 62570,
+        "organization": true
+      },
+      {
+        "route": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+        "status": 200,
+        "language": "tr",
+        "title": "DND Cyprus, 2025 PropertyNC Ödülleri’nde Altın Ödül Kazandı",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 63065,
+        "organization": true
+      },
+      {
+        "route": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+        "status": 200,
+        "language": "tr",
+        "title": "DND Cyprus, Yılbaşı Etkinliğiyle İş Ortaklarını Ağırladı",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/blog/dnd-cyprus-new-year-celebration-2023",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 61156,
+        "organization": true
+      },
+      {
+        "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+        "status": 200,
+        "language": "tr",
+        "title": "DND Homes, Kuzey Kıbrıs’ta 30.000+ Konutluk Büyüme Planını Açıkladı",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 61958,
+        "organization": true
+      },
+      {
+        "route": "/tr/qr",
+        "status": 200,
+        "language": "tr",
+        "title": "Joy Cafe Haftalık Menü",
+        "description": true,
+        "canonical": "https://www.dndcyprus.com/tr/qr",
+        "cacheControl": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 11338,
+        "organization": false
+      }
+    ],
+    "assets": [
+      {
+        "src": "/DND-LOGO-LIGHT.svg",
+        "exists": true,
+        "route": "/en/contact"
+      },
+      {
+        "src": "/lagoon-verde/1.jpg",
+        "exists": true,
+        "route": "/en/contact"
+      },
+      {
+        "src": "/BEST-SOCIOCULTURAL-GOLD.png",
+        "exists": true,
+        "route": "/en"
+      },
+      {
+        "src": "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png",
+        "exists": true,
+        "route": "/en"
+      },
+      {
+        "src": "/BEST-NEWCOMER.png",
+        "exists": true,
+        "route": "/en"
+      },
+      {
+        "src": "/perla-ii/1.jpg",
+        "exists": true,
+        "route": "/en/perla-ii"
+      },
+      {
+        "src": "/perla/9.jpg",
+        "exists": true,
+        "route": "/en"
+      },
+      {
+        "src": "/la-joya/3.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/mariachi/2.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/dnd-boston-ofis.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/optimized/ozanbeycropped.07b7e617b44b.webp",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/Keurig_Dr_Pepper.png",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/Kellogg's-Logo.png",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/Kraft_logo_2012.png",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/Cargill_logo.png",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/mariachi/3.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/logos/dndgroup.png",
+        "exists": true,
+        "route": "/en"
+      },
+      {
+        "src": "/logos/dndhomes.png",
+        "exists": true,
+        "route": "/en"
+      },
+      {
+        "src": "/logos/lagoon.png",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/logos/lajoya.png",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/logos/mariachi.png",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/logos/perla.png",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/logos/perlaii.png",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/uu.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/news/mhacover.webp",
+        "exists": true,
+        "route": "/en/press"
+      },
+      {
+        "src": "/news/kpcover.jpg",
+        "exists": true,
+        "route": "/en/press"
+      },
+      {
+        "src": "/news/ydcover.jpg",
+        "exists": true,
+        "route": "/en/press"
+      },
+      {
+        "src": "/news/hkcover.jpg",
+        "exists": true,
+        "route": "/en/press"
+      },
+      {
+        "src": "/lagoon-verde/2.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/DND-LOGO-2.svg",
+        "exists": true,
+        "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+      },
+      {
+        "src": "/perla-ii/2.jpg",
+        "exists": true,
+        "route": "/en/perla-ii"
+      },
+      {
+        "src": "/perla/1.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/la-joya/2.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/gecitkaleimage.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/lagoon-verde/5.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/lagoon-verde/3.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/lagoon-verde/6.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/tec/klima.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/tec/jenerator.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/tec/smart.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/tec/yer.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/lagoon-verde-interior/2plus1/6.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/lagoon-verde-interior/floor-plans/studio.webp",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/lagoon-verde-interior/studio/1.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/lagoon-verde-interior/studio/3.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/lagoon-verde-interior/studio/4.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/lagoon-verde-interior/studio/5.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/lagoon-verde-interior/studio/6.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/mariachi/7.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/lagoon-verde/7.jpg",
+        "exists": true,
+        "route": "/en/lagoon-verde"
+      },
+      {
+        "src": "/perla-ii/3.jpg",
+        "exists": true,
+        "route": "/en/perla-ii"
+      },
+      {
+        "src": "/perla-ii/6.jpg",
+        "exists": true,
+        "route": "/en/perla-ii"
+      },
+      {
+        "src": "/perla-ii/5.jpg",
+        "exists": true,
+        "route": "/en/perla-ii"
+      },
+      {
+        "src": "/perla-ii-in/2.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/perla-ii-plans/7.png",
+        "exists": true,
+        "route": "/en/perla-ii"
+      },
+      {
+        "src": "/perla-ii-in/6.jpg",
+        "exists": true,
+        "route": "/en/perla-ii"
+      },
+      {
+        "src": "/perla/7.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/perla/3.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/perla/6.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/perla/8.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/perla-in/1.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/perla-plans/1.png",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/perla/4.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/perla-in/7.jpg",
+        "exists": true,
+        "route": "/en/perla"
+      },
+      {
+        "src": "/la-joya/1.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/la-joya/6.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/la-joya/5.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/la-joya-in/2.jpg",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/la-joya-plan/4.png",
+        "exists": true,
+        "route": "/en/la-joya"
+      },
+      {
+        "src": "/mariachi/1.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/mariachi/6.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/dj.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/spa.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/sea.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/mariachi/4.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/mariachi/5.jpg",
+        "exists": true,
+        "route": "/en/mariachi"
+      },
+      {
+        "src": "/gecitkale/gecitkale-1.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/gecitkale/gecitkale-2.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/gecitkale/gecitkale-3.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/gecitkale/gecitkale-4.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/gecitkale/gecitkale-5.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/ercan.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/elec.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/zon.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/vil.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/apart.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/water.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/tapu.jpg",
+        "exists": true,
+        "route": "/en/gecitkale"
+      },
+      {
+        "src": "/DND%20Beach%20Parti%2024-59.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/homesthumb.webp",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/12lex.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/ozan-dokmecioglu-cfo-of-the-year.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/kurulus.JPG",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/property_awards_2025-747.jpg",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/optimized/aynurhanimhome.a514b897cb1d.webp",
+        "exists": true,
+        "route": "/en/about"
+      },
+      {
+        "src": "/teams/ozan.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/aynurzorbagulol.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/burcingul.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/borhan.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/bulent.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/emine.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/sabina.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/shadi.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/onur.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/bob.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/shayan.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/ava.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/mustafa.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/okan.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/nevin.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/meryem.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/ebru.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/placeholder.svg",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/gozde.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/mami.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/yusuf.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/rojina.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/onuryalcin.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/hilal.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/omer.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/teams/tanya.png",
+        "exists": true,
+        "route": "/en/team"
+      },
+      {
+        "src": "/dndofis.JPG",
+        "exists": true,
+        "route": "/en/contact"
+      },
+      {
+        "src": "/ofis.jpg",
+        "exists": true,
+        "route": "/en/contact"
+      },
+      {
+        "src": "/daireici.jpg",
+        "exists": true,
+        "route": "/en/contact"
+      },
+      {
+        "src": "/DND.png",
+        "exists": true,
+        "route": "/en/dndcyprus"
+      },
+      {
+        "src": "/property_awards_2025-782.jpg",
+        "exists": true,
+        "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+      },
+      {
+        "src": "/ozanbeyrop.jpg",
+        "exists": true,
+        "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+      },
+      {
+        "src": "/yaho.jpg",
+        "exists": true,
+        "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+      },
+      {
+        "src": "/dndwhoweare.jpg",
+        "exists": true,
+        "route": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024"
+      },
+      {
+        "src": "/optimized/menu.50fdc17e37d7.webp",
+        "exists": true,
+        "route": "/tr/qr"
+      }
+    ],
+    "links": [
+      {
+        "target": "/tr",
+        "status": 200
+      },
+      {
+        "target": "/tr/projects",
+        "status": 200
+      },
+      {
+        "target": "/tr/about",
+        "status": 200
+      },
+      {
+        "target": "/tr/contact",
+        "status": 200
+      },
+      {
+        "target": "/tr/press",
+        "status": 200
+      },
+      {
+        "target": "/tr/lagoon-verde",
+        "status": 200
+      },
+      {
+        "target": "/tr/perla-ii",
+        "status": 200
+      },
+      {
+        "target": "/tr/perla",
+        "status": 200
+      },
+      {
+        "target": "/tr/la-joya",
+        "status": 200
+      },
+      {
+        "target": "/tr/mariachi",
+        "status": 200
+      },
+      {
+        "target": "/tr/team",
+        "status": 200
+      },
+      {
+        "target": "/tr/privacy",
+        "status": 200
+      },
+      {
+        "target": "/tr/terms",
+        "status": 200
+      },
+      {
+        "target": "/en",
+        "status": 200
+      },
+      {
+        "target": "/en/projects",
+        "status": 200
+      },
+      {
+        "target": "/en/about",
+        "status": 200
+      },
+      {
+        "target": "/en/contact",
+        "status": 200
+      },
+      {
+        "target": "/en/press",
+        "status": 200
+      },
+      {
+        "target": "/en/lagoon-verde",
+        "status": 200
+      },
+      {
+        "target": "/en/perla-ii",
+        "status": 200
+      },
+      {
+        "target": "/en/perla",
+        "status": 200
+      },
+      {
+        "target": "/en/la-joya",
+        "status": 200
+      },
+      {
+        "target": "/en/mariachi",
+        "status": 200
+      },
+      {
+        "target": "/en/team",
+        "status": 200
+      },
+      {
+        "target": "/en/privacy",
+        "status": 200
+      },
+      {
+        "target": "/en/terms",
+        "status": 200
+      },
+      {
+        "target": "/tr/gecitkale",
+        "status": 200
+      },
+      {
+        "target": "/en/gecitkale",
+        "status": 200
+      },
+      {
+        "target": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+        "status": 200
+      },
+      {
+        "target": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+        "status": 200
+      },
+      {
+        "target": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+        "status": 200
+      },
+      {
+        "target": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+        "status": 200
+      },
+      {
+        "target": "/tr/blog",
+        "status": 200
+      }
+    ],
+    "removedRoutes": [
+      {
+        "route": "/dndturkiye",
+        "status": 404
+      },
+      {
+        "route": "/tr/dndturkiye",
+        "status": 404
+      },
+      {
+        "route": "/en/dndturkiye",
+        "status": 404
+      }
+    ],
+    "redirects": [
+      {
+        "route": "/contact",
+        "status": 308,
+        "destination": "/tr/contact"
+      },
+      {
+        "route": "/about",
+        "status": 308,
+        "destination": "/tr/about"
+      },
+      {
+        "route": "/projects",
+        "status": 308,
+        "destination": "/tr/projects"
+      },
+      {
+        "route": "/perla-ii",
+        "status": 308,
+        "destination": "/tr/perla-ii"
+      },
+      {
+        "route": "/la-joya",
+        "status": 308,
+        "destination": "/tr/la-joya"
+      }
+    ],
+    "errors": [],
+    "warnings": [],
+    "status": "passed",
+    "phoneLinkFixChecks": [
+      {
+        "locale": "tr",
+        "officeTelephone": "tel:+903924440363",
+        "status": "passed"
+      },
+      {
+        "locale": "en",
+        "officeTelephone": "tel:+903924440363",
+        "status": "passed"
+      }
+    ]
+  },
+  "delivery": {
+    "measuredAt": "2026-10-14T10:20:17.641Z",
+    "origin": "http://127.0.0.1:3100",
+    "assets": [
+      {
+        "path": "/_next/static/chunks/5cedbe3d28acc407.js",
+        "status": 200,
+        "cacheControl": "public, max-age=31536000, immutable",
+        "encoding": "gzip",
+        "type": "application/javascript; charset=UTF-8",
+        "vary": "Accept-Encoding"
+      },
+      {
+        "path": "/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+        "status": 200,
+        "cacheControl": "public, max-age=31536000, immutable",
+        "encoding": null,
+        "type": "font/woff2",
+        "vary": null
+      },
+      {
+        "path": "/optimized/menu.50fdc17e37d7.webp",
+        "status": 200,
+        "cacheControl": "public, max-age=31536000, immutable",
+        "encoding": null,
+        "type": "image/webp",
+        "vary": null
+      },
+      {
+        "path": "/_next/image?url=%2Fperla%2F9.jpg&w=750&q=65",
+        "status": 200,
+        "cacheControl": "public, max-age=14400, must-revalidate",
+        "encoding": null,
+        "type": "image/webp",
+        "vary": "Accept"
+      }
+    ],
+    "status": "passed"
+  },
+  "browsers": [
+    {
+      "name": "media-checks",
+      "measuredAt": "2026-10-14T10:10:18.817Z",
+      "status": "passed",
+      "checked": [
+        {
+          "path": "/tr/team",
+          "width": 390,
+          "initialPhotos": 1,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/tr/team",
+          "width": 1440,
+          "initialPhotos": 10,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/en/team",
+          "width": 390,
+          "initialPhotos": 1,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/en/team",
+          "width": 1440,
+          "initialPhotos": 10,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/tr/about",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/tr/mariachi",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/tr/gecitkale",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/en/about",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/en/mariachi",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/en/gecitkale",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/tr/qr",
+          "checks": "1280-pixel menu, image preload, no fonts, no shared navigation or consent"
+        }
+      ],
+      "errors": [],
+      "missing": []
+    },
+    {
+      "name": "home-checks",
+      "measuredAt": "2026-10-14T10:18:26.913Z",
+      "status": "passed",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+        },
+        {
+          "locale": "tr",
+          "width": 1440,
+          "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+        },
+        {
+          "locale": "en",
+          "width": 1440,
+          "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+        }
+      ],
+      "errors": [],
+      "missing": []
+    },
+    {
+      "name": "loading-checks",
+      "measuredAt": "2026-10-14T10:11:11.411Z",
+      "status": "passed",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "DND Homes Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              },
+              {
+                "alt": "İlk Proje La Joya Teslimi",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=750&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=384&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=384&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=384&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=384&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=384&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 53359
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        },
+        {
+          "locale": "tr",
+          "width": 1440,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "DND Homes Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "Amerika’daki İlk Proje",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Ödülü",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "DND Kıbrıs Kuruluşu",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Ödülleri",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "İlk Proje La Joya Teslimi",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=1200&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=640&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=640&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=640&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=640&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=640&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 92785
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "Founding of DND Homes",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=750&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=750&q=65"
+              },
+              {
+                "alt": "Delivery of the First Project – La Joya",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=750&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=384&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=384&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=384&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=384&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=384&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=384&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 53359
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 1440,
+          "deviceScaleFactor": 2,
+          "heroPriority": "high",
+          "timelineDeferred": true,
+          "milestoneImages": [
+            [
+              {
+                "alt": "Founding of DND Homes",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fdnd-boston-ofis.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              }
+            ],
+            [
+              {
+                "alt": "First Project in the USA",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2F12lex.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Ozan Dökmecioğlu Award",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fozan-dokmecioglu-cfo-of-the-year.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Establishment of DND Cyprus",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fkurulus.JPG&w=1200&q=65"
+              },
+              {
+                "alt": "Property NC Awards",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fproperty_awards_2025-747.jpg&w=1200&q=65"
+              },
+              {
+                "alt": "Delivery of the First Project – La Joya",
+                "src": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=1200&q=65"
+              }
+            ]
+          ],
+          "logos": [
+            {
+              "alt": "DND Group",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndgroup.png&w=640&q=75"
+            },
+            {
+              "alt": "DND Homes",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fdndhomes.png&w=640&q=75"
+            },
+            {
+              "alt": "Lagoon Verde",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flagoon.png&w=640&q=75"
+            },
+            {
+              "alt": "La Joya",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Flajoya.png&w=640&q=75"
+            },
+            {
+              "alt": "Mariachi Beach Club",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperla.png&w=640&q=75"
+            },
+            {
+              "alt": "Perla II",
+              "src": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fperlaii.png&w=640&q=75"
+            }
+          ],
+          "logoBytes": {
+            "original": 2200587,
+            "optimized": 92785
+          },
+          "consent": "fresh visible; saved hidden",
+          "overflow": false
+        }
+      ],
+      "errors": [],
+      "missing": []
+    },
+    {
+      "name": "contact-checks",
+      "measuredAt": "2026-10-14T10:13:47.504Z",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Merkez Ofis Harita",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Satış Ofisi Harita",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        },
+        {
+          "locale": "tr",
+          "width": 1440,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Merkez Ofis Harita",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Satış Ofisi Harita",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Head Office Map",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Sales Office Map",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        },
+        {
+          "locale": "en",
+          "width": 1440,
+          "initialMaps": 0,
+          "maps": [
+            {
+              "src": "https://www.google.com/maps?q=35.1856,33.3823&z=15&output=embed",
+              "title": "DND Cyprus Head Office Map",
+              "height": 176
+            },
+            {
+              "src": "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+              "title": "Lagoon Verde Sales Office Map",
+              "height": 176
+            }
+          ],
+          "address": "official unchanged",
+          "directMapLinks": 2,
+          "overflow": false
+        }
+      ],
+      "errors": [],
+      "missing": [],
+      "status": "passed"
+    },
+    {
+      "name": "fonts-checks",
+      "measuredAt": "2026-10-14T10:11:29.145Z",
+      "status": "passed",
+      "checked": [
+        {
+          "locale": "tr",
+          "sans": "inter",
+          "heading": "montserrat",
+          "preloadedFonts": 2,
+          "loadedFonts": [
+            {
+              "family": "inter",
+              "weight": "100 900"
+            },
+            {
+              "family": "montserrat",
+              "weight": "300 500"
+            }
+          ],
+          "sansLoaded": true,
+          "headingLoaded": true
+        },
+        {
+          "locale": "en",
+          "sans": "inter",
+          "heading": "montserrat",
+          "preloadedFonts": 2,
+          "loadedFonts": [
+            {
+              "family": "inter",
+              "weight": "100 900"
+            },
+            {
+              "family": "montserrat",
+              "weight": "300 500"
+            }
+          ],
+          "sansLoaded": true,
+          "headingLoaded": true
+        }
+      ]
+    },
+    {
+      "name": "interactions",
+      "measuredAt": "2026-10-14T10:16:57.670Z",
+      "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+        },
+        {
+          "locale": "tr",
+          "width": 1440,
+          "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+        },
+        {
+          "locale": "en",
+          "width": 1440,
+          "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+        },
+        {
+          "locale": "tr",
+          "project": "lagoon-verde",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/lagoon-verde-interior/floor-plans/studio.webp",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "tr",
+          "project": "la-joya",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/la-joya-plan/4.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "tr",
+          "project": "perla",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/perla-plans/1.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "tr",
+          "project": "perla-ii",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "tr",
+          "project": "perla-ii",
+          "width": 1440,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "en",
+          "project": "lagoon-verde",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/lagoon-verde-interior/floor-plans/studio.webp",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "en",
+          "project": "la-joya",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/la-joya-plan/4.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "en",
+          "project": "perla",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/perla-plans/1.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "en",
+          "project": "perla-ii",
+          "width": 390,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        },
+        {
+          "locale": "en",
+          "project": "perla-ii",
+          "width": 1440,
+          "galleryPanels": 5,
+          "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+          "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+        }
+      ],
+      "errors": [],
+      "missing": [],
+      "status": "passed"
+    },
+    {
+      "name": "hub-checks",
+      "measuredAt": "2026-10-14T10:30:48.634Z",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "cards": 11,
+          "checks": "media cards, campaign popup, video iframe activates on click, close button, no overflow",
+          "thirdPartyPlayback": "blocked; not validated"
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "cards": 9,
+          "checks": "media cards, campaign popup, video iframe activates on click, close button, no overflow",
+          "thirdPartyPlayback": "blocked; not validated"
+        }
+      ],
+      "errors": [],
+      "missing": [],
+      "current": {
+        "locale": "en",
+        "title": "Lagoon Verde Video"
+      },
+      "clickPoint": {
+        "rect": {
+          "x": 16,
+          "y": 292,
+          "width": 358,
+          "height": 280,
+          "top": 292,
+          "right": 374,
+          "bottom": 572,
+          "left": 16
+        },
+        "top": "<div class=\"relative flex h-full flex-col justify-between p-5 sm:p-6\"><div class=\"flex items-start justify-between gap-3\"><span class=\"inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em]\" style=\"background:#ffffff;color:#27959b;border:1px solid rgba(39,149,155,0.14);box-shadow:0 6px 18px rgba(20,21,23,0.06)\"><svg xmlns=\"http://www.w3.org/2000"
+      },
+      "status": "passed"
+    }
+  ],
+  "lintRules": {
+    "@typescript-eslint/no-unused-vars": 125,
+    "@next/next/no-img-element": 68,
+    "jsx-a11y/role-supports-aria-props": 2,
+    "react-hooks/exhaustive-deps": 23,
+    "jsx-a11y/alt-text": 3
+  },
+  "mobile": [
+    {
+      "route": "/tr",
+      "sampleCount": 3,
+      "score": 88,
+      "lcpMs": 3905.2092000000002,
+      "fcpMs": 1205.2092,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 550494,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 24158,
+        "Font": 164373,
+        "Image": 75064,
+        "Stylesheet": 22576,
+        "Script": 243811,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/en",
+      "sampleCount": 3,
+      "score": 87,
+      "lcpMs": 3979.8649000000005,
+      "fcpMs": 1204.8649,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 553352,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 23546,
+        "Font": 164373,
+        "Image": 75064,
+        "Stylesheet": 22576,
+        "Script": 247124,
+        "Other": 4690,
+        "Fetch": 15979
+      }
+    },
+    {
+      "route": "/tr/projects",
+      "sampleCount": 1,
+      "score": 91,
+      "lcpMs": 3530.2455,
+      "fcpMs": 1055.2455,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 525900,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 14077,
+        "Font": 164373,
+        "Image": 89383,
+        "Stylesheet": 22576,
+        "Script": 214979,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/en/projects",
+      "sampleCount": 1,
+      "score": 91,
+      "lcpMs": 3530.3608999999997,
+      "fcpMs": 1055.3609,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 528899,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 13539,
+        "Font": 164373,
+        "Image": 89383,
+        "Stylesheet": 22576,
+        "Script": 218359,
+        "Other": 4690,
+        "Fetch": 15979
+      }
+    },
+    {
+      "route": "/tr/team",
+      "sampleCount": 1,
+      "score": 91,
+      "lcpMs": 3473.9305999999997,
+      "fcpMs": 1055.1032,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 471047,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 13935,
+        "Font": 164373,
+        "Image": 36017,
+        "Stylesheet": 22576,
+        "Script": 213634,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/en/team",
+      "sampleCount": 1,
+      "score": 91,
+      "lcpMs": 3455.4659,
+      "fcpMs": 1055.4659,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 473998,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 13337,
+        "Font": 164373,
+        "Image": 36017,
+        "Stylesheet": 22576,
+        "Script": 217026,
+        "Other": 4690,
+        "Fetch": 15979
+      }
+    },
+    {
+      "route": "/tr/about",
+      "sampleCount": 1,
+      "score": 87,
+      "lcpMs": 3980.9564999999993,
+      "fcpMs": 1203.971,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 601163,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 21009,
+        "Font": 164373,
+        "Image": 99589,
+        "Stylesheet": 22576,
+        "Script": 273104,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/en/about",
+      "sampleCount": 1,
+      "score": 87,
+      "lcpMs": 3982.2799499999996,
+      "fcpMs": 1204.8533,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 603752,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 20315,
+        "Font": 164373,
+        "Image": 99589,
+        "Stylesheet": 22576,
+        "Script": 276230,
+        "Other": 4690,
+        "Fetch": 15979
+      }
+    },
+    {
+      "route": "/tr/contact",
+      "sampleCount": 1,
+      "score": 89,
+      "lcpMs": 3680.135,
+      "fcpMs": 1205.135,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 545633,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 15051,
+        "Font": 164373,
+        "Image": 91269,
+        "Stylesheet": 22576,
+        "Script": 221154,
+        "Other": 4690,
+        "Fetch": 26520
+      }
+    },
+    {
+      "route": "/en/contact",
+      "sampleCount": 1,
+      "score": 91,
+      "lcpMs": 3530.1121999999996,
+      "fcpMs": 1055.1122,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 548392,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 14487,
+        "Font": 164373,
+        "Image": 91269,
+        "Stylesheet": 22576,
+        "Script": 224424,
+        "Other": 4690,
+        "Fetch": 26573
+      }
+    },
+    {
+      "route": "/tr/lagoon-verde",
+      "sampleCount": 1,
+      "score": 87,
+      "lcpMs": 4054.5733,
+      "fcpMs": 1204.5733,
+      "tbtMs": 0.5,
+      "cls": 0.000139988042982138,
+      "transferBytes": 692292,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 27843,
+        "Font": 164373,
+        "Image": 196342,
+        "Stylesheet": 22576,
+        "Script": 260646,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/tr/la-joya",
+      "sampleCount": 1,
+      "score": 87,
+      "lcpMs": 3980.1715000000004,
+      "fcpMs": 1205.1715,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 711868,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 23986,
+        "Font": 164373,
+        "Image": 189258,
+        "Stylesheet": 22576,
+        "Script": 284302,
+        "Other": 4690,
+        "Fetch": 22683
+      }
+    },
+    {
+      "route": "/tr/perla",
+      "sampleCount": 1,
+      "score": 87,
+      "lcpMs": 3983.3967000000007,
+      "fcpMs": 1208.3967,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 734863,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 26298,
+        "Font": 164373,
+        "Image": 202864,
+        "Stylesheet": 22576,
+        "Script": 291379,
+        "Fetch": 22683,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/tr/perla-ii",
+      "sampleCount": 1,
+      "score": 87,
+      "lcpMs": 3980.1525,
+      "fcpMs": 1205.1525,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 765660,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 26263,
+        "Font": 164373,
+        "Image": 233791,
+        "Stylesheet": 22576,
+        "Script": 291284,
+        "Other": 4690,
+        "Fetch": 22683
+      }
+    },
+    {
+      "route": "/en/perla-ii",
+      "sampleCount": 1,
+      "score": 87,
+      "lcpMs": 3980.1747000000005,
+      "fcpMs": 1205.1747,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 767924,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 25433,
+        "Font": 164373,
+        "Image": 233800,
+        "Stylesheet": 22576,
+        "Script": 294316,
+        "Other": 4690,
+        "Fetch": 22736
+      }
+    },
+    {
+      "route": "/tr/mariachi",
+      "sampleCount": 1,
+      "score": 88,
+      "lcpMs": 3830.0241000000005,
+      "fcpMs": 1205.0241,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 590699,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 18770,
+        "Font": 164373,
+        "Image": 68126,
+        "Stylesheet": 22576,
+        "Script": 283894,
+        "Other": 4690,
+        "Fetch": 28270
+      }
+    },
+    {
+      "route": "/en/mariachi",
+      "sampleCount": 1,
+      "score": 88,
+      "lcpMs": 3829.4888,
+      "fcpMs": 1204.4888,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 593114,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 18145,
+        "Font": 164373,
+        "Image": 68124,
+        "Stylesheet": 22576,
+        "Script": 286946,
+        "Other": 4690,
+        "Fetch": 28260
+      }
+    },
+    {
+      "route": "/tr/gecitkale",
+      "sampleCount": 1,
+      "score": 89,
+      "lcpMs": 3680.2667,
+      "fcpMs": 1205.2667,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 528753,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 17413,
+        "Font": 164373,
+        "Image": 60641,
+        "Stylesheet": 22576,
+        "Script": 243238,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/tr/qr",
+      "sampleCount": 1,
+      "score": 88,
+      "lcpMs": 3903.5487000000003,
+      "fcpMs": 753.5487,
+      "tbtMs": 2,
+      "cls": 0,
+      "transferBytes": 551603,
+      "fontBytes": 0,
+      "transferByType": {
+        "Document": 3105,
+        "Image": 411910,
+        "Stylesheet": 481,
+        "Script": 131417,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "sampleCount": 1,
+      "score": 75,
+      "lcpMs": 10975.822549999997,
+      "fcpMs": 1057.9454,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 4976678,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 12346,
+        "Font": 164373,
+        "Image": 4542172,
+        "Stylesheet": 22581,
+        "Script": 214689,
+        "Other": 4690,
+        "Fetch": 15827
+      }
+    },
+    {
+      "route": "/en/dndcyprus",
+      "sampleCount": 1,
+      "score": 75,
+      "lcpMs": 9922.51865,
+      "fcpMs": 1056.4339,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 4578179,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 7166,
+        "Font": 164373,
+        "Image": 4137911,
+        "Stylesheet": 22581,
+        "Script": 225482,
+        "Other": 4690,
+        "Fetch": 15976
+      }
+    }
+  ],
+  "desktop": [
+    {
+      "route": "/tr",
+      "sampleCount": 1,
+      "score": 99,
+      "lcpMs": 904.9592,
+      "fcpMs": 324.9592,
+      "tbtMs": 0,
+      "cls": 0.00006292210255961242,
+      "transferBytes": 640582,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 24158,
+        "Font": 164373,
+        "Image": 165152,
+        "Stylesheet": 22576,
+        "Script": 243811,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/en",
+      "sampleCount": 1,
+      "score": 99,
+      "lcpMs": 904.4601,
+      "fcpMs": 324.4601,
+      "tbtMs": 0,
+      "cls": 0.0000615795464495228,
+      "transferBytes": 643440,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 23546,
+        "Font": 164373,
+        "Image": 165152,
+        "Stylesheet": 22576,
+        "Script": 247124,
+        "Other": 4690,
+        "Fetch": 15979
+      }
+    },
+    {
+      "route": "/tr/team",
+      "sampleCount": 1,
+      "score": 100,
+      "lcpMs": 783.14185,
+      "fcpMs": 287.6186,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 541972,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 13935,
+        "Font": 164373,
+        "Image": 106942,
+        "Stylesheet": 22576,
+        "Script": 213634,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/tr/contact",
+      "sampleCount": 1,
+      "score": 100,
+      "lcpMs": 745.5627,
+      "fcpMs": 325.5627,
+      "tbtMs": 0,
+      "cls": 0.00006292210255961242,
+      "transferBytes": 732438,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 15051,
+        "Font": 164373,
+        "Image": 278074,
+        "Stylesheet": 22576,
+        "Script": 221154,
+        "Other": 4690,
+        "Fetch": 26520
+      }
+    },
+    {
+      "route": "/tr/perla-ii",
+      "sampleCount": 1,
+      "score": 100,
+      "lcpMs": 785.414,
+      "fcpMs": 325.414,
+      "tbtMs": 0,
+      "cls": 0.00006292210255961242,
+      "transferBytes": 1049431,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 26263,
+        "Font": 164373,
+        "Image": 517562,
+        "Stylesheet": 22576,
+        "Script": 291284,
+        "Fetch": 22683,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/tr/qr",
+      "sampleCount": 1,
+      "score": 100,
+      "lcpMs": 765.7246,
+      "fcpMs": 205.7246,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 551603,
+      "fontBytes": 0,
+      "transferByType": {
+        "Document": 3105,
+        "Image": 411910,
+        "Stylesheet": 481,
+        "Script": 131417,
+        "Other": 4690
+      }
+    }
+  ],
+  "savedPreferences": [
+    {
+      "route": "/tr",
+      "sampleCount": 1,
+      "score": 88,
+      "lcpMs": 3904.7210000000005,
+      "fcpMs": 1204.721,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 533717,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 24158,
+        "Font": 164373,
+        "Image": 75064,
+        "Stylesheet": 22576,
+        "Script": 242856,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/en",
+      "sampleCount": 1,
+      "score": 88,
+      "lcpMs": 3904.5085,
+      "fcpMs": 1204.5085,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 536418,
+      "fontBytes": 164373,
+      "transferByType": {
+        "Document": 23546,
+        "Font": 164373,
+        "Image": 75064,
+        "Stylesheet": 22576,
+        "Script": 246169,
+        "Other": 4690
+      }
+    }
+  ],
+  "hubBeforeFix": [
+    {
+      "route": "/tr/dndcyprus",
+      "sample": 1,
+      "score": 75,
+      "lcpMs": 11044.2842,
+      "fcpMs": 1055.9336,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 4976667,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "div.relative > div.mt-10 > button.group > div.absolute",
+          "selector": "div.relative > div.mt-10 > button.group > div.absolute"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 4.269
+          },
+          {
+            "subpart": "resourceLoadDelay",
+            "label": "Resource load delay",
+            "duration": 16.542
+          },
+          {
+            "subpart": "resourceLoadDuration",
+            "label": "Resource load duration",
+            "duration": 6.553
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 127.872
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/31bd60e0a149aa70.css",
+            "totalBytes": 21336,
+            "wastedMs": 453
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 153
+          }
+        ],
+        "unusedJavaScriptBytes": 24744,
+        "imageSavingsBytes": 2386246,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/campain.png",
+            "type": "Image",
+            "transferBytes": 1979863,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lala.jpg",
+            "type": "Image",
+            "transferBytes": 582103,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lajoyaimage.jpg",
+            "type": "Image",
+            "transferBytes": 372947,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/2.jpg",
+            "type": "Image",
+            "transferBytes": 280007,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/1.jpg",
+            "type": "Image",
+            "transferBytes": 266695,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/3.jpg",
+            "type": "Image",
+            "transferBytes": 266215,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/kktc.ff08e0f764.webp",
+            "type": "Image",
+            "transferBytes": 200006,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/property_awards_2025-747.jpg",
+            "type": "Image",
+            "transferBytes": 191955,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/proaw.jpeg",
+            "type": "Image",
+            "transferBytes": 138046,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/DND.png",
+            "type": "Image",
+            "transferBytes": 136871,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/dndweb.33a891333c.webp",
+            "type": "Image",
+            "transferBytes": 77181,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 12345,
+        "Font": 164373,
+        "Image": 4542172,
+        "Stylesheet": 22576,
+        "Script": 214689,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/en/dndcyprus",
+      "sample": 2,
+      "score": 75,
+      "lcpMs": 9916.568649999997,
+      "fcpMs": 1054.7339,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 4578177,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "div.relative > div.mt-10 > button.group > div.absolute",
+          "selector": "div.relative > div.mt-10 > button.group > div.absolute"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 2.811
+          },
+          {
+            "subpart": "resourceLoadDelay",
+            "label": "Resource load delay",
+            "duration": 14.653
+          },
+          {
+            "subpart": "resourceLoadDuration",
+            "label": "Resource load duration",
+            "duration": 9.317
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 101.807
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/31bd60e0a149aa70.css",
+            "totalBytes": 21336,
+            "wastedMs": 452
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240,
+            "wastedMs": 152
+          }
+        ],
+        "unusedJavaScriptBytes": 25471,
+        "imageSavingsBytes": 2385257,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/campain.png",
+            "type": "Image",
+            "transferBytes": 1979863,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lala.jpg",
+            "type": "Image",
+            "transferBytes": 582103,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lajoyaimage.jpg",
+            "type": "Image",
+            "transferBytes": 372947,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/2.jpg",
+            "type": "Image",
+            "transferBytes": 280007,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/1.jpg",
+            "type": "Image",
+            "transferBytes": 266695,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/kktc.ff08e0f764.webp",
+            "type": "Image",
+            "transferBytes": 200006,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/property_awards_2025-747.jpg",
+            "type": "Image",
+            "transferBytes": 191955,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/DND.png",
+            "type": "Image",
+            "transferBytes": 136871,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/dndweb.33a891333c.webp",
+            "type": "Image",
+            "transferBytes": 77181,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 7166,
+        "Font": 164373,
+        "Image": 4137911,
+        "Stylesheet": 22576,
+        "Script": 225482,
+        "Other": 4690,
+        "Fetch": 15979
+      }
+    }
+  ],
+  "priorities": [
+    {
+      "priority": 1,
+      "title": "Medya merkezinin kapak görselleri",
+      "evidence": "TR yaklaşık 4,98 MB, EN yaklaşık 4,58 MB ilk açılış yükü. Görseller toplamın yaklaşık %90’ını oluşturuyor; yalnız campain.png yaklaşık 1,98 MB. Kapaklar CSS backgroundImage ile aynı anda yükleniyor.",
+      "action": "Küçük responsive WebP/AVIF kapaklar kullan; ekran dışındaki kartları ekrana yaklaşınca yükle. Kampanya görselinin okunaklı orijinalini popup için koru. Broşür/PDF dosyaları sadece tıklama sonrası açılsın.",
+      "acceptance": "Her iki dilde ilk açılış aktarımı belirgin azalmalı; görsel/video/PDF açma ve kapatma çalışmalı. Mobil LCP üçer ölçümle tekrar değerlendirilmeli.",
+      "budget": "Önerilen başlangıç bütçesi: 800 KB altı. Henüz uygulanmadı veya ölçülmedi."
+    },
+    {
+      "priority": 2,
+      "title": "Ana sayfa ve genel font yükü",
+      "evidence": "TR ana sayfa 550 KB; fontlar 164 KB, ağ trafiğinin yaklaşık %30’u. Çerez tercihi kayıtlı ziyaretçide de LCP yaklaşık 3,9 saniye.",
+      "action": "Latin/Türkçe karakterlerini küçük ana dosyada tut; Rusça karakterlerini unicode-range ile ihtiyaç halinde yükle. Türkçe, Lehçe, Rusça karakterleri, sayı özelliklerini ve lisansları koru.",
+      "acceptance": "Görünüm korunmalı; font boyutu azalmalı, FCP/CLS kötüleşmemeli. TR/EN üçer Lighthouse örneği ve gerçek ziyaretçi ölçümüyle değerlendirilmeli.",
+      "budget": "Deneme bütçesi: ilk ekranda font aktarımı 100 KB altı. Kesin LCP kazancı henüz bilinmiyor."
+    },
+    {
+      "priority": 3,
+      "title": "QR menüsü",
+      "evidence": "Sayfa toplamı yaklaşık 552 KB; 412 KB’ı menü görseli. Mobil LCP yaklaşık 3,9 saniye. Lighthouse görsel tesliminde yaklaşık 325 KB tasarruf tahmin ediyor; bu okunaklılık kontrolü yapılmış bir çıktı değil.",
+      "action": "WebP kalite ve AVIF seçeneklerini gerçek cihaz boyutunda karşılaştır. Yemek ve fiyat yazılarını koru; tam çözünürlüklü orijinale erişim sürsün. Uzun vadede HTML menü seçeneğini değerlendir.",
+      "acceptance": "Bütün metinler rahat okunmalı; fiyat/içerik değişmemeli. LCP ve ağ boyutu birlikte kontrol edilmeli.",
+      "budget": "Görüntü kalitesi uygunsa 250 KB altını dene; otomatik kalite düşürme yapılmadı."
+    },
+    {
+      "priority": 4,
+      "title": "Ortak JavaScript ve proje görselleri",
+      "evidence": "Ana sayfada yaklaşık 244 KB sıkıştırılmış Script aktarımı var. Perla II mobil açılışı yaklaşık 766–768 KB; yaklaşık 234 KB görsel. İlk HTML’nin JS bağımlılıkları açılmış olarak ana sayfada 759 KB.",
+      "action": "Paket analizinde ortak animasyon/uygulama kodunu ayır. Ekran altında gereken ağır etkileşimleri ihtiyaç anında yükle; statik içeriği sunucuda tut. Proje fotoğraflarının kalan boyut/sıkıştırma seçeneklerini incele.",
+      "acceptance": "Menü, klavye/dokunma slaytları, galeri, kat planı ve SEO içeriği korunmalı. Mevcut TBT düşük; her JS tasarrufunun LCP’yi azaltacağı varsayılmamalı.",
+      "budget": "İlk ekran Script aktarımında 200 KB altı deneme bütçesi; garanti değil."
+    },
+    {
+      "priority": 5,
+      "title": "Canlı ziyaretçi ölçümü ve yayın kontrolü",
+      "evidence": "Bu testler local production ortamından. Gerçek ziyaretçi p75 LCP/INP/CLS ölçülmedi. Localde analitik kimliği yapılandırılmamış; canlı yapılandırma bu turda doğrulanmadı.",
+      "action": "Canlı analitik yapılandırmasını doğrula; mevcut izinli Web Vitals altyapısını kullan. Yayın sonrası CDN, mobil/masaüstü ve gerçek ziyaretçi verisini karşılaştır.",
+      "acceptance": "İzin koşulları korunmalı; TBT gerçek INP gibi sunulmamalı. Local sonuçlar canlı sitenin puanı olarak kullanılmamalı.",
+      "budget": "Resmî iyi eşikler: LCP ≤2,5 sn; INP ≤200 ms; CLS ≤0,1, ziyaretlerin p75 değeriyle."
+    },
+    {
+      "priority": 6,
+      "title": "Bakım ve eksik ekip fotoğrafları",
+      "evidence": "Lint hata sayısı 0, uyarı sayısı 221: 125 kullanılmayan değişken, 68 img, 23 hook bağımlılığı, 3 alt metin, 2 ARIA uyarısı. Parmida Mesgari ve Emine Güngör için gerçek fotoğraf yok; nötr yer tutucu kullanılıyor.",
+      "action": "Uyarıları dosya bazında temizle; orijinal çözünürlüklü plan/menü görsellerindeki bilinçli img kullanımını koru. İki gerçek ekip fotoğrafını tamamla. Eski middleware adlandırmasını desteklenen proxy düzenine ayrı kontrolde taşı.",
+      "acceptance": "Yeni runtime hatası olmamalı; gerçek fotoğraf eklenince responsive boyutlar korunmalı. Lint uyarısı tek başına ölçülmüş performans kaybı demek değil.",
+      "budget": "Bakım işi; puan artışı vaat edilmez."
+    }
+  ],
+  "limits": [
+    "Local scores are not live field scores; p75 and real INP were not measured.",
+    "Third-party YouTube/Instagram/maps playback and real lead delivery were not exercised; API/database/conversion unit tests use mocks.",
+    "The static asset inventory checks HTML image/source references; CSS covers are assessed through browser/Lighthouse requests, not counted as all public assets.",
+    "Desktop QR has a valid numeric LCP and score, but Lighthouse emitted a NO_LCP trace insight warning; supplementary LCP breakdown is unavailable for that sample.",
+    "The public folder is approximately 571 MiB of archive/media; this is storage size and not a visitor’s page download.",
+    "No commit, push or deployment during this audit."
+  ],
+  "sources": [
+    {
+      "title": "Core Web Vitals thresholds and lab/field distinction",
+      "url": "https://web.dev/articles/vitals"
+    },
+    {
+      "title": "Lighthouse performance scoring",
+      "url": "https://developer.chrome.com/docs/lighthouse/performance/performance-scoring"
+    },
+    {
+      "title": "Next.js Image sizing and optimization",
+      "url": "https://nextjs.org/docs/app/api-reference/components/image"
+    }
+  ]
+}

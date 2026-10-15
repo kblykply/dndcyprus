@@ -29,7 +29,7 @@ type Props = {
 export default function Perla2Overview({
  title = "La Joya Overview",
 lead =
-  "La Joya is a boutique project of 74 residences with low-rise architecture, located just 500 m from the sea in Long Beach, İskele. With exclusive membership privileges at Mariachi Beach Club, outdoor swimming pools, a restaurant & pool bar, a gym, and smart home/central systems, it brings holiday comfort into everyday living.",
+  "Completed in 2025, La Joya is a boutique project of 74 residences with low-rise architecture, located just 500 m from the sea in Long Beach, İskele. With exclusive membership privileges at Mariachi Beach Club, outdoor swimming pools, a restaurant & pool bar, a gym, and smart home/central systems, it brings holiday comfort into everyday living.",
 highlights = [
   "500 m to the sea; Mariachi Beach Club membership and discounted services",
   "Low-rise architecture: 74 residences (1+1 loft, 2+1 penthouse, studio penthouse)",
@@ -49,7 +49,7 @@ highlights = [
 
   return (
     <section
-      aria-label="La Joya Perla II — Genel Bakış"
+      aria-label="La Joya — Overview"
       className="relative overflow-hidden pb-12 lg:pb-16" // extra bottom padding
       style={{
         background: "#fff",
@@ -162,8 +162,8 @@ highlights = [
                 {finalEmbed ? (
                   <LazyYouTube
                     videoId={YT_ID!}
-                    title="La Joya Perla II tanıtım videosu"
-                    posterAlt="La Joya Perla II tanıtım videosu"
+                    title="La Joya promotional video"
+                    posterAlt="La Joya promotional video"
                     className="relative w-full h-full"
                     query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${YT_ID}`}
                   />

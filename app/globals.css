@@ -1,7 +1,22 @@
 @import "tailwindcss";
-@import "swiper/css/effect-coverflow";
-@import "swiper/css/navigation";
-@import "swiper/css/pagination";
+
+/* Extra scripts load only when the page actually uses those characters. */
+@font-face {
+  font-family: "DND Sans Cyrillic";
+  src: url("./fonts/inter-cyrillic.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0400-04FF;
+}
+@font-face {
+  font-family: "DND Display Cyrillic";
+  src: url("./fonts/montserrat-cyrillic.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: swap;
+  unicode-range: U+0400-04FF;
+}
 
 
 
@@ -40,6 +55,8 @@ html, body {
 }
 
 body {
+  --font-sans: "DND Sans Cyrillic", var(--font-sans-core);
+  --font-display: "DND Display Cyrillic", var(--font-display-core);
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
@@ -92,6 +109,13 @@ html {
   [aria-hidden="true"][class*="blur-3xl"] { display: none; }
 }
 
+/* Keep text inputs readable without Safari zooming the form on focus. */
+@media (max-width: 1023px) {
+  input:not([type="checkbox"]):not([type="radio"]), textarea, select {
+    font-size: 16px;
+  }
+}
+
 /* Show consent in static HTML on first visits, and hide it before first paint
    for returning visitors; opening preferences after hydration remains possible. */
 html[data-dnd-consent="saved"] [data-consent-initial] { display: none; }
@@ -111,3 +135,37 @@ html[data-dnd-consent="saved"] [data-consent-initial] { display: none; }
   box-shadow: 0 20px 44px #f15c3444 !important;
   border-color: #f15c3466 !important;
 }
+
+/* The hero uses a small native carousel; media carousels retain Swiper. */
+.hero-carousel-slide { transition: opacity 900ms ease; }
+.hero-carousel-arrow {
+  position: absolute; z-index: 20; top: 50%; transform: translateY(-50%);
+  display: grid; place-items: center; width: 44px; height: 44px;
+  border-radius: 999px; border: 1px solid rgb(255 255 255 / .25);
+  background: rgb(255 255 255 / .14); backdrop-filter: blur(10px);
+  color: white; font-size: 28px; cursor: pointer;
+}
+.hero-carousel-prev { left: 4px; }
+.hero-carousel-next { right: 4px; }
+@media (min-width: 768px) {
+  .hero-carousel-prev { left: 72px; }
+}
+.hero-carousel-pagination {
+  position: absolute; z-index: 20; bottom: 5px; left: 0; right: 0;
+  display: flex; justify-content: center; align-items: center;
+}
+.hero-carousel-dot {
+  display: grid; place-items: center; width: 44px; height: 44px;
+  background: transparent; cursor: pointer;
+}
+.hero-carousel-dot::after {
+  content: ""; width: 10px; height: 10px; border-radius: 999px;
+  background: rgb(255 255 255 / .9); opacity: .45;
+}
+.hero-carousel-dot-active::after { width: 26px; opacity: 1; }
+@media (max-width: 479px) {
+  /* Reserve the right corner for the fixed WhatsApp control. */
+  .hero-carousel-pagination { padding-right: 4.5rem; }
+}
+.hero-carousel button:focus-visible { outline: 2px solid white; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .hero-carousel-slide { transition: none; } }

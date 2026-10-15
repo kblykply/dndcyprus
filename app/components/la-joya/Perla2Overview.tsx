@@ -28,7 +28,7 @@ type Props = {
 
 export default function Perla2Overview({
   title = "La Joya Genel Bakış",
-  lead = "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir projedir. Mariachi Beach Club’a özel üyelik ayrıcalıkları, açık yüzme havuzları, restoran & pool bar, spor salonu ve akıllı ev/merkezi sistemlerle tatil konforunu günlük yaşama taşır.",
+  lead = "La Joya; 2025 yılında tamamlanmış, Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir konut projesidir. Mariachi Beach Club’a özel üyelik ayrıcalıkları, açık yüzme havuzları, restoran & pool bar, spor salonu ve akıllı ev/merkezi sistemlerle tatil konforunu günlük yaşama taşır.",
   highlights = [
     "Denize 500 m; Mariachi Beach Club üyeliği ve indirimli hizmetler",
     "Yatay mimari: 74 konut (1+1 loft, 2+1 penthouse, stüdyo penthouse)",
@@ -47,7 +47,7 @@ export default function Perla2Overview({
 
   return (
     <section
-      aria-label="La Joya Perla II — Genel Bakış"
+      aria-label="La Joya — Genel Bakış"
       className="relative overflow-hidden pb-12 lg:pb-16" // extra bottom padding
       style={{
         background: "#fff",
@@ -159,8 +159,8 @@ export default function Perla2Overview({
                 {finalEmbed ? (
                   <LazyYouTube
                     videoId={YT_ID!}
-                    title="La Joya Perla II tanıtım videosu"
-                    posterAlt="La Joya Perla II tanıtım videosu"
+                    title="La Joya tanıtım videosu"
+                    posterAlt="La Joya tanıtım videosu"
                     className="relative w-full h-full"
                     query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${YT_ID}`}
                   />

@@ -26,7 +26,7 @@ type GalleryItem = {
 
 export default function MariachiGalleryExpanding({
   title = "La Joya Gallery",
-subtitle = "Lagoon Verde Images",
+subtitle = "La Joya Images",
 
   items,
 }: {
@@ -38,11 +38,11 @@ subtitle = "Lagoon Verde Images",
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/la-joya/1.jpg", alt: "Havuz" },
-        { src: "/la-joya/2.jpg", alt: "Plaj" },
-        { src: "/la-joya/3.jpg", alt: "Cabanalar" },
-        { src: "/la-joya/6.jpg", alt: "DJ Gecesi" },
-        { src: "/la-joya/5.jpg", alt: "Kokteyller" },
+        { src: "/la-joya/1.jpg", alt: "La Joya project image 1" },
+        { src: "/la-joya/2.jpg", alt: "La Joya project image 2" },
+        { src: "/la-joya/3.jpg", alt: "La Joya project image 3" },
+        { src: "/la-joya/6.jpg", alt: "La Joya project image 4" },
+        { src: "/la-joya/5.jpg", alt: "La Joya project image 5" },
 
 
       ],
@@ -65,7 +65,7 @@ subtitle = "Lagoon Verde Images",
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="La Joya — Gallery"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -132,7 +132,7 @@ subtitle = "Lagoon Verde Images",
                   onMouseEnter={() => setHovered(i)}
                   onClick={() => setActive(active === i ? null : i)} // mobil için: dokununca sabitle
                   role="button"
-                  aria-label={g.alt || `Galeri görseli ${i + 1}`}
+                  aria-label={g.alt || `Gallery image ${i + 1}`}
                   style={{
                     flexGrow: grow,
                     transition: "flex-grow .55s cubic-bezier(0.22,1,0.36,1)",

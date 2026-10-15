@@ -12,7 +12,7 @@ const ORANGE = "#f15c34";
 type CSSVars = React.CSSProperties & { ["--stroke"]?: string };
 
 /* ------------------------------------------------------------------
-   Perla2LastUpdate – Only the latest construction update (video + text)
+   Perla2LastUpdate – Completed project and historical construction footage
    ------------------------------------------------------------------ */
 
 type Video = {
@@ -31,13 +31,13 @@ type Props = {
 };
 
 export default function Perla2LastUpdate({
-  eyebrow = "November 2024 Update",
-title = "La Joya Latest Construction Update",
-description = "Construction at the La Joya project, which will be delivered soon, is progressing rapidly.",
+  eyebrow = "Completed in 2025",
+title = "La Joya – Completed Project",
+description = "The La Joya project was completed in 2025. The November 2024 video below is archive footage of construction before completion.",
 video = {
   src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=pZzQhqiXy4Xp4pSd",
   type: "youtube",
-  title: "La Joya Perla II – Construction Update",
+  title: "La Joya — November 2024 Construction Archive",
 },
 cta,
 
@@ -52,7 +52,7 @@ cta,
 
   return (
     <section
-      aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
+      aria-label="La Joya — Completed Project and Construction Archive"
       className="relative overflow-hidden"
       style={sectionStyle}
     >
@@ -91,7 +91,7 @@ cta,
               ) : (
                 <iframe
                   src={video.src}
-                  title={video.title || "Son İnşaat Güncellemesi"}
+                  title={video.title || "La Joya Construction Archive"}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -130,14 +130,14 @@ cta,
     className="mt-1 inline-block h-1.5 w-1.5 rounded-full"
     style={{ background: TEAL }}
   />
-  The footage was recorded during the site supervisor’s weekly site tour.
+  The video shows the construction process before completion.
 </li>
 <li className="flex items-start gap-2">
   <span
     className="mt-1 inline-block h-1.5 w-1.5 rounded-full"
     style={{ background: ORANGE }}
   />
-  Dates are for promotional purposes only; the official handover schedule should be confirmed with the sales team.
+  La Joya is a completed project, finished in 2025.
 </li>
 
             </ul>

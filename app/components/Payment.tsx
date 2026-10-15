@@ -1,6 +1,10 @@
 // app/components/ProjectVideoSlider.tsx
 "use client";
 
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
+
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { m as motion, useReducedMotion, type Variants } from "framer-motion";
@@ -10,9 +14,6 @@ import { Volume2, VolumeX, Maximize2, Minimize2, ChevronLeft, ChevronRight } fro
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade, Keyboard } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper/types";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -189,7 +190,7 @@ export default function   ProjectVideoSlider({
         type="button"
         aria-label="Önceki slayt"
         onClick={() => swiperRef.current?.slidePrev()}
-        className="absolute z-20 left-2 md:left-4 bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
+        className="absolute z-20 min-h-11 min-w-11 left-[calc(50%-3.5rem)] md:left-4 bottom-16 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
       >
         <ChevronLeft size={22} />
       </button>
@@ -197,7 +198,7 @@ export default function   ProjectVideoSlider({
         type="button"
         aria-label="Sonraki slayt"
         onClick={() => swiperRef.current?.slideNext()}
-        className="absolute z-20 right-2 md:right-4 bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
+        className="absolute z-20 min-h-11 min-w-11 right-[calc(50%-3.5rem)] md:right-4 bottom-16 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
       >
         <ChevronRight size={22} />
       </button>

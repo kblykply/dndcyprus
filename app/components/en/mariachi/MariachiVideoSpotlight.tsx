@@ -1,6 +1,7 @@
 // app/components/mariachi/MariachiVideoSpotlight.tsx
 "use client";
 
+import DeferredIframe from "@/app/components/performance/DeferredIframe";
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { m as motion } from "framer-motion";
@@ -58,7 +59,7 @@ highlights = [
         url.searchParams.set("autoplay", "1");     // required
         url.searchParams.set("mute", "1");         // required for autoplay policies
         url.searchParams.set("playsinline", "1");  // iOS inline autoplay
-        url.searchParams.set("controls", "0");     // optional, looks cleaner
+        url.searchParams.set("controls", "1");     // optional, looks cleaner
         url.searchParams.set("rel", "0");          // no related vids at end
         url.searchParams.set("loop", "1");         // loop requires playlist=id
         const vid = url.pathname.split("/").pop() || "";
@@ -89,7 +90,7 @@ highlights = [
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Tanıtım Videosu"
+      aria-label="Mariachi Beach Club — Promotional Video"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -145,7 +146,7 @@ highlights = [
               }}
             >
               {autoplayEmbedUrl ? (
-                <iframe
+                <DeferredIframe activation="click" poster={poster} buttonLabel="Play video"
                   src={autoplayEmbedUrl}
                   title={title}
                   loading="lazy"
@@ -170,7 +171,7 @@ highlights = [
               ) : (
                 <img
                   src={poster}
-                  alt="Mariachi Beach Club Tanıtım"
+                  alt="Mariachi Beach Club Introduction"
                   className="absolute inset-0 h-full w-full object-cover"
                   decoding="async"
                 />

@@ -2,6 +2,7 @@
 "use client";
 
 import Image from "next/image";
+import { useMenuDialog } from "../performance/useMenuDialog";
 import { useLightBackground } from "../performance/useLightBackground";
 import { useEffect, useState, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -55,11 +56,6 @@ const NAV: NavGroup[] = [
     href: "/tr/contact",
 
   },
-     {
-    label: "DND\u00A0Istanbul",
-    href: "/tr/dndturkiye",
-
-  },
   {
     label: "Haberler",
     href: "/tr/press",
@@ -84,10 +80,11 @@ export default function Header() {
 const locale = useLocale();
 const [openLang, setOpenLang] = useState(false);
 const langRef = useRef<HTMLDivElement>(null);
+const drawerLangRef = useRef<HTMLDivElement>(null);
 
 useEffect(() => {
   const onDocPointer = (e: PointerEvent) => {
-    if (!langRef.current?.contains(e.target as Node)) setOpenLang(false);
+    if (!langRef.current?.contains(e.target as Node) && !drawerLangRef.current?.contains(e.target as Node)) setOpenLang(false);
   };
   document.addEventListener("pointerdown", onDocPointer, { passive: true });
   return () => document.removeEventListener("pointerdown", onDocPointer);
@@ -132,15 +129,15 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
                 const isLaJoya = pathname === "/la-joya" || pathname.startsWith("/la-joya/");
                                 const isMariachi = pathname === "/mariachi" || pathname.startsWith("/mariachi/");
                                 const gecitkale = pathname === "/gecitkale" || pathname.startsWith("/gecitkale/");
-                                const dndturkiye = pathname === "/dndturkiye" || pathname.startsWith("/dndturkiye/");
 
 
 
-  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi || gecitkale || dndturkiye ;
+  const isTransparentRoute = isHome || isPerla || isProjects || isAbout || isContact || isLagoon || iPerla || isLaJoya || isMariachi || gecitkale ;
 
   const [scrolled, setScrolled] = useState(false);
   const [showFab, setShowFab] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useMenuDialog(menuOpen, setMenuOpen);
   const isOnLight = useLightBackground("floating-hamburger", showFab);
   const [openDrop, setOpenDrop] = useState<number | null>(null);
   const [openAcc, setOpenAcc] = useState<number | null>(null);
@@ -212,7 +209,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
   /* Header classes */
   const positionClass = isTransparentRoute ? "fixed top-0" : "sticky top-0";
   const headerBase =
-    `${positionClass} left-0 w-full z-50 transition-all duration-300 flex justify-between items-center px-6 md:px-10 py-4 md:py-6 will-change-transform`;
+    `${positionClass} left-0 w-full z-50 transition-all duration-300 flex justify-between items-center px-4 sm:px-6 lg:px-10 py-3 sm:py-4 lg:py-6 will-change-transform`;
 
   const headerSkin = isTransparentRoute
     ? (scrolled ? "backdrop-blur-md ring-1 ring-white/10 bg-black/25" : "bg-transparent")
@@ -238,12 +235,12 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
             alt="DND Cyprus"
             width={140}
             height={50}
-            className="h-auto w-[120px]"
+            className="h-auto w-[88px] sm:w-[120px]"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 font-medium">
+        <nav className="hidden lg:flex items-center gap-8 font-medium">
           {NAV.map((group, i) => {
             const hasDropdown = (group.items?.length ?? 0) > 0;
             const hasHref = !!group.href;
@@ -347,7 +344,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
         </nav>
 
         {/* Right Section */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-2 lg:gap-5">
           <div className="relative" ref={langRef}>
   <motion.button
     onClick={() => setOpenLang((v) => !v)}
@@ -355,7 +352,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
     aria-expanded={openLang}
     animate={{ color: subColor }}
     transition={{ duration: 0.25 }}
-    className="text-sm hover:opacity-100 flex items-center gap-1 transition"
+    className="min-h-11 min-w-11 justify-center text-sm hover:opacity-100 flex items-center gap-1 transition"
   >
     {locale.toUpperCase()}
     <svg
@@ -418,12 +415,12 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
 </div>
 
 
-          <div className={`h-5 w-px ${dividerClass}`} />
+          <div className={`hidden sm:block h-5 w-px ${dividerClass}`} />
 
           <a
             href="tel:+903924440363"
             className={[
-              "px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 shadow-sm transition",
+              "min-h-11 px-3 lg:px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 shadow-sm transition",
               onTransparent
                 ? "text-white/90 bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white hover:text-black"
                 : "text-black bg-black/[0.04] border border-black/10 hover:bg-black/10"
@@ -432,6 +429,17 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
             <FaPhoneAlt className="text-sm" />
             <span>Ara</span>
           </a>
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+            aria-controls="site-menu"
+            aria-expanded={menuOpen}
+            className="lg:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-current/20"
+            style={{ color: linkColor }}
+          >
+            <FaBars size={18} />
+          </button>
         </div>
       </header>
 
@@ -464,9 +472,11 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
               onClick={() => setMenuOpen(false)}
             />
             <motion.aside
+              ref={menuRef}
+              id="site-menu"
               className={[
-                "fixed top-0 right-0 h-full w-5/6 sm:w-2/3 md:w-1/3 z-[10001]",
-                "backdrop-blur-lg bg-white/10 border-l border-white/20",
+                "fixed top-0 right-0 h-[100dvh] w-full max-w-sm z-[10001]",
+                "backdrop-blur-lg bg-[#10191c]/95 border-l border-white/20",
                 "rounded-l-2xl shadow-lg p-0",
                 "text-white flex flex-col",
                 "pt-[max(env(safe-area-inset-top),16px)] pb-[max(env(safe-area-inset-bottom),16px)]"
@@ -481,7 +491,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
               {/* Top row: logo + home + close */}
               <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-white/15">
                 <Link href="/tr" onClick={() => setMenuOpen(false)} className="flex items-center gap-3" prefetch={false}>
-                  <div className="relative w-22 h-22 rounded-xl overflow-hidden ">
+                  <div className="relative w-14 h-14 sm:w-20 sm:h-20 rounded-xl overflow-hidden ">
                     <Image src="/DND-LOGO-LIGHT.svg" alt="DND Cyprus" fill className="object-contain p-1" />
                   </div>
                 </Link>
@@ -497,7 +507,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
                     Anasayfa
                   </Link>
                   <button
-                    className="px-3 py-2 rounded-xl bg-white/15 border border-white/20 hover:bg-white hover:text-black transition"
+                    className="min-h-11 min-w-11 px-3 py-2 rounded-xl bg-white/15 border border-white/20 hover:bg-white hover:text-black transition"
                     onClick={() => setMenuOpen(false)}
                     aria-label="Close menu"
                   >
@@ -511,13 +521,13 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
 <div className="px-5 py-3 flex items-center justify-between">
   <span className="text-xs opacity-80">Dili değiştir:</span>
 
-  <div className="relative" ref={langRef}>
+  <div className="relative" ref={drawerLangRef}>
     {/* trigger */}
     <button
       onClick={() => setOpenLang(v => !v)}
       aria-haspopup="menu"
       aria-expanded={openLang}
-      className="text-xs px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 hover:bg-white/20 inline-flex items-center gap-1"
+      className="min-h-11 text-xs px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 hover:bg-white/20 inline-flex items-center gap-1"
     >
       {locale.toUpperCase()}
       <svg width="10" height="10" viewBox="0 0 20 20" className="ml-1" aria-hidden="true">
@@ -609,7 +619,7 @@ function withLocale(locale: "tr" | "en", cleanPath: string) {
                               e.stopPropagation();
                               setOpenAcc(open ? null : i);
                             }}
-                            className="ml-3 px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 hover:bg-white/20 text-sm"
+                            className="min-h-11 min-w-11 ml-3 px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 hover:bg-white/20 text-sm"
                             aria-label="Alt menüyü aç/kapat"
                             aria-expanded={open}
                           >

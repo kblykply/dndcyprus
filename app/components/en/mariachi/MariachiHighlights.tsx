@@ -1,6 +1,7 @@
 // app/components/mariachi/MariachiHighlights.tsx
 "use client";
 
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   m as motion,
@@ -219,7 +220,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Öne Çıkanlar"
+      aria-label="Mariachi Beach Club — Highlights"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -285,7 +286,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
               onDragEnd={onDragEnd}
               role="group"
               aria-roledescription="carousel"
-              aria-label="Öne çıkanlar listesi"
+              aria-label="Highlights list"
             >
            {/** Kartlar */}
 {data.map((card, i) => {
@@ -312,11 +313,8 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
         }}
       >
         {/* Arka plan görseli */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${card.image})` }}
-          aria-hidden
-        />
+        <DeferredFillImage fill src={card.image} alt="" quality={65}
+          sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw" className="object-cover" aria-hidden />
         {/* Üstten aşağı hafif koyuluk (okunabilirlik) */}
         <div
           className="absolute inset-0"
@@ -345,7 +343,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
                 boxShadow: `0 6px 14px ${TEAL}1f`,
               }}
             >
-              {card.icon} <span>Öne Çıkan</span>
+              {card.icon} <span>Featured</span>
             </span>
           ) : null}
 
@@ -375,7 +373,7 @@ subtitle = "All-day beach enjoyment, cabana comfort, a restaurant & pool bar, an
                   type="button"
                   key={`dot-${i}`}
                   onClick={() => goTo(i)}
-                  aria-label={`Sayfa ${i + 1}`}
+                  aria-label={`Page ${i + 1}`}
                   aria-current={isActive ? "true" : undefined}
                   className="h-2.5 rounded-full transition-all"
                   style={{

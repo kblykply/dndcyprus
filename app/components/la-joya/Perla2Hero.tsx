@@ -33,8 +33,8 @@ export default function Perla2Hero({
 title = "La Joya",
 tagline = "Long Beach, İskele’de denize 500 m mesafede, yatay mimarili modern yaşam.",
 location = "Long Beach, İskele",
-statusTR = "Devam Eden",
-delivery = "Kasım 2025",
+statusTR = "Tamamlanan Proje",
+delivery = "2025",
 heroImage = "/la-joya/2.jpg",
 brochureHref = "#",
 
@@ -51,7 +51,7 @@ brochureHref = "#",
 >
   {/* Background image (z-0) */}
   <div className="absolute inset-0 z-0">
-    <Image src={heroImage} alt={title} fill preload sizes="100vw" className="object-cover" />
+    <Image quality={65} src={heroImage} alt={title} fill preload sizes="100vw" className="object-cover" />
   </div>
 
   {/* --- Overlays for readability --- */}
@@ -128,7 +128,7 @@ brochureHref = "#",
         >
           <Chip text={statusTR} color={ORANGE} />
           <Chip text={location} color="rgba(255,255,255,0.85)" neutral />
-          <Chip text={`Teslim: ${delivery}`} color={TEAL} />
+          <Chip text={`Tamamlanma: ${delivery}`} color={TEAL} />
         </div>
 
         {/* CTAs */}

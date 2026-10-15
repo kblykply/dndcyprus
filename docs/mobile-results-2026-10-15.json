@@ -1,0 +1,304 @@
+{
+  "measuredAt": "2026-10-15T09:36:56.434Z",
+  "clientDate": "2026-10-15",
+  "timezone": "Europe/Istanbul",
+  "origin": "http://localhost:3100",
+  "status": "mobile improvements implemented and validated locally; not committed, pushed or deployed",
+  "buildId": "1xDBqubpGQmxPvGS66w5v",
+  "method": "Lighthouse 13.5 local production, simulated mobile; three cold-cache samples per home page, metric medians. Other page and desktop results are single samples. Analytics/advertising endpoints are blocked and verified. These are application-only lab metrics, not real-user field performance or live Google rankings.",
+  "comparisons": [
+    {
+      "route": "/tr",
+      "before": {
+        "route": "/tr",
+        "sampleCount": 3,
+        "score": 90,
+        "lcpMs": 3614.3592,
+        "fcpMs": 1206.5452,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 487289,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 25715,
+          "Font": 117725,
+          "Image": 75064,
+          "Stylesheet": 22764,
+          "Script": 241331,
+          "Other": 4690
+        }
+      },
+      "after": {
+        "route": "/tr",
+        "sampleCount": 3,
+        "score": 92,
+        "lcpMs": 3380.60265,
+        "fcpMs": 903.7351000000001,
+        "tbtMs": 0,
+        "cls": 0.000039319564869359,
+        "transferBytes": 451110,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 25732,
+          "Font": 117725,
+          "Image": 40415,
+          "Stylesheet": 20181,
+          "Script": 242367,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 7.424546829499534,
+      "fcpReductionPercent": 25.097286036196564,
+      "lcpReductionPercent": 6.46744103353093
+    },
+    {
+      "route": "/en",
+      "before": {
+        "route": "/en",
+        "sampleCount": 3,
+        "score": 90,
+        "lcpMs": 3608.1952,
+        "fcpMs": 1204.0976,
+        "tbtMs": 0,
+        "cls": 0.0001426577240783032,
+        "transferBytes": 490006,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 25105,
+          "Font": 117725,
+          "Image": 75064,
+          "Stylesheet": 22764,
+          "Script": 244658,
+          "Other": 4690
+        }
+      },
+      "after": {
+        "route": "/en",
+        "sampleCount": 3,
+        "score": 91,
+        "lcpMs": 3530.394,
+        "fcpMs": 903.596,
+        "tbtMs": 0,
+        "cls": 0.000039319564869359,
+        "transferBytes": 453799,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 25101,
+          "Font": 117725,
+          "Image": 40415,
+          "Stylesheet": 20181,
+          "Script": 245687,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 7.389093194777208,
+      "fcpReductionPercent": 24.956581592721395,
+      "lcpReductionPercent": 2.156235893224412
+    }
+  ],
+  "otherMobilePages": [
+    {
+      "route": "/tr/contact",
+      "sampleCount": 1,
+      "score": 92,
+      "lcpMs": 3306.54555,
+      "fcpMs": 904.3637000000001,
+      "tbtMs": 0,
+      "cls": 0.000039319564869359,
+      "transferBytes": 487098,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 15241,
+        "Font": 117725,
+        "Image": 91269,
+        "Stylesheet": 20181,
+        "Script": 221189,
+        "Other": 4690,
+        "Fetch": 16803
+      }
+    },
+    {
+      "route": "/tr/perla-ii",
+      "sampleCount": 1,
+      "score": 90,
+      "lcpMs": 3682.4653499999995,
+      "fcpMs": 904.9768999999999,
+      "tbtMs": 0,
+      "cls": 0.000039319564869359,
+      "transferBytes": 707271,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 26385,
+        "Font": 117725,
+        "Image": 233800,
+        "Stylesheet": 20181,
+        "Script": 289917,
+        "Other": 4690,
+        "Fetch": 14573
+      }
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "sampleCount": 1,
+      "score": 88,
+      "lcpMs": 3936.847225,
+      "fcpMs": 903.9127000000001,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 559533,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 12593,
+        "Font": 117725,
+        "Image": 189598,
+        "Stylesheet": 20181,
+        "Script": 214746,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/en/dndcyprus",
+      "sampleCount": 1,
+      "score": 86,
+      "lcpMs": 4161.097174999999,
+      "fcpMs": 1205.22615,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 663599,
+      "fontBytes": 158505,
+      "transferByType": {
+        "Document": 7673,
+        "Font": 158505,
+        "Image": 263941,
+        "Stylesheet": 20181,
+        "Script": 208609,
+        "Other": 4690
+      }
+    }
+  ],
+  "desktop": [
+    {
+      "route": "/tr",
+      "sampleCount": 1,
+      "score": 100,
+      "lcpMs": 787.5233000000001,
+      "fcpMs": 247.5233,
+      "tbtMs": 0,
+      "cls": 0.00005200712138458395,
+      "transferBytes": 529739,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 25732,
+        "Font": 117725,
+        "Image": 119044,
+        "Stylesheet": 20181,
+        "Script": 242367,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/en",
+      "sampleCount": 1,
+      "score": 100,
+      "lcpMs": 804.4525000000001,
+      "fcpMs": 244.4525,
+      "tbtMs": 0,
+      "cls": 0.00005083968128885386,
+      "transferBytes": 532428,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 25101,
+        "Font": 117725,
+        "Image": 119044,
+        "Stylesheet": 20181,
+        "Script": 245687,
+        "Other": 4690
+      }
+    }
+  ],
+  "changes": [
+    "TR/EN mobile navigation is available at the top of the page. Tablet navigation uses the drawer until 1024px; narrow headers fit without overlap.",
+    "Drawer dimensions, contrast, safe-area spacing, focus trapping, Escape, focus restoration and document scroll locking were corrected. Header/drawer language controls use separate refs.",
+    "The home/project-list hero retains a minimum height on short landscape screens. Its internal wrappers fill the available height.",
+    "Hero pagination has 44px targets and reserves the WhatsApp corner on narrow phones. Touch swipes, vertical scrolling and pinch-zoom are supported. Mobile consent controls have larger targets; form fonts remain 16px through tablet widths.",
+    "Video-carousel arrows were moved away from WhatsApp on mobile and have at least 44px targets.",
+    "The original hero photograph now has seven pre-generated responsive AVIF sizes with the existing Next image/WebP fallback. Original source photos remain unchanged.",
+    "Award ribbons wait until visible. Swiper styles are imported by the components that use them; unused global coverflow styles were removed.",
+    "Both language roots share one font definition/stylesheet. Optional font display avoids late font replacement on slow first visits; original font versions, glyphs, weights and licenses are retained."
+  ],
+  "validation": {
+    "productionBuild": "passed; TypeScript passed; 47 generated routes",
+    "unitTests": {
+      "passed": 78,
+      "failed": 0,
+      "mode": "Mocked integrations; no real leads submitted"
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 221
+    },
+    "contentComparison": {
+      "comparedPages": 36,
+      "changed": []
+    },
+    "browserChecks": {
+      "responsive": {
+        "file": "mobile-responsive-final-2026-10-15.json",
+        "status": "passed",
+        "cases": 108,
+        "buildId": "xMQwwWcEuy1ihACX_E4OR"
+      },
+      "landscape": {
+        "file": "mobile-landscape-final-2026-10-15.json",
+        "status": "passed",
+        "cases": 8,
+        "buildId": "xMQwwWcEuy1ihACX_E4OR"
+      },
+      "touch": {
+        "file": "mobile-interactions-final-2026-10-15.json",
+        "status": "passed",
+        "cases": 18,
+        "buildId": "1xDBqubpGQmxPvGS66w5v"
+      },
+      "media": {
+        "file": "mobile-media-final-2026-10-15.json",
+        "status": "passed",
+        "cases": 6,
+        "buildId": "1xDBqubpGQmxPvGS66w5v"
+      },
+      "tabletMedia": {
+        "file": "mobile-media-tablet-landscape-2026-10-15.json",
+        "status": "passed",
+        "cases": 4,
+        "buildId": "DzIvYS9rTIxJoA_uNSzG1"
+      },
+      "fonts": {
+        "file": "mobile-fonts-final-2026-10-15.json",
+        "status": "passed",
+        "cases": 2,
+        "buildId": null
+      },
+      "homeRecheck": {
+        "file": "mobile-home-recheck-2026-10-15.json",
+        "status": "passed",
+        "cases": 6,
+        "buildId": "1xDBqubpGQmxPvGS66w5v"
+      },
+      "regression": {
+        "file": "mobile-regression-interactions-2026-10-15.json",
+        "status": "passed",
+        "cases": 14,
+        "buildId": "q31g75-cykWVKysYn1tyL"
+      }
+    },
+    "buildCoverage": "The 108-page/viewport matrix, eight landscape layouts, 14 gallery/navigation regressions and four tablet-media checks passed before final follow-up changes. After the last font/pagination changes, the final build rechecked 18 touch/consent scenarios, six media cases, six home layouts and both font character sets. HTTP/content comparisons cover all 36 pages on the final build.",
+    "lighthouseComparisonRuns": 18
+  },
+  "limits": [
+    "Mobile LCP still exceeds the 2.5s good threshold on the measured ordinary pages; media-hub image loading remains a larger opportunity.",
+    "Tests use Chrome mobile/tablet emulation and native touch events. Physical iOS Safari/Android devices and real-user p75/INP have not been measured.",
+    "On a slow first visit, optional font display may retain the metric-adjusted system fallback for that page view. Font files are still preloaded and available for subsequent views.",
+    "The first attempted tracking filter was ineffective. That initial report includes third-party scripts and is excluded from this before/after comparison; the isolated baseline and final measurements verify blocking.",
+    "Existing lint warnings and the middleware convention deprecation remain."
+  ]
+}

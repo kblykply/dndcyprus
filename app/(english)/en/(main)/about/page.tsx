@@ -29,7 +29,7 @@ export default function HomePage() {
     
       youtubeId="jxjWP9L0SwQ"        // replace with your real ID
   poster="/DND Beach Parti 24-59.jpg" // optional
-  videoTitle="DND Cyprus Tanıtım"
+  videoTitle="DND Cyprus Introduction"
   images={{
     main: "/dndwhoweare.jpg",   // used only if no youtubeId or as poster fallback
     sideTop: "/dndwhoweare.jpg",

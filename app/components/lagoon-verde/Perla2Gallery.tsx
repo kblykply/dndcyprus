@@ -37,11 +37,11 @@ export default function MariachiGalleryExpanding({
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/lagoon-verde/1.jpg", alt: "Lagün havuzu kıyısında şemsiyeli şezlonglar ve arkada rezidans blokları" },
-        { src: "/lagoon-verde/2.jpg", alt: "Palmiyeler arasında havuza bakan iki katlı rezidanslar" },
-        { src: "/lagoon-verde/3.jpg", alt: "Havuz boyunca uzanan rezidans cepheleri ve şezlonglar" },
-        { src: "/lagoon-verde/6.jpg", alt: "Gün batımında lagün havuzu, su kaydırakları ve rezidans blokları" },
-        { src: "/lagoon-verde/5.jpg", alt: "Kumsal girişli lagün havuzu, palmiyeler ve havuz kenarı restoran" },
+        { src: "/lagoon-verde/1.jpg", alt: "Lagoon Verde proje görseli 1" },
+        { src: "/lagoon-verde/2.jpg", alt: "Lagoon Verde proje görseli 2" },
+        { src: "/lagoon-verde/3.jpg", alt: "Lagoon Verde proje görseli 3" },
+        { src: "/lagoon-verde/6.jpg", alt: "Lagoon Verde proje görseli 4" },
+        { src: "/lagoon-verde/5.jpg", alt: "Lagoon Verde proje görseli 5" },
       ],
     [items]
   );

@@ -35,7 +35,7 @@ subtitle =
     >
       {/* Background */}
       <div className="absolute inset-0">
-        <Image
+        <Image quality={65}
           fill
           preload
           sizes="100vw"

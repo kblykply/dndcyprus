@@ -49,7 +49,7 @@ export default function ContactHeroGlass({
     <section
       className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      <Image src={bgImage} alt="" fill preload sizes="100vw" className="object-cover" />
+      <Image quality={65} src={bgImage} alt="" fill preload sizes="100vw" className="object-cover" />
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40" />
 

@@ -12,7 +12,7 @@ import ContactVisitSection from "@/app/components/en/ContactVisitSection";
 import BrandsLogoSliderGlass  from "@/app/components/en/BrandsSection";
 
 
-import PressSection, { type PressItem } from "@/app/components/PressSection";
+import PressSection, { type PressItem } from "@/app/components/en/PressSection";
 import ProjectsHeroFullSlider from "@/app/components/en/projects/ProjectsHero";
 import { pageMetadata } from "@/lib/seo";
 

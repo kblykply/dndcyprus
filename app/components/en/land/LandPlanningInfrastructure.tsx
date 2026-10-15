@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import {
   m as motion,
   type Variants,
@@ -204,7 +205,7 @@ subtitle =
 
   return (
     <section
-      aria-label="Planlama & Altyapı — Görsel Kart Carousel"
+      aria-label="Planning &amp; Infrastructure — Image Carousel"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"
@@ -267,7 +268,7 @@ subtitle =
                 onDragEnd={onDragEnd}
                 role="group"
                 aria-roledescription="carousel"
-                aria-label="Planlama & Altyapı kartları"
+                aria-label="Planning &amp; Infrastructure cards"
               >
                 {data.map((card, i) => {
                   const isActive = i >= index && i < index + visibleCount;
@@ -296,10 +297,13 @@ subtitle =
       }}
     >
       {/* BG image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${card.image})` }}
-        aria-hidden
+      <DeferredFillImage
+        src={card.image}
+        alt=""
+        fill
+        quality={65}
+        sizes="(max-width: 639px) 85vw, (max-width: 1023px) 45vw, 384px"
+        className="object-cover"
       />
       {/* Readability wash */}
       <div
@@ -364,7 +368,7 @@ subtitle =
                     type="button"
                     key={`dot-${i}`}
                     onClick={() => goTo(i)}
-                    aria-label={`Sayfa ${i + 1}`}
+                    aria-label={`Page ${i + 1}`}
                     aria-current={isActive ? "true" : undefined}
                     className="h-2.5 rounded-full transition-all"
                     style={{

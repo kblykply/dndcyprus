@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -107,10 +108,10 @@ export default function LandOverviewDevelopment() {
       data-bg={isLight ? "light" : "dark"}
     >
       {/* ===== Background image (z-0) + brand wash (z-10) ===== */}
-      {hasBg && (
+      {backgroundImage && (
         <>
           <div className="absolute inset-0 z-0">
-            <img
+            <DeferredFillImage fill quality={65} sizes="100vw"
               src={backgroundImage}
               alt=""
               aria-hidden
@@ -191,7 +192,7 @@ export default function LandOverviewDevelopment() {
                   >
                     <div className="relative aspect-[16/10]">
                       {b.image ? (
-                        <img
+                        <DeferredFillImage fill quality={65} sizes="(min-width: 1280px) 300px, (min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                           src={b.image}
                           alt={b.alt ?? ""}
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -272,7 +273,7 @@ export default function LandOverviewDevelopment() {
           >
             {/* Main visual */}
             <div className="relative aspect-[4/3] lg:aspect-[5/6]">
-              <img
+              <DeferredFillImage fill quality={65} sizes="(min-width: 1280px) 592px, (min-width: 1024px) 50vw, 100vw"
                 src={mainImage ?? backgroundImage ?? ""}
                 alt={mainImageAlt ?? "Proje görseli"}
                 className="absolute inset-0 h-full w-full object-cover"

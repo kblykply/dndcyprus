@@ -104,7 +104,7 @@ subtitle = "The La Joya complex offers a wide range of amenities designed for yo
 }: Props) {
   return (
     <section
-      aria-label="La Joya — Öne Çıkan Proje Olanakları"
+      aria-label="La Joya — Project Amenities"
       className="relative overflow-hidden"
       style={
         {

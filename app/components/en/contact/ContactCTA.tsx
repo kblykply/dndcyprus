@@ -39,7 +39,7 @@ buttonText = "Contact Us Now",
 }: Props) {
   return (
     <section
-      aria-label="İletişim Çağrısı"
+      aria-label="Contact us"
       className={`relative overflow-hidden ${fullHeight ? "min-h-screen" : "min-h-[70vh]"}`}
       style={
         {

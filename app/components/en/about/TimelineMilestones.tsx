@@ -1,12 +1,13 @@
 // app/components/TimelineHorizontal.tsx
 "use client";
 
-import Image from "next/image";
+import "swiper/css";
+import "swiper/css/navigation";
+
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import React, { useMemo, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
 import { m as motion, useInView, useReducedMotion } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -83,7 +84,7 @@ subtitle = "Explore our key milestones.",
     >
       {/* Background image (blurred) */}
       <div className="absolute inset-0 -z-20">
-        <Image
+        <DeferredFillImage quality={65}
           src={bgSrc}
           alt={bgAlt}
           fill
@@ -210,10 +211,10 @@ subtitle = "Explore our key milestones.",
                     >
                       {m.image && (
                         <div className={`${compact ? "h-36" : "h-44"} w-full relative overflow-hidden`}>
-                          <img
+                          <DeferredFillImage fill quality={65} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 90vw"
                             src={m.image}
                             alt={m.title}
-                            className="h-full w-full object-cover"
+                            className="object-cover"
                             style={{ filter: "saturate(1.02) contrast(1.02) brightness(0.95)" }}
                           />
                           {/* Subtle gloss */}

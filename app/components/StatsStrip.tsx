@@ -1,7 +1,7 @@
 // app/components/StatsStrip.tsx
 "use client";
 
-import Image from "next/image";
+import Image from "@/app/components/performance/DeferredFillImage";
 
 import { m as motion, useAnimation, useInView, useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -102,7 +102,11 @@ function StatsStrip({
     "shadow-[inset_0_1px_0_rgba(255,255,255,.4),0_16px_40px_rgba(0,0,0,.35)]";
 
   return (
-    <section className="relative z-10 py-24 md:py-28 text-white">
+    <section aria-label="Rakamlarla DND" data-bg="dark" className="relative z-10 overflow-hidden bg-[#0b0b0c] py-24 md:py-28 text-white">
+      <div aria-hidden="true" className="absolute inset-0">
+        <Image src="/perla/9.jpg" alt="" fill quality={65} sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(11,11,12,0.90), rgba(11,11,12,0.72) 55%, rgba(11,11,12,0.60))" }} />
+      </div>
       <div className="relative mx-auto w-full max-w-[1200px] px-5">
         {/* Layout: left stats, optional right image */}
         <motion.div
@@ -174,7 +178,7 @@ function StatsStrip({
                 <div
                   className="relative flex-1 min-h-[460px] rounded-2xl overflow-hidden bg-center bg-cover"
                 >
-                  <Image src={imageUrl} alt="" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
+                  <Image src={imageUrl} alt="" fill quality={65} sizes="(min-width: 1200px) 548px, (min-width: 1024px) calc((100vw - 88px) / 2), calc(100vw - 56px)" className="object-cover" />
                   <div className="absolute inset-0 bg-black/20" />
                 </div>
               </div>

@@ -39,7 +39,7 @@ const PROJECTS: Project[] = [
   {
     name: "La Joya",
     region: "Iskele",
-    blurb: "A boutique living experience along the coastline.",
+    blurb: "Completed in 2025: a boutique living experience along the coastline.",
     img: "/la-joya/3.jpg",
     href: "/en/la-joya",
   },
@@ -184,7 +184,7 @@ export default function ProjectsStrip() {
                       href={p.href}
                       className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-white/95 bg-white/15 hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-xl px-3 py-1.5 border border-white/20 backdrop-blur-md"
                       prefetch
-                      aria-label={`${p.name} detay sayfasına git`}
+                      aria-label={`${p.name} details`}
                     >
                       <span>See Details</span>
                       <span className="translate-y-[1px]">→</span>
@@ -285,7 +285,7 @@ export default function ProjectsStrip() {
                       href={p.href}
                       className="mt-3 inline-flex items-center gap-2 text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-md px-1 py-0.5"
                       prefetch
-                      aria-label={`${p.name} detay sayfasına git`}
+                      aria-label={`${p.name} details`}
                     >
                       <span className="opacity-90">See Details</span>
                       <span className="translate-y-[1px]">→</span>

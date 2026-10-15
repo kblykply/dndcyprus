@@ -1,0 +1,899 @@
+{
+  "measuredAt": "2026-10-12T18:11:58.334Z",
+  "status": "verified locally; not deployed",
+  "method": "Local production builds, Lighthouse 13.5 simulated mobile first visit; three TR homepage samples per stage, single samples on other routes. Field INP/p75 not measured.",
+  "changes": [
+    "Responsive team portraits; first portrait preloaded with high priority; other portraits load near viewport.",
+    "Static first-screen team headings and neutral placeholders for two missing portrait files.",
+    "Optimized about/home brand logos, posters and timeline images.",
+    "Optimized Mariachi and Geçitkale content images. Mariachi video activates on click; map waits near viewport.",
+    "Independent QR root with no site fonts/analytics; full 1280x1280 quality-98 WebP; original PNG retained; menu regenerates before build.",
+    "Pinned licensed local Inter/Montserrat subsets; Turkish/Polish/Russian glyphs and tabular numbers retained.",
+    "Server-rendered spotlight and CTA content with a shared motion boundary; existing hover behavior moved to CSS."
+  ],
+  "home": {
+    "beforeFonts": {
+      "score": 85,
+      "lcpMs": 4364.574450000001,
+      "fcpMs": 1206.5212,
+      "transferBytes": 657327,
+      "fontBytes": 238638
+    },
+    "afterFonts": {
+      "score": 88,
+      "lcpMs": 3908.3508,
+      "fcpMs": 1208.3508,
+      "transferBytes": 582715,
+      "fontBytes": 164373
+    },
+    "final": {
+      "score": 88,
+      "lcpMs": 3904.9228000000003,
+      "fcpMs": 1204.9228,
+      "transferBytes": 581284,
+      "fontBytes": 164373
+    }
+  },
+  "routeSamples": [
+    {
+      "route": "/en",
+      "sample": 4,
+      "score": 88,
+      "lcpMs": 3904.7787,
+      "fcpMs": 1204.7787,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 584150,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+          "selector": "body.inter_49cffcb9-module__nixIWG__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/team",
+      "sample": 5,
+      "score": 90,
+      "lcpMs": 3708.7083999999995,
+      "fcpMs": 1054.2576,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 471040,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Ozan Dökmecioğlu",
+          "selector": "div.mt-12 > article.group > div.relative > img.object-cover"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/about",
+      "sample": 6,
+      "score": 87,
+      "lcpMs": 3981.3571500000007,
+      "fcpMs": 1204.2381,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 601153,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/qr",
+      "sample": 7,
+      "score": 88,
+      "lcpMs": 3903.8615,
+      "fcpMs": 753.8615,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 551602,
+      "fontBytes": 0,
+      "lcpNode": [
+        {
+          "label": "Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL…",
+          "selector": "body > main.qr-menu > img.qr-menu-image"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/mariachi",
+      "sample": 1,
+      "score": 88,
+      "lcpMs": 3830.1549999999997,
+      "fcpMs": 1205.155,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 589829,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Mariachi Beach Club",
+          "selector": "div.relative > div.max-w-3xl > div.rounded-3xl > h1.mt-3"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/gecitkale",
+      "sample": 2,
+      "score": 90,
+      "lcpMs": 3679.331,
+      "fcpMs": 1204.331,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 528742,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "comparisonToGeneralAudit": [
+    {
+      "route": "/tr/team",
+      "before": {
+        "path": "/tr/team",
+        "performanceScore": 75,
+        "lcpMs": 12459.92205,
+        "fcpMs": 1056.6147,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 3177011,
+        "requests": 38,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Ozan Dökmecioğlu",
+            "selector": "div.mt-12 > article.group > div.relative > img.absolute",
+            "snippet": "<img src=\"/teams/ozan.png\" alt=\"Ozan Dökmecioğlu\" class=\"absolute inset-0 h-full w-full object-cover transition-transform duration-…\" loading=\"lazy\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/teams/ozan.png",
+            "bytes": 571900,
+            "estimatedSavingsBytes": 527311
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/emine.png",
+            "bytes": 553580,
+            "estimatedSavingsBytes": 508991
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/burcingul.png",
+            "bytes": 526165,
+            "estimatedSavingsBytes": 481576
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/bulent.png",
+            "bytes": 390590,
+            "estimatedSavingsBytes": 346001
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/aynurzorbagulol.png",
+            "bytes": 313677,
+            "estimatedSavingsBytes": 269088
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/borhan.png",
+            "bytes": 304076,
+            "estimatedSavingsBytes": 259487
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 2,336 KiB"
+          },
+          {
+            "id": "lcp-discovery-insight",
+            "title": "LCP request discovery"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 440 ms"
+          }
+        ]
+      },
+      "after": {
+        "route": "/tr/team",
+        "sample": 5,
+        "score": 90,
+        "lcpMs": 3708.7083999999995,
+        "fcpMs": 1054.2576,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 471040,
+        "fontBytes": 164373,
+        "lcpNode": [
+          {
+            "label": "Ozan Dökmecioğlu",
+            "selector": "div.mt-12 > article.group > div.relative > img.object-cover"
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "route": "/tr/about",
+      "before": {
+        "path": "/tr/about",
+        "performanceScore": 75,
+        "lcpMs": 7666.874199999998,
+        "fcpMs": 1204.8212,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 3160697,
+        "requests": 53,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/DND%20Beach%20Parti%2024-59.jpg",
+            "bytes": 326042,
+            "estimatedSavingsBytes": 311276
+          },
+          {
+            "url": "http://127.0.0.1:3100/dnd-boston-ofis.jpg",
+            "bytes": 175011,
+            "estimatedSavingsBytes": 163034
+          },
+          {
+            "url": "http://127.0.0.1:3100/Kellogg's-Logo.png",
+            "bytes": 155890,
+            "estimatedSavingsBytes": 155691
+          },
+          {
+            "url": "http://127.0.0.1:3100/Keurig_Dr_Pepper.png",
+            "bytes": 101112,
+            "estimatedSavingsBytes": 100938
+          },
+          {
+            "url": "http://127.0.0.1:3100/homesthumb.webp",
+            "bytes": 108632,
+            "estimatedSavingsBytes": 99158
+          },
+          {
+            "url": "http://127.0.0.1:3100/Cargill_logo.png",
+            "bytes": 55228,
+            "estimatedSavingsBytes": 55056
+          },
+          {
+            "url": "http://127.0.0.1:3100/Kraft_logo_2012.png",
+            "bytes": 41090,
+            "estimatedSavingsBytes": 40890
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F5.jpg&w=750&q=75",
+            "bytes": 52176,
+            "estimatedSavingsBytes": 25520
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fuu.jpg&w=750&q=65",
+            "bytes": 37332,
+            "estimatedSavingsBytes": 20650
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 949 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 410 ms"
+          }
+        ]
+      },
+      "after": {
+        "route": "/tr/about",
+        "sample": 6,
+        "score": 87,
+        "lcpMs": 3981.3571500000007,
+        "fcpMs": 1204.2381,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 601153,
+        "fontBytes": 164373,
+        "lcpNode": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "route": "/tr/mariachi",
+      "before": {
+        "path": "/tr/mariachi",
+        "performanceScore": 78,
+        "lcpMs": 5946.267675000001,
+        "fcpMs": 1206.5439,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 4400852,
+        "requests": 78,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Mariachi Beach Club",
+            "selector": "div.relative > div.max-w-3xl > div.rounded-3xl > h1.mt-3",
+            "snippet": "<h1 class=\"mt-3 text-4xl sm:text-5xl font-semibold leading-tight drop-shadow\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/logos/perlaii.png",
+            "bytes": 361270,
+            "estimatedSavingsBytes": 361151
+          },
+          {
+            "url": "http://127.0.0.1:3100/logos/perla.png",
+            "bytes": 297072,
+            "estimatedSavingsBytes": 296920
+          },
+          {
+            "url": "http://127.0.0.1:3100/logos/lajoya.png",
+            "bytes": 271604,
+            "estimatedSavingsBytes": 271460
+          },
+          {
+            "url": "http://127.0.0.1:3100/logos/lagoon.png",
+            "bytes": 219879,
+            "estimatedSavingsBytes": 219812
+          },
+          {
+            "url": "http://127.0.0.1:3100/mariachi/2.jpg",
+            "bytes": 330841,
+            "estimatedSavingsBytes": 68697
+          },
+          {
+            "url": "http://127.0.0.1:3100/mariachi/6.jpg",
+            "bytes": 307589,
+            "estimatedSavingsBytes": 45445
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=256&q=75",
+            "bytes": 18986,
+            "estimatedSavingsBytes": 17662
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fmariachi%2F7.jpg&w=750&q=65",
+            "bytes": 35222,
+            "estimatedSavingsBytes": 14355
+          }
+        ],
+        "thirdPartyBytes": 1077621,
+        "thirdPartyRequestCount": 18,
+        "thirdPartyDomains": [
+          "www.youtube.com",
+          "fonts.gstatic.com",
+          "googleads.g.doubleclick.net",
+          "static.doubleclick.net",
+          "www.google.com",
+          "jnn-pa.googleapis.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 0 KiB"
+          },
+          {
+            "id": "font-display-insight",
+            "title": "Font display",
+            "displayValue": "Est savings of 40 ms"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 1,265 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 420 ms"
+          }
+        ]
+      },
+      "after": {
+        "route": "/tr/mariachi",
+        "sample": 1,
+        "score": 88,
+        "lcpMs": 3830.1549999999997,
+        "fcpMs": 1205.155,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 589829,
+        "fontBytes": 164373,
+        "lcpNode": [
+          {
+            "label": "Mariachi Beach Club",
+            "selector": "div.relative > div.max-w-3xl > div.rounded-3xl > h1.mt-3"
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "route": "/tr/gecitkale",
+      "before": {
+        "path": "/tr/gecitkale",
+        "performanceScore": 77,
+        "lcpMs": 6692.932125,
+        "fcpMs": 1204.7819,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 2138620,
+        "requests": 60,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/2.jpg",
+            "bytes": 279723,
+            "estimatedSavingsBytes": 241307
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/1.jpg",
+            "bytes": 266411,
+            "estimatedSavingsBytes": 227995
+          },
+          {
+            "url": "http://127.0.0.1:3100/gecitkaleimage.jpg",
+            "bytes": 233854,
+            "estimatedSavingsBytes": 187381
+          },
+          {
+            "url": "http://127.0.0.1:3100/elec.jpg",
+            "bytes": 157799,
+            "estimatedSavingsBytes": 117839
+          },
+          {
+            "url": "http://127.0.0.1:3100/ercan.jpg",
+            "bytes": 143693,
+            "estimatedSavingsBytes": 79006
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fgecitkaleimage.jpg&w=750&q=65",
+            "bytes": 28866,
+            "estimatedSavingsBytes": 11491
+          }
+        ],
+        "thirdPartyBytes": 471007,
+        "thirdPartyRequestCount": 18,
+        "thirdPartyDomains": [
+          "www.google.com",
+          "i.ytimg.com",
+          "maps.gstatic.com",
+          "maps.googleapis.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 19 KiB"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 845 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 420 ms"
+          }
+        ]
+      },
+      "after": {
+        "route": "/tr/gecitkale",
+        "sample": 2,
+        "score": 90,
+        "lcpMs": 3679.331,
+        "fcpMs": 1204.331,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 528742,
+        "fontBytes": 164373,
+        "lcpNode": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "route": "/tr/qr",
+      "before": {
+        "path": "/tr/qr",
+        "performanceScore": 89,
+        "lcpMs": 3759.0154,
+        "fcpMs": 1054.5077,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 2206941,
+        "requests": 19,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > main.min-h-svh > img.mx-auto",
+            "snippet": "<img alt=\"Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 2…\" width=\"1280\" height=\"1280\" decoding=\"async\" data-nimg=\"1\" class=\"mx-auto block h-auto w-full max-w-[1600px]\" style=\"color:transparent\" src=\"/qr/image.png?v=20261009\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/qr/image.png?v=20261009",
+            "bytes": 1777195,
+            "estimatedSavingsBytes": 1690555
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 1,651 KiB"
+          },
+          {
+            "id": "lcp-discovery-insight",
+            "title": "LCP request discovery"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 450 ms"
+          }
+        ]
+      },
+      "after": {
+        "route": "/tr/qr",
+        "sample": 7,
+        "score": 88,
+        "lcpMs": 3903.8615,
+        "fcpMs": 753.8615,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 551602,
+        "fontBytes": 0,
+        "lcpNode": [
+          {
+            "label": "Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL…",
+            "selector": "body > main.qr-menu > img.qr-menu-image"
+          }
+        ],
+        "warnings": []
+      }
+    }
+  ],
+  "initialResources": {
+    "measuredAt": "2026-10-12T18:07:16.414Z",
+    "origin": "http://127.0.0.1:3100",
+    "units": "uncompressed bytes; initial HTML script and stylesheet dependencies only",
+    "routes": {
+      "/tr": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 141747,
+        "scriptCount": 15,
+        "scriptBytes": 758279,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 134490
+      },
+      "/en": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 141126,
+        "scriptCount": 16,
+        "scriptBytes": 758359,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 134490
+      },
+      "/tr/perla-ii": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 149544,
+        "scriptCount": 16,
+        "scriptBytes": 796946,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 134490
+      },
+      "/en/perla-ii": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 148835,
+        "scriptCount": 17,
+        "scriptBytes": 796929,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 134490
+      },
+      "/tr/contact": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 70537,
+        "scriptCount": 13,
+        "scriptBytes": 672704,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 134490
+      },
+      "/en/contact": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 69358,
+        "scriptCount": 14,
+        "scriptBytes": 672726,
+        "stylesheetCount": 2,
+        "stylesheetBytes": 134490
+      },
+      "/tr/qr": {
+        "status": 200,
+        "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+        "htmlBytes": 11338,
+        "scriptCount": 8,
+        "scriptBytes": 553819,
+        "stylesheetCount": 1,
+        "stylesheetBytes": 149
+      }
+    }
+  },
+  "fontAssets": {
+    "sourceCommit": "bd8f81ddb5c74d5c8897b36ad88b440266245103",
+    "unicodeRanges": "0000-017F,0218-021B,0300-036F,0400-04FF,2000-206F,20A0-20CF,2122,2190-21FF,2212,2215,FEFF,FFFD",
+    "fonts": [
+      {
+        "family": "inter",
+        "file": "inter-latin.woff2",
+        "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+        "sourceSha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+        "bytes": 98736,
+        "sha256": "bb5a2d3076a4a2012fb13ad4f13a98c724f914311284d91a3031cebf9c5f96c5",
+        "glyphs": 772
+      },
+      {
+        "family": "montserrat",
+        "file": "montserrat-latin.woff2",
+        "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/montserrat/Montserrat%5Bwght%5D.ttf",
+        "sourceSha256": "0f7b311b2f3279e4eef9b2f968bcdbab6e28f4daeb1f049f4f278a902bcd82f7",
+        "bytes": 65036,
+        "sha256": "87694b6fe1ee28e8b21644bc6ce90ac3fce63532491ea915cd3b46712717c691",
+        "glyphs": 652
+      }
+    ]
+  },
+  "verification": {
+    "productionBuild": "passed",
+    "performanceUnitTests": 3,
+    "browser": {
+      "measuredAt": "2026-10-12T18:03:25.963Z",
+      "status": "passed",
+      "checked": [
+        {
+          "path": "/tr/team",
+          "width": 390,
+          "initialPhotos": 1,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/tr/team",
+          "width": 1440,
+          "initialPhotos": 10,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/en/team",
+          "width": 390,
+          "initialPhotos": 1,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/en/team",
+          "width": 1440,
+          "initialPhotos": 10,
+          "allPhotos": 27,
+          "checks": "priority, deferral, visible heading, category filters, all photos, no overflow"
+        },
+        {
+          "path": "/tr/about",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/tr/mariachi",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/tr/gecitkale",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/en/about",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/en/mariachi",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/en/gecitkale",
+          "checks": "deferred images, media activation, map toggle, no overflow"
+        },
+        {
+          "path": "/tr/qr",
+          "checks": "1280-pixel menu, image preload, no fonts, no shared navigation or consent"
+        }
+      ],
+      "errors": [],
+      "missing": []
+    },
+    "fontChecks": {
+      "status": "passed",
+      "checked": [
+        {
+          "locale": "tr",
+          "sans": "inter",
+          "heading": "montserrat",
+          "preloadedFonts": 2,
+          "loadedFonts": [
+            {
+              "family": "inter",
+              "weight": "100 900"
+            },
+            {
+              "family": "montserrat",
+              "weight": "300 500"
+            }
+          ],
+          "sansLoaded": true,
+          "headingLoaded": true
+        },
+        {
+          "locale": "en",
+          "sans": "inter",
+          "heading": "montserrat",
+          "preloadedFonts": 2,
+          "loadedFonts": [
+            {
+              "family": "inter",
+              "weight": "100 900"
+            },
+            {
+              "family": "montserrat",
+              "weight": "300 500"
+            }
+          ],
+          "sansLoaded": true,
+          "headingLoaded": true
+        }
+      ]
+    },
+    "homeChecks": {
+      "status": "passed",
+      "checked": [
+        {
+          "locale": "tr",
+          "width": 390,
+          "checks": "completed La Joya slide, animated server content, optimized logos, contact CTA, hover, no overflow"
+        },
+        {
+          "locale": "tr",
+          "width": 1440,
+          "checks": "completed La Joya slide, animated server content, optimized logos, contact CTA, hover, no overflow"
+        },
+        {
+          "locale": "en",
+          "width": 390,
+          "checks": "completed La Joya slide, animated server content, optimized logos, contact CTA, hover, no overflow"
+        },
+        {
+          "locale": "en",
+          "width": 1440,
+          "checks": "completed La Joya slide, animated server content, optimized logos, contact CTA, hover, no overflow"
+        }
+      ],
+      "errors": [],
+      "missing": []
+    },
+    "ctaBackgroundImages": "loaded and checked in both languages and both viewport widths"
+  },
+  "limitations": [
+    "The general-audit comparison uses earlier single samples and is indicative, not a controlled before/after experiment.",
+    "Homepage font comparison is controlled using three samples per build; one slower sample is retained in each report.",
+    "LCP still exceeds 2.5 seconds; scores do not establish passing real-user Core Web Vitals.",
+    "QR traffic and FCP improve, but the sampled LCP did not improve versus the original PNG page; no QR LCP improvement is claimed.",
+    "JavaScript dependency sizes are decoded bytes. The server-component changes reduce these modestly and increase HTML/RSC bytes; observed final page transfer is recorded separately.",
+    "Advertising-consent, full catalog/360-tour sessions and production CDN cold/warm behavior not measured.",
+    "Additional scripts outside the documented Latin/Cyrillic subsets use system fallback fonts."
+  ]
+}

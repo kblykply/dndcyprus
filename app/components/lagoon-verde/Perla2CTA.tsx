@@ -32,7 +32,7 @@ type Props = {
 export default function ContactCTALagoonVerde({
   title = "Lagoon Verde",
   subtitle =
-    "Ötüken, İskele — doğayla iç içe, Long Beach’e yakın konum. Studio, 1+1 Loft ve 2+1 seçenekleri; geniş teras ve çatı terasları.",
+    "Ötüken, İskele — doğayla iç içe, Long Beach’e yakın konum. Stüdyo, 1+1 Loft ve 2+1 seçenekleri; geniş teras ve çatı terasları.",
   buttonText = "Fiyat Al",
   buttonHref = "#fiyat-al", // sayfadaki teklif formu
   bgImage = "/lagoon-verde/7.jpg", // kendi görsel yolunuzu koyun (public/)

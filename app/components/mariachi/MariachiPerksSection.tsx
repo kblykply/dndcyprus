@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import Link from "next/link";
 import { m as motion, type Variants, type Easing } from "framer-motion";
 import { BadgePercent, ShieldCheck } from "lucide-react";
@@ -138,12 +139,10 @@ export default function MariachiUnifiedPerks({
                       className="group relative flex items-center justify-center rounded-2xl bg-white ring-1 ring-black/5 p-4 sm:p-5 h-24 sm:h-28 transition-transform duration-300"
                       style={{ boxShadow: "0 12px 30px rgba(0,0,0,0.06)" }}
                     >
-                      <img
-                        src={src}
-                        alt={name}
-                        className="max-h-10 sm:max-h-12 md:max-h-14 w-auto object-contain select-none pointer-events-none grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition"
-                        draggable={false}
-                      />
+                      <div className="relative w-full h-10 sm:h-12 md:h-14">
+                        <DeferredFillImage fill src={src} alt={name} sizes="(min-width: 1024px) 128px, 160px" quality={75}
+                          className="object-contain select-none pointer-events-none grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition" draggable={false} />
+                      </div>
                       <span className="sr-only">{name}</span>
                     </div>
                   );
@@ -197,11 +196,8 @@ export default function MariachiUnifiedPerks({
           >
             {/* cover image */}
             {sideImage ? (
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${sideImage})` }}
-                aria-hidden
-              />
+              <DeferredFillImage fill src={sideImage} alt="" quality={65}
+                sizes="(min-width: 1280px) 500px, (min-width: 1024px) 42vw, 100vw" className="object-cover" aria-hidden />
             ) : (
               <div
                 className="absolute inset-0"

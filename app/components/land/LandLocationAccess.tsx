@@ -1,6 +1,8 @@
 // app/components/land/LandLocationAccess.tsx
 "use client";
 
+import DeferredIframe from "@/app/components/performance/DeferredIframe";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import React, { useMemo, useState } from "react";
 import { m as motion, type Variants } from "framer-motion";
 
@@ -136,7 +138,7 @@ export default function LandLocationAccess() {
 
               {/* Map iframe */}
               <div className="aspect-video relative z-10">
-                <iframe
+                <DeferredIframe buttonLabel="Haritayı göster"
                   title="Proje Konumu"
                   src={embedUrl}
                   className="absolute inset-0 w-full h-full"
@@ -145,7 +147,7 @@ export default function LandLocationAccess() {
                 />
                 {/* Optional parcel overlay image (must be pre-aligned if used) */}
                 {boundaryOverlay ? (
-                  <img
+                  <DeferredFillImage fill quality={75} sizes="(min-width: 1280px) 592px, (min-width: 1024px) 50vw, 100vw"
                     src={boundaryOverlay}
                     alt="Parsel sınırı overlay"
                     className="pointer-events-none absolute inset-0 w-full h-full object-contain z-20 opacity-80 mix-blend-multiply"

@@ -1,0 +1,621 @@
+{
+  "generatedAt": "2026-10-14T12:17:17.136Z",
+  "clientDate": "2026-10-14",
+  "timezone": "Europe/Istanbul",
+  "status": "Implemented and validated locally; not committed, pushed or deployed",
+  "origin": "http://localhost:3100",
+  "buildId": "iafEpGHE8zJtg4QGvg7Fm",
+  "method": "Lighthouse 13.5 local production, simulated mobile and desktop presets, cold cache. Three samples per mobile home page, medians per metric; other routes/profiles single samples. Before and after use the same tool/profile but different builds. Network figures include response headers; decimal KB/MB. Laboratory results, not field Core Web Vitals.",
+  "baseline": "performance-final-audit-2026-10-14.json",
+  "changes": [
+    "TR/EN media hub covers use responsive, quality-65 optimized images and load near the viewport. Original popup media and PDFs remain available on interaction.",
+    "Inter and Montserrat retain their original versions, variable weights and licenses. Latin/Turkish core subsets preload; Cyrillic subsets download only when their characters are rendered.",
+    "QR menu uses a 1280px AVIF with WebP fallback. Its static native HTML route preserves metadata and menu details, with no application JavaScript or fonts.",
+    "TR/EN brand and beach sections render static content on the server with client animation wrappers. Privacy links stop speculative prefetching. Existing animation features and team filters are retained; reduced-motion beach content remains visible."
+  ],
+  "mobile": [
+    {
+      "route": "/tr",
+      "before": {
+        "route": "/tr",
+        "sampleCount": 3,
+        "score": 88,
+        "lcpMs": 3905.2092000000002,
+        "fcpMs": 1205.2092,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 550494,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 24158,
+          "Font": 164373,
+          "Image": 75064,
+          "Stylesheet": 22576,
+          "Script": 243811,
+          "Other": 4690,
+          "Fetch": 15822
+        }
+      },
+      "after": {
+        "route": "/tr",
+        "sampleCount": 3,
+        "score": 90,
+        "lcpMs": 3611.6004,
+        "fcpMs": 1205.8002,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 487290,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 25717,
+          "Font": 117725,
+          "Image": 75064,
+          "Stylesheet": 22764,
+          "Script": 241330,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 11.481324047128583,
+      "lcpReductionPercent": 7.518388515524355
+    },
+    {
+      "route": "/en",
+      "before": {
+        "route": "/en",
+        "sampleCount": 3,
+        "score": 87,
+        "lcpMs": 3979.8649000000005,
+        "fcpMs": 1204.8649,
+        "tbtMs": 0,
+        "cls": 0.0001426577240783032,
+        "transferBytes": 553352,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 23546,
+          "Font": 164373,
+          "Image": 75064,
+          "Stylesheet": 22576,
+          "Script": 247124,
+          "Other": 4690,
+          "Fetch": 15979
+        }
+      },
+      "after": {
+        "route": "/en",
+        "sampleCount": 3,
+        "score": 89,
+        "lcpMs": 3688.1269500000003,
+        "fcpMs": 1205.8342,
+        "tbtMs": 0,
+        "cls": 0.0001426577240783032,
+        "transferBytes": 489987,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 25087,
+          "Font": 117725,
+          "Image": 75064,
+          "Stylesheet": 22764,
+          "Script": 244657,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 11.451119721262415,
+      "lcpReductionPercent": 7.330348072870518
+    },
+    {
+      "route": "/tr/dndcyprus",
+      "before": {
+        "route": "/tr/dndcyprus",
+        "sampleCount": 1,
+        "score": 75,
+        "lcpMs": 10975.822549999997,
+        "fcpMs": 1057.9454,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 4976678,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 12346,
+          "Font": 164373,
+          "Image": 4542172,
+          "Stylesheet": 22581,
+          "Script": 214689,
+          "Other": 4690,
+          "Fetch": 15827
+        }
+      },
+      "after": {
+        "route": "/tr/dndcyprus",
+        "sampleCount": 1,
+        "score": 90,
+        "lcpMs": 3707.0560499999997,
+        "fcpMs": 1054.9138,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 561330,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 12404,
+          "Font": 117725,
+          "Image": 189598,
+          "Stylesheet": 22764,
+          "Script": 214149,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 88.72078924937479,
+      "lcpReductionPercent": 66.2252552543317
+    },
+    {
+      "route": "/en/dndcyprus",
+      "before": {
+        "route": "/en/dndcyprus",
+        "sampleCount": 1,
+        "score": 75,
+        "lcpMs": 9922.51865,
+        "fcpMs": 1056.4339,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 4578179,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 7166,
+          "Font": 164373,
+          "Image": 4137911,
+          "Stylesheet": 22581,
+          "Script": 225482,
+          "Other": 4690,
+          "Fetch": 15976
+        }
+      },
+      "after": {
+        "route": "/en/dndcyprus",
+        "sampleCount": 1,
+        "score": 88,
+        "lcpMs": 3919.0447500000005,
+        "fcpMs": 1356.9268499999998,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 665715,
+        "fontBytes": 158505,
+        "transferByType": {
+          "Document": 7214,
+          "Font": 158505,
+          "Image": 263941,
+          "Stylesheet": 22764,
+          "Script": 208601,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 85.4589564977691,
+      "lcpReductionPercent": 60.503528506847395
+    },
+    {
+      "route": "/tr/qr",
+      "before": {
+        "route": "/tr/qr",
+        "sampleCount": 1,
+        "score": 88,
+        "lcpMs": 3903.5487000000003,
+        "fcpMs": 753.5487,
+        "tbtMs": 2,
+        "cls": 0,
+        "transferBytes": 551603,
+        "fontBytes": 0,
+        "transferByType": {
+          "Document": 3105,
+          "Image": 411910,
+          "Stylesheet": 481,
+          "Script": 131417,
+          "Other": 4690
+        }
+      },
+      "after": {
+        "route": "/tr/qr",
+        "sampleCount": 1,
+        "score": 99,
+        "lcpMs": 1953.1627,
+        "fcpMs": 609.58135,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 230931,
+        "fontBytes": 0,
+        "transferByType": {
+          "Document": 2410,
+          "Image": 223831,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 58.134564170245625,
+      "lcpReductionPercent": 49.96443364469874
+    },
+    {
+      "route": "/tr/team",
+      "before": {
+        "route": "/tr/team",
+        "sampleCount": 1,
+        "score": 91,
+        "lcpMs": 3473.9305999999997,
+        "fcpMs": 1055.1032,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 471047,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 13935,
+          "Font": 164373,
+          "Image": 36017,
+          "Stylesheet": 22576,
+          "Script": 213634,
+          "Other": 4690,
+          "Fetch": 15822
+        }
+      },
+      "after": {
+        "route": "/tr/team",
+        "sampleCount": 1,
+        "score": 94,
+        "lcpMs": 3086.6076000000003,
+        "fcpMs": 1055.8038,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 407822,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 13939,
+          "Font": 117725,
+          "Image": 36017,
+          "Stylesheet": 22764,
+          "Script": 212687,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 13.422227505960127,
+      "lcpReductionPercent": 11.149416744249274
+    },
+    {
+      "route": "/tr/contact",
+      "before": {
+        "route": "/tr/contact",
+        "sampleCount": 1,
+        "score": 89,
+        "lcpMs": 3680.135,
+        "fcpMs": 1205.135,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 545633,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 15051,
+          "Font": 164373,
+          "Image": 91269,
+          "Stylesheet": 22576,
+          "Script": 221154,
+          "Other": 4690,
+          "Fetch": 26520
+        }
+      },
+      "after": {
+        "route": "/tr/contact",
+        "sampleCount": 1,
+        "score": 92,
+        "lcpMs": 3386.39775,
+        "fcpMs": 1206.513,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 488561,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 15055,
+          "Font": 117725,
+          "Image": 91269,
+          "Stylesheet": 22764,
+          "Script": 220207,
+          "Other": 4690,
+          "Fetch": 16851
+        }
+      },
+      "transferReductionPercent": 10.459777909327329,
+      "lcpReductionPercent": 7.981697682286115
+    },
+    {
+      "route": "/tr/perla-ii",
+      "before": {
+        "route": "/tr/perla-ii",
+        "sampleCount": 1,
+        "score": 87,
+        "lcpMs": 3980.1525,
+        "fcpMs": 1205.1525,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 765660,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 26263,
+          "Font": 164373,
+          "Image": 233791,
+          "Stylesheet": 22576,
+          "Script": 291284,
+          "Other": 4690,
+          "Fetch": 22683
+        }
+      },
+      "after": {
+        "route": "/tr/perla-ii",
+        "sampleCount": 1,
+        "score": 89,
+        "lcpMs": 3686.3660749999995,
+        "fcpMs": 1206.4949,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 708645,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 26264,
+          "Font": 117725,
+          "Image": 233796,
+          "Stylesheet": 22764,
+          "Script": 288803,
+          "Other": 4690,
+          "Fetch": 14603
+        }
+      },
+      "transferReductionPercent": 7.446516730663744,
+      "lcpReductionPercent": 7.381285641693392
+    },
+    {
+      "route": "/tr/mariachi",
+      "before": {
+        "route": "/tr/mariachi",
+        "sampleCount": 1,
+        "score": 88,
+        "lcpMs": 3830.0241000000005,
+        "fcpMs": 1205.0241,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 590699,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 18770,
+          "Font": 164373,
+          "Image": 68126,
+          "Stylesheet": 22576,
+          "Script": 283894,
+          "Other": 4690,
+          "Fetch": 28270
+        }
+      },
+      "after": {
+        "route": "/tr/mariachi",
+        "sampleCount": 1,
+        "score": 91,
+        "lcpMs": 3460.2054749999993,
+        "fcpMs": 1205.8317,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 533681,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 18775,
+          "Font": 117725,
+          "Image": 68124,
+          "Stylesheet": 22764,
+          "Script": 281413,
+          "Other": 4690,
+          "Fetch": 20190
+        }
+      },
+      "transferReductionPercent": 9.652631881889084,
+      "lcpReductionPercent": 9.655778014556127
+    },
+    {
+      "route": "/tr/gecitkale",
+      "before": {
+        "route": "/tr/gecitkale",
+        "sampleCount": 1,
+        "score": 89,
+        "lcpMs": 3680.2667,
+        "fcpMs": 1205.2667,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 528753,
+        "fontBytes": 164373,
+        "transferByType": {
+          "Document": 17413,
+          "Font": 164373,
+          "Image": 60641,
+          "Stylesheet": 22576,
+          "Script": 243238,
+          "Other": 4690,
+          "Fetch": 15822
+        }
+      },
+      "after": {
+        "route": "/tr/gecitkale",
+        "sampleCount": 1,
+        "score": 91,
+        "lcpMs": 3459.6171249999998,
+        "fcpMs": 1205.4955,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 465518,
+        "fontBytes": 117725,
+        "transferByType": {
+          "Document": 17413,
+          "Font": 117725,
+          "Image": 60635,
+          "Stylesheet": 22764,
+          "Script": 242291,
+          "Other": 4690
+        }
+      },
+      "transferReductionPercent": 11.959270207450356,
+      "lcpReductionPercent": 5.995477854906561
+    }
+  ],
+  "desktop": [
+    {
+      "route": "/tr",
+      "sampleCount": 1,
+      "score": 99,
+      "lcpMs": 866.7045000000003,
+      "fcpMs": 326.7045,
+      "tbtMs": 0,
+      "cls": 0.00006292210255961242,
+      "transferBytes": 577378,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 25717,
+        "Font": 117725,
+        "Image": 165152,
+        "Stylesheet": 22764,
+        "Script": 241330,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/en",
+      "sampleCount": 1,
+      "score": 99,
+      "lcpMs": 866.7583999999997,
+      "fcpMs": 326.7584,
+      "tbtMs": 0,
+      "cls": 0.0000615795464495228,
+      "transferBytes": 580075,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 25087,
+        "Font": 117725,
+        "Image": 165152,
+        "Stylesheet": 22764,
+        "Script": 244657,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/tr/qr",
+      "sampleCount": 1,
+      "score": 100,
+      "lcpMs": 442.213,
+      "fcpMs": 163.1065,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 230931,
+      "fontBytes": 0,
+      "transferByType": {
+        "Document": 2410,
+        "Image": 223831,
+        "Other": 4690
+      }
+    }
+  ],
+  "savedPreferences": [
+    {
+      "route": "/tr",
+      "sampleCount": 1,
+      "score": 90,
+      "lcpMs": 3611.1428,
+      "fcpMs": 1205.5714,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 487290,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 25717,
+        "Font": 117725,
+        "Image": 75064,
+        "Stylesheet": 22764,
+        "Script": 241330,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/en",
+      "sampleCount": 1,
+      "score": 90,
+      "lcpMs": 3610.2498000000005,
+      "fcpMs": 1205.1249,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 489987,
+      "fontBytes": 117725,
+      "transferByType": {
+        "Document": 25087,
+        "Font": 117725,
+        "Image": 75064,
+        "Stylesheet": 22764,
+        "Script": 244657,
+        "Other": 4690
+      }
+    }
+  ],
+  "payload": {
+    "coreFonts": {
+      "beforeNetworkBytes": 164373,
+      "afterNetworkBytes": 117725,
+      "reductionPercent": 28.379356707001758,
+      "note": "EN media hub also needs Cyrillic and transfers 158505 font bytes."
+    },
+    "qrImage": {
+      "beforeFileBytes": 411608,
+      "avifFileBytes": 223529,
+      "webpFileBytes": 259354,
+      "width": 1280,
+      "height": 1280
+    },
+    "homeScript": {
+      "beforeNetworkBytes": 243811,
+      "afterNetworkBytes": 241330,
+      "reductionPercent": 1.0175914950514953,
+      "note": "Modest reduction; server-rendered content increases home HTML. Largest JS improvement is QR: 131417 network bytes to zero."
+    },
+    "homeDocument": {
+      "beforeRawBytes": 141026,
+      "afterRawBytes": 155414,
+      "beforeNetworkBytes": 24158,
+      "afterNetworkBytes": 25717
+    }
+  },
+  "validation": {
+    "productionBuild": "passed; TypeScript passed; 43 generated routes",
+    "unitTests": {
+      "passed": 76,
+      "failed": 0,
+      "mode": "Mocked API/database integrations; no real leads submitted"
+    },
+    "browserCases": 46,
+    "publicRoutes": 36,
+    "localImageReferences": 137,
+    "internalLinks": 33,
+    "lighthouseRuns": 19,
+    "lint": {
+      "errors": 0,
+      "warnings": 221
+    },
+    "buildCoverage": "Lighthouse, public inventory and the optimized-media/QR checks use the final build. General UI and font suites ran before the QR-only route replacement; the affected QR route was verified again on the final build.",
+    "evidence": [
+      "docs/performance-round5-home.json",
+      "docs/performance-round5-loading.json",
+      "docs/performance-round5-media.json",
+      "docs/performance-round5-interactions.json",
+      "docs/performance-round5-hub.json",
+      "docs/performance-round5-contact.json",
+      "docs/performance-round5-fonts.json",
+      "docs/performance-round5-special.json",
+      "docs/performance-round5-inventory.json",
+      "docs/performance-round5-lighthouse-suite.json"
+    ]
+  },
+  "limits": [
+    "Home mobile LCP is still 3.61s TR / 3.69s EN, above the 2.5s good threshold. Most measured regular pages remain above 2.5s; QR is 1.95s. Further font/render-path and shared JavaScript work requires separate changes and measurements.",
+    "Core font traffic remains 117.7KB and home JavaScript 241.3KB; the proposed sub-100KB font and sub-200KB JavaScript targets were not reached.",
+    "No live field p75, real-user INP or post-deployment measurements. Local GA4 configuration is absent; production performance must be checked after deployment.",
+    "QR desktop supplementary LCP trace insight reported NO_LCP; numeric LCP, performance score and browser image checks succeeded.",
+    "Existing 221 lint warnings and the middleware-to-proxy convention warning remain."
+  ],
+  "sources": [
+    "https://web.dev/articles/vitals",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@font-face/unicode-range",
+    "https://nextjs.org/docs/app/api-reference/components/image"
+  ]
+}

@@ -290,10 +290,11 @@ function VideoHeroCard({
             src={imgSrc}
             alt={title}
             fill
-            sizes="(min-width: 1024px) 1000px, 100vw"
+            sizes="(min-width: 1280px) 1216px, 100vw"
             className="object-cover"
-            unoptimized
-            onLoadingComplete={() => setImgLoaded(true)}
+            quality={65}
+            unoptimized={!imgSrc.startsWith("/")}
+            onLoad={() => setImgLoaded(true)}
             onError={() => {
               setImgLoaded(false);
               setImgSrc((prev) => (prev === ytMax ? ytHQ : prev));
@@ -352,4 +353,3 @@ function VideoHeroCard({
     </div>
   );
 }
-  

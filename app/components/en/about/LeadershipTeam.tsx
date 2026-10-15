@@ -2,6 +2,8 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import Image from "next/image";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, Variants, AnimatePresence } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -31,19 +33,6 @@ type Props = {
   title?: string;
   subtitle?: string;
   members?: Member[];
-};
-
-const containerHead: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1, y: 0, filter: "blur(0px)",
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-  },
 };
 
 // ✅ Presence variants for filter add/remove
@@ -114,17 +103,7 @@ members = [
     accent: "orange",
     sortOrder: 2,
   },
-  {
-    id: "tugba",
-    name: "Tuğba Aksun",
-    role: "Site Manager",
-    category: "Operations",
-    photo: "/teams/tugba.png",
-    bio: "Responsible for managing site operations.",
-    socials: {},
-    accent: "teal",
-    sortOrder: 14,
-  },
+
 
   {
     id: "burcin",
@@ -274,7 +253,7 @@ members = [
     name: "Parmida Mesgari",
     role: "Videographer",
     category: "Marketing",
-    photo: "/teams/parmida.png",
+    photo: "/teams/placeholder.svg", // Portrait file is not available yet.
     bio: "Video production and visual content specialist.",
     socials: {},
     accent: "teal",
@@ -308,7 +287,7 @@ members = [
     name: "Emine Güngör",
     role: "La Joya Service Staff",
     category: "Operations",
-    photo: "/teams/emineg.png",
+    photo: "/teams/placeholder.svg", // Portrait file is not available yet.
     bio: "Responsible for service and support operations.",
     socials: {},
     accent: "orange",
@@ -456,15 +435,10 @@ members = [
 
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       {/* Header */}
-      <motion.div
-        variants={containerHead}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: false, amount: 0.35 }}
+      <div
         className="text-left"
       >
-        <motion.span
-          variants={fadeUp}
+        <span
           className="inline-flex items-center text-xs tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
@@ -474,16 +448,16 @@ members = [
           }}
         >
           {kicker}
-        </motion.span>
+        </span>
 
-        <motion.h2 variants={fadeUp} className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+        <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
           {title}
-        </motion.h2>
+        </h2>
 
-        <motion.p variants={fadeUp} className="mt-2 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.65)" }}>
+        <p className="mt-2 text-base sm:text-lg" style={{ color: "rgba(20,21,23,0.65)" }}>
           {subtitle}
-        </motion.p>
-      </motion.div>
+        </p>
+      </div>
 
       {/* Filters (sticky on mobile for easy nav) */}
       <div className="mt-8 sticky top-2 z-10 -mx-4 px-4 bg-white/80 backdrop-blur supports-[backdrop-filter]:backdrop-blur rounded-2xl border border-[var(--stroke)]">
@@ -507,26 +481,31 @@ members = [
       >
         <AnimatePresence initial={false} mode="popLayout">
           
-          {sorted.map((m) => {
+          {sorted.map((m, index) => {
             const color = m.accent === "orange" ? ORANGE : TEAL;
+            const photoProps = {
+              fill: true,
+              src: m.photo || "/teams/okan.png",
+              alt: m.name,
+              quality: 75,
+              sizes: "(min-width: 1280px) 224px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 32px)",
+              className: "object-cover transition-transform duration-700 group-hover:scale-[1.05]",
+            };
             return (
               <motion.article
                 key={m.id}
                 layout
                 variants={cardPresence}
-                initial="hidden"
+                initial={index === 0 ? false : "hidden"}
                 animate="show"
                 exit="exit"
                 className="group relative overflow-hidden rounded-3xl ring-1 ring-[var(--stroke)] shadow-[0_16px_40px_rgba(0,0,0,0.06)]"
               >
                 {/* Image */}
                 <div className="relative aspect-[3/5] w-full">
-                  <img
-                    src={m.photo || "/teams/okan.png"}
-                    alt={m.name}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                    loading="lazy"
-                  />
+                  {index === 0 ? (
+                    <Image {...photoProps} fetchPriority="high" preload={activeCat === "All"} loading={activeCat === "All" ? undefined : "eager"} />
+                  ) : <DeferredFillImage {...photoProps} />}
 
                   {/* Gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent opacity-50 group-hover:opacity-55 transition-opacity" />

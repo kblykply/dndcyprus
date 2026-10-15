@@ -228,7 +228,7 @@ window.gtag=window.gtag||function(){dataLayer.push(arguments);};
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
 gtag('set','ads_data_redaction',true);
 gtag('set','url_passthrough',true);
-try{var m=document.cookie.match(/(?:^|; )${CONSENT_COOKIE}=([^;]*)/);if(m){var c=JSON.parse(decodeURIComponent(m[1]));if(c&&c.v===1){var a=c.ads?'granted':'denied';gtag('consent','update',{ad_storage:a,ad_user_data:a,ad_personalization:a,analytics_storage:c.analytics?'granted':'denied'});}}}catch(e){}`;
+try{var m=document.cookie.match(/(?:^|; )${CONSENT_COOKIE}=([^;]*)/);if(m){var c=JSON.parse(decodeURIComponent(m[1]));if(c&&c.v===1&&typeof c.ads==='boolean'&&typeof c.analytics==='boolean'){var a=c.ads?'granted':'denied';gtag('consent','update',{ad_storage:a,ad_user_data:a,ad_personalization:a,analytics_storage:c.analytics?'granted':'denied'});}}}catch(e){}`;
 
 /* ---------------- Script yükleme ---------------- */
 

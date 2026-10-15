@@ -1,0 +1,3474 @@
+{
+  "createdAt": "2026-10-12T14:31:37.670Z",
+  "date": "2026-10-12",
+  "scope": "Read-only audit. Website source and deployment unchanged. Current production build includes unpushed optimizations; live deployment is a separate older version.",
+  "method": "Lighthouse 13.5 / Chrome 155, production pages, default simulated mobile throttling, one screening sample per route, fresh browser storage",
+  "local": {
+    "origin": "http://127.0.0.1:3100",
+    "routes": [
+      {
+        "path": "/en",
+        "performanceScore": 83,
+        "lcpMs": 4367.287499999999,
+        "fcpMs": 2117.2875,
+        "tbtMs": 2.5,
+        "cls": 0.0001426577240783032,
+        "transferBytes": 659956,
+        "requests": 44,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+            "selector": "body.inter_fd091ad6-module__giF-bG__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "bytes": 35620,
+            "estimatedSavingsBytes": 14753
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 1,310 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/contact",
+        "performanceScore": 87,
+        "lcpMs": 4060.4215999999997,
+        "fcpMs": 1205.2108,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 1092469,
+        "requests": 82,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "bytes": 35620,
+            "estimatedSavingsBytes": 14753
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=640&q=65",
+            "bytes": 21476,
+            "estimatedSavingsBytes": 14457
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fofis.jpg&w=640&q=65",
+            "bytes": 19838,
+            "estimatedSavingsBytes": 13355
+          }
+        ],
+        "thirdPartyBytes": 472786,
+        "thirdPartyRequestCount": 34,
+        "thirdPartyDomains": [
+          "www.google.com",
+          "maps.gstatic.com",
+          "maps.googleapis.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 13 KiB"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 42 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 440 ms"
+          }
+        ]
+      },
+      {
+        "path": "/en/contact",
+        "performanceScore": 91,
+        "lcpMs": 3537.41955,
+        "fcpMs": 1358.2797,
+        "tbtMs": 0,
+        "cls": 0.0001426577240783032,
+        "transferBytes": 1026474,
+        "requests": 83,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+            "selector": "body.inter_fd091ad6-module__giF-bG__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "bytes": 35620,
+            "estimatedSavingsBytes": 14753
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=640&q=65",
+            "bytes": 21476,
+            "estimatedSavingsBytes": 14457
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fofis.jpg&w=640&q=65",
+            "bytes": 19838,
+            "estimatedSavingsBytes": 13355
+          }
+        ],
+        "thirdPartyBytes": 472772,
+        "thirdPartyRequestCount": 34,
+        "thirdPartyDomains": [
+          "www.google.com",
+          "maps.gstatic.com",
+          "maps.googleapis.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 13 KiB"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 42 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 750 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/about",
+        "performanceScore": 75,
+        "lcpMs": 7666.874199999998,
+        "fcpMs": 1204.8212,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 3160697,
+        "requests": 53,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/DND%20Beach%20Parti%2024-59.jpg",
+            "bytes": 326042,
+            "estimatedSavingsBytes": 311276
+          },
+          {
+            "url": "http://127.0.0.1:3100/dnd-boston-ofis.jpg",
+            "bytes": 175011,
+            "estimatedSavingsBytes": 163034
+          },
+          {
+            "url": "http://127.0.0.1:3100/Kellogg's-Logo.png",
+            "bytes": 155890,
+            "estimatedSavingsBytes": 155691
+          },
+          {
+            "url": "http://127.0.0.1:3100/Keurig_Dr_Pepper.png",
+            "bytes": 101112,
+            "estimatedSavingsBytes": 100938
+          },
+          {
+            "url": "http://127.0.0.1:3100/homesthumb.webp",
+            "bytes": 108632,
+            "estimatedSavingsBytes": 99158
+          },
+          {
+            "url": "http://127.0.0.1:3100/Cargill_logo.png",
+            "bytes": 55228,
+            "estimatedSavingsBytes": 55056
+          },
+          {
+            "url": "http://127.0.0.1:3100/Kraft_logo_2012.png",
+            "bytes": 41090,
+            "estimatedSavingsBytes": 40890
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F5.jpg&w=750&q=75",
+            "bytes": 52176,
+            "estimatedSavingsBytes": 25520
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fuu.jpg&w=750&q=65",
+            "bytes": 37332,
+            "estimatedSavingsBytes": 20650
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 949 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 410 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/team",
+        "performanceScore": 75,
+        "lcpMs": 12459.92205,
+        "fcpMs": 1056.6147,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 3177011,
+        "requests": 38,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Ozan Dökmecioğlu",
+            "selector": "div.mt-12 > article.group > div.relative > img.absolute",
+            "snippet": "<img src=\"/teams/ozan.png\" alt=\"Ozan Dökmecioğlu\" class=\"absolute inset-0 h-full w-full object-cover transition-transform duration-…\" loading=\"lazy\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/teams/ozan.png",
+            "bytes": 571900,
+            "estimatedSavingsBytes": 527311
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/emine.png",
+            "bytes": 553580,
+            "estimatedSavingsBytes": 508991
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/burcingul.png",
+            "bytes": 526165,
+            "estimatedSavingsBytes": 481576
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/bulent.png",
+            "bytes": 390590,
+            "estimatedSavingsBytes": 346001
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/aynurzorbagulol.png",
+            "bytes": 313677,
+            "estimatedSavingsBytes": 269088
+          },
+          {
+            "url": "http://127.0.0.1:3100/teams/borhan.png",
+            "bytes": 304076,
+            "estimatedSavingsBytes": 259487
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 2,336 KiB"
+          },
+          {
+            "id": "lcp-discovery-insight",
+            "title": "LCP request discovery"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 440 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/mariachi",
+        "performanceScore": 78,
+        "lcpMs": 5946.267675000001,
+        "fcpMs": 1206.5439,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 4400852,
+        "requests": 78,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Mariachi Beach Club",
+            "selector": "div.relative > div.max-w-3xl > div.rounded-3xl > h1.mt-3",
+            "snippet": "<h1 class=\"mt-3 text-4xl sm:text-5xl font-semibold leading-tight drop-shadow\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/logos/perlaii.png",
+            "bytes": 361270,
+            "estimatedSavingsBytes": 361151
+          },
+          {
+            "url": "http://127.0.0.1:3100/logos/perla.png",
+            "bytes": 297072,
+            "estimatedSavingsBytes": 296920
+          },
+          {
+            "url": "http://127.0.0.1:3100/logos/lajoya.png",
+            "bytes": 271604,
+            "estimatedSavingsBytes": 271460
+          },
+          {
+            "url": "http://127.0.0.1:3100/logos/lagoon.png",
+            "bytes": 219879,
+            "estimatedSavingsBytes": 219812
+          },
+          {
+            "url": "http://127.0.0.1:3100/mariachi/2.jpg",
+            "bytes": 330841,
+            "estimatedSavingsBytes": 68697
+          },
+          {
+            "url": "http://127.0.0.1:3100/mariachi/6.jpg",
+            "bytes": 307589,
+            "estimatedSavingsBytes": 45445
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flogos%2Fmariachi.png&w=256&q=75",
+            "bytes": 18986,
+            "estimatedSavingsBytes": 17662
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fmariachi%2F7.jpg&w=750&q=65",
+            "bytes": 35222,
+            "estimatedSavingsBytes": 14355
+          }
+        ],
+        "thirdPartyBytes": 1077621,
+        "thirdPartyRequestCount": 18,
+        "thirdPartyDomains": [
+          "www.youtube.com",
+          "fonts.gstatic.com",
+          "googleads.g.doubleclick.net",
+          "static.doubleclick.net",
+          "www.google.com",
+          "jnn-pa.googleapis.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 0 KiB"
+          },
+          {
+            "id": "font-display-insight",
+            "title": "Font display",
+            "displayValue": "Est savings of 40 ms"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 1,265 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 420 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/gecitkale",
+        "performanceScore": 77,
+        "lcpMs": 6692.932125,
+        "fcpMs": 1204.7819,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 2138620,
+        "requests": 60,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/2.jpg",
+            "bytes": 279723,
+            "estimatedSavingsBytes": 241307
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/1.jpg",
+            "bytes": 266411,
+            "estimatedSavingsBytes": 227995
+          },
+          {
+            "url": "http://127.0.0.1:3100/gecitkaleimage.jpg",
+            "bytes": 233854,
+            "estimatedSavingsBytes": 187381
+          },
+          {
+            "url": "http://127.0.0.1:3100/elec.jpg",
+            "bytes": 157799,
+            "estimatedSavingsBytes": 117839
+          },
+          {
+            "url": "http://127.0.0.1:3100/ercan.jpg",
+            "bytes": 143693,
+            "estimatedSavingsBytes": 79006
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Fgecitkaleimage.jpg&w=750&q=65",
+            "bytes": 28866,
+            "estimatedSavingsBytes": 11491
+          }
+        ],
+        "thirdPartyBytes": 471007,
+        "thirdPartyRequestCount": 18,
+        "thirdPartyDomains": [
+          "www.google.com",
+          "i.ytimg.com",
+          "maps.gstatic.com",
+          "maps.googleapis.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 19 KiB"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 845 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 420 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/lagoon-verde",
+        "performanceScore": 83,
+        "lcpMs": 4661.884725,
+        "fcpMs": 1205.2821,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 767049,
+        "requests": 45,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F5.jpg&w=750&q=65",
+            "bytes": 46018,
+            "estimatedSavingsBytes": 27493
+          }
+        ],
+        "thirdPartyBytes": 13552,
+        "thirdPartyRequestCount": 1,
+        "thirdPartyDomains": [
+          "i.ytimg.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 10 KiB"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 27 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 440 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/qr",
+        "performanceScore": 89,
+        "lcpMs": 3759.0154,
+        "fcpMs": 1054.5077,
+        "tbtMs": 0,
+        "cls": 0,
+        "transferBytes": 2206941,
+        "requests": 19,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > main.min-h-svh > img.mx-auto",
+            "snippet": "<img alt=\"Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 2…\" width=\"1280\" height=\"1280\" decoding=\"async\" data-nimg=\"1\" class=\"mx-auto block h-auto w-full max-w-[1600px]\" style=\"color:transparent\" src=\"/qr/image.png?v=20261009\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "http://127.0.0.1:3100/qr/image.png?v=20261009",
+            "bytes": 1777195,
+            "estimatedSavingsBytes": 1690555
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 1,651 KiB"
+          },
+          {
+            "id": "lcp-discovery-insight",
+            "title": "LCP request discovery"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 450 ms"
+          }
+        ]
+      }
+    ],
+    "homeMedian": {
+      "performanceScore": 85,
+      "lcpMs": 4291.264000000001,
+      "fcpMs": 1207.2235,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 657338,
+      "cssRequests": 2
+    },
+    "perlaIISingle": {
+      "performanceScore": 84,
+      "lcpMs": 4510.566000000001,
+      "fcpMs": 1205.283,
+      "totalBlockingTimeMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 841452,
+      "cssRequests": 2
+    },
+    "inventory": {
+      "measuredAt": "2026-10-12T14:24:57.356Z",
+      "origin": "http://127.0.0.1:3100",
+      "units": "Decoded uncompressed bytes for initial HTML-linked assets; server TTFB is this workstation connection only",
+      "routes": [
+        {
+          "path": "/tr",
+          "status": 200,
+          "ttfbMs": 11.676124999999999,
+          "htmlBytes": 127061,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 767637,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": true,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en",
+          "status": 200,
+          "ttfbMs": 2.6627500000000026,
+          "htmlBytes": 125663,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 767742,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": true,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/projects",
+          "status": 200,
+          "ttfbMs": 1.8574580000000083,
+          "htmlBytes": 72241,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 671113,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": true,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/projects",
+          "status": 200,
+          "ttfbMs": 1.7592500000000086,
+          "htmlBytes": 70671,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 671238,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": true,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/lagoon-verde",
+          "status": 200,
+          "ttfbMs": 7.637374999999992,
+          "htmlBytes": 162888,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 807898,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/lagoon-verde",
+          "status": 200,
+          "ttfbMs": 8.017749999999978,
+          "htmlBytes": 161473,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 807870,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/perla-ii",
+          "status": 200,
+          "ttfbMs": 17.20320799999999,
+          "htmlBytes": 150052,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 796946,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/perla-ii",
+          "status": 200,
+          "ttfbMs": 8.226791999999989,
+          "htmlBytes": 148845,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 796929,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/perla",
+          "status": 200,
+          "ttfbMs": 6.407166999999987,
+          "htmlBytes": 150568,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 796655,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/perla",
+          "status": 200,
+          "ttfbMs": 9.418125000000003,
+          "htmlBytes": 149339,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 796594,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/la-joya",
+          "status": 200,
+          "ttfbMs": 7.126792000000023,
+          "htmlBytes": 132573,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 778963,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/la-joya",
+          "status": 200,
+          "ttfbMs": 7.592625000000027,
+          "htmlBytes": 132171,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 779167,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/mariachi",
+          "status": 200,
+          "ttfbMs": 5.576750000000004,
+          "htmlBytes": 95132,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 750530,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/mariachi",
+          "status": 200,
+          "ttfbMs": 6.228082999999998,
+          "htmlBytes": 93698,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 750527,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/gecitkale",
+          "status": 200,
+          "ttfbMs": 5.712083999999976,
+          "htmlBytes": 91463,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 751853,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/gecitkale",
+          "status": 200,
+          "ttfbMs": 5.948499999999996,
+          "htmlBytes": 90255,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 752130,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/about",
+          "status": 200,
+          "ttfbMs": 2.3219170000000418,
+          "htmlBytes": 101800,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 863144,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/about",
+          "status": 200,
+          "ttfbMs": 7.303708000000029,
+          "htmlBytes": 100143,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 863009,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/team",
+          "status": 200,
+          "ttfbMs": 1.9371659999999906,
+          "htmlBytes": 84992,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 666527,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/team",
+          "status": 200,
+          "ttfbMs": 5.468999999999994,
+          "htmlBytes": 83442,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 666744,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/contact",
+          "status": 200,
+          "ttfbMs": 1.735416999999984,
+          "htmlBytes": 71045,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 672704,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/contact",
+          "status": 200,
+          "ttfbMs": 1.7153749999999945,
+          "htmlBytes": 69368,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 672726,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/dndcyprus",
+          "status": 200,
+          "ttfbMs": 5.916832999999997,
+          "htmlBytes": 69719,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 670770,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/dndcyprus",
+          "status": 200,
+          "ttfbMs": 5.792790999999966,
+          "htmlBytes": 42227,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 632357,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": false,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/press",
+          "status": 200,
+          "ttfbMs": 6.139708999999982,
+          "htmlBytes": 58123,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 710923,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/press",
+          "status": 200,
+          "ttfbMs": 5.131665999999996,
+          "htmlBytes": 56335,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 710982,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/privacy",
+          "status": 200,
+          "ttfbMs": 2.117084000000034,
+          "htmlBytes": 86686,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656771,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/privacy",
+          "status": 200,
+          "ttfbMs": 2.116457999999966,
+          "htmlBytes": 84344,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 656851,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/terms",
+          "status": 200,
+          "ttfbMs": 4.432165999999995,
+          "htmlBytes": 66025,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656163,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/en/terms",
+          "status": 200,
+          "ttfbMs": 5.518000000000029,
+          "htmlBytes": 64781,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "en",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 656243,
+          "cssBytes": 139858,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/blog",
+          "status": 200,
+          "ttfbMs": 4.76887499999998,
+          "htmlBytes": 54162,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656163,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+          "status": 200,
+          "ttfbMs": 60.387459000000035,
+          "htmlBytes": 63078,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656163,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+          "status": 200,
+          "ttfbMs": 13.514292000000012,
+          "htmlBytes": 63573,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656163,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+          "status": 200,
+          "ttfbMs": 10.556375000000003,
+          "htmlBytes": 61664,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656163,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+          "status": 200,
+          "ttfbMs": 9.858791999999994,
+          "htmlBytes": 62184,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656163,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/qr",
+          "status": 200,
+          "ttfbMs": 4.735957999999982,
+          "htmlBytes": 18292,
+          "cache": "s-maxage=86400, stale-while-revalidate=31449600",
+          "edgeCache": null,
+          "encoding": "gzip",
+          "language": "tr",
+          "scriptCount": 10,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 610201,
+          "cssBytes": 139866,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": false,
+          "oldOfficeLink": false
+        }
+      ],
+      "assets": [
+        {
+          "url": "/_next/static/chunks/5cedbe3d28acc407.js",
+          "status": 200,
+          "bytes": 32858,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/ed432eccdaca5a7e.js",
+          "status": 200,
+          "bytes": 118418,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/9dc88527b93ac6dc.js",
+          "status": 200,
+          "bytes": 223561,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/turbopack-addab8c1a62bc67e.js",
+          "status": 200,
+          "bytes": 10250,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/ff1a16fafef87110.js",
+          "status": 200,
+          "bytes": 282,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": null,
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/7340adf74ff47ec0.js",
+          "status": 200,
+          "bytes": 30717,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/0a4cd96607a3b69d.js",
+          "status": 200,
+          "bytes": 42286,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/b2e275ddee71259f.js",
+          "status": 200,
+          "bytes": 22356,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/5f93cb58c2f26d93.js",
+          "status": 200,
+          "bytes": 6472,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/d07f562729b08e55.js",
+          "status": 200,
+          "bytes": 31230,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/6f48cd20165ae41e.js",
+          "status": 200,
+          "bytes": 29452,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/80c08d4196cb7a7d.js",
+          "status": 200,
+          "bytes": 39524,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/d42915fb9112c99f.js",
+          "status": 200,
+          "bytes": 41816,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/d3c5026bee4306a7.js",
+          "status": 200,
+          "bytes": 682,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": null,
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/a6dad97d9634a72d.js",
+          "status": 200,
+          "bytes": 112594,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f85c27e3430bc364.js",
+          "status": 200,
+          "bytes": 25139,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/b33de76553fbcb74.css",
+          "status": 200,
+          "bytes": 6538,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/1b53dcfc35424ff2.css",
+          "status": 200,
+          "bytes": 133328,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/media/1bffadaabf893a1e-s.p.7cd81963.woff2",
+          "status": 200,
+          "bytes": 85272,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+          "status": 200,
+          "bytes": 48432,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/media/a88409fdd7dc121c-s.p.62b55a98.woff2",
+          "status": 200,
+          "bytes": 68224,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2",
+          "status": 200,
+          "bytes": 35508,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/chunks/840d2c7b1f0a1149.js",
+          "status": 200,
+          "bytes": 3533,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/8115c4d0596bb106.js",
+          "status": 200,
+          "bytes": 21087,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f7b00863506d7ec3.js",
+          "status": 200,
+          "bytes": 29046,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/37adfc18198d3def.js",
+          "status": 200,
+          "bytes": 29496,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/1ecd488f906706eb.js",
+          "status": 200,
+          "bytes": 39505,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/e584d71715dc91f7.css",
+          "status": 200,
+          "bytes": 6530,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/eceb31508d10e183.js",
+          "status": 200,
+          "bytes": 14950,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f7d83e01095e323b.js",
+          "status": 200,
+          "bytes": 14995,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/44b66d70e343dc84.js",
+          "status": 200,
+          "bytes": 39539,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/9166fca499605a29.js",
+          "status": 200,
+          "bytes": 46004,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/ffdd7cdded2c17c0.js",
+          "status": 200,
+          "bytes": 24376,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/c5854c2779e4d0be.js",
+          "status": 200,
+          "bytes": 41816,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/d417497c7cd19ebc.js",
+          "status": 200,
+          "bytes": 39434,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/38ab4978e1c33f7e.js",
+          "status": 200,
+          "bytes": 46001,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/15a6dd6f42cc902c.js",
+          "status": 200,
+          "bytes": 31766,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f72a14edd684039c.js",
+          "status": 200,
+          "bytes": 42825,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/d138a3c527628aab.js",
+          "status": 200,
+          "bytes": 31763,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/3f5fcc3945795101.js",
+          "status": 200,
+          "bytes": 42731,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/211940217f9c259d.js",
+          "status": 200,
+          "bytes": 32161,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/8b02becf0eb91b8a.js",
+          "status": 200,
+          "bytes": 42139,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/fe3717135ee5351b.js",
+          "status": 200,
+          "bytes": 32158,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/8604211eb4391030.js",
+          "status": 200,
+          "bytes": 42001,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/c39159574aa0965c.js",
+          "status": 200,
+          "bytes": 56608,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/6617eb399810ae1f.js",
+          "status": 200,
+          "bytes": 22464,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/a22ed95c5a2f0903.js",
+          "status": 200,
+          "bytes": 34268,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/35e167d58af74e57.js",
+          "status": 200,
+          "bytes": 28175,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/1687aebddfff4c62.js",
+          "status": 200,
+          "bytes": 28092,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/e046985d81012895.js",
+          "status": 200,
+          "bytes": 29100,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/7b590a8363090bfd.js",
+          "status": 200,
+          "bytes": 24774,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/ba1299e76b4cc6af.js",
+          "status": 200,
+          "bytes": 29297,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/33448d4e32c5d6a8.js",
+          "status": 200,
+          "bytes": 14092,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/b9f19a55728a6a07.js",
+          "status": 200,
+          "bytes": 43256,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/a12a2f5361ff7c40.js",
+          "status": 200,
+          "bytes": 107817,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/02e6db86a340b63f.js",
+          "status": 200,
+          "bytes": 41816,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/9a4747506191ff99.js",
+          "status": 200,
+          "bytes": 43041,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/adfd3e6c93e1cca2.js",
+          "status": 200,
+          "bytes": 10364,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/3d531846da629fdc.js",
+          "status": 200,
+          "bytes": 10501,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/23d6164e70f35d6f.js",
+          "status": 200,
+          "bytes": 16541,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f9b9d54e4e493540.js",
+          "status": 200,
+          "bytes": 16483,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/3d5be4e1769faef0.js",
+          "status": 200,
+          "bytes": 14607,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/b2c5c0a8d33eee40.js",
+          "status": 200,
+          "bytes": 12913,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/26c0e6b442a120bd.js",
+          "status": 200,
+          "bytes": 19806,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/8ff0973b230ec0d8.js",
+          "status": 200,
+          "bytes": 12944,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/3ec7cb0e723a444b.js",
+          "status": 200,
+          "bytes": 12923,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/80865ffcb221629e.js",
+          "status": 200,
+          "bytes": 608,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": null,
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/8f2a9948718fa722.js",
+          "status": 200,
+          "bytes": 14096,
+          "cache": "public, max-age=31536000, immutable",
+          "encoding": "gzip",
+          "kind": "scripts"
+        }
+      ],
+      "retiredOffices": [
+        {
+          "path": "/tr/dndturkiye",
+          "status": 404,
+          "location": null
+        },
+        {
+          "path": "/en/dndturkiye",
+          "status": 404,
+          "location": null
+        },
+        {
+          "path": "/dndturkiye",
+          "status": 404,
+          "location": null
+        }
+      ]
+    }
+  },
+  "live": {
+    "origin": "https://www.dndcyprus.com",
+    "routes": [
+      {
+        "path": "/tr",
+        "performanceScore": 93,
+        "lcpMs": 3216.609,
+        "fcpMs": 1116.609,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 736248,
+        "requests": 47,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=75",
+            "bytes": 39854,
+            "estimatedSavingsBytes": 18987
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2FBEST-SOCIOCULTURAL-GOLD.png&w=384&q=75",
+            "bytes": 19464,
+            "estimatedSavingsBytes": 18178
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2FBEST-NEWCOMER.png&w=384&q=75",
+            "bytes": 18524,
+            "estimatedSavingsBytes": 17296
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2FBEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png&w=384&q=75",
+            "bytes": 19526,
+            "estimatedSavingsBytes": 16779
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 70 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 90 ms"
+          }
+        ]
+      },
+      {
+        "path": "/en",
+        "performanceScore": 96,
+        "lcpMs": 2752.1059999999998,
+        "fcpMs": 1102.106,
+        "tbtMs": 0,
+        "cls": 0.0001426577240783032,
+        "transferBytes": 738904,
+        "requests": 49,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+            "selector": "body.inter_fd091ad6-module__giF-bG__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=75",
+            "bytes": 39854,
+            "estimatedSavingsBytes": 18987
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2FBEST-SOCIOCULTURAL-GOLD.png&w=384&q=75",
+            "bytes": 19464,
+            "estimatedSavingsBytes": 18178
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2FBEST-NEWCOMER.png&w=384&q=75",
+            "bytes": 18524,
+            "estimatedSavingsBytes": 17296
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2FBEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png&w=384&q=75",
+            "bytes": 19526,
+            "estimatedSavingsBytes": 16779
+          }
+        ],
+        "thirdPartyBytes": 0,
+        "thirdPartyRequestCount": 0,
+        "thirdPartyDomains": [],
+        "diagnostics": [
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 70 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "displayValue": "Est savings of 80 ms"
+          }
+        ]
+      },
+      {
+        "path": "/tr/contact",
+        "performanceScore": 99,
+        "lcpMs": 2234.7275,
+        "fcpMs": 1043.2315000000003,
+        "tbtMs": 0,
+        "cls": 0.000139988042982138,
+        "transferBytes": 1261393,
+        "requests": 87,
+        "warnings": [],
+        "lcpNodes": [
+          {
+            "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+            "selector": "body.inter_19d2945c-module__e4KC9a__variable > div.fixed > p#_R_1aivb_-body",
+            "snippet": "<p id=\"_R_1aivb_-body\" class=\"mt-1.5 text-[13px] leading-relaxed text-[rgba(20,21,23,0.72)]\">"
+          }
+        ],
+        "imageOpportunities": [
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2Fdndofis.JPG&w=1920&q=75",
+            "bytes": 99382,
+            "estimatedSavingsBytes": 95048
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2Fofis.jpg&w=1920&q=75",
+            "bytes": 66570,
+            "estimatedSavingsBytes": 62036
+          },
+          {
+            "url": "https://www.dndcyprus.com/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=75",
+            "bytes": 39854,
+            "estimatedSavingsBytes": 18987
+          }
+        ],
+        "thirdPartyBytes": 472808,
+        "thirdPartyRequestCount": 34,
+        "thirdPartyDomains": [
+          "www.google.com",
+          "maps.gstatic.com",
+          "maps.googleapis.com"
+        ],
+        "diagnostics": [
+          {
+            "id": "cache-insight",
+            "title": "Use efficient cache lifetimes",
+            "displayValue": "Est savings of 13 KiB"
+          },
+          {
+            "id": "image-delivery-insight",
+            "title": "Improve image delivery",
+            "displayValue": "Est savings of 172 KiB"
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "displayValue": "Est savings of 14 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree"
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests"
+          }
+        ]
+      }
+    ],
+    "inventory": {
+      "measuredAt": "2026-10-12T14:24:59.797Z",
+      "origin": "https://www.dndcyprus.com",
+      "units": "Decoded uncompressed bytes for initial HTML-linked assets; server TTFB is this workstation connection only",
+      "routes": [
+        {
+          "path": "/tr",
+          "status": 200,
+          "ttfbMs": 171.75041700000003,
+          "htmlBytes": 127885,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 17,
+          "cssCount": 6,
+          "fontPreloads": 4,
+          "scriptsBytes": 890623,
+          "cssBytes": 148288,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en",
+          "status": 200,
+          "ttfbMs": 83.29591600000003,
+          "htmlBytes": 126754,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 18,
+          "cssCount": 6,
+          "fontPreloads": 2,
+          "scriptsBytes": 890837,
+          "cssBytes": 148280,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/projects",
+          "status": 200,
+          "ttfbMs": 92.58566700000029,
+          "htmlBytes": 73375,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 14,
+          "cssCount": 6,
+          "fontPreloads": 4,
+          "scriptsBytes": 794090,
+          "cssBytes": 148288,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/projects",
+          "status": 200,
+          "ttfbMs": 359.8053749999999,
+          "htmlBytes": 71822,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 15,
+          "cssCount": 6,
+          "fontPreloads": 2,
+          "scriptsBytes": 794238,
+          "cssBytes": 148280,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/lagoon-verde",
+          "status": 200,
+          "ttfbMs": 86.56645799999978,
+          "htmlBytes": 161554,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 808967,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/lagoon-verde",
+          "status": 200,
+          "ttfbMs": 449.5085830000007,
+          "htmlBytes": 160123,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 808937,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/perla-ii",
+          "status": 200,
+          "ttfbMs": 198.32795799999985,
+          "htmlBytes": 148468,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 797589,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/perla-ii",
+          "status": 200,
+          "ttfbMs": 496.1688750000003,
+          "htmlBytes": 147283,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 797615,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/perla",
+          "status": 200,
+          "ttfbMs": 205.31845799999974,
+          "htmlBytes": 149071,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 797323,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/perla",
+          "status": 200,
+          "ttfbMs": 75.39075000000048,
+          "htmlBytes": 147894,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 797322,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/la-joya",
+          "status": 200,
+          "ttfbMs": 425.74095899999975,
+          "htmlBytes": 131208,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 779267,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/la-joya",
+          "status": 200,
+          "ttfbMs": 94.51474999999937,
+          "htmlBytes": 130847,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 779547,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/mariachi",
+          "status": 200,
+          "ttfbMs": 152.13895800000046,
+          "htmlBytes": 93804,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 750072,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/mariachi",
+          "status": 200,
+          "ttfbMs": 502.1683750000002,
+          "htmlBytes": 92507,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 750117,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/gecitkale",
+          "status": 200,
+          "ttfbMs": 412.44445800000085,
+          "htmlBytes": 90929,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 751275,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/gecitkale",
+          "status": 200,
+          "ttfbMs": 74.77612500000032,
+          "htmlBytes": 89776,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 16,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 751580,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/about",
+          "status": 200,
+          "ttfbMs": 250.47416599999997,
+          "htmlBytes": 102399,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 16,
+          "cssCount": 4,
+          "fontPreloads": 4,
+          "scriptsBytes": 871698,
+          "cssBytes": 143074,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/about",
+          "status": 200,
+          "ttfbMs": 367.981667,
+          "htmlBytes": 100852,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 17,
+          "cssCount": 4,
+          "fontPreloads": 2,
+          "scriptsBytes": 871604,
+          "cssBytes": 143066,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/team",
+          "status": 200,
+          "ttfbMs": 290.783707999999,
+          "htmlBytes": 86399,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 667255,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/team",
+          "status": 200,
+          "ttfbMs": 461.8875000000007,
+          "htmlBytes": 84893,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 667488,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/contact",
+          "status": 200,
+          "ttfbMs": 79.29733300000044,
+          "htmlBytes": 69271,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "HIT",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 673092,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/contact",
+          "status": 200,
+          "ttfbMs": 264.2737499999985,
+          "htmlBytes": 67674,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 673135,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/dndturkiye",
+          "status": 200,
+          "ttfbMs": 377.7627500000017,
+          "htmlBytes": 60398,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 673007,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/dndturkiye",
+          "status": 200,
+          "ttfbMs": 474.76850000000013,
+          "htmlBytes": 58627,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 673010,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/dndcyprus",
+          "status": 200,
+          "ttfbMs": 414.9797920000001,
+          "htmlBytes": 69733,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 671315,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/dndcyprus",
+          "status": 200,
+          "ttfbMs": 361.9698750000007,
+          "htmlBytes": 42091,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 632809,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": false,
+          "oldOfficeLink": false
+        },
+        {
+          "path": "/tr/press",
+          "status": 200,
+          "ttfbMs": 382.6540839999998,
+          "htmlBytes": 58137,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 711468,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/press",
+          "status": 200,
+          "ttfbMs": 369.03208300000006,
+          "htmlBytes": 56365,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 15,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 711543,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/privacy",
+          "status": 200,
+          "ttfbMs": 383.6770830000005,
+          "htmlBytes": 86674,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 657316,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/privacy",
+          "status": 200,
+          "ttfbMs": 512.3352080000004,
+          "htmlBytes": 84345,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 14,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 657409,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/terms",
+          "status": 200,
+          "ttfbMs": 378.6577499999985,
+          "htmlBytes": 66013,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656708,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/en/terms",
+          "status": 200,
+          "ttfbMs": 460.98979099999997,
+          "htmlBytes": 64782,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "en",
+          "scriptCount": 13,
+          "cssCount": 2,
+          "fontPreloads": 2,
+          "scriptsBytes": 656801,
+          "cssBytes": 135788,
+          "fontsBytes": 83940,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/blog",
+          "status": 200,
+          "ttfbMs": 380.62024999999994,
+          "htmlBytes": 54176,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "PRERENDER",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656708,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+          "status": 200,
+          "ttfbMs": 1500.1915840000001,
+          "htmlBytes": 63105,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "MISS",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656708,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/blog/dnd-cyprus-gold-award-propertync-2025",
+          "status": 200,
+          "ttfbMs": 485.24895800000013,
+          "htmlBytes": 63587,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "MISS",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656708,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/blog/dnd-cyprus-new-year-celebration-2023",
+          "status": 200,
+          "ttfbMs": 437.718667000001,
+          "htmlBytes": 61678,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "MISS",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656708,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        },
+        {
+          "path": "/tr/blog/dnd-homes-30000-konut-buyume-plani-2024",
+          "status": 200,
+          "ttfbMs": 429.9985000000015,
+          "htmlBytes": 62198,
+          "cache": "public, max-age=0, must-revalidate",
+          "edgeCache": "MISS",
+          "encoding": "br",
+          "language": "tr",
+          "scriptCount": 12,
+          "cssCount": 2,
+          "fontPreloads": 4,
+          "scriptsBytes": 656708,
+          "cssBytes": 135796,
+          "fontsBytes": 237436,
+          "nativeHero": false,
+          "legalName": true,
+          "oldOfficeLink": true
+        }
+      ],
+      "assets": [
+        {
+          "url": "/_next/static/chunks/5cedbe3d28acc407.js",
+          "status": 200,
+          "bytes": 32858,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/ed432eccdaca5a7e.js",
+          "status": 200,
+          "bytes": 118418,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/9dc88527b93ac6dc.js",
+          "status": 200,
+          "bytes": 223561,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/turbopack-addab8c1a62bc67e.js",
+          "status": 200,
+          "bytes": 10711,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/ff1a16fafef87110.js",
+          "status": 200,
+          "bytes": 282,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/7340adf74ff47ec0.js",
+          "status": 200,
+          "bytes": 30717,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/109bf09d11a08337.js",
+          "status": 200,
+          "bytes": 42277,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/fb59e9c35fa0614b.js",
+          "status": 200,
+          "bytes": 23119,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/5f93cb58c2f26d93.js",
+          "status": 200,
+          "bytes": 6472,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/dd6de41916f4dc7b.js",
+          "status": 200,
+          "bytes": 30560,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/e85339cd9142c418.js",
+          "status": 200,
+          "bytes": 39494,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/2db7b77476deaae7.js",
+          "status": 200,
+          "bytes": 35727,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/d3c5026bee4306a7.js",
+          "status": 200,
+          "bytes": 682,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/89b7801e36ebff32.js",
+          "status": 200,
+          "bytes": 116196,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/d42915fb9112c99f.js",
+          "status": 200,
+          "bytes": 41816,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/a6dad97d9634a72d.js",
+          "status": 200,
+          "bytes": 112594,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f85c27e3430bc364.js",
+          "status": 200,
+          "bytes": 25139,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/b33de76553fbcb74.css",
+          "status": 200,
+          "bytes": 6538,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/abf1e4eb11da72dc.css",
+          "status": 200,
+          "bytes": 129258,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/febab3fae21381e6.css",
+          "status": 200,
+          "bytes": 4183,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/ded2596e0d5cee92.css",
+          "status": 200,
+          "bytes": 3095,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/30718e32e17299a4.css",
+          "status": 200,
+          "bytes": 4868,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/d46bf7227d6a9604.css",
+          "status": 200,
+          "bytes": 346,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/media/1bffadaabf893a1e-s.p.7cd81963.woff2",
+          "status": 200,
+          "bytes": 85272,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+          "status": 200,
+          "bytes": 48432,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/media/a88409fdd7dc121c-s.p.62b55a98.woff2",
+          "status": 200,
+          "bytes": 68224,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/media/e8f2fbee2754df70-s.p.9b7a96b4.woff2",
+          "status": 200,
+          "bytes": 35508,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "fonts"
+        },
+        {
+          "url": "/_next/static/chunks/cbeec44a774ae06f.js",
+          "status": 200,
+          "bytes": 3533,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/5861d5ffca365fdc.js",
+          "status": 200,
+          "bytes": 21863,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/87a3875536cf001b.js",
+          "status": 200,
+          "bytes": 28376,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/8074472ea38d3189.js",
+          "status": 200,
+          "bytes": 39547,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/25e20b9b0c05e5d3.js",
+          "status": 200,
+          "bytes": 35795,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/e584d71715dc91f7.css",
+          "status": 200,
+          "bytes": 6530,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "css"
+        },
+        {
+          "url": "/_next/static/chunks/f6b47c2e7bec61b0.js",
+          "status": 200,
+          "bytes": 21186,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/7da07ae2d450faf1.js",
+          "status": 200,
+          "bytes": 21241,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/567a5b366793b02c.js",
+          "status": 200,
+          "bytes": 39619,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/16acb2ba0d988188.js",
+          "status": 200,
+          "bytes": 47391,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/e9b7dc8da2f85599.js",
+          "status": 200,
+          "bytes": 23433,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/c5854c2779e4d0be.js",
+          "status": 200,
+          "bytes": 41816,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/383988a6dc20f62a.js",
+          "status": 200,
+          "bytes": 39499,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/1941ff567ddaf95d.js",
+          "status": 200,
+          "bytes": 47388,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/cf379333204b77ed.js",
+          "status": 200,
+          "bytes": 33153,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f40ec2d465a4f980.js",
+          "status": 200,
+          "bytes": 42479,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/84718a414bd2735f.js",
+          "status": 200,
+          "bytes": 33150,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/de1a8ee8ece16526.js",
+          "status": 200,
+          "bytes": 42415,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/444d34491554cc58.js",
+          "status": 200,
+          "bytes": 33548,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/171b87cec99fb5a8.js",
+          "status": 200,
+          "bytes": 41818,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/12449a67b319dea6.js",
+          "status": 200,
+          "bytes": 33545,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/011bbcd2269763d9.js",
+          "status": 200,
+          "bytes": 41727,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/473f7f8a4d605806.js",
+          "status": 200,
+          "bytes": 57310,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/e2afeeb1cf0f3f08.js",
+          "status": 200,
+          "bytes": 23407,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/bdff3bf7f4e103ea.js",
+          "status": 200,
+          "bytes": 34090,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/97d072b6cee72e06.js",
+          "status": 200,
+          "bytes": 28115,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/6367b8379f89e4e8.js",
+          "status": 200,
+          "bytes": 28067,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/74392fdcd9c3135d.js",
+          "status": 200,
+          "bytes": 28920,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/fe0ddb8953c96550.js",
+          "status": 200,
+          "bytes": 23831,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/31fa537bb0e2b83d.js",
+          "status": 200,
+          "bytes": 29132,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f80ec5c4a3643850.js",
+          "status": 200,
+          "bytes": 13830,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/435f7824de870ed5.js",
+          "status": 200,
+          "bytes": 43148,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/02e6db86a340b63f.js",
+          "status": 200,
+          "bytes": 41816,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/be507e5e4d2447d0.js",
+          "status": 200,
+          "bytes": 42961,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/1d9d7f6149fdd4f3.js",
+          "status": 200,
+          "bytes": 10547,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/cfbe669c99bae37a.js",
+          "status": 200,
+          "bytes": 10687,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/ff54323de9a53364.js",
+          "status": 200,
+          "bytes": 16384,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/27cfd6d48835c77f.js",
+          "status": 200,
+          "bytes": 16334,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/085194ec0506cca2.js",
+          "status": 200,
+          "bytes": 16299,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/91b4ce88f9e617ee.js",
+          "status": 200,
+          "bytes": 16209,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/3d5be4e1769faef0.js",
+          "status": 200,
+          "bytes": 14607,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/b2c5c0a8d33eee40.js",
+          "status": 200,
+          "bytes": 12913,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/5aab68dc6b1eef37.js",
+          "status": 200,
+          "bytes": 19806,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/8ff0973b230ec0d8.js",
+          "status": 200,
+          "bytes": 12944,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/f90da9f5d4f0579d.js",
+          "status": 200,
+          "bytes": 12926,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": "br",
+          "kind": "scripts"
+        },
+        {
+          "url": "/_next/static/chunks/80865ffcb221629e.js",
+          "status": 200,
+          "bytes": 608,
+          "cache": "public,max-age=31536000,immutable",
+          "encoding": null,
+          "kind": "scripts"
+        }
+      ],
+      "retiredOffices": [
+        {
+          "path": "/tr/dndturkiye",
+          "status": 200,
+          "location": null
+        },
+        {
+          "path": "/en/dndturkiye",
+          "status": 200,
+          "location": null
+        },
+        {
+          "path": "/dndturkiye",
+          "status": 308,
+          "location": "/tr/dndturkiye"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "One screening sample per newly measured route; homepage local median has three earlier same-day samples.",
+    "Simulated mobile results are laboratory data, not real-user p75 or INP.",
+    "Local gzip and live Brotli/CDN environments differ; their scores cannot establish deployment gains.",
+    "No Search Console, CrUX or GA4 aggregate field data inspected. No accepted-advertising scenario measured.",
+    "Desktop results of 99 are earlier same-day samples for homepage and Perla II only.",
+    "TTFB values are individual workstation observations, including connection overhead, not global server benchmarks.",
+    "Lighthouse image savings are estimates; quality and text legibility require visual validation.",
+    "Full-scroll, all-slide, catalog, 360-tour and interaction sessions are not represented by the initial-load page totals."
+  ],
+  "sources": [
+    {
+      "title": "Google Web Vitals thresholds and field versus lab measurement",
+      "url": "https://web.dev/articles/vitals"
+    },
+    {
+      "title": "Google Optimize LCP",
+      "url": "https://web.dev/articles/optimize-lcp"
+    },
+    {
+      "title": "Next.js Image",
+      "url": "https://nextjs.org/docs/app/api-reference/components/image"
+    },
+    {
+      "title": "Next.js Lazy Loading",
+      "url": "https://nextjs.org/docs/app/guides/lazy-loading"
+    },
+    {
+      "title": "Chrome Improve image delivery",
+      "url": "https://developer.chrome.com/docs/performance/insights/image-delivery"
+    }
+  ]
+}

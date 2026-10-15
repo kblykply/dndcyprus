@@ -160,7 +160,7 @@ distances = [
                 border: `1px solid ${ORANGE}33`,
               }}
             >
-             Open on Map (or View on Map)
+             Open on Map
             </a>
           </div>
         </motion.div>

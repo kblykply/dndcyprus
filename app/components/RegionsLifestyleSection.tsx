@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import { portraitSource } from "@/lib/optimized-portraits";
 import { m as motion, type Variants } from "framer-motion";
 import Link from "next/link";
 
@@ -34,7 +35,7 @@ type Props = {
 };
 
 export default function AynurSpotlightAlt({
-  title = "Aynur Zorba Gülol",
+  title = "Aynur Zorba Güloğlu",
   role = "DND Cyprus Direktörü",
   subtitle = "Operasyonel mükemmeliyet, müşteri deneyimi ve sürdürülebilir projeler için stratejik liderlik sağlıyor.",
   quote = "“Güven, şeffaflık ve ekip ruhu — başarılarımızın temelinde bunlar var.”",
@@ -49,7 +50,7 @@ export default function AynurSpotlightAlt({
 }: Props) {
   return (
         <section
-      aria-label="Aynur Zorba Gülol — Spotlight"
+      aria-label="Aynur Zorba Güloğlu — Spotlight"
       className="relative overflow-visible bg-white"  // ⬅ remove -mb-8 / lg:-mb-12
       style={{ color: "#141517" }}
       data-bg="light"
@@ -70,7 +71,7 @@ export default function AynurSpotlightAlt({
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24 pb-0 min-h-[88vh] lg:min-h-[95vh]">
         {/* Absolutized portrait */}
         <img
-          src={image}
+          src={portraitSource(image)}
           alt={title}
           className="
             pointer-events-none select-none

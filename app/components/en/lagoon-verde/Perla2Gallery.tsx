@@ -38,11 +38,11 @@ subtitle = "Lagoon Verde Images",
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/lagoon-verde/1.jpg", alt: "Sun loungers with parasols on the lagoon pool shore, residence blocks behind" },
-        { src: "/lagoon-verde/2.jpg", alt: "Two-storey residences facing the pool among palm trees" },
-        { src: "/lagoon-verde/3.jpg", alt: "Residence facades and sun loungers lining the pool" },
-        { src: "/lagoon-verde/6.jpg", alt: "Lagoon pool at sunset with water slides and residence blocks" },
-        { src: "/lagoon-verde/5.jpg", alt: "Beach-entry lagoon pool with palm trees and a poolside restaurant" },
+        { src: "/lagoon-verde/1.jpg", alt: "Lagoon Verde project image 1" },
+        { src: "/lagoon-verde/2.jpg", alt: "Lagoon Verde project image 2" },
+        { src: "/lagoon-verde/3.jpg", alt: "Lagoon Verde project image 3" },
+        { src: "/lagoon-verde/6.jpg", alt: "Lagoon Verde project image 4" },
+        { src: "/lagoon-verde/5.jpg", alt: "Lagoon Verde project image 5" },
       ],
     [items]
   );

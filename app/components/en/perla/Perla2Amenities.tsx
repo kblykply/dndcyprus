@@ -222,7 +222,7 @@ export default function LagoonVerde360Section() {
                   onClick={() => setIsPlaying(true)}
                   className="group relative h-full w-full"
                   style={{ cursor: "pointer" }}
-                  aria-label="360 Turu Başlat"
+                  aria-label="Start 360° Tour"
                 >
                   <Image
                     src={POSTER_IMAGE}
@@ -260,10 +260,10 @@ Start 360 Tour
                   <button
                     onClick={isFs ? exitFullscreen : enterFullscreen}
                     className="absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-xl bg-black/60 px-3 py-2 text-xs text-white backdrop-blur-md hover:bg-black/70"
-                    aria-label={isFs ? "Fullscreen'den çık" : "Fullscreen"}
+                    aria-label={isFs ? "Exit fullscreen" : "Fullscreen"}
                   >
                     {isFs ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-                    {isFs ? "Çık" : "Fullscreen"}
+                    {isFs ? "Exit" : "Fullscreen"}
                   </button>
                 </>
               )}

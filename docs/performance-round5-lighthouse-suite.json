@@ -1,0 +1,19 @@
+{
+  "measuredAt": "2026-10-14T12:00:11.830Z",
+  "buildId": "iafEpGHE8zJtg4QGvg7Fm",
+  "tasks": [
+    {
+      "phase": "round5-mobile",
+      "code": 0
+    },
+    {
+      "phase": "round5-desktop",
+      "code": 0
+    },
+    {
+      "phase": "round5-saved",
+      "code": 0
+    }
+  ],
+  "status": "passed"
+}

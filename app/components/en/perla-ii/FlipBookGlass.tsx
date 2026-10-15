@@ -65,7 +65,7 @@ export function FlipBookGlassBase({
   pdfUrl,
   bgImage = "/perla-ii/1.jpg",
   kicker = "LA JOYA PERLA II",
-  title = "Tanıtım Kataloğu",
+  title = "Project Brochure",
   pageAspect = 842 / 596,
   maxWidth = 2000,
   vhMaxRatio = 0.88,

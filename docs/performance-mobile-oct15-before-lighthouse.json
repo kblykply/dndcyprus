@@ -1,0 +1,793 @@
+{
+  "measuredAt": "2026-10-15T09:00:43.916Z",
+  "origin": "http://127.0.0.1:3100",
+  "phase": "mobile-oct15-before",
+  "device": "mobile",
+  "visit": "first visit",
+  "method": "Lighthouse 13.5 default simulated mobile throttling; first visit; laboratory data. Sample counts recorded per route.; initial filter ineffective; includes third-party measurement scripts",
+  "sampleCounts": {
+    "/tr": 3,
+    "/en": 3
+  },
+  "buildId": "q7N2_7Lo69LJ_eHfbK_uV",
+  "samples": [
+    {
+      "route": "/tr",
+      "sample": 1,
+      "score": 90,
+      "lcpMs": 3609.2906000000003,
+      "fcpMs": 1204.6453,
+      "tbtMs": 42.5,
+      "cls": 0.000139988042982138,
+      "transferBytes": 848688,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_1845486a-module__HXNRVa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 4.404
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 67.972
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "totalBytes": 21514,
+            "wastedMs": 452
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d7a06921ddf0b343.css",
+            "totalBytes": 1250,
+            "wastedMs": 152
+          }
+        ],
+        "unusedJavaScriptBytes": 171673,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-M944YNCLQ2",
+            "type": "Script",
+            "transferBytes": 193876,
+            "priority": "Low"
+          },
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=AW-18454433145&cx=c&gtm=4e6ad1",
+            "type": "Script",
+            "transferBytes": 166935,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "type": "Stylesheet",
+            "transferBytes": 21514,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/897ea38ffe46f226.js",
+            "type": "Script",
+            "transferBytes": 16706,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25715,
+        "Font": 117725,
+        "Image": 75064,
+        "Stylesheet": 22764,
+        "Script": 602142,
+        "Other": 4690,
+        "Fetch": 588
+      }
+    },
+    {
+      "route": "/tr",
+      "sample": 2,
+      "score": 90,
+      "lcpMs": 3609.1506000000004,
+      "fcpMs": 1204.5753,
+      "tbtMs": 30.5,
+      "cls": 0.000139988042982138,
+      "transferBytes": 848954,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_1845486a-module__HXNRVa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 8.614
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 68.972
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "totalBytes": 21514,
+            "wastedMs": 452
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d7a06921ddf0b343.css",
+            "totalBytes": 1250,
+            "wastedMs": 152
+          }
+        ],
+        "unusedJavaScriptBytes": 170085,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-M944YNCLQ2",
+            "type": "Script",
+            "transferBytes": 193876,
+            "priority": "Low"
+          },
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=AW-18454433145&cx=c&gtm=4e6ad1",
+            "type": "Script",
+            "transferBytes": 166935,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "type": "Stylesheet",
+            "transferBytes": 21514,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/897ea38ffe46f226.js",
+            "type": "Script",
+            "transferBytes": 16706,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25715,
+        "Font": 117725,
+        "Image": 75330,
+        "Stylesheet": 22764,
+        "Script": 602142,
+        "Other": 4690,
+        "Fetch": 588
+      }
+    },
+    {
+      "route": "/tr",
+      "sample": 3,
+      "score": 90,
+      "lcpMs": 3611.884,
+      "fcpMs": 1205.942,
+      "tbtMs": 50,
+      "cls": 0.000139988042982138,
+      "transferBytes": 848688,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_1845486a-module__HXNRVa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 5.673
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 74.459
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "totalBytes": 21514,
+            "wastedMs": 453
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d7a06921ddf0b343.css",
+            "totalBytes": 1250,
+            "wastedMs": 153
+          }
+        ],
+        "unusedJavaScriptBytes": 171739,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-M944YNCLQ2",
+            "type": "Script",
+            "transferBytes": 193876,
+            "priority": "Low"
+          },
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=AW-18454433145&cx=c&gtm=4e6ad1",
+            "type": "Script",
+            "transferBytes": 166935,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "type": "Stylesheet",
+            "transferBytes": 21514,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/897ea38ffe46f226.js",
+            "type": "Script",
+            "transferBytes": 16706,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25715,
+        "Font": 117725,
+        "Image": 75064,
+        "Stylesheet": 22764,
+        "Script": 602142,
+        "Other": 4690,
+        "Fetch": 588
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 4,
+      "score": 90,
+      "lcpMs": 3615.3852000000006,
+      "fcpMs": 1207.6926,
+      "tbtMs": 60,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 851405,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+          "selector": "body.inter_1845486a-module__9muZjW__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 4.952000015258789
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 74.38199998474121
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "totalBytes": 21514,
+            "wastedMs": 454
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4ed495cbe7dc8535.css",
+            "totalBytes": 1250,
+            "wastedMs": 154
+          }
+        ],
+        "unusedJavaScriptBytes": 171596,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-M944YNCLQ2",
+            "type": "Script",
+            "transferBytes": 193876,
+            "priority": "Low"
+          },
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=AW-18454433145&cx=c&gtm=4e6ad1",
+            "type": "Script",
+            "transferBytes": 166935,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "type": "Stylesheet",
+            "transferBytes": 21514,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/775833e7425da77a.js",
+            "type": "Script",
+            "transferBytes": 16592,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25105,
+        "Font": 117725,
+        "Image": 75064,
+        "Stylesheet": 22764,
+        "Script": 605469,
+        "Other": 4690,
+        "Fetch": 588
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 5,
+      "score": 90,
+      "lcpMs": 3609.6772,
+      "fcpMs": 1204.8386,
+      "tbtMs": 36,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 851405,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+          "selector": "body.inter_1845486a-module__9muZjW__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 6.738
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 70.682
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "totalBytes": 21514,
+            "wastedMs": 452
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4ed495cbe7dc8535.css",
+            "totalBytes": 1250,
+            "wastedMs": 152
+          }
+        ],
+        "unusedJavaScriptBytes": 171706,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-M944YNCLQ2",
+            "type": "Script",
+            "transferBytes": 193876,
+            "priority": "Low"
+          },
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=AW-18454433145&cx=c&gtm=4e6ad1",
+            "type": "Script",
+            "transferBytes": 166935,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "type": "Stylesheet",
+            "transferBytes": 21514,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/775833e7425da77a.js",
+            "type": "Script",
+            "transferBytes": 16592,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25105,
+        "Font": 117725,
+        "Image": 75064,
+        "Stylesheet": 22764,
+        "Script": 605469,
+        "Other": 4690,
+        "Fetch": 588
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 6,
+      "score": 90,
+      "lcpMs": 3615.5234,
+      "fcpMs": 1207.7617,
+      "tbtMs": 34,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 851405,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+          "selector": "body.inter_1845486a-module__9muZjW__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 6.563999984741211
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 81.67800001525879
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "totalBytes": 21514,
+            "wastedMs": 454
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/4ed495cbe7dc8535.css",
+            "totalBytes": 1250,
+            "wastedMs": 154
+          }
+        ],
+        "unusedJavaScriptBytes": 170958,
+        "imageSavingsBytes": 14753,
+        "largestAssets": [
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=G-M944YNCLQ2",
+            "type": "Script",
+            "transferBytes": 193876,
+            "priority": "Low"
+          },
+          {
+            "url": "https://www.googletagmanager.com/gtag/js?id=AW-18454433145&cx=c&gtm=4e6ad1",
+            "type": "Script",
+            "transferBytes": 166935,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=750&q=65",
+            "type": "Image",
+            "transferBytes": 36037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/7e540b5a8b3680b7.css",
+            "type": "Stylesheet",
+            "transferBytes": 21514,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/775833e7425da77a.js",
+            "type": "Script",
+            "transferBytes": 16592,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25105,
+        "Font": 117725,
+        "Image": 75064,
+        "Stylesheet": 22764,
+        "Script": 605469,
+        "Other": 4690,
+        "Fetch": 588
+      }
+    }
+  ],
+  "blockTracking": false,
+  "status": "passed",
+  "networkIsolationVerified": false,
+  "filterCorrection": "Requested filter was ineffective. This initial run includes third-party Google scripts. Use mobile-oct15-isolated-before for the application-only comparison."
+}

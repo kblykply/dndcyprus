@@ -13,7 +13,7 @@ const PROJECT_JSON_LD = {
   name: "La Joya",
   url: `${SITE_URL}/tr/la-joya`,
   description:
-    "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir projedir.",
+    "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan, 2025 yılında tamamlanmış butik bir konut projesidir.",
   image: `${SITE_URL}/la-joya/2.jpg`,
   address: {
     "@type": "PostalAddress",
@@ -49,11 +49,11 @@ title = "La Joya Öne Çıkan Bilgiler",
 subtitle = "Projenin temel özelliklerine hızlıca göz atın.",
 facts = [
   { label: "Lokasyon", value: "Long Beach, İskele", accent: "teal" },
-  { label: "Teslim", value: "Kasım 2025", accent: "orange" },
+  { label: "Tamamlanma Yılı", value: "2025", accent: "orange" },
   { label: "Tip", value: "Rezidans & Beach Club", accent: "teal" },
   { label: "Birim Sayısı", value: "74", accent: "orange" },
   { label: "Arsa Alanı", value: "6.360 m²", accent: "teal" },
-  { label: "Durum", value: "Devam Ediyor", accent: "orange" },
+  { label: "Durum", value: "Tamamlandı", accent: "orange" },
 ]
 ,
 

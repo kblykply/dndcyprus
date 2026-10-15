@@ -1,0 +1,262 @@
+{
+  "measuredAt": "2026-10-15T09:34:50.358Z",
+  "origin": "http://127.0.0.1:3100",
+  "phase": "mobile-oct15-desktop",
+  "device": "desktop",
+  "visit": "first visit",
+  "method": "Lighthouse 13.5 desktop preset; first visit; laboratory data. Sample counts recorded per route.; analytics/advertising endpoints blocked; application performance only",
+  "sampleCounts": {
+    "/tr": 1,
+    "/en": 1
+  },
+  "buildId": "1xDBqubpGQmxPvGS66w5v",
+  "samples": [
+    {
+      "route": "/tr",
+      "sample": 1,
+      "score": 100,
+      "lcpMs": 787.5233000000001,
+      "fcpMs": 247.5233,
+      "tbtMs": 0,
+      "cls": 0.00005200712138458395,
+      "transferBytes": 529739,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Lagoon Verde",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > h2.mt-3"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 10.682
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 73.474
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/79900c9e40149ba6.css",
+            "totalBytes": 20181
+          }
+        ],
+        "unusedJavaScriptBytes": 24456,
+        "imageSavingsBytes": 12668,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+            "type": "Image",
+            "transferBytes": 105969,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/79900c9e40149ba6.css",
+            "type": "Stylesheet",
+            "transferBytes": 20181,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/3adc6a2a5c797bf9.js",
+            "type": "Script",
+            "transferBytes": 17151,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/8878ce1d8ef3d3c9.js",
+            "type": "Script",
+            "transferBytes": 14977,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d07f562729b08e55.js",
+            "type": "Script",
+            "transferBytes": 11684,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25732,
+        "Font": 117725,
+        "Image": 119044,
+        "Stylesheet": 20181,
+        "Script": 242367,
+        "Other": 4690
+      }
+    },
+    {
+      "route": "/en",
+      "sample": 2,
+      "score": 100,
+      "lcpMs": 804.4525000000001,
+      "fcpMs": 244.4525,
+      "tbtMs": 0,
+      "cls": 0.00005083968128885386,
+      "transferBytes": 532428,
+      "fontBytes": 117725,
+      "lcpNode": [
+        {
+          "label": "Living spaces that bring modern architecture and comfort together under one roo…",
+          "selector": "div.relative > div.max-w-[720px] > div.rounded-3xl > p.mt-4"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 5.445
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 63.905
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/79900c9e40149ba6.css",
+            "totalBytes": 20181
+          }
+        ],
+        "unusedJavaScriptBytes": 24456,
+        "imageSavingsBytes": 12668,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/optimized/home-hero-1536.73f795ef81ef.avif",
+            "type": "Image",
+            "transferBytes": 105969,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2b6aca95.woff2",
+            "type": "Font",
+            "transferBytes": 74721,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.b645f510.woff2",
+            "type": "Font",
+            "transferBytes": 43004,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/ed432eccdaca5a7e.js",
+            "type": "Script",
+            "transferBytes": 32423,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/79900c9e40149ba6.css",
+            "type": "Stylesheet",
+            "transferBytes": 20181,
+            "priority": "VeryHigh"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/89a9850c16966737.js",
+            "type": "Script",
+            "transferBytes": 17032,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/c038246b39e063cc.js",
+            "type": "Script",
+            "transferBytes": 16598,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/d42915fb9112c99f.js",
+            "type": "Script",
+            "transferBytes": 15307,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/fedbb6788d480779.js",
+            "type": "Script",
+            "transferBytes": 15268,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/8878ce1d8ef3d3c9.js",
+            "type": "Script",
+            "transferBytes": 14977,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/f7b00863506d7ec3.js",
+            "type": "Script",
+            "transferBytes": 10917,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 25101,
+        "Font": 117725,
+        "Image": 119044,
+        "Stylesheet": 20181,
+        "Script": 245687,
+        "Other": 4690
+      }
+    }
+  ],
+  "blockTracking": true,
+  "status": "passed",
+  "networkIsolationVerified": true
+}

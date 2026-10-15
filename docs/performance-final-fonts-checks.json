@@ -1,0 +1,42 @@
+{
+  "measuredAt": "2026-10-14T10:11:29.145Z",
+  "status": "passed",
+  "checked": [
+    {
+      "locale": "tr",
+      "sans": "inter",
+      "heading": "montserrat",
+      "preloadedFonts": 2,
+      "loadedFonts": [
+        {
+          "family": "inter",
+          "weight": "100 900"
+        },
+        {
+          "family": "montserrat",
+          "weight": "300 500"
+        }
+      ],
+      "sansLoaded": true,
+      "headingLoaded": true
+    },
+    {
+      "locale": "en",
+      "sans": "inter",
+      "heading": "montserrat",
+      "preloadedFonts": 2,
+      "loadedFonts": [
+        {
+          "family": "inter",
+          "weight": "100 900"
+        },
+        {
+          "family": "montserrat",
+          "weight": "300 500"
+        }
+      ],
+      "sansLoaded": true,
+      "headingLoaded": true
+    }
+  ]
+}

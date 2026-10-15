@@ -4,6 +4,7 @@
 import LazyYouTube from "@/app/components/LazyYouTube";
 
 import React from "react";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, type Variants } from "framer-motion";
 
 const TEAL = "#27959b";
@@ -155,7 +156,7 @@ export default function GecitkaleOverview({
                 backdropFilter: "blur(10px)",
               }}
             >
-              <div className="aspect-video bg-black">
+              <div className="relative aspect-video bg-black">
                 {finalEmbed ? (
                   <LazyYouTube
                     videoId={YT_ID!}
@@ -165,10 +166,10 @@ export default function GecitkaleOverview({
                     query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=${YT_ID}`}
                   />
                 ) : (
-                  <img
+                  <DeferredFillImage fill quality={65} sizes="(min-width: 1280px) 592px, (min-width: 1024px) 50vw, 100vw"
                     src={imagePrimary}
                     alt="Geçitkale arsa genel görünüm"
-                    className="w-full h-full object-cover"
+                    className="object-cover"
                     loading="lazy"
                   />
                 )}

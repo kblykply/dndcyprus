@@ -1,0 +1,135 @@
+{
+  "measuredAt": "2026-10-12T17:57:54.491Z",
+  "origin": "http://127.0.0.1:3100",
+  "phase": "after-fonts",
+  "method": "Lighthouse 13.5 default simulated mobile throttling; first visit. Three TR homepage samples, one per other route; laboratory data.",
+  "buildId": "PIk-Z-g04sgmPqS6b2pCo",
+  "samples": [
+    {
+      "route": "/tr",
+      "sample": 1,
+      "score": 88,
+      "lcpMs": 3908.3508,
+      "fcpMs": 1208.3508,
+      "tbtMs": 1,
+      "cls": 0.000139988042982138,
+      "transferBytes": 582715,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr",
+      "sample": 2,
+      "score": 88,
+      "lcpMs": 3906.2529999999997,
+      "fcpMs": 1206.253,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 582715,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr",
+      "sample": 3,
+      "score": 83,
+      "lcpMs": 4390.359,
+      "fcpMs": 1881.1436,
+      "tbtMs": 39.99999999999909,
+      "cls": 0.000139988042982138,
+      "transferBytes": 582715,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/en",
+      "sample": 4,
+      "score": 88,
+      "lcpMs": 3907.785299999999,
+      "fcpMs": 1207.7853,
+      "tbtMs": 0,
+      "cls": 0.0001426577240783032,
+      "transferBytes": 585483,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Besides necessary cookies, with your permission we use Google Analytics, Micros…",
+          "selector": "body.inter_49cffcb9-module__nixIWG__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/team",
+      "sample": 5,
+      "score": 91,
+      "lcpMs": 3456.9202000000005,
+      "fcpMs": 1056.9202,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 471036,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Ozan Dökmecioğlu",
+          "selector": "div.mt-12 > article.group > div.relative > img.object-cover"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/about",
+      "sample": 6,
+      "score": 87,
+      "lcpMs": 3982.677074999999,
+      "fcpMs": 1204.3869,
+      "tbtMs": 0,
+      "cls": 0.000139988042982138,
+      "transferBytes": 601480,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "Zorunlu çerezlerin yanında, izninizle Google Analytics, Microsoft Clarity, Goog…",
+          "selector": "body.inter_49cffcb9-module__1DtLAa__variable > div.fixed > p#_R_1aivb_-body"
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "route": "/tr/qr",
+      "sample": 7,
+      "score": 88,
+      "lcpMs": 3904.4946999999997,
+      "fcpMs": 754.4947,
+      "tbtMs": 2,
+      "cls": 0,
+      "transferBytes": 551607,
+      "fontBytes": 0,
+      "lcpNode": [
+        {
+          "label": "Joy Cafe haftalık menüsü: Pazartesiden pazara günlük yemekler, kişi başı 280 TL…",
+          "selector": "body > main.qr-menu > img.qr-menu-image"
+        }
+      ],
+      "warnings": []
+    }
+  ]
+}

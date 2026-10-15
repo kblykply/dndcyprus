@@ -1,8 +1,10 @@
+import { MotionDiv, MotionSpan } from "@/app/components/performance/MotionElements";
 // app/components/home/OzanSpotlight.tsx
-"use client";
 
 import React from "react";
-import { m as motion } from "framer-motion";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
+import { portraitSource } from "@/lib/optimized-portraits";
+
 import type { Variants, Easing } from "framer-motion";
 import Link from "next/link";
 
@@ -42,7 +44,7 @@ export default function OzanSpotlight({
       data-bg="light"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 lg:pt-16 pb-0">
-        <motion.span
+        <MotionSpan
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
@@ -55,11 +57,11 @@ export default function OzanSpotlight({
           }}
         >
           Kurucu & Yönetim
-        </motion.span>
+        </MotionSpan>
 
         <div className="mt-6 grid gap-10 lg:grid-cols-2 items-stretch min-h-[78vh] lg:min-h-[86vh]">
           {/* LEFT: image */}
-          <motion.div
+          <MotionDiv
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -69,17 +71,17 @@ export default function OzanSpotlight({
             <div className="relative w-full h-full">
               <img
                 loading="lazy"
-                src={image}
+                src={portraitSource(image)}
                 alt={title}
                 draggable={false}
                 decoding="async"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[100%] lg:h-[105%] w-auto max-w-none object-contain pointer-events-none select-none"
               />
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* RIGHT: text */}
-          <motion.div
+          <MotionDiv
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -151,19 +153,16 @@ export default function OzanSpotlight({
                       className="h-10 w-36 flex items-center justify-center opacity-80 hover:opacity-100 transition"
                       title="Partner/Geçmiş Logo"
                     >
-                      <img
-                loading="lazy"
-                        src={src}
-                        alt="Partner/Geçmiş Logo"
-                        draggable={false}
-                        className="h-8 sm:h-9 w-auto max-h-10 object-contain filter grayscale hover:grayscale-0 transition will-change-filter select-none"
-                      />
+                      <div className="relative h-8 sm:h-9 w-36">
+                        <DeferredFillImage fill src={src} alt="Partner/Geçmiş Logo" sizes="144px" quality={75}
+                          draggable={false} className="object-contain filter grayscale hover:grayscale-0 transition select-none" />
+                      </div>
                     </li>
                   ))}
                 </ul>
               </div>
             ) : null}
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

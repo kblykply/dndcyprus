@@ -51,7 +51,7 @@ export default function Perla2LastUpdate({
 
   return (
     <section
-      aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
+      aria-label="La Joya Perla — Son İnşaat Güncellemesi"
       className="relative overflow-hidden"
       style={sectionStyle}
     >

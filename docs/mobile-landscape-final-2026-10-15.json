@@ -1,0 +1,57 @@
+{
+  "measuredAt": "2026-10-15T09:14:49.694Z",
+  "buildId": "xMQwwWcEuy1ihACX_E4OR",
+  "checked": [
+    {
+      "route": "/tr",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/en",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/tr/contact",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/en/contact",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/tr/perla-ii",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/en/perla-ii",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/tr/privacy",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    },
+    {
+      "route": "/en/privacy",
+      "width": 844,
+      "height": 390,
+      "issues": []
+    }
+  ],
+  "errors": [],
+  "pageErrors": [],
+  "status": "passed"
+}

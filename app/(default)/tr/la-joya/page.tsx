@@ -19,7 +19,7 @@ export const metadata = pageMetadata({
   path: "/la-joya",
   title: "La Joya Long Beach İskele | Loft ve Penthouse – DND Cyprus",
   description:
-    "Long Beach, İskele'de denize 500 m La Joya: 74 konutluk yatay mimari, 1+1 loft, 2+1 ve stüdyo penthouse, havuz, gym ve Mariachi Beach Club üyeliği. Bilgi alın.",
+    "2025’te tamamlanan La Joya, Long Beach, İskele’de denize 500 m: 74 konut, loft ve penthouse daireler, havuz ve Mariachi Beach Club üyeliği. Bilgi alın.",
   image: "/og/la-joya.jpg",
   imageAlt: "La Joya havuz kenarındaki loft konutlar",
 });
@@ -54,7 +54,7 @@ export default function HomePage() {
 <Perla2Location />
 <Perla2Timeline
 
-eyebrow="Kasım 2024 Güncellemesi" title="La Joya  – Son İnşaat Güncellemesi" description="Yakında Teslim edilecek La Joya Projesinde inşaat hızla ilerliyor." video={{ src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=z9erV672JTOhKtKz", type: "youtube", title: "La Joya  — Update", }} cta={{ label: "Tüm güncellemeleri gör", href: "https://www.youtube.com/@dndcyprus/videos" }}
+eyebrow="2025’te Tamamlandı" title="La Joya – Tamamlanan Proje" description="La Joya projesi 2025 yılında tamamlanmıştır. Aşağıdaki Kasım 2024 videosu, tamamlanma öncesindeki inşaat sürecinin arşiv kaydıdır." video={{ src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=z9erV672JTOhKtKz", type: "youtube", title: "La Joya — Kasım 2024 İnşaat Arşivi", }} cta={{ label: "Tüm videoları gör", href: "https://www.youtube.com/@dndcyprus/videos" }}
 
 />
 
@@ -63,7 +63,7 @@ eyebrow="Kasım 2024 Güncellemesi" title="La Joya  – Son İnşaat Güncelleme
 
  <QuarterLogoBadge
           logoSrc="/logos/lajoya.png"
-          alt="Your Project"
+          alt="La Joya"
           href="/tr"
           size={180}         // tweak the visible radius
           // hideOnMobile     // uncomment if you want to hide on small screens

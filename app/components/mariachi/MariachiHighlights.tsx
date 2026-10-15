@@ -1,6 +1,7 @@
 // app/components/mariachi/MariachiHighlights.tsx
 "use client";
 
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   m as motion,
@@ -310,11 +311,8 @@ export default function MariachiHighlights({
         }}
       >
         {/* Arka plan görseli */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${card.image})` }}
-          aria-hidden
-        />
+        <DeferredFillImage fill src={card.image} alt="" quality={65}
+          sizes="(min-width: 1280px) 600px, (min-width: 1024px) 50vw, 100vw" className="object-cover" aria-hidden />
         {/* Üstten aşağı hafif koyuluk (okunabilirlik) */}
         <div
           className="absolute inset-0"

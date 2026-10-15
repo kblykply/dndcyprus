@@ -1,0 +1,294 @@
+{
+  "measuredAt": "2026-10-14T10:25:13.977Z",
+  "origin": "http://127.0.0.1:3100",
+  "phase": "final-hub",
+  "device": "mobile",
+  "visit": "first visit",
+  "method": "Lighthouse 13.5 default simulated mobile throttling; first visit; laboratory data. Sample counts recorded per route.",
+  "sampleCounts": {
+    "/tr/dndcyprus": 1,
+    "/en/dndcyprus": 1
+  },
+  "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+  "samples": [
+    {
+      "route": "/tr/dndcyprus",
+      "sample": 1,
+      "score": 75,
+      "lcpMs": 11044.2842,
+      "fcpMs": 1055.9336,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 4976667,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "div.relative > div.mt-10 > button.group > div.absolute",
+          "selector": "div.relative > div.mt-10 > button.group > div.absolute"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 4.269
+          },
+          {
+            "subpart": "resourceLoadDelay",
+            "label": "Resource load delay",
+            "duration": 16.542
+          },
+          {
+            "subpart": "resourceLoadDuration",
+            "label": "Resource load duration",
+            "duration": 6.553
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 127.872
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/31bd60e0a149aa70.css",
+            "totalBytes": 21336,
+            "wastedMs": 453
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/72c31344c14c1484.css",
+            "totalBytes": 1240,
+            "wastedMs": 153
+          }
+        ],
+        "unusedJavaScriptBytes": 24744,
+        "imageSavingsBytes": 2386246,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/campain.png",
+            "type": "Image",
+            "transferBytes": 1979863,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lala.jpg",
+            "type": "Image",
+            "transferBytes": 582103,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lajoyaimage.jpg",
+            "type": "Image",
+            "transferBytes": 372947,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/2.jpg",
+            "type": "Image",
+            "transferBytes": 280007,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/1.jpg",
+            "type": "Image",
+            "transferBytes": 266695,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/3.jpg",
+            "type": "Image",
+            "transferBytes": 266215,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/kktc.ff08e0f764.webp",
+            "type": "Image",
+            "transferBytes": 200006,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/property_awards_2025-747.jpg",
+            "type": "Image",
+            "transferBytes": 191955,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/proaw.jpeg",
+            "type": "Image",
+            "transferBytes": 138046,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/DND.png",
+            "type": "Image",
+            "transferBytes": 136871,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/dndweb.33a891333c.webp",
+            "type": "Image",
+            "transferBytes": 77181,
+            "priority": "Low"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 12345,
+        "Font": 164373,
+        "Image": 4542172,
+        "Stylesheet": 22576,
+        "Script": 214689,
+        "Other": 4690,
+        "Fetch": 15822
+      }
+    },
+    {
+      "route": "/en/dndcyprus",
+      "sample": 2,
+      "score": 75,
+      "lcpMs": 9916.568649999997,
+      "fcpMs": 1054.7339,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 4578177,
+      "fontBytes": 164373,
+      "lcpNode": [
+        {
+          "label": "div.relative > div.mt-10 > button.group > div.absolute",
+          "selector": "div.relative > div.mt-10 > button.group > div.absolute"
+        }
+      ],
+      "warnings": [],
+      "findings": {
+        "lcpBreakdown": [
+          {
+            "subpart": "timeToFirstByte",
+            "label": "Time to first byte",
+            "duration": 2.811
+          },
+          {
+            "subpart": "resourceLoadDelay",
+            "label": "Resource load delay",
+            "duration": 14.653
+          },
+          {
+            "subpart": "resourceLoadDuration",
+            "label": "Resource load duration",
+            "duration": 9.317
+          },
+          {
+            "subpart": "elementRenderDelay",
+            "label": "Element render delay",
+            "duration": 101.807
+          }
+        ],
+        "renderBlocking": [
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/31bd60e0a149aa70.css",
+            "totalBytes": 21336,
+            "wastedMs": 452
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/56f8c6b83ab2439b.css",
+            "totalBytes": 1240,
+            "wastedMs": 152
+          }
+        ],
+        "unusedJavaScriptBytes": 25471,
+        "imageSavingsBytes": 2385257,
+        "largestAssets": [
+          {
+            "url": "http://127.0.0.1:3100/campain.png",
+            "type": "Image",
+            "transferBytes": 1979863,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lala.jpg",
+            "type": "Image",
+            "transferBytes": 582103,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lajoyaimage.jpg",
+            "type": "Image",
+            "transferBytes": 372947,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/2.jpg",
+            "type": "Image",
+            "transferBytes": 280007,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/lagoon-verde/1.jpg",
+            "type": "Image",
+            "transferBytes": 266695,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/kktc.ff08e0f764.webp",
+            "type": "Image",
+            "transferBytes": 200006,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/property_awards_2025-747.jpg",
+            "type": "Image",
+            "transferBytes": 191955,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/DND.png",
+            "type": "Image",
+            "transferBytes": 136871,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/inter_latin-s.p.2eb52788.woff2",
+            "type": "Font",
+            "transferBytes": 99037,
+            "priority": "High"
+          },
+          {
+            "url": "http://127.0.0.1:3100/optimized/dndweb.33a891333c.webp",
+            "type": "Image",
+            "transferBytes": 77181,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/chunks/9dc88527b93ac6dc.js",
+            "type": "Script",
+            "transferBytes": 70282,
+            "priority": "Low"
+          },
+          {
+            "url": "http://127.0.0.1:3100/_next/static/media/montserrat_latin-s.p.cc73ebac.woff2",
+            "type": "Font",
+            "transferBytes": 65336,
+            "priority": "High"
+          }
+        ]
+      },
+      "transferByType": {
+        "Document": 7166,
+        "Font": 164373,
+        "Image": 4137911,
+        "Stylesheet": 22576,
+        "Script": 225482,
+        "Other": 4690,
+        "Fetch": 15979
+      }
+    }
+  ],
+  "status": "passed"
+}

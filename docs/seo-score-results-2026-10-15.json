@@ -1,0 +1,95 @@
+{
+  "measuredAt": "2026-10-15T08:27:44.797Z",
+  "clientDate": "2026-10-15",
+  "tool": "Lighthouse 13.5.0, SEO category only",
+  "status": "measurement completed; no application changes needed to raise the measured local scores",
+  "localBuildId": "q7N2_7Lo69LJ_eHfbK_uV",
+  "localMobile": [
+    {
+      "route": "/tr",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/en",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/tr/projects",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/en/projects",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/tr/about",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/en/about",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/tr/blog/dnd-usa-quality-in-cyprus-interview-2025",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/en/dndcyprus",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/tr/qr",
+      "score": 100,
+      "failed": []
+    }
+  ],
+  "localDesktop": [
+    {
+      "route": "/tr",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/en",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/tr/qr",
+      "score": 100,
+      "failed": []
+    }
+  ],
+  "liveMobile": [
+    {
+      "route": "/tr",
+      "score": 100,
+      "failed": []
+    },
+    {
+      "route": "/en",
+      "score": 100,
+      "failed": []
+    }
+  ],
+  "contentPreservation": {
+    "comparedPages": 36,
+    "changed": []
+  },
+  "interpretation": "Local scores were already 100 at the beginning of this turn, after the previous technical SEO changes. There is no higher Lighthouse SEO score. No before/after score gain is claimed. The live homepage checks are separate from the unpublished local changes.",
+  "limits": [
+    "Only the listed pages/profiles received Lighthouse runs; all 36 public pages received the separate source/HTTP SEO checks.",
+    "The initial Lighthouse third-party filter was ineffective; measurement requests may have been sent. The helper is corrected. SEO scores are not affected by this filter issue.",
+    "Lighthouse SEO checks cover basic technical requirements. They do not measure rankings, keyword coverage, organic traffic or domain authority.",
+    "Structured data is a manual Lighthouse check and is not part of the numerical score; Google Rich Results Test was not run.",
+    "The previous technical SEO changes remain local and unpublished. Live Search Console indexing and field performance have not been inspected."
+  ]
+}

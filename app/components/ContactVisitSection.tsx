@@ -1,9 +1,9 @@
+import { MotionDiv, MotionH2, MotionP, MotionSpan, MotionUl } from "@/app/components/performance/MotionElements";
 // app/components/HomeCTA.tsx
-"use client";
 
 import React from "react";
 import Image from "next/image";
-import { m as motion, type Variants } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const TEAL = "#27959b";    // lagoon vibe
 const ORANGE = "#f15c34";  // sunset accent
@@ -101,7 +101,7 @@ export default function HomeCTA({
       {/* Content */}
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
         {/* Glass card */}
-        <motion.div
+        <MotionDiv
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
@@ -118,7 +118,7 @@ export default function HomeCTA({
         >
           {/* kicker (chip) */}
           {kicker && (
-            <motion.span
+            <MotionSpan
               variants={fadeUp}
               className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
               style={{
@@ -129,31 +129,31 @@ export default function HomeCTA({
               }}
             >
               {kicker}
-            </motion.span>
+            </MotionSpan>
           )}
 
           {/* title */}
-          <motion.h2
+          <MotionH2
             variants={fadeUp}
             className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-center"
           >
             {title}
-          </motion.h2>
+          </MotionH2>
 
           {/* subtitle */}
           {subtitle && (
-            <motion.p
+            <MotionP
               variants={fadeUp}
               className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-center"
               style={{ color: "rgba(255,255,255,0.85)" }}
             >
               {subtitle}
-            </motion.p>
+            </MotionP>
           )}
 
           {/* Highlights */}
           {highlights?.length > 0 && (
-            <motion.ul
+            <MotionUl
               variants={fadeUp}
               className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
               aria-label="Öne çıkanlar"
@@ -171,11 +171,11 @@ export default function HomeCTA({
                   {h}
                 </li>
               ))}
-            </motion.ul>
+            </MotionUl>
           )}
 
           {/* buttons */}
-          <motion.div
+          <MotionDiv
             variants={fadeUp}
             className="mt-8 flex items-center justify-center gap-3 flex-wrap"
           >
@@ -189,18 +189,7 @@ export default function HomeCTA({
                   border: `1px solid ${TEAL}66`,
                   boxShadow: `0 16px 36px ${TEAL}40`,
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.background = `linear-gradient(180deg, ${ORANGE}, ${ORANGE})`;
-                  e.currentTarget.style.boxShadow = `0 20px 44px ${ORANGE}44`;
-                  e.currentTarget.style.border = `1px solid ${ORANGE}66`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.background = `linear-gradient(180deg, ${TEAL}, ${TEAL})`;
-                  e.currentTarget.style.boxShadow = `0 16px 36px ${TEAL}40`;
-                  e.currentTarget.style.border = `1px solid ${TEAL}66`;
-                }}
+                data-cta-hover
               >
                 {primaryText}
               </a>
@@ -220,7 +209,7 @@ export default function HomeCTA({
                 {secondaryText}
               </a>
             )}
-          </motion.div>
+          </MotionDiv>
 
           {/* subtle underglow line */}
           <div
@@ -231,7 +220,7 @@ export default function HomeCTA({
                 "linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)",
             }}
           />
-        </motion.div>
+        </MotionDiv>
       </div>
 
       {/* Decorative corner orbs */}

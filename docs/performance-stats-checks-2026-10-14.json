@@ -1,0 +1,192 @@
+{
+  "measuredAt": "2026-10-14T10:05:36.596Z",
+  "status": "passed",
+  "results": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "background": "rgb(11, 11, 12)",
+      "color": "rgb(255, 255, 255)",
+      "opacity": "1",
+      "images": [
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F9.jpg&w=828&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 0,
+            "y": -704.25,
+            "width": 390,
+            "height": 1489.5,
+            "top": -704.25,
+            "right": 390,
+            "bottom": 785.25,
+            "left": 0
+          }
+        },
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fuu.jpg&w=750&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 29,
+            "y": 220.25,
+            "width": 332,
+            "height": 460,
+            "top": 220.25,
+            "right": 361,
+            "bottom": 680.25,
+            "left": 29
+          }
+        }
+      ],
+      "numbers": [
+        "30.000+",
+        "8+",
+        "4+"
+      ],
+      "overflow": false,
+      "optimizedBackgroundBytes": 59608,
+      "originalBytes": 329638,
+      "mime": "image/webp"
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "background": "rgb(11, 11, 12)",
+      "color": "rgb(255, 255, 255)",
+      "opacity": "1",
+      "images": [
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F9.jpg&w=3840&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 0,
+            "y": 27.375,
+            "width": 1440,
+            "height": 845,
+            "top": 27.375,
+            "right": 1440,
+            "bottom": 872.375,
+            "left": 0
+          }
+        },
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fuu.jpg&w=1200&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 745,
+            "y": 148.375,
+            "width": 546,
+            "height": 603,
+            "top": 148.375,
+            "right": 1291,
+            "bottom": 751.375,
+            "left": 745
+          }
+        }
+      ],
+      "numbers": [
+        "30.000+",
+        "8+",
+        "4+"
+      ],
+      "overflow": false,
+      "optimizedBackgroundBytes": 187080,
+      "originalBytes": 329638,
+      "mime": "image/webp"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "background": "rgb(11, 11, 12)",
+      "color": "rgb(255, 255, 255)",
+      "opacity": "1",
+      "images": [
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F9.jpg&w=828&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 0,
+            "y": -748.25,
+            "width": 390,
+            "height": 1533.5,
+            "top": -748.25,
+            "right": 390,
+            "bottom": 785.25,
+            "left": 0
+          }
+        },
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fuu.jpg&w=750&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 29,
+            "y": 220.25,
+            "width": 332,
+            "height": 460,
+            "top": 220.25,
+            "right": 361,
+            "bottom": 680.25,
+            "left": 29
+          }
+        }
+      ],
+      "numbers": [
+        "30.000+",
+        "8+",
+        "4+"
+      ],
+      "overflow": false,
+      "optimizedBackgroundBytes": 59608,
+      "originalBytes": 329638,
+      "mime": "image/webp"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "background": "rgb(11, 11, 12)",
+      "color": "rgb(255, 255, 255)",
+      "opacity": "1",
+      "images": [
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F9.jpg&w=3840&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 0,
+            "y": 27.375,
+            "width": 1440,
+            "height": 845,
+            "top": 27.375,
+            "right": 1440,
+            "bottom": 872.375,
+            "left": 0
+          }
+        },
+        {
+          "src": "http://127.0.0.1:3100/_next/image?url=%2Fuu.jpg&w=1200&q=65",
+          "loading": "eager",
+          "rect": {
+            "x": 745,
+            "y": 148.375,
+            "width": 546,
+            "height": 603,
+            "top": 148.375,
+            "right": 1291,
+            "bottom": 751.375,
+            "left": 745
+          }
+        }
+      ],
+      "numbers": [
+        "30.000+",
+        "8+",
+        "4+"
+      ],
+      "overflow": false,
+      "optimizedBackgroundBytes": 187080,
+      "originalBytes": 329638,
+      "mime": "image/webp"
+    }
+  ],
+  "errors": [],
+  "missing": []
+}

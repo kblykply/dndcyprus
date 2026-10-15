@@ -220,7 +220,7 @@ export default function LandMediaContact() {
                 >
                   <img
                     src={g.src}
-                    alt={g.alt || `Galeri görseli ${i + 1}`}
+                    alt={g.alt || `Gallery image ${i + 1}`}
                     className="h-36 md:h-40 w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                     loading="lazy"
                     draggable={false}
@@ -364,17 +364,17 @@ export default function LandMediaContact() {
             }}
           />
           <button
-            aria-label="Kapat"
+            aria-label="Close"
             onClick={() => setOpenIndex(null)}
             className="absolute top-4 right-4 z-50 rounded-full px-3 py-2 text-sm font-medium"
             style={{ background: "rgba(255,255,255,0.12)", color: "#fff", border: "1px solid rgba(255,255,255,0.28)" }}
           >
-            Kapat
+            Close
           </button>
 
           {/* Nav buttons */}
           <button
-            aria-label="Önceki"
+            aria-label="Previous"
             onClick={(e) => {
               e.stopPropagation();
               setOpenIndex((i) => (i === null ? null : (i - 1 + gallery.length) % gallery.length));
@@ -385,7 +385,7 @@ export default function LandMediaContact() {
             ←
           </button>
           <button
-            aria-label="Sonraki"
+            aria-label="Next"
             onClick={(e) => {
               e.stopPropagation();
               setOpenIndex((i) => (i === null ? null : (i + 1) % gallery.length));

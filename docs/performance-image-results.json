@@ -1,0 +1,329 @@
+{
+  "measuredAt": "2026-10-12T11:14:37.240Z",
+  "method": "Local production build, Chrome 390×844 at device scale 2; selected currentSrc body bytes, WebP Accept header; external requests blocked.",
+  "units": "bytes; individual selected image response bodies, not total page transfer",
+  "changes": [
+    "Photographic hero images use quality 65; floor plans retain default quality 75.",
+    "Responsive sizes on office photos and award ribbons.",
+    "Responsive WebP floor-plan previews on four project pages in both languages; enlarged originals retained.",
+    "Project list cards wait near the viewport and use responsive optimized images.",
+    "Removed default reference to absent Mariachi hero video; responsive hero image loads instead."
+  ],
+  "comparisons": [
+    {
+      "route": "/tr",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 47656,
+          "afterBytes": 42198,
+          "reductionPercent": 11,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=65",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/en",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 47656,
+          "afterBytes": 42198,
+          "reductionPercent": 11,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=65",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/tr/contact",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 47656,
+          "afterBytes": 42198,
+          "reductionPercent": 11,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "office",
+          "beforeBytes": 99382,
+          "afterBytes": 21476,
+          "reductionPercent": 78,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=1920&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=640&q=65",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/en/contact",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 47656,
+          "afterBytes": 42198,
+          "reductionPercent": 11,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F1.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "office",
+          "beforeBytes": 99382,
+          "afterBytes": 21476,
+          "reductionPercent": 78,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=1920&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fdndofis.JPG&w=640&q=65",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/tr/la-joya",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 42984,
+          "afterBytes": 37720,
+          "reductionPercent": 12,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": 973843,
+          "afterBytes": 44684,
+          "reductionPercent": 95,
+          "beforeUrl": "http://127.0.0.1:3100/la-joya-plan/4.png",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya-plan%2F4.png&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/en/la-joya",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 42984,
+          "afterBytes": 37720,
+          "reductionPercent": 12,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya%2F2.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": 973843,
+          "afterBytes": 44684,
+          "reductionPercent": 95,
+          "beforeUrl": "http://127.0.0.1:3100/la-joya-plan/4.png",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fla-joya-plan%2F4.png&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 56768,
+          "afterBytes": 50056,
+          "reductionPercent": 12,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F7.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F7.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": 316642,
+          "afterBytes": 11436,
+          "reductionPercent": 96,
+          "beforeUrl": "http://127.0.0.1:3100/perla-plans/1.png",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-plans%2F1.png&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 56768,
+          "afterBytes": 50056,
+          "reductionPercent": 12,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F7.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla%2F7.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": 316642,
+          "afterBytes": 11436,
+          "reductionPercent": 96,
+          "beforeUrl": "http://127.0.0.1:3100/perla-plans/1.png",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-plans%2F1.png&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/tr/perla-ii",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 85640,
+          "afterBytes": 75460,
+          "reductionPercent": 12,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-ii%2F1.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-ii%2F1.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": 253790,
+          "afterBytes": 10548,
+          "reductionPercent": 96,
+          "beforeUrl": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-ii-plans%2F7.png&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/en/perla-ii",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": 85640,
+          "afterBytes": 75460,
+          "reductionPercent": 12,
+          "beforeUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-ii%2F1.jpg&w=828&q=75",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-ii%2F1.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": 253790,
+          "afterBytes": 10548,
+          "reductionPercent": 96,
+          "beforeUrl": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fperla-ii-plans%2F7.png&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/tr/lagoon-verde",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": null,
+          "afterBytes": 55756,
+          "reductionPercent": null,
+          "beforeUrl": null,
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F5.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": null,
+          "afterBytes": 16964,
+          "reductionPercent": null,
+          "beforeUrl": null,
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde-interior%2Ffloor-plans%2Fstudio.webp&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/en/lagoon-verde",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": null,
+          "afterBytes": 55756,
+          "reductionPercent": null,
+          "beforeUrl": null,
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde%2F5.jpg&w=828&q=65",
+          "format": "image/webp"
+        },
+        {
+          "kind": "floorPlan",
+          "beforeBytes": null,
+          "afterBytes": 16964,
+          "reductionPercent": null,
+          "beforeUrl": null,
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Flagoon-verde-interior%2Ffloor-plans%2Fstudio.webp&w=750&q=75",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/tr/mariachi",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": null,
+          "afterBytes": 42158,
+          "reductionPercent": null,
+          "beforeUrl": null,
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fmariachi%2F7.jpg&w=828&q=65",
+          "format": "image/webp"
+        }
+      ]
+    },
+    {
+      "route": "/en/mariachi",
+      "images": [
+        {
+          "kind": "hero",
+          "beforeBytes": null,
+          "afterBytes": 42158,
+          "reductionPercent": null,
+          "beforeUrl": null,
+          "afterUrl": "http://127.0.0.1:3100/_next/image?url=%2Fmariachi%2F7.jpg&w=828&q=65",
+          "format": "image/webp"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "productionBuild": "passed",
+    "imageRoutesMeasured": 14,
+    "browserChecks": {
+      "status": "passed",
+      "combinations": 28,
+      "viewports": [
+        390,
+        1440
+      ],
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "checks": [
+        "No horizontal overflow",
+        "Hero and responsive floor-plan previews load",
+        "Full-resolution plan enlargement opens and closes",
+        "Project cards load near the viewport",
+        "No missing Mariachi video request",
+        "No runtime errors or missing local assets"
+      ]
+    }
+  },
+  "limitations": [
+    "Local mobile 390×844 at device scale 2; other screens and deployed CDN may select different widths.",
+    "Results compare delivered image bytes; do not establish a Lighthouse score or a production LCP improvement.",
+    "Original files remain available; asset directory size is not the amount downloaded by visitors."
+  ]
+}

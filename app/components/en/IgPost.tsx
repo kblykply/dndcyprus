@@ -1,15 +1,16 @@
 // app/components/social/InstagramSpotlight.tsx
 "use client";
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 import React, { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import { m as motion, type Variants } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper/types";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";

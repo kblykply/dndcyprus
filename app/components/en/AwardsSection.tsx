@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import Image from "next/image";
+import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, useInView } from "framer-motion";
 
 /* ------- Types & Data ------- */
@@ -175,9 +175,9 @@ export default function AwardsSection() {
                 requestAnimationFrame(() => setIsDragging(false));
               }}
               aria-roledescription="carousel"
-              aria-label="Ödüller şeridi"
+              aria-label="Awards carousel"
             >
-              <span className="sr-only">Kaydırarak değiştirin</span>
+              <span className="sr-only">Swipe to change</span>
               {trio.map((item, i) => {
                 const role = i === 0 ? "left" : i === 1 ? "center" : "right";
                 const target = POS[role as keyof typeof POS];
@@ -214,7 +214,7 @@ export default function AwardsSection() {
                     transition={{ type: "spring", stiffness: 280, damping: 26, mass: 0.65 }}
                     style={{ zIndex: target.zIndex }}
                     whileTap={{ scale: 0.98 }}
-                    aria-label={`Seç: ${item.title}`}
+                    aria-label={`Select: ${item.title}`}
                   >
                     <div
                       className={[
@@ -226,11 +226,13 @@ export default function AwardsSection() {
                         height: boxH as unknown as number,
                       }}
                     >
-                      <Image
+                      <DeferredFillImage
+                        rootMargin="0px"
                         src={item.ribbon}
                         alt={item.title}
                         fill
-                        sizes="(max-width: 768px) 42vw, 220px"
+                        // Tall ribbons occupy only part of their object-contain box.
+                        sizes={role === "center" ? "128px" : "72px"}
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}
                         className="object-contain select-none pointer-events-none"

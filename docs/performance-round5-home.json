@@ -1,0 +1,28 @@
+{
+  "measuredAt": "2026-10-14T11:50:54.665Z",
+  "status": "passed",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "checks": "completed La Joya slide, animated server content, optimized logos, visible stats/counters and deferred Perla background, contact CTA, hover, no overflow"
+    }
+  ],
+  "errors": [],
+  "missing": []
+}

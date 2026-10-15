@@ -21,7 +21,7 @@ const fadeUp: Variants = {
 export default function ProjectsCTA() {
   return (
     <section
-      aria-label="Projeler CTA"
+      aria-label="Project enquiries"
       className="relative isolate overflow-hidden"
       style={
         {

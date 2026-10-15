@@ -1,0 +1,39 @@
+{
+  "measuredAt": "2026-10-14T10:30:48.634Z",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "cards": 11,
+      "checks": "media cards, campaign popup, video iframe activates on click, close button, no overflow",
+      "thirdPartyPlayback": "blocked; not validated"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "cards": 9,
+      "checks": "media cards, campaign popup, video iframe activates on click, close button, no overflow",
+      "thirdPartyPlayback": "blocked; not validated"
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "current": {
+    "locale": "en",
+    "title": "Lagoon Verde Video"
+  },
+  "clickPoint": {
+    "rect": {
+      "x": 16,
+      "y": 292,
+      "width": 358,
+      "height": 280,
+      "top": 292,
+      "right": 374,
+      "bottom": 572,
+      "left": 16
+    },
+    "top": "<div class=\"relative flex h-full flex-col justify-between p-5 sm:p-6\"><div class=\"flex items-start justify-between gap-3\"><span class=\"inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em]\" style=\"background:#ffffff;color:#27959b;border:1px solid rgba(39,149,155,0.14);box-shadow:0 6px 18px rgba(20,21,23,0.06)\"><svg xmlns=\"http://www.w3.org/2000"
+  },
+  "status": "passed"
+}

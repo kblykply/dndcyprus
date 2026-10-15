@@ -155,7 +155,7 @@ export function persistAttribution() {
   if (mem.first && !getCookie(FIRST_TOUCH_COOKIE)) {
     setCookie(FIRST_TOUCH_COOKIE, JSON.stringify(mem.first), MAX_AGE);
   }
-  if (mem.last && mem.last.ts !== mem.lastWrittenTs) {
+  if (mem.last && (mem.last.ts !== mem.lastWrittenTs || !getCookie(LAST_TOUCH_COOKIE))) {
     setCookie(LAST_TOUCH_COOKIE, JSON.stringify(mem.last), MAX_AGE);
     mem.lastWrittenTs = mem.last.ts;
   }

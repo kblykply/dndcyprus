@@ -1,0 +1,66 @@
+{
+  "measuredAt": "2026-10-14T11:51:38.581Z",
+  "status": "passed",
+  "checked": [
+    {
+      "locale": "tr",
+      "sans": "\"DND Sans Cyrillic\", inter, \"inter Fallback\", sans-serif",
+      "heading": "\"DND Display Cyrillic\", montserrat, \"montserrat Fallback\", sans-serif",
+      "initialFonts": [
+        "inter",
+        "montserrat"
+      ],
+      "preloadedFonts": 2,
+      "loadedFonts": [
+        {
+          "family": "inter",
+          "weight": "100 900"
+        },
+        {
+          "family": "montserrat",
+          "weight": "300 500"
+        },
+        {
+          "family": "DND Sans Cyrillic",
+          "weight": "100 900"
+        },
+        {
+          "family": "DND Display Cyrillic",
+          "weight": "300 500"
+        }
+      ],
+      "sansLoaded": true,
+      "headingLoaded": true
+    },
+    {
+      "locale": "en",
+      "sans": "\"DND Sans Cyrillic\", inter, \"inter Fallback\", sans-serif",
+      "heading": "\"DND Display Cyrillic\", montserrat, \"montserrat Fallback\", sans-serif",
+      "initialFonts": [
+        "inter",
+        "montserrat"
+      ],
+      "preloadedFonts": 2,
+      "loadedFonts": [
+        {
+          "family": "inter",
+          "weight": "100 900"
+        },
+        {
+          "family": "montserrat",
+          "weight": "300 500"
+        },
+        {
+          "family": "DND Sans Cyrillic",
+          "weight": "100 900"
+        },
+        {
+          "family": "DND Display Cyrillic",
+          "weight": "300 500"
+        }
+      ],
+      "sansLoaded": true,
+      "headingLoaded": true
+    }
+  ]
+}

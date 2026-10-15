@@ -48,7 +48,7 @@ description = "DND Homes develops high-end residences in prime locations in Mass
       ref={sectionRef}
       id="dnd-homes"
       className="relative isolate px-4 sm:px-6 md:px-12 py-10 sm:py-14 lg:py-24 [color-scheme:light] bg-white"
-      aria-label="DND Homes Video Kartı"
+      aria-label="DND Homes video"
     >
       <div className="mx-auto max-w-7xl">
         {/* Single video card */}
@@ -295,10 +295,11 @@ function VideoHeroCard({
             src={imgSrc}
             alt={title}
             fill
-            sizes="(min-width: 1024px) 1000px, 100vw"
+            sizes="(min-width: 1280px) 1216px, 100vw"
             className="object-cover"
-            unoptimized
-            onLoadingComplete={() => setImgLoaded(true)}
+            quality={65}
+            unoptimized={!imgSrc.startsWith("/")}
+            onLoad={() => setImgLoaded(true)}
             onError={() => {
               setImgLoaded(false);
               setImgSrc((prev) => (prev === ytMax ? ytHQ : prev));
@@ -357,4 +358,3 @@ function VideoHeroCard({
     </div>
   );
 }
-  

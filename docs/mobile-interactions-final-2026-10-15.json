@@ -1,0 +1,114 @@
+{
+  "measuredAt": "2026-10-15T09:29:33.522Z",
+  "buildId": "1xDBqubpGQmxPvGS66w5v",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 320,
+      "height": 740,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "tr",
+      "width": 360,
+      "height": 800,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "tr",
+      "width": 390,
+      "height": 844,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "tr",
+      "width": 430,
+      "height": 932,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "tr",
+      "width": 768,
+      "height": 1024,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "tr",
+      "width": 844,
+      "height": 390,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "height": 740,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "en",
+      "width": 360,
+      "height": 800,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "en",
+      "width": 430,
+      "height": 932,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "en",
+      "width": 768,
+      "height": 1024,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "checks": "immediate touch menu; in-bounds drawer; accordion; scroll lock/restoration; focus/Escape; touch carousel; 44px pagination; pinch zoom; short landscape hero; floating menu"
+    },
+    {
+      "locale": "tr",
+      "width": 320,
+      "height": 740,
+      "checks": "fresh-visit consent fits narrow/landscape viewport and necessary-only choice remains tappable"
+    },
+    {
+      "locale": "tr",
+      "width": 844,
+      "height": 390,
+      "checks": "fresh-visit consent fits narrow/landscape viewport and necessary-only choice remains tappable"
+    },
+    {
+      "locale": "en",
+      "width": 320,
+      "height": 740,
+      "checks": "fresh-visit consent fits narrow/landscape viewport and necessary-only choice remains tappable"
+    },
+    {
+      "locale": "en",
+      "width": 844,
+      "height": 390,
+      "checks": "fresh-visit consent fits narrow/landscape viewport and necessary-only choice remains tappable"
+    },
+    {
+      "locale": "tr",
+      "width": 390,
+      "checks": "native horizontal touch swipe changes slide; vertical touch scroll remains available"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "checks": "native horizontal touch swipe changes slide; vertical touch scroll remains available"
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

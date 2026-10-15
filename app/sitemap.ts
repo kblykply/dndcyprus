@@ -19,7 +19,6 @@ const BILINGUAL: { path: string; priority: number; changeFrequency: Freq }[] = [
   { path: "/about", priority: 0.6, changeFrequency: "yearly" },
   { path: "/team", priority: 0.5, changeFrequency: "yearly" },
   { path: "/contact", priority: 0.7, changeFrequency: "yearly" },
-  { path: "/dndturkiye", priority: 0.6, changeFrequency: "yearly" },
   { path: "/dndcyprus", priority: 0.5, changeFrequency: "monthly" },
   { path: "/press", priority: 0.5, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
@@ -46,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...BLOG_POSTS.map((post) => ({
       url: abs("tr", `/blog/${post.slug}`),
       lastModified: post.date ? new Date(post.date) : undefined,
+      images: post.cover ? [new URL(post.cover, SITE_URL).href] : undefined,
       changeFrequency: "yearly" as const,
       priority: 0.5,
     })),

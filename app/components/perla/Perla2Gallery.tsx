@@ -37,11 +37,11 @@ export default function MariachiGalleryExpanding({
   const data: GalleryItem[] = useMemo(
     () =>
       items ?? [
-        { src: "/perla/1.jpg", alt: "Havuz" },
-        { src: "/perla/7.jpg", alt: "Plaj" },
-        { src: "/perla/3.jpg", alt: "Cabanalar" },
-        { src: "/perla/6.jpg", alt: "DJ Gecesi" },
-        { src: "/perla/8.jpg", alt: "Kokteyller" },
+        { src: "/perla/1.jpg", alt: "La Joya Perla proje görseli 1" },
+        { src: "/perla/7.jpg", alt: "La Joya Perla proje görseli 2" },
+        { src: "/perla/3.jpg", alt: "La Joya Perla proje görseli 3" },
+        { src: "/perla/6.jpg", alt: "La Joya Perla proje görseli 4" },
+        { src: "/perla/8.jpg", alt: "La Joya Perla proje görseli 5" },
 
 
       ],
@@ -64,7 +64,7 @@ export default function MariachiGalleryExpanding({
 
   return (
     <section
-      aria-label="Mariachi Beach Club — Galeri"
+      aria-label="La Joya Perla — Galeri"
       className="relative overflow-hidden"
       style={{ background: "#ffffff", color: "#141517" }}
       data-bg="light"

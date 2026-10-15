@@ -1,0 +1,109 @@
+{
+  "measuredAt": "2026-10-14T10:16:57.670Z",
+  "buildId": "4Es3zHr5GiwhBvpRTDxxh",
+  "checked": [
+    {
+      "locale": "tr",
+      "width": 390,
+      "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+    },
+    {
+      "locale": "tr",
+      "width": 1440,
+      "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "checks": "hero keyboard, dots, drag and wrap; drawer open/close; removed office absent; completed filter and search; consent preferences reopen/save"
+    },
+    {
+      "locale": "tr",
+      "project": "lagoon-verde",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/lagoon-verde-interior/floor-plans/studio.webp",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "tr",
+      "project": "la-joya",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/la-joya-plan/4.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "tr",
+      "project": "perla",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/perla-plans/1.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "tr",
+      "project": "perla-ii",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "tr",
+      "project": "perla-ii",
+      "width": 1440,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "en",
+      "project": "lagoon-verde",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/lagoon-verde-interior/floor-plans/studio.webp",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "en",
+      "project": "la-joya",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/la-joya-plan/4.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "en",
+      "project": "perla",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/perla-plans/1.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "en",
+      "project": "perla-ii",
+      "width": 390,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    },
+    {
+      "locale": "en",
+      "project": "perla-ii",
+      "width": 1440,
+      "galleryPanels": 5,
+      "planImage": "http://127.0.0.1:3100/perla-ii-plans/7.png",
+      "checks": "gallery panel expands and loads; floor-plan tabs; original-resolution lightbox; Escape closes; no overflow"
+    }
+  ],
+  "errors": [],
+  "missing": [],
+  "status": "passed"
+}

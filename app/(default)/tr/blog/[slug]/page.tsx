@@ -1,10 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { BLOG_POSTS } from "@/lib/blog";
 import { pageMetadata } from "@/lib/seo";
+import { blogPostingJsonLd } from "@/lib/structured-data";
+import JsonLd from "@/app/components/seo/JsonLd";
 
 export const dynamic = "force-static";
+// Posts are local source data; unknown slugs must return 404 before streaming.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+}
 
 function isHttpUrl(src?: string) {
   return !!src && (src.startsWith("http://") || src.startsWith("https://"));
@@ -18,15 +27,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   if (!post) {
-    return pageMetadata({
-      locale: "tr",
-      path: `/blog/${slug}`,
-      title: "Yazı bulunamadı | DND Cyprus",
-      description:
-        "Aradığınız blog yazısı bulunamadı. DND Cyprus blogundaki diğer haber ve röportajlara göz atabilirsiniz.",
-      singleLanguage: true,
-      noindex: true,
-    });
+    notFound();
   }
 
   const title = post.title.includes("DND") ? post.title : `${post.title} | DND Cyprus`;
@@ -61,11 +62,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   if (!post) {
-    return (
-      <main className="min-h-svh flex items-center justify-center bg-white text-black">
-        <p>Post not found</p>
-      </main>
-    );
+    notFound();
   }
 
   const { title, cover, date, author, content } = post;
@@ -86,6 +83,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
 
   return (
     <main className="min-h-svh bg-white text-black">
+      <JsonLd data={blogPostingJsonLd(post)} />
       {/* Header */}
       <section className="border-b border-black/10 bg-white/70 backdrop-blur-md">
         <div className="mx-auto max-w-[1200px] px-5 md:px-8 py-10">

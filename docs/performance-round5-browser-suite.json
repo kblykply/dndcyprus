@@ -1,0 +1,43 @@
+{
+  "measuredAt": "2026-10-14T11:50:43.761Z",
+  "buildId": "bf-lQskTU5a_bpG-nLnrD",
+  "jobs": [
+    {
+      "name": "home",
+      "output": "docs/performance-round5-home.json",
+      "code": 0,
+      "log": "tr 390 home passed\ntr 1440 home passed\nen 390 home passed\nen 1440 home passed\n"
+    },
+    {
+      "name": "loading",
+      "output": "docs/performance-round5-loading.json",
+      "code": 0,
+      "log": "tr 390 loading checks passed { originalBytes: 2200587, optimizedBytes: 53359 }\ntr 1440 loading checks passed { originalBytes: 2200587, optimizedBytes: 92785 }\nen 390 loading checks passed { originalBytes: 2200587, optimizedBytes: 53359 }\nen 1440 loading checks passed { originalBytes: 2200587, optimizedBytes: 92785 }\n"
+    },
+    {
+      "name": "media",
+      "output": "docs/performance-round5-media.json",
+      "code": 0,
+      "log": "tr 390 Sales {\"x\":166.921875,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Sales</button>\"}\ntr 390 Finance {\"x\":302.1875,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Finance</button>\"}\ntr 390 Leadership {\"x\":65.09375,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Leadership</button>\"}\ntr 390 All {\"x\":17,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background: rgba(20, 21, 23, 0.05); color: rgba(20, 21, 23, 0.75); border: 1px solid rgba(20, 21, 23, 0.08); box-shadow: none; backdrop-filter: blur(8px);\\\">All</button\"}\ntr 390 team passed\ntr 1440 Sales {\"x\":384.09375,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Sales</button>\"}\ntr 1440 Finance {\"x\":775.890625,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Finance</button>\"}\ntr 1440 Leadership {\"x\":163.453125,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Leadership</button>\"}\ntr 1440 All {\"x\":113,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background: rgba(20, 21, 23, 0.05); color: rgba(20, 21, 23, 0.75); border: 1px solid rgba(20, 21, 23, 0.08); box-shadow: none; backdrop-filter: blur(8px);\\\">All</button\"}\ntr 1440 team passed\nen 390 Sales {\"x\":166.921875,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Sales</button>\"}\nen 390 Finance {\"x\":302.1875,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Finance</button>\"}\nen 390 Leadership {\"x\":65.09375,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Leadership</button>\"}\nen 390 All {\"x\":17,\"y\":326.296875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background: rgba(20, 21, 23, 0.05); color: rgba(20, 21, 23, 0.75); border: 1px solid rgba(20, 21, 23, 0.08); box-shadow: none; backdrop-filter: blur(8px);\\\">All</button\"}\nen 390 team passed\nen 1440 Sales {\"x\":384.09375,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Sales</button>\"}\nen 1440 Finance {\"x\":775.890625,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Finance</button>\"}\nen 1440 Leadership {\"x\":163.453125,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background:rgba(20,21,23,0.05);color:rgba(20,21,23,0.75);border:1px solid rgba(20,21,23,0.08);box-shadow:none;backdrop-filter:blur(8px)\\\">Leadership</button>\"}\nen 1440 All {\"x\":113,\"y\":376.796875,\"top\":\"<button class=\\\"text-xs sm:text-sm px-3 py-1 rounded-full transition-colors\\\" style=\\\"background: rgba(20, 21, 23, 0.05); color: rgba(20, 21, 23, 0.75); border: 1px solid rgba(20, 21, 23, 0.08); box-shadow: none; backdrop-filter: blur(8px);\\\">All</button\"}\nen 1440 team passed\ntr about passed\ntr mariachi passed\ntr gecitkale passed\nen about passed\nen mariachi passed\nen gecitkale passed\n"
+    },
+    {
+      "name": "interactions",
+      "output": "docs/performance-round5-interactions.json",
+      "code": 0,
+      "log": "tr 390 navigation passed\ntr 1440 navigation passed\nen 390 navigation passed\nen 1440 navigation passed\ntr lagoon-verde 390 gallery/plan passed\ntr la-joya 390 gallery/plan passed\ntr perla 390 gallery/plan passed\ntr perla-ii 390 gallery/plan passed\ntr perla-ii 1440 gallery/plan passed\nen lagoon-verde 390 gallery/plan passed\nen la-joya 390 gallery/plan passed\nen perla 390 gallery/plan passed\nen perla-ii 390 gallery/plan passed\nen perla-ii 1440 gallery/plan passed\n"
+    },
+    {
+      "name": "hub",
+      "output": "docs/performance-round5-hub.json",
+      "code": 0,
+      "log": "tr media hub passed 11\nen media hub passed 9\n"
+    },
+    {
+      "name": "contact",
+      "output": "docs/performance-round5-contact.json",
+      "code": 0,
+      "log": "tr 390 contact maps passed\ntr 1440 contact maps passed\nen 390 contact maps passed\nen 1440 contact maps passed\n"
+    }
+  ],
+  "status": "passed"
+}

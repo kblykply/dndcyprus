@@ -12,7 +12,7 @@ const ORANGE = "#f15c34";
 type CSSVars = React.CSSProperties & { ["--stroke"]?: string };
 
 /* ------------------------------------------------------------------
-   Perla2LastUpdate – Only the latest construction update (video + text)
+   Perla2LastUpdate – Completed project and historical construction footage
    ------------------------------------------------------------------ */
 
 type Video = {
@@ -31,13 +31,13 @@ type Props = {
 };
 
 export default function Perla2LastUpdate({
-  eyebrow = "Kasım 2024 Güncellemesi",
-  title = "La Joya Son İnşaat Güncellemesi",
-  description = "Yakında Teslim edilecek La Joya Projesinde inşaat hızla ilerliyor. ",
+  eyebrow = "2025’te Tamamlandı",
+  title = "La Joya – Tamamlanan Proje",
+  description = "La Joya projesi 2025 yılında tamamlanmıştır. Aşağıdaki Kasım 2024 videosu, tamamlanma öncesindeki inşaat sürecinin arşiv kaydıdır.",
   video = {
     src: "https://www.youtube.com/embed/VDcbFkpEQhQ?si=pZzQhqiXy4Xp4pSd",
     type: "youtube",
-    title: "La Joya Perla II – İnşaat Güncellemesi",
+    title: "La Joya — Kasım 2024 İnşaat Arşivi",
   },
   cta,
 }: Props) {
@@ -51,7 +51,7 @@ export default function Perla2LastUpdate({
 
   return (
     <section
-      aria-label="La Joya Perla II — Son İnşaat Güncellemesi"
+      aria-label="La Joya — Tamamlanan Proje ve İnşaat Arşivi"
       className="relative overflow-hidden"
       style={sectionStyle}
     >
@@ -90,7 +90,7 @@ export default function Perla2LastUpdate({
               ) : (
                 <iframe
                   src={video.src}
-                  title={video.title || "Son İnşaat Güncellemesi"}
+                  title={video.title || "La Joya İnşaat Arşivi"}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -126,11 +126,11 @@ export default function Perla2LastUpdate({
             <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(20,21,23,0.75)" }}>
               <li className="flex items-start gap-2">
                 <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full" style={{ background: TEAL }} />
-                Kayıt, şantiye sorumlusunun haftalık saha turundan alınmıştır.
+                Video, tamamlanma öncesindeki inşaat sürecini göstermektedir.
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full" style={{ background: ORANGE }} />
-                Tarihler tanıtım amaçlıdır; resmi teslim programı satış ekibinden teyit edilmelidir.
+                La Joya, 2025 yılında tamamlanmış bir projedir.
               </li>
             </ul>
 

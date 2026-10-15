@@ -155,7 +155,7 @@ subtitle = "Within the La Joya Perla complex, you’ll find many amenities desig
 }: Props) {
   return (
     <section
-      aria-label="La Joya Perla — Proje Olanakları"
+      aria-label="La Joya Perla — Project Amenities"
       className="relative overflow-hidden"
       style={
         {
