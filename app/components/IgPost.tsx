@@ -5,8 +5,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import React, { useEffect, useRef, useState } from "react";
-import Script from "next/script";
+import React, { useState } from "react";
+import IgPhone, { type IgPost } from "@/app/components/social/IgPhone";
 import { m as motion, type Variants } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
@@ -15,19 +15,6 @@ import type { Swiper as SwiperType } from "swiper/types";
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 const BG_IMAGE = "/ins.jpg";
-
-/** Fixed viewport height for the IG card (clips long captions at the bottom) */
-const VIEWPORT_H_PX = 590; // ← increase/decrease to show more/less
-
-/** Keep a 9:16 viewport width for tall reels, then zoom the iframe a bit to kill side bars */
-const VIEWPORT_W_PX = Math.round((9 / 16) * VIEWPORT_H_PX); // ≈332 when height=590
-const ZOOM_CROP = 1.14; // 1.00–1.30 -> increase until side bars disappear
-
-declare global {
-  interface Window {
-    instgrm?: { Embeds?: { process: () => void } };
-  }
-}
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const fadeUp: Variants = {
@@ -56,18 +43,23 @@ const IG_URLS = [
   "https://www.instagram.com/p/DOVeAdtDJDv/",
 ];
 
+// Telefon mockup'ı için gönderilerin sitede barındırılan medyası (Instagram gömme kutusu yerine)
+const IG_MEDIA: Record<string, Omit<IgPost, "url">> = {
+  DQoFlJHjIa5: { kind: "image", media: "/instagram/DQoFlJHjIa5.webp", poster: "/instagram/DQoFlJHjIa5.webp", caption: "✨ Hayaller Gerçek Oldu: DND Cyprus, La Joya Rezidansları ve Tatil Köyü’nün Tamamlandığını Duyurdu" },
+  DP0mSn8gK1h: { kind: "image", media: "/instagram/DP0mSn8gK1h.webp", poster: "/instagram/DP0mSn8gK1h.webp", caption: "✨ Inspired by Nature, Designed for You 🌿" },
+  DNIOMH0MjBT: { kind: "reel", media: "/instagram/DNIOMH0MjBT.mp4", poster: "/instagram/DNIOMH0MjBT.webp", caption: "£900’DAN BAŞLAYAN TAKSİTLERLE!" },
+  DQGqJSyDMM7: { kind: "reel", media: "/instagram/DQGqJSyDMM7.mp4", poster: "/instagram/DQGqJSyDMM7.webp", caption: "North Cyprus — The Rising Star of the Mediterranean" },
+  DPD0UpLjKdL: { kind: "reel", media: "/instagram/DPD0UpLjKdL.mp4", poster: "/instagram/DPD0UpLjKdL.webp", caption: "La Joya: The First Project of the Collection, Trust in Investment, Prestige in Living" },
+  DOVeAdtDJDv: { kind: "reel", media: "/instagram/DOVeAdtDJDv.mp4", poster: "/instagram/DOVeAdtDJDv.webp", caption: "The Real Campaign by DND Cyprus. The Real Opportunity. Your Place at Lagoon Verde is Ready" },
+};
+const IG_POSTS: IgPost[] = IG_URLS.map((url) => ({ url, ...IG_MEDIA[url.split("/").filter(Boolean).pop() as string] }));
+const IG_LABELS = { follow: "Takip et", viewOnInstagram: "Instagram’da gör", reels: "Reels", awards: "Ödüller" };
+
 export default function InstagramSpotlight() {
-  useEffect(() => {
-    window?.instgrm?.Embeds?.process?.();
-  }, []);
+  const [activeIdx, setActiveIdx] = useState(0);
 
   return (
     <>
-      <Script
-        src="https://www.instagram.com/embed.js"
-        strategy="lazyOnload"
-        onLoad={() => window?.instgrm?.Embeds?.process?.()}
-      />
 
       <section
         aria-label="Instagram — Spotlight"
@@ -202,14 +194,13 @@ export default function InstagramSpotlight() {
                     const swiper = s as SwiperWithNav;
                     swiper.navigation?.init();
                     swiper.navigation?.update();
-                    window?.instgrm?.Embeds?.process?.();
                   }}
-                  onSlideChange={() => window?.instgrm?.Embeds?.process?.()}
+                  onSlideChange={(sw) => setActiveIdx(sw.realIndex)}
                   className="!h-auto w-full"
                 >
-                  {IG_URLS.map((url) => (
-                    <SwiperSlide key={url} className="grid place-items-center !h-auto py-2">
-                      <EmbedViewport url={url} />
+                  {IG_POSTS.map((post, i) => (
+                    <SwiperSlide key={post.url} className="grid place-items-center !h-auto py-4">
+                      <IgPhone post={post} active={i === activeIdx} labels={IG_LABELS} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -217,109 +208,7 @@ export default function InstagramSpotlight() {
             </motion.div>
           </div>
         </div>
-
-        {/* tighten default IG margins */}
-        <style jsx global>{`
-          .instagram-media { margin: 0 !important; min-width: 0 !important; width: 100% !important; }
-          .instagram-media iframe { margin: 0 !important; }
-        `}</style>
       </section>
     </>
   );
-}
-
-/** A fixed 9:16-ish viewport that center-crops the IG iframe by slightly scaling it.
- *  The viewport is centered in the column, so the card never “sticks” to the top.
- */
-function EmbedViewport({ url }: { url: string }) {
-  const { ref, inView } = useInView<HTMLDivElement>(true);
-  const [processed, setProcessed] = useState(false);
-
-  useEffect(() => {
-    if (inView && !processed) {
-      window?.instgrm?.Embeds?.process?.();
-      setProcessed(true);
-    }
-  }, [inView, processed]);
-
-  return (
-    <div className="relative" style={{ height: VIEWPORT_H_PX, width: VIEWPORT_W_PX }}>
-      {/* Clip anything that exceeds the viewport (caption/footer + scaled sides) */}
-      <div className="absolute inset-0 overflow-hidden rounded-2xl ring-1 ring-black/10 bg-white">
-        {/* Center the IG card and scale it to remove left/right black bars */}
-        <div className="absolute inset-0 grid place-items-center">
-          <div
-            ref={ref}
-            className="[&_.instagram-media]:!m-0"
-            style={{
-              transform: `scale(${ZOOM_CROP})`,
-              transformOrigin: "center center",
-              width: `${100 / ZOOM_CROP}%`,
-              height: `${100 / ZOOM_CROP}%`,
-            }}
-          >
-            {inView ? (
-              <blockquote
-                key={`${url}-nocaption`}
-                className="instagram-media"
-                data-instgrm-permalink={url}
-                data-instgrm-captioned="false"
-                data-instgrm-version="14"
-                style={{
-                  background: "#fff",
-                  border: 0,
-                  margin: 0,
-                  padding: 0,
-                  maxWidth: "100%",
-                  minWidth: 0,
-                }}
-              >
-                <a href={url} aria-label="View on Instagram" />
-              </blockquote>
-            ) : (
-              <div className="w-full h-full animate-pulse" style={{ background: "rgba(0,0,0,0.05)" }} />
-            )}
-          </div>
-        </div>
-
-        {/* soft fade at bottom edge for a cleaner crop */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-16"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,1) 100%)",
-          }}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* Tiny in-view hook */
-function useInView<T extends HTMLElement>(once = true) {
-  const ref = useRef<T | null>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setInView(true);
-            if (once) obs.unobserve(el);
-          }
-        });
-      },
-      { rootMargin: "200px" }
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [once]);
-
-  return { ref, inView };
 }
