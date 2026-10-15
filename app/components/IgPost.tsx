@@ -1,16 +1,10 @@
 // app/components/social/InstagramSpotlight.tsx
 "use client";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 import React, { useState } from "react";
 import IgPhone, { type IgPost } from "@/app/components/social/IgPhone";
 import { m as motion, type Variants } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Keyboard, A11y } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper/types";
 
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
@@ -26,12 +20,6 @@ const fadeUp: Variants = {
   },
 };
 
-type SwiperWithNav = SwiperType & {
-  navigation?: {
-    init: () => void;
-    update: () => void;
-  };
-};
 
 const IG_URLS = [
     "https://www.instagram.com/p/DQoFlJHjIa5/",
@@ -56,7 +44,9 @@ const IG_POSTS: IgPost[] = IG_URLS.map((url) => ({ url, ...IG_MEDIA[url.split("/
 const IG_LABELS = { follow: "Takip et", viewOnInstagram: "Instagram’da gör", reels: "Reels", awards: "Ödüller" };
 
 export default function InstagramSpotlight() {
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [idx, setIdx] = useState(0);
+  const n = IG_POSTS.length;
+  const go = (d: number) => setIdx((i) => (i + d + n) % n);
 
   return (
     <>
@@ -142,68 +132,46 @@ export default function InstagramSpotlight() {
               viewport={{ once: false, amount: 0.35 }}
               className="relative order-1 lg:order-2"
             >
-              <div className="relative h-full w-full grid place-items-center">
-                {/* Nav buttons */}
-                <button
-                  aria-label="Previous post"
-                  className="ig-prev absolute left-3 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full grid place-items-center backdrop-blur-sm hover:scale-105 transition pointer-events-auto"
-                  style={{ background: "#ffffff", boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M15 18l-6-6 6-6"
-                      stroke="#141517"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+              <div className="relative flex h-full w-full flex-col items-center justify-center py-4">
+                {/* Telefon sabit; oklar hemen yanında */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    aria-label="Önceki gönderi"
+                    onClick={() => go(-1)}
+                    className="absolute -left-[52px] sm:-left-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
+                    style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M15 18l-6-6 6-6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  <IgPhone post={IG_POSTS[idx]} labels={IG_LABELS} />
+                  <button
+                    type="button"
+                    aria-label="Sonraki gönderi"
+                    onClick={() => go(1)}
+                    className="absolute -right-[52px] sm:-right-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
+                    style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M9 6l6 6-6 6" stroke="#141517" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="mt-5 flex items-center gap-2">
+                  {IG_POSTS.map((p, i) => (
+                    <button
+                      key={p.url}
+                      type="button"
+                      aria-label={`Gönderi ${i + 1}`}
+                      aria-current={i === idx}
+                      onClick={() => setIdx(i)}
+                      className={`h-2 rounded-full transition-all ${i === idx ? "w-6" : "w-2 bg-black/20 hover:bg-black/35"}`}
+                      style={i === idx ? { background: TEAL } : undefined}
                     />
-                  </svg>
-                </button>
-                <button
-                  aria-label="Next post"
-                  className="ig-next absolute right-3 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full grid place-items-center backdrop-blur-sm hover:scale-105 transition pointer-events-auto"
-                  style={{ background: "#ffffff", boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path
-                      d="M9 6l6 6-6 6"
-                      stroke="#141517"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-
-                <Swiper
-                  modules={[Navigation, Pagination, Keyboard, A11y]}
-                  slidesPerView={1}
-                  centeredSlides
-                  loop
-                  allowTouchMove={false}
-                  simulateTouch={false}
-                  grabCursor={false}
-                  keyboard={{ enabled: true }}
-                  pagination={{ clickable: true }}
-                  navigation={{
-                    prevEl: ".ig-prev",
-                    nextEl: ".ig-next",
-                    disabledClass: "opacity-40 pointer-events-none",
-                  }}
-                  onInit={(s) => {
-                    const swiper = s as SwiperWithNav;
-                    swiper.navigation?.init();
-                    swiper.navigation?.update();
-                  }}
-                  onSlideChange={(sw) => setActiveIdx(sw.realIndex)}
-                  className="!h-auto w-full"
-                >
-                  {IG_POSTS.map((post, i) => (
-                    <SwiperSlide key={post.url} className="grid place-items-center !h-auto py-4">
-                      <IgPhone post={post} active={i === activeIdx} labels={IG_LABELS} />
-                    </SwiperSlide>
                   ))}
-                </Swiper>
+                </div>
               </div>
             </motion.div>
           </div>

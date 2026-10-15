@@ -460,8 +460,8 @@ useEffect(() => {
       },
       events: {
         onStateChange: (ev) => {
-          // 1 = oynuyor; kalite yükselsin diye kısa bir süre sonra kapak karesi kalkar
-          if (ev.data === 1) setTimeout(() => { if (mounted) setRevealed(true); }, 2200);
+          // 1 = oynuyor; kalite yükselsin ve YouTube'un açılış katmanı kaybolsun diye kapak ~4 sn sonra kalkar
+          if (ev.data === 1) setTimeout(() => { if (mounted) setRevealed(true); }, 4200);
         },
         onReady: (ev) => {
           if (!mounted) { ev.target.destroy(); return; }
@@ -543,16 +543,16 @@ useEffect(() => {
           toggleMute();
         }}
         aria-pressed={!muted}
-        className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium shadow-lg backdrop-blur-md swiper-no-swiping"
+        aria-label={muted ? "Unmute" : "Mute"}
+        className="absolute top-3 right-14 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
         style={{
-          background: muted ? `${ORANGE}1A` : `${TEAL}1A`,
+          background: "rgba(0,0,0,0.4)",
           color: "#fff",
           border: `1px solid ${muted ? `${ORANGE}66` : `${TEAL}66`}`,
         }}
         title={muted ? "Sesi Aç" : "Sesi Kapat"}
       >
         {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-        {muted ? "Unmute" : "Mute"}
       </button>
 
       {/* Bottom-right: Fullscreen */}
@@ -564,16 +564,16 @@ useEffect(() => {
           toggleFullscreen();
         }}
         aria-pressed={isFullscreen}
-        className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium shadow-lg backdrop-blur-md swiper-no-swiping"
+        aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+        className="absolute top-3 right-3 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
         style={{
-          background: `rgba(0,0,0,.25)`,
+          background: "rgba(0,0,0,0.4)",
           color: "#fff",
           border: `1px solid rgba(255,255,255,.35)`,
         }}
         title={isFullscreen ? "Tam Ekranı Kapat" : "Tam Ekran"}
       >
         {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-        {isFullscreen ? "Exit" : "Fullscreen"}
       </button>
     </div>
   );
@@ -704,16 +704,16 @@ function HostedVideoPanel({
           toggleMute();
         }}
         aria-pressed={!muted}
-        className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium shadow-lg backdrop-blur-md swiper-no-swiping"
+        aria-label={muted ? "Unmute" : "Mute"}
+        className="absolute top-3 right-14 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
         style={{
-          background: muted ? `${ORANGE}1A` : `${TEAL}1A`,
+          background: "rgba(0,0,0,0.4)",
           color: "#fff",
           border: `1px solid ${muted ? `${ORANGE}66` : `${TEAL}66`}`,
         }}
         title={muted ? "Sesi Aç" : "Sesi Kapat"}
       >
         {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-        {muted ? "Unmute" : "Mute"}
       </button>
 
       <button
@@ -724,16 +724,16 @@ function HostedVideoPanel({
           toggleFullscreen();
         }}
         aria-pressed={isFullscreen}
-        className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium shadow-lg backdrop-blur-md swiper-no-swiping"
+        aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+        className="absolute top-3 right-3 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
         style={{
-          background: `rgba(0,0,0,.25)`,
+          background: "rgba(0,0,0,0.4)",
           color: "#fff",
           border: `1px solid rgba(255,255,255,.35)`,
         }}
         title={isFullscreen ? "Tam Ekranı Kapat" : "Tam Ekran"}
       >
         {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
-        {isFullscreen ? "Exit" : "Fullscreen"}
       </button>
     </div>
   );

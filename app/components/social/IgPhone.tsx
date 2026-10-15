@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { AnimatePresence, m } from "framer-motion";
 
 /*
   Instagram gönderisini telefon mockup'ı içinde gösterir (Instagram gömme kutusu yerine).
   Medya sitede barındırılır (public/instagram), beğeni/yorum sayısı gösterilmez.
   - Reels: tam ekran dikey video, sağda ikonlar, altta hesap + açıklama
   - Fotoğraf: akış görünümü (profil satırı, kare görsel, ikonlar, açıklama)
-  Video yalnızca etkin slaytta oynar; diğerlerinde kapak karesi görünür ve video indirilmez.
+  Tek telefon çerçevesi sabit kalır; gönderi değişince yalnız ekran içeriği yumuşak geçişle değişir
+  (yalnız gösterilen gönderinin videosu indirilir ve oynar).
 */
 
 export type IgPost = {
@@ -30,45 +31,38 @@ const HIGHLIGHTS: { label: string; img: string }[] = [
 
 const USERNAME = "dndcyprus";
 
-export default function IgPhone({ post, active, labels }: { post: IgPost; active: boolean; labels: IgPhoneLabels }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (active) {
-      v.play().catch(() => {});
-    } else {
-      v.pause();
-      v.currentTime = 0;
-    }
-  }, [active]);
-
+export default function IgPhone({ post, labels }: { post: IgPost; labels: IgPhoneLabels }) {
   return (
-    <div className="relative mx-auto w-[260px] sm:w-[290px] lg:w-[300px]">
+    <div className="relative mx-auto w-[228px] sm:w-[240px] lg:w-[250px]">
       {/* Gövde */}
-      <div className="relative aspect-[9/19.2] rounded-[2.9rem] bg-[#0d0d0f] p-[9px] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45),0_0_0_1px_rgba(0,0,0,0.06)] ring-1 ring-white/10">
+      <div className="relative aspect-[9/19.2] rounded-[2.5rem] bg-[#0d0d0f] p-[8px] ring-1 ring-black/10">
         {/* Yan tuşlar */}
-        <span aria-hidden className="absolute -left-[3px] top-[22%] h-12 w-[3px] rounded-l bg-[#1b1b1f]" />
-        <span aria-hidden className="absolute -left-[3px] top-[33%] h-12 w-[3px] rounded-l bg-[#1b1b1f]" />
-        <span aria-hidden className="absolute -right-[3px] top-[27%] h-16 w-[3px] rounded-r bg-[#1b1b1f]" />
+        <span aria-hidden className="absolute -left-[3px] top-[22%] h-10 w-[3px] rounded-l bg-[#1b1b1f]" />
+        <span aria-hidden className="absolute -left-[3px] top-[32%] h-10 w-[3px] rounded-l bg-[#1b1b1f]" />
+        <span aria-hidden className="absolute -right-[3px] top-[27%] h-14 w-[3px] rounded-r bg-[#1b1b1f]" />
 
         {/* Ekran */}
-        <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2.35rem] bg-white">
+        <div className="relative h-full w-full overflow-hidden rounded-[2.05rem] bg-white">
           {/* Dinamik ada */}
-          <span aria-hidden className="absolute left-1/2 top-2.5 z-30 h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-black" />
+          <span aria-hidden className="absolute left-1/2 top-2 z-30 h-[20px] w-[76px] -translate-x-1/2 rounded-full bg-black" />
 
-          {post.kind === "reel" ? (
-            <ReelScreen post={post} labels={labels} videoRef={videoRef} active={active} />
-          ) : (
-            <FeedScreen post={post} labels={labels} />
-          )}
-
-          {/* Ana ekran çubuğu */}
-          <span
-            aria-hidden
-            className={`absolute bottom-1.5 left-1/2 z-30 h-[4px] w-[96px] -translate-x-1/2 rounded-full ${post.kind === "reel" ? "bg-white/80" : "bg-black/80"}`}
-          />
+          <AnimatePresence mode="wait" initial={false}>
+            <m.div
+              key={post.url}
+              className="absolute inset-0"
+              initial={{ opacity: 0, scale: 1.015 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.99 }}
+              transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {post.kind === "reel" ? <ReelScreen post={post} labels={labels} /> : <FeedScreen post={post} labels={labels} />}
+              {/* Ana ekran çubuğu */}
+              <span
+                aria-hidden
+                className={`absolute bottom-1.5 left-1/2 z-30 h-[4px] w-[84px] -translate-x-1/2 rounded-full ${post.kind === "reel" ? "bg-white/80" : "bg-black/80"}`}
+              />
+            </m.div>
+          </AnimatePresence>
         </div>
       </div>
     </div>
@@ -121,27 +115,17 @@ const Icon = {
   ),
 };
 
-function ReelScreen({
-  post,
-  labels,
-  videoRef,
-  active,
-}: {
-  post: IgPost;
-  labels: IgPhoneLabels;
-  videoRef: React.RefObject<HTMLVideoElement | null>;
-  active: boolean;
-}) {
+function ReelScreen({ post, labels }: { post: IgPost; labels: IgPhoneLabels }) {
   return (
     <div className="absolute inset-0 bg-black text-white">
       <video
-        ref={videoRef}
         src={post.media}
         poster={post.poster}
+        autoPlay
         muted
         loop
         playsInline
-        preload={active ? "auto" : "none"}
+        preload="auto"
         className="absolute inset-0 h-full w-full object-cover"
       />
       {/* okunabilirlik için üst/alt gölge */}
