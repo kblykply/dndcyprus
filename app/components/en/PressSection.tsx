@@ -209,11 +209,12 @@ description = 'News coverage and press releases featuring our brand.',
                   </h3>
                   <p className="mt-3 line-clamp-3 min-h-[3lh] text-[15px] leading-relaxed text-gray-600 sm:text-base">{shown.excerpt}</p>
                   <div className="mt-auto pt-5">
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500">
-                      <span className="inline-flex items-center gap-1">
-                        <Building2 className="h-3.5 w-3.5" /> {shown.outlet}
+                    {/* tek satır: uzun kaynak adı kısalır, kart yüksekliği haberden habere değişmez */}
+                    <div className="flex items-center gap-3 text-xs text-gray-500">
+                      <span className="inline-flex min-w-0 items-center gap-1">
+                        <Building2 className="h-3.5 w-3.5 shrink-0" /> <span className="truncate">{shown.outlet}</span>
                       </span>
-                      <span className="inline-flex items-center gap-1">
+                      <span className="inline-flex shrink-0 items-center gap-1">
                         <Calendar className="h-3.5 w-3.5" /> {fmtDate(shown.date)}
                       </span>
                     </div>
