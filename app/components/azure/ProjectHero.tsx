@@ -18,7 +18,7 @@ export default function ProjectHero({ slug, locale }: { slug: ProjectPage["slug"
       tags={[p.status[locale], p.location[locale], p.delivery[locale]]}
       chips={p.chips[locale]}
       ctas={[
-        { label: locale === "tr" ? "Fiyat ve kat planı iste" : "Request prices & floor plans", href: "#fiyat-al" },
+        { label: locale === "tr" ? "Fiyat ve kat planı iste" : "Request prices & floor plans", href: "#fiyat-al", track: "price_request_click" },
         ...(brochure ? [{ label: locale === "tr" ? "Broşür (PDF)" : "Brochure (PDF)", href: brochure, variant: "ghost" as const }] : []),
       ]}
     />

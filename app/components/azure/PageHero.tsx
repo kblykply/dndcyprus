@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 
-type Cta = { label: string; href: string; variant?: "coral" | "sea" | "glass" | "ghost" };
+type Cta = { label: string; href: string; variant?: "coral" | "sea" | "glass" | "ghost"; track?: string };
 
 type Props = {
   kicker?: string;
@@ -52,8 +52,8 @@ export default function PageHero({ kicker, title, lead, image, imageAlt = "", vi
                 {ctas.map((c) => {
                   const cls = `az-btn${c.variant && c.variant !== "coral" ? ` ${c.variant}` : ""}`;
                   return c.href.startsWith("#") || c.href.startsWith("http") || c.href.endsWith(".pdf")
-                    ? <a key={c.label} className={cls} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}>{c.label}</a>
-                    : <Link key={c.label} className={cls} href={c.href} prefetch={false}>{c.label}</Link>;
+                    ? <a key={c.label} className={cls} href={c.href} data-track={c.track} target={c.href.startsWith("http") ? "_blank" : undefined} rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}>{c.label}</a>
+                    : <Link key={c.label} className={cls} href={c.href} data-track={c.track} prefetch={false}>{c.label}</Link>;
                 })}
               </div>
             )}
