@@ -31,7 +31,7 @@ const PRESS_ITEMS: PressItem[] = [
   {
     id: "50fifty-2026-10-14",
     outlet: "50fifty Magazin",
-    title: "DND Cyprus’tan yerli halka Türk lirasıyla konut finansmanı",
+    title: "DND Cyprus’tan 60 aya kadar faizsiz, vade farksız TL konut modeli",
     url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
     date: "2026-10-14",
     cover: "/news/50fifty-tl-konut-finansmani.webp",

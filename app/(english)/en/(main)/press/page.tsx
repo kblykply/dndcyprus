@@ -31,7 +31,7 @@ const PRESS_ITEMS: PressItem[] = [
   {
     id: "50fifty-2026-10-14",
     outlet: "50fifty Magazin",
-    title: "DND Cyprus Brings Turkish Lira Home Financing to Local Residents",
+    title: "Up to 60 Months Interest-Free: DND Cyprus’ Turkish Lira Home Financing",
     url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
     date: "2026-10-14",
     cover: "/news/50fifty-tl-konut-finansmani.webp",
