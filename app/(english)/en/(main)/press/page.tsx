@@ -34,7 +34,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "DND Cyprus Brings Turkish Lira Home Financing to Local Residents",
     url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
     date: "2026-10-14",
-    cover: "/news/tl-odeme-plani.webp",
+    cover: "/news/50fifty-tl-konut-finansmani.webp",
     tags: ["TL Payment Model", "DND Cyprus"],
   },
   {
@@ -86,7 +86,7 @@ export default function HomePage() {
   return (
     <main className="bg-white relative w-full min-h-screen text-white overflow-x-hidden">
       <h1 className="sr-only">DND Cyprus in the Press</h1>
-   <PressSection items={PRESS_ITEMS} />
+   <PressSection items={PRESS_ITEMS} moreHref="" initialLimit={PRESS_ITEMS.length} />
 
 
     </main>

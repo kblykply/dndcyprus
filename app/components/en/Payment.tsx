@@ -643,7 +643,8 @@ function HostedVideoPanel({
       className="relative rounded-2xl overflow-hidden border bg-black shadow-[0_6px_24px_rgba(0,0,0,.45)] swiper-no-swiping"
       style={{ borderColor: "rgba(255,255,255,0.15)" }}
     >
-      <div className="relative aspect-video w-full swiper-no-swiping">
+      {/* Telefonda dikey video yatay kutuda çok küçük kalıyordu: mobilde 4:5, sm+ 16:9 */}
+      <div className="relative aspect-[4/5] w-full swiper-no-swiping sm:aspect-video">
         {video.poster && (
           // Dikey (9:16) videoda yan boşlukları aynı karenin bulanık hâli doldurur
           <img aria-hidden src={video.poster} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl" />

@@ -87,7 +87,7 @@ export default function PaymentModelPopup() {
         if (e.target === e.currentTarget) dismiss();
       }}
     >
-      <div className="relative flex max-h-[calc(100svh-2rem)] w-full max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 md:flex-row">
+      <div className="relative flex max-h-[calc(100svh-2rem)] w-full max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 md:w-auto md:flex-row">
         <button
           ref={closeRef}
           type="button"
@@ -98,8 +98,15 @@ export default function PaymentModelPopup() {
           <X size={18} />
         </button>
 
-        {/* Dikey (9:16) reel videosu */}
-        <div className="relative flex shrink-0 justify-center bg-black md:w-[46%]">
+        {/* Dikey (9:16) reel videosu — oran her ekranda korunur. Telefonda yükseklik ekrana göre
+            sınırlı (butonlar görünür kalsın); md+ yan yana düzende yükseklik ekran boyuna göre. */}
+        <div className="relative flex shrink-0 justify-center overflow-hidden bg-black">
+          <img
+            aria-hidden
+            src="/videos/tl-odeme-modeli.jpg"
+            alt=""
+            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl md:hidden"
+          />
           <video
             ref={videoRef}
             src="/videos/tl-odeme-modeli.mp4"
@@ -109,7 +116,7 @@ export default function PaymentModelPopup() {
             loop
             playsInline
             preload="auto"
-            className="aspect-[9/16] h-[46svh] w-auto object-cover md:h-auto md:max-h-[calc(100svh-2rem)] md:w-full"
+            className="relative aspect-[9/16] h-[32svh] w-auto object-cover min-[400px]:h-[38svh] sm:h-[44svh] md:h-[min(560px,calc(100svh-2rem))]"
           />
           <button
             type="button"
@@ -126,21 +133,21 @@ export default function PaymentModelPopup() {
           </button>
         </div>
 
-        <div className="flex flex-col justify-center gap-4 overflow-y-auto p-6 sm:p-8">
+        <div className="flex min-h-0 flex-col justify-center gap-3 overflow-y-auto p-5 sm:gap-4 sm:p-8 md:w-[420px] lg:w-[460px] [@media(max-height:500px)]:gap-2 [@media(max-height:500px)]:py-4">
           <span
             className="inline-block self-start rounded-full px-3 py-1 text-[12px] uppercase tracking-wide"
             style={{ background: `${TEAL}44`, border: `1px solid ${TEAL}66` }}
           >
             Yeni Ödeme Modeli
           </span>
-          <h2 id="tl-payment-popup-title" className="text-2xl font-semibold leading-tight sm:text-3xl">
+          <h2 id="tl-payment-popup-title" className="pr-8 text-xl font-semibold leading-tight sm:text-3xl [@media(max-height:500px)]:text-2xl">
             Maaşınız TL, taksitiniz de TL
           </h2>
           <p className="text-sm text-white/80 sm:text-base">
             Size özel yeni konut finansman modeliyle Lagoon Verde&apos;de 60 aya kadar
             faizsiz ve vade farksız ödeme.
           </p>
-          <ul className="space-y-2 text-sm sm:text-base">
+          <ul className="space-y-1.5 text-sm sm:space-y-2 sm:text-base [@media(max-height:500px)]:hidden">
             {[
               "Banka, faiz ve kefil yok",
               "Kur farkı ve vade farkı yok",
@@ -156,11 +163,11 @@ export default function PaymentModelPopup() {
               </li>
             ))}
           </ul>
-          <div className="mt-2 flex flex-wrap gap-3">
+          <div className="mt-1 flex flex-wrap gap-2 sm:mt-2 sm:gap-3">
             <Link
               href="/tr/lagoon-verde"
               onClick={dismiss}
-              className="rounded-full px-6 py-2.5 text-sm font-medium transition-transform hover:-translate-y-0.5"
+              className="rounded-full px-4 py-2 text-sm font-medium transition-transform hover:-translate-y-0.5 sm:px-6 sm:py-2.5"
               style={{ background: TEAL, boxShadow: `0 10px 24px ${TEAL}55` }}
             >
               Lagoon Verde&apos;yi İncele
@@ -168,7 +175,7 @@ export default function PaymentModelPopup() {
             <Link
               href="/tr/contact"
               onClick={dismiss}
-              className="rounded-full px-6 py-2.5 text-sm font-medium"
+              className="rounded-full px-4 py-2 text-sm font-medium sm:px-6 sm:py-2.5"
               style={{ background: `${ORANGE}33`, border: `1px solid ${ORANGE}66` }}
             >
               Bilgi Al
