@@ -1,0 +1,817 @@
+// app/components/ru/Payment.tsx (ProjectVideoSlider, RU)
+"use client";
+
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
+
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { m as motion, useReducedMotion, type Variants } from "framer-motion";
+import { Volume2, VolumeX, Maximize2, Minimize2, ChevronLeft, ChevronRight } from "lucide-react";
+
+// Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade, Keyboard } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper/types";
+
+const TEAL = "#0d6570";
+const ORANGE = "#f15c34";
+
+/* ---------------- Motion ---------------- */
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+const containerStagger: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+};
+
+/* ---------------- Utils ---------------- */
+const extractYouTubeId = (url: string) => {
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes("youtube.com")) return u.searchParams.get("v") || "";
+    if (u.hostname.includes("youtu.be")) return u.pathname.replace("/", "");
+  } catch {}
+  return url;
+};
+const ytThumb = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+const toMinSec = (secs?: number) => {
+  if (secs === undefined || !Number.isFinite(secs)) return "–:–";
+  const m = Math.floor(secs / 60);
+  const s = Math.floor(secs % 60);
+  return `${m}:${s.toString().padStart(2, "0")}`;
+};
+
+/* ---------------- Types ---------------- */
+// Basit, yerel YouTube Iframe API tipleri (paket eklemeden çalışır)
+type YTVideoData = { author?: string };
+interface YTPlayer {
+  playVideo(): void;
+  pauseVideo(): void;
+  seekTo(seconds: number, allowSeekAhead: boolean): void;
+  mute(): void;
+  unMute(): void;
+  destroy(): void;
+  getDuration(): number;
+  getVideoData(): YTVideoData;
+}
+type YTReadyEvent = { target: YTPlayer };
+type YTPlayerOptions = {
+  videoId: string;
+  width?: string | number;
+  height?: string | number;
+  playerVars?: Record<string, unknown>;
+  events?: { onReady?: (ev: YTReadyEvent) => void; onStateChange?: (ev: { data: number }) => void };
+};
+interface YTGlobal {
+  Player: new (elementId: string | HTMLElement, options: YTPlayerOptions) => YTPlayer;
+}
+interface WindowWithYT extends Window {
+  YT?: YTGlobal;
+  onYouTubeIframeAPIReady?: () => void;
+}
+
+// CSS değişkenlerini güvenle verebilmek için yardımcı tip
+type CSSVars = React.CSSProperties & { [key: `--${string}`]: string | number };
+
+type CTALink = { label: string; href: string };
+type SlideContent = {
+  customHeadline: string;
+  tagline?: string;
+  bullets?: string[];
+  primaryCta?: CTALink | null;
+  secondaryCta?: CTALink | null;
+};
+type SlideInput = {
+  id: number;
+  /** YouTube adresi; videoSrc verilmişse kullanılmaz */
+  videoUrl?: string;
+  /** Sitede barındırılan mp4 (ör. Instagram reel'leri YouTube'da olmadığı için) */
+  videoSrc?: string;
+  poster?: string;
+  durationSec?: number;
+  source?: string;
+  backgroundImage?: string;
+  badge?: string;
+  content: SlideContent;
+};
+
+export type ProjectVideoSliderProps = {
+  slides?: SlideInput[];
+  autoplayMs?: number; // default 10000
+  className?: string;
+};
+
+/* ---------------- YouTube API Loader ---------------- */
+let ytApiPromise: Promise<YTGlobal | null> | null = null;
+
+function ensureYouTubeAPI(): Promise<YTGlobal | null> {
+  if (typeof window === "undefined") return Promise.resolve(null);
+  const w = window as WindowWithYT;
+  if (w.YT && w.YT.Player) return Promise.resolve(w.YT);
+
+  if (!ytApiPromise) {
+    ytApiPromise = new Promise<YTGlobal | null>((resolve) => {
+      const existing = document.getElementById("youtube-iframe-api");
+      if (!existing) {
+        const tag = document.createElement("script");
+        tag.id = "youtube-iframe-api";
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.body.appendChild(tag);
+      }
+      w.onYouTubeIframeAPIReady = () => resolve((window as WindowWithYT).YT ?? null);
+      const deadline = Date.now() + 10000;
+      const check = () => {
+        const ww = window as WindowWithYT;
+        if (ww.YT && ww.YT.Player) resolve(ww.YT);
+        else if (Date.now() < deadline) setTimeout(check, 120);
+        else resolve(null);
+      };
+      check();
+    });
+  }
+  return ytApiPromise;
+}
+
+/* ---------------- Main Component ---------------- */
+export default function   ProjectVideoSlider({
+  autoplayMs = 10000,
+  className = "",
+  slides = DEFAULT_SLIDES,
+}: ProjectVideoSliderProps) {
+  const playersRef = useRef<(YTPlayer | null)[]>([]);
+  const swiperRef = useRef<SwiperType | null>(null);
+  const [autoplayStopped, setAutoplayStopped] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const reducedMotion = useReducedMotion();
+
+  const registerPlayer = useCallback((index: number, player: YTPlayer | null) => {
+    playersRef.current[index] = player;
+  }, []);
+
+  const playOnly = useCallback((activeIndex: number) => {
+    playersRef.current.forEach((p, i) => {
+      if (!p) return;
+      try {
+        if (i === activeIndex && !reducedMotion) {
+          p.playVideo?.();
+        } else {
+          p.pauseVideo?.();
+          p.seekTo?.(0, true);
+        }
+      } catch {}
+    });
+  }, [reducedMotion]);
+
+  const stopAutoplay = useCallback(() => {
+    if (autoplayStopped) return;
+    try {
+      swiperRef.current?.autoplay?.stop();
+      setAutoplayStopped(true);
+    } catch {}
+  }, [autoplayStopped]);
+
+  const paginationVars: CSSVars = {
+    "--swiper-pagination-color": "#ffffff",
+    "--swiper-pagination-bullet-inactive-color": "rgba(255,255,255,0.5)",
+    "--swiper-pagination-bullet-inactive-opacity": 1,
+  };
+
+  return (
+    <section
+      aria-label="Видеокарусель проектов"
+      className={`relative w-full px-3 py-8 sm:px-6 sm:py-12 lg:px-8 ${className}`}
+      style={{ background: "transparent" }}
+    >
+      {/* Ana sayfa kaydırıcısının hemen altında: tam genişlik koyu şerit yerine beyaz zeminde
+          köşeleri yuvarlak koyu kart (fotoğraftan koyuya sert geçiş olmasın) */}
+      <div
+        className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#0b1517] shadow-[0_24px_60px_-30px_rgba(0,0,0,0.45)]"
+        style={{ color: "#fff" }}
+        data-bg="dark"
+      >
+      {/* Custom white nav arrows */}
+      <button
+        type="button"
+        aria-label="Предыдущий слайд"
+        onClick={() => swiperRef.current?.slidePrev()}
+        className="absolute z-20 hidden md:block min-h-11 min-w-11 md:left-4 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
+      >
+        <ChevronLeft size={22} />
+      </button>
+      <button
+        type="button"
+        aria-label="Следующий слайд"
+        onClick={() => swiperRef.current?.slideNext()}
+        className="absolute z-20 hidden md:block min-h-11 min-w-11 md:right-4 md:bottom-1 -translate-y-1/2 rounded-full p-2 md:p-3 bg-white/10 hover:bg-white/20 border border-white/30 shadow-lg backdrop-blur-md"
+      >
+        <ChevronRight size={22} />
+      </button>
+
+      <Swiper
+        modules={[Autoplay, Pagination, EffectFade, Keyboard]}
+        slidesPerView={1}
+        effect="fade"
+        fadeEffect={{ crossFade: true }}
+        loop
+        autoplay={
+          autoplayStopped || reducedMotion
+            ? false
+            : {
+                delay: autoplayMs,
+                disableOnInteraction: false, // unmute/fullscreen manuel durduruyor
+                pauseOnMouseEnter: false,
+              }
+        }
+        pagination={{ clickable: true }}
+        keyboard={{ enabled: true, onlyInViewport: true }}
+        noSwiping
+        noSwipingClass="swiper-no-swiping"
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+          playOnly(swiper.realIndex);
+        }}
+        onSlideChange={(swiper) => { setActiveSlide(swiper.realIndex); playOnly(swiper.realIndex); }}
+        className="relative"
+        style={paginationVars}
+      >
+        {slides.map((s, idx) => {
+          const vid = s.videoSrc ? "" : extractYouTubeId(s.videoUrl ?? "");
+          const bg = s.backgroundImage || s.poster || ytThumb(vid);
+          return (
+            <SwiperSlide key={s.id} className="!h-auto">
+              <SlideContentBlock
+                active={idx === activeSlide}
+                index={idx}
+                id={vid}
+                video={s.videoSrc ? { src: s.videoSrc, poster: s.poster, durationSec: s.durationSec, source: s.source } : undefined}
+                bgImage={bg}
+                badge={s.badge ?? "Видео"}
+                content={s.content}
+                onPlayerReady={(player) => registerPlayer(idx, player)}
+                onNeedStopAutoplay={stopAutoplay}
+              />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Slide ---------------- */
+function SlideContentBlock({
+  active,
+  index,
+  id,
+  video,
+  badge,
+  content,
+  onPlayerReady,
+  onNeedStopAutoplay,
+}: {
+  active: boolean;
+  index: number;
+  id: string;
+  video?: HostedVideo;
+  bgImage: string;
+  badge: string;
+  content: SlideContent;
+  onPlayerReady: (player: YTPlayer | null) => void;
+  onNeedStopAutoplay: () => void;
+}) {
+  const [author, setAuthor] = useState<string>(video?.source ?? "");
+  const [duration, setDuration] = useState<string>(toMinSec(video?.durationSec));
+
+  const handleMeta = useCallback((p: YTPlayer) => {
+    try {
+      const data = p.getVideoData?.() || {};
+      setAuthor(data.author || "");
+      const d = p.getDuration?.();
+      if (typeof d === "number" && d > 0) setDuration(toMinSec(d));
+    } catch {}
+  }, []);
+
+  return (
+    <div className="relative flex h-full min-h-[560px] flex-col justify-center md:min-h-[640px]">
+      {/* Arka plan: bölüm artık ana sayfa kaydırıcısının hemen altında; fotoğraf zemin onun devamı
+          gibi görünüyordu. Marka renklerinde sade koyu degrade (turkuaz zemin, hafif turuncu ışık). */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(60% 70% at 12% 20%, ${TEAL}38 0%, transparent 60%), radial-gradient(55% 65% at 92% 85%, ${ORANGE}26 0%, transparent 60%), linear-gradient(135deg, #0b1517 0%, #0f2226 55%, #141012 100%)`,
+        }}
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/10" />
+
+      {/* Content */}
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 lg:pt-20 pb-12 lg:pb-20">
+        <motion.div
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.25 }}
+          className="grid lg:grid-cols-12 gap-10 items-center"
+        >
+          {/* Left */}
+          <motion.div variants={fadeUp} className="lg:col-span-6">
+            <span
+              className="inline-block text-[12px] uppercase tracking-wide px-3 py-1 rounded-full mb-3 backdrop-blur-md"
+              style={{ background: `${TEAL}44`, color: "#fff", border: `1px solid ${TEAL}66` }}
+            >
+              {badge}
+            </span>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold leading-tight drop-shadow-lg lg:line-clamp-2 lg:min-h-[2lh]">
+              {content.customHeadline}
+            </h2>
+
+            {content.tagline && (
+              <p className="mt-3 text-white/85 text-base sm:text-lg max-w-[60ch] drop-shadow lg:line-clamp-2 lg:min-h-[2lh]">
+                {content.tagline}
+              </p>
+            )}
+
+            {(author || duration) && (
+              <div className="mt-5 grid grid-cols-2 gap-3 max-w-md">
+                <StatPill label="Длительность" value={duration} />
+                <StatPill label="Источник" value={author || "YouTube"} />
+              </div>
+            )}
+
+            {!!content.bullets?.length && (
+              <ul className="mt-6 space-y-2">
+                {content.bullets.slice(0, 3).map((b, i) => (
+                  <li key={i} className="flex min-w-0 items-start gap-2">
+                    <span
+                      className="mt-[6px] inline-block h-[10px] w-[10px] rounded-full"
+                      style={{ background: ORANGE, boxShadow: `0 0 0 3px ${ORANGE}33` }}
+                    />
+                    <p className="text-white/90 lg:truncate">{b}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <div className="mt-7 flex flex-wrap gap-4">
+              {content.primaryCta !== null && content.primaryCta && (
+                <Link
+                  href={content.primaryCta.href}
+                  className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5 backdrop-blur-md"
+                  style={{ background: TEAL, color: "#fff", boxShadow: `0 10px 24px ${TEAL}55` }}
+                >
+                  {content.primaryCta.label}
+                </Link>
+              )}
+              {content.secondaryCta !== null && content.secondaryCta && (
+                <Link
+                  href={content.secondaryCta.href}
+                  className="px-6 py-2.5 rounded-full text-sm font-medium backdrop-blur-md"
+                  style={{ background: `${ORANGE}33`, color: "#fff", border: `1px solid ${ORANGE}66` }}
+                >
+                  {content.secondaryCta.label}
+                </Link>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Right: video */}
+          <motion.div variants={fadeUp} className="lg:col-span-6">
+         {video ? (active ? <HostedVideoPanel
+  video={video}
+  onReady={(player) => {
+    onPlayerReady(player);
+    if (player) handleMeta(player);
+  }}
+  onNeedStopAutoplay={onNeedStopAutoplay}
+/> : <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-black sm:aspect-video">{video.poster ? <><img aria-hidden src={video.poster} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full scale-110 object-cover blur-xl brightness-90 saturate-125" /><img src={video.poster} alt={content.customHeadline} loading="lazy" decoding="async" className="relative h-full w-full object-contain" /></> : null}</div>) : active ? <YouTubePanel
+  videoId={id}
+  index={index}
+  onReady={(player) => {
+    onPlayerReady(player);
+    if (player) handleMeta(player); // <<< null guard
+  }}
+  onNeedStopAutoplay={onNeedStopAutoplay}
+/> : <div className="aspect-video overflow-hidden rounded-2xl bg-black"><img src={ytThumb(id)} alt={content.customHeadline} loading="lazy" decoding="async" className="h-full w-full object-cover" /></div>}
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Video Panel ---------------- */
+function YouTubePanel({
+  videoId,
+  index,
+  onReady,
+  onNeedStopAutoplay,
+}: {
+  videoId: string;
+  index: number;
+  onReady: (player: YTPlayer | null) => void;
+  onNeedStopAutoplay: () => void;
+}) {
+  const containerId = useMemo(() => `yt-player-${index}-${videoId}`, [index, videoId]);
+  const [muted, setMuted] = useState(true);
+  // YouTube küçük/sessiz oynatıcıda düşük kaliteyle başlıyor: ilk saniyelerde HD kapak karesi üstte kalır
+  const [revealed, setRevealed] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const playerRef = useRef<YTPlayer | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const reducedMotion = useReducedMotion();
+  const readyCallback = useRef(onReady);
+  useEffect(() => { readyCallback.current = onReady; }, [onReady]);
+
+  // Watch fullscreen changes to update UI and stop autoplay
+  useEffect(() => {
+    const onFsChange = () => {
+      const active = !!document.fullscreenElement && !!panelRef.current?.contains(document.fullscreenElement);
+      setIsFullscreen(active);
+      if (active) onNeedStopAutoplay();
+    };
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, [onNeedStopAutoplay]);
+
+useEffect(() => {
+  let mounted = true;
+
+  ensureYouTubeAPI().then((YT) => {
+    if (!mounted || !YT) return;
+    const loopParams: { loop: 1; playlist: string } = { loop: 1, playlist: videoId };
+    const player = new YT.Player(containerId, {
+      videoId,
+      width: "100%",
+      height: "100%",
+      playerVars: {
+        autoplay: reducedMotion ? 0 : 1,
+        mute: 1,
+        controls: 0,
+        rel: 0,
+        playsinline: 1,
+        modestbranding: 1,
+        iv_load_policy: 3,
+        vq: "hd1080",
+        ...loopParams,
+      },
+      events: {
+        onStateChange: (ev) => {
+          // 1 = oynuyor; kalite yükselsin ve YouTube'un açılış katmanı kaybolsun diye kapak ~4 sn sonra kalkar
+          if (ev.data === 1) setTimeout(() => { if (mounted) setRevealed(true); }, 4200);
+        },
+        onReady: (ev) => {
+          if (!mounted) { ev.target.destroy(); return; }
+          playerRef.current = ev.target;
+          try {
+            ev.target.mute();
+            if (!reducedMotion) ev.target.playVideo();
+          } catch {}
+          readyCallback.current(ev.target);
+        },
+      },
+    });
+    playerRef.current = player;
+  });
+
+  return () => {
+    mounted = false; // <<< önemli: prefer-const uyarısını da çözer
+    try {
+      playerRef.current?.destroy?.();
+      playerRef.current = null;
+      readyCallback.current(null);
+    } catch {}
+  };
+}, [containerId, videoId, reducedMotion]);
+
+
+  const toggleMute = useCallback(() => {
+    const p = playerRef.current;
+    if (!p) return;
+    try {
+      if (muted) {
+        p.unMute?.();
+        p.playVideo?.();
+        onNeedStopAutoplay(); // unmute -> slider autoplay durur
+      } else {
+        p.mute?.();
+      }
+      setMuted((m) => !m);
+    } catch {}
+  }, [muted, onNeedStopAutoplay]);
+
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await panelRef.current?.requestFullscreen?.();
+      } else {
+        await document.exitFullscreen();
+      }
+      onNeedStopAutoplay();
+    } catch {}
+  }, [onNeedStopAutoplay]);
+
+  return (
+    <div
+      ref={panelRef}
+      className="relative rounded-2xl overflow-hidden border bg-white/5 backdrop-blur-md shadow-[0_6px_24px_rgba(0,0,0,.45)] swiper-no-swiping"
+      style={{ borderColor: "rgba(255,255,255,0.15)" }}
+    >
+      <div className="relative aspect-video w-full swiper-no-swiping">
+        <div id={containerId} className="h-full w-full" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          aria-hidden
+          src={ytThumb(videoId)}
+          alt=""
+          className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${revealed ? "opacity-0" : "opacity-100"}`}
+        />
+        {/* Kontroller gizli; videoya tıklanınca YouTube duraklatıp kanalın diğer videolarını
+            (ör. eski Geçitkale videosu) öneren rafı açıyordu. Tıklamayı burada karşılıyoruz. */}
+        <div aria-hidden className="absolute inset-0" />
+      </div>
+
+      {/* Bottom-left: Mute/Unmute */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleMute();
+        }}
+        aria-pressed={!muted}
+        aria-label={muted ? "Включить звук" : "Выключить звук"}
+        className="absolute top-3 right-14 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
+        style={{
+          background: "rgba(0,0,0,0.4)",
+          color: "#fff",
+          border: `1px solid ${muted ? `${ORANGE}66` : `${TEAL}66`}`,
+        }}
+        title={muted ? "Включить звук" : "Выключить звук"}
+      >
+        {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+      </button>
+
+      {/* Bottom-right: Fullscreen */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFullscreen();
+        }}
+        aria-pressed={isFullscreen}
+        aria-label={isFullscreen ? "Выйти из полноэкранного режима" : "Во весь экран"}
+        className="absolute top-3 right-3 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
+        style={{
+          background: "rgba(0,0,0,0.4)",
+          color: "#fff",
+          border: `1px solid rgba(255,255,255,.35)`,
+        }}
+        title={isFullscreen ? "Выйти из полноэкранного режима" : "Во весь экран"}
+      >
+        {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+      </button>
+    </div>
+  );
+}
+
+/* ---------------- Hosted (mp4) Video Panel ---------------- */
+type HostedVideo = { src: string; poster?: string; durationSec?: number; source?: string };
+
+function HostedVideoPanel({
+  video,
+  onReady,
+  onNeedStopAutoplay,
+}: {
+  video: HostedVideo;
+  onReady: (player: YTPlayer | null) => void;
+  onNeedStopAutoplay: () => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  // Yan boşlukları dolduran bulanık kopya; ana videoyla birlikte oynar/durur
+  const bgRef = useRef<HTMLVideoElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const [muted, setMuted] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const readyCallback = useRef(onReady);
+  useEffect(() => { readyCallback.current = onReady; }, [onReady]);
+
+  useEffect(() => {
+    const onFsChange = () => {
+      const active = !!document.fullscreenElement && !!panelRef.current?.contains(document.fullscreenElement);
+      setIsFullscreen(active);
+      if (active) onNeedStopAutoplay();
+    };
+    document.addEventListener("fullscreenchange", onFsChange);
+    return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, [onNeedStopAutoplay]);
+
+  // YouTube oynatıcısıyla aynı arayüz: slider aktif slaytı oynatıp diğerlerini durdurabilsin
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const bgv = () => bgRef.current;
+    const player: YTPlayer = {
+      playVideo: () => { el.play().catch(() => {}); bgv()?.play().catch(() => {}); },
+      pauseVideo: () => { el.pause(); bgv()?.pause(); },
+      seekTo: (sec) => { el.currentTime = sec; const b = bgv(); if (b) b.currentTime = sec; },
+      mute: () => { el.muted = true; },
+      unMute: () => { el.muted = false; },
+      destroy: () => el.pause(),
+      getDuration: () => (Number.isFinite(el.duration) ? el.duration : video.durationSec ?? 0),
+      getVideoData: () => ({ author: video.source }),
+    };
+    if (!reducedMotion) player.playVideo();
+    readyCallback.current(player);
+    return () => {
+      el.pause();
+      readyCallback.current(null);
+    };
+  }, [video.src, video.durationSec, video.source, reducedMotion]);
+
+  const toggleMute = useCallback(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (muted) {
+      el.muted = false;
+      el.play().catch(() => {});
+      onNeedStopAutoplay();
+    } else {
+      el.muted = true;
+    }
+    setMuted((m) => !m);
+  }, [muted, onNeedStopAutoplay]);
+
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await panelRef.current?.requestFullscreen?.();
+      } else {
+        await document.exitFullscreen();
+      }
+      onNeedStopAutoplay();
+    } catch {}
+  }, [onNeedStopAutoplay]);
+
+  return (
+    <div
+      ref={panelRef}
+      className="relative rounded-2xl overflow-hidden border bg-black shadow-[0_6px_24px_rgba(0,0,0,.45)] swiper-no-swiping"
+      style={{ borderColor: "rgba(255,255,255,0.15)" }}
+    >
+      {/* Telefonda dikey video yatay kutuda çok küçük kalıyordu: mobilde 4:5, sm+ 16:9 */}
+      <div className="relative aspect-[4/5] w-full swiper-no-swiping sm:aspect-video">
+        {/* Dikey (9:16) video yatay kutuda: yanları aynı videonun bulanık, hareketli kopyası doldurur
+            (kırpma yok, ana video tam çözünürlükte kalır) */}
+        <video
+          ref={bgRef}
+          aria-hidden
+          tabIndex={-1}
+          src={video.src}
+          poster={video.poster}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover blur-xl brightness-90 saturate-125"
+        />
+        <video
+          ref={videoRef}
+          src={video.src}
+          poster={video.poster}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onTimeUpdate={(e) => {
+            const b = bgRef.current;
+            if (b && Math.abs(b.currentTime - e.currentTarget.currentTime) > 0.3) b.currentTime = e.currentTarget.currentTime;
+          }}
+          className="relative h-full w-full object-contain drop-shadow-[0_0_24px_rgba(0,0,0,0.45)]"
+        />
+      </div>
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleMute();
+        }}
+        aria-pressed={!muted}
+        aria-label={muted ? "Включить звук" : "Выключить звук"}
+        className="absolute top-3 right-14 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
+        style={{
+          background: "rgba(0,0,0,0.4)",
+          color: "#fff",
+          border: `1px solid ${muted ? `${ORANGE}66` : `${TEAL}66`}`,
+        }}
+        title={muted ? "Включить звук" : "Выключить звук"}
+      >
+        {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+      </button>
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFullscreen();
+        }}
+        aria-pressed={isFullscreen}
+        aria-label={isFullscreen ? "Выйти из полноэкранного режима" : "Во весь экран"}
+        className="absolute top-3 right-3 inline-grid h-9 w-9 place-items-center rounded-full backdrop-blur-md swiper-no-swiping"
+        style={{
+          background: "rgba(0,0,0,0.4)",
+          color: "#fff",
+          border: `1px solid rgba(255,255,255,.35)`,
+        }}
+        title={isFullscreen ? "Выйти из полноэкранного режима" : "Во весь экран"}
+      >
+        {isFullscreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+      </button>
+    </div>
+  );
+}
+
+/* ---------------- Small UI ---------------- */
+function StatPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div
+      className="rounded-xl p-3 bg-white/10 backdrop-blur-md border shadow-[0_6px_20px_rgba(0,0,0,.4)]"
+      style={{ borderColor: "rgba(255,255,255,0.15)" }}
+    >
+      <div className="text-[11px] uppercase tracking-wide text-white/70">{label}</div>
+      <div className="text-lg sm:text-xl font-semibold text-white">{value}</div>
+    </div>
+  );
+}
+
+/* ---------------- Example Slides (replace BGs with yours) ---------------- */
+const DEFAULT_SLIDES: SlideInput[] = [
+
+   {
+  id: 4,
+  videoUrl: "https://www.youtube.com/watch?v=GKH4VSPH57E",
+  backgroundImage: "/lajoyaimage.jpg", // you can replace this with a suitable visual you have
+  badge: "Видео",
+  content: {
+    customHeadline: "La Joya открыт!",
+    tagline: "С официальным открытием на средиземноморском побережье началась новая жизнь.",
+    bullets: [
+      "Официальное открытие: 1 ноября 2025 г., Искеле",
+      "Праздник вместе с владельцами, партнёрами и нашей командой",
+      "Минималистичная архитектура, общественные пространства и атмосфера пляжного курорта"
+    ],
+    primaryCta: { label: "Откройте La Joya", href: "/ru/la-joya" },
+    secondaryCta: { label: "Связаться с нами", href: "/ru/contact" }
+  }
+}
+,
+  {
+    id: 1,
+    videoUrl: "https://www.youtube.com/watch?v=hMbzVAJMzXo",
+    backgroundImage: "/daireici.jpg",
+    badge: "Видео",
+    content: {
+      customHeadline: "Тур по резиденциям La Joya",
+      tagline: "Простота и современные линии на фоне моря.",
+      bullets: [
+        "Минималистичная архитектура в ритме побережья",
+        "Просторные общественные зоны и прогулочные маршруты",
+        "Игра естественного света на закате",
+      ],
+      primaryCta: { label: "Смотреть проект", href: "/ru/la-joya" },
+      secondaryCta: { label: "Связаться с нами", href: "/ru/contact" },
+    },
+  },
+  {
+    id: 3,
+    videoUrl: "https://www.youtube.com/watch?v=JNKcu1APZO0&pp=0gcJCQYKAYcqIYzv",
+    backgroundImage: "lala.jpg",
+    badge: "Видео",
+    content: {
+      customHeadline: "Видео о Северном Кипре",
+      tagline: "Продуманная среда для жизни, которая со временем только растёт в цене.",
+      bullets: [
+        "Гибкие условия оплаты и сдачи",
+        "Высокая заполняемость и профессиональное управление",
+        "Долгосрочный подход, ориентированный на ценность",
+      ],
+      primaryCta: { label: "О нас", href: "/ru/contact" },
+      secondaryCta: { label: "Другие проекты", href: "/ru/projects" },
+    },
+  },
+];
+

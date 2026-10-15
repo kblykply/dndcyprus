@@ -1,0 +1,201 @@
+// app/components/social/InstagramSpotlight.tsx
+"use client";
+
+
+import React, { useState } from "react";
+import IgPhone, { type IgPost } from "@/app/components/social/IgPhone";
+import { m as motion, type Variants } from "framer-motion";
+
+const TEAL = "#0d6570";
+const ORANGE = "#f15c34";
+const BG_IMAGE = "/ins.jpg";
+
+const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: EASE },
+  },
+};
+
+
+const IG_URLS = [
+  "https://www.instagram.com/p/DP0mSn8gK1h/",
+  "https://www.instagram.com/reel/DNIOMH0MjBT/",
+  "https://www.instagram.com/p/DQGqJSyDMM7/",
+  "https://www.instagram.com/p/DPD0UpLjKdL/",
+  "https://www.instagram.com/p/DOVeAdtDJDv/",
+];
+
+// Telefon mockup'ı için gönderilerin sitede barındırılan medyası (Instagram gömme kutusu yerine)
+const IG_MEDIA: Record<string, Omit<IgPost, "url">> = {
+  DQoFlJHjIa5: { kind: "image", media: "/instagram/DQoFlJHjIa5.webp", poster: "/instagram/DQoFlJHjIa5.webp", caption: "✨ Marzenia się spełniły: DND Cyprus ogłasza ukończenie rezydencji i wioski wakacyjnej La Joya" },
+  DP0mSn8gK1h: { kind: "image", media: "/instagram/DP0mSn8gK1h.webp", poster: "/instagram/DP0mSn8gK1h.webp", caption: "✨ Inspirowane naturą, zaprojektowane dla Państwa 🌿" },
+  DNIOMH0MjBT: { kind: "reel", media: "/instagram/DNIOMH0MjBT.mp4", poster: "/instagram/DNIOMH0MjBT.webp", caption: "RATY JUŻ OD £900!" },
+  DQGqJSyDMM7: { kind: "reel", media: "/instagram/DQGqJSyDMM7.mp4", poster: "/instagram/DQGqJSyDMM7.webp", caption: "Cypr Północny — wschodząca gwiazda Morza Śródziemnego" },
+  DPD0UpLjKdL: { kind: "reel", media: "/instagram/DPD0UpLjKdL.mp4", poster: "/instagram/DPD0UpLjKdL.webp", caption: "La Joya: pierwszy projekt kolekcji. Bezpieczna inwestycja, prestiżowe życie" },
+  DOVeAdtDJDv: { kind: "reel", media: "/instagram/DOVeAdtDJDv.mp4", poster: "/instagram/DOVeAdtDJDv.webp", caption: "Prawdziwa kampania DND Cyprus. Prawdziwa okazja. Państwa miejsce w Lagoon Verde już czeka" },
+};
+const IG_POSTS: IgPost[] = IG_URLS.map((url) => ({ url, ...IG_MEDIA[url.split("/").filter(Boolean).pop() as string] }));
+const IG_LABELS = { follow: "Obserwuj", viewOnInstagram: "Zobacz na Instagramie", reels: "Rolki", awards: "Nagrody" };
+
+export default function InstagramSpotlight() {
+  const [idx, setIdx] = useState(0);
+  const n = IG_POSTS.length;
+  const go = (d: number) => setIdx((i) => (i + d + n) % n);
+
+  return (
+    <>
+
+      <section
+        aria-label="Instagram — wyróżnione"
+        className="relative overflow-hidden bg-white"
+        style={{
+          color: "#0d2326",
+          backgroundImage: `url(${BG_IMAGE})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundColor: "#fff",
+        }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "rgba(255,255,255,0.75)" }}
+        />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="mt-0 grid gap-10 lg:grid-cols-2 lg:items-start">
+        {/* LEFT */}
+<motion.div
+  variants={fadeUp}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: false, amount: 0.35 }}
+  className="flex flex-col justify-center order-2 lg:order-1 lg:h-[533px] lg:justify-between"
+>
+  <span
+    className="inline-flex items-center w-fit text-[11px] tracking-wider uppercase px-3 py-1 rounded-full mb-3"
+    style={{
+      border: "1px solid rgba(13,35,38,0.08)",
+      color: TEAL,
+      background: "#ffffff",
+    }}
+  >
+    Instagram
+  </span>
+
+  <h2 className="text-3xl sm:text-4xl lg:text-[3.4rem] font-semibold leading-[1.08] tracking-tight">
+    Zapraszamy na nasz Instagram
+  </h2>
+  <p
+    className="mt-4 text-base sm:text-lg lg:text-xl lg:leading-relaxed"
+    style={{ color: "rgba(13,35,38,0.72)" }}
+  >
+    W regularnych wpisach mogą Państwo śledzić nasze najnowsze projekty, aktualności i nowości.
+  </p>
+
+  <ul className="mt-6 space-y-3">
+    <li className="flex items-center gap-3">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(13,35,38,0.78)" }}>Nowe projekty, kampanie i oferty płatności</span>
+    </li>
+    <li className="flex items-center gap-3">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(13,35,38,0.78)" }}>Bieżące relacje z budów i przekazań mieszkań</span>
+    </li>
+    <li className="flex items-center gap-3">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full" style={{ background: `${TEAL}1a`, color: TEAL }} aria-hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+      </span>
+      <span className="text-[15px] sm:text-base" style={{ color: "rgba(13,35,38,0.78)" }}>Rolki z La Joya, Lagoon Verde i Mariachi</span>
+    </li>
+  </ul>
+
+  <div className="mt-8 flex flex-wrap gap-3 lg:mt-0">
+    <a
+      href="https://www.instagram.com/dndcyprus/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5"
+      style={{ background: TEAL, color: "#fff", boxShadow: `0 10px 22px ${TEAL}33` }}
+    >
+      Obserwuj na Instagramie
+    </a>
+    <a
+      href="/pl/contact"
+      className="px-6 py-2.5 rounded-full text-sm font-medium"
+      style={{
+        background: `${ORANGE}0`,
+        color: ORANGE,
+        border: `1px solid ${ORANGE}33`,
+      }}
+    >
+      Skontaktuj się z nami
+    </a>
+  </div>
+</motion.div>
+
+
+            {/* RIGHT — vertically centered viewport; long captions clipped */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false, amount: 0.35 }}
+              className="relative order-1 lg:order-2"
+            >
+              <div className="relative flex w-full flex-col items-center">
+                {/* Telefon sabit; oklar hemen yanında */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    aria-label="Poprzedni wpis"
+                    onClick={() => go(-1)}
+                    className="absolute -left-[52px] sm:-left-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
+                    style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M15 18l-6-6 6-6" stroke="#0d2326" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  <IgPhone post={IG_POSTS[idx]} labels={IG_LABELS} />
+                  <button
+                    type="button"
+                    aria-label="Następny wpis"
+                    onClick={() => go(1)}
+                    className="absolute -right-[52px] sm:-right-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
+                    style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M9 6l6 6-6 6" stroke="#0d2326" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="mt-5 flex items-center gap-2">
+                  {IG_POSTS.map((p, i) => (
+                    <button
+                      key={p.url}
+                      type="button"
+                      aria-label={`Wpis ${i + 1}`}
+                      aria-current={i === idx}
+                      onClick={() => setIdx(i)}
+                      className={`h-2 rounded-full transition-all ${i === idx ? "w-6" : "w-2 bg-black/20 hover:bg-black/35"}`}
+                      style={i === idx ? { background: TEAL } : undefined}
+                    />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
