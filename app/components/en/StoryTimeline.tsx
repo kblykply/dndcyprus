@@ -1,9 +1,9 @@
 // app/components/StoryTimeline.tsx
 "use client";
 
-import { useState, useCallback, useRef, useMemo } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import Image from "@/app/components/performance/DeferredFillImage";
-import { m as motion, AnimatePresence } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 type Milestone = {
@@ -17,6 +17,9 @@ type Milestone = {
 const TEAL = "#27959b";
 const ORANGE = "#f15c34";
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const GAP = 24; // kartlar arası boşluk (gap-6)
+// şerit sayfa içeriğiyle aynı hizadan başlar, sağa doğru ekran kenarına kadar akar
+const RAIL_PAD = "max(1.5rem, calc((100vw - 80rem) / 2 + 1.5rem))";
 
 const MILESTONES: Milestone[] = [
   {
@@ -65,28 +68,37 @@ const MILESTONES: Milestone[] = [
 
 
 export default function StoryTimeline() {
-  const [index, setIndex] = useState(0);
-  const prevIndexRef = useRef(0);
-  const len = MILESTONES.length;
-  const current = MILESTONES[index];
+  const railRef = useRef<HTMLOListElement>(null);
+  const [thumb, setThumb] = useState({ size: 1, pos: 0 });
+  const [edge, setEdge] = useState({ start: true, end: true });
 
-  const goTo = useCallback(
-    (i: number) => {
-      prevIndexRef.current = index;
-      setIndex(((i % len) + len) % len);
-    },
-    [index, len]
-  );
+  // kaydırma durumuna göre ilerleme çubuğu ve okların açık/kapalı hali
+  const update = useCallback(() => {
+    const el = railRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const size = el.scrollWidth > 0 ? el.clientWidth / el.scrollWidth : 1;
+    const pos = max > 0 ? (el.scrollLeft / max) * (1 - size) : 0;
+    setThumb({ size, pos });
+    setEdge({ start: el.scrollLeft <= 4, end: el.scrollLeft >= max - 4 });
+  }, []);
 
-  const prev = () => goTo(index - 1);
-  const next = () => goTo(index + 1);
+  useEffect(() => {
+    const el = railRef.current;
+    if (!el) return;
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [update]);
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowRight") next();
-    if (e.key === "ArrowLeft") prev();
+  const step = (dir: 1 | -1) => {
+    const el = railRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("li");
+    const w = card ? card.offsetWidth + GAP : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * w, behavior: "smooth" });
   };
-
-  const progress = useMemo(() => (index + 1) / len, [index, len]);
 
   return (
     <section
@@ -94,21 +106,13 @@ export default function StoryTimeline() {
       data-bg="light"
       className="relative w-full overflow-hidden py-16 md:py-24"
       style={{ background: `linear-gradient(180deg, ${TEAL}0f 0%, #ffffff 85%)` }}
-      onKeyDown={onKeyDown}
-      tabIndex={0}
     >
       {/* yumuşak marka ışıkları */}
       <div aria-hidden className="pointer-events-none absolute -left-32 top-10 h-80 w-80 rounded-full blur-3xl" style={{ background: `${TEAL}1f` }} />
       <div aria-hidden className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full blur-3xl" style={{ background: `${ORANGE}14` }} />
 
-      <motion.div
-        className="relative mx-auto max-w-7xl px-6"
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.35, ease: EASE }}
-      >
-        {/* Başlık */}
+      {/* Başlık + oklar */}
+      <div className="relative mx-auto flex max-w-7xl items-end justify-between gap-6 px-6">
         <div className="max-w-2xl">
           <span
             className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wider"
@@ -119,156 +123,111 @@ export default function StoryTimeline() {
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">DND since 2017</h2>
           <p className="mt-2 text-base text-black/60 md:text-lg">Milestones of our journey from Boston to North Cyprus.</p>
         </div>
-
-        {/* Yatay zaman çizelgesi */}
-        <nav aria-label="Milestones" className="relative mt-10">
-          <div aria-hidden className="absolute left-0 right-0 top-[11px] h-[2px] rounded-full bg-black/10" />
-          <motion.div
-            aria-hidden
-            className="absolute left-0 top-[11px] h-[2px] rounded-full"
-            style={{ background: TEAL }}
-            initial={false}
-            animate={{ width: `${(index / (len - 1)) * 100}%` }}
-            transition={{ duration: 0.5, ease: EASE }}
-          />
-          <ol className="relative grid grid-cols-6 gap-1">
-            {MILESTONES.map((m, i) => {
-              const active = i === index;
-              const done = i < index;
-              return (
-                <li key={`${m.year}-${i}`} className="flex flex-col items-center text-center">
-                  <button
-                    type="button"
-                    onClick={() => goTo(i)}
-                    aria-label={`${m.year} – ${m.title}`}
-                    aria-current={active ? "step" : undefined}
-                    className="group flex flex-col items-center"
-                  >
-                    <span
-                      className="grid h-6 w-6 place-items-center rounded-full border-2 bg-white transition-all"
-                      style={{
-                        borderColor: active || done ? TEAL : "rgba(0,0,0,0.18)",
-                        boxShadow: active ? `0 0 0 6px ${TEAL}22` : undefined,
-                      }}
-                    >
-                      <span className="h-2.5 w-2.5 rounded-full transition-colors" style={{ background: active || done ? TEAL : "transparent" }} />
-                    </span>
-                    <span className={`mt-2 text-sm font-semibold transition-colors md:text-base ${active ? "" : "text-black/45 group-hover:text-black/70"}`} style={active ? { color: TEAL } : undefined}>
-                      {m.year}
-                    </span>
-                    <span className={`mt-0.5 hidden text-xs md:block ${active ? "text-black/70" : "text-black/40"}`}>{m.badge}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-        </nav>
-
-        {/* İçerik: tam genişlik görsel pano, metin görselin üstünde (boş beyaz kart yerine) */}
-        <div className="relative mt-10 overflow-hidden rounded-3xl shadow-[0_24px_60px_-28px_rgba(0,0,0,0.45)] ring-1 ring-black/5">
-          <div className="relative h-[520px] sm:h-[480px] md:h-[500px]">
-            <AnimatePresence initial={false} mode="sync">
-              <motion.div
-                key={`out-${prevIndexRef.current}`}
-                className="absolute inset-0"
-                initial={{ opacity: 1, scale: 1 }}
-                animate={{ opacity: 0, scale: 1.02, transition: { duration: 0.6, ease: EASE } }}
-                exit={{ opacity: 0 }}
-              >
-                <Image
-                  src={MILESTONES[prevIndexRef.current].image}
-                  alt=""
-                  fill
-                  quality={70}
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 1216px, 100vw"
-                />
-              </motion.div>
-              <motion.div
-                key={`in-${index}`}
-                className="absolute inset-0"
-                initial={{ opacity: 0, scale: 1.02 }}
-                animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } }}
-                exit={{ opacity: 1 }}
-              >
-                <Image
-                  src={MILESTONES[index].image}
-                  alt={MILESTONES[index].title}
-                  fill
-                  quality={70}
-                  className="object-cover"
-                  sizes="(min-width: 1280px) 1216px, 100vw"
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* okunabilirlik: telefonda alttan, masaüstünde soldan koyu geçiş */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/5 md:bg-gradient-to-r md:from-black/80 md:via-black/45 md:to-transparent" />
-
-            <div className="absolute inset-0 flex items-end md:items-center">
-              <div className="w-full max-w-xl p-6 text-white sm:p-10 md:p-12">
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-white" style={{ background: `${ORANGE}cc` }}>
-                    {current.badge ?? current.year}
-                  </span>
-                  <span className="ml-auto text-sm tabular-nums text-white/60 md:ml-3">
-                    {String(index + 1).padStart(2, "0")} / {String(len).padStart(2, "0")}
-                  </span>
-                </div>
-
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={`txt-${index}`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.28, ease: EASE }}
-                  >
-                    <p className="mt-4 text-6xl font-black leading-none tracking-tight text-white md:text-7xl">{current.year}</p>
-                    <span aria-hidden className="mt-3 block h-1 w-14 rounded-full" style={{ background: TEAL }} />
-                    <h3 className="mt-4 text-2xl font-semibold tracking-tight text-balance md:text-4xl">{current.title}</h3>
-                    <p className="mt-3 text-base leading-relaxed text-white/80 md:text-lg">{current.summary}</p>
-                  </motion.div>
-                </AnimatePresence>
-
-                <div className="mt-8 flex items-center gap-4">
-                  <div className="h-1.5 w-32 overflow-hidden rounded-full bg-white/20">
-                    <motion.div className="h-full rounded-full" style={{ background: TEAL }} initial={false} animate={{ width: `${progress * 100}%` }} transition={{ duration: 0.5, ease: EASE }} />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <GlassIconButton onClick={prev} ariaLabel="Previous">
-                      <FiChevronLeft className="h-5 w-5" />
-                    </GlassIconButton>
-                    <GlassIconButton onClick={next} ariaLabel="Next">
-                      <FiChevronRight className="h-5 w-5" />
-                    </GlassIconButton>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="hidden shrink-0 items-center gap-2 md:flex">
+          <RoundButton onClick={() => step(-1)} disabled={edge.start} ariaLabel="Previous">
+            <FiChevronLeft className="h-5 w-5" />
+          </RoundButton>
+          <RoundButton onClick={() => step(1)} disabled={edge.end} ariaLabel="Next">
+            <FiChevronRight className="h-5 w-5" />
+          </RoundButton>
         </div>
-      </motion.div>
+      </div>
+
+      {/* Yolculuk şeridi: kilometre taşları yan yana, çizgiyle birbirine bağlı */}
+      <ol
+        ref={railRef}
+        onScroll={update}
+        tabIndex={0}
+        aria-label="Milestones"
+        className="relative mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-10 pt-2 outline-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ paddingInline: RAIL_PAD, scrollPaddingInline: RAIL_PAD }}
+      >
+        {MILESTONES.map((m, i) => (
+          <motion.li
+            key={`${m.year}-${i}`}
+            className="group relative flex w-[78vw] max-w-[340px] shrink-0 snap-start flex-col sm:w-[340px]"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: Math.min(i, 3) * 0.08, ease: EASE }}
+          >
+            {/* nokta + bir sonraki karta uzanan çizgi */}
+            <div className="relative flex h-6 items-center">
+              {i < MILESTONES.length - 1 && (
+                <span
+                  aria-hidden
+                  className="absolute left-3 top-1/2 h-[2px] -translate-y-1/2"
+                  style={{ right: -(GAP + 12), background: `linear-gradient(90deg, ${TEAL}80, ${TEAL}33)` }}
+                />
+              )}
+              <span className="relative grid h-6 w-6 place-items-center rounded-full bg-white" style={{ boxShadow: `0 0 0 2px ${TEAL}, 0 0 0 7px ${TEAL}1a` }}>
+                <span className="h-2.5 w-2.5 rounded-full" style={{ background: TEAL }} />
+              </span>
+            </div>
+
+            <p className="mt-4 text-3xl font-bold tracking-tight md:text-4xl" style={{ color: TEAL }}>
+              {m.year}
+            </p>
+
+            <article className="mt-4 flex flex-1 flex-col overflow-hidden rounded-3xl bg-white shadow-[0_18px_40px_-24px_rgba(0,0,0,0.35)] ring-1 ring-black/5 transition-shadow duration-300 group-hover:shadow-[0_24px_50px_-24px_rgba(0,0,0,0.45)]">
+              <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
+                <Image
+                  src={m.image}
+                  alt={m.title}
+                  fill
+                  quality={70}
+                  sizes="(min-width: 640px) 340px, 78vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+                {m.badge && (
+                  <span
+                    className="absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white shadow-sm"
+                    style={{ background: ORANGE }}
+                  >
+                    {m.badge}
+                  </span>
+                )}
+              </div>
+              <div className="p-5">
+                <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-zinc-950">{m.title}</h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-black/60">{m.summary}</p>
+              </div>
+            </article>
+          </motion.li>
+        ))}
+      </ol>
+
+      {/* kaydırma ilerlemesi */}
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="relative h-[3px] w-full overflow-hidden rounded-full bg-black/10">
+          <span
+            className="absolute inset-y-0 rounded-full transition-[left,width] duration-150 ease-out"
+            style={{ left: `${thumb.pos * 100}%`, width: `${thumb.size * 100}%`, background: TEAL }}
+          />
+        </div>
+      </div>
     </section>
   );
 }
 
-function GlassIconButton({
+function RoundButton({
   children,
   onClick,
+  disabled,
   ariaLabel,
 }: {
   children: React.ReactNode;
   onClick: () => void;
+  disabled?: boolean;
   ariaLabel: string;
 }) {
   return (
     <button
+      type="button"
       onClick={onClick}
+      disabled={disabled}
       aria-label={ariaLabel}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-full
-                 border border-white/25 bg-white/10 text-white backdrop-blur-md
-                 transition hover:bg-white/20"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-zinc-900 shadow-sm transition hover:border-[#27959b] hover:text-[#27959b] disabled:pointer-events-none disabled:opacity-35"
     >
       {children}
     </button>
