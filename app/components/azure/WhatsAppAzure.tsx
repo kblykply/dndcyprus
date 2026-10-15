@@ -6,15 +6,23 @@ import { projectFromPath } from "@/lib/analytics";
 import { attributionRef } from "@/lib/attribution";
 import { CONTACT, type Locale } from "@/lib/azure/site";
 
+const MSG: Record<Locale, { base: string; project: (name: string) => string }> = {
+  tr: { base: "Merhaba! Bilgi almak istiyorum.", project: (name) => `Merhaba! ${name} hakkında bilgi almak istiyorum.` },
+  en: { base: "Hello! I would like more information.", project: (name) => `Hello! I would like to know more about ${name}.` },
+  de: { base: "Hallo! Ich hätte gerne weitere Informationen.", project: (name) => `Hallo! Ich hätte gerne mehr Informationen zu ${name}.` },
+  ru: { base: "Здравствуйте! Хочу получить больше информации.", project: (name) => `Здравствуйте! Хочу узнать больше о проекте ${name}.` },
+  pl: { base: "Dzień dobry! Proszę o więcej informacji.", project: (name) => `Dzień dobry! Proszę o więcej informacji o projekcie ${name}.` },
+};
+
 // Azure: sabit yeşil WhatsApp düğmesi. Proje sayfalarında proje adıyla hazır mesaj (eski davranış korundu).
 export default function WhatsAppAzure({ locale }: { locale: Locale }) {
   const pathname = usePathname() || "";
-  const base = locale === "tr" ? "Merhaba! Bilgi almak istiyorum." : "Hello! I would like more information.";
+  const base = MSG[locale].base;
   const [message, setMessage] = useState(base);
   const refresh = useCallback(() => {
     const project = projectFromPath(pathname);
     const text = project
-      ? (locale === "tr" ? `Merhaba! ${project.name} hakkında bilgi almak istiyorum.` : `Hello! I would like to know more about ${project.name}.`)
+      ? MSG[locale].project(project.name)
       : base;
     setMessage(text + attributionRef());
   }, [pathname, locale, base]);

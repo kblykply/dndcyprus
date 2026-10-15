@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import Script from "next/script";
 import { CONSENT_COOKIE, CONSENT_DEFAULT_SCRIPT } from "@/lib/analytics";
+import type { Locale } from "@/lib/azure/site";
 import AnalyticsRoot from "./analytics/AnalyticsRoot";
 import "@/app/globals.css";
 
 // Separate static roots keep the server-rendered HTML language correct without
 // making every public page depend on request headers or consent cookies.
-export default function RootDocument({ children, lang, fontClass }: { children: ReactNode; lang: "tr" | "en"; fontClass: string }) {
+export default function RootDocument({ children, lang, fontClass }: { children: ReactNode; lang: Locale; fontClass: string }) {
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>

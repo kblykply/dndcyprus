@@ -3,7 +3,8 @@ import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 import type { PressItem } from "@/app/components/PressSection";
 
-const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : "en-GB", { year: "numeric", month: "long", day: "2-digit" }).format(new Date(iso));
+const DATE_LOCALE: Record<Locale, string> = { tr: "tr-TR", en: "en-GB", de: "de-DE", ru: "ru-RU", pl: "pl-PL" };
+const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(DATE_LOCALE[locale], { year: "numeric", month: "long", day: "2-digit" }).format(new Date(iso));
 
 export default function PressFaq({ locale, items }: { locale: Locale; items: PressItem[] }) {
   const t = HOME[locale];

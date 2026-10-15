@@ -5,6 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { HOME } from "@/lib/azure/home";
 import { PROJECTS, href, type Locale } from "@/lib/azure/site";
 
+const LAND_TITLE: Record<Locale, string> = {
+  tr: "Geçitkale Arazi Projesi",
+  en: "Geçitkale Land Project",
+  de: "Grundstücksprojekt Geçitkale",
+  ru: "Земельный проект Гечиткале",
+  pl: "Projekt gruntowy Geçitkale",
+};
+
 export default function ProjectsCarousel({ locale }: { locale: Locale }) {
   const t = HOME[locale].projects;
   const car = useRef<HTMLDivElement>(null);
@@ -29,7 +37,7 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
       <div className="az-car" ref={car}>
         {PROJECTS.map((p) => p.slug === "gecitkale" ? (
           <Link key={p.slug} className="az-pc soon" href={href(locale, "/gecitkale")} prefetch={false}>
-            <div className="c"><span className="az-kicker">{t.soonKicker}</span><h3>{locale === "tr" ? "Geçitkale Arazi Projesi" : "Geçitkale Land Project"}</h3><p style={{ color: "var(--ink-60)", marginTop: 8 }}>{p.blurb[locale]}</p><span className="az-btn sea sm" style={{ marginTop: 18 }}>{t.soonCta}</span></div>
+            <div className="c"><span className="az-kicker">{t.soonKicker}</span><h3>{LAND_TITLE[locale]}</h3><p style={{ color: "var(--ink-60)", marginTop: 8 }}>{p.blurb[locale]}</p><span className="az-btn sea sm" style={{ marginTop: 18 }}>{t.soonCta}</span></div>
           </Link>
         ) : (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false}>

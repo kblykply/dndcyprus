@@ -1,8 +1,17 @@
 "use client";
 
-// Gizlilik sayfasındaki "Çerez tercihlerini değiştir" butonu → window.dndConsent.open()
+import type { Locale } from "@/lib/azure/site";
 
-export default function ConsentPreferencesButton({ locale }: { locale: "tr" | "en" }) {
+// Gizlilik sayfasındaki "Çerez tercihlerini değiştir" butonu → window.dndConsent.open()
+const LABEL: Record<Locale, string> = {
+  tr: "Çerez tercihlerini değiştir",
+  en: "Change cookie preferences",
+  de: "Cookie-Einstellungen ändern",
+  ru: "Изменить настройки cookie",
+  pl: "Zmień ustawienia plików cookie",
+};
+
+export default function ConsentPreferencesButton({ locale }: { locale: Locale }) {
   return (
     <button
       type="button"
@@ -10,7 +19,7 @@ export default function ConsentPreferencesButton({ locale }: { locale: "tr" | "e
       className="mt-4 inline-flex items-center rounded-xl px-4 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0d6570]"
       style={{ background: "#0d6570" }}
     >
-      {locale === "tr" ? "Çerez tercihlerini değiştir" : "Change cookie preferences"}
+      {LABEL[locale]}
     </button>
   );
 }

@@ -1,5 +1,5 @@
 // app/not-found.tsx
-// Markalı, iki dilli 404 sayfası. Yalnızca kök layout içinde çizilir (header/footer yok).
+// Markalı, çok dilli (TR ağırlıklı) 404 sayfası. Yalnızca kök layout içinde çizilir (header/footer yok).
 // Başlık metadata ile verilir; JSX içine <title> koymayın (yoksa sayfada iki <title> olur).
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -7,16 +7,19 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: { absolute: "Sayfa bulunamadı (404) | DND Cyprus" },
   description:
-    "Aradığınız sayfa bulunamadı. DND Cyprus projelerine veya iletişim sayfasına dönebilirsiniz. / Page not found.",
+    "Aradığınız sayfa bulunamadı. DND Cyprus projelerine veya iletişim sayfasına dönebilirsiniz. / Page not found. / Seite nicht gefunden. / Страница не найдена. / Nie znaleziono strony.",
 };
 
 const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
 
-const LINKS = [
+const LINKS: { href: string; label: string; lang?: string }[] = [
   { href: "/tr/projects", label: "Projeler" },
   { href: "/tr/contact", label: "İletişim" },
-  { href: "/en", label: "English site" },
+  { href: "/en", label: "English site", lang: "en" },
+  { href: "/de", label: "Deutsch", lang: "de" },
+  { href: "/ru", label: "Русский", lang: "ru" },
+  { href: "/pl", label: "Polski", lang: "pl" },
 ];
 
 export default function NotFound() {
@@ -69,7 +72,7 @@ export default function NotFound() {
             <Link
               key={l.href}
               href={l.href}
-              lang={l.href === "/en" ? "en" : undefined}
+              lang={l.lang}
               className="rounded-full border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-black/[0.03]"
               style={{ borderColor: `${TEAL}55`, color: TEAL }}
             >

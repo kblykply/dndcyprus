@@ -249,7 +249,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "pdf",
       thumb: "/lagoonflip/l-01.webp",
       src: "/bro.pdf",
-      description: "Брошюра Lagoon Verde",
+      description: "Lagoon Verde brochure",
     },
     {
       id: "lagoon-video",
@@ -257,7 +257,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "youtube",
       thumb: "/lagoon-verde/2.jpg",
       src: "https://www.youtube.com/embed/bKNPhMFNzGY?si=bAsOzWd2Kr6O8Fy-",
-      description: "Видео Lagoon Verde",
+      description: "Lagoon Verde video",
     },
     {
       id: "kktc-video",
@@ -265,7 +265,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "youtube",
       thumb: "/lala.jpg",
       src: "https://www.youtube.com/embed/JNKcu1APZO0?si=qDPxGjdF1uxJakR0",
-      description: "Видео о Северном Кипре",
+      description: "North Cyprus introduction video",
     },
     {
       id: "kktc-catalog",
@@ -273,7 +273,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "pdf",
       thumb: "/optimized/kktc.ff08e0f764.webp",
       src: "/kktckat.pdf",
-      description: "Каталог Северного Кипра",
+      description: "North Cyprus catalogue",
     },
     {
       id: "la-joya-polish",
@@ -281,7 +281,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "instagram",
       thumb: "/lajoyaimage.jpg",
       src: "https://www.instagram.com/reel/DSKNkREjLbD/",
-      description: "Видео La Joya (Польша)",
+      description: "La Joya video for Poland",
     },
     {
       id: "dnd-website",
@@ -289,7 +289,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "link",
       thumb: "/optimized/dndweb.33a891333c.webp",
       src: "https://dndcyprus.com/en",
-      description: "Сайт DND Cyprus",
+      description: "Official DND Cyprus website",
     },
     {
       id: "property-awards",
@@ -297,7 +297,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "instagram",
       thumb: "/property_awards_2025-747.jpg",
       src: "https://www.instagram.com/reel/DJLqfFSA4dP/",
-      description: "Видео Property Awards",
+      description: "Property Awards video",
     },
     {
       id: "payment-plan",
@@ -305,7 +305,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "pdf",
       thumb: "/lagoon-verde/1.jpg",
       src: "/paymentt.pdf",
-      description: "План оплаты Lagoon Verde",
+      description: "Lagoon Verde payment plan",
     },
     {
       id: "campaign",
@@ -313,7 +313,7 @@ export default function LagoonVerdeMediaHubLight({
       type: "image",
       thumb: "/campain.png",
       src: "/campain.png",
-      description: "Рекламная кампания",
+      description: "Advertising campaign",
     },
   ],
   []

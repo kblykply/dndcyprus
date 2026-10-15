@@ -4,12 +4,14 @@ import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "./lib/admin-session";
 
 const LOCALE_COOKIE = "locale";
 
-const SUPPORTED = ["tr", "en"] as const;
-const DEFAULT: (typeof SUPPORTED)[number] = "tr";
+const SUPPORTED = ["tr", "en", "de", "ru", "pl"] as const;
+type Supported = (typeof SUPPORTED)[number];
+const DEFAULT: Supported = "tr";
+const isSupported = (v: string | undefined): v is Supported => !!v && (SUPPORTED as readonly string[]).includes(v);
 
-function pickLocale(req: NextRequest): "tr" | "en" {
+function pickLocale(req: NextRequest): Supported {
   const saved = req.cookies.get(LOCALE_COOKIE)?.value;
-  if (saved === "en" || saved === "tr") return saved;
+  if (isSupported(saved)) return saved;
 
   // Accept-Language sırası/q değeri önemlidir: "tr-TR,tr;q=0.9,en;q=0.8" Türkçe tercih eder.
   // Eskiden başlıkta herhangi bir yerde "en" geçmesi /en'e yolluyordu.
@@ -24,7 +26,7 @@ function pickLocale(req: NextRequest): "tr" | "en" {
     .filter((p) => p.lang && p.q > 0)
     .sort((a, b) => b.q - a.q || a.i - b.i);
   for (const { lang } of prefs) {
-    if (lang === "tr" || lang === "en") return lang;
+    if (isSupported(lang)) return lang;
   }
   return DEFAULT;
 }
@@ -67,7 +69,7 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     url.pathname = `/${locale}`;
     const res = NextResponse.redirect(url);
-    if (locale === "en") {
+    if (locale !== DEFAULT) {
       res.cookies.set(LOCALE_COOKIE, locale, { path: "/", maxAge: 60 * 60 * 24 * 365 });
     }
     return res;

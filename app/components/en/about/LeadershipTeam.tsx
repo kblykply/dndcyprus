@@ -413,7 +413,7 @@ members = [
 
  return (
   <section
-    aria-label="Liderlik ve Ekip"
+    aria-label="Leadership and Team"
     className="relative overflow-hidden bg-white"
   style={{
   background: "transparent",

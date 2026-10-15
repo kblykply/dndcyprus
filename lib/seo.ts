@@ -1,12 +1,13 @@
 // lib/seo.ts
 // Sayfa başına başlık, açıklama, canonical, hreflang ve Open Graph üretir.
 import type { Metadata } from "next";
+import { LOCALES, LOCALE_META, type Locale } from "./azure/site";
 
 export const SITE_URL = "https://www.dndcyprus.com";
 export const SITE_NAME = "DND Cyprus";
 export const DEFAULT_OG_IMAGE = "/og/dnd-cyprus.jpg";
 
-export type Locale = "tr" | "en";
+export type { Locale };
 
 type PageMetaInput = {
   locale: Locale;
@@ -47,8 +48,7 @@ export function pageMetadata({
         ? {}
         : {
             languages: {
-              tr: localePath("tr", path),
-              en: localePath("en", path),
+              ...Object.fromEntries(LOCALES.map((l) => [l, localePath(l, path)])),
               "x-default": localePath("en", path),
             },
           }),
@@ -57,8 +57,8 @@ export function pageMetadata({
       type: "website",
       url,
       siteName: SITE_NAME,
-      locale: locale === "tr" ? "tr_TR" : "en_GB",
-      alternateLocale: singleLanguage ? undefined : locale === "tr" ? ["en_GB"] : ["tr_TR"],
+      locale: LOCALE_META[locale].og,
+      alternateLocale: singleLanguage ? undefined : LOCALES.filter((l) => l !== locale).map((l) => LOCALE_META[l].og),
       title,
       description,
       images: [{ url: image, width: 1200, height: 630, alt: imageAlt ?? title }],

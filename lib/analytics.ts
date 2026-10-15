@@ -1,3 +1,4 @@
+import { localeFromPathname, type Locale } from "./azure/site";
 // lib/analytics.ts
 // İstemci olay API'si: dataLayer + GA4 + Google Ads + Meta Pixel ve çerez izni.
 // Script yoksa ya da ID tanımlı değilse her çağrı sessizce hiçbir şey yapmaz.
@@ -58,8 +59,8 @@ export function isAdminPath(pathname: string) {
   return pathname === "/admin" || pathname.startsWith("/admin/");
 }
 
-export function localeFromPath(pathname: string): "tr" | "en" {
-  return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "tr";
+export function localeFromPath(pathname: string): Locale {
+  return localeFromPathname(pathname);
 }
 
 export const PROJECTS = {
@@ -72,12 +73,12 @@ export const PROJECTS = {
 
 export type ProjectSlug = keyof typeof PROJECTS;
 
-/** /tr/lagoon-verde → { slug, name, locale }; proje sayfası değilse null */
+/** /tr/lagoon-verde (/en, /de, /ru, /pl) → { slug, name, locale }; proje sayfası değilse null */
 export function projectFromPath(pathname: string) {
-  const m = pathname.match(/^\/(tr|en)\/(lagoon-verde|perla|perla-ii|la-joya|gecitkale)\/?$/);
+  const m = pathname.match(/^\/(tr|en|de|ru|pl)\/(lagoon-verde|perla|perla-ii|la-joya|gecitkale)\/?$/);
   if (!m) return null;
   const slug = m[2] as ProjectSlug;
-  return { slug, name: PROJECTS[slug], locale: m[1] as "tr" | "en" };
+  return { slug, name: PROJECTS[slug], locale: m[1] as Locale };
 }
 
 /* ---------------- Telefon normalizasyonu ---------------- */
@@ -86,7 +87,7 @@ export function projectFromPath(pathname: string) {
  * Ülke kodlu E.164 (+905488880363). Ülke kodu çıkarılamazsa null.
  * TR sayfasında 0 ile başlayan 11 haneli numara +90 kabul edilir (KKTC/TR mobil).
  */
-export function normalizePhoneE164(raw: string | undefined | null, locale?: "tr" | "en") {
+export function normalizePhoneE164(raw: string | undefined | null, locale?: Locale) {
   const s = (raw || "").trim();
   if (!s) return null;
   let digits = s.replace(/\D/g, "");
@@ -444,7 +445,7 @@ export function metaPageViewOnly() {
 }
 
 /** Google gelişmiş dönüşümler: yalnızca reklam izni (ad_user_data) varsa */
-export function setEnhancedConversionData(input: { email?: string; phone?: string; locale?: "tr" | "en" }) {
+export function setEnhancedConversionData(input: { email?: string; phone?: string; locale?: Locale }) {
   if (!isBrowser() || !ANALYTICS_ENV.adsId || !hasConsent("ads")) return;
   const email = (input.email || "").trim().toLowerCase();
   const phone = normalizePhoneE164(input.phone, input.locale);

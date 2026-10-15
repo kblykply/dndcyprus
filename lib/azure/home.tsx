@@ -219,4 +219,289 @@ const EN: HomeContent = {
   contact: { kicker: "Contact", title: <>Let’s create value <b>together.</b></>, lead: "End-to-end solutions from design to delivery in residential, commercial and mixed-use projects. Send your request and our team will reply within 24–48 hours.", highlights: ["On-time delivery", "Quality assurance", "Transparent communication"] },
 };
 
-export const HOME: Record<Locale, HomeContent> = { tr: TR, en: EN };
+const DE: HomeContent = {
+  hero: {
+    tag: "PropertyNC 2025 · Goldpreis",
+    play: "Imagefilm",
+    title: <>Ein neues Lebensgefühl <b>am Mittelmeer.</b></>,
+    lead: "Die zyprische Niederlassung der in Boston gegründeten DND Homes. Residenzen mit Lagunenpool in İskele, Boutique-Wohnen am Meer und ein preisgekrönter Beach Club.",
+    primary: "Projekte entdecken",
+    secondary: "Lagoon Verde",
+    chips: [{ big: "354", label: "Residenzen · Lagoon Verde" }, { big: "30.000+", label: "Wohnungen · Vision für Nordzypern" }, { big: "4", label: "Auszeichnungen · 2018–2025" }],
+  },
+  awards: {
+    label: "Auszeichnungen & Anerkennung",
+    items: [
+      { b: "Gold", rest: " · Lagoon Verde 2025", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png" },
+      { b: "Platin", rest: " · Mariachi Beach Club 2025", ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png" },
+      { b: "Bester Newcomer", rest: " · PropertyNC 2025", ribbon: "/BEST-NEWCOMER.png" },
+      { b: "CFO des Jahres", rest: " · Boston Business Journal 2018" },
+    ],
+  },
+  bento: {
+    kicker: "DND Cyprus auf einen Blick",
+    title: <><b>US-Qualität</b> auf Zypern. Preisgekrönte Projekte, Zahlung in Lira, Beach-Club-Vorteile.</>,
+    lead: "Ganzheitliche Lösungen von der Planung bis zur Übergabe – für Wohn-, Gewerbe- und Mischprojekte. Termingerechte Übergabe, Qualitätssicherung, transparente Kommunikation.",
+    lagoon: { k: "Bahçeler, İskele · Übergabe: Dezember 2028", h: "Lagoon Verde", p: "Ein einzigartiges Lagunenpool-Konzept: Aquapark, Minigolf, Amphitheater, Fitness, Verde Cafe. 354 Residenzen auf einem 43.179 m² großen Grundstück.", pill: "Goldpreis · Im Bau" },
+    tl: { k: "Neues Zahlungsmodell", h: "Einkommen in Lira, Raten in Lira.", upto: "Monate zinsfrei", rules: ["Keine Bank, keine Zinsen, kein Bürge", "Keine Kursdifferenz, kein Laufzeitaufschlag", "Raten folgen der Mindestlohnerhöhung in Nordzypern"], months: "Monate" },
+    units: { k: "Wohnungstypen", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² Wohnfläche" },
+    usa: { k: "Massachusetts, USA", count: 120, p: "Abgeschlossene Projekte; die Vision: 30.000+ Wohnungen in Nordzypern" },
+    mariachi: { k: "Exklusiv für DND-Eigentümer", h: "Mariachi Beach Club", p: "Freier Eintritt und 10% Rabatt in Restaurant und Bars. Strand, Pool mit 4 Whirlpools, Pavillons, DJ-Abende.", pill: "Platinpreis" },
+    lajoya: { k: "Long Beach · 500 m zum Meer", h: "La Joya", p: "74 Residenzen, an ihre Eigentümer übergeben.", pill: "Fertiggestellt · 2025" },
+    tech: { k: "Technische Ausstattung", h: "Standard in jedem Projekt", p: "Zentrale Heizung & Kühlung · Generator · Smart Home · Fußbodenheizung" },
+    awards: {
+      k: "PropertyNC 2025", h: "Drei Auszeichnungen, ein Jahr",
+      items: [
+        { title: "Platinpreis – Mariachi Beach Club", text: "Bestes geplantes neues Gewerbeprojekt. Unterhaltung, Design und Gemeinschaft auf Weltniveau für die Küste Nordzyperns.", ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png", href: "/de/mariachi" },
+        { title: "Goldpreis – DND Homes", text: "Bester Newcomer. Ein neuer Maßstab für exzellentes Design und Kundenzufriedenheit.", ribbon: "/BEST-NEWCOMER.png", href: "https://dnd-homes.com" },
+        { title: "Goldpreis – Lagoon Verde", text: "Beste soziokulturelle Entwicklung. Ein gemeinschaftsorientiertes Projekt mit Fokus auf Wohlbefinden, Nachhaltigkeit und Einklang mit der Natur.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/de/lagoon-verde" },
+      ],
+    },
+    stats: { k: "DND in Zahlen", h: "Von Boston nach İskele", items: [{ value: 30000, suffix: "+", label: "Geplante Wohnungen" }, { value: 8, suffix: "+", label: "Regionen" }, { value: 4, suffix: "+", label: "Auszeichnungen" }] },
+  },
+  videos: { kicker: "Videos", title: <>Projekte und Kampagnen, <b>aus erster Hand.</b></> },
+  story: {
+    kicker: "Ein Tag im Lagoon Verde",
+    title: <>Vom Morgen bis in die Nacht, <b>an einer Adresse.</b></>,
+    steps: [
+      { t: "08:30 · Morgen", h: "Aufwachen an der Lagune", p: "Die ruhige Lagune im ersten Licht, dazu der weitläufige Lagunenpool und das Inselpool-Konzept. Third-Wave-Kaffee und eine stille Terrasse im Verde Cafe.", tags: ["Lagunenpool", "Verde Cafe", "Fitness"], img: "/azure/lv-6m.jpg" },
+      { t: "13:00 · Mittag", h: "Mittagessen am Pool", p: "Sonnenliegen, Schirme und die Poolbar: erfrischende Drinks und Gourmet-Küche. Aquapark und Minigolf sind nur wenige Schritte entfernt.", tags: ["Poolbar & Restaurant", "Aquapark", "Minigolf"], img: "/azure/lv-1.jpg" },
+      { t: "19:30 · Abend", h: "Wenn die Lichter der Lagune angehen", p: "Abende auf den Terrassen bei Sonnenuntergang, Open-Air-Aufführungen im Amphitheater und Kinoabende unter Sternen.", tags: ["Amphitheater", "Dorfmarkt", "Beauty-Center"], img: "/azure/lv-2.jpg" },
+      { t: "22:00 · Nacht", h: "DJ-Nacht im Mariachi", p: "Der Mariachi Beach Club, nur 700 Meter entfernt: Live-Auftritte vom Sonnenuntergang bis spät in die Nacht. Freier Eintritt für Bewohner.", tags: ["DJ-Abende", "Latino-Menü", "2 Bars"], img: "/azure/dj.jpg" },
+    ],
+  },
+  projects: { kicker: "Projekte", title: <>Sechs Adressen, <b>ein Standard.</b></>, prev: "Zurück", next: "Weiter", soonKicker: "Demnächst", soonCta: "Vorab registrieren" },
+  location: {
+    kicker: "Lage · Lagoon Verde",
+    title: <>Nah an Meer, Stadt <b>und Flughafen.</b></>,
+    p: "Bahçeler, İskele (Ötüken). Long Beach Market und Restaurants, die Strandpromenade, das Zentrum von İskele.",
+    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Krankenhaus", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Flughafen Ercan", v: "45 km", w: 1 }],
+    directions: "Route", tour: "360°-Tour", lbl: "Lagoon Verde", sub: "Bahçeler, İskele · Nordzypern",
+  },
+  leadership: {
+    kicker: "Gründer & Management",
+    title: <>Globale Erfahrung, <b>lokale Disziplin.</b></>,
+    people: [
+      { img: "/azure/ozan.jpg", role: "Gründer · Vorstandsvorsitzender", name: "Ozan Dökmecioğlu", q: "Disziplin, Transparenz und nachhaltiges Wachstum – das Fundament all unseres Handelns.", dl: [["Expertise", "Finanzen & operatives Geschäft"], ["Globale Rolle", "Keurig Dr Pepper, ehem. CFO / President Int."], ["Werdegang", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/aynur.jpg", role: "Direktorin, DND Cyprus", name: "Aynur Zorba Güloğlu", q: "Vertrauen, Transparenz und Teamgeist – sie stehen im Zentrum unseres Erfolgs.", dl: [["Fokus", "Operative Führung"], ["Expertise", "Architektur & Management"], ["Ansatz", "Nachhaltigkeit"]] },
+    ],
+    team: "Ein Team von 27 Personen", teamCta: "Das ganze Team kennenlernen", brandsLabel: "Marken & Projekte",
+  },
+  timeline: {
+    kicker: "Unsere Geschichte",
+    title: <>Von 2017 bis heute, <b>von Boston nach İskele.</b></>,
+    items: [
+      { year: "2017", tag: "Gründung", p: "DND Homes wird in Boston gegründet.", img: "/azure/about-boston.jpg" },
+      { year: "2017", tag: "USA", p: "Projekt 12 Longfellow Road, Lexington.", img: "/azure/about-12lex.jpg" },
+      { year: "2018", tag: "Auszeichnung", p: "Boston Business Journal: CFO des Jahres.", img: "/azure/about-cfo.jpg" },
+      { year: "2023", tag: "Zypern", p: "Eröffnung des Betriebszentrums von DND Cyprus.", img: "/kurulus.JPG" },
+      { year: "2025", tag: "PropertyNC", p: "Bester Newcomer; Gold- und Platinpreis.", img: "/property_awards_2025-747.jpg" },
+      { year: "2025", tag: "Übergabe", p: "La Joya mit 74 Residenzen übergeben.", img: "/azure/lj-2.jpg" },
+    ],
+  },
+  press: { kicker: "DND Cyprus in der Presse", title: "Aktuelles", all: "Alle Meldungen" },
+  faq: {
+    kicker: "FAQ", title: "Gut zu wissen",
+    items: [
+      { q: "In welcher Währung wird bezahlt?", a: "Für eine begrenzte Anzahl von Residenzen im Lagoon Verde erfolgen alle Zahlungen in Türkischer Lira – ohne Bank, ohne Zinsen, ohne Bürgen, ohne Kursdifferenz und ohne Laufzeitaufschlag." },
+      { q: "Wie werden die Raten angepasst?", a: "Die Raten werden regelmäßig an die Erhöhung des Mindestlohns in Nordzypern angepasst – nicht an den Wechselkurs des Pfund Sterling. Laufzeiten von bis zu 60 Monaten sind möglich." },
+      { q: "Wer erhält die Vorteile im Mariachi Beach Club?", a: "Bewohner von La Joya, La Joya Perla, Perla II und Lagoon Verde erhalten freien Eintritt und 10% Rabatt auf Ausgaben im Restaurant, an der Poolbar sowie für Sonnenliegen und Cabanas. Vor Ort kann ein Ausweis verlangt werden." },
+      { q: "Wann wird Lagoon Verde übergeben?", a: "Die Übergabe ist für Dezember 2028 geplant. Das Projekt umfasst 354 Einheiten auf einem 43.179 m² großen Grundstück; erhältlich sind die Typen 1+0, 1+1 und 2+1." },
+      { q: "Welche technische Ausstattung ist Standard?", a: "Zentrale Heizung und Kühlung, ein zentraler Generator, Smart-Home-Systeme und Fußbodenheizung in den Bädern sind in jedem Projekt Standard." },
+    ],
+  },
+  instagram: { kicker: "Social Media", title: <>DND Cyprus <b>auf Instagram.</b></> },
+  contact: { kicker: "Kontakt", title: <>Lassen Sie uns gemeinsam <b>Werte schaffen.</b></>, lead: "Ganzheitliche Lösungen von der Planung bis zur Übergabe – für Wohn-, Gewerbe- und Mischprojekte. Senden Sie uns Ihre Anfrage, unser Team meldet sich innerhalb von 24–48 Stunden.", highlights: ["Termingerechte Übergabe", "Qualitätssicherung", "Transparente Kommunikation"] },
+};
+
+const RU: HomeContent = {
+  hero: {
+    tag: "PropertyNC 2025 · Золотая награда",
+    play: "Промо-ролик",
+    title: <>Новый ритм жизни <b>на Средиземноморье.</b></>,
+    lead: "Кипрское подразделение основанной в Бостоне компании DND Homes. Резиденции с бассейном-лагуной в Искеле, бутик-проекты на побережье и пляжный клуб, отмеченный наградами.",
+    primary: "Смотреть проекты",
+    secondary: "Lagoon Verde",
+    chips: [{ big: "354", label: "Резиденции · Lagoon Verde" }, { big: "30 000+", label: "Квартир в перспективе · Северный Кипр" }, { big: "4", label: "Награды · 2018–2025" }],
+  },
+  awards: {
+    label: "Награды и признание",
+    items: [
+      { b: "Золото", rest: " · Lagoon Verde 2025", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png" },
+      { b: "Платина", rest: " · Mariachi Beach Club 2025", ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png" },
+      { b: "Лучшая новая компания", rest: " · PropertyNC 2025", ribbon: "/BEST-NEWCOMER.png" },
+      { b: "Финансовый директор года", rest: " · Boston Business Journal 2018" },
+    ],
+  },
+  bento: {
+    kicker: "Коротко о DND Cyprus",
+    title: <><b>Качество США</b> на Кипре. Проекты-лауреаты, оплата в лирах, пляжный клуб.</>,
+    lead: "Комплексные решения от проектирования до сдачи — в жилых, коммерческих и многофункциональных проектах. Сдача в срок, гарантия качества, прозрачная коммуникация.",
+    lagoon: { k: "Bahçeler, Искеле · Сдача: декабрь 2028", h: "Lagoon Verde", p: "Уникальная концепция бассейна-лагуны: аквапарк, мини-гольф, амфитеатр, фитнес, Verde Cafe. 354 резиденции на участке 43 179 m².", pill: "Золотая награда · Строится" },
+    tl: { k: "Новая схема оплаты", h: "Зарплата в лирах — и платежи в лирах.", upto: "мес. без процентов", rules: ["Без банка, процентов и поручителей", "Без курсовой разницы и наценки за срок", "Платежи индексируются по росту минимальной зарплаты на Северном Кипре"], months: "мес." },
+    units: { k: "Типы квартир", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² закрытой площади" },
+    usa: { k: "Массачусетс, США", count: 120, p: "Завершённых проектов; в перспективе — 30 000+ квартир на Северном Кипре" },
+    mariachi: { k: "Только для владельцев жилья DND", h: "Mariachi Beach Club", p: "Бесплатный вход и скидка 10% в ресторане и барах. Пляж, бассейн с 4 джакузи, павильоны, DJ-вечеринки.", pill: "Платиновая награда" },
+    lajoya: { k: "Long Beach · 500 m до моря", h: "La Joya", p: "74 резиденции переданы владельцам.", pill: "Завершён · 2025" },
+    tech: { k: "Техническое оснащение", h: "Стандарт в каждом проекте", p: "Центральное отопление и кондиционирование · Генератор · Умный дом · Тёплый пол" },
+    awards: {
+      k: "PropertyNC 2025", h: "Три награды за один год",
+      items: [
+        { title: "Платиновая награда — Mariachi Beach Club", text: "Лучший предлагаемый новый коммерческий проект. Развлечения, дизайн и комьюнити мирового уровня — на побережье Северного Кипра.", ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png", href: "/ru/mariachi" },
+        { title: "Золотая награда — DND Homes", text: "Лучшая новая компания. Новый стандарт качества дизайна и удовлетворённости клиентов.", ribbon: "/BEST-NEWCOMER.png", href: "https://dnd-homes.com" },
+        { title: "Золотая награда — Lagoon Verde", text: "Лучший социокультурный проект. Проект, ориентированный на сообщество, где в приоритете благополучие, устойчивое развитие и гармония с природой.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/ru/lagoon-verde" },
+      ],
+    },
+    stats: { k: "DND в цифрах", h: "Из Бостона в Искеле", items: [{ value: 30000, suffix: "+", label: "Квартир в планах" }, { value: 8, suffix: "+", label: "Регионов" }, { value: 4, suffix: "+", label: "Наград" }] },
+  },
+  videos: { kicker: "Видео", title: <>Проекты и кампании — <b>из первых уст.</b></> },
+  story: {
+    kicker: "Один день в Lagoon Verde",
+    title: <>С утра до ночи — <b>по одному адресу.</b></>,
+    steps: [
+      { t: "08:30 · Утро", h: "Пробуждение у лагуны", p: "Спокойная лагуна в первых лучах солнца, просторный бассейн-лагуна и бассейны с островками. Кофе третьей волны и тихая терраса в Verde Cafe.", tags: ["Бассейн-лагуна", "Verde Cafe", "Фитнес"], img: "/azure/lv-6m.jpg" },
+      { t: "13:00 · День", h: "Обед у бассейна", p: "Шезлонги, зонтики и бар у бассейна: освежающие напитки и блюда для гурманов. Аквапарк и мини-гольф — в нескольких шагах.", tags: ["Бар и ресторан у бассейна", "Аквапарк", "Мини-гольф"], img: "/azure/lv-1.jpg" },
+      { t: "19:30 · Вечер", h: "Когда зажигаются огни лагуны", p: "Вечера на террасах под закат, выступления под открытым небом в амфитеатре и кино под звёздами.", tags: ["Амфитеатр", "Деревенский рынок", "Салон красоты"], img: "/azure/lv-2.jpg" },
+      { t: "22:00 · Ночь", h: "DJ-вечеринка в Mariachi", p: "Mariachi Beach Club в 700 метрах: живые выступления от заката до поздней ночи. Для жителей вход бесплатный.", tags: ["DJ-вечеринки", "Латиноамериканское меню", "2 бара"], img: "/azure/dj.jpg" },
+    ],
+  },
+  projects: { kicker: "Проекты", title: <>Шесть адресов, <b>один стандарт.</b></>, prev: "Назад", next: "Далее", soonKicker: "Скоро", soonCta: "Предварительная запись" },
+  location: {
+    kicker: "Расположение · Lagoon Verde",
+    title: <>Рядом море, город <b>и аэропорт.</b></>,
+    p: "Bahçeler, Искеле (Ötüken). Long Beach Market и рестораны, набережная, центр Искеле.",
+    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Больница", v: "10 km", w: 0.32 }, { label: "Фамагуста", v: "15 km", w: 0.45 }, { label: "Аэропорт Эрджан", v: "45 km", w: 1 }],
+    directions: "Маршрут", tour: "3D-тур", lbl: "Lagoon Verde", sub: "Bahçeler, Искеле · Северный Кипр",
+  },
+  leadership: {
+    kicker: "Основатель и руководство",
+    title: <>Международный опыт, <b>местная дисциплина.</b></>,
+    people: [
+      { img: "/azure/ozan.jpg", role: "Основатель · Председатель совета директоров", name: "Ozan Dökmecioğlu", q: "Дисциплина, прозрачность и устойчивый рост — основа всего, что мы делаем.", dl: [["Специализация", "Финансы и операционная деятельность"], ["Международная роль", "Keurig Dr Pepper, экс-CFO / President Int."], ["Опыт", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/aynur.jpg", role: "Директор DND Cyprus", name: "Aynur Zorba Güloğlu", q: "Доверие, прозрачность и командный дух — вот что лежит в основе нашего успеха.", dl: [["Фокус", "Операционное руководство"], ["Специализация", "Архитектура и управление"], ["Подход", "Устойчивое развитие"]] },
+    ],
+    team: "Команда из 27 человек", teamCta: "Познакомиться с командой", brandsLabel: "Бренды и проекты",
+  },
+  timeline: {
+    kicker: "Наша история",
+    title: <>С 2017 года до наших дней — <b>из Бостона в Искеле.</b></>,
+    items: [
+      { year: "2017", tag: "Основание", p: "В Бостоне основана компания DND Homes.", img: "/azure/about-boston.jpg" },
+      { year: "2017", tag: "США", p: "Проект 12 Longfellow Road в Лексингтоне.", img: "/azure/about-12lex.jpg" },
+      { year: "2018", tag: "Награда", p: "Boston Business Journal: финансовый директор года.", img: "/azure/about-cfo.jpg" },
+      { year: "2023", tag: "Кипр", p: "Открыт операционный центр DND Cyprus.", img: "/kurulus.JPG" },
+      { year: "2025", tag: "PropertyNC", p: "«Лучшая новая компания», золотая и платиновая награды.", img: "/property_awards_2025-747.jpg" },
+      { year: "2025", tag: "Сдача", p: "Комплекс La Joya сдан: 74 резиденции.", img: "/azure/lj-2.jpg" },
+    ],
+  },
+  press: { kicker: "DND Cyprus в прессе", title: "Новости", all: "Все новости" },
+  faq: {
+    kicker: "Частые вопросы", title: "Полезно знать",
+    items: [
+      { q: "В какой валюте производятся платежи?", a: "Для ограниченного числа резиденций в Lagoon Verde все платежи принимаются в турецких лирах. Без банка, процентов и поручителей, без курсовой разницы и наценки за срок." },
+      { q: "Как индексируются платежи?", a: "Платежи периодически пересчитываются в соответствии с ростом минимальной зарплаты на Северном Кипре, а не по курсу фунта стерлингов. Рассрочка доступна на срок до 60 месяцев." },
+      { q: "Кому доступны привилегии Mariachi Beach Club?", a: "Жители La Joya, La Joya Perla, Perla II и Lagoon Verde получают бесплатный вход и скидку 10% в ресторане, баре у бассейна, а также на шезлонги и кабаны. На месте может потребоваться удостоверение личности." },
+      { q: "Когда сдаётся Lagoon Verde?", a: "Плановый срок сдачи — декабрь 2028. Проект включает 354 квартиры на участке 43 179 m²; доступны планировки 1+0, 1+1 и 2+1." },
+      { q: "Какое техническое оснащение входит в стандарт?", a: "Центральное отопление и кондиционирование, центральный генератор, системы умного дома и тёплые полы в ванных комнатах — стандарт в каждом проекте." },
+    ],
+  },
+  instagram: { kicker: "Соцсети", title: <>DND Cyprus <b>в Instagram.</b></> },
+  contact: { kicker: "Контакты", title: <>Давайте создавать ценность <b>вместе.</b></>, lead: "Комплексные решения от проектирования до сдачи — в жилых, коммерческих и многофункциональных проектах. Оставьте заявку, и наша команда свяжется с вами в течение 24–48 часов.", highlights: ["Сдача в срок", "Гарантия качества", "Прозрачная коммуникация"] },
+};
+
+const PL: HomeContent = {
+  hero: {
+    tag: "PropertyNC 2025 · Złota Nagroda",
+    play: "Film promocyjny",
+    title: <>Nowy rytm życia <b>nad Morzem Śródziemnym.</b></>,
+    lead: "Cypryjski oddział założonej w Bostonie firmy DND Homes. Apartamenty z basenem-laguną w İskele, kameralne inwestycje nad morzem i nagradzany beach club.",
+    primary: "Odkryj projekty",
+    secondary: "Lagoon Verde",
+    chips: [{ big: "354", label: "Apartamenty · Lagoon Verde" }, { big: "30 000+", label: "Mieszkań w planach · Cypr Północny" }, { big: "4", label: "Nagrody · 2018–2025" }],
+  },
+  awards: {
+    label: "Nagrody i wyróżnienia",
+    items: [
+      { b: "Złoto", rest: " · Lagoon Verde 2025", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png" },
+      { b: "Platyna", rest: " · Mariachi Beach Club 2025", ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png" },
+      { b: "Najlepszy debiut", rest: " · PropertyNC 2025", ribbon: "/BEST-NEWCOMER.png" },
+      { b: "CFO Roku", rest: " · Boston Business Journal 2018" },
+    ],
+  },
+  bento: {
+    kicker: "DND Cyprus w skrócie",
+    title: <><b>Jakość z USA</b> na Cyprze. Nagradzane projekty, płatność w lirach, beach club.</>,
+    lead: "Kompleksowe rozwiązania od projektu po oddanie – w inwestycjach mieszkaniowych, komercyjnych i wielofunkcyjnych. Terminowe oddanie, gwarancja jakości, przejrzysta komunikacja.",
+    lagoon: { k: "Bahçeler, İskele · Oddanie: grudzień 2028", h: "Lagoon Verde", p: "Wyjątkowa koncepcja basenu-laguny: aquapark, minigolf, amfiteatr, fitness, Verde Cafe. 354 apartamenty na działce o powierzchni 43 179 m².", pill: "Złota Nagroda · W budowie" },
+    tl: { k: "Nowy model płatności", h: "Pensja w lirach, raty w lirach.", upto: "mies. bez odsetek", rules: ["Bez banku, odsetek i poręczyciela", "Bez różnic kursowych i dopłat za termin", "Raty rosną wraz z płacą minimalną na Cyprze Północnym"], months: "mies." },
+    units: { k: "Typy mieszkań", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² powierzchni zamkniętej" },
+    usa: { k: "Massachusetts, USA", count: 120, p: "Zrealizowanych projektów; wizja 30 000+ mieszkań na Cyprze Północnym" },
+    mariachi: { k: "Wyłącznie dla właścicieli nieruchomości DND", h: "Mariachi Beach Club", p: "Bezpłatny wstęp i 10% zniżki w restauracji i barach. Plaża, basen z 4 jacuzzi, pawilony, wieczory z DJ-em.", pill: "Platynowa Nagroda" },
+    lajoya: { k: "Long Beach · 500 m od morza", h: "La Joya", p: "74 apartamenty przekazane właścicielom.", pill: "Ukończony · 2025" },
+    tech: { k: "Wyposażenie techniczne", h: "Standard w każdym projekcie", p: "Centralne ogrzewanie i chłodzenie · Generator · Inteligentny dom · Ogrzewanie podłogowe" },
+    awards: {
+      k: "PropertyNC 2025", h: "Trzy nagrody w jednym roku",
+      items: [
+        { title: "Platynowa Nagroda – Mariachi Beach Club", text: "Najlepszy proponowany nowy projekt komercyjny. Rozrywka, design i społeczność na światowym poziomie na wybrzeżu Cypru Północnego.", ribbon: "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png", href: "/pl/mariachi" },
+        { title: "Złota Nagroda – DND Homes", text: "Najlepszy debiut. Nowy standard doskonałego designu i satysfakcji klientów.", ribbon: "/BEST-NEWCOMER.png", href: "https://dnd-homes.com" },
+        { title: "Złota Nagroda – Lagoon Verde", text: "Najlepszy projekt społeczno-kulturalny. Inwestycja skupiona na społeczności, w której priorytetem są dobrostan, zrównoważony rozwój i harmonia z naturą.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/pl/lagoon-verde" },
+      ],
+    },
+    stats: { k: "DND w liczbach", h: "Z Bostonu do İskele", items: [{ value: 30000, suffix: "+", label: "Planowanych mieszkań" }, { value: 8, suffix: "+", label: "Regionów" }, { value: 4, suffix: "+", label: "Nagród" }] },
+  },
+  videos: { kicker: "Wideo", title: <>Projekty i kampanie <b>z pierwszej ręki.</b></> },
+  story: {
+    kicker: "Jeden dzień w Lagoon Verde",
+    title: <>Od rana do nocy, <b>pod jednym adresem.</b></>,
+    steps: [
+      { t: "08:30 · Poranek", h: "Pobudka nad laguną", p: "Spokojna laguna w pierwszym świetle dnia, rozległy basen-laguna i baseny z wyspami. Kawa trzeciej fali i cichy taras w Verde Cafe.", tags: ["Basen-laguna", "Verde Cafe", "Fitness"], img: "/azure/lv-6m.jpg" },
+      { t: "13:00 · Południe", h: "Lunch przy basenie", p: "Leżaki, parasole i pool bar: orzeźwiające napoje i smaki dla smakoszy. Aquapark i minigolf zaledwie kilka kroków dalej.", tags: ["Pool bar i restauracja", "Aquapark", "Minigolf"], img: "/azure/lv-1.jpg" },
+      { t: "19:30 · Wieczór", h: "Gdy zapalają się światła laguny", p: "Wieczory na tarasach o zachodzie słońca, występy plenerowe w amfiteatrze i seanse filmowe pod gwiazdami.", tags: ["Amfiteatr", "Wiejski targ", "Centrum urody"], img: "/azure/lv-2.jpg" },
+      { t: "22:00 · Noc", h: "Noc z DJ-em w Mariachi", p: "Mariachi Beach Club 700 metrów dalej: występy na żywo od zachodu słońca do późnej nocy. Dla mieszkańców wstęp bezpłatny.", tags: ["Wieczory z DJ-em", "Menu latino", "2 bary"], img: "/azure/dj.jpg" },
+    ],
+  },
+  projects: { kicker: "Projekty", title: <>Sześć adresów, <b>jeden standard.</b></>, prev: "Poprzedni", next: "Następny", soonKicker: "Wkrótce", soonCta: "Wstępna rejestracja" },
+  location: {
+    kicker: "Lokalizacja · Lagoon Verde",
+    title: <>Blisko morza, miasta <b>i lotniska.</b></>,
+    p: "Bahçeler, İskele (Ötüken). Long Beach Market i restauracje, nadmorska promenada, centrum İskele.",
+    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Szpital", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Lotnisko Ercan", v: "45 km", w: 1 }],
+    directions: "Trasa", tour: "Wirtualny spacer", lbl: "Lagoon Verde", sub: "Bahçeler, İskele · Cypr Północny",
+  },
+  leadership: {
+    kicker: "Założyciel i zarząd",
+    title: <>Globalne doświadczenie, <b>lokalna dyscyplina.</b></>,
+    people: [
+      { img: "/azure/ozan.jpg", role: "Założyciel · Przewodniczący Rady Dyrektorów", name: "Ozan Dökmecioğlu", q: "Dyscyplina, przejrzystość i zrównoważony wzrost – fundament wszystkiego, co robimy.", dl: [["Specjalizacja", "Finanse i operacje"], ["Rola globalna", "Keurig Dr Pepper, były CFO / President Int."], ["Doświadczenie", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/aynur.jpg", role: "Dyrektor DND Cyprus", name: "Aynur Zorba Güloğlu", q: "Zaufanie, przejrzystość i duch zespołu – to one stoją u podstaw naszego sukcesu.", dl: [["Obszar działania", "Przywództwo operacyjne"], ["Specjalizacja", "Architektura i zarządzanie"], ["Podejście", "Zrównoważony rozwój"]] },
+    ],
+    team: "Zespół 27 osób", teamCta: "Poznaj cały zespół", brandsLabel: "Marki i projekty",
+  },
+  timeline: {
+    kicker: "Nasza historia",
+    title: <>Od 2017 roku do dziś, <b>z Bostonu do İskele.</b></>,
+    items: [
+      { year: "2017", tag: "Założenie", p: "W Bostonie powstaje DND Homes.", img: "/azure/about-boston.jpg" },
+      { year: "2017", tag: "USA", p: "Projekt 12 Longfellow Road w Lexington.", img: "/azure/about-12lex.jpg" },
+      { year: "2018", tag: "Nagroda", p: "Boston Business Journal: CFO Roku.", img: "/azure/about-cfo.jpg" },
+      { year: "2023", tag: "Cypr", p: "Otwarcie centrum operacyjnego DND Cyprus.", img: "/kurulus.JPG" },
+      { year: "2025", tag: "PropertyNC", p: "Najlepszy debiut; Złota i Platynowa Nagroda.", img: "/property_awards_2025-747.jpg" },
+      { year: "2025", tag: "Oddanie", p: "Oddano La Joya – 74 apartamenty.", img: "/azure/lj-2.jpg" },
+    ],
+  },
+  press: { kicker: "DND Cyprus w mediach", title: "Aktualności", all: "Wszystkie aktualności" },
+  faq: {
+    kicker: "FAQ", title: "Warto wiedzieć",
+    items: [
+      { q: "W jakiej walucie dokonuje się płatności?", a: "W przypadku ograniczonej liczby apartamentów w Lagoon Verde wszystkie płatności realizowane są w lirach tureckich. Bez banku, odsetek i poręczyciela, bez różnic kursowych i dopłat za termin." },
+      { q: "Jak aktualizowane są raty?", a: "Raty są okresowo aktualizowane zgodnie ze wzrostem płacy minimalnej na Cyprze Północnym, a nie według kursu funta szterlinga. Dostępne są okresy spłaty do 60 miesięcy." },
+      { q: "Kto korzysta z przywilejów Mariachi Beach Club?", a: "Mieszkańcy La Joya, La Joya Perla, Perla II i Lagoon Verde mają bezpłatny wstęp i 10% zniżki w restauracji, pool barze oraz na leżaki i cabany. Na miejscu może być wymagane okazanie dokumentu tożsamości." },
+      { q: "Kiedy Lagoon Verde zostanie oddany do użytku?", a: "Planowany termin oddania to grudzień 2028. Projekt obejmuje 354 lokale na działce o powierzchni 43 179 m²; dostępne są typy 1+0, 1+1 i 2+1." },
+      { q: "Jakie wyposażenie techniczne jest standardem?", a: "Centralne ogrzewanie i chłodzenie, centralny generator, systemy inteligentnego domu oraz ogrzewanie podłogowe w łazienkach to standard w każdym projekcie." },
+    ],
+  },
+  instagram: { kicker: "Social media", title: <>DND Cyprus <b>na Instagramie.</b></> },
+  contact: { kicker: "Kontakt", title: <>Twórzmy wartość <b>razem.</b></>, lead: "Kompleksowe rozwiązania od projektu po oddanie – w inwestycjach mieszkaniowych, komercyjnych i wielofunkcyjnych. Prosimy o przesłanie zapytania – nasz zespół odpowie w ciągu 24–48 godzin.", highlights: ["Terminowe oddanie", "Gwarancja jakości", "Przejrzysta komunikacja"] },
+};
+
+export const HOME: Record<Locale, HomeContent> = { tr: TR, en: EN, de: DE, ru: RU, pl: PL };

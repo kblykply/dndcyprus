@@ -245,7 +245,7 @@ export default function TermsPage() {
                   info@dndcyprus.com
                 </a>{" "}
                 · Phone:{" "}
-                <a href="tel:+9039244400363" className="underline underline-offset-4">
+                <a href="tel:+903924440363" className="underline underline-offset-4">
                   +90 392 444 0 363
                 </a>
               </div>

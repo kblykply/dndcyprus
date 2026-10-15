@@ -2,6 +2,7 @@
 // Sunucu: Meta Conversions API "Lead" olayı. Pixel ile aynı event_id → Meta tekilleştirir.
 // Token yalnızca ortam değişkeninden okunur ve asla loglanmaz; hata kullanıcı isteğini bozmaz.
 
+import type { Locale } from "./azure/site";
 import { createHash } from "node:crypto";
 import { normalizePhoneE164 } from "./analytics";
 
@@ -18,7 +19,7 @@ export type MetaLeadInput = {
   fbclid?: string;
   fbclidTs?: number;
   contentName?: string;
-  locale?: "tr" | "en";
+  locale?: Locale;
 };
 
 let warnedMissingVersion = false;

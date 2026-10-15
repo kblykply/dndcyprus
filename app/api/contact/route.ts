@@ -1,4 +1,5 @@
 // app/api/contact/route.ts
+import { localeFromPathname } from "@/lib/azure/site";
 import { NextResponse, after } from "next/server";
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
@@ -132,7 +133,7 @@ export async function POST(req: NextRequest) {
     const fbp = req.cookies.get("_fbp")?.value;
     const fbc = req.cookies.get("_fbc")?.value;
     const fbTouch = [attribution?.current, attribution?.last, attribution?.first].find((t) => t?.fbclid);
-    const locale = pageUrl && new URL(pageUrl).pathname.startsWith("/en") ? "en" : "tr";
+    const locale = pageUrl ? localeFromPathname(new URL(pageUrl).pathname) : "tr"; // 5 dil: de/ru/pl de kendi dili ile
 
     after(() =>
       sendMetaLeadEvent({

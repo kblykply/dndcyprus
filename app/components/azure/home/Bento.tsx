@@ -19,7 +19,7 @@ export default function Bento({ locale }: { locale: Locale }) {
       <div className="az-wrap">
         <div className="az-head">
           <span className="az-kicker rv">{t.kicker}</span>
-          <h2 className="az-h2 rv d1">{t.title}</h2>
+          <h2 className="az-h2 statement rv d1">{t.title}</h2>
           <p className="az-lead rv d2">{t.lead}</p>
         </div>
         <div className="az-grid">

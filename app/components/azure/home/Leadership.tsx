@@ -11,6 +11,13 @@ const BRANDS = [
   { name: "Perla", logo: "/logos/perla.png", path: "/perla" },
   { name: "Perla II", logo: "/logos/perlaii.png", path: "/perla-ii" },
 ];
+const TEAMS: Record<Locale, [string, string]> = {
+  tr: ["Satış · Mimarlık · Mühendislik", "Finans · Pazarlama · Operasyon"],
+  en: ["Sales · Architecture · Engineering", "Finance · Marketing · Operations"],
+  de: ["Vertrieb · Architektur · Ingenieurwesen", "Finanzen · Marketing · Betrieb"],
+  ru: ["Продажи · Архитектура · Инжиниринг", "Финансы · Маркетинг · Операции"],
+  pl: ["Sprzedaż · Architektura · Inżynieria", "Finanse · Marketing · Operacje"],
+};
 const PARTNERS = [
   { name: "Keurig Dr Pepper", logo: "/Keurig_Dr_Pepper.png" },
   { name: "Kellogg's", logo: "/Kellogg's-Logo.png" },
@@ -22,7 +29,7 @@ const PARTNERS = [
 export default function Leadership({ locale }: { locale: Locale }) {
   const t = HOME[locale].leadership;
   return (
-    <section className="az-section az-lead" id="yonetim">
+    <section className="az-section az-leaders" id="yonetim">
       <div className="az-wrap">
         <div className="az-head"><span className="az-kicker rv">{t.kicker}</span><h2 className="az-h2 rv d1">{t.title}</h2></div>
         <div className="g">
@@ -38,7 +45,7 @@ export default function Leadership({ locale }: { locale: Locale }) {
           ))}
         </div>
         <div className="az-trow rv">
-          <span>{t.team}</span><span>{locale === "tr" ? "Satış · Mimarlık · Mühendislik" : "Sales · Architecture · Engineering"}</span><span>{locale === "tr" ? "Finans · Pazarlama · Operasyon" : "Finance · Marketing · Operations"}</span>
+          <span>{t.team}</span><span>{TEAMS[locale][0]}</span><span>{TEAMS[locale][1]}</span>
           <Link className="az-btn glass sm" href={href(locale, "/team")} prefetch={false}>{t.teamCta}</Link>
         </div>
         <div className="az-brands rv d1" aria-label={t.brandsLabel}>

@@ -3,6 +3,7 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS } from "@/lib/blog";
 import { SITE_URL, localePath, type Locale } from "@/lib/seo";
+import { LOCALES } from "@/lib/azure/site";
 
 type Freq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
 
@@ -30,8 +31,8 @@ const abs = (locale: Locale, path: string) => `${SITE_URL}${localePath(locale, p
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = BILINGUAL.flatMap(({ path, priority, changeFrequency }) => {
     // pageMetadata ile aynı: x-default İngilizce sürüm
-    const languages = { tr: abs("tr", path), en: abs("en", path), "x-default": abs("en", path) };
-    return (["tr", "en"] as const).map((locale) => ({
+    const languages = { ...Object.fromEntries(LOCALES.map((l) => [l, abs(l, path)])), "x-default": abs("en", path) };
+    return LOCALES.map((locale) => ({
       url: abs(locale, path),
       changeFrequency,
       priority,

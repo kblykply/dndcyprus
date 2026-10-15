@@ -23,6 +23,7 @@ const COPY = {
     phoneHint: "Ülke koduyla yazın (ör. +90, +44).",
     note: "Bilgileriniz yalnızca talebinizi yanıtlamak için kullanılır.",
     waText: (p?: string) => p ? `Merhaba! ${p} hakkında fiyat ve kat planı bilgisi almak istiyorum.` : "Merhaba! Bilgi almak istiyorum.",
+    dial: "+90", brochure: "Broşür (PDF)",
   },
   en: {
     kicker: "Contact",
@@ -41,8 +42,66 @@ const COPY = {
     phoneHint: "Include your country code (e.g. +44, +90).",
     note: "Your details are only used to respond to your request.",
     waText: (p?: string) => p ? `Hello! I would like to receive prices and floor plans for ${p}.` : "Hello! I would like more information.",
+    dial: "+44", brochure: "Brochure (PDF)",
   },
-};
+  de: {
+    kicker: "Kontakt",
+    title: <>Gemeinsam Werte <b>schaffen.</b></>,
+    lead: "Senden Sie uns Ihre Anfrage – unser Team meldet sich innerhalb von 24–48 Stunden bei Ihnen. Ihre Daten sind geschützt.",
+    hq: "DND Cyprus Hauptsitz", sales: "Lagoon Verde Verkaufsbüro",
+    name: "Vor- und Nachname *", phone: "Telefon *", email: "E-Mail *", project: "Projekt", unit: "Wohnungstyp", message: "Nachricht", subject: "Betreff *",
+    undecided: "Noch nicht entschieden",
+    consentPre: "Ich bin mit der Verarbeitung ", consentLink: "meiner personenbezogenen Daten", consentPost: " zur Kontaktaufnahme einverstanden.",
+    submit: "Preise & Grundrisse anfordern", submitContact: "Nachricht senden", sending: "Wird gesendet…",
+    ok: "Anfrage erhalten · wir antworten innerhalb von 24–48 Stunden",
+    okTitle: "Vielen Dank!", okText: "Wir haben Ihre Anfrage erhalten. Unser Vertriebsteam meldet sich in Kürze bei Ihnen.",
+    wa: "Sie möchten nicht warten? Schreiben Sie uns auf WhatsApp",
+    err: "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns auf WhatsApp.",
+    invalid: "Bitte prüfen Sie die markierten Felder.",
+    phoneHint: "Bitte mit Ländervorwahl angeben (z. B. +49, +90).",
+    note: "Ihre Angaben werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet.",
+    waText: (p?: string) => p ? `Hallo! Ich hätte gerne Preise und Grundrisse für ${p}.` : "Hallo! Ich hätte gerne weitere Informationen.",
+    dial: "+49", brochure: "Broschüre (PDF)",
+  },
+  ru: {
+    kicker: "Контакты",
+    title: <>Создадим ценность <b>вместе.</b></>,
+    lead: "Отправьте заявку, и наша команда свяжется с вами в течение 24–48 часов. Ваши данные под защитой.",
+    hq: "Головной офис DND Cyprus", sales: "Офис продаж Lagoon Verde",
+    name: "Имя и фамилия *", phone: "Телефон *", email: "Эл. почта *", project: "Проект", unit: "Тип квартиры", message: "Сообщение", subject: "Тема *",
+    undecided: "Пока не выбрано",
+    consentPre: "Даю согласие на обработку ", consentLink: "моих персональных данных", consentPost: " для связи со мной.",
+    submit: "Запросить цены и планировки", submitContact: "Отправить сообщение", sending: "Отправка…",
+    ok: "Заявка получена · ответим в течение 24–48 часов",
+    okTitle: "Спасибо!", okText: "Мы получили вашу заявку. Наш отдел продаж скоро свяжется с вами.",
+    wa: "Не хотите ждать? Напишите нам в WhatsApp",
+    err: "При отправке произошла ошибка. Попробуйте ещё раз или напишите нам в WhatsApp.",
+    invalid: "Пожалуйста, проверьте отмеченные поля.",
+    phoneHint: "Укажите номер с кодом страны (напр. +7, +90).",
+    note: "Ваши данные используются только для ответа на вашу заявку.",
+    waText: (p?: string) => p ? `Здравствуйте! Хочу получить цены и планировки по проекту ${p}.` : "Здравствуйте! Хочу получить больше информации.",
+    dial: "+7", brochure: "Брошюра (PDF)",
+  },
+  pl: {
+    kicker: "Kontakt",
+    title: <>Twórzmy wartość <b>razem.</b></>,
+    lead: "Prosimy przesłać zapytanie – nasz zespół skontaktuje się z Państwem w ciągu 24–48 godzin. Państwa dane są chronione.",
+    hq: "Siedziba główna DND Cyprus", sales: "Biuro sprzedaży Lagoon Verde",
+    name: "Imię i nazwisko *", phone: "Telefon *", email: "E-mail *", project: "Projekt", unit: "Typ mieszkania", message: "Wiadomość", subject: "Temat *",
+    undecided: "Jeszcze nie wybrano",
+    consentPre: "Wyrażam zgodę na przetwarzanie ", consentLink: "moich danych osobowych", consentPost: " w celu kontaktu.",
+    submit: "Poproś o ceny i plany", submitContact: "Wyślij wiadomość", sending: "Wysyłanie…",
+    ok: "Zapytanie otrzymane · odpowiemy w ciągu 24–48 godzin",
+    okTitle: "Dziękujemy!", okText: "Otrzymaliśmy Państwa zapytanie. Nasz dział sprzedaży wkrótce się z Państwem skontaktuje.",
+    wa: "Wolą Państwo nie czekać? Prosimy napisać do nas na WhatsApp",
+    err: "Podczas wysyłania wystąpił błąd. Prosimy spróbować ponownie lub napisać do nas na WhatsApp.",
+    invalid: "Prosimy sprawdzić zaznaczone pola.",
+    phoneHint: "Prosimy podać numer z kierunkowym kraju (np. +48, +90).",
+    note: "Państwa dane wykorzystujemy wyłącznie do odpowiedzi na zapytanie.",
+    waText: (p?: string) => p ? `Dzień dobry! Proszę o ceny i plany mieszkań w projekcie ${p}.` : "Dzień dobry! Proszę o więcej informacji.",
+    dial: "+48", brochure: "Broszura (PDF)",
+  },
+} satisfies Record<Locale, unknown>;
 
 type Props = {
   locale: Locale;
@@ -135,7 +194,7 @@ export default function ContactCard({
               </div>
             )}
             {brochureHref && (
-              <div className="cta"><a className="az-btn glass sm" href={brochureHref} target={brochureHref.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">{locale === "tr" ? "Broşür (PDF)" : "Brochure (PDF)"}</a></div>
+              <div className="cta"><a className="az-btn glass sm" href={brochureHref} target={brochureHref.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">{t.brochure}</a></div>
             )}
           </div>
 
@@ -149,7 +208,7 @@ export default function ContactCard({
             <form className="az-f" onSubmit={onSubmit} noValidate aria-describedby={Object.keys(errors).length ? `${uid}-err` : undefined}>
               <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: -9999, opacity: 0 }} />
               <div className="az-field"><label htmlFor={`${uid}-n`}>{t.name}</label><input id={`${uid}-n`} name="name" type="text" autoComplete="name" required aria-invalid={errors.name || undefined} /></div>
-              <div className="az-field"><label htmlFor={`${uid}-p`}>{t.phone}</label><input id={`${uid}-p`} name="phone" type="tel" placeholder={locale === "tr" ? "+90" : "+44"} autoComplete="tel" required aria-invalid={errors.phone || undefined} /></div>
+              <div className="az-field"><label htmlFor={`${uid}-p`}>{t.phone}</label><input id={`${uid}-p`} name="phone" type="tel" placeholder={t.dial} autoComplete="tel" required aria-invalid={errors.phone || undefined} /></div>
               <div className="az-field"><label htmlFor={`${uid}-e`}>{t.email}</label><input id={`${uid}-e`} name="email" type="email" autoComplete="email" required aria-invalid={errors.email || undefined} /></div>
               {mode === "contact" ? (
                 <div className="az-field"><label htmlFor={`${uid}-s`}>{t.subject}</label><input id={`${uid}-s`} name="subject" type="text" required aria-invalid={errors.subject || undefined} /></div>

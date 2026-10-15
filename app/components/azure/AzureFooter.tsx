@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT, FOOTER_COPY, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
+import { CONTACT, FOOTER_COPY, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
 import CookiePrefsLink from "./CookiePrefsLink";
 
 export default function AzureFooter({ locale }: { locale: Locale }) {
@@ -32,7 +32,7 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
               <li><Link href={href(locale, "/about")} prefetch={false}>{n.about}</Link></li>
               <li><Link href={href(locale, "/team")} prefetch={false}>{n.team}</Link></li>
               <li><Link href={href(locale, "/press")} prefetch={false}>{n.press}</Link></li>
-              {locale === "tr" && <li><Link href="/tr/blog" prefetch={false}>{n.blog}</Link></li>}
+              {LOCALE_META[locale].blog && <li><Link href={href(locale, "/blog")} prefetch={false}>{n.blog}</Link></li>}
               <li><Link href={href(locale, "/dndcyprus")} prefetch={false}>{n.media}</Link></li>
               <li><Link href={href(locale, "/contact")} prefetch={false}>{n.contact}</Link></li>
             </ul>
