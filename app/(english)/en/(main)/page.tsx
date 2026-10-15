@@ -48,7 +48,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "Up to 60 Months Interest-Free: DND Cyprus’ Turkish Lira Home Financing",
     url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
     date: "2026-10-14",
-    cover: "/news/50fifty-tl-konut-finansmani.webp",
+    cover: "/news/50fifty-haber-kapak.webp",
     tags: ["TL Payment Model", "DND Cyprus"],
   },
   {
