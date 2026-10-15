@@ -33,7 +33,7 @@ export const LA_JOYA: ProjectData = {
         { label: "Sahil Yaşamı", accent: "sea" },
       ],
       image: "/la-joya/3.jpg",
-      imageAlt: "Proje genel görünüm",
+      imageAlt: "La Joya genel görünüm",
       youtubeId: "hMbzVAJMzXo",
       videoTitle: "La Joya tanıtım videosu",
       videoPosterAlt: "La Joya tanıtım videosu",
@@ -104,11 +104,11 @@ export const LA_JOYA: ProjectData = {
     interiors: {
       kicker: "İç mekân",
       title: "La Joya İç Mekan & Tasarım",
-      lead: <>Tatil Yaşamının  ve estetiğin buluştuğu <strong>Lagoon Verde</strong> sizlerle.</>,
+      lead: <>Tatil yaşamının ve estetiğin buluştuğu <strong>La Joya</strong> sizlerle.</>,
       angles: [
-        { id: "angle-a", name: "Salon", image: "/la-joya-in/2.jpg", alt: "Interior render – Angle A" },
-        { id: "angle-b", name: "Mutfak", image: "/la-joya-in/3.jpg", alt: "Interior render – Angle B" },
-        { id: "angle-c", name: "Yatak Odası", image: "/la-joya-in/6.jpg", alt: "Interior render – Angle C" },
+        { id: "angle-a", name: "Salon", image: "/la-joya-in/2.jpg", alt: "La Joya salon iç mekân görseli" },
+        { id: "angle-b", name: "Mutfak", image: "/la-joya-in/3.jpg", alt: "La Joya mutfak iç mekân görseli" },
+        { id: "angle-c", name: "Yatak Odası", image: "/la-joya-in/6.jpg", alt: "La Joya yatak odası iç mekân görseli" },
       ],
     },
     floorPlans: {
@@ -291,7 +291,7 @@ export const LA_JOYA: ProjectData = {
         { label: "Coastal Living", accent: "sea" },
       ],
       image: "/la-joya/3.jpg",
-      imageAlt: "Proje genel görünüm",
+      imageAlt: "La Joya overview",
       youtubeId: "hMbzVAJMzXo",
       videoTitle: "La Joya promotional video",
       videoPosterAlt: "La Joya promotional video",

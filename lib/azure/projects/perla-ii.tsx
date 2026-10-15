@@ -7,7 +7,7 @@ export const PERLA_II: ProjectData = {
     gallery: {
       kicker: "Galeri",
       title: "La Joya Perla II Galeri",
-      lead: "Lagoon Verde Görselleri",
+      lead: "La Joya Perla II Görselleri",
       items: [
         { src: "/perla-ii/1.jpg", alt: "La Joya Perla II proje görseli 1" },
         { src: "/perla-ii/2.jpg", alt: "La Joya Perla II proje görseli 2" },
@@ -33,7 +33,7 @@ export const PERLA_II: ProjectData = {
         { label: "Sahil Yaşamı", accent: "sea" },
       ],
       image: "/perla-ii/3.jpg",
-      imageAlt: "Proje genel görünüm",
+      imageAlt: "La Joya Perla II genel görünüm",
       youtubeId: "rhNxT0eZw_0",
       videoTitle: "La Joya Perla II tanıtım videosu",
       videoPosterAlt: "La Joya Perla II tanıtım videosu",
@@ -106,9 +106,9 @@ export const PERLA_II: ProjectData = {
       title: "La Joya Perla II Materyaller ve Detaylar",
       lead: <>Şıklığın ve konforun buluştuğu <strong>Perla II </strong> sizlerle.</>,
       angles: [
-        { id: "angle-a", name: "Salon", image: "/perla-ii-in/2.jpg", alt: "Interior render – Angle A" },
-        { id: "angle-b", name: "Mutfak", image: "/perla-ii-in/3.jpg", alt: "Interior render – Angle B" },
-        { id: "angle-c", name: "Yatak Odası", image: "/perla-ii-in/5.jpg", alt: "Interior render – Angle C" },
+        { id: "angle-a", name: "Salon", image: "/perla-ii-in/2.jpg", alt: "La Joya Perla II salon iç mekân görseli" },
+        { id: "angle-b", name: "Mutfak", image: "/perla-ii-in/3.jpg", alt: "La Joya Perla II mutfak iç mekân görseli" },
+        { id: "angle-c", name: "Yatak Odası", image: "/perla-ii-in/5.jpg", alt: "La Joya Perla II yatak odası iç mekân görseli" },
       ],
     },
     floorPlans: {
@@ -249,7 +249,7 @@ export const PERLA_II: ProjectData = {
       src: "/tours/perla-ii/app-files/index.html",
       bg: "/perla-ii/1.jpg",
       poster: "/perla-ii-in/6.jpg",
-      iframeTitle: "Lagoon Verde 360 Tour",
+      iframeTitle: "La Joya Perla II 360 Tour",
     },
     location: {
       kicker: "Konum",
@@ -323,7 +323,7 @@ export const PERLA_II: ProjectData = {
         { label: "Coastal Living", accent: "sea" },
       ],
       image: "/perla-ii/3.jpg",
-      imageAlt: "Proje genel görünüm",
+      imageAlt: "La Joya Perla II overview",
       youtubeId: "rhNxT0eZw_0",
       videoTitle: "La Joya Perla II promotional video",
       videoPosterAlt: "La Joya Perla II promotional video",
@@ -396,9 +396,9 @@ export const PERLA_II: ProjectData = {
       title: "La Joya Perla II Materials & Details",
       lead: <><strong>Perla II</strong> is where elegance and comfort come together.</>,
       angles: [
-        { id: "angle-a", name: "Living Room", image: "/perla-ii-in/2.jpg", alt: "Interior render – Angle A" },
-        { id: "angle-b", name: "Kitchen", image: "/perla-ii-in/3.jpg", alt: "Interior render – Angle B" },
-        { id: "angle-c", name: "Bedroom", image: "/perla-ii-in/5.jpg", alt: "Interior render – Angle C" },
+        { id: "angle-a", name: "Living Room", image: "/perla-ii-in/2.jpg", alt: "La Joya Perla II living room interior" },
+        { id: "angle-b", name: "Kitchen", image: "/perla-ii-in/3.jpg", alt: "La Joya Perla II kitchen interior" },
+        { id: "angle-c", name: "Bedroom", image: "/perla-ii-in/5.jpg", alt: "La Joya Perla II bedroom interior" },
       ],
     },
     floorPlans: {
@@ -539,7 +539,7 @@ export const PERLA_II: ProjectData = {
       src: "/tours/perla-ii/app-files/index.html",
       bg: "/perla-ii/1.jpg",
       poster: "/perla-ii-in/6.jpg",
-      iframeTitle: "Lagoon Verde 360 Tour",
+      iframeTitle: "La Joya Perla II 360 Tour",
     },
     location: {
       kicker: "Location",

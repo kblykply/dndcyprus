@@ -7,7 +7,7 @@ export const PERLA: ProjectData = {
     gallery: {
       kicker: "Galeri",
       title: "La Joya Perla Galeri",
-      lead: "Lagoon Verde Görselleri",
+      lead: "La Joya Perla Görselleri",
       items: [
         { src: "/perla/1.jpg", alt: "La Joya Perla proje görseli 1" },
         { src: "/perla/7.jpg", alt: "La Joya Perla proje görseli 2" },
@@ -33,7 +33,7 @@ export const PERLA: ProjectData = {
         { label: "Sahil Yaşamı", accent: "sea" },
       ],
       image: "/perla/3.jpg",
-      imageAlt: "Proje genel görünüm",
+      imageAlt: "La Joya Perla genel görünüm",
       youtubeId: "uNnqGH_QFVw",
       videoTitle: "La Joya Perla tanıtım videosu",
       videoPosterAlt: "La Joya Perla tanıtım videosu",
@@ -104,11 +104,11 @@ export const PERLA: ProjectData = {
     interiors: {
       kicker: "İç mekân",
       title: "La Joya Perla İç Mekan & Tasarım",
-      lead: <>Tatil Yaşamının  ve estetiğin buluştuğu <strong>Lagoon Verde</strong> sizlerle.</>,
+      lead: <>Tatil yaşamının ve estetiğin buluştuğu <strong>La Joya Perla</strong> sizlerle.</>,
       angles: [
-        { id: "angle-c", name: "Yatak Odası", image: "/perla-in/1.jpg", alt: "Interior render – Angle C" },
-        { id: "angle-a", name: "Salon", image: "/perla-in/2.jpg", alt: "Interior render – Angle A" },
-        { id: "angle-b", name: "Mutfak", image: "/perla-in/3.jpg", alt: "Interior render – Angle B" },
+        { id: "angle-c", name: "Yatak Odası", image: "/perla-in/1.jpg", alt: "La Joya Perla yatak odası iç mekân görseli" },
+        { id: "angle-a", name: "Salon", image: "/perla-in/2.jpg", alt: "La Joya Perla salon iç mekân görseli" },
+        { id: "angle-b", name: "Mutfak", image: "/perla-in/3.jpg", alt: "La Joya Perla mutfak iç mekân görseli" },
       ],
     },
     floorPlans: {
@@ -236,7 +236,7 @@ export const PERLA: ProjectData = {
       src: "/tours/perla/app-files/index.html",
       bg: "/perla/4.jpg",
       poster: "/perla-in/7.jpg",
-      iframeTitle: "Lagoon Verde 360 Tour",
+      iframeTitle: "La Joya Perla 360 Tour",
     },
     location: {
       kicker: "Konum",
@@ -269,7 +269,7 @@ export const PERLA: ProjectData = {
       video: {
         src: "https://www.youtube.com/embed/YSy7WB056Fg?si=v_Pogz8TpxnfIBqR",
         type: "youtube",
-        title: "La Joya Perla  — Update",
+        title: "La Joya Perla — Update",
       },
       cta: { label: "Tüm güncellemeleri gör", href: "https://www.youtube.com/@dndcyprus/videos" },
       bullets: [
@@ -309,7 +309,7 @@ export const PERLA: ProjectData = {
         { label: "Coastal Living", accent: "sea" },
       ],
       image: "/perla/3.jpg",
-      imageAlt: "Proje genel görünüm",
+      imageAlt: "La Joya Perla overview",
       youtubeId: "uNnqGH_QFVw",
       videoTitle: "La Joya Perla promotional video",
       videoPosterAlt: "La Joya Perla promotional video",
@@ -382,9 +382,9 @@ export const PERLA: ProjectData = {
       title: "La Joya Perla Interior & Design",
       lead: <><strong>La Joya Perla</strong> is where holiday living and aesthetics come together.</>,
       angles: [
-        { id: "angle-c", name: "Bedroom", image: "/perla-in/1.jpg", alt: "Interior render – Angle C" },
-        { id: "angle-a", name: "Living Room", image: "/perla-in/2.jpg", alt: "Interior render – Angle A" },
-        { id: "angle-b", name: "Kitchen", image: "/perla-in/3.jpg", alt: "Interior render – Angle B" },
+        { id: "angle-c", name: "Bedroom", image: "/perla-in/1.jpg", alt: "La Joya Perla bedroom interior" },
+        { id: "angle-a", name: "Living Room", image: "/perla-in/2.jpg", alt: "La Joya Perla living room interior" },
+        { id: "angle-b", name: "Kitchen", image: "/perla-in/3.jpg", alt: "La Joya Perla kitchen interior" },
       ],
     },
     floorPlans: {
@@ -512,7 +512,7 @@ export const PERLA: ProjectData = {
       src: "/tours/perla/app-files/index.html",
       bg: "/perla/4.jpg",
       poster: "/perla-in/7.jpg",
-      iframeTitle: "Lagoon Verde 360 Tour",
+      iframeTitle: "La Joya Perla 360 Tour",
     },
     location: {
       kicker: "Location",
@@ -545,7 +545,7 @@ export const PERLA: ProjectData = {
       video: {
         src: "https://www.youtube.com/embed/YSy7WB056Fg?si=v_Pogz8TpxnfIBqR",
         type: "youtube",
-        title: "La Joya Perla  — Update",
+        title: "La Joya Perla — Update",
       },
       cta: { label: "View all updates", href: "https://www.youtube.com/@dndcyprus/videos" },
       bullets: [
