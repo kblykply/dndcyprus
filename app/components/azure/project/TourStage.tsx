@@ -41,7 +41,7 @@ export default function TourStage({ src, bg, poster, iframeTitle, locale }: { sr
               </button>
             </>
           ) : (
-            <button type="button" onClick={() => setPlaying(true)} aria-label={t.start}>
+            <button type="button" onClick={() => setPlaying(true)} aria-label={t.start} data-track="tour_start">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={poster} alt="" loading="lazy" />
               <span className="play"><span><i><PlayCircle size={44} /></i>{t.start}</span></span>
@@ -49,7 +49,7 @@ export default function TourStage({ src, bg, poster, iframeTitle, locale }: { sr
           )}
         </div>
         <div className="row">
-          <a className="az-btn ghost sm" href={src} target="_blank" rel="noopener noreferrer"><ExternalLink size={14} /> {t.open}</a>
+          <a className="az-btn ghost sm" href={src} target="_blank" rel="noopener noreferrer" data-track="tour_start"><ExternalLink size={14} /> {t.open}</a>
         </div>
       </div>
     </div>

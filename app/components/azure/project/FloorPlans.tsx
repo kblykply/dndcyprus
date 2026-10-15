@@ -35,7 +35,7 @@ export default function FloorPlans({ d, name, id, locale }: { d: ProjectFloorPla
 
         <div className="az-seg rv" role="tablist" aria-label={t.types}>
           {d.plans.map((p, i) => (
-            <button key={p.id} type="button" role="tab" aria-selected={i === pi} aria-controls={`${id}-panel`} className={i === pi ? "on" : undefined} onClick={() => selectPlan(i)}>
+            <button key={p.id} type="button" role="tab" aria-selected={i === pi} aria-controls={`${id}-panel`} className={i === pi ? "on" : undefined} onClick={() => selectPlan(i)} data-track="floorplan_view">
               {p.title}{p.size ? <span>({p.size})</span> : null}
             </button>
           ))}
