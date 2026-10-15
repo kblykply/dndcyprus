@@ -34,7 +34,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "DND Cyprus’tan 60 aya kadar faizsiz, vade farksız TL konut modeli",
     url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
     date: "2026-10-14",
-    cover: "/news/50fifty-haber-kapak.webp",
+    cover: "/news/50fifty-haber-kapak-v2.webp",
     tags: ["TL Ödeme Modeli", "DND Cyprus"],
   },
   {
