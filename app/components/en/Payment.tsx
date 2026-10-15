@@ -383,7 +383,7 @@ function SlideContentBlock({
     if (player) handleMeta(player);
   }}
   onNeedStopAutoplay={onNeedStopAutoplay}
-/> : <div className="aspect-video overflow-hidden rounded-2xl bg-black">{video.poster ? <img src={video.poster} alt={content.customHeadline} loading="lazy" decoding="async" className="h-full w-full object-contain" /> : null}</div>) : active ? <YouTubePanel
+/> : <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-black sm:aspect-video">{video.poster ? <><img aria-hidden src={video.poster} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full scale-110 object-cover blur-xl brightness-90 saturate-125" /><img src={video.poster} alt={content.customHeadline} loading="lazy" decoding="async" className="relative h-full w-full object-contain" /></> : null}</div>) : active ? <YouTubePanel
   videoId={id}
   index={index}
   onReady={(player) => {
@@ -574,6 +574,8 @@ function HostedVideoPanel({
   onNeedStopAutoplay: () => void;
 }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  // Yan boşlukları dolduran bulanık kopya; ana videoyla birlikte oynar/durur
+  const bgRef = useRef<HTMLVideoElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [muted, setMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -595,10 +597,11 @@ function HostedVideoPanel({
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
+    const bgv = () => bgRef.current;
     const player: YTPlayer = {
-      playVideo: () => { el.play().catch(() => {}); },
-      pauseVideo: () => el.pause(),
-      seekTo: (sec) => { el.currentTime = sec; },
+      playVideo: () => { el.play().catch(() => {}); bgv()?.play().catch(() => {}); },
+      pauseVideo: () => { el.pause(); bgv()?.pause(); },
+      seekTo: (sec) => { el.currentTime = sec; const b = bgv(); if (b) b.currentTime = sec; },
       mute: () => { el.muted = true; },
       unMute: () => { el.muted = false; },
       destroy: () => el.pause(),
@@ -645,10 +648,20 @@ function HostedVideoPanel({
     >
       {/* Telefonda dikey video yatay kutuda çok küçük kalıyordu: mobilde 4:5, sm+ 16:9 */}
       <div className="relative aspect-[4/5] w-full swiper-no-swiping sm:aspect-video">
-        {video.poster && (
-          // Dikey (9:16) videoda yan boşlukları aynı karenin bulanık hâli doldurur
-          <img aria-hidden src={video.poster} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-50 blur-2xl" />
-        )}
+        {/* Dikey (9:16) video yatay kutuda: yanları aynı videonun bulanık, hareketli kopyası doldurur
+            (kırpma yok, ana video tam çözünürlükte kalır) */}
+        <video
+          ref={bgRef}
+          aria-hidden
+          tabIndex={-1}
+          src={video.src}
+          poster={video.poster}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover blur-xl brightness-90 saturate-125"
+        />
         <video
           ref={videoRef}
           src={video.src}
@@ -657,7 +670,11 @@ function HostedVideoPanel({
           loop
           playsInline
           preload="metadata"
-          className="relative h-full w-full object-contain"
+          onTimeUpdate={(e) => {
+            const b = bgRef.current;
+            if (b && Math.abs(b.currentTime - e.currentTarget.currentTime) > 0.3) b.currentTime = e.currentTarget.currentTime;
+          }}
+          className="relative h-full w-full object-contain drop-shadow-[0_0_24px_rgba(0,0,0,0.45)]"
         />
       </div>
 
