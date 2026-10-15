@@ -331,12 +331,12 @@ function SlideContentBlock({
               {badge}
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight drop-shadow-lg">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold leading-tight drop-shadow-lg lg:line-clamp-2 lg:min-h-[2lh]">
               {content.customHeadline}
             </h2>
 
             {content.tagline && (
-              <p className="mt-3 text-white/85 text-base sm:text-lg max-w-[60ch] drop-shadow">
+              <p className="mt-3 text-white/85 text-base sm:text-lg max-w-[60ch] drop-shadow lg:line-clamp-2 lg:min-h-[2lh]">
                 {content.tagline}
               </p>
             )}
@@ -350,13 +350,13 @@ function SlideContentBlock({
 
             {!!content.bullets?.length && (
               <ul className="mt-6 space-y-2">
-                {content.bullets.slice(0, 4).map((b, i) => (
-                  <li key={i} className="flex items-start gap-2">
+                {content.bullets.slice(0, 3).map((b, i) => (
+                  <li key={i} className="flex min-w-0 items-start gap-2">
                     <span
                       className="mt-[6px] inline-block h-[10px] w-[10px] rounded-full"
                       style={{ background: ORANGE, boxShadow: `0 0 0 3px ${ORANGE}33` }}
                     />
-                    <p className="text-white/90">{b}</p>
+                    <p className="text-white/90 lg:truncate">{b}</p>
                   </li>
                 ))}
               </ul>
@@ -774,7 +774,7 @@ const DEFAULT_SLIDES: SlideInput[] = [
       bullets: [
         "Banka yok, faiz yok, kefil yok",
         "Kur farkı ve vade farkı yok; 60 aya kadar vade",
-        "Taksitler KKTC asgari ücret artışına göre dönemsel güncellenir",
+        "Taksitler KKTC asgari ücretine göre güncellenir",
       ],
       primaryCta: { label: "Lagoon Verde'yi İncele", href: "/tr/lagoon-verde" },
       secondaryCta: { label: "Bilgi Al", href: "/tr/contact" },
