@@ -131,14 +131,15 @@ function ReelScreen({ post, labels }: { post: IgPost; labels: IgPhoneLabels }) {
       {/* okunabilirlik için üst/alt gölge */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/45 to-transparent" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/70 to-transparent" />
+      <a href={post.url} target="_blank" rel="noopener noreferrer" aria-label={`${labels.viewOnInstagram}: ${post.caption}`} className="absolute inset-0" />
 
-      <div className="relative">
+      <div className="pointer-events-none relative">
         <StatusBar light />
         <div className="px-4 text-[17px] font-semibold drop-shadow">{labels.reels}</div>
       </div>
 
       {/* Sağ ikonlar (sayı yok) */}
-      <div className="absolute bottom-24 right-3 flex flex-col items-center gap-5 drop-shadow" aria-hidden>
+      <div className="pointer-events-none absolute bottom-24 right-3 flex flex-col items-center gap-5 drop-shadow" aria-hidden>
         {Icon.heart("h-[26px] w-[26px]")}
         {Icon.comment("h-[26px] w-[26px]")}
         {Icon.send("h-[25px] w-[25px]")}
@@ -146,7 +147,7 @@ function ReelScreen({ post, labels }: { post: IgPost; labels: IgPhoneLabels }) {
       </div>
 
       {/* Alt: hesap + açıklama */}
-      <div className="absolute inset-x-0 bottom-7 px-3.5 pr-14">
+      <div className="pointer-events-none absolute inset-x-0 bottom-7 px-3.5 pr-14 [&_a]:pointer-events-auto">
         <div className="flex items-center gap-2">
           <Avatar size={28} />
           <a href={post.url} target="_blank" rel="noopener noreferrer" className="text-[13px] font-semibold hover:underline">
