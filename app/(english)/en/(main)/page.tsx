@@ -30,7 +30,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "A Chance to Own a Home in North Cyprus Without Borrowing in Sterling",
     url: "https://www.bestlifemagazin.com/kuzey-kibris-ta-sterlinle-borclanmadan-ev-sahibi-olma-firsati/6618/",
     date: "2026-10-14",
-    cover: "/news/bestlife-tl-konut-modeli.webp",
+    cover: "/news/bestlife-tl-konut-modeli-v2.webp",
     tags: ["Lagoon Verde", "TL Payment Model"],
   },
   {
@@ -39,7 +39,7 @@ const PRESS_ITEMS: PressItem[] = [
     title: "DND Cyprus Brings Turkish Lira Home Financing to Local Residents",
     url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
     date: "2026-10-14",
-    cover: "/news/tl-konut-finansmani.webp",
+    cover: "/news/tl-konut-finansmani-v2.webp",
     tags: ["TL Payment Model", "DND Cyprus"],
   },
   {
