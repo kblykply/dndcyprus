@@ -20,7 +20,7 @@ export default function MariachiUnifiedPerks({
   secondaryCta = { label: "Ayrıcalıkları Doğrula", href: "/tr/contact" },
 
   /** Sağ görsel panel */
-  sideImage = "/azure/mb-7.jpg",
+  sideImage = "/azure/mb-6.jpg",
   sideImageAlt = "Mariachi Beach Club",
   sideBadge = "Mariachi Beach Club",
   sideTitle = "Denizin yanında ayrıcalıklı günler",

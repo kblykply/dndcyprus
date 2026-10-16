@@ -2,7 +2,7 @@ import LazyYouTube from "@/app/components/LazyYouTube";
 import type { ProjectOverview } from "@/lib/azure/project-types";
 import ProjectHead, { splitTitle } from "./ProjectHead";
 
-// Genel bakış: beyaz kart — solda başlık + metin + maddeler + etiketler, sağda tanıtım videosu.
+// Genel bakış: beyaz kart — solda başlık + metin + maddeler + etiketler, sağda tanıtım videosu (16:9, kırpılmadan).
 export default function Overview({ d, name, id }: { d: ProjectOverview; name: string; id: string }) {
   const q = d.youtubeId ? `autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${d.youtubeId}` : "";
   return (
@@ -19,7 +19,8 @@ export default function Overview({ d, name, id }: { d: ProjectOverview; name: st
               <div className="az-tags">{d.chips.map((c) => <span key={c.label} className={c.accent === "coral" ? "c" : "s"}>{c.label}</span>)}</div>
             )}
           </div>
-          <div className="m">
+          {/* video 16:9 çerçevede, kırpılmaz (videonun içindeki yazılar kesiliyordu); görselde kart yüksekliğini doldurur */}
+          <div className={d.youtubeId ? "m v" : "m"}>
             {d.youtubeId ? (
               <LazyYouTube videoId={d.youtubeId} query={q} title={d.videoTitle} posterAlt={d.videoPosterAlt} playLabel={d.videoPlayLabel} className="absolute inset-0" cover />
             ) : (

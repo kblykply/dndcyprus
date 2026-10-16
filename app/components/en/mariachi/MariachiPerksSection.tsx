@@ -20,7 +20,7 @@ export default function MariachiUnifiedPerks({
   secondaryCta = { label: "Verify Privileges", href: "/en/contact" },
 
   /** Right-side image panel */
-  sideImage = "/azure/mb-7.jpg",
+  sideImage = "/azure/mb-6.jpg",
   sideImageAlt = "Mariachi Beach Club",
   sideBadge = "Mariachi Beach Club",
   sideTitle = "Privileged days by the sea",

@@ -34,7 +34,7 @@ export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
     unitTypes: { tr: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], en: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], de: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], ru: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], pl: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"] },
   },
   "perla-ii": {
-    slug: "perla-ii", name: "La Joya Perla II", logo: "/logos/perlaii.png", image: "/azure/p2-1.jpg", ctaImage: "/azure/p2-9.jpg",
+    slug: "perla-ii", name: "La Joya Perla II", logo: "/logos/perlaii.png", image: "/perla-ii/3.jpg", ctaImage: "/azure/p2-9.jpg",
     tagline: { tr: "Bahçeler, İskele'de modern yaşam ve yatırım fırsatı.", en: "Modern living and investment opportunity in Bahçeler, İskele.", de: "Modernes Wohnen und attraktive Investitionschance in Bahçeler, İskele.", ru: "Современная жизнь и выгодные инвестиции в Bahçeler, Искеле.", pl: "Nowoczesne życie i okazja inwestycyjna w Bahçeler, İskele." },
     location: { tr: "Bahçeler, İskele", en: "Bahçeler, İskele", de: "Bahçeler, İskele", ru: "Bahçeler, Искеле", pl: "Bahçeler, İskele" },
     status: { tr: "Devam Eden", en: "Ongoing", de: "Im Bau", ru: "Строится", pl: "W budowie" },
