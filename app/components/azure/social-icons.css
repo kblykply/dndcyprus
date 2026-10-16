@@ -1,0 +1,6 @@
+/* İletişim sayfası: ofis kartında küçük ikonlu sosyal medya satırı */
+.az-social { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.az-social .lbl { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--ink-60); }
+.az-social .ic { display: flex; gap: 8px; }
+.az-social a { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; color: var(--sea); background: var(--glass-b); border: 1px solid rgba(13, 101, 112, .14); transition: background .3s, color .3s, transform .4s var(--ease); }
+.az-social a:hover { background: var(--sea); color: #fff; transform: translateY(-2px); }

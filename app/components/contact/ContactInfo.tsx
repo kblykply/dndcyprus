@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import DeferredIframe from "@/app/components/performance/DeferredIframe";
+import SocialIcons from "@/app/components/azure/SocialIcons";
 
 type Office = {
   id: string;
@@ -173,26 +174,13 @@ export default function ContactInfo({
                       <a className="az-btn glass sm" href={o.mapUrl} target="_blank" rel="noopener noreferrer">Haritada Gör</a>
                     )}
                   </div>
+                  {idx === 0 && socials?.length ? <SocialIcons items={socials} label="Sosyal medya" /> : null}
                 </div>
               </article>
             );
           })}
         </div>
 
-        {/* Sosyal medya */}
-        {socials?.length ? (
-          <div className="rv d2" style={{ marginTop: 28 }}>
-            <div className="mb-3 flex items-center gap-4">
-              <h4 style={{ ...LABEL_STYLE, fontFamily: "var(--font-sans)" }}>Sosyal Medya</h4>
-              <div className="h-px flex-1" style={{ background: "var(--line)" }} />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {socials.map((s) => (
-                <a key={s.label} className="az-btn glass sm" href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
-              ))}
-            </div>
-          </div>
-        ) : null}
       </div>
     </section>
   );
