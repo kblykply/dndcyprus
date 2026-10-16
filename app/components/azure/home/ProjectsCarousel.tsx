@@ -27,7 +27,7 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
   }, []);
   return (
     <section className="az-section flush" id="projeler">
-      <div className="az-head row" style={{ padding: "0 var(--gutter)", marginBottom: 30 }}>
+      <div className="az-head row" style={{ padding: "0 var(--edge)", marginBottom: 30 }}>
         <div><span className="az-kicker rv">{t.kicker}</span><h2 className="az-h2 rv d1">{t.title}</h2></div>
         <div className="az-ctrl rv d2">
           <button type="button" aria-label={t.prev} onClick={() => go(-1)}>←</button>

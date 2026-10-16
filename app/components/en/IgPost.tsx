@@ -66,7 +66,7 @@ export default function InstagramSpotlight() {
           style={{ background: "rgba(255,255,255,0.75)" }}
         />
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="relative py-12 lg:py-16" style={{ paddingInline: "var(--edge)" }}>
           <div className="mt-0 grid gap-10 lg:grid-cols-2 lg:items-start">
         {/* LEFT */}
 <motion.div

@@ -47,7 +47,7 @@ export default function LandPlanningInfrastructure({
 
   return (
     <section className="az-section flush" aria-label="Планирование и инфраструктура — карточки">
-      <div className="az-head row" style={{ padding: "0 var(--gutter)", marginBottom: 30 }}>
+      <div className="az-head row" style={{ padding: "0 var(--edge)", marginBottom: 30 }}>
         <div>
           <span className="az-kicker rv">Зонирование и готовность</span>
           <h2 className="az-h2 sm rv d1">{title}</h2>

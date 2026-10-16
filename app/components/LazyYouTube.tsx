@@ -50,6 +50,10 @@ export default function LazyYouTube({
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [mounted, setMounted] = useState(false);
   const [reduced, setReduced] = useState(false);
+  // Arka plan videosu (kaplama + kontroller kapalı): YouTube'un açılışta ve fare üstündeyken gösterdiği başlık,
+  // düğmeler ve "Diğer videolar" bandı görünmesin diye ilk saniyelerde kapak üstte kalır, üstte şeffaf engel var.
+  const background = cover && /(^|&)controls=0(&|$)/.test(query);
+  const [shown, setShown] = useState(false);
 
   useEffect(() => {
     if (mounted) return;
@@ -113,7 +117,20 @@ export default function LazyYouTube({
             allow={allow}
             referrerPolicy={referrerPolicy}
             allowFullScreen
+            onLoad={background ? () => window.setTimeout(() => setShown(true), 3800) : undefined}
           />
+        )}
+        {background && mounted && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={posterSrc}
+              alt=""
+              aria-hidden
+              className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${shown ? "opacity-0" : "opacity-100"}`}
+            />
+            <div aria-hidden className="absolute inset-0" />
+          </>
         )}
       </div>
 
