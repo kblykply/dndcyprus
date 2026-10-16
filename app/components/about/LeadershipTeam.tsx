@@ -487,7 +487,7 @@ export default function LeadershipTeam({
 
       {/* Filters (sticky on mobile for easy nav) */}
       <div className="mt-2 sticky top-20 z-10 rounded-full border border-white/90 bg-white/75 px-3 shadow-[0_10px_30px_rgba(13,35,38,0.06)] backdrop-blur supports-[backdrop-filter]:backdrop-blur">
-        <div className="flex gap-2 overflow-x-auto py-2 no-scrollbar">
+        <div className="flex justify-between gap-2 overflow-x-auto py-2 no-scrollbar">
           {categories.map((cat) => (
             <Badge
               key={cat}
