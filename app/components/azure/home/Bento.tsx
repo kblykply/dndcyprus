@@ -4,6 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
+import { Icon } from "../project/icons";
+
+// teknik donanım kartı: metindeki sırayla simgeler (merkezi ısıtma-soğutma · jeneratör · akıllı ev · yerden ısıtma)
+const GEAR = ["climate", "generator", "smart-home", "floor-heating"];
 
 const Arrow = () => (
   <span className="arrow" aria-hidden>
@@ -47,14 +51,24 @@ export default function Bento({ locale }: { locale: Locale }) {
 
           <div className="az-tile t-award rv d1">
             <div className="k">{t.usa.k}</div>
+            {/* etiket ile rakam arasındaki alanı DND Homes'un ABD'deki iki gerçek fotoğrafı doldurur */}
+            <div className="ph">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <span><img src="/azure/about-12lex.jpg" alt="DND Homes, Lexington" loading="lazy" decoding="async" /></span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <span><img src="/azure/about-boston.jpg" alt="DND Homes, Boston" loading="lazy" decoding="async" /></span>
+            </div>
             <div className="big" data-count={t.usa.count}>0</div>
             <p>{t.usa.p}</p>
           </div>
 
           <div className="az-tile t-homes rv d2">
             <div className="k">{t.tech.k}</div>
+            {/* donanım listesi simgeli 2×2 kutular (metin aynı, " · " ile ayrılmış dört öğe) */}
+            <ul className="gear">
+              {t.tech.p.split(" · ").map((g, k) => <li key={g}><i><Icon name={GEAR[k] ?? ""} size={20} /></i><span>{g}</span></li>)}
+            </ul>
             <h3 style={{ fontSize: 22 }}>{t.tech.h}</h3>
-            <p>{t.tech.p}</p>
           </div>
 
           <Link className="az-tile img t-lajoya rv d3" href={href(locale, "/la-joya")} prefetch={false}>

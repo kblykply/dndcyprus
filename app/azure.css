@@ -235,6 +235,22 @@ body.az-lock { overflow: hidden; }
 .t-award, .t-homes, .t-lajoya { min-height: 260px; }
 .t-tl .tl-cta { display: inline-block; align-self: flex-start; width: max-content; margin-top: 18px; font-size: 14px; font-weight: 500; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .6); padding-bottom: 2px; transition: border-color .3s; }
 .t-tl .tl-cta:hover { border-color: #fff; }
+/* ABD ve teknik donanım kartları: etiket ile alt yazı arasındaki alanı orta blok doldurur (flex: 1), boşluk kalmaz */
+.t-award .ph { flex: 1 1 auto; min-height: clamp(96px, 22vw, 140px); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 18px; }
+.t-award .ph span { position: relative; border-radius: 16px; overflow: hidden; background: var(--sky-2); }
+.t-award .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
+.t-award:hover .ph img { transform: scale(1.05); }
+/* düzen kartın kendi genişliğine göre (container query): dar kartta tek sütun liste, genişte simgesi üstte 2×2 kutu */
+.t-homes { container-type: inline-size; }
+.t-homes .gear { flex: 1 1 auto; display: grid; grid-template-columns: minmax(0, 1fr); grid-auto-rows: 1fr; gap: 8px; margin: 4px 0 18px; padding: 0; list-style: none; }
+.t-homes .gear li { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 10px 12px; border-radius: 16px; background: var(--sky); border: 1px solid var(--line); font-size: 13px; font-weight: 500; line-height: 1.3; color: var(--ink); }
+@container (min-width: 280px) {
+  .t-homes .gear { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* simge üstte, yazı altta: yan yana kutularda simgeler de yazıların son satırı da aynı çizgide */
+  .t-homes .gear li { flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 12px 14px; }
+}
+.t-homes .gear i { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #fff; color: var(--sea); box-shadow: 0 4px 12px rgba(13, 35, 38, .06); }
+.t-homes .gear span { min-width: 0; overflow-wrap: break-word; hyphens: auto; }
 @media (max-width: 1000px) { .t-mariachi, .t-tl, .t-lajoya { grid-column: span 12; } .t-award, .t-homes { grid-column: span 6; } .t-mariachi { min-height: 360px; } }
 @media (max-width: 560px) { .t-award, .t-homes { grid-column: span 12; min-height: 0; } .az-grid { grid-auto-rows: auto; } .t-lajoya { min-height: 240px; } }
 
