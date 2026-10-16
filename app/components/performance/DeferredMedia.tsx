@@ -37,9 +37,12 @@ export function DeferredInstagram({ locale }: { locale: Locale }) {
   );
 }
 
-// Azure katalog (5 dil): açık sahne, gerçek kitap, sayaç · ilerleme çizgisi · oklar; bölüm yaklaşınca yüklenir
+// Azure katalog (5 dil): açık sahne, gerçek kitap, ilerleme çizgisi · oklar.
+// Bölümün çerçevesi (başlık, sahne, şerit) sayfa açılırken son boyunda kurulur; kitap motoru ve görseller bölüm
+// yaklaşınca yüklenir. Eskiden bütün bölüm yaklaşınca kuruluyor, 75svh yer tutucu 860–1085 px'e uzayıp
+// kaydırırken (özellikle yukarı, Safari'de) sayfayı itiyordu.
 const AzureCatalog = dynamic(() => import("../azure/project/AzureCatalog"), { ssr: false });
 export function DeferredCatalog({ locale, project }: { locale: Locale; project: "lagoon-verde" | "perla" | "perla-ii" }) {
-  const { ref, near } = useNearViewport<HTMLDivElement>();
-  return <div id="catalog" ref={ref} className="min-h-[75svh]">{near ? <AzureCatalog locale={locale} project={project} /> : null}</div>;
+  const { ref, near } = useNearViewport<HTMLDivElement>("800px");
+  return <div id="catalog" ref={ref}><AzureCatalog locale={locale} project={project} near={near} /></div>;
 }

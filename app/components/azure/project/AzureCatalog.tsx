@@ -39,7 +39,7 @@ const T: Record<Locale, { kicker: string; title: (n: string) => string; lead: st
  * Azure katalog: açık sahne üzerinde gerçek kitap (sayfa çevirme), altta sayaç · ilerleme çizgisi · oklar,
  * başlıkta PDF. Geniş ekranda iki sayfa (açılım), dar ekranda tek sayfa. Yalnız açık sayfanın yakınları yüklenir.
  */
-export default function AzureCatalog({ locale, project }: { locale: Locale; project: keyof typeof CATALOGS }) {
+export default function AzureCatalog({ locale, project, near = true }: { locale: Locale; project: keyof typeof CATALOGS; near?: boolean }) {
   const def = CATALOGS[project];
   const t = T[locale];
   const n = def.pages.length;
@@ -80,7 +80,7 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
       im.dataset.ready = "1";
       im.decode?.().catch(() => {});
     });
-  }, [idx, n, size]);
+  }, [idx, n, size, near]);
 
   const name = PROJECT_PAGES[project].name;
   const onFlip = useCallback((e: { data: number }) => setIdx(e.data), []);
@@ -122,7 +122,10 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
           {pdf ? <a className="az-btn glass rv d2" href={pdf} target="_blank" rel="noopener" data-track="brochure_download">{t.pdf} ↓</a> : null}
         </div>
         <div className="stage" ref={stage} tabIndex={0} onKeyDown={onKey} aria-label={t.title(name)}>
-          {size ? (
+          {size && !near ? (
+            // kitap henüz kurulmadı: aynı boyda yer tutucu (sahne son boyunda, yüklenince sayfa kaymaz)
+            <div className="book-ph" style={{ width: size.two ? size.w * 2 : size.w, height: size.h }} aria-hidden />
+          ) : size ? (
             // @ts-expect-error: react-pageflip türleri eksik (eski katalogdaki gibi)
             <HTMLFlipBook
               key={`${size.w}x${size.h}x${size.two}`}
