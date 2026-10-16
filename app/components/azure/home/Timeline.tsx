@@ -20,8 +20,13 @@ const at = (t: number) => {
   const a = (1 - t) * (1 - t), b = 2 * (1 - t) * t, c = t * t;
   return [a * P0[0] + b * P1[0] + c * P2[0], a * P0[1] + b * P1[1] + c * P2[1]];
 };
-const STOPS = [0.045, 0.165, 0.285, 0.715, 0.835, 0.955];
+// Duraklar kartların tam ortasının üstünde: kontrol noktası ortada olduğu için x(t) doğrusal (40 + 920t),
+// sütun ortası x'ten t çözülür → kesikli çizgiler karta dik iner.
+const N = 6;
+const colX = (i: number) => ((2 * i + 1) / (2 * N)) * 1000;
+const STOPS = Array.from({ length: N }, (_, i) => (colX(i) - P0[0]) / (P2[0] - P0[0]));
 const ROUTE = `M${P0[0]},${P0[1]} Q${P1[0]},${P1[1]} ${P2[0]},${P2[1]}`;
+const APEX_Y = at(0.5)[1]; // rotanın tepesi (mesafe etiketi hemen altında)
 
 // küre ızgarası (dekoratif): meridyenler ve paraleller
 const G = { cx: 600, cy: 780, r: 760, tilt: 0.34 };
@@ -36,7 +41,6 @@ export default function Timeline({ locale }: { locale: Locale }) {
   const m = MAP[locale];
   const items = t.items.slice(0, STOPS.length);
   const pts = items.map((_, i) => at(STOPS[i]));
-  const col = (i: number) => ((2 * i + 1) / (2 * items.length)) * 1000;
 
   return (
     <section className="az-section">
@@ -68,7 +72,8 @@ export default function Timeline({ locale }: { locale: Locale }) {
               <path className="route" d={ROUTE} pathLength={1} vectorEffect="non-scaling-stroke" />
               <path className="comet" d={ROUTE} pathLength={100} vectorEffect="non-scaling-stroke" />
               {pts.map(([x, y], i) => (
-                <line key={i} className="leader" x1={x} y1={y} x2={col(i)} y2={280} vectorEffect="non-scaling-stroke" />
+                // uçtaki iki durağın çizgisi Boston / İskele etiketinin altından başlar (yazının üstünden geçmesin)
+                <line key={i} className="leader" x1={x} y1={i === 0 || i === pts.length - 1 ? Math.max(y + 18, P0[1] + 62) : y + 18} x2={x} y2={280} vectorEffect="non-scaling-stroke" />
               ))}
             </svg>
             <div className="end from" style={{ left: `${P0[0] / 10}%`, top: `${(P0[1] / 280) * 100}%` }}>
@@ -77,7 +82,7 @@ export default function Timeline({ locale }: { locale: Locale }) {
             <div className="end to" style={{ left: `${P2[0] / 10}%`, top: `${(P2[1] / 280) * 100}%` }}>
               <b>{m.to}</b><small>{m.toXY}</small>
             </div>
-            <div className="dist">{m.dist}</div>
+            <div className="dist" style={{ top: `calc(${((APEX_Y / 280) * 100).toFixed(2)}% + 24px)` }}>{m.dist}</div>
             {pts.map(([x, y], i) => (
               <span key={i} className={`pin p${i}`} style={{ left: `${x / 10}%`, top: `${(y / 280) * 100}%` }}>
                 <i>{i + 1}</i><em>{items[i].year}</em>
