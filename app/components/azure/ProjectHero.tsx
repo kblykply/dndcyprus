@@ -16,7 +16,6 @@ export default function ProjectHero({ slug, locale }: { slug: ProjectPage["slug"
   return (
     <PageHero
       size="full"
-      kicker="DND Cyprus"
       title={p.name}
       lead={p.tagline[locale]}
       image={p.image}

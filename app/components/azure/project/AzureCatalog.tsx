@@ -103,11 +103,8 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
   const go = (d: number) => { const a = api(); if (!a) return; if (d > 0) a.flipNext(); else a.flipPrev(); };
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => { if (e.key === "ArrowRight") { e.preventDefault(); go(1); } else if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); } };
 
-  // görünen sayfalar: açılımda sol + sağ (kapak tek başına)
+  // açılımda sol + sağ sayfa (kapak tek başına); sayfa sayacı kaldırıldı, yalnız ilerleme çizgisi ve oklar
   const two = !!size?.two;
-  const first = idx + 1;
-  const showsPair = two && !(def.cover && idx === 0) && idx + 1 < n;
-  const label = showsPair ? `${pad2(first)}–${pad2(first + 1)}` : pad2(first);
   const lastStart = two ? (def.cover ? (n % 2 === 0 ? n - 1 : n - 2) : n - 2 + (n % 2)) : n - 1;
   const atStart = idx <= 0, atEnd = idx >= lastStart;
   const prog = Math.min(1, idx / Math.max(1, lastStart));
@@ -150,7 +147,6 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
           ) : null}
         </div>
         <div className="nav">
-          <span className="count" aria-live="polite">{label} <i>/</i> {pad2(n)}</span>
           <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.03, prog)})` }} /></span>
           <span className="az-ctrl">
             <button type="button" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}><Arrow dir={-1} size={18} /></button>

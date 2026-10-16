@@ -82,7 +82,7 @@ export default function MariachiVideoSpotlight({
           {/* Video (dark player box, framed inside the card) */}
           <div className="self-center p-3 sm:p-4 min-[900px]:p-5">
             <div
-              className="relative aspect-video overflow-hidden rounded-[22px] max-w-full"
+              className="relative aspect-[4/3] overflow-hidden rounded-[22px] max-w-full" /* video 4:3 (960×720): 16:9 kutuda yanlarda siyah bant kalıyordu */
               style={{ background: "var(--sea-deep)", boxShadow: "0 20px 50px rgba(13,35,38,.18)" }}
             >
               {autoplayEmbedUrl ? (

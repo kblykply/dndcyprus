@@ -30,6 +30,7 @@ type Props = {
   cover?: boolean;
   /** Oynat düğmesi etiketi (reduced-motion durumunda) */
   playLabel?: string;
+  /** Varsayılan: arka plan videosunda 1200px (kullanıcı varmadan oynamaya başlasın), diğerlerinde 200px */
   rootMargin?: string;
   allow?: string;
   referrerPolicy?: React.HTMLAttributeReferrerPolicy;
@@ -46,7 +47,7 @@ export default function LazyYouTube({
   className = "relative w-full h-full",
   cover = false,
   playLabel = "Videoyu oynat",
-  rootMargin = "200px",
+  rootMargin,
   allow = "autoplay; encrypted-media; picture-in-picture",
   referrerPolicy = "origin-when-cross-origin",
 }: Props) {
@@ -57,6 +58,9 @@ export default function LazyYouTube({
   // düğmeler ve "Diğer videolar" bandı görünmesin diye ilk saniyelerde kapak üstte kalır, üstte şeffaf engel var.
   const background = cover && /(^|&)controls=0(&|$)/.test(query);
   const [shown, setShown] = useState(false);
+  // Arka plan videosu bölüm ekrana gelmeden çok önce yüklenir: kapak, YouTube arayüzü sönene kadar (yüklemeden
+  // ~3,8 sn sonra) üstte kaldığı için 200px'te takılınca video bölüme varıldıktan 5–6 sn sonra başlıyordu
+  const margin = rootMargin ?? (background ? "1200px 0px" : "200px");
 
   useEffect(() => {
     if (mounted) return;
@@ -79,11 +83,11 @@ export default function LazyYouTube({
           io.disconnect();
         }
       },
-      { rootMargin }
+      { rootMargin: margin }
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [mounted, rootMargin]);
+  }, [mounted, margin]);
 
   const src = `https://www.youtube-nocookie.com/embed/${videoId}${query ? `?${query}` : ""}`;
   const posterSrc = poster ?? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;

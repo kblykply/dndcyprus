@@ -100,6 +100,7 @@ a:hover > .az-arrow:not(.back) { transform: translateX(3px); }
   display: grid; grid-template-columns: 1fr 1fr; gap: 6px; opacity: 0; visibility: hidden; transition: all .4s var(--ease);
 }
 .az-nav li:hover .drop, .az-nav li:focus-within .drop, .az-nav li.open .drop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.az-nav li.shut .drop { opacity: 0; visibility: hidden; transform: translate(-50%, 8px); pointer-events: none; } /* seçimden sonra kapalı (AzureHeader) */
 .az-nav .drop a { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; padding: 8px; border-radius: 14px; transition: background .3s; color: var(--ink); }
 .az-nav .drop a:hover { background: #fff; }
 .az-nav .drop a img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; }
@@ -566,8 +567,10 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 
 /* ---- son güncelleme ---- */
 .az-up { position: relative; }
-.az-up .card { display: grid; grid-template-columns: 1.1fr .9fr; border-radius: 36px; overflow: hidden; background: var(--foam); border: 1px solid rgba(255,255,255,.9); box-shadow: 0 20px 60px rgba(13,35,38,.08); max-width: 100%; }
-.az-up .v { position: relative; background: #000; min-height: 320px; }
+.az-up .card { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; padding: clamp(10px, 1.2vw, 16px); border-radius: 36px; overflow: hidden; background: var(--foam); border: 1px solid rgba(255,255,255,.9); box-shadow: 0 20px 60px rgba(13,35,38,.08); max-width: 100%; }
+/* video kutusu her genişlikte tam 16:9: eskiden yüksekliği yandaki metinden geliyordu, oran ekrana göre
+   1,54–1,90 arasında değişip video kırpılıyor ya da bantlanıyordu */
+.az-up .v { position: relative; background: #000; aspect-ratio: 16 / 9; border-radius: 26px; overflow: hidden; }
 .az-up .v iframe, .az-up .v video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .az-up .t { padding: clamp(26px, 4vw, 52px); min-width: 0; }
 .az-up .t h2 { margin-top: 12px; font-size: clamp(24px, 2.6vw, 36px); }   /* dar sütunda en fazla 2 satır */
@@ -582,7 +585,7 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 .az-up .ov .az-panel { text-align: center; max-width: 520px; }
 .az-up .ov h3 { font-size: clamp(20px, 2.2vw, 28px); }
 .az-up .ov p { color: var(--ink-60); font-size: 14px; margin-top: 6px; }
-@media (max-width: 900px) { .az-up .card { grid-template-columns: 1fr; border-radius: 28px; } .az-up .v { min-height: 0; aspect-ratio: 16 / 9; } }
+@media (max-width: 900px) { .az-up .card { grid-template-columns: 1fr; border-radius: 28px; } .az-up .v { border-radius: 20px; } }
 
 /* katalog (flipbook) eski bileşen: üst boşluk */
 .az-catalog { margin-top: clamp(64px, 8vw, 120px); }

@@ -15,6 +15,8 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);       // mobil menü
   const [drop, setDrop] = useState(false);       // projeler açılır menüsü (dokunmatik için)
+  // seçim yapılınca menü kapanır ve fare menüden çıkana kadar kapalı kalır (yoksa :hover / :focus-within açık tutuyordu)
+  const [shut, setShut] = useState(false);
   const [langOpen, setLangOpen] = useState(false); // dil menüsü (5 dil)
   const langRef = useRef<HTMLDivElement>(null);
   const menuRef = useMenuDialog(open, setOpen);
@@ -37,6 +39,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
     if (location.hash) history.replaceState(history.state, "", pathname);
     requestAnimationFrame(() => window.scrollTo({ top: 0 }));
   };
+  const pick = () => { setDrop(false); setShut(true); (document.activeElement as HTMLElement | null)?.blur(); };
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -62,6 +65,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
 
   const isActive = (path: string) => clean === path || (path !== "/" && clean.startsWith(path + "/"));
   const items: { label: string; path: string }[] = [
+    { label: t.home, path: "/" },
     { label: t.about, path: "/about" },
     { label: t.team, path: "/team" },
     { label: t.press, path: "/press" },
@@ -77,27 +81,32 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
             <img src="/DND-LOGO-2.svg" alt="DND Cyprus" width={70} height={30} />
           </Link>
           <ul>
-            <li ref={dropRef} className={drop ? "open" : undefined}>
-              <button type="button" aria-haspopup="true" aria-expanded={drop} onClick={() => setDrop((d) => !d)}>
+            <li>
+              <Link href={href(locale, "/")} className={isActive("/") ? "on" : undefined} prefetch={false} onClick={toTop}>{t.home}</Link>
+            </li>
+            {/* seçimden sonra kapalı kalır; fare "Projeler" düğmesine yeniden gelince (ya da klavye odağında) açılabilir.
+                Kapanınca fare menünün alanından "çıkmış" sayıldığı için mouseleave ile açmak menüyü hemen geri açıyordu */}
+            <li ref={dropRef} className={[drop ? "open" : "", shut ? "shut" : ""].join(" ").trim() || undefined}>
+              <button type="button" aria-haspopup="true" aria-expanded={drop} onMouseEnter={() => setShut(false)} onFocus={() => setShut(false)} onClick={() => { setShut(false); setDrop((d) => !d); }}>
                 {t.projects}
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.3" /></svg>
               </button>
               <div className="drop">
                 {PROJECTS.filter((p) => p.slug !== "gecitkale").map((p) => (
-                  <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false}>
+                  <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false} onClick={pick}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={p.thumb} alt="" width={56} height={56} loading="lazy" />
                     <span><b>{p.name}</b><small>{p.short[locale]}</small></span>
                   </Link>
                 ))}
-                <Link href={href(locale, "/projects")} prefetch={false}>
+                <Link href={href(locale, "/projects")} prefetch={false} onClick={pick}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/azure/sea.jpg" alt="" width={56} height={56} loading="lazy" />
                   <span><b>{t.all}</b><small>{t.allSub}</small></span>
                 </Link>
               </div>
             </li>
-            {items.map((it) => (
+            {items.filter((it) => it.path !== "/").map((it) => (
               <li key={it.path}>
                 <Link href={href(locale, it.path)} className={isActive(it.path) ? "on" : undefined} prefetch={false}>{it.label}</Link>
               </li>
@@ -134,7 +143,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
         <div className="sub">
           {PROJECTS.map((p) => <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false}>{p.name}</Link>)}
         </div>
-        {items.map((it) => <Link key={it.path} className="big" href={href(locale, it.path)} prefetch={false}>{it.label}</Link>)}
+        {items.filter((it) => it.path !== "/").map((it) => <Link key={it.path} className="big" href={href(locale, it.path)} prefetch={false}>{it.label}</Link>)}
         <div className="sub">
           {LOCALE_META[locale].blog && <Link href={href(locale, "/blog")} prefetch={false}>{t.blog}</Link>}
           <Link href={href(locale, "/dndcyprus")} prefetch={false}>{t.media}</Link>
