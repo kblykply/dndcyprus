@@ -45,7 +45,7 @@ export default function Bento({ locale }: { locale: Locale }) {
             <Link className="tl-cta" href={href(locale, "/lagoon-verde")} prefetch={false}>{t.tl.cta} →</Link>
           </div>
 
-          <div className="az-tile sand t-award rv d1">
+          <div className="az-tile t-award rv d1">
             <div className="k">{t.usa.k}</div>
             <div className="big" data-count={t.usa.count}>0</div>
             <p>{t.usa.p}</p>
