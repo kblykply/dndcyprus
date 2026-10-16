@@ -125,13 +125,16 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
               }))}
             </div>
             <p className="note">{d.note}</p>
-            <div className="mr-ctas">
-              <a className="az-btn sea sm" href="#fiyat-al" data-track="price_request_click">{t.request}</a>
-              {cta.brochure ? (
-                <a className="az-btn glass sm" href={cta.brochure} {...(brochureIsFile ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{t.brochure}</a>
-              ) : null}
-              {cta.tour ? <a className="az-btn glass sm" href={cta.tour}>{t.tour}</a> : null}
-            </div>
+          </div>
+
+          {/* düğmeler: masaüstünde sol sütunun altında (plan kutusunun alt kenarıyla aynı çizgi, liste üstte kalan yeri
+              eşit paylaşır); tablet ve telefonda tablonun altında */}
+          <div className="mr-ctas">
+            <a className="az-btn sea sm" href="#fiyat-al" data-track="price_request_click">{t.request}</a>
+            {cta.brochure ? (
+              <a className="az-btn glass sm" href={cta.brochure} {...(brochureIsFile ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{t.brochure}</a>
+            ) : null}
+            {cta.tour ? <a className="az-btn glass sm" href={cta.tour}>{t.tour}</a> : null}
           </div>
         </div>
       </div>
