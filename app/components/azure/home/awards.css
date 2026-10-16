@@ -10,6 +10,16 @@
 .az-aw .rb.h { --s: .5; opacity: 0; pointer-events: none; }
 .az-aw .rb.l:hover, .az-aw .rb.r:hover { opacity: .9; }
 @keyframes az-sway { 0%, 100% { rotate: 0deg; } 50% { rotate: 1.2deg; } }
+/* masaüstünde kurdeleler bölümün yıldızı: daha geniş sütun, daha yüksek sahne, yandakiler daha büyük ve dışa açık
+   (telefon / tablet ölçüleri aynı kalır) */
+@media (min-width: 901px) {
+  .az-aw { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
+  .az-aw .stage { height: clamp(380px, 40vw, 600px); }
+  .az-aw .rb.l { --x: calc(clamp(130px, 15vw, 250px) * -1); --s: .8; }
+  .az-aw .rb.r { --x: clamp(130px, 15vw, 250px); --s: .8; }
+}
+/* ödüllerden "Bir bakışta"ya geçiş kısa (kurdeleler büyüdü, toplam yükseklik aynı kalsın) */
+#oduller + .az-section { padding-top: clamp(48px, 5vw, 72px); }
 .az-aw .txt { min-width: 0; }
 .az-aw .txt .az-h2 { margin-top: 10px; }
 .az-aw .cur { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--hair); animation: az-cur .6s var(--ease); }
