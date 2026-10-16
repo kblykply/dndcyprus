@@ -1,0 +1,47 @@
+/* Proje şeridi: içerik genişliğinde tam 3 kart, görsellerin sağında / solunda oklar, fareyle sürükleme,
+   alt şerit (sayaç · ilerleme çizgisi). Kart kuralları app/azure.css (.az-car, .az-pc). */
+.az-pcar .az-car { cursor: grab; outline: none; }
+.az-pcar .az-car:focus-visible { box-shadow: inset 0 0 0 2px var(--coral); }
+/* sürüklerken mıknatıs kapalı, yazı seçilmez, kartlar tıklanmaz; bırakınca karta oturur */
+.az-pcar .az-car.is-drag { cursor: grabbing; scroll-snap-type: none; user-select: none; -webkit-user-select: none; }
+.az-pcar .az-car.is-drag .az-pc { pointer-events: none; }
+.az-pcar .az-pc img { -webkit-user-drag: none; }
+
+/* alt şerit içerik kenarına hizalı */
+.az-pcar .nav { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); padding: 4px var(--edge) 0; }
+.az-pcar .count { font-family: var(--font-display), sans-serif; font-size: 15px; letter-spacing: .04em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.az-pcar .count i { font-style: normal; color: var(--ink-40); margin: 0 2px; }
+.az-pcar .bar { flex: 1; height: 2px; border-radius: 2px; background: rgba(13, 35, 38, .12); overflow: hidden; }
+.az-pcar .bar i { display: block; height: 100%; background: var(--sea); transform-origin: left; transition: transform .25s linear; }
+
+/* tam 3 kart: şerit tam genişlik yerine içerik kenarlarında kesilir, kartlar 3'e bölünür
+   (1099px altında 2, 700px altında 1 + sonraki kartın ucu kaydırılabilir olduğunu gösterir) */
+.az-pcar .rail { position: relative; margin-inline: var(--edge); }
+.az-pcar .az-car { padding: 10px 0 30px; scroll-padding-inline: 0; }
+.az-pcar .az-pc { flex: 0 0 calc((100% - 32px) / 3); }
+@media (max-width: 1099px) { .az-pcar .az-pc { flex-basis: calc((100% - 16px) / 2); } }
+@media (max-width: 699px) { .az-pcar .az-pc { flex-basis: 86%; } }
+
+/* oklar görsellerin üstünde, kart satırının dikey ortasında (şeridin üst 10px, alt 30px payı); uçta gizlenir */
+.az-pcar .arw {
+  position: absolute; z-index: 3; top: calc(50% - 10px); transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  border: 1px solid rgba(255, 255, 255, .9); background: rgba(255, 255, 255, .92); color: var(--ink);
+  box-shadow: 0 8px 24px rgba(13, 35, 38, .18); cursor: pointer; transition: opacity .3s, background .3s, color .3s;
+}
+.az-pcar .arw:hover { background: var(--sea); color: #fff; }
+.az-pcar .arw:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.az-pcar .arw.prev { left: 16px; }
+.az-pcar .arw.next { right: 16px; }
+.az-pcar .arw:disabled { opacity: 0; pointer-events: none; }
+@media (max-width: 600px) {
+  .az-pcar .arw { width: 42px; height: 42px; }
+  .az-pcar .arw.prev { left: 10px; }
+  .az-pcar .arw.next { right: 10px; }
+}
+
+/* Sabitleme (fareli ekranlar, ≥700px): sahne ekranda sabit, şerit sayfa kaydırmasıyla yana gider (JS 1px = 1px eşler).
+   Bu modda mıknatıs ve yatay kaydırma çubuğu kapalı; kart boyu ekrana sığacak kadar sınırlanır (görsel kırpılır). */
+.az-pcar.pin .stage { position: sticky; }
+.az-pcar.pin .az-car { overflow-x: hidden; scroll-snap-type: none; cursor: default; }
+.az-pcar.pin .az-pc { max-height: calc(100svh - 360px); min-height: 300px; }
