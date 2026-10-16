@@ -24,6 +24,8 @@ type Props = {
   zoom?: number;
   /** Dış kapsayıcı konum/boyut sınıfı (ör. "relative w-full h-full" ya da "absolute inset-0") */
   className?: string;
+  /** true: 16:9 video kutuyu tamamen doldurur (siyah bant yok, taşan kısım kırpılır) */
+  cover?: boolean;
   /** Oynat düğmesi etiketi (reduced-motion durumunda) */
   playLabel?: string;
   rootMargin?: string;
@@ -39,6 +41,7 @@ export default function LazyYouTube({
   poster,
   zoom = 1,
   className = "relative w-full h-full",
+  cover = false,
   playLabel = "Videoyu oynat",
   rootMargin = "200px",
   allow = "autoplay; encrypted-media; picture-in-picture",
@@ -77,11 +80,17 @@ export default function LazyYouTube({
 
   const src = `https://www.youtube-nocookie.com/embed/${videoId}${query ? `?${query}` : ""}`;
   const posterSrc = poster ?? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-  const scaleStyle: React.CSSProperties | undefined =
-    zoom !== 1 ? { transform: `scale(${zoom})` } : undefined;
+  const scaleStyle: React.CSSProperties | undefined = cover
+    ? {
+        // kapsayıcı sorgu birimleriyle "object-fit: cover": 16:9 video her oranda kutuyu doldurur
+        inset: "auto", left: "50%", top: "50%",
+        width: "max(100%, calc(100cqh * 16 / 9))", height: "max(100%, calc(100cqw * 9 / 16))",
+        transform: `translate(-50%, -50%)${zoom !== 1 ? ` scale(${zoom})` : ""}`,
+      }
+    : zoom !== 1 ? { transform: `scale(${zoom})` } : undefined;
 
   return (
-    <div ref={wrapRef} className={`overflow-hidden bg-black ${className}`}>
+    <div ref={wrapRef} className={`overflow-hidden bg-black ${className}`} style={cover ? { containerType: "size" } : undefined}>
       <div className="absolute inset-0 origin-center" style={scaleStyle}>
         {/* Kapak (iframe gelene kadar görünür, sonra altında kalır) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}

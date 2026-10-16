@@ -21,7 +21,7 @@ export default function Overview({ d, name, id }: { d: ProjectOverview; name: st
           </div>
           <div className="m">
             {d.youtubeId ? (
-              <LazyYouTube videoId={d.youtubeId} query={q} title={d.videoTitle} posterAlt={d.videoPosterAlt} playLabel={d.videoPlayLabel} className="absolute inset-0" />
+              <LazyYouTube videoId={d.youtubeId} query={q} title={d.videoTitle} posterAlt={d.videoPosterAlt} playLabel={d.videoPlayLabel} className="absolute inset-0" cover />
             ) : (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={d.image} alt={d.imageAlt} loading="lazy" />

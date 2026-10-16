@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { PiArrowsOutDuotone } from "react-icons/pi";
 import type { ProjectFloorPlans } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
@@ -50,51 +51,54 @@ export default function FloorPlans({ d, name, id, locale }: { d: ProjectFloorPla
         )}
 
         <div className="az-fp rv d1" id={`${id}-panel`} role="tabpanel">
-          <div>
-            <div className="img">
+          {/* plan: büyük beyaz kutu, köşede büyüt, altta cam etiket */}
+          <div className="plan">
+            <button type="button" className="zoom" onClick={() => setLb({ images: [v.image], idx: 0 })} aria-label={t.enlargeAria}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={v.image} alt={alt} loading="lazy" decoding="async" />
-            </div>
-            <div className="bar">
-              <span>{plan.title}{plan.size ? ` • ${plan.size}` : ""}</span>
-              <span className="b">
-                <button type="button" className="az-pill" onClick={() => setLb({ images: [v.image], idx: 0 })} aria-label={t.enlargeAria}>{t.enlarge}</button>
-                {v.pdf ? <a className="az-pill g" href={v.pdf} target="_blank" rel="noreferrer">{t.pdf}</a> : null}
-              </span>
+              <span className="go"><PiArrowsOutDuotone size={16} aria-hidden /> {t.enlarge}</span>
+            </button>
+            <div className="cap">
+              <b>{plan.title}</b>
+              {plan.size ? <span>{plan.size}</span> : null}
+              {v.pdf ? <a className="az-pill g" href={v.pdf} target="_blank" rel="noreferrer">{t.pdf}</a> : null}
             </div>
           </div>
-          <div>
+
+          {/* alanlar */}
+          <div className="info">
             <div className="hd">
-              <h3>{plan.title} — {v.name}</h3>
+              <span className="az-kicker">{plan.title}</span>
+              <h3>{v.name}</h3>
               {v.note ? <span className="az-pill c static">{v.note}</span> : null}
             </div>
-            <div className="body">
-              <dl>
-                {v.areas.map((r) => <div key={r.label}><dt>{r.label}</dt><dd>{r.value}</dd></div>)}
-              </dl>
-              {(v.totals?.closed || v.totals?.usage) ? (
-                <div className="tot">
-                  {v.totals?.closed ? <div><small>{t.closed}</small><b>{v.totals.closed}</b></div> : null}
-                  {v.totals?.usage ? <div className="c"><small>{t.usage}</small><b>{v.totals.usage}</b></div> : null}
-                </div>
-              ) : null}
-              {v.gallery && v.gallery.length > 0 ? (
-                <>
-                  <div className="gl">{t.gallery}</div>
-                  <ul className="thumbs">
-                    {v.gallery.map((src, i) => (
-                      <li key={src}>
-                        <button type="button" onClick={() => setLb({ images: v.gallery!, idx: i })} aria-label={t.galleryImage(i + 1)}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={src} alt="" loading="lazy" decoding="async" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : null}
-            </div>
+            <dl>
+              {v.areas.map((r) => <div key={r.label}><dt>{r.label}</dt><dd>{r.value}</dd></div>)}
+            </dl>
           </div>
+
+          {/* toplamlar: ana sayfadaki büyük rakamlı kutular */}
+          {v.totals?.closed ? <div className="stat sea"><small>{t.closed}</small><b>{v.totals.closed}</b></div> : null}
+          {v.totals?.usage ? <div className="stat sand"><small>{t.usage}</small><b>{v.totals.usage}</b></div> : null}
+
+          {/* iç mekân: büyük + 4 küçük mozaik; fazlası "+n" */}
+          {v.gallery && v.gallery.length > 0 ? (() => {
+            const g = v.gallery!;
+            const shown = g.slice(0, 5);
+            const extra = g.length - shown.length;
+            return (
+              <div className={`mosaic n${shown.length}`}>
+                {shown.map((src, i) => (
+                  <button key={src} type="button" className={i === 0 ? "big" : undefined} onClick={() => setLb({ images: g, idx: i })} aria-label={t.galleryImage(i + 1)}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={src} alt="" loading="lazy" decoding="async" />
+                    {i === 0 ? <span className="tag">{t.gallery} · {g.length}</span> : null}
+                    {i === shown.length - 1 && extra > 0 ? <span className="more">+{extra}</span> : null}
+                  </button>
+                ))}
+              </div>
+            );
+          })() : null}
         </div>
         <p className="az-note-sm">{d.note}</p>
       </div>
