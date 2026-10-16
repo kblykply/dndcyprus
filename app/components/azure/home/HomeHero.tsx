@@ -24,6 +24,10 @@ export default function HomeHero({ locale }: { locale: Locale }) {
               <Link className="az-btn glass" href={href(locale, "/lagoon-verde")} prefetch={false}>{t.secondary}</Link>
             </div>
           </div>
+          {/* proje sayfalarındaki gibi hafifçe süzülen cam kartlar (az-chip): şirket genelinde öne çıkan üç rakam */}
+          <div className="chips rv d2">
+            {t.chips.map((ch) => <div key={ch.label} className="az-chip"><b>{ch.big}</b><span>{ch.label}</span></div>)}
+          </div>
         </div>
       </div>
     </section>

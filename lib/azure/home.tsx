@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { Locale } from "./site";
 
 export type HomeContent = {
-  hero: { tag: string; play: string; title: ReactNode; primary: string; secondary: string };
+  hero: { tag: string; play: string; title: ReactNode; primary: string; secondary: string; chips: { big: string; label: string }[] };
   awards: { label: string; items: { b: string; rest: string; ribbon?: string }[] };
   bento: {
     kicker: string; title: ReactNode; lead: string;
@@ -33,6 +33,7 @@ const TR: HomeContent = {
     title: <>Akdeniz’de yeni bir <b>yaşam ritmi.</b></>,
     primary: "Projeleri Keşfet",
     secondary: "Lagoon Verde",
+    chips: [{ big: "120", label: "ABD’de tamamlanan proje" }, { big: "3", label: "PropertyNC 2025 ödülü" }, { big: "60", label: "aya kadar TL taksit" }],
   },
   awards: {
     label: "Ödüller & Tanınma",
@@ -123,6 +124,7 @@ const EN: HomeContent = {
     title: <>A new rhythm of life <b>on the Mediterranean.</b></>,
     primary: "Explore Projects",
     secondary: "Lagoon Verde",
+    chips: [{ big: "120", label: "completed projects in the USA" }, { big: "3", label: "PropertyNC 2025 awards" }, { big: "60", label: "months, lira instalments" }],
   },
   awards: {
     label: "Awards & Recognition",
@@ -213,6 +215,7 @@ const DE: HomeContent = {
     title: <>Ein neues Lebensgefühl <b>am Mittelmeer.</b></>,
     primary: "Projekte entdecken",
     secondary: "Lagoon Verde",
+    chips: [{ big: "120", label: "abgeschlossene Projekte in den USA" }, { big: "3", label: "Auszeichnungen, PropertyNC 2025" }, { big: "60", label: "Monate, Raten in Lira" }],
   },
   awards: {
     label: "Auszeichnungen & Anerkennung",
@@ -303,6 +306,7 @@ const RU: HomeContent = {
     title: <>Новый ритм жизни <b>на Средиземноморье.</b></>,
     primary: "Смотреть проекты",
     secondary: "Lagoon Verde",
+    chips: [{ big: "120", label: "завершённых проектов в США" }, { big: "3", label: "награды PropertyNC 2025" }, { big: "60", label: "месяцев рассрочки в лирах" }],
   },
   awards: {
     label: "Награды и признание",
@@ -393,6 +397,7 @@ const PL: HomeContent = {
     title: <>Nowy rytm życia <b>nad Morzem Śródziemnym.</b></>,
     primary: "Odkryj projekty",
     secondary: "Lagoon Verde",
+    chips: [{ big: "120", label: "zrealizowanych projektów w USA" }, { big: "3", label: "nagrody PropertyNC 2025" }, { big: "60", label: "miesięcy rat w lirach" }],
   },
   awards: {
     label: "Nagrody i wyróżnienia",
