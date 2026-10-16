@@ -19,15 +19,6 @@ const IG_FOLLOW: Record<Locale, string> = {
   ru: "Подписывайтесь на DND Cyprus в Instagram",
   pl: "Zapraszamy do obserwowania DND Cyprus na Instagramie",
 };
-const PerlaTr = dynamic(() => import("../perla/FlipBookGlass"), { ssr: false });
-const PerlaEn = dynamic(() => import("../en/perla/FlipBookGlass"), { ssr: false });
-const PerlaIITr = dynamic(() => import("../perla-ii/FlipBookGlass"), { ssr: false });
-const PerlaIIEn = dynamic(() => import("../en/perla-ii/FlipBookGlass"), { ssr: false });
-const LagoonTr = dynamic(() => import("../lagoon-verde/FlipBookGlass"), { ssr: false });
-const LagoonEn = dynamic(() => import("../en/lagoon-verde/FlipBookGlass"), { ssr: false });
-
-// Katalog (flipbook) yalnızca TR/EN; diğer diller İngilizce kataloğu görür.
-const pick = (locale: Locale): "tr" | "en" => (locale === "tr" ? "tr" : "en");
 export function DeferredInstagram({ locale }: { locale: Locale }) {
   const { ref, near } = useNearViewport<HTMLDivElement>();
   const Component = INSTAGRAM[locale];
@@ -46,13 +37,9 @@ export function DeferredInstagram({ locale }: { locale: Locale }) {
   );
 }
 
-const catalogs = {
-  perla: { tr: PerlaTr, en: PerlaEn },
-  "perla-ii": { tr: PerlaIITr, en: PerlaIIEn },
-  "lagoon-verde": { tr: LagoonTr, en: LagoonEn },
-};
-export function DeferredCatalog({ locale, project }: { locale: Locale; project: keyof typeof catalogs }) {
+// Azure katalog (5 dil): açık sahne, gerçek kitap, sayaç · ilerleme çizgisi · oklar; bölüm yaklaşınca yüklenir
+const AzureCatalog = dynamic(() => import("../azure/project/AzureCatalog"), { ssr: false });
+export function DeferredCatalog({ locale, project }: { locale: Locale; project: "lagoon-verde" | "perla" | "perla-ii" }) {
   const { ref, near } = useNearViewport<HTMLDivElement>();
-  const Component = catalogs[project][pick(locale)];
-  return <div id="catalog" ref={ref} className="min-h-[75svh] bg-white">{near ? <Component /> : null}</div>;
+  return <div id="catalog" ref={ref} className="min-h-[75svh]">{near ? <AzureCatalog locale={locale} project={project} /> : null}</div>;
 }

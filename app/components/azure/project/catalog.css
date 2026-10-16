@@ -1,0 +1,27 @@
+/* Azure katalog: açık sahne, gerçek kitap, alt şerit (sayaç · çizgi · oklar) */
+.az-cat .hd { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px 24px; flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px); }
+.az-cat .hd .az-btn { flex: none; margin-bottom: 4px; }
+.az-cat .stage {
+  position: relative; display: grid; place-items: center; outline: none;
+  padding: clamp(16px, 3.4vw, 56px); border-radius: 36px; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 0%, #fff 0%, var(--sky) 58%, var(--sky-2) 100%);
+  border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 30px 80px rgba(13, 35, 38, .1);
+}
+.az-cat .stage:focus-visible { box-shadow: 0 0 0 2px var(--coral), 0 30px 80px rgba(13, 35, 38, .1); }
+/* kitabın altında yumuşak gölge */
+.az-cat .book { filter: drop-shadow(0 26px 40px rgba(13, 35, 38, .2)); }
+.az-cat .pg { position: relative; overflow: hidden; background: #fff; }
+.az-cat .pg img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.az-cat .pg.half img { width: 200%; max-width: none; }
+.az-cat .pg.half.r img { transform: translateX(-50%); }
+/* sırt gölgesi: açılımın ortasında hafif kıvrım */
+.az-cat .pg.lp::after, .az-cat .pg.rp::after { content: ""; position: absolute; top: 0; bottom: 0; width: 7%; pointer-events: none; }
+.az-cat .pg.lp::after { right: 0; background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .14)); }
+.az-cat .pg.rp::after { left: 0; background: linear-gradient(270deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .12)); }
+.az-cat .nav { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); margin-top: 18px; }
+.az-cat .count { font-family: var(--font-display), sans-serif; font-size: 15px; letter-spacing: .04em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; min-width: 9ch; }
+.az-cat .count i { font-style: normal; color: var(--ink-40); margin: 0 2px; }
+.az-cat .bar { flex: 1; height: 2px; border-radius: 2px; background: rgba(13, 35, 38, .12); overflow: hidden; }
+.az-cat .bar i { display: block; height: 100%; background: var(--sea); transform-origin: left; transition: transform .4s var(--ease); }
+.az-cat .az-ctrl button:disabled { opacity: .35; cursor: default; background: var(--foam); color: var(--ink); }
+@media (max-width: 600px) { .az-cat .stage { border-radius: 28px; } .az-cat .az-ctrl button { width: 42px; height: 42px; } }
