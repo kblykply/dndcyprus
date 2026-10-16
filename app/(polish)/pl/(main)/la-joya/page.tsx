@@ -16,7 +16,7 @@ export const metadata = pageMetadata({
 // İçerik: lib/azure/projects/la-joya.tsx
 export default function Page() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
       <AzureProject slug="la-joya" locale="pl" />
     </main>
   );

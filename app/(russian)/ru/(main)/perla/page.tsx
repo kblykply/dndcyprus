@@ -16,7 +16,7 @@ export const metadata = pageMetadata({
 // İçerik: lib/azure/projects/perla.tsx
 export default function Page() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
       <AzureProject slug="perla" locale="ru" />
     </main>
   );
