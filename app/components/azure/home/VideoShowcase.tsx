@@ -155,7 +155,7 @@ function Poster({ slide }: { slide: VideoSlide }) {
 
 /**
  * Ana sayfa video bölümü — Meridian düzeni, açık zemin: solda küçük etiket + sayaç, iki parçalı başlık,
- * kısa açıklama, numaralı maddeler ve tek dolu düğme; sağda video, altında ilerleme çizgileri,
+ * kısa açıklama, numaralı maddeler, dolu ana düğme ve cam ikinci düğme; sağda video, altında ilerleme çizgileri,
  * "sıradaki" etiketi ve oklar. Slaytlar 10 sn'de bir kendiliğinden ilerler; ses açılınca ya da tam ekranda durur.
  */
 export default function VideoShowcase({ locale }: { locale: Locale }) {
@@ -262,7 +262,7 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
               </div>
               <div className="cta">
                 <Link className="az-btn sea" href={href(locale, x.primary.path)} prefetch={false}>{x.primary.label}</Link>
-                {x.secondary ? <Link className="ul" href={href(locale, x.secondary.path)} prefetch={false}>{x.secondary.label} →</Link> : null}
+                {x.secondary ? <Link className="az-btn glass" href={href(locale, x.secondary.path)} prefetch={false}>{x.secondary.label} →</Link> : null}
               </div>
             </div>
           ))}
