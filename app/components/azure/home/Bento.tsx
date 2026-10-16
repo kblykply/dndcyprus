@@ -51,12 +51,12 @@ export default function Bento({ locale }: { locale: Locale }) {
 
           <div className="az-tile t-award rv d1">
             <div className="k">{t.usa.k}</div>
-            {/* etiket ile rakam arasındaki alanı DND Homes'un ABD'deki iki gerçek fotoğrafı doldurur */}
+            {/* etiket ile rakam arasındaki alanı DND Homes'un Massachusetts'te teslim ettiği (satılmış) iki projesi doldurur */}
             <div className="ph">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <span><img src="/azure/about-12lex.jpg" alt="DND Homes, Lexington" loading="lazy" decoding="async" /></span>
+              <span><img src="/azure/usa/15-tyler-road.webp" alt="15 Tyler Road, Lexington, MA · DND Homes" loading="lazy" decoding="async" /></span>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <span><img src="/azure/about-boston.jpg" alt="DND Homes, Boston" loading="lazy" decoding="async" /></span>
+              <span><img src="/azure/usa/131-dane-hill-road.webp" alt="131 Dane Hill Road, Newton, MA · DND Homes" loading="lazy" decoding="async" /></span>
             </div>
             <div className="big" data-count={t.usa.count}>0</div>
             <p>{t.usa.p}</p>
