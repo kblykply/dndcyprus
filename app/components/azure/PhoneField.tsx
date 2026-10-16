@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
-import { COUNTRIES, COUNTRY_HEAD, COUNTRY_UI, DEFAULT_DIAL, type Country } from "@/lib/azure/countries";
+import { COUNTRIES, COUNTRY_HEAD, COUNTRY_UI, DEFAULT_DIAL, phoneSample, type Country } from "@/lib/azure/countries";
 import type { Locale } from "@/lib/azure/site";
 import "./phone-field.css";
 
@@ -170,7 +170,7 @@ export default function PhoneField({ id, locale, invalid }: Props) {
           </div>
         )}
       </div>
-      <input id={id} name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder={code ? undefined : "+"} aria-invalid={invalid || undefined} />
+      <input id={id} name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder={phoneSample(code)} aria-invalid={invalid || undefined} />
     </div>
   );
 }

@@ -24,6 +24,8 @@ const COPY = {
     phoneHint: "Ülke kodunu seçip numaranızı yazın; listede yoksa numarayı + ile başlatın.",
     note: "Bilgileriniz yalnızca talebinizi yanıtlamak için kullanılır.",
     waText: (p?: string) => p ? `Merhaba! ${p} hakkında fiyat ve kat planı bilgisi almak istiyorum.` : "Merhaba! Bilgi almak istiyorum.",
+    namePh: "Adınız ve soyadınız", emailPh: "ad@eposta.com",
+    messagePh: "Bütçe, teslim tarihi veya sorularınızı yazabilirsiniz.", messagePhContact: "Size nasıl yardımcı olabiliriz?",
     brochure: "Broşür (PDF)",
   },
   en: {
@@ -43,6 +45,8 @@ const COPY = {
     phoneHint: "Choose your country code and enter your number; if your country is not listed, start the number with +.",
     note: "Your details are only used to respond to your request.",
     waText: (p?: string) => p ? `Hello! I would like to receive prices and floor plans for ${p}.` : "Hello! I would like more information.",
+    namePh: "Your full name", emailPh: "you@email.com",
+    messagePh: "Budget, preferred delivery date or any questions.", messagePhContact: "How can we help you?",
     brochure: "Brochure (PDF)",
   },
   de: {
@@ -62,6 +66,8 @@ const COPY = {
     phoneHint: "Wählen Sie die Ländervorwahl und geben Sie Ihre Nummer ein; fehlt Ihr Land, beginnen Sie die Nummer mit +.",
     note: "Ihre Angaben werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet.",
     waText: (p?: string) => p ? `Hallo! Ich hätte gerne Preise und Grundrisse für ${p}.` : "Hallo! Ich hätte gerne weitere Informationen.",
+    namePh: "Ihr Name", emailPh: "name@mail.de",
+    messagePh: "Budget, gewünschter Übergabetermin oder Ihre Fragen.", messagePhContact: "Wie können wir Ihnen helfen?",
     brochure: "Broschüre (PDF)",
   },
   ru: {
@@ -81,6 +87,8 @@ const COPY = {
     phoneHint: "Выберите код страны и введите номер; если вашей страны нет в списке, начните номер с +.",
     note: "Ваши данные используются только для ответа на вашу заявку.",
     waText: (p?: string) => p ? `Здравствуйте! Хочу получить цены и планировки по проекту ${p}.` : "Здравствуйте! Хочу получить больше информации.",
+    namePh: "Ваше имя и фамилия", emailPh: "name@mail.ru",
+    messagePh: "Бюджет, желаемый срок сдачи или ваши вопросы.", messagePhContact: "Чем мы можем помочь?",
     brochure: "Брошюра (PDF)",
   },
   pl: {
@@ -100,6 +108,8 @@ const COPY = {
     phoneHint: "Wybierz kierunkowy kraju i wpisz numer; jeśli kraju nie ma na liście, zacznij numer od +.",
     note: "Państwa dane wykorzystujemy wyłącznie do odpowiedzi na zapytanie.",
     waText: (p?: string) => p ? `Dzień dobry! Proszę o ceny i plany mieszkań w projekcie ${p}.` : "Dzień dobry! Proszę o więcej informacji.",
+    namePh: "Imię i nazwisko", emailPh: "ty@poczta.pl",
+    messagePh: "Budżet, preferowany termin oddania lub pytania.", messagePhContact: "W czym możemy pomóc?",
     brochure: "Broszura (PDF)",
   },
 } satisfies Record<Locale, unknown>;
@@ -211,9 +221,9 @@ export default function ContactCard({
           ) : (
             <form className="az-f" onSubmit={onSubmit} noValidate aria-describedby={Object.keys(errors).length ? `${uid}-err` : undefined}>
               <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: -9999, opacity: 0 }} />
-              <div className="az-field az-wide"><label htmlFor={`${uid}-n`}>{t.name}</label><input id={`${uid}-n`} name="name" type="text" autoComplete="name" required aria-invalid={errors.name || undefined} /></div>
+              <div className="az-field az-wide"><label htmlFor={`${uid}-n`}>{t.name}</label><input id={`${uid}-n`} name="name" type="text" autoComplete="name" placeholder={t.namePh} required aria-invalid={errors.name || undefined} /></div>
               <div className="az-field az-wide"><label htmlFor={`${uid}-p`}>{t.phone}</label><PhoneField id={`${uid}-p`} locale={locale} invalid={errors.phone} /></div>
-              <div className="az-field"><label htmlFor={`${uid}-e`}>{t.email}</label><input id={`${uid}-e`} name="email" type="email" autoComplete="email" required aria-invalid={errors.email || undefined} /></div>
+              <div className="az-field"><label htmlFor={`${uid}-e`}>{t.email}</label><input id={`${uid}-e`} name="email" type="email" autoComplete="email" placeholder={t.emailPh} required aria-invalid={errors.email || undefined} /></div>
               {mode === "contact" ? (
                 <div className="az-field"><label htmlFor={`${uid}-s`}>{t.subject}</label><input id={`${uid}-s`} name="subject" type="text" required aria-invalid={errors.subject || undefined} /></div>
               ) : (
@@ -224,7 +234,7 @@ export default function ContactCard({
                   </select>
                 </div>
               )}
-              <div className="az-field full"><label htmlFor={`${uid}-m`}>{t.message}{mode === "contact" ? " *" : ""}</label><textarea id={`${uid}-m`} name="message" aria-invalid={errors.message || undefined} /></div>
+              <div className="az-field full"><label htmlFor={`${uid}-m`}>{t.message}{mode === "contact" ? " *" : ""}</label><textarea id={`${uid}-m`} name="message" placeholder={mode === "contact" ? t.messagePhContact : t.messagePh} aria-invalid={errors.message || undefined} /></div>
               <div className="az-field full">
                 <label className="kv"><input type="checkbox" name="consent" required aria-invalid={errors.consent || undefined} />
                   <span>{t.consentPre}<Link href={href(locale, "/privacy")} prefetch={false}>{t.consentLink}</Link>{t.consentPost}</span>

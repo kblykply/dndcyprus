@@ -10,12 +10,19 @@
 }
 .az-cc-btn:focus-visible, .az-cc.open .az-cc-btn { outline: none; box-shadow: 0 0 0 3px rgba(42, 169, 179, .5); }
 .az-cc-f { font-size: 1.15em; line-height: 1; }
+/* 1023px ve altında alanlar 16px (globals.css, iOS yakınlaştırması): düğme de aynı boyda kalsın */
+@media (max-width: 1023px) { .az-cc-btn { font-size: 16px; } }
 /* dar telefonlarda numaraya yer kalsın: kod düğmesi sıkılaşır, 360px ve altında formun iç boşluğu azalır */
 @media (max-width: 420px) {
   .az-tel { gap: 6px; }
   .az-cc-btn { gap: 6px; padding: 13px 24px 13px 10px; background-position: right 8px center; }
 }
 @media (max-width: 360px) { .az-contact form.az-f { padding: 14px; } }
+/* çok dar telefonlarda (iPhone SE 1 vb.) kod düğmesi numaranın üstünde, numara tam genişlik */
+@media (max-width: 374px) {
+  .az-tel { grid-template-columns: minmax(0, 1fr); }
+  .az-cc { justify-self: start; }
+}
 
 /* açılır liste: beyaz kart, üstte arama, altta kaydırılabilir ülke listesi */
 .az-cc-pop {
@@ -34,13 +41,17 @@
 .az-cc-sep { margin: 6px 10px 2px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sea); }
 .az-cc-none { margin: 12px 10px 6px; font-size: 14px; color: var(--ink-60); }
 
-/* Form düzeni kartın genişliğine göre (container query): iki sütunlu formda telefon hücresi kod + numaraya
-   yetmiyorsa (hücre < ~254px, kart < 1286px) ad soyad ve telefon tam satıra geçer, e-posta ile proje yan yana kalır
-   (boş hücre olmaz); artan yükseklik yine mesaj satırına gider. 900px ve altında form zaten tek sütun. */
+/* Form düzeni kartın genişliğine göre (container query, kartın iç genişliği): iki sütunlu formda telefon hücresi
+   kod + numaraya yetmiyorsa (hücre < ~254px → form içi < 520px → kart içi < 1158px) ad soyad ve telefon tam satıra
+   geçer, e-posta ile proje yan yana kalır (boş hücre olmaz); artan yükseklik yine mesaj satırına gider.
+   900px ve altında form zaten tek sütun. */
 .az-contact .card { container-type: inline-size; }
 @media (min-width: 901px) {
-  @container (max-width: 1285px) {
+  @container (max-width: 1157px) {
     .az-contact form.az-f { grid-template-rows: auto auto auto 1fr auto auto; }
     .az-contact form.az-f > .az-field.az-wide { grid-column: 1 / -1; }
   }
 }
+
+/* örnek metinler (placeholder): beyaz alan üzerinde açık mürekkep */
+.az-contact .az-field input::placeholder, .az-contact .az-field textarea::placeholder { color: rgba(13, 35, 38, .4); opacity: 1; }

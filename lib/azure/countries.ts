@@ -71,3 +71,10 @@ export const COUNTRY_UI: Record<Locale, { search: string; code: string; none: st
   ru: { search: "Поиск страны", code: "Код страны", none: "Страна не найдена", all: "Все страны" },
   pl: { search: "Szukaj kraju", code: "Kierunkowy kraju", none: "Nie znaleziono kraju", all: "Wszystkie kraje" },
 };
+
+/** Numara kutusundaki örnek (ülke kodu ayrı seçildiği için kodsuz, cep telefonu biçiminde) */
+const PHONE_SAMPLE: Record<string, string> = {
+  "+90": "5xx xxx xx xx", "+357": "9x xxx xxx", "+44": "7xxx xxxxxx", "+7": "9xx xxx xx xx", "+49": "15x xxxxxxxx",
+  "+48": "5xx xxx xxx", "+380": "xx xxx xx xx", "+972": "5x xxx xxxx", "+1": "xxx xxx xxxx",
+};
+export const phoneSample = (code: string) => (code ? PHONE_SAMPLE[code] ?? "xxx xxx xxxx" : "+xx xxx xxx xxxx");
