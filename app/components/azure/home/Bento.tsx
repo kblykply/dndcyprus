@@ -1,5 +1,6 @@
 "use client";
 
+import Arrow from "../Arrow";
 import Link from "next/link";
 import { useState } from "react";
 import { HOME } from "@/lib/azure/home";
@@ -9,9 +10,9 @@ import { Icon } from "../project/icons";
 // teknik donanım kartı: metindeki sırayla simgeler (merkezi ısıtma-soğutma · jeneratör · akıllı ev · yerden ısıtma)
 const GEAR = ["climate", "generator", "smart-home", "floor-heating"];
 
-const Arrow = () => (
+const TileArrow = () => (
   <span className="arrow" aria-hidden>
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" /></svg>
+    <Arrow size={16} />
   </span>
 );
 
@@ -32,7 +33,7 @@ export default function Bento({ locale }: { locale: Locale }) {
           <Link className="az-tile img t-mariachi rv" href={href(locale, "/mariachi")} prefetch={false}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="bg" src="/azure/mb-6.jpg" alt="Mariachi Beach Club" loading="lazy" />
-            <span className="pill gold">{t.mariachi.pill}</span><Arrow />
+            <span className="pill gold">{t.mariachi.pill}</span><TileArrow />
             <div className="k">{t.mariachi.k}</div><h3>{t.mariachi.h}</h3><p>{t.mariachi.p}</p>
           </Link>
 
@@ -46,7 +47,7 @@ export default function Bento({ locale }: { locale: Locale }) {
                 <button key={m} type="button" className={months === m ? "on" : undefined} onClick={() => setMonths(m)} aria-pressed={months === m}>{m}{m === 60 ? ` ${t.tl.months}` : ""}</button>
               ))}
             </div>
-            <Link className="tl-cta" href={href(locale, "/lagoon-verde")} prefetch={false}>{t.tl.cta} →</Link>
+            <Link className="tl-cta" href={href(locale, "/lagoon-verde")} prefetch={false}>{t.tl.cta} <Arrow /></Link>
           </div>
 
           <div className="az-tile t-award rv d1">

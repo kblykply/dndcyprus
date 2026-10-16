@@ -1,5 +1,6 @@
 "use client";
 
+import Arrow from "../Arrow";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { PiArrowsInDuotone, PiArrowsOutDuotone, PiSpeakerHighDuotone, PiSpeakerSlashDuotone } from "react-icons/pi";
@@ -262,7 +263,7 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
               </div>
               <div className="cta">
                 <Link className="az-btn sea" href={href(locale, x.primary.path)} prefetch={false}>{x.primary.label}</Link>
-                {x.secondary ? <Link className="az-btn glass" href={href(locale, x.secondary.path)} prefetch={false}>{x.secondary.label} →</Link> : null}
+                {x.secondary ? <Link className="az-btn glass" href={href(locale, x.secondary.path)} prefetch={false}>{x.secondary.label} <Arrow /></Link> : null}
               </div>
             </div>
           ))}
@@ -306,8 +307,8 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
           <figcaption className="row">
             <span className="mr-mono">{ui.next} · <b>{next.tag}</b></span>
             <span className="nav">
-              <button type="button" onClick={() => go(i - 1)} aria-label={ui.prev}>←</button>
-              <button type="button" onClick={() => go(i + 1)} aria-label={ui.nextAria}>→</button>
+              <button type="button" onClick={() => go(i - 1)} aria-label={ui.prev}><Arrow dir={-1} size={18} /></button>
+              <button type="button" onClick={() => go(i + 1)} aria-label={ui.nextAria}><Arrow size={18} /></button>
             </span>
           </figcaption>
         </figure>

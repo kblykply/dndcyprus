@@ -1,3 +1,4 @@
+import Arrow from "../Arrow";
 import Link from "next/link";
 import { PiInfoDuotone, PiSealPercentDuotone, PiTicketDuotone } from "react-icons/pi";
 import LazyYouTube from "@/app/components/LazyYouTube";
@@ -23,7 +24,7 @@ export default function Mariachi({ locale, id }: { locale: Locale; id: string })
             <img className="logo" src="/azure/brands/mariachi.webp" alt="Mariachi Beach Club" loading="lazy" />
             <h2>{t.title}</h2>
             <p className="sub">{t.subtitle}</p>
-            <div className="cta"><Link className="az-btn sea sm" href={t.href} prefetch={false} aria-label={t.ctaAria}>{t.cta} →</Link></div>
+            <div className="cta"><Link className="az-btn sea sm" href={t.href} prefetch={false} aria-label={t.ctaAria}>{t.cta} <Arrow /></Link></div>
           </div>
           <div className="perks">
             <div className="mr-rows">

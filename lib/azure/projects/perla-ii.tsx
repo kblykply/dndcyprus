@@ -283,7 +283,7 @@ export const PERLA_II: ProjectData = {
         type: "youtube",
         title: "La Joya Perla II — Update",
       },
-      cta: { label: "Tüm güncellemeleri gör →", href: "/tr/perla-ii" },
+      cta: { label: "Tüm güncellemeleri gör", href: "/tr/perla-ii" },
       bullets: [
         "Kayıt, şantiye sorumlusunun haftalık saha turundan alınmıştır.",
         "Tarihler tanıtım amaçlıdır; resmi teslim programı satış ekibinden teyit edilmelidir.",
@@ -573,7 +573,7 @@ export const PERLA_II: ProjectData = {
         type: "youtube",
         title: "La Joya Perla II — Update",
       },
-      cta: { label: "View all updates →", href: "/en/perla-ii" },
+      cta: { label: "View all updates", href: "/en/perla-ii" },
       bullets: [
         "The recording was taken during the site supervisor’s weekly inspection.",
         "Dates are for promotional purposes; please confirm the official delivery schedule with our sales team.",
@@ -863,7 +863,7 @@ export const PERLA_II: ProjectData = {
         type: "youtube",
         title: "La Joya Perla II – Baufortschritt",
       },
-      cta: { label: "Alle Updates ansehen →", href: "/de/perla-ii" },
+      cta: { label: "Alle Updates ansehen", href: "/de/perla-ii" },
       bullets: [
         "Die Aufnahme entstand beim wöchentlichen Baustellenrundgang der Bauleitung.",
         "Die Termine dienen Werbezwecken; den offiziellen Übergabeplan bestätigt Ihnen unser Vertriebsteam.",
@@ -1153,7 +1153,7 @@ export const PERLA_II: ProjectData = {
         type: "youtube",
         title: "La Joya Perla II — ход строительства",
       },
-      cta: { label: "Все обновления →", href: "/ru/perla-ii" },
+      cta: { label: "Все обновления", href: "/ru/perla-ii" },
       bullets: [
         "Видео снято во время еженедельного обхода объекта руководителем строительства.",
         "Сроки указаны в рекламных целях; официальный график сдачи уточняйте в нашем отделе продаж.",
@@ -1443,7 +1443,7 @@ export const PERLA_II: ProjectData = {
         type: "youtube",
         title: "La Joya Perla II – postęp budowy",
       },
-      cta: { label: "Zobacz wszystkie aktualizacje →", href: "/pl/perla-ii" },
+      cta: { label: "Zobacz wszystkie aktualizacje", href: "/pl/perla-ii" },
       bullets: [
         "Nagranie powstało podczas cotygodniowej inspekcji kierownika budowy.",
         "Terminy mają charakter promocyjny; oficjalny harmonogram oddania prosimy potwierdzić w naszym dziale sprzedaży.",

@@ -1,3 +1,4 @@
+import Arrow from "../Arrow";
 import Link from "next/link";
 import type { ProjectUpdate } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
@@ -26,8 +27,8 @@ export default function Update({ d, id, locale }: { d: ProjectUpdate; id: string
             {d.cta && (
               <div className="cta">
                 {external
-                  ? <a className="az-btn glass sm" href={d.cta.href} target="_blank" rel="noopener noreferrer" tabIndex={d.comingSoon ? -1 : 0}>{d.cta.label}</a>
-                  : <Link className="az-btn glass sm" href={d.cta.href} prefetch={false} tabIndex={d.comingSoon ? -1 : 0}>{d.cta.label}</Link>}
+                  ? <a className="az-btn glass sm" href={d.cta.href} target="_blank" rel="noopener noreferrer" tabIndex={d.comingSoon ? -1 : 0}>{d.cta.label} <Arrow /></a>
+                  : <Link className="az-btn glass sm" href={d.cta.href} prefetch={false} tabIndex={d.comingSoon ? -1 : 0}>{d.cta.label} <Arrow /></Link>}
               </div>
             )}
           </div>

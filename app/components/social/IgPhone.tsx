@@ -1,5 +1,6 @@
 "use client";
 
+import Arrow from "@/app/components/azure/Arrow";
 import { AnimatePresence, m } from "framer-motion";
 
 /*
@@ -164,7 +165,7 @@ function ReelScreen({ post, labels }: { post: IgPost; labels: IgPhoneLabels }) {
         </div>
         <p className="mt-2 line-clamp-2 text-[12px] leading-snug text-white/95">{post.caption}</p>
         <a href={post.url} target="_blank" rel="noopener noreferrer" className="mt-1.5 inline-block text-[11px] font-medium text-white/75 hover:text-white">
-          {labels.viewOnInstagram} →
+          {labels.viewOnInstagram} <Arrow />
         </a>
       </div>
     </div>
@@ -233,7 +234,7 @@ function FeedScreen({ post, labels }: { post: IgPost; labels: IgPhoneLabels }) {
           <span className="font-semibold">{USERNAME}</span> {post.caption}
         </p>
         <a href={post.url} target="_blank" rel="noopener noreferrer" className="mt-1.5 inline-block text-[11.5px] font-medium text-black/50 hover:text-black/80">
-          {labels.viewOnInstagram} →
+          {labels.viewOnInstagram} <Arrow />
         </a>
       </div>
     </div>

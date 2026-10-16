@@ -1,5 +1,6 @@
 "use client";
 
+import Arrow from "../Arrow";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type FocusEvent } from "react";
 import { HOME } from "@/lib/azure/home";
@@ -94,8 +95,8 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
                 <h3>{cur.title}</h3>
                 <p>{cur.text}</p>
                 {external
-                  ? <a className="az-btn sea sm" href={cur.href} target="_blank" rel="noopener noreferrer">{MORE[locale]} →</a>
-                  : <Link className="az-btn sea sm" href={cur.href} prefetch={false}>{MORE[locale]} →</Link>}
+                  ? <a className="az-btn sea sm" href={cur.href} target="_blank" rel="noopener noreferrer">{MORE[locale]} <Arrow /></a>
+                  : <Link className="az-btn sea sm" href={cur.href} prefetch={false}>{MORE[locale]} <Arrow /></Link>}
               </div>
               {extra ? <p className="mr-mono more">+ {extra.b}{extra.rest}</p> : null}
             </div>

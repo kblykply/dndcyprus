@@ -1,5 +1,6 @@
 "use client";
 
+import Arrow from "../Arrow";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { InteriorGroup } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
@@ -112,9 +113,9 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
         </div>
         {n > 1 ? (
           <div className="nav">
-            <button type="button" onClick={() => go(i - 1)} aria-label={t.prev}>←</button>
+            <button type="button" onClick={() => go(i - 1)} aria-label={t.prev}><Arrow dir={-1} size={18} /></button>
             <span aria-live="polite">{pad(i + 1)} / {pad(n)}</span>
-            <button type="button" onClick={() => go(i + 1)} aria-label={t.next}>→</button>
+            <button type="button" onClick={() => go(i + 1)} aria-label={t.next}><Arrow size={18} /></button>
           </div>
         ) : null}
       </div>

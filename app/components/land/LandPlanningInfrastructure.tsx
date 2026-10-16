@@ -1,6 +1,7 @@
 // app/components/land/LandPlanningInfrastructure.tsx
 "use client";
 
+import Arrow from "@/app/components/azure/Arrow";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 
@@ -54,8 +55,8 @@ export default function LandPlanningInfrastructure({
           <p className="az-lead rv d2">{subtitle}</p>
         </div>
         <div className="az-ctrl rv d2">
-          <button type="button" aria-label="Önceki" onClick={() => go(-1)}>←</button>
-          <button type="button" aria-label="Sonraki" onClick={() => go(1)}>→</button>
+          <button type="button" aria-label="Önceki" onClick={() => go(-1)}><Arrow dir={-1} size={18} /></button>
+          <button type="button" aria-label="Sonraki" onClick={() => go(1)}><Arrow size={18} /></button>
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+import Arrow from "../Arrow";
 import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
@@ -61,7 +62,7 @@ export default function Leadership({ locale }: { locale: Locale }) {
             </div>
             <h3>{t.team}</h3>
             <ul><li>{TEAMS[locale][0]}</li><li>{TEAMS[locale][1]}</li></ul>
-            <Link className="az-btn glass sm" href={href(locale, "/team")} prefetch={false}>{t.teamCta} →</Link>
+            <Link className="az-btn glass sm" href={href(locale, "/team")} prefetch={false}>{t.teamCta} <Arrow /></Link>
           </aside>
         </div>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Arrow from "../Arrow";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { PROJECT_PAGES } from "@/lib/azure/projects";
@@ -152,8 +153,8 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
           <span className="count" aria-live="polite">{label} <i>/</i> {pad2(n)}</span>
           <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.03, prog)})` }} /></span>
           <span className="az-ctrl">
-            <button type="button" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}>←</button>
-            <button type="button" aria-label={t.next} onClick={() => go(1)} disabled={atEnd}>→</button>
+            <button type="button" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}><Arrow dir={-1} size={18} /></button>
+            <button type="button" aria-label={t.next} onClick={() => go(1)} disabled={atEnd}><Arrow size={18} /></button>
           </span>
         </div>
       </div>

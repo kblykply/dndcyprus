@@ -1,3 +1,4 @@
+import Arrow from "../Arrow";
 import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
@@ -15,7 +16,7 @@ export default function PressFaq({ locale, items }: { locale: Locale; items: Pre
         <div>
           <div className="hd">
             <div><span className="az-kicker rv">{t.press.kicker}</span><h2 className="az-h2 sm rv d1">{t.press.title}</h2></div>
-            <Link className="az-btn glass sm rv d1" href={href(locale, "/press")} prefetch={false}>{t.press.all} →</Link>
+            <Link className="az-btn glass sm rv d1" href={href(locale, "/press")} prefetch={false}>{t.press.all} <Arrow /></Link>
           </div>
           <div className="az-news">
             {news.map((n, k) => (

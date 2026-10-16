@@ -28,6 +28,16 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
     router.push(langTarget(target));
   };
 
+  // logo / "Ana sayfa": zaten ana sayfadaysak Next aynı adrese giderken kaydırmıyor; menüyü kapat, sayfanın başına çık
+  // (html'de scroll-behavior: smooth; hareket azaltma açıksa anında). Adresteki #bölüm de silinir.
+  const toTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (clean !== "/" || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    setOpen(false);
+    if (location.hash) history.replaceState(history.state, "", pathname);
+    requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+  };
+
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
     onScroll();
@@ -62,7 +72,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
     <>
       <header className={`az-nav${solid ? " solid" : ""}`} id="az-nav">
         <div className="pill">
-          <Link className="logo" href={href(locale, "/")} aria-label="DND Cyprus" prefetch={false}>
+          <Link className="logo" href={href(locale, "/")} aria-label="DND Cyprus" prefetch={false} onClick={toTop}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/DND-LOGO-2.svg" alt="DND Cyprus" width={70} height={30} />
           </Link>
@@ -119,7 +129,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
         <button className="close" type="button" aria-label={t.close} onClick={() => setOpen(false)}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.6" /></svg>
         </button>
-        <Link className="big" href={href(locale, "/")} prefetch={false}>{t.home}</Link>
+        <Link className="big" href={href(locale, "/")} prefetch={false} onClick={toTop}>{t.home}</Link>
         <Link className="big" href={href(locale, "/projects")} prefetch={false}>{t.projects} <small>06</small></Link>
         <div className="sub">
           {PROJECTS.map((p) => <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false}>{p.name}</Link>)}
