@@ -20,7 +20,7 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
       
 <PageHero size="compact" kicker="DND Cyprus" title={<>Гечиткале</>} lead="Участок в развивающемся районе с потенциалом застройки под виллы, дома-близнецы и многоквартирные дома." image="/gecitkaleimage.jpg" imageAlt="Гечиткале" tags={["Участок на продажу", "Гечиткале, Искеле", "Зонирование: Fasıl 96"]} chips={[{ big: "~5 этажей", label: "Потенциал застройки" }]} ctas={[{ label: "Связаться с нами", href: "/ru/contact" }]} />
 <GecitkaleOverview />

@@ -14,7 +14,7 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="short" kicker="DND Cyprus" title={<>Unser Team</>} lead="Hinter dem Erfolg jedes Projekts steht die Professionalität unseres Teams – unser stärkstes Fundament." image="/azure/about-beach.jpg" imagePosition="58% 16%" />
       <LeadershipTeam showHeader={false} />
    

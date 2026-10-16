@@ -92,7 +92,7 @@ const PRESS_ITEMS: PressItem[] = [
 
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="short" kicker="DND Cyprus в прессе" title={<>Новости</>} lead="Публикации в СМИ и пресс-релизы о нашем бренде." image="/azure/p2-3.jpg" />
    <PressSection items={PRESS_ITEMS} title="Все новости" description="" moreHref="" initialLimit={PRESS_ITEMS.length} />
 

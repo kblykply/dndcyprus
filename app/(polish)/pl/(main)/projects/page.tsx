@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
 
 <PageHero size="compact" kicker="Projekty" title={<>Sześć adresów, <b>jeden standard.</b></>} lead="Lagoon Verde, La Joya, La Joya Perla, Perla II, Mariachi Beach Club i działka w Geçitkale – wszystkie projekty DND Cyprus do porównania w jednym miejscu." image="/azure/lv-7.jpg" imageAlt="DND Cyprus" chips={[{ big: "6", label: "Projektów" }, { big: "2", label: "Nagrody · 2025" }]} />
 <ProjectsFilters />

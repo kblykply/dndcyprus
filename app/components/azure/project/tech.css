@@ -1,5 +1,7 @@
 /* Teknik donanım: hafif cam kartlar; ana sayfa proje şeridiyle aynı geçiş (3 kart, sabitlenip sayfayla yana akar), ok yok */
-.az-tcards { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 0 16px; scrollbar-width: none; outline: none; }
+/* overflow-y: hidden — yalnız overflow-x verilince dikey eksen "auto" oluyor ve şerit dikeyde de birkaç px
+   kayıyordu: tekerlek/parmak önce şeridi kaydırıp sayfa bir an takılıyordu */
+.az-tcards { display: flex; gap: 18px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 6px 0 16px; scrollbar-width: none; outline: none; }
 .az-tcards::-webkit-scrollbar { display: none; }
 .az-tcards:focus-visible { box-shadow: inset 0 0 0 2px var(--coral); border-radius: 28px; }
 .az-tcard {

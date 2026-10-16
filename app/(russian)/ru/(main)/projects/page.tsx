@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
 
 <PageHero size="compact" kicker="Проекты" title={<>Шесть адресов, <b>один стандарт.</b></>} lead="Lagoon Verde, La Joya, La Joya Perla, Perla II, Mariachi Beach Club и участок в Гечиткале: сравните все проекты DND Cyprus в одном месте." image="/azure/lv-7.jpg" imageAlt="DND Cyprus" chips={[{ big: "6", label: "проектов" }, { big: "2", label: "награды · 2025" }]} />
 <ProjectsFilters />

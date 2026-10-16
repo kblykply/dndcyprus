@@ -22,7 +22,7 @@ export const metadata = pageMetadata({
 
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="compact" kicker="Über uns" title={<>DND <b>Cyprus</b></>} lead="Mit innovativer Vision, langjähriger Erfahrung und dem Anspruch an hochwertige Bauqualität gestalten wir die Zukunft Zyperns." image="/azure/about-uu.jpg" imageAlt="DND Cyprus" />
     <AboutUs
     

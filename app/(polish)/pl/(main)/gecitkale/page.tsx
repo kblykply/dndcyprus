@@ -20,7 +20,7 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
       
 <PageHero size="compact" kicker="DND Cyprus" title={<>Geçitkale</>} lead="Działka w dynamicznie rozwijającej się okolicy, z potencjałem zabudowy pod wille, bliźniaki i budynki apartamentowe." image="/gecitkaleimage.jpg" imageAlt="Geçitkale" tags={["Działka na sprzedaż", "Geçitkale, İskele", "Przeznaczenie: Fasıl 96"]} chips={[{ big: "~5 kondygnacji", label: "Potencjał zabudowy" }]} ctas={[{ label: "Skontaktuj się z nami", href: "/pl/contact" }]} />
 <GecitkaleOverview />

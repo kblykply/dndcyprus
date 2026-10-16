@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 });
 export default function HomePage() {
   return (
-    <main className="relative w-full min-h-screen overflow-x-hidden">
+    <main className="relative w-full min-h-screen overflow-x-clip">
 
 <PageHero size="short" kicker="Kontakt" title={<>Zapraszamy <b>do kontaktu.</b></>} lead="Chętnie opowiemy Państwu więcej o naszych projektach i możliwościach inwestycyjnych." image="/azure/lv-3.jpg" imageAlt="DND Cyprus" ctas={[{ label: "Wyślij wiadomość", href: "#form" }, { label: "Nasze projekty", href: "/pl/projects", variant: "ghost" }]} />
 <ContactInfo />
