@@ -13,8 +13,8 @@ export default function Amenities({ d, name, id }: { d: ProjectAmenities; name: 
         <ul className="az-amen">
           {d.items.map((a, i) => (
             <li key={a.label + i} className={`az-fact rv d${i % 3} ${a.accent === "coral" ? "coral" : "sea"}`}>
-              <div className="hd"><span className="ic"><Icon name={a.icon} size={22} /></span><span className="no">{String(i + 1).padStart(2, "0")}</span></div>
-              <h3>{a.label}</h3>
+              {/* simge | başlık | numara tek satırda; açıklama altında */}
+              <div className="hd"><span className="ic"><Icon name={a.icon} size={22} /></span><h3>{a.label}</h3><span className="no">{String(i + 1).padStart(2, "0")}</span></div>
               <p>{a.desc}</p>
             </li>
           ))}

@@ -32,7 +32,19 @@
 @media (prefers-reduced-motion: reduce) { .az-fact .live { animation: none; } }
 /* olanaklar: başlık + açıklama */
 .az-amen { list-style: none; padding: 0; }
-.az-amen .az-fact h3 { margin-top: clamp(16px, 1.8vw, 22px); font-size: clamp(19px, 1.5vw, 23px); font-weight: 500; letter-spacing: -.01em; color: var(--ink); }
-.az-amen .az-fact p { margin-top: 8px; font-size: 14px; line-height: 1.55; color: var(--ink-60); max-width: 44ch; }
+/* başlık simgenin yanında: uzun başlık iki satıra sarılır, simge ve numara satırla dikey ortalı kalır */
+.az-amen .az-fact .hd { gap: 14px; }
+.az-amen .az-fact .ic { flex: none; }
+.az-amen .az-fact h3 { flex: 1; min-width: 0; margin: 0; font-size: clamp(18px, 1.4vw, 21px); line-height: 1.25; font-weight: 500; letter-spacing: -.01em; color: var(--ink); overflow-wrap: break-word; hyphens: auto; text-wrap: balance; }
+.az-amen .az-fact .no { flex: none; }
+.az-amen .az-fact p { margin-top: 14px; font-size: 14px; line-height: 1.55; color: var(--ink-60); max-width: 48ch; }
+/* dar kartta (telefon, 1001–1100px üç sütun) başlığa yer: simge küçülür, süs numarası gizlenir — kartın kendi genişliğine göre */
+.az-amen .az-fact { container-type: inline-size; }
+@container (max-width: 260px) {
+  .az-amen .az-fact .hd { gap: 10px; }
+  .az-amen .az-fact .ic { width: 38px; height: 38px; }
+  .az-amen .az-fact .no { display: none; }
+  .az-amen .az-fact h3 { font-size: 17px; }
+}
 @media (max-width: 900px) { .az-facts, .az-amen { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .az-facts, .az-amen { grid-template-columns: 1fr; gap: 10px; } }
