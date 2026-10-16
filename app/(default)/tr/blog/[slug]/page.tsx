@@ -93,7 +93,7 @@ export default async function BlogDetail({ params }: BlogPageProps) {
           >
             ← Blog
           </Link>
-          <h1 className="mt-6 text-4xl md:text-5xl max-w-[22ch]">
+          <h1 className="mt-6 text-4xl md:text-[44px] md:leading-[1.1] max-w-[34ch] [text-wrap:balance]">
             {title}
           </h1>
           {meta ? <div className="mt-3 text-sm text-[var(--ink-60)]">{meta}</div> : null}

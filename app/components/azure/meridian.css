@@ -54,7 +54,7 @@
 .mr-under { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(26px, 4vw, 60px); padding-top: 30px; align-items: start; }
 .mr-under .hd { display: flex; gap: 18px; align-items: flex-start; }
 .mr-under .hd img { height: 58px; width: auto; flex: 0 0 auto; }
-.mr-under h2 { font-size: clamp(28px, 3.2vw, 46px); margin-top: 10px; }
+.mr-under h2 { font-size: clamp(26px, 2.5vw, 36px); line-height: 1.12; margin-top: 10px; text-wrap: balance; }
 .mr-under .sub { color: var(--ink-60); margin-top: 10px; font-size: 16px; }
 .mr-under .cta { margin-top: 22px; }
 .mr-rows { border-top: 1px solid var(--hair); }

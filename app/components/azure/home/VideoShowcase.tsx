@@ -169,7 +169,10 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
   const touchX = useRef<number | null>(null);
 
   const [i, setI] = useState(0);
-  const [muted, setMuted] = useState(true);
+  const [muted, setMutedState] = useState(true);
+  // istenen ses durumu: oynatıcı henüz yüklenmemişken basılsa da kaybolmaz, oynatıcı hazır olunca uygulanır
+  const mutedRef = useRef(true);
+  const setMuted = useCallback((v: boolean) => { mutedRef.current = v; setMutedState(v); }, []);
   const [stopped, setStopped] = useState(false);
   const [visible, setVisible] = useState(false);
   const [hover, setHover] = useState(false);
@@ -178,7 +181,7 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
 
   const s = slides[i];
   const next = slides[(i + 1) % n];
-  const go = useCallback((k: number) => { setI(((k % n) + n) % n); setMuted(true); }, [n]);
+  const go = useCallback((k: number) => { setI(((k % n) + n) % n); setMuted(true); }, [n, setMuted]);
 
   useEffect(() => { setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches); }, []);
 
@@ -209,13 +212,19 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
   const visibleRef = useRef(false);
   useEffect(() => { visibleRef.current = visible; }, [visible]);
   // oynatıcı ekran dışındayken hazır olduysa beklesin; görünür olunca yukarıdaki etki başlatır
-  const onPlayer = useCallback((p: Player | null) => { player.current = p; if (p && !visibleRef.current) p.pause(); }, []);
+  const onPlayer = useCallback((p: Player | null) => {
+    player.current = p;
+    if (!p) return;
+    if (!mutedRef.current) { p.unmute(); p.play(); }
+    if (!visibleRef.current) p.pause();
+  }, []);
 
   const toggleMute = () => {
+    const next = !muted;
     const p = player.current;
-    if (!p) return;
-    if (muted) { p.unmute(); p.play(); setStopped(true); } else p.mute();
-    setMuted(!muted);
+    if (p) { if (next) p.mute(); else { p.unmute(); p.play(); } }
+    if (!next) setStopped(true); // ses açılınca otomatik ilerleme durur
+    setMuted(next);
   };
   const toggleFs = async () => {
     try {

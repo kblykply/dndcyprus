@@ -35,7 +35,7 @@ const DATA: Project[] = [
     title: "Lagoon Verde",
     status: "Ongoing", // “coming soon” / campaign posts
     type: "Residential",
-    location: "Long Beach, Искеле",
+    location: "Bahçeler, Искеле",
     cover: "/azure/lv-7.jpg",
     href: "/ru/lagoon-verde",
   },

@@ -266,7 +266,8 @@ body.az-lock { overflow: hidden; }
 .az-pc:hover > img { transform: scale(1.06); }
 .az-pc::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 14, 16, 0) 52%, rgba(8, 14, 16, .66) 100%); }
 .az-pc .top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; gap: 6px; z-index: 2; flex-wrap: wrap; }
-.az-st { padding: 8px 12px; border-radius: 999px; background: rgba(255, 255, 255, .18); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .35); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: #fff; }
+/* açık gökyüzü üstünde de okunsun: hap zemini koyu cam (görselin kendisine katman yok) */
+.az-st { padding: 8px 12px; border-radius: 999px; background: rgba(13, 35, 38, .34); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .28); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: #fff; }
 .az-st.gold { background: rgba(241, 92, 52, .9); border-color: transparent; }
 .az-pc .in { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; z-index: 2; }
 .az-pc .in small { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .8; font-weight: 600; }

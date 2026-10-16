@@ -346,7 +346,8 @@ export function FlipBookGlassBase({
 }
 
 /* Quick wrapper so you can just <FlipBookGlass /> */
-const DEFAULT_SPREADS = Array.from({ length: 11 }).map(
+// Katalogda 14 sayfa var (public/perlaflip/l-01…l-14); eskiden ilk 11 sayfa gösteriliyordu
+const DEFAULT_SPREADS = Array.from({ length: 14 }).map(
   (_, i) => `/perlaflip/l-${String(i + 1).padStart(2, "0")}.webp`
 );
 
@@ -354,7 +355,7 @@ export default function FlipBookGlass() {
   return (
     <FlipBookGlassBase
       pages={DEFAULT_SPREADS}
-      pdfUrl="/brochure/perla2.pdf"
+      pdfUrl="/brochure/perla.pdf"
       title="La Joya Perla Kataloğu"
       kicker="LA JOYA PERLA"
       maxWidth={2000}
