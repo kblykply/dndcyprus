@@ -7,10 +7,9 @@ import "./brand-wheel.css";
 export type WheelItem = { name: string; logo: string; href?: string; external?: boolean; muted?: boolean };
 
 /**
- * Marka çarkı: logolar U şeklinde bir yay üzerinde sürekli kayar (ortadaki en altta ve en büyük,
- * kenarlara doğru yükselip küçülür, yayın eğimine göre döner). Fareyle üzerine gelince durur,
- * sürükleyerek / kaydırarak çevrilir, klavyeyle odaklanan logo ortaya gelir.
- * JS yoksa ya da ölçülmeden önce düz bir sıra olarak görünür.
+ * Marka şeridi: logolar dik kartlarda tek sıra halinde yavaşça ve sonsuz kayar.
+ * Fareyle üzerine gelince durur, sürükleyerek / kaydırarak çevrilir, klavyeyle odaklanan logo ortaya gelir.
+ * JS yoksa ya da ölçülmeden önce ortalı, sarmalanan bir sıra olarak görünür.
  */
 export default function BrandWheel({ items, label }: { items: WheelItem[]; label: string }) {
   const wrap = useRef<HTMLDivElement>(null);
@@ -24,8 +23,8 @@ export default function BrandWheel({ items, label }: { items: WheelItem[]; label
     if (!el || !n) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const GAP = 18;
-    const SPEED = reduce ? 0 : 36; // px/sn
-    let W = 0, cw = 0, S = 0, L = 0, depth = 60;
+    const SPEED = reduce ? 0 : 28; // px/sn
+    let W = 0, cw = 0, S = 0, L = 0;
     let offset = 0, vel = 0, last = performance.now(), raf = 0, visible = false, hover = false, suppress = false;
     let drag: { x: number; o: number; moved: number; t: number; lx: number } | null = null;
 
@@ -36,23 +35,15 @@ export default function BrandWheel({ items, label }: { items: WheelItem[]; label
       cw = c.offsetWidth;
       S = cw + GAP;
       L = S * n;
-      depth = parseFloat(getComputedStyle(el).getPropertyValue("--depth")) || 60;
     };
 
     const layout = () => {
       if (!L) return;
-      const mid = W / 2;
-      const R = W / 2 + S * 0.15;
       for (let i = 0; i < n; i++) {
         const node = cards.current[i];
         if (!node) continue;
         const x = ((((i * S - offset) % L) + L) % L) - S;
-        const u = Math.max(-1.25, Math.min(1.25, (x + cw / 2 - mid) / R));
-        const y = depth * (1 - u * u);                       // U: ortada en aşağıda
-        const ang = (Math.atan((-2 * depth * u) / R) * 180) / Math.PI; // yayın eğimi
-        const s = 1.08 - 0.34 * Math.min(1, u * u);
-        node.style.transform = `translate3d(${x.toFixed(1)}px, ${(y + 8).toFixed(1)}px, 0) rotate(${ang.toFixed(2)}deg) scale(${s.toFixed(3)})`;
-        node.style.zIndex = String(100 - Math.round(Math.abs(u) * 60));
+        node.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0)`;
       }
     };
 

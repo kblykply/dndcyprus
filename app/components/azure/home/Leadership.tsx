@@ -3,14 +3,15 @@ import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 import BrandWheel, { type WheelItem } from "./BrandWheel";
 
+// Sıra bilerek karışık: birbirine benzeyen logolar (Perla / Perla II / La Joya, DND Group / DND Homes) yan yana gelmesin
 const BRANDS = [
   { name: "DND Group", logo: "/azure/brands/dndgroup.webp", path: "/contact" },
-  { name: "DND Homes", logo: "/azure/brands/dndhomes.webp", href: "http://dnd-homes.com/" },
+  { name: "Perla", logo: "/azure/brands/perla.webp", path: "/perla" },
   { name: "Lagoon Verde", logo: "/azure/brands/lagoon.webp", path: "/lagoon-verde" },
+  { name: "Perla II", logo: "/azure/brands/perlaii.webp", path: "/perla-ii" },
+  { name: "DND Homes", logo: "/azure/brands/dndhomes.webp", href: "http://dnd-homes.com/" },
   { name: "La Joya", logo: "/azure/brands/lajoya.webp", path: "/la-joya" },
   { name: "Mariachi Beach Club", logo: "/azure/brands/mariachi.webp", path: "/mariachi" },
-  { name: "Perla", logo: "/azure/brands/perla.webp", path: "/perla" },
-  { name: "Perla II", logo: "/azure/brands/perlaii.webp", path: "/perla-ii" },
 ];
 const TEAMS: Record<Locale, [string, string]> = {
   tr: ["Satış · Mimarlık · Mühendislik", "Finans · Pazarlama · Operasyon"],
@@ -29,10 +30,10 @@ const PARTNERS = [
 
 export default function Leadership({ locale }: { locale: Locale }) {
   const t = HOME[locale].leadership;
-  const wheel: WheelItem[] = [
-    ...BRANDS.map((b) => ({ name: b.name, logo: b.logo, href: b.href ?? href(locale, b.path!), external: !!b.href })),
-    ...PARTNERS.map((b) => ({ name: b.name, logo: b.logo, muted: true })),
-  ];
+  // DND markaları ile iş ortakları dönüşümlü dizilir: renkli, gri, renkli…
+  const own: WheelItem[] = BRANDS.map((b) => ({ name: b.name, logo: b.logo, href: b.href ?? href(locale, b.path!), external: !!b.href }));
+  const partners: WheelItem[] = PARTNERS.map((b) => ({ name: b.name, logo: b.logo, muted: true }));
+  const wheel: WheelItem[] = own.flatMap((b, i) => (partners[i] ? [b, partners[i]] : [b]));
   return (
     <section className="az-section az-leaders" id="yonetim">
       <div className="az-wrap">
