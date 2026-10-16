@@ -1,39 +1,87 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
-import "../meridian.css";
-
-// Gün çizgisindeki noktalar: sabah altın, öğle mercan, akşam turkuaz, gece koyu turkuaz
-const DOT = ["#f0b35e", "var(--coral)", "var(--sea)", "var(--sea-deep)"];
 
 /**
- * "Bir gün" şeridi: sabahtan geceye dört an yan yana. Üstte renk değiştiren ince gün çizgisi ve saatler,
- * altında aynı hizada başlayan dikey görsel, başlık, kısa metin ve olanaklar. Yapışkan görsel / kaydırma yok;
- * telefonda kartlar yana kayar.
+ * Scrollytelling: sol sütunda adımlar kayar, sağda yapışkan görsel değişir.
+ * Etkin adım, adımın üst kenarı görselin üst üçte birindeki çizgiyi geçince seçilir (telefonda görselin hemen altını).
+ * Son adım görsel hâlâ yapışıkken etkinleşip bir süre kalsın diye adımların altına ölçülü boşluk eklenir;
+ * ilk adım görselle aynı hizada başlar.
  */
 export default function Story({ locale }: { locale: Locale }) {
   const t = HOME[locale].story;
-  const n = t.steps.length;
+  const [i, setI] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const stickRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const box = ref.current;
+    const stick = stickRef.current;
+    if (!box || !stick) return;
+    const steps = Array.from(box.querySelectorAll<HTMLElement>(".az-step"));
+    if (!steps.length) return;
+    const mq = window.matchMedia("(max-width: 900px)");
+    let raf = 0;
+
+    // Etkinleşme çizgisi: görselin üstünden ~%35 aşağıda; ama ilk iki adımın arasından aşağı inmez ki
+    // bölüm başında ilk adım atlanmasın. Telefonda görsel üstte olduğundan çizgi görselin hemen altında.
+    const offset = () => {
+      const h = stick.offsetHeight;
+      const firstGap = steps.length > 1 ? steps[1].offsetTop - steps[0].offsetTop : h;
+      return Math.max(24, Math.min(h * 0.35, firstGap - 24));
+    };
+    const fit = () => {
+      if (mq.matches) { box.style.paddingBottom = ""; return; }
+      const h = stick.offsetHeight;
+      const last = steps[steps.length - 1].offsetHeight;
+      // son adım çizgiye ulaştığında görsel hâlâ yapışık olsun ve ekranın ~%30'u kadar kaydırma boyunca etkin kalsın
+      box.style.paddingBottom = `${Math.max(0, Math.round(h - offset() - last + window.innerHeight * 0.3))}px`;
+    };
+    const pick = () => {
+      raf = 0;
+      const r = stick.getBoundingClientRect();
+      const line = mq.matches ? r.bottom + 48 : r.top + offset();
+      let k = 0;
+      steps.forEach((s, j) => { if (s.getBoundingClientRect().top <= line) k = j; });
+      setI(k);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(pick); };
+    const onResize = () => { fit(); onScroll(); };
+
+    fit();
+    pick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   return (
-    <section className="az-section az-day" id="hikaye">
+    <section className="az-section az-story" id="hikaye">
       <div className="az-wrap">
         <div className="az-head"><span className="az-kicker rv">{t.kicker}</span><h2 className="az-h2 rv d1">{t.title}</h2></div>
-        <ol className="row rv d2">
-          {t.steps.map((s, k) => {
-            const [time, part] = s.t.split(" · ");
-            return (
-              <li key={s.h} style={{ "--c": DOT[k % DOT.length], "--n": k < n - 1 ? DOT[(k + 1) % DOT.length] : "transparent" } as React.CSSProperties}>
-                <div className="tick"><b>{time}</b>{part ? <span className="mr-mono">{part}</span> : null}</div>
-                <figure>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.img} alt={s.h} loading="lazy" decoding="async" />
-                </figure>
-                <h3>{s.h}</h3>
-                <p>{s.p}</p>
-                <p className="mr-mono tg">{s.tags.join(" · ")}</p>
-              </li>
-            );
-          })}
-        </ol>
+        <div className="g">
+          <div className="steps" ref={ref}>
+            {t.steps.map((s, k) => (
+              <div key={s.h} className={`az-step${k === i ? " on" : ""}`} data-i={k}>
+                <div className="t">{s.t}</div><h3>{s.h}</h3><p>{s.p}</p>
+                <div className="az-tags">{s.tags.map((x) => <span key={x}>{x}</span>)}</div>
+              </div>
+            ))}
+          </div>
+          <div className="stick" ref={stickRef}>
+            {t.steps.map((s, k) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={s.img} className={k === i ? "on" : undefined} src={s.img} alt={k === i ? s.h : ""} loading={k === 0 ? "eager" : "lazy"} />
+            ))}
+            <div className="cap"><b>{t.steps[i].h}</b><div className="az-dots">{t.steps.map((s, k) => <i key={s.h} className={k === i ? "on" : undefined} />)}</div></div>
+          </div>
+        </div>
       </div>
     </section>
   );
