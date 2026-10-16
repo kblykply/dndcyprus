@@ -6,13 +6,15 @@ import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
 import { Icon } from "./icons";
 import ProjectHead, { splitTitle } from "./ProjectHead";
+import { mono } from "@/app/fonts";
+import "../meridian.css";
 
 // Teknik donanım: yatay kaydırılan 4:5 görsel kartlar, alt cam etiket, ok düğmeleri ve noktalar.
 export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: string; id: string; locale: Locale }) {
   const t = PROJECT_UI[locale].tech;
   const car = useRef<HTMLDivElement>(null);
   const [i, setI] = useState(0);
-  const step = () => (car.current?.querySelector<HTMLElement>(".az-tc")?.getBoundingClientRect().width ?? 300) + 16;
+  const step = () => (car.current?.querySelector<HTMLElement>(".mr-card")?.getBoundingClientRect().width ?? 300) + 22;
   const go = (dir: number) => car.current?.scrollBy({ left: dir * step(), behavior: "smooth" });
   useEffect(() => {
     const el = car.current; if (!el) return;
@@ -21,7 +23,7 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <section className="az-section az-proj" id={id}>
+    <section className={`az-section az-proj mr ${mono.variable}`} id={id}>
       <div className="az-wrap">
         <div className="az-head row">
           <ProjectHead kicker={d.kicker} title={splitTitle(d.title, name)} lead={d.lead} className="mb-0" />
@@ -30,13 +32,15 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
             <button type="button" aria-label={t.next} onClick={() => go(1)}>→</button>
           </div>
         </div>
-        <div className="az-tech rv d1" ref={car} role="group" aria-roledescription="carousel" aria-label={t.list}>
+        <div className="mr-cards rv d1" ref={car} role="group" aria-roledescription="carousel" aria-label={t.list}>
           {d.items.map((c, k) => (
-            <article key={c.title + k} className="az-tc">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={c.image} alt="" loading="lazy" decoding="async" draggable={false} />
-              <div className="g">
-                <small><Icon name={c.icon} size={14} /> {d.badge}</small>
+            <article key={c.title + k} className="mr-card">
+              <figure>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.image} alt={c.title} loading="lazy" decoding="async" draggable={false} />
+              </figure>
+              <div className="cap">
+                <span className="mr-mono"><Icon name={c.icon} size={18} /> {String(k + 1).padStart(2, "0")} · {d.badge}</span>
                 <h3>{c.title}</h3>
                 <p>{c.desc}</p>
               </div>

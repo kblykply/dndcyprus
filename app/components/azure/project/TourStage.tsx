@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ExternalLink, Maximize2, Minimize2, PlayCircle } from "lucide-react";
+import { PiArrowSquareOutDuotone, PiArrowsInDuotone, PiArrowsOutDuotone, PiPlayFill } from "react-icons/pi";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
 
 type FsDoc = Document & { webkitExitFullscreen?: () => void; webkitFullscreenElement?: Element | null };
 type FsEl = HTMLElement & { webkitRequestFullscreen?: () => void };
 
-export default function TourStage({ src, bg, poster, iframeTitle, locale }: { src: string; bg: string; poster: string; iframeTitle: string; locale: Locale }) {
+export default function TourStage({ src, poster, iframeTitle, locale }: { src: string; poster: string; iframeTitle: string; locale: Locale }) {
   const t = PROJECT_UI[locale].tour;
   const [playing, setPlaying] = useState(false);
   const [fs, setFs] = useState(false);
@@ -28,29 +28,26 @@ export default function TourStage({ src, bg, poster, iframeTitle, locale }: { sr
   };
 
   return (
-    <div className="az-tour rv">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="bg" src={bg} alt="" loading="lazy" />
-      <div className="in">
-        <div className="stage" ref={wrap}>
-          {playing ? (
-            <>
-              <iframe src={src} title={iframeTitle} allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; magnetometer" allowFullScreen />
-              <button type="button" className="az-btn glass sm fs" onClick={toggleFs} aria-label={fs ? t.exitFsAria : t.fs}>
-                {fs ? <Minimize2 size={15} /> : <Maximize2 size={15} />} {fs ? t.exitFs : t.fs}
-              </button>
-            </>
-          ) : (
-            <button type="button" onClick={() => setPlaying(true)} aria-label={t.start} data-track="tour_start">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={poster} alt="" loading="lazy" />
-              <span className="play"><span><i><PlayCircle size={44} /></i>{t.start}</span></span>
+    <div className="mr-tour rv">
+      <div className="stage" ref={wrap}>
+        {playing ? (
+          <>
+            <iframe src={src} title={iframeTitle} allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer; magnetometer" allowFullScreen />
+            <button type="button" className="az-btn glass sm fs" onClick={toggleFs} aria-label={fs ? t.exitFsAria : t.fs}>
+              {fs ? <PiArrowsInDuotone size={16} /> : <PiArrowsOutDuotone size={16} />} {fs ? t.exitFs : t.fs}
             </button>
-          )}
-        </div>
-        <div className="row">
-          <a className="az-btn ghost sm" href={src} target="_blank" rel="noopener noreferrer" data-track="tour_start"><ExternalLink size={14} /> {t.open}</a>
-        </div>
+          </>
+        ) : (
+          <button type="button" onClick={() => setPlaying(true)} aria-label={t.start} data-track="tour_start">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={poster} alt="" loading="lazy" />
+            <span className="play"><i><PiPlayFill size={30} /></i><em>{t.start}</em></span>
+          </button>
+        )}
+      </div>
+      <div className="row">
+        <span className="mr-mono">360° · {iframeTitle}</span>
+        <a href={src} target="_blank" rel="noopener noreferrer" data-track="tour_start"><PiArrowSquareOutDuotone size={15} /> {t.open}</a>
       </div>
     </div>
   );
