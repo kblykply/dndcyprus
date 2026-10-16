@@ -66,7 +66,7 @@ export default function InstagramSpotlight() {
           style={{ background: "rgba(255,255,255,0.75)" }}
         />
 
-        <div className="relative py-12 lg:py-16" style={{ paddingInline: "var(--edge)" }}>
+        <div className="relative py-12 lg:py-16 px-3 min-[361px]:px-[clamp(24px,5vw,64px)]">
           <div className="mt-0 grid gap-10 lg:grid-cols-2 lg:items-start">
         {/* LEFT */}
 <motion.div
@@ -158,7 +158,7 @@ export default function InstagramSpotlight() {
                     type="button"
                     aria-label="Vorheriger Beitrag"
                     onClick={() => go(-1)}
-                    className="absolute -left-[52px] sm:-left-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
+                    className="absolute -left-3 min-[361px]:-left-5 sm:-left-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
                     style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -170,7 +170,7 @@ export default function InstagramSpotlight() {
                     type="button"
                     aria-label="Nächster Beitrag"
                     onClick={() => go(1)}
-                    className="absolute -right-[52px] sm:-right-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
+                    className="absolute -right-3 min-[361px]:-right-5 sm:-right-16 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white transition hover:scale-105"
                     style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">

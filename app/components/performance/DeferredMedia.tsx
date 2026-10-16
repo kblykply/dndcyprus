@@ -32,7 +32,9 @@ export function DeferredInstagram({ locale }: { locale: Locale }) {
   const { ref, near } = useNearViewport<HTMLDivElement>();
   const Component = INSTAGRAM[locale];
   return (
-    <div ref={ref} className="min-h-[1000px] lg:min-h-[720px] bg-white">
+    // Ana sayfadaki diğer bölümler gibi kart: kenarlardan içeride, yuvarlak köşe, hafif gölge (taşan dekor kartta kalır)
+    // yükseklik ayırma yalnız yüklenene kadar (sonra kart içerik boyunda, altta boşluk kalmaz)
+    <div ref={ref} className={`${near ? "" : "min-h-[1150px] sm:min-h-[1030px] lg:min-h-[700px] "}overflow-hidden rounded-[36px] max-[900px]:rounded-[28px] border border-white/90 bg-white shadow-[0_10px_40px_rgba(13,35,38,0.06)]`}>
       {near ? <Component /> : (
         <div className="mx-auto max-w-7xl px-6 py-12 text-[#0d2326]">
           <a href="https://www.instagram.com/dndcyprus/" target="_blank" rel="noopener noreferrer">

@@ -119,7 +119,7 @@ export default function HomePage() {
       <Leadership locale="tr" />
       <Timeline locale="tr" />
       <PressFaq locale="tr" items={PRESS_ITEMS} />
-      <div className="az-section tight flush rv"><DeferredInstagram locale="tr" /></div>
+      <div className="az-section tight rv"><div className="az-wrap"><DeferredInstagram locale="tr" /></div></div>
       <ContactCard locale="tr" mode="home" kicker={t.contact.kicker} title={t.contact.title} lead={t.contact.lead} highlights={t.contact.highlights} image="/azure/contact-sea.webp" id="iletisim" />
     </>
   );
