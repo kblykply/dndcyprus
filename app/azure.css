@@ -48,6 +48,8 @@ html:not([lang="tr"]) .az-chip span { max-width: 20ch; }
 @keyframes az-m3 { to { transform: translate(-14vw, -8vh); } }
 @media (max-width: 767px) { .az-mesh { display: none; } }
 .az-page { position: relative; z-index: 1; }
+/* sayfa kayarken hover yok (AzureFx, yalnız fareli ekranlar): altından geçen kartlar kalkıp inmez, galeri panelleri açılıp kapanmaz */
+html.is-scrolling body { pointer-events: none; }
 
 /* ---- buttons ---- */
 .az-btn {

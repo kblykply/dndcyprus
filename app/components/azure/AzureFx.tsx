@@ -45,9 +45,24 @@ export default function AzureFx() {
     }), { threshold: 0.5 });
     document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => cio.observe(el));
 
-    // Yeni içerik (dinamik bölümler) için gözlemi tazele
-    const mo = new MutationObserver(() => observeAll());
+    // Yeni içerik (dinamik bölümler) için gözlemi tazele; sayaç gibi her karede değişen içerik sayfayı
+    // kare başına bir kereden fazla taramasın
+    let moRaf = 0;
+    const mo = new MutationObserver(() => { if (!moRaf) moRaf = requestAnimationFrame(() => { moRaf = 0; observeAll(); }); });
     mo.observe(document.body, { childList: true, subtree: true });
+
+    // Kaydırırken titreme: fare yerinde dururken altından geçen kartlar hover'a girip kalkıyor, galeri
+    // panelleri açılıp kapanıyordu. Fareli ekranlarda sayfa kayarken hover kapalı (html.is-scrolling,
+    // app/azure.css); kaydırma bitince 160 ms sonra geri gelir. Dokunmatik ekranlarda hover yok, dokunulmaz.
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let scrollT = 0;
+    const onScroll = () => {
+      if (!fine.matches) return;
+      if (!scrollT) root.classList.add("is-scrolling");
+      window.clearTimeout(scrollT);
+      scrollT = window.setTimeout(() => { scrollT = 0; root.classList.remove("is-scrolling"); }, 160);
+    };
+    addEventListener("scroll", onScroll, { passive: true });
 
     // Hero video: düşük güç modu vb. durumlarda ilk etkileşimde oynat; "hareketi azalt" açıksa durur (afiş görünür)
     const v = document.querySelector<HTMLVideoElement>(".az-hero video");
@@ -55,12 +70,16 @@ export default function AzureFx() {
     const tryPlay = () => { try { const p = v?.play(); if (p && p.catch) p.catch(() => {}); } catch {} };
     const evs = ["touchstart", "pointerdown", "scroll", "keydown", "click"] as const;
     if (v && !reduce) { tryPlay(); evs.forEach((ev) => addEventListener(ev, tryPlay, { passive: true })); }
+    // video oynamaya başlayınca her kaydırmada play() çağrılmasın
+    const stopTry = () => evs.forEach((ev) => removeEventListener(ev, tryPlay));
+    v?.addEventListener("playing", stopTry, { once: true });
     const onVis = () => { if (!document.hidden && !reduce) tryPlay(); };
     document.addEventListener("visibilitychange", onVis);
 
     return () => {
-      io.disconnect(); cio.disconnect(); mo.disconnect();
-      evs.forEach((ev) => removeEventListener(ev, tryPlay));
+      io.disconnect(); cio.disconnect(); mo.disconnect(); cancelAnimationFrame(moRaf);
+      removeEventListener("scroll", onScroll); window.clearTimeout(scrollT); root.classList.remove("is-scrolling");
+      v?.removeEventListener("playing", stopTry); stopTry();
       document.removeEventListener("visibilitychange", onVis);
     };
   }, [pathname]);
