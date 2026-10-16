@@ -5,7 +5,7 @@ import { HOME } from "@/lib/azure/home";
 
 // Azure tasarımı — ana sayfa bölümleri
 import HomeHero from "@/app/components/azure/home/HomeHero";
-import AwardsStrip from "@/app/components/azure/home/AwardsStrip";
+import AwardsShowcase from "@/app/components/azure/home/AwardsShowcase";
 import Bento from "@/app/components/azure/home/Bento";
 import Story from "@/app/components/azure/home/Story";
 import ProjectsCarousel from "@/app/components/azure/home/ProjectsCarousel";
@@ -105,7 +105,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero locale="ru" />
-      <AwardsStrip locale="ru" />
+      <AwardsShowcase locale="ru" />
       <Bento locale="ru" />
       <SectionHead kicker={t.videos.kicker} title={t.videos.title}>
         <DeferredPayment locale="ru" />

@@ -1,0 +1,34 @@
+/* Ödül vitrini: kum tonlu kart, solda dönen kurdeleler, sağda etkin ödül */
+.az-aw { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: center; padding: clamp(24px, 3.4vw, 52px); border-radius: 36px; background: linear-gradient(135deg, #fbf8f1 0%, #f4ecdd 100%); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 24px 70px rgba(13, 35, 38, .08); max-width: 100%; overflow: hidden; }
+.az-aw .stage { position: relative; height: clamp(320px, 34vw, 480px); }
+.az-aw .rb { --x: 0px; --s: 1; position: absolute; left: 50%; top: 50%; height: 92%; aspect-ratio: 329 / 1000; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -50%) translateX(var(--x)) scale(var(--s)); transition: transform .8s var(--ease), opacity .6s, filter .6s; }
+.az-aw .rb img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 18px 30px rgba(13, 35, 38, .22)); }
+.az-aw .rb.c { --s: 1; z-index: 3; opacity: 1; animation: az-sway 6s ease-in-out infinite; }
+.az-aw .rb.l { --x: calc(clamp(96px, 11vw, 170px) * -1); --s: .72; z-index: 2; opacity: .6; filter: saturate(.8); }
+.az-aw .rb.r { --x: clamp(96px, 11vw, 170px); --s: .72; z-index: 2; opacity: .6; filter: saturate(.8); }
+.az-aw .rb.h { --s: .5; opacity: 0; pointer-events: none; }
+.az-aw .rb.l:hover, .az-aw .rb.r:hover { opacity: .9; }
+@keyframes az-sway { 0%, 100% { rotate: 0deg; } 50% { rotate: 1.2deg; } }
+.az-aw .txt { min-width: 0; }
+.az-aw .txt .az-h2 { margin-top: 10px; }
+.az-aw .cur { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--hair); animation: az-cur .6s var(--ease); }
+@keyframes az-cur { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.az-aw .cur h3 { font-size: clamp(22px, 2.2vw, 32px); font-weight: 400; letter-spacing: -.02em; margin-top: 10px; }
+.az-aw .cur p { color: var(--ink-60); margin-top: 10px; max-width: 46ch; }
+.az-aw .cur .az-btn { margin-top: 20px; }
+.az-aw .dots { display: flex; gap: 8px; margin-top: 24px; }
+.az-aw .dots button { width: 8px; height: 8px; border-radius: 4px; border: 0; padding: 0; background: rgba(13, 35, 38, .2); cursor: pointer; transition: width .4s var(--ease), background .3s; }
+.az-aw .dots button.on { width: 26px; background: var(--coral); }
+.az-aw .more { margin-top: 18px; }
+@media (max-width: 900px) {
+  .az-aw { grid-template-columns: 1fr; border-radius: 28px; }
+  /* telefonda sıra: başlık · kurdeleler · etkin ödül · noktalar · ek satır */
+  .az-aw .txt { display: contents; }
+  .az-aw .hd { order: 1; }
+  .az-aw .stage { order: 2; height: clamp(260px, 64vw, 380px); }
+  .az-aw .cur { order: 3; margin-top: 0; }
+  .az-aw .dots { order: 4; margin-top: 0; }
+  .az-aw .more { order: 5; margin-top: 0; }
+  .az-aw { gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .az-aw .rb.c { animation: none; } }
