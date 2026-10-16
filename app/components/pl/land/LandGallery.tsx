@@ -96,7 +96,7 @@ export default function LandGallery({
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0"
-                  style={{ background: "linear-gradient(180deg, rgba(6,58,66,0) 55%, rgba(6,58,66,.6) 100%)" }}
+                  style={{ background: "linear-gradient(180deg, rgba(8,14,16,0) 65%, rgba(8,14,16,.42) 100%)" }}
                 />
                 <span
                   className="az-st pointer-events-none absolute bottom-4 left-4"

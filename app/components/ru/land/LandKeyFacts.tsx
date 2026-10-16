@@ -19,7 +19,7 @@ export default function LandKeyFacts({
     { label: "Площадь", value: "9 840 m²", accent: "teal" },
     { label: "Ширина по фасаду", value: "42 м", accent: "orange" },
     { label: "Зонирование", value: "Fasıl 96", accent: "orange" },
-    { label: "Макс. высота", value: "Ориентировочно: ~5 этажей", accent: "teal" },
+    { label: "Макс. высота · ориентировочно", value: "~5 этажей", accent: "teal" },
   ],
   note = "*Информация носит ознакомительный характер; параметры зонирования и разрешений могут отличаться для каждого участка и зависят от решений компетентных органов.",
   withSeoJsonLd = false,
@@ -41,6 +41,8 @@ export default function LandKeyFacts({
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(26px, 2.4vw, 40px)",
+                  overflowWrap: "break-word",
+                  hyphens: "auto",
                   lineHeight: 1.05,
                   letterSpacing: "-.02em",
                   color: f.accent === "orange" ? "var(--coral)" : "var(--sea)",

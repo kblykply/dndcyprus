@@ -19,7 +19,7 @@ export default function LandKeyFacts({
     { label: "Fläche", value: "9.840 m²", accent: "teal" },
     { label: "Straßenfront", value: "42 m", accent: "orange" },
     { label: "Baurecht", value: "Fasıl 96", accent: "orange" },
-    { label: "Max. Höhe", value: "Zur Information: ~5 Geschosse", accent: "teal" },
+    { label: "Max. Höhe · Richtwert", value: "~5 Geschosse", accent: "teal" },
   ],
   note = "*Nur zur Information; Bebauungs- und Genehmigungsparameter können je nach Parzelle und nach Entscheidung der zuständigen Behörden abweichen.",
   withSeoJsonLd = false,
@@ -41,6 +41,8 @@ export default function LandKeyFacts({
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(26px, 2.4vw, 40px)",
+                  overflowWrap: "break-word",
+                  hyphens: "auto",
                   lineHeight: 1.05,
                   letterSpacing: "-.02em",
                   color: f.accent === "orange" ? "var(--coral)" : "var(--sea)",

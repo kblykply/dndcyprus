@@ -19,7 +19,7 @@ export default function LandKeyFacts({
     { label: "Alan", value: "9,840 m²", accent: "teal" },
     { label: "Cephe", value: "42 m", accent: "orange" },
     { label: "Zonlama", value: "Fasıl 96", accent: "orange" },
-    { label: "Maks. Yükseklik", value: "Bilgi amaçlı: ~5 kat", accent: "teal" },
+    { label: "Maks. yükseklik · bilgi amaçlı", value: "~5 kat", accent: "teal" },
   ],
   note = "*Bilgi amaçlıdır; imar/ruhsat parametreleri parsel özelinde ve yetkili kurum kararlarına göre değişebilir.",
   withSeoJsonLd = false,
@@ -41,6 +41,8 @@ export default function LandKeyFacts({
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(26px, 2.4vw, 40px)",
+                  overflowWrap: "break-word",
+                  hyphens: "auto",
                   lineHeight: 1.05,
                   letterSpacing: "-.02em",
                   color: f.accent === "orange" ? "var(--coral)" : "var(--sea)",

@@ -137,7 +137,7 @@ export default function MariachiUnifiedPerks({
             <div
               aria-hidden
               className="absolute inset-0"
-              style={{ background: "linear-gradient(180deg, rgba(6,58,66,0) 30%, rgba(6,58,66,.78) 100%)" }}
+              style={{ background: "linear-gradient(180deg, rgba(8,14,16,0) 42%, rgba(8,14,16,.62) 100%)" }}
             />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white min-[900px]:p-8">
               {sideBadge && <span className="az-st">{sideBadge}</span>}

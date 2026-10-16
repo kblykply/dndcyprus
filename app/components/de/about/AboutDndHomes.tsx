@@ -130,7 +130,7 @@ function VideoHeroCard({
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"
-            style={{ background: "linear-gradient(180deg, rgba(6,58,66,.08) 0%, rgba(6,58,66,0) 35%, rgba(6,58,66,.45) 100%)" }}
+            style={{ background: "linear-gradient(180deg, rgba(8,14,16,0) 55%, rgba(8,14,16,.38) 100%)" }}
           />
           <span className="az-tag absolute left-4 top-4 sm:left-5 sm:top-5">Video</span>
           <button

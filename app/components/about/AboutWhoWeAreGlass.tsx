@@ -154,7 +154,7 @@ function VideoPlayer({
           <span
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"
-            style={{ background: "linear-gradient(180deg, rgba(6,58,66,0) 40%, rgba(6,58,66,.7) 100%)" }}
+            style={{ background: "linear-gradient(180deg, rgba(8,14,16,0) 50%, rgba(8,14,16,.55) 100%)" }}
           />
           <span className="absolute inset-0 grid place-items-center">
             <span

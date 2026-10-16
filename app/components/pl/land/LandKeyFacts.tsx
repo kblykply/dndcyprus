@@ -19,7 +19,7 @@ export default function LandKeyFacts({
     { label: "Powierzchnia", value: "9 840 m²", accent: "teal" },
     { label: "Front działki", value: "42 m", accent: "orange" },
     { label: "Przeznaczenie terenu", value: "Fasıl 96", accent: "orange" },
-    { label: "Maks. wysokość", value: "Orientacyjnie: ~5 kondygnacji", accent: "teal" },
+    { label: "Maks. wysokość · orientacyjnie", value: "~5 kondygnacji", accent: "teal" },
   ],
   note = "*Wyłącznie w celach informacyjnych; parametry planistyczne i warunki pozwoleń mogą się różnić w zależności od działki i decyzji właściwych urzędów.",
   withSeoJsonLd = false,
@@ -41,6 +41,8 @@ export default function LandKeyFacts({
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(26px, 2.4vw, 40px)",
+                  overflowWrap: "break-word",
+                  hyphens: "auto",
                   lineHeight: 1.05,
                   letterSpacing: "-.02em",
                   color: f.accent === "orange" ? "var(--coral)" : "var(--sea)",

@@ -19,7 +19,7 @@ export default function LandKeyFacts({
     { label: "Area", value: "9,840 m²", accent: "teal" },
     { label: "Frontage", value: "42 m", accent: "orange" },
     { label: "Zoning", value: "Fasıl 96", accent: "orange" },
-    { label: "Max. Height", value: "For information purposes: ~5 floors", accent: "teal" },
+    { label: "Max. height · indicative", value: "~5 floors", accent: "teal" },
   ],
   note = "*For information purposes only; zoning/permit parameters may vary per parcel and according to decisions of the competent authorities.",
   withSeoJsonLd = false,
@@ -41,6 +41,8 @@ export default function LandKeyFacts({
                 style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(26px, 2.4vw, 40px)",
+                  overflowWrap: "break-word",
+                  hyphens: "auto",
                   lineHeight: 1.05,
                   letterSpacing: "-.02em",
                   color: f.accent === "orange" ? "var(--coral)" : "var(--sea)",
