@@ -72,7 +72,7 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
 
           {/* orta: görsel kutusu; geçiş, büyüt ve oklar kutunun içinde (kutu üst / alt çizgiye oturur) */}
           <div className="fig">
-            <button type="button" className={`zoom${showInterior ? " photo" : ""}`} aria-label={t.enlargeAria}
+            <button type="button" className={`zoom${showInterior ? " photo" : v.tone === "dark" ? " dark" : ""}`} aria-label={t.enlargeAria}
               onClick={() => setLb(showInterior ? { images: gallery, idx: gi } : { images: [v.image], idx: 0 })}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img key={showInterior ? gallery[gi] : v.image} src={showInterior ? gallery[gi] : v.image} alt={showInterior ? t.galleryImage(gi + 1) : alt} loading={showInterior ? "lazy" : "eager"} decoding="async" />
