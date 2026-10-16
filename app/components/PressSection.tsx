@@ -194,21 +194,24 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
                   className="order-2 flex flex-col md:order-1"
                 >
                   <span className="az-kicker">Öne Çıkan Haber</span>
-                  <h3 className="mt-4 line-clamp-2 min-h-[2lh] text-xl font-semibold leading-snug text-[var(--ink)] group-hover:underline underline-offset-2 sm:text-2xl">
+                  <h3 className="mt-4 line-clamp-2 font-[family-name:var(--font-display)] text-[26px] font-normal leading-[1.15] tracking-[-0.02em] text-[var(--ink)] group-hover:underline underline-offset-4 sm:text-[32px]">
                     {shown.title}
                   </h3>
-                  <p className="mt-3 line-clamp-3 min-h-[3lh] text-[15px] leading-relaxed text-[var(--ink-60)] sm:text-base">{shown.excerpt}</p>
+                  <p className="mt-4 line-clamp-4 text-[15px] leading-relaxed text-[var(--ink-60)] sm:text-base">{shown.excerpt}</p>
                   <div className="mt-auto pt-5">
                     {/* tek satır: uzun kaynak adı kısalır, kart yüksekliği haberden habere değişmez */}
-                    <div className="flex items-center gap-3 text-xs text-[var(--ink-40)]">
-                      <span className="inline-flex min-w-0 items-center gap-1">
-                        <Building2 className="h-3.5 w-3.5 shrink-0" /> <span className="truncate">{shown.outlet}</span>
-                      </span>
-                      <span className="inline-flex shrink-0 items-center gap-1">
-                        <Calendar className="h-3.5 w-3.5" /> {fmtTR(shown.date)}
-                      </span>
-                    </div>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: TEAL }}>
+                    {/* kaynak ve tarih ince çizgili satırlarda (Meridian dili); kartın alt kısmı boş kalmasın */}
+                    <dl className="m-0 border-t border-[var(--line)] text-sm">
+                      <div className="flex items-center justify-between gap-4 border-b border-[var(--line)] py-3">
+                        <dt className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-40)]"><Building2 className="h-3.5 w-3.5 shrink-0" /> Kaynak</dt>
+                        <dd className="m-0 min-w-0 truncate font-medium text-[var(--ink)]">{shown.outlet}</dd>
+                      </div>
+                      <div className="flex items-center justify-between gap-4 border-b border-[var(--line)] py-3">
+                        <dt className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-40)]"><Calendar className="h-3.5 w-3.5 shrink-0" /> Tarih</dt>
+                        <dd className="m-0 shrink-0 font-medium text-[var(--ink)]">{fmtTR(shown.date)}</dd>
+                      </div>
+                    </dl>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: TEAL }}>
                       Devamını oku <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </div>
@@ -216,7 +219,8 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
 
                 {/* Visual with smooth zoom; kapaklar üst üste, gösterilen görünür */}
                 <div className="order-1 md:order-2">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[22px] bg-[var(--sky-2)]">
+                  {/* masaüstünde görsel yazı sütununun boyunda (alt kenarlar hizalı) */}
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[22px] bg-[var(--sky-2)] md:aspect-auto md:h-full md:min-h-[300px]">
                     {coverStack.map((it) => {
                       const on = it.id === shown.id;
                       return (

@@ -24,7 +24,7 @@ const COPY = {
     phoneHint: "Ülke kodunu seçip numaranızı yazın; listede yoksa numarayı + ile başlatın.",
     note: "Bilgileriniz yalnızca talebinizi yanıtlamak için kullanılır.",
     waText: (p?: string) => p ? `Merhaba! ${p} hakkında fiyat ve kat planı bilgisi almak istiyorum.` : "Merhaba! Bilgi almak istiyorum.",
-    namePh: "Adınız ve soyadınız", emailPh: "ad@eposta.com",
+    namePh: "Adınız ve soyadınız", emailPh: "ad@eposta.com", subjectPh: "Örn. Lagoon Verde fiyat bilgisi",
     messagePh: "Bütçe, teslim tarihi veya sorularınızı yazabilirsiniz.", messagePhContact: "Size nasıl yardımcı olabiliriz?",
     brochure: "Broşür (PDF)",
   },
@@ -45,7 +45,7 @@ const COPY = {
     phoneHint: "Choose your country code and enter your number; if your country is not listed, start the number with +.",
     note: "Your details are only used to respond to your request.",
     waText: (p?: string) => p ? `Hello! I would like to receive prices and floor plans for ${p}.` : "Hello! I would like more information.",
-    namePh: "Your full name", emailPh: "you@email.com",
+    namePh: "Your full name", emailPh: "you@email.com", subjectPh: "E.g. Lagoon Verde prices",
     messagePh: "Budget, preferred delivery date or any questions.", messagePhContact: "How can we help you?",
     brochure: "Brochure (PDF)",
   },
@@ -66,7 +66,7 @@ const COPY = {
     phoneHint: "Wählen Sie die Ländervorwahl und geben Sie Ihre Nummer ein; fehlt Ihr Land, beginnen Sie die Nummer mit +.",
     note: "Ihre Angaben werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet.",
     waText: (p?: string) => p ? `Hallo! Ich hätte gerne Preise und Grundrisse für ${p}.` : "Hallo! Ich hätte gerne weitere Informationen.",
-    namePh: "Ihr Name", emailPh: "name@mail.de",
+    namePh: "Ihr Name", emailPh: "name@mail.de", subjectPh: "z. B. Preise Lagoon Verde",
     messagePh: "Budget, gewünschter Übergabetermin oder Ihre Fragen.", messagePhContact: "Wie können wir Ihnen helfen?",
     brochure: "Broschüre (PDF)",
   },
@@ -87,7 +87,7 @@ const COPY = {
     phoneHint: "Выберите код страны и введите номер; если вашей страны нет в списке, начните номер с +.",
     note: "Ваши данные используются только для ответа на вашу заявку.",
     waText: (p?: string) => p ? `Здравствуйте! Хочу получить цены и планировки по проекту ${p}.` : "Здравствуйте! Хочу получить больше информации.",
-    namePh: "Ваше имя и фамилия", emailPh: "name@mail.ru",
+    namePh: "Ваше имя и фамилия", emailPh: "name@mail.ru", subjectPh: "Напр. цены Lagoon Verde",
     messagePh: "Бюджет, желаемый срок сдачи или ваши вопросы.", messagePhContact: "Чем мы можем помочь?",
     brochure: "Брошюра (PDF)",
   },
@@ -108,7 +108,7 @@ const COPY = {
     phoneHint: "Wybierz kierunkowy kraju i wpisz numer; jeśli kraju nie ma na liście, zacznij numer od +.",
     note: "Państwa dane wykorzystujemy wyłącznie do odpowiedzi na zapytanie.",
     waText: (p?: string) => p ? `Dzień dobry! Proszę o ceny i plany mieszkań w projekcie ${p}.` : "Dzień dobry! Proszę o więcej informacji.",
-    namePh: "Imię i nazwisko", emailPh: "ty@poczta.pl",
+    namePh: "Imię i nazwisko", emailPh: "ty@poczta.pl", subjectPh: "Np. ceny Lagoon Verde",
     messagePh: "Budżet, preferowany termin oddania lub pytania.", messagePhContact: "W czym możemy pomóc?",
     brochure: "Broszura (PDF)",
   },
@@ -225,7 +225,7 @@ export default function ContactCard({
               <div className="az-field az-wide"><label htmlFor={`${uid}-p`}>{t.phone}</label><PhoneField id={`${uid}-p`} locale={locale} invalid={errors.phone} /></div>
               <div className="az-field"><label htmlFor={`${uid}-e`}>{t.email}</label><input id={`${uid}-e`} name="email" type="email" autoComplete="email" placeholder={t.emailPh} required aria-invalid={errors.email || undefined} /></div>
               {mode === "contact" ? (
-                <div className="az-field"><label htmlFor={`${uid}-s`}>{t.subject}</label><input id={`${uid}-s`} name="subject" type="text" required aria-invalid={errors.subject || undefined} /></div>
+                <div className="az-field"><label htmlFor={`${uid}-s`}>{t.subject}</label><input id={`${uid}-s`} name="subject" type="text" placeholder={t.subjectPh} required aria-invalid={errors.subject || undefined} /></div>
               ) : (
                 <div className="az-field"><label htmlFor={`${uid}-c`}>{mode === "lead" ? t.unit : t.project}</label>
                   <select id={`${uid}-c`} name="choice" defaultValue="">
