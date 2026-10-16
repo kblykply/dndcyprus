@@ -17,7 +17,7 @@ export const PROJECT_UI = {
       planAlt: (plan: string, variant: string) => `${plan} — ${variant} kat planı`,
       request: "Fiyat ve kat planı iste", brochure: "Broşür (PDF)", tour: "360° Tur", planTab: "Plan", interiorTab: "İç mekân", total: "Toplam kapalı · kullanım",
     },
-    tour: { start: "360 Turu Başlat", open: "Yeni sekmede aç", fs: "Fullscreen", exitFs: "Çık", exitFsAria: "Fullscreen'den çık" },
+    tour: { start: "360 Turu Başlat", open: "Yeni sekmede aç", fs: "Tam ekran", exitFs: "Çık", exitFsAria: "Tam ekrandan çık" },
     location: { address: "Adres:", google: "Google Haritalar ile Yol Tarifi", apple: "Apple Haritalar ile Yol Tarifi", open: "Haritada Aç", mapTitle: "Proje Konumu" },
     update: { videoTitle: "Son İnşaat Güncellemesi" },
   },
