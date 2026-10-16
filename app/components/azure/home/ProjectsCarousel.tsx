@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import "./projects-carousel.css";
 import { HOME } from "@/lib/azure/home";
 import { PROJECTS, href, type Locale } from "@/lib/azure/site";
+import GlassArrow from "../GlassArrow";
 
 const LAND_TITLE: Record<Locale, string> = {
   tr: "Geçitkale Arazi Projesi",
@@ -165,16 +166,16 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
         {PROJECTS.map((p) => p.slug === "gecitkale" ? (
           <Link key={p.slug} className="az-pc soon" href={href(locale, "/gecitkale")} prefetch={false} draggable={false}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/azure/gk-1.jpg" alt="" loading="lazy" draggable={false} />
+            <img src={p.cover} alt="" loading="lazy" draggable={false} />
             <div className="top"><span className="az-st gold">{t.soonKicker}</span></div>
-            <div className="in"><small>{p.location[locale]}</small><h3>{LAND_TITLE[locale]}</h3><p>{p.blurb[locale]}</p><div className="glassrow">{t.soonCta} <i>→</i></div></div>
+            <div className="in"><small>{p.location[locale]}</small><h3>{LAND_TITLE[locale]}</h3><p>{p.blurb[locale]}</p><div className="glassrow">{t.soonCta} <GlassArrow /></div></div>
           </Link>
         ) : (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false} draggable={false}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.cover} alt="" loading="lazy" draggable={false} />
             <div className="top">{p.award && <span className="az-st gold">{p.award[locale]}</span>}<span className="az-st">{p.status[locale]}</span></div>
-            <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="glassrow">{p.cta[locale]} <i>→</i></div></div>
+            <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="glassrow">{p.cta[locale]} <GlassArrow /></div></div>
           </Link>
         ))}
       </div>

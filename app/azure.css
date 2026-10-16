@@ -302,7 +302,10 @@ body.az-lock { overflow: hidden; }
 .az-pc h3 { font-size: 28px; margin: 6px 0 6px; color: #fff; }
 .az-pc p { font-size: 13px; opacity: .85; max-width: 32ch; }
 .az-pc .glassrow { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-radius: 16px; background: rgba(255, 255, 255, .14); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .3); font-size: 13px; font-weight: 500; }
-.az-pc .glassrow i { width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; font-style: normal; }
+.az-pc .glassrow i { width: 30px; height: 30px; flex: none; border-radius: 50%; background: rgba(255, 255, 255, .2); border: 1px solid rgba(255, 255, 255, .5); color: #fff; display: grid; place-items: center; font-style: normal; transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease); }
+.az-pc .glassrow i svg { transition: transform .4s var(--ease); }
+.az-pc:hover .glassrow i, .az-pc:focus-visible .glassrow i { background: #fff; border-color: #fff; color: var(--ink); }
+.az-pc:hover .glassrow i svg, .az-pc:focus-visible .glassrow i svg { transform: translateX(2px); }
 .az-cdots { display: flex; gap: 6px; justify-content: center; padding: 0 var(--gutter); }
 .az-cdots i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-40); opacity: .4; transition: all .4s; }
 .az-cdots i.on { opacity: 1; background: var(--sea); width: 26px; border-radius: 4px; }

@@ -3,6 +3,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import GlassArrow from "@/app/components/azure/GlassArrow";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 
 /**
@@ -211,7 +212,7 @@ export default function ProjectsFilters() {
               <div className="in">
                 <small>{p.location}</small>
                 <h3>{p.title}</h3>
-                <div className="glassrow">{CTA} <i>→</i></div>
+                <div className="glassrow">{CTA} <GlassArrow /></div>
               </div>
             </Link>
           ))}
