@@ -54,11 +54,16 @@ export type ProjectTech = {
 
 /* ---- İç mekân (eski Hotspots) ---- */
 export type InteriorAngle = { id: string; name: string; image: string; alt: string };
+/** İç mekân karesi: image büyük sürüm, thumb şerit için küçük sürüm; vertical = kare / dikey (kırpılmadan gösterilir) */
+export type InteriorShot = { image: string; thumb?: string; srcSet?: string; vertical?: boolean; label: string; alt: string };
+/** Daire tipine göre grup (ör. Studio / Loft / 2+1) */
+export type InteriorGroup = { id: string; name: string; shots: InteriorShot[] };
 export type ProjectInteriors = {
   kicker: string;
   title: string;
   lead: ReactNode;                               // eski <p> içeriği (<strong> dahil)
   angles: InteriorAngle[];
+  groups?: InteriorGroup[];                      // varsa daire tipi seçici + film şeridi bunlarla çalışır
 };
 
 /* ---- Kat planları (eski Perla2FloorPlans) ---- */

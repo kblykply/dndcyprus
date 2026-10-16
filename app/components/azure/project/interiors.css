@@ -1,0 +1,40 @@
+/* İç mekân film şeridi (InteriorStage): ölçüler akışkan; görsel üstünde renk katmanı yok */
+.az-int2 { max-width: 100%; }
+.az-int2 .hd { display: flex; justify-content: space-between; align-items: flex-end; gap: 18px 32px; flex-wrap: wrap; margin-bottom: clamp(18px, 2vw, 28px); }
+.az-int2 .hd .az-head { margin-bottom: 0; min-width: 0; }
+.az-int2 .types { flex: none; display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .72); }
+.az-int2 .types button { padding: 10px 16px; border: 0; border-radius: 999px; background: none; cursor: pointer; font-family: var(--font-sans); font-size: 12px; font-weight: 600; line-height: 1; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-60); transition: background .3s, color .3s; }
+.az-int2 .types button small { margin-left: 6px; font-size: 11px; font-weight: 500; opacity: .7; }
+.az-int2 .types button.on { background: var(--sea); color: #fff; }
+.az-int2 .stage { position: relative; height: clamp(260px, 56vh, 640px); border-radius: var(--r); overflow: hidden; background: var(--sky-2); isolation: isolate; touch-action: pan-y; }
+.az-int2 .stage .main { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: az-int-fade .5s var(--ease); }
+.az-int2 .stage .main.fit { object-fit: contain; }
+.az-int2 .stage .blur { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); filter: blur(26px) brightness(.97); }
+@keyframes az-int-fade { from { opacity: 0; } to { opacity: 1; } }
+.az-int2 .stage .tag { position: absolute; left: 16px; bottom: 16px; z-index: 2; padding: 9px 14px; border-radius: 999px; background: #fbfaf6; font-family: var(--font-sans); font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+.az-int2 .row { display: flex; align-items: center; gap: 20px; margin-top: 14px; }
+.az-int2 .strip { position: relative; flex: 1 1 auto; min-width: 0; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+.az-int2 .strip::-webkit-scrollbar { display: none; }
+.az-int2 .strip.more { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 64px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 64px), transparent); }
+.az-int2 .strip button { flex: 0 0 clamp(104px, 9.6vw, 140px); min-width: 0; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; scroll-snap-align: start; }
+.az-int2 .strip img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 12px; opacity: .6; transition: opacity .3s; }
+.az-int2 .strip button:hover img, .az-int2 .strip button.on img { opacity: 1; }
+.az-int2 .strip i { display: block; height: 2px; margin-top: 8px; background: var(--line); transition: background .3s; }
+.az-int2 .strip button.on i { background: var(--sea); }
+/* uzun oda adları kesilmez: en çok iki satır, tüm etiketler iki satırlık yükseklikte (şerit hizası bozulmaz) */
+.az-int2 .strip span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; min-height: 2.6em; margin-top: 7px; overflow: hidden; overflow-wrap: anywhere; hyphens: auto; font-family: var(--font-sans); font-size: 11px; font-weight: 600; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-60); }
+.az-int2 .strip button.on span { color: var(--ink); }
+.az-int2 .nav { flex: none; display: inline-flex; align-items: center; gap: 10px; padding: 5px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .72); }
+.az-int2 .nav button { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 15px; cursor: pointer; transition: background .3s, color .3s; }
+.az-int2 .nav button:hover { background: var(--sea); color: #fff; }
+.az-int2 .nav span { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .12em; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--ink); }
+.az-int2 button:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+@media (max-width: 700px) {
+  .az-int2 .hd .types { width: 100%; justify-content: space-between; }
+  .az-int2 .types button { flex: 1; padding: 10px 8px; }
+  .az-int2 .stage { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; }
+  .az-int2 .stage .tag { left: 12px; bottom: 12px; }
+  .az-int2 .row { flex-direction: column; align-items: flex-start; }
+  .az-int2 .strip { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .az-int2 .stage .main { animation: none; } }

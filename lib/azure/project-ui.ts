@@ -7,7 +7,7 @@ export const PROJECT_UI = {
     ids: { gallery: "galeri", overview: "genel-bakis", facts: "bilgiler", tech: "teknik-donanim", interiors: "ic-mekan", floorPlans: "kat-planlari", mariachi: "mariachi", amenities: "olanaklar", tour: "sanal-tur", location: "konum", update: "guncelleme" },
     gallery: { aria: "Galeri", item: (i: number) => `Galeri görseli ${i}` },
     tech: { prev: "Önceki", next: "Sonraki", list: "Teknik donanım listesi", page: (i: number) => `Sayfa ${i}` },
-    interiors: { tabs: "Açılar" },
+    interiors: { tabs: "Odalar", types: "Daire tipi", prev: "Önceki görsel", next: "Sonraki görsel", region: "İç mekân görselleri" },
     floor: {
       types: "Daire Tipleri", variants: "Varyantlar",
       enlarge: "Büyüt", enlargeAria: "Görseli büyüt", pdf: "PDF",
@@ -25,7 +25,7 @@ export const PROJECT_UI = {
     ids: { gallery: "gallery", overview: "overview", facts: "key-facts", tech: "technical-features", interiors: "interiors", floorPlans: "floor-plans", mariachi: "mariachi", amenities: "amenities", tour: "virtual-tour", location: "location", update: "update" },
     gallery: { aria: "Gallery", item: (i: number) => `Gallery image ${i}` },
     tech: { prev: "Previous", next: "Next", list: "Technical features list", page: (i: number) => `Page ${i}` },
-    interiors: { tabs: "Angles" },
+    interiors: { tabs: "Rooms", types: "Unit type", prev: "Previous image", next: "Next image", region: "Interior images" },
     floor: {
       types: "Apartment types", variants: "Variants",
       enlarge: "Enlarge", enlargeAria: "Enlarge image", pdf: "PDF",
@@ -43,7 +43,7 @@ export const PROJECT_UI = {
     ids: { gallery: "galerie", overview: "ueberblick", facts: "fakten", tech: "technik", interiors: "innenraeume", floorPlans: "grundrisse", mariachi: "mariachi", amenities: "ausstattung", tour: "virtueller-rundgang", location: "lage", update: "bautenstand" },
     gallery: { aria: "Galerie", item: (i: number) => `Galeriebild ${i}` },
     tech: { prev: "Zurück", next: "Weiter", list: "Liste der technischen Ausstattung", page: (i: number) => `Seite ${i}` },
-    interiors: { tabs: "Perspektiven" },
+    interiors: { tabs: "Räume", types: "Wohnungstyp", prev: "Vorheriges Bild", next: "Nächstes Bild", region: "Innenansichten" },
     floor: {
       types: "Wohnungstypen", variants: "Varianten",
       enlarge: "Vergrößern", enlargeAria: "Bild vergrößern", pdf: "PDF",
@@ -61,7 +61,7 @@ export const PROJECT_UI = {
     ids: { gallery: "galereya", overview: "obzor", facts: "fakty", tech: "tekhnika", interiors: "interiery", floorPlans: "planirovki", mariachi: "mariachi", amenities: "infrastruktura", tour: "virtualnyy-tur", location: "raspolozhenie", update: "novosti-stroyki" },
     gallery: { aria: "Галерея", item: (i: number) => `Фото галереи ${i}` },
     tech: { prev: "Назад", next: "Далее", list: "Список технического оснащения", page: (i: number) => `Страница ${i}` },
-    interiors: { tabs: "Ракурсы" },
+    interiors: { tabs: "Комнаты", types: "Тип квартиры", prev: "Предыдущее фото", next: "Следующее фото", region: "Фото интерьеров" },
     floor: {
       types: "Типы квартир", variants: "Варианты",
       enlarge: "Увеличить", enlargeAria: "Увеличить изображение", pdf: "PDF",
@@ -79,7 +79,7 @@ export const PROJECT_UI = {
     ids: { gallery: "galeria", overview: "przeglad", facts: "fakty", tech: "technika", interiors: "wnetrza", floorPlans: "plany", mariachi: "mariachi", amenities: "udogodnienia", tour: "wirtualny-spacer", location: "lokalizacja", update: "postep-budowy" },
     gallery: { aria: "Galeria", item: (i: number) => `Zdjęcie z galerii ${i}` },
     tech: { prev: "Poprzedni", next: "Następny", list: "Lista wyposażenia technicznego", page: (i: number) => `Strona ${i}` },
-    interiors: { tabs: "Ujęcia" },
+    interiors: { tabs: "Pomieszczenia", types: "Typ mieszkania", prev: "Poprzednie zdjęcie", next: "Następne zdjęcie", region: "Zdjęcia wnętrz" },
     floor: {
       types: "Typy mieszkań", variants: "Warianty",
       enlarge: "Powiększ", enlargeAria: "Powiększ zdjęcie", pdf: "PDF",

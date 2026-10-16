@@ -2,6 +2,7 @@
 // DE/RU/PL, EN sürümünden docs/ceviri-notu.md kurallarına göre çevrildi.
 import type { ProjectData } from "@/lib/azure/project-types";
 import { SITE_URL } from "@/lib/seo";
+import { LV_INTERIOR_GROUPS } from "./lagoon-verde-interiors";
 
 export const LAGOON_VERDE: ProjectData = {
   tr: {
@@ -104,6 +105,7 @@ export const LAGOON_VERDE: ProjectData = {
       ],
     },
     interiors: {
+      groups: LV_INTERIOR_GROUPS.tr,
       kicker: "İç mekân",
       title: "Lagoon Verde İç Mekan & Tasarım",
       lead: <>Tatil Yaşamının ve estetiğin buluştuğu <strong>Lagoon Verde</strong> sizlerle.</>,
@@ -402,6 +404,7 @@ export const LAGOON_VERDE: ProjectData = {
       ],
     },
     interiors: {
+      groups: LV_INTERIOR_GROUPS.en,
       kicker: "Interiors",
       title: "Lagoon Verde Interior & Design",
       lead: <><strong>Lagoon Verde</strong> is where holiday living and aesthetics come together.</>,
@@ -700,6 +703,7 @@ export const LAGOON_VERDE: ProjectData = {
       ],
     },
     interiors: {
+      groups: LV_INTERIOR_GROUPS.de,
       kicker: "Innenräume",
       title: "Lagoon Verde – Interieur & Design",
       lead: <><strong>Lagoon Verde</strong> vereint Urlaubsgefühl und Ästhetik.</>,
@@ -998,6 +1002,7 @@ export const LAGOON_VERDE: ProjectData = {
       ],
     },
     interiors: {
+      groups: LV_INTERIOR_GROUPS.ru,
       kicker: "Интерьеры",
       title: "Lagoon Verde: интерьер и дизайн",
       lead: <><strong>Lagoon Verde</strong> — место, где курортная жизнь встречается с эстетикой.</>,
@@ -1296,6 +1301,7 @@ export const LAGOON_VERDE: ProjectData = {
       ],
     },
     interiors: {
+      groups: LV_INTERIOR_GROUPS.pl,
       kicker: "Wnętrza",
       title: "Lagoon Verde — wnętrza i design",
       lead: <><strong>Lagoon Verde</strong> to miejsce, w którym wakacyjny styl życia spotyka się z estetyką.</>,
