@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
@@ -30,7 +29,7 @@ const CAREER = [
   { name: "Cargill", logo: "/azure/brands/cargill.webp" },
   { name: "Arthur Andersen", logo: "/azure/brands/arthur-andersen.webp" },
 ];
-// Ekip panelindeki yüzler (public/teams, ekip sayfasındaki sırayla)
+// Ekip panelindeki yüzler: public/teams portrelerinden baş ve omuz kırpılmış 192px kare WebP (public/azure/team), ekip sayfasındaki sırayla
 const FACES = ["burcingul", "borhan", "sabina", "shadi", "bob", "onuryalcin"];
 
 /**
@@ -95,7 +94,8 @@ export default function Leadership({ locale }: { locale: Locale }) {
           ))}
           <aside className="az-team rv d2" aria-label={t.team}>
             <div className="faces" aria-hidden>
-              {FACES.map((f) => <span key={f}><Image src={`/teams/${f}.png`} alt="" width={120} height={180} sizes="120px" quality={75} /></span>)}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {FACES.map((f) => <span key={f}><img src={`/azure/team/${f}.webp`} alt="" width={192} height={192} loading="lazy" decoding="async" draggable={false} /></span>)}
               {total > FACES.length ? <span className="more">+{total - FACES.length}</span> : null}
             </div>
             <h3>{t.team}</h3>
