@@ -220,17 +220,13 @@ body.az-lock { overflow: hidden; }
 .az-tile .seg button.on, .az-tile .seg button:hover { background: #fff; color: var(--sea); }
 .az-tile .ribbons { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 14px; }
 .az-tile .ribbons img { height: 84px; width: auto; filter: drop-shadow(0 6px 14px rgba(0,0,0,.12)); }
-.t-lagoon { grid-column: span 7; grid-row: span 2; }
+.t-mariachi { grid-column: span 7; grid-row: span 2; }
 .t-tl { grid-column: span 5; grid-row: span 2; }
-.t-units { grid-column: span 3; }
-.t-award { grid-column: span 3; }
-.t-mariachi { grid-column: span 6; grid-row: span 2; }
-.t-lajoya { grid-column: span 3; }
-.t-homes { grid-column: span 3; }
-.t-awards { grid-column: span 6; }
-.t-stats { grid-column: span 6; }
-@media (max-width: 1000px) { .t-lagoon, .t-tl, .t-mariachi, .t-awards, .t-stats { grid-column: span 12; } .t-units, .t-award, .t-lajoya, .t-homes { grid-column: span 6; } }
-@media (max-width: 560px) { .t-units, .t-award, .t-lajoya, .t-homes { grid-column: span 12; } .az-grid { grid-auto-rows: auto; } .t-lagoon, .t-mariachi { min-height: 360px; } }
+.t-award, .t-homes, .t-lajoya { grid-column: span 4; }
+.t-tl .tl-cta { display: inline-block; align-self: flex-start; width: max-content; margin-top: 18px; font-size: 14px; font-weight: 500; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .6); padding-bottom: 2px; transition: border-color .3s; }
+.t-tl .tl-cta:hover { border-color: #fff; }
+@media (max-width: 1000px) { .t-mariachi, .t-tl, .t-lajoya { grid-column: span 12; } .t-award, .t-homes { grid-column: span 6; } .t-mariachi { min-height: 360px; } }
+@media (max-width: 560px) { .t-award, .t-homes { grid-column: span 12; } .az-grid { grid-auto-rows: auto; } .t-lajoya { min-height: 240px; } }
 
 /* ---- scrollytelling ---- */
 .az-story .g { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(24px, 4vw, 64px); align-items: start; }
@@ -437,8 +433,6 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 :focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
 
 /* ---- ince ayarlar (tarayıcı kontrolü sonrası) ---- */
-.t-units .big { font-size: clamp(40px, 4.2vw, 72px); }
-.t-units .big span { white-space: nowrap; }
 @media (max-width: 1240px) and (min-width: 1001px) {
   .az-person { grid-template-columns: 1fr; }
   .az-person figure { max-width: 200px; }

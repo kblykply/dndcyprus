@@ -7,15 +7,12 @@ export type HomeContent = {
   awards: { label: string; items: { b: string; rest: string; ribbon?: string }[] };
   bento: {
     kicker: string; title: ReactNode; lead: string;
-    lagoon: { k: string; h: string; p: string; pill: string };
-    tl: { k: string; h: string; upto: string; rules: string[]; months: string };
-    units: { k: string; big: string; small: string; p: string };
+    tl: { k: string; h: string; upto: string; rules: string[]; months: string; cta: string };
     usa: { k: string; count: number; p: string };
     mariachi: { k: string; h: string; p: string; pill: string };
     lajoya: { k: string; h: string; p: string; pill: string };
     tech: { k: string; h: string; p: string };
     awards: { k: string; h: string; items: { title: string; text: string; ribbon: string; href: string }[] };
-    stats: { k: string; h: string; items: { value: number; suffix: string; label: string }[] };
   };
   videos: { kicker: string; title: ReactNode };
   story: { kicker: string; title: ReactNode; steps: { t: string; h: string; p: string; tags: string[]; img: string }[] };
@@ -50,9 +47,7 @@ const TR: HomeContent = {
     kicker: "Bir bakışta DND Cyprus",
     title: <>Kıbrıs’ta <b>ABD kalitesi.</b> Ödüllü projeler, TL ile ödeme, beach club ayrıcalığı.</>,
     lead: "Konut, ticari ve karma projelerde tasarımdan teslimata uçtan uca çözüm. Zamanında teslim, kalite güvencesi, şeffaf iletişim.",
-    lagoon: { k: "Bahçeler, İskele · Teslim Aralık 2028", h: "Lagoon Verde", p: "Eşsiz lagün havuzu konsepti; aquapark, mini golf, amfitiyatro, fitness, Verde Cafe. 43.179 m² arsa üzerinde 354 rezidans.", pill: "Altın Ödül · Devam eden" },
-    tl: { k: "Yeni ödeme modeli", h: "Maaşınız TL, taksitiniz de TL.", upto: "aya kadar faizsiz", rules: ["Banka, faiz ve kefil yok", "Kur farkı ve vade farkı yok", "Taksitler KKTC asgari ücret artışına göre güncellenir"], months: "ay" },
-    units: { k: "Daire tipleri", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² kapalı alan" },
+    tl: { k: "Yeni ödeme modeli", h: "Maaşınız TL, taksitiniz de TL.", upto: "aya kadar faizsiz", rules: ["Banka, faiz ve kefil yok", "Kur farkı ve vade farkı yok", "Taksitler KKTC asgari ücret artışına göre güncellenir"], months: "ay", cta: "Lagoon Verde'yi incele" },
     usa: { k: "Massachusetts, ABD", count: 120, p: "Tamamlanmış proje; Kuzey Kıbrıs'ta 30.000+ konut vizyonu" },
     mariachi: { k: "DND ev sahiplerine özel", h: "Mariachi Beach Club", p: "Ücretsiz giriş ve %10 restoran-bar indirimi. Plaj, 4 jakuzili havuz, pavilyonlar, DJ geceleri.", pill: "Platin Ödül" },
     lajoya: { k: "Long Beach · Denize 500 m", h: "La Joya", p: "74 rezidans, sahiplerine teslim edildi.", pill: "Tamamlandı · 2025" },
@@ -65,7 +60,6 @@ const TR: HomeContent = {
         { title: "Altın Ödül – Lagoon Verde", text: "En İyi Sosyo-Kültürel Gelişim. Refah, sürdürülebilirlik ve çevreyle uyumu önceliklendiren toplum odaklı proje.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/tr/lagoon-verde" },
       ],
     },
-    stats: { k: "Rakamlarla DND", h: "Boston'dan İskele'ye", items: [{ value: 30000, suffix: "+", label: "Planlanan konut" }, { value: 8, suffix: "+", label: "Bölge" }, { value: 4, suffix: "+", label: "Ödül" }] },
   },
   videos: { kicker: "Videolar", title: <>Projeler ve kampanyalar, <b>kendi sesinden.</b></> },
   story: {
@@ -143,9 +137,7 @@ const EN: HomeContent = {
     kicker: "DND Cyprus at a glance",
     title: <><b>USA quality</b> in Cyprus. Award-winning projects, payment in Turkish lira, beach club privileges.</>,
     lead: "End-to-end solutions from design to delivery in residential, commercial and mixed-use projects. On-time delivery, quality assurance, transparent communication.",
-    lagoon: { k: "Bahçeler, İskele · Delivery December 2028", h: "Lagoon Verde", p: "A unique lagoon-pool concept; aqua park, mini golf, amphitheatre, fitness, Verde Cafe. 354 residences on a 43,179 m² plot.", pill: "Gold Award · Ongoing" },
-    tl: { k: "New payment model", h: "Earn in lira, pay in lira.", upto: "months interest-free", rules: ["No bank, no interest, no guarantor", "No exchange-rate or maturity difference", "Instalments follow the TRNC minimum-wage increase"], months: "months" },
-    units: { k: "Unit types", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² enclosed area" },
+    tl: { k: "New payment model", h: "Earn in lira, pay in lira.", upto: "months interest-free", rules: ["No bank, no interest, no guarantor", "No exchange-rate or maturity difference", "Instalments follow the TRNC minimum-wage increase"], months: "months", cta: "Explore Lagoon Verde" },
     usa: { k: "Massachusetts, USA", count: 120, p: "Completed projects; a 30,000+ homes vision for North Cyprus" },
     mariachi: { k: "Exclusive to DND homeowners", h: "Mariachi Beach Club", p: "Free entry and 10% off at the restaurant and bars. Beach, pool with 4 jacuzzis, pavilions, DJ nights.", pill: "Platinum Award" },
     lajoya: { k: "Long Beach · 500 m to the sea", h: "La Joya", p: "74 residences, handed over to their owners.", pill: "Completed · 2025" },
@@ -158,7 +150,6 @@ const EN: HomeContent = {
         { title: "Gold Award – Lagoon Verde", text: "Best Socio-Cultural Development. A community-focused project prioritising well-being, sustainability and harmony with nature.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/en/lagoon-verde" },
       ],
     },
-    stats: { k: "DND in numbers", h: "From Boston to İskele", items: [{ value: 30000, suffix: "+", label: "Planned homes" }, { value: 8, suffix: "+", label: "Regions" }, { value: 4, suffix: "+", label: "Awards" }] },
   },
   videos: { kicker: "Videos", title: <>Projects and campaigns, <b>in their own voice.</b></> },
   story: {
@@ -236,9 +227,7 @@ const DE: HomeContent = {
     kicker: "DND Cyprus auf einen Blick",
     title: <><b>US-Qualität</b> auf Zypern. Preisgekrönte Projekte, Zahlung in Lira, Beach-Club-Vorteile.</>,
     lead: "Ganzheitliche Lösungen von der Planung bis zur Übergabe – für Wohn-, Gewerbe- und Mischprojekte. Termingerechte Übergabe, Qualitätssicherung, transparente Kommunikation.",
-    lagoon: { k: "Bahçeler, İskele · Übergabe: Dezember 2028", h: "Lagoon Verde", p: "Ein einzigartiges Lagunenpool-Konzept: Aquapark, Minigolf, Amphitheater, Fitness, Verde Cafe. 354 Residenzen auf einem 43.179 m² großen Grundstück.", pill: "Goldpreis · Im Bau" },
-    tl: { k: "Neues Zahlungsmodell", h: "Einkommen in Lira, Raten in Lira.", upto: "Monate zinsfrei", rules: ["Keine Bank, keine Zinsen, kein Bürge", "Keine Kursdifferenz, kein Laufzeitaufschlag", "Raten folgen der Mindestlohnerhöhung in Nordzypern"], months: "Monate" },
-    units: { k: "Wohnungstypen", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² Wohnfläche" },
+    tl: { k: "Neues Zahlungsmodell", h: "Einkommen in Lira, Raten in Lira.", upto: "Monate zinsfrei", rules: ["Keine Bank, keine Zinsen, kein Bürge", "Keine Kursdifferenz, kein Laufzeitaufschlag", "Raten folgen der Mindestlohnerhöhung in Nordzypern"], months: "Monate", cta: "Lagoon Verde ansehen" },
     usa: { k: "Massachusetts, USA", count: 120, p: "Abgeschlossene Projekte; die Vision: 30.000+ Wohnungen in Nordzypern" },
     mariachi: { k: "Exklusiv für DND-Eigentümer", h: "Mariachi Beach Club", p: "Freier Eintritt und 10% Rabatt in Restaurant und Bars. Strand, Pool mit 4 Whirlpools, Pavillons, DJ-Abende.", pill: "Platinpreis" },
     lajoya: { k: "Long Beach · 500 m zum Meer", h: "La Joya", p: "74 Residenzen, an ihre Eigentümer übergeben.", pill: "Fertiggestellt · 2025" },
@@ -251,7 +240,6 @@ const DE: HomeContent = {
         { title: "Goldpreis – Lagoon Verde", text: "Beste soziokulturelle Entwicklung. Ein gemeinschaftsorientiertes Projekt mit Fokus auf Wohlbefinden, Nachhaltigkeit und Einklang mit der Natur.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/de/lagoon-verde" },
       ],
     },
-    stats: { k: "DND in Zahlen", h: "Von Boston nach İskele", items: [{ value: 30000, suffix: "+", label: "Geplante Wohnungen" }, { value: 8, suffix: "+", label: "Regionen" }, { value: 4, suffix: "+", label: "Auszeichnungen" }] },
   },
   videos: { kicker: "Videos", title: <>Projekte und Kampagnen, <b>aus erster Hand.</b></> },
   story: {
@@ -329,9 +317,7 @@ const RU: HomeContent = {
     kicker: "Коротко о DND Cyprus",
     title: <><b>Качество США</b> на Кипре. Проекты-лауреаты, оплата в лирах, пляжный клуб.</>,
     lead: "Комплексные решения от проектирования до сдачи — в жилых, коммерческих и многофункциональных проектах. Сдача в срок, гарантия качества, прозрачная коммуникация.",
-    lagoon: { k: "Bahçeler, Искеле · Сдача: декабрь 2028", h: "Lagoon Verde", p: "Уникальная концепция бассейна-лагуны: аквапарк, мини-гольф, амфитеатр, фитнес, Verde Cafe. 354 резиденции на участке 43 179 m².", pill: "Золотая награда · Строится" },
-    tl: { k: "Новая схема оплаты", h: "Зарплата в лирах — и платежи в лирах.", upto: "мес. без процентов", rules: ["Без банка, процентов и поручителей", "Без курсовой разницы и наценки за срок", "Платежи индексируются по росту минимальной зарплаты на Северном Кипре"], months: "мес." },
-    units: { k: "Типы квартир", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² закрытой площади" },
+    tl: { k: "Новая схема оплаты", h: "Зарплата в лирах — и платежи в лирах.", upto: "мес. без процентов", rules: ["Без банка, процентов и поручителей", "Без курсовой разницы и наценки за срок", "Платежи индексируются по росту минимальной зарплаты на Северном Кипре"], months: "мес.", cta: "Смотреть Lagoon Verde" },
     usa: { k: "Массачусетс, США", count: 120, p: "Завершённых проектов; в перспективе — 30 000+ квартир на Северном Кипре" },
     mariachi: { k: "Только для владельцев жилья DND", h: "Mariachi Beach Club", p: "Бесплатный вход и скидка 10% в ресторане и барах. Пляж, бассейн с 4 джакузи, павильоны, DJ-вечеринки.", pill: "Платиновая награда" },
     lajoya: { k: "Long Beach · 500 m до моря", h: "La Joya", p: "74 резиденции переданы владельцам.", pill: "Завершён · 2025" },
@@ -344,7 +330,6 @@ const RU: HomeContent = {
         { title: "Золотая награда — Lagoon Verde", text: "Лучший социокультурный проект. Проект, ориентированный на сообщество, где в приоритете благополучие, устойчивое развитие и гармония с природой.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/ru/lagoon-verde" },
       ],
     },
-    stats: { k: "DND в цифрах", h: "Из Бостона в Искеле", items: [{ value: 30000, suffix: "+", label: "Квартир в планах" }, { value: 8, suffix: "+", label: "Регионов" }, { value: 4, suffix: "+", label: "Наград" }] },
   },
   videos: { kicker: "Видео", title: <>Проекты и кампании — <b>из первых уст.</b></> },
   story: {
@@ -422,9 +407,7 @@ const PL: HomeContent = {
     kicker: "DND Cyprus w skrócie",
     title: <><b>Jakość z USA</b> na Cyprze. Nagradzane projekty, płatność w lirach, beach club.</>,
     lead: "Kompleksowe rozwiązania od projektu po oddanie – w inwestycjach mieszkaniowych, komercyjnych i wielofunkcyjnych. Terminowe oddanie, gwarancja jakości, przejrzysta komunikacja.",
-    lagoon: { k: "Bahçeler, İskele · Oddanie: grudzień 2028", h: "Lagoon Verde", p: "Wyjątkowa koncepcja basenu-laguny: aquapark, minigolf, amfiteatr, fitness, Verde Cafe. 354 apartamenty na działce o powierzchni 43 179 m².", pill: "Złota Nagroda · W budowie" },
-    tl: { k: "Nowy model płatności", h: "Pensja w lirach, raty w lirach.", upto: "mies. bez odsetek", rules: ["Bez banku, odsetek i poręczyciela", "Bez różnic kursowych i dopłat za termin", "Raty rosną wraz z płacą minimalną na Cyprze Północnym"], months: "mies." },
-    units: { k: "Typy mieszkań", big: "1+0", small: " · 1+1 · 2+1", p: "Studio 39 m² · Loft 50 m² · Roof 70 m² · Garden 78 m² powierzchni zamkniętej" },
+    tl: { k: "Nowy model płatności", h: "Pensja w lirach, raty w lirach.", upto: "mies. bez odsetek", rules: ["Bez banku, odsetek i poręczyciela", "Bez różnic kursowych i dopłat za termin", "Raty rosną wraz z płacą minimalną na Cyprze Północnym"], months: "mies.", cta: "Zobacz Lagoon Verde" },
     usa: { k: "Massachusetts, USA", count: 120, p: "Zrealizowanych projektów; wizja 30 000+ mieszkań na Cyprze Północnym" },
     mariachi: { k: "Wyłącznie dla właścicieli nieruchomości DND", h: "Mariachi Beach Club", p: "Bezpłatny wstęp i 10% zniżki w restauracji i barach. Plaża, basen z 4 jacuzzi, pawilony, wieczory z DJ-em.", pill: "Platynowa Nagroda" },
     lajoya: { k: "Long Beach · 500 m od morza", h: "La Joya", p: "74 apartamenty przekazane właścicielom.", pill: "Ukończony · 2025" },
@@ -437,7 +420,6 @@ const PL: HomeContent = {
         { title: "Złota Nagroda – Lagoon Verde", text: "Najlepszy projekt społeczno-kulturalny. Inwestycja skupiona na społeczności, w której priorytetem są dobrostan, zrównoważony rozwój i harmonia z naturą.", ribbon: "/BEST-SOCIOCULTURAL-GOLD.png", href: "/pl/lagoon-verde" },
       ],
     },
-    stats: { k: "DND w liczbach", h: "Z Bostonu do İskele", items: [{ value: 30000, suffix: "+", label: "Planowanych mieszkań" }, { value: 8, suffix: "+", label: "Regionów" }, { value: 4, suffix: "+", label: "Nagród" }] },
   },
   videos: { kicker: "Wideo", title: <>Projekty i kampanie <b>z pierwszej ręki.</b></> },
   story: {

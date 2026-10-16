@@ -7,9 +7,6 @@ export type VideoSlide = {
   src?: string;
   poster?: string;
   youtube?: string;
-  /** Bilinen süre (sn); YouTube'da bilinmiyorsa oynatıcıdan okunur */
-  duration?: number;
-  source: "YouTube" | "Instagram";
   /** Dikey (9:16) video: telefonda 4:5, geniş ekranda yanları bulanık kopyayla dolar */
   vertical?: boolean;
   tag: string;
@@ -22,16 +19,16 @@ export type VideoSlide = {
 };
 
 export type VideoUi = {
-  region: string; duration: string; source: string; next: string;
+  region: string; next: string;
   prev: string; nextAria: string; goTo: (n: number) => string;
   mute: string; unmute: string; fullscreen: string; exitFullscreen: string;
 };
 
-const TL_1 = { id: "tl-odeme", src: "/videos/tl-odeme-modeli.mp4", poster: "/videos/tl-odeme-modeli.jpg", duration: 43, source: "Instagram", vertical: true } as const;
-const TL_2 = { id: "lv-tl", src: "/videos/lagoon-verde-tl-odeme.mp4", poster: "/videos/lagoon-verde-tl-odeme.jpg", duration: 36, source: "Instagram", vertical: true } as const;
-const OPEN = { id: "lajoya-acilis", youtube: "GKH4VSPH57E", source: "YouTube" } as const;
-const TOUR = { id: "lajoya-tur", youtube: "hMbzVAJMzXo", source: "YouTube" } as const;
-const KKTC = { id: "kktc", youtube: "JNKcu1APZO0", duration: 188, source: "YouTube" } as const;
+const TL_1 = { id: "tl-odeme", src: "/videos/tl-odeme-modeli.mp4", poster: "/videos/tl-odeme-modeli.jpg", vertical: true } as const;
+const TL_2 = { id: "lv-tl", src: "/videos/lagoon-verde-tl-odeme.mp4", poster: "/videos/lagoon-verde-tl-odeme.jpg", vertical: true } as const;
+const OPEN = { id: "lajoya-acilis", youtube: "GKH4VSPH57E" } as const;
+const TOUR = { id: "lajoya-tur", youtube: "hMbzVAJMzXo" } as const;
+const KKTC = { id: "kktc", youtube: "JNKcu1APZO0" } as const;
 
 export const VIDEO_SLIDES: Record<Locale, VideoSlide[]> = {
   tr: [
@@ -98,14 +95,14 @@ export const VIDEO_SLIDES: Record<Locale, VideoSlide[]> = {
 };
 
 export const VIDEO_UI: Record<Locale, VideoUi> = {
-  tr: { region: "Video galerisi", duration: "Süre", source: "Kaynak", next: "Sıradaki", prev: "Önceki video", nextAria: "Sonraki video", goTo: (n) => `${n}. videoya git`,
+  tr: { region: "Video galerisi", next: "Sıradaki", prev: "Önceki video", nextAria: "Sonraki video", goTo: (n) => `${n}. videoya git`,
     mute: "Sesi kapat", unmute: "Sesi aç", fullscreen: "Tam ekran", exitFullscreen: "Tam ekrandan çık" },
-  en: { region: "Video gallery", duration: "Duration", source: "Source", next: "Up next", prev: "Previous video", nextAria: "Next video", goTo: (n) => `Go to video ${n}`,
+  en: { region: "Video gallery", next: "Up next", prev: "Previous video", nextAria: "Next video", goTo: (n) => `Go to video ${n}`,
     mute: "Mute", unmute: "Unmute", fullscreen: "Fullscreen", exitFullscreen: "Exit fullscreen" },
-  de: { region: "Videogalerie", duration: "Dauer", source: "Quelle", next: "Als Nächstes", prev: "Vorheriges Video", nextAria: "Nächstes Video", goTo: (n) => `Zu Video ${n}`,
+  de: { region: "Videogalerie", next: "Als Nächstes", prev: "Vorheriges Video", nextAria: "Nächstes Video", goTo: (n) => `Zu Video ${n}`,
     mute: "Ton aus", unmute: "Ton an", fullscreen: "Vollbild", exitFullscreen: "Vollbild beenden" },
-  ru: { region: "Видеогалерея", duration: "Длительность", source: "Источник", next: "Далее", prev: "Предыдущее видео", nextAria: "Следующее видео", goTo: (n) => `Перейти к видео ${n}`,
+  ru: { region: "Видеогалерея", next: "Далее", prev: "Предыдущее видео", nextAria: "Следующее видео", goTo: (n) => `Перейти к видео ${n}`,
     mute: "Выключить звук", unmute: "Включить звук", fullscreen: "Во весь экран", exitFullscreen: "Выйти из полноэкранного режима" },
-  pl: { region: "Galeria wideo", duration: "Czas", source: "Źródło", next: "Następny", prev: "Poprzedni film", nextAria: "Następny film", goTo: (n) => `Przejdź do filmu ${n}`,
+  pl: { region: "Galeria wideo", next: "Następny", prev: "Poprzedni film", nextAria: "Następny film", goTo: (n) => `Przejdź do filmu ${n}`,
     mute: "Wyłącz dźwięk", unmute: "Włącz dźwięk", fullscreen: "Pełny ekran", exitFullscreen: "Zamknij pełny ekran" },
 };

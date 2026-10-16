@@ -10,10 +10,6 @@
 .az-vs h3 { margin-top: clamp(18px, 2vw, 26px); font-family: var(--font-display); font-weight: 300; font-size: clamp(30px, 3.3vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); text-wrap: balance; }
 .az-vs h3 b { font-weight: 500; color: var(--sea); }
 .az-vs .lead { margin-top: 16px; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.6; color: var(--ink-60); max-width: 42ch; }
-.az-vs .meta { display: grid; grid-template-columns: 1fr 1fr; margin: clamp(22px, 2.4vw, 32px) 0 0; border-top: 1px solid var(--hair); }
-.az-vs .meta > div { padding-top: 14px; min-width: 0; }
-.az-vs .meta > div + div { padding-left: 22px; border-left: 1px solid var(--hair); }
-.az-vs .meta dd { margin: 6px 0 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 2.3vw, 34px); line-height: 1.1; letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
 .az-vs ol { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--hair); }
 .az-vs li { display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 12px 0; border-bottom: 1px solid var(--hair); font-size: 15px; line-height: 1.45; color: var(--ink); }
 .az-vs li .mr-mono { padding-top: 2px; }
@@ -63,8 +59,7 @@
   .az-vs .box.v { aspect-ratio: 4 / 5; }
   .az-vs .txts { padding: 0 6px; }
   .az-vs li { font-size: 14px; grid-template-columns: 34px minmax(0, 1fr); }
-  .az-vs .meta > div + div { padding-left: 16px; }
-}
+  }
 @media (prefers-reduced-motion: reduce) {
   .az-vs .txt, .az-vs .txt.on { transition: none; transform: none; }
 }

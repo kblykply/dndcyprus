@@ -11,13 +11,12 @@ import "./video-showcase.css";
 
 const AUTOPLAY_MS = 10000;
 const pad = (n: number) => String(n).padStart(2, "0");
-const toMinSec = (s?: number) => (s && Number.isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "—");
 const ytThumb = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
 /* ---------- oynatıcı arayüzü (YouTube ve sitedeki mp4 aynı biçimde yönetilir) ---------- */
 type Player = { play(): void; pause(): void; mute(): void; unmute(): void };
 
-type YTPlayer = { playVideo(): void; pauseVideo(): void; mute(): void; unMute(): void; destroy(): void; getDuration(): number; unloadModule?(name: string): void };
+type YTPlayer = { playVideo(): void; pauseVideo(): void; mute(): void; unMute(): void; destroy(): void; unloadModule?(name: string): void };
 type YTGlobal = {
   Player: new (el: HTMLElement, o: {
     videoId: string; width: string; height: string; playerVars: Record<string, unknown>;
@@ -51,12 +50,12 @@ function loadYouTube(): Promise<YTGlobal | null> {
 // Tarayıcı dili Türkçe olunca YouTube otomatik altyazıyı ("[müzik]") açıyor; sessiz vitrin videosunda kapalı kalsın
 const noCaptions = (p: YTPlayer) => { try { p.unloadModule?.("captions"); p.unloadModule?.("cc"); } catch {} };
 
-type MediaProps = { slide: VideoSlide; autoplay: boolean; onPlayer: (p: Player | null) => void; onDuration: (sec: number) => void };
+type MediaProps = { slide: VideoSlide; autoplay: boolean; onPlayer: (p: Player | null) => void };
 
-function YouTubeMedia({ slide, autoplay, onPlayer, onDuration }: MediaProps) {
+function YouTubeMedia({ slide, autoplay, onPlayer }: MediaProps) {
   const host = useRef<HTMLDivElement>(null);
-  const cb = useRef({ onPlayer, onDuration });
-  useEffect(() => { cb.current = { onPlayer, onDuration }; }, [onPlayer, onDuration]);
+  const cb = useRef(onPlayer);
+  useEffect(() => { cb.current = onPlayer; }, [onPlayer]);
   // YouTube sessiz ve küçük oynatıcıda düşük kaliteyle açılıyor: ilk saniyelerde HD kapak karesi üstte kalır
   const [revealed, setRevealed] = useState(false);
   const id = slide.youtube!;
@@ -79,15 +78,11 @@ function YouTubeMedia({ slide, autoplay, onPlayer, onDuration }: MediaProps) {
             if (!alive) return;
             try { target.mute(); if (autoplay) target.playVideo(); } catch {}
             noCaptions(target);
-            const d = target.getDuration?.();
-            if (d > 0) cb.current.onDuration(d);
-            cb.current.onPlayer({ play: () => target.playVideo(), pause: () => target.pauseVideo(), mute: () => target.mute(), unmute: () => target.unMute() });
+            cb.current({ play: () => target.playVideo(), pause: () => target.pauseVideo(), mute: () => target.mute(), unmute: () => target.unMute() });
           },
           onStateChange: ({ data }) => {
             if (data !== 1) return; // 1 = oynuyor
             if (yt) noCaptions(yt);
-            const d = yt?.getDuration?.();
-            if (d && d > 0) cb.current.onDuration(d);
             clearTimeout(timer);
             timer = window.setTimeout(() => { if (alive) setRevealed(true); }, 4200);
           },
@@ -99,7 +94,7 @@ function YouTubeMedia({ slide, autoplay, onPlayer, onDuration }: MediaProps) {
       clearTimeout(timer);
       try { yt?.destroy(); } catch {}
       el.innerHTML = "";
-      cb.current.onPlayer(null);
+      cb.current(null);
     };
   }, [id, autoplay]);
 
@@ -159,8 +154,8 @@ function Poster({ slide }: { slide: VideoSlide }) {
 }
 
 /**
- * Ana sayfa video bölümü — Meridian dili, açık zemin: solda mono etiket + sayaç, iki parçalı başlık,
- * süre / kaynak satırı, numaralı maddeler ve tek dolu düğme; sağda video, altında ilerleme çizgileri,
+ * Ana sayfa video bölümü — Meridian düzeni, açık zemin: solda küçük etiket + sayaç, iki parçalı başlık,
+ * kısa açıklama, numaralı maddeler ve tek dolu düğme; sağda video, altında ilerleme çizgileri,
  * "sıradaki" etiketi ve oklar. Slaytlar 10 sn'de bir kendiliğinden ilerler; ses açılınca ya da tam ekranda durur.
  */
 export default function VideoShowcase({ locale }: { locale: Locale }) {
@@ -180,7 +175,6 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
   const [hover, setHover] = useState(false);
   const [fs, setFs] = useState(false);
   const [reduce, setReduce] = useState(false);
-  const [durations, setDurations] = useState<Record<string, number>>({});
 
   const s = slides[i];
   const next = slides[(i + 1) % n];
@@ -216,9 +210,6 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
   useEffect(() => { visibleRef.current = visible; }, [visible]);
   // oynatıcı ekran dışındayken hazır olduysa beklesin; görünür olunca yukarıdaki etki başlatır
   const onPlayer = useCallback((p: Player | null) => { player.current = p; if (p && !visibleRef.current) p.pause(); }, []);
-  const onDuration = useCallback((sec: number) => {
-    setDurations((d) => (d[s.id] ? d : { ...d, [s.id]: sec }));
-  }, [s.id]);
 
   const toggleMute = () => {
     const p = player.current;
@@ -256,10 +247,6 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
               <div className="hd"><span className="mr-mono">{x.tag}</span><span className="mr-mono"><b>{pad(k + 1)}</b> / {pad(n)}</span></div>
               <h3>{x.title[0]} <b>{x.title[1]}</b></h3>
               <p className="lead">{x.lead}</p>
-              <dl className="meta">
-                <div><dt className="mr-mono">{ui.duration}</dt><dd>{toMinSec(durations[x.id] ?? x.duration)}</dd></div>
-                <div><dt className="mr-mono">{ui.source}</dt><dd>{x.source}</dd></div>
-              </dl>
               <ol>{x.bullets.map((b, j) => <li key={b}><span className="mr-mono">{pad(j + 1)}</span>{b}</li>)}</ol>
               <div className="cta">
                 <Link className="az-btn sea" href={href(locale, x.primary.path)} prefetch={false}>{x.primary.label}</Link>
@@ -273,8 +260,8 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
           <div ref={box} className={`box${s.vertical ? " v" : ""}`}>
             {near
               ? (s.youtube
-                ? <YouTubeMedia key={s.id} slide={s} autoplay={!reduce} onPlayer={onPlayer} onDuration={onDuration} />
-                : <HostedMedia key={s.id} slide={s} autoplay={!reduce} onPlayer={onPlayer} onDuration={onDuration} />)
+                ? <YouTubeMedia key={s.id} slide={s} autoplay={!reduce} onPlayer={onPlayer} />
+                : <HostedMedia key={s.id} slide={s} autoplay={!reduce} onPlayer={onPlayer} />)
               : <Poster slide={s} />}
             {/* videoya tıklayınca YouTube duraklayıp başka videolar önermesin; kaydırma hareketini burada karşıla */}
             <div
