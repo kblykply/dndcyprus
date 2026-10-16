@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { PiInfoDuotone, PiSealPercentDuotone, PiTicketDuotone } from "react-icons/pi";
 import LazyYouTube from "@/app/components/LazyYouTube";
-import { mono } from "@/app/fonts";
 import { MARIACHI_MEDIA, MARIACHI_PERKS } from "@/lib/azure/projects/mariachi";
 import type { Locale } from "@/lib/azure/site";
 import "../meridian.css";
@@ -11,7 +10,7 @@ import "../meridian.css";
 export default function Mariachi({ locale, id }: { locale: Locale; id: string }) {
   const t = MARIACHI_PERKS[locale];
   return (
-    <section className={`az-section az-proj mr ${mono.variable}`} id={id}>
+    <section className="az-section az-proj mr" id={id}>
       <div className="az-wrap">
         <div className="mr-band rv">
           <LazyYouTube videoId={MARIACHI_MEDIA.youtubeId} query={MARIACHI_MEDIA.embedQuery} zoom={1.38} cover className="absolute inset-0" title={t.videoTitle} posterAlt={t.videoPosterAlt} playLabel={t.videoPlayLabel} />

@@ -4,7 +4,7 @@
   padding: clamp(22px, 4vw, 56px); border-radius: var(--r); background: rgba(255, 255, 255, .72); border: 1px solid var(--hair);
 }
 .az-vs .txts { display: grid; min-width: 0; }
-.az-vs .txt { grid-area: 1 / 1; display: flex; flex-direction: column; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .55s var(--ease), transform .55s var(--ease), visibility 0s .55s; }
+.az-vs .txt { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: center; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .55s var(--ease), transform .55s var(--ease), visibility 0s .55s; }
 .az-vs .txt.on { opacity: 1; visibility: visible; transform: none; transition: opacity .55s var(--ease), transform .55s var(--ease); }
 .az-vs .hd { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--hair); }
 .az-vs h3 { margin-top: clamp(18px, 2vw, 26px); font-family: var(--font-display); font-weight: 300; font-size: clamp(30px, 3.3vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); text-wrap: balance; }
@@ -17,7 +17,7 @@
 .az-vs ol { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--hair); }
 .az-vs li { display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 12px 0; border-bottom: 1px solid var(--hair); font-size: 15px; line-height: 1.45; color: var(--ink); }
 .az-vs li .mr-mono { padding-top: 2px; }
-.az-vs .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; margin-top: auto; padding-top: 28px; }
+.az-vs .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; margin-top: 28px; }
 .az-vs .cta .ul { font-size: 15px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: color .3s, border-color .3s; }
 .az-vs .cta .ul:hover { color: var(--sea); border-color: var(--sea); }
 

@@ -1,13 +1,12 @@
 import type { ProjectAmenities } from "@/lib/azure/project-types";
 import { Icon } from "./icons";
 import ProjectHead, { splitTitle } from "./ProjectHead";
-import { mono } from "@/app/fonts";
 import "../meridian.css";
 
 // Olanaklar: ikon + başlık + açıklama beyaz kutuları (3 sütun).
 export default function Amenities({ d, name, id }: { d: ProjectAmenities; name: string; id: string }) {
   return (
-    <section className={`az-section az-proj mr ${mono.variable}`} id={id}>
+    <section className="az-section az-proj mr" id={id}>
       <div className="az-wrap">
         <ProjectHead kicker={d.kicker} title={splitTitle(d.title, name)} lead={d.lead} />
         <ul className="mr-grid rv">

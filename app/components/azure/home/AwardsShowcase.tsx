@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { mono } from "@/app/fonts";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import "../meridian.css";
@@ -53,7 +52,7 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
   const pad = (v: number) => String(v).padStart(2, "0");
 
   return (
-    <section className={`az-section tight mr ${mono.variable}`} id="oduller" aria-label={strip.label}>
+    <section className="az-section tight mr" id="oduller" aria-label={strip.label}>
       <div className="az-wrap">
         <div className="rv">
           <div ref={box} className="az-aw" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>

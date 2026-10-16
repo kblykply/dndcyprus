@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { PiArrowsInDuotone, PiArrowsOutDuotone, PiSpeakerHighDuotone, PiSpeakerSlashDuotone } from "react-icons/pi";
-import { mono } from "@/app/fonts";
 import { useNearViewport } from "@/app/components/performance/useNearViewport";
 import { VIDEO_SLIDES, VIDEO_UI, type VideoSlide } from "@/lib/azure/videos";
 import { href, type Locale } from "@/lib/azure/site";
@@ -18,7 +17,7 @@ const ytThumb = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
 /* ---------- oynatıcı arayüzü (YouTube ve sitedeki mp4 aynı biçimde yönetilir) ---------- */
 type Player = { play(): void; pause(): void; mute(): void; unmute(): void };
 
-type YTPlayer = { playVideo(): void; pauseVideo(): void; mute(): void; unMute(): void; destroy(): void; getDuration(): number };
+type YTPlayer = { playVideo(): void; pauseVideo(): void; mute(): void; unMute(): void; destroy(): void; getDuration(): number; unloadModule?(name: string): void };
 type YTGlobal = {
   Player: new (el: HTMLElement, o: {
     videoId: string; width: string; height: string; playerVars: Record<string, unknown>;
@@ -49,6 +48,9 @@ function loadYouTube(): Promise<YTGlobal | null> {
   return ytApi;
 }
 
+// Tarayıcı dili Türkçe olunca YouTube otomatik altyazıyı ("[müzik]") açıyor; sessiz vitrin videosunda kapalı kalsın
+const noCaptions = (p: YTPlayer) => { try { p.unloadModule?.("captions"); p.unloadModule?.("cc"); } catch {} };
+
 type MediaProps = { slide: VideoSlide; autoplay: boolean; onPlayer: (p: Player | null) => void; onDuration: (sec: number) => void };
 
 function YouTubeMedia({ slide, autoplay, onPlayer, onDuration }: MediaProps) {
@@ -71,17 +73,19 @@ function YouTubeMedia({ slide, autoplay, onPlayer, onDuration }: MediaProps) {
       if (!alive || !YT) return;
       yt = new YT.Player(mount, {
         videoId: id, width: "100%", height: "100%",
-        playerVars: { autoplay: autoplay ? 1 : 0, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1, iv_load_policy: 3, disablekb: 1, loop: 1, playlist: id },
+        playerVars: { autoplay: autoplay ? 1 : 0, mute: 1, controls: 0, rel: 0, playsinline: 1, modestbranding: 1, iv_load_policy: 3, disablekb: 1, cc_load_policy: 0, loop: 1, playlist: id },
         events: {
           onReady: ({ target }) => {
             if (!alive) return;
             try { target.mute(); if (autoplay) target.playVideo(); } catch {}
+            noCaptions(target);
             const d = target.getDuration?.();
             if (d > 0) cb.current.onDuration(d);
             cb.current.onPlayer({ play: () => target.playVideo(), pause: () => target.pauseVideo(), mute: () => target.mute(), unmute: () => target.unMute() });
           },
           onStateChange: ({ data }) => {
             if (data !== 1) return; // 1 = oynuyor
+            if (yt) noCaptions(yt);
             const d = yt?.getDuration?.();
             if (d && d > 0) cb.current.onDuration(d);
             clearTimeout(timer);
@@ -235,7 +239,7 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
   return (
     <div
       ref={setRefs}
-      className={`az-wrap az-vs mr ${mono.variable}`}
+      className="az-wrap az-vs mr"
       role="region"
       aria-roledescription="carousel"
       aria-label={ui.region}

@@ -6,7 +6,6 @@ import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
 import { Icon } from "./icons";
 import ProjectHead, { splitTitle } from "./ProjectHead";
-import { mono } from "@/app/fonts";
 import "../meridian.css";
 
 // Teknik donanım: yatay kaydırılan 4:5 görsel kartlar, alt cam etiket, ok düğmeleri ve noktalar.
@@ -23,7 +22,7 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <section className={`az-section az-proj mr ${mono.variable}`} id={id}>
+    <section className="az-section az-proj mr" id={id}>
       <div className="az-wrap">
         <div className="az-head row">
           <ProjectHead kicker={d.kicker} title={splitTitle(d.title, name)} lead={d.lead} className="mb-0" />

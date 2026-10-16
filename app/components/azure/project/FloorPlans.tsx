@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { PiArrowsOutDuotone, PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
-import { mono } from "@/app/fonts";
 import type { FloorPlan, ProjectFloorPlans } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
@@ -54,7 +53,7 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
   const brochureIsFile = !!cta.brochure && !cta.brochure.startsWith("#");
 
   return (
-    <section className={`az-section az-proj mr ${mono.variable}`} id={id}>
+    <section className="az-section az-proj mr" id={id}>
       <div className="az-wrap">
         <ProjectHead kicker={d.kicker} title={splitTitle(d.title, name)} lead={d.lead} />
 
