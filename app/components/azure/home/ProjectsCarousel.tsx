@@ -37,8 +37,6 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
   const [pin, setPin] = useState(false); // fareli ekran: aşağı kaydırma kartları yana kaydırır
   const pinRef = useRef(false);
   const [prog, setProg] = useState(0); // 0–1 gerçek kaydırma konumu
-  const [view, setView] = useState({ first: 0, vis: 3 }); // görünen ilk kart ve görünen kart sayısı
-  const n = PROJECTS.length;
   const step = () => (car.current?.querySelector<HTMLElement>(".az-pc")?.getBoundingClientRect().width ?? 300) + 16;
 
   useEffect(() => {
@@ -48,9 +46,6 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
       // son kart mıknatısa oturduğunda kenar payı kadar (Safari'de ~34px) geride kalabilir: o da "sonda" sayılır
       const end = max <= 0 || max - el.scrollLeft <= 40;
       setProg(max > 0 ? (end ? 1 : el.scrollLeft / max) : 0);
-      const w = step(), vis = Math.max(1, Math.round((el.clientWidth + 16) / w));
-      const total = PROJECTS.length;
-      setView({ vis, first: end ? Math.max(0, total - vis) : Math.min(total - vis, Math.round(el.scrollLeft / w)) });
     };
     onScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -154,8 +149,6 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
     el.scrollBy({ left: d * w, behavior: "smooth" });
   };
   const atStart = prog <= 0.01, atEnd = prog >= 0.99;
-  const pad = (v: number) => String(v).padStart(2, "0");
-  const last = Math.min(n, view.first + view.vis);
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "ArrowRight") { e.preventDefault(); go(1); } else if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); }
   };
@@ -188,8 +181,7 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
       <button type="button" className="arw next" aria-label={t.next} onClick={() => go(1)} disabled={atEnd}><Chevron dir={1} /></button>
       </div>
       <div className="nav">
-        {/* görülen kart sayısı / toplam (son görünen kartın sırası): "03 / 04" → sonda "04 / 04" */}
-            <span className="count" aria-hidden>{pad(last)} <i>/</i> {pad(n)}</span>
+        {/* yalnız ilerleme çizgisi (sayaç kaldırıldı) */}
         <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.04, prog)})` }} /></span>
       </div>
       </div>

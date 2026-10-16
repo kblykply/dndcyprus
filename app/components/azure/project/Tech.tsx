@@ -31,20 +31,17 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
   const car = useRef<HTMLDivElement>(null);
   const [pin, setPin] = useState(false);
   const [prog, setProg] = useState(0);
-  const [view, setView] = useState({ first: 0, vis: 3 });
   const n = d.items.length;
   const GAP = 18;
   const step = () => (car.current?.querySelector<HTMLElement>(".az-tcard")?.getBoundingClientRect().width ?? 300) + GAP;
 
-  // konum → ilerleme çizgisi ve görünen kart aralığı
+  // konum → ilerleme çizgisi
   useEffect(() => {
     const el = car.current; if (!el) return;
     const onScroll = () => {
       const max = el.scrollWidth - el.clientWidth;
       const end = max <= 0 || max - el.scrollLeft <= 40;
       setProg(max > 0 ? (end ? 1 : el.scrollLeft / max) : 0);
-      const w = step(), vis = Math.max(1, Math.min(n, Math.round((el.clientWidth + GAP) / w)));
-      setView({ vis, first: end ? Math.max(0, n - vis) : Math.min(n - vis, Math.max(0, Math.round(el.scrollLeft / w))) });
     };
     onScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -114,7 +111,6 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
   };
 
   const pad = (v: number) => String(v).padStart(2, "0");
-  const last = Math.min(n, view.first + view.vis);
 
   return (
     <section ref={sec} className={`az-section az-proj mr az-tech${pin ? " pin" : ""}`} id={id}>
@@ -137,8 +133,7 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
             ))}
           </div>
           <div className="nav">
-            {/* görülen kart sayısı / toplam (son görünen kartın sırası): "03 / 04" → sonda "04 / 04" */}
-            <span className="count" aria-hidden>{pad(last)} <i>/</i> {pad(n)}</span>
+        {/* yalnız ilerleme çizgisi (sayaç kaldırıldı) */}
             <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.04, prog)})` }} /></span>
           </div>
         </div>
