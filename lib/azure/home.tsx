@@ -17,7 +17,7 @@ export type HomeContent = {
   videos: { kicker: string; title: ReactNode };
   story: { kicker: string; title: ReactNode; steps: { t: string; h: string; p: string; tags: string[]; img: string }[] };
   projects: { kicker: string; title: ReactNode; prev: string; next: string; soonKicker: string; soonCta: string };
-  location: { kicker: string; title: ReactNode; p: string; dist: { label: string; v: string; w: number }[]; directions: string; tour: string; lbl: string; sub: string };
+  location: { kicker: string; title: ReactNode; p: string; dist: { label: string; v: string; w: number }[]; directions: string; tour: string };
   leadership: { kicker: string; title: ReactNode; people: { img: string; role: string; name: string; q: string; dl: [string, string][] }[]; team: string; teamCta: string; brandsLabel: string };
   timeline: { kicker: string; title: ReactNode; items: { year: string; tag: string; p: string; img: string }[] };
   press: { kicker: string; title: string; all: string };
@@ -78,7 +78,7 @@ const TR: HomeContent = {
     title: <>Denize, şehre ve havalimanına <b>yakın.</b></>,
     p: "Bahçeler, İskele (Ötüken). Long Beach Market ve restoranlar, sahil yürüyüş yolu, İskele merkezi.",
     dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Hastane", v: "10 km", w: 0.32 }, { label: "Gazimağusa", v: "15 km", w: 0.45 }, { label: "Ercan Havalimanı", v: "45 km", w: 1 }],
-    directions: "Yol tarifi", tour: "360° Tur", lbl: "Lagoon Verde", sub: "Bahçeler, İskele · Kuzey Kıbrıs",
+    directions: "Yol tarifi", tour: "360° Tur",
   },
   leadership: {
     kicker: "Kurucu & yönetim",
@@ -168,7 +168,7 @@ const EN: HomeContent = {
     title: <>Close to the sea, the city <b>and the airport.</b></>,
     p: "Bahçeler, İskele (Ötüken). Long Beach Market and restaurants, the seaside promenade, İskele town centre.",
     dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Hospital", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Ercan Airport", v: "45 km", w: 1 }],
-    directions: "Directions", tour: "360° Tour", lbl: "Lagoon Verde", sub: "Bahçeler, İskele · North Cyprus",
+    directions: "Directions", tour: "360° Tour",
   },
   leadership: {
     kicker: "Founder & management",
@@ -258,7 +258,7 @@ const DE: HomeContent = {
     title: <>Nah an Meer, Stadt <b>und Flughafen.</b></>,
     p: "Bahçeler, İskele (Ötüken). Long Beach Market und Restaurants, die Strandpromenade, das Zentrum von İskele.",
     dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Krankenhaus", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Flughafen Ercan", v: "45 km", w: 1 }],
-    directions: "Route", tour: "360°-Tour", lbl: "Lagoon Verde", sub: "Bahçeler, İskele · Nordzypern",
+    directions: "Route", tour: "360°-Tour",
   },
   leadership: {
     kicker: "Gründer & Management",
@@ -348,7 +348,7 @@ const RU: HomeContent = {
     title: <>Рядом море, город <b>и аэропорт.</b></>,
     p: "Bahçeler, Искеле (Ötüken). Long Beach Market и рестораны, набережная, центр Искеле.",
     dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Больница", v: "10 km", w: 0.32 }, { label: "Фамагуста", v: "15 km", w: 0.45 }, { label: "Аэропорт Эрджан", v: "45 km", w: 1 }],
-    directions: "Маршрут", tour: "3D-тур", lbl: "Lagoon Verde", sub: "Bahçeler, Искеле · Северный Кипр",
+    directions: "Маршрут", tour: "3D-тур",
   },
   leadership: {
     kicker: "Основатель и руководство",
@@ -438,7 +438,7 @@ const PL: HomeContent = {
     title: <>Blisko morza, miasta <b>i lotniska.</b></>,
     p: "Bahçeler, İskele (Ötüken). Long Beach Market i restauracje, nadmorska promenada, centrum İskele.",
     dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Szpital", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Lotnisko Ercan", v: "45 km", w: 1 }],
-    directions: "Trasa", tour: "Wirtualny spacer", lbl: "Lagoon Verde", sub: "Bahçeler, İskele · Cypr Północny",
+    directions: "Trasa", tour: "Wirtualny spacer",
   },
   leadership: {
     kicker: "Założyciel i zarząd",

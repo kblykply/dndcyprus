@@ -229,28 +229,26 @@ body.az-lock { overflow: hidden; }
 @media (max-width: 560px) { .t-award, .t-homes { grid-column: span 12; } .az-grid { grid-auto-rows: auto; } .t-lajoya { min-height: 240px; } }
 
 /* ---- scrollytelling ---- */
-.az-story .g { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(24px, 4vw, 64px); align-items: start; }
-.az-story .steps { display: grid; gap: clamp(60px, 14vh, 160px); padding: 10vh 0; }
-.az-step { opacity: .3; transition: opacity .6s; max-width: 46ch; }
-.az-step.on { opacity: 1; }
-.az-step .t { font-family: var(--font-display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
-.az-step h3 { font-size: clamp(26px, 3vw, 44px); margin: 10px 0 12px; }
-.az-step p { color: var(--ink-60); font-size: 17px; }
-.az-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-.az-tags span { padding: 7px 12px; border-radius: 999px; background: var(--glass); border: 1px solid rgba(255, 255, 255, .9); font-size: 12px; font-weight: 500; color: var(--ink); }
-.az-story .stick { position: sticky; top: 96px; border-radius: var(--r); overflow: hidden; aspect-ratio: 4 / 4.6; max-height: calc(100vh - 120px); max-width: 100%; background: var(--sea-deep); box-shadow: 0 30px 80px rgba(13, 35, 38, .18); }
-.az-story .stick img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity 1s var(--ease), transform 1.4s var(--ease); }
-.az-story .stick img.on { opacity: 1; transform: scale(1); }
-.az-story .stick .cap { position: absolute; left: 20px; bottom: 20px; right: 20px; display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-radius: 18px; background: rgba(255, 255, 255, .16); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, .35); color: #fff; font-size: 13px; }
-.az-story .stick .cap b { font-family: var(--font-display); font-weight: 500; font-size: 16px; }
-.az-dots { display: flex; gap: 6px; }
-.az-dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, .4); transition: all .4s; }
-.az-dots i.on { background: #fff; width: 18px; border-radius: 4px; }
-@media (max-width: 900px) {
-  .az-story .g { grid-template-columns: 1fr; }
-  .az-story .stick { top: 76px; aspect-ratio: 16 / 10; order: -1; max-height: 46vh; }
-  .az-story .steps { gap: 40px; padding: 20px 0; }
-  .az-step { opacity: 1; }
+/* "Bir gün" şeridi (Story): dört an yan yana, üstte renk değiştiren gün çizgisi; hepsi aynı hizada başlar */
+.az-day .row { list-style: none; padding: 0; margin: clamp(26px, 3vw, 44px) 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
+.az-day li { position: relative; min-width: 0; padding-top: 30px; }
+.az-day li::before { content: ""; position: absolute; left: 0; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px rgba(255, 255, 255, .85); z-index: 1; }
+.az-day li::after { content: ""; position: absolute; left: 6px; right: calc(-1 * clamp(16px, 2vw, 28px)); top: 5px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--c), var(--n)); opacity: .6; }
+.az-day .tick { display: flex; align-items: baseline; gap: 10px; }
+.az-day .tick b { font-family: var(--font-display); font-size: clamp(22px, 2vw, 28px); font-weight: 400; letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.az-day figure { margin: 16px 0 0; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: var(--sky-2); }
+.az-day figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease); }
+.az-day li:hover figure img { transform: scale(1.04); }
+.az-day h3 { margin-top: 18px; font-size: clamp(20px, 1.7vw, 25px); font-weight: 400; letter-spacing: -.02em; line-height: 1.15; }
+.az-day p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--ink-60); }
+.az-day p.tg { margin-top: 12px; line-height: 1.6; }
+@media (max-width: 1000px) { .az-day .row { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; } .az-day li:nth-child(2n)::after { right: 0; } }
+@media (max-width: 600px) {
+  .az-day .row { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 6px; scroll-padding-inline: var(--gutter); scrollbar-width: none; }
+  .az-day .row::-webkit-scrollbar { display: none; }
+  .az-day li { flex: 0 0 78%; scroll-snap-align: start; }
+  .az-day li:nth-child(2n)::after { right: -14px; }
+  .az-day li::after { right: -14px; }
 }
 
 /* ---- projects carousel ---- */
@@ -290,13 +288,6 @@ body.az-lock { overflow: hidden; }
 .az-dist li i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--aqua), var(--sea)); border-radius: 3px; transform: scaleX(0); transform-origin: left; transition: transform 1.4s var(--ease); }
 .az-dist.in li i::after { transform: scaleX(var(--w)); }
 .az-loc .map { position: relative; min-height: 420px; background: var(--sea-deep); }
-.az-loc .map img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
-.az-loc .map .pin { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; }
-.az-loc .map .pin i { width: 14px; height: 14px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 6px rgba(241, 92, 52, .3); position: relative; z-index: 2; }
-.az-loc .map .pin::before { content: ""; position: absolute; width: 120px; height: 120px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .6); animation: az-ring 2.4s ease-out infinite; }
-@keyframes az-ring { from { transform: scale(.3); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
-.az-loc .map .lbl { position: absolute; left: 20px; bottom: 20px; padding: 12px 16px; border-radius: 16px; background: rgba(255, 255, 255, .18); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .35); color: #fff; font-size: 13px; }
-.az-loc .map .lbl b { display: block; font-family: var(--font-display); font-size: 16px; font-weight: 500; }
 @media (max-width: 900px) { .az-loc .az-card { grid-template-columns: 1fr; } .az-loc .map { min-height: 300px; } }
 
 /* ---- leadership ---- */
@@ -337,8 +328,11 @@ body.az-lock { overflow: hidden; }
 @media (max-width: 600px) { .az-track { grid-template-columns: 1fr 1fr; } }
 
 /* ---- press + faq ---- */
-.az-pf { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: start; }
-.az-pf h2 { margin-bottom: 24px; }
+/* haberler ve SSS: iki sütun aynı hizada başlar ve biter; kapalı sorular haber listesinin boyuna uzar */
+.az-pf { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: stretch; }
+.az-pf > div { display: flex; flex-direction: column; min-width: 0; }
+.az-pf .hd { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 24px; }
+.az-pf .hd .az-btn { flex: none; margin-bottom: 6px; }
 .az-news { display: grid; gap: 12px; }
 .az-news a { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: center; padding: 12px; border-radius: 22px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); transition: transform .4s var(--ease), box-shadow .4s; color: var(--ink); }
 .az-news a:hover { transform: translateX(6px); box-shadow: 0 16px 40px rgba(13, 35, 38, .1); }
@@ -346,8 +340,8 @@ body.az-lock { overflow: hidden; }
 .az-news a small { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--sea); font-weight: 600; }
 .az-news a b { display: block; font-weight: 500; font-size: 15px; line-height: 1.3; margin-top: 4px; }
 .az-news a .d { font-size: 12px; color: var(--ink-40); margin-top: 4px; display: block; }
-.az-faq { display: grid; gap: 10px; }
-.az-faq details { border-radius: 20px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); padding: 0 20px; transition: background .3s; }
+.az-faq { flex: 1; display: grid; gap: 10px; align-content: stretch; }
+.az-faq details { display: flex; flex-direction: column; justify-content: center; border-radius: 20px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); padding: 0 20px; transition: background .3s; }
 .az-faq details[open] { background: var(--sand); }
 .az-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; font-weight: 500; font-size: 16px; }
 .az-faq summary::-webkit-details-marker { display: none; }

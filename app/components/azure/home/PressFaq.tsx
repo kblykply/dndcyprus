@@ -13,7 +13,10 @@ export default function PressFaq({ locale, items }: { locale: Locale; items: Pre
     <section className="az-section" id="basin">
       <div className="az-wrap az-pf">
         <div>
-          <span className="az-kicker rv">{t.press.kicker}</span><h2 className="az-h2 sm rv d1">{t.press.title}</h2>
+          <div className="hd">
+            <div><span className="az-kicker rv">{t.press.kicker}</span><h2 className="az-h2 sm rv d1">{t.press.title}</h2></div>
+            <Link className="az-btn glass sm rv d1" href={href(locale, "/press")} prefetch={false}>{t.press.all} →</Link>
+          </div>
           <div className="az-news">
             {news.map((n, k) => (
               <a key={n.id} className={`rv d${Math.min(k, 3)}`} href={n.url} target="_blank" rel="noopener noreferrer nofollow">
@@ -23,13 +26,12 @@ export default function PressFaq({ locale, items }: { locale: Locale; items: Pre
               </a>
             ))}
           </div>
-          <div style={{ marginTop: 16 }}><Link className="az-btn glass sm" href={href(locale, "/press")} prefetch={false}>{t.press.all} →</Link></div>
         </div>
         <div>
-          <span className="az-kicker rv">{t.faq.kicker}</span><h2 className="az-h2 sm rv d1">{t.faq.title}</h2>
+          <div className="hd"><div><span className="az-kicker rv">{t.faq.kicker}</span><h2 className="az-h2 sm rv d1">{t.faq.title}</h2></div></div>
           <div className="az-faq rv d2">
-            {t.faq.items.map((f, k) => (
-              <details key={f.q} open={k === 0}><summary>{f.q} <i>+</i></summary><div className="a">{f.a}</div></details>
+            {t.faq.items.map((f) => (
+              <details key={f.q}><summary>{f.q} <i>+</i></summary><div className="a">{f.a}</div></details>
             ))}
           </div>
         </div>
