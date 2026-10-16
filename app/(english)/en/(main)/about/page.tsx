@@ -44,7 +44,7 @@ description = "Discover our projects and living concept."
 
 />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="en" heading="h2" /></div></section>
-    <Timeline locale="en" id="timeline" />
+    <Timeline locale="en" id="timeline" about />
     <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="en" heading="h2" /></div></section>
 
 

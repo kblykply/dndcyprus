@@ -43,7 +43,7 @@ export default function HomePage() {
   description="Projelerimizi ve yaşam konseptimizi keşfedin."
 />
 <section className="az-section" id="kurucu" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="tr" heading="h2" /></div></section>
-    <Timeline locale="tr" id="timeline" />
+    <Timeline locale="tr" id="timeline" about />
     <section className="az-section" id="direktor" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="tr" heading="h2" /></div></section>
 
 

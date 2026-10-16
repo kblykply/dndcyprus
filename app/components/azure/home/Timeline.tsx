@@ -36,18 +36,38 @@ const PARALLELS = [10, 22, 34, 46, 58, 70].map((d) => {
   return { cy: G.cy - G.r * Math.sin(p) * Math.cos(G.tilt), rx: G.r * Math.cos(p), ry: G.r * Math.cos(p) * Math.sin(G.tilt) };
 });
 
-// Ana sayfada ve Hakkımızda'da ("Yolculuğumuz" kartlarının yerine, id="timeline") aynı bileşen.
-export default function Timeline({ locale, id }: { locale: Locale; id?: string }) {
+// Hakkımızda başlığı: eski "Yolculuğumuz" bölümünün etiket, başlık ve açıklaması
+const ABOUT_HEAD: Record<Locale, { kicker: string; title: string; lead: string }> = {
+  tr: { kicker: "DND Cyprus", title: "Yolculuğumuz", lead: "Önemli kilometre taşlarımızı gezinerek keşfedin." },
+  en: { kicker: "DND Cyprus", title: "Our Journey", lead: "Explore our key milestones." },
+  de: { kicker: "DND Cyprus", title: "Unser Weg", lead: "Entdecken Sie unsere wichtigsten Meilensteine." },
+  ru: { kicker: "DND Cyprus", title: "Наш путь", lead: "Ключевые вехи нашей истории." },
+  pl: { kicker: "DND Cyprus", title: "Nasza historia", lead: "Najważniejsze etapy naszego rozwoju." },
+};
+
+// Ana sayfada ve Hakkımızda'da ("Yolculuğumuz" kartlarının yerine, about + id="timeline") aynı bileşen.
+export default function Timeline({ locale, id, about }: { locale: Locale; id?: string; about?: boolean }) {
   const t = HOME[locale].timeline;
   const m = MAP[locale];
   const items = t.items.slice(0, STOPS.length);
   const pts = items.map((_, i) => at(STOPS[i]));
+  const head = about ? ABOUT_HEAD[locale] : null;
 
   return (
     <section className="az-section" id={id}>
       <div className="az-wrap">
-        <span className="az-kicker rv">{t.kicker}</span>
-        <h2 className="az-h2 rv d1">{t.title}</h2>
+        {head ? (
+          <>
+            <span className="az-kicker rv">{head.kicker}</span>
+            <h2 className="az-h2 sm rv d1">{head.title}</h2>
+            <p className="az-lead rv d2">{head.lead}</p>
+          </>
+        ) : (
+          <>
+            <span className="az-kicker rv">{t.kicker}</span>
+            <h2 className="az-h2 rv d1">{t.title}</h2>
+          </>
+        )}
 
         <div className="az-meridian rv">
           <svg className="globe" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden>

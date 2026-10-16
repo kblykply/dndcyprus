@@ -44,7 +44,7 @@ description = "Entdecken Sie unsere Projekte und unser Wohnkonzept."
 
 />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="de" heading="h2" /></div></section>
-    <Timeline locale="de" id="timeline" />
+    <Timeline locale="de" id="timeline" about />
     <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="de" heading="h2" /></div></section>
 
 
