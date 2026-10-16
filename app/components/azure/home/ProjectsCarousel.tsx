@@ -188,7 +188,8 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
       <button type="button" className="arw next" aria-label={t.next} onClick={() => go(1)} disabled={atEnd}><Chevron dir={1} /></button>
       </div>
       <div className="nav">
-        <span className="count" aria-hidden>{view.vis > 1 ? <>{pad(view.first + 1)}<i>–</i>{pad(last)}</> : pad(view.first + 1)} <i>/</i> {pad(n)}</span>
+        {/* görülen kart sayısı / toplam (son görünen kartın sırası): "03 / 04" → sonda "04 / 04" */}
+            <span className="count" aria-hidden>{pad(last)} <i>/</i> {pad(n)}</span>
         <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.04, prog)})` }} /></span>
       </div>
       </div>

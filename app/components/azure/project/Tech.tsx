@@ -137,7 +137,8 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
             ))}
           </div>
           <div className="nav">
-            <span className="count" aria-hidden>{view.vis > 1 ? <>{pad(view.first + 1)}<i>–</i>{pad(last)}</> : pad(view.first + 1)} <i>/</i> {pad(n)}</span>
+            {/* görülen kart sayısı / toplam (son görünen kartın sırası): "03 / 04" → sonda "04 / 04" */}
+            <span className="count" aria-hidden>{pad(last)} <i>/</i> {pad(n)}</span>
             <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.04, prog)})` }} /></span>
           </div>
         </div>
