@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Lagoon Verde — 360° Sanal Tur | DND Cyprus</title>
+<meta name="description" content="Lagoon Verde 360° sanal turu: daireler, lagün havuzu, aquapark ve sosyal tesisleri panoramik olarak keşfedin. Bahçeler, İskele — Kuzey Kıbrıs.">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:title" content="Lagoon Verde — 360° Sanal Tur">
+<meta property="og:description" content="Projeyi panoramik olarak keşfedin — 27 durak, daireler ve sosyal alanlar.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tour.css?v=71">
+</head>
+<body class="is-loading">
+
+<!-- ══ YÜKLEME EKRANI ══ -->
+<div id="preloader" role="status" aria-live="polite" aria-label="Tur yükleniyor">
+  <div class="pl-inner">
+    <div class="pl-ring">
+      <svg class="pl-arc" viewBox="0 0 140 140" aria-hidden="true">
+        <circle cx="70" cy="70" r="66" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1.5"/>
+        <circle cx="70" cy="70" r="66" fill="none" stroke="#37b6bd" stroke-width="1.5"
+                stroke-linecap="round" stroke-dasharray="60 355"/>
+      </svg>
+      <svg class="pl-arc pl-arc-rev" viewBox="0 0 140 140" aria-hidden="true">
+        <circle cx="70" cy="70" r="55" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1"
+                stroke-linecap="round" stroke-dasharray="24 322"/>
+      </svg>
+      <!-- Çift yüz: dönerken arka tarafta logo ters okunmasın. -->
+      <div class="pl-coin">
+        <div class="pl-face"><img src="assets/dnd-logo.svg" alt="DND Cyprus"></div>
+        <div class="pl-face pl-back"><img src="assets/dnd-logo.svg" alt="" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- Harfler dağınık başlar, yükleme ilerledikçe birleşir. -->
+    <div class="pl-word">
+      <p class="wm wm-sm" id="wmTop">DND PROJELERİ</p>
+      <p class="wm wm-lg" id="wmBig">360° GÖRÜNÜM</p>
+    </div>
+
+    <div class="pl-meta">
+      <div class="pl-bar"><span id="plFill"></span></div>
+      <p class="pl-pct"><b id="plPct">0</b><i>%</i></p>
+    </div>
+  </div>
+</div>
+
+<!-- Panorama sahnesi -->
+<div id="pano" aria-label="360 derece panorama görünümü"></div>
+<div id="vignette" aria-hidden="true"></div>
+
+<!-- ══ AÇILIŞ ══ -->
+<section id="intro" aria-label="Tura giriş">
+  <!-- Panoramayı karartmaz; yalnızca alt kenarda okunurluk zemini verir. -->
+  <div class="intro-veil" aria-hidden="true"></div>
+
+  <div class="intro-inner">
+    <div class="intro-logo-wrap">
+      <img class="intro-logo" src="assets/lagoon-logo.png" alt="Lagoon Verde">
+    </div>
+    <p class="intro-kicker" data-i18n="introKicker">360° SANAL TUR</p>
+    <div class="line-mask">
+      <h1 class="intro-title" data-i18n="introTitle">Projeyi kendi gözünüzle gezin</h1>
+    </div>
+    <div class="line-mask">
+      <p class="intro-sub" data-i18n="introSub">Daireleri, lagün havuzunu ve sosyal alanları panoramik olarak keşfedin.</p>
+    </div>
+    <button id="startBtn" class="btn-primary btn-lg">
+      <span data-i18n="startTour">Tura Başla</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <ul class="intro-facts">
+      <li><b id="factScenes">27</b> <span data-i18n="factStops">durak</span></li>
+      <li id="liUnits"><b id="factUnitsN">354</b> <span data-i18n="factUnits">konut</span></li>
+      <li id="liLand"><b id="factLandN">43.179</b> m² <span data-i18n="factLand">arsa</span></li>
+    </ul>
+    <p class="intro-loc" id="introLoc">Bahçeler, İskele — Kuzey Kıbrıs</p>
+  </div>
+
+  <div class="intro-brand">
+    <img src="assets/dnd-logo.svg" alt="DND Cyprus">
+  </div>
+</section>
+
+<!-- ══ ARAYÜZ ══ -->
+<div id="ui" hidden>
+
+  <!-- Üst bar -->
+  <header id="topbar">
+    <div class="tb-left">
+      <button id="menuBtn" class="icon-btn" aria-label="Sahne menüsü" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <a class="tb-back" href="index.html" aria-label="Projeler">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <img src="assets/dnd-logo.svg" alt="DND Cyprus">
+      </a>
+      <a class="tb-brand" href="https://www.dndcyprus.com/tr/lagoon-verde" target="_blank" rel="noopener">
+        <span class="tb-project">Lagoon Verde</span>
+      </a>
+    </div>
+
+    <div class="tb-center">
+      <p id="sceneGroup" class="tb-group"></p>
+      <h2 id="sceneName" class="tb-name"></h2>
+    </div>
+
+    <div class="tb-right">
+      <button id="nearbyBtn" class="icon-btn" aria-label="Çevreyi keşfet" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      </button>
+      <button id="langBtn" class="icon-btn text-btn" aria-label="Dil değiştir">EN</button>
+      <button id="rotateBtn" class="icon-btn is-on" aria-label="Otomatik dönüş" aria-pressed="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button id="infoBtn" class="icon-btn" aria-label="Sahne bilgisi" aria-pressed="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 7.6v.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button id="fsBtn" class="icon-btn" aria-label="Tam ekran">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sahne menüsü -->
+  <nav id="menu" aria-label="Sahneler" aria-hidden="true">
+    <div class="menu-head">
+      <img class="menu-logo" src="assets/lagoon-logo.png" alt="Lagoon Verde">
+      <button id="menuClose" class="icon-btn" aria-label="Menüyü kapat">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div id="menuBody" class="menu-body"></div>
+    <div class="menu-foot">
+      <a class="btn-primary btn-block" id="menuCta" href="https://www.dndcyprus.com/tr/lagoon-verde" target="_blank" rel="noopener" data-i18n="getPrice">Fiyat Al</a>
+    </div>
+  </nav>
+  <!-- Çevreyi Keşfet: Kıbrıs'ın tarihi ve gezilecek yerleri -->
+  <aside id="nearby" aria-label="Çevredeki gezilecek yerler" aria-hidden="true">
+    <!-- Kapak, listede üzerine gelinen yerin fotoğrafına ve adına döner -->
+    <div class="nb-cover">
+      <img id="nbCoverImg" src="assets/wide/cyprus-heritage.jpg" alt="" aria-hidden="true">
+      <button id="nearbyClose" class="icon-btn nb-close" aria-label="Kapat">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="nb-cover-text">
+        <p class="nb-kicker" id="nbKicker" data-i18n="nearbyKicker">KUZEY KIBRIS</p>
+        <h2 class="nb-title" id="nbTitle" data-i18n="nearbyTitle">Çevreyi Keşfet</h2>
+        <p class="nb-cover-credit" id="nbCredit"></p>
+      </div>
+    </div>
+    <p class="nb-lead" data-i18n="nearbyLead">Projeden yola çıkarak gezebileceğiniz tarihi ve doğal noktalar. Mesafeler karayolu ile yaklaşıktır.</p>
+    <div class="nb-tabs" id="nbTabs" role="tablist"></div>
+    <div class="nb-body" id="nbBody"></div>
+  </aside>
+
+  <div id="scrim" hidden></div>
+
+  <!-- Sahne bilgi kartı -->
+  <aside id="infoCard" aria-live="polite">
+    <p class="ic-group"></p>
+    <h3 class="ic-name"></h3>
+    <p class="ic-desc"></p>
+  </aside>
+
+  <!-- Sağ sütun: iletişim + pusula + zoom -->
+  <div id="tools">
+    <a id="waBtn" class="wa-btn" href="https://wa.me/905488880363" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişim">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2m0 18.02h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.26-4.35c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24m4.52-6.17c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.13c-.17.24-.64.8-.79.97c-.14.16-.29.18-.54.06c-.25-.13-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.01-.38.11-.5c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.13-.56-1.35-.77-1.84c-.2-.48-.4-.42-.55-.43h-.47c-.16 0-.43.06-.65.31c-.22.25-.85.83-.85 2.02c0 1.19.87 2.34.99 2.5c.12.17 1.71 2.61 4.15 3.66c.58.25 1.03.4 1.39.51c.58.19 1.11.16 1.53.1c.47-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.15-1.18c-.06-.11-.22-.17-.47-.29"/></svg>
+      <span data-i18n="contact">İletişim</span>
+    </a>
+    <div id="compass" aria-hidden="true">
+      <svg viewBox="0 0 44 44" width="44" height="44">
+        <circle cx="22" cy="22" r="20" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+        <g id="compassNeedle">
+          <path d="M22 7 L26.5 22 L22 19 L17.5 22 Z" fill="#27959B"/>
+          <path d="M22 37 L17.5 22 L22 25 L26.5 22 Z" fill="rgba(255,255,255,.55)"/>
+        </g>
+        <text x="22" y="6.5" text-anchor="middle" font-size="7" fill="rgba(255,255,255,.7)" font-family="Inter,sans-serif">K</text>
+      </svg>
+    </div>
+    <div class="zoom-group">
+      <button id="zoomIn" class="icon-btn" aria-label="Yakınlaştır">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button id="zoomOut" class="icon-btn" aria-label="Uzaklaştır">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Alt: küçük resim şeridi -->
+  <footer id="filmstrip">
+    <div class="fs-tabs" id="fsTabs" role="tablist"></div>
+    <div class="fs-scroll">
+      <button class="fs-arrow fs-prev" id="fsPrev" aria-label="Geri kaydır">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="fs-track" id="fsTrack"></div>
+      <button class="fs-arrow fs-next" id="fsNext" aria-label="İleri kaydır">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- İlk kullanım ipucu -->
+  <div id="hint" hidden>
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M9 8l-3 4 3 4M15 8l3 4-3 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-i18n="dragHint">Bakmak için sürükleyin</span>
+  </div>
+
+  <!-- Sahne yükleniyor -->
+  <div id="sceneLoader" hidden><span></span><span></span><span></span></div>
+</div>
+
+<script src="vendor/marzipano.js"></script>
+<script src="js/projects.js?v=71"></script>
+<script src="js/nearby.js?v=71"></script>
+<script src="js/i18n.js?v=71"></script>
+<!-- boot.js, ?p= parametresine göre proje verisini ve tour.js'i yükler -->
+<script src="js/boot.js?v=71"></script>
+</body>
+</html>

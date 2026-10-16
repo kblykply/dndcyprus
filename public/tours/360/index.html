@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DND Cyprus — 360° Proje Turları</title>
+<meta name="description" content="DND Cyprus projelerinin 360° sanal turları: Lagoon Verde, La Joya Perla II ve diğer projeler. Kuzey Kıbrıs.">
+<meta name="theme-color" content="#0b0b0c">
+<meta property="og:title" content="DND Cyprus — 360° Proje Turları">
+<meta property="og:description" content="Projeleri panoramik olarak keşfedin.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tour.css?v=71">
+</head>
+<body class="is-loading is-hub">
+
+<!-- ══ YÜKLEME EKRANI ══ -->
+<div id="preloader" role="status" aria-live="polite" aria-label="Yükleniyor">
+  <div class="pl-inner">
+    <div class="pl-ring">
+      <svg class="pl-arc" viewBox="0 0 140 140" aria-hidden="true">
+        <circle cx="70" cy="70" r="66" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="1.5"/>
+        <circle cx="70" cy="70" r="66" fill="none" stroke="#37b6bd" stroke-width="1.5"
+                stroke-linecap="round" stroke-dasharray="60 355"/>
+      </svg>
+      <svg class="pl-arc pl-arc-rev" viewBox="0 0 140 140" aria-hidden="true">
+        <circle cx="70" cy="70" r="55" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1"
+                stroke-linecap="round" stroke-dasharray="24 322"/>
+      </svg>
+      <!-- Çift yüz: dönerken arka tarafta logo ters okunmasın. -->
+      <div class="pl-coin">
+        <div class="pl-face"><img src="assets/dnd-logo.svg" alt="DND Cyprus"></div>
+        <div class="pl-face pl-back"><img src="assets/dnd-logo.svg" alt="" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- Harfler dağınık başlar, yükleme ilerledikçe birleşir. -->
+    <div class="pl-word">
+      <p class="wm wm-sm" id="wmTop">DND PROJELERİ</p>
+      <p class="wm wm-lg" id="wmBig">360° GÖRÜNÜM</p>
+    </div>
+
+    <div class="pl-meta">
+      <div class="pl-bar"><span id="plFill"></span></div>
+      <p class="pl-pct"><b id="plPct">0</b><i>%</i></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROJE SEÇİMİ ══ -->
+<main id="hub">
+  <header class="hub-top">
+    <a class="hub-brand" href="/tr/" target="_top" rel="noopener">
+      <img src="assets/dnd-logo.svg" alt="DND Cyprus">
+    </a>
+    <button id="hubLang" class="icon-btn text-btn" aria-label="Dil değiştir">EN</button>
+  </header>
+
+  <div class="hub-head">
+    <p class="hub-kicker" data-i18n="hubKicker">360° SANAL TURLAR</p>
+    <h1 class="hub-title" data-i18n="hubTitle">Hangi projeyi gezmek istersiniz?</h1>
+    <p class="hub-lead" data-i18n="hubLead">Bir proje seçin; daireleri, havuzları ve sosyal alanları panoramik olarak dolaşın.</p>
+  </div>
+
+  <div class="hub-grid" id="hubGrid"></div>
+
+  <footer class="hub-foot">
+    <p data-i18n="hubFoot">Görseller ve bilgiler tanıtım amaçlıdır. Nihai detaylar için satış ekibiyle iletişime geçiniz.</p>
+  </footer>
+</main>
+
+<script src="js/projects.js?v=71"></script>
+<script src="js/i18n.js?v=71"></script>
+<script src="js/hub.js?v=71"></script>
+</body>
+</html>
