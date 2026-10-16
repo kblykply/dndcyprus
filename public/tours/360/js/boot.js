@@ -8,7 +8,17 @@
 
   var VER = (document.currentScript && document.currentScript.src.split('?v=')[1]) || '1';
 
-  var id = new URLSearchParams(location.search).get('p') || 'lagoon-verde';
+  /* ⚠️ SESSIZ VARSAYILAN KALDIRILDI (brief-2, 2026-08-18): p yokken
+     'lagoon-verde' varsayiliyordu — sorgusu kirpilmis bir Perla linki
+     ziyaretciyi YANLIS projeye (Lagoon Verde) sokuyordu. p yoksa ya da
+     bilinmiyorsa proje secim ekranina donulur; site slug'lari da
+     (la-joya-perla gibi) alias tablosuyla dogru ide cevrilir. */
+  var ALIAS = {
+    'la-joya-perla': 'perla', 'la-joya-perla-ii': 'perla-ii',
+    'mariachi-beach-club': 'mariachi'
+  };
+  var id = new URLSearchParams(location.search).get('p') || '';
+  id = ALIAS[id] || id;
   var list = window.TOUR_PROJECTS || [];
   var project = list.filter(function (p) { return p.id === id; })[0];
 

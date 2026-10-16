@@ -4,17 +4,24 @@
 <meta charset="utf-8">
 <meta http-equiv="Cache-Control" content="no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<!-- 🔴 `maximum-scale=1, user-scalable=no` KALDIRILDI (2026-08-25
+     denetimi): az goren ziyaretci bu iki sayfada arayuzu (sahne
+     menusu, "Cevreyi Kesfet" listesi, konut bilgileri) parmakla
+     buyutemiyordu. Panorama kendi ic yakinlastirmasini zaten
+     isliyor; sayfa yakinlastirmasi onunla catismaz. Sitenin
+     kalan 439 sayfasiyla ayni viewport. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lagoon Verde — 360° Sanal Tur | DND Cyprus</title>
 <meta name="description" content="Lagoon Verde 360° sanal turu: daireler, lagün havuzu, aquapark ve sosyal tesisleri panoramik olarak keşfedin. Bahçeler, İskele — Kuzey Kıbrıs.">
 <meta name="theme-color" content="#0b0b0c">
 <meta property="og:title" content="Lagoon Verde — 360° Sanal Tur">
 <meta property="og:description" content="Projeyi panoramik olarak keşfedin — 27 durak, daireler ve sosyal alanlar.">
 <meta property="og:type" content="website">
+<!-- Yazı tipleri dndcyprus.com ile aynı: başlık Outfit, metin Albert Sans -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/tour.css?v=71">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tour.css?v=75">
 </head>
 <body class="is-loading">
 
@@ -71,7 +78,7 @@
     <div class="line-mask">
       <p class="intro-sub" data-i18n="introSub">Daireleri, lagün havuzunu ve sosyal alanları panoramik olarak keşfedin.</p>
     </div>
-    <button id="startBtn" class="btn-primary btn-lg">
+    <button type="button" id="startBtn" class="btn-primary btn-lg">
       <span data-i18n="startTour">Tura Başla</span>
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -94,7 +101,7 @@
   <!-- Üst bar -->
   <header id="topbar">
     <div class="tb-left">
-      <button id="menuBtn" class="icon-btn" aria-label="Sahne menüsü" aria-expanded="false">
+      <button type="button" id="menuBtn" class="icon-btn" aria-label="Sahne menüsü" aria-expanded="false">
         <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
       <a class="tb-back" href="index.html" aria-label="Projeler">
@@ -112,17 +119,17 @@
     </div>
 
     <div class="tb-right">
-      <button id="nearbyBtn" class="icon-btn" aria-label="Çevreyi keşfet" aria-expanded="false">
+      <button type="button" id="nearbyBtn" class="icon-btn" aria-label="Çevreyi keşfet" aria-expanded="false">
         <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
       </button>
-      <button id="langBtn" class="icon-btn text-btn" aria-label="Dil değiştir">EN</button>
-      <button id="rotateBtn" class="icon-btn is-on" aria-label="Otomatik dönüş" aria-pressed="true">
+      <button type="button" id="langBtn" class="icon-btn text-btn" aria-label="Dil değiştir">EN</button>
+      <button type="button" id="rotateBtn" class="icon-btn is-on" aria-label="Otomatik dönüş" aria-pressed="true">
         <svg viewBox="0 0 24 24" width="20" height="20"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <button id="infoBtn" class="icon-btn" aria-label="Sahne bilgisi" aria-pressed="true">
+      <button type="button" id="infoBtn" class="icon-btn" aria-label="Sahne bilgisi" aria-pressed="true">
         <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5M12 7.6v.9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
-      <button id="fsBtn" class="icon-btn" aria-label="Tam ekran">
+      <button type="button" id="fsBtn" class="icon-btn" aria-label="Tam ekran">
         <svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
@@ -132,7 +139,7 @@
   <nav id="menu" aria-label="Sahneler" aria-hidden="true">
     <div class="menu-head">
       <img class="menu-logo" src="assets/lagoon-logo.png" alt="Lagoon Verde">
-      <button id="menuClose" class="icon-btn" aria-label="Menüyü kapat">
+      <button type="button" id="menuClose" class="icon-btn" aria-label="Menüyü kapat">
         <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
@@ -145,8 +152,13 @@
   <aside id="nearby" aria-label="Çevredeki gezilecek yerler" aria-hidden="true">
     <!-- Kapak, listede üzerine gelinen yerin fotoğrafına ve adına döner -->
     <div class="nb-cover">
-      <img id="nbCoverImg" src="assets/wide/cyprus-heritage.jpg" alt="" aria-hidden="true">
-      <button id="nearbyClose" class="icon-btn nb-close" aria-label="Kapat">
+      <!-- Baslangic karesi DISKTE VAR OLAN bir dosya olmali: eskiden burada
+           assets/wide/cyprus-heritage.jpg yaziyordu, o dosya hic uretilmedi —
+           tarayici her tur acilisinda 404 istiyor ve JS devreye girene kadar
+           kirik gorsel gorunuyordu. JS (tour.js COVER_DEFAULT) bunu zaten
+           gezilen projenin kendi kapagiyla degistiriyor. -->
+      <img id="nbCoverImg" src="assets/covers/lagoon-verde.jpg" alt="" aria-hidden="true">
+      <button type="button" id="nearbyClose" class="icon-btn nb-close" aria-label="Kapat">
         <svg viewBox="0 0 24 24" width="20" height="20"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
       <div class="nb-cover-text">
@@ -182,14 +194,14 @@
           <path d="M22 7 L26.5 22 L22 19 L17.5 22 Z" fill="#27959B"/>
           <path d="M22 37 L17.5 22 L22 25 L26.5 22 Z" fill="rgba(255,255,255,.55)"/>
         </g>
-        <text x="22" y="6.5" text-anchor="middle" font-size="7" fill="rgba(255,255,255,.7)" font-family="Inter,sans-serif">K</text>
+        <text x="22" y="6.5" text-anchor="middle" font-size="7" fill="rgba(255,255,255,.7)" font-family="Albert Sans,sans-serif">K</text>
       </svg>
     </div>
     <div class="zoom-group">
-      <button id="zoomIn" class="icon-btn" aria-label="Yakınlaştır">
+      <button type="button" id="zoomIn" class="icon-btn" aria-label="Yakınlaştır">
         <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
-      <button id="zoomOut" class="icon-btn" aria-label="Uzaklaştır">
+      <button type="button" id="zoomOut" class="icon-btn" aria-label="Uzaklaştır">
         <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
@@ -199,11 +211,11 @@
   <footer id="filmstrip">
     <div class="fs-tabs" id="fsTabs" role="tablist"></div>
     <div class="fs-scroll">
-      <button class="fs-arrow fs-prev" id="fsPrev" aria-label="Geri kaydır">
+      <button type="button" class="fs-arrow fs-prev" id="fsPrev" aria-label="Geri kaydır">
         <svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="fs-track" id="fsTrack"></div>
-      <button class="fs-arrow fs-next" id="fsNext" aria-label="İleri kaydır">
+      <button type="button" class="fs-arrow fs-next" id="fsNext" aria-label="İleri kaydır">
         <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
@@ -217,13 +229,30 @@
 
   <!-- Sahne yükleniyor -->
   <div id="sceneLoader" hidden><span></span><span></span><span></span></div>
+
+  <!-- Kaynak künyesi. Hub'da bu turlar "PROJE TURU" rozetiyle, ABD turları
+       "ÖRNEK İÇ MEKÂN" rozetiyle görünüyor; bu karşıtlık, uyarı olmayınca
+       buradaki görselleri tamamlanmış yapının fotoğrafı gibi gösteriyordu.
+       Oysa bu panoramalar da projenin render/katalog görsellerinden. -->
+  <button id="kaynakBtn" class="kaynak-etiket" type="button"
+          aria-expanded="false" aria-controls="kaynakPanel">
+    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+         stroke-width="2" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6v.6" stroke-linecap="round"/>
+    </svg>
+    <span data-i18n="kaynakEtiket">Bu görseller hakkında</span>
+  </button>
+  <div id="kaynakPanel" class="kaynak-panel" hidden>
+    <p data-i18n="kaynakMetin">Bu turdaki panoramalar tamamlanmış yapının fotoğrafı değildir; projenin kendi render ve katalog görsellerinden hazırlanmış görselleştirmelerdir. Malzeme, renk ve donanım seçenekleri değişebilir.</p>
+    <button type="button" class="btn-primary" id="kaynakKapat" data-i18n="kaynakKapat">Kapat</button>
+  </div>
 </div>
 
 <script src="vendor/marzipano.js"></script>
-<script src="js/projects.js?v=71"></script>
-<script src="js/nearby.js?v=71"></script>
-<script src="js/i18n.js?v=71"></script>
+<script src="js/projects.js?v=75"></script>
+<script src="js/nearby.js?v=75"></script>
+<script src="js/i18n.js?v=75"></script>
 <!-- boot.js, ?p= parametresine göre proje verisini ve tour.js'i yükler -->
-<script src="js/boot.js?v=71"></script>
+<script src="js/boot.js?v=75"></script>
 </body>
 </html>

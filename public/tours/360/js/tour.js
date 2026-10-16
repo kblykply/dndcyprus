@@ -7,9 +7,15 @@
   'use strict';
 
   /* Karo (tile) kökü. Tur dndcyprus.com'a kurulduğunda index.html içinde
-     window.TOUR_TILE_BASE = 'tiles' verilerek yerel karolar kullanılır. */
-  var TILE_BASE = window.TOUR_TILE_BASE ||
-    '/tours/lagoon-verde/app-files/tiles';
+     window.TOUR_TILE_BASE = 'tiles' verilerek yerel karolar kullanılır.
+     ⚠️ BOS DIZE gecerli bir degerdir: "bu turun karolari kendi klasorunde"
+     demektir (la-joya / mariachi / gecitkale boyle). Eskiden bos dize falsy
+     oldugu icin || zinciri LAGOON VERDE'nin karolarina dusuyordu — yani
+     karolari yerel olan bir tur, sessizce baska bir projenin karolarini
+     istiyordu. Simdi bos dize yerel klasore baglaniyor. */
+  var TILE_BASE = (typeof window.TOUR_TILE_BASE === 'string')
+    ? (window.TOUR_TILE_BASE || 'assets/tiles')
+    : '/tours/lagoon-verde/app-files/tiles';
 
   var META = window.TOUR_META;
   var I18N = window.TOUR_I18N;
@@ -18,11 +24,20 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  /* ── Dil ─────────────────────────────────────────────── */
+  /* ── Dil ──────────────────────────────────────────────────────────────
+     Bu motor yalniz TR ve EN biliyor. Iki kusur vardi:
+      · son satirin iki dali da 'tr' idi (olu kod) — Ingilizce HIC devreye
+        girmiyordu, dunyanin her yerinden gelen ziyaretci Turkce goruyordu;
+      · ?lang= hic okunmuyordu, bu yuzden 360 bolumunde secilen dil Kibris
+        turuna gecmiyordu.
+     Sira: adres > kayitli tercih > tarayici. DE/RU/PL gibi cevrilmemis
+     diller Turkce'ye degil INGILIZCE'ye duser. */
   var lang = (function () {
-    var q = new URLSearchParams(location.search).get('lang'); if (q === 'tr' || q === 'en') return q;
+    var esle = { tr: 'tr', en: 'en', de: 'en', ru: 'en', pl: 'en' };
+    var q = esle[new URLSearchParams(location.search).get('lang')];
+    if (q) return q;
     try { var s = localStorage.getItem('lv360-lang'); if (s === 'tr' || s === 'en') return s; } catch (e) {}
-    return (navigator.language || '').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'tr';
+    return (navigator.language || '').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en';
   })();
 
   function t(key) { return (I18N[lang] && I18N[lang][key]) || I18N.tr[key] || key; }
@@ -123,10 +138,50 @@
 
   /* ── Marzipano kurulumu ──────────────────────────────── */
   var panoEl = $('#pano');
-  var viewer = new Marzipano.Viewer(panoEl, {
-    controls: { mouseViewMode: 'drag' },
-    stage: { preserveDrawingBuffer: false }
-  });
+
+  /* ⚠️ KORUMA (brief-2, 2026-08-18 — _360/js/tur.js'teki kalibin aynisi):
+     WebGL yoksa Viewer kurucusu firlatiyor, IIFE oluyor ve preloader'i
+     kaldiran finishLoading zinciri ile 12 sn emniyet zamanlayicisi HIC
+     kurulamiyordu — ziyaretci mesajsiz, sonsuz yukleme ekraninda kaliyordu.
+     Hata dalinda perde kaldirilir, aciklayici metin + tur listesi linki
+     gosterilir (statik galeriye donus). */
+  function webglVar() {
+    try {
+      var c = document.createElement('canvas');
+      return !!(window.WebGLRenderingContext &&
+        (c.getContext('webgl') || c.getContext('experimental-webgl')));
+    } catch (e) { return false; }
+  }
+  function webglHata(neden) {
+    console.warn('[DND 360] tur baslatilamadi:', neden);
+    document.body.classList.remove('is-loading');
+    var pl = document.getElementById('preloader');
+    if (pl) pl.hidden = true;
+    var kutu = document.createElement('div');
+    kutu.setAttribute('role', 'alert');
+    kutu.style.cssText = 'position:fixed;inset:0;display:grid;place-items:center;' +
+      'background:#0c141e;color:#fff;text-align:center;padding:2rem;z-index:99';
+    var tr = (document.documentElement.lang || 'tr').indexOf('tr') === 0;
+    kutu.innerHTML = '<div><p style="font-size:1.1rem;margin:0 0 .4rem">' +
+      (tr ? 'Sanal tur bu cihazda başlatılamadı.'
+          : 'The virtual tour could not start on this device.') + '</p>' +
+      '<p style="opacity:.75;margin:0 0 1.2rem">' +
+      (tr ? 'Tarayıcınız WebGL desteklemiyor ya da devre dışı.'
+          : 'Your browser does not support WebGL or it is disabled.') + '</p>' +
+      '<p><a href="javascript:location.reload()" style="color:#37b6bd;margin-right:1.2rem">' +
+      (tr ? 'Tekrar dene' : 'Try again') + '</a>' +
+      '<a href="index.html" style="color:#fff">' +
+      (tr ? 'Tüm turlar' : 'All tours') + '</a></p></div>';
+    document.body.appendChild(kutu);
+  }
+  if (!webglVar()) { webglHata('WebGL yok'); return; }
+  var viewer;
+  try {
+    viewer = new Marzipano.Viewer(panoEl, {
+      controls: { mouseViewMode: 'drag' },
+      stage: { preserveDrawingBuffer: false }
+    });
+  } catch (e) { webglHata(e && e.message); return; }
 
   var autorotate = Marzipano.autorotate({
     yawSpeed: 0.028,
@@ -325,7 +380,13 @@
 
     syncUI(id);
     if (!opts.silent) {
-      try { history.replaceState(null, '', '#s=' + id); } catch (e) {}
+      /* ⚠️ YOL VE SORGU KORUNMALI (2026-08-25). Yalnizca '#s=...' vermek
+         adresi BULUNDUGUN KLASORE gore cozer: 'tour.html?p=<slug>' dusuyor
+         ve adres '/360/abd/#s=...' oluyor. O klasorde index.html yok →
+         ziyaretci F5'e basinca 404 goruyordu (kullanici bildirdi). */
+      try {
+        history.replaceState(null, '', location.pathname + location.search + '#s=' + id);
+      } catch (e) {}
     }
   }
 
@@ -507,7 +568,15 @@
   /* Üst kapak: varsayılanda Salamis, listede gezinirken o yerin fotoğrafı. */
   var nbCoverImg = $('#nbCoverImg'), nbKicker = $('#nbKicker'),
       nbTitle = $('#nbTitle'), nbCredit = $('#nbCredit');
-  var COVER_DEFAULT = nbCoverImg ? nbCoverImg.getAttribute('src') : '';
+  /* "Cevreyi Kesfet" varsayilan kapagi: HTML'deki src bir donem var olmayan
+     assets/wide/cyprus-heritage.jpg'yi gosteriyordu -> panel her acilista kirik
+     gorselle geliyordu. Artik gezilen PROJENIN kendi kapagi kullaniliyor; boyle
+     hem dosya kesin var hem de her turda dogru gorsel cikiyor.
+     Yer fotograflari (assets/places) bilerek kullanilmiyor: onlar Wikimedia
+     CC BY/BY-SA ve ATIF zorunlu — atif yalnizca kart uzerinde gosteriliyor. */
+  var COVER_DEFAULT = (window.TOUR_PROJECT && window.TOUR_PROJECT.cover)
+    || (nbCoverImg ? nbCoverImg.getAttribute('src') : '');
+  if (nbCoverImg && COVER_DEFAULT) nbCoverImg.src = COVER_DEFAULT;
   var coverTimer = null;
 
   function paintCover(src, kicker, title, credit) {
@@ -1032,6 +1101,26 @@
 
   /* Konsoldan inceleme için (tur mantığını etkilemez). */
   window.__tour = { scenes: scenes, viewer: viewer, meta: META, go: switchScene };
+
+  /* ── Kaynak künyesi ──────────────────────────────────────
+     "Bu görseller hakkında" düğmesi + açıklama paneli. Metinler data-i18n ile
+     applyLang() tarafından dolduruluyor, burada yalnız aç/kapat bağlanıyor. */
+  (function kaynakKunyesi() {
+    var btn = $('#kaynakBtn'), panel = $('#kaynakPanel'), kapat = $('#kaynakKapat');
+    if (!btn || !panel) return;
+    function ac(durum) {
+      panel.hidden = !durum;
+      btn.setAttribute('aria-expanded', String(durum));
+    }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); ac(panel.hidden); });
+    if (kapat) kapat.addEventListener('click', function () { ac(false); btn.focus(); });
+    document.addEventListener('click', function (e) {
+      if (!panel.hidden && !panel.contains(e.target)) ac(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) { ac(false); btn.focus(); }
+    });
+  })();
 
   /* Geri/ileri ile sahne bağlantısı */
   window.addEventListener('hashchange', function () {
