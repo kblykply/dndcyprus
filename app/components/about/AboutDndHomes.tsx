@@ -40,7 +40,7 @@ export default function AboutDndHomes({
           <p className="az-lead rv d2">{description}</p>
         </div>
 
-        <div className="grid grid-cols-1 items-stretch gap-4 min-[900px]:grid-cols-[1.5fr_1fr]">
+        <div className="grid grid-cols-1 items-stretch gap-4 min-[1440px]:grid-cols-[1.5fr_1fr]">
           <figure
             className="rv m-0 w-full max-w-full overflow-hidden rounded-[28px]"
             style={{ background: "var(--sea-deep)", boxShadow: "0 24px 60px rgba(13,35,38,.14)" }}
@@ -49,15 +49,15 @@ export default function AboutDndHomes({
           </figure>
 
           <aside className="az-panel rv d1 flex flex-col">
-            <ul className="m-0 grid list-none gap-3 p-0">
+            {/* Meridian satırları: ince çizgili, masaüstünde video yüksekliğine eşit paylaşılır (altta boş alan kalmaz) */}
+            <ul className="m-0 flex list-none flex-col border-t p-0 min-[1440px]:flex-1" style={{ borderColor: "var(--line)" }}>
               {POINTS.map((p, i) => (
-                <li key={i} className="flex items-start gap-3 text-[15px] leading-relaxed" style={{ color: "var(--ink-60)" }}>
-                  <Check />
-                  <span>{p}</span>
+                <li key={i} className="flex flex-col justify-center border-b py-3 text-[15px] leading-relaxed min-[1440px]:flex-1" style={{ color: "var(--ink-60)", borderColor: "var(--line)" }}>
+                  <div className="flex items-start gap-3"><Check /><span>{p}</span></div>
                 </li>
               ))}
             </ul>
-            <div className="mt-auto flex flex-wrap gap-3 pt-7">
+            <div className="flex flex-wrap gap-3 pt-6 min-[1440px]:mt-auto">
               <a className="az-btn sea sm" href="https://dnd-homes.com/" target="_blank" rel="noopener noreferrer">DND Homes Web Sitesi</a>
               <Link className="az-btn glass sm" href="/tr/projects" prefetch={false}>Kuzey Kıbrıs Projeleri</Link>
             </div>
