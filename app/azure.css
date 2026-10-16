@@ -277,10 +277,6 @@ body.az-lock { overflow: hidden; }
 .az-pc p { font-size: 13px; opacity: .85; max-width: 32ch; }
 .az-pc .glassrow { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-radius: 16px; background: rgba(255, 255, 255, .14); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .3); font-size: 13px; font-weight: 500; }
 .az-pc .glassrow i { width: 30px; height: 30px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; font-style: normal; }
-.az-pc.soon { display: grid; place-items: center; background: var(--sand); color: var(--ink); text-align: center; }
-.az-pc.soon::after { display: none; }
-.az-pc.soon .c { padding: 30px; }
-.az-pc.soon h3 { margin-top: 10px; color: var(--ink); }
 .az-cdots { display: flex; gap: 6px; justify-content: center; padding: 0 var(--gutter); }
 .az-cdots i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-40); opacity: .4; transition: all .4s; }
 .az-cdots i.on { opacity: 1; background: var(--sea); width: 26px; border-radius: 4px; }

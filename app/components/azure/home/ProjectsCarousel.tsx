@@ -37,7 +37,10 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
       <div className="az-car" ref={car}>
         {PROJECTS.map((p) => p.slug === "gecitkale" ? (
           <Link key={p.slug} className="az-pc soon" href={href(locale, "/gecitkale")} prefetch={false}>
-            <div className="c"><span className="az-kicker">{t.soonKicker}</span><h3>{LAND_TITLE[locale]}</h3><p style={{ color: "var(--ink-60)", marginTop: 8 }}>{p.blurb[locale]}</p><span className="az-btn sea sm" style={{ marginTop: 18 }}>{t.soonCta}</span></div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/azure/gk-1.jpg" alt="" loading="lazy" />
+            <div className="top"><span className="az-st gold">{t.soonKicker}</span></div>
+            <div className="in"><small>{p.location[locale]}</small><h3>{LAND_TITLE[locale]}</h3><p>{p.blurb[locale]}</p><div className="glassrow">{t.soonCta} <i>→</i></div></div>
           </Link>
         ) : (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false}>

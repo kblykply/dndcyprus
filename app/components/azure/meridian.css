@@ -7,35 +7,6 @@
 .mr-mono { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-60); }
 .mr-mono b { color: var(--sea); font-weight: 500; }
 
-/* ---- Hikâye: sabit büyük yıl + görsel, sağda ince çizgili liste ---- */
-.mr-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(30px, 5vw, 80px); margin-top: 36px; }
-.mr-story .side { position: sticky; top: 100px; align-self: start; }
-.mr-story .yr { font-family: var(--font-display); font-weight: 500; font-size: clamp(96px, 12vw, 190px); line-height: .82; letter-spacing: -.06em; color: var(--ink); font-variant-numeric: tabular-nums; }
-.mr-story .yr span { display: inline-block; animation: mr-up .7s var(--ease); }
-@keyframes mr-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-.mr-story .where { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--hair); }
-.mr-story .yf { position: relative; aspect-ratio: 4 / 3; max-width: 100%; margin-top: 22px; border-radius: 22px; overflow: hidden; background: var(--sky-2); }
-.mr-story .yf img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity .8s var(--ease), transform 1.4s var(--ease); }
-.mr-story .yf img.on { opacity: 1; transform: none; }
-.mr-story ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
-.mr-story li { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 18px; padding: clamp(26px, 3.4vw, 40px) 0; border-bottom: 1px solid var(--hair); opacity: .32; transition: opacity .6s var(--ease); }
-.mr-story li.on { opacity: 1; }
-.mr-story li .mr-mono { padding-top: 8px; }
-.mr-story li small { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--coral); margin-bottom: 8px; }
-.mr-story li h3 { font-size: clamp(26px, 2.8vw, 40px); font-weight: 400; letter-spacing: -.03em; }
-.mr-story li p { color: var(--ink-60); margin-top: 8px; max-width: 46ch; font-size: 16px; }
-.mr-story li figure { display: none; }
-@media (max-width: 900px) {
-  .mr-story { grid-template-columns: 1fr; gap: 0; }
-  .mr-story .side { display: none; }
-  .mr-story li { opacity: 1; grid-template-columns: 1fr; gap: 10px; }
-  .mr-story li figure { display: block; position: relative; aspect-ratio: 16 / 10; max-width: 100%; border-radius: 18px; overflow: hidden; margin: 6px 0 0; background: var(--sky-2); }
-  .mr-story li figure img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .mr-story li .head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-  .mr-story li .yy { font-family: var(--font-display); font-size: 44px; font-weight: 500; letter-spacing: -.05em; line-height: 1; }
-}
-@media (min-width: 901px) { .mr-story li .yy { display: none; } }
-
 /* ---- Görsel kartlar: görsel temiz, açıklama altta ---- */
 .mr-cards { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px var(--gutter) 10px; margin-inline: calc(var(--gutter) * -1); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
 .mr-cards::-webkit-scrollbar { display: none; }

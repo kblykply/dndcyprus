@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { Locale } from "./site";
 
 export type HomeContent = {
-  hero: { tag: string; play: string; title: ReactNode; primary: string; secondary: string; chips: { big: string; label: string }[] };
+  hero: { tag: string; play: string; title: ReactNode; primary: string; secondary: string };
   awards: { label: string; items: { b: string; rest: string; ribbon?: string }[] };
   bento: {
     kicker: string; title: ReactNode; lead: string;
@@ -36,7 +36,6 @@ const TR: HomeContent = {
     title: <>Akdeniz’de yeni bir <b>yaşam ritmi.</b></>,
     primary: "Projeleri Keşfet",
     secondary: "Lagoon Verde",
-    chips: [{ big: "354", label: "Rezidans · Lagoon Verde" }, { big: "30.000+", label: "Konut vizyonu · Kuzey Kıbrıs" }, { big: "4", label: "Ödül · 2018–2025" }],
   },
   awards: {
     label: "Ödüller & Tanınma",
@@ -130,7 +129,6 @@ const EN: HomeContent = {
     title: <>A new rhythm of life <b>on the Mediterranean.</b></>,
     primary: "Explore Projects",
     secondary: "Lagoon Verde",
-    chips: [{ big: "354", label: "Residences · Lagoon Verde" }, { big: "30,000+", label: "Homes vision · North Cyprus" }, { big: "4", label: "Awards · 2018–2025" }],
   },
   awards: {
     label: "Awards & Recognition",
@@ -224,7 +222,6 @@ const DE: HomeContent = {
     title: <>Ein neues Lebensgefühl <b>am Mittelmeer.</b></>,
     primary: "Projekte entdecken",
     secondary: "Lagoon Verde",
-    chips: [{ big: "354", label: "Residenzen · Lagoon Verde" }, { big: "30.000+", label: "Wohnungen · Vision für Nordzypern" }, { big: "4", label: "Auszeichnungen · 2018–2025" }],
   },
   awards: {
     label: "Auszeichnungen & Anerkennung",
@@ -318,7 +315,6 @@ const RU: HomeContent = {
     title: <>Новый ритм жизни <b>на Средиземноморье.</b></>,
     primary: "Смотреть проекты",
     secondary: "Lagoon Verde",
-    chips: [{ big: "354", label: "Резиденции · Lagoon Verde" }, { big: "30 000+", label: "Квартир в перспективе · Северный Кипр" }, { big: "4", label: "Награды · 2018–2025" }],
   },
   awards: {
     label: "Награды и признание",
@@ -412,7 +408,6 @@ const PL: HomeContent = {
     title: <>Nowy rytm życia <b>nad Morzem Śródziemnym.</b></>,
     primary: "Odkryj projekty",
     secondary: "Lagoon Verde",
-    chips: [{ big: "354", label: "Apartamenty · Lagoon Verde" }, { big: "30 000+", label: "Mieszkań w planach · Cypr Północny" }, { big: "4", label: "Nagrody · 2018–2025" }],
   },
   awards: {
     label: "Nagrody i wyróżnienia",

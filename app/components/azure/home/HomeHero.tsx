@@ -24,9 +24,6 @@ export default function HomeHero({ locale }: { locale: Locale }) {
               <Link className="az-btn glass" href={href(locale, "/lagoon-verde")} prefetch={false}>{t.secondary}</Link>
             </div>
           </div>
-          <div className="chips rv d2">
-            {t.chips.map((c) => <div key={c.label} className="az-chip"><b>{c.big}</b><span>{c.label}</span></div>)}
-          </div>
         </div>
       </div>
     </section>
