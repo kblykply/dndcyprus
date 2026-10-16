@@ -143,7 +143,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Studio Residence",
               image: "/azure/interiors/lagoon-verde/plans/studio.webp",
-              tone: "dark",
               areas: [
                 { label: "Oturma Odası", value: "29,36 m²" },
                 { label: "WC - Banyo", value: "5,48 m²" },
@@ -171,7 +170,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Loft Residence",
               image: "/azure/interiors/lagoon-verde/plans/loft.webp",
-              tone: "dark",
               areas: [
                 { label: "Oturma Odası", value: "25,57 m²" },
                 { label: "WC - Banyo", value: "5,48 m²" },
@@ -200,7 +198,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Roof Residence",
               image: "/azure/interiors/lagoon-verde/plans/roof.webp",
-              tone: "dark",
               areas: [
                 { label: "Oturma Odası", value: "33,35 m²" },
                 { label: "WC - Banyo", value: "4,77 m²" },
@@ -233,7 +230,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Garden Residence",
               image: "/azure/interiors/lagoon-verde/plans/garden.webp",
-              tone: "dark",
               areas: [
                 { label: "Oturma Odası", value: "37,42 m²" },
                 { label: "WC - Banyo", value: "5,15 m²" },
@@ -450,7 +446,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Studio Residence",
               image: "/azure/interiors/lagoon-verde/plans/studio.webp",
-              tone: "dark",
               areas: [
                 { label: "Living Room", value: "29.36 m²" },
                 { label: "WC - Bathroom", value: "5.48 m²" },
@@ -478,7 +473,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Loft Residence",
               image: "/azure/interiors/lagoon-verde/plans/loft.webp",
-              tone: "dark",
               areas: [
                 { label: "Living Room", value: "25.57 m²" },
                 { label: "WC - Bathroom", value: "5.48 m²" },
@@ -507,7 +501,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Roof Residence",
               image: "/azure/interiors/lagoon-verde/plans/roof.webp",
-              tone: "dark",
               areas: [
                 { label: "Living Room", value: "33.35 m²" },
                 { label: "WC - Bathroom", value: "4.77 m²" },
@@ -540,7 +533,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Garden Residence",
               image: "/azure/interiors/lagoon-verde/plans/garden.webp",
-              tone: "dark",
               areas: [
                 { label: "Living Room", value: "37.42 m²" },
                 { label: "WC - Bathroom", value: "5.15 m²" },
@@ -757,7 +749,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Studio Residence",
               image: "/azure/interiors/lagoon-verde/plans/studio.webp",
-              tone: "dark",
               areas: [
                 { label: "Wohnzimmer", value: "29,36 m²" },
                 { label: "WC - Bad", value: "5,48 m²" },
@@ -785,7 +776,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Loft Residence",
               image: "/azure/interiors/lagoon-verde/plans/loft.webp",
-              tone: "dark",
               areas: [
                 { label: "Wohnzimmer", value: "25,57 m²" },
                 { label: "WC - Bad", value: "5,48 m²" },
@@ -814,7 +804,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Roof Residence",
               image: "/azure/interiors/lagoon-verde/plans/roof.webp",
-              tone: "dark",
               areas: [
                 { label: "Wohnzimmer", value: "33,35 m²" },
                 { label: "WC - Bad", value: "4,77 m²" },
@@ -847,7 +836,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Garden Residence",
               image: "/azure/interiors/lagoon-verde/plans/garden.webp",
-              tone: "dark",
               areas: [
                 { label: "Wohnzimmer", value: "37,42 m²" },
                 { label: "WC - Bad", value: "5,15 m²" },
@@ -1064,7 +1052,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Studio Residence",
               image: "/azure/interiors/lagoon-verde/plans/studio.webp",
-              tone: "dark",
               areas: [
                 { label: "Гостиная", value: "29,36 m²" },
                 { label: "Санузел", value: "5,48 m²" },
@@ -1092,7 +1079,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Loft Residence",
               image: "/azure/interiors/lagoon-verde/plans/loft.webp",
-              tone: "dark",
               areas: [
                 { label: "Гостиная", value: "25,57 m²" },
                 { label: "Санузел", value: "5,48 m²" },
@@ -1121,7 +1107,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Roof Residence",
               image: "/azure/interiors/lagoon-verde/plans/roof.webp",
-              tone: "dark",
               areas: [
                 { label: "Гостиная", value: "33,35 m²" },
                 { label: "Санузел", value: "4,77 m²" },
@@ -1154,7 +1139,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Garden Residence",
               image: "/azure/interiors/lagoon-verde/plans/garden.webp",
-              tone: "dark",
               areas: [
                 { label: "Гостиная", value: "37,42 m²" },
                 { label: "Санузел", value: "5,15 m²" },
@@ -1371,7 +1355,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Studio Residence",
               image: "/azure/interiors/lagoon-verde/plans/studio.webp",
-              tone: "dark",
               areas: [
                 { label: "Salon", value: "29,36 m²" },
                 { label: "WC - łazienka", value: "5,48 m²" },
@@ -1399,7 +1382,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Loft Residence",
               image: "/azure/interiors/lagoon-verde/plans/loft.webp",
-              tone: "dark",
               areas: [
                 { label: "Salon", value: "25,57 m²" },
                 { label: "WC - łazienka", value: "5,48 m²" },
@@ -1428,7 +1410,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Roof Residence",
               image: "/azure/interiors/lagoon-verde/plans/roof.webp",
-              tone: "dark",
               areas: [
                 { label: "Salon", value: "33,35 m²" },
                 { label: "WC - łazienka", value: "4,77 m²" },
@@ -1461,7 +1442,6 @@ export const LAGOON_VERDE: ProjectData = {
             {
               name: "Garden Residence",
               image: "/azure/interiors/lagoon-verde/plans/garden.webp",
-              tone: "dark",
               areas: [
                 { label: "Salon", value: "37,42 m²" },
                 { label: "WC - łazienka", value: "5,15 m²" },

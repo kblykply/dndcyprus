@@ -102,8 +102,6 @@
 .mr-units .zoom { position: relative; display: block; flex: 1 1 auto; width: 100%; min-height: clamp(280px, 27vw, 420px); max-width: 100%; padding: 0; border: 1px solid var(--hair); border-radius: 22px; overflow: hidden; background: #fff; cursor: zoom-in; }
 .mr-units .zoom img { position: absolute; inset: 58px 18px 18px; width: calc(100% - 36px); height: calc(100% - 76px); object-fit: contain; animation: mr-fade .5s var(--ease); }
 .mr-units .zoom.photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
-/* koyu sunum zeminli planlar: kutu zemini planla aynı antrasit, beyaz boşluk yok */
-.mr-units .zoom.dark { background: #2a2b2e; border-color: transparent; }
 @keyframes mr-fade { from { opacity: 0; } to { opacity: 1; } }
 .mr-units .zoom .go { position: absolute; right: 12px; top: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: var(--paper); border: 1px solid var(--hair); font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
 .mr-units .fig .nav { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 2; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px; border-radius: 999px; background: var(--paper); border: 1px solid var(--hair); }
@@ -114,6 +112,9 @@
 .mr-units .tbl .stack { display: grid; }
 .mr-units .tbl .stack > .pane { grid-area: 1 / 1; min-width: 0; }
 .mr-units .tbl .stack > .pane:not(.on) { visibility: hidden; }
+/* uzun tablo (8+ satır) sık dizilir; masaüstünde bölüm her projede aynı yükseklikte (tip ve proje değişince boy oynamaz) */
+.mr-units .tbl .pane.dense dl > div { padding: 7px 0; }
+@media (min-width: 1101px) { .mr-units { min-height: 645px; } }
 .mr-units .tbl h3 { font-size: clamp(24px, 2.2vw, 32px); font-weight: 400; letter-spacing: -.025em; }
 .mr-units .tbl .vars { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
 .mr-units .tbl .vars button { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--hair); background: none; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-60); cursor: pointer; }

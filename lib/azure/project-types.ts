@@ -72,7 +72,6 @@ export type PlanVariant = {
   name: string;
   note?: string;
   image: string;
-  tone?: "dark";                                 // koyu sunum zeminli plan: kutu zemini de koyu (beyaz boşluk kalmaz)
   pdf?: string;
   areas: AreaRow[];
   gallery?: string[];

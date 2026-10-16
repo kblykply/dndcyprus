@@ -37,7 +37,7 @@ export default function Location({ d, name, id, locale }: { d: ProjectLocation; 
               <ul className="az-dist">
                 {d.distances.map((x, i) => (
                   <li key={x.label + i} style={{ ["--w" as string]: Math.max(0.08, meters(x) / max).toFixed(2) } as React.CSSProperties} title={x.note}>
-                    <span>{x.label}</span><b style={x.accent === "coral" ? { color: "var(--coral)" } : undefined}>{formatDistance(x)}</b><i />
+                    <span>{x.label}</span><b>{formatDistance(x)}</b><i />
                   </li>
                 ))}
               </ul>

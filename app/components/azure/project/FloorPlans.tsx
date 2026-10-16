@@ -72,7 +72,7 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
 
           {/* orta: görsel kutusu; geçiş, büyüt ve oklar kutunun içinde (kutu üst / alt çizgiye oturur) */}
           <div className="fig">
-            <button type="button" className={`zoom${showInterior ? " photo" : v.tone === "dark" ? " dark" : ""}`} aria-label={t.enlargeAria}
+            <button type="button" className={`zoom${showInterior ? " photo" : ""}`} aria-label={t.enlargeAria}
               onClick={() => setLb(showInterior ? { images: gallery, idx: gi } : { images: [v.image], idx: 0 })}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img key={showInterior ? gallery[gi] : v.image} src={showInterior ? gallery[gi] : v.image} alt={showInterior ? t.galleryImage(gi + 1) : alt} loading={showInterior ? "lazy" : "eager"} decoding="async" />
@@ -101,7 +101,7 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
               {d.plans.flatMap((p, pIdx) => p.variants.map((x, xIdx) => {
                 const on = pIdx === pi && x === v;
                 return (
-                  <div key={`${p.id}-${x.name}`} className={on ? "pane on" : "pane"} aria-hidden={on ? undefined : true} inert={!on}>
+                  <div key={`${p.id}-${x.name}`} className={`pane${on ? " on" : ""}${x.areas.length > 8 ? " dense" : ""}`} aria-hidden={on ? undefined : true} inert={!on}>
                     <h3>{variantTitle(p, x.name)}</h3>
                     {(p.variants.length > 1 || x.note || p.note) && (
                       <div className="vars">
