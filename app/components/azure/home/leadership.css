@@ -7,7 +7,8 @@
   padding: clamp(12px, 1.3vw, 20px); border-radius: calc(var(--r) + 8px);
   background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 24px 70px rgba(13, 35, 38, .08);
 }
-.az-ozan figure { position: relative; margin: 0; min-height: clamp(440px, 44vw, 700px); border-radius: var(--r); overflow: hidden; background: var(--sky-2); }
+/* portre boyu içerikten gelir (yazının altında boşluk kalmaz); min-height yalnız taban */
+.az-ozan figure { position: relative; margin: 0; min-height: clamp(380px, 30vw, 520px); border-radius: var(--r); overflow: hidden; background: var(--sky-2); }
 .az-ozan figure > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; user-select: none; }
 /* ödül rozeti: portrenin altında beyaz cam etiket (görselin üstünde renk katmanı yok) */
 .az-ozan figcaption {
@@ -24,14 +25,15 @@
 .az-ozan .bd { display: flex; flex-direction: column; min-width: 0; padding: clamp(8px, 1.6vw, 28px) clamp(4px, 2vw, 36px) clamp(8px, 1.6vw, 28px) 0; }
 .az-ozan .role { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); font-weight: 600; }
 .az-ozan h3 { font-size: clamp(36px, 4.2vw, 68px); letter-spacing: -.03em; line-height: 1; margin-top: 14px; }
-.az-ozan .bio { margin-top: 18px; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.55; color: var(--ink-60); max-width: 54ch; }
+.az-ozan .bio { margin-top: 18px; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.55; color: var(--ink-60); max-width: 54ch; text-wrap: pretty; }
 .az-ozan blockquote { margin: clamp(18px, 2vw, 28px) 0 0; padding-left: 18px; border-left: 2px solid var(--coral); max-width: 46ch; }
-.az-ozan q { display: block; font-family: var(--font-display), sans-serif; font-size: clamp(18px, 1.6vw, 25px); line-height: 1.4; letter-spacing: -.01em; color: var(--ink); }
-.az-ozan dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: clamp(20px, 2.2vw, 32px) 0 0; }
-.az-ozan dl > div { padding: 14px clamp(12px, 1.1vw, 16px); border-radius: 18px; background: var(--sky); border: 1px solid var(--line); min-width: 0; }
-.az-ozan dt { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--sea); font-weight: 600; overflow-wrap: anywhere; }
-.az-ozan dd { margin: 6px 0 0; font-size: 14px; line-height: 1.4; font-weight: 500; color: var(--ink); }
-.az-ozan .acts { display: flex; flex-wrap: wrap; gap: 10px; margin: clamp(20px, 2.2vw, 32px) 0 clamp(24px, 2.6vw, 36px); }
+.az-ozan q { display: block; font-family: var(--font-display), sans-serif; font-size: clamp(18px, 1.6vw, 25px); line-height: 1.4; letter-spacing: -.01em; color: var(--ink); text-wrap: pretty; }
+/* bilgi satırları: ince çizgiyle ayrılan etiket | değer; etiket sütunu üç satırda ortak (subgrid) */
+.az-ozan dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: clamp(20px, 2.4vw, 40px); margin: clamp(22px, 2.4vw, 34px) 0 clamp(26px, 2.8vw, 40px); }
+.az-ozan dl > div { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: baseline; padding: clamp(11px, 1vw, 14px) 0; border-top: 1px solid var(--line); }
+.az-ozan dt { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--sea); font-weight: 600; }
+.az-ozan dd { margin: 0; font-size: clamp(14px, 1.1vw, 16px); line-height: 1.45; font-weight: 500; color: var(--ink); }
+.az-ozan dd span { display: inline-block; }
 /* kariyer logoları en altta: margin-top:auto ile içerik portrenin alt çizgisinde biter */
 .az-ozan .past { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 12px clamp(18px, 2vw, 30px); }
 .az-ozan .past > span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-40); font-weight: 600; }
@@ -100,5 +102,6 @@
 @media (max-width: 640px) {
   .az-ozan figure { aspect-ratio: 4 / 5; }
   .az-ozan figure > img { object-position: 50% 0; }
-  .az-ozan dl { grid-template-columns: 1fr; }
+  .az-ozan dl, .az-ozan dl > div { grid-template-columns: minmax(0, 1fr); }
+  .az-ozan dl > div { row-gap: 4px; }
 }

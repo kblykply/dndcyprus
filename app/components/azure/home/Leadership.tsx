@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
-import { href, NAV_COPY, type Locale } from "@/lib/azure/site";
+import { href, type Locale } from "@/lib/azure/site";
 import BrandWheel, { type WheelItem } from "./BrandWheel";
 import "./leadership.css";
 
@@ -35,12 +35,11 @@ const FACES = ["burcingul", "borhan", "sabina", "shadi", "bob", "onuryalcin"];
 
 /**
  * Kurucu & yönetim: önce Ozan Bey için büyük öne çıkan blok (renkli portre + "Yılın CFO'su" rozeti, rol, isim,
- * tanıtım, alıntı, üç bilgi kutusu, Hakkımızda bağlantısı, kariyerindeki kurumlar). Altında ikinci sırada
+ * tanıtım, alıntı, ince çizgili üç bilgi satırı, kariyerindeki kurumlar). Altında ikinci sırada
  * Aynur Hanım'ın kartı ve ekip paneli; en altta DND marka şeridi.
  */
 export default function Leadership({ locale }: { locale: Locale }) {
   const t = HOME[locale].leadership;
-  const nav = NAV_COPY[locale];
   const cfo = HOME[locale].awards.items.find((x) => !x.ribbon);
   const [ozan, ...others] = t.people;
   const total = Number(t.team.match(/\d+/)?.[0] ?? 0);
@@ -66,10 +65,13 @@ export default function Leadership({ locale }: { locale: Locale }) {
             <h3>{ozan.name}</h3>
             {ozan.bio ? <p className="bio">{ozan.bio}</p> : null}
             <blockquote><q>{ozan.q}</q></blockquote>
-            <dl>{ozan.dl.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-            <div className="acts">
-              <Link className="az-btn sea" href={href(locale, "/about")} prefetch={false}>{nav.about} →</Link>
-            </div>
+            {/* değer ilk virgülden sonra bölünmez parça: dar ekranda yalnız virgülden kırılır ("Keurig Dr Pepper," / "eski CFO / President Int.") */}
+            <dl>
+              {ozan.dl.map(([k, v]) => {
+                const c = v.indexOf(", ");
+                return <div key={k}><dt>{k}</dt><dd>{c > 0 ? <>{v.slice(0, c + 1)} <span>{v.slice(c + 2)}</span></> : v}</dd></div>;
+              })}
+            </dl>
             <div className="past">
               <span>{t.career}</span>
               <ul aria-label={t.career}>
