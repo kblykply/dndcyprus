@@ -253,10 +253,13 @@ export default function VideoShowcase({ locale }: { locale: Locale }) {
         <div className="txts">
           {slides.map((x, k) => (
             <div key={x.id} className={`txt${k === i ? " on" : ""}`} aria-hidden={k !== i} inert={k !== i}>
-              <div className="hd"><span className="mr-mono">{x.tag}</span><span className="mr-mono"><b>{pad(k + 1)}</b> / {pad(n)}</span></div>
-              <h3>{x.title[0]} <b>{x.title[1]}</b></h3>
-              <p className="lead">{x.lead}</p>
-              <ol>{x.bullets.map((b, j) => <li key={b}><span className="mr-mono">{pad(j + 1)}</span>{b}</li>)}</ol>
+              {/* body: videoyla aynı satır (liste videonun alt kenarında biter); cta: "Sıradaki" satırıyla aynı satır */}
+              <div className="body">
+                <div className="hd"><span className="mr-mono">{x.tag}</span><span className="mr-mono"><b>{pad(k + 1)}</b> / {pad(n)}</span></div>
+                <h3>{x.title[0]} <b>{x.title[1]}</b></h3>
+                <p className="lead">{x.lead}</p>
+                <ol>{x.bullets.map((b, j) => <li key={b}><span className="mr-mono">{pad(j + 1)}</span>{b}</li>)}</ol>
+              </div>
               <div className="cta">
                 <Link className="az-btn sea" href={href(locale, x.primary.path)} prefetch={false}>{x.primary.label}</Link>
                 {x.secondary ? <Link className="ul" href={href(locale, x.secondary.path)} prefetch={false}>{x.secondary.label} →</Link> : null}

@@ -1,24 +1,27 @@
 /* Ana sayfa video bölümü (VideoShowcase) — Meridian dili, açık zemin */
+/* iki sütun aynı üç satırı paylaşır (subgrid): 1) metin ↔ video  2) boş ↔ ilerleme çubukları  3) düğmeler ↔ "Sıradaki".
+   Hiza sabit piksele değil satırlara bağlı; her genişlikte kendiliğinden tutar. */
 .az-vs .card {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 2.8vw, 40px); align-items: stretch;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto auto auto; column-gap: clamp(24px, 2.8vw, 40px); row-gap: 0;
   padding: clamp(18px, 2.5vw, 36px); border-radius: var(--r); background: rgba(255, 255, 255, .72); border: 1px solid var(--hair);
 }
-.az-vs .txts { display: grid; min-width: 0; }
-.az-vs .txt { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: flex-start; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .55s var(--ease), transform .55s var(--ease), visibility 0s .55s; }
+.az-vs .txts, .az-vs .fig { grid-row: 1 / span 3; display: grid; grid-template-rows: subgrid; min-width: 0; }
+.az-vs .txt { grid-row: 1 / span 3; grid-column: 1; display: grid; grid-template-rows: subgrid; opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .55s var(--ease), transform .55s var(--ease), visibility 0s .55s; }
 .az-vs .txt.on { opacity: 1; visibility: visible; transform: none; transition: opacity .55s var(--ease), transform .55s var(--ease); }
+.az-vs .body { grid-row: 1; display: flex; flex-direction: column; min-width: 0; }
 .az-vs .hd { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--hair); }
 .az-vs h3 { margin-top: clamp(14px, 1.4vw, 20px); font-family: var(--font-display); font-weight: 300; font-size: clamp(30px, 3.3vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); text-wrap: balance; }
 .az-vs h3 b { font-weight: 500; color: var(--sea); }
-.az-vs .lead { margin-top: 12px; padding-bottom: 18px; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.6; color: var(--ink-60); max-width: 42ch; }
+.az-vs .lead { margin-top: clamp(8px, 1vw, 14px); padding-bottom: clamp(14px, 1.5vw, 22px); font-size: clamp(15px, 1.15vw, 17px); line-height: 1.6; color: var(--ink-60); max-width: 42ch; }
 .az-vs ol { list-style: none; padding: 0; margin: auto 0 0; border-top: 1px solid var(--hair); }
 .az-vs li { display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 10px 0; border-bottom: 1px solid var(--hair); font-size: 15px; line-height: 1.45; color: var(--ink); }
 .az-vs li .mr-mono { padding-top: 2px; }
-.az-vs .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; padding-top: 32px; }
+.az-vs .cta { grid-row: 3; align-self: center; display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; }
 .az-vs .cta .ul { font-size: 15px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: color .3s, border-color .3s; }
 .az-vs .cta .ul:hover { color: var(--sea); border-color: var(--sea); }
 
-.az-vs .fig { margin: 0; min-width: 0; display: flex; flex-direction: column; }
-.az-vs .box { position: relative; flex: 1 0 auto; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: var(--sky-2); isolation: isolate; container-type: size; }
+.az-vs .fig { margin: 0; }
+.az-vs .box { grid-row: 1; align-self: stretch; justify-self: stretch; width: 100%; position: relative; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: var(--sky-2); isolation: isolate; container-type: size; }
 .az-vs .box:fullscreen { border-radius: 0; background: #000; }
 .az-vs .box .yt, .az-vs .box iframe { position: absolute; top: 50%; left: 50%; width: max(100cqw, 177.78cqh); height: max(100cqh, 56.25cqw); transform: translate(-50%, -50%); border: 0; }
 .az-vs .box .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: opacity .7s; }
@@ -34,7 +37,7 @@
 .az-vs .box .ctl button:hover { background: rgba(13, 35, 38, .62); }
 .az-vs .box .ctl button[aria-pressed="true"] { background: var(--sea); border-color: transparent; }
 
-.az-vs .bars { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; margin-top: 12px; }
+.az-vs .bars { grid-row: 2; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; margin: clamp(8px, 1vw, 12px) 0 clamp(4px, .6vw, 8px); }
 .az-vs .bars button { padding: 8px 0; border: 0; background: none; cursor: pointer; }
 .az-vs .bars i { position: relative; display: block; height: 2px; overflow: hidden; background: var(--hair); transition: background .3s; }
 .az-vs .bars button:hover i { background: rgba(13, 35, 38, .28); }
@@ -42,7 +45,7 @@
 .az-vs .bars .p.run { width: 0; animation: az-vs-fill linear forwards; }
 .az-vs .bars.pause .p.run { animation-play-state: paused; }
 @keyframes az-vs-fill { from { width: 0; } to { width: 100%; } }
-.az-vs .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; }
+.az-vs .row { grid-row: 3; align-self: center; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .az-vs .row .mr-mono { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .az-vs .nav { display: flex; gap: 8px; flex: none; }
 .az-vs .nav button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--hair); background: none; color: var(--ink); font-size: 16px; cursor: pointer; transition: background .3s, border-color .3s; }
@@ -54,8 +57,15 @@
   .az-vs .card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 @media (max-width: 960px) {
-  .az-vs .card { grid-template-columns: 1fr; gap: 26px; }
-  .az-vs .fig { order: -1; }
+  /* tek sütun: video üstte, metin altta; ortak satırlar kapanır */
+  .az-vs .card { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 26px; }
+  .az-vs .txts, .az-vs .fig, .az-vs .txt { grid-row: auto; grid-template-rows: none; }
+  .az-vs .fig { order: -1; display: block; }
+  .az-vs .txt { grid-area: 1 / 1; display: flex; flex-direction: column; }
+  .az-vs .body { display: block; }
+  .az-vs ol { margin-top: 18px; }
+  .az-vs .cta { padding-top: 24px; }
+  .az-vs .row { margin-top: 4px; }
 }
 @media (max-width: 639px) {
   .az-vs .card { padding: 14px 14px 22px; border-radius: 24px; }
