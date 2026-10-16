@@ -21,6 +21,8 @@ const LEGACY_REDIRECTS: [source: string, destination: string][] = [
 ];
 
 const nextConfig: NextConfig = {
+  // Birden çok kök düzen var: eşleşmeyen adresler için app/global-not-found.tsx
+  experimental: { globalNotFound: true },
   images: {
     // Photographic backgrounds use 65; plans and text-heavy images keep 75.
     qualities: [65, 75],

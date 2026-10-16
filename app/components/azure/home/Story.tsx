@@ -7,8 +7,8 @@ import type { Locale } from "@/lib/azure/site";
 /**
  * Scrollytelling: sol sütunda adımlar kayar, sağda yapışkan görsel değişir.
  * Etkin adım, adımın üst kenarı görselin üst üçte birindeki çizgiyi geçince seçilir (telefonda görselin hemen altını).
- * Son adım görsel hâlâ yapışıkken etkinleşip bir süre kalsın diye adımların altına ölçülü boşluk eklenir;
- * ilk adım görselle aynı hizada başlar.
+ * Son adım görsel hâlâ yapışıkken etkinleşip bir süre kalsın diye adımların altında boşluk var (azure.css,
+ * ilk çizimde hazır); ilk adım görselle aynı hizada başlar.
  */
 export default function Story({ locale }: { locale: Locale }) {
   const t = HOME[locale].story;
@@ -32,13 +32,6 @@ export default function Story({ locale }: { locale: Locale }) {
       const firstGap = steps.length > 1 ? steps[1].offsetTop - steps[0].offsetTop : h;
       return Math.max(24, Math.min(h * 0.35, firstGap - 24));
     };
-    const fit = () => {
-      if (mq.matches) { box.style.paddingBottom = ""; return; }
-      const h = stick.offsetHeight;
-      const last = steps[steps.length - 1].offsetHeight;
-      // son adım çizgiye ulaştığında görsel hâlâ yapışık olsun ve ekranın ~%30'u kadar kaydırma boyunca etkin kalsın
-      box.style.paddingBottom = `${Math.max(0, Math.round(h - offset() - last + window.innerHeight * 0.3))}px`;
-    };
     const pick = () => {
       raf = 0;
       const r = stick.getBoundingClientRect();
@@ -48,9 +41,8 @@ export default function Story({ locale }: { locale: Locale }) {
       setI(k);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(pick); };
-    const onResize = () => { fit(); onScroll(); };
+    const onResize = () => onScroll();
 
-    fit();
     pick();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);

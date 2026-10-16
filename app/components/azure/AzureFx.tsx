@@ -49,12 +49,13 @@ export default function AzureFx() {
     const mo = new MutationObserver(() => observeAll());
     mo.observe(document.body, { childList: true, subtree: true });
 
-    // Hero video: düşük güç modu vb. durumlarda ilk etkileşimde oynat
+    // Hero video: düşük güç modu vb. durumlarda ilk etkileşimde oynat; "hareketi azalt" açıksa durur (afiş görünür)
     const v = document.querySelector<HTMLVideoElement>(".az-hero video");
+    if (v && reduce) { v.removeAttribute("autoplay"); v.pause(); }
     const tryPlay = () => { try { const p = v?.play(); if (p && p.catch) p.catch(() => {}); } catch {} };
     const evs = ["touchstart", "pointerdown", "scroll", "keydown", "click"] as const;
-    if (v) { tryPlay(); evs.forEach((ev) => addEventListener(ev, tryPlay, { passive: true })); }
-    const onVis = () => { if (!document.hidden) tryPlay(); };
+    if (v && !reduce) { tryPlay(); evs.forEach((ev) => addEventListener(ev, tryPlay, { passive: true })); }
+    const onVis = () => { if (!document.hidden && !reduce) tryPlay(); };
     document.addEventListener("visibilitychange", onVis);
 
     return () => {

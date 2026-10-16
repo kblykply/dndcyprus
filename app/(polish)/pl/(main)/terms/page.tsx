@@ -63,7 +63,7 @@ export default function TermsPage() {
         </nav>
 
         {/* CONTENT */}
-        <div className="rounded-[28px] border border-white/90 bg-white p-6 md:p-10 shadow-[0_10px_40px_rgba(13,35,38,0.06)] prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24">
+        <div className="rounded-[28px] border border-white/90 bg-white p-6 md:p-10 [&_section]:scroll-mt-28 shadow-[0_10px_40px_rgba(13,35,38,0.06)] prose prose-neutral max-w-none prose-h2:mt-10 prose-h2:scroll-mt-24">
           <section id="giris">
             <h2>1. Zakres i akceptacja</h2>
             <p>

@@ -21,9 +21,10 @@
 .az-wheel .card.muted:hover img { filter: none; opacity: 1; }
 .az-wheel .card:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
 
-/* ölçülmeden önce / JS yokken: düz, ortalı sıra */
-.az-wheel:not(.ready) { height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; -webkit-mask-image: none; mask-image: none; cursor: auto; }
-.az-wheel:not(.ready) .card { position: static; }
+/* ölçülmeden önce / JS yokken: aynı yükseklikte tek sıra (sarılıp 3 satır olunca JS gelince sayfa ~220px kısalıyor,
+   çapa atlamaları şaşıyordu) */
+.az-wheel:not(.ready) { display: flex; flex-wrap: nowrap; gap: 18px; align-items: flex-start; padding-top: 12px; cursor: auto; }
+.az-wheel:not(.ready) .card { position: static; flex: 0 0 var(--cw); }
 
 @media (max-width: 700px) {
   .az-wheel { --cw: 150px; --ch: 88px; margin-top: 24px; }

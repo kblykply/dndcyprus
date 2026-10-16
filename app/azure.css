@@ -230,8 +230,10 @@ body.az-lock { overflow: hidden; }
 
 /* ---- scrollytelling ---- */
 .az-story .g { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(24px, 4vw, 64px); align-items: start; }
-/* üstte boşluk yok: ilk adım yapışkan görselle aynı hizada başlar; alt boşluk Story.tsx içinde ölçülür */
-.az-story .steps { display: grid; gap: clamp(60px, 14vh, 160px); padding: 0; }
+/* üstte boşluk yok: ilk adım yapışkan görselle aynı hizada başlar. Alt boşluk: son adım görsel yapışıkken
+   etkinleşip ekranın ~%30'u kadar kalsın diye ≈ 0,65 × görsel yüksekliği − son adım (~240px) + 30vh.
+   İlk çizimde hazır olsun diye CSS'te (JS ile sonradan eklenince sayfa ~550px kayıyordu, çapa atlamaları şaşıyordu). */
+.az-story .steps { display: grid; gap: clamp(60px, 14vh, 160px); padding: 0 0 max(0px, calc(min(100vh - 120px, 50vw, 760px) * .65 - 240px + 30vh)); }
 .az-step { opacity: .3; transition: opacity .6s; max-width: 46ch; }
 .az-step.on { opacity: 1; }
 .az-step .t { font-family: var(--font-display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
