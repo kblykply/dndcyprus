@@ -46,7 +46,7 @@ export default function AzureProject({ slug, locale }: { slug: ProjectPage["slug
       <Facts d={d.facts} name={name} id={ids.facts} />
       <Tech d={d.tech} name={name} id={ids.tech} locale={locale} />
       <Interiors d={d.interiors} name={name} id={ids.interiors} locale={locale} />
-      <FloorPlans d={d.floorPlans} name={name} id={ids.floorPlans} locale={locale} />
+      <FloorPlans d={d.floorPlans} name={name} id={ids.floorPlans} locale={locale} cta={{ brochure: PROJECT_PAGES[slug].brochure?.[locale], tour: d.tour ? `#${ids.tour}` : undefined }} />
       <Mariachi locale={locale} id={ids.mariachi} />
       <Amenities d={d.amenities} name={name} id={ids.amenities} />
       {d.tour && <Tour d={d.tour} name={name} id={ids.tour} locale={locale} />}

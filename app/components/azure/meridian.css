@@ -108,3 +108,51 @@
 .mr-tour .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 14px; margin-top: 14px; border-top: 1px solid var(--hair); }
 .mr-tour .row a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
 @media (max-width: 700px) { .mr-tour .stage { height: clamp(300px, 58vh, 560px); border-radius: 22px; } }
+
+/* ---- Kat planları (konsept-2 "feat"): liste · görsel · alan tablosu ---- */
+.mr-units { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(0, 1.25fr) minmax(0, 1.25fr); gap: clamp(24px, 3vw, 44px); align-items: start; margin-top: 8px; }
+.mr-units .list { border-top: 1px solid var(--hair); }
+.mr-units .list button { position: relative; display: grid; gap: 6px; width: 100%; text-align: left; padding: 20px 34px 20px 0; border: 0; border-bottom: 1px solid var(--hair); background: none; cursor: pointer; font: inherit; color: var(--ink-60); transition: color .3s, padding .4s var(--ease); }
+.mr-units .list button .nm { font-family: var(--font-display); font-size: clamp(18px, 1.5vw, 22px); font-weight: 400; letter-spacing: -.02em; line-height: 1.15; }
+.mr-units .list button .mr-mono { font-size: 10px; color: var(--ink-40); letter-spacing: .04em; }
+.mr-units .list button i { position: absolute; right: 6px; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; border: 1.5px solid var(--ink-40); transition: all .3s; }
+.mr-units .list button:hover { color: var(--ink); }
+.mr-units .list button.on { color: var(--ink); padding-left: 12px; }
+.mr-units .list button.on .nm { font-weight: 500; }
+.mr-units .list button.on i { background: var(--sea); border-color: var(--sea); box-shadow: 0 0 0 4px rgba(13, 101, 112, .14); }
+.mr-units .fig { position: relative; min-width: 0; }
+.mr-units .fig .sw { display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 10px; border-radius: 999px; border: 1px solid var(--hair); background: var(--glass-b); }
+.mr-units .fig .sw button { padding: 7px 13px; border-radius: 999px; border: 0; background: none; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-60); cursor: pointer; transition: all .3s; }
+.mr-units .fig .sw button.on { background: var(--sea); color: #fff; }
+.mr-units .zoom { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; padding: 0; border: 1px solid var(--hair); border-radius: 22px; overflow: hidden; background: #fff; cursor: zoom-in; }
+.mr-units .zoom img { position: absolute; inset: 18px; width: calc(100% - 36px); height: calc(100% - 36px); object-fit: contain; animation: mr-fade .5s var(--ease); }
+.mr-units .zoom.photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@keyframes mr-fade { from { opacity: 0; } to { opacity: 1; } }
+.mr-units .zoom .go { position: absolute; right: 12px; top: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: var(--paper); border: 1px solid var(--hair); font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+.mr-units .fig .nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 10px; }
+.mr-units .fig .nav button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--hair); background: var(--glass-b); display: grid; place-items: center; cursor: pointer; color: var(--ink); }
+.mr-units .fig .nav button:hover { background: var(--sea); color: #fff; }
+.mr-units .tbl { min-width: 0; }
+.mr-units .tbl h3 { font-size: clamp(24px, 2.2vw, 32px); font-weight: 400; letter-spacing: -.025em; }
+.mr-units .tbl .vars { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+.mr-units .tbl .vars button { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--hair); background: none; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-60); cursor: pointer; }
+.mr-units .tbl .vars button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.mr-units .tbl dl { margin: 18px 0 0; border-top: 1px solid var(--hair); }
+.mr-units .tbl dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--hair); }
+.mr-units .tbl dt { font-size: 14.5px; color: var(--ink); }
+.mr-units .tbl dd { margin: 0; font-family: var(--mono); font-size: 13px; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.mr-units .tbl dl > .tot { border-bottom: 0; padding-top: 16px; flex-wrap: wrap; row-gap: 4px; }
+.mr-units .tbl .tot dt { font-weight: 500; }
+.mr-units .tbl .tot dd { color: var(--sea); font-weight: 500; font-size: 14px; white-space: normal; text-align: right; margin-left: auto; }
+.mr-units .tbl .note { margin-top: 14px; font-size: 12px; color: var(--ink-40); }
+.mr-link { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 500; border-bottom: 1px solid var(--ink); }
+.mr-ctas { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
+@media (max-width: 1100px) {
+  .mr-units { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .mr-units .list { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; }
+}
+@media (max-width: 700px) {
+  .mr-units { grid-template-columns: 1fr; }
+  .mr-units .list { grid-template-columns: 1fr; }
+  .mr-units .list button { padding: 16px 30px 16px 0; }
+}
