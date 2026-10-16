@@ -43,7 +43,7 @@ export default function AzureProject({ slug, locale }: { slug: ProjectPage["slug
       </section>
 
       <Overview d={d.overview} name={name} id={ids.overview} />
-      <Facts d={d.facts} name={name} id={ids.facts} />
+      <Facts d={d.facts} name={name} id={ids.facts} done={PROJECT_PAGES[slug].status.tr.startsWith("Tamamlan")} />
       <Tech d={d.tech} name={name} id={ids.tech} locale={locale} />
       <Interiors d={d.interiors} name={name} id={ids.interiors} locale={locale} />
       <FloorPlans d={d.floorPlans} name={name} id={ids.floorPlans} locale={locale} cta={{ brochure: PROJECT_PAGES[slug].brochure?.[locale], tour: d.tour ? `#${ids.tour}` : undefined }} />
