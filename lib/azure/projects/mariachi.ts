@@ -8,6 +8,9 @@ export const MARIACHI_MEDIA = {
   embedQuery: "autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=AobeR8p2Aq4&playsinline=1&modestbranding=1",
   bg: "/mariachi/7.jpg",
   zoom: 1.6,   // orijinal videonun yan bantlarını kırpmak için
+  // Video 4:3 (960×720); proje sayfası bandı bu oranla kaplanır, büyütme yok. Kapak: YouTube'un 1280×720 karesi
+  ratio: 4 / 3,
+  poster: "https://i.ytimg.com/vi/AobeR8p2Aq4/maxresdefault.jpg",
 };
 
 export type MariachiPerk = { title: string; desc: string; icon: "Waves" | "BadgePercent" };

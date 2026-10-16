@@ -20,9 +20,9 @@ const variantTitle = (p: FloorPlan, name: string) => (name.startsWith(p.title) ?
 const nb = (v: string) => v.replace(/ (m²|м²|m2)/g, "\u00A0$1");
 
 /**
- * Kat planları — Meridian düzeni: solda ince çizgili daire tipi listesi (ad + mono ölçüler + nokta),
- * ortada görsel (plan; iç mekân fotoğrafı varsa Plan / İç mekân geçişi), sağda alan tablosu ve toplam,
- * altta fiyat talebi / broşür / 360° tur düğmeleri.
+ * Kat planları — Meridian düzeni, üç sütun ortak üst ve alt çizgide: solda ince çizgili daire tipi listesi,
+ * ortada görsel kutusu (Plan / İç mekân geçişi, büyüt ve iç mekân okları kutunun içinde), sağda alan tablosu;
+ * fiyat talebi / broşür / 360° tur düğmeleri tablonun altında, görsel kutusunun alt kenarıyla aynı çizgide biter.
  */
 export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: ProjectFloorPlans; name: string; id: string; locale: Locale; cta?: Cta }) {
   const t = PROJECT_UI[locale].floor;
@@ -70,20 +70,20 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
             ))}
           </div>
 
-          {/* orta: görsel */}
+          {/* orta: görsel kutusu; geçiş, büyüt ve oklar kutunun içinde (kutu üst / alt çizgiye oturur) */}
           <div className="fig">
+            <button type="button" className={`zoom${showInterior ? " photo" : ""}`} aria-label={t.enlargeAria}
+              onClick={() => setLb(showInterior ? { images: gallery, idx: gi } : { images: [v.image], idx: 0 })}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img key={showInterior ? gallery[gi] : v.image} src={showInterior ? gallery[gi] : v.image} alt={showInterior ? t.galleryImage(gi + 1) : alt} loading={showInterior ? "lazy" : "eager"} decoding="async" />
+              <span className="go"><PiArrowsOutDuotone size={15} aria-hidden /> <span className="t">{t.enlarge}</span></span>
+            </button>
             {gallery.length > 0 && (
               <div className="sw" role="tablist" aria-label={t.gallery}>
                 <button type="button" role="tab" aria-selected={!showInterior} className={!showInterior ? "on" : undefined} onClick={() => setView("plan")}>{t.planTab}</button>
                 <button type="button" role="tab" aria-selected={showInterior} className={showInterior ? "on" : undefined} onClick={() => setView("interior")}>{t.interiorTab} · {gallery.length}</button>
               </div>
             )}
-            <button type="button" className={`zoom${showInterior ? " photo" : ""}`} aria-label={t.enlargeAria}
-              onClick={() => setLb(showInterior ? { images: gallery, idx: gi } : { images: [v.image], idx: 0 })}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img key={showInterior ? gallery[gi] : v.image} src={showInterior ? gallery[gi] : v.image} alt={showInterior ? t.galleryImage(gi + 1) : alt} loading={showInterior ? "lazy" : "eager"} decoding="async" />
-              <span className="go"><PiArrowsOutDuotone size={15} aria-hidden /> {t.enlarge}</span>
-            </button>
             {showInterior && gallery.length > 1 && (
               <div className="nav">
                 <button type="button" onClick={() => setGi((gi - 1 + gallery.length) % gallery.length)} aria-label={t.prev}><PiCaretLeftBold size={14} /></button>
@@ -114,15 +114,14 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
             </dl>
             {v.pdf ? <a className="mr-link" href={v.pdf} target="_blank" rel="noreferrer">{t.pdf} ↗</a> : null}
             <p className="note">{d.note}</p>
+            <div className="mr-ctas">
+              <a className="az-btn sea sm" href="#fiyat-al" data-track="price_request_click">{t.request}</a>
+              {cta.brochure ? (
+                <a className="az-btn glass sm" href={cta.brochure} {...(brochureIsFile ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{t.brochure}</a>
+              ) : null}
+              {cta.tour ? <a className="az-btn glass sm" href={cta.tour}>{t.tour}</a> : null}
+            </div>
           </div>
-        </div>
-
-        <div className="mr-ctas rv d2">
-          <a className="az-btn sea" href="#fiyat-al" data-track="price_request_click">{t.request}</a>
-          {cta.brochure ? (
-            <a className="az-btn glass" href={cta.brochure} {...(brochureIsFile ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{t.brochure}</a>
-          ) : null}
-          {cta.tour ? <a className="az-btn glass" href={cta.tour}>{t.tour}</a> : null}
         </div>
       </div>
 

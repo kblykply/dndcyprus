@@ -22,6 +22,8 @@ type Props = {
   poster?: string;
   /** Yan bantları kırpmak için ölçek (1 = kırpma yok); kapak ve iframe'e birlikte uygulanır */
   zoom?: number;
+  /** Videonun kendi en-boy oranı (cover hesabı için); 4:3 video 16:9 sanılırsa gereksiz büyütülüp bulanıklaşır */
+  ratio?: number;
   /** Dış kapsayıcı konum/boyut sınıfı (ör. "relative w-full h-full" ya da "absolute inset-0") */
   className?: string;
   /** true: 16:9 video kutuyu tamamen doldurur (siyah bant yok, taşan kısım kırpılır) */
@@ -40,6 +42,7 @@ export default function LazyYouTube({
   query = "",
   poster,
   zoom = 1,
+  ratio = 16 / 9,
   className = "relative w-full h-full",
   cover = false,
   playLabel = "Videoyu oynat",
@@ -88,7 +91,7 @@ export default function LazyYouTube({
     ? {
         // kapsayıcı sorgu birimleriyle "object-fit: cover": 16:9 video her oranda kutuyu doldurur
         inset: "auto", left: "50%", top: "50%",
-        width: "max(100%, calc(100cqh * 16 / 9))", height: "max(100%, calc(100cqw * 9 / 16))",
+        width: `max(100%, calc(100cqh * ${ratio}))`, height: `max(100%, calc(100cqw / ${ratio}))`,
         transform: `translate(-50%, -50%)${zoom !== 1 ? ` scale(${zoom})` : ""}`,
       }
     : zoom !== 1 ? { transform: `scale(${zoom})` } : undefined;
