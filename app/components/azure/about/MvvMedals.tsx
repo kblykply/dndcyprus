@@ -22,20 +22,20 @@ type Props = {
 };
 
 /**
- * Misyon, Vizyon & Değerler: misyon ve vizyon ikonlu iki kart; değerler koyu deniz panelinde ince çizgili ikonlar
- * (yarı saydam çember). Panel görününce ikonlar sırayla belirir; üzerine gelince çember beyaza döner.
+ * Misyon, Vizyon & Değerler: üç parça aynı dilde, koyu deniz zeminde ince çizgili ikonlar (yarı saydam çember):
+ * misyon ve vizyon iki kart, değerler altta geniş panel. Panel görününce ikonlar sırayla belirir; üzerine gelince çember beyaza döner.
  * Hareket azaltma tercihinde animasyon yok.
  */
 export default function MvvMedals({ mission, vision, valuesTitle, values }: Props) {
   return (
     <div className="az-mvv">
       <div className="mv">
-        <article className="az-panel rv mvc">
-          <span className="mdl sea" aria-hidden><PiTargetLight size={30} /></span>
+        <article className="rv mvc">
+          <span className="ico" aria-hidden><PiTargetLight size={32} /></span>
           <div><span className="n">01</span><h3>{mission.title}</h3><p>{mission.text}</p></div>
         </article>
-        <article className="az-panel rv d1 mvc">
-          <span className="mdl coral" aria-hidden><PiBinocularsLight size={30} /></span>
+        <article className="rv d1 mvc">
+          <span className="ico" aria-hidden><PiBinocularsLight size={32} /></span>
           <div><span className="n">02</span><h3>{vision.title}</h3><p>{vision.text}</p></div>
         </article>
       </div>
