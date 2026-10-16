@@ -24,7 +24,11 @@
 html:not([lang="tr"]) .az-h2.statement { font-size: clamp(26px, 3.1vw, 52px); }
 @media (max-width: 600px) { .az-h2.statement { font-size: 24px; } }
 /* ana sayfa hero: uzun dillerde başlık iki satıra sığsın (TR tasarım boyutunda kalır) */
-html:not([lang="tr"]) #top.az-hero h1 { font-size: clamp(34px, 4.4vw, 76px); }
+/* ana sayfa hero'su: başlık biraz daha küçük ve çerçevenin altına yakın */
+#top.az-hero h1 { font-size: clamp(34px, 4.6vw, 72px); }
+html:not([lang="tr"]) #top.az-hero h1 { font-size: clamp(32px, 4.1vw, 64px); }
+#top.az-hero .c { padding-bottom: clamp(22px, 2.8vw, 40px); }
+#top.az-hero .cta { margin-top: 22px; }
 .az-chip b { white-space: nowrap; }
 html:not([lang="tr"]) .az-chip span { max-width: 20ch; }
 .az-lead { color: var(--ink-60); font-size: 17px; margin-top: 14px; max-width: 56ch; }

@@ -19,7 +19,6 @@ export default function HomeHero({ locale }: { locale: Locale }) {
         <div className="c">
           <div>
             <h1 className="rv">{t.title}</h1>
-            <p className="rv d1">{t.lead}</p>
             <div className="cta rv d2">
               <Link className="az-btn" href={href(locale, "/projects")} prefetch={false}>{t.primary}</Link>
               <Link className="az-btn glass" href={href(locale, "/lagoon-verde")} prefetch={false}>{t.secondary}</Link>

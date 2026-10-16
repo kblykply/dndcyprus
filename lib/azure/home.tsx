@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { Locale } from "./site";
 
 export type HomeContent = {
-  hero: { tag: string; play: string; title: ReactNode; lead: string; primary: string; secondary: string; chips: { big: string; label: string }[] };
+  hero: { tag: string; play: string; title: ReactNode; primary: string; secondary: string; chips: { big: string; label: string }[] };
   awards: { label: string; items: { b: string; rest: string; ribbon?: string }[] };
   bento: {
     kicker: string; title: ReactNode; lead: string;
@@ -34,7 +34,6 @@ const TR: HomeContent = {
     tag: "PropertyNC 2025 · Altın Ödül",
     play: "Tanıtım filmi",
     title: <>Akdeniz’de yeni bir <b>yaşam ritmi.</b></>,
-    lead: "Boston'da kurulan DND Homes'un Kıbrıs yapılanması. İskele'de lagün havuzlu rezidanslar, sahilde butik yaşam ve ödüllü bir beach club.",
     primary: "Projeleri Keşfet",
     secondary: "Lagoon Verde",
     chips: [{ big: "354", label: "Rezidans · Lagoon Verde" }, { big: "30.000+", label: "Konut vizyonu · Kuzey Kıbrıs" }, { big: "4", label: "Ödül · 2018–2025" }],
@@ -129,7 +128,6 @@ const EN: HomeContent = {
     tag: "PropertyNC 2025 · Gold Award",
     play: "Showreel",
     title: <>A new rhythm of life <b>on the Mediterranean.</b></>,
-    lead: "The Cyprus arm of Boston-founded DND Homes. Lagoon-pool residences in İskele, boutique seaside living and an award-winning beach club.",
     primary: "Explore Projects",
     secondary: "Lagoon Verde",
     chips: [{ big: "354", label: "Residences · Lagoon Verde" }, { big: "30,000+", label: "Homes vision · North Cyprus" }, { big: "4", label: "Awards · 2018–2025" }],
@@ -224,7 +222,6 @@ const DE: HomeContent = {
     tag: "PropertyNC 2025 · Goldpreis",
     play: "Imagefilm",
     title: <>Ein neues Lebensgefühl <b>am Mittelmeer.</b></>,
-    lead: "Die zyprische Niederlassung der in Boston gegründeten DND Homes. Residenzen mit Lagunenpool in İskele, Boutique-Wohnen am Meer und ein preisgekrönter Beach Club.",
     primary: "Projekte entdecken",
     secondary: "Lagoon Verde",
     chips: [{ big: "354", label: "Residenzen · Lagoon Verde" }, { big: "30.000+", label: "Wohnungen · Vision für Nordzypern" }, { big: "4", label: "Auszeichnungen · 2018–2025" }],
@@ -319,7 +316,6 @@ const RU: HomeContent = {
     tag: "PropertyNC 2025 · Золотая награда",
     play: "Промо-ролик",
     title: <>Новый ритм жизни <b>на Средиземноморье.</b></>,
-    lead: "Кипрское подразделение основанной в Бостоне компании DND Homes. Резиденции с бассейном-лагуной в Искеле, бутик-проекты на побережье и пляжный клуб, отмеченный наградами.",
     primary: "Смотреть проекты",
     secondary: "Lagoon Verde",
     chips: [{ big: "354", label: "Резиденции · Lagoon Verde" }, { big: "30 000+", label: "Квартир в перспективе · Северный Кипр" }, { big: "4", label: "Награды · 2018–2025" }],
@@ -414,7 +410,6 @@ const PL: HomeContent = {
     tag: "PropertyNC 2025 · Złota Nagroda",
     play: "Film promocyjny",
     title: <>Nowy rytm życia <b>nad Morzem Śródziemnym.</b></>,
-    lead: "Cypryjski oddział założonej w Bostonie firmy DND Homes. Apartamenty z basenem-laguną w İskele, kameralne inwestycje nad morzem i nagradzany beach club.",
     primary: "Odkryj projekty",
     secondary: "Lagoon Verde",
     chips: [{ big: "354", label: "Apartamenty · Lagoon Verde" }, { big: "30 000+", label: "Mieszkań w planach · Cypr Północny" }, { big: "4", label: "Nagrody · 2018–2025" }],
