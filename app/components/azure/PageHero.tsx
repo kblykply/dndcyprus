@@ -17,20 +17,22 @@ type Props = {
   logo?: string;               // proje logosu (sağ üst)
   size?: "full" | "compact" | "short";
   id?: string;
+  /** Görselin odak noktası (object-position), ör. "50% 18%": yüz/kişi kırpılmasın */
+  imagePosition?: string;
 };
 
 // İç sayfalar için Azure hero çerçevesi: 36px yuvarlatılmış görsel, cam etiketler, floating chips.
-export default function PageHero({ kicker, title, lead, image, imageAlt = "", video, tags = [], goldTag, chips, ctas = [], logo, size = "compact", id }: Props) {
+export default function PageHero({ kicker, title, lead, image, imageAlt = "", video, tags = [], goldTag, chips, ctas = [], logo, size = "compact", id, imagePosition }: Props) {
   return (
     <section className={`az-hero ${size}`} id={id}>
       <div className="frame">
         {video ? (
-          <video className="bg" autoPlay muted loop playsInline preload="metadata" poster={image} aria-label={imageAlt}>
+          <video className="bg" autoPlay muted loop playsInline preload="metadata" poster={image} aria-label={imageAlt} style={imagePosition ? { objectPosition: imagePosition } : undefined}>
             <source src={video} type="video/mp4" />
           </video>
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img className="bg" src={image} alt={imageAlt} fetchPriority="high" />
+          <img className="bg" src={image} alt={imageAlt} fetchPriority="high" style={imagePosition ? { objectPosition: imagePosition } : undefined} />
         )}
         {(goldTag || tags.length || logo) ? (
           <div className="top">

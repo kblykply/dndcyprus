@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
+import BrandWheel, { type WheelItem } from "./BrandWheel";
 
 const BRANDS = [
-  { name: "DND Group", logo: "/logos/dndgroup.png", path: "/contact" },
-  { name: "DND Homes", logo: "/logos/dndhomes.png", href: "http://dnd-homes.com/" },
-  { name: "Lagoon Verde", logo: "/logos/lagoon.png", path: "/lagoon-verde" },
-  { name: "La Joya", logo: "/logos/lajoya.png", path: "/la-joya" },
-  { name: "Mariachi Beach Club", logo: "/logos/mariachi.png", path: "/mariachi" },
-  { name: "Perla", logo: "/logos/perla.png", path: "/perla" },
-  { name: "Perla II", logo: "/logos/perlaii.png", path: "/perla-ii" },
+  { name: "DND Group", logo: "/azure/brands/dndgroup.webp", path: "/contact" },
+  { name: "DND Homes", logo: "/azure/brands/dndhomes.webp", href: "http://dnd-homes.com/" },
+  { name: "Lagoon Verde", logo: "/azure/brands/lagoon.webp", path: "/lagoon-verde" },
+  { name: "La Joya", logo: "/azure/brands/lajoya.webp", path: "/la-joya" },
+  { name: "Mariachi Beach Club", logo: "/azure/brands/mariachi.webp", path: "/mariachi" },
+  { name: "Perla", logo: "/azure/brands/perla.webp", path: "/perla" },
+  { name: "Perla II", logo: "/azure/brands/perlaii.webp", path: "/perla-ii" },
 ];
 const TEAMS: Record<Locale, [string, string]> = {
   tr: ["Satış · Mimarlık · Mühendislik", "Finans · Pazarlama · Operasyon"],
@@ -19,15 +20,19 @@ const TEAMS: Record<Locale, [string, string]> = {
   pl: ["Sprzedaż · Architektura · Inżynieria", "Finanse · Marketing · Operacje"],
 };
 const PARTNERS = [
-  { name: "Keurig Dr Pepper", logo: "/Keurig_Dr_Pepper.png" },
-  { name: "Kellogg's", logo: "/Kellogg's-Logo.png" },
-  { name: "Kraft", logo: "/Kraft_logo_2012.png" },
-  { name: "Cargill", logo: "/Cargill_logo.png" },
-  { name: "Arthur Andersen", logo: "/Arthur_Andersen_(ancien).png" },
+  { name: "Keurig Dr Pepper", logo: "/azure/brands/keurig-dr-pepper.webp" },
+  { name: "Kellogg's", logo: "/azure/brands/kelloggs.webp" },
+  { name: "Kraft", logo: "/azure/brands/kraft.webp" },
+  { name: "Cargill", logo: "/azure/brands/cargill.webp" },
+  { name: "Arthur Andersen", logo: "/azure/brands/arthur-andersen.webp" },
 ];
 
 export default function Leadership({ locale }: { locale: Locale }) {
   const t = HOME[locale].leadership;
+  const wheel: WheelItem[] = [
+    ...BRANDS.map((b) => ({ name: b.name, logo: b.logo, href: b.href ?? href(locale, b.path!), external: !!b.href })),
+    ...PARTNERS.map((b) => ({ name: b.name, logo: b.logo, muted: true })),
+  ];
   return (
     <section className="az-section az-leaders" id="yonetim">
       <div className="az-wrap">
@@ -48,12 +53,7 @@ export default function Leadership({ locale }: { locale: Locale }) {
           <span>{t.team}</span><span>{TEAMS[locale][0]}</span><span>{TEAMS[locale][1]}</span>
           <Link className="az-btn glass sm" href={href(locale, "/team")} prefetch={false}>{t.teamCta}</Link>
         </div>
-        <div className="az-brands rv d1" aria-label={t.brandsLabel}>
-          {BRANDS.map((b) => b.href
-            ? <a key={b.name} href={b.href} target="_blank" rel="noopener noreferrer" title={b.name}>{/* eslint-disable-next-line @next/next/no-img-element */}<img src={b.logo} alt={b.name} loading="lazy" /></a>
-            : <Link key={b.name} href={href(locale, b.path!)} prefetch={false} title={b.name}>{/* eslint-disable-next-line @next/next/no-img-element */}<img src={b.logo} alt={b.name} loading="lazy" /></Link>)}
-          {PARTNERS.map((b) => <span key={b.name} className="logo" title={b.name}>{/* eslint-disable-next-line @next/next/no-img-element */}<img src={b.logo} alt={b.name} loading="lazy" style={{ height: 22, opacity: .7 }} /></span>)}
-        </div>
+        <BrandWheel label={t.brandsLabel} items={wheel} />
       </div>
     </section>
   );
