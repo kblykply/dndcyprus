@@ -27,7 +27,7 @@ html:not([lang="tr"]) .az-h2.statement { font-size: clamp(26px, 3.1vw, 52px); }
 /* ana sayfa hero'su: başlık biraz daha küçük ve çerçevenin altına yakın */
 #top.az-hero h1 { font-size: clamp(34px, 4.6vw, 72px); }
 html:not([lang="tr"]) #top.az-hero h1 { font-size: clamp(32px, 4.1vw, 64px); }
-#top.az-hero .c { padding-bottom: clamp(22px, 2.8vw, 40px); }
+/* başlık ve düğmeler sol alt köşede: alt boşluk sol boşlukla eşit (.az-hero .c varsayılan dolgusu) */
 #top.az-hero .cta { margin-top: 22px; }
 .az-chip b { white-space: nowrap; }
 html:not([lang="tr"]) .az-chip span { max-width: 20ch; }

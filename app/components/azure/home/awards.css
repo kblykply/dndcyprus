@@ -1,5 +1,5 @@
-/* Ödül vitrini: kum tonlu kart, solda dönen kurdeleler, sağda etkin ödül */
-.az-aw { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: center; padding: clamp(24px, 3.4vw, 52px); border-radius: 36px; background: linear-gradient(135deg, #fbf8f1 0%, #f4ecdd 100%); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 24px 70px rgba(13, 35, 38, .08); max-width: 100%; overflow: hidden; }
+/* Ödül vitrini: kartsız, sayfa zemininde; solda dönen kurdeleler, sağda etkin ödül */
+.az-aw { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: center; max-width: 100%; }
 .az-aw .side { min-width: 0; }
 .az-aw .stage { position: relative; height: clamp(320px, 34vw, 480px); }
 .az-aw .rb { --x: 0px; --s: 1; position: absolute; left: 50%; top: 50%; height: 92%; aspect-ratio: 329 / 1000; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -50%) translateX(var(--x)) scale(var(--s)); transition: transform .8s var(--ease), opacity .6s, filter .6s; }
@@ -28,7 +28,7 @@
 @keyframes az-aw-fill { from { width: 0; } to { width: 100%; } }
 .az-aw .more { margin-top: 18px; }
 @media (max-width: 900px) {
-  .az-aw { grid-template-columns: 1fr; border-radius: 28px; }
+  .az-aw { grid-template-columns: 1fr; }
   /* telefonda sıra: başlık · kurdeleler ve çizgiler · etkin ödül · ek satır */
   .az-aw .txt { display: contents; }
   .az-aw .hd { order: 1; }
