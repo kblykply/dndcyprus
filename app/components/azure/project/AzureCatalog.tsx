@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { PROJECT_PAGES } from "@/lib/azure/projects";
 import type { Locale } from "@/lib/azure/site";
 import "./catalog.css";
@@ -65,11 +65,39 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
     return () => ro.disconnect();
   }, [def.aspect]);
 
-  // açık sayfanın yakınları önceden indirilir: çevirirken ya da sürüklerken boş sayfa görünmesin
+  // Görseller React dışında yüklenir: kitap (react-pageflip) yalnız bir kez kurulur (renderOnlyPageLengthChange),
+  // çocuklar her çizimde değişseydi kütüphane her çevirmede kitabı HTML'den yeniden kuruyor, sayfalar boş geliyordu.
+  // Açık sayfanın yakınındaki <img data-src> öğelerine src verilir; önceden çözülür ki çevirme sırasında boş kalmasın.
   useEffect(() => {
-    for (let i = Math.max(0, idx - 2); i <= Math.min(n - 1, idx + 6); i++) { const im = new Image(); im.decoding = "async"; im.src = def.pages[i].src; }
-  }, [idx, n, def.pages]);
+    const root = stage.current; if (!root) return;
+    const lo = Math.max(0, idx - 4), hi = Math.min(n - 1, idx + 8);
+    root.querySelectorAll<HTMLImageElement>("img[data-i]").forEach((im) => {
+      const i = Number(im.dataset.i);
+      if (i < lo || i > hi || im.dataset.ready) return;
+      if (!im.getAttribute("src")) im.src = im.dataset.src!;
+      // gizli sayfadaki görsel tarayıcıca çözülmez; çevirme anında beyaz kalmasın diye önceden çöz
+      im.dataset.ready = "1";
+      im.decode?.().catch(() => {});
+    });
+  }, [idx, n, size]);
 
+  const name = PROJECT_PAGES[project].name;
+  const onFlip = useCallback((e: { data: number }) => setIdx(e.data), []);
+  // sayfa öğeleri yalnız kitap kurulurken üretilir (boyut değişince key ile yeniden kurulur); ilk yakın sayfalar src ile gelir
+  const pagesEls = useMemo(() => {
+    const at = idx; // kurulum anındaki sayfa (idx bilerek bağımlılık değil: çevirmede kitap yeniden kurulmasın)
+    return def.pages.map((p, i) => {
+      const left = def.cover ? i % 2 === 1 : i % 2 === 0;
+      const near = i >= at - 4 && i <= at + 8;
+      return (
+        <div key={i} className={`pg${p.half ? ` half ${p.half}` : ""}${size?.two ? (left ? " lp" : " rp") : ""}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img data-i={i} data-src={p.src} src={near ? p.src : undefined} alt={`${name} · ${t.page} ${i + 1}`} draggable={false} />
+        </div>
+      );
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [size?.w, size?.h, size?.two, def.pages, def.cover, name, t.page]);
   const api = () => book.current?.pageFlip();
   const go = (d: number) => { const a = api(); if (!a) return; if (d > 0) a.flipNext(); else a.flipPrev(); };
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => { if (e.key === "ArrowRight") { e.preventDefault(); go(1); } else if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); } };
@@ -83,7 +111,6 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
   const atStart = idx <= 0, atEnd = idx >= lastStart;
   const prog = Math.min(1, idx / Math.max(1, lastStart));
   const pdf = def.pdf?.[locale];
-  const name = PROJECT_PAGES[project].name;
 
   return (
     <section className="az-section az-proj az-cat" aria-label={t.title(name)}>
@@ -114,20 +141,10 @@ export default function AzureCatalog({ locale, project }: { locale: Locale; proj
               maxShadowOpacity={0.35}
               flippingTime={850}
               mobileScrollSupport
-              onFlip={(e: { data: number }) => setIdx(e.data)}
+              renderOnlyPageLengthChange
+              onFlip={onFlip}
             >
-              {def.pages.map((p, i) => {
-                const near = i >= idx - 3 && i <= idx + 6;
-                const left = def.cover ? i % 2 === 1 : i % 2 === 0;
-                return (
-                  <div key={i} className={`pg${p.half ? ` half ${p.half}` : ""}${two ? (left ? " lp" : " rp") : ""}`}>
-                    {near ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={p.src} alt={`${name} · ${t.page} ${i + 1}`} draggable={false} decoding="async" />
-                    ) : null}
-                  </div>
-                );
-              })}
+              {pagesEls}
             </HTMLFlipBook>
           ) : null}
         </div>
