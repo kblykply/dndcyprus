@@ -95,24 +95,35 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
 
           {/* sağ: alan tablosu */}
           <div className="tbl" id={`${id}-panel`} role="tabpanel">
-            <h3>{variantTitle(plan, v.name)}</h3>
-            {(plan.variants.length > 1 || v.note || plan.note) && (
-              <div className="vars">
-                {plan.variants.length > 1 && plan.variants.map((x, i) => (
-                  <button key={x.name} type="button" className={i === vi ? "on" : undefined} aria-pressed={i === vi} onClick={() => { setVi(i); setGi(0); }}>
-                    {(x.name.match(/\(([^)]*)\)\s*$/)?.[1]) ?? x.name}
-                  </button>
-                ))}
-                {v.note || plan.note ? <span className="mr-mono">{v.note || plan.note}</span> : null}
-              </div>
-            )}
-            <dl>
-              {v.areas.map((r) => <div key={r.label}><dt>{r.label}</dt><dd>{nb(r.value)}</dd></div>)}
-              {(v.totals?.closed || v.totals?.usage) && (
-                <div className="tot"><dt>{t.total}</dt><dd>{[v.totals?.closed, v.totals?.usage].filter(Boolean).map((x) => nb(x!)).join(" · ")}</dd></div>
-              )}
-            </dl>
-            {v.pdf ? <a className="mr-link" href={v.pdf} target="_blank" rel="noreferrer">{t.pdf} ↗</a> : null}
+            {/* bütün tiplerin (ve varyantların) tabloları aynı hücrede üst üste, yalnız seçili görünür:
+                kartın yüksekliği en uzun tabloya göre sabit, tip değiştirince kutu ve düğmeler oynamaz */}
+            <div className="stack">
+              {d.plans.flatMap((p, pIdx) => p.variants.map((x, xIdx) => {
+                const on = pIdx === pi && x === v;
+                return (
+                  <div key={`${p.id}-${x.name}`} className={on ? "pane on" : "pane"} aria-hidden={on ? undefined : true} inert={!on}>
+                    <h3>{variantTitle(p, x.name)}</h3>
+                    {(p.variants.length > 1 || x.note || p.note) && (
+                      <div className="vars">
+                        {p.variants.length > 1 && p.variants.map((y, i) => (
+                          <button key={y.name} type="button" className={i === xIdx ? "on" : undefined} aria-pressed={i === xIdx} onClick={() => { setVi(i); setGi(0); }}>
+                            {(y.name.match(/\(([^)]*)\)\s*$/)?.[1]) ?? y.name}
+                          </button>
+                        ))}
+                        {x.note || p.note ? <span className="mr-mono">{x.note || p.note}</span> : null}
+                      </div>
+                    )}
+                    <dl>
+                      {x.areas.map((r) => <div key={r.label}><dt>{r.label}</dt><dd>{nb(r.value)}</dd></div>)}
+                      {(x.totals?.closed || x.totals?.usage) && (
+                        <div className="tot"><dt>{t.total}</dt><dd>{[x.totals?.closed, x.totals?.usage].filter(Boolean).map((z) => nb(z!)).join(" · ")}</dd></div>
+                      )}
+                    </dl>
+                    {x.pdf ? <a className="mr-link" href={x.pdf} target="_blank" rel="noreferrer">{t.pdf} ↗</a> : null}
+                  </div>
+                );
+              }))}
+            </div>
             <p className="note">{d.note}</p>
             <div className="mr-ctas">
               <a className="az-btn sea sm" href="#fiyat-al" data-track="price_request_click">{t.request}</a>

@@ -110,6 +110,10 @@
 .mr-units .fig .nav button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--hair); background: var(--glass-b); display: grid; place-items: center; cursor: pointer; color: var(--ink); }
 .mr-units .fig .nav button:hover { background: var(--sea); color: #fff; }
 .mr-units .tbl { min-width: 0; display: flex; flex-direction: column; border-top: 1px solid var(--hair); padding-top: 18px; }
+/* tablolar üst üste (FloorPlans .stack): hücre en uzun tablonun boyunda, seçili olmayanlar gizli ama yer tutar */
+.mr-units .tbl .stack { display: grid; }
+.mr-units .tbl .stack > .pane { grid-area: 1 / 1; min-width: 0; }
+.mr-units .tbl .stack > .pane:not(.on) { visibility: hidden; }
 .mr-units .tbl h3 { font-size: clamp(24px, 2.2vw, 32px); font-weight: 400; letter-spacing: -.025em; }
 .mr-units .tbl .vars { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
 .mr-units .tbl .vars button { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--hair); background: none; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-60); cursor: pointer; }
