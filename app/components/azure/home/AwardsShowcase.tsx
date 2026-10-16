@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { mono } from "@/app/fonts";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
@@ -18,7 +18,8 @@ const WEBP: Record<string, string> = {
 
 /**
  * Ödül vitrini (hero'nun hemen altı): canlı sitedeki gibi ortadaki kurdele büyük, yanlardakiler küçük;
- * kendiliğinden döner (üzerine gelince durur), kurdeleye tıklanınca o ödül ortaya gelir; yanında başlık,
+ * kendiliğinden döner (üzerine gelince ve ekran dışındayken durur), kurdeleye tıklanınca o ödül ortaya gelir;
+ * kurdelelerin altında ince ilerleme çizgileri (dönüş, etkin çizgi dolunca ilerler). Yanında başlık,
  * açıklama ve bağlantı. PropertyNC dışındaki ödül (Yılın CFO'su) altta mono satır.
  */
 export default function AwardsShowcase({ locale }: { locale: Locale }) {
@@ -28,13 +29,19 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
   const n = items.length;
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [reduce, setReduce] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
 
+  useEffect(() => { setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches); }, []);
   useEffect(() => {
-    if (paused || n < 2) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setI((x) => (x + 1) % n), 5200);
-    return () => window.clearInterval(id);
-  }, [paused, n]);
+    const el = box.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const auto = !reduce && n > 1;
 
   const pos = (k: number) => {
     const d = (((k - i) % n) + n) % n;
@@ -49,14 +56,24 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
     <section className={`az-section tight mr ${mono.variable}`} id="oduller" aria-label={strip.label}>
       <div className="az-wrap">
         <div className="rv">
-          <div className="az-aw" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
-            <div className="stage" role="tablist" aria-label={strip.label}>
-              {items.map((it, k) => (
-                <button key={it.title} type="button" role="tab" aria-selected={k === i} aria-label={it.title} className={`rb ${pos(k)}`} onClick={() => setI(k)}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={WEBP[it.ribbon] ?? it.ribbon} alt="" draggable={false} />
-                </button>
-              ))}
+          <div ref={box} className="az-aw" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+            <div className="side">
+              <div className="stage" role="tablist" aria-label={strip.label}>
+                {items.map((it, k) => (
+                  <button key={it.title} type="button" role="tab" aria-selected={k === i} aria-label={it.title} className={`rb ${pos(k)}`} onClick={() => setI(k)}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={WEBP[it.ribbon] ?? it.ribbon} alt="" draggable={false} />
+                  </button>
+                ))}
+              </div>
+              {/* klavye kurdeleleri kullanır; çizgiler fareyle / dokunarak seçim ve ilerleme göstergesi */}
+              <div className={`bars${paused || !visible ? " pause" : ""}`} aria-hidden>
+                {items.map((it, k) => (
+                  <button key={it.title} type="button" tabIndex={-1} className={k === i ? "on" : undefined} onClick={() => setI(k)}>
+                    <i>{k === i ? <span key={`${i}-${auto}`} className={auto ? "p run" : "p"} onAnimationEnd={() => setI((i + 1) % n)} /> : null}</i>
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="txt">
               <div className="hd">
@@ -70,11 +87,6 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
                 {external
                   ? <a className="az-btn sea sm" href={cur.href} target="_blank" rel="noopener noreferrer">{MORE[locale]} →</a>
                   : <Link className="az-btn sea sm" href={cur.href} prefetch={false}>{MORE[locale]} →</Link>}
-              </div>
-              <div className="dots" role="tablist" aria-label={strip.label}>
-                {items.map((it, k) => (
-                  <button key={it.title} type="button" role="tab" aria-selected={k === i} aria-label={it.title} className={k === i ? "on" : undefined} onClick={() => setI(k)} />
-                ))}
               </div>
               {extra ? <p className="mr-mono more">+ {extra.b}{extra.rest}</p> : null}
             </div>
