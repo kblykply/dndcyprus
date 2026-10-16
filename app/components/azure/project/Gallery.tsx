@@ -12,7 +12,9 @@ export default function Gallery({ items, locale }: { items: GalleryItem[]; local
   const [active, setActive] = useState<number | null>(null);
   const on = active ?? hover;
   return (
-    <div className={`az-pg rv${on !== null ? " has" : ""}`} role="group" aria-label={t.aria} onMouseLeave={() => setHover(null)}>
+    // Görünürlük (rv/in) sınıfı sabit dış kapta: React içteki sınıfı (has) değiştirdiğinde AzureFx'in eklediği "in" silinmesin
+    <div className="rv">
+    <div className={`az-pg${on !== null ? " has" : ""}`} role="group" aria-label={t.aria} onMouseLeave={() => setHover(null)}>
       {items.map((g, i) => (
         <button
           key={g.src + i}
@@ -30,6 +32,7 @@ export default function Gallery({ items, locale }: { items: GalleryItem[]; local
           <span className="n" aria-hidden>{g.label ?? `${i + 1} / ${items.length}`}</span>
         </button>
       ))}
+    </div>
     </div>
   );
 }
