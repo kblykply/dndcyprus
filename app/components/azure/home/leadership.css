@@ -1,0 +1,104 @@
+/* Kurucu & yönetim: Ozan Bey öne çıkan blok + ikinci sıra (Aynur Hanım, ekip paneli).
+   Ölçüler akışkan (clamp / fr / aspect-ratio); kırılımlar yalnız düzeni değiştirir. */
+
+/* ---- Ozan Bey: solda portre, sağda içerik; içerik ve portre aynı çizgide biter ---- */
+.az-ozan {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 3.6vw, 64px);
+  padding: clamp(12px, 1.3vw, 20px); border-radius: calc(var(--r) + 8px);
+  background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 24px 70px rgba(13, 35, 38, .08);
+}
+.az-ozan figure { position: relative; margin: 0; min-height: clamp(440px, 44vw, 700px); border-radius: var(--r); overflow: hidden; background: var(--sky-2); }
+.az-ozan figure > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; user-select: none; }
+/* ödül rozeti: portrenin altında beyaz cam etiket (görselin üstünde renk katmanı yok) */
+.az-ozan figcaption {
+  position: absolute; left: clamp(12px, 1.4vw, 20px); bottom: clamp(12px, 1.4vw, 20px); max-width: calc(100% - 2 * clamp(12px, 1.4vw, 20px));
+  display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 999px;
+  background: rgba(255, 255, 255, .82); border: 1px solid rgba(255, 255, 255, .95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(13, 35, 38, .12);
+}
+.az-ozan figcaption i { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--coral); color: #fff; }
+.az-ozan figcaption span { display: grid; font-size: 12px; line-height: 1.3; color: var(--ink-60); }
+.az-ozan figcaption b { font-size: 14px; font-weight: 600; color: var(--ink); }
+
+/* üst ve alt pay eşit: rol satırı portrenin üstünden, logolar portrenin altından aynı uzaklıkta */
+.az-ozan .bd { display: flex; flex-direction: column; min-width: 0; padding: clamp(8px, 1.6vw, 28px) clamp(4px, 2vw, 36px) clamp(8px, 1.6vw, 28px) 0; }
+.az-ozan .role { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); font-weight: 600; }
+.az-ozan h3 { font-size: clamp(36px, 4.2vw, 68px); letter-spacing: -.03em; line-height: 1; margin-top: 14px; }
+.az-ozan .bio { margin-top: 18px; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.55; color: var(--ink-60); max-width: 54ch; }
+.az-ozan blockquote { margin: clamp(18px, 2vw, 28px) 0 0; padding-left: 18px; border-left: 2px solid var(--coral); max-width: 46ch; }
+.az-ozan q { display: block; font-family: var(--font-display), sans-serif; font-size: clamp(18px, 1.6vw, 25px); line-height: 1.4; letter-spacing: -.01em; color: var(--ink); }
+.az-ozan dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: clamp(20px, 2.2vw, 32px) 0 0; }
+.az-ozan dl > div { padding: 14px clamp(12px, 1.1vw, 16px); border-radius: 18px; background: var(--sky); border: 1px solid var(--line); min-width: 0; }
+.az-ozan dt { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--sea); font-weight: 600; overflow-wrap: anywhere; }
+.az-ozan dd { margin: 6px 0 0; font-size: 14px; line-height: 1.4; font-weight: 500; color: var(--ink); }
+.az-ozan .acts { display: flex; flex-wrap: wrap; gap: 10px; margin: clamp(20px, 2.2vw, 32px) 0 clamp(24px, 2.6vw, 36px); }
+/* kariyer logoları en altta: margin-top:auto ile içerik portrenin alt çizgisinde biter */
+.az-ozan .past { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 12px clamp(18px, 2vw, 30px); }
+.az-ozan .past > span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-40); font-weight: 600; }
+.az-ozan .past ul { display: flex; flex-wrap: wrap; align-items: center; gap: 12px clamp(18px, 2vw, 30px); margin: 0; padding: 0; list-style: none; }
+.az-ozan .past li { display: flex; align-items: center; height: clamp(24px, 2.2vw, 32px); }
+.az-ozan .past img { display: block; height: 100%; width: auto; max-width: 112px; object-fit: contain; filter: grayscale(1); opacity: .62; transition: filter .4s, opacity .4s; }
+.az-ozan .past li:hover img { filter: none; opacity: 1; }
+
+/* almanca / rusça / lehçe alıntı işaretleri */
+.az-leaders q:lang(de) { quotes: "„" "“"; }
+.az-leaders q:lang(ru) { quotes: "«" "»"; }
+.az-leaders q:lang(pl) { quotes: "„" "”"; }
+
+/* ---- ikinci sıra: Aynur Hanım + ekip paneli (eşit yükseklik) ---- */
+.az-lrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; }
+/* Aynur Hanım'ın kartı ekip paneliyle aynı boyda: portre kart boyunca uzar, bilgi satırları alta, panel düğmesiyle aynı çizgiye iner */
+@media (min-width: 1001px) {
+  .az-lrow .az-person figure { aspect-ratio: auto; min-height: 240px; }
+  .az-lrow .az-person > div { display: flex; flex-direction: column; min-width: 0; }
+  .az-lrow .az-person dl { margin-top: auto; }
+}
+/* 1001–1240: genel kural kişi kartını tek sütuna indiriyor; burada iki sütunlu kalır, Aynur Hanım'ın kartı biraz daha geniş */
+@media (min-width: 1001px) and (max-width: 1240px) {
+  .az-lrow { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+  .az-lrow .az-person { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+  .az-lrow .az-person figure { max-width: none; }
+}
+/* tablette kart tam genişlik: portre yazı bloğu boyunda kalsın diye sütunu daralır */
+@media (min-width: 521px) and (max-width: 1000px) {
+  .az-lrow .az-person { grid-template-columns: clamp(170px, 24vw, 230px) minmax(0, 1fr); align-items: center; }
+}
+.az-team {
+  /* dikey pay Aynur Hanım'ın kartıyla aynı (22px): yüzler portrenin üstüyle, düğme bilgi satırlarının altıyla aynı çizgide */
+  display: flex; flex-direction: column; padding: 22px clamp(22px, 2.4vw, 36px); border-radius: var(--r); color: #fff;
+  background: linear-gradient(135deg, var(--sea), var(--sea-deep)); box-shadow: 0 18px 50px rgba(13, 101, 112, .22);
+  container-type: inline-size;
+}
+/* yüz boyutu panel genişliğine oranlı (cqw): 7 çember her genişlikte panelin içine sığar */
+.az-team .faces { --face: clamp(32px, 16cqw, 56px); display: flex; }
+.az-team .faces > span {
+  position: relative; flex: none; width: var(--face); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  background: var(--sky-2); border: 2px solid #fff; margin-left: calc(var(--face) * -.24);
+}
+.az-team .faces > span:first-child { margin-left: 0; }
+/* dikey boy portreden baş ve omuzlar: görsel çemberin ~2.8 katı genişlikte, üstten hizalı */
+.az-team .faces img { position: absolute; left: 50%; top: 2%; width: 280%; max-width: none; height: auto; transform: translateX(-50%); }
+.az-team .faces .more { display: grid; place-items: center; background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .7); font-size: 13px; font-weight: 600; color: #fff; }
+.az-team h3 { margin-top: clamp(18px, 2vw, 28px); font-size: clamp(28px, 2.6vw, 42px); letter-spacing: -.02em; color: #fff; }
+.az-team ul { margin: 14px 0 clamp(22px, 2.4vw, 32px); padding: 0; list-style: none; }
+.az-team li { padding: 11px 0; border-top: 1px solid rgba(255, 255, 255, .18); font-size: 15px; color: rgba(255, 255, 255, .84); }
+.az-team .az-btn { margin-top: auto; align-self: flex-start; }
+
+/* rusça ve lehçe bölüm başlığı dar telefonda iki satırda kalsın: boy ekran genişliğiyle orantılı küçülür (320px'te ~24px, 420px+ 32px) */
+@media (max-width: 600px) {
+  .az-leaders .az-head .az-h2:is(:lang(ru), :lang(pl)) { font-size: clamp(24px, 7.6vw, 32px); }
+  .az-leaders .az-head .az-h2:lang(de) { font-size: clamp(24px, 9.8vw, 32px); }
+}
+
+/* ---- tablet: Ozan Bey üstte geniş portre, içerik altında; ikinci sıra alt alta ---- */
+@media (max-width: 1000px) {
+  .az-ozan { grid-template-columns: 1fr; }
+  .az-ozan figure { min-height: 0; aspect-ratio: 16 / 10; }
+  .az-ozan .bd { padding: 4px clamp(4px, 2vw, 20px) clamp(8px, 2vw, 20px); }
+  .az-lrow { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .az-ozan figure { aspect-ratio: 4 / 5; }
+  .az-ozan figure > img { object-position: 50% 0; }
+  .az-ozan dl { grid-template-columns: 1fr; }
+}

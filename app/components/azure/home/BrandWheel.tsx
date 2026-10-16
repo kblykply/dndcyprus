@@ -16,7 +16,10 @@ export default function BrandWheel({ items, label }: { items: WheelItem[]; label
   const cards = useRef<(HTMLElement | null)[]>([]);
   const focusTo = useRef<(i: number) => void>(() => {});
   const [ready, setReady] = useState(false);
-  const n = items.length;
+  // az logo varsa şerit geniş ekranı doldurup kesintisiz dönebilsin diye liste kopyalanır (kopyalar ekran okuyucuya ve klavyeye kapalı)
+  const copies = items.length ? Math.max(1, Math.ceil(12 / items.length)) : 1;
+  const loop = Array.from({ length: copies }, (_, c) => items.map((b) => ({ ...b, copy: c }))).flat();
+  const n = loop.length;
 
   useEffect(() => {
     const el = wrap.current;
@@ -135,21 +138,24 @@ export default function BrandWheel({ items, label }: { items: WheelItem[]; label
 
   return (
     <div ref={wrap} className={`az-wheel${ready ? " ready" : ""}`} role="region" aria-label={label}>
-      {items.map((b, i) => {
+      {loop.map((b, i) => {
+        const dup = b.copy > 0;
+        const key = `${b.name}-${b.copy}`;
         const img = (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={b.logo} alt={b.name} decoding="async" draggable={false} />
+          <img src={b.logo} alt={dup ? "" : b.name} decoding="async" draggable={false} />
         );
         const common = {
           ref: (node: HTMLElement | null) => { cards.current[i] = node; },
           className: `card${b.muted ? " muted" : ""}`,
           title: b.name,
           onFocus: () => focusTo.current(i),
+          ...(dup ? { "aria-hidden": true, tabIndex: -1 } : {}),
         };
-        if (!b.href) return <span key={b.name} {...common}>{img}</span>;
+        if (!b.href) return <span key={key} {...common}>{img}</span>;
         return b.external
-          ? <a key={b.name} {...common} href={b.href} target="_blank" rel="noopener noreferrer" draggable={false}>{img}</a>
-          : <Link key={b.name} {...common} href={b.href} prefetch={false} draggable={false}>{img}</Link>;
+          ? <a key={key} {...common} href={b.href} target="_blank" rel="noopener noreferrer" draggable={false}>{img}</a>
+          : <Link key={key} {...common} href={b.href} prefetch={false} draggable={false}>{img}</Link>;
       })}
     </div>
   );

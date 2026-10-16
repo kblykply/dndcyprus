@@ -18,7 +18,7 @@ export type HomeContent = {
   story: { kicker: string; title: ReactNode; steps: { t: string; h: string; p: string; tags: string[]; img: string }[] };
   projects: { kicker: string; title: ReactNode; prev: string; next: string; soonKicker: string; soonCta: string };
   location: { kicker: string; title: ReactNode; p: string; dist: { label: string; v: string; w: number }[]; directions: string; tour: string };
-  leadership: { kicker: string; title: ReactNode; people: { img: string; role: string; name: string; q: string; dl: [string, string][] }[]; team: string; teamCta: string; brandsLabel: string };
+  leadership: { kicker: string; title: ReactNode; people: { img: string; role: string; name: string; bio?: string; q: string; dl: [string, string][] }[]; team: string; teamCta: string; brandsLabel: string; career: string };
   timeline: { kicker: string; title: ReactNode; items: { year: string; tag: string; p: string; img: string }[] };
   press: { kicker: string; title: string; all: string };
   faq: { kicker: string; title: string; items: { q: string; a: string }[] };
@@ -84,10 +84,10 @@ const TR: HomeContent = {
     kicker: "Kurucu & yönetim",
     title: <>Küresel tecrübe, <b>yerel disiplin.</b></>,
     people: [
-      { img: "/azure/ozan.jpg", role: "Kurucu · Yönetim Kurulu Başkanı", name: "Ozan Dökmecioğlu", q: "Disiplin, şeffaflık ve sürdürülebilir büyüme; her işimizin temelinde.", dl: [["Uzmanlık", "Finans & Operasyon"], ["Küresel rol", "Keurig Dr Pepper, eski CFO / President Int."], ["Geçmiş", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/ozan.jpg", role: "Kurucu · Yönetim Kurulu Başkanı", name: "Ozan Dökmecioğlu", bio: "DND Cyprus’un kurucusu ve vizyoner lideri. Küresel finans ve operasyon deneyimini Kıbrıs’taki çağdaş yaşam projelerine aktarıyor.", q: "Disiplin, şeffaflık ve sürdürülebilir büyüme; her işimizin temelinde.", dl: [["Uzmanlık", "Finans & Operasyon"], ["Küresel rol", "Keurig Dr Pepper, eski CFO / President Int."], ["Geçmiş", "Kellogg, Kraft, Cargill"]] },
       { img: "/azure/aynur.jpg", role: "DND Cyprus Direktörü", name: "Aynur Zorba Güloğlu", q: "Güven, şeffaflık ve ekip ruhu; başarılarımızın temelinde bunlar var.", dl: [["Odak", "Operasyonel liderlik"], ["Uzmanlık", "Mimarlık & yöneticilik"], ["Yaklaşım", "Sürdürülebilirlik"]] },
     ],
-    team: "27 kişilik ekip", teamCta: "Tüm ekibimiz", brandsLabel: "Markalar & projeler",
+    team: "27 kişilik ekip", teamCta: "Tüm ekibimiz", brandsLabel: "Markalar & projeler", career: "Geçmiş kurumlar",
   },
   timeline: {
     kicker: "Hikayemiz",
@@ -174,10 +174,10 @@ const EN: HomeContent = {
     kicker: "Founder & management",
     title: <>Global experience, <b>local discipline.</b></>,
     people: [
-      { img: "/azure/ozan.jpg", role: "Founder · Chairman of the Board", name: "Ozan Dökmecioğlu", q: "Discipline, transparency and sustainable growth; the foundation of everything we do.", dl: [["Expertise", "Finance & Operations"], ["Global role", "Keurig Dr Pepper, former CFO / President Int."], ["Background", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/ozan.jpg", role: "Founder · Chairman of the Board", name: "Ozan Dökmecioğlu", bio: "Founder and visionary leader of DND Cyprus. He brings his global finance and operations experience to contemporary living projects in Cyprus.", q: "Discipline, transparency and sustainable growth; the foundation of everything we do.", dl: [["Expertise", "Finance & Operations"], ["Global role", "Keurig Dr Pepper, former CFO / President Int."], ["Background", "Kellogg, Kraft, Cargill"]] },
       { img: "/azure/aynur.jpg", role: "Director, DND Cyprus", name: "Aynur Zorba Güloğlu", q: "Trust, transparency and team spirit; these are at the heart of our success.", dl: [["Focus", "Operational leadership"], ["Expertise", "Architecture & management"], ["Approach", "Sustainability"]] },
     ],
-    team: "A team of 27", teamCta: "Meet the whole team", brandsLabel: "Brands & projects",
+    team: "A team of 27", teamCta: "Meet the whole team", brandsLabel: "Brands & projects", career: "Previous companies",
   },
   timeline: {
     kicker: "Our story",
@@ -264,10 +264,10 @@ const DE: HomeContent = {
     kicker: "Gründer & Management",
     title: <>Globale Erfahrung, <b>lokale Disziplin.</b></>,
     people: [
-      { img: "/azure/ozan.jpg", role: "Gründer · Vorstandsvorsitzender", name: "Ozan Dökmecioğlu", q: "Disziplin, Transparenz und nachhaltiges Wachstum – das Fundament all unseres Handelns.", dl: [["Expertise", "Finanzen & operatives Geschäft"], ["Globale Rolle", "Keurig Dr Pepper, ehem. CFO / President Int."], ["Werdegang", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/ozan.jpg", role: "Gründer · Vorstandsvorsitzender", name: "Ozan Dökmecioğlu", bio: "Gründer und visionärer Kopf von DND Cyprus. Seine internationale Erfahrung in Finanzen und operativem Management bringt er in zeitgemäße Wohnprojekte auf Zypern ein.", q: "Disziplin, Transparenz und nachhaltiges Wachstum – das Fundament all unseres Handelns.", dl: [["Expertise", "Finanzen & operatives Geschäft"], ["Globale Rolle", "Keurig Dr Pepper, ehem. CFO / President Int."], ["Werdegang", "Kellogg, Kraft, Cargill"]] },
       { img: "/azure/aynur.jpg", role: "Direktorin, DND Cyprus", name: "Aynur Zorba Güloğlu", q: "Vertrauen, Transparenz und Teamgeist – sie stehen im Zentrum unseres Erfolgs.", dl: [["Fokus", "Operative Führung"], ["Expertise", "Architektur & Management"], ["Ansatz", "Nachhaltigkeit"]] },
     ],
-    team: "Ein Team von 27 Personen", teamCta: "Das ganze Team kennenlernen", brandsLabel: "Marken & Projekte",
+    team: "Ein Team von 27 Personen", teamCta: "Das ganze Team kennenlernen", brandsLabel: "Marken & Projekte", career: "Frühere Unternehmen",
   },
   timeline: {
     kicker: "Unsere Geschichte",
@@ -354,10 +354,10 @@ const RU: HomeContent = {
     kicker: "Основатель и руководство",
     title: <>Международный опыт, <b>местная дисциплина.</b></>,
     people: [
-      { img: "/azure/ozan.jpg", role: "Основатель · Председатель совета директоров", name: "Ozan Dökmecioğlu", q: "Дисциплина, прозрачность и устойчивый рост — основа всего, что мы делаем.", dl: [["Специализация", "Финансы и операционная деятельность"], ["Международная роль", "Keurig Dr Pepper, экс-CFO / President Int."], ["Опыт", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/ozan.jpg", role: "Основатель · Председатель совета директоров", name: "Ozan Dökmecioğlu", bio: "Основатель и идейный лидер DND Cyprus. Свой международный опыт в финансах и операционном управлении он воплощает в современных жилых проектах на Кипре.", q: "Дисциплина, прозрачность и устойчивый рост — основа всего, что мы делаем.", dl: [["Специализация", "Финансы и операционная деятельность"], ["Международная роль", "Keurig Dr Pepper, экс-CFO / President Int."], ["Опыт", "Kellogg, Kraft, Cargill"]] },
       { img: "/azure/aynur.jpg", role: "Директор DND Cyprus", name: "Aynur Zorba Güloğlu", q: "Доверие, прозрачность и командный дух — вот что лежит в основе нашего успеха.", dl: [["Фокус", "Операционное руководство"], ["Специализация", "Архитектура и управление"], ["Подход", "Устойчивое развитие"]] },
     ],
-    team: "Команда из 27 человек", teamCta: "Познакомиться с командой", brandsLabel: "Бренды и проекты",
+    team: "Команда из 27 человек", teamCta: "Познакомиться с командой", brandsLabel: "Бренды и проекты", career: "Предыдущие компании",
   },
   timeline: {
     kicker: "Наша история",
@@ -444,10 +444,10 @@ const PL: HomeContent = {
     kicker: "Założyciel i zarząd",
     title: <>Globalne doświadczenie, <b>lokalna dyscyplina.</b></>,
     people: [
-      { img: "/azure/ozan.jpg", role: "Założyciel · Przewodniczący Rady Dyrektorów", name: "Ozan Dökmecioğlu", q: "Dyscyplina, przejrzystość i zrównoważony wzrost – fundament wszystkiego, co robimy.", dl: [["Specjalizacja", "Finanse i operacje"], ["Rola globalna", "Keurig Dr Pepper, były CFO / President Int."], ["Doświadczenie", "Kellogg, Kraft, Cargill"]] },
+      { img: "/azure/ozan.jpg", role: "Założyciel · Przewodniczący Rady Dyrektorów", name: "Ozan Dökmecioğlu", bio: "Założyciel i wizjoner DND Cyprus. Swoje globalne doświadczenie w finansach i zarządzaniu operacyjnym przenosi do nowoczesnych projektów mieszkaniowych na Cyprze.", q: "Dyscyplina, przejrzystość i zrównoważony wzrost – fundament wszystkiego, co robimy.", dl: [["Specjalizacja", "Finanse i operacje"], ["Rola globalna", "Keurig Dr Pepper, były CFO / President Int."], ["Doświadczenie", "Kellogg, Kraft, Cargill"]] },
       { img: "/azure/aynur.jpg", role: "Dyrektor DND Cyprus", name: "Aynur Zorba Güloğlu", q: "Zaufanie, przejrzystość i duch zespołu – to one stoją u podstaw naszego sukcesu.", dl: [["Obszar działania", "Przywództwo operacyjne"], ["Specjalizacja", "Architektura i zarządzanie"], ["Podejście", "Zrównoważony rozwój"]] },
     ],
-    team: "Zespół 27 osób", teamCta: "Poznaj cały zespół", brandsLabel: "Marki i projekty",
+    team: "Zespół 27 osób", teamCta: "Poznaj cały zespół", brandsLabel: "Marki i projekty", career: "Wcześniejsze firmy",
   },
   timeline: {
     kicker: "Nasza historia",
