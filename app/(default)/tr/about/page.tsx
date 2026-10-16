@@ -1,7 +1,7 @@
 import PageHero from "@/app/components/azure/PageHero";
 import AboutUs from "@/app/components/about/AboutWhoWeAreGlass";
 import MissionVisionValues from "@/app/components/about/MissionVisionValues";
-import TimelineMilestones from "@/app/components/about/TimelineMilestones";
+import Timeline from "@/app/components/azure/home/Timeline";
 import WhyChooseUs from "@/app/components/about/WhyChooseUs";
 
 import CallToAction from "@/app/components/about/CallToAction";
@@ -43,7 +43,7 @@ export default function HomePage() {
   description="Projelerimizi ve yaşam konseptimizi keşfedin."
 />
 <section className="az-section" id="kurucu" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="tr" heading="h2" /></div></section>
-    <TimelineMilestones />
+    <Timeline locale="tr" id="timeline" />
     <section className="az-section" id="direktor" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="tr" heading="h2" /></div></section>
 
 

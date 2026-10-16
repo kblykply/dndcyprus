@@ -36,14 +36,15 @@ const PARALLELS = [10, 22, 34, 46, 58, 70].map((d) => {
   return { cy: G.cy - G.r * Math.sin(p) * Math.cos(G.tilt), rx: G.r * Math.cos(p), ry: G.r * Math.cos(p) * Math.sin(G.tilt) };
 });
 
-export default function Timeline({ locale }: { locale: Locale }) {
+// Ana sayfada ve Hakkımızda'da ("Yolculuğumuz" kartlarının yerine, id="timeline") aynı bileşen.
+export default function Timeline({ locale, id }: { locale: Locale; id?: string }) {
   const t = HOME[locale].timeline;
   const m = MAP[locale];
   const items = t.items.slice(0, STOPS.length);
   const pts = items.map((_, i) => at(STOPS[i]));
 
   return (
-    <section className="az-section">
+    <section className="az-section" id={id}>
       <div className="az-wrap">
         <span className="az-kicker rv">{t.kicker}</span>
         <h2 className="az-h2 rv d1">{t.title}</h2>

@@ -1,7 +1,7 @@
 import PageHero from "@/app/components/azure/PageHero";
 import AboutUs from "@/app/components/de/about/AboutWhoWeAreGlass";
 import MissionVisionValues from "@/app/components/de/about/MissionVisionValues";
-import TimelineMilestones from "@/app/components/de/about/TimelineMilestones";
+import Timeline from "@/app/components/azure/home/Timeline";
 import WhyChooseUs from "@/app/components/de/about/WhyChooseUs";
 
 import CallToAction from "@/app/components/de/about/CallToAction";
@@ -44,7 +44,7 @@ description = "Entdecken Sie unsere Projekte und unser Wohnkonzept."
 
 />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="de" heading="h2" /></div></section>
-    <TimelineMilestones />
+    <Timeline locale="de" id="timeline" />
     <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="de" heading="h2" /></div></section>
 
 

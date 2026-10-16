@@ -1,7 +1,7 @@
 import PageHero from "@/app/components/azure/PageHero";
 import AboutUs from "@/app/components/ru/about/AboutWhoWeAreGlass";
 import MissionVisionValues from "@/app/components/ru/about/MissionVisionValues";
-import TimelineMilestones from "@/app/components/ru/about/TimelineMilestones";
+import Timeline from "@/app/components/azure/home/Timeline";
 import WhyChooseUs from "@/app/components/ru/about/WhyChooseUs";
 
 import CallToAction from "@/app/components/ru/about/CallToAction";
@@ -44,7 +44,7 @@ description = "Откройте для себя наши проекты и ко�
 
 />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="ru" heading="h2" /></div></section>
-    <TimelineMilestones />
+    <Timeline locale="ru" id="timeline" />
     <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="ru" heading="h2" /></div></section>
 
 
