@@ -4,7 +4,7 @@
   position: relative; isolation: isolate; overflow: hidden; min-width: 0;
   padding: clamp(20px, 2.2vw, 28px); border-radius: var(--r);
   background: rgba(255, 255, 255, .74); border: 1px solid rgba(255, 255, 255, .95);
-  box-shadow: 0 10px 40px rgba(13, 35, 38, .06); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 40px rgba(13, 35, 38, .06); backdrop-filter: blur(14px);
   transition: transform .5s var(--ease), box-shadow .5s;
 }
 /* köşede yumuşak renk ışığı (görselin üstünde değil, kart zemininde); üzerine gelince büyür */

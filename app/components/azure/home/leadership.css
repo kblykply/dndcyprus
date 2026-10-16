@@ -14,7 +14,7 @@
 .az-ozan figcaption {
   position: absolute; left: clamp(12px, 1.4vw, 20px); bottom: clamp(12px, 1.4vw, 20px); max-width: calc(100% - 2 * clamp(12px, 1.4vw, 20px));
   display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 999px;
-  background: rgba(255, 255, 255, .82); border: 1px solid rgba(255, 255, 255, .95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, .82); border: 1px solid rgba(255, 255, 255, .95); backdrop-filter: blur(14px);
   box-shadow: 0 10px 30px rgba(13, 35, 38, .12);
 }
 .az-ozan figcaption i { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--coral); color: #fff; }
