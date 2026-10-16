@@ -7,8 +7,8 @@ import type { Locale } from "@/lib/azure/site";
 /**
  * Scrollytelling: sol sütunda adımlar kayar, sağda yapışkan görsel değişir.
  * Etkin adım, adımın üst kenarı görselin üst üçte birindeki çizgiyi geçince seçilir (telefonda görselin hemen altını).
- * Son adım görsel hâlâ yapışıkken etkinleşip bir süre kalsın diye adımların altında boşluk var (azure.css,
- * ilk çizimde hazır); ilk adım görselle aynı hizada başlar.
+ * İlk adım görselin üst kenarıyla, son adım görselin alt kenarıyla aynı çizgide başlar/biter (adımların altında
+ * boşluk yok). Son adım, görsel yapışıklıktan çıkıp alt kenarı son adımla hizalandığında etkinleşir.
  */
 export default function Story({ locale }: { locale: Locale }) {
   const t = HOME[locale].story;
@@ -35,9 +35,24 @@ export default function Story({ locale }: { locale: Locale }) {
     const pick = () => {
       raf = 0;
       const r = stick.getBoundingClientRect();
-      const line = mq.matches ? r.bottom + 48 : r.top + offset();
       let k = 0;
-      steps.forEach((s, j) => { if (s.getBoundingClientRect().top <= line) k = j; });
+      if (mq.matches) {
+        const line = r.bottom + 48;
+        steps.forEach((s, j) => { if (s.getBoundingClientRect().top <= line) k = j; });
+      } else {
+        // Masaüstü: çizgi görselle birlikte iner; yapışkan kaydırma mesafesi kısa kalırsa (uzun görsel, kısa metin)
+        // çizgi orantılı hızlanır, böylece her adım sırayla etkinleşir ve son adım tam bölüm sonunda etkin olur.
+        const b = box.getBoundingClientRect();
+        const off = offset();
+        const tops = steps.map((s) => s.getBoundingClientRect().top - b.top);
+        const travel = b.height - r.height;
+        const t = Math.max(0, r.top - b.top);
+        const f = travel > 1 ? Math.max(1, (tops[tops.length - 1] - off) / travel) : 1;
+        const line = off + t * f;
+        tops.forEach((y, j) => { if (y <= line + 0.5) k = j; });
+        // bölüm sonu: görselin alt kenarı son adımın alt kenarına ulaştı → son adım etkin
+        if (b.bottom <= r.bottom + 4) k = steps.length - 1;
+      }
       setI(k);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(pick); };
