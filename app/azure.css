@@ -429,25 +429,7 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 .az-prose ul, .az-prose ol { padding-left: 1.2em; margin: 10px 0; }
 .az-prose a { color: var(--sea); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---- footer ---- */
-.az-footer { padding: clamp(40px, 6vw, 72px) var(--gutter) clamp(20px, 2.4vw, 28px); position: relative; z-index: 1; }
-/* sütunlar altbilgi genişliğine eşit aralıkla yayılır; son sütun sağ kenarla (alt satırla) hizalı */
-.az-footer .g { display: flex; justify-content: space-between; gap: 40px; padding-top: 30px; border-top: 1px solid var(--line); }
-.az-footer .g > div { flex: 0 0 auto; min-width: 0; }
-.az-footer .g > .brand { flex: 0 1 40ch; }
-.az-footer .brand img { height: 36px; width: auto; margin-bottom: 16px; }
-.az-footer p { font-size: 14px; color: var(--ink-60); max-width: 36ch; }
-.az-footer p a { color: var(--ink); }
-.az-footer h4 { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); margin-bottom: 14px; font-weight: 600; font-family: var(--font-sans); }
-.az-footer ul { list-style: none; display: grid; gap: 9px; padding: 0; margin: 0; }
-.az-footer li a { font-size: 14px; color: var(--ink-60); transition: color .3s; }
-.az-footer li a:hover { color: var(--ink); }
-.az-footer .bottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-40); }
-.az-footer .bottom a, .az-footer .bottom button { color: var(--ink-40); background: none; border: 0; font: inherit; cursor: pointer; padding: 0; }
-.az-footer .bottom a:hover, .az-footer .bottom button:hover { color: var(--ink); }
-.az-footer .bottom .links { display: flex; gap: 14px; flex-wrap: wrap; }
-@media (max-width: 900px) { .az-footer .g { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; } }
-@media (max-width: 520px) { .az-footer .g { grid-template-columns: 1fr; } }
+/* ---- footer: app/components/azure/footer.css ---- */
 
 /* ---- floating ---- */
 .az-wa { position: fixed; right: 20px; bottom: 20px; z-index: 900; width: 54px; height: 54px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(37, 211, 102, .35); transition: transform .4s var(--ease), bottom .45s var(--ease); color: #fff; }
