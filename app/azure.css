@@ -227,14 +227,16 @@ body.az-lock { overflow: hidden; }
 .t-mariachi { grid-column: span 7; grid-row: span 2; }
 .t-tl { grid-column: span 5; grid-row: span 2; }
 .t-award, .t-homes, .t-lajoya { grid-column: span 4; }
-/* metin kartları üstten başlar (içerik uzunluğu farklı olsa da aynı hizada) */
-.t-award, .t-homes { justify-content: flex-start; }
+/* alt sıra hizası: küçük etiket üstte (La Joya'nın etiketiyle aynı çizgi), asıl içerik altta
+   (üç kartta da son satır aynı çizgide biter) */
+.t-award, .t-homes { justify-content: flex-end; }
+.t-award .k, .t-homes .k { margin-bottom: auto; padding-bottom: 8px; }
 /* alt sıra en az 260px: La Joya kartında üstteki etiket ile alttaki yazı arasında görsel görünsün */
 .t-award, .t-homes, .t-lajoya { min-height: 260px; }
 .t-tl .tl-cta { display: inline-block; align-self: flex-start; width: max-content; margin-top: 18px; font-size: 14px; font-weight: 500; color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .6); padding-bottom: 2px; transition: border-color .3s; }
 .t-tl .tl-cta:hover { border-color: #fff; }
 @media (max-width: 1000px) { .t-mariachi, .t-tl, .t-lajoya { grid-column: span 12; } .t-award, .t-homes { grid-column: span 6; } .t-mariachi { min-height: 360px; } }
-@media (max-width: 560px) { .t-award, .t-homes { grid-column: span 12; } .az-grid { grid-auto-rows: auto; } .t-lajoya { min-height: 240px; } }
+@media (max-width: 560px) { .t-award, .t-homes { grid-column: span 12; min-height: 0; } .az-grid { grid-auto-rows: auto; } .t-lajoya { min-height: 240px; } }
 
 /* ---- scrollytelling ---- */
 .az-story .g { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(24px, 4vw, 64px); align-items: start; }
