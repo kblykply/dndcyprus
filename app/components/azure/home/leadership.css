@@ -24,7 +24,7 @@
 /* üst ve alt pay eşit: rol satırı portrenin üstünden, logolar portrenin altından aynı uzaklıkta */
 .az-ozan .bd { display: flex; flex-direction: column; min-width: 0; padding: clamp(8px, 1.6vw, 28px) clamp(4px, 2vw, 36px) clamp(8px, 1.6vw, 28px) 0; }
 .az-ozan .role { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); font-weight: 600; }
-.az-ozan h3 { font-size: clamp(36px, 4.2vw, 68px); letter-spacing: -.03em; line-height: 1; margin-top: 14px; }
+.az-ozan .nm { font-size: clamp(36px, 4.2vw, 68px); font-weight: 400; letter-spacing: -.03em; line-height: 1; margin-top: 14px; }
 .az-ozan .bio { margin-top: 18px; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.55; color: var(--ink-60); max-width: 54ch; text-wrap: pretty; }
 .az-ozan blockquote { margin: clamp(18px, 2vw, 28px) 0 0; padding-left: 18px; border-left: 2px solid var(--coral); max-width: 46ch; }
 .az-ozan q { display: block; font-family: var(--font-display), sans-serif; font-size: clamp(18px, 1.6vw, 25px); line-height: 1.4; letter-spacing: -.01em; color: var(--ink); text-wrap: pretty; }
@@ -41,6 +41,12 @@
 .az-ozan .past li { display: flex; align-items: center; height: clamp(24px, 2.2vw, 32px); }
 .az-ozan .past img { display: block; height: 100%; width: auto; max-width: 112px; object-fit: contain; filter: grayscale(1); opacity: .62; transition: filter .4s, opacity .4s; }
 .az-ozan .past li:hover img { filter: none; opacity: 1; }
+
+/* portre sağda (Hakkımızda, Aynur Hanım): sayfada sağ-sol dengesi; logo satırı yoksa bilgi satırları kartın altında biter */
+.az-ozan.flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.az-ozan.flip figure { order: 2; }
+.az-ozan.flip .bd { padding-left: clamp(4px, 2vw, 36px); padding-right: 0; }
+.az-ozan .bd > dl:last-child { margin-bottom: 0; }
 
 /* almanca / rusça / lehçe alıntı işaretleri */
 .az-leaders q:lang(de) { quotes: "„" "“"; }
@@ -94,7 +100,9 @@
 
 /* ---- tablet: Ozan Bey üstte geniş portre, içerik altında; ikinci sıra alt alta ---- */
 @media (max-width: 1000px) {
-  .az-ozan { grid-template-columns: 1fr; }
+  .az-ozan, .az-ozan.flip { grid-template-columns: 1fr; }
+  .az-ozan.flip figure { order: 0; }
+  .az-ozan.flip .bd { padding: 4px clamp(4px, 2vw, 20px) clamp(8px, 2vw, 20px); }
   .az-ozan figure { min-height: 0; aspect-ratio: 16 / 10; }
   .az-ozan .bd { padding: 4px clamp(4px, 2vw, 20px) clamp(8px, 2vw, 20px); }
   .az-lrow { grid-template-columns: minmax(0, 1fr); }

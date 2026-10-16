@@ -5,8 +5,7 @@ import TimelineMilestones from "@/app/components/ru/about/TimelineMilestones";
 import WhyChooseUs from "@/app/components/ru/about/WhyChooseUs";
 
 import CallToAction from "@/app/components/ru/about/CallToAction";
-import OzanSpotlight from "@/app/components/ru/about/OzanSpotlight";
-import AynurSpotlightAlt from "@/app/components/ru/about/AynurSpotlightAlt"
+import { OzanCard, AynurCard } from "@/app/components/azure/PersonCard";
 
 import AboutDndHomes from "@/app/components/ru/about/AboutDndHomes";
 import { pageMetadata } from "@/lib/seo";
@@ -44,9 +43,9 @@ heading = "DND Homes — видение для Кипра"
 description = "Откройте для себя наши проекты и концепцию жизни."
 
 />
-<OzanSpotlight/>
+<section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="ru" heading="h2" /></div></section>
     <TimelineMilestones />
-    <AynurSpotlightAlt/>
+    <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="ru" heading="h2" /></div></section>
 
 
         <MissionVisionValues />

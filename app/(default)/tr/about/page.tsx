@@ -5,8 +5,7 @@ import TimelineMilestones from "@/app/components/about/TimelineMilestones";
 import WhyChooseUs from "@/app/components/about/WhyChooseUs";
 
 import CallToAction from "@/app/components/about/CallToAction";
-import OzanSpotlight from "@/app/components/about/OzanSpotlight";
-import AynurSpotlightAlt from "@/app/components/about/AynurSpotlightAlt"
+import { OzanCard, AynurCard } from "@/app/components/azure/PersonCard";
 
 import AboutDndHomes from "@/app/components/about/AboutDndHomes";
 import { pageMetadata } from "@/lib/seo";
@@ -43,9 +42,9 @@ export default function HomePage() {
   heading="DND Homes — Kıbrıs Vizyonu"
   description="Projelerimizi ve yaşam konseptimizi keşfedin."
 />
-<OzanSpotlight/>
+<section className="az-section" id="kurucu" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="tr" heading="h2" /></div></section>
     <TimelineMilestones />
-    <AynurSpotlightAlt/>
+    <section className="az-section" id="direktor" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="tr" heading="h2" /></div></section>
 
 
         <MissionVisionValues />

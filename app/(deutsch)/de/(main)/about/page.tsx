@@ -5,8 +5,7 @@ import TimelineMilestones from "@/app/components/de/about/TimelineMilestones";
 import WhyChooseUs from "@/app/components/de/about/WhyChooseUs";
 
 import CallToAction from "@/app/components/de/about/CallToAction";
-import OzanSpotlight from "@/app/components/de/about/OzanSpotlight";
-import AynurSpotlightAlt from "@/app/components/de/about/AynurSpotlightAlt"
+import { OzanCard, AynurCard } from "@/app/components/azure/PersonCard";
 
 import AboutDndHomes from "@/app/components/de/about/AboutDndHomes";
 import { pageMetadata } from "@/lib/seo";
@@ -44,9 +43,9 @@ heading = "DND Homes – Vision für Zypern"
 description = "Entdecken Sie unsere Projekte und unser Wohnkonzept."
 
 />
-<OzanSpotlight/>
+<section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="de" heading="h2" /></div></section>
     <TimelineMilestones />
-    <AynurSpotlightAlt/>
+    <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="de" heading="h2" /></div></section>
 
 
         <MissionVisionValues />

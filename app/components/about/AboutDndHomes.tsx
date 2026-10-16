@@ -40,7 +40,7 @@ export default function AboutDndHomes({
           <p className="az-lead rv d2">{description}</p>
         </div>
 
-        <div className="grid grid-cols-1 items-start gap-4 min-[900px]:grid-cols-[1.5fr_1fr]">
+        <div className="grid grid-cols-1 items-stretch gap-4 min-[900px]:grid-cols-[1.5fr_1fr]">
           <figure
             className="rv m-0 w-full max-w-full overflow-hidden rounded-[28px]"
             style={{ background: "var(--sea-deep)", boxShadow: "0 24px 60px rgba(13,35,38,.14)" }}
@@ -48,7 +48,7 @@ export default function AboutDndHomes({
             <VideoHeroCard id={videoId} title={videoTitle} poster={poster} startAt={startAt} />
           </figure>
 
-          <aside className="az-panel rv d1">
+          <aside className="az-panel rv d1 flex flex-col">
             <ul className="m-0 grid list-none gap-3 p-0">
               {POINTS.map((p, i) => (
                 <li key={i} className="flex items-start gap-3 text-[15px] leading-relaxed" style={{ color: "var(--ink-60)" }}>
@@ -57,7 +57,7 @@ export default function AboutDndHomes({
                 </li>
               ))}
             </ul>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-auto flex flex-wrap gap-3 pt-7">
               <a className="az-btn sea sm" href="https://dnd-homes.com/" target="_blank" rel="noopener noreferrer">DND Homes Web Sitesi</a>
               <Link className="az-btn glass sm" href="/tr/projects" prefetch={false}>Kuzey Kıbrıs Projeleri</Link>
             </div>
@@ -105,7 +105,7 @@ function VideoHeroCard({
     setPlay(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "manual" : "auto");
 
   return (
-    <div className="relative aspect-video w-full max-w-full" style={{ background: "var(--sea-deep)" }}>
+    <div className="relative aspect-video h-full w-full max-w-full" style={{ background: "var(--sea-deep)" }}>
       {play ? (
         <iframe
           className="absolute inset-0 h-full w-full"
