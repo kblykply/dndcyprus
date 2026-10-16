@@ -11,7 +11,7 @@
 .az-vs .body { grid-row: 1; display: flex; flex-direction: column; min-width: 0; }
 .az-vs .hd { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--hair); }
 .az-vs h3 { margin-top: clamp(14px, 1.4vw, 20px); font-family: var(--font-display); font-weight: 300; font-size: clamp(30px, 3.3vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); text-wrap: balance; }
-.az-vs h3 b { font-weight: 500; color: var(--sea); }
+.az-vs h3 b { display: block; font-weight: 500; color: var(--sea); } /* her başlık iki satır: düz kısım üstte, vurgulu kısım altta */
 .az-vs .lead { margin-top: clamp(8px, 1vw, 14px); padding-bottom: clamp(14px, 1.5vw, 22px); font-size: clamp(15px, 1.15vw, 17px); line-height: 1.6; color: var(--ink-60); max-width: 42ch; }
 .az-vs ol { list-style: none; padding: 0; margin: auto 0 0; border-top: 1px solid var(--hair); }
 .az-vs li { display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 10px 0; border-bottom: 1px solid var(--hair); font-size: 15px; line-height: 1.45; color: var(--ink); }
