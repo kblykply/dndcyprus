@@ -322,6 +322,11 @@ body.az-lock { overflow: hidden; }
 .az-brands a:hover { transform: translateY(-3px); }
 .az-brands img { height: 34px; width: auto; object-fit: contain; }
 @media (max-width: 1000px) { .az-leaders .g { grid-template-columns: 1fr; } }
+/* logo şeridi ekip satırı ile sonraki bölüm başlığının tam ortasında: üst ve alt boşluk eşit (--wheel-gap).
+   kart şeridin içinde 12px aşağıda, altında 28px gölge payı var; sonraki başlığın üstünde ~7px satır boşluğu */
+.az-leaders { --wheel-gap: clamp(64px, 6.8vw, 100px); }
+.az-leaders .az-wheel { margin-top: calc(var(--wheel-gap) - 12px); margin-bottom: calc(var(--wheel-gap) - 35px); }
+.az-leaders + .az-section { padding-top: 0; }
 @media (max-width: 520px) { .az-person { grid-template-columns: 1fr; } .az-person figure { max-width: 220px; } }
 
 /* ---- timeline chips ---- */
