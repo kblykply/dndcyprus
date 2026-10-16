@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useId, useState } from "react";
 import { submitLead } from "@/lib/lead-submit";
 import { CONTACT, PROJECTS, href, type Locale } from "@/lib/azure/site";
+import PhoneField, { joinPhone } from "./PhoneField";
 
 const COPY = {
   tr: {
@@ -20,10 +21,10 @@ const COPY = {
     wa: "Beklemek istemezseniz WhatsApp'tan yazın",
     err: "Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin ya da WhatsApp üzerinden bize yazın.",
     invalid: "Lütfen işaretli alanları kontrol edin.",
-    phoneHint: "Ülke koduyla yazın (ör. +90, +44).",
+    phoneHint: "Ülke kodunu seçip numaranızı yazın; listede yoksa numarayı + ile başlatın.",
     note: "Bilgileriniz yalnızca talebinizi yanıtlamak için kullanılır.",
     waText: (p?: string) => p ? `Merhaba! ${p} hakkında fiyat ve kat planı bilgisi almak istiyorum.` : "Merhaba! Bilgi almak istiyorum.",
-    dial: "+90", brochure: "Broşür (PDF)",
+    brochure: "Broşür (PDF)",
   },
   en: {
     kicker: "Contact",
@@ -39,10 +40,10 @@ const COPY = {
     wa: "Prefer not to wait? Message us on WhatsApp",
     err: "Something went wrong while sending. Please try again or message us on WhatsApp.",
     invalid: "Please check the highlighted fields.",
-    phoneHint: "Include your country code (e.g. +44, +90).",
+    phoneHint: "Choose your country code and enter your number; if your country is not listed, start the number with +.",
     note: "Your details are only used to respond to your request.",
     waText: (p?: string) => p ? `Hello! I would like to receive prices and floor plans for ${p}.` : "Hello! I would like more information.",
-    dial: "+44", brochure: "Brochure (PDF)",
+    brochure: "Brochure (PDF)",
   },
   de: {
     kicker: "Kontakt",
@@ -58,10 +59,10 @@ const COPY = {
     wa: "Sie möchten nicht warten? Schreiben Sie uns auf WhatsApp",
     err: "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns auf WhatsApp.",
     invalid: "Bitte prüfen Sie die markierten Felder.",
-    phoneHint: "Bitte mit Ländervorwahl angeben (z. B. +49, +90).",
+    phoneHint: "Wählen Sie die Ländervorwahl und geben Sie Ihre Nummer ein; fehlt Ihr Land, beginnen Sie die Nummer mit +.",
     note: "Ihre Angaben werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet.",
     waText: (p?: string) => p ? `Hallo! Ich hätte gerne Preise und Grundrisse für ${p}.` : "Hallo! Ich hätte gerne weitere Informationen.",
-    dial: "+49", brochure: "Broschüre (PDF)",
+    brochure: "Broschüre (PDF)",
   },
   ru: {
     kicker: "Контакты",
@@ -77,10 +78,10 @@ const COPY = {
     wa: "Не хотите ждать? Напишите нам в WhatsApp",
     err: "При отправке произошла ошибка. Попробуйте ещё раз или напишите нам в WhatsApp.",
     invalid: "Пожалуйста, проверьте отмеченные поля.",
-    phoneHint: "Укажите номер с кодом страны (напр. +7, +90).",
+    phoneHint: "Выберите код страны и введите номер; если вашей страны нет в списке, начните номер с +.",
     note: "Ваши данные используются только для ответа на вашу заявку.",
     waText: (p?: string) => p ? `Здравствуйте! Хочу получить цены и планировки по проекту ${p}.` : "Здравствуйте! Хочу получить больше информации.",
-    dial: "+7", brochure: "Брошюра (PDF)",
+    brochure: "Брошюра (PDF)",
   },
   pl: {
     kicker: "Kontakt",
@@ -96,10 +97,10 @@ const COPY = {
     wa: "Wolą Państwo nie czekać? Prosimy napisać do nas na WhatsApp",
     err: "Podczas wysyłania wystąpił błąd. Prosimy spróbować ponownie lub napisać do nas na WhatsApp.",
     invalid: "Prosimy sprawdzić zaznaczone pola.",
-    phoneHint: "Prosimy podać numer z kierunkowym kraju (np. +48, +90).",
+    phoneHint: "Wybierz kierunkowy kraju i wpisz numer; jeśli kraju nie ma na liście, zacznij numer od +.",
     note: "Państwa dane wykorzystujemy wyłącznie do odpowiedzi na zapytanie.",
     waText: (p?: string) => p ? `Dzień dobry! Proszę o ceny i plany mieszkań w projekcie ${p}.` : "Dzień dobry! Proszę o więcej informacji.",
-    dial: "+48", brochure: "Broszura (PDF)",
+    brochure: "Broszura (PDF)",
   },
 } satisfies Record<Locale, unknown>;
 
@@ -137,13 +138,16 @@ export default function ContactCard({
     const form = e.currentTarget;
     const data = new FormData(form);
     const v = (k: string) => String(data.get(k) || "").trim();
-    const name = v("name"), phone = v("phone"), email = v("email"), message = v("message");
+    const name = v("name"), email = v("email"), message = v("message");
+    // telefon: seçilen ülke kodu + numara ("0533…" → "+90 533…"); "+" / "00" ile tam yazıldıysa olduğu gibi
+    const phoneIn = v("phone"), cc = v("cc");
+    const phone = joinPhone(cc, phoneIn);
     const choice = v("choice");
     const subject = mode === "contact" ? v("subject") : "";
     const errs: Record<string, boolean> = {};
     if (name.length < 2) errs.name = true;
-    const digits = phone.replace(/\D/g, "");
-    if (!phone || digits.length < 7 || digits.length > 15) errs.phone = true;
+    const full = /^(\+|00)/.test(phoneIn) || !!cc;   // "Diğer ülke" seçiliyse numara + ile yazılmalı
+    if (!phoneIn || phoneIn.replace(/\D/g, "").length < 7 || phone.replace(/\D/g, "").length > 15 || !full) errs.phone = true;
     if (!EMAIL_RE.test(email)) errs.email = true;
     if (mode === "contact" && !subject) errs.subject = true;
     if (mode === "contact" && !message) errs.message = true;
@@ -207,8 +211,8 @@ export default function ContactCard({
           ) : (
             <form className="az-f" onSubmit={onSubmit} noValidate aria-describedby={Object.keys(errors).length ? `${uid}-err` : undefined}>
               <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: -9999, opacity: 0 }} />
-              <div className="az-field"><label htmlFor={`${uid}-n`}>{t.name}</label><input id={`${uid}-n`} name="name" type="text" autoComplete="name" required aria-invalid={errors.name || undefined} /></div>
-              <div className="az-field"><label htmlFor={`${uid}-p`}>{t.phone}</label><input id={`${uid}-p`} name="phone" type="tel" placeholder={t.dial} autoComplete="tel" required aria-invalid={errors.phone || undefined} /></div>
+              <div className="az-field az-wide"><label htmlFor={`${uid}-n`}>{t.name}</label><input id={`${uid}-n`} name="name" type="text" autoComplete="name" required aria-invalid={errors.name || undefined} /></div>
+              <div className="az-field az-wide"><label htmlFor={`${uid}-p`}>{t.phone}</label><PhoneField id={`${uid}-p`} locale={locale} invalid={errors.phone} /></div>
               <div className="az-field"><label htmlFor={`${uid}-e`}>{t.email}</label><input id={`${uid}-e`} name="email" type="email" autoComplete="email" required aria-invalid={errors.email || undefined} /></div>
               {mode === "contact" ? (
                 <div className="az-field"><label htmlFor={`${uid}-s`}>{t.subject}</label><input id={`${uid}-s`} name="subject" type="text" required aria-invalid={errors.subject || undefined} /></div>
