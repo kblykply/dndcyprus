@@ -95,7 +95,8 @@ a:hover > .az-arrow:not(.back) { transform: translateX(3px); }
 .az-nav li:hover > a, .az-nav li:hover > button, .az-nav li > a.on, .az-nav li.open > button { background: rgba(13, 35, 38, .06); color: var(--ink); }
 .az-nav .drop {
   position: absolute; top: calc(100% + 10px); left: 50%; transform: translate(-50%, 8px); width: min(640px, 100%);
-  padding: 12px; background: var(--glass-b); backdrop-filter: blur(20px);
+  /* açılır menü yüzeyleri (mega, mobil, dil) daha opak: açık ve hareketli görselin üstünde yazı okunsun */
+  padding: 12px; background: rgba(255, 255, 255, .92); backdrop-filter: blur(24px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, .7); border-radius: 22px; box-shadow: 0 20px 60px rgba(13, 35, 38, .16);
   display: grid; grid-template-columns: 1fr 1fr; gap: 6px; opacity: 0; visibility: hidden; transition: all .4s var(--ease);
 }
@@ -105,14 +106,14 @@ a:hover > .az-arrow:not(.back) { transform: translateX(3px); }
 .az-nav .drop a:hover { background: #fff; }
 .az-nav .drop a img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; }
 .az-nav .drop a b { display: block; font-weight: 500; font-size: 14px; }
-.az-nav .drop a small { font-size: 11px; color: var(--ink-40); letter-spacing: .06em; text-transform: uppercase; }
+.az-nav .drop a small { font-size: 11px; color: var(--ink-60); letter-spacing: .06em; text-transform: uppercase; }
 .az-nav .lang { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 999px; background: rgba(13,35,38,.05); margin-left: 4px; }
 .az-nav .lang a { padding: 6px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .08em; color: var(--ink-60); transition: all .3s; }
 .az-nav .lang a.on { background: var(--sea); color: #fff; }
 .az-nav .lang a:not(.on):hover { background: #fff; color: var(--ink); }
 .az-nav .burger { display: none; width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: #fff; place-items: center; border: 0; cursor: pointer; flex: 0 0 auto; }
 .az-mobile {
-  position: fixed; inset: 12px; z-index: 99; background: var(--glass-b); backdrop-filter: blur(30px);
+  position: fixed; inset: 12px; z-index: 99; background: rgba(255, 255, 255, .92); backdrop-filter: blur(30px) saturate(140%);
   border-radius: 32px; border: 1px solid rgba(255, 255, 255, .8); padding: 90px 28px 28px;
   display: flex; flex-direction: column; justify-content: center; gap: 4px; opacity: 0; visibility: hidden; transform: scale(.96);
   transition: all .5s var(--ease); overflow-y: auto;

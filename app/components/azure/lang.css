@@ -5,7 +5,7 @@
 .az-nav .lang.menu > button svg { transition: transform .3s; }
 .az-nav .lang.menu > button:hover, .az-nav .lang.menu.open > button { background: var(--sea); color: #fff; }
 .az-nav .lang.menu.open > button svg { transform: rotate(180deg); }
-.az-nav .lang.menu ul { position: absolute; top: calc(100% + 10px); right: 0; min-width: 176px; margin: 0; padding: 6px; list-style: none; display: grid; gap: 2px; background: var(--glass-b); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.7); border-radius: 18px; box-shadow: 0 20px 60px rgba(13,35,38,.16); opacity: 0; visibility: hidden; transform: translateY(8px); transition: all .35s var(--ease); }
+.az-nav .lang.menu ul { position: absolute; top: calc(100% + 10px); right: 0; min-width: 176px; margin: 0; padding: 6px; list-style: none; display: grid; gap: 2px; background: rgba(255, 255, 255, .92); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.7); border-radius: 18px; box-shadow: 0 20px 60px rgba(13,35,38,.16); opacity: 0; visibility: hidden; transform: translateY(8px); transition: all .35s var(--ease); }
 .az-nav .lang.menu.open ul { opacity: 1; visibility: visible; transform: none; }
 .az-nav .lang.menu li a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; font-size: 13px; font-weight: 500; color: var(--ink); letter-spacing: 0; transition: background .3s, color .3s; }
 .az-nav .lang.menu li a b { font-size: 11px; letter-spacing: .08em; color: var(--sea); width: 22px; font-weight: 700; }

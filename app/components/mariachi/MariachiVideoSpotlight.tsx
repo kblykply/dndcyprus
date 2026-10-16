@@ -1,7 +1,7 @@
 // app/components/mariachi/MariachiVideoSpotlight.tsx
 "use client";
 
-import DeferredIframe from "@/app/components/performance/DeferredIframe";
+import LazyYouTube from "@/app/components/LazyYouTube";
 import { useMemo, type ReactNode } from "react";
 import Link from "next/link";
 
@@ -33,46 +33,7 @@ export default function MariachiVideoSpotlight({
   highlights?: { k: string; v: string }[];
 }) {
   // Ensure autoplay for embeds (YouTube/Vimeo/etc.)
-  const autoplayEmbedUrl = useMemo(() => {
-    if (!embedUrl) return null;
-    try {
-      const url = new URL(embedUrl);
-      const host = url.hostname;
-
-      // YouTube (incl. youtube-nocookie)
-      if (host.includes("youtube") || host.includes("youtu.be")) {
-        url.searchParams.set("autoplay", "1");     // required
-        url.searchParams.set("mute", "1");         // required for autoplay policies
-        url.searchParams.set("playsinline", "1");  // iOS inline autoplay
-        url.searchParams.set("controls", "1");     // optional, looks cleaner
-        url.searchParams.set("rel", "0");          // no related vids at end
-        url.searchParams.set("loop", "1");         // loop requires playlist=id
-        const vid = url.pathname.split("/").pop() || "";
-        if (vid && !url.searchParams.has("playlist")) {
-          url.searchParams.set("playlist", vid);
-        }
-      }
-      // Vimeo
-      else if (host.includes("vimeo.com")) {
-        url.searchParams.set("autoplay", "1");
-        url.searchParams.set("muted", "1");
-        url.searchParams.set("loop", "1");
-        url.searchParams.set("autopause", "0");
-        url.searchParams.set("background", "1"); // hides controls, inline style
-      }
-      // Generic iframe players
-      else {
-        url.searchParams.set("autoplay", "1");
-        url.searchParams.set("muted", "1");
-        url.searchParams.set("playsinline", "1");
-      }
-      return url.toString();
-    } catch {
-      const joiner = embedUrl.includes("?") ? "&" : "?";
-      return `${embedUrl}${joiner}autoplay=1&mute=1&playsinline=1`;
-    }
-  }, [embedUrl]);
-
+  const ytId = useMemo(() => embedUrl?.match(/(?:youtube(?:-nocookie)?\.com\/embed\/|youtu\.be\/)([\w-]{6,})/)?.[1] ?? "", [embedUrl]);
   const isExternal = (href: string) => href.startsWith("http");
 
   return (
@@ -85,17 +46,18 @@ export default function MariachiVideoSpotlight({
               className="relative aspect-[4/3] overflow-hidden rounded-[22px] max-w-full" /* video 4:3 (960×720): 16:9 kutuda yanlarda siyah bant kalıyordu */
               style={{ background: "var(--sea-deep)", boxShadow: "0 20px 50px rgba(13,35,38,.18)" }}
             >
-              {autoplayEmbedUrl ? (
-                <DeferredIframe
-                  activation="click"
+              {ytId ? (
+                <LazyYouTube
+                  // çerçevede kendiliğinden, sessiz ve döngüyle oynar (YouTube başlığı, düğmeleri ve "Diğer videolar" görünmez);
+                  // eskiden tıklayınca YouTube oynatıcısı süslü açılış ekranı ve arayüzüyle açılıyordu
+                  videoId={ytId}
+                  query={`autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=${ytId}&playsinline=1&modestbranding=1`}
+                  ratio={4 / 3}
                   poster={poster}
-                  buttonLabel="Videoyu oynat"
-                  src={autoplayEmbedUrl}
+                  cover
+                  className="absolute inset-0"
                   title={iframeTitle}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
+                  posterAlt={iframeTitle}
                 />
               ) : videoSrc ? (
                 <video
