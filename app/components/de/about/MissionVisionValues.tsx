@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import MvvMedals from "@/app/components/azure/about/MvvMedals";
 
 type MVVProps = {
   kicker?: string;
@@ -47,27 +48,8 @@ export default function MissionVisionValues({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 min-[900px]:grid-cols-3">
-          <article className="az-panel rv">
-            <CardHead n="01" title={missionTitle} accent="var(--sea)" />
-            <p className="mt-4 text-[15px] leading-relaxed" style={{ color: "var(--ink-60)" }}>{missionText}</p>
-          </article>
-
-          <article className="az-panel rv d1">
-            <CardHead n="02" title={visionTitle} accent="var(--coral)" />
-            <p className="mt-4 text-[15px] leading-relaxed" style={{ color: "var(--ink-60)" }}>{visionText}</p>
-          </article>
-
-          <article className="az-tile sea rv d2" style={{ justifyContent: "flex-start" }}>
-            <div className="k">03</div>
-            <h3>{valuesTitle}</h3>
-            <ul className="rules">
-              {values.map((val) => (
-                <li key={val}><i>✓</i>{val}</li>
-              ))}
-            </ul>
-          </article>
-        </div>
+        {/* misyon, vizyon ve değerler: madalya sistemi (ortak bileşen, metinler bu dilin) */}
+        <MvvMedals mission={{ title: missionTitle, text: missionText }} vision={{ title: visionTitle, text: visionText }} valuesTitle={valuesTitle} values={values} />
 
         <div className="mt-4 grid grid-cols-1 gap-4 min-[900px]:grid-cols-[1.15fr_0.85fr]">
           <figure
@@ -91,14 +73,5 @@ export default function MissionVisionValues({
         </div>
       </div>
     </section>
-  );
-}
-
-function CardHead({ n, title, accent }: { n: string; title: string; accent: string }) {
-  return (
-    <div>
-      <span className="text-[11px] font-semibold uppercase tracking-[0.14em]" style={{ color: accent }}>{n}</span>
-      <h3 className="mt-2 text-[clamp(22px,2.2vw,30px)] leading-tight">{title}</h3>
-    </div>
   );
 }

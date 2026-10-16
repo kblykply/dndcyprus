@@ -1,0 +1,44 @@
+/* Misyon, Vizyon & Değerler (MvvMedals): ikonlu misyon / vizyon kartları + değerler paneli */
+.az-mvv { display: grid; gap: 16px; }
+
+/* misyon · vizyon: açık zeminli çemberde ince ikon, eşit boy */
+.az-mvv .mv { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.az-mvv .mvc { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(18px, 2.2vw, 28px); align-items: start; }
+.az-mvv .mvc .n { display: block; font-size: 11px; letter-spacing: .14em; font-weight: 600; color: var(--ink-40); }
+.az-mvv .mvc h3 { font-size: clamp(22px, 2.2vw, 30px); line-height: 1.1; margin-top: 6px; }
+.az-mvv .mvc p { margin-top: 12px; font-size: 15px; line-height: 1.65; color: var(--ink-60); text-wrap: pretty; }
+.az-mvv .mdl { display: grid; place-items: center; width: clamp(56px, 4.6vw, 68px); aspect-ratio: 1; border-radius: 50%; }
+.az-mvv .mdl.sea { color: var(--sea); background: rgba(13, 101, 112, .09); box-shadow: inset 0 0 0 1px rgba(13, 101, 112, .16); }
+.az-mvv .mdl.coral { color: var(--coral); background: rgba(241, 92, 52, .09); box-shadow: inset 0 0 0 1px rgba(241, 92, 52, .18); }
+
+/* değerler paneli */
+.az-mvv .vals {
+  position: relative; overflow: hidden; border-radius: var(--r); padding: clamp(26px, 3.4vw, 48px); color: #fff;
+  background: radial-gradient(120% 90% at 85% 0%, rgba(42, 169, 179, .35), transparent 60%), linear-gradient(135deg, var(--sea), var(--sea-deep));
+  box-shadow: 0 24px 60px rgba(13, 101, 112, .25);
+}
+.az-mvv .vh .k { font-size: 11px; letter-spacing: .14em; font-weight: 600; opacity: .8; }
+.az-mvv .vh h3 { margin-top: 6px; font-size: clamp(26px, 2.8vw, 40px); color: #fff; }
+.az-mvv .vals ul { list-style: none; margin: clamp(26px, 3.2vw, 44px) 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(22px, 2.6vw, 34px) 12px; }
+.az-mvv .vals li { flex: 0 0 calc((100% - 6 * 12px) / 7); min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+@media (max-width: 1100px) { .az-mvv .vals li { flex-basis: calc((100% - 3 * 12px) / 4); } }
+@media (max-width: 600px) { .az-mvv .vals li { flex-basis: calc((100% - 12px) / 2); } }
+.az-mvv .lbl { font-size: 14px; font-weight: 500; line-height: 1.35; color: rgba(255, 255, 255, .92); max-width: 18ch; text-wrap: balance; overflow-wrap: break-word; }
+
+/* ikon: yarı saydam çember, ince beyaz ikon; üzerine gelince çember beyaz, ikon deniz rengi */
+.az-mvv .ico {
+  display: grid; place-items: center; width: clamp(64px, 5.6vw, 84px); aspect-ratio: 1; border-radius: 50%; color: #fff;
+  background: rgba(255, 255, 255, .08); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .24), 0 0 0 6px rgba(255, 255, 255, .04);
+  transition: background .4s var(--ease), color .4s var(--ease), transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.az-mvv .vals li:hover .ico { background: #fff; color: var(--sea); transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0, 0, 0, .22), 0 0 0 6px rgba(255, 255, 255, .1); }
+
+/* panel görününce ikonlar sırayla belirir */
+@media (prefers-reduced-motion: no-preference) {
+  .az-js .az-mvv .vals:not(.in) li { opacity: 0; }
+  .az-mvv .vals.in li { animation: az-val-in .8s var(--ease) both; animation-delay: calc(var(--i) * 90ms + 200ms); }
+}
+@keyframes az-val-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 900px) { .az-mvv .mv { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .az-mvv .mvc { grid-template-columns: minmax(0, 1fr); } }
