@@ -9,11 +9,11 @@
 .az-vs .hd { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--hair); }
 .az-vs h3 { margin-top: clamp(14px, 1.4vw, 20px); font-family: var(--font-display); font-weight: 300; font-size: clamp(30px, 3.3vw, 50px); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); text-wrap: balance; }
 .az-vs h3 b { font-weight: 500; color: var(--sea); }
-.az-vs .lead { margin-top: 12px; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.6; color: var(--ink-60); max-width: 42ch; }
-.az-vs ol { list-style: none; padding: 0; margin: 18px 0 0; border-top: 1px solid var(--hair); }
+.az-vs .lead { margin-top: 12px; padding-bottom: 18px; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.6; color: var(--ink-60); max-width: 42ch; }
+.az-vs ol { list-style: none; padding: 0; margin: auto 0 0; border-top: 1px solid var(--hair); }
 .az-vs li { display: grid; grid-template-columns: 40px minmax(0, 1fr); padding: 10px 0; border-bottom: 1px solid var(--hair); font-size: 15px; line-height: 1.45; color: var(--ink); }
 .az-vs li .mr-mono { padding-top: 2px; }
-.az-vs .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; margin-top: auto; padding-top: 22px; }
+.az-vs .cta { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; padding-top: 32px; }
 .az-vs .cta .ul { font-size: 15px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; transition: color .3s, border-color .3s; }
 .az-vs .cta .ul:hover { color: var(--sea); border-color: var(--sea); }
 
@@ -49,6 +49,10 @@
 .az-vs .nav button:hover { background: #fff; border-color: rgba(13, 35, 38, .24); }
 .az-vs button:focus-visible, .az-vs a:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
 
+/* tablet yatay: metin sütunu daralmasın, düğmeler tek satırda kalsın */
+@media (min-width: 961px) and (max-width: 1200px) {
+  .az-vs .card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
 @media (max-width: 960px) {
   .az-vs .card { grid-template-columns: 1fr; gap: 26px; }
   .az-vs .fig { order: -1; }
