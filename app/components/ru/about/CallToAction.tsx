@@ -21,7 +21,7 @@ export default function CallToAction({
   subtitle = "Если вы ищете надёжного и инновационного партнёра для своих проектов, свяжитесь с нами.",
   buttonLabel = "Связаться с нами",
   buttonHref = "/ru/contact",
-  bgSrc = "/lagoon-verde/1.jpg",
+  bgSrc = "/azure/contact-sea.webp", // sitedeki tüm iletişim kartlarıyla aynı deniz arka planı
   bgAlt = "",
 }: Props) {
   return (

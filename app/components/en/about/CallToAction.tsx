@@ -21,7 +21,7 @@ export default function CallToAction({
   subtitle = "If you are looking for a reliable and innovative solution partner for your projects, get in touch with us.",
   buttonLabel = "Contact Us",
   buttonHref = "/en/contact",
-  bgSrc = "/lagoon-verde/1.jpg",
+  bgSrc = "/azure/contact-sea.webp", // sitedeki tüm iletişim kartlarıyla aynı deniz arka planı
   bgAlt = "",
 }: Props) {
   return (

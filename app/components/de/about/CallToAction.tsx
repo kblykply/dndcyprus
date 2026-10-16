@@ -21,7 +21,7 @@ export default function CallToAction({
   subtitle = "Sie suchen einen verlässlichen und innovativen Partner für Ihre Projekte? Nehmen Sie Kontakt mit uns auf.",
   buttonLabel = "Kontakt aufnehmen",
   buttonHref = "/de/contact",
-  bgSrc = "/lagoon-verde/1.jpg",
+  bgSrc = "/azure/contact-sea.webp", // sitedeki tüm iletişim kartlarıyla aynı deniz arka planı
   bgAlt = "",
 }: Props) {
   return (
