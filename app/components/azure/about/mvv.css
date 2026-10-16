@@ -30,6 +30,12 @@
 }
 .az-mvv .vals li:hover .ico, .az-mvv .mvc:hover .ico { background: #fff; color: var(--sea); transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0, 0, 0, .22), 0 0 0 6px rgba(255, 255, 255, .1); }
 
+/* panelin altında soru + düğme: ince çizgiyle ayrılır, düğme beyaz */
+.az-mvv .vals .cta { margin-top: clamp(28px, 3.4vw, 44px); padding-top: clamp(22px, 2.6vw, 32px); border-top: 1px solid rgba(255, 255, 255, .18); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
+.az-mvv .vals .cta p { margin: 0; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.45; color: rgba(255, 255, 255, .92); max-width: 52ch; text-wrap: pretty; }
+.az-mvv .vals .cta .az-btn { background: #fff; color: var(--sea); box-shadow: 0 10px 26px rgba(0, 0, 0, .18); }
+.az-mvv .vals .cta .az-btn:hover { background: var(--coral); color: #fff; }
+
 /* panel görününce ikonlar sırayla belirir */
 @media (prefers-reduced-motion: no-preference) {
   .az-js .az-mvv .vals:not(.in) li { opacity: 0; }

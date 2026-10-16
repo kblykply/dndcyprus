@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 import {
@@ -19,6 +20,8 @@ type Props = {
   vision: { title: string; text: string };
   valuesTitle: string;
   values: string[];
+  /** panelin altında ince çizgiyle ayrılmış soru + düğme (projelere) */
+  cta?: { text: string; label: string; href: string };
 };
 
 /**
@@ -26,7 +29,7 @@ type Props = {
  * misyon ve vizyon iki kart, değerler altta geniş panel. Panel görününce ikonlar sırayla belirir; üzerine gelince çember beyaza döner.
  * Hareket azaltma tercihinde animasyon yok.
  */
-export default function MvvMedals({ mission, vision, valuesTitle, values }: Props) {
+export default function MvvMedals({ mission, vision, valuesTitle, values, cta }: Props) {
   return (
     <div className="az-mvv">
       <div className="mv">
@@ -52,6 +55,15 @@ export default function MvvMedals({ mission, vision, valuesTitle, values }: Prop
             );
           })}
         </ul>
+        {cta ? (
+          <div className="cta">
+            <p>{cta.text}</p>
+            <Link className="az-btn" href={cta.href} prefetch={false}>
+              {cta.label}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+            </Link>
+          </div>
+        ) : null}
       </div>
     </div>
   );
