@@ -23,7 +23,7 @@
 .az-aw .bars i { position: relative; display: block; height: 2px; overflow: hidden; background: rgba(13, 35, 38, .16); transition: background .3s; }
 .az-aw .bars button:hover i { background: rgba(13, 35, 38, .3); }
 .az-aw .bars .p { position: absolute; inset: 0 auto 0 0; width: 100%; background: var(--sea); }
-.az-aw .bars .p.run { width: 0; animation: az-aw-fill 5.2s linear forwards; }
+.az-aw .bars .p.run { width: 0; animation: az-aw-fill 5s linear forwards; }
 .az-aw .bars.pause .p.run { animation-play-state: paused; }
 @keyframes az-aw-fill { from { width: 0; } to { width: 100%; } }
 .az-aw .more { margin-top: 18px; }

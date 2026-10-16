@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FocusEvent } from "react";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import "../meridian.css";
@@ -17,9 +17,10 @@ const WEBP: Record<string, string> = {
 
 /**
  * Ödül vitrini (hero'nun hemen altı): canlı sitedeki gibi ortadaki kurdele büyük, yanlardakiler küçük;
- * kendiliğinden döner (üzerine gelince ve ekran dışındayken durur), kurdeleye tıklanınca o ödül ortaya gelir;
- * kurdelelerin altında ince ilerleme çizgileri (dönüş, etkin çizgi dolunca ilerler). Yanında başlık,
- * açıklama ve bağlantı. PropertyNC dışındaki ödül (Yılın CFO'su) altta mono satır.
+ * 5 saniyede bir kendiliğinden döner, kurdeleye tıklanınca o ödül ortaya gelir; kurdelelerin altında ince
+ * ilerleme çizgileri (etkin çizgi dolunca ilerler). Kurdelelerin üstüne gelmek dönüşü durdurmaz; yalnızca
+ * fare yazı / bağlantı alanındayken (tıklanan ödül değişmesin), klavyeyle gezinirken ve ekran dışındayken durur.
+ * Yanında başlık, açıklama ve bağlantı. PropertyNC dışındaki ödül (Yılın CFO'su) altta mono satır.
  */
 export default function AwardsShowcase({ locale }: { locale: Locale }) {
   const a = HOME[locale].bento.awards;
@@ -27,7 +28,8 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
   const items = a.items;
   const n = items.length;
   const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hold, setHold] = useState(false); // fare yazı / bağlantı alanında
+  const [kbd, setKbd] = useState(false); // klavye odağı vitrinin içinde
   const [visible, setVisible] = useState(false);
   const [reduce, setReduce] = useState(false);
   const box = useRef<HTMLDivElement>(null);
@@ -41,6 +43,13 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
     return () => io.disconnect();
   }, []);
   const auto = !reduce && n > 1;
+  const paused = hold || kbd || !visible;
+  // fareyle / dokunarak tıklanan düğme de odak alır; yalnızca klavye odağı (:focus-visible) dönüşü durdurur
+  const onFocus = (e: FocusEvent<HTMLElement>) => {
+    let k = false;
+    try { k = e.target.matches(":focus-visible"); } catch { k = false; }
+    setKbd(k);
+  };
 
   const pos = (k: number) => {
     const d = (((k - i) % n) + n) % n;
@@ -55,7 +64,7 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
     <section className="az-section tight mr" id="oduller" aria-label={strip.label}>
       <div className="az-wrap">
         <div className="rv">
-          <div ref={box} className="az-aw" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+          <div ref={box} className="az-aw" onFocus={onFocus} onBlur={() => setKbd(false)}>
             <div className="side">
               <div className="stage" role="tablist" aria-label={strip.label}>
                 {items.map((it, k) => (
@@ -66,7 +75,7 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
                 ))}
               </div>
               {/* klavye kurdeleleri kullanır; çizgiler fareyle / dokunarak seçim ve ilerleme göstergesi */}
-              <div className={`bars${paused || !visible ? " pause" : ""}`} aria-hidden>
+              <div className={`bars${paused ? " pause" : ""}`} aria-hidden>
                 {items.map((it, k) => (
                   <button key={it.title} type="button" tabIndex={-1} className={k === i ? "on" : undefined} onClick={() => setI(k)}>
                     <i>{k === i ? <span key={`${i}-${auto}`} className={auto ? "p run" : "p"} onAnimationEnd={() => setI((i + 1) % n)} /> : null}</i>
@@ -74,7 +83,7 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
                 ))}
               </div>
             </div>
-            <div className="txt">
+            <div className="txt" onPointerEnter={(e) => { if (e.pointerType === "mouse") setHold(true); }} onPointerLeave={() => setHold(false)}>
               <div className="hd">
                 <span className="az-kicker">{strip.label}</span>
                 <h2 className="az-h2 sm">{a.h}</h2>
