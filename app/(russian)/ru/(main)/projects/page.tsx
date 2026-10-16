@@ -16,7 +16,7 @@ export default function HomePage() {
 
 <PageHero size="compact" kicker="Проекты" title={<>Шесть адресов, <b>один стандарт.</b></>} lead="Lagoon Verde, La Joya, La Joya Perla, Perla II, Mariachi Beach Club и участок в Гечиткале: сравните все проекты DND Cyprus в одном месте." image="/azure/lv-7.jpg" imageAlt="DND Cyprus" chips={[{ big: "6", label: "проектов" }, { big: "2", label: "награды · 2025" }]} />
 <ProjectsFilters />
-<ContactCard locale="ru" mode="home" id="iletisim" kicker="DND Cyprus" title={<>Узнайте больше <b>о наших проектах.</b></>} lead="Если вас интересуют текущие или будущие проекты, наш отдел продаж с радостью расскажет подробности и предложит лучшие варианты." image="/azure/p1-9.jpg" />
+<ContactCard locale="ru" mode="home" id="iletisim" kicker="DND Cyprus" title={<>Узнайте больше <b>о наших проектах.</b></>} lead="Если вас интересуют текущие или будущие проекты, наш отдел продаж с радостью расскажет подробности и предложит лучшие варианты." />
     </main>
   );
 }

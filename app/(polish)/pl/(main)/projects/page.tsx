@@ -16,7 +16,7 @@ export default function HomePage() {
 
 <PageHero size="compact" kicker="Projekty" title={<>Sześć adresów, <b>jeden standard.</b></>} lead="Lagoon Verde, La Joya, La Joya Perla, Perla II, Mariachi Beach Club i działka w Geçitkale – wszystkie projekty DND Cyprus do porównania w jednym miejscu." image="/azure/lv-7.jpg" imageAlt="DND Cyprus" chips={[{ big: "6", label: "Projektów" }, { big: "2", label: "Nagrody · 2025" }]} />
 <ProjectsFilters />
-<ContactCard locale="pl" mode="home" id="iletisim" kicker="DND Cyprus" title={<>Więcej informacji <b>o naszych projektach.</b></>} lead="Jeśli interesują Państwa nasze bieżące lub planowane inwestycje, nasz zespół sprzedaży chętnie przedstawi szczegółowe informacje i aktualne możliwości." image="/azure/p1-9.jpg" />
+<ContactCard locale="pl" mode="home" id="iletisim" kicker="DND Cyprus" title={<>Więcej informacji <b>o naszych projektach.</b></>} lead="Jeśli interesują Państwa nasze bieżące lub planowane inwestycje, nasz zespół sprzedaży chętnie przedstawi szczegółowe informacje i aktualne możliwości." />
     </main>
   );
 }

@@ -134,7 +134,7 @@ type Props = {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactCard({
-  locale, mode = "home", project, projectName, unitTypes = [], image = "/azure/p2-9.jpg",
+  locale, mode = "home", project, projectName, unitTypes = [], image = "/azure/contact-sea.webp", // tüm formlarda aynı deniz arka planı (kum ve dalga kırpılmış)
   kicker, title, lead, highlights = [], showOffices = true, brochureHref, id,
 }: Props) {
   const t = COPY[locale];

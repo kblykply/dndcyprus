@@ -21,7 +21,6 @@ export default function ProjectCTA({ slug, locale }: { slug: ProjectPage["slug"]
       project={slug}
       projectName={p.name}
       unitTypes={p.unitTypes[locale]}
-      image={p.ctaImage}
       kicker={`${T[locale].kicker} · ${p.name}`}
       title={T[locale].title}
       lead={p.ctaLead[locale]}

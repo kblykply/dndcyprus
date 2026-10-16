@@ -19,7 +19,7 @@ export default function ContactCTAMariachi({
   title = <>Mariachi <b>Beach Club</b></>,
   subtitle =
     "Bahçeler, Искеле — пляж и бассейн пятизвёздочного уровня, где средиземноморское солнце встречается с латиноамериканским духом. Ресторан с латиноамериканским меню, 2 бара, 4 бассейна-джакузи и живые DJ-сеты.",
-  bgImage = "/azure/mb-4.jpg",
+  bgImage = "/azure/contact-sea.webp",
   highlights = [
     "Ресторан (латиноамериканское меню)",
     "Бассейн + 4 джакузи",

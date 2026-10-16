@@ -19,7 +19,7 @@ export default function ContactCTAMariachi({
   title = <>Mariachi <b>Beach Club</b></>,
   subtitle =
     "Bahçeler, İskele — pięciogwiazdkowa plaża i basen, gdzie śródziemnomorskie słońce spotyka latynoski temperament. Restauracja z menu inspirowanym kuchnią latynoską, 2 bary, 4 baseny z jacuzzi i występy DJ-ów na żywo.",
-  bgImage = "/azure/mb-4.jpg",
+  bgImage = "/azure/contact-sea.webp",
   highlights = [
     "Restauracja (menu w stylu latynoskim)",
     "Basen + 4 jacuzzi",

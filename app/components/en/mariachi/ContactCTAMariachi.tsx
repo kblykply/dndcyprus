@@ -19,7 +19,7 @@ export default function ContactCTAMariachi({
   title = <>Mariachi <b>Beach Club</b></>,
   subtitle =
     "Bahçeler, İskele — a five-star beach & pool experience where the Mediterranean sun meets Latin spirit. Restaurant with a Latino-inspired menu, 2 bars, 4 jacuzzi pools and live DJ performances.",
-  bgImage = "/azure/mb-4.jpg",
+  bgImage = "/azure/contact-sea.webp",
   highlights = [
     "Restaurant (Latino-inspired menu)",
     "Pool + 4 jacuzzis",
