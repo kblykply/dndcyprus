@@ -4,14 +4,7 @@ import dynamic from "next/dynamic";
 import { useNearViewport } from "./useNearViewport";
 import type { Locale } from "@/lib/azure/site";
 
-// Ana sayfa video kaydırıcısı ve Instagram bölümü beş dilde ayrı bileşen; her dil yalnızca kendini yükler.
-const PAYMENT = {
-  tr: dynamic(() => import("../Payment"), { ssr: false }),
-  en: dynamic(() => import("../en/Payment"), { ssr: false }),
-  de: dynamic(() => import("../de/Payment"), { ssr: false }),
-  ru: dynamic(() => import("../ru/Payment"), { ssr: false }),
-  pl: dynamic(() => import("../pl/Payment"), { ssr: false }),
-} satisfies Record<Locale, unknown>;
+// Instagram bölümü beş dilde ayrı bileşen; her dil yalnızca kendini yükler.
 const INSTAGRAM = {
   tr: dynamic(() => import("../IgPost"), { ssr: false }),
   en: dynamic(() => import("../en/IgPost"), { ssr: false }),
@@ -35,12 +28,6 @@ const LagoonEn = dynamic(() => import("../en/lagoon-verde/FlipBookGlass"), { ssr
 
 // Katalog (flipbook) yalnızca TR/EN; diğer diller İngilizce kataloğu görür.
 const pick = (locale: Locale): "tr" | "en" => (locale === "tr" ? "tr" : "en");
-export function DeferredPayment({ locale }: { locale: Locale }) {
-  const { ref, near } = useNearViewport<HTMLDivElement>();
-  const Component = PAYMENT[locale];
-  return <div ref={ref} className="min-h-[640px]">{near ? <Component /> : null}</div>;
-}
-
 export function DeferredInstagram({ locale }: { locale: Locale }) {
   const { ref, near } = useNearViewport<HTMLDivElement>();
   const Component = INSTAGRAM[locale];

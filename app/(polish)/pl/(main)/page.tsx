@@ -1,4 +1,4 @@
-import { DeferredInstagram, DeferredPayment } from "@/app/components/performance/DeferredMedia";
+import { DeferredInstagram } from "@/app/components/performance/DeferredMedia";
 import { type PressItem } from "@/app/components/PressSection";
 import { pageMetadata } from "@/lib/seo";
 import { HOME } from "@/lib/azure/home";
@@ -14,6 +14,7 @@ import Leadership from "@/app/components/azure/home/Leadership";
 import Timeline from "@/app/components/azure/home/Timeline";
 import PressFaq from "@/app/components/azure/home/PressFaq";
 import SectionHead from "@/app/components/azure/home/SectionHead";
+import VideoShowcase from "@/app/components/azure/home/VideoShowcase";
 import ContactCard from "@/app/components/azure/ContactCard";
 
 export const metadata = pageMetadata({
@@ -108,7 +109,7 @@ export default function HomePage() {
       <AwardsShowcase locale="pl" />
       <Bento locale="pl" />
       <SectionHead kicker={t.videos.kicker} title={t.videos.title}>
-        <DeferredPayment locale="pl" />
+        <VideoShowcase locale="pl" />
       </SectionHead>
       <Story locale="pl" />
       <ProjectsCarousel locale="pl" />
