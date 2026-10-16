@@ -41,3 +41,5 @@
   .az-footer .brand .top { flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 14px; }
   .az-footer .bottom { flex-direction: column; }
 }
+/* çok dar ekranda logo + dört simge metinden geniş kalmasın (FooterFit satırı metnin bittiği yere çeker) */
+@media (max-width: 360px) { .az-footer .brand .top { gap: 10px; } .az-footer .soc { gap: 5px; } }

@@ -5,6 +5,7 @@ import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, P
 import { CONTACT, FOOTER_COPY, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
 import CookiePrefsLink from "./CookiePrefsLink";
 import "./footer.css";
+import FooterFit from "./FooterFit";
 
 // sosyal medya ayrı sütun yerine logonun yanında simge olarak durur
 const SOCIAL_ICONS: Record<string, IconType> = {
@@ -41,6 +42,7 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
             <p className="ct">
               <a href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
             </p>
+            <FooterFit />
           </div>
           <div>
             <h4>{t.projects}</h4>
