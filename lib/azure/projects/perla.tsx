@@ -106,9 +106,9 @@ export const PERLA: ProjectData = {
       title: "La Joya Perla İç Mekan & Tasarım",
       lead: <>Tatil yaşamının ve estetiğin buluştuğu <strong>La Joya Perla</strong> sizlerle.</>,
       angles: [
-        { id: "angle-c", name: "Yatak Odası", image: "/perla-in/1.jpg", alt: "La Joya Perla yatak odası iç mekân görseli" },
-        { id: "angle-a", name: "Salon", image: "/perla-in/2.jpg", alt: "La Joya Perla salon iç mekân görseli" },
-        { id: "angle-b", name: "Mutfak", image: "/perla-in/3.jpg", alt: "La Joya Perla mutfak iç mekân görseli" },
+        { id: "angle-c", name: "Yatak Odası", image: "/perla-in/6.jpg", alt: "La Joya Perla yatak odası iç mekân görseli" },
+        { id: "angle-a", name: "Salon", image: "/perla-in/8.jpg", alt: "La Joya Perla salon iç mekân görseli" },
+        { id: "angle-b", name: "Mutfak", image: "/perla-in/7.jpg", alt: "La Joya Perla mutfak iç mekân görseli" },
       ],
     },
     floorPlans: {
@@ -382,9 +382,9 @@ export const PERLA: ProjectData = {
       title: "La Joya Perla Interior & Design",
       lead: <><strong>La Joya Perla</strong> is where holiday living and aesthetics come together.</>,
       angles: [
-        { id: "angle-c", name: "Bedroom", image: "/perla-in/1.jpg", alt: "La Joya Perla bedroom interior" },
-        { id: "angle-a", name: "Living Room", image: "/perla-in/2.jpg", alt: "La Joya Perla living room interior" },
-        { id: "angle-b", name: "Kitchen", image: "/perla-in/3.jpg", alt: "La Joya Perla kitchen interior" },
+        { id: "angle-c", name: "Bedroom", image: "/perla-in/6.jpg", alt: "La Joya Perla bedroom interior" },
+        { id: "angle-a", name: "Living Room", image: "/perla-in/8.jpg", alt: "La Joya Perla living room interior" },
+        { id: "angle-b", name: "Kitchen", image: "/perla-in/7.jpg", alt: "La Joya Perla kitchen interior" },
       ],
     },
     floorPlans: {
@@ -658,9 +658,9 @@ export const PERLA: ProjectData = {
       title: "La Joya Perla – Interieur & Design",
       lead: <>In <strong>La Joya Perla</strong> verbinden sich Urlaubsgefühl und Ästhetik.</>,
       angles: [
-        { id: "angle-c", name: "Schlafzimmer", image: "/perla-in/1.jpg", alt: "La Joya Perla – Schlafzimmer" },
-        { id: "angle-a", name: "Wohnzimmer", image: "/perla-in/2.jpg", alt: "La Joya Perla – Wohnzimmer" },
-        { id: "angle-b", name: "Küche", image: "/perla-in/3.jpg", alt: "La Joya Perla – Küche" },
+        { id: "angle-c", name: "Schlafzimmer", image: "/perla-in/6.jpg", alt: "La Joya Perla – Schlafzimmer" },
+        { id: "angle-a", name: "Wohnzimmer", image: "/perla-in/8.jpg", alt: "La Joya Perla – Wohnzimmer" },
+        { id: "angle-b", name: "Küche", image: "/perla-in/7.jpg", alt: "La Joya Perla – Küche" },
       ],
     },
     floorPlans: {
@@ -934,9 +934,9 @@ export const PERLA: ProjectData = {
       title: "La Joya Perla: интерьер и дизайн",
       lead: <><strong>La Joya Perla</strong> — место, где курортный образ жизни встречается с эстетикой.</>,
       angles: [
-        { id: "angle-c", name: "Спальня", image: "/perla-in/1.jpg", alt: "La Joya Perla — интерьер спальни" },
-        { id: "angle-a", name: "Гостиная", image: "/perla-in/2.jpg", alt: "La Joya Perla — интерьер гостиной" },
-        { id: "angle-b", name: "Кухня", image: "/perla-in/3.jpg", alt: "La Joya Perla — интерьер кухни" },
+        { id: "angle-c", name: "Спальня", image: "/perla-in/6.jpg", alt: "La Joya Perla — интерьер спальни" },
+        { id: "angle-a", name: "Гостиная", image: "/perla-in/8.jpg", alt: "La Joya Perla — интерьер гостиной" },
+        { id: "angle-b", name: "Кухня", image: "/perla-in/7.jpg", alt: "La Joya Perla — интерьер кухни" },
       ],
     },
     floorPlans: {
@@ -1210,9 +1210,9 @@ export const PERLA: ProjectData = {
       title: "La Joya Perla – wnętrza i design",
       lead: <><strong>La Joya Perla</strong> to miejsce, w którym wakacyjny styl życia łączy się z estetyką.</>,
       angles: [
-        { id: "angle-c", name: "Sypialnia", image: "/perla-in/1.jpg", alt: "La Joya Perla — wnętrze sypialni" },
-        { id: "angle-a", name: "Salon", image: "/perla-in/2.jpg", alt: "La Joya Perla — wnętrze salonu" },
-        { id: "angle-b", name: "Kuchnia", image: "/perla-in/3.jpg", alt: "La Joya Perla — wnętrze kuchni" },
+        { id: "angle-c", name: "Sypialnia", image: "/perla-in/6.jpg", alt: "La Joya Perla — wnętrze sypialni" },
+        { id: "angle-a", name: "Salon", image: "/perla-in/8.jpg", alt: "La Joya Perla — wnętrze salonu" },
+        { id: "angle-b", name: "Kuchnia", image: "/perla-in/7.jpg", alt: "La Joya Perla — wnętrze kuchni" },
       ],
     },
     floorPlans: {
