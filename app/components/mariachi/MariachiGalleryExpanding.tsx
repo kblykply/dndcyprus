@@ -25,7 +25,7 @@ export default function MariachiGalleryExpanding({
         { src: "/azure/mb-1.jpg", alt: "Havuz" },
         { src: "/azure/mb-2.jpg", alt: "Plaj" },
         { src: "/azure/mb-6.jpg", alt: "Cabanalar" },
-        { src: "/azure/dj.jpg", alt: "DJ Gecesi" },
+        { src: "/azure/mb-7.jpg", alt: "Gün batımı" },
         { src: "/azure/mb-5.jpg", alt: "Kokteyller" },
       ],
     [items]

@@ -25,7 +25,7 @@ export default function MariachiGalleryExpanding({
         { src: "/azure/mb-1.jpg", alt: "Бассейн" },
         { src: "/azure/mb-2.jpg", alt: "Пляж" },
         { src: "/azure/mb-6.jpg", alt: "Кабаны" },
-        { src: "/azure/dj.jpg", alt: "DJ-вечеринка" },
+        { src: "/azure/mb-7.jpg", alt: "Закат" },
         { src: "/azure/mb-5.jpg", alt: "Коктейли" },
       ],
     [items]

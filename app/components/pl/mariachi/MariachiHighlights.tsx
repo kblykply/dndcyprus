@@ -23,9 +23,9 @@ const DEFAULT_ITEMS: Highlight[] = [
   { title: "Basen i plaża", desc: "Przestronne strefy do opalania z prysznicami i serwisem ręczników.", image: "/azure/mb-4.jpg", icon: <Waves size={ICON} /> },
   { title: "Altany", desc: "Wygodny cień przez cały dzień; zalecamy wcześniejszą rezerwację.", image: "/azure/mb-7.jpg", icon: <Umbrella size={ICON} /> },
   { title: "Restauracja i bar przy basenie", desc: "W dzień orzeźwiające smaki, wieczorem autorskie koktajle.", image: "/azure/mb-3.jpg", icon: <Martini size={ICON} /> },
-  { title: "Wieczory z DJ-em", desc: "Występy na żywo od zachodu słońca do późnych godzin.", image: "/azure/dj.jpg", icon: <Music4 size={ICON} /> },
-  { title: "Spa i wellness", desc: "Masaże i zabiegi (w zależności od projektu).", image: "/spa.jpg", icon: <Sparkles size={ICON} /> },
-  { title: "Nad samym morzem", desc: "Śródziemnomorska bryza i malownicze spacery brzegiem morza.", image: "/azure/sea.jpg", icon: <Sun size={ICON} /> },
+  { title: "Wieczory z DJ-em", desc: "Występy na żywo od zachodu słońca do późnych godzin.", image: "/azure/mb-5.jpg", icon: <Music4 size={ICON} /> },
+  { title: "Spa i wellness", desc: "Masaże i zabiegi (w zależności od projektu).", image: "/azure/mb-6.jpg", icon: <Sparkles size={ICON} /> },
+  { title: "Nad samym morzem", desc: "Śródziemnomorska bryza i malownicze spacery brzegiem morza.", image: "/azure/mb-1.jpg", icon: <Sun size={ICON} /> },
 ];
 
 export default function MariachiHighlights({

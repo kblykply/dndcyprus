@@ -23,9 +23,9 @@ const DEFAULT_ITEMS: Highlight[] = [
   { title: "Бассейн и пляж", desc: "Просторные зоны для загара, души и полотенца.", image: "/azure/mb-4.jpg", icon: <Waves size={ICON} /> },
   { title: "Кабаны", desc: "Уютная тень в течение всего дня; рекомендуем бронировать заранее.", image: "/azure/mb-7.jpg", icon: <Umbrella size={ICON} /> },
   { title: "Ресторан и бар у бассейна", desc: "Освежающие блюда днём, авторские коктейли вечером.", image: "/azure/mb-3.jpg", icon: <Martini size={ICON} /> },
-  { title: "DJ-вечеринки", desc: "Живые сеты от заката до поздней ночи.", image: "/azure/dj.jpg", icon: <Music4 size={ICON} /> },
-  { title: "Спа и велнес", desc: "Массаж и уходовые процедуры (в зависимости от проекта).", image: "/spa.jpg", icon: <Sparkles size={ICON} /> },
-  { title: "Жизнь у моря", desc: "Средиземноморский бриз и живописные прогулки вдоль берега.", image: "/azure/sea.jpg", icon: <Sun size={ICON} /> },
+  { title: "DJ-вечеринки", desc: "Живые сеты от заката до поздней ночи.", image: "/azure/mb-5.jpg", icon: <Music4 size={ICON} /> },
+  { title: "Спа и велнес", desc: "Массаж и уходовые процедуры (в зависимости от проекта).", image: "/azure/mb-6.jpg", icon: <Sparkles size={ICON} /> },
+  { title: "Жизнь у моря", desc: "Средиземноморский бриз и живописные прогулки вдоль берега.", image: "/azure/mb-1.jpg", icon: <Sun size={ICON} /> },
 ];
 
 export default function MariachiHighlights({

@@ -23,9 +23,9 @@ const DEFAULT_ITEMS: Highlight[] = [
   { title: "Pool & Strand", desc: "Großzügige Liegeflächen mit Dusche und Handtuchservice.", image: "/azure/mb-4.jpg", icon: <Waves size={ICON} /> },
   { title: "Pavillons", desc: "Bequeme Schattenplätze den ganzen Tag über; Reservierung empfohlen.", image: "/azure/mb-7.jpg", icon: <Umbrella size={ICON} /> },
   { title: "Restaurant & Poolbar", desc: "Erfrischende Gerichte am Tag, Signature-Cocktails am Abend.", image: "/azure/mb-3.jpg", icon: <Martini size={ICON} /> },
-  { title: "DJ-Nächte", desc: "Live-Auftritte vom Sonnenuntergang bis spät in die Nacht.", image: "/azure/dj.jpg", icon: <Music4 size={ICON} /> },
-  { title: "Spa & Wellness", desc: "Massagen und Anwendungen (je nach Projekt).", image: "/spa.jpg", icon: <Sparkles size={ICON} /> },
-  { title: "Küstenerlebnis", desc: "Mittelmeerbrise und malerische Spaziergänge am Meer.", image: "/azure/sea.jpg", icon: <Sun size={ICON} /> },
+  { title: "DJ-Nächte", desc: "Live-Auftritte vom Sonnenuntergang bis spät in die Nacht.", image: "/azure/mb-5.jpg", icon: <Music4 size={ICON} /> },
+  { title: "Spa & Wellness", desc: "Massagen und Anwendungen (je nach Projekt).", image: "/azure/mb-6.jpg", icon: <Sparkles size={ICON} /> },
+  { title: "Küstenerlebnis", desc: "Mittelmeerbrise und malerische Spaziergänge am Meer.", image: "/azure/mb-1.jpg", icon: <Sun size={ICON} /> },
 ];
 
 export default function MariachiHighlights({

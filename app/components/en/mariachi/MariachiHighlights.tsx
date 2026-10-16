@@ -23,9 +23,9 @@ const DEFAULT_ITEMS: Highlight[] = [
   { title: "Pool & Beach", desc: "Spacious sunbathing areas with shower and towel service.", image: "/azure/mb-4.jpg", icon: <Waves size={ICON} /> },
   { title: "Cabanas", desc: "Comfortable shaded spaces throughout the day; reservations recommended.", image: "/azure/mb-7.jpg", icon: <Umbrella size={ICON} /> },
   { title: "Restaurant & Pool Bar", desc: "Refreshing flavors by day, signature cocktails in the evening.", image: "/azure/mb-3.jpg", icon: <Martini size={ICON} /> },
-  { title: "DJ Nights", desc: "Live performances from sunset into the late hours.", image: "/azure/dj.jpg", icon: <Music4 size={ICON} /> },
-  { title: "Spa & Wellness", desc: "Massage and treatment services (depending on the project).", image: "/spa.jpg", icon: <Sparkles size={ICON} /> },
-  { title: "Coastal Experience", desc: "Mediterranean breeze and scenic seaside walks.", image: "/azure/sea.jpg", icon: <Sun size={ICON} /> },
+  { title: "DJ Nights", desc: "Live performances from sunset into the late hours.", image: "/azure/mb-5.jpg", icon: <Music4 size={ICON} /> },
+  { title: "Spa & Wellness", desc: "Massage and treatment services (depending on the project).", image: "/azure/mb-6.jpg", icon: <Sparkles size={ICON} /> },
+  { title: "Coastal Experience", desc: "Mediterranean breeze and scenic seaside walks.", image: "/azure/mb-1.jpg", icon: <Sun size={ICON} /> },
 ];
 
 export default function MariachiHighlights({

@@ -23,9 +23,9 @@ const DEFAULT_ITEMS: Highlight[] = [
   { title: "Havuz & Plaj", desc: "Geniş güneşlenme alanları, duş ve havlu servisi.", image: "/azure/mb-4.jpg", icon: <Waves size={ICON} /> },
   { title: "Cabanalar", desc: "Gün boyu gölgede konfor; rezervasyon önerilir.", image: "/azure/mb-7.jpg", icon: <Umbrella size={ICON} /> },
   { title: "Restoran & Havuz Barı", desc: "Gündüz ferah tatlar, akşam imza kokteyller.", image: "/azure/mb-3.jpg", icon: <Martini size={ICON} /> },
-  { title: "DJ Geceleri", desc: "Sunset’ten geç saate uzanan canlı performanslar.", image: "/azure/dj.jpg", icon: <Music4 size={ICON} /> },
-  { title: "Spa & Wellness", desc: "Masaj ve bakım hizmetleri (projeye göre).", image: "/spa.jpg", icon: <Sparkles size={ICON} /> },
-  { title: "Kıyı Deneyimi", desc: "Akdeniz esintisi ve sahil yürüyüşleri.", image: "/azure/sea.jpg", icon: <Sun size={ICON} /> },
+  { title: "DJ Geceleri", desc: "Sunset’ten geç saate uzanan canlı performanslar.", image: "/azure/mb-5.jpg", icon: <Music4 size={ICON} /> },
+  { title: "Spa & Wellness", desc: "Masaj ve bakım hizmetleri (projeye göre).", image: "/azure/mb-6.jpg", icon: <Sparkles size={ICON} /> },
+  { title: "Kıyı Deneyimi", desc: "Akdeniz esintisi ve sahil yürüyüşleri.", image: "/azure/mb-1.jpg", icon: <Sun size={ICON} /> },
 ];
 
 export default function MariachiHighlights({
