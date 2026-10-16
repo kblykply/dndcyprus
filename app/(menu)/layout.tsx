@@ -7,5 +7,5 @@ export const revalidate = 86400;
 
 // The standalone image menu needs no site navigation, web fonts or analytics.
 export default function MenuLayout({ children }: { children: ReactNode }) {
-  return <html lang="tr"><body>{children}</body></html>;
+  return <html lang="tr" data-scroll-behavior="smooth"><body>{children}</body></html>;
 }
