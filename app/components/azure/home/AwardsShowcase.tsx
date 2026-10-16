@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FocusEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FocusEvent } from "react";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import "../meridian.css";
@@ -68,7 +68,8 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
             <div className="side">
               <div className="stage" role="tablist" aria-label={strip.label}>
                 {items.map((it, k) => (
-                  <button key={it.title} type="button" role="tab" aria-selected={k === i} aria-label={it.title} className={`rb ${pos(k)}`} onClick={() => setI(k)}>
+                  <button key={it.title} type="button" role="tab" aria-selected={k === i} aria-label={it.title} className={`rb ${pos(k)}`} onClick={() => setI(k)}
+                    style={{ "--m": `url(${WEBP[it.ribbon] ?? it.ribbon})` } as CSSProperties}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={WEBP[it.ribbon] ?? it.ribbon} alt="" draggable={false} />
                   </button>

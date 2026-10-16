@@ -10,6 +10,23 @@
 .az-aw .rb.h { --s: .5; opacity: 0; pointer-events: none; }
 .az-aw .rb.l:hover, .az-aw .rb.r:hover { opacity: .9; }
 @keyframes az-sway { 0%, 100% { rotate: 0deg; } 50% { rotate: 1.2deg; } }
+/* ortadaki kurdelede aralıklı hafif parlama: ışık kurdelenin kendi şeklinde kalır (görsel maske, --m), ortaya
+   geldikten ~1 sn sonra geçer ve 5 sn'de bir tekrarlar (kurdele değişince baştan başlar) */
+.az-aw .rb::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 41%, rgba(255, 255, 255, .7) 50%, transparent 59%) no-repeat;
+  background-size: 260% 100%; background-position: 140% 0;
+  -webkit-mask: var(--m) center / 100% 100% no-repeat; mask: var(--m) center / 100% 100% no-repeat;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .az-aw .rb.c::after { animation: az-rb-shine 5s ease-in-out infinite; }
+}
+@keyframes az-rb-shine {
+  0%, 18% { opacity: 0; background-position: 140% 0; }
+  22% { opacity: 1; }
+  44% { opacity: 1; background-position: -40% 0; }
+  48%, 100% { opacity: 0; background-position: -40% 0; }
+}
 /* masaüstünde kurdeleler bölümün yıldızı: daha geniş sütun, daha yüksek sahne, yandakiler daha büyük ve dışa açık
    (telefon / tablet ölçüleri aynı kalır) */
 @media (min-width: 901px) {
