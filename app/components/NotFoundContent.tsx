@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
+const ORANGE = "#cd4824";
 
 const LINKS: { href: string; label: string; lang?: string }[] = [
   { href: "/tr/projects", label: "Projeler" },

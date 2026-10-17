@@ -7,7 +7,7 @@ import IgPhone, { type IgPost } from "@/app/components/social/IgPhone";
 import { m as motion, type Variants } from "framer-motion";
 
 const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
+const ORANGE = "#cd4824";
 const BG_IMAGE = "/ins.jpg";
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];

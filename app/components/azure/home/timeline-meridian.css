@@ -27,7 +27,7 @@
 .az-meridian .pin { position: absolute; transform: translate(-50%, -50%); display: grid; justify-items: center; opacity: 0; transition: opacity .6s var(--ease); z-index: 2; }
 .az-meridian .pin i { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 12px; font-weight: 700; color: var(--sea-deep); background: #fff; box-shadow: 0 0 0 4px rgba(159, 224, 229, .18), 0 6px 16px rgba(0, 0, 0, .25); transition: transform .4s var(--ease); }
 .az-meridian .pin em { position: absolute; bottom: calc(100% + 8px); font-style: normal; font-family: var(--font-display); font-size: 17px; font-weight: 500; letter-spacing: -.01em; color: #fff; white-space: nowrap; }
-.az-meridian .pin.p3 i, .az-meridian .pin.p4 i, .az-meridian .pin.p5 i { background: var(--coral); color: #fff; box-shadow: 0 0 0 4px rgba(241, 92, 52, .2), 0 6px 16px rgba(0, 0, 0, .25); }
+.az-meridian .pin.p3 i, .az-meridian .pin.p4 i, .az-meridian .pin.p5 i { background: var(--coral); color: #fff; box-shadow: 0 0 0 4px rgba(205, 72, 36, .2), 0 6px 16px rgba(0, 0, 0, .25); }
 .az-meridian.in .pin { opacity: 1; }
 .az-meridian.in .pin.p0 { transition-delay: .5s; } .az-meridian.in .pin.p1 { transition-delay: .75s; } .az-meridian.in .pin.p2 { transition-delay: 1s; }
 .az-meridian.in .pin.p3 { transition-delay: 1.7s; } .az-meridian.in .pin.p4 { transition-delay: 1.95s; } .az-meridian.in .pin.p5 { transition-delay: 2.2s; }
@@ -75,10 +75,10 @@
   .az-meridian .arc { display: none; }
   .az-meridian .stops { grid-template-columns: 1fr; gap: 12px; position: relative; padding-left: 30px; }
   .az-meridian .stops > .stop { margin: 0; }
-  .az-meridian .stops::before { content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, #9fe0e5, rgba(159, 224, 229, .4) 45%, rgba(241, 92, 52, .5) 55%, var(--coral)); }
+  .az-meridian .stops::before { content: ""; position: absolute; left: 9px; top: 10px; bottom: 10px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, #9fe0e5, rgba(159, 224, 229, .4) 45%, rgba(205, 72, 36, .5) 55%, var(--coral)); }
   .az-meridian .stops .cap { display: grid; gap: 2px; position: relative; padding: 2px 0; }
   .az-meridian .stops .cap::before { content: ""; position: absolute; left: -27px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #9fe0e5; box-shadow: 0 0 0 5px rgba(159, 224, 229, .2); }
-  .az-meridian .stops .cap.to::before { background: var(--coral); box-shadow: 0 0 0 5px rgba(241, 92, 52, .2); }
+  .az-meridian .stops .cap.to::before { background: var(--coral); box-shadow: 0 0 0 5px rgba(205, 72, 36, .2); }
   .az-meridian .stops .cap b { font-family: var(--font-display); font-weight: 500; font-size: 17px; }
   .az-meridian .stop { display: grid; grid-template-columns: 92px 1fr; position: relative; overflow: visible; }
   .az-meridian .stop::before { content: ""; position: absolute; left: -26px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: #fff; }

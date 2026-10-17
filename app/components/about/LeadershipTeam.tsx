@@ -7,7 +7,7 @@ import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, Variants, AnimatePresence } from "framer-motion";
 
 const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
+const ORANGE = "#cd4824";
 
 type Socials = {
   linkedin?: string;

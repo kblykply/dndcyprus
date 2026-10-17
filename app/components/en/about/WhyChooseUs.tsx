@@ -62,7 +62,7 @@ export default function WhyChooseUs({
               <article key={s.title} className={`az-panel rv${i ? ` d${Math.min(i, 4)}` : ""}`}>
                 <div
                   className="grid h-12 w-12 place-items-center rounded-2xl"
-                  style={{ background: orange ? "rgba(241,92,52,.12)" : "rgba(13,101,112,.1)", color: orange ? "var(--coral)" : "var(--sea)" }}
+                  style={{ background: orange ? "rgba(205,72,36,.12)" : "rgba(13,101,112,.1)", color: orange ? "var(--coral)" : "var(--sea)" }}
                 >
                   {s.icon ?? (s.image ? (
                     // eslint-disable-next-line @next/next/no-img-element

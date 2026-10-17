@@ -60,7 +60,7 @@
 .mr-under .perks { display: flex; flex-direction: column; min-width: 0; }
 .mr-rows { border-top: 1px solid var(--hair); }
 .mr-rows > div { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--hair); }
-.mr-rows > div > i { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: rgba(241, 92, 52, .08); color: var(--coral); }
+.mr-rows > div > i { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: rgba(205, 72, 36, .08); color: var(--coral); }
 .mr-rows b { display: block; font-weight: 500; font-size: 17px; }
 .mr-rows small { display: block; color: var(--ink-60); font-size: 14px; margin-top: 2px; }
 .mr-note { display: flex; gap: 8px; align-items: flex-start; margin-top: auto; padding-top: 14px; }

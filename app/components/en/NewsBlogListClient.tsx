@@ -7,7 +7,7 @@ import Link from "next/link";
 import type { BlogPost } from "./NewsBlogSection";
 
 const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
+const ORANGE = "#cd4824";
 const EASE_CB = [0.22, 1, 0.36, 1] as const;
 const GAP_PX = 24; // Tailwind gap-6
 
@@ -200,7 +200,7 @@ kicker = "Blog & News",
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(60% 60% at 8% 12%, rgba(13,101,112,0.05), transparent 60%), radial-gradient(50% 50% at 90% 10%, rgba(241,92,52,0.05), transparent 60%)",
+              "radial-gradient(60% 60% at 8% 12%, rgba(13,101,112,0.05), transparent 60%), radial-gradient(50% 50% at 90% 10%, rgba(205,72,36,0.05), transparent 60%)",
           }}
         />
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Volume2, VolumeX, X } from "lucide-react";
 
 const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
+const ORANGE = "#cd4824";
 // Oturum başına bir kez; kampanya değişirse anahtarın sürümü artırılır
 const DISMISS_KEY = "dnd_tl_payment_popup_v1";
 

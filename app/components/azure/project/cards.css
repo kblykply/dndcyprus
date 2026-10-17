@@ -28,7 +28,7 @@
 /* durum noktası: devam ediyorsa nabız gibi atar */
 .az-fact .live { flex: none; width: 11px; height: 11px; margin-right: 12px; border-radius: 50%; background: var(--coral); animation: az-live 1.8s ease-out infinite; }
 .az-fact .live.done { background: var(--sea); animation: none; box-shadow: 0 0 0 4px rgba(13, 101, 112, .15); }
-@keyframes az-live { 0% { box-shadow: 0 0 0 0 rgba(241, 92, 52, .5); } 75% { box-shadow: 0 0 0 12px rgba(241, 92, 52, 0); } 100% { box-shadow: 0 0 0 0 rgba(241, 92, 52, 0); } }
+@keyframes az-live { 0% { box-shadow: 0 0 0 0 rgba(205, 72, 36, .5); } 75% { box-shadow: 0 0 0 12px rgba(205, 72, 36, 0); } 100% { box-shadow: 0 0 0 0 rgba(205, 72, 36, 0); } }
 @media (prefers-reduced-motion: reduce) { .az-fact .live { animation: none; } }
 /* olanaklar: başlık + açıklama */
 .az-amen { list-style: none; padding: 0; }

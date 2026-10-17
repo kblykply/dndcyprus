@@ -29,8 +29,8 @@
   --sea-deep: #063a42;
   --aqua: #2aa9b3;
   --aqua-20: rgba(42, 169, 179, 0.2);
-  --coral: #f15c34;
-  --coral-dark: #d6471f;
+  --coral: #cd4824; /* #f15c34 beyaz yazıyla 3,32:1 kalıyordu; bu ton 4,6:1 (WCAG AA) */
+  --coral-dark: #b23c1d;
   --ink: #0d2326;
   --ink-60: rgba(13, 35, 38, 0.67); /* 0.64 açık mavi zeminde 4.46:1 kalıyordu (WCAG AA 4.5) */
   --ink-40: rgba(13, 35, 38, 0.62); /* 0.42 küçük etiketlerde 2.5:1 kalıyordu; 0.62 beyaz ve açık mavide 4.5:1 (WCAG AA) */
@@ -158,8 +158,8 @@ html[data-dnd-consent="saved"] [data-consent-initial] { display: none; }
 [data-cta-hover]:hover, [data-cta-hover]:focus-visible {
   transform: translateY(-2px);
   background: var(--coral) !important;
-  box-shadow: 0 20px 44px rgba(241,92,52,0.27) !important;
-  border-color: rgba(241,92,52,0.4) !important;
+  box-shadow: 0 20px 44px rgba(205,72,36,0.27) !important;
+  border-color: rgba(205,72,36,0.4) !important;
 }
 
 /* The hero uses a small native carousel; media carousels retain Swiper. */

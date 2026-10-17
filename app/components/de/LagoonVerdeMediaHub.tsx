@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
+const ORANGE = "#cd4824";
 const EASE: Easing = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp: Variants = {
@@ -359,7 +359,7 @@ export default function LagoonVerdeMediaHubLight({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(40% 28% at 50% 4%, rgba(13,101,112,0.08), transparent 70%), radial-gradient(22% 20% at 90% 18%, rgba(241,92,52,0.06), transparent 70%)",
+            "radial-gradient(40% 28% at 50% 4%, rgba(13,101,112,0.08), transparent 70%), radial-gradient(22% 20% at 90% 18%, rgba(205,72,36,0.06), transparent 70%)",
         }}
       />
 
@@ -385,7 +385,7 @@ export default function LagoonVerdeMediaHubLight({
                 className="absolute inset-0"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(13,101,112,0.05), rgba(241,92,52,0.03), rgba(255,255,255,0.6))",
+                    "linear-gradient(135deg, rgba(13,101,112,0.05), rgba(205,72,36,0.03), rgba(255,255,255,0.6))",
                 }}
               />
               <img
@@ -500,7 +500,7 @@ className="fixed inset-0 z-[11000] overflow-y-auto bg-[rgba(13,35,38,0.42)] p-3 
                 className="pointer-events-none absolute inset-0"
                 style={{
                   background:
-                    "radial-gradient(40% 28% at 20% 0%, rgba(13,101,112,0.05), transparent 70%), radial-gradient(30% 24% at 80% 0%, rgba(241,92,52,0.04), transparent 70%)",
+                    "radial-gradient(40% 28% at 20% 0%, rgba(13,101,112,0.05), transparent 70%), radial-gradient(30% 24% at 80% 0%, rgba(205,72,36,0.04), transparent 70%)",
                 }}
               />
 

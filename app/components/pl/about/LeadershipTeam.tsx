@@ -7,7 +7,7 @@ import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, Variants, AnimatePresence } from "framer-motion";
 
 const TEAL = "#0d6570";
-const ORANGE = "#f15c34";
+const ORANGE = "#cd4824";
 
 // Display labels for the category filter keys (the keys themselves stay in English).
 const CATEGORY_LABELS: Record<string, string> = {
