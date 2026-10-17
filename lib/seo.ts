@@ -5,7 +5,7 @@ import { LOCALES, LOCALE_META, type Locale } from "./azure/site";
 
 export const SITE_URL = "https://www.dndcyprus.com";
 export const SITE_NAME = "DND Cyprus";
-export const DEFAULT_OG_IMAGE = "/og/dnd-cyprus.jpg";
+export const DEFAULT_OG_IMAGE = "/og/dnd-cyprus-lagoon.jpg"; // Lagoon Verde lagünü + DND logosu (yeni dosya adı: paylaşım önbelleği eskisini göstermesin)
 
 export type { Locale };
 
