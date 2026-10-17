@@ -1,5 +1,7 @@
 "use client";
 
+import Arrow from "@/app/components/azure/Arrow";
+
 import { useEffect, useMemo, useState } from "react";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 import { m as motion, AnimatePresence, type Variants, type Easing } from "framer-motion";
@@ -91,15 +93,33 @@ function getBadge(type: MediaType) {
     case "pdf":
       return "PDF";
     case "image":
-      return "Image";
+      return "Görsel";
     case "youtube":
-      return "YouTube";
+      return "Video";
     case "instagram":
       return "Instagram";
     case "link":
-      return "Website";
+      return "Web sitesi";
     default:
-      return "Media";
+      return "Medya";
+  }
+}
+
+// kartın altındaki eylem satırı (eskiden açıklama başlığı tekrar ediyordu: "Lagoon Verde Ödeme Planı / Lagoon Verde ödeme planı")
+function getAction(type: MediaType) {
+  switch (type) {
+    case "pdf":
+      return "PDF'i görüntüle";
+    case "image":
+      return "Görseli aç";
+    case "youtube":
+      return "Videoyu izle";
+    case "instagram":
+      return "Instagram'da izle";
+    case "link":
+      return "Siteye git";
+    default:
+      return "PDF'i görüntüle";
   }
 }
 
@@ -467,16 +487,8 @@ subtitle = "Katalogları, broşürleri, videoları, kampanyaları ve dijital iç
 
               <div className="relative flex h-full flex-col justify-between p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-3">
-                  <span
-                    className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.18em]"
-                    style={{
-                      background: "#ffffff",
-                      color: TEAL,
-                      border: "1px solid rgba(13,101,112,0.14)",
-                      boxShadow: "0 6px 18px rgba(13,35,38,0.06)",
-                    }}
-                  >
-                    {getIcon(item.type)}
+                  {/* tür etiketi: sitedeki görsel üstü etiketlerle aynı koyu cam (.az-st), bu dilde */}
+                  <span className="az-st inline-flex items-center gap-1.5">
                     {getBadge(item.type)}
                   </span>
 
@@ -496,11 +508,9 @@ subtitle = "Katalogları, broşürleri, videoları, kampanyaları ve dijital iç
                   <h3 className="text-[22px] font-semibold leading-tight text-white sm:text-[24px]">
                     {item.title}
                   </h3>
-                  {item.description ? (
-                    <p className="mt-2 max-w-[32rem] text-sm leading-6 text-white/88">
-                      {item.description}
-                    </p>
-                  ) : null}
+                  <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-white/90">
+                    {getAction(item.type)} <Arrow />
+                  </p>
                 </div>
               </div>
             </motion.button>
