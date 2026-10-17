@@ -2,13 +2,14 @@ import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import "./home/leadership.css";
 
-// Ozan Bey'in kariyerindeki kurumlar (Arthur Andersen: kariyer başlangıcı)
+// Ozan Bey'in kariyerindeki kurumlar (Arthur Andersen: kariyer başlangıcı). w/h: görselin piksel boyutu — tarayıcı
+// yerini yüklemeden ayırır; yoksa tembel yüklenen logolar gelince satır sarıyor, bölüm 30–65 px uzayıp sayfayı itiyordu
 export const CAREER = [
-  { name: "Keurig Dr Pepper", logo: "/azure/brands/keurig-dr-pepper.webp" },
-  { name: "Kellogg's", logo: "/azure/brands/kelloggs.webp" },
-  { name: "Kraft", logo: "/azure/brands/kraft.webp" },
-  { name: "Cargill", logo: "/azure/brands/cargill.webp" },
-  { name: "Arthur Andersen", logo: "/azure/brands/arthur-andersen.webp" },
+  { name: "Keurig Dr Pepper", logo: "/azure/brands/keurig-dr-pepper.webp", w: 520, h: 156 },
+  { name: "Kellogg's", logo: "/azure/brands/kelloggs.webp", w: 515, h: 180 },
+  { name: "Kraft", logo: "/azure/brands/kraft.webp", w: 472, h: 180 },
+  { name: "Cargill", logo: "/azure/brands/cargill.webp", w: 403, h: 180 },
+  { name: "Arthur Andersen", logo: "/azure/brands/arthur-andersen.webp", w: 515, h: 180 },
 ];
 
 type Person = { img: string; role: string; name: string; bio?: string; q: string; dl: [string, string][] };
@@ -17,7 +18,7 @@ type Props = {
   /** portrenin altındaki beyaz cam rozet ("Yılın CFO'su · Boston Business Journal 2018") */
   badge?: { b: string; rest: string };
   /** en altta gri kurum logoları */
-  career?: { label: string; logos: { name: string; logo: string }[] };
+  career?: { label: string; logos: { name: string; logo: string; w: number; h: number }[] };
   /** portre sağda (sayfada sağ-sol dengesi için) */
   flip?: boolean;
   /** sayfadaki başlık sırası: ana sayfada bölüm başlığının altında h3, Hakkımızda'da bölümün kendisi h2 */
@@ -60,7 +61,7 @@ export function PersonCard({ person, badge, career, flip, heading = "h3" }: Prop
             <span>{career.label}</span>
             <ul aria-label={career.label}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              {career.logos.map((c) => <li key={c.name} title={c.name}><img src={c.logo} alt={c.name} loading="lazy" decoding="async" draggable={false} /></li>)}
+              {career.logos.map((c) => <li key={c.name} title={c.name}><img src={c.logo} alt={c.name} width={c.w} height={c.h} loading="lazy" decoding="async" draggable={false} /></li>)}
             </ul>
           </div>
         ) : null}
