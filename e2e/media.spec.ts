@@ -32,7 +32,7 @@ test("video dosyaları parça parça (Range) sunulur", async ({ request }, info)
 test("360° tur düğmeyle açılır, aynı kökenden yüklenir", async ({ page }) => {
   await page.goto("/tr/lagoon-verde");
   const start = page.getByRole("button", { name: "360 Turu Başlat" });
-  await start.scrollIntoViewIfNeeded();
+  await settle(start);
   const tourLoaded = page.waitForResponse((r) => r.url().includes("/tours/360/tour.html") && r.status() === 200);
   await start.click();
   await tourLoaded;

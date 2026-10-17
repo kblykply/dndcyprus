@@ -36,6 +36,12 @@ test("çapaya indikten sonra kullanıcı kaydırınca sayfa geri çekilmez", asy
   await page.mouse.wheel(0, -3000);
   // tekerlek adımı tarayıcıya göre değişir (Firefox daha az kaydırır): belirgin bir yukarı kayma yeterli
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(y0 - 200);
+  // Firefox tekerlek kaydırmasını animasyonla yapıyor: animasyon bitmeden ölçülürse süren kaydırma geri çekme sanılıyordu
+  await expect.poll(async () => {
+    const a = await page.evaluate(() => window.scrollY);
+    await page.waitForTimeout(300);
+    return Math.abs((await page.evaluate(() => window.scrollY)) - a);
+  }).toBeLessThan(1);
   const y1 = await page.evaluate(() => window.scrollY);
   await page.waitForTimeout(2000); // izleme süresi içinde geri çekme olmamalı (olmayan bir olayı doğruluyor)
   expect(Math.abs((await page.evaluate(() => window.scrollY)) - y1)).toBeLessThan(50);
