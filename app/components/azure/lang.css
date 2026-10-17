@@ -1,7 +1,7 @@
 /* Azure dil menüsü (5 dil): masaüstü pill içinde açılır liste, mobil menüde çipler.
    azure.css'e dokunmadan AzureHeader'dan içe aktarılır. */
 .az-nav .lang.menu { position: relative; padding: 0; background: none; margin-left: 6px; }
-.az-nav .lang.menu > button { display: inline-flex; align-items: center; gap: 5px; padding: 8px 10px 8px 12px; border-radius: 999px; background: rgba(13,35,38,.05); border: 0; font: inherit; font-size: 11px; font-weight: 600; letter-spacing: .08em; color: var(--ink-60); cursor: pointer; transition: all .3s; }
+.az-nav .lang.menu > button { display: inline-flex; align-items: center; gap: 5px; padding: 8px 10px 8px 12px; border-radius: 999px; background: rgba(13,35,38,.05); border: 0; font: inherit; font-size: 11px; font-weight: 600; letter-spacing: .08em; color: var(--ink); cursor: pointer; transition: all .3s; }
 .az-nav .lang.menu > button svg { transition: transform .3s; }
 .az-nav .lang.menu > button:hover, .az-nav .lang.menu.open > button { background: var(--sea); color: #fff; }
 .az-nav .lang.menu.open > button svg { transform: rotate(180deg); }

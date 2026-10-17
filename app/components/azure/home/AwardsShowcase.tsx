@@ -72,7 +72,7 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
                   <button key={it.title} type="button" role="tab" aria-selected={k === i} aria-label={it.title} className={`rb ${pos(k)}`} onClick={() => setI(k)}
                     style={{ "--m": `url(${WEBP[it.ribbon] ?? it.ribbon})` } as CSSProperties}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={WEBP[it.ribbon] ?? it.ribbon} alt="" draggable={false} />
+                    <img src={WEBP[it.ribbon] ?? it.ribbon} alt="" loading="lazy" decoding="async" draggable={false} />
                   </button>
                 ))}
               </div>
@@ -95,8 +95,8 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
                 <h3>{cur.title}</h3>
                 <p>{cur.text}</p>
                 {external
-                  ? <a className="az-btn sea sm" href={cur.href} target="_blank" rel="noopener noreferrer">{MORE[locale]} <Arrow /></a>
-                  : <Link className="az-btn sea sm" href={cur.href} prefetch={false}>{MORE[locale]} <Arrow /></Link>}
+                  ? <a className="az-btn sea sm" href={cur.href} target="_blank" rel="noopener noreferrer">{MORE[locale]} <Arrow /><span className="sr-only">: {cur.title}</span></a>
+                  : <Link className="az-btn sea sm" href={cur.href} prefetch={false}>{MORE[locale]} <Arrow /><span className="sr-only">: {cur.title}</span></Link>}
               </div>
               {extra ? <p className="mr-mono more">+ {extra.b}{extra.rest}</p> : null}
             </div>

@@ -211,7 +211,7 @@ export default function ProjectsFilters() {
               </div>
               <div className="in">
                 <small>{p.location}</small>
-                <h3>{p.title}</h3>
+                <h2>{p.title}</h2>
                 <div className="glassrow">{CTA} <GlassArrow /></div>
               </div>
             </Link>

@@ -143,7 +143,7 @@ export default function BrandWheel({ items, label }: { items: WheelItem[]; label
         const key = `${b.name}-${b.copy}`;
         const img = (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={b.logo} alt={dup ? "" : b.name} decoding="async" draggable={false} />
+          <img src={b.logo} alt={dup ? "" : b.name} loading="lazy" decoding="async" draggable={false} />
         );
         const common = {
           ref: (node: HTMLElement | null) => { cards.current[i] = node; },

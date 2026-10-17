@@ -16,7 +16,8 @@
   transition: background .3s, color .3s, transform .3s var(--ease);
 }
 .az-footer .soc a:hover { background: var(--sea); color: #fff; transform: translateY(-2px); }
-.az-footer h4 { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); margin-bottom: 12px; font-weight: 600; font-family: var(--font-sans); }
+/* h2: sayfanın son bölüm başlığından sonra h4 gelince başlık sırası atlıyordu (erişilebilirlik); görünüm aynı */
+.az-footer h2 { font-size: 11px; line-height: 1.2; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); margin-bottom: 12px; font-weight: 600; font-family: var(--font-sans); }
 .az-footer ul { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-template-rows: repeat(var(--rows, 4), auto); grid-auto-columns: minmax(0, max-content); gap: 8px clamp(20px, 2.4vw, 36px); }
 .az-footer li a { font-size: 14px; color: var(--ink-60); transition: color .3s; }
 .az-footer li a:hover { color: var(--ink); }

@@ -545,7 +545,7 @@ export default function LeadershipTeam({
                   {/* Info box on image */}
                   <div className="absolute inset-x-0 bottom-0 p-5 ">
                     <div className="rounded-[18px] bg-white/85 backdrop-blur-md p-4 ring-1 ring-white/70 shadow-[0_8px_24px_rgba(13,35,38,0.14)] group-hover:translate-y-0 translate-y-1 transition-transform h-[110px]">
-                      <h3 className="text-[15px] leading-tight text-[var(--ink)]">{m.name}</h3>
+                      <h2 className="text-[15px] leading-tight text-[var(--ink)]">{m.name}</h2>
                       <div className="text-[11px] mt-1 uppercase tracking-[0.08em] font-semibold text-[var(--sea)]">{m.role}</div>
                       {m.bio ? (
                         <p className="mt-1.5 text-xs leading-relaxed text-[var(--ink-60)] line-clamp-2">

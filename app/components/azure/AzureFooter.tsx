@@ -45,14 +45,14 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
             <FooterFit />
           </div>
           <div>
-            <h4>{t.projects}</h4>
+            <h2>{t.projects}</h2>
             <ul style={rows(PROJECTS.length + 1)}>
               <li><Link href={href(locale, "/projects")} prefetch={false}>{n.all}</Link></li>
               {PROJECTS.map((p) => <li key={p.slug}><Link href={href(locale, `/${p.slug}`)} prefetch={false}>{p.name}</Link></li>)}
             </ul>
           </div>
           <div>
-            <h4>{t.general}</h4>
+            <h2>{t.general}</h2>
             <ul style={rows(general.length)}>
               {general.map((g) => <li key={g.path}><Link href={href(locale, g.path)} prefetch={false}>{g.label}</Link></li>)}
             </ul>

@@ -458,9 +458,9 @@ export default function LagoonVerdeMediaHubLight({
                 </div>
 
                 <div>
-                  <h3 className="text-[22px] font-semibold leading-tight text-white sm:text-[24px]">
+                  <h2 className="text-[22px] font-semibold leading-tight text-white sm:text-[24px]">
                     {item.title}
-                  </h3>
+                  </h2>
                   <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-white/90">
                     {getAction(item.type)} <Arrow />
                   </p>
