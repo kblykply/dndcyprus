@@ -99,7 +99,7 @@ export default function Perla2Location({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
@@ -113,7 +113,7 @@ export default function Perla2Location({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           custom={1}
           className="mt-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3"
         >
@@ -169,7 +169,7 @@ export default function Perla2Location({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           custom={2}
           className="mt-6 rounded-2xl overflow-hidden"
           style={{
@@ -197,7 +197,7 @@ export default function Perla2Location({
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             custom={3}
             className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
           >
@@ -253,7 +253,7 @@ export default function Perla2Location({
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             custom={4}
             className="mt-6 flex flex-wrap gap-2"
           >

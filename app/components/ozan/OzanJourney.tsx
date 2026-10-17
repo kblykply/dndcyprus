@@ -63,7 +63,7 @@ export default function OzanJourney({
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.45 }}
           className="max-w-2xl"
         >
@@ -88,7 +88,7 @@ export default function OzanJourney({
                   key={s.id}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: false, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   className="relative ml-0 mb-6 last:mb-0"
                 >

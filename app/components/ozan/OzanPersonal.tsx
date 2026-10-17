@@ -70,7 +70,7 @@ style={{
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.5 }}
           className="max-w-3xl"
         >
@@ -102,7 +102,7 @@ style={{
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.45 }}
                 className="rounded-2xl p-5 flex flex-wrap gap-2"
                 style={{
@@ -138,7 +138,7 @@ style={{
             <motion.blockquote
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.45 }}
               className="rounded-2xl p-6"
               style={{
@@ -164,7 +164,7 @@ style={{
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.45, delay: 0.06 }}
                 className="grid grid-cols-3 gap-3"
               >
@@ -211,7 +211,7 @@ function Card({
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: false, amount: 0.35 }}
+      viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.45 }}
       className="rounded-2xl p-5"
       style={{

@@ -72,7 +72,7 @@ export default function DndUsaVision({
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.5 }}
           className="max-w-3xl"
         >
@@ -90,7 +90,7 @@ export default function DndUsaVision({
               key={p.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="rounded-2xl p-6"
               style={{
@@ -125,7 +125,7 @@ export default function DndUsaVision({
           <motion.blockquote
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.5 }}
             className="lg:col-span-7 rounded-2xl p-6"
             style={{
@@ -150,7 +150,7 @@ export default function DndUsaVision({
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.08 }}
             className="lg:col-span-5 grid grid-cols-2 gap-4"
           >

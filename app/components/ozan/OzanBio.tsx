@@ -65,7 +65,7 @@ style={{
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               className="text-2xl sm:text-3xl font-semibold"
             >
               {title}
@@ -75,7 +75,7 @@ style={{
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               custom={1}
               className="mt-3 text-base sm:text-lg leading-relaxed"
               style={{ color: "rgba(13,35,38,0.78)" }}
@@ -88,7 +88,7 @@ style={{
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               custom={2}
               className="mt-6 flex flex-wrap gap-2"
             >
@@ -119,7 +119,7 @@ style={{
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               className="rounded-2xl overflow-hidden"
               style={{
                 background:
@@ -147,7 +147,7 @@ style={{
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           custom={3}
           className="mt-6 text-xs"
           style={{ color: "rgba(13,35,38,0.55)" }}

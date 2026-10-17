@@ -106,7 +106,7 @@ highlights = [
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
   className="mx-auto max-w-3xl rounded-2xl p-8 sm:p-10 lg:p-12 text-center shadow-[0_12px_48px_rgba(0,0,0,0.25)] ring-1"          style={{
             background:
               "linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08))",

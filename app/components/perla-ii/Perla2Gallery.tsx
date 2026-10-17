@@ -95,7 +95,7 @@ export default function MariachiGalleryExpanding({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="max-w-3xl"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">

@@ -173,7 +173,7 @@ export default function MariachiPerks() {
             variants={WRAP}
             initial="hidden"
             whileInView="show"
-            viewport={{ amount: 0.35, once: false }}
+            viewport={{ amount: 0.35, once: true }}
             className="flex items-center gap-4 sm:gap-6"
           >
             <motion.div variants={ITEM} className="relative h-12 w-auto sm:h-14">
@@ -205,7 +205,7 @@ export default function MariachiPerks() {
                   variants={WRAP}
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ amount: 0.25, once: false }}
+                  viewport={{ amount: 0.25, once: true }}
                   className="relative overflow-hidden rounded-2xl ring-1 ring-white/20 bg-transparent shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
                 >
                   {/* Aspect-ratio frame that crops the player content */}
@@ -266,7 +266,7 @@ export default function MariachiPerks() {
               variants={WRAP}
               initial="hidden"
               whileInView="show"
-              viewport={{ amount: 0.25, once: false }}
+              viewport={{ amount: 0.25, once: true }}
               className="relative rounded-2xl p-5 sm:p-6 lg:p-7 ring-1 ring-white/20 bg-transparent shadow-[0_20px_50px_rgba(0,0,0,0.35)]"
             >
               <div className="grid grid-cols-1 gap-4">

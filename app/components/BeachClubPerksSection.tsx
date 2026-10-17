@@ -46,7 +46,7 @@ export default function BeachClubPerksSection() {
       variants={wrap}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.4, margin: "-10% 0px -10% 0px" }}
+      viewport={{ once: true, amount: 0.4, margin: "-10% 0px -10% 0px" }}
       className="
         rounded-3xl p-8 md:p-10 text-center
         bg-white/70 backdrop-blur-xl

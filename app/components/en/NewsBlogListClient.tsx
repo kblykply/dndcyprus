@@ -209,7 +209,7 @@ kicker = "Blog & News",
           variants={item}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
@@ -226,7 +226,7 @@ kicker = "Blog & News",
             variants={item}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
           >
             {title}
@@ -236,7 +236,7 @@ kicker = "Blog & News",
               variants={item}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               className="mt-2 text-sm sm:text-base"
               style={{ color: "rgba(13,35,38,0.72)" }}
             >
@@ -251,7 +251,7 @@ kicker = "Blog & News",
             variants={wrap}
             initial="hidden"
             whileInView="show"
-            viewport={{ amount: 0.2, once: false }}
+            viewport={{ amount: 0.2, once: true }}
             className="mx-auto mt-10 md:mt-12 max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {shown.map((p, idx) => {

@@ -171,7 +171,7 @@ subtitle = "Within the La Joya Perla complex, you’ll find many amenities desig
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="max-w-3xl"
         >
           <div
@@ -200,7 +200,7 @@ subtitle = "Within the La Joya Perla complex, you’ll find many amenities desig
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           custom={1}
           className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7"
           role="list"

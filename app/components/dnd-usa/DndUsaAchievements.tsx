@@ -60,7 +60,7 @@ style={{
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.5 }}
           className="max-w-3xl"
         >
@@ -80,7 +80,7 @@ style={{
                 key={m.label + i}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: false, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.45, delay: i * 0.05 }}
                 className="rounded-2xl px-4 py-5 text-center"
                 style={{
@@ -106,7 +106,7 @@ style={{
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.5, delay: 0.05 }}
           className="mt-10 rounded-3xl p-6 lg:p-8"
           style={{
@@ -157,7 +157,7 @@ style={{
                 key={(a.title || "a") + i}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: false, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.45, delay: i * 0.05 }}
                 className="rounded-2xl p-5"
                 style={{
@@ -195,7 +195,7 @@ style={{
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.08 }}
             className="mt-12"
           >
@@ -235,7 +235,7 @@ style={{
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-10 rounded-2xl p-5"
             style={{

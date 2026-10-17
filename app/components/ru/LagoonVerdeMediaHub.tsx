@@ -368,7 +368,7 @@ export default function LagoonVerdeMediaHubLight({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="mx-auto max-w-4xl text-center"
         >
           <div className="flex justify-center">
@@ -413,7 +413,7 @@ export default function LagoonVerdeMediaHubLight({
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.12 }}
+              viewport={{ once: true, amount: 0.12 }}
               transition={{ delay: i * 0.02 }}
               onClick={() => handleItemClick(item)}
               className={cn(

@@ -92,7 +92,7 @@ export default function ClientsPartners({
           variants={head}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="text-left max-w-2xl"
         >
           <span

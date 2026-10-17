@@ -66,7 +66,7 @@ export default function DndUsaTestimonials({
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.5 }}
           className="max-w-3xl"
         >
@@ -159,7 +159,7 @@ function Card({ item, index }: { item: Testimonial; index: number }) {
     <motion.blockquote
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: false, amount: 0.35 }}
+      viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.45, delay: (index % 6) * 0.05 }}
       className="h-full rounded-2xl p-5"
       style={{

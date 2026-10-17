@@ -54,7 +54,7 @@ export default function DndUsaSustainability({
         <motion.div
           initial={{ opacity: 0, x: -24 }}
           whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{title}</h2>
@@ -74,7 +74,7 @@ export default function DndUsaSustainability({
                   key={i}
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: false, amount: 0.3 }}
+                  viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.45, delay: i * 0.05 }}
                   className="flex items-start gap-3"
                 >
@@ -104,7 +104,7 @@ export default function DndUsaSustainability({
         <motion.div
           initial={{ opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="rounded-2xl overflow-hidden"
           style={{

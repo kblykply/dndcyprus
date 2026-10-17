@@ -75,7 +75,7 @@ export default function InstagramSpotlight() {
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               className="flex flex-col justify-center order-2 lg:order-1 lg:h-[533px] lg:justify-between"
             >
               <span
@@ -151,7 +151,7 @@ export default function InstagramSpotlight() {
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.35 }}
               className="relative order-1 lg:order-2"
             >
               <div className="relative flex w-full flex-col items-center">

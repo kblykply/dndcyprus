@@ -103,7 +103,7 @@ export default function AwardsSection() {
 
   // Retrigger ribbons on section enter
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(sectionRef, { amount: 0.35, once: false });
+  const inView = useInView(sectionRef, { amount: 0.35, once: true });
   const [enterWave, setEnterWave] = useState(0);
   useEffect(() => {
     if (inView) setEnterWave((n) => n + 1);

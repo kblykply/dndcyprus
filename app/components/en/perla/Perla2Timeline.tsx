@@ -73,7 +73,7 @@ description = "Construction at the La Joya Perla project, scheduled for delivery
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.45 }}
             className="rounded-2xl overflow-hidden border"
             style={{ borderColor: varStroke, backdropFilter: "blur(10px)" }}
@@ -106,7 +106,7 @@ description = "Construction at the La Joya Perla project, scheduled for delivery
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.45, delay: 0.06 }}
           >
             {eyebrow && (

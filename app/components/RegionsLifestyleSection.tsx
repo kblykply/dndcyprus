@@ -89,7 +89,7 @@ export default function AynurSpotlightAlt({
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             className="lg:col-span-7"
           >
             <span

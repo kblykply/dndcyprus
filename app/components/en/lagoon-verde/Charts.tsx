@@ -162,7 +162,7 @@ subtitle = "A wide range of amenities at Lagoon Verde designed for your comfort 
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold">{title}</h2>
@@ -176,7 +176,7 @@ subtitle = "A wide range of amenities at Lagoon Verde designed for your comfort 
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
           custom={1}
           className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           role="list"

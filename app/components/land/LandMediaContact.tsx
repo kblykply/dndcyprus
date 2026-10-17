@@ -113,7 +113,7 @@ export default function LandMediaContact() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             className="text-2xl sm:text-3xl font-semibold"
           >
             {heading}
@@ -123,7 +123,7 @@ export default function LandMediaContact() {
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.3 }}
               className="mt-2 text-sm sm:text-base mx-auto max-w-3xl"
               style={{ color: isLight ? "rgba(13,35,38,0.70)" : "rgba(255,255,255,0.88)" }}
             >
@@ -141,7 +141,7 @@ export default function LandMediaContact() {
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: false, amount: 0.25 }}
+                viewport={{ once: true, amount: 0.25 }}
                 className="relative rounded-2xl overflow-hidden border"
                 style={{
                   background: isLight ? "rgba(255,255,255,0.50)" : "rgba(255,255,255,0.08)",
@@ -205,7 +205,7 @@ export default function LandMediaContact() {
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.25 }}
+              viewport={{ once: true, amount: 0.25 }}
               className="grid grid-cols-2 md:grid-cols-3 gap-3"
             >
               {gallery.map((g, i) => (
@@ -241,7 +241,7 @@ export default function LandMediaContact() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.25 }}
+            viewport={{ once: true, amount: 0.25 }}
             className="lg:col-span-4 space-y-6"
           >
             {/* Contact card */}

@@ -30,7 +30,7 @@ export default function DndUsaWhoWeAre() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
@@ -76,7 +76,7 @@ export default function DndUsaWhoWeAre() {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.4 }}
+              viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="rounded-2xl p-6 backdrop-blur-lg"
               style={{

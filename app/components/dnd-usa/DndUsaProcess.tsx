@@ -53,7 +53,7 @@ export default function DndUsaProcess({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
@@ -76,7 +76,7 @@ export default function DndUsaProcess({
                 key={s.id}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: false, amount: 0.35 }}
+                viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.5, delay: (i % 6) * 0.05 }}
                 className="rounded-2xl p-6 flex flex-col items-start"
                 style={{

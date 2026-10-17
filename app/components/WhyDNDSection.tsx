@@ -48,7 +48,7 @@ export default function OzanSpotlight({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
@@ -65,7 +65,7 @@ export default function OzanSpotlight({
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             className="relative order-2 lg:order-1"
           >
             <div className="relative w-full h-full">
@@ -85,7 +85,7 @@ export default function OzanSpotlight({
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             className="flex flex-col justify-center order-1 lg:order-2 pb-6 lg:pb-8"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">

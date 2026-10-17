@@ -81,7 +81,7 @@ export default function CompanyOverview() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start"
         >
           {/* TEXT */}
@@ -195,7 +195,7 @@ export default function CompanyOverview() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="mt-12"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -248,7 +248,7 @@ export default function CompanyOverview() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10"
         >
           {/* STORY / APPROACH */}
@@ -351,7 +351,7 @@ export default function CompanyOverview() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.4 }}
           className="mt-14"
         >
           <div className="flex items-center justify-between gap-4 mb-4">
@@ -395,7 +395,7 @@ export default function CompanyOverview() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.4 }}
           className="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between"
         >
           <p className="text-[color:var(--muted)]">

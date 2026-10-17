@@ -173,7 +173,7 @@ export default function LagoonVerde360Section() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="mx-auto w-full max-w-none rounded-3xl p-6 sm:p-8 lg:p-10 ring-1"
           style={{
             background:

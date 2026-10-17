@@ -58,7 +58,7 @@ function InViewReveal({
   children,
   delay = 0,
   y = 14,
-  once = false,
+  once = true,
   className,
 }: {
   children: React.ReactNode;

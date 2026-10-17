@@ -102,7 +102,7 @@ export default function Perla2Amenities({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="max-w-2xl"
         >
           <h2 className="text-2xl sm:text-3xl font-semibold text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.35)]">
@@ -123,7 +123,7 @@ export default function Perla2Amenities({
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: false, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.3 }}
                 custom={i + 1}
                 className="group relative rounded-2xl p-6"
                 style={{
@@ -191,7 +191,7 @@ export default function Perla2Amenities({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           custom={groups.length + 2}
           className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
         >

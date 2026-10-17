@@ -63,7 +63,7 @@ export default function AynurSpotlight({
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.35 }}
           className="inline-flex items-center text-[11px] tracking-wider uppercase px-3 py-1 rounded-full"
           style={{
             background: "rgba(255, 255, 255, 0.05)",
@@ -80,7 +80,7 @@ export default function AynurSpotlight({
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             className="flex justify-center lg:justify-start"
           >
             <img
@@ -95,7 +95,7 @@ export default function AynurSpotlight({
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             className="flex flex-col justify-center"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">

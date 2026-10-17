@@ -50,7 +50,7 @@ export default function OzanAchievements({
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.35 }}
+      viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.5 }}
       className="max-w-3xl"
     >
@@ -72,7 +72,7 @@ export default function OzanAchievements({
             key={m.label + i}
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.45, delay: i * 0.05 }}
             className="rounded-2xl px-4 py-5 text-center transition-transform duration-300 hover:-translate-y-1"
             style={{
@@ -99,7 +99,7 @@ export default function OzanAchievements({
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.35 }}
+      viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.5, delay: 0.05 }}
       className="mt-12"
     >
