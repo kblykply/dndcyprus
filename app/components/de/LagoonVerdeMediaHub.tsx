@@ -304,14 +304,6 @@ export default function LagoonVerdeMediaHubLight({
       description: "Video zu La Joya (Polen)",
     },
     {
-      id: "dnd-website",
-      title: "Website von DND Cyprus",
-      type: "link",
-      thumb: "/optimized/dndweb.33a891333c.webp",
-      src: "https://dndcyprus.com/de",
-      description: "Die Website von DND Cyprus",
-    },
-    {
       id: "property-awards",
       title: "Video Property Awards",
       type: "instagram",
@@ -326,14 +318,6 @@ export default function LagoonVerdeMediaHubLight({
       thumb: "/lagoon-verde/1.jpg",
       src: "/paymentt.pdf",
       description: "Der Zahlungsplan für Lagoon Verde",
-    },
-    {
-      id: "campaign",
-      title: "Kampagne",
-      type: "image",
-      thumb: "/campain.png",
-      src: "/campain.png",
-      description: "Aktuelle Werbekampagne",
     },
   ],
   []

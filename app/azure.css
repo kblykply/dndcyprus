@@ -121,7 +121,12 @@ a:hover > .az-arrow:not(.back) { transform: translateX(3px); }
   transition: opacity .35s var(--ease), transform .35s var(--ease), visibility .35s; overflow-y: auto; overscroll-behavior: contain;
 }
 .az-mobile.on { opacity: 1; visibility: visible; transform: none; }
-.az-mobile a.big { font-family: var(--font-display); font-size: 19px; padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: var(--ink); letter-spacing: -.01em; }
+.az-mobile a.big, .az-mobile button.big { font-family: var(--font-display); font-size: 19px; padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: var(--ink); letter-spacing: -.01em; }
+.az-mobile button.big { width: 100%; background: none; border: 0; border-bottom: 1px solid var(--line); cursor: pointer; text-align: left; }
+.az-mobile button.acc svg { transition: transform .3s var(--ease); color: var(--ink-60); }
+.az-mobile button.acc.open svg { transform: rotate(180deg); }
+.az-mobile .acc-body[hidden] { display: none; }
+.az-mobile .sub a.all { background: var(--sea); border-color: var(--sea); color: #fff; gap: 6px; }
 .az-mobile a.big small { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sea); font-family: var(--font-sans); font-weight: 600; }
 .az-mobile .sub { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 0; border-bottom: 1px solid var(--line); }
 /* paneldeki bütün çipler (bölümler ve diller) aynı boy ve yazıda */

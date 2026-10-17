@@ -304,14 +304,6 @@ export default function LagoonVerdeMediaHubLight({
       description: "La Joya video for Poland",
     },
     {
-      id: "dnd-website",
-      title: "DND Cyprus Website",
-      type: "link",
-      thumb: "/optimized/dndweb.33a891333c.webp",
-      src: "https://dndcyprus.com/en",
-      description: "Official DND Cyprus website",
-    },
-    {
       id: "property-awards",
       title: "Property Awards Video",
       type: "instagram",
@@ -326,14 +318,6 @@ export default function LagoonVerdeMediaHubLight({
       thumb: "/lagoon-verde/1.jpg",
       src: "/paymentt.pdf",
       description: "Lagoon Verde payment plan",
-    },
-    {
-      id: "campaign",
-      title: "Campaign",
-      type: "image",
-      thumb: "/campain.png",
-      src: "/campain.png",
-      description: "Advertising campaign",
     },
   ],
   []

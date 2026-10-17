@@ -304,14 +304,6 @@ export default function LagoonVerdeMediaHubLight({
       description: "Reels в Instagram",
     },
     {
-      id: "dnd-website",
-      title: "Сайт DND Cyprus",
-      type: "link",
-      thumb: "/optimized/dndweb.33a891333c.webp",
-      src: "https://dndcyprus.com/ru",
-      description: "Официальный сайт компании",
-    },
-    {
       id: "property-awards",
       title: "Видео с Property Awards",
       type: "instagram",
@@ -326,14 +318,6 @@ export default function LagoonVerdeMediaHubLight({
       thumb: "/lagoon-verde/1.jpg",
       src: "/paymentt.pdf",
       description: "План оплаты (PDF)",
-    },
-    {
-      id: "campaign",
-      title: "Рекламная кампания",
-      type: "image",
-      thumb: "/campain.png",
-      src: "/campain.png",
-      description: "Актуальное предложение DND Cyprus",
     },
   ],
   []

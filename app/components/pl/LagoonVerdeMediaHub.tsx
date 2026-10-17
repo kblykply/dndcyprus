@@ -304,14 +304,6 @@ export default function LagoonVerdeMediaHubLight({
       description: "Film o La Joya w języku polskim",
     },
     {
-      id: "dnd-website",
-      title: "Strona DND Cyprus",
-      type: "link",
-      thumb: "/optimized/dndweb.33a891333c.webp",
-      src: "https://dndcyprus.com/pl",
-      description: "Oficjalna strona internetowa DND Cyprus",
-    },
-    {
       id: "property-awards",
       title: "Film z Property Awards",
       type: "instagram",
@@ -326,14 +318,6 @@ export default function LagoonVerdeMediaHubLight({
       thumb: "/lagoon-verde/1.jpg",
       src: "/paymentt.pdf",
       description: "Plan płatności Lagoon Verde w formacie PDF",
-    },
-    {
-      id: "campaign",
-      title: "Kampania",
-      type: "image",
-      thumb: "/campain.png",
-      src: "/campain.png",
-      description: "Aktualna kampania reklamowa",
     },
   ],
   []

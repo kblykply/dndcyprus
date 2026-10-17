@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useMenuDialog } from "@/app/components/performance/useMenuDialog";
 import { CONTACT, LOCALES, LOCALE_META, NAV_COPY, PROJECTS, href, stripLocale, type Locale } from "@/lib/azure/site";
+import Arrow from "./Arrow";
 import "./lang.css";
 
 // Azure: yüzen cam pill menü + proje mega menüsü + tam ekran mobil menü.
@@ -14,6 +15,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
   const router = useRouter();
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);       // mobil menü
+  const [projOpen, setProjOpen] = useState(false); // mobil menüde Projeler açılır bölümü
   const [drop, setDrop] = useState(false);       // projeler açılır menüsü (dokunmatik için)
   // seçim yapılınca menü kapanır ve fare menüden çıkana kadar kapalı kalır (yoksa :hover / :focus-within açık tutuyordu)
   const [shut, setShut] = useState(false);
@@ -48,7 +50,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
     return () => removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setOpen(false); setDrop(false); setLangOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setDrop(false); setLangOpen(false); setProjOpen(false); }, [pathname]);
   // açık panelin dışına (menü çubuğu hariç) dokununca kapanır
   useEffect(() => {
     if (!open) return;
@@ -153,15 +155,16 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.6" /></svg>
         </button>
         <Link className="big" href={href(locale, "/")} prefetch={false} onClick={toTop}>{t.home}</Link>
-        <Link className="big" href={href(locale, "/projects")} prefetch={false}>{t.projects} <small>06</small></Link>
-        <div className="sub">
+        {/* Projeler: açılır bölüm (dokununca projeler ve "Tüm projeler" açılır) */}
+        <button type="button" className={`big acc${projOpen ? " open" : ""}`} aria-expanded={projOpen} aria-controls="az-mobile-projects" onClick={() => setProjOpen((o) => !o)}>
+          {t.projects}
+          <svg width="14" height="14" viewBox="0 0 10 10" fill="none" aria-hidden><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.3" /></svg>
+        </button>
+        <div className="sub acc-body" id="az-mobile-projects" hidden={!projOpen}>
           {PROJECTS.map((p) => <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false}>{p.name}</Link>)}
+          <Link className="all" href={href(locale, "/projects")} prefetch={false}>{t.all} <Arrow /></Link>
         </div>
         {items.filter((it) => it.path !== "/").map((it) => <Link key={it.path} className="big" href={href(locale, it.path)} prefetch={false}>{it.label}</Link>)}
-        <div className="sub">
-          {LOCALE_META[locale].blog && <Link href={href(locale, "/blog")} prefetch={false}>{t.blog}</Link>}
-          <Link href={href(locale, "/dndcyprus")} prefetch={false}>{t.media}</Link>
-        </div>
         <nav className="langs" aria-label={t.lang}>
           {LOCALES.map((l) => (
             <a key={l} href={langTarget(l)} className={l === locale ? "on" : undefined} lang={l} hrefLang={l} aria-current={l === locale ? "true" : undefined} onClick={(e) => { e.preventDefault(); switchTo(l); }}>{LOCALE_META[l].name}</a>

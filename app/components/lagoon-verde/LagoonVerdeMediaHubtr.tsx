@@ -311,22 +311,6 @@ subtitle = "Katalogları, broşürleri, videoları, kampanyaları ve dijital iç
       description: "Kuzey Kıbrıs kataloğu",
     },
     {
-      id: "la-joya-video",
-      title: "La Joya Video",
-      type: "youtube",
-      thumb: "/lajoyaimage.jpg",
-      src: "https://www.youtube.com/embed/bKNPhMFNzGY?si=bAsOzWd2Kr6O8Fy-",
-      description: "La Joya Polonya videosu",
-    },
-    {
-      id: "dnd-website",
-      title: "DND Cyprus Web Sitesi",
-      type: "link",
-      thumb: "/optimized/dndweb.33a891333c.webp",
-      src: "https://dndcyprus.com/tr",
-      description: "DND Cyprus resmi web sitesi",
-    },
-    {
       id: "property-awards",
       title: "Property Awards Videosu",
       type: "instagram",
@@ -357,14 +341,6 @@ subtitle = "Katalogları, broşürleri, videoları, kampanyaları ve dijital iç
       thumb: "/lagoon-verde/1.jpg",
       src: "/paymentt.pdf",
       description: "Lagoon Verde ödeme planı",
-    },
-    {
-      id: "campaign",
-      title: "Kampanya",
-      type: "image",
-      thumb: "/campain.png",
-      src: "/kampanyatr.jpeg",
-      description: "Reklam kampanyası",
     },
   ],
   []
