@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -107,14 +108,13 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
               <div className="drop">
                 {PROJECTS.filter((p) => p.slug !== "gecitkale").map((p) => (
                   <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false} onClick={pick}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.thumb} alt="" width={56} height={56} loading="lazy" />
+                    {/* 56 px küçük resim: tam boy fotoğraf (300–390 KB) yerine 64/128 px WebP; menü kapalıyken de iniyordu */}
+                    <Image src={p.thumb} alt="" width={56} height={56} quality={75} />
                     <span><b>{p.name}</b><small>{p.short[locale]}</small></span>
                   </Link>
                 ))}
                 <Link href={href(locale, "/projects")} prefetch={false} onClick={pick}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/azure/sea.jpg" alt="" width={56} height={56} loading="lazy" />
+                  <Image src="/azure/sea.jpg" alt="" width={56} height={56} quality={75} />
                   <span><b>{t.all}</b><small>{t.allSub}</small></span>
                 </Link>
               </div>
