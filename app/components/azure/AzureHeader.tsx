@@ -170,7 +170,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
         <div className="meta">
           <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
           <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-          <Link className="az-btn" href={href(locale, "/contact")} prefetch={false} style={{ justifySelf: "start", marginTop: 8 }}>{t.cta}</Link>
+          <Link className="az-btn" href={href(locale, "/contact")} prefetch={false}>{t.cta}</Link>
         </div>
       </div>
     </>

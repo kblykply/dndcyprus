@@ -123,10 +123,13 @@ a:hover > .az-arrow:not(.back) { transform: translateX(3px); }
 .az-mobile.on { opacity: 1; visibility: visible; transform: none; }
 .az-mobile a.big { font-family: var(--font-display); font-size: 19px; padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: var(--ink); letter-spacing: -.01em; }
 .az-mobile a.big small { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--sea); font-family: var(--font-sans); font-weight: 600; }
-.az-mobile .sub { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 0 12px; border-bottom: 1px solid var(--line); }
-.az-mobile .sub a { padding: 6px 11px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.9); font-size: 13px; font-weight: 500; color: var(--ink-60); }
-.az-mobile .meta { margin-top: 24px; font-size: 13px; color: var(--ink-60); display: grid; gap: 6px; }
-.az-mobile .meta a { color: var(--ink); }
+.az-mobile .sub { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+/* paneldeki bütün çipler (bölümler ve diller) aynı boy ve yazıda */
+.az-mobile .sub a, .az-mobile .langs a { display: inline-flex; align-items: center; min-height: 34px; padding: 0 13px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.9); font-size: 13px; font-weight: 500; line-height: 1; color: var(--ink-60); }
+.az-mobile .meta { margin-top: 18px; font-size: 13px; color: var(--ink-60); display: grid; gap: 6px; }
+.az-mobile .meta a:not(.az-btn) { color: var(--ink); }
+/* Bilgi Al: panel genişliğinde, yazı beyaz ve ortada (önceki kural yazıyı koyu yapıyordu) */
+.az-mobile .meta .az-btn { justify-self: stretch; margin-top: 10px; }
 .az-mobile .close { display: none; } /* kapatma: menü çubuğundaki düğme (çarpıya döner) */
 body.az-lock { overflow: hidden; }
 @media (max-width: 1000px) {

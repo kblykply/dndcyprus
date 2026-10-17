@@ -14,6 +14,6 @@
 .az-nav .lang.menu li a.on b { color: #fff; }
 @media (max-width: 1000px) { .az-nav .lang.menu { margin-left: 2px; margin-right: 4px; } }
 
-.az-mobile .langs { display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 0 0; }
-.az-mobile .langs a { padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.9); font-size: 12px; font-weight: 600; color: var(--ink-60); }
-.az-mobile .langs a.on { background: var(--sea); color: #fff; border-color: var(--sea); }
+.az-mobile .langs { display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--line); }
+/* çip ölçüleri app/azure.css (.az-mobile .sub a, .az-mobile .langs a) */
+.az-mobile .langs a.on { background: var(--sea); color: #fff; border-color: var(--sea); font-weight: 600; }
