@@ -75,7 +75,7 @@ export default function FloorPlans({ d, name, id, locale, cta = {} }: { d: Proje
             <button type="button" className={`zoom${showInterior ? " photo" : ""}`} aria-label={t.enlargeAria}
               onClick={() => setLb(showInterior ? { images: gallery, idx: gi } : { images: [v.image], idx: 0 })}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img key={showInterior ? gallery[gi] : v.image} src={showInterior ? gallery[gi] : v.image} alt={showInterior ? t.galleryImage(gi + 1) : alt} loading={showInterior ? "lazy" : "eager"} decoding="async" />
+              <img key={showInterior ? gallery[gi] : v.image} src={showInterior ? gallery[gi] : v.image} alt={showInterior ? t.galleryImage(gi + 1) : alt} loading="lazy" decoding="async" />
               <span className="go"><PiArrowsOutDuotone size={15} aria-hidden /> <span className="t">{t.enlarge}</span></span>
             </button>
             {gallery.length > 0 && (

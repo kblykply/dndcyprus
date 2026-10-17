@@ -28,7 +28,7 @@ export default function Gallery({ items, locale }: { items: GalleryItem[]; local
           onClick={() => setActive(active === i ? null : i)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={g.src} alt={g.alt} loading={i < 2 ? "eager" : "lazy"} decoding="async" draggable={false} />
+          <img src={g.src} alt={g.alt} loading="lazy" decoding="async" draggable={false} />
           <span className="n" aria-hidden>{g.label ?? `${i + 1} / ${items.length}`}</span>
         </button>
       ))}
