@@ -1,6 +1,6 @@
 # DND Cyprus — Azure tasarımı devir notu
 
-Son güncelleme: 16 Ekim 2026, 22:50 (İstanbul). Bu dosya, projeyi hiç görmemiş biri (ya da yeni bir Claude hesabı) işe kaldığı yerden devam edebilsin diye yazıldı. Her şey yerel olarak commit'li, çalışma alanı temiz.
+Son güncelleme: 16 Ekim 2026, 22:50 (İstanbul); §6 17 Ekim 2026 sabahı QA ile güncellendi. Bu dosya, projeyi hiç görmemiş biri (ya da yeni bir Claude hesabı) işe kaldığı yerden devam edebilsin diye yazıldı. Her şey yerel olarak commit'li, çalışma alanı temiz.
 
 ## 1. Kısa durum
 
@@ -120,6 +120,18 @@ Beklenen sonuçlar: tsc 0 hata, lint 0 hata (uyarılar var), testler 78/78.
 Önizleme ayarları `/Users/nymboo/Downloads/LAGOON VERDE/.claude/launch.json` dosyasında. `dndcyprus-web` 3102'de geliştirme sunucusu açar. `dndcyprus-prod` 3112'de `next start` çalıştırır, önce derleme gerekir.
 
 ## 6. Test ve doğrulama
+
+- **17 Ekim 2026 gece QA'sı:** rapor `docs/qa-2026-10-17.md` (düzeltmeler, performans öncesi/sonrası, açık konular, yayın öncesi adımlar).
+- **Kalıcı test paketi (Playwright Test, depoda):**
+  - Yer: `e2e/` + `playwright.config.ts`.
+  - Projeler: chromium-desktop, chromium-mobile (Pixel 7), webkit-mobile (iPhone 13), firefox-desktop.
+  - Kapsam: 262 test (sayfalar, menü, formlar sahte API ile, API doğrulama ve 429, çerez izni, SEO, güvenlik başlıkları, medya, çapalar, kaydırma kilidi, axe).
+  - Çalıştırma: `npm run build && npm run test:e2e`. Çalışan sunucuya karşı: `E2E_BASE_URL=http://localhost:3114 npm run test:e2e`.
+  - Bu makinede Chromium sürümü farklı olduğu için `PW_CHROMIUM_EXECUTABLE=~/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell` gerekir.
+  - CI: `.github/workflows/test.yml`. Henüz hiç koşmadı (push yok).
+- **Birim testleri:** `npm test` (89). Video faststart/H.264 denetimi de burada.
+- **Dikkat:** localhost:5432'de bir Postgres çalışıyor. `DATABASE_URL` yokken pg ona bağlanabilir. `/api/contact`'a geçerli form gönderme; yalnız 400 dönen ya da honeypot dolu istek gönder.
+- **Üretim kopyası:** repo APFS klonu (`cp -cR`, `.git`/`.next` hariç) + `npm run build`. Sunucu: `LAGOON VERDE/.claude/launch.json` `dndcyprus-qa2` (3114). 3102'deki geliştirme sunucusunun `.next` klasörüne dokunmaz.
 
 - **E2E betikleri (`scripts/e2e/`, başsız Chrome CDP):**
   - `audit.mjs`: 80 sayfa × boyut; taşma, kırık görsel, konsol hatası, başlık satırı.
