@@ -1,0 +1,70 @@
+import { expect, test } from "@playwright/test";
+import { isMobile, prepare } from "./helpers";
+
+test.describe("masaüstü menü", () => {
+  test.beforeEach(async ({ page }, info) => {
+    test.skip(isMobile(info), "masaüstü menüsü");
+    await prepare(page);
+  });
+
+  test("Projeler menüsünden seçim yapınca sayfa açılır ve menü kapanır", async ({ page }) => {
+    await page.goto("/tr/about");
+    const nav = page.locator("#az-nav");
+    await nav.getByRole("button", { name: "Projeler" }).hover();
+    const drop = nav.locator(".drop");
+    await expect(drop).toBeVisible();
+    await drop.getByRole("link", { name: /Lagoon Verde/ }).click();
+    await expect(page).toHaveURL(/\/tr\/lagoon-verde$/);
+    await expect(drop).toBeHidden();
+  });
+
+  test("ana sayfada logo sayfanın başına çıkarır", async ({ page }) => {
+    await page.goto("/tr");
+    await page.evaluate(() => window.scrollTo(0, 2000));
+    await page.waitForFunction(() => window.scrollY > 1000);
+    await page.locator("#az-nav a.logo").click();
+    await page.waitForFunction(() => window.scrollY === 0);
+    await expect(page).toHaveURL(/\/tr$/);
+  });
+
+  test("dil değiştirince aynı sayfanın diğer dili açılır", async ({ page }) => {
+    await page.goto("/tr/perla");
+    await page.locator("#az-nav nav.lang > button").click();
+    await page.locator("#az-nav nav.lang").getByRole("option", { name: /English/ }).click();
+    await expect(page).toHaveURL(/\/en\/perla$/);
+    await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  });
+});
+
+test.describe("mobil menü", () => {
+  test.beforeEach(async ({ page }, info) => {
+    test.skip(!isMobile(info), "mobil menü");
+    await prepare(page);
+  });
+
+  test("hamburger paneli açılır, Projeler açılır bölümünden proje seçilir, panel kapanır", async ({ page }) => {
+    await page.goto("/tr/about");
+    const panel = page.locator(".az-mobile");
+    await page.getByRole("button", { name: "Menü" }).click();
+    await expect(panel).toHaveClass(/\bon\b/);
+    // panel ekranı kaplamaz: en fazla 400 px genişlik
+    const box = await panel.boundingBox();
+    expect(box!.width).toBeLessThanOrEqual(400);
+    await panel.getByRole("button", { name: "Projeler" }).click();
+    const list = panel.locator("#az-mobile-projects");
+    await expect(list).toBeVisible();
+    await list.getByRole("link", { name: "La Joya Perla", exact: true }).click();
+    await expect(page).toHaveURL(/\/tr\/perla$/);
+    await expect(panel).not.toHaveClass(/\bon\b/);
+  });
+
+  test("panel dışına dokununca kapanır", async ({ page }) => {
+    await page.goto("/tr/contact");
+    const panel = page.locator(".az-mobile");
+    await page.getByRole("button", { name: "Menü" }).click();
+    await expect(panel).toHaveClass(/\bon\b/);
+    const vp = page.viewportSize()!;
+    await page.mouse.click(12, vp.height - 12);
+    await expect(panel).not.toHaveClass(/\bon\b/);
+  });
+});
