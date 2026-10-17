@@ -1,6 +1,7 @@
 import { getImageProps } from "next/image";
 import Link from "next/link";
 import { preload } from "react-dom";
+import { HERO_DIK } from "@/lib/azure/hero-dik";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 
@@ -12,7 +13,8 @@ export default function HomeHero({ locale }: { locale: Locale }) {
   const t = HOME[locale].hero;
   // Afiş videonun altında duran duyarlı görsel (LCP öğesi): `poster` özelliği her ekrana 1800 px JPEG indiriyordu.
   // Video ilk karesi gelene kadar saydam kalır, sonra görselin üstünü örter.
-  const dik = getImageProps({ src: "/azure/lv-5-dik.jpg", alt: "", width: 840, height: 1005, quality: 75, sizes: "68vh" }).props;
+  const k = HERO_DIK["/azure/lv-5.jpg"];
+  const dik = getImageProps({ src: k.src, alt: "", width: k.w, height: k.h, quality: 75, sizes: "68vh" }).props;
   const { srcSet, sizes, ...img } = getImageProps({ src: "/azure/lv-5.jpg", alt: "", fill: true, quality: 75, sizes: "100vw", loading: "eager", fetchPriority: "high" }).props;
   preload(dik.src, { as: "image", imageSrcSet: dik.srcSet, imageSizes: dik.sizes, fetchPriority: "high", media: DIK });
   preload(img.src, { as: "image", imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: "high", media: `not all and ${DIK}` });

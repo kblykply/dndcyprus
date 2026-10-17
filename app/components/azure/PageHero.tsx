@@ -1,5 +1,8 @@
 import type { ReactNode } from "react";
+import { getImageProps } from "next/image";
 import Link from "next/link";
+import { preload } from "react-dom";
+import { HERO_DIK } from "@/lib/azure/hero-dik";
 
 type Cta = { label: string; href: string; variant?: "coral" | "sea" | "glass" | "ghost"; track?: string };
 
@@ -21,6 +24,25 @@ type Props = {
   imagePosition?: string;
 };
 
+// Dik telefon ekranı: çerçeve fotoğrafın yalnız ortasını gösteriyor; HERO_DIK'te kesiti olan görselde o bölge iner
+// (scripts/hero-dik.mjs). Kesiti olmayan görsel (short çerçeve) tam çözünürlükte WebP iner.
+const DIK = "(max-aspect-ratio: 3/5)";
+
+function HeroImage({ src, alt, position }: { src: string; alt: string; position?: string }) {
+  const k = HERO_DIK[src];
+  const dik = k ? getImageProps({ src: k.src, alt, width: k.w, height: k.h, quality: 75, sizes: "100vh" }).props : null;
+  // dik ve kareye yakın ekranlarda çerçeve fotoğrafın enini aşıyor (cover): tam çözünürlük insin diye 200vw
+  const { srcSet, sizes, ...img } = getImageProps({ src, alt, fill: true, quality: 75, sizes: "(max-aspect-ratio: 1/1) 200vw, 100vw", loading: "eager", fetchPriority: "high" }).props;
+  if (dik) preload(dik.src, { as: "image", imageSrcSet: dik.srcSet, imageSizes: dik.sizes, fetchPriority: "high", media: DIK });
+  preload(img.src, { as: "image", imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: "high", media: dik ? `not all and ${DIK}` : undefined });
+  return (
+    <picture>
+      {dik && <source media={DIK} srcSet={dik.srcSet} sizes={dik.sizes} />}
+      <img {...img} alt={alt} srcSet={srcSet} sizes={sizes} className="bg" style={position ? { ...img.style, objectPosition: position } : img.style} />
+    </picture>
+  );
+}
+
 // İç sayfalar için Azure hero çerçevesi: 36px yuvarlatılmış görsel, cam etiketler, floating chips.
 export default function PageHero({ kicker, title, lead, image, imageAlt = "", video, tags = [], goldTag, chips, ctas = [], logo, size = "compact", id, imagePosition }: Props) {
   return (
@@ -31,8 +53,7 @@ export default function PageHero({ kicker, title, lead, image, imageAlt = "", vi
             <source src={video} type="video/mp4" />
           </video>
         ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img className="bg" src={image} alt={imageAlt} fetchPriority="high" style={imagePosition ? { objectPosition: imagePosition } : undefined} />
+          <HeroImage src={image} alt={imageAlt} position={imagePosition} />
         )}
         {(goldTag || tags.length || logo) ? (
           <div className="top">
