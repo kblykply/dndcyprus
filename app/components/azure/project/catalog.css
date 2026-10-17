@@ -1,25 +1,32 @@
-/* Azure katalog: açık sahne, gerçek kitap, alt şerit (sayaç · çizgi · oklar) */
+/* Azure katalog — La Joya'daki kitap düzeni: çerçevesiz büyük kitap, oklar iki yanda, altında yumuşak gölge
+   ve ince ilerleme çizgisi. Kapak tek sayfa olarak ortada açılır (AzureCatalog .shift). */
 .az-cat .hd { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px 24px; flex-wrap: wrap; margin-bottom: clamp(20px, 2.6vw, 32px); }
 .az-cat .hd .az-btn { flex: none; margin-bottom: 4px; }
-.az-cat .stage {
-  position: relative; display: grid; place-items: center; outline: none;
-  padding: clamp(16px, 3.4vw, 56px); border-radius: 36px; overflow: hidden;
-  background: radial-gradient(120% 90% at 50% 0%, #fff 0%, var(--sky) 58%, var(--sky-2) 100%);
-  border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 30px 80px rgba(13, 35, 38, .1);
-}
-.az-cat .stage:focus-visible { box-shadow: 0 0 0 2px var(--coral), 0 30px 80px rgba(13, 35, 38, .1); }
-/* kitabın altında yumuşak gölge */
-.az-cat .book { filter: drop-shadow(0 26px 40px rgba(13, 35, 38, .2)); }
+.az-cat .row { position: relative; display: flex; align-items: center; gap: clamp(10px, 2vw, 24px); }
+.az-cat .stage { position: relative; flex: 1; min-width: 0; display: flex; justify-content: center; outline: none; border-radius: 8px; }
+.az-cat .stage:focus-visible { box-shadow: 0 0 0 2px var(--coral); }
+/* kitabın altında yere düşen gölge */
+.az-cat .stage::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: -26px; height: 40px; z-index: -1; background: radial-gradient(50% 50% at 50% 50%, rgba(13, 35, 38, .32), transparent 70%); pointer-events: none; }
+.az-cat .shift { transition: transform .9s cubic-bezier(.22, .8, .2, 1); }
+.az-cat .book { filter: drop-shadow(0 18px 30px rgba(13, 35, 38, .18)); }
 .az-cat .book-ph { border-radius: 4px; background: rgba(255, 255, 255, .55); }
 .az-cat .pg { position: relative; overflow: hidden; background: #fff; }
 .az-cat .pg img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
 .az-cat .pg.half img { width: 200%; max-width: none; }
 .az-cat .pg.half.r img { transform: translateX(-50%); }
 /* sabit sırt gölgesi yok: iki sayfaya yayılan fotoğrafların ortasında şerit gibi duruyordu; çevirme gölgesini kütüphane çizer */
-.az-cat .nav { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); margin-top: 18px; }
-.az-cat .count { font-family: var(--font-display), sans-serif; font-size: 15px; letter-spacing: .04em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; min-width: 9ch; }
-.az-cat .count i { font-style: normal; color: var(--ink-40); margin: 0 2px; }
-.az-cat .bar { flex: 1; height: 2px; border-radius: 2px; background: rgba(13, 35, 38, .12); overflow: hidden; }
+/* yan oklar: sitedeki cam yuvarlak düğmeler */
+.az-cat .side { flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--ink); background: var(--glass-b); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 8px 24px rgba(13, 35, 38, .1); transition: background .3s, color .3s, opacity .3s; }
+.az-cat .side:hover { background: var(--sea); color: #fff; }
+.az-cat .side:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.az-cat .side:disabled { opacity: .3; pointer-events: none; }
+.az-cat .bar { display: block; width: min(420px, 60%); height: 2px; margin: 40px auto 0; border-radius: 2px; background: rgba(13, 35, 38, .12); overflow: hidden; }
 .az-cat .bar i { display: block; height: 100%; background: var(--sea); transform-origin: left; transition: transform .4s var(--ease); }
-.az-cat .az-ctrl button:disabled { opacity: .35; cursor: default; background: var(--foam); color: var(--ink); }
-@media (max-width: 600px) { .az-cat .stage { border-radius: 28px; } .az-cat .az-ctrl button { width: 42px; height: 42px; } }
+/* telefon ve dar tablet: tek sayfa, oklar kitabın üstünde iki kenarda */
+@media (max-width: 760px) {
+  .az-cat .side { position: absolute; z-index: 5; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(13, 35, 38, .45); border-color: rgba(255, 255, 255, .3); color: #fff; backdrop-filter: blur(8px); }
+  .az-cat .side.prev { left: 6px; }
+  .az-cat .side.next { right: 6px; }
+  .az-cat .side:disabled { opacity: 0; }
+  .az-cat .bar { margin-top: 32px; }
+}

@@ -54,8 +54,8 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
       const cs = getComputedStyle(el);
       const cw = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       const two = cw >= 700;
-      // kitap + alt şerit ekrana sığsın (üstte sabit menü ~80px, sahne payı ve şerit ~180px)
-      const maxH = Math.max(300, Math.min(window.innerHeight * 0.7, window.innerHeight - 260, 860));
+      // La Joya kitabı gibi: çerçevesiz, ekranın ~%74'ü kadar yüksek (üstte sabit menü payı)
+      const maxH = Math.max(300, Math.min(window.innerHeight * 0.74, window.innerHeight - 140, 900));
       let pw = two ? cw / 2 : cw, ph = pw / def.aspect;
       if (ph > maxH) { ph = maxH; pw = ph * def.aspect; }
       const next = { w: Math.floor(pw), h: Math.floor(ph), two };
@@ -109,6 +109,8 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
   const atStart = idx <= 0, atEnd = idx >= lastStart;
   const prog = Math.min(1, idx / Math.max(1, lastStart));
   const pdf = def.pdf?.[locale];
+  // kapaklı katalogda (Lagoon Verde) kapak ve arka kapak açılımda tek sayfa: kitap yarım sayfa kayar, sayfa ortada durur
+  const shift = two && def.cover ? (idx === 0 ? "translateX(-25%)" : idx >= n - 1 ? "translateX(25%)" : "none") : "none";
 
   return (
     <section className="az-section az-proj az-cat" aria-label={t.title(name)}>
@@ -121,41 +123,44 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
           </div>
           {pdf ? <a className="az-btn glass rv d2" href={pdf} target="_blank" rel="noopener" data-track="brochure_download">{t.pdf} ↓</a> : null}
         </div>
-        <div className="stage" ref={stage} tabIndex={0} onKeyDown={onKey} aria-label={t.title(name)}>
-          {size && !near ? (
-            // kitap henüz kurulmadı: aynı boyda yer tutucu (sahne son boyunda, yüklenince sayfa kaymaz)
-            <div className="book-ph" style={{ width: size.two ? size.w * 2 : size.w, height: size.h }} aria-hidden />
-          ) : size ? (
-            // @ts-expect-error: react-pageflip türleri eksik (eski katalogdaki gibi)
-            <HTMLFlipBook
-              key={`${size.w}x${size.h}x${size.two}`}
-              ref={book}
-              className="book"
-              width={size.w}
-              height={size.h}
-              size="fixed"
-              minWidth={200} maxWidth={2000} minHeight={200} maxHeight={2000}
-              showCover={def.cover}
-              usePortrait={!size.two}
-              startPage={idx}
-              drawShadow
-              maxShadowOpacity={0.35}
-              flippingTime={850}
-              mobileScrollSupport
-              renderOnlyPageLengthChange
-              onFlip={onFlip}
-            >
-              {pagesEls}
-            </HTMLFlipBook>
-          ) : null}
+        {/* La Joya'daki katalog düzeni: çerçevesiz büyük kitap, oklar kitabın iki yanında; kapak ve arka kapak
+            tek sayfa olarak ortada açılır (kitap yarım sayfa kayar), köşesinden tutup çevrilebilir */}
+        <div className="row">
+          <button type="button" className="side prev" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}><Arrow dir={-1} size={20} /></button>
+          <div className="stage" ref={stage} tabIndex={0} onKeyDown={onKey} aria-label={t.title(name)}>
+            <div className="shift" style={{ transform: shift }}>
+              {size && !near ? (
+                // kitap henüz kurulmadı: aynı boyda yer tutucu (bölüm son boyunda, yüklenince sayfa kaymaz)
+                <div className="book-ph" style={{ width: size.two ? size.w * 2 : size.w, height: size.h }} aria-hidden />
+              ) : size ? (
+                // @ts-expect-error: react-pageflip türleri eksik (eski katalogdaki gibi)
+                <HTMLFlipBook
+                  key={`${size.w}x${size.h}x${size.two}`}
+                  ref={book}
+                  className="book"
+                  width={size.w}
+                  height={size.h}
+                  size="fixed"
+                  minWidth={200} maxWidth={2000} minHeight={200} maxHeight={2000}
+                  showCover={def.cover}
+                  usePortrait={!size.two}
+                  startPage={idx}
+                  drawShadow
+                  maxShadowOpacity={0.5}
+                  flippingTime={900}
+                  showPageCorners
+                  mobileScrollSupport={!size.two}
+                  renderOnlyPageLengthChange
+                  onFlip={onFlip}
+                >
+                  {pagesEls}
+                </HTMLFlipBook>
+              ) : null}
+            </div>
+          </div>
+          <button type="button" className="side next" aria-label={t.next} onClick={() => go(1)} disabled={atEnd}><Arrow size={20} /></button>
         </div>
-        <div className="nav">
-          <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.03, prog)})` }} /></span>
-          <span className="az-ctrl">
-            <button type="button" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}><Arrow dir={-1} size={18} /></button>
-            <button type="button" aria-label={t.next} onClick={() => go(1)} disabled={atEnd}><Arrow size={18} /></button>
-          </span>
-        </div>
+        <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.03, prog)})` }} /></span>
       </div>
     </section>
   );
