@@ -22,6 +22,7 @@ type Office = {
   imageAlt?: string;
   coords?: [number, number];    // [lat, lng]
   mapEmbedUrl?: string;         // optional custom iframe src
+  mapImage?: string;            // haritanın tıklamadan önceki statik görseli (public/maps)
 };
 
 type Props = {
@@ -61,7 +62,8 @@ export default function ContactInfo({
       whatsapp: "https://wa.me/905488880363",
       image: "/dndofis.JPG",
       imageAlt: "Головной офис DND Cyprus",
-      coords: [35.1856, 33.3823],
+      coords: [35.1310, 33.9193],
+      mapImage: "/maps/ofis-gazimagusa.webp",
     },
     {
       id: "sales",
@@ -78,6 +80,7 @@ export default function ContactInfo({
       imageAlt: "Офис продаж DND Cyprus",
       mapEmbedUrl:
         "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
+      mapImage: "/maps/ofis-iskele.webp",
     },
   ],
   socials = [
@@ -124,6 +127,11 @@ export default function ContactInfo({
                     {mapSrc && (
                       <div className="relative h-48 overflow-hidden rounded-[22px]" style={{ background: "var(--sky-2)" }}>
                         <DeferredIframe
+                          activation="click"
+                          poster={o.mapImage}
+                          posterSizes="(max-width: 639px) calc(100vw - 56px), (max-width: 899px) calc(50vw - 40px), 360px"
+                          posterQuality={75}
+                          posterCredit={<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap</a>}
                           src={mapSrc}
                           buttonLabel="Показать карту"
                           title={`${o.label}: карта`}
