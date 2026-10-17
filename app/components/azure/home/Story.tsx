@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
+import Image from "next/image";
 
 /**
  * Scrollytelling: sol sütunda adımlar kayar, sağda yapışkan görsel değişir.
@@ -84,9 +85,10 @@ export default function Story({ locale }: { locale: Locale }) {
           <div className="stick" ref={stickRef}>
             {t.steps.map((s, k) => (
               // bölüm sayfanın aşağısında: ilk görsel de tembel yüklenir (eager iken ana sayfa açılışında LCP afişiyle
-              // aynı anda 280 KB iniyordu); tarayıcı bölüme ~1250 px kala yükler
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={s.img} className={k === i ? "on" : undefined} src={s.img} alt={k === i ? s.h : ""} loading="lazy" decoding="async" />
+              // aynı anda 280 KB iniyordu); tarayıcı bölüme ~1250 px kala yükler. WebP; kutu masaüstünde dikey
+              // (≤ 740×851) olduğu için yatay fotoğraf ~1530 px genişlikte çiziliyor, telefonda ~390 px
+              <Image key={s.img} className={k === i ? "on" : undefined} src={s.img} alt={k === i ? s.h : ""} fill quality={75}
+                sizes="(min-width: 900px) 1530px, 100vw" />
             ))}
             <div className="cap"><b>{t.steps[i].h}</b><div className="az-dots">{t.steps.map((s, k) => <i key={s.h} className={k === i ? "on" : undefined} />)}</div></div>
           </div>

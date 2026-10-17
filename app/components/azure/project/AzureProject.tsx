@@ -1,4 +1,4 @@
-import { DeferredCatalog } from "@/app/components/performance/DeferredMedia";
+import { DeferredCatalog } from "@/app/components/performance/DeferredCatalog";
 import ProjectHero from "@/app/components/azure/ProjectHero";
 import ProjectCTA from "@/app/components/azure/ProjectCTA";
 import { PROJECT_PAGES, type ProjectPage } from "@/lib/azure/projects";
