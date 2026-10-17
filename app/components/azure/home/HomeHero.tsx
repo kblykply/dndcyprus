@@ -1,16 +1,29 @@
+import { getImageProps } from "next/image";
 import Link from "next/link";
 import { preload } from "react-dom";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 
+// Dik telefon ekranı: çerçeve fotoğrafın yalnız ortasını gösteriyor (cover, en fazla ~0,78 en/boy); oraya aynı
+// bölgenin kesilmiş kopyası iner (lv-5-dik.jpg: lv-5.jpg'nin ortasından 840×1005, aynı ölçek, aynı pikseller)
+const DIK = "(max-aspect-ratio: 2/3)";
+
 export default function HomeHero({ locale }: { locale: Locale }) {
   const t = HOME[locale].hero;
-  // LCP öğesi video afişi: tarayıcı onu videodan (6 MB) önce ve yüksek öncelikle alsın
-  preload("/azure/lv-5.jpg", { as: "image", fetchPriority: "high" });
+  // Afiş videonun altında duran duyarlı görsel (LCP öğesi): `poster` özelliği her ekrana 1800 px JPEG indiriyordu.
+  // Video ilk karesi gelene kadar saydam kalır, sonra görselin üstünü örter.
+  const dik = getImageProps({ src: "/azure/lv-5-dik.jpg", alt: "", width: 840, height: 1005, quality: 75, sizes: "68vh" }).props;
+  const { srcSet, sizes, ...img } = getImageProps({ src: "/azure/lv-5.jpg", alt: "", fill: true, quality: 75, sizes: "100vw", loading: "eager", fetchPriority: "high" }).props;
+  preload(dik.src, { as: "image", imageSrcSet: dik.srcSet, imageSizes: dik.sizes, fetchPriority: "high", media: DIK });
+  preload(img.src, { as: "image", imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: "high", media: `not all and ${DIK}` });
   return (
     <section className="az-hero full" id="top">
       <div className="frame">
-        <video className="bg" autoPlay muted loop playsInline preload="auto" poster="/azure/lv-5.jpg" aria-label="DND Cyprus">
+        <picture>
+          <source media={DIK} srcSet={dik.srcSet} sizes={dik.sizes} />
+          <img {...img} alt="" srcSet={srcSet} sizes={sizes} className="bg" />
+        </picture>
+        <video className="bg" autoPlay muted loop playsInline preload="auto" aria-label="DND Cyprus">
           <source src="/videos/hero-montaj.mp4" type="video/mp4" />
         </video>
         <div className="top">

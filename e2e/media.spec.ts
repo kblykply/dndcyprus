@@ -5,14 +5,19 @@ test.beforeEach(async ({ page }) => {
   await prepare(page);
 });
 
-test("ana sayfa hero videosu: sessiz, satır içi, otomatik, posterli, H.264 kaynak", async ({ page }) => {
+test("ana sayfa hero videosu: sessiz, satır içi, otomatik, altında duyarlı afiş, H.264 kaynak", async ({ page }) => {
   await page.goto("/tr");
   const v = page.locator("section.az-hero video.bg");
   await expect(v).toHaveJSProperty("muted", true);
   await expect(v).toHaveAttribute("playsinline", "");
   await expect(v).toHaveAttribute("autoplay", "");
-  await expect(v).toHaveAttribute("poster", /\.(jpe?g|webp|avif)$/);
   await expect(v.locator("source")).toHaveAttribute("type", "video/mp4");
+  // afiş `poster` değil, videonun altındaki next/image <picture>: öncelikli iner; dik telefon ekranında yalnız
+  // görünen orta bölge (lv-5-dik.jpg)
+  const poster = page.locator("section.az-hero picture img.bg");
+  await expect(poster).toHaveAttribute("fetchpriority", "high");
+  await expect(poster).toHaveAttribute("srcset", /_next\/image\?url=%2Fazure%2Flv-5\.jpg/);
+  await expect(page.locator("section.az-hero picture source")).toHaveAttribute("srcset", /_next\/image\?url=%2Fazure%2Flv-5-dik\.jpg/);
 });
 
 test("video dosyaları parça parça (Range) sunulur", async ({ request }, info) => {
