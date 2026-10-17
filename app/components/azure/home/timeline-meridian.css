@@ -86,6 +86,8 @@
   .az-meridian .stop figure { aspect-ratio: auto; height: 100%; min-height: 104px; border-radius: 22px 0 0 22px; }
   .az-meridian .stop > div { padding: 12px 14px 14px; }
   .az-meridian .stop b { font-size: 24px; }
+  /* numara fotoğrafın sağ alt köşesinde: sol üstte yüzlerin üstüne biniyordu */
+  .az-meridian .stop figure i { top: auto; left: auto; right: 8px; bottom: 8px; width: 24px; height: 24px; font-size: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

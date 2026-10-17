@@ -118,19 +118,20 @@ export default function InstagramSpotlight() {
     </li>
   </ul>
 
-  <div className="mt-8 flex flex-wrap gap-3 lg:mt-0">
+  {/* telefonda da iki düğme yan yana, eşit genişlikte (alt alta düşüyordu) */}
+              <div className="mt-8 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:gap-3 lg:mt-0">
     <a
       href="https://www.instagram.com/dndcyprus/"
       target="_blank"
       rel="noopener noreferrer"
-      className="px-6 py-2.5 rounded-full text-sm font-medium transition-transform hover:-translate-y-0.5"
+      className="flex items-center justify-center text-center px-3 py-2.5 rounded-full text-[13px] leading-tight font-medium transition-transform hover:-translate-y-0.5 sm:px-6 sm:text-sm"
       style={{ background: TEAL, color: "#fff", boxShadow: `0 10px 22px ${TEAL}33` }}
     >
       Подписаться в Instagram
     </a>
     <a
       href="/ru/contact"
-      className="px-6 py-2.5 rounded-full text-sm font-medium"
+      className="flex items-center justify-center text-center px-3 py-2.5 rounded-full text-[13px] leading-tight font-medium sm:px-6 sm:text-sm"
       style={{
         background: `${ORANGE}0`,
         color: ORANGE,
