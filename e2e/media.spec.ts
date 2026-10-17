@@ -29,6 +29,23 @@ test("video dosyaları parça parça (Range) sunulur", async ({ request }, info)
   }
 });
 
+test("proje arka plan videosu sitede barındırılıyor: YouTube'a gitmeden sessiz oynar", async ({ page }) => {
+  const youtube: string[] = [];
+  page.on("request", (r) => { if (/youtube|ytimg|googlevideo/.test(r.url())) youtube.push(r.url()); });
+  await page.goto("/tr/lagoon-verde");
+  const box = page.locator("#genel-bakis .overflow-hidden.bg-black");
+  await box.scrollIntoViewIfNeeded();
+  const v = box.locator('video[src="/videos/lagoon-verde-tanitim.mp4"]');
+  await expect(v).toHaveJSProperty("muted", true);
+  await expect(v).toHaveJSProperty("loop", true);
+  await expect(box.locator("iframe")).toHaveCount(0);
+  // oynatma: H.264 çözebilen tarayıcıda (Playwright'ın Chromium'u çözemiyor; WebKit ve gerçek Chrome çözüyor)
+  if (await v.evaluate((el: HTMLVideoElement) => el.canPlayType('video/mp4; codecs="avc1.64001F"') !== "")) {
+    await expect.poll(() => v.evaluate((el: HTMLVideoElement) => el.currentTime), { timeout: 15_000 }).toBeGreaterThan(0.2);
+  }
+  expect(youtube, youtube.join("\n")).toEqual([]);
+});
+
 test("360° tur düğmeyle açılır, aynı kökenden yüklenir", async ({ page }) => {
   await page.goto("/tr/lagoon-verde");
   const start = page.getByRole("button", { name: "360 Turu Başlat" });

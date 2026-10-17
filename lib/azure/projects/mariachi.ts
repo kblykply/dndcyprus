@@ -10,7 +10,7 @@ export const MARIACHI_MEDIA = {
   zoom: 1.6,   // orijinal videonun yan bantlarını kırpmak için
   // Video 4:3 (960×720); proje sayfası bandı bu oranla kaplanır, büyütme yok. Kapak: YouTube'un 1280×720 karesi
   ratio: 4 / 3,
-  poster: "https://i.ytimg.com/vi/AobeR8p2Aq4/maxresdefault.jpg",
+  poster: "/videos/mariachi-tanitim.jpg",
 };
 
 export type MariachiPerk = { title: string; desc: string; icon: "Waves" | "BadgePercent" };

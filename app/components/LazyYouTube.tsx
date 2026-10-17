@@ -2,12 +2,15 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { LOCAL_VIDEO } from "@/lib/azure/local-videos";
 
 /*
   Tembel YouTube gömme:
   - Önce kapak görseli (i.ytimg.com küçük resmi ya da verilen poster) gösterilir.
   - Öğe görünüm alanına ~200px yaklaşınca gerçek iframe takılır.
   - prefers-reduced-motion açıksa otomatik takılmaz; oynat düğmesi gösterilir.
+  - Sessiz, kontrolsüz (arka plan) video sitede barındırılıyorsa (LOCAL_VIDEO) iframe yerine <video> oynar;
+    ekrandan çıkınca durur, girince devam eder.
 */
 
 type Props = {
@@ -57,6 +60,8 @@ export default function LazyYouTube({
   // Arka plan videosu (kaplama + kontroller kapalı): YouTube'un açılışta ve fare üstündeyken gösterdiği başlık,
   // düğmeler ve "Diğer videolar" bandı görünmesin diye ilk saniyelerde kapak üstte kalır, üstte şeffaf engel var.
   const background = cover && /(^|&)controls=0(&|$)/.test(query);
+  const local = /(^|&)controls=0(&|$)/.test(query) && /(^|&)mute=1(&|$)/.test(query) ? LOCAL_VIDEO[videoId] : undefined;
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
@@ -92,7 +97,19 @@ export default function LazyYouTube({
   }, [mounted, rootMargin, background]);
 
   const src = `https://www.youtube-nocookie.com/embed/${videoId}${query ? `?${query}` : ""}`;
-  const posterSrc = poster ?? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  const posterSrc = poster ?? local?.poster ?? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+
+  // yerel video: React `muted`ı öznitelik olarak yazmıyor, otomatik oynatma için özellik ayarlanır;
+  // ekran dışındayken durur (veri ve pil), görününce oynar
+  useEffect(() => {
+    const v = videoRef.current, el = wrapRef.current;
+    if (!local || !mounted || !v || !el) return;
+    v.muted = true;
+    if (typeof IntersectionObserver === "undefined") { v.play().catch(() => {}); return; }
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) v.play().catch(() => {}); else v.pause(); });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [local, mounted]);
   const scaleStyle: React.CSSProperties | undefined = cover
     ? {
         // kapsayıcı sorgu birimleriyle "object-fit: cover": 16:9 video her oranda kutuyu doldurur
@@ -118,7 +135,20 @@ export default function LazyYouTube({
           className="absolute inset-0 h-full w-full object-cover"
         />
 
-        {mounted && (
+        {mounted && local && (
+          <video
+            ref={videoRef}
+            src={local.src}
+            className="absolute inset-0 h-full w-full object-cover"
+            muted
+            autoPlay
+            loop
+            playsInline
+            preload="auto"
+            aria-label={title}
+          />
+        )}
+        {mounted && !local && (
           <iframe
             title={title}
             src={src}
@@ -129,7 +159,7 @@ export default function LazyYouTube({
             onLoad={background ? () => window.setTimeout(() => setShown(true), 3800) : undefined}
           />
         )}
-        {background && mounted && (
+        {background && mounted && !local && (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
