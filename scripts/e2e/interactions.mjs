@@ -75,8 +75,9 @@ await test("Video bölümü: oklar, çizgiler ve ses düğmesi çalışır, 10 s
 });
 
 await test("Projeler karuseli sağ okla kayar", async () => {
-  const r = await ev(`const s=document.querySelector("#projeler"); s.scrollIntoView({block:"center"}); await wait(300); const car=s.querySelector(".az-car"); const a=car.scrollLeft; s.querySelector(".az-ctrl button:last-child").click(); await wait(900); return {a, b:car.scrollLeft}`);
-  return { ok: r.b > r.a, detail: r };
+  const r = await ev(`const s=document.querySelector("#projeler"); s.scrollIntoView({block:"center"}); await wait(300); const card=s.querySelector(".az-car").firstElementChild; const a=Math.round(card.getBoundingClientRect().left); s.querySelector("button.arw.next").click(); await wait(1200); return {a, b:-Math.round(card.getBoundingClientRect().left)}`);
+  // sabitlemede (masaüstü) düğme sayfayı kaydırır, telefonda şeridi: iki durumda da ilk kart sola gider
+  return { ok: -r.b < r.a, detail: r };
 });
 
 await test("Logo şeridi kayıyor ve kartlar dik", async () => {
@@ -119,7 +120,7 @@ await test("Galeri: panele tıklayınca genişler, tekrar tıklayınca eski hâl
 });
 
 await test("Kat planı: tip değişince başlık değişir, Plan / İç mekân ve büyütme çalışır", async () => {
-  const r = await ev(`const u=document.querySelector(".mr-units"); u.scrollIntoView({block:"center"}); await wait(300); const h=()=>u.querySelector(".tbl h3")?.textContent; const a=h(); u.querySelectorAll(".list button")[1].click(); await wait(400); const b=h(); const sw=u.querySelectorAll(".fig .sw button"); let interior=null; if(sw.length>1){ sw[1].click(); await wait(500); interior=sw[1].getAttribute("aria-selected"); sw[0].click(); await wait(300);} u.querySelector(".zoom").click(); await wait(500); const lb=vis(document.querySelector(".az-lb")); return {a,b,interior,lb}`);
+  const r = await ev(`const u=document.querySelector(".mr-units"); u.scrollIntoView({block:"center"}); await wait(300); const h=()=>u.querySelector(".tbl .pane.on h3")?.textContent; /* bütün tipler üst üste, görünen .on */ const a=h(); u.querySelectorAll(".list button")[1].click(); await wait(400); const b=h(); const sw=u.querySelectorAll(".fig .sw button"); let interior=null; if(sw.length>1){ sw[1].click(); await wait(500); interior=sw[1].getAttribute("aria-selected"); sw[0].click(); await wait(300);} u.querySelector(".zoom").click(); await wait(500); const lb=vis(document.querySelector(".az-lb")); return {a,b,interior,lb}`);
   await key("Escape"); await b.sleep(400);
   const closed = await ev(`return !vis(document.querySelector(".az-lb"))`);
   return { ok: r.a !== r.b && r.lb && closed, detail: { ...r, closed } };

@@ -91,5 +91,65 @@ export default function AzureFx() {
     };
   }, [pathname]);
 
+  // #bölüm bağlantıları: sayfa "#fiyat-al" gibi bir adresle açılınca ya da sayfa içi bağlantıya tıklanınca, sonradan
+  // yüklenen bölümler (katalog, fareli ekranda sabitlenen proje şeridi, teknik kartlar) hedefi 400–1400 px aşağı
+  // itiyordu; form ekranın altında kalıyordu (17 Ekim QA). Düzen oturana kadar hedef yeniden hizalanır;
+  // kullanıcı kendisi kaydırır ya da dokunursa bırakılır.
+  useEffect(() => {
+    let cleanup = () => {};
+    const follow = (hash: string, instant: boolean) => {
+      cleanup();
+      let id = "";
+      try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
+      if (!id || !document.getElementById(id)) return;
+      let done = false, raf = 0, idle = 0, lastY = -1;
+      const pos = (el: HTMLElement) => el.getBoundingClientRect().top + window.scrollY; // belgedeki mutlak konum
+      const align = (smooth: boolean) => {
+        const el = document.getElementById(id);
+        if (done || !el) return;
+        const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+        if (Math.abs(el.getBoundingClientRect().top - margin) > 2) el.scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "instant" });
+      };
+      // body kutusu büyümeyebiliyor (ResizeObserver tetiklenmiyordu): hedefin mutlak konumu her karede izlenir,
+      // yukarıdaki bir bölüm uzayıp hedef yer değiştirince yeniden hizalanır; kaydırma durunca son düzeltme yapılır
+      let last = pos(document.getElementById(id)!);
+      const loop = () => {
+        raf = 0;
+        const el = document.getElementById(id);
+        if (done || !el) return;
+        const p = pos(el);
+        if (Math.abs(p - last) > 1) { last = p; align(!instant); }
+        if (window.scrollY === lastY) { if (++idle === 8) align(false); } else { idle = 0; lastY = window.scrollY; }
+        raf = requestAnimationFrame(loop);
+      };
+      const stop = () => cleanup();
+      const user = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
+      const timer = window.setTimeout(stop, 8000);
+      cleanup = () => {
+        if (done) return;
+        done = true; cancelAnimationFrame(raf); window.clearTimeout(timer);
+        user.forEach((ev) => removeEventListener(ev, stop));
+      };
+      user.forEach((ev) => addEventListener(ev, stop, { passive: true }));
+      if (instant) align(false);
+      raf = requestAnimationFrame(loop);
+    };
+    if (location.hash) follow(location.hash, true);
+    // sayfa içi #bağlantı (aynı adrese tekrar tıklanınca hashchange gelmediği için tıklamadan)
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as Element | null)?.closest?.("a[href*='#']") as HTMLAnchorElement | null;
+      if (!a || a.target === "_blank" || a.pathname !== location.pathname || !a.hash) return;
+      const hash = a.hash;
+      // tıklamanın kendi pointerdown'ı bitti; tarayıcı kaydırmayı başlattıktan sonra izlemeye başla
+      window.setTimeout(() => follow(hash, false), 0);
+    };
+    document.addEventListener("click", onClick);
+    // tıklama dışı adres değişimi (ör. 360° tur içinden "Fiyat Al")
+    const onHash = () => follow(location.hash, false);
+    addEventListener("hashchange", onHash);
+    return () => { cleanup(); document.removeEventListener("click", onClick); removeEventListener("hashchange", onHash); };
+  }, [pathname]);
+
   return <div className="az-mesh" aria-hidden="true"><i /><i /><i /></div>;
 }

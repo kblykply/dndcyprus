@@ -76,6 +76,8 @@ export default function PaymentModelPopup() {
   };
 
   if (!open) return null;
+  // "Hareketi azalt" açıksa video kendiliğinden oynamaz; afiş görünür, oynatma denetimleri kullanıcıda
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   return (
     <div
@@ -111,11 +113,12 @@ export default function PaymentModelPopup() {
             ref={videoRef}
             src="/videos/tl-odeme-modeli.mp4"
             poster="/videos/tl-odeme-modeli.jpg"
-            autoPlay
+            autoPlay={!reduce}
+            controls={reduce || undefined}
             muted
             loop
             playsInline
-            preload="auto"
+            preload={reduce ? "metadata" : "auto"}
             className="relative aspect-[9/16] h-[32svh] w-auto object-cover min-[400px]:h-[38svh] sm:h-[44svh] md:h-[min(560px,calc(100svh-2rem))]"
           />
           <button
