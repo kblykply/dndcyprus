@@ -37,7 +37,7 @@ export default function BlogIndex() {
 
   return (
     <main className="min-h-svh">
-      <PageHero size="short" kicker="DND Cyprus" title={<>Yazılar</>} lead="Röportajlar, ödüller ve etkinliklerden notlar." image="/azure/p1-3.jpg" />
+      <PageHero size="short" title={<>Yazılar</>} lead="Röportajlar, ödüller ve etkinliklerden notlar." image="/azure/p1-3.jpg" />
       {/* hero */}
    
 

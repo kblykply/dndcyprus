@@ -15,7 +15,7 @@ export const metadata = pageMetadata({
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <PageHero size="short" kicker="DND Cyprus" title={<>Ekibimiz</>} lead="Her projemizin yükselişinde, ekibimizin profesyonelliği en sağlam yapı taşıdır." image="/property_awards_2025-747.jpg" imagePosition="50% 16%" />
+      <PageHero size="short" title={<>Ekibimiz</>} lead="Her projemizin yükselişinde, ekibimizin profesyonelliği en sağlam yapı taşıdır." image="/property_awards_2025-747.jpg" imagePosition="50% 16%" />
       <LeadershipTeam showHeader={false} />
    
     

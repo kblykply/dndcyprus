@@ -22,7 +22,7 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
       
-<PageHero size="compact" kicker="DND Cyprus" title={<>Geçitkale</>} lead="Ein Grundstück in aufstrebender Lage mit Entwicklungspotenzial für Villen, Doppelhäuser und Apartmenthäuser." image="/gecitkaleimage.jpg" imageAlt="Geçitkale" tags={["Grundstück zu verkaufen", "Geçitkale, İskele", "Baurecht: Fasıl 96"]} chips={[{ big: "~5 Geschosse", label: "Entwicklungspotenzial" }]} ctas={[{ label: "Kontakt aufnehmen", href: "/de/contact" }]} />
+<PageHero size="compact" title={<>Geçitkale</>} lead="Ein Grundstück in aufstrebender Lage mit Entwicklungspotenzial für Villen, Doppelhäuser und Apartmenthäuser." image="/gecitkaleimage.jpg" imageAlt="Geçitkale" tags={["Grundstück zu verkaufen", "Geçitkale, İskele", "Baurecht: Fasıl 96"]} chips={[{ big: "~5 Geschosse", label: "Entwicklungspotenzial" }]} ctas={[{ label: "Kontakt aufnehmen", href: "/de/contact" }]} />
 <GecitkaleOverview />
 
 <LandKeyFacts />
