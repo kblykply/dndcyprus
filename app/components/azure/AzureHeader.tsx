@@ -49,6 +49,17 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
   }, []);
 
   useEffect(() => { setOpen(false); setDrop(false); setLangOpen(false); }, [pathname]);
+  // açık panelin dışına (menü çubuğu hariç) dokununca kapanır
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => {
+      const tgt = e.target as Node;
+      if (menuRef.current?.contains(tgt) || document.getElementById("az-nav")?.contains(tgt)) return;
+      setOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+  }, [open, menuRef]);
   useEffect(() => {
     document.body.classList.toggle("az-lock", open);
     return () => document.body.classList.remove("az-lock");
@@ -128,8 +139,11 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
               ))}
             </ul>
           </nav>
-          <button className="burger" type="button" aria-label={t.menu} aria-expanded={open} onClick={() => setOpen(true)}>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden><path d="M2 5h14M2 13h14" stroke="currentColor" strokeWidth="1.6" /></svg>
+          {/* menü, düğmenin altında açılan panel; düğme açıkken çarpıya döner (panelin kendi kapatma düğmesi menünün altında kalıyordu) */}
+          <button className="burger" type="button" aria-label={open ? t.close : t.menu} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+            {open
+              ? <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.6" /></svg>
+              : <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden><path d="M2 5h14M2 13h14" stroke="currentColor" strokeWidth="1.6" /></svg>}
           </button>
         </div>
       </header>
