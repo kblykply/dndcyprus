@@ -1,4 +1,4 @@
-import { expect, type Page, type TestInfo } from "@playwright/test";
+import { expect, type Locator, type Page, type TestInfo } from "@playwright/test";
 
 export const LOCALES = ["tr", "en", "de", "ru", "pl"] as const;
 export const PAGES = [
@@ -51,6 +51,21 @@ export function collectErrors(page: Page) {
 export async function noHorizontalOverflow(page: Page) {
   const over = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   expect(over, "sayfa yatayda taşmamalı").toBeLessThanOrEqual(1);
+}
+
+/**
+ * Öğeyi görünür alana getirip kaydırmanın bitmesini bekler. Fareli ekranda kaydırma sırasında hover kilidi
+ * (html.is-scrolling, body pointer-events:none) açıktır; gerçek kullanıcı kaydırma bitince tıklar.
+ */
+export async function settle(locator: Locator) {
+  // açık klavye / odaktaki alan (mobil WebKit) ilk dokunuşu yutabiliyor: kullanıcı da önce klavyeyi kapatır
+  await locator.page().evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+  await locator.scrollIntoViewIfNeeded();
+  await expect(locator).toBeInViewport();
+  await locator.page().waitForFunction(() => !document.documentElement.classList.contains("is-scrolling"));
+  // görünme animasyonu sürerken öğe yer değiştirir; sonsuz döngülü animasyonlar hariç hepsi bitsin
+  await locator.page().waitForFunction(() =>
+    document.getAnimations().filter((a) => a.effect?.getTiming().iterations !== Infinity).every((a) => a.playState !== "running"));
 }
 
 export const isMobile = (info: TestInfo) => /mobile/.test(info.project.name);

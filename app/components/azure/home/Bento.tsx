@@ -1,6 +1,7 @@
 "use client";
 
 import Arrow from "../Arrow";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { HOME } from "@/lib/azure/home";
@@ -31,8 +32,8 @@ export default function Bento({ locale }: { locale: Locale }) {
             TL modeli kampanya olarak burada, Lagoon Verde sayfasına bağlanır. */}
         <div className="az-grid">
           <Link className="az-tile img t-mariachi rv" href={href(locale, "/mariachi")} prefetch={false}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="bg" src="/azure/mb-6.jpg" alt="Mariachi Beach Club" loading="lazy" />
+            {/* ekran boyuna göre AVIF/WebP (telefonda 1800 px JPEG yerine): açılışta LCP afişiyle yarışan bayt azalır */}
+            <Image className="bg" src="/azure/mb-6.jpg" alt="Mariachi Beach Club" fill quality={75} sizes="(min-width: 1100px) 760px, (min-width: 700px) 60vw, 100vw" />
             <span className="pill gold">{t.mariachi.pill}</span><TileArrow />
             <div className="k">{t.mariachi.k}</div><h3>{t.mariachi.h}</h3><p>{t.mariachi.p}</p>
           </Link>
@@ -73,8 +74,7 @@ export default function Bento({ locale }: { locale: Locale }) {
           </div>
 
           <Link className="az-tile img t-lajoya rv d3" href={href(locale, "/la-joya")} prefetch={false}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="bg" src="/azure/lj-2.jpg" alt="La Joya" loading="lazy" />
+            <Image className="bg" src="/azure/lj-2.jpg" alt="La Joya" fill quality={75} sizes="(min-width: 1100px) 760px, (min-width: 700px) 60vw, 100vw" />
             <span className="pill">{t.lajoya.pill}</span>
             <div className="k">{t.lajoya.k}</div><h3>{t.lajoya.h}</h3><p>{t.lajoya.p}</p>
           </Link>

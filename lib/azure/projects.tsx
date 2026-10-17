@@ -21,7 +21,7 @@ export type ProjectPage = {
 
 export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
   "lagoon-verde": {
-    slug: "lagoon-verde", name: "Lagoon Verde", logo: "/logos/lagoon.png", image: "/azure/lv-5.jpg", ctaImage: "/azure/lv-7.jpg",
+    slug: "lagoon-verde", name: "Lagoon Verde", logo: "/logos/web/lagoon.webp", image: "/azure/lv-5.jpg", ctaImage: "/azure/lv-7.jpg",
     brochure: { tr: "/lagoonbrotr.pdf", en: "#catalog", de: "#catalog", ru: "#catalog", pl: "#catalog" },
     tagline: { tr: "Bahçeler, İskele'de modern yaşam ve yatırım fırsatı.", en: "Modern living and investment opportunity in Bahçeler, İskele.", de: "Modernes Wohnen und attraktive Investitionschance in Bahçeler, İskele.", ru: "Современная жизнь и выгодные инвестиции в Bahçeler, Искеле.", pl: "Nowoczesne życie i okazja inwestycyjna w Bahçeler, İskele." },
     location: { tr: "Bahçeler, İskele", en: "Bahçeler, İskele", de: "Bahçeler, İskele", ru: "Bahçeler, Искеле", pl: "Bahçeler, İskele" },
@@ -34,7 +34,7 @@ export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
     unitTypes: { tr: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], en: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], de: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], ru: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"], pl: ["1+0 Studio Residence", "1+1 Loft Residence", "2+1 Roof Residence", "2+1 Garden Residence"] },
   },
   "perla-ii": {
-    slug: "perla-ii", name: "La Joya Perla II", logo: "/logos/perlaii.png", image: "/perla-ii/3.jpg", ctaImage: "/azure/p2-9.jpg",
+    slug: "perla-ii", name: "La Joya Perla II", logo: "/logos/web/perlaii.webp", image: "/perla-ii/3.jpg", ctaImage: "/azure/p2-9.jpg",
     tagline: { tr: "Bahçeler, İskele'de modern yaşam ve yatırım fırsatı.", en: "Modern living and investment opportunity in Bahçeler, İskele.", de: "Modernes Wohnen und attraktive Investitionschance in Bahçeler, İskele.", ru: "Современная жизнь и выгодные инвестиции в Bahçeler, Искеле.", pl: "Nowoczesne życie i okazja inwestycyjna w Bahçeler, İskele." },
     location: { tr: "Bahçeler, İskele", en: "Bahçeler, İskele", de: "Bahçeler, İskele", ru: "Bahçeler, Искеле", pl: "Bahçeler, İskele" },
     status: { tr: "Devam Eden", en: "Ongoing", de: "Im Bau", ru: "Строится", pl: "W budowie" },
@@ -45,7 +45,7 @@ export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
     unitTypes: { tr: ["1+0 Stüdyo", "1+1 Loft", "2+1 Çatı Teraslı", "2+1 Bahçeli"], en: ["1+0 Studio", "1+1 Loft", "2+1 Roof Terrace", "2+1 Garden"], de: ["1+0 Studio", "1+1 Loft", "2+1 mit Dachterrasse", "2+1 mit Garten"], ru: ["Студия 1+0", "1+1 Loft", "2+1 с террасой на крыше", "2+1 с садом"], pl: ["1+0 Studio", "1+1 Loft", "2+1 z tarasem na dachu", "2+1 z ogrodem"] },
   },
   perla: {
-    slug: "perla", name: "La Joya Perla", logo: "/logos/perla.png", image: "/azure/p1-7.jpg", ctaImage: "/azure/p1-4.jpg",
+    slug: "perla", name: "La Joya Perla", logo: "/logos/web/perla.webp", image: "/azure/p1-7.jpg", ctaImage: "/azure/p1-4.jpg",
     tagline: { tr: "Bahçeler, İskele'de denize 700 m, yıl boyu lüks ve konfor.", en: "700 m from the sea in Bahçeler, İskele — year-round luxury and comfort.", de: "700 m vom Meer in Bahçeler, İskele – Luxus und Komfort das ganze Jahr über.", ru: "700 m от моря в Bahçeler, Искеле — роскошь и комфорт круглый год.", pl: "700 m od morza w Bahçeler, İskele – luksus i komfort przez cały rok." },
     location: { tr: "Bahçeler, İskele", en: "Bahçeler, İskele", de: "Bahçeler, İskele", ru: "Bahçeler, Искеле", pl: "Bahçeler, İskele" },
     status: { tr: "Devam Eden", en: "Ongoing", de: "Im Bau", ru: "Строится", pl: "W budowie" },
@@ -56,7 +56,7 @@ export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
     unitTypes: { tr: ["1+0 Stüdyo", "1+1", "2+1"], en: ["1+0 Studio", "1+1", "2+1"], de: ["1+0 Studio", "1+1", "2+1"], ru: ["Студия 1+0", "1+1", "2+1"], pl: ["1+0 Studio", "1+1", "2+1"] },
   },
   "la-joya": {
-    slug: "la-joya", name: "La Joya", logo: "/logos/lajoya.png", image: "/azure/lj-2.jpg", ctaImage: "/azure/lj-5.jpg",
+    slug: "la-joya", name: "La Joya", logo: "/logos/web/lajoya.webp", image: "/azure/lj-2.jpg", ctaImage: "/azure/lj-5.jpg",
     tagline: { tr: "Long Beach, İskele'de denize 500 m mesafede, yatay mimarili modern yaşam.", en: "Modern, low-rise living just 500 m from the sea in Long Beach, İskele.", de: "Modernes Wohnen in flacher Bauweise, nur 500 m vom Meer in Long Beach, İskele.", ru: "Современный малоэтажный комплекс всего в 500 m от моря в Long Beach, Искеле.", pl: "Nowoczesne życie w niskiej zabudowie, zaledwie 500 m od morza w Long Beach, İskele." },
     location: { tr: "Long Beach, İskele", en: "Long Beach, İskele", de: "Long Beach, İskele", ru: "Long Beach, Искеле", pl: "Long Beach, İskele" },
     status: { tr: "Tamamlanan Proje", en: "Completed Project", de: "Fertiggestelltes Projekt", ru: "Завершённый проект", pl: "Ukończony projekt" },

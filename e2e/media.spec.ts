@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { isMobile, prepare } from "./helpers";
+import { isMobile, prepare, settle } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
   await prepare(page);
@@ -61,6 +61,7 @@ test("kat planında tip değiştirmek kartın yüksekliğini değiştirmez", asy
   test.skip(n < 2, "tek tip var");
   const h0 = (await units.boundingBox())!.height;
   for (let i = 1; i < n; i++) {
+    await settle(tabs.nth(i));
     await tabs.nth(i).click();
     await expect(tabs.nth(i)).toHaveAttribute("aria-selected", "true");
     const h = (await units.boundingBox())!.height;

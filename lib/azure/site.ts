@@ -75,7 +75,7 @@ export const PROJECTS: ProjectMeta[] = [
     blurb: { tr: "354 rezidans · Teslim Aralık 2028", en: "354 residences · Delivery December 2028", de: "354 Residenzen · Übergabe: Dezember 2028", ru: "354 резиденции · Сдача: декабрь 2028", pl: "354 apartamenty · Oddanie: grudzień 2028" },
     cover: "/azure/lv-7.jpg",
     thumb: "/azure/lv-5.jpg",
-    logo: "/logos/lagoon.png",
+    logo: "/logos/web/lagoon.webp",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
@@ -87,7 +87,7 @@ export const PROJECTS: ProjectMeta[] = [
     blurb: { tr: "Stüdyo, 1+1 loft, çatı teraslı veya bahçeli 2+1", en: "Studio, 1+1 loft, 2+1 with roof terrace or garden", de: "Studio, 1+1 Loft, 2+1 mit Dachterrasse oder Garten", ru: "Студия, лофт 1+1, 2+1 с террасой на крыше или садом", pl: "Studio, loft 1+1, 2+1 z tarasem na dachu lub ogrodem" },
     cover: "/azure/p2-9.jpg",
     thumb: "/azure/p2-2.jpg",
-    logo: "/logos/perlaii.png",
+    logo: "/logos/web/perlaii.webp",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
@@ -99,7 +99,7 @@ export const PROJECTS: ProjectMeta[] = [
     blurb: { tr: "Sand pool, kapalı havuz ve spa", en: "Sand pool, indoor pool and spa", de: "Sand pool, Hallenbad und Spa", ru: "Sand pool, крытый бассейн и спа", pl: "Sand pool, kryty basen i spa" },
     cover: "/azure/p1-9.jpg",
     thumb: "/azure/p1-7.jpg",
-    logo: "/logos/perla.png",
+    logo: "/logos/web/perla.webp",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
@@ -111,7 +111,7 @@ export const PROJECTS: ProjectMeta[] = [
     blurb: { tr: "Yatay mimari, 74 konut, loft ve penthouse", en: "Low-rise architecture, 74 homes, lofts and penthouses", de: "Flache Bauweise, 74 Wohnungen, Lofts und Penthouses", ru: "Малоэтажная архитектура, 74 квартиры, лофты и пентхаусы", pl: "Niska zabudowa, 74 mieszkania, lofty i penthouse’y" },
     cover: "/azure/lj-5.jpg",
     thumb: "/azure/lj-5.jpg",
-    logo: "/logos/lajoya.png",
+    logo: "/logos/web/lajoya.webp",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
@@ -124,7 +124,7 @@ export const PROJECTS: ProjectMeta[] = [
     blurb: { tr: "Plaj, 4 jakuzili havuz, pavilyonlar, DJ", en: "Beach, pool with 4 jacuzzis, pavilions, DJ", de: "Strand, Pool mit 4 Whirlpools, Pavillons, DJ", ru: "Пляж, бассейн с 4 джакузи, павильоны, DJ", pl: "Plaża, basen z 4 jacuzzi, pawilony, DJ" },
     cover: "/azure/mb-2.jpg",
     thumb: "/azure/mb-1.jpg",
-    logo: "/logos/mariachi.png",
+    logo: "/logos/web/mariachi.webp",
     cta: { tr: "Pavilyon rezervasyonu", en: "Book a pavilion", de: "Pavillon reservieren", ru: "Забронировать павильон", pl: "Zarezerwuj pawilon" },
   },
   {

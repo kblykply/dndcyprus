@@ -56,8 +56,9 @@ export default function AzureFx() {
     // app/azure.css); kaydırma bitince 160 ms sonra geri gelir. Dokunmatik ekranlarda hover yok, dokunulmaz.
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
     let scrollT = 0;
+    let pressed = false; // fare basılıyken kilit açılmaz: basış ile bırakma arasında açılırsa tıklama kaybolurdu
     const onScroll = () => {
-      if (!fine.matches) return;
+      if (!fine.matches || pressed) return;
       if (!scrollT) root.classList.add("is-scrolling");
       window.clearTimeout(scrollT);
       scrollT = window.setTimeout(() => { scrollT = 0; root.classList.remove("is-scrolling"); }, 160);
@@ -70,6 +71,30 @@ export default function AzureFx() {
       window.clearTimeout(scrollT); scrollT = 0; root.classList.remove("is-scrolling");
     };
     addEventListener("pointermove", onMove, { passive: true });
+    // Fare hiç kıpırdamadan (ör. trackpad ataletini parmakla durdurup) kilit açıkken basılırsa basış <html>'e
+    // düşer ve tıklama kaybolurdu: kilit basışta kalkar, bu tek tıklama imlecin altındaki öğeye iletilir.
+    let rescue: { x: number; y: number } | null = null;
+    const onDown = (e: PointerEvent) => {
+      rescue = null;
+      if (e.pointerType === "mouse") pressed = true;
+      if (!scrollT || e.pointerType !== "mouse") return;
+      window.clearTimeout(scrollT); scrollT = 0; root.classList.remove("is-scrolling");
+      if (e.target === root || e.target === document.body) rescue = { x: e.clientX, y: e.clientY };
+    };
+    const onClickRescue = (e: MouseEvent) => {
+      const at = rescue; rescue = null;
+      if (!at || (e.target !== root && e.target !== document.body)) return; // tarayıcı hedefi zaten bulduysa dokunma
+      const el = document.elementFromPoint(at.x, at.y) as HTMLElement | null;
+      if (!el || el === root || el === document.body) return;
+      e.stopImmediatePropagation();
+      if (el.matches("input, textarea, select")) el.focus();
+      el.click();
+    };
+    const onUp = () => { pressed = false; };
+    addEventListener("pointerdown", onDown, { capture: true, passive: true });
+    addEventListener("pointerup", onUp, { capture: true, passive: true });
+    addEventListener("pointercancel", onUp, { capture: true, passive: true });
+    addEventListener("click", onClickRescue, true);
 
     // Hero video: düşük güç modu vb. durumlarda ilk etkileşimde oynat; "hareketi azalt" açıksa durur (afiş görünür)
     const v = document.querySelector<HTMLVideoElement>(".az-hero video");
@@ -85,7 +110,10 @@ export default function AzureFx() {
 
     return () => {
       io.disconnect(); cio.disconnect(); mo.disconnect(); cancelAnimationFrame(moRaf);
-      removeEventListener("scroll", onScroll); removeEventListener("pointermove", onMove); window.clearTimeout(scrollT); root.classList.remove("is-scrolling");
+      removeEventListener("scroll", onScroll); removeEventListener("pointermove", onMove);
+      removeEventListener("pointerdown", onDown, true); removeEventListener("click", onClickRescue, true);
+      removeEventListener("pointerup", onUp, true); removeEventListener("pointercancel", onUp, true);
+      window.clearTimeout(scrollT); root.classList.remove("is-scrolling");
       v?.removeEventListener("playing", stopTry); stopTry();
       document.removeEventListener("visibilitychange", onVis);
     };
@@ -102,24 +130,37 @@ export default function AzureFx() {
       let id = "";
       try { id = decodeURIComponent(hash.slice(1)); } catch { return; }
       if (!id || !document.getElementById(id)) return;
-      let done = false, raf = 0, idle = 0, lastY = -1;
-      const pos = (el: HTMLElement) => el.getBoundingClientRect().top + window.scrollY; // belgedeki mutlak konum
+      let done = false, raf = 0;
+      // belgedeki düzen konumu: offsetTop zinciri (görünme animasyonundaki translateY'den etkilenmez)
+      const pos = (el: HTMLElement) => { let y = 0; for (let e: HTMLElement | null = el; e; e = e.offsetParent as HTMLElement | null) y += e.offsetTop; return y; };
+      // hedefe en iyi ulaşılabilecek kaydırma (sayfa sonundaki hedef ekranın tepesine gelemez)
+      const best = (el: HTMLElement) => Math.min(document.documentElement.scrollHeight - window.innerHeight,
+        Math.max(0, pos(el) - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)));
       const align = (smooth: boolean) => {
         const el = document.getElementById(id);
         if (done || !el) return;
-        const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
-        if (Math.abs(el.getBoundingClientRect().top - margin) > 2) el.scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "instant" });
+        const top = best(el);
+        if (Math.abs(window.scrollY - top) > 2) window.scrollTo({ top, behavior: smooth ? "smooth" : "instant" });
       };
-      // body kutusu büyümeyebiliyor (ResizeObserver tetiklenmiyordu): hedefin mutlak konumu her karede izlenir,
-      // yukarıdaki bir bölüm uzayıp hedef yer değiştirince yeniden hizalanır; kaydırma durunca son düzeltme yapılır
+      // body kutusu büyümeyebiliyor (ResizeObserver tetiklenmiyordu): hedefin konumu her karede izlenir, yukarıdaki
+      // bir bölüm uzayıp hedef yer değiştirince yeniden hizalanır. Kullanıcı tekerlek, dokunma, tuş ya da fare
+      // basışıyla (kaydırma çubuğu dahil) bir şey yaparsa izleme hemen bırakılır; en fazla 8 sn sürer.
       let last = pos(document.getElementById(id)!);
+      let lastY = window.scrollY, still = 0;
       const loop = () => {
         raf = 0;
         const el = document.getElementById(id);
         if (done || !el) return;
-        const p = pos(el);
+        const p = pos(el), y = window.scrollY;
+        still = Math.abs(y - lastY) > 1 ? 0 : still + 1;
+        lastY = y;
         if (Math.abs(p - last) > 1) { last = p; align(!instant); }
-        if (window.scrollY === lastY) { if (++idle === 8) align(false); } else { idle = 0; lastY = window.scrollY; }
+        else {
+          // kaydırma durdu ama hedef kaymış (tarayıcının kaydırma sabitlemesi bölüm içindeki bir öğeyi tutmuş olabilir):
+          // anında düzelt. Kullanıcı girdisi izlemeyi zaten bitirdiği için kullanıcıyı geri çekmez.
+          const d = Math.abs(y - best(el));
+          if (still === 6 && d > 2) align(false);
+        }
         raf = requestAnimationFrame(loop);
       };
       const stop = () => cleanup();

@@ -26,6 +26,21 @@ for (const url of ["/tr/lagoon-verde#fiyat-al", "/tr/perla#konum", "/tr#iletisim
   });
 }
 
+test("çapaya indikten sonra kullanıcı kaydırınca sayfa geri çekilmez", async ({ page }, info) => {
+  test.skip(/mobile/.test(info.project.name), "tekerlek fareli ekranda");
+  await page.goto("/tr/lagoon-verde#fiyat-al");
+  await page.waitForLoadState("load");
+  await expect.poll(() => offset(page, "fiyat-al"), { timeout: 15_000 }).toBeLessThanOrEqual(4);
+  const y0 = await page.evaluate(() => window.scrollY);
+  await page.mouse.move(200, 400);
+  await page.mouse.wheel(0, -3000);
+  // tekerlek adımı tarayıcıya göre değişir (Firefox daha az kaydırır): belirgin bir yukarı kayma yeterli
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(y0 - 200);
+  const y1 = await page.evaluate(() => window.scrollY);
+  await page.waitForTimeout(2000); // izleme süresi içinde geri çekme olmamalı (olmayan bir olayı doğruluyor)
+  expect(Math.abs((await page.evaluate(() => window.scrollY)) - y1)).toBeLessThan(50);
+});
+
 test("proje sayfasında Fiyat Al bağlantısı forma götürür", async ({ page }) => {
   await page.goto("/tr/lagoon-verde");
   await page.waitForLoadState("load");

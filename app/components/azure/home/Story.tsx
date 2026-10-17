@@ -83,8 +83,10 @@ export default function Story({ locale }: { locale: Locale }) {
           </div>
           <div className="stick" ref={stickRef}>
             {t.steps.map((s, k) => (
+              // bölüm sayfanın aşağısında: ilk görsel de tembel yüklenir (eager iken ana sayfa açılışında LCP afişiyle
+              // aynı anda 280 KB iniyordu); tarayıcı bölüme ~1250 px kala yükler
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={s.img} className={k === i ? "on" : undefined} src={s.img} alt={k === i ? s.h : ""} loading={k === 0 ? "eager" : "lazy"} />
+              <img key={s.img} className={k === i ? "on" : undefined} src={s.img} alt={k === i ? s.h : ""} loading="lazy" decoding="async" />
             ))}
             <div className="cap"><b>{t.steps[i].h}</b><div className="az-dots">{t.steps.map((s, k) => <i key={s.h} className={k === i ? "on" : undefined} />)}</div></div>
           </div>

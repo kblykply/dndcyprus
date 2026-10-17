@@ -3,7 +3,7 @@
 import type { Locale } from "@/lib/azure/site";
 
 export const MARIACHI_MEDIA = {
-  logo: "/logos/mariachi.png",
+  logo: "/logos/web/mariachi.webp",
   youtubeId: "AobeR8p2Aq4",
   embedQuery: "autoplay=1&mute=1&controls=0&rel=0&loop=1&playlist=AobeR8p2Aq4&playsinline=1&modestbranding=1",
   bg: "/mariachi/7.jpg",

@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { preload } from "react-dom";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 
 export default function HomeHero({ locale }: { locale: Locale }) {
   const t = HOME[locale].hero;
+  // LCP öğesi video afişi: tarayıcı onu videodan (6 MB) önce ve yüksek öncelikle alsın
+  preload("/azure/lv-5.jpg", { as: "image", fetchPriority: "high" });
   return (
     <section className="az-hero full" id="top">
       <div className="frame">

@@ -1,5 +1,5 @@
 import { expect, test, type Page, type Request } from "@playwright/test";
-import { prepare } from "./helpers";
+import { prepare, settle } from "./helpers";
 
 // SAHTE API: /api/contact isteği tarayıcıda yakalanır, sunucuya ve CRM'e hiçbir şey gitmez.
 // Bu testler formun istemci davranışını doğrular; gerçek kayıt entegrasyonunu doğrulamaz.
@@ -11,7 +11,11 @@ async function fillContact(page: Page, { consent = true } = {}) {
   await form.getByLabel("E-posta *").fill("test@example.com");
   await form.getByLabel("Konu *").fill("E2E test");
   await form.getByLabel(/Mesaj/).fill("Otomatik test mesajı, işlem yapmayın.");
-  if (consent) await form.locator('input[name="consent"]').check();
+  if (consent) {
+    const box = form.locator('input[name="consent"]');
+    await settle(box);
+    await box.check();
+  }
   return form;
 }
 
@@ -47,6 +51,7 @@ test.describe("iletişim formu (sahte API)", () => {
 
   test("onay kutusu tıklanabilir", async ({ page }) => {
     const box = page.locator('form.az-f input[name="consent"]').first();
+    await settle(box);
     await box.check();
     await expect(box).toBeChecked();
     await box.uncheck();
@@ -86,12 +91,15 @@ test("proje fiyat formu (sahte API) proje bilgisini gönderir", async ({ page })
   await prepare(page);
   const sent = trackContact(page);
   await page.route("**/api/contact", (route) => route.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' }));
-  await page.goto("/tr/lagoon-verde#fiyat-al");
+  // #adres olmadan açılır: çapa hizalaması ayrıca e2e/anchors.spec.ts içinde test ediliyor
+  await page.goto("/tr/lagoon-verde");
   const form = page.locator("#fiyat-al form.az-f");
   await form.getByLabel("Ad Soyad *").fill("Test Kullanıcı");
   await form.getByLabel("Telefon *").fill("5331234567");
   await form.getByLabel("E-posta *").fill("test@example.com");
-  await form.locator('input[name="consent"]').check();
+  const consent = form.locator('input[name="consent"]');
+  await settle(consent);
+  await consent.check();
   await form.getByRole("button", { name: "Fiyat ve kat planı iste" }).click();
   await expect(page.locator("#fiyat-al").getByRole("status")).toContainText("Teşekkürler!");
   expect(sent).toHaveLength(1);
