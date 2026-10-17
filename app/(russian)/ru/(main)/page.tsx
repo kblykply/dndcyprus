@@ -20,9 +20,9 @@ import ContactCard from "@/app/components/azure/ContactCard";
 export const metadata = pageMetadata({
   locale: "ru",
   path: "",
-  title: "Девелопер и квартиры на Северном Кипре | DND Cyprus",
+  title: "Дома по американским стандартам на Северном Кипре | DND Cyprus",
   description:
-    "Отмеченный наградами девелопер DND Cyprus строит дома у моря в Искеле: Lagoon Verde, La Joya Perla и Perla II с привилегиями Mariachi Beach Club. Смотрите проекты.",
+    "Опыт 120 проектов в Массачусетсе — теперь в Искеле: отмеченный наградами Lagoon Verde, резиденции La Joya Perla и привилегии Mariachi Beach Club.",
 });
 
 const PRESS_ITEMS: PressItem[] = [

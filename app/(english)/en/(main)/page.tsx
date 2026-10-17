@@ -20,9 +20,9 @@ import ContactCard from "@/app/components/azure/ContactCard";
 export const metadata = pageMetadata({
   locale: "en",
   path: "",
-  title: "North Cyprus Property Developer & Apartments | DND Cyprus",
+  title: "American-Standard Homes in North Cyprus | DND Cyprus",
   description:
-    "Award-winning developer DND Cyprus builds seaside homes in Iskele: Lagoon Verde, La Joya Perla and Perla II, with Mariachi Beach Club perks. See our projects.",
+    "120 completed projects in Massachusetts, now in İskele: the award-winning Lagoon Verde, La Joya Perla residences and the privileges of Mariachi Beach Club.",
 });
 
 const PRESS_ITEMS: PressItem[] = [

@@ -20,9 +20,9 @@ import ContactCard from "@/app/components/azure/ContactCard";
 export const metadata = pageMetadata({
   locale: "pl",
   path: "",
-  title: "Deweloper i apartamenty na Cyprze Północnym | DND Cyprus",
+  title: "Domy w standardzie USA na Cyprze Północnym | DND Cyprus",
   description:
-    "Nagradzany deweloper DND Cyprus buduje domy nad morzem w İskele: Lagoon Verde, La Joya Perla i Perla II z przywilejami Mariachi Beach Club. Zapraszamy do poznania naszych projektów.",
+    "Doświadczenie 120 projektów z Massachusetts, teraz w İskele: nagradzany Lagoon Verde, rezydencje La Joya Perla i przywileje Mariachi Beach Club.",
 });
 
 const PRESS_ITEMS: PressItem[] = [

@@ -20,9 +20,9 @@ import ContactCard from "@/app/components/azure/ContactCard";
 export const metadata = pageMetadata({
   locale: "de",
   path: "",
-  title: "Bauträger & Wohnungen in Nordzypern | DND Cyprus",
+  title: "Wohnen nach US-Standard in Nordzypern | DND Cyprus",
   description:
-    "Der preisgekrönte Bauträger DND Cyprus baut Wohnungen am Meer in İskele: Lagoon Verde, La Joya Perla und Perla II, mit Vorteilen im Mariachi Beach Club. Jetzt Projekte ansehen.",
+    "Die Erfahrung aus 120 Projekten in Massachusetts, jetzt in İskele: das preisgekrönte Lagoon Verde, die Residenzen La Joya Perla und der Mariachi Beach Club.",
 });
 
 const PRESS_ITEMS: PressItem[] = [

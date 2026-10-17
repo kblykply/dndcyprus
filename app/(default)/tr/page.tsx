@@ -21,9 +21,9 @@ import ContactCard from "@/app/components/azure/ContactCard";
 export const metadata = pageMetadata({
   locale: "tr",
   path: "",
-  title: "Kuzey Kıbrıs'ta Satılık Daireler ve Projeler | DND Cyprus",
+  title: "Kuzey Kıbrıs'ta Amerikan Standartlarında Konutlar | DND Cyprus",
   description:
-    "Ödüllü geliştirici DND Cyprus; İskele'de Lagoon Verde, La Joya Perla ve Perla II gibi denize yakın projeler ve Mariachi Beach Club ayrıcalığı sunar. Keşfedin.",
+    "Massachusetts'te 120 tamamlanmış projenin birikimi şimdi İskele'de: ödüllü Lagoon Verde, La Joya Perla rezidansları ve Mariachi Beach Club ayrıcalığı.",
 });
 
 const PRESS_ITEMS: PressItem[] = [
