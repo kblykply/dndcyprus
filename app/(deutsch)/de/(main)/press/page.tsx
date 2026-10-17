@@ -42,6 +42,86 @@ const PRESS_ITEMS: PressItem[] = [
     tags: ["TL-Zahlungsmodell", "DND Cyprus"],
   },
   {
+    id: "ekonomist-2026-09-30",
+    outlet: "Ekonomist",
+    title: "DND Cyprus investiert 50 Millionen Dollar in Nordzypern",
+    url: "https://www.ekonomist.com.tr/talip-yilmaz/dnd-cyprus-tan-kktc-de-50-milyon-dolarlik-yatirim--79348",
+    excerpt: "Ekonomist-Kolumnist Talip Yılmaz schreibt über drei Jahre Immobilieninvestitionen von DND Cyprus in Nordzypern – über den Erfolg der La-Joya-Projekte in İskele, die Fertigstellung von La Joya und die neuen Projekte des Unternehmens in der Region.",
+    date: "2026-09-30",
+    cover: "/news/ekonomist-dnd-50-milyon-yatirim.webp",
+    tags: ["Investition", "La Joya"],
+  },
+  {
+    id: "nethaber-2026-09-29",
+    outlet: "Net Haber",
+    title: "Konflikte im Nahen Osten verändern Investitionsrouten: Nordzypern wird zum Anziehungspunkt",
+    url: "https://www.nethaber.com.tr/haber/orta-dogudaki-catismalar-yatirim-rotasini-degistirdi-kktc-cazibe-merkezi-oldu-1009797",
+    excerpt: "Im Gespräch mit İHA erläutert DND-Cyprus-Vorstandsvorsitzender Ozan Dökmecioğlu, warum das Interesse von Investoren an Nordzypern nach den jüngsten Entwicklungen in der Region gestiegen ist – mit Mieteinnahmen in Fremdwährung und kurzen Amortisationszeiten.",
+    date: "2026-09-29",
+    cover: "/news/nethaber-la-joya-havadan.webp",
+    tags: ["Interview", "Investition"],
+  },
+  {
+    id: "halkinsesi-2026-09-26",
+    outlet: "Halkın Sesi",
+    title: "Meistermannschaft: Die U17 von Larnaka Gençler Birliği trifft ihren Sponsor zum Abendessen",
+    url: "https://www.halkinsesikibris.com/sampiyon-larnaka-gencler-birligi-u17-takimi-sponsoruyla-yemekte-bulustu",
+    excerpt: "Die U17-Mannschaft von Larnaka Gençler Birliği feierte ihren Meistertitel bei einem Abendessen auf Einladung ihres Sponsors DND Cyprus. Dabei wurde betont, wie wichtig Investitionen in junge Sportler sind.",
+    date: "2026-09-26",
+    cover: "/news/halkinsesi-larnaka-u17.webp",
+    tags: ["Sport", "Sponsoring"],
+  },
+  {
+    id: "yeniduzen-2026-09-16",
+    outlet: "YENİDÜZEN",
+    title: "Joy Cafe & Bar in İskele eröffnet",
+    url: "https://www.yeniduzen.com/joy-cafe-bar-iskelede-hizmete-acildi-199408h.htm",
+    excerpt: "In der La Joya Residences & Resort von DND Cyprus in İskele hat die Joy Cafe & Bar eröffnet. Der Ort am Pool steht Bewohnern und Hotelgästen ebenso offen wie Einheimischen und Besuchern der Region.",
+    date: "2026-09-16",
+    cover: "/news/yeniduzen-joy-cafe-bar.webp",
+    tags: ["La Joya", "Eröffnung"],
+  },
+  {
+    id: "yeniduzen-2026-08-17",
+    outlet: "YENİDÜZEN",
+    title: "DND Cyprus fördert Kunst und kreatives Schaffen: „tüş“ startet seine Festivalreise",
+    url: "https://www.yeniduzen.com/dnd-cyprustan-sanata-ve-yaratici-uretime-destek-tus-festival-yolculuguna-basladi-198450h.htm",
+    excerpt: "DND Cyprus gehört zu den Unterstützern des experimentellen Kurzfilms „tüş“ von Regisseurin Cansu Ezgi Bozkurt, der auf Festivals in der Türkei und in Europa gezeigt wird. Mitgründerin Netice Dökmecioğlu betonte, wie wichtig die Förderung von Frauen in Kunst und Kreativwirtschaft ist.",
+    date: "2026-08-17",
+    cover: "/news/yeniduzen-tus-kisa-film.webp",
+    tags: ["Kunst", "Sponsoring"],
+  },
+  {
+    id: "mha-2026-07-30",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "Dökmecioğlu: Wir haben das Potenzial von İskele früh erkannt",
+    url: "https://www.mhahaber.com/dokmecioglu-iskelenin-potansiyelini-erken-gorduk",
+    excerpt: "Ozan Dökmecioğlu erzählt, dass DND das Potenzial von İskele früh erkannt hat und nicht nur Wohnungen, sondern Lebensorte baut. La Joya, La Joya Perla, Perla II, Lagoon Verde und den Beach Club sieht er als Teile einer gemeinsamen Vision.",
+    date: "2026-07-30",
+    cover: "/news/mha-iskele-potansiyel.webp",
+    tags: ["Interview", "İskele"],
+  },
+  {
+    id: "haberturk-2026-03-11",
+    outlet: "Habertürk",
+    title: "Ein Portfolio von 400 Millionen Dollar in den USA",
+    url: "https://yerel-haberler.haberturk.com/kayseri-haberleri/abdye-400-milyon-dolarlik-portfoy-116967814",
+    excerpt: "Die İHA-Meldung porträtiert DND-Cyprus-Gründer Ozan Dökmecioğlu und das Investitionsportfolio, das er mit DND Homes in den USA und in Nordzypern aufgebaut hat – darunter Wohnprojekte in Boston und Cambridge.",
+    date: "2026-03-11",
+    cover: "/news/haberturk-400-milyon-portfoy.webp",
+    tags: ["DND Homes", "Boston"],
+  },
+  {
+    id: "gundemkibris-2026-02-08",
+    outlet: "Gündem Kıbrıs",
+    title: "Tourismus- und Erfolgspreise der TRNZ im Les Ambassadeurs Hotel verliehen",
+    url: "https://www.gundemkibris.com/kktc-turizm-ve-basari-odul-toreni-les-ambassadeurs-hotelde-gerceklesti",
+    excerpt: "Bei der Verleihung der Tourismus- und Erfolgspreise in Kyrenia unter der Schirmherrschaft des Vizepremierministeriums und des Tourismusministeriums wurde Ozan Dökmecioğlu als „Bestes Projektentwicklungsunternehmen des Jahres“ ausgezeichnet.",
+    date: "2026-02-08",
+    cover: "/news/gundemkibris-turizm-basari-odulu.webp",
+    tags: ["Auszeichnung"],
+  },
+  {
     id: "mha-2025-11-04",
     outlet: "Mağusa Haber Ajansı (MHA)",
     title: "DND verkündet die gute Nachricht: La Joya ist fertiggestellt",
@@ -50,28 +130,6 @@ const PRESS_ITEMS: PressItem[] = [
     date: "2025-11-04",
     cover: "/news/mhacover.webp",
     tags: ["La Joya", "DND Cyprus"],
-  },
-  {
-    id: "kibrispostasi-2025-11-04",
-    outlet: "Kıbrıs Postası",
-    title:
-      "Träume wurden wahr: DND Cyprus meldet die Fertigstellung der La Joya Residences and Holiday Village",
-    url: "https://www.kibrispostasi.com/c35-KIBRIS_HABERLERI/n580748-hayaller-gercek-oldu-dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu",
-    excerpt: "DND Cyprus hat bekannt gegeben, dass die La Joya Residences and Holiday Village in İskele Long Beach fertiggestellt sind. Das Projekt mit 74 privaten Wohnungen in niedriger Bauweise ist bereit zur Übergabe.",
-    date: "2025-11-04",
-    cover: "/news/kpcover.jpg",
-    tags: ["La Joya", "İskele Long Beach"],
-  },
-  {
-    id: "yeniduzen-2025-11-04",
-    outlet: "YENİDÜZEN",
-    title:
-      "DND Cyprus meldet die Fertigstellung der La Joya Residences and Holiday Village",
-    url: "https://www.yeniduzen.com/dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu-188492h.htm",
-    excerpt: "DND Cyprus hat bekannt gegeben, dass die mit Spannung erwarteten La Joya Residences and Holiday Village offiziell fertiggestellt und nun bereit für ihre Eigentümer sind.",
-    date: "2025-11-04",
-    cover: "/news/ydcover.jpg",
-    tags: ["La Joya"],
   },
   {
     id: "haberkibris-2025-11-04",
@@ -84,6 +142,26 @@ const PRESS_ITEMS: PressItem[] = [
     cover: "/news/hkcover.jpg",
     tags: ["La Joya"],
   },
+  {
+    id: "mha-2025-04-28",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "DND Cyprus prägt die Property NC Awards",
+    url: "https://www.mhahaber.com/dnd-kibris-property-nc-odullerine-damga-vurdu",
+    excerpt: "DND Cyprus erhielt bei den Property NC Awards 2025 drei Auszeichnungen: Bester Newcomer (Gold), beste geplante soziokulturelle Entwicklung (Gold) für Lagoon Verde und bestes geplantes neues Gewerbeprojekt (Platin) für den Mariachi Beach Club.",
+    date: "2025-04-28",
+    cover: "/news/mha-propertync-2025-odulleri.webp",
+    tags: ["Auszeichnung", "Lagoon Verde", "Mariachi"],
+  },
+  {
+    id: "kibrispostasi-2023-11-08",
+    outlet: "Kıbrıs Postası",
+    title: "DND North Cyprus bringt La Joya Perla Residences & Beach Resort auf den Markt",
+    url: "https://www.kibrispostasi.com/c68-ISKELE/n494500-dnd-kuzey-kibris-la-joya-perla-residences-beach-resortu-satisa-sundu",
+    excerpt: "DND North Cyprus hat La Joya Perla Residences & Beach Resort, ein Projekt mit 384 Einheiten in İskele Bahçeler, in den Verkauf gebracht. Der Beitrag enthält Aussagen von Gründer Ozan Dökmecioğlu und Direktorin Aynur Zorba Güloğlu und stellt die Ausstattung des Projekts vor.",
+    date: "2023-11-08",
+    cover: "/news/kibrispostasi-la-joya-perla-lansman.webp",
+    tags: ["La Joya Perla", "Markteinführung"],
+  },
 ];
 
 
@@ -94,7 +172,7 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="short" kicker="DND Cyprus in der Presse" title={<>Aktuelles</>} lead="Presseberichte und Pressemitteilungen über unsere Marke." image="/dndwhoweare.jpg" imagePosition="50% 42%" />
-   <PressSection items={PRESS_ITEMS} title="Alle Meldungen" description="" moreHref="" initialLimit={PRESS_ITEMS.length} />
+   <PressSection items={PRESS_ITEMS} title="Alle Meldungen" description="" moreHref="" initialLimit={6} />
 
 
     </main>

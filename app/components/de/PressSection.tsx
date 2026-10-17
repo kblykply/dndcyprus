@@ -1,8 +1,9 @@
 // components/press/PressSection.tsx
 'use client';
 
-import { useMemo, useEffect, useRef, useState } from 'react';
-import { m as motion, useAnimation, useInView } from 'framer-motion';
+import { useMemo, useRef, useState } from 'react';
+import Arrow from '@/app/components/azure/Arrow';
+import { m as motion, useInView } from 'framer-motion';
 import { ExternalLink, Calendar, Building2, ChevronRight } from 'lucide-react';
 import Image, { type StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -68,23 +69,17 @@ function InViewReveal({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { amount: 0.3, margin: '-10% 0px -10% 0px' });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (inView) {
-      controls.start({
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] },
-      });
-    } else if (!once) {
-      controls.set({ opacity: 0, y });
-    }
-  }, [controls, inView, delay, y, once]);
-
+  const inView = useInView(ref, { amount: 0.3, margin: '-10% 0px -10% 0px', once });
+  // Bildirimsel animate: framer-motion özellikleri (LazyMotion) geç yüklense de görünür duruma geçer.
+  // Önceki controls.start() çağrısı özellikler yüklenmeden çalışınca açılışta ekranda olan başlık ve
+  // öne çıkan haber kaydırılana kadar görünmez kalıyordu.
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y }} animate={controls} className={className}>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0, transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] } } : { opacity: 0, y }}
+      className={className}
+    >
       {children}
     </motion.div>
   );
@@ -271,15 +266,15 @@ description = 'Berichterstattung und Pressemitteilungen über unsere Marke.',
               <ChevronRight className="h-4 w-4" />
             </Link>
           ) : (
-            hasMoreThanLimit && (
+            hasMoreThanLimit && !showAll && (
+              // ilk 6 haber görünür; düğme kalanları açar ve kaybolur
               <button
                 type="button"
                 onClick={() => setShowAll(true)}
                 aria-expanded={showAll}
                 className="az-btn glass sm"
               >
-                Alle Meldungen
-                <ChevronRight className="h-4 w-4" />
+                Alle ansehen <Arrow />
               </button>
             )
           )}

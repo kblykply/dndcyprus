@@ -42,6 +42,86 @@ const PRESS_ITEMS: PressItem[] = [
     tags: ["TL Ödeme Modeli", "DND Cyprus"],
   },
   {
+    id: "ekonomist-2026-09-30",
+    outlet: "Ekonomist",
+    title: "DND Cyprus’tan KKTC’de 50 milyon dolarlık yatırım",
+    url: "https://www.ekonomist.com.tr/talip-yilmaz/dnd-cyprus-tan-kktc-de-50-milyon-dolarlik-yatirim--79348",
+    excerpt: "Ekonomist yazarı Talip Yılmaz, DND Cyprus’un üç yılda Kuzey Kıbrıs’ta yaptığı gayrimenkul yatırımlarını kaleme aldı. Yazıda İskele’deki La Joya projelerinin başarısı, La Joya’nın tamamlanması ve şirketin bölgedeki yeni projeleri öne çıkıyor.",
+    date: "2026-09-30",
+    cover: "/news/ekonomist-dnd-50-milyon-yatirim.webp",
+    tags: ["Yatırım", "La Joya"],
+  },
+  {
+    id: "nethaber-2026-09-29",
+    outlet: "Net Haber",
+    title: "Orta Doğu'daki çatışmalar yatırım rotasını değiştirdi: KKTC cazibe merkezi oldu",
+    url: "https://www.nethaber.com.tr/haber/orta-dogudaki-catismalar-yatirim-rotasini-degistirdi-kktc-cazibe-merkezi-oldu-1009797",
+    excerpt: "İHA’ya konuşan DND Cyprus Yönetim Kurulu Başkanı Ozan Dökmecioğlu, bölgedeki gelişmelerin ardından yatırımcıların Kuzey Kıbrıs’a ilgisinin arttığını anlattı; döviz bazlı kira gelirinin ve kısa amortisman süresinin öne çıktığını vurguladı.",
+    date: "2026-09-29",
+    cover: "/news/nethaber-la-joya-havadan.webp",
+    tags: ["Röportaj", "Yatırım"],
+  },
+  {
+    id: "halkinsesi-2026-09-26",
+    outlet: "Halkın Sesi",
+    title: "Şampiyon Larnaka Gençler Birliği U17 takımı, sponsoruyla yemekte buluştu",
+    url: "https://www.halkinsesikibris.com/sampiyon-larnaka-gencler-birligi-u17-takimi-sponsoruyla-yemekte-bulustu",
+    excerpt: "Şampiyonluğa ulaşan Larnaka Gençler Birliği U17 takımı, sponsoru DND Cyprus’un ev sahipliğinde verilen yemekte bir araya geldi. Gecede başarı kutlanırken genç sporculara yapılan yatırımın önemi vurgulandı.",
+    date: "2026-09-26",
+    cover: "/news/halkinsesi-larnaka-u17.webp",
+    tags: ["Spor", "Sponsorluk"],
+  },
+  {
+    id: "yeniduzen-2026-09-16",
+    outlet: "YENİDÜZEN",
+    title: "Joy Cafe & Bar İskele’de hizmete açıldı",
+    url: "https://www.yeniduzen.com/joy-cafe-bar-iskelede-hizmete-acildi-199408h.htm",
+    excerpt: "DND Cyprus’un İskele’deki La Joya Rezidansları ve Tatil Köyü bünyesinde Joy Cafe & Bar kapılarını açtı. Havuz başındaki mekân rezidans sakinlerinin ve otel misafirlerinin yanı sıra İskele halkına ve bölge ziyaretçilerine de açık.",
+    date: "2026-09-16",
+    cover: "/news/yeniduzen-joy-cafe-bar.webp",
+    tags: ["La Joya", "Açılış"],
+  },
+  {
+    id: "yeniduzen-2026-08-17",
+    outlet: "YENİDÜZEN",
+    title: "DND Cyprus’tan sanata ve yaratıcı üretime destek: “tüş” Festival yolculuğuna başladı",
+    url: "https://www.yeniduzen.com/dnd-cyprustan-sanata-ve-yaratici-uretime-destek-tus-festival-yolculuguna-basladi-198450h.htm",
+    excerpt: "DND Cyprus, Cansu Ezgi Bozkurt’un yönettiği deneysel kısa film “tüş”ün destekçileri arasında yer aldı; film Türkiye ve Avrupa’daki festivallere katılıyor. Kurucu ortak Netice Dökmecioğlu, kadınların sanat ve yaratıcı sektörlerde desteklenmesinin önemine dikkat çekti.",
+    date: "2026-08-17",
+    cover: "/news/yeniduzen-tus-kisa-film.webp",
+    tags: ["Sanat", "Sponsorluk"],
+  },
+  {
+    id: "mha-2026-07-30",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "DÖKMECİOĞLU: İSKELE'NİN POTANSİYELİNİ ERKEN GÖRDÜK",
+    url: "https://www.mhahaber.com/dokmecioglu-iskelenin-potansiyelini-erken-gorduk",
+    excerpt: "Ozan Dökmecioğlu, İskele’nin potansiyelini erken gördüklerini ve yalnızca konut değil yaşam destinasyonları inşa ettiklerini anlattı. La Joya, La Joya Perla, Perla II, Lagoon Verde ve beach club projelerini tek bir vizyonun parçaları olarak değerlendirdi.",
+    date: "2026-07-30",
+    cover: "/news/mha-iskele-potansiyel.webp",
+    tags: ["Röportaj", "İskele"],
+  },
+  {
+    id: "haberturk-2026-03-11",
+    outlet: "Habertürk",
+    title: "ABD'ye 400 milyon dolarlık portföy",
+    url: "https://yerel-haberler.haberturk.com/kayseri-haberleri/abdye-400-milyon-dolarlik-portfoy-116967814",
+    excerpt: "İHA kaynaklı haberde DND Cyprus’un kurucusu Ozan Dökmecioğlu’nun DND Homes ile ABD’de ve Kuzey Kıbrıs’ta oluşturduğu yatırım portföyü anlatılıyor; Boston ve Cambridge’deki konut projelerine yer veriliyor.",
+    date: "2026-03-11",
+    cover: "/news/haberturk-400-milyon-portfoy.webp",
+    tags: ["DND Homes", "Boston"],
+  },
+  {
+    id: "gundemkibris-2026-02-08",
+    outlet: "Gündem Kıbrıs",
+    title: "KKTC Turizm ve Başarı Ödül Töreni, Les Ambassadeurs Hotel’de gerçekleşti",
+    url: "https://www.gundemkibris.com/kktc-turizm-ve-basari-odul-toreni-les-ambassadeurs-hotelde-gerceklesti",
+    excerpt: "Başbakan Yardımcılığı ve Turizm Bakanlığı himayesinde Girne’de düzenlenen KKTC Turizm ve Başarı Ödül Töreni’nde Ozan Dökmecioğlu, “Yılın En İyi Proje Geliştirme Şirketi” ödülüne layık görüldü.",
+    date: "2026-02-08",
+    cover: "/news/gundemkibris-turizm-basari-odulu.webp",
+    tags: ["Ödül"],
+  },
+  {
     id: "mha-2025-11-04",
     outlet: "Mağusa Haber Ajansı (MHA)",
     title: "DND MÜJDEYİ VERDİ: LA JOYA TAMAMLANDI",
@@ -50,28 +130,6 @@ const PRESS_ITEMS: PressItem[] = [
     date: "2025-11-04",
     cover: "/news/mhacover.webp",
     tags: ["La Joya", "DND Cyprus"],
-  },
-  {
-    id: "kibrispostasi-2025-11-04",
-    outlet: "Kıbrıs Postası",
-    title:
-      "Hayaller gerçek oldu: DND Cyprus, La Joya Rezidansları ve Tatil Köyü’nün tamamlandığını duyurdu",
-    url: "https://www.kibrispostasi.com/c35-KIBRIS_HABERLERI/n580748-hayaller-gercek-oldu-dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu",
-    excerpt: "DND Cyprus, İskele Long Beach bölgesindeki La Joya Rezidansları ve Tatil Köyü projesinin tamamlandığını duyurdu. Yatay mimariyle tasarlanan 74 özel rezidanslık proje, sahiplerine teslime hazır.",
-    date: "2025-11-04",
-    cover: "/news/kpcover.jpg",
-    tags: ["La Joya", "İskele Long Beach"],
-  },
-  {
-    id: "yeniduzen-2025-11-04",
-    outlet: "YENİDÜZEN",
-    title:
-      "DND Cyprus, La Joya Rezidansları ve Tatil Köyü’nün tamamlandığını duyurdu",
-    url: "https://www.yeniduzen.com/dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu-188492h.htm",
-    excerpt: "DND Cyprus, büyük heyecanla beklenen La Joya Rezidansları ve Tatil Köyü projesinin resmi olarak tamamlandığını ve artık sahiplerini ağırlamaya hazır olduğunu duyurdu.",
-    date: "2025-11-04",
-    cover: "/news/ydcover.jpg",
-    tags: ["La Joya"],
   },
   {
     id: "haberkibris-2025-11-04",
@@ -84,6 +142,26 @@ const PRESS_ITEMS: PressItem[] = [
     cover: "/news/hkcover.jpg",
     tags: ["La Joya"],
   },
+  {
+    id: "mha-2025-04-28",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "DND KIBRIS, PROPERTY NC ÖDÜLLERİ'NE DAMGA VURDU",
+    url: "https://www.mhahaber.com/dnd-kibris-property-nc-odullerine-damga-vurdu",
+    excerpt: "DND Kıbrıs, 2025 Property NC Ödülleri’nden üç ödülle döndü: En İyi Yeni Girişim (Altın), Lagoon Verde ile En İyi Önerilen Sosyo-Kültürel Gelişim (Altın) ve Mariachi Beach Club ile En İyi Önerilen Yeni Ticari Proje (Platin).",
+    date: "2025-04-28",
+    cover: "/news/mha-propertync-2025-odulleri.webp",
+    tags: ["Ödül", "Lagoon Verde", "Mariachi"],
+  },
+  {
+    id: "kibrispostasi-2023-11-08",
+    outlet: "Kıbrıs Postası",
+    title: "DND Kuzey Kıbrıs, La Joya Perla Residences & Beach Resort’u satışa sundu",
+    url: "https://www.kibrispostasi.com/c68-ISKELE/n494500-dnd-kuzey-kibris-la-joya-perla-residences-beach-resortu-satisa-sundu",
+    excerpt: "DND Kuzey Kıbrıs, İskele Bahçeler’deki 384 konutluk La Joya Perla Residences & Beach Resort projesini satışa sundu. Haberde kurucu Ozan Dökmecioğlu ile direktör Aynur Zorba Güloğlu’nun açıklamalarına ve projenin olanaklarına yer veriliyor.",
+    date: "2023-11-08",
+    cover: "/news/kibrispostasi-la-joya-perla-lansman.webp",
+    tags: ["La Joya Perla", "Lansman"],
+  },
 ];
 
 
@@ -94,7 +172,7 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="short" kicker="Basında DND Cyprus" title={<>Haberler</>} lead="Markamızın yer aldığı haberler ve basın duyuruları." image="/dndwhoweare.jpg" imagePosition="50% 42%" />
-   <PressSection items={PRESS_ITEMS} title="Tüm haberler" description="" moreHref="" initialLimit={PRESS_ITEMS.length} />
+   <PressSection items={PRESS_ITEMS} title="Tüm haberler" description="" moreHref="" initialLimit={6} />
 
 
     </main>

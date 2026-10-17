@@ -42,6 +42,86 @@ const PRESS_ITEMS: PressItem[] = [
     tags: ["Оплата в лирах", "DND Cyprus"],
   },
   {
+    id: "ekonomist-2026-09-30",
+    outlet: "Ekonomist",
+    title: "DND Cyprus инвестирует 50 млн долларов в Северный Кипр",
+    url: "https://www.ekonomist.com.tr/talip-yilmaz/dnd-cyprus-tan-kktc-de-50-milyon-dolarlik-yatirim--79348",
+    excerpt: "Колумнист Ekonomist Талип Йылмаз рассказывает о трёх годах инвестиций DND Cyprus в недвижимость Северного Кипра: об успехе проектов La Joya в Искеле, завершении La Joya и новых проектах компании в регионе.",
+    date: "2026-09-30",
+    cover: "/news/ekonomist-dnd-50-milyon-yatirim.webp",
+    tags: ["Инвестиции", "La Joya"],
+  },
+  {
+    id: "nethaber-2026-09-29",
+    outlet: "Net Haber",
+    title: "Конфликты на Ближнем Востоке меняют инвестиционные маршруты: Северный Кипр становится центром притяжения",
+    url: "https://www.nethaber.com.tr/haber/orta-dogudaki-catismalar-yatirim-rotasini-degistirdi-kktc-cazibe-merkezi-oldu-1009797",
+    excerpt: "В интервью агентству İHA председатель совета директоров DND Cyprus Озан Дёкмеджиоглу объясняет, почему после событий в регионе вырос интерес инвесторов к Северному Кипру, и выделяет арендный доход в валюте и короткий срок окупаемости.",
+    date: "2026-09-29",
+    cover: "/news/nethaber-la-joya-havadan.webp",
+    tags: ["Интервью", "Инвестиции"],
+  },
+  {
+    id: "halkinsesi-2026-09-26",
+    outlet: "Halkın Sesi",
+    title: "Команда-чемпион U17 «Ларнака Генчлер Бирлиги» встретилась со спонсором за ужином",
+    url: "https://www.halkinsesikibris.com/sampiyon-larnaka-gencler-birligi-u17-takimi-sponsoruyla-yemekte-bulustu",
+    excerpt: "Команда U17 «Ларнака Генчлер Бирлиги», завоевавшая чемпионский титул, собралась на ужине, который устроил её спонсор DND Cyprus. Вечер был посвящён победе и важности инвестиций в молодых спортсменов.",
+    date: "2026-09-26",
+    cover: "/news/halkinsesi-larnaka-u17.webp",
+    tags: ["Спорт", "Спонсорство"],
+  },
+  {
+    id: "yeniduzen-2026-09-16",
+    outlet: "YENİDÜZEN",
+    title: "В Искеле открылся Joy Cafe & Bar",
+    url: "https://www.yeniduzen.com/joy-cafe-bar-iskelede-hizmete-acildi-199408h.htm",
+    excerpt: "На территории La Joya Residences & Resort от DND Cyprus в Искеле открылся Joy Cafe & Bar. Заведение у бассейна открыто для жителей и гостей отеля, а также для местных жителей и гостей региона.",
+    date: "2026-09-16",
+    cover: "/news/yeniduzen-joy-cafe-bar.webp",
+    tags: ["La Joya", "Открытие"],
+  },
+  {
+    id: "yeniduzen-2026-08-17",
+    outlet: "YENİDÜZEN",
+    title: "DND Cyprus поддерживает искусство и творчество: фильм «tüş» начал фестивальный путь",
+    url: "https://www.yeniduzen.com/dnd-cyprustan-sanata-ve-yaratici-uretime-destek-tus-festival-yolculuguna-basladi-198450h.htm",
+    excerpt: "DND Cyprus вошла в число партнёров экспериментального короткометражного фильма «tüş» режиссёра Джансу Эзги Бозкурт, который участвует в фестивалях Турции и Европы. Сооснователь компании Нетидже Дёкмеджиоглу подчеркнула важность поддержки женщин в искусстве и креативных индустриях.",
+    date: "2026-08-17",
+    cover: "/news/yeniduzen-tus-kisa-film.webp",
+    tags: ["Искусство", "Спонсорство"],
+  },
+  {
+    id: "mha-2026-07-30",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "Дёкмеджиоглу: мы рано увидели потенциал Искеле",
+    url: "https://www.mhahaber.com/dokmecioglu-iskelenin-potansiyelini-erken-gorduk",
+    excerpt: "Озан Дёкмеджиоглу рассказывает, что DND рано разглядела потенциал Искеле и строит не просто жильё, а пространства для жизни. La Joya, La Joya Perla, Perla II, Lagoon Verde и бич-клуб он называет частями единого замысла.",
+    date: "2026-07-30",
+    cover: "/news/mha-iskele-potansiyel.webp",
+    tags: ["Интервью", "Искеле"],
+  },
+  {
+    id: "haberturk-2026-03-11",
+    outlet: "Habertürk",
+    title: "Портфель в 400 млн долларов в США",
+    url: "https://yerel-haberler.haberturk.com/kayseri-haberleri/abdye-400-milyon-dolarlik-portfoy-116967814",
+    excerpt: "Материал İHA рассказывает об основателе DND Cyprus Озане Дёкмеджиоглу и инвестиционном портфеле, который он создал вместе с DND Homes в США и на Северном Кипре, включая жилые проекты в Бостоне и Кембридже.",
+    date: "2026-03-11",
+    cover: "/news/haberturk-400-milyon-portfoy.webp",
+    tags: ["DND Homes", "Бостон"],
+  },
+  {
+    id: "gundemkibris-2026-02-08",
+    outlet: "Gündem Kıbrıs",
+    title: "Церемония премии «Туризм и успех ТРСК» прошла в отеле Les Ambassadeurs",
+    url: "https://www.gundemkibris.com/kktc-turizm-ve-basari-odul-toreni-les-ambassadeurs-hotelde-gerceklesti",
+    excerpt: "На церемонии вручения премии «Туризм и успех» в Кирении, проходившей под патронатом вице-премьерства и Министерства туризма, Озан Дёкмеджиоглу получил награду «Лучшая девелоперская компания года».",
+    date: "2026-02-08",
+    cover: "/news/gundemkibris-turizm-basari-odulu.webp",
+    tags: ["Награда"],
+  },
+  {
     id: "mha-2025-11-04",
     outlet: "Mağusa Haber Ajansı (MHA)",
     title: "DND сообщила радостную новость: La Joya завершён",
@@ -50,28 +130,6 @@ const PRESS_ITEMS: PressItem[] = [
     date: "2025-11-04",
     cover: "/news/mhacover.webp",
     tags: ["La Joya", "DND Cyprus"],
-  },
-  {
-    id: "kibrispostasi-2025-11-04",
-    outlet: "Kıbrıs Postası",
-    title:
-      "Мечты сбылись: DND Cyprus объявила о завершении резиденций и курортного комплекса La Joya",
-    url: "https://www.kibrispostasi.com/c35-KIBRIS_HABERLERI/n580748-hayaller-gercek-oldu-dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu",
-    excerpt: "DND Cyprus сообщила, что резиденции и курортный комплекс La Joya в Long Beach (Искеле) завершены. Малоэтажный проект из 74 частных резиденций готов к передаче владельцам.",
-    date: "2025-11-04",
-    cover: "/news/kpcover.jpg",
-    tags: ["La Joya", "Long Beach, Искеле"],
-  },
-  {
-    id: "yeniduzen-2025-11-04",
-    outlet: "YENİDÜZEN",
-    title:
-      "DND Cyprus объявила о завершении резиденций и курортного комплекса La Joya",
-    url: "https://www.yeniduzen.com/dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu-188492h.htm",
-    excerpt: "DND Cyprus сообщила, что долгожданные резиденции и курортный комплекс La Joya официально завершены и готовы встречать своих владельцев.",
-    date: "2025-11-04",
-    cover: "/news/ydcover.jpg",
-    tags: ["La Joya"],
   },
   {
     id: "haberkibris-2025-11-04",
@@ -84,6 +142,26 @@ const PRESS_ITEMS: PressItem[] = [
     cover: "/news/hkcover.jpg",
     tags: ["La Joya"],
   },
+  {
+    id: "mha-2025-04-28",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "DND Cyprus отличилась на премии Property NC Awards",
+    url: "https://www.mhahaber.com/dnd-kibris-property-nc-odullerine-damga-vurdu",
+    excerpt: "На Property NC Awards 2025 DND Cyprus получила три награды: «Лучшая новая компания» (золото), «Лучший предлагаемый социокультурный проект» (золото) за Lagoon Verde и «Лучший предлагаемый новый коммерческий проект» (платина) за Mariachi Beach Club.",
+    date: "2025-04-28",
+    cover: "/news/mha-propertync-2025-odulleri.webp",
+    tags: ["Награда", "Lagoon Verde", "Mariachi"],
+  },
+  {
+    id: "kibrispostasi-2023-11-08",
+    outlet: "Kıbrıs Postası",
+    title: "DND North Cyprus открыла продажи La Joya Perla Residences & Beach Resort",
+    url: "https://www.kibrispostasi.com/c68-ISKELE/n494500-dnd-kuzey-kibris-la-joya-perla-residences-beach-resortu-satisa-sundu",
+    excerpt: "DND North Cyprus открыла продажи La Joya Perla Residences & Beach Resort — проекта на 384 квартиры в Искеле-Бахчелер. В материале приводятся слова основателя Озана Дёкмеджиоглу и директора Айнур Зорба Гюлоглу, а также описание инфраструктуры проекта.",
+    date: "2023-11-08",
+    cover: "/news/kibrispostasi-la-joya-perla-lansman.webp",
+    tags: ["La Joya Perla", "Старт продаж"],
+  },
 ];
 
 
@@ -94,7 +172,7 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="short" kicker="DND Cyprus в прессе" title={<>Новости</>} lead="Публикации в СМИ и пресс-релизы о нашем бренде." image="/dndwhoweare.jpg" imagePosition="50% 42%" />
-   <PressSection items={PRESS_ITEMS} title="Все новости" description="" moreHref="" initialLimit={PRESS_ITEMS.length} />
+   <PressSection items={PRESS_ITEMS} title="Все новости" description="" moreHref="" initialLimit={6} />
 
 
     </main>
