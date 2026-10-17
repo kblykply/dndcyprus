@@ -199,11 +199,11 @@ description = 'Berichterstattung und Pressemitteilungen über unsere Marke.',
                     {/* kaynak ve tarih ince çizgili satırlarda (Meridian dili); kartın alt kısmı boş kalmasın */}
                     <dl className="m-0 border-t border-[var(--line)] text-sm">
                       <div className="flex items-center justify-between gap-4 border-b border-[var(--line)] py-3">
-                        <dt className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-40)]"><Building2 className="h-3.5 w-3.5 shrink-0" /> Quelle</dt>
+                        <dt className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-60)]"><Building2 className="h-3.5 w-3.5 shrink-0" /> Quelle</dt>
                         <dd className="m-0 min-w-0 truncate font-medium text-[var(--ink)]">{shown.outlet}</dd>
                       </div>
                       <div className="flex items-center justify-between gap-4 border-b border-[var(--line)] py-3">
-                        <dt className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-40)]"><Calendar className="h-3.5 w-3.5 shrink-0" /> Datum</dt>
+                        <dt className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--ink-60)]"><Calendar className="h-3.5 w-3.5 shrink-0" /> Datum</dt>
                         <dd className="m-0 shrink-0 font-medium text-[var(--ink)]">{fmtDate(shown.date)}</dd>
                       </div>
                     </dl>

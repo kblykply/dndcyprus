@@ -127,7 +127,7 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
             tek sayfa olarak ortada açılır (kitap yarım sayfa kayar), köşesinden tutup çevrilebilir */}
         <div className="row">
           <button type="button" className="side prev" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}><Arrow dir={-1} size={20} /></button>
-          <div className="stage" ref={stage} tabIndex={0} onKeyDown={onKey} aria-label={t.title(name)}>
+          <div className="stage" ref={stage} tabIndex={0} onKeyDown={onKey} role="group" aria-label={t.title(name)}>
             <div className="shift" style={{ transform: shift }}>
               {size && !near ? (
                 // kitap henüz kurulmadı: aynı boyda yer tutucu (bölüm son boyunda, yüklenince sayfa kaymaz)

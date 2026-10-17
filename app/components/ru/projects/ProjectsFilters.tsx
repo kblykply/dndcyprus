@@ -162,7 +162,7 @@ export default function ProjectsFilters() {
 
         {/* Type chips */}
         <div className="az-tags rv d1" role="group" aria-label="Тип" style={{ alignItems: "center" }}>
-          <span style={{ background: "transparent", border: 0, padding: "7px 0", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 600, color: "var(--ink-40)" }}>
+          <span style={{ background: "transparent", border: 0, padding: "7px 0", fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 600, color: "var(--ink-60)" }}>
             Тип:
           </span>
           {TYPE_CHIPS.map((t) => {

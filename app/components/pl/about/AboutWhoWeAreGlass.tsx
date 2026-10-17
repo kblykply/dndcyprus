@@ -140,7 +140,6 @@ function VideoPlayer({
           type="button"
           onClick={start}
           className="group absolute inset-0 h-full w-full cursor-pointer text-left"
-          aria-label={`Odtwórz wideo: ${title}`}
         >
           <DeferredFillImage
             fill
@@ -174,6 +173,8 @@ function VideoPlayer({
               <span className="mt-0.5 hidden text-[13px] text-white/85 sm:block">{description}</span>
             </span>
             <span className="az-tag hidden flex-none sm:inline-flex">Wideo</span>
+            {/* erişilebilir ad görünen metinden oluşur (başlık + açıklama), sonuna eylem eklenir */}
+            <span className="sr-only"> – odtwórz wideo</span>
           </span>
         </button>
       )}

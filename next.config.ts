@@ -36,10 +36,25 @@ const nextConfig: NextConfig = {
     ],
   },
 
+  // "X-Powered-By: Next.js" başlığı gönderilmez
+  poweredByHeader: false,
+
   async headers() {
     // Only generated content-addressed assets get immutable caching. Existing
     // brochure/menu URLs can still be updated without stale year-long caches.
     return [{
+      // Güvenli varsayılan başlıklar (HSTS'yi Vercel ekliyor). Tam CSP yok: GA4 / Meta / Clarity / YouTube /
+      // harita / 360° tur kaynakları canlı analitikle doğrulanmadan zorunlu kılınırsa ölçüm ve gömmeler kırılabilir.
+      // frame-ancestors yalnız kendi alan adı: 360° tur iframe'i aynı kökenden geliyor.
+      source: "/:path*",
+      headers: [
+        { key: "X-Content-Type-Options", value: "nosniff" },
+        { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        { key: "Content-Security-Policy", value: "frame-ancestors 'self'" },
+        { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+      ],
+    }, {
       source: "/optimized/:path*",
       headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
     }, {

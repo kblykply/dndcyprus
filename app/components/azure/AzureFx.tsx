@@ -63,6 +63,13 @@ export default function AzureFx() {
       scrollT = window.setTimeout(() => { scrollT = 0; root.classList.remove("is-scrolling"); }, 160);
     };
     addEventListener("scroll", onScroll, { passive: true });
+    // Fare gerçekten hareket edince kilit hemen kalkar: kilit açıkken body tıklama almadığı için kaydırmanın
+    // hemen ardından (trackpad ataleti sürerken) yapılan tıklama yutuluyordu (17 Ekim, Firefox testinde görüldü).
+    const onMove = (e: PointerEvent) => {
+      if (!scrollT || e.pointerType !== "mouse" || (!e.movementX && !e.movementY)) return;
+      window.clearTimeout(scrollT); scrollT = 0; root.classList.remove("is-scrolling");
+    };
+    addEventListener("pointermove", onMove, { passive: true });
 
     // Hero video: düşük güç modu vb. durumlarda ilk etkileşimde oynat; "hareketi azalt" açıksa durur (afiş görünür)
     const v = document.querySelector<HTMLVideoElement>(".az-hero video");
@@ -78,7 +85,7 @@ export default function AzureFx() {
 
     return () => {
       io.disconnect(); cio.disconnect(); mo.disconnect(); cancelAnimationFrame(moRaf);
-      removeEventListener("scroll", onScroll); window.clearTimeout(scrollT); root.classList.remove("is-scrolling");
+      removeEventListener("scroll", onScroll); removeEventListener("pointermove", onMove); window.clearTimeout(scrollT); root.classList.remove("is-scrolling");
       v?.removeEventListener("playing", stopTry); stopTry();
       document.removeEventListener("visibilitychange", onVis);
     };

@@ -32,8 +32,8 @@
   --coral: #f15c34;
   --coral-dark: #d6471f;
   --ink: #0d2326;
-  --ink-60: rgba(13, 35, 38, 0.64);
-  --ink-40: rgba(13, 35, 38, 0.42);
+  --ink-60: rgba(13, 35, 38, 0.67); /* 0.64 açık mavi zeminde 4.46:1 kalıyordu (WCAG AA 4.5) */
+  --ink-40: rgba(13, 35, 38, 0.62); /* 0.42 küçük etiketlerde 2.5:1 kalıyordu; 0.62 beyaz ve açık mavide 4.5:1 (WCAG AA) */
   --line: rgba(13, 35, 38, 0.1);
   --glass: rgba(255, 255, 255, 0.58);
   --glass-b: rgba(255, 255, 255, 0.75);

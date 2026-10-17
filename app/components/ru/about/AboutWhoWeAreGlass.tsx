@@ -140,7 +140,6 @@ function VideoPlayer({
           type="button"
           onClick={start}
           className="group absolute inset-0 h-full w-full cursor-pointer text-left"
-          aria-label={`Смотреть видео: ${title}`}
         >
           <DeferredFillImage
             fill
@@ -174,6 +173,8 @@ function VideoPlayer({
               <span className="mt-0.5 hidden text-[13px] text-white/85 sm:block">{description}</span>
             </span>
             <span className="az-tag hidden flex-none sm:inline-flex">Видео</span>
+            {/* erişilebilir ad görünen metinden oluşur (başlık + açıklama), sonuna eylem eklenir */}
+            <span className="sr-only"> – смотреть видео</span>
           </span>
         </button>
       )}

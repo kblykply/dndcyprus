@@ -38,6 +38,31 @@ function cleanPageUrl(v: unknown) {
   }
 }
 
+// Kötüye kullanım sınırı (sunucu örneği başına, en iyi çaba): aynı IP'den 10 dakikada en çok 10 istek.
+// Formlar istemcide doğrulandığı için gerçek ziyaretçi bu sınıra pratikte ulaşmaz.
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 10;
+const hits = new Map<string, number[]>();
+// Aynı eventId ikinci kez gelirse (çift gönderim / ağ yeniden denemesi) yeni kayıt açılmaz
+const seenEvents = new Map<string, number>();
+
+function rateLimited(key: string, now: number) {
+  const recent = (hits.get(key) || []).filter((t) => now - t < RATE_WINDOW_MS);
+  recent.push(now);
+  hits.set(key, recent);
+  if (hits.size > 5000) {
+    for (const [k, v] of hits) if (!v.some((t) => now - t < RATE_WINDOW_MS)) hits.delete(k);
+  }
+  return recent.length > RATE_MAX;
+}
+
+function rememberEvent(id: string, now: number) {
+  seenEvents.set(id, now);
+  if (seenEvents.size > 5000) {
+    for (const [k, t] of seenEvents) if (now - t > RATE_WINDOW_MS) seenEvents.delete(k);
+  }
+}
+
 /** Migration henüz çalışmadıysa yeni kolonlar yoktur (P2022 / Postgres 42703) */
 function isMissingColumnError(err: unknown) {
   const e = err as { code?: unknown; message?: unknown } | null;
@@ -46,6 +71,13 @@ function isMissingColumnError(err: unknown) {
 }
 
 export async function POST(req: NextRequest) {
+  const now = Date.now();
+  // Vercel x-real-ip'yi kendisi yazar (istemci değiştiremez); yoksa x-forwarded-for'un ilk adresi
+  const ipKey = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+  if (rateLimited(ipKey, now)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429, headers: { "Retry-After": "600" } });
+  }
+
   let body: Record<string, unknown>;
   try {
     const parsed: unknown = await req.json();
@@ -93,6 +125,10 @@ export async function POST(req: NextRequest) {
 
   const legacyData = { name, email, phone: phone || null, subject, message };
 
+  if (eventId && seenEvents.has(eventId)) {
+    return NextResponse.json({ ok: true });
+  }
+
   try {
     try {
       await prisma.contactMessage.create({
@@ -123,6 +159,7 @@ export async function POST(req: NextRequest) {
     console.error("CONTACT_API_ERROR", { code: e?.code, name: e?.name });
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
+  if (eventId) rememberEvent(eventId, now);
 
   // Meta CAPI: yalnızca reklam izni varsa; yanıt döndükten sonra çalışır
   const consent = body.consent as { ads?: unknown } | null | undefined;

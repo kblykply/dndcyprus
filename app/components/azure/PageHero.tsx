@@ -36,9 +36,10 @@ export default function PageHero({ kicker, title, lead, image, imageAlt = "", vi
         )}
         {(goldTag || tags.length || logo) ? (
           <div className="top">
-            <div className="tagrow">
-              {goldTag && <span className="az-tag gold">{goldTag}</span>}
-              {tags.map((t) => <span key={t} className="az-tag">{t}</span>)}
+            {/* telefonda tek satır, yatay kayar: klavyeyle de kaydırılabilsin diye odaklanabilir liste */}
+            <div className="tagrow" role="list" tabIndex={0}>
+              {goldTag && <span role="listitem" className="az-tag gold">{goldTag}</span>}
+              {tags.map((t) => <span key={t} role="listitem" className="az-tag">{t}</span>)}
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             {logo && <img className="plogo" src={logo} alt="" />}
