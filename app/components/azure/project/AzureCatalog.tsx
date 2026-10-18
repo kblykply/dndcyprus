@@ -1,16 +1,14 @@
 "use client";
 
 import Arrow from "../Arrow";
-import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import type { PageFlip } from "page-flip/dist/js/page-flip.module.js";
 import { PROJECT_PAGES } from "@/lib/azure/projects";
 import type { Locale } from "@/lib/azure/site";
 import "./catalog.css";
 
-// react-pageflip: sayfa çevirme motoru (eski katalogla aynı)
-const HTMLFlipBook = dynamic(() => import("react-pageflip"), { ssr: false });
-type FlipApi = { flipNext: () => void; flipPrev: () => void };
-type FlipHandle = { pageFlip: () => FlipApi | undefined };
+// Sayfa çevirme motoru: page-flip, La Joya sitesindeki menü kitabıyla aynı kurulum (React sarmalayıcısı yok).
+// Kitap bir kez kurulur; yalnız genişlik değişince (telefon döndürme, pencere boyutu) yeniden kurulur.
 
 type Page = { src: string; half?: "l" | "r" };
 type Def = { pages: Page[]; aspect: number; cover: boolean; pdf?: Partial<Record<Locale, string>> };
@@ -36,25 +34,40 @@ const T: Record<Locale, { kicker: string; title: (n: string) => string; lead: st
 };
 
 /**
- * Azure katalog: açık sahne üzerinde gerçek kitap (sayfa çevirme), altta sayaç · ilerleme çizgisi · oklar,
- * başlıkta PDF. Geniş ekranda iki sayfa (açılım), dar ekranda tek sayfa. Yalnız açık sayfanın yakınları yüklenir.
+ * Azure katalog: açık sahne üzerinde gerçek kitap (sayfa çevirme), başlıkta PDF, altta ilerleme çizgisi ve oklar.
+ * Geniş ekranda iki sayfa (açılım), dar ekranda tek sayfa.
+ *
+ * La Joya'daki menü kitabının yöntemi:
+ * - kitabın genişliği motor kurulmadan önce açıkça verilir (tek sayfa = sayfa genişliği, açılım = iki katı). Eskiden
+ *   genişlik içerikten geliyordu; görseller önbellekten anında gelince iPhone'da kitap telefonda bile açılım kipine
+ *   geçiyor, sağ sayfa kesiliyordu;
+ * - kitap yalnız sahne genişliği değişince yeniden kurulur. iPhone'da kaydırırken adres çubuğu küçülüp ekran
+ *   yüksekliği değişince React sarmalayıcısı kitabı baştan kuruyor, çevirme yarıda bozuluyordu;
+ * - sayfa öğeleri React dışında kurulur (motor onları taşır ve biçimler); görseller açık sayfanın çevresinde önceden
+ *   yüklenir ve çözülür ki çevirirken boş sayfa görünmesin.
  */
 export default function AzureCatalog({ locale, project, near = true }: { locale: Locale; project: keyof typeof CATALOGS; near?: boolean }) {
   const def = CATALOGS[project];
   const t = T[locale];
   const n = def.pages.length;
+  const name = PROJECT_PAGES[project].name;
   const stage = useRef<HTMLDivElement>(null);
-  const book = useRef<FlipHandle | null>(null);
+  const host = useRef<HTMLDivElement>(null);
+  const flipRef = useRef<PageFlip | null>(null);
+  const idxRef = useRef(0);
   const [size, setSize] = useState<{ w: number; h: number; two: boolean } | null>(null);
   const [idx, setIdx] = useState(0);
+  const [ready, setReady] = useState(false);
 
+  // ölçü: yalnız sahne genişliği değişince yeniden hesaplanır (yükseklik değişimi, ör. adres çubuğu, kitabı bozmasın)
   useEffect(() => {
     const el = stage.current; if (!el) return;
+    let lastW = -1, timer = 0;
     const fit = () => {
-      const cs = getComputedStyle(el);
-      const cw = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      const cw = el.clientWidth;
+      if (Math.abs(cw - lastW) < 2) return;
+      lastW = cw;
       const two = cw >= 700;
-      // La Joya kitabı gibi: çerçevesiz, ekranın ~%74'ü kadar yüksek (üstte sabit menü payı)
       const maxH = Math.max(300, Math.min(window.innerHeight * 0.74, window.innerHeight - 140, 900));
       let pw = two ? cw / 2 : cw, ph = pw / def.aspect;
       if (ph > maxH) { ph = maxH; pw = ph * def.aspect; }
@@ -62,48 +75,71 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
       setSize((s) => (s && s.w === next.w && s.h === next.h && s.two === next.two ? s : next));
     };
     fit();
-    const ro = new ResizeObserver(fit); ro.observe(el);
-    return () => ro.disconnect();
+    const ro = new ResizeObserver(() => { window.clearTimeout(timer); timer = window.setTimeout(fit, 200); });
+    ro.observe(el);
+    return () => { ro.disconnect(); window.clearTimeout(timer); };
   }, [def.aspect]);
 
-  // Görseller React dışında yüklenir: kitap (react-pageflip) yalnız bir kez kurulur (renderOnlyPageLengthChange),
-  // çocuklar her çizimde değişseydi kütüphane her çevirmede kitabı HTML'den yeniden kuruyor, sayfalar boş geliyordu.
-  // Açık sayfanın yakınındaki <img data-src> öğelerine src verilir; önceden çözülür ki çevirme sırasında boş kalmasın.
+  // kitap: bölüm yaklaşınca ve ölçü belliyken kurulur
   useEffect(() => {
-    const root = stage.current; if (!root) return;
-    const lo = Math.max(0, idx - 4), hi = Math.min(n - 1, idx + 8);
-    root.querySelectorAll<HTMLImageElement>("img[data-i]").forEach((im) => {
-      const i = Number(im.dataset.i);
-      if (i < lo || i > hi || im.dataset.ready) return;
-      if (!im.getAttribute("src")) im.src = im.dataset.src!;
-      // gizli sayfadaki görsel tarayıcıca çözülmez; çevirme anında beyaz kalmasın diye önceden çöz
-      im.dataset.ready = "1";
-      im.decode?.().catch(() => {});
-    });
-  }, [idx, n, size, near]);
+    const root = host.current;
+    if (!near || !size || !root) return;
+    let cancelled = false;
+    let flip: PageFlip | null = null;
+    const imgs: HTMLImageElement[] = [];
+    // açık sayfanın çevresi önceden yüklenir ve çözülür (gizli sayfadaki görseli tarayıcı kendiliğinden çözmez)
+    const load = (at: number) => {
+      for (let i = Math.max(0, at - 4); i <= Math.min(n - 1, at + 10); i++) {
+        const im = imgs[i];
+        if (im && !im.getAttribute("src")) { im.src = im.dataset.src!; im.decode?.().catch(() => {}); }
+      }
+    };
+    (async () => {
+      const { PageFlip: PF } = await import("page-flip/dist/js/page-flip.module.js");
+      if (cancelled) return;
+      root.innerHTML = "";
+      const book = document.createElement("div");
+      book.className = "book";
+      book.style.width = `${size.two ? size.w * 2 : size.w}px`;
+      book.style.height = `${size.h}px`;
+      root.appendChild(book);
+      const pages = def.pages.map((p, i) => {
+        const pg = document.createElement("div");
+        pg.className = `pg${p.half ? ` half ${p.half}` : ""}`;
+        const im = document.createElement("img");
+        im.dataset.src = p.src;
+        im.alt = `${name} · ${t.page} ${i + 1}`;
+        im.draggable = false;
+        im.decoding = "async";
+        pg.appendChild(im);
+        book.appendChild(pg);
+        imgs.push(im);
+        return pg;
+      });
+      load(idxRef.current);
+      flip = new PF(book, {
+        width: size.w, height: size.h, size: "fixed", showCover: def.cover, usePortrait: !size.two,
+        mobileScrollSupport: !size.two, drawShadow: true, maxShadowOpacity: 0.5, flippingTime: 900,
+        showPageCorners: true, startZIndex: 0, startPage: Math.min(idxRef.current, n - 1),
+      });
+      flip.loadFromHTML(pages);
+      flip.on("flip", (e) => { const i = Number(e.data) || 0; idxRef.current = i; setIdx(i); load(i); });
+      flipRef.current = flip;
+      setReady(true);
+    })();
+    return () => {
+      cancelled = true;
+      flipRef.current = null;
+      setReady(false);
+      try { flip?.destroy(); } catch { /* zaten kaldırıldı */ }
+      root.innerHTML = "";
+    };
+  }, [near, size, def, n, name, t.page]);
 
-  const name = PROJECT_PAGES[project].name;
-  const onFlip = useCallback((e: { data: number }) => setIdx(e.data), []);
-  // sayfa öğeleri yalnız kitap kurulurken üretilir (boyut değişince key ile yeniden kurulur); ilk yakın sayfalar src ile gelir
-  const pagesEls = useMemo(() => {
-    const at = idx; // kurulum anındaki sayfa (idx bilerek bağımlılık değil: çevirmede kitap yeniden kurulmasın)
-    return def.pages.map((p, i) => {
-      const left = def.cover ? i % 2 === 1 : i % 2 === 0;
-      const near = i >= at - 4 && i <= at + 8;
-      return (
-        <div key={i} className={`pg${p.half ? ` half ${p.half}` : ""}${size?.two ? (left ? " lp" : " rp") : ""}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img data-i={i} data-src={p.src} src={near ? p.src : undefined} alt={`${name} · ${t.page} ${i + 1}`} draggable={false} />
-        </div>
-      );
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [size?.w, size?.h, size?.two, def.pages, def.cover, name, t.page]);
-  const api = () => book.current?.pageFlip();
-  const go = (d: number) => { const a = api(); if (!a) return; if (d > 0) a.flipNext(); else a.flipPrev(); };
+  const go = (d: number) => { const f = flipRef.current; if (!f) return; if (d > 0) f.flipNext(); else f.flipPrev(); };
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => { if (e.key === "ArrowRight") { e.preventDefault(); go(1); } else if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); } };
 
-  // açılımda sol + sağ sayfa (kapak tek başına); sayfa sayacı kaldırıldı, yalnız ilerleme çizgisi ve oklar
+  // açılımda sol + sağ sayfa (kapak tek başına); yalnız ilerleme çizgisi ve oklar
   const two = !!size?.two;
   const lastStart = two ? (def.cover ? (n % 2 === 0 ? n - 1 : n - 2) : n - 2 + (n % 2)) : n - 1;
   const atStart = idx <= 0, atEnd = idx >= lastStart;
@@ -123,42 +159,15 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
           </div>
           {pdf ? <a className="az-btn glass rv d2" href={pdf} target="_blank" rel="noopener" data-track="brochure_download">{t.pdf} ↓</a> : null}
         </div>
-        {/* La Joya'daki katalog düzeni: çerçevesiz büyük kitap, oklar kitabın iki yanında; kapak ve arka kapak
-            tek sayfa olarak ortada açılır (kitap yarım sayfa kayar), köşesinden tutup çevrilebilir */}
         <div className="row">
-          <button type="button" className="side prev" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}><Arrow dir={-1} size={20} /></button>
+          <button type="button" className="side prev" aria-label={t.prev} onClick={() => go(-1)} disabled={!ready || atStart}><Arrow dir={-1} size={20} /></button>
           <div className="stage" ref={stage} tabIndex={0} onKeyDown={onKey} role="group" aria-label={t.title(name)}>
-            <div className="shift" style={{ transform: shift }}>
-              {size && !near ? (
-                // kitap henüz kurulmadı: aynı boyda yer tutucu (bölüm son boyunda, yüklenince sayfa kaymaz)
-                <div className="book-ph" style={{ width: size.two ? size.w * 2 : size.w, height: size.h }} aria-hidden />
-              ) : size ? (
-                // @ts-expect-error: react-pageflip türleri eksik (eski katalogdaki gibi)
-                <HTMLFlipBook
-                  key={`${size.w}x${size.h}x${size.two}`}
-                  ref={book}
-                  className="book"
-                  width={size.w}
-                  height={size.h}
-                  size="fixed"
-                  minWidth={200} maxWidth={2000} minHeight={200} maxHeight={2000}
-                  showCover={def.cover}
-                  usePortrait={!size.two}
-                  startPage={idx}
-                  drawShadow
-                  maxShadowOpacity={0.5}
-                  flippingTime={900}
-                  showPageCorners
-                  mobileScrollSupport={!size.two}
-                  renderOnlyPageLengthChange
-                  onFlip={onFlip}
-                >
-                  {pagesEls}
-                </HTMLFlipBook>
-              ) : null}
-            </div>
+            {/* kitap bu kutunun içinde kurulur; kurulana kadar kutu kitabın boyunda yer tutucudur (bölüm son boyunda,
+                yüklenince sayfa kaymaz). Kutu gizlenmez: motor kurulurken genişliğini ölçüp tek / çift sayfaya karar verir */}
+            <div className={`shift${ready ? "" : " empty"}`} ref={host}
+              style={{ transform: shift, ...(size ? { width: size.two ? size.w * 2 : size.w, height: size.h } : null) }} />
           </div>
-          <button type="button" className="side next" aria-label={t.next} onClick={() => go(1)} disabled={atEnd}><Arrow size={20} /></button>
+          <button type="button" className="side next" aria-label={t.next} onClick={() => go(1)} disabled={!ready || atEnd}><Arrow size={20} /></button>
         </div>
         <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.03, prog)})` }} /></span>
       </div>

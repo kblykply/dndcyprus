@@ -1,4 +1,4 @@
-/* Teknik donanım: hafif cam kartlar; ana sayfa proje şeridiyle aynı geçiş (3 kart, sabitlenip sayfayla yana akar), ok yok */
+/* Teknik donanım: hafif cam kartlar; ana sayfa proje şeridiyle aynı geçiş (3 kart, sabitlenip sayfayla yana akar), altta oklar */
 /* overflow-y: hidden — yalnız overflow-x verilince dikey eksen "auto" oluyor ve şerit dikeyde de birkaç px
    kayıyordu: tekerlek/parmak önce şeridi kaydırıp sayfa bir an takılıyordu */
 .az-tcards { display: flex; gap: 18px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 6px 0 16px; scrollbar-width: none; outline: none; }
@@ -23,7 +23,11 @@
 @media (max-width: 1099px) { .az-tcard { flex-basis: calc((100% - 18px) / 2); } }
 @media (max-width: 699px) { .az-tcard { flex-basis: 86%; } }
 
-/* alt şerit: görünen aralık · ilerleme çizgisi (ok yok) */
+/* alt şerit: ← ilerleme çizgisi → (oklar katalogdaki cam yuvarlak düğmelerle aynı) */
+.az-tech .tbtn { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--ink); background: var(--glass-b); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 8px 24px rgba(13, 35, 38, .1); transition: background .3s, color .3s, opacity .3s; }
+.az-tech .tbtn:hover { background: var(--sea); color: #fff; }
+.az-tech .tbtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.az-tech .tbtn:disabled { opacity: .3; pointer-events: none; }
 .az-tech .nav { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); margin-top: 6px; }
 .az-tech .count { font-family: var(--font-display), sans-serif; font-size: 15px; letter-spacing: .04em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .az-tech .count i { font-style: normal; color: var(--ink-40); margin: 0 2px; }

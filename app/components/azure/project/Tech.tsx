@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import type { ProjectTech } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
+import Arrow from "../Arrow";
 import { Icon } from "./icons";
 import ProjectHead, { splitTitle } from "./ProjectHead";
 import "../meridian.css";
@@ -22,7 +23,8 @@ const KIND: Record<Locale, Record<string, string>> = {
  * Teknik donanım: hafif cam kartlar (görsel kartın içinde, altında simge · özellik adı · başlık · açıklama).
  * Ana sayfadaki proje şeridiyle aynı geçiş: içerik genişliğinde 3 kart (tablette 2, telefonda 1 + sonrakinin ucu);
  * fareli ekranlarda (≥700px) sahne ekranda sabitlenir ve sayfayı aşağı kaydırmak kartları yana kaydırır (1px = 1px).
- * Dokunmatikte parmakla yana kaydırma (mıknatıslı). Ok yok; altta görünen aralık (01–03 / 04) ve ilerleme çizgisi.
+ * Dokunmatikte parmakla yana kaydırma (mıknatıslı). Altta ilerleme çizgisinin iki yanında oklar: telefonda yana
+ * kaydırılabildiği anlaşılmıyordu (kullanıcı geri bildirimi, 18 Ekim).
  */
 export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: string; id: string; locale: Locale }) {
   const t = PROJECT_UI[locale].tech;
@@ -95,11 +97,8 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
     };
   }, [pin]);
 
-  // klavye: şerit odaktayken ← → bir kart
-  const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
-    const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-    if (!dir) return;
-    e.preventDefault();
+  // bir kart ileri / geri (oklar ve klavye): sabitlemede sayfa kaydırılır, değilse şerit
+  const go = (dir: number) => {
     const el = car.current, s = sec.current, st = stage.current; if (!el) return;
     const w = step();
     if (pin && s && st) {
@@ -108,6 +107,13 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
       const padTop = parseFloat(getComputedStyle(s).paddingTop) || 0;
       window.scrollTo({ top: s.getBoundingClientRect().top + window.scrollY + padTop - (parseFloat(st.style.top) || 0) + target, behavior: "smooth" });
     } else el.scrollBy({ left: dir * w, behavior: "smooth" });
+  };
+  // klavye: şerit odaktayken ← → bir kart
+  const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
+    const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if (!dir) return;
+    e.preventDefault();
+    go(dir);
   };
 
   const pad = (v: number) => String(v).padStart(2, "0");
@@ -133,8 +139,9 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
             ))}
           </div>
           <div className="nav">
-        {/* yalnız ilerleme çizgisi (sayaç kaldırıldı) */}
+            <button type="button" className="tbtn" aria-label={t.prev} onClick={() => go(-1)} disabled={prog <= 0.001}><Arrow dir={-1} size={20} /></button>
             <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.04, prog)})` }} /></span>
+            <button type="button" className="tbtn" aria-label={t.next} onClick={() => go(1)} disabled={prog >= 0.999}><Arrow size={20} /></button>
           </div>
         </div>
       </div>
