@@ -11,6 +11,18 @@ import "./catalog.css";
 // Kitap bir kez kurulur; yalnız genişlik değişince (telefon döndürme, pencere boyutu) yeniden kurulur.
 
 type Page = { src: string; half?: "l" | "r" };
+// page-flip'in iç parçaları (telefonda geri çevirme için; paket derlemesinde adlar korunuyor, sürüm 2.0.7'ye sabit)
+type Pt = { x: number; y: number };
+type FlipCtl = {
+  flip(p: Pt): void; start(p: Pt): boolean; setState(s: string): void;
+  getCalculation(): { calc(p: Pt): boolean } | null;
+  animateFlippingTo(from: Pt, to: Pt, isTurned: boolean): void;
+};
+type FlipRender = {
+  getRect(): { left: number; top: number; width: number; height: number; pageWidth: number };
+  getOrientation(): string; convertToBook(p: Pt): Pt; finishAnimation(): void;
+};
+type FlipInner = PageFlip & { getFlipController(): FlipCtl; getRender(): FlipRender; turnToPage(i: number): void };
 type Def = { pages: Page[]; aspect: number; cover: boolean; pdf?: Partial<Record<Locale, string>> };
 
 const pad2 = (n: number) => String(n).padStart(2, "0");
@@ -124,6 +136,27 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
       });
       flip.loadFromHTML(pages);
       flip.on("flip", (e) => { const i = Number(e.data) || 0; idxRef.current = i; setIdx(i); load(i); });
+      // Telefonda (tek sayfa) geri çevirme: kütüphane önceki sayfayı kitabın solundan getiriyor; kıvrılan kısım ekran
+      // dışında kaldığı için sayfa düz kayıyormuş gibi görünüyordu, çevirme efekti yoktu (18 Ekim, iPhone). Ok, tuş,
+      // kaydırma ve sol yarıya dokunuşla geri gidişte ileri çevirme tersinden oynatılır: önceki sayfaya geçilir ve sayfa,
+      // tamamen çevrilmiş konumdan sol kenardan kıvrılarak geri gelip kapanır. Elle sürükleme kütüphanede kalır.
+      const inner = flip as FlipInner, fc = inner.getFlipController(), render = inner.getRender(), own = fc.flip.bind(fc);
+      fc.flip = (pos) => {
+        const r = render.getRect(), b = render.convertToBook(pos);
+        if (render.getOrientation() !== "portrait" || b.x - r.pageWidth > r.width / 5) return own(pos); // ileri ya da açılım
+        if (fc.getCalculation() !== null) render.finishAnimation(); // süren çevirmeyi bitir (kütüphane de böyle yapar)
+        const cur = inner.getCurrentPageIndex();
+        if (cur <= 0) return;
+        const bottom = b.y >= r.height / 2;
+        inner.turnToPage(cur - 1);
+        // ileri çevirmeyle aynı köşe → çevrilen sayfa önceki sayfa, altta kalan şimdiki sayfa
+        if (!fc.start({ x: r.left + r.pageWidth * 2 - 10, y: r.top + (bottom ? r.height - 2 : 1) })) return;
+        fc.setState("flipping");
+        const m = r.height / 10; // kütüphanenin ileri çevirmede köşeyi kaldırdığı pay
+        const from = { x: -r.pageWidth, y: bottom ? r.height : 0 }, to = { x: r.pageWidth - m, y: bottom ? r.height - m : m };
+        fc.getCalculation()?.calc(from);
+        fc.animateFlippingTo(from, to, false);
+      };
       flipRef.current = flip;
       setReady(true);
     })();
