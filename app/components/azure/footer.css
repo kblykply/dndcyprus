@@ -36,11 +36,27 @@
 @media (max-width: 720px) {
   .az-footer ul { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: minmax(0, 1fr); }
 }
+/* bağlantı grupları (FooterGroup): geniş ekranda başlık düz metin, liste hep açık */
+.az-footer .fg .tg { display: none; }
 @media (max-width: 600px) {
-  .az-footer .g { gap: 24px 16px; }
-  .az-footer .brand { display: block; }
+  .az-footer .g { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .az-footer .brand { display: block; padding-bottom: 22px; }
   .az-footer .brand .top { flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .az-footer .bottom { flex-direction: column; }
+  .az-footer .bottom { flex-direction: column; margin-top: 0; }
+  /* telefonda akordeon: alt alta yedişer bağlantı altbilgiyi çok uzatıyordu (18 Ekim). Gruplar kapalı başlar,
+     başlığa dokununca iki sütunlu liste yumuşakça açılır; kapalıyken bağlantılar görünmez ve sekmeyle odaklanmaz */
+  .az-footer .fg { border-top: 1px solid var(--line); }
+  .az-footer .fg h2 { margin: 0; font-size: 12px; }
+  .az-footer .fg h2 .t { display: none; }
+  .az-footer .fg .tg { display: flex; width: 100%; justify-content: space-between; align-items: center; padding: 16px 0; border: 0; background: none; font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; cursor: pointer; }
+  .az-footer .fg .tg i { position: relative; flex: none; width: 14px; height: 14px; color: var(--ink-60); }
+  .az-footer .fg .tg i::before, .az-footer .fg .tg i::after { content: ""; position: absolute; left: 0; top: 6.5px; width: 14px; height: 1.5px; border-radius: 1px; background: currentColor; transition: transform .35s var(--ease); }
+  .az-footer .fg .tg i::after { transform: rotate(90deg); }
+  .az-footer .fg.open .tg i::after { transform: rotate(0deg); }
+  .az-footer .fg .bd { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows .35s var(--ease), visibility 0s .35s; }
+  .az-footer .fg.open .bd { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .35s var(--ease); }
+  .az-footer .fg .bd > div { min-height: 0; overflow: hidden; }
+  .az-footer .fg ul { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; padding: 2px 0 20px; }
 }
 /* çok dar ekranda logo + dört simge metinden geniş kalmasın (FooterFit satırı metnin bittiği yere çeker) */
 @media (max-width: 360px) { .az-footer .brand .top { gap: 10px; } .az-footer .soc { gap: 5px; } }

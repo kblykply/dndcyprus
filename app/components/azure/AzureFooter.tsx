@@ -6,6 +6,7 @@ import { CONTACT, FOOTER_COPY, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, t
 import CookiePrefsLink from "./CookiePrefsLink";
 import "./footer.css";
 import FooterFit from "./FooterFit";
+import FooterGroup from "./FooterGroup";
 
 // sosyal medya ayrı sütun yerine logonun yanında simge olarak durur
 const SOCIAL_ICONS: Record<string, IconType> = {
@@ -44,19 +45,17 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
             </p>
             <FooterFit />
           </div>
-          <div>
-            <h2>{t.projects}</h2>
+          <FooterGroup id="ft-projects" title={t.projects}>
             <ul style={rows(PROJECTS.length + 1)}>
               <li><Link href={href(locale, "/projects")} prefetch={false}>{n.all}</Link></li>
               {PROJECTS.map((p) => <li key={p.slug}><Link href={href(locale, `/${p.slug}`)} prefetch={false}>{p.name}</Link></li>)}
             </ul>
-          </div>
-          <div>
-            <h2>{t.general}</h2>
+          </FooterGroup>
+          <FooterGroup id="ft-general" title={t.general}>
             <ul style={rows(general.length)}>
               {general.map((g) => <li key={g.path}><Link href={href(locale, g.path)} prefetch={false}>{g.label}</Link></li>)}
             </ul>
-          </div>
+          </FooterGroup>
         </div>
         <div className="bottom">
           <span>© {year} CY-DND HOMES LTD. {t.rights}</span>

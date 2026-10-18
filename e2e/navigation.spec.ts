@@ -68,3 +68,28 @@ test.describe("mobil menü", () => {
     await expect(panel).not.toHaveClass(/\bon\b/);
   });
 });
+
+test.describe("altbilgi", () => {
+  test.beforeEach(async ({ page }) => { await prepare(page); });
+
+  // telefonda Projeler / Genel akordeon (kapalı başlar); geniş ekranda başlık düz metin, bağlantılar hep görünür
+  test("telefonda bağlantı grupları kapalı başlar, dokununca açılır; geniş ekranda hep açık", async ({ page }, info) => {
+    await page.goto("/tr");
+    const foot = page.locator("footer.az-footer");
+    const link = foot.getByRole("link", { name: "Lagoon Verde" });
+    const btn = foot.getByRole("button", { name: "Projeler" });
+    await foot.scrollIntoViewIfNeeded();
+    if (!isMobile(info)) {
+      await expect(btn).toHaveCount(0);
+      await expect(link).toBeVisible();
+      return;
+    }
+    await expect(btn).toHaveAttribute("aria-expanded", "false");
+    await expect(link).toBeHidden();
+    await btn.click();
+    await expect(btn).toHaveAttribute("aria-expanded", "true");
+    await expect(link).toBeVisible();
+    await btn.click();
+    await expect(link).toBeHidden();
+  });
+});
