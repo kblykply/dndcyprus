@@ -80,7 +80,14 @@
 .mr-tour iframe { width: 100%; height: 100%; border: 0; display: block; }
 .mr-tour .fs { position: absolute; inset: auto 14px 14px auto; z-index: 2; }
 .mr-tour .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 14px; margin-top: 14px; border-top: 1px solid var(--hair); }
-.mr-tour .row a { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+/* "Yeni sekmede aç": sitenin cam hap düğmesi, solda deniz renginde yuvarlak ok (altı çizili düz bağlantı sönük duruyordu) */
+.mr-tour .row a.open { display: inline-flex; align-items: center; gap: 10px; padding: 5px 18px 5px 5px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--ink); background: var(--glass-b); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 8px 24px rgba(13, 35, 38, .08); backdrop-filter: blur(12px); transition: transform .4s var(--ease), box-shadow .4s, background .3s; }
+.mr-tour .row a.open i { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--sea); color: #fff; transition: background .3s; }
+.mr-tour .row a.open i svg { transition: transform .4s var(--ease); }
+.mr-tour .row a.open:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 14px 34px rgba(13, 35, 38, .12); }
+.mr-tour .row a.open:hover i { background: var(--sea-deep); }
+.mr-tour .row a.open:hover i svg { transform: translate(2px, -2px); }
+.mr-tour .row a.open:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
 @media (max-width: 700px) { .mr-tour .stage { height: clamp(300px, 58vh, 560px); border-radius: 22px; } }
 
 /* ---- Kat planları (konsept-2 "feat"): liste · görsel · alan tablosu ---- */
@@ -144,6 +151,11 @@
   .mr-units > .mr-ctas { grid-column: 1 / -1; }
 }
 @media (max-width: 700px) {
+  /* telefonda tablo yalnız seçili tipin boyunda: en uzun tablonun yerini tutunca kısa tablolarla not arasında
+     ekran yüksekliğinin üçte biri kadar boşluk kalıyordu (18 Ekim). Düğmeler tablonun altında, kayma sorun değil */
+  .mr-units .tbl .stack > .pane:not(.on) { display: none; }
+  /* düğmeler her satırı doldurur; tek kalan düğme tam genişlik */
+  .mr-ctas > .az-btn { flex: 1 1 auto; }
   .mr-units { grid-template-columns: 1fr; }
   .mr-units .list { grid-template-columns: 1fr; }
   .mr-units .list button { padding: 16px 30px 16px 0; }

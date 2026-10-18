@@ -505,7 +505,15 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 }
 @media (max-width: 1000px) { .az-mobile { background: rgba(238, 245, 246, .97); } }
 .az-hero .top .tagrow { display: flex; gap: 8px; flex-wrap: wrap; }
-@media (max-width: 600px) { .az-hero .top .tagrow { flex-wrap: nowrap; } }
+/* telefonda etiketler yana kaymaz: tek satıra tam sığanlar görünür, sığmayan alt satıra iner ve satır yüksekliğiyle
+   tamamen gizlenir (kaydırılan satırda son etiket bannerın kenarında yarım kalıyordu, 18 Ekim). Konum ve teslim
+   bilgisi sayfadaki "Bilgiler" bölümünde; ekran okuyucu bütün etiketleri okur */
+@media (max-width: 600px) {
+  .az-hero .top > .tagrow { flex-wrap: wrap; overflow: hidden; max-height: 34px; padding-bottom: 0; }
+  .az-hero .top .az-tag { font-size: 11px; line-height: 16px; padding: 8px 13px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  /* düğmeler satırı doldurur: yan yana sığmayınca ikisi de tam genişlik (farklı boyda alt alta durmaz) */
+  .az-hero .cta > .az-btn { flex: 1 1 auto; }
+}
 .az-hero .top .tagrow:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 999px; }
 
 /* ==========================================================================
@@ -589,6 +597,18 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 .az-loc .addr { margin-top: 18px; font-size: 14px; color: var(--ink-60); }
 .az-loc .addr b { color: var(--ink); font-weight: 600; }
 .az-loc .btns { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
+.az-loc .btns .sh { display: none; }
+/* telefonda iki sütun, tek kalan düğme tam genişlik; uzun "… ile Yol Tarifi" yerine kısa etiket (üç satır yerine iki) */
+@media (max-width: 600px) {
+  .az-loc .t { padding-inline: 22px; }
+  .az-loc .btns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .az-loc .btns .az-btn { padding-inline: 10px; }
+  .az-loc .btns .az-btn:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .az-loc .btns .lg { display: none; }
+  .az-loc .btns .sh { display: inline; }
+}
+/* 360 px altı (iPhone SE 1): kısa etiket de yarım genişliğe sığmıyor, düğmeler alt alta */
+@media (max-width: 359px) { .az-loc .btns { grid-template-columns: minmax(0, 1fr); } }
 .az-loc .az-tags { margin-top: 16px; }
 @media (max-width: 900px) { .az-loc .map.live { min-height: 320px; } }
 

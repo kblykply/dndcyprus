@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { PiArrowSquareOutDuotone, PiArrowsInDuotone, PiArrowsOutDuotone, PiPlayFill } from "react-icons/pi";
+import { PiArrowUpRightBold, PiArrowsInDuotone, PiArrowsOutDuotone, PiPlayFill } from "react-icons/pi";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
 
@@ -47,7 +47,7 @@ export default function TourStage({ src, poster, iframeTitle, locale }: { src: s
       </div>
       <div className="row">
         <span className="mr-mono">360° · {iframeTitle}</span>
-        <a href={src} target="_blank" rel="noopener noreferrer" data-track="tour_start"><PiArrowSquareOutDuotone size={15} /> {t.open}</a>
+        <a className="open" href={src} target="_blank" rel="noopener noreferrer" data-track="tour_start"><i aria-hidden><PiArrowUpRightBold size={15} /></i>{t.open}</a>
       </div>
     </div>
   );

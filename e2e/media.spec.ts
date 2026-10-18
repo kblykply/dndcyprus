@@ -73,7 +73,8 @@ test("katalog oklarla çevrilir", async ({ page }, info) => {
   test.info().annotations.push({ type: "görünüm", description: isMobile(info) ? "tek sayfa" : "açılım" });
 });
 
-test("kat planında tip değiştirmek kartın yüksekliğini değiştirmez", async ({ page }) => {
+// telefonda tablo yalnız seçili tipin boyunda (kısa tabloyla not arasında boşluk kalmasın); geniş ekranda kart sabit
+test("kat planında tip değiştirmek kartın yüksekliğini değiştirmez, telefonda tablonun altında boşluk kalmaz", async ({ page }, info) => {
   await page.goto("/tr/lagoon-verde");
   const units = page.locator(".mr-units").first();
   await units.scrollIntoViewIfNeeded();
@@ -86,6 +87,11 @@ test("kat planında tip değiştirmek kartın yüksekliğini değiştirmez", asy
     await settle(tabs.nth(i));
     await tabs.nth(i).click();
     await expect(tabs.nth(i)).toHaveAttribute("aria-selected", "true");
+    if (isMobile(info)) {
+      const gap = await units.evaluate((el) => el.querySelector(".tbl .note")!.getBoundingClientRect().top - el.querySelector(".tbl .pane.on")!.getBoundingClientRect().bottom);
+      expect(gap, `tip ${i}: tablo ile not arası`).toBeLessThan(40);
+      continue;
+    }
     const h = (await units.boundingBox())!.height;
     expect(Math.abs(h - h0), `tip ${i}`).toBeLessThanOrEqual(1);
   }

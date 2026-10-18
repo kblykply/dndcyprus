@@ -40,7 +40,16 @@
 .az-tech .tbtn { position: absolute; z-index: 3; top: calc(16px + (var(--cw) - 20px) * .425); transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--ink); background: var(--glass-b); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 8px 24px rgba(13, 35, 38, .14); backdrop-filter: blur(10px); transition: background .3s, color .3s, opacity .3s; }
 .az-tech .tbtn.prev { left: -24px; }
 .az-tech .tbtn.next { right: -24px; }
-@media (max-width: 699px) { .az-tech .tbtn { width: 42px; height: 42px; } .az-tech .tbtn.prev { left: 8px; } .az-tech .tbtn.next { right: 8px; } }
+/* telefonda oklar öndeki kartın iki kenarına simetrik oturur (masaüstündeki gibi kenarı ortalar). Eskiden sol ok
+   fotoğrafın üstünde, sağ ok kartın dışındaydı (18 Ekim). Son kart da başa hizalansın diye şeridin sonunda kart
+   dışında kalan pay kadar boşluk var; oklar her kartta aynı yerde */
+@media (max-width: 699px) {
+  .az-tech .tbtn { width: 40px; height: 40px; }
+  .az-tech .tbtn.prev { left: -20px; }
+  .az-tech .tbtn.next { right: auto; left: calc(var(--cw) - 20px); }
+  /* dolgu değil boş öğe: dolgu içerik kutusunu, dolayısıyla %86'lık kartı da daraltıyordu */
+  .az-tech:not(.pin) .az-tcards::after { content: ""; flex: 0 0 calc(14% - 18px); }
+}
 .az-tech.pin[style*="--fig"] .tbtn { top: calc(16px + var(--fig) / 2); }
 .az-tech .tbtn:hover { background: var(--sea); color: #fff; }
 .az-tech .tbtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }

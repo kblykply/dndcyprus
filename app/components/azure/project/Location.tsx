@@ -43,9 +43,14 @@ export default function Location({ d, name, id, locale }: { d: ProjectLocation; 
               </ul>
             )}
             {d.nearby.length > 0 && <div className="az-tags">{d.nearby.map((n) => <span key={n}>{n}</span>)}</div>}
+            {/* telefonda kısa etiket ("Google Haritalar"): üç düğme iki satıra sığar; erişilebilir ad tam metin */}
             <div className="btns">
-              <a className="az-btn sea sm" href={googleDir} target="_blank" rel="noreferrer">{t.google}</a>
-              <a className="az-btn glass sm" href={appleDir} target="_blank" rel="noreferrer">{t.apple}</a>
+              <a className="az-btn sea sm" href={googleDir} target="_blank" rel="noreferrer" aria-label={t.google}>
+                <span className="lg">{t.google}</span><span className="sh">{t.googleShort}</span>
+              </a>
+              <a className="az-btn glass sm" href={appleDir} target="_blank" rel="noreferrer" aria-label={t.apple}>
+                <span className="lg">{t.apple}</span><span className="sh">{t.appleShort}</span>
+              </a>
               <a className="az-btn glass sm" href={googleOpen} target="_blank" rel="noreferrer">{t.open}</a>
             </div>
           </div>
