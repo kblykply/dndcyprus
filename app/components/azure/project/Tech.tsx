@@ -23,8 +23,8 @@ const KIND: Record<Locale, Record<string, string>> = {
  * Teknik donanım: hafif cam kartlar (görsel kartın içinde, altında simge · özellik adı · başlık · açıklama).
  * Ana sayfadaki proje şeridiyle aynı geçiş: içerik genişliğinde 3 kart (tablette 2, telefonda 1 + sonrakinin ucu);
  * fareli ekranlarda (≥700px) sahne ekranda sabitlenir ve sayfayı aşağı kaydırmak kartları yana kaydırır (1px = 1px).
- * Dokunmatikte parmakla yana kaydırma (mıknatıslı). Altta ilerleme çizgisinin iki yanında oklar: telefonda yana
- * kaydırılabildiği anlaşılmıyordu (kullanıcı geri bildirimi, 18 Ekim).
+ * Dokunmatikte parmakla yana kaydırma (mıknatıslı). Oklar fotoğrafların iki yanında (telefonda yana kaydırılabildiği
+ * anlaşılmıyordu, 18 Ekim); altta ilerleme çizgisi.
  */
 export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: string; id: string; locale: Locale }) {
   const t = PROJECT_UI[locale].tech;
@@ -123,6 +123,9 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
       <div className="az-wrap">
         <div ref={stage} className="stage">
           <ProjectHead kicker={d.kicker} title={splitTitle(d.title, name)} lead={d.lead} />
+          {/* oklar fotoğrafların iki yanında, fotoğrafın dikey ortasında (tech.css .tbtn) */}
+          <div className="tc-wrap">
+          <button type="button" className="tbtn prev" aria-label={t.prev} onClick={() => go(-1)} disabled={prog <= 0.001}><Arrow dir={-1} size={20} /></button>
           <div className="az-tcards" ref={car} tabIndex={0} role="region" aria-roledescription="carousel" aria-label={t.list} onKeyDown={onKey}>
             {d.items.map((c, k) => (
               <article key={c.title + k} className={`az-tcard rv d${k % 3}`}>
@@ -138,10 +141,10 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
               </article>
             ))}
           </div>
+          <button type="button" className="tbtn next" aria-label={t.next} onClick={() => go(1)} disabled={prog >= 0.999}><Arrow size={20} /></button>
+          </div>
           <div className="nav">
-            <button type="button" className="tbtn" aria-label={t.prev} onClick={() => go(-1)} disabled={prog <= 0.001}><Arrow dir={-1} size={20} /></button>
             <span className="bar" aria-hidden><i style={{ transform: `scaleX(${Math.max(0.04, prog)})` }} /></span>
-            <button type="button" className="tbtn" aria-label={t.next} onClick={() => go(1)} disabled={prog >= 0.999}><Arrow size={20} /></button>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 /* Teknik donanım: hafif cam kartlar; ana sayfa proje şeridiyle aynı geçiş (3 kart, sabitlenip sayfayla yana akar), altta oklar */
 /* overflow-y: hidden — yalnız overflow-x verilince dikey eksen "auto" oluyor ve şerit dikeyde de birkaç px
    kayıyordu: tekerlek/parmak önce şeridi kaydırıp sayfa bir an takılıyordu */
-.az-tcards { display: flex; gap: 18px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 6px 0 16px; scrollbar-width: none; outline: none; }
+/* kart gölgesi (40px yayılım) şeridin taşma sınırında kesilip kartların altında kare bir bant bırakıyordu:
+   dolgu gölgeyi içine alır, aynı ölçüde negatif boşluk yerleşimi korur */
+.az-tcards { display: flex; gap: 18px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 24px 24px 60px; margin: -18px -24px -44px; scroll-padding-inline: 24px; scrollbar-width: none; outline: none; }
 .az-tcards::-webkit-scrollbar { display: none; }
 .az-tcards:focus-visible { box-shadow: inset 0 0 0 2px var(--coral); border-radius: 28px; }
 .az-tcard {
@@ -23,11 +25,19 @@
 @media (max-width: 1099px) { .az-tcard { flex-basis: calc((100% - 18px) / 2); } }
 @media (max-width: 699px) { .az-tcard { flex-basis: 86%; } }
 
-/* alt şerit: ← ilerleme çizgisi → (oklar katalogdaki cam yuvarlak düğmelerle aynı) */
-.az-tech .tbtn { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--ink); background: var(--glass-b); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 8px 24px rgba(13, 35, 38, .1); transition: background .3s, color .3s, opacity .3s; }
+/* oklar fotoğrafların iki yanında, fotoğrafın dikey ortasında (katalogdaki cam yuvarlak düğmelerle aynı).
+   Fotoğraf yüksekliği kart genişliğinden: (kart − 20px iç boşluk) × 3.4/4; kart genişliği kart sayısına göre */
+.az-tech .tc-wrap { position: relative; container-type: inline-size; --cw: calc((100cqw - 36px) / 3); }
+@media (max-width: 1099px) { .az-tech .tc-wrap { --cw: calc((100cqw - 18px) / 2); } }
+@media (max-width: 699px) { .az-tech .tc-wrap { --cw: calc(100cqw * .86); } }
+.az-tech .tbtn { position: absolute; z-index: 3; top: calc(16px + (var(--cw) - 20px) * .425); transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--ink); background: var(--glass-b); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 8px 24px rgba(13, 35, 38, .14); backdrop-filter: blur(10px); transition: background .3s, color .3s, opacity .3s; }
+.az-tech .tbtn.prev { left: -24px; }
+.az-tech .tbtn.next { right: -24px; }
+@media (max-width: 699px) { .az-tech .tbtn { width: 42px; height: 42px; } .az-tech .tbtn.prev { left: 8px; } .az-tech .tbtn.next { right: 8px; } }
+.az-tech.pin[style*="--fig"] .tbtn { top: calc(16px + var(--fig) / 2); }
 .az-tech .tbtn:hover { background: var(--sea); color: #fff; }
 .az-tech .tbtn:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
-.az-tech .tbtn:disabled { opacity: .3; pointer-events: none; }
+.az-tech .tbtn:disabled { opacity: 0; pointer-events: none; }
 .az-tech .nav { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); margin-top: 6px; }
 .az-tech .count { font-family: var(--font-display), sans-serif; font-size: 15px; letter-spacing: .04em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .az-tech .count i { font-style: normal; color: var(--ink-40); margin: 0 2px; }
