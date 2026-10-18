@@ -24,6 +24,13 @@
 .az-tcard p { margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: var(--ink-60); max-width: 44ch; }
 @media (max-width: 1099px) { .az-tcard { flex-basis: calc((100% - 18px) / 2); } }
 @media (max-width: 699px) { .az-tcard { flex-basis: 86%; } }
+/* dokunmatik/dar ekranda şerit ekranın iki kenarına kadar uzanır: kenar boşluğunun 8–30 px içinde kesilince yandaki
+   kart ve gölgesi dikey bir çizgiyle bitiyordu (18 Ekim, iPhone). İçerik kutusu aynı genişlikte kalır, kartlar yine
+   içerik hizasında durur. Pay = bölüm + .az-wrap kenar boşluğu (scroll-padding yüzdesi şeridin kendi genişliğinden
+   hesaplandığı için yüzde kullanılmaz) */
+@media (max-width: 1099px) {
+  .az-tech:not(.pin) .az-tcards { --bleed: calc(2 * var(--gutter)); margin-inline: calc(-1 * var(--bleed)); padding-inline: var(--bleed); scroll-padding-inline: var(--bleed); }
+}
 
 /* oklar fotoğrafların iki yanında, fotoğrafın dikey ortasında (katalogdaki cam yuvarlak düğmelerle aynı).
    Fotoğraf yüksekliği kart genişliğinden: (kart − 20px iç boşluk) × 3.4/4; kart genişliği kart sayısına göre */
