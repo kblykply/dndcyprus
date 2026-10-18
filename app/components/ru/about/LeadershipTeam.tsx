@@ -9,6 +9,18 @@ import { m as motion, Variants, AnimatePresence } from "framer-motion";
 const TEAL = "#0d6570";
 const ORANGE = "#cd4824";
 
+// Kategori adları veride İngilizce tutulur (filtre anahtarı); ekranda sayfanın dilinde gösterilir
+const CATEGORY_LABELS: Record<string, string> = {
+  All: "Все",
+  Leadership: "Руководство",
+  Architecture: "Архитектура",
+  Engineering: "Инженерия",
+  Operations: "Сервис",
+  Finance: "Финансы",
+  Sales: "Продажи",
+  Marketing: "Маркетинг",
+};
+
 type Socials = {
   linkedin?: string;
   instagram?: string;
@@ -466,7 +478,7 @@ members = [
           {categories.map((cat) => (
             <Badge
               key={cat}
-              label={cat}
+              label={CATEGORY_LABELS[cat] ?? cat}
               active={activeCat === cat}
               color={undefined}
               onClick={() => setActiveCat(cat)}
@@ -478,7 +490,7 @@ members = [
       {/* FULL-IMAGE GRID */}
       <motion.div
         layout
-        className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
+        className="mt-8 grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4"
       >
         <AnimatePresence initial={false} mode="popLayout">
           
@@ -488,7 +500,7 @@ members = [
               src: m.photo || "/teams/okan.png",
               alt: m.name,
               quality: 75,
-              sizes: "(min-width: 1280px) 224px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 32px)",
+              sizes: "(min-width: 1280px) 224px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 640px) calc((100vw - 72px) / 2), calc((100vw - 44px) / 2)",
               className: "object-cover transition-transform duration-700 group-hover:scale-[1.05]",
             };
             return (
@@ -512,24 +524,24 @@ members = [
 
                   {/* Category pill */}
                   <span
-                    className="az-st absolute left-3 top-3"
+                    className="az-st absolute left-3 top-3 max-sm:hidden"
                   >
-                    {m.category}
+                    {CATEGORY_LABELS[m.category] ?? m.category}
                   </span>
 
                   {/* Info box on image */}
-                  <div className="absolute inset-x-0 bottom-0 p-5 ">
-                    <div className="rounded-[18px] bg-white/85 backdrop-blur-md p-4 ring-1 ring-white/70 shadow-[0_8px_24px_rgba(13,35,38,0.14)] group-hover:translate-y-0 translate-y-1 transition-transform h-[110px]">
-                      <h2 className="text-[15px] leading-tight text-[var(--ink)]">{m.name}</h2>
-                      <div className="text-[11px] mt-1 uppercase tracking-[0.08em] font-semibold text-[var(--sea)]">{m.role}</div>
+                  <div className="absolute inset-x-0 bottom-0 p-2 sm:p-5">
+                    <div className="rounded-[18px] bg-white/85 backdrop-blur-md ring-1 ring-white/70 shadow-[0_8px_24px_rgba(13,35,38,0.14)] group-hover:translate-y-0 translate-y-1 transition-transform p-2.5 sm:p-4 sm:h-[110px]">
+                      <h2 className="text-[13px] sm:text-[15px] leading-tight text-[var(--ink)]">{m.name}</h2>
+                      <div className="text-[9.5px] sm:text-[11px] mt-1 uppercase tracking-[0.06em] sm:tracking-[0.08em] font-semibold text-[var(--sea)]">{m.role}</div>
                       {m.bio ? (
-                        <p className="mt-1.5 text-xs leading-relaxed text-[var(--ink-60)] line-clamp-2">
+                        <p className="mt-1.5 hidden sm:block text-xs leading-relaxed text-[var(--ink-60)] line-clamp-2">
                           {m.bio}
                         </p>
                       ) : null}
 
                       {/* socials */}
-                      <div className="mt-3 flex items-center gap-3 flex-wrap">
+                      <div className="mt-3 hidden sm:flex items-center gap-3 flex-wrap">
                         <SocialLink href={m.socials?.linkedin} label="LinkedIn" />
                         <SocialLink href={m.socials?.instagram} label="Instagram" />
                         <SocialLink href={m.socials?.x} label="X" />

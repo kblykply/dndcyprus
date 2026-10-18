@@ -196,6 +196,13 @@ body.az-lock { overflow: hidden; }
   .az-hero .top .play span { display: none; }
 }
 @media (max-width: 480px) { .az-hero .chips { grid-template-columns: 1fr; } }
+/* telefon ve tablette yazı fotoğrafın ortasına kadar çıkıyor; yalnız alttan başlayan koyulaşma oraya yetmiyordu
+   (Mariachi, Projeler gibi parlak fotoğraflarda başlık ve açıklama okunmuyordu). Renk tonu yok: koyulaşma yukarı
+   uzar, yazıya hafif gölge düşer. */
+@media (max-width: 900px) {
+  .az-hero .frame::after { background: linear-gradient(180deg, rgba(8, 14, 16, .22) 0%, rgba(8, 14, 16, .1) 16%, rgba(8, 14, 16, .3) 42%, rgba(8, 14, 16, .62) 100%); }
+  .az-hero h1, .az-hero .c p { text-shadow: 0 1px 18px rgba(8, 14, 16, .45); }
+}
 
 /* ---- reveal ---- */
 .az-js .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
