@@ -7,8 +7,11 @@
 .az-cat .stage:focus-visible { box-shadow: 0 0 0 2px var(--coral); }
 /* kitabın altında yere düşen gölge */
 .az-cat .stage::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: -26px; height: 40px; z-index: -1; background: radial-gradient(50% 50% at 50% 50%, rgba(13, 35, 38, .32), transparent 70%); pointer-events: none; }
-.az-cat .shift { transition: transform .9s cubic-bezier(.22, .8, .2, 1); }
-.az-cat .book { filter: drop-shadow(0 18px 30px rgba(13, 35, 38, .18)); }
+/* çevrilen sayfa üst köşeden döndürülürken kitabın alt kenarının ~100 px dışına savruluyordu: kutu üstten ve alttan
+   kırpılır (yanlar açık: telefonda tek sayfa sola doğru çevrilir) */
+.az-cat .shift { transition: transform .9s cubic-bezier(.22, .8, .2, 1); overflow-x: visible; overflow-y: clip; }
+/* kitapta CSS filtresi yok (La Joya'da da yok): drop-shadow çevirme animasyonunu her karede yeniden işletip
+   takıltı yapıyordu; zemin gölgesi .stage::after */
 .az-cat .shift.empty { border-radius: 4px; background: rgba(255, 255, 255, .55); }
 .az-cat .pg { position: relative; overflow: hidden; background: #fff; }
 .az-cat .pg img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
