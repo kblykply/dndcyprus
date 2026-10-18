@@ -430,6 +430,12 @@ body.az-lock { overflow: hidden; }
 .az-contact .off a { color: #fff; }
 .az-contact .hl { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
 .az-contact .hl span { padding: 8px 13px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); font-size: 12px; font-weight: 500; }
+/* telefonda etiketler ikişer: satırda tek etiket kalmasın; tek sayıda etiket varsa sonuncusu tam satır */
+@media (max-width: 600px) {
+  .az-contact .hl { display: grid; grid-template-columns: 1fr 1fr; }
+  .az-contact .hl span { display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 6px; font-size: 11.5px; line-height: 1.25; border-radius: 16px; }
+  .az-contact .hl span:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 .az-contact .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 22px; border-radius: 26px; background: rgba(255, 255, 255, .14); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, .3); align-self: stretch; grid-template-rows: auto auto 1fr auto auto; }
 .az-field { display: grid; gap: 6px; }
