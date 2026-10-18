@@ -32,7 +32,8 @@ test("çapaya indikten sonra kullanıcı kaydırınca sayfa geri çekilmez", asy
   await page.waitForLoadState("load");
   await expect.poll(() => offset(page, "fiyat-al"), { timeout: 15_000 }).toBeLessThanOrEqual(4);
   const y0 = await page.evaluate(() => window.scrollY);
-  await page.mouse.move(200, 400);
+  // fare kenar boşluğunda: form alanının üstündeyken Firefox tekerleği iç alana veriyordu
+  await page.mouse.move(6, 450);
   await page.mouse.wheel(0, -3000);
   // tekerlek adımı tarayıcıya göre değişir (Firefox daha az kaydırır): belirgin bir yukarı kayma yeterli
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(y0 - 200);
