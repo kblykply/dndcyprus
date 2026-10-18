@@ -22,11 +22,11 @@
 .az-cat .side:disabled { opacity: .3; pointer-events: none; }
 .az-cat .bar { display: block; width: min(420px, 60%); height: 2px; margin: 40px auto 0; border-radius: 2px; background: rgba(13, 35, 38, .12); overflow: hidden; }
 .az-cat .bar i { display: block; height: 100%; background: var(--sea); transform-origin: left; transition: transform .4s var(--ease); }
-/* telefon ve dar tablet: tek sayfa, oklar kitabın üstünde iki kenarda */
+/* telefon ve dar tablet: tek sayfa; oklar kitabın altında, ilerleme çizgisinin iki yanında
+   (kitabın üstündeyken sayfa metninin üstüne biniyordu) */
 @media (max-width: 760px) {
-  .az-cat .side { position: absolute; z-index: 5; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(13, 35, 38, .45); border-color: rgba(255, 255, 255, .3); color: #fff; backdrop-filter: blur(8px); }
-  .az-cat .side.prev { left: 6px; }
-  .az-cat .side.next { right: 6px; }
-  .az-cat .side:disabled { opacity: 0; }
-  .az-cat .bar { margin-top: 32px; }
+  .az-cat .row { flex-wrap: wrap; justify-content: space-between; row-gap: 22px; }
+  .az-cat .stage { order: -1; flex: 1 1 100%; }
+  .az-cat .side { width: 44px; height: 44px; }
+  .az-cat .bar { width: calc(100% - 132px); margin-top: -23px; }
 }
