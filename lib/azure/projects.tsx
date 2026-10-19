@@ -2,7 +2,7 @@
 import type { Locale } from "./site";
 
 export type ProjectPage = {
-  slug: "lagoon-verde" | "perla-ii" | "perla" | "la-joya";
+  slug: "neocity" | "lagoon-verde" | "perla-ii" | "perla" | "la-joya";
   name: string;
   logo: string;
   image: string;        // hero (fotogerçekçi)
@@ -20,6 +20,18 @@ export type ProjectPage = {
 };
 
 export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
+  // NeoCity: "NEOCITY PRESANTATION" sunumundan (Ekim 2026). Teslim tarihi verilmedi: üçüncü etiket etap bilgisi
+  neocity: {
+    slug: "neocity", name: "NeoCity", logo: "/logos/web/neocity-white.webp", image: "/neocity/hero.jpg", ctaImage: "/neocity/g-02.jpg",
+    tagline: { tr: "Gazimağusa ve Tuzla’nın yanı başında, yerli aileler için villa yaşamı.", en: "Villa living for local families, right beside Famagusta and Tuzla.", de: "Villenleben für einheimische Familien, direkt neben Famagusta und Tuzla.", ru: "Жизнь в вилле для местных семей — рядом с Фамагустой и Тузлой.", pl: "Życie w willi dla lokalnych rodzin, tuż obok Famagusty i Tuzli." },
+    location: { tr: "Tuzla, Gazimağusa", en: "Tuzla, Famagusta", de: "Tuzla, Famagusta", ru: "Тузла, Фамагуста", pl: "Tuzla, Famagusta" },
+    status: { tr: "Yeni Proje", en: "New Project", de: "Neues Projekt", ru: "Новый проект", pl: "Nowy projekt" },
+    delivery: { tr: "1. Etap · 54 Villa", en: "Phase 1 · 54 Villas", de: "1. Bauabschnitt · 54 Villen", ru: "1-я очередь · 54 виллы", pl: "Etap 1 · 54 wille" },
+    chips: { tr: [{ big: "54", label: "Villa" }, { big: "20.170", label: "m² arsa" }, { big: "60", label: "ay · %0 faiz, TL" }], en: [{ big: "54", label: "Villas" }, { big: "20,170", label: "m² plot" }, { big: "60", label: "months · 0% interest, lira" }], de: [{ big: "54", label: "Villen" }, { big: "20.170", label: "m² Grundstück" }, { big: "60", label: "Monate · 0 % Zinsen, Lira" }], ru: [{ big: "54", label: "Виллы" }, { big: "20 170", label: "m² участка" }, { big: "60", label: "мес. · 0 %, в лирах" }], pl: [{ big: "54", label: "Wille" }, { big: "20 170", label: "m² działki" }, { big: "60", label: "mies. · 0%, w lirach" }] },
+    ctaLead: { tr: "Tuzla, Gazimağusa — eğitim, sağlık ve günlük ihtiyaçlara birkaç dakika. Tek villa (175 m²) ve ikiz villa (135 m²); özel bahçe, opsiyonel özel havuz ve 5 Sıfır ödeme modeli.", en: "Tuzla, Famagusta — minutes from schools, healthcare and daily needs. Single villa (175 m²) and twin villa (135 m²) with private garden, optional private pool and the 5 Zeros payment model.", de: "Tuzla, Famagusta – Schulen, Gesundheitsversorgung und Einkauf in wenigen Minuten. Freistehende Villa (175 m²) und Doppelvilla (135 m²) mit Privatgarten, optionalem Privatpool und dem 5-Null-Zahlungsmodell.", ru: "Тузла, Фамагуста — школы, медицина и магазины в нескольких минутах. Отдельная вилла (175 m²) и дуплекс-вилла (135 m²): частный сад, бассейн по желанию и модель оплаты «5 нулей».", pl: "Tuzla, Famagusta – szkoły, opieka zdrowotna i zakupy w kilka minut. Willa wolnostojąca (175 m²) i bliźniacza (135 m²) z prywatnym ogrodem, opcjonalnym basenem i modelem płatności „5 zer”." },
+    highlights: { tr: ["Özel bahçe", "Opsiyonel özel havuz", "Site içi market, eczane, restoran", "Spor tesisi & çocuk oyun alanı", "DAÜ'ye 6 dk", "5 Sıfır ödeme"], en: ["Private garden", "Optional private pool", "On-site market, pharmacy, restaurant", "Sports facility & playground", "6 min to EMU", "5 Zeros payment"], de: ["Privatgarten", "Optionaler Privatpool", "Markt, Apotheke, Restaurant in der Anlage", "Sportanlage & Spielplatz", "6 Min. zur EMU", "5-Null-Zahlung"], ru: ["Частный сад", "Бассейн по желанию", "Магазин, аптека, ресторан на территории", "Спорт и детская площадка", "6 мин до EMU", "Оплата «5 нулей»"], pl: ["Prywatny ogród", "Opcjonalny basen", "Market, apteka, restauracja na miejscu", "Obiekt sportowy i plac zabaw", "6 min do EMU", "Płatność „5 zer”"] },
+    unitTypes: { tr: ["Tek Villa", "İkiz Villa"], en: ["Single Villa", "Twin Villa"], de: ["Freistehende Villa", "Doppelvilla"], ru: ["Отдельная вилла", "Дуплекс-вилла"], pl: ["Willa wolnostojąca", "Willa bliźniacza"] },
+  },
   "lagoon-verde": {
     slug: "lagoon-verde", name: "Lagoon Verde", logo: "/logos/web/lagoon.webp", image: "/azure/lv-5.jpg", ctaImage: "/azure/lv-7.jpg",
     brochure: { tr: "/lagoonbrotr.pdf", en: "#catalog", de: "#catalog", ru: "#catalog", pl: "#catalog" },

@@ -17,6 +17,8 @@ import Amenities from "./Amenities";
 import Tour from "./Tour";
 import Location from "./Location";
 import Update from "./Update";
+import SitePlan from "./SitePlan";
+import Payment from "./Payment";
 
 /**
  * Ortak Azure proje sayfası: hero → galeri → genel bakış → bilgiler → teknik donanım → iç mekân →
@@ -44,14 +46,16 @@ export default function AzureProject({ slug, locale }: { slug: ProjectPage["slug
 
       <Overview d={d.overview} name={name} id={ids.overview} />
       <Facts d={d.facts} name={name} id={ids.facts} done={PROJECT_PAGES[slug].status.tr.startsWith("Tamamlan")} />
-      <Tech d={d.tech} name={name} id={ids.tech} locale={locale} />
+      {d.sitePlan && <SitePlan d={d.sitePlan} name={name} id={ids.sitePlan} />}
+      {d.tech && <Tech d={d.tech} name={name} id={ids.tech} locale={locale} />}
       <Interiors d={d.interiors} name={name} id={ids.interiors} locale={locale} />
       <FloorPlans d={d.floorPlans} name={name} id={ids.floorPlans} locale={locale} cta={{ brochure: PROJECT_PAGES[slug].brochure?.[locale], tour: d.tour ? `#${ids.tour}` : undefined }} />
-      <Mariachi locale={locale} id={ids.mariachi} />
+      {d.payment && <Payment d={d.payment} id={ids.payment} />}
+      {d.mariachi !== false && <Mariachi locale={locale} id={ids.mariachi} />}
       <Amenities d={d.amenities} name={name} id={ids.amenities} />
       {d.tour && <Tour d={d.tour} name={name} id={ids.tour} locale={locale} />}
       <Location d={d.location} name={name} id={ids.location} locale={locale} />
-      {d.catalog && slug !== "la-joya" && <div className="az-catalog"><DeferredCatalog locale={locale} project={slug} /></div>}
+      {d.catalog && (slug === "lagoon-verde" || slug === "perla" || slug === "perla-ii") && <div className="az-catalog"><DeferredCatalog locale={locale} project={slug} /></div>}
       {d.update && <Update d={d.update} id={ids.update} locale={locale} />}
 
       <ProjectCTA slug={slug} locale={locale} />

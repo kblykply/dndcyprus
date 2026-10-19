@@ -48,7 +48,7 @@ export const SOCIALS = [
   { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
 ];
 
-export type ProjectSlug = "lagoon-verde" | "perla-ii" | "perla" | "la-joya" | "mariachi" | "gecitkale";
+export type ProjectSlug = "neocity" | "lagoon-verde" | "perla-ii" | "perla" | "la-joya" | "mariachi" | "gecitkale";
 
 export type ProjectMeta = {
   slug: ProjectSlug;
@@ -66,6 +66,18 @@ export type ProjectMeta = {
 
 export const PROJECTS: ProjectMeta[] = [
   {
+    slug: "neocity",
+    name: "NeoCity",
+    short: { tr: "Tuzla · Yeni proje", en: "Tuzla · New project", de: "Tuzla · Neues Projekt", ru: "Тузла · Новый проект", pl: "Tuzla · Nowy projekt" },
+    location: { tr: "Tuzla, Gazimağusa", en: "Tuzla, Famagusta", de: "Tuzla, Famagusta", ru: "Тузла, Фамагуста", pl: "Tuzla, Famagusta" },
+    status: { tr: "Yeni proje", en: "New project", de: "Neues Projekt", ru: "Новый проект", pl: "Nowy projekt" },
+    blurb: { tr: "54 villa · Tek ve ikiz villa, özel bahçe", en: "54 villas · Single and twin villas, private gardens", de: "54 Villen · Freistehend und Doppelvilla, Privatgärten", ru: "54 виллы · Отдельные и дуплекс-виллы, частные сады", pl: "54 wille · Wolnostojące i bliźniacze, prywatne ogrody" },
+    cover: "/neocity/hero.jpg",
+    thumb: "/neocity/g-02.jpg",
+    logo: "/logos/web/neocity.webp",
+    cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
+  },
+  {
     slug: "lagoon-verde",
     name: "Lagoon Verde",
     short: { tr: "İskele · Altın Ödül", en: "İskele · Gold Award", de: "İskele · Goldpreis", ru: "Искеле · Золотая награда", pl: "İskele · Złota Nagroda" },
@@ -79,15 +91,15 @@ export const PROJECTS: ProjectMeta[] = [
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
-    slug: "perla-ii",
-    name: "La Joya Perla II",
-    short: { tr: "İskele · Devam eden", en: "İskele · Ongoing", de: "İskele · Im Bau", ru: "Искеле · Строится", pl: "İskele · W budowie" },
-    location: { tr: "Bahçeler, İskele", en: "Bahçeler, İskele", de: "Bahçeler, İskele", ru: "Bahçeler, Искеле", pl: "Bahçeler, İskele" },
-    status: { tr: "Devam eden", en: "Ongoing", de: "Im Bau", ru: "Строится", pl: "W budowie" },
-    blurb: { tr: "Stüdyo, 1+1 loft, çatı teraslı veya bahçeli 2+1", en: "Studio, 1+1 loft, 2+1 with roof terrace or garden", de: "Studio, 1+1 Loft, 2+1 mit Dachterrasse oder Garten", ru: "Студия, лофт 1+1, 2+1 с террасой на крыше или садом", pl: "Studio, loft 1+1, 2+1 z tarasem na dachu lub ogrodem" },
-    cover: "/azure/p2-9.jpg",
-    thumb: "/azure/p2-2.jpg",
-    logo: "/logos/web/perlaii.webp",
+    slug: "la-joya",
+    name: "La Joya",
+    short: { tr: "Long Beach · 2025", en: "Long Beach · 2025", de: "Long Beach · 2025", ru: "Long Beach · 2025", pl: "Long Beach · 2025" },
+    location: { tr: "Long Beach, İskele · Denize 500 m", en: "Long Beach, İskele · 500 m to the sea", de: "Long Beach, İskele · 500 m zum Meer", ru: "Long Beach, Искеле · 500 m до моря", pl: "Long Beach, İskele · 500 m od morza" },
+    status: { tr: "Tamamlandı · 2025", en: "Completed · 2025", de: "Fertiggestellt · 2025", ru: "Завершён · 2025", pl: "Ukończony · 2025" },
+    blurb: { tr: "Yatay mimari, 74 konut, loft ve penthouse", en: "Low-rise architecture, 74 homes, lofts and penthouses", de: "Flache Bauweise, 74 Wohnungen, Lofts und Penthouses", ru: "Малоэтажная архитектура, 74 квартиры, лофты и пентхаусы", pl: "Niska zabudowa, 74 mieszkania, lofty i penthouse’y" },
+    cover: "/azure/lj-5.jpg",
+    thumb: "/azure/lj-5.jpg",
+    logo: "/logos/web/lajoya.webp",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
@@ -103,15 +115,15 @@ export const PROJECTS: ProjectMeta[] = [
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
-    slug: "la-joya",
-    name: "La Joya",
-    short: { tr: "Long Beach · 2025", en: "Long Beach · 2025", de: "Long Beach · 2025", ru: "Long Beach · 2025", pl: "Long Beach · 2025" },
-    location: { tr: "Long Beach, İskele · Denize 500 m", en: "Long Beach, İskele · 500 m to the sea", de: "Long Beach, İskele · 500 m zum Meer", ru: "Long Beach, Искеле · 500 m до моря", pl: "Long Beach, İskele · 500 m od morza" },
-    status: { tr: "Tamamlandı · 2025", en: "Completed · 2025", de: "Fertiggestellt · 2025", ru: "Завершён · 2025", pl: "Ukończony · 2025" },
-    blurb: { tr: "Yatay mimari, 74 konut, loft ve penthouse", en: "Low-rise architecture, 74 homes, lofts and penthouses", de: "Flache Bauweise, 74 Wohnungen, Lofts und Penthouses", ru: "Малоэтажная архитектура, 74 квартиры, лофты и пентхаусы", pl: "Niska zabudowa, 74 mieszkania, lofty i penthouse’y" },
-    cover: "/azure/lj-5.jpg",
-    thumb: "/azure/lj-5.jpg",
-    logo: "/logos/web/lajoya.webp",
+    slug: "perla-ii",
+    name: "La Joya Perla II",
+    short: { tr: "İskele · Devam eden", en: "İskele · Ongoing", de: "İskele · Im Bau", ru: "Искеле · Строится", pl: "İskele · W budowie" },
+    location: { tr: "Bahçeler, İskele", en: "Bahçeler, İskele", de: "Bahçeler, İskele", ru: "Bahçeler, Искеле", pl: "Bahçeler, İskele" },
+    status: { tr: "Devam eden", en: "Ongoing", de: "Im Bau", ru: "Строится", pl: "W budowie" },
+    blurb: { tr: "Stüdyo, 1+1 loft, çatı teraslı veya bahçeli 2+1", en: "Studio, 1+1 loft, 2+1 with roof terrace or garden", de: "Studio, 1+1 Loft, 2+1 mit Dachterrasse oder Garten", ru: "Студия, лофт 1+1, 2+1 с террасой на крыше или садом", pl: "Studio, loft 1+1, 2+1 z tarasem na dachu lub ogrodem" },
+    cover: "/azure/p2-9.jpg",
+    thumb: "/azure/p2-2.jpg",
+    logo: "/logos/web/perlaii.webp",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {

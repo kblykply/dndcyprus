@@ -17,6 +17,7 @@ const LIST = [
   ["/azure/lv-7.jpg", "compact", 0.5],
   ["/azure/about-uu.jpg", "compact", 0.5],
   ["/gecitkaleimage.jpg", "compact", 0.5],
+  ["/neocity/hero.jpg", "full", 0.5],
 ];
 
 const rows = [];

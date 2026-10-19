@@ -9,4 +9,5 @@ export const HERO_DIK: Record<string, { src: string; w: number; h: number }> = {
   "/azure/lv-7.jpg": { src: "/azure/lv-7-dik.jpg", w: 1126, h: 1005 },
   "/azure/about-uu.jpg": { src: "/azure/about-uu-dik.jpg", w: 1202, h: 1072 },
   "/gecitkaleimage.jpg": { src: "/gecitkaleimage-dik.jpg", w: 1148, h: 1024 },
+  "/neocity/hero.jpg": { src: "/neocity/hero-dik.jpg", w: 1130, h: 1350 },
 };

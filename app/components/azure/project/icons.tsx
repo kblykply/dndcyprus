@@ -6,7 +6,7 @@ import {
   PiFilmSlateDuotone, PiFlowerLotusDuotone, PiForkKnifeDuotone, PiGarageDuotone, PiGolfDuotone, PiHouseLineDuotone,
   PiLetterCirclePDuotone, PiLifebuoyDuotone, PiLightningDuotone, PiMartiniDuotone, PiMaskHappyDuotone, PiPillDuotone,
   PiPuzzlePieceDuotone, PiScissorsDuotone, PiShoppingCartSimpleDuotone, PiSparkleDuotone, PiSwimmingPoolDuotone,
-  PiTennisBallDuotone, PiThermometerHotDuotone,
+  PiTennisBallDuotone, PiThermometerHotDuotone, PiPersonSimpleWalkDuotone, PiSoccerBallDuotone, PiTreeDuotone, PiPlantDuotone,
 } from "react-icons/pi";
 
 export const ICONS: Record<string, IconType> = {
@@ -16,6 +16,7 @@ export const ICONS: Record<string, IconType> = {
   golf: PiGolfDuotone, tennis: PiTennisBallDuotone, "farmers-market": PiBasketDuotone, aquapark: PiLifebuoyDuotone,
   pharmacy: PiPillDuotone, hair: PiScissorsDuotone, market: PiShoppingCartSimpleDuotone, beauty: PiFlowerLotusDuotone,
   basketball: PiBasketballDuotone, restaurant: PiForkKnifeDuotone, pool: PiSwimmingPoolDuotone, bar: PiMartiniDuotone,
+  walk: PiPersonSimpleWalkDuotone, football: PiSoccerBallDuotone, green: PiTreeDuotone, garden: PiPlantDuotone,
   // teknik donanım
   climate: PiFanDuotone, generator: PiLightningDuotone, "smart-home": PiHouseLineDuotone, "floor-heating": PiThermometerHotDuotone,
 };

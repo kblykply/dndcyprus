@@ -4,7 +4,7 @@ import type { Locale } from "./site";
 
 export const PROJECT_UI = {
   tr: {
-    ids: { gallery: "galeri", overview: "genel-bakis", facts: "bilgiler", tech: "teknik-donanim", interiors: "ic-mekan", floorPlans: "kat-planlari", mariachi: "mariachi", amenities: "olanaklar", tour: "sanal-tur", location: "konum", update: "guncelleme" },
+    ids: { gallery: "galeri", overview: "genel-bakis", facts: "bilgiler", tech: "teknik-donanim", interiors: "ic-mekan", floorPlans: "kat-planlari", mariachi: "mariachi", amenities: "olanaklar", tour: "sanal-tur", location: "konum", update: "guncelleme", sitePlan: "vaziyet-plani", payment: "odeme-plani" },
     gallery: { aria: "Galeri", item: (i: number) => `Galeri görseli ${i}` },
     tech: { prev: "Önceki", next: "Sonraki", list: "Teknik donanım listesi", page: (i: number) => `Sayfa ${i}` },
     interiors: { tabs: "Odalar", types: "Daire tipi", prev: "Önceki görsel", next: "Sonraki görsel", region: "İç mekân görselleri" },
@@ -18,11 +18,11 @@ export const PROJECT_UI = {
       request: "Fiyat ve kat planı iste", brochure: "Broşür (PDF)", tour: "360° Tur", planTab: "Plan", interiorTab: "İç mekân", total: "Toplam kapalı · kullanım",
     },
     tour: { start: "360 Turu Başlat", open: "Yeni sekmede aç", fs: "Tam ekran", exitFs: "Çık", exitFsAria: "Tam ekrandan çık" },
-    location: { address: "Adres:", google: "Google Haritalar ile Yol Tarifi", apple: "Apple Haritalar ile Yol Tarifi", googleShort: "Google Haritalar", appleShort: "Apple Haritalar", open: "Haritada Aç", mapTitle: "Proje Konumu" },
+    location: { address: "Adres:", google: "Google Haritalar ile Yol Tarifi", apple: "Apple Haritalar ile Yol Tarifi", googleShort: "Google Haritalar", appleShort: "Apple Haritalar", open: "Haritada Aç", mapTitle: "Proje Konumu", minute: "dk" },
     update: { videoTitle: "Son İnşaat Güncellemesi" },
   },
   en: {
-    ids: { gallery: "gallery", overview: "overview", facts: "key-facts", tech: "technical-features", interiors: "interiors", floorPlans: "floor-plans", mariachi: "mariachi", amenities: "amenities", tour: "virtual-tour", location: "location", update: "update" },
+    ids: { gallery: "gallery", overview: "overview", facts: "key-facts", tech: "technical-features", interiors: "interiors", floorPlans: "floor-plans", mariachi: "mariachi", amenities: "amenities", tour: "virtual-tour", location: "location", update: "update", sitePlan: "site-plan", payment: "payment-plan" },
     gallery: { aria: "Gallery", item: (i: number) => `Gallery image ${i}` },
     tech: { prev: "Previous", next: "Next", list: "Technical features list", page: (i: number) => `Page ${i}` },
     interiors: { tabs: "Rooms", types: "Unit type", prev: "Previous image", next: "Next image", region: "Interior images" },
@@ -36,11 +36,11 @@ export const PROJECT_UI = {
       request: "Request prices & floor plans", brochure: "Brochure (PDF)", tour: "360° Tour", planTab: "Plan", interiorTab: "Interiors", total: "Total covered · usable",
     },
     tour: { start: "Start 360 Tour", open: "Open in new tab", fs: "Fullscreen", exitFs: "Exit", exitFsAria: "Exit fullscreen" },
-    location: { address: "Address:", google: "Get Directions with Google Maps", apple: "Get Directions with Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "Open on Map", mapTitle: "Project location" },
+    location: { address: "Address:", google: "Get Directions with Google Maps", apple: "Get Directions with Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "Open on Map", mapTitle: "Project location", minute: "min" },
     update: { videoTitle: "Latest Construction Update" },
   },
   de: {
-    ids: { gallery: "galerie", overview: "ueberblick", facts: "fakten", tech: "technik", interiors: "innenraeume", floorPlans: "grundrisse", mariachi: "mariachi", amenities: "ausstattung", tour: "virtueller-rundgang", location: "lage", update: "bautenstand" },
+    ids: { gallery: "galerie", overview: "ueberblick", facts: "fakten", tech: "technik", interiors: "innenraeume", floorPlans: "grundrisse", mariachi: "mariachi", amenities: "ausstattung", tour: "virtueller-rundgang", location: "lage", update: "bautenstand", sitePlan: "lageplan", payment: "zahlungsplan" },
     gallery: { aria: "Galerie", item: (i: number) => `Galeriebild ${i}` },
     tech: { prev: "Zurück", next: "Weiter", list: "Liste der technischen Ausstattung", page: (i: number) => `Seite ${i}` },
     interiors: { tabs: "Räume", types: "Wohnungstyp", prev: "Vorheriges Bild", next: "Nächstes Bild", region: "Innenansichten" },
@@ -54,11 +54,11 @@ export const PROJECT_UI = {
       request: "Preise & Grundrisse anfordern", brochure: "Broschüre (PDF)", tour: "360°-Tour", planTab: "Grundriss", interiorTab: "Innenräume", total: "Wohnfläche · Nutzfläche",
     },
     tour: { start: "360°-Tour starten", open: "In neuem Tab öffnen", fs: "Vollbild", exitFs: "Beenden", exitFsAria: "Vollbild beenden" },
-    location: { address: "Adresse:", google: "Route mit Google Maps", apple: "Route mit Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "In Karte öffnen", mapTitle: "Projektstandort" },
+    location: { address: "Adresse:", google: "Route mit Google Maps", apple: "Route mit Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "In Karte öffnen", mapTitle: "Projektstandort", minute: "Min." },
     update: { videoTitle: "Aktueller Bautenstand" },
   },
   ru: {
-    ids: { gallery: "galereya", overview: "obzor", facts: "fakty", tech: "tekhnika", interiors: "interiery", floorPlans: "planirovki", mariachi: "mariachi", amenities: "infrastruktura", tour: "virtualnyy-tur", location: "raspolozhenie", update: "novosti-stroyki" },
+    ids: { gallery: "galereya", overview: "obzor", facts: "fakty", tech: "tekhnika", interiors: "interiery", floorPlans: "planirovki", mariachi: "mariachi", amenities: "infrastruktura", tour: "virtualnyy-tur", location: "raspolozhenie", update: "novosti-stroyki", sitePlan: "genplan", payment: "plan-oplaty" },
     gallery: { aria: "Галерея", item: (i: number) => `Фото галереи ${i}` },
     tech: { prev: "Назад", next: "Далее", list: "Список технического оснащения", page: (i: number) => `Страница ${i}` },
     interiors: { tabs: "Комнаты", types: "Тип квартиры", prev: "Предыдущее фото", next: "Следующее фото", region: "Фото интерьеров" },
@@ -72,11 +72,11 @@ export const PROJECT_UI = {
       request: "Запросить цены и планировки", brochure: "Брошюра (PDF)", tour: "3D-тур 360°", planTab: "План", interiorTab: "Интерьеры", total: "Закрытая · полезная площадь",
     },
     tour: { start: "Начать 3D-тур", open: "Открыть в новой вкладке", fs: "Полный экран", exitFs: "Выйти", exitFsAria: "Выйти из полноэкранного режима" },
-    location: { address: "Адрес:", google: "Маршрут в Google Maps", apple: "Маршрут в Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "Открыть на карте", mapTitle: "Расположение проекта" },
+    location: { address: "Адрес:", google: "Маршрут в Google Maps", apple: "Маршрут в Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "Открыть на карте", mapTitle: "Расположение проекта", minute: "мин" },
     update: { videoTitle: "Последний отчёт о ходе строительства" },
   },
   pl: {
-    ids: { gallery: "galeria", overview: "przeglad", facts: "fakty", tech: "technika", interiors: "wnetrza", floorPlans: "plany", mariachi: "mariachi", amenities: "udogodnienia", tour: "wirtualny-spacer", location: "lokalizacja", update: "postep-budowy" },
+    ids: { gallery: "galeria", overview: "przeglad", facts: "fakty", tech: "technika", interiors: "wnetrza", floorPlans: "plany", mariachi: "mariachi", amenities: "udogodnienia", tour: "wirtualny-spacer", location: "lokalizacja", update: "postep-budowy", sitePlan: "plan-osiedla", payment: "plan-platnosci" },
     gallery: { aria: "Galeria", item: (i: number) => `Zdjęcie z galerii ${i}` },
     tech: { prev: "Poprzedni", next: "Następny", list: "Lista wyposażenia technicznego", page: (i: number) => `Strona ${i}` },
     interiors: { tabs: "Pomieszczenia", types: "Typ mieszkania", prev: "Poprzednie zdjęcie", next: "Następne zdjęcie", region: "Zdjęcia wnętrz" },
@@ -90,7 +90,7 @@ export const PROJECT_UI = {
       request: "Poproś o ceny i plany", brochure: "Broszura (PDF)", tour: "Wirtualny spacer 360°", planTab: "Rzut", interiorTab: "Wnętrza", total: "Pow. zamknięta · użytkowa",
     },
     tour: { start: "Rozpocznij wirtualny spacer", open: "Otwórz w nowej karcie", fs: "Pełny ekran", exitFs: "Wyjdź", exitFsAria: "Wyjdź z trybu pełnoekranowego" },
-    location: { address: "Adres:", google: "Trasa w Google Maps", apple: "Trasa w Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "Otwórz na mapie", mapTitle: "Lokalizacja projektu" },
+    location: { address: "Adres:", google: "Trasa w Google Maps", apple: "Trasa w Apple Maps", googleShort: "Google Maps", appleShort: "Apple Maps", open: "Otwórz na mapie", mapTitle: "Lokalizacja projektu", minute: "min" },
     update: { videoTitle: "Aktualny postęp budowy" },
   },
 } as const satisfies Record<Locale, unknown>;

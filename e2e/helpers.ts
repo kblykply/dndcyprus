@@ -2,7 +2,7 @@ import { expect, type Locator, type Page, type TestInfo } from "@playwright/test
 
 export const LOCALES = ["tr", "en", "de", "ru", "pl"] as const;
 export const PAGES = [
-  "", "/about", "/projects", "/lagoon-verde", "/la-joya", "/perla", "/perla-ii", "/mariachi", "/gecitkale",
+  "", "/about", "/projects", "/neocity", "/lagoon-verde", "/la-joya", "/perla", "/perla-ii", "/mariachi", "/gecitkale",
   "/team", "/press", "/contact", "/dndcyprus", "/privacy", "/terms",
 ] as const;
 export const SITE = "https://www.dndcyprus.com";

@@ -64,6 +64,7 @@ export function localeFromPath(pathname: string): Locale {
 }
 
 export const PROJECTS = {
+  neocity: "NeoCity",
   "lagoon-verde": "Lagoon Verde",
   perla: "La Joya Perla",
   "perla-ii": "La Joya Perla II",
@@ -75,7 +76,7 @@ export type ProjectSlug = keyof typeof PROJECTS;
 
 /** /tr/lagoon-verde (/en, /de, /ru, /pl) → { slug, name, locale }; proje sayfası değilse null */
 export function projectFromPath(pathname: string) {
-  const m = pathname.match(/^\/(tr|en|de|ru|pl)\/(lagoon-verde|perla|perla-ii|la-joya|gecitkale)\/?$/);
+  const m = pathname.match(/^\/(tr|en|de|ru|pl)\/(neocity|lagoon-verde|perla|perla-ii|la-joya|gecitkale)\/?$/);
   if (!m) return null;
   const slug = m[2] as ProjectSlug;
   return { slug, name: PROJECTS[slug], locale: m[1] as Locale };

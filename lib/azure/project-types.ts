@@ -113,17 +113,44 @@ export type ProjectTour = {
 };
 
 /* ---- Konum (eski Perla2Location) ---- */
-export type Distance = { label: string; km?: number; m?: number; accent: Accent; note?: string };
+/** min: araçla dakika (NeoCity sunumundaki gibi); km / m yerine */
+export type Distance = { label: string; km?: number; m?: number; min?: number; accent: Accent; note?: string };
 export type ProjectLocation = {
   kicker: string;
   title: string;
   lead: string;
   address: string;
-  lat: number;
-  lng: number;
+  /** koordinat yoksa yol tarifi düğmeleri gizlenir, harita yerine mapImage gösterilir */
+  lat?: number;
+  lng?: number;
   embedSrc?: string;
+  mapImage?: string;
+  mapAlt?: string;
   nearby: string[];
   distances: Distance[];
+};
+
+/* ---- Vaziyet planı (NeoCity): gündüz / gece görseli, alan bilgileri ve numaralı lejant ---- */
+export type ProjectSitePlan = {
+  kicker: string;
+  title: string;
+  lead: string;
+  views: { id: string; label: string; image: string; alt: string }[];
+  stats: { label: string; value: string }[];
+  legend: string[];
+  note?: string;
+};
+
+/* ---- Ödeme modeli (NeoCity "5 Sıfır") ---- */
+export type ProjectPayment = {
+  kicker: string;
+  title: string;
+  lead: string;
+  zeros: string[];                               // "Faiz", "Banka", "Kefil", "Vade farkı", "Kur farkı"
+  steps: string[];                               // planın işleyişi, sırayla
+  quote: { h: string; p: string };               // "Villanızı bankasız, bugünkü TL fiyatla alın."
+  cta: string;
+  note: string;
 };
 
 /* ---- Son güncelleme (eski Perla2Timeline; değerler SAYFADAN gelen prop'lar) ---- */
@@ -143,7 +170,10 @@ export type ProjectContent = {
   gallery: ProjectGallery;
   overview: ProjectOverview;
   facts: ProjectFacts;
-  tech: ProjectTech;
+  tech?: ProjectTech;                            // NeoCity'de yok
+  mariachi?: false;                              // false: Mariachi ayrıcalık bölümü gösterilmez (NeoCity)
+  sitePlan?: ProjectSitePlan;
+  payment?: ProjectPayment;
   interiors: ProjectInteriors;
   floorPlans: ProjectFloorPlans;
   amenities: ProjectAmenities;
