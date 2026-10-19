@@ -86,7 +86,7 @@ const TR: HomeContent = {
     title: <>Küresel tecrübe, <b>yerel disiplin.</b></>,
     people: [
       { img: "/azure/ozan.jpg", role: "Kurucu · Yönetim Kurulu Başkanı", name: "Ozan Dökmecioğlu", bio: "DND Cyprus’un kurucusu ve vizyoner lideri. Küresel finans ve operasyon deneyimini Kıbrıs’taki çağdaş yaşam projelerine aktarıyor.", q: "Disiplin, şeffaflık ve sürdürülebilir büyüme; her işimizin temelinde.", dl: [["Uzmanlık", "Finans & Operasyon"], ["Küresel rol", "Keurig Dr Pepper, eski CFO / President Int."], ["Geçmiş", "Kellogg, Kraft, Cargill"]] },
-      { img: "/azure/aynur.jpg", role: "DND Cyprus Direktörü", name: "Aynur Zorba Güloğlu", bio: "Operasyonel mükemmeliyet, müşteri deneyimi ve sürdürülebilir projeler için stratejik liderlik sağlıyor.", q: "Güven, şeffaflık ve ekip ruhu; başarılarımızın temelinde bunlar var.", dl: [["Odak", "Operasyonel liderlik"], ["Uzmanlık", "Mimarlık & yöneticilik"], ["Yaklaşım", "Sürdürülebilirlik"]] },
+      { img: "/azure/aynur.jpg", role: "Direktör & Mimar", name: "Aynur Zorba Güloğlu", bio: "DND Cyprus’un kuruluşundan bu yana şirketin mimari vizyonunun ve proje gelişiminin merkezinde; projeleri konsept aşamasından uygulamaya kadar yönetiyor.", q: "Mimariyi yalnızca yapı tasarlamak değil, insanların yaşamak isteyeceği özgün yaşam alanları yaratmak olarak görüyoruz.", dl: [["Projeleri", "La Joya · La Joya Perla · La Joya Perla II · Lagoon Verde"], ["Deneyim", "20+ yıl mimarlık, 14+ yıl direktörlük"], ["Mimari projeler", "400+"]] },
     ],
     team: "27 kişilik ekip", teamCta: "Tüm ekibimiz", brandsLabel: "Markalar & projeler", career: "Geçmiş kurumlar",
   },
@@ -177,7 +177,7 @@ const EN: HomeContent = {
     title: <>Global experience, <b>local discipline.</b></>,
     people: [
       { img: "/azure/ozan.jpg", role: "Founder · Chairman of the Board", name: "Ozan Dökmecioğlu", bio: "Founder and visionary leader of DND Cyprus. He brings his global finance and operations experience to contemporary living projects in Cyprus.", q: "Discipline, transparency and sustainable growth; the foundation of everything we do.", dl: [["Expertise", "Finance & Operations"], ["Global role", "Keurig Dr Pepper, former CFO / President Int."], ["Background", "Kellogg, Kraft, Cargill"]] },
-      { img: "/azure/aynur.jpg", role: "Director, DND Cyprus", name: "Aynur Zorba Güloğlu", bio: "Provides strategic leadership for operational excellence, customer experience, and sustainable projects.", q: "Trust, transparency and team spirit; these are at the heart of our success.", dl: [["Focus", "Operational leadership"], ["Expertise", "Architecture & management"], ["Approach", "Sustainability"]] },
+      { img: "/azure/aynur.jpg", role: "Director & Architect", name: "Aynur Zorba Güloğlu", bio: "At the heart of DND Cyprus’s architectural vision and project development since the company was founded, managing projects from concept to completion.", q: "We see architecture not just as designing buildings, but as creating original living spaces where people want to live.", dl: [["Projects", "La Joya · La Joya Perla · La Joya Perla II · Lagoon Verde"], ["Experience", "20+ years in architecture, 14+ years as director"], ["Architectural projects", "400+"]] },
     ],
     team: "A team of 27", teamCta: "Meet the whole team", brandsLabel: "Brands & projects", career: "Previous companies",
   },
@@ -268,7 +268,7 @@ const DE: HomeContent = {
     title: <>Globale Erfahrung, <b>lokale Disziplin.</b></>,
     people: [
       { img: "/azure/ozan.jpg", role: "Gründer · Vorstandsvorsitzender", name: "Ozan Dökmecioğlu", bio: "Gründer und visionärer Kopf von DND Cyprus. Seine internationale Erfahrung in Finanzen und operativem Management bringt er in zeitgemäße Wohnprojekte auf Zypern ein.", q: "Disziplin, Transparenz und nachhaltiges Wachstum – das Fundament all unseres Handelns.", dl: [["Expertise", "Finanzen & operatives Geschäft"], ["Globale Rolle", "Keurig Dr Pepper, ehem. CFO / President Int."], ["Werdegang", "Kellogg, Kraft, Cargill"]] },
-      { img: "/azure/aynur.jpg", role: "Direktorin, DND Cyprus", name: "Aynur Zorba Güloğlu", bio: "Verantwortet die strategische Führung für operative Exzellenz, Kundenerlebnis und nachhaltige Projekte.", q: "Vertrauen, Transparenz und Teamgeist – sie stehen im Zentrum unseres Erfolgs.", dl: [["Fokus", "Operative Führung"], ["Expertise", "Architektur & Management"], ["Ansatz", "Nachhaltigkeit"]] },
+      { img: "/azure/aynur.jpg", role: "Direktorin & Architektin", name: "Aynur Zorba Güloğlu", bio: "Seit der Gründung im Zentrum der architektonischen Vision und Projektentwicklung von DND Cyprus; sie begleitet Projekte vom Konzept bis zur Umsetzung.", q: "Architektur bedeutet für uns nicht nur, Gebäude zu entwerfen, sondern einzigartige Lebensräume zu schaffen, in denen Menschen leben möchten.", dl: [["Projekte", "La Joya · La Joya Perla · La Joya Perla II · Lagoon Verde"], ["Erfahrung", "20+ Jahre Architektur, 14+ Jahre als Direktorin"], ["Architekturprojekte", "400+"]] },
     ],
     team: "Ein Team von 27 Personen", teamCta: "Das ganze Team kennenlernen", brandsLabel: "Marken & Projekte", career: "Frühere Unternehmen",
   },
@@ -359,7 +359,7 @@ const RU: HomeContent = {
     title: <>Международный опыт, <b>местная дисциплина.</b></>,
     people: [
       { img: "/azure/ozan.jpg", role: "Основатель · Председатель совета директоров", name: "Ozan Dökmecioğlu", bio: "Основатель и идейный лидер DND Cyprus. Свой международный опыт в финансах и операционном управлении он воплощает в современных жилых проектах на Кипре.", q: "Дисциплина, прозрачность и устойчивый рост — основа всего, что мы делаем.", dl: [["Специализация", "Финансы и операционная деятельность"], ["Международная роль", "Keurig Dr Pepper, экс-CFO / President Int."], ["Опыт", "Kellogg, Kraft, Cargill"]] },
-      { img: "/azure/aynur.jpg", role: "Директор DND Cyprus", name: "Aynur Zorba Güloğlu", bio: "Обеспечивает стратегическое руководство: операционное совершенство, клиентский опыт и устойчивые проекты.", q: "Доверие, прозрачность и командный дух — вот что лежит в основе нашего успеха.", dl: [["Фокус", "Операционное руководство"], ["Специализация", "Архитектура и управление"], ["Подход", "Устойчивое развитие"]] },
+      { img: "/azure/aynur.jpg", role: "Директор и архитектор", name: "Aynur Zorba Güloğlu", bio: "С момента основания DND Cyprus — в центре архитектурного видения и развития проектов компании; ведёт проекты от концепции до реализации.", q: "Для нас архитектура — это не просто проектирование зданий, а создание уникальных пространств, в которых людям хочется жить.", dl: [["Проекты", "La Joya · La Joya Perla · La Joya Perla II · Lagoon Verde"], ["Опыт", "20+ лет в архитектуре, 14+ лет на посту директора"], ["Архитектурные проекты", "400+"]] },
     ],
     team: "Команда из 27 человек", teamCta: "Познакомиться с командой", brandsLabel: "Бренды и проекты", career: "Предыдущие компании",
   },
@@ -450,7 +450,7 @@ const PL: HomeContent = {
     title: <>Globalne doświadczenie, <b>lokalna dyscyplina.</b></>,
     people: [
       { img: "/azure/ozan.jpg", role: "Założyciel · Przewodniczący Rady Dyrektorów", name: "Ozan Dökmecioğlu", bio: "Założyciel i wizjoner DND Cyprus. Swoje globalne doświadczenie w finansach i zarządzaniu operacyjnym przenosi do nowoczesnych projektów mieszkaniowych na Cyprze.", q: "Dyscyplina, przejrzystość i zrównoważony wzrost – fundament wszystkiego, co robimy.", dl: [["Specjalizacja", "Finanse i operacje"], ["Rola globalna", "Keurig Dr Pepper, były CFO / President Int."], ["Doświadczenie", "Kellogg, Kraft, Cargill"]] },
-      { img: "/azure/aynur.jpg", role: "Dyrektor DND Cyprus", name: "Aynur Zorba Güloğlu", bio: "Kieruje strategią firmy z naciskiem na doskonałość operacyjną, doświadczenia klientów i zrównoważone projekty.", q: "Zaufanie, przejrzystość i duch zespołu – to one stoją u podstaw naszego sukcesu.", dl: [["Obszar działania", "Przywództwo operacyjne"], ["Specjalizacja", "Architektura i zarządzanie"], ["Podejście", "Zrównoważony rozwój"]] },
+      { img: "/azure/aynur.jpg", role: "Dyrektor i architekt", name: "Aynur Zorba Güloğlu", bio: "Od założenia DND Cyprus w centrum wizji architektonicznej i rozwoju projektów firmy; prowadzi projekty od koncepcji do realizacji.", q: "Architektura to dla nas nie tylko projektowanie budynków, ale tworzenie wyjątkowych przestrzeni, w których ludzie chcą mieszkać.", dl: [["Projekty", "La Joya · La Joya Perla · La Joya Perla II · Lagoon Verde"], ["Doświadczenie", "20+ lat w architekturze, 14+ lat jako dyrektor"], ["Projekty architektoniczne", "400+"]] },
     ],
     team: "Zespół 27 osób", teamCta: "Poznaj cały zespół", brandsLabel: "Marki i projekty", career: "Wcześniejsze firmy",
   },

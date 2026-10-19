@@ -108,7 +108,7 @@ export default function LeadershipTeam({
   {
     id: "aynur",
     name: "Aynur Zorba Güloğlu",
-    role: "Direktör",
+    role: "Direktör & Mimar",
     category: "Leadership",
     photo: "/teams/aynurzorbagulol.png",
     bio: "Yönetim ve stratejik planlama süreçlerinde sorumlu.",

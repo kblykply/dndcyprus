@@ -96,7 +96,7 @@ members = [
   {
     id: "aynur",
     name: "Aynur Zorba Güloğlu",
-    role: "Director",
+    role: "Director & Architect",
     category: "Leadership",
     photo: "/teams/aynurzorbagulol.png",
     bio: "Responsible for management and strategic planning processes.",
