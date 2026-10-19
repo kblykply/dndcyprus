@@ -1,6 +1,7 @@
 import Arrow from "../Arrow";
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
 import { PiCheckBold, PiGearSixDuotone, PiHouseLineDuotone, PiKeyDuotone, PiTrophyDuotone } from "react-icons/pi";
 import { HOME_FLOW } from "@/lib/azure/home-flow";
@@ -48,15 +49,15 @@ export function WhyDnd({ locale }: { locale: Locale }) {
 }
 
 /** 4 · Size özel ödeme ve yatırım fırsatları: Lagoon Verde TL modeli + NeoCity 5 Sıfır */
-export function Offers({ locale }: { locale: Locale }) {
+export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }: { locale: Locale; id?: string; kicker?: string; title?: ReactNode; lead?: string }) {
   const t = HOME_FLOW[locale].offers;
   return (
-    <section className="az-section az-offers" id="odeme-firsatlari">
+    <section className="az-section az-offers" id={id}>
       <div className="az-wrap">
         <div className="az-head">
-          <span className="az-kicker rv">{t.kicker}</span>
-          <h2 className="az-h2 sm rv d1">{t.title}</h2>
-          <p className="az-lead rv d2">{t.lead}</p>
+          <span className="az-kicker rv">{kicker ?? t.kicker}</span>
+          <h2 className="az-h2 sm rv d1">{title ?? t.title}</h2>
+          <p className="az-lead rv d2">{lead ?? t.lead}</p>
         </div>
         <div className="cards">
           <Link className="card tl rv" href={href(locale, "/lagoon-verde")} prefetch={false}>
@@ -109,17 +110,19 @@ export function LifePerks({ locale }: { locale: Locale }) {
 }
 
 /** 6 · Rakamlarla DND: yalnız Kıbrıs rakamları (sayaç: AzureFx [data-count]) */
-export function Numbers({ locale }: { locale: Locale }) {
+/** usa: Hakkımızda sürümü — ABD'deki 120 proje başa eklenir, ödeme rakamı çıkar (ana sayfada Amerika anılmaz) */
+export function Numbers({ locale, id = "rakamlar", usa, title }: { locale: Locale; id?: string; usa?: string; title?: ReactNode }) {
   const t = HOME_FLOW[locale].numbers;
+  const items = usa ? [{ n: 120, label: usa } as { n: number; suffix?: string; label: string }, ...t.items.filter((x) => x.n !== 60)] : t.items;
   return (
-    <section className="az-section az-nums" id="rakamlar">
+    <section className="az-section az-nums" id={id}>
       <div className="az-wrap">
         <div className="az-head">
           <span className="az-kicker rv">{t.kicker}</span>
-          <h2 className="az-h2 sm rv d1">{t.title}</h2>
+          <h2 className="az-h2 sm rv d1">{title ?? t.title}</h2>
         </div>
         <ul>
-          {t.items.map((x, k) => (
+          {items.map((x, k) => (
             <li key={x.label} className={`rv d${k % 4}`}>
               <b data-count={x.n} data-suffix={x.suffix ?? ""}>{x.n}{x.suffix ?? ""}</b>
               <span>{x.label}</span>

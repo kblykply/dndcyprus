@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import DeferredIframe from "@/app/components/performance/DeferredIframe";
 import SocialIcons from "@/app/components/azure/SocialIcons";
+import { SECTION_IDS } from "@/lib/azure/nav";
 
 type Office = {
   id: string;
@@ -91,7 +92,7 @@ export default function ContactInfo({
   // Kuruluş JSON-LD'si artık site geneli layout'ta (tr/layout, en/(main)/layout) basılıyor
 
   return (
-    <section className="az-section" aria-label="İletişim Bilgileri">
+    <section className="az-section" id={SECTION_IDS.tr.offices} aria-label="İletişim Bilgileri">
       <div className="az-wrap">
         <div className="az-head">
           <span className="az-kicker rv">{kicker}</span>

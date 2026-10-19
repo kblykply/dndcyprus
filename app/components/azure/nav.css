@@ -1,0 +1,36 @@
+/* Üst menü: 7 başlık (müşterinin akış belgesi). Temel pill / açılır menü stilleri app/azure.css (.az-nav). */
+
+/* başlıklar sığsın: yazı ve iç boşluk biraz daralır; uzun "Ödeme ve Yatırım Fırsatları" orta genişlikte kısalır */
+.az-nav ul { gap: 0; }
+.az-nav li > a, .az-nav li > button { padding: 10px 11px; font-size: 13.5px; gap: 5px; white-space: nowrap; }
+.az-nav li > a.on, .az-nav li > button.on { color: var(--ink); background: rgba(13, 35, 38, .06); }
+.az-nav li > button .sh { display: none; }
+@media (max-width: 1439px) { .az-nav li > button .lg { display: none; } .az-nav li > button .sh { display: inline; } }
+
+/* projeler mega menüsü: üç durum sütunu (Devam Eden / Tamamlanan / Gelecek) + "Tüm Projeler" */
+.az-nav .drop.mega { width: min(900px, 100%); grid-template-columns: 1.4fr 1fr 1fr; gap: 6px 10px; align-items: start; }
+.az-nav .drop.mega .grp { display: grid; gap: 4px; min-width: 0; }
+.az-nav .drop.mega .gh { display: flex; align-items: center; gap: 6px; grid-template-columns: none; padding: 8px 10px 6px; font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
+.az-nav .drop.mega .gh:hover { background: none; color: var(--ink); }
+.az-nav .drop.mega .all { grid-column: 1 / -1; display: flex; justify-content: center; align-items: center; gap: 8px; padding: 12px; margin-top: 4px;
+  border-radius: 14px; background: var(--sky-2); font-size: 14px; font-weight: 600; color: var(--ink); }
+.az-nav .drop.mega .all:hover { background: var(--sea); color: #fff; }
+
+/* sade açılır liste: başlığın altında, başlığa hizalı */
+.az-nav li.sm { position: relative; }
+.az-nav .drop.list { left: 0; transform: translate(0, 8px); width: max-content; min-width: 240px; max-width: 340px; grid-template-columns: 1fr; gap: 2px; padding: 8px; }
+.az-nav li.sm:hover .drop.list, .az-nav li.sm:focus-within .drop.list, .az-nav li.sm.open .drop.list { transform: translate(0, 0); }
+.az-nav li.sm.shut .drop.list { transform: translate(0, 8px); }
+.az-nav .drop.list a { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 11px 12px; font-size: 14px; font-weight: 500; }
+.az-nav .drop.list a .az-arrow { opacity: 0; transform: translateX(-4px); transition: opacity .3s, transform .3s var(--ease); color: var(--sea); }
+.az-nav .drop.list a:hover .az-arrow { opacity: 1; transform: none; }
+/* sağdaki başlıkların listesi sağa açılır (ekran kenarından taşmasın) */
+.az-nav ul > li.sm:nth-last-child(-n+2) .drop.list { left: auto; right: 0; }
+
+/* mobil menü: proje grupları ve diğer bölümler */
+.az-mobile .accw { display: contents; }
+.az-mobile .sub.groups { display: grid; gap: 10px; }
+.az-mobile .sub.groups .g { display: flex; flex-wrap: wrap; gap: 6px; }
+.az-mobile .sub.groups .g a.gh { flex-basis: 100%; min-height: 0; padding: 4px 0 0; background: none; border: 0; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
+.az-mobile .sub.groups a.all { justify-self: start; }

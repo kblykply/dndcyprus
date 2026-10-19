@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiYoutubeLogoDuotone } from "react-icons/pi";
 import { CONTACT, FOOTER_COPY, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
+import { NAV_TEXT } from "@/lib/azure/nav";
 import CookiePrefsLink from "./CookiePrefsLink";
 import "./footer.css";
 import FooterFit from "./FooterFit";
@@ -20,7 +21,8 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
   const n = NAV_COPY[locale];
   const year = new Date().getFullYear();
   const general = [
-    { path: "/", label: n.home }, { path: "/about", label: n.about }, { path: "/team", label: n.team }, { path: "/press", label: n.press },
+    { path: "/", label: n.home }, { path: "/advantage", label: NAV_TEXT[locale].advantage }, { path: "/payment-plans", label: NAV_TEXT[locale].paymentShort },
+    { path: "/about", label: n.about }, { path: "/team", label: n.team }, { path: "/press", label: n.press },
     ...(LOCALE_META[locale].blog ? [{ path: "/blog", label: n.blog }] : []),
     { path: "/dndcyprus", label: n.media }, { path: "/contact", label: n.contact },
   ];

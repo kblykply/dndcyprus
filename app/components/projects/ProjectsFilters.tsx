@@ -1,7 +1,8 @@
 // app/components/projects/ProjectsFilters.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { PROJECT_HASH } from "@/lib/azure/nav";
 import Link from "next/link";
 import GlassArrow from "@/app/components/azure/GlassArrow";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
@@ -30,6 +31,15 @@ type Filters = { status: ProjectStatus; type: ProjectType; q: string };
 
 /* ================== DND CYPRUS — PROJECTS (edit here) ================== */
 const DATA: Project[] = [
+  {
+    id: "neocity",
+    title: "NeoCity",
+    status: "Ongoing", // 1. etap satışta (Ekim 2026)
+    type: "Residential",
+    location: "Tuzla, Gazimağusa",
+    cover: "/neocity/hero.jpg",
+    href: "/tr/neocity",
+  },
   // Residential
   {
     id: "lagoon-verde",
@@ -111,6 +121,22 @@ const CTA = "Detaylara bak";
 /* ================== COMPONENT ================== */
 export default function ProjectsFilters() {
   const [filters, setFilters] = useState<Filters>({ status: "All", type: "All", q: "" });
+  // menüden gelen durum çapası (/projects#devam-eden …): ilgili sekme seçilir, liste görünür alana kayar
+  const box = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const h = PROJECT_HASH["tr"];
+    const map: Record<string, Exclude<ProjectStatus, "All">> = { [h.ongoing]: "Ongoing", [h.completed]: "Completed", [h.upcoming]: "Upcoming" };
+    const apply = () => {
+      const st = map[decodeURIComponent(location.hash.slice(1))];
+      if (!st) return;
+      setFilters((v) => ({ ...v, status: st }));
+      // açılışta Next sayfayı başa aldıktan sonra kaydır
+      window.setTimeout(() => box.current?.scrollIntoView({ block: "start", behavior: "smooth" }), 250);
+    };
+    apply();
+    addEventListener("hashchange", apply);
+    return () => removeEventListener("hashchange", apply);
+  }, []);
 
   const filtered = useMemo(() => {
     return DATA.filter((p) => {
@@ -123,7 +149,7 @@ export default function ProjectsFilters() {
   }, [filters]);
 
   return (
-    <section className="az-section tight" aria-label="Proje Filtreleri ve Liste">
+    <section ref={box} style={{ scrollMarginTop: 90 }} className="az-section tight" aria-label="Proje Filtreleri ve Liste">
       <div className="az-wrap">
         {/* Filtre çubuğu: durum sekmeleri (pill) + arama */}
         <div

@@ -1,6 +1,7 @@
 import PageHero from "@/app/components/azure/PageHero";
 import PressSection, { type PressItem } from "@/app/components/PressSection";
 import { pageMetadata } from "@/lib/seo";
+import { EventsSection } from "@/app/components/azure/pages/PageSections";
 
 export const metadata = pageMetadata({
   locale: "tr",
@@ -173,6 +174,7 @@ export default function HomePage() {
     <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="short" kicker="Basında DND Cyprus" title={<>Haberler</>} lead="Markamızın yer aldığı haberler ve basın duyuruları." image="/dndwhoweare.jpg" imagePosition="50% 42%" />
    <PressSection items={PRESS_ITEMS} title="Tüm haberler" description="" moreHref="" initialLimit={6} />
+   <EventsSection locale="tr" />
 
 
     </main>

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import DeferredIframe from "@/app/components/performance/DeferredIframe";
 import SocialIcons from "@/app/components/azure/SocialIcons";
+import { SECTION_IDS } from "@/lib/azure/nav";
 
 type Office = {
   id: string;
@@ -93,7 +94,7 @@ export default function ContactInfo({
   // Organization JSON-LD is now emitted in the site-wide layouts (tr/layout, en/(main)/layout)
 
   return (
-    <section className="az-section" aria-label="Dane kontaktowe">
+    <section className="az-section" id={SECTION_IDS.pl.offices} aria-label="Dane kontaktowe">
       <div className="az-wrap">
         <div className="az-head">
           <span className="az-kicker rv">{kicker}</span>

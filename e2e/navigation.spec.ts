@@ -7,15 +7,25 @@ test.describe("masaüstü menü", () => {
     await prepare(page);
   });
 
-  test("Projeler menüsünden seçim yapınca sayfa açılır ve menü kapanır", async ({ page }) => {
+  test("Projelerimiz menüsünden seçim yapınca sayfa açılır ve menü kapanır", async ({ page }) => {
     await page.goto("/tr/about");
     const nav = page.locator("#az-nav");
-    await nav.getByRole("button", { name: "Projeler" }).hover();
-    const drop = nav.locator(".drop");
+    await nav.getByRole("button", { name: "Projelerimiz" }).hover();
+    const drop = nav.locator(".drop.mega");
     await expect(drop).toBeVisible();
     await drop.getByRole("link", { name: /Lagoon Verde/ }).click();
     await expect(page).toHaveURL(/\/tr\/lagoon-verde$/);
     await expect(drop).toBeHidden();
+  });
+
+  // menü (müşterinin akış belgesi): alt başlık, ilgili sayfanın bölümüne gider
+  test("DND Ayrıcalığı → Satış Sonrası Hizmetler sayfanın o bölümünü açar", async ({ page }) => {
+    await page.goto("/tr");
+    const nav = page.locator("#az-nav");
+    await nav.getByRole("button", { name: "DND Ayrıcalığı" }).hover();
+    await nav.getByRole("link", { name: "Satış Sonrası Hizmetler" }).click();
+    await expect(page).toHaveURL(/\/tr\/advantage#satis-sonrasi$/);
+    await expect(page.locator("#satis-sonrasi")).toBeInViewport();
   });
 
   test("ana sayfada logo sayfanın başına çıkarır", async ({ page }) => {
@@ -50,7 +60,7 @@ test.describe("mobil menü", () => {
     // panel ekranı kaplamaz: en fazla 400 px genişlik
     const box = await panel.boundingBox();
     expect(box!.width).toBeLessThanOrEqual(400);
-    await panel.getByRole("button", { name: "Projeler" }).click();
+    await panel.getByRole("button", { name: "Projelerimiz" }).click();
     const list = panel.locator("#az-mobile-projects");
     await expect(list).toBeVisible();
     await list.getByRole("link", { name: "La Joya Perla", exact: true }).click();

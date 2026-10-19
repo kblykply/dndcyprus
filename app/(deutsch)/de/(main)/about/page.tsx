@@ -8,6 +8,11 @@ import CallToAction from "@/app/components/de/about/CallToAction";
 import { OzanCard, AynurCard } from "@/app/components/azure/PersonCard";
 
 import AboutDndHomes from "@/app/components/de/about/AboutDndHomes";
+import { AboutUsa, PartnerCard } from "@/app/components/azure/pages/PageSections";
+import { Numbers } from "@/app/components/azure/home/FlowSections";
+import AwardsShowcase from "@/app/components/azure/home/AwardsShowcase";
+import { PAGES } from "@/lib/azure/pages";
+import { SECTION_IDS } from "@/lib/azure/nav";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -44,8 +49,12 @@ description = "Entdecken Sie unsere Projekte und unser Wohnkonzept."
 
 />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="de" heading="h2" /></div></section>
-    <Timeline locale="de" id="timeline" about />
+    <PartnerCard locale="de" />
     <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="de" heading="h2" /></div></section>
+    <Timeline locale="de" id="timeline" about />
+    <AboutUsa locale="de" />
+    <Numbers locale="de" id={SECTION_IDS.de.numbers} usa={PAGES.de.about.numbersUsa} title={PAGES.de.about.numbersTitle} />
+    <AwardsShowcase locale="de" />
 
 
         <MissionVisionValues />

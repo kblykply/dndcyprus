@@ -136,14 +136,15 @@ a:hover > .az-arrow:not(.back) { transform: translateX(3px); }
 .az-mobile .meta .az-btn { justify-self: stretch; margin-top: 10px; }
 .az-mobile .close { display: none; } /* kapatma: menü çubuğundaki düğme (çarpıya döner) */
 body.az-lock { overflow: hidden; }
-@media (max-width: 1000px) {
+/* 7 başlıklı menü (Ekim 2026) 1200 px altında tek satıra sığmıyor (uzun dillerde): hamburger menüye geçer */
+@media (max-width: 1199px) {
   .az-nav ul, .az-nav .pill > .az-btn { display: none; }
   .az-nav .burger { display: grid; }
   .az-nav .pill { width: auto; margin-left: auto; padding-left: 12px; }
   .az-nav .logo { margin-right: 6px; }
 }
 @media (max-width: 420px) { .az-nav .lang { display: none; } }
-@media (min-width: 1001px) and (max-width: 1180px) { .az-nav li > a, .az-nav li > button { padding: 10px 11px; font-size: 13px; } }
+
 
 /* ---- hero (home + inner pages) ---- */
 .az-hero { padding: 96px var(--gutter) 0; }

@@ -1,0 +1,73 @@
+/* Yeni sayfa bölümleri: görsel + metin (az-split), kampanyalar (az-camp), etkinlikler (az-events), S.S.S. (az-pfaq),
+   DND Homes Amerika (az-usa), kurucu ortak (az-partner). Sitenin cam kart / deniz rengi dili. */
+
+/* ---- görsel + metin ---- */
+.az-split .g { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 4.4vw, 72px); align-items: center; }
+.az-split .g.flip .pic { order: 2; }
+.az-split .pic { position: relative; min-height: clamp(340px, 36vw, 520px); border-radius: var(--r); overflow: hidden; background: var(--sky-2); box-shadow: 0 24px 60px rgba(13, 35, 38, .1); }
+.az-split .pic img { object-fit: cover; }
+.az-split .az-h2 { margin-top: 12px; }
+.az-split .az-lead { margin-top: 14px; }
+.az-split ul { display: grid; gap: 10px; margin: 22px 0 26px; padding: 0; list-style: none; }
+.az-split li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; line-height: 1.5; color: var(--ink); }
+.az-split li i { flex: none; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; background: var(--sky-2); color: var(--sea); }
+.az-split .az-note-sm { margin-top: 16px; }
+@media (max-width: 1000px) { .az-split .g { grid-template-columns: minmax(0, 1fr); } .az-split .g.flip .pic { order: 0; } .az-split .pic { min-height: 0; aspect-ratio: 16 / 10; } }
+
+/* ---- kampanyalar ---- */
+.az-camp .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.az-camp .card { display: flex; flex-direction: column; border-radius: calc(var(--r) + 2px); overflow: hidden; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9);
+  box-shadow: 0 14px 40px rgba(13, 35, 38, .07); transition: transform .5s var(--ease), box-shadow .5s; }
+.az-camp .card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(13, 35, 38, .12); }
+.az-camp .pic { position: relative; aspect-ratio: 16 / 10; }
+.az-camp .pic img { object-fit: cover; }
+.az-camp .b { display: flex; flex-direction: column; flex: 1; padding: 22px 22px 24px; }
+.az-camp .k { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--coral); }
+.az-camp .h { margin-top: 8px; font-family: var(--font-display), sans-serif; font-size: 22px; letter-spacing: -.02em; color: var(--ink); }
+.az-camp .p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--ink-60); }
+.az-camp .go { margin-top: auto; padding-top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--sea); }
+.az-camp .az-note-sm { margin-top: 14px; }
+@media (max-width: 1000px) { .az-camp .cards { grid-template-columns: minmax(0, 1fr); } .az-camp .pic { aspect-ratio: 16 / 9; } }
+
+/* ---- ödeme S.S.S. ---- */
+.az-pfaq { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 64px); align-items: start; }
+@media (max-width: 900px) { .az-pfaq { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- etkinlikler ---- */
+.az-events ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0 0 24px; padding: 0; list-style: none; }
+.az-events li > a, .az-events li > div { display: flex; flex-direction: column; height: 100%; border-radius: 24px; overflow: hidden; background: var(--foam);
+  border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 12px 36px rgba(13, 35, 38, .06); color: var(--ink); transition: transform .5s var(--ease); }
+.az-events li > a:hover { transform: translateY(-4px); }
+.az-events .pic { position: relative; aspect-ratio: 4 / 3; background: var(--sky-2); }
+.az-events .pic img { object-fit: cover; }
+.az-events .b { display: grid; gap: 6px; padding: 18px 20px 22px; }
+.az-events .b > small { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
+.az-events .b > b { font-size: 18px; font-weight: 500; letter-spacing: -.01em; }
+.az-events .b > span { font-size: 14.5px; line-height: 1.55; color: var(--ink-60); }
+@media (max-width: 1000px) { .az-events ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .az-events ul { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- DND Homes Amerika ---- */
+.az-usa .g { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 4.4vw, 72px); align-items: center; }
+.az-usa .az-h2 { margin-top: 12px; }
+.az-usa .az-lead { margin-top: 14px; }
+.az-usa .stat { display: flex; align-items: baseline; gap: 14px; margin: 24px 0 22px; }
+.az-usa .stat b { font-family: var(--font-display), sans-serif; font-size: clamp(56px, 6vw, 84px); line-height: 1; font-weight: 400; letter-spacing: -.04em; color: var(--sea); }
+.az-usa .stat span { font-size: 14.5px; color: var(--ink-60); max-width: 22ch; }
+.az-usa .ph { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.az-usa figure { margin: 0; }
+.az-usa figure > span { position: relative; display: block; aspect-ratio: 3 / 4; border-radius: 22px; overflow: hidden; background: var(--sky-2); }
+.az-usa figure img { object-fit: cover; }
+.az-usa figcaption { margin-top: 8px; font-size: 12px; color: var(--ink-60); }
+.az-usa .ph figure:nth-child(2) { margin-top: 40px; }
+@media (max-width: 1000px) { .az-usa .g { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- kurucu ortak ---- */
+.az-partner .card { display: flex; gap: clamp(18px, 3vw, 36px); align-items: center; padding: clamp(22px, 3vw, 36px); border-radius: calc(var(--r) + 4px);
+  background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 18px 50px rgba(13, 35, 38, .06); }
+.az-partner .ini { flex: none; display: grid; place-items: center; width: clamp(72px, 9vw, 104px); aspect-ratio: 1; border-radius: 50%;
+  background: linear-gradient(135deg, var(--sea), var(--sea-deep)); color: #fff; font-family: var(--font-display), sans-serif; font-size: clamp(24px, 3vw, 34px); letter-spacing: .02em; }
+.az-partner small { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
+.az-partner h2 { margin-top: 6px; font-size: clamp(24px, 2.4vw, 32px); font-weight: 400; letter-spacing: -.02em; }
+.az-partner p { margin-top: 8px; font-size: 15.5px; line-height: 1.6; color: var(--ink-60); max-width: 70ch; }
+@media (max-width: 560px) { .az-partner .card { flex-direction: column; align-items: flex-start; } }

@@ -18,6 +18,8 @@ const BILINGUAL: { path: string; priority: number; changeFrequency: Freq }[] = [
   { path: "/la-joya", priority: 0.8, changeFrequency: "monthly" },
   { path: "/mariachi", priority: 0.8, changeFrequency: "monthly" },
   { path: "/gecitkale", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/advantage", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/payment-plans", priority: 0.8, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "yearly" },
   { path: "/team", priority: 0.5, changeFrequency: "yearly" },
   { path: "/contact", priority: 0.7, changeFrequency: "yearly" },

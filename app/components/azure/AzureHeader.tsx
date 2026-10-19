@@ -5,25 +5,28 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useMenuDialog } from "@/app/components/performance/useMenuDialog";
+import { NAV_TEXT, PROJECT_GROUPS, PROJECT_HASH, navItems, type NavItem, type NavLink } from "@/lib/azure/nav";
 import { CONTACT, LOCALES, LOCALE_META, NAV_COPY, PROJECTS, href, stripLocale, type Locale } from "@/lib/azure/site";
 import Arrow from "./Arrow";
 import "./lang.css";
+import "./nav.css";
 
-// Azure: yüzen cam pill menü + proje mega menüsü + tam ekran mobil menü.
+// Azure: yüzen cam pill menü (7 başlık: Ana Sayfa, Projelerimiz mega menüsü, DND Ayrıcalığı, Ödeme ve Yatırım, Hakkımızda,
+// Haberler, İletişim — lib/azure/nav.ts) + açılır bölümlü mobil menü.
 export default function AzureHeader({ locale }: { locale: Locale }) {
   const t = NAV_COPY[locale];
   const pathname = usePathname() || "/";
   const router = useRouter();
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);       // mobil menü
-  const [projOpen, setProjOpen] = useState(false); // mobil menüde Projeler açılır bölümü
-  const [drop, setDrop] = useState(false);       // projeler açılır menüsü (dokunmatik için)
+  const [acc, setAcc] = useState<string | null>(null); // mobil menüde açık bölüm
+  const [drop, setDrop] = useState<string | null>(null); // tıklamayla açık açılır menü (dokunmatik için)
   // seçim yapılınca menü kapanır ve fare menüden çıkana kadar kapalı kalır (yoksa :hover / :focus-within açık tutuyordu)
-  const [shut, setShut] = useState(false);
+  const [shut, setShut] = useState<string | null>(null);
   const [langOpen, setLangOpen] = useState(false); // dil menüsü (5 dil)
   const langRef = useRef<HTMLDivElement>(null);
   const menuRef = useMenuDialog(open, setOpen);
-  const dropRef = useRef<HTMLLIElement>(null);
+  const dropRef = useRef<HTMLUListElement>(null);
 
   // dil değiştirince aynı sayfanın diğer dil sürümüne git
   const clean = stripLocale(pathname);
@@ -42,7 +45,6 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
     if (location.hash) history.replaceState(history.state, "", pathname);
     requestAnimationFrame(() => window.scrollTo({ top: 0 }));
   };
-  const pick = () => { setDrop(false); setShut(true); (document.activeElement as HTMLElement | null)?.blur(); };
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -51,7 +53,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
     return () => removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setOpen(false); setDrop(false); setLangOpen(false); setProjOpen(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setDrop(null); setLangOpen(false); setAcc(null); }, [pathname]);
   // açık panelin dışına (menü çubuğu hariç) dokununca kapanır
   useEffect(() => {
     if (!open) return;
@@ -70,7 +72,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
   useEffect(() => {
     if (!drop && !langOpen) return;
     const onDoc = (e: PointerEvent) => {
-      if (drop && !dropRef.current?.contains(e.target as Node)) setDrop(false);
+      if (drop && !dropRef.current?.contains(e.target as Node)) setDrop(null);
       if (langOpen && !langRef.current?.contains(e.target as Node)) setLangOpen(false);
     };
     document.addEventListener("pointerdown", onDoc);
@@ -78,13 +80,22 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
   }, [drop, langOpen]);
 
   const isActive = (path: string) => clean === path || (path !== "/" && clean.startsWith(path + "/"));
-  const items: { label: string; path: string }[] = [
-    { label: t.home, path: "/" },
-    { label: t.about, path: "/about" },
-    { label: t.team, path: "/team" },
-    { label: t.press, path: "/press" },
-    { label: t.contact, path: "/contact" },
-  ];
+  const nav = NAV_TEXT[locale];
+  const items = navItems(locale, LOCALE_META[locale].blog);
+  const ph = PROJECT_HASH[locale];
+  const linkOf = (c: NavLink) => c.external ?? `${href(locale, c.path)}${c.hash ? `#${c.hash}` : ""}`;
+  const itemOn = (it: NavItem) => isActive(it.path) || it.children.some((c) => c.path && isActive(c.path));
+  const projectOn = isActive("/projects") || PROJECTS.some((p) => isActive(`/${p.slug}`));
+  const byslug = (slug: string) => PROJECTS.find((p) => p.slug === slug)!;
+  // açılır menü durumları: hangi başlık tıklamayla açık (dokunmatik), hangisi seçimden sonra kapalı tutuluyor
+  const liClass = (key: string, on: boolean, extra = "") =>
+    [drop === key ? "open" : "", shut === key ? "shut" : "", extra].join(" ").trim() || undefined;
+  const opener = (key: string) => ({
+    onMouseEnter: () => setShut(null), onFocus: () => setShut(null),
+    onClick: () => { setShut(null); setDrop((d) => (d === key ? null : key)); },
+  });
+  const pickIn = (key: string) => () => { setDrop(null); setShut(key); (document.activeElement as HTMLElement | null)?.blur(); };
+  const chevron = <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.3" /></svg>;
 
   return (
     <>
@@ -94,34 +105,49 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/DND-LOGO-2.svg" alt="DND Cyprus" width={70} height={30} />
           </Link>
-          <ul>
+          {/* menü: müşterinin akış belgesindeki 7 başlık (lib/azure/nav.ts). Seçimden sonra açılır menü kapalı kalır;
+              fare başlığa yeniden gelince (ya da klavye odağında) açılabilir */}
+          <ul ref={dropRef}>
             <li>
-              <Link href={href(locale, "/")} className={isActive("/") ? "on" : undefined} prefetch={false} onClick={toTop}>{t.home}</Link>
+              <Link href={href(locale, "/")} className={isActive("/") ? "on" : undefined} prefetch={false} onClick={toTop}>{nav.home}</Link>
             </li>
-            {/* seçimden sonra kapalı kalır; fare "Projeler" düğmesine yeniden gelince (ya da klavye odağında) açılabilir.
-                Kapanınca fare menünün alanından "çıkmış" sayıldığı için mouseleave ile açmak menüyü hemen geri açıyordu */}
-            <li ref={dropRef} className={[drop ? "open" : "", shut ? "shut" : ""].join(" ").trim() || undefined}>
-              <button type="button" aria-haspopup="true" aria-expanded={drop} onMouseEnter={() => setShut(false)} onFocus={() => setShut(false)} onClick={() => { setShut(false); setDrop((d) => !d); }}>
-                {t.projects}
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.3" /></svg>
+            <li className={liClass("projects", projectOn)}>
+              <button type="button" aria-haspopup="true" aria-expanded={drop === "projects"} className={projectOn ? "on" : undefined} {...opener("projects")}>
+                {nav.projects}{chevron}
               </button>
-              <div className="drop">
-                {PROJECTS.filter((p) => p.slug !== "gecitkale").map((p) => (
-                  <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false} onClick={pick}>
-                    {/* 56 px küçük resim: tam boy fotoğraf (300–390 KB) yerine 64/128 px WebP; menü kapalıyken de iniyordu */}
-                    <Image src={p.thumb} alt="" width={56} height={56} quality={75} />
-                    <span><b>{p.name}</b><small>{p.short[locale]}</small></span>
-                  </Link>
+              <div className="drop mega">
+                {PROJECT_GROUPS.map((g) => (
+                  <div className="grp" key={g.key}>
+                    <Link className="gh" href={`${href(locale, "/projects")}#${ph[g.key]}`} prefetch={false} onClick={pickIn("projects")}>{nav.groups[g.key]} <Arrow size={14} /></Link>
+                    {g.slugs.map((slug) => {
+                      const p = byslug(slug);
+                      return (
+                        <Link key={slug} href={href(locale, `/${slug}`)} prefetch={false} onClick={pickIn("projects")}>
+                          {/* 56 px küçük resim: tam boy fotoğraf yerine 64/128 px WebP */}
+                          <Image src={p.thumb} alt="" width={56} height={56} quality={75} />
+                          <span><b>{p.name}</b><small>{p.short[locale]}</small></span>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 ))}
-                <Link href={href(locale, "/projects")} prefetch={false} onClick={pick}>
-                  <Image src="/azure/sea.jpg" alt="" width={56} height={56} quality={75} />
-                  <span><b>{t.all}</b><small>{t.allSub}</small></span>
-                </Link>
+                <Link className="all" href={href(locale, "/projects")} prefetch={false} onClick={pickIn("projects")}>{nav.allProjects} <Arrow size={14} /></Link>
               </div>
             </li>
-            {items.filter((it) => it.path !== "/").map((it) => (
-              <li key={it.path}>
-                <Link href={href(locale, it.path)} className={isActive(it.path) ? "on" : undefined} prefetch={false}>{it.label}</Link>
+            {items.map((it) => it.children.length <= 1 ? (
+              <li key={it.key}>
+                <Link href={linkOf(it.children[0] ?? { label: it.label, path: it.path })} className={itemOn(it) ? "on" : undefined} prefetch={false}>{it.label}</Link>
+              </li>
+            ) : (
+              <li key={it.key} className={liClass(it.key, itemOn(it), "sm")}>
+                <button type="button" aria-haspopup="true" aria-expanded={drop === it.key} className={itemOn(it) ? "on" : undefined} {...opener(it.key)}>
+                  {it.key === "payment" ? <><span className="lg">{it.label}</span><span className="sh">{nav.paymentShort}</span></> : it.label}{chevron}
+                </button>
+                <div className="drop list">
+                  {it.children.map((c) => c.external
+                    ? <a key={c.label} href={c.external} target="_blank" rel="noopener noreferrer" onClick={pickIn(it.key)}>{c.label}<Arrow size={14} /></a>
+                    : <Link key={c.label} href={linkOf(c)} prefetch={false} onClick={pickIn(it.key)}>{c.label}<Arrow size={14} /></Link>)}
+                </div>
               </li>
             ))}
           </ul>
@@ -154,17 +180,36 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
         <button className="close" type="button" aria-label={t.close} onClick={() => setOpen(false)}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.6" /></svg>
         </button>
-        <Link className="big" href={href(locale, "/")} prefetch={false} onClick={toTop}>{t.home}</Link>
-        {/* Projeler: açılır bölüm (dokununca projeler ve "Tüm projeler" açılır) */}
-        <button type="button" className={`big acc${projOpen ? " open" : ""}`} aria-expanded={projOpen} aria-controls="az-mobile-projects" onClick={() => setProjOpen((o) => !o)}>
-          {t.projects}
+        <Link className="big" href={href(locale, "/")} prefetch={false} onClick={toTop}>{nav.home}</Link>
+        {/* her başlık açılır bölüm: dokununca alt başlıklar çip olarak açılır (aynı anda bir bölüm açık) */}
+        <button type="button" className={`big acc${acc === "projects" ? " open" : ""}`} aria-expanded={acc === "projects"} aria-controls="az-mobile-projects" onClick={() => setAcc((a) => (a === "projects" ? null : "projects"))}>
+          {nav.projects}
           <svg width="14" height="14" viewBox="0 0 10 10" fill="none" aria-hidden><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.3" /></svg>
         </button>
-        <div className="sub acc-body" id="az-mobile-projects" hidden={!projOpen}>
-          {PROJECTS.map((p) => <Link key={p.slug} href={href(locale, `/${p.slug}`)} prefetch={false}>{p.name}</Link>)}
-          <Link className="all" href={href(locale, "/projects")} prefetch={false}>{t.all} <Arrow /></Link>
+        <div className="sub acc-body groups" id="az-mobile-projects" hidden={acc !== "projects"}>
+          {PROJECT_GROUPS.map((g) => (
+            <div key={g.key} className="g">
+              <Link className="gh" href={`${href(locale, "/projects")}#${ph[g.key]}`} prefetch={false}>{nav.groups[g.key]}</Link>
+              {g.slugs.map((slug) => <Link key={slug} href={href(locale, `/${slug}`)} prefetch={false}>{byslug(slug).name}</Link>)}
+            </div>
+          ))}
+          <Link className="all" href={href(locale, "/projects")} prefetch={false}>{nav.allProjects} <Arrow /></Link>
         </div>
-        {items.filter((it) => it.path !== "/").map((it) => <Link key={it.path} className="big" href={href(locale, it.path)} prefetch={false}>{it.label}</Link>)}
+        {items.map((it) => it.children.length <= 1 ? (
+          <Link key={it.key} className="big" href={linkOf(it.children[0] ?? { label: it.label, path: it.path })} prefetch={false}>{it.label}</Link>
+        ) : (
+          <div key={it.key} className="accw">
+            <button type="button" className={`big acc${acc === it.key ? " open" : ""}`} aria-expanded={acc === it.key} aria-controls={`az-mobile-${it.key}`} onClick={() => setAcc((a) => (a === it.key ? null : it.key))}>
+              {it.label}
+              <svg width="14" height="14" viewBox="0 0 10 10" fill="none" aria-hidden><path d="M2 4l3 3 3-3" stroke="currentColor" strokeWidth="1.3" /></svg>
+            </button>
+            <div className="sub acc-body" id={`az-mobile-${it.key}`} hidden={acc !== it.key}>
+              {it.children.map((c) => c.external
+                ? <a key={c.label} href={c.external} target="_blank" rel="noopener noreferrer">{c.label}</a>
+                : <Link key={c.label} href={linkOf(c)} prefetch={false} onClick={() => setOpen(false)}>{c.label}</Link>)}
+            </div>
+          </div>
+        ))}
         <nav className="langs" aria-label={t.lang}>
           {LOCALES.map((l) => (
             <a key={l} href={langTarget(l)} className={l === locale ? "on" : undefined} lang={l} hrefLang={l} aria-current={l === locale ? "true" : undefined} onClick={(e) => { e.preventDefault(); switchTo(l); }}>{LOCALE_META[l].name}</a>

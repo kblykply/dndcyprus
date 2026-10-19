@@ -158,27 +158,27 @@ export const href = (locale: Locale, path: string) => `/${locale}${path === "/" 
 
 export const NAV_COPY = {
   tr: {
-    projects: "Projeler", all: "Tüm Projeler", allSub: "6 proje", about: "Hakkımızda", team: "Ekibimiz",
+    projects: "Projeler", all: "Tüm Projeler", allSub: "7 proje", about: "Hakkımızda", team: "Ekibimiz",
     press: "Haberler", blog: "Yazılar", media: "Medya Merkezi", contact: "İletişim", cta: "Bilgi Al",
     menu: "Menü", close: "Menüyü kapat", home: "Ana Sayfa", lang: "Dil",
   },
   en: {
-    projects: "Projects", all: "All Projects", allSub: "6 projects", about: "About Us", team: "Our Team",
+    projects: "Projects", all: "All Projects", allSub: "7 projects", about: "About Us", team: "Our Team",
     press: "News", blog: "Blog", media: "Media Center", contact: "Contact", cta: "Enquire",
     menu: "Menu", close: "Close menu", home: "Home", lang: "Language",
   },
   de: {
-    projects: "Projekte", all: "Alle Projekte", allSub: "6 Projekte", about: "Über uns", team: "Unser Team",
+    projects: "Projekte", all: "Alle Projekte", allSub: "7 Projekte", about: "Über uns", team: "Unser Team",
     press: "Aktuelles", blog: "Blog", media: "Mediencenter", contact: "Kontakt", cta: "Anfragen",
     menu: "Menü", close: "Menü schließen", home: "Startseite", lang: "Sprache",
   },
   ru: {
-    projects: "Проекты", all: "Все проекты", allSub: "6 проектов", about: "О компании", team: "Наша команда",
+    projects: "Проекты", all: "Все проекты", allSub: "7 проектов", about: "О компании", team: "Наша команда",
     press: "Новости", blog: "Блог", media: "Медиацентр", contact: "Контакты", cta: "Узнать больше",
     menu: "Меню", close: "Закрыть меню", home: "Главная", lang: "Язык",
   },
   pl: {
-    projects: "Projekty", all: "Wszystkie projekty", allSub: "6 projektów", about: "O nas", team: "Nasz zespół",
+    projects: "Projekty", all: "Wszystkie projekty", allSub: "7 projektów", about: "O nas", team: "Nasz zespół",
     press: "Aktualności", blog: "Blog", media: "Centrum medialne", contact: "Kontakt", cta: "Zapytaj",
     menu: "Menu", close: "Zamknij menu", home: "Strona główna", lang: "Język",
   },
