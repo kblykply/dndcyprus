@@ -163,9 +163,18 @@ test("S.S.S.: bir soru açılınca diğeri kapanır (ana sayfa ve Ödeme sayfas�
   for (const url of ["/tr", "/tr/payment-plans"]) {
     await page.goto(url);
     const items = page.locator(".az-faq details");
-    await items.nth(0).locator("summary").click();
+    // Firefox'ta sayfa açılır açılmaz yapılan ilk tıklama ara sıra boşa düşüyor (kullanıcıda tekrar tıklamakla aynı):
+    // soru açılana kadar tıklamayı yeniden dene
+    const open = async (k: number) => {
+      const d = items.nth(k);
+      await expect(async () => {
+        if ((await d.getAttribute("open")) === null) await d.locator("summary").click();
+        await expect(d).toHaveAttribute("open", "", { timeout: 1500 });
+      }).toPass({ timeout: 10000 });
+    };
+    await open(0);
     await expect(items.nth(0)).toHaveAttribute("open", "");
-    await items.nth(1).locator("summary").click();
+    await open(1);
     await expect(items.nth(1)).toHaveAttribute("open", "");
     await expect(items.nth(0)).not.toHaveAttribute("open", "");
   }

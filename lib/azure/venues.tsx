@@ -22,12 +22,12 @@ export const VENUES: Venue[] = [
   {
     key: "ulfet-shu",
     logo: "/azure/venues/ulfet-shu-logo.png",
-    // Ülfet Shu Instagram (Ekim 2026): dolu salon, DJ kabini, boş sahne (dansçılı kare kurumsal sitede uygun değil, kişiler silindi); dikey reel kareleri kartın 3:2 oranına Kling ile yanlardan
-    // genişletildi (salonda özgün pikseller ortada aynen; DJ karesi tamamen yeniden çizildi, mekân aynı)
+    // Ülfet Shu Instagram (Ekim 2026): dolu salon, DJ kabini, sahnede kemancı (dansçılı kare kurumsal sitede uygun değil); dikey reel kareleri kartın 3:2 oranına Kling ile yanlardan
+    // genişletildi (salonda özgün pikseller ortada aynen; DJ karesi tamamen yeniden çizildi, mekân aynı; kemancı karesinde oynat simgesi temizlendi)
     images: [
       { src: "/azure/venues/ulfet-shu-salon.jpg" },
       { src: "/azure/venues/ulfet-shu-dj.jpg" },
-      { src: "/azure/venues/ulfet-shu-sahne.jpg" },
+      { src: "/azure/venues/ulfet-shu-keman.jpg" },
     ],
     instagram: { handle: "@ulfetshu", href: "https://www.instagram.com/ulfetshu/" },
     phone: { display: "0546 996 55 55", tel: "+905469965555" },

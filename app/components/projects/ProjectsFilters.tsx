@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { PROJECT_HASH } from "@/lib/azure/nav";
 import Link from "next/link";
 import GlassArrow from "@/app/components/azure/GlassArrow";
+import LogoTag from "@/app/components/azure/LogoTag";
 import DeferredFillImage from "@/app/components/performance/DeferredFillImage";
 
 /**
@@ -90,6 +91,10 @@ const DATA: Project[] = [
   },
 
 ];
+
+// proje kartının logosu (ana sayfadaki proje kartları gibi sağ üstte)
+const LOGO: Record<string, string> = { neocity: "/logos/web/neocity.webp", "lagoon-verde": "/logos/web/lagoon.webp", "la-joya": "/logos/web/lajoya.webp", perla: "/logos/web/perla.webp", "perla-ii": "/logos/web/perlaii.webp", mariachi: "/logos/web/mariachi.webp" };
+const logoOf = (href: string) => LOGO[href.split("#")[0].split("/").filter(Boolean).pop() ?? ""];
 
 /* ================== UI META ================== */
 const STATUS_TABS: { key: ProjectStatus; label: string }[] = [
@@ -221,8 +226,8 @@ export default function ProjectsFilters() {
                 aria-hidden
               />
               <div className="top">
-                <span className="az-st">{labelStatusTR(p.status)}</span>
-                <span className="az-st">{labelTypeTR(p.type)}</span>
+                <span className="tags"><span className="az-st">{labelStatusTR(p.status)}</span><span className="az-st">{labelTypeTR(p.type)}</span></span>
+                {logoOf(p.href) ? <LogoTag src={logoOf(p.href)!} inline /> : null}
               </div>
               <div className="in">
                 <small>{p.location}</small>

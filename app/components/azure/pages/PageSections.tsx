@@ -9,7 +9,8 @@ import { blogPosts } from "@/lib/blog";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { PROJECT_DATA } from "@/lib/azure/projects/index";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
-import { SOCIALS, href, type Locale } from "@/lib/azure/site";
+import { PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
+import LogoTag from "../LogoTag";
 import Tech from "../project/Tech";
 import Amenities from "../project/Amenities";
 import Mariachi from "../project/Mariachi";
@@ -102,7 +103,7 @@ export function PaymentSections({ locale }: { locale: Locale }) {
           <div className="cards">
             {t.campaigns.items.map((c, k) => (
               <Link key={c.h} className={`card rv d${k}`} href={href(locale, c.path)} prefetch={false}>
-                <span className="pic"><Image src={c.img} alt="" fill quality={70} sizes="(min-width: 900px) 33vw, 100vw" /></span>
+                <span className="pic"><Image src={c.img} alt="" fill quality={70} sizes="(min-width: 900px) 33vw, 100vw" />{campLogo(c) ? <LogoTag src={campLogo(c)!} /> : null}</span>
                 <span className="b">
                   <span className="k">{c.k}</span>
                   <span className="h">{c.h}</span>
@@ -120,6 +121,10 @@ export function PaymentSections({ locale }: { locale: Locale }) {
     </>
   );
 }
+
+// kampanya kartının fotoğrafındaki logo (kullanıcı: "kartların hangi projeye ait olduğu anlaşılsın"): bağlantıdaki proje; Ülfet kartında Ülfet Beach
+const campLogo = (c: { path: string; img: string }) =>
+  c.img.includes("ulfet") ? "/azure/venues/ulfet-beach-logo.png" : PROJECTS.find((x) => c.path.split("#")[0] === `/${x.slug}`)?.logo;
 
 /** Haberler sayfası: Etkinlikler (gerçek fotoğraflar) */
 export function EventsSection({ locale }: { locale: Locale }) {
