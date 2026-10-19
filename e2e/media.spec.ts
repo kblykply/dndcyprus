@@ -171,15 +171,16 @@ test("S.S.S.: bir soru açılınca diğeri kapanır (ana sayfa ve Ödeme sayfas�
   }
 });
 
-// ödüller: geniş akordiyon; platin ödül (Mariachi) başta açık, panele gelince / dokununca o açılır ve madalyası görünür
-test("ödül akordiyonu: başta platin açık, başka panel seçilince o genişler", async ({ page }) => {
+// ödüller: geniş akordiyon; altın ödüllü Lagoon Verde ortada ve başta açık, panele gelince / dokununca o açılır ve madalyası görünür
+test("ödül akordiyonu: başta ortadaki Lagoon Verde açık, başka panel seçilince o genişler", async ({ page }) => {
   await page.goto("/tr");
   const acc = page.locator("#oduller .az-awacc");
   await acc.scrollIntoViewIfNeeded();
   await expect(acc.locator(".pn")).toHaveCount(3);
-  await expect(acc.locator(".pn.on .medal")).toHaveAttribute("src", /platinum-mariachi/);
+  await expect(acc.locator(".pn").nth(1)).toHaveClass(/\bon\b/);
+  await expect(acc.locator(".pn.on .medal")).toHaveAttribute("src", /gold-lagoon-verde/);
   // fare panele gelince açılır (açılan panelin düğmesi tıklamayı kapatır; kullanıcıdaki gibi üstüne gelinir)
   await acc.locator(".pn").first().hover();
-  await expect(acc.locator(".pn.on .medal")).toHaveAttribute("src", /gold-lagoon-verde/);
-  await expect(acc.locator(".pn.on .gl a")).toHaveAttribute("href", "/tr/lagoon-verde");
+  await expect(acc.locator(".pn.on .medal")).toHaveAttribute("src", /platinum-mariachi/);
+  await expect(acc.locator(".pn.on .gl a")).toHaveAttribute("href", "/tr/mariachi");
 });

@@ -1,7 +1,7 @@
 import PageHero from "@/app/components/azure/PageHero";
 import PressSection, { type PressItem } from "@/app/components/ru/PressSection";
 import { pageMetadata } from "@/lib/seo";
-import { EventsSection } from "@/app/components/azure/pages/PageSections";
+import { DndNewsSection, EventsSection, PressBlock } from "@/app/components/azure/pages/PageSections";
 
 export const metadata = pageMetadata({
   locale: "ru",
@@ -172,9 +172,11 @@ const PRESS_ITEMS: PressItem[] = [
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <PageHero size="short" kicker="DND Cyprus в прессе" title={<>Новости</>} lead="Публикации в СМИ и пресс-релизы о нашем бренде." image="/dndwhoweare.jpg" imagePosition="50% 42%" />
-   <PressSection items={PRESS_ITEMS} title="Все новости" description="" moreHref="" initialLimit={6} />
-   <EventsSection locale="ru" />
+      <PageHero size="short" kicker="DND Cyprus в прессе" title={<>Новости</>} lead="Новости DND, DND в прессе и мероприятия." image="/dndwhoweare.jpg" imagePosition="50% 42%" />
+      {/* akış belgesi: Haberler = DND’den Haberler · Basında DND · Etkinlikler */}
+      <DndNewsSection locale="ru" />
+      <PressBlock locale="ru"><PressSection items={PRESS_ITEMS} bare description="" moreHref="" initialLimit={6} /></PressBlock>
+      <EventsSection locale="ru" />
 
 
     </main>

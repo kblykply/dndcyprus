@@ -34,6 +34,7 @@ export type PressSectionProps = {
   className?: string;
   moreHref?: string; // link to "all news" page, e.g. '/press'
   initialLimit?: number; // default 4 (featured counts as 1)
+  bare?: boolean; // Haberler sayfası: başlık, beyaz bant ve iç kenar boşluğu yok; dıştaki az-section / az-wrap hizalar
 };
 
 // ------------------------------------------------------------
@@ -100,6 +101,7 @@ description = 'Publikacje w mediach i komunikaty prasowe o naszej marce.',
   className,
   moreHref = '/pl/press',
   initialLimit = 4,
+  bare = false,
 }: PressSectionProps) {
   // Fallback expand state only used when moreHref is absent
   const [showAll, setShowAll] = useState(false);
@@ -134,7 +136,7 @@ description = 'Publikacje w mediach i komunikaty prasowe o naszej marce.',
   const sectionBleed = fullBleed
     ? 'relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-[100vw] bg-white'
     : 'bg-white';
-  const sectionClass = `${sectionBleed} isolate ${className ?? ''}`.trim();
+  const sectionClass = bare ? `isolate ${className ?? ''}`.trim() : `${sectionBleed} isolate ${className ?? ''}`.trim();
 
   // Görsel geçişi yumuşak olsun diye ilk birkaç haberin kapağı üst üste hazır bekler
   const stackIds = new Set([...list.slice(0, 4).map((i) => i.id), ...seenIds]);
@@ -143,9 +145,9 @@ description = 'Publikacje w mediach i komunikaty prasowe o naszej marce.',
   return (
     <section className={sectionClass} onMouseLeave={() => setActiveId(null)}>
       {/* Inner container keeps nice reading width but the white background spans full viewport */}
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className={bare ? "" : "mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"}>
         {/* Header */}
-        <InViewReveal y={16}>
+        {bare ? null : <InViewReveal y={16}>
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-[var(--ink)]">
@@ -169,7 +171,7 @@ description = 'Publikacje w mediach i komunikaty prasowe o naszej marce.',
               </a>
             )}
           </div>
-        </InViewReveal>
+        </InViewReveal>}
 
         {/* Featured */}
         {featured && shown && (

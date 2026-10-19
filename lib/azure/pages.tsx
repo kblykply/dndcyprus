@@ -32,6 +32,8 @@ export type PagesCopy = {
       statsLabel: string; stats: { n: string; l: string }[]; links: { label: string; href: string }[];
     };
   };
+  /** Haberler sayfası (akış belgesi): DND’den Haberler · Basında DND · Etkinlikler */
+  news: { heroLead: string; blog: { kicker: string; title: ReactNode; lead: string; all: string }; press: { kicker: string; title: ReactNode; lead: string } };
   events: { kicker: string; title: ReactNode; lead: string; items: Event[]; follow: string };
   about: {
     usa: { kicker: string; title: ReactNode; p: string[]; stat: string; photos: string[]; link: string };
@@ -84,6 +86,11 @@ const TR: PagesCopy = {
       statsLabel: "Neden Kuzey Kıbrıs?", stats: [{ n: "2,2 M+", l: "yıllık ziyaretçi" }, { n: "%19,1", l: "turist artışı (2023–2024)" }, { n: "300+", l: "güneşli gün (yılda)" }],
       links: [{ label: "La Joya’da konaklama", href: LAJOYA }, { label: "DND Reserve", href: RESERVE }],
     },
+  },
+  news: {
+    heroLead: "DND’den haberler, basında DND ve etkinlikler.",
+    blog: { kicker: "DND’den Haberler", title: <>DND Cyprus’tan <b>son gelişmeler.</b></>, lead: "Röportajlar, ödüller ve etkinliklerden notlar.", all: "Tüm yazılar" },
+    press: { kicker: "Basında DND", title: <>Markamız <b>basında.</b></>, lead: "Markamızın yer aldığı haberler ve basın duyuruları." },
   },
   events: {
     kicker: "Etkinlikler", title: <>DND Cyprus’la <b>bir arada.</b></>, lead: "Ödül törenlerinden kutlamalara, DND Cyprus ailesinin bir araya geldiği anlar.",
@@ -156,6 +163,11 @@ const EN: PagesCopy = {
       links: [{ label: "Stay at La Joya", href: LAJOYA }, { label: "DND Reserve", href: RESERVE }],
     },
   },
+  news: {
+    heroLead: "News from DND, DND in the press and events.",
+    blog: { kicker: "News from DND", title: <>The latest <b>from DND Cyprus.</b></>, lead: "Notes from interviews, awards and events.", all: "All posts" },
+    press: { kicker: "DND in the Press", title: <>Our brand <b>in the news.</b></>, lead: "News coverage and press announcements featuring our brand." },
+  },
   events: {
     kicker: "Events", title: <>Together with <b>DND Cyprus.</b></>, lead: "From award ceremonies to celebrations — moments when the DND Cyprus family came together.",
     items: [
@@ -226,6 +238,11 @@ const DE: PagesCopy = {
       statsLabel: "Warum Nordzypern?", stats: [{ n: "2,2 Mio.+", l: "Besucher pro Jahr" }, { n: "+19,1 %", l: "Touristenwachstum (2023–2024)" }, { n: "300+", l: "Sonnentage im Jahr" }],
       links: [{ label: "Urlaub in La Joya", href: LAJOYA }, { label: "DND Reserve", href: RESERVE }],
     },
+  },
+  news: {
+    heroLead: "Neues von DND, DND in der Presse und Veranstaltungen.",
+    blog: { kicker: "Neues von DND", title: <>Das Neueste <b>von DND Cyprus.</b></>, lead: "Notizen zu Interviews, Auszeichnungen und Veranstaltungen.", all: "Alle Beiträge" },
+    press: { kicker: "DND in der Presse", title: <>Unsere Marke <b>in den Medien.</b></>, lead: "Presseberichte und Pressemitteilungen über unsere Marke." },
   },
   events: {
     kicker: "Veranstaltungen", title: <>Gemeinsam mit <b>DND Cyprus.</b></>, lead: "Von Preisverleihungen bis zu Feiern – Momente, in denen die DND-Cyprus-Familie zusammenkam.",
@@ -298,6 +315,11 @@ const RU: PagesCopy = {
       links: [{ label: "Отдых в La Joya", href: LAJOYA }, { label: "DND Reserve", href: RESERVE }],
     },
   },
+  news: {
+    heroLead: "Новости DND, DND в прессе и мероприятия.",
+    blog: { kicker: "Новости DND", title: <>Последние новости <b>DND Cyprus.</b></>, lead: "Интервью, награды и события.", all: "Все публикации" },
+    press: { kicker: "DND в прессе", title: <>Наш бренд <b>в СМИ.</b></>, lead: "Публикации в СМИ и пресс-релизы о нашем бренде." },
+  },
   events: {
     kicker: "Мероприятия", title: <>Вместе <b>с DND Cyprus.</b></>, lead: "От церемоний награждения до праздников — моменты, когда семья DND Cyprus собиралась вместе.",
     items: [
@@ -368,6 +390,11 @@ const PL: PagesCopy = {
       statsLabel: "Dlaczego Cypr Północny?", stats: [{ n: "2,2 mln+", l: "turystów rocznie" }, { n: "+19,1%", l: "wzrost ruchu turystycznego (2023–2024)" }, { n: "300+", l: "słonecznych dni w roku" }],
       links: [{ label: "Pobyt w La Joya", href: LAJOYA }, { label: "DND Reserve", href: RESERVE }],
     },
+  },
+  news: {
+    heroLead: "Wiadomości od DND, DND w prasie i wydarzenia.",
+    blog: { kicker: "Wiadomości od DND", title: <>Najnowsze wieści <b>od DND Cyprus.</b></>, lead: "Wywiady, nagrody i wydarzenia.", all: "Wszystkie wpisy" },
+    press: { kicker: "DND w prasie", title: <>Nasza marka <b>w mediach.</b></>, lead: "Publikacje prasowe i komunikaty dotyczące naszej marki." },
   },
   events: {
     kicker: "Wydarzenia", title: <>Razem <b>z DND Cyprus.</b></>, lead: "Od gal nagród po świętowanie — chwile, w których rodzina DND Cyprus była razem.",

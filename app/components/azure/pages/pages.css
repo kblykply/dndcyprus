@@ -102,3 +102,6 @@
 @media (max-width: 560px) { .az-ulfet-row .pic { width: 84px; } .az-ulfet-row b { font-size: 14px; } }
 
 /* kurucu ortak alıntısı */
+
+/* ---- Haberler: DND'den Haberler kartları (Etkinlikler kartlarıyla aynı), özet en çok 3 satır ---- */
+.az-dndnews .b > span { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }

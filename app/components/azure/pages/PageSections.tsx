@@ -1,9 +1,11 @@
 import Arrow from "../Arrow";
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { PiCheckBold } from "react-icons/pi";
 import { HOME } from "@/lib/azure/home";
 import { PAGES } from "@/lib/azure/pages";
+import { blogPosts } from "@/lib/blog";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { PROJECT_DATA } from "@/lib/azure/projects/index";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
@@ -147,6 +149,54 @@ export function EventsSection({ locale }: { locale: Locale }) {
           })}
         </ul>
         <a className="az-btn glass sm rv" href={ig} target="_blank" rel="noopener noreferrer">{t.follow} <Arrow /></a>
+      </div>
+    </section>
+  );
+}
+
+const NEWS_DATE: Record<Locale, string> = { tr: "tr-TR", en: "en-GB", de: "de-DE", ru: "ru-RU", pl: "pl-PL" };
+
+/** Haberler sayfası: DND'den Haberler (son 3 yazı; kartlar Etkinlikler ile aynı, tümü /blog'da) */
+export function DndNewsSection({ locale }: { locale: Locale }) {
+  const t = PAGES[locale].news.blog;
+  const fmt = new Intl.DateTimeFormat(NEWS_DATE[locale], { year: "numeric", month: "long", day: "numeric" });
+  const posts = [...blogPosts(locale)].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
+  return (
+    <section className="az-section az-events az-dndnews" id={SECTION_IDS[locale].dndNews}>
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">{t.kicker}</span>
+          <h2 className="az-h2 sm rv d1">{t.title}</h2>
+          <p className="az-lead rv d2">{t.lead}</p>
+        </div>
+        <ul>
+          {posts.map((p, k) => (
+            <li key={p.slug} className={`rv d${k % 3}`}>
+              <Link href={href(locale, `/blog/${p.slug}`)} prefetch={false}>
+                <span className="pic">{p.cover ? <Image src={p.cover} alt={p.title} fill quality={75} sizes="(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw" /> : null}</span>
+                <span className="b">{p.date ? <small>{fmt.format(new Date(p.date))}</small> : null}<b>{p.title}</b><span>{p.excerpt}</span></span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link className="az-btn glass sm rv" href={href(locale, "/blog")} prefetch={false}>{t.all} <Arrow /></Link>
+      </div>
+    </section>
+  );
+}
+
+/** Haberler sayfası: Basında DND. Haber listesi sayfanın kendi PressSection'ı (bare); başlık ve hiza bu bölümden */
+export function PressBlock({ locale, children }: { locale: Locale; children: ReactNode }) {
+  const t = PAGES[locale].news.press;
+  return (
+    <section className="az-section az-pressblock" id={SECTION_IDS[locale].press}>
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">{t.kicker}</span>
+          <h2 className="az-h2 sm rv d1">{t.title}</h2>
+          <p className="az-lead rv d2">{t.lead}</p>
+        </div>
+        {children}
       </div>
     </section>
   );

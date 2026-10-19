@@ -27,7 +27,7 @@ const PROJECT: Record<string, { img: string; name: string; medal: string; path: 
 /**
  * Ödüller: geniş akordiyon (müşteri isteği, Ekim 2026). Her panel ödülün projesinin fotoğrafı; üzerine gelince /
  * dokununca panel genişler, madalya (kurdele) yukarıdan iner, altta cam kartta ödül adı, açıklama ve bağlantı.
- * Platin ödül ortada ve başta açık (eski kurdele dizilimindeki gibi). Telefonda paneller alt alta.
+ * Altın ödüllü Lagoon Verde ortada ve başta açık (kullanıcı isteği, 19 Ekim). Telefonda paneller alt alta.
  * withProjects: bağlantı proje sayfasına (ana sayfa); yoksa ödülün kendi bağlantısı ve altta Yılın CFO'su (Hakkımızda).
  */
 export default function AwardsShowcase({ locale, kicker, withProjects = false }: {
@@ -35,8 +35,8 @@ export default function AwardsShowcase({ locale, kicker, withProjects = false }:
 }) {
   const a = HOME[locale].bento.awards;
   const strip = HOME[locale].awards;
-  const order = [2, 0, 1].filter((k) => k < a.items.length); // Lagoon Verde · Mariachi (platin, ortada) · DND Homes
-  const [on, setOn] = useState(0); // a.items içindeki sıra: 0 = Mariachi
+  const order = [0, 2, 1].filter((k) => k < a.items.length); // Mariachi (platin) · Lagoon Verde (altın, ortada) · DND Homes
+  const [on, setOn] = useState(2); // a.items içindeki sıra: 2 = Lagoon Verde
   // Yılın CFO'su (Boston) yalnız Hakkımızda'da: ana sayfada Amerika anılmaz
   const extra = withProjects ? undefined : strip.items.find((x) => !x.ribbon);
   const t = HEAD[locale];
