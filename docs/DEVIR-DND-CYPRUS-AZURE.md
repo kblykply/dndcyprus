@@ -7,7 +7,7 @@
 ### Yayın durumu
 - **Depo:** `/Users/nymboo/Documents/Mami/dndcyprus`, dal `azure-tasarim`. `main`'den 165 commit ileride, son commit `ad4fe9d5`. GitHub'a **push edilmedi**; push ve gerçek dndcyprus.com geçişi yalnız kullanıcının açık onayıyla.
 - **Paylaşılan adres:** https://dndcyprus-azure.vercel.app. Vercel projesi `dndcyprus-azure`, scope `zubeyruygur-5267s-projects`. Herkese açık, arama motorlarına kapalı (noindex). Uzun önizleme adresleri (`…-zubeyruygur-5267s-projects.vercel.app`) Vercel girişi ister; başkasına her zaman ana adres gönderilir.
-- **⚠️ Canlıda yanlış sürüm olabilir:** 19 Ekim 16:10'da kullanıcı yanlışlıkla eski önizlemeyi (m46ilkga9) onayladı; canlı adres `mngafuvo3` (ödül akordiyonu yok). En güncel önizleme **q4810ri6i** (`ad4fe9d5`). Önce kontrol et: `vercel inspect dndcyprus-azure.vercel.app --scope zubeyruygur-5267s-projects`. Hâlâ mngafuvo3 ise kullanıcıya şunu ver:
+- **Canlı sürüm (19 Ekim 17:17):** `qawowfct5` = önizleme q4810ri6i (`ad4fe9d5`, en güncel). Arada (16:10–17:15) yanlışlıkla eski önizleme m46ilkga9 onaylanmıştı; düzeltildi. Sonraki değişikliklerde yine yeni önizleme yayınla ve terfi komutunu ver. Eski not: 19 Ekim 16:10'da kullanıcı yanlışlıkla eski önizlemeyi (m46ilkga9) onayladı; canlı adres `mngafuvo3` (ödül akordiyonu yok). En güncel önizleme **q4810ri6i** (`ad4fe9d5`). Önce kontrol et: `vercel inspect dndcyprus-azure.vercel.app --scope zubeyruygur-5267s-projects`. Hâlâ mngafuvo3 ise kullanıcıya şunu ver:
   `vercel promote https://dndcyprus-azure-q4810ri6i-zubeyruygur-5267s-projects.vercel.app --scope zubeyruygur-5267s-projects` (soru çıkınca "y").
 - **Yayın akışı:** `git archive HEAD` → boş bir klasöre aç, içine `.vercel/project.json` (projectName dndcyprus-azure) ve noindex `vercel.json` koy → `vercel deploy --yes --scope zubeyruygur-5267s-projects` → önizleme adresini kullanıcıya ver. **Terfiyi kullanıcı yapar** (`vercel promote …`, "y" onayı ister, yeniden derler ~2 dk); Claude'un promote komutu izin sisteminde engellendi. Derleme ara sıra "next/font/google" hatası verir: yeniden yayınla, geçer.
 - **Canlı kontrol:** Terfiden sonra ana adreste 5 dilde kontrol et. Playwright'ta `waitUntil: 'load'` kullan (analitik istekleri yüzünden networkidle beklenmez); ilk ziyarette açılan TL ödeme penceresini (`[role=dialog]`) kaldır. Sonra görsel önbelleğini ısıt: 5 dil × ana sayfalardaki `/_next/image?url=…` adreslerini curl ile çağır.
@@ -37,7 +37,7 @@
 - Kısa, Türkçe, ekran görüntüsüyle konuş; mesajlar Türkçe karaktersiz ve hızlı gelir ("bunu kaldır", "hizala").
 
 ### Açık işler
-1. q4810ri6i'nin terfisi (yukarı bak).
+1. ~~q4810ri6i'nin terfisi~~ yapıldı (19 Ekim 17:17, canlı `qawowfct5`).
 2. EN/DE/RU/PL çevirileri ana dili konuşan biri kontrol etmedi.
 3. Gerçek dndcyprus.com geçişi (GitHub `kblykply/dndcyprus` `main`'e birleştirme + push) — kullanıcı onayı bekliyor.
 4. Müşteriden bekleyen bilgi yok (`musteriden-istenecek-bilgiler.md`).
