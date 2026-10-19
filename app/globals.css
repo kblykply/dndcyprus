@@ -39,6 +39,11 @@
   --glass-b: rgba(255, 255, 255, 0.75);
   --r: 28px;
   --gutter: clamp(16px, 3.5vw, 56px);
+  /* fotoğraf üstündeki gerçek cam kart (ödeme fırsatları, ödüller): beyaz dolgu yok, ince ışık + bulanıklık.
+     Bulanıklık her kuralda açık yazılır: blur(24px) saturate(1.5) brightness(1.24) (değişkenle yazınca derleyici önekli tek satıra indiriyor, Chrome okumuyor) */
+  --glass-clear: linear-gradient(145deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .34)); /* en düşük ton: koyu fotoğrafta da yazı ≥4.5:1 (ölçüldü) */
+  --glass-clear-line: rgba(255, 255, 255, .5);
+  --glass-clear-shadow: 0 16px 44px rgba(8, 14, 16, .18), inset 0 1px 0 rgba(255, 255, 255, .55);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   --background: var(--sky);

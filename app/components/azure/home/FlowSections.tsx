@@ -66,8 +66,7 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
             <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={72} sizes="(min-width: 900px) 46vw, 100vw" /></span>
             <div className="gl">
               <span className="k">{t.tl.k}</span>
-              <div className="hd"><div className="big">60</div><h3>{t.tl.h}</h3></div>
-              <p>{t.tl.p}</p>
+              <div className="hd"><div className="big">60</div><h3>{t.tl.h}</h3><p>{t.tl.p}</p></div>
               <ul>{t.tl.rules.map((r) => <li key={r}><i><PiCheckBold size={12} aria-hidden /></i>{r}</li>)}</ul>
               <div className="links">
                 <Link href={href(locale, "/lagoon-verde")} prefetch={false}>Lagoon Verde <Arrow /></Link>

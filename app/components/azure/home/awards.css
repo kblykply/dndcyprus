@@ -11,8 +11,8 @@
 .az-awacc .hit { position: absolute; inset: 0; z-index: 1; display: flex; align-items: flex-end; justify-content: center; padding: 18px;
   border: 0; background: none; cursor: pointer; }
 .az-awacc .hit:focus-visible { outline: 2px solid var(--coral); outline-offset: -4px; }
-.az-awacc .nm { padding: 10px 16px; border-radius: 999px; background: rgba(251, 250, 246, .88); border: 1px solid rgba(255, 255, 255, .8);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 8px 24px rgba(8, 14, 16, .18);
+.az-awacc .nm { padding: 10px 16px; border-radius: 999px; background: var(--glass-clear); border: 1px solid var(--glass-clear-line);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5) brightness(1.24); backdrop-filter: blur(24px) saturate(1.5) brightness(1.24); box-shadow: var(--glass-clear-shadow);
   font-size: 13.5px; font-weight: 600; color: var(--ink); white-space: nowrap; transition: opacity .35s, transform .5s var(--ease); }
 .az-awacc .pn.on .hit { pointer-events: none; }
 .az-awacc .pn.on .nm { opacity: 0; transform: translateY(10px); }
@@ -27,8 +27,8 @@
   transition: transform .7s cubic-bezier(.34, 1.45, .64, 1) .25s, opacity .3s .25s; }
 .az-awacc .pn.on .medal { transform: none; opacity: 1; }
 .az-awacc .gl { flex: none; max-width: 480px; padding: clamp(18px, 2vw, 26px); border-radius: calc(var(--r) - 8px);
-  background: rgba(251, 250, 246, .88); border: 1px solid rgba(255, 255, 255, .8); box-shadow: 0 14px 40px rgba(8, 14, 16, .2);
-  backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  background: var(--glass-clear); border: 1px solid var(--glass-clear-line); box-shadow: var(--glass-clear-shadow);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5) brightness(1.24); backdrop-filter: blur(24px) saturate(1.5) brightness(1.24);
   opacity: 0; transform: translateY(14px); transition: opacity .45s .35s, transform .6s var(--ease) .35s; }
 .az-awacc .pn.on .gl { opacity: 1; transform: none; }
 .az-awacc .gl small { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
@@ -50,3 +50,9 @@
 @media (prefers-reduced-motion: reduce) {
   .az-awacc .pn, .az-awacc .bg, .az-awacc .medal, .az-awacc .gl, .az-awacc .nm { transition: none; }
 }
+
+/* gerçek camda okunurluk: küçük etiket, bağlantı ve açıklama koyu tonda */
+.az-awacc .gl small { color: #052c33; }
+/* kapalı paneldeki ad hapı küçük ve koyu zeminde (kırmızı halı) durabilir: cam biraz daha yoğun */
+.az-awacc .nm { background: linear-gradient(145deg, rgba(255, 255, 255, .64), rgba(255, 255, 255, .5)); }
+.az-awacc .gl p, .az-awacc .gl a { color: var(--ink); }
