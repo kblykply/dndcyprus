@@ -19,7 +19,7 @@ export type PagesCopy = {
     quality: { kicker: string; title: string; lead: string };
     social: { kicker: string; title: string; lead: string };
     after: { kicker: string; title: ReactNode; lead: string; points: string[]; imageAlt: string; note: string; cta: string };
-    extra: { kicker: string; title: ReactNode; lead: string; items: { h: string; p: string; tag: string }[]; imageAlt: string; note: string };
+    extra: { kicker: string; title: ReactNode; lead: string; items: { h: string; p: string; tag: string }[]; imageAlt: string };
   };
   payment: {
     meta: { title: string; description: string };
@@ -56,7 +56,7 @@ const TR: PagesCopy = {
       kicker: "Diğer ev sahibi ayrıcalıkları", title: <>Ülfet’te <b>DND ayrıcalığı.</b></>,
       lead: "DND Cyprus’un Girne Karaoğlanoğlu’ndaki iş ortağı Ülfet’te ev sahiplerine özel avantajlar.",
       items: [{ h: "Ülfet Beach Club", p: "DND Cyprus ev sahiplerine 2026 yaz sezonu boyunca ücretsiz giriş.", tag: "Ücretsiz giriş" }, { h: "Ülfet Shu", p: "Yeni nesil meyhane Ülfet Shu’da DND ev sahiplerine ve La Joya misafirlerine %10 indirim.", tag: "%10 indirim" }],
-      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu", note: "* Kimlik doğrulaması gerekebilir; koşullar sezona göre değişebilir.",
+      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
   payment: {
@@ -126,7 +126,7 @@ const EN: PagesCopy = {
       kicker: "More homeowner privileges", title: <>DND privileges <b>at Ülfet.</b></>,
       lead: "Exclusive benefits for homeowners at Ülfet, DND Cyprus’s partner in Karaoğlanoğlu, Kyrenia.",
       items: [{ h: "Ülfet Beach Club", p: "Free entry for DND Cyprus homeowners throughout the 2026 summer season.", tag: "Free entry" }, { h: "Ülfet Shu", p: "10% off for DND homeowners and La Joya guests at Ülfet Shu, a new-generation meyhane (tavern).", tag: "10% off" }],
-      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu", note: "* ID verification may be required; terms may change by season.",
+      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
   payment: {
@@ -196,7 +196,7 @@ const DE: PagesCopy = {
       kicker: "Weitere Eigentümervorteile", title: <>DND-Vorteile <b>bei Ülfet.</b></>,
       lead: "Exklusive Vorteile für Eigentümer bei Ülfet, dem Partner von DND Cyprus in Karaoğlanoğlu, Kyrenia.",
       items: [{ h: "Ülfet Beach Club", p: "Freier Eintritt für DND-Cyprus-Eigentümer in der gesamten Sommersaison 2026.", tag: "Freier Eintritt" }, { h: "Ülfet Shu", p: "10 % Rabatt für DND-Eigentümer und Gäste von La Joya im Ülfet Shu, einer Meyhane (Taverne) der neuen Generation.", tag: "10 % Rabatt" }],
-      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu", note: "* Ein Ausweis kann erforderlich sein; die Bedingungen können sich je nach Saison ändern.",
+      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
   payment: {
@@ -266,7 +266,7 @@ const RU: PagesCopy = {
       kicker: "Другие привилегии владельцев", title: <>Привилегии DND <b>в Ülfet.</b></>,
       lead: "Эксклюзивные преимущества для владельцев в Ülfet — партнёре DND Cyprus в Караогланоглу (Кирения).",
       items: [{ h: "Ülfet Beach Club", p: "Бесплатный вход для владельцев DND Cyprus в течение всего летнего сезона 2026.", tag: "Бесплатный вход" }, { h: "Ülfet Shu", p: "Скидка 10 % для владельцев DND и гостей La Joya в Ülfet Shu — мейхане (таверне) нового поколения.", tag: "Скидка 10 %" }],
-      imageAlt: "Ülfet Beach Club, Караогланоглу", note: "* Может потребоваться удостоверение личности; условия могут меняться в зависимости от сезона.",
+      imageAlt: "Ülfet Beach Club, Караогланоглу",
     },
   },
   payment: {
@@ -336,7 +336,7 @@ const PL: PagesCopy = {
       kicker: "Więcej przywilejów właścicieli", title: <>Przywileje DND <b>w Ülfet.</b></>,
       lead: "Wyjątkowe korzyści dla właścicieli w Ülfet — partnerze DND Cyprus w Karaoğlanoğlu (Kyrenia).",
       items: [{ h: "Ülfet Beach Club", p: "Bezpłatne wejście dla właścicieli DND Cyprus przez cały sezon letni 2026.", tag: "Bezpłatne wejście" }, { h: "Ülfet Shu", p: "10% zniżki dla właścicieli DND i gości La Joya w Ülfet Shu, meyhane (tawernie) nowej generacji.", tag: "10% zniżki" }],
-      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu", note: "* Może być wymagany dokument tożsamości; warunki mogą się zmieniać w zależności od sezonu.",
+      imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
   payment: {

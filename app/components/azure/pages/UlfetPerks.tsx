@@ -27,7 +27,6 @@ export default function UlfetPerks({ locale, compact }: { locale: Locale; compac
           <h2 className="az-h2 sm rv d1">{t.title}</h2>
           <p className="az-lead rv d2">{t.lead}</p>
           <ul className="rv d2">{t.items.map((x) => <li key={x.h}><span className="tag">{x.tag}</span><b>{x.h}</b><span>{x.p}</span></li>)}</ul>
-          <p className="az-note-sm">{t.note}</p>
         </div>
       </div>
     </section>

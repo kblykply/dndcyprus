@@ -7,6 +7,7 @@ import { HERO_DIK } from "@/lib/azure/hero-dik";
 type Cta = { label: string; href: string; variant?: "coral" | "sea" | "glass" | "ghost"; track?: string };
 
 type Props = {
+  /** artık gösterilmiyor (sayfalar hâlâ geçebilir) */
   kicker?: string;
   title: ReactNode;
   lead?: string;
@@ -44,7 +45,7 @@ function HeroImage({ src, alt, position }: { src: string; alt: string; position?
 }
 
 // İç sayfalar için Azure hero çerçevesi: 36px yuvarlatılmış görsel, cam etiketler, floating chips.
-export default function PageHero({ kicker, title, lead, image, imageAlt = "", video, tags = [], goldTag, chips, ctas = [], logo, size = "compact", id, imagePosition }: Props) {
+export default function PageHero({ title, lead, image, imageAlt = "", video, tags = [], goldTag, chips, ctas = [], logo, size = "compact", id, imagePosition }: Props) {
   return (
     <section className={`az-hero ${size}`} id={id}>
       <div className="frame">
@@ -68,8 +69,8 @@ export default function PageHero({ kicker, title, lead, image, imageAlt = "", vi
         ) : null}
         <div className="c">
           <div>
-            {kicker && <span className="az-kicker light rv">{kicker}</span>}
-            <h1 className="rv d1" style={kicker ? { marginTop: 14 } : undefined}>{title}</h1>
+            {/* üst etiket ("— İLETİŞİM") başlığın tekrarıydı; kullanıcı isteğiyle sayfa başlıklarında gösterilmiyor (Ekim 2026) */}
+            <h1 className="rv d1">{title}</h1>
             {lead && <p className="rv d2">{lead}</p>}
             {ctas.length > 0 && (
               <div className="cta rv d3">

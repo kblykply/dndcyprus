@@ -45,9 +45,10 @@
 .az-life .perk { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); border-radius: calc(var(--r) + 4px); overflow: hidden; background: var(--foam);
   border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 24px 60px rgba(13, 35, 38, .08); transition: transform .5s var(--ease); }
 .az-life .perk:hover { transform: translateY(-4px); }
-.az-life .pic { position: relative; min-height: 380px; }
-.az-life .pic img { object-fit: cover; }
-.az-life .tx { display: flex; flex-direction: column; padding: clamp(24px, 3.4vw, 48px); }
+/* yalnız Mariachi kartı (.perk): altındaki Ülfet şeridinin (.az-ulfet-row) görseli ve metni bu kuralları almasın */
+.az-life .perk > .pic { position: relative; min-height: 380px; }
+.az-life .perk > .pic img { object-fit: cover; }
+.az-life .perk > .tx { display: flex; flex-direction: column; padding: clamp(24px, 3.4vw, 48px); }
 .az-life .k { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--coral); }
 .az-life .h { margin-top: 10px; font-family: var(--font-display), sans-serif; font-size: clamp(28px, 2.8vw, 40px); letter-spacing: -.02em; color: var(--ink); }
 .az-life .p { margin-top: 10px; font-size: 15.5px; line-height: 1.55; color: var(--ink-60); }
@@ -55,7 +56,7 @@
 .az-life .ls > span { display: flex; gap: 10px; align-items: center; font-size: 15px; color: var(--ink); }
 .az-life .ls i { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--sky-2); color: var(--sea); }
 .az-life .go { margin-top: auto; padding-top: 24px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--sea); }
-@media (max-width: 900px) { .az-life .perk { grid-template-columns: minmax(0, 1fr); } .az-life .pic { min-height: 0; aspect-ratio: 16 / 10; } }
+@media (max-width: 900px) { .az-life .perk { grid-template-columns: minmax(0, 1fr); } .az-life .perk > .pic { min-height: 0; aspect-ratio: 16 / 10; } }
 
 /* ---- 6 · Rakamlarla DND ---- */
 .az-nums ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
