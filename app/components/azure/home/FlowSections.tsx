@@ -1,0 +1,132 @@
+import Arrow from "../Arrow";
+import Image from "next/image";
+import Link from "next/link";
+import type { IconType } from "react-icons";
+import { PiCheckBold, PiGearSixDuotone, PiHouseLineDuotone, PiKeyDuotone, PiTrophyDuotone } from "react-icons/pi";
+import { HOME_FLOW } from "@/lib/azure/home-flow";
+import { PROJECT_UI } from "@/lib/azure/project-ui";
+import { href, type Locale } from "@/lib/azure/site";
+import "./flow.css";
+
+// Ana sayfa akışının yeni bölümleri (Ekim 2026): 3 Neden DND · 4 Ödeme ve yatırım fırsatları · 5 Yaşam ve
+// ayrıcalıklar · 6 Rakamlarla DND. Metinler lib/azure/home-flow.tsx; yalnız Kıbrıs (Amerika Hakkımızda'da).
+
+const WHY_ICONS: Record<string, IconType> = { house: PiHouseLineDuotone, key: PiKeyDuotone, gear: PiGearSixDuotone, award: PiTrophyDuotone };
+
+/** 3 · Neden DND?: solda teslim edilen La Joya'nın fotoğrafı, sağda dört gerekçe */
+export function WhyDnd({ locale }: { locale: Locale }) {
+  const t = HOME_FLOW[locale].why;
+  return (
+    <section className="az-section az-why" id="neden-dnd">
+      <div className="az-wrap g">
+        <div className="pic rv">
+          <Image src="/azure/lj-5.jpg" alt={t.imageAlt} fill quality={75} sizes="(min-width: 1000px) 44vw, 100vw" />
+          <span className="az-tag">{t.imageTag}</span>
+        </div>
+        <div>
+          <div className="az-head">
+            <span className="az-kicker rv">{t.kicker}</span>
+            <h2 className="az-h2 sm rv d1">{t.title}</h2>
+            <p className="az-lead rv d2">{t.lead}</p>
+          </div>
+          <ul className="items">
+            {t.items.map((it, k) => {
+              const I = WHY_ICONS[it.icon] ?? PiHouseLineDuotone;
+              return (
+                <li key={it.h} className={`rv d${k % 3}`}>
+                  <i><I size={24} aria-hidden /></i>
+                  <h3>{it.h}</h3>
+                  <p>{it.p}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** 4 · Size özel ödeme ve yatırım fırsatları: Lagoon Verde TL modeli + NeoCity 5 Sıfır */
+export function Offers({ locale }: { locale: Locale }) {
+  const t = HOME_FLOW[locale].offers;
+  return (
+    <section className="az-section az-offers" id="odeme-firsatlari">
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">{t.kicker}</span>
+          <h2 className="az-h2 sm rv d1">{t.title}</h2>
+          <p className="az-lead rv d2">{t.lead}</p>
+        </div>
+        <div className="cards">
+          <Link className="card tl rv" href={href(locale, "/lagoon-verde")} prefetch={false}>
+            <span className="k">{t.tl.k}</span>
+            <div className="big">60</div>
+            <h3>{t.tl.h}</h3>
+            <p>{t.tl.p}</p>
+            <ul>{t.tl.rules.map((r) => <li key={r}><i><PiCheckBold size={12} aria-hidden /></i>{r}</li>)}</ul>
+            <span className="go">{t.tl.cta} <Arrow /></span>
+          </Link>
+          <Link className="card neo rv d1" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>
+            <Image className="bg" src="/neocity/g-09.jpg" alt="" fill quality={70} sizes="(min-width: 900px) 46vw, 100vw" />
+            <span className="k">{t.neo.k}</span>
+            <ul className="zeros">{t.neo.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}</ul>
+            <h3>{t.neo.h}</h3>
+            <p>{t.neo.p}</p>
+            <span className="go">{t.neo.cta} <Arrow /></span>
+          </Link>
+        </div>
+        <p className="az-note-sm">{t.note}</p>
+      </div>
+    </section>
+  );
+}
+
+/** 5 · DND ile yaşam ve ayrıcalıklar: Mariachi Beach Club ayrıcalığı (ardından sayfada "Lagoon Verde'de bir gün") */
+export function LifePerks({ locale }: { locale: Locale }) {
+  const t = HOME_FLOW[locale].life;
+  return (
+    <section className="az-section az-life" id="yasam">
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">{t.kicker}</span>
+          <h2 className="az-h2 sm rv d1">{t.title}</h2>
+          <p className="az-lead rv d2">{t.lead}</p>
+        </div>
+        <Link className="perk rv" href={href(locale, "/mariachi")} prefetch={false}>
+          <span className="pic"><Image src="/azure/mb-6.jpg" alt={t.perk.h} fill quality={75} sizes="(min-width: 900px) 52vw, 100vw" /></span>
+          <span className="tx">
+            <span className="k">{t.perk.k}</span>
+            <span className="h">{t.perk.h}</span>
+            <span className="p">{t.perk.p}</span>
+            <span className="ls">{t.perk.items.map((x) => <span key={x}><i><PiCheckBold size={12} aria-hidden /></i>{x}</span>)}</span>
+            <span className="go">{t.perk.cta} <Arrow /></span>
+          </span>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+/** 6 · Rakamlarla DND: yalnız Kıbrıs rakamları (sayaç: AzureFx [data-count]) */
+export function Numbers({ locale }: { locale: Locale }) {
+  const t = HOME_FLOW[locale].numbers;
+  return (
+    <section className="az-section az-nums" id="rakamlar">
+      <div className="az-wrap">
+        <div className="az-head">
+          <span className="az-kicker rv">{t.kicker}</span>
+          <h2 className="az-h2 sm rv d1">{t.title}</h2>
+        </div>
+        <ul>
+          {t.items.map((x, k) => (
+            <li key={x.label} className={`rv d${k % 4}`}>
+              <b data-count={x.n} data-suffix={x.suffix ?? ""}>{x.n}{x.suffix ?? ""}</b>
+              <span>{x.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}

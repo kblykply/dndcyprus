@@ -1,4 +1,3 @@
-import { DeferredInstagram } from "@/app/components/performance/DeferredMedia";
 import { type PressItem } from "@/app/components/PressSection";
 import { pageMetadata } from "@/lib/seo";
 import { HOME } from "@/lib/azure/home";
@@ -6,23 +5,19 @@ import { HOME } from "@/lib/azure/home";
 // Azure tasarımı — ana sayfa bölümleri
 import HomeHero from "@/app/components/azure/home/HomeHero";
 import AwardsShowcase from "@/app/components/azure/home/AwardsShowcase";
-import Bento from "@/app/components/azure/home/Bento";
 import Story from "@/app/components/azure/home/Story";
 import ProjectsCarousel from "@/app/components/azure/home/ProjectsCarousel";
-import LocationPanel from "@/app/components/azure/home/LocationPanel";
-import Leadership from "@/app/components/azure/home/Leadership";
-import Timeline from "@/app/components/azure/home/Timeline";
 import PressFaq from "@/app/components/azure/home/PressFaq";
-import SectionHead from "@/app/components/azure/home/SectionHead";
-import VideoShowcase from "@/app/components/azure/home/VideoShowcase";
 import ContactCard from "@/app/components/azure/ContactCard";
+import { WhyDnd, Offers, LifePerks, Numbers } from "@/app/components/azure/home/FlowSections";
+import { HOME_FLOW } from "@/lib/azure/home-flow";
 
 export const metadata = pageMetadata({
   locale: "en",
   path: "",
-  title: "American-Standard Homes in North Cyprus | DND Cyprus",
+  title: "DND Cyprus | Award-Winning Homes and Villas in North Cyprus",
   description:
-    "120 completed projects in Massachusetts, now in İskele: the award-winning Lagoon Verde, La Joya Perla residences and the privileges of Mariachi Beach Club.",
+    "NeoCity, Lagoon Verde, La Joya, La Joya Perla and Perla II: award-winning projects in North Cyprus, interest-free lira payment models up to 60 months and Mariachi Beach Club privileges.",
 });
 
 const PRESS_ITEMS: PressItem[] = [
@@ -103,22 +98,21 @@ const PRESS_ITEMS: PressItem[] = [
 
 export default function HomePage() {
   const t = HOME.en;
+  const f = HOME_FLOW.en;
+  // Akış (müşteri belgesi, Ekim 2026): vitrin · projeler · neden DND · ödeme fırsatları · yaşam ve ayrıcalıklar ·
+  // rakamlar · haberler ve ödüller · iletişim. Ana sayfada Amerika anılmaz (Hakkımızda'da).
   return (
     <>
       <HomeHero locale="en" />
-      <AwardsShowcase locale="en" />
-      <Bento locale="en" />
-      <SectionHead kicker={t.videos.kicker} title={t.videos.title}>
-        <VideoShowcase locale="en" />
-      </SectionHead>
-      <Story locale="en" />
       <ProjectsCarousel locale="en" />
-      <LocationPanel locale="en" />
-      <Leadership locale="en" />
-      <Timeline locale="en" />
-      <PressFaq locale="en" items={PRESS_ITEMS} />
-      <div className="az-section tight rv"><div className="az-wrap"><DeferredInstagram locale="en" /></div></div>
-      <ContactCard locale="en" mode="home" kicker={t.contact.kicker} title={t.contact.title} lead={t.contact.lead} highlights={t.contact.highlights} image="/azure/contact-sea.webp" id="iletisim" />
+      <WhyDnd locale="en" />
+      <Offers locale="en" />
+      <LifePerks locale="en" />
+      <Story locale="en" />
+      <Numbers locale="en" />
+      <AwardsShowcase locale="en" kicker={f.news.kicker} withProjects projectLabel={f.news.awardsProject} companyName={f.news.homesProject} />
+      <PressFaq locale="en" items={PRESS_ITEMS} faq={false} />
+      <ContactCard locale="en" mode="home" kicker={f.contact.kicker} title={f.contact.title} lead={f.contact.lead} highlights={t.contact.highlights} image="/azure/contact-sea.webp" id="iletisim" />
     </>
   );
 }

@@ -25,10 +25,9 @@
 /* uzun tanıtım cümlesi: TR tasarımdaki boyutta kalır, uzun diller iki satıra sığar */
 html:not([lang="tr"]) .az-h2.statement { font-size: clamp(26px, 3.1vw, 52px); }
 @media (max-width: 600px) { .az-h2.statement { font-size: 24px; } }
-/* ana sayfa hero: uzun dillerde başlık iki satıra sığsın (TR tasarım boyutunda kalır) */
-/* ana sayfa hero'su: başlık biraz daha küçük ve çerçevenin altına yakın */
-#top.az-hero h1 { font-size: clamp(34px, 4.6vw, 72px); }
-html:not([lang="tr"]) #top.az-hero h1 { font-size: clamp(32px, 4.1vw, 64px); }
+/* ana sayfa vitrini (HeroSlider): H1 üstteki sabit etiket, büyük başlık slaytın p.h'si (home/hero-slider.css).
+   Uzun dillerde slayt başlığı biraz küçülür */
+html:not([lang="tr"]) .az-hs .c p.h { font-size: clamp(34px, 5vw, 78px); }
 /* başlık ve düğmeler sol alt köşede: alt boşluk sol boşlukla eşit (.az-hero .c varsayılan dolgusu) */
 #top.az-hero .cta { margin-top: 22px; }
 .az-chip b { white-space: nowrap; }
@@ -414,6 +413,10 @@ body.az-lock { overflow: hidden; }
 .az-faq details[open] summary i { transform: rotate(45deg); background: var(--sea); color: #fff; }
 .az-faq .a { padding: 0 0 18px; color: var(--ink-60); font-size: 15px; max-width: 60ch; }
 @media (max-width: 900px) { .az-pf { grid-template-columns: 1fr; } }
+/* ana sayfa akışı: S.S.S. yok, haberler tam genişlikte iki sütun */
+.az-pf.solo { grid-template-columns: minmax(0, 1fr); }
+.az-pf.solo .az-news { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .az-pf.solo .az-news { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---- contact card + form ---- */
 .az-contact .card { position: relative; border-radius: 36px; overflow: hidden; background: var(--sea-deep); color: #fff; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: clamp(28px, 5vw, 64px); isolation: isolate; max-width: 100%; }
@@ -599,6 +602,9 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 /* ---- konum: harita iframe + adres + yol tarifi ---- */
 .az-loc .map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .az-loc .map.live { min-height: 480px; }
+/* koordinatsız projede (NeoCity) harita yerine konum görseli */
+.az-loc .map.pic { min-height: 420px; background: var(--sky-2); }
+.az-loc .map.pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .az-loc .addr { margin-top: 18px; font-size: 14px; color: var(--ink-60); }
 .az-loc .addr b { color: var(--ink); font-weight: 600; }
 .az-loc .btns { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }

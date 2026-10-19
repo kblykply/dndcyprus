@@ -66,3 +66,12 @@
   .az-aw { gap: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { .az-aw .rb.c { animation: none; } }
+
+/* ana sayfa: ödülün projesi (küçük görsel + ad + ok) — "Detaylı bilgi" düğmesinin yerinde */
+.az-aw .proj { display: inline-flex; align-items: center; gap: 14px; margin-top: 18px; padding: 8px 18px 8px 8px; border-radius: 18px;
+  background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 10px 30px rgba(13, 35, 38, .07); color: var(--ink); transition: transform .4s var(--ease), box-shadow .4s; }
+.az-aw .proj:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(13, 35, 38, .12); }
+.az-aw .proj img { width: 84px; height: 60px; border-radius: 12px; object-fit: cover; }
+.az-aw .proj span { display: grid; gap: 2px; }
+.az-aw .proj small { font-size: 10.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-40); }
+.az-aw .proj b { font-size: 16px; font-weight: 500; color: var(--ink); }

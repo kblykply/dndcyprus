@@ -5,19 +5,27 @@ test.beforeEach(async ({ page }) => {
   await prepare(page);
 });
 
-test("ana sayfa hero videosu: sessiz, satır içi, otomatik, altında duyarlı afiş, H.264 kaynak", async ({ page }) => {
+// ana sayfa vitrini (Ekim 2026): video yerine projeler sırayla döner — NeoCity, Lagoon Verde, La Joya, Perla, Perla II
+test("ana sayfa vitrini: tek H1, ilk slayt NeoCity ve öncelikli görsel, oklar sıradaki projeye geçer", async ({ page }) => {
   await page.goto("/tr");
-  const v = page.locator("section.az-hero video.bg");
-  await expect(v).toHaveJSProperty("muted", true);
-  await expect(v).toHaveAttribute("playsinline", "");
-  await expect(v).toHaveAttribute("autoplay", "");
-  await expect(v.locator("source")).toHaveAttribute("type", "video/mp4");
-  // afiş `poster` değil, videonun altındaki next/image <picture>: öncelikli iner; dik telefon ekranında yalnız
-  // görünen orta bölge (lv-5-dik.jpg)
-  const poster = page.locator("section.az-hero picture img.bg");
-  await expect(poster).toHaveAttribute("fetchpriority", "high");
-  await expect(poster).toHaveAttribute("srcset", /_next\/image\?url=%2Fazure%2Flv-5\.jpg/);
-  await expect(page.locator("section.az-hero picture source")).toHaveAttribute("srcset", /_next\/image\?url=%2Fazure%2Flv-5-dik\.jpg/);
+  const hero = page.locator("section.az-hs");
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.locator("h1")).toHaveText("DND Cyprus — Hayalinizdeki yaşam burada başlıyor");
+  await expect(hero.locator(".sl")).toHaveCount(5);
+  // ilk slayt öncelikli iner; dik telefon ekranında yalnız görünen orta bölge (hero-dik.jpg)
+  const first = hero.locator(".sl").first().locator("img.bg");
+  await expect(first).toHaveAttribute("fetchpriority", "high");
+  await expect(first).toHaveAttribute("srcset", /_next\/image\?url=%2Fneocity%2Fhero\.jpg/);
+  await expect(hero.locator(".sl").first().locator("source")).toHaveAttribute("srcset", /_next\/image\?url=%2Fneocity%2Fhero-dik\.jpg/);
+  await expect(hero.locator(".nm")).toHaveText("NeoCity");
+  // kendiliğinden geçiş durdurulur (telefonda düğme gizli, slayt 7 sn), oklarla sırayla gezilir
+  const pause = hero.getByRole("button", { name: "Durdur" });
+  if (await pause.isVisible()) await pause.click();
+  await hero.getByRole("button", { name: "Sonraki proje" }).click();
+  await expect(hero.locator(".nm")).toHaveText("Lagoon Verde Rezidansları ve Tatil Koyu");
+  await expect(hero.getByRole("link", { name: /Projeyi keşfet/ })).toHaveAttribute("href", "/tr/lagoon-verde");
+  await hero.getByRole("button", { name: "Önceki proje" }).click();
+  await expect(hero.locator(".nm")).toHaveText("NeoCity");
 });
 
 test("video dosyaları parça parça (Range) sunulur", async ({ request }, info) => {
@@ -95,4 +103,22 @@ test("kat planında tip değiştirmek kartın yüksekliğini değiştirmez, tele
     const h = (await units.boundingBox())!.height;
     expect(Math.abs(h - h0), `tip ${i}`).toBeLessThanOrEqual(1);
   }
+});
+
+// NeoCity (Ekim 2026): vaziyet planı gündüz / gece anahtarı, 5 Sıfır ödeme bölümü; Mariachi ve teknik donanım yok
+test("NeoCity: vaziyet planı anahtarı çalışır, ödeme planı var, Mariachi bölümü yok", async ({ page }) => {
+  await page.goto("/tr/neocity");
+  const site = page.locator("#vaziyet-plani");
+  await site.scrollIntoViewIfNeeded();
+  const night = site.getByRole("button", { name: "Gece" });
+  await settle(night);
+  await night.click();
+  await expect(night).toHaveAttribute("aria-pressed", "true");
+  await expect(site.locator("img.on")).toHaveAttribute("src", "/neocity/vaziyet-gece.jpg");
+  await expect(page.locator("#odeme-plani .zeros li")).toHaveCount(5);
+  await expect(page.locator("#mariachi")).toHaveCount(0);
+  await expect(page.locator("#teknik-donanim")).toHaveCount(0);
+  // konum: koordinat yok, harita yerine görsel; mesafeler dakika
+  await expect(page.locator("#konum .map.pic img")).toHaveCount(1);
+  await expect(page.locator("#konum .az-dist li").first()).toContainText("dk");
 });

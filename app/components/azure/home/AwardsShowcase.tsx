@@ -4,7 +4,7 @@ import Arrow from "../Arrow";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type FocusEvent } from "react";
 import { HOME } from "@/lib/azure/home";
-import type { Locale } from "@/lib/azure/site";
+import { href, type Locale } from "@/lib/azure/site";
 import "../meridian.css";
 import "./awards.css";
 
@@ -23,7 +23,17 @@ const WEBP: Record<string, string> = {
  * fare yazı / bağlantı alanındayken (tıklanan ödül değişmesin), klavyeyle gezinirken ve ekran dışındayken durur.
  * Yanında başlık, açıklama ve bağlantı. PropertyNC dışındaki ödül (Yılın CFO'su) altta mono satır.
  */
-export default function AwardsShowcase({ locale }: { locale: Locale }) {
+// her ödül kendi projesiyle (müşteri isteği, Ekim 2026): küçük görsel, ad ve proje sayfası bağlantısı
+const PROJECT: Record<string, { img: string; name?: string; path: string }> = {
+  "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png": { img: "/azure/mb-1.jpg", name: "Mariachi Beach Club", path: "/mariachi" },
+  "/BEST-NEWCOMER.png": { img: "/property_awards_2025-747.jpg", path: "/about" },
+  "/BEST-SOCIOCULTURAL-GOLD.png": { img: "/azure/lv-7.jpg", name: "Lagoon Verde", path: "/lagoon-verde" },
+};
+
+/** kicker: bölüm üst etiketi (ana sayfada "Haberler ve ödüller"); project: ödülün projesi (adsızsa companyName) */
+export default function AwardsShowcase({ locale, kicker, withProjects = false, projectLabel, companyName = "DND Cyprus" }: {
+  locale: Locale; kicker?: string; withProjects?: boolean; projectLabel?: string; companyName?: string;
+}) {
   const a = HOME[locale].bento.awards;
   const strip = HOME[locale].awards;
   const items = a.items;
@@ -57,8 +67,11 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
     return d === 0 ? "c" : d === 1 ? "r" : d === n - 1 ? "l" : "h";
   };
   const cur = items[i];
-  const external = /^https?:\/\//.test(cur.href);
-  const extra = strip.items.find((x) => !x.ribbon);
+  const proj = withProjects ? PROJECT[cur.ribbon] : undefined;
+  const link = proj ? href(locale, proj.path) : cur.href;
+  const external = /^https?:\/\//.test(link);
+  // Yılın CFO'su (Boston) yalnız Hakkımızda'da: ana sayfada Amerika anılmaz
+  const extra = withProjects ? undefined : strip.items.find((x) => !x.ribbon);
   const pad = (v: number) => String(v).padStart(2, "0");
 
   return (
@@ -87,16 +100,23 @@ export default function AwardsShowcase({ locale }: { locale: Locale }) {
             </div>
             <div className="txt" onPointerEnter={(e) => { if (e.pointerType === "mouse") setHold(true); }} onPointerLeave={() => setHold(false)}>
               <div className="hd">
-                <span className="az-kicker">{strip.label}</span>
+                <span className="az-kicker">{kicker ?? strip.label}</span>
                 <h2 className="az-h2 sm">{a.h}</h2>
               </div>
               <div className="cur" key={i} aria-live="polite">
                 <span className="mr-mono">{a.k} · {pad(i + 1)} / {pad(n)}</span>
                 <h3>{cur.title}</h3>
                 <p>{cur.text}</p>
-                {external
-                  ? <a className="az-btn sea sm" href={cur.href} target="_blank" rel="noopener noreferrer">{MORE[locale]} <Arrow /><span className="sr-only">: {cur.title}</span></a>
-                  : <Link className="az-btn sea sm" href={cur.href} prefetch={false}>{MORE[locale]} <Arrow /><span className="sr-only">: {cur.title}</span></Link>}
+                {proj ? (
+                  <Link className="proj" href={link} prefetch={false}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={proj.img} alt="" loading="lazy" decoding="async" />
+                    <span><small>{projectLabel}</small><b>{proj.name ?? companyName}</b></span>
+                    <Arrow />
+                  </Link>
+                ) : external
+                  ? <a className="az-btn sea sm" href={link} target="_blank" rel="noopener noreferrer">{MORE[locale]} <Arrow /><span className="sr-only">: {cur.title}</span></a>
+                  : <Link className="az-btn sea sm" href={link} prefetch={false}>{MORE[locale]} <Arrow /><span className="sr-only">: {cur.title}</span></Link>}
               </div>
               {extra ? <p className="mr-mono more">+ {extra.b}{extra.rest}</p> : null}
             </div>
