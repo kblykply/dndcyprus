@@ -77,8 +77,8 @@ const TR: HomeContent = {
   location: {
     kicker: "Konum · Lagoon Verde",
     title: <>Denize, şehre ve havalimanına <b>yakın.</b></>,
-    p: "Bahçeler, İskele (Ötüken). Long Beach Market ve restoranlar, sahil yürüyüş yolu, İskele merkezi.",
-    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Hastane", v: "10 km", w: 0.32 }, { label: "Gazimağusa", v: "15 km", w: 0.45 }, { label: "Ercan Havalimanı", v: "45 km", w: 1 }],
+    p: "Ötüken, İskele. Long Beach sahiline 5, Mariachi Beach Club'a 7 dakika.",
+    dist: [{ label: "Mariachi Beach Club", v: "7 dk", w: 0.16 }, { label: "Long Beach", v: "5 dk", w: 0.11 }, { label: "Hastane", v: "10 dk", w: 0.22 }, { label: "Gazimağusa", v: "15 dk", w: 0.33 }, { label: "Ercan Havalimanı", v: "45 dk", w: 1.0 }],
     directions: "Yol tarifi", tour: "360° Tur",
   },
   leadership: {
@@ -168,8 +168,8 @@ const EN: HomeContent = {
   location: {
     kicker: "Location · Lagoon Verde",
     title: <>Close to the sea, the city <b>and the airport.</b></>,
-    p: "Bahçeler, İskele (Ötüken). Long Beach Market and restaurants, the seaside promenade, İskele town centre.",
-    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Hospital", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Ercan Airport", v: "45 km", w: 1 }],
+    p: "Ötüken, İskele. 5 minutes to Long Beach, 7 minutes to Mariachi Beach Club.",
+    dist: [{ label: "Mariachi Beach Club", v: "7 min", w: 0.16 }, { label: "Long Beach", v: "5 min", w: 0.11 }, { label: "Hospital", v: "10 min", w: 0.22 }, { label: "Famagusta", v: "15 min", w: 0.33 }, { label: "Ercan Airport", v: "45 min", w: 1.0 }],
     directions: "Directions", tour: "360° Tour",
   },
   leadership: {
@@ -259,8 +259,8 @@ const DE: HomeContent = {
   location: {
     kicker: "Lage · Lagoon Verde",
     title: <>Nah an Meer, Stadt <b>und Flughafen.</b></>,
-    p: "Bahçeler, İskele (Ötüken). Long Beach Market und Restaurants, die Strandpromenade, das Zentrum von İskele.",
-    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Krankenhaus", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Flughafen Ercan", v: "45 km", w: 1 }],
+    p: "Ötüken, İskele. 5 Minuten bis Long Beach, 7 Minuten zum Mariachi Beach Club.",
+    dist: [{ label: "Mariachi Beach Club", v: "7 Min.", w: 0.16 }, { label: "Long Beach", v: "5 Min.", w: 0.11 }, { label: "Krankenhaus", v: "10 Min.", w: 0.22 }, { label: "Famagusta", v: "15 Min.", w: 0.33 }, { label: "Flughafen Ercan", v: "45 Min.", w: 1.0 }],
     directions: "Route", tour: "360°-Tour",
   },
   leadership: {
@@ -350,8 +350,8 @@ const RU: HomeContent = {
   location: {
     kicker: "Расположение · Lagoon Verde",
     title: <>Рядом море, город <b>и аэропорт.</b></>,
-    p: "Bahçeler, Искеле (Ötüken). Long Beach Market и рестораны, набережная, центр Искеле.",
-    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Больница", v: "10 km", w: 0.32 }, { label: "Фамагуста", v: "15 km", w: 0.45 }, { label: "Аэропорт Эрджан", v: "45 km", w: 1 }],
+    p: "Ötüken, Искеле. 5 минут до Long Beach, 7 минут до Mariachi Beach Club.",
+    dist: [{ label: "Mariachi Beach Club", v: "7 мин", w: 0.16 }, { label: "Long Beach", v: "5 мин", w: 0.11 }, { label: "Больница", v: "10 мин", w: 0.22 }, { label: "Фамагуста", v: "15 мин", w: 0.33 }, { label: "Аэропорт Эрджан", v: "45 мин", w: 1.0 }],
     directions: "Маршрут", tour: "3D-тур",
   },
   leadership: {
@@ -441,8 +441,8 @@ const PL: HomeContent = {
   location: {
     kicker: "Lokalizacja · Lagoon Verde",
     title: <>Blisko morza, miasta <b>i lotniska.</b></>,
-    p: "Bahçeler, İskele (Ötüken). Long Beach Market i restauracje, nadmorska promenada, centrum İskele.",
-    dist: [{ label: "Mariachi Beach Club", v: "700 m", w: 0.14 }, { label: "Long Beach", v: "5 km", w: 0.2 }, { label: "Szpital", v: "10 km", w: 0.32 }, { label: "Famagusta", v: "15 km", w: 0.45 }, { label: "Lotnisko Ercan", v: "45 km", w: 1 }],
+    p: "Ötüken, İskele. 5 minut do Long Beach, 7 minut do Mariachi Beach Club.",
+    dist: [{ label: "Mariachi Beach Club", v: "7 min", w: 0.16 }, { label: "Long Beach", v: "5 min", w: 0.11 }, { label: "Szpital", v: "10 min", w: 0.22 }, { label: "Famagusta", v: "15 min", w: 0.33 }, { label: "Lotnisko Ercan", v: "45 min", w: 1.0 }],
     directions: "Trasa", tour: "Wirtualny spacer",
   },
   leadership: {

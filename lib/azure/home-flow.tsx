@@ -29,7 +29,7 @@ const TR: HomeFlow = {
     cta: "Projeyi keşfet", prev: "Önceki proje", next: "Sonraki proje", pause: "Durdur", play: "Oynat",
     slides: [
       { slug: "neocity", name: "NeoCity", title: <>Yerli aileler için <b>villa yaşamı.</b></>, sub: "Tuzla, Gazimağusa · 54 villa · 5 Sıfır ödeme" },
-      { slug: "lagoon-verde", name: "Lagoon Verde Rezidansları ve Tatil Koyu", title: <>Akdeniz’de yeni bir <b>yaşam ritmi.</b></>, sub: "Bahçeler, İskele · 3.500 m² lagün" },
+      { slug: "lagoon-verde", name: "Lagoon Verde Rezidansları ve Tatil Köyü", title: <>Akdeniz’de yeni bir <b>yaşam ritmi.</b></>, sub: "Ötüken, İskele · 3.500 m² lagün" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Tamamlandı, <b>yaşam başladı.</b></>, sub: "Long Beach, İskele · 74 konut · 2025’te teslim edildi" },
       { slug: "perla", name: "La Joya Perla", title: <>Dört mevsim <b>resort yaşamı.</b></>, sub: "Bahçeler, İskele · Denize 700 m · Sand pool ve spa" },
       { slug: "perla-ii", name: "La Joya Perla II", title: <>Perla yaşamının <b>butik devamı.</b></>, sub: "Bahçeler, İskele · Bahçeli ve özel havuzlu seçenekler" },
@@ -83,7 +83,7 @@ const EN: HomeFlow = {
     cta: "Explore the project", prev: "Previous project", next: "Next project", pause: "Pause", play: "Play",
     slides: [
       { slug: "neocity", name: "NeoCity", title: <>Villa living for <b>local families.</b></>, sub: "Tuzla, Famagusta · 54 villas · 5 Zeros payment" },
-      { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Bay", title: <>A new rhythm of life <b>on the Mediterranean.</b></>, sub: "Bahçeler, İskele · 3,500 m² lagoon" },
+      { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>A new rhythm of life <b>on the Mediterranean.</b></>, sub: "Ötüken, İskele · 3,500 m² lagoon" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Completed, <b>and life has begun.</b></>, sub: "Long Beach, İskele · 74 homes · Delivered in 2025" },
       { slug: "perla", name: "La Joya Perla", title: <>Resort living <b>all year round.</b></>, sub: "Bahçeler, İskele · 700 m to the sea · Sand pool and spa" },
       { slug: "perla-ii", name: "La Joya Perla II", title: <>The boutique sequel <b>to Perla living.</b></>, sub: "Bahçeler, İskele · Options with gardens and private pools" },
@@ -137,7 +137,7 @@ const DE: HomeFlow = {
     cta: "Projekt entdecken", prev: "Vorheriges Projekt", next: "Nächstes Projekt", pause: "Pausieren", play: "Abspielen",
     slides: [
       { slug: "neocity", name: "NeoCity", title: <>Villenleben für <b>einheimische Familien.</b></>, sub: "Tuzla, Famagusta · 54 Villen · 5-Null-Zahlung" },
-      { slug: "lagoon-verde", name: "Lagoon Verde Residenzen & Urlaubsbucht", title: <>Ein neuer Lebensrhythmus <b>am Mittelmeer.</b></>, sub: "Bahçeler, İskele · 3.500 m² Lagune" },
+      { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>Ein neuer Lebensrhythmus <b>am Mittelmeer.</b></>, sub: "Ötüken, İskele · 3.500 m² Lagune" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Fertiggestellt – <b>das Leben hat begonnen.</b></>, sub: "Long Beach, İskele · 74 Wohnungen · Übergeben 2025" },
       { slug: "perla", name: "La Joya Perla", title: <>Resort-Leben <b>zu jeder Jahreszeit.</b></>, sub: "Bahçeler, İskele · 700 m zum Meer · Sand pool und Spa" },
       { slug: "perla-ii", name: "La Joya Perla II", title: <>Die Boutique-Fortsetzung <b>von Perla.</b></>, sub: "Bahçeler, İskele · Mit Garten und Privatpool" },
@@ -191,7 +191,7 @@ const RU: HomeFlow = {
     cta: "Узнать о проекте", prev: "Предыдущий проект", next: "Следующий проект", pause: "Пауза", play: "Воспроизвести",
     slides: [
       { slug: "neocity", name: "NeoCity", title: <>Жизнь в вилле <b>для местных семей.</b></>, sub: "Тузла, Фамагуста · 54 виллы · Оплата «5 нулей»" },
-      { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Bay", title: <>Новый ритм жизни <b>на Средиземном море.</b></>, sub: "Bahçeler, Искеле · лагуна 3 500 m²" },
+      { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>Новый ритм жизни <b>на Средиземном море.</b></>, sub: "Ötüken, Искеле · лагуна 3 500 m²" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Построено — <b>жизнь началась.</b></>, sub: "Long Beach, Искеле · 74 квартиры · Сдан в 2025 году" },
       { slug: "perla", name: "La Joya Perla", title: <>Курортная жизнь <b>круглый год.</b></>, sub: "Bahçeler, Искеле · 700 m до моря · Sand pool и спа" },
       { slug: "perla-ii", name: "La Joya Perla II", title: <>Бутиковое продолжение <b>Perla.</b></>, sub: "Bahçeler, Искеле · Варианты с садом и частным бассейном" },
@@ -245,7 +245,7 @@ const PL: HomeFlow = {
     cta: "Poznaj projekt", prev: "Poprzedni projekt", next: "Następny projekt", pause: "Wstrzymaj", play: "Odtwórz",
     slides: [
       { slug: "neocity", name: "NeoCity", title: <>Życie w willi <b>dla lokalnych rodzin.</b></>, sub: "Tuzla, Famagusta · 54 wille · Płatność „5 zer”" },
-      { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Bay", title: <>Nowy rytm życia <b>nad Morzem Śródziemnym.</b></>, sub: "Bahçeler, İskele · laguna 3 500 m²" },
+      { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>Nowy rytm życia <b>nad Morzem Śródziemnym.</b></>, sub: "Ötüken, İskele · laguna 3 500 m²" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Ukończone — <b>życie się zaczęło.</b></>, sub: "Long Beach, İskele · 74 mieszkania · Oddane w 2025" },
       { slug: "perla", name: "La Joya Perla", title: <>Życie jak w kurorcie <b>przez cały rok.</b></>, sub: "Bahçeler, İskele · 700 m od morza · Sand pool i spa" },
       { slug: "perla-ii", name: "La Joya Perla II", title: <>Butikowa kontynuacja <b>Perli.</b></>, sub: "Bahçeler, İskele · Opcje z ogrodem i prywatnym basenem" },

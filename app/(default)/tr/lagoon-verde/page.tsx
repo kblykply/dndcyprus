@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "tr",
   path: "/lagoon-verde",
-  title: "Lagoon Verde İskele | Bahçeler'de Satılık Daireler – DND Cyprus",
+  title: "Lagoon Verde İskele | Ötüken'de Satılık Daireler – DND Cyprus",
   description:
-    "İskele Bahçeler'de lagün havuzlu Lagoon Verde: studio, 1+1 ve 2+1 daireler, aquapark, fitness ve Mariachi Beach Club ayrıcalığı. Kat planları ve fiyat için ulaşın.",
+    "İskele Ötüken'de lagün havuzlu Lagoon Verde: studio, 1+1 ve 2+1 daireler, aquapark, fitness ve Mariachi Beach Club ayrıcalığı. Kat planları ve fiyat için ulaşın.",
   image: "/og/lagoon-verde.jpg",
   imageAlt: "Lagoon Verde lagün havuzu ve rezidans blokları",
 });

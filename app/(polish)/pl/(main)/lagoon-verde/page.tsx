@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   path: "/lagoon-verde",
   title: "Lagoon Verde İskele – apartamenty na sprzedaż | DND Cyprus",
   description:
-    "Lagoon Verde w Bahçeler (İskele): apartamenty Studio, 1+1 i 2+1 z basenem lagunowym, Aqua Parkiem, siłownią i przywilejami Mariachi Beach Club. Zapraszamy po plany i ceny.",
+    "Lagoon Verde w Ötüken (İskele): apartamenty Studio, 1+1 i 2+1 z basenem lagunowym, Aqua Parkiem, siłownią i przywilejami Mariachi Beach Club. Zapraszamy po plany i ceny.",
   image: "/og/lagoon-verde.jpg",
   imageAlt: "Basen lagunowy i budynki mieszkalne Lagoon Verde",
 });

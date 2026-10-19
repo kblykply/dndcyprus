@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   path: "/lagoon-verde",
   title: "Lagoon Verde İskele – Wohnungen kaufen | DND Cyprus",
   description:
-    "Lagoon Verde in Bahçeler, İskele: Studio-, 1+1- und 2+1-Wohnungen mit Lagunenpool, Aqua Park, Fitness und Vorteilen im Mariachi Beach Club. Preise & Grundrisse anfordern.",
+    "Lagoon Verde in Ötüken, İskele: Studio-, 1+1- und 2+1-Wohnungen mit Lagunenpool, Aqua Park, Fitness und Vorteilen im Mariachi Beach Club. Preise & Grundrisse anfordern.",
   image: "/og/lagoon-verde.jpg",
   imageAlt: "Lagunenpool und Wohngebäude von Lagoon Verde",
 });

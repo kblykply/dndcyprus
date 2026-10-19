@@ -35,8 +35,8 @@ export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
   "lagoon-verde": {
     slug: "lagoon-verde", name: "Lagoon Verde", logo: "/logos/web/lagoon.webp", image: "/azure/lv-5.jpg", ctaImage: "/azure/lv-7.jpg",
     brochure: { tr: "/lagoonbrotr.pdf", en: "#catalog", de: "#catalog", ru: "#catalog", pl: "#catalog" },
-    tagline: { tr: "Bahçeler, İskele'de modern yaşam ve yatırım fırsatı.", en: "Modern living and investment opportunity in Bahçeler, İskele.", de: "Modernes Wohnen und attraktive Investitionschance in Bahçeler, İskele.", ru: "Современная жизнь и выгодные инвестиции в Bahçeler, Искеле.", pl: "Nowoczesne życie i okazja inwestycyjna w Bahçeler, İskele." },
-    location: { tr: "Bahçeler, İskele", en: "Bahçeler, İskele", de: "Bahçeler, İskele", ru: "Bahçeler, Искеле", pl: "Bahçeler, İskele" },
+    tagline: { tr: "Ötüken, İskele'de modern yaşam ve yatırım fırsatı.", en: "Modern living and investment opportunity in Ötüken, İskele.", de: "Modernes Wohnen und attraktive Investitionschance in Ötüken, İskele.", ru: "Современная жизнь и выгодные инвестиции в Ötüken, Искеле.", pl: "Nowoczesne życie i okazja inwestycyjna w Ötüken, İskele." },
+    location: { tr: "Ötüken, İskele", en: "Ötüken, İskele", de: "Ötüken, İskele", ru: "Ötüken, Искеле", pl: "Ötüken, İskele" },
     status: { tr: "Devam Eden", en: "Ongoing", de: "Im Bau", ru: "Строится", pl: "W budowie" },
     delivery: { tr: "Teslim: Aralık 2028", en: "Delivery: December 2028", de: "Übergabe: Dezember 2028", ru: "Сдача: декабрь 2028", pl: "Oddanie: grudzień 2028" },
     award: { tr: "Altın Ödül · PropertyNC 2025", en: "Gold Award · PropertyNC 2025", de: "Goldpreis · PropertyNC 2025", ru: "Золотая награда · PropertyNC 2025", pl: "Złota Nagroda · PropertyNC 2025" },

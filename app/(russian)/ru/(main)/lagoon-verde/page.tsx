@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   path: "/lagoon-verde",
   title: "Lagoon Verde, Искеле – квартиры на продажу | DND Cyprus",
   description:
-    "Lagoon Verde в Bahçeler (Искеле): студии, квартиры 1+1 и 2+1 с бассейном-лагуной, аквапарком, фитнесом и привилегиями Mariachi Beach Club. Запросите цены и планировки.",
+    "Lagoon Verde в Ötüken (Искеле): студии, квартиры 1+1 и 2+1 с бассейном-лагуной, аквапарком, фитнесом и привилегиями Mariachi Beach Club. Запросите цены и планировки.",
   image: "/og/lagoon-verde.jpg",
   imageAlt: "Бассейн-лагуна и жилые корпуса Lagoon Verde",
 });
