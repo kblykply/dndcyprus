@@ -1,5 +1,51 @@
 # DND Cyprus — Azure tasarımı devir notu
 
+## 0. SON DURUM — 19 Ekim 2026, 16:30 (İstanbul)
+
+**Önce bu bölümü oku.** Aşağıdaki eski bölümlerle (16–17 Ekim) çelişirse bu bölüm geçerlidir.
+
+### Yayın durumu
+- **Depo:** `/Users/nymboo/Documents/Mami/dndcyprus`, dal `azure-tasarim`. `main`'den 165 commit ileride, son commit `ad4fe9d5`. GitHub'a **push edilmedi**; push ve gerçek dndcyprus.com geçişi yalnız kullanıcının açık onayıyla.
+- **Paylaşılan adres:** https://dndcyprus-azure.vercel.app. Vercel projesi `dndcyprus-azure`, scope `zubeyruygur-5267s-projects`. Herkese açık, arama motorlarına kapalı (noindex). Uzun önizleme adresleri (`…-zubeyruygur-5267s-projects.vercel.app`) Vercel girişi ister; başkasına her zaman ana adres gönderilir.
+- **⚠️ Canlıda yanlış sürüm olabilir:** 19 Ekim 16:10'da kullanıcı yanlışlıkla eski önizlemeyi (m46ilkga9) onayladı; canlı adres `mngafuvo3` (ödül akordiyonu yok). En güncel önizleme **q4810ri6i** (`ad4fe9d5`). Önce kontrol et: `vercel inspect dndcyprus-azure.vercel.app --scope zubeyruygur-5267s-projects`. Hâlâ mngafuvo3 ise kullanıcıya şunu ver:
+  `vercel promote https://dndcyprus-azure-q4810ri6i-zubeyruygur-5267s-projects.vercel.app --scope zubeyruygur-5267s-projects` (soru çıkınca "y").
+- **Yayın akışı:** `git archive HEAD` → boş bir klasöre aç, içine `.vercel/project.json` (projectName dndcyprus-azure) ve noindex `vercel.json` koy → `vercel deploy --yes --scope zubeyruygur-5267s-projects` → önizleme adresini kullanıcıya ver. **Terfiyi kullanıcı yapar** (`vercel promote …`, "y" onayı ister, yeniden derler ~2 dk); Claude'un promote komutu izin sisteminde engellendi. Derleme ara sıra "next/font/google" hatası verir: yeniden yayınla, geçer.
+- **Canlı kontrol:** Terfiden sonra ana adreste 5 dilde kontrol et. Playwright'ta `waitUntil: 'load'` kullan (analitik istekleri yüzünden networkidle beklenmez); ilk ziyarette açılan TL ödeme penceresini (`[role=dialog]`) kaldır. Sonra görsel önbelleğini ısıt: 5 dil × ana sayfalardaki `/_next/image?url=…` adreslerini curl ile çağır.
+
+### Test
+- Playwright e2e: 329 test, hepsi geçiyor. Yerel üretim derlemesine karşı çalıştırılır: `npx next build && npx next start -p 3117`, sonra `PW_CHROMIUM_EXECUTABLE=~/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell E2E_BASE_URL=http://localhost:3117 npx playwright test`. Playwright modülü: `/Users/nymboo/Documents/Mami/dndreserve-audit/node_modules/playwright`.
+- Önizleme paneli `~/Documents` ve `~/Downloads`'ı okuyamaz: depoyu `/private/tmp/...` altına APFS klonuyla (`cp -c -R`) kopyalayıp orada derle.
+- **Asla** geçerli bir formu `/api/contact`'a POST etme (gerçek lead oluşur); gerçek müşteriye mesaj/e-posta gönderme.
+
+### 18–19 Ekim'de yapılanlar (hepsi 5 dilde)
+- **Patronun akış belgesi** ("DND Cyprus web sitesi akis.pages", Netice Hanım): menü 7 başlık; **yalnız Projelerimiz açılır menü** (19 Ekim kararı; belgedeki "alt sayfalar" sayfa bölümleridir). Ana sayfa 8 bölüm; haberlerin yanında S.S.S. (kullanıcı istedi), biri açılınca diğeri kapanır.
+- **Ana sayfa vitrini:** NeoCity → Lagoon Verde → La Joya → Perla → Perla II; 3 sn'de bir geçer, fare üstündeyken durmaz. Ana sayfada Amerika anılmaz (DND Homes Amerika yalnız Hakkımızda'da).
+- **NeoCity sayfası:** teslim Nisan 2029; konum 35.15406, 33.85201 (sunum s.9 uydu görselinden Google uydu ile eşlendi); galeri 5 kare (`GALLERY=[1,2,3,4,11]`); iç mekân 10 kare, 03/06/08/09/10 masaüstündeki "S2" sürümleri; vaziyet planı kartı planla hizalı; 5 Sıfır ödeme kartında düğme solda.
+- **Lagoon Verde = Ötüken, İskele** (katalog s.16), Bahçeler değil (Bahçeler = La Joya Perla / Perla II). Koordinat 35.228781, 33.880673, Plus Code 6VHJ+G7 Ötüken; sokak adresi hiçbir belgede yok. Mesafeler katalogdan dakika: Long Beach 5, Mariachi 7, hastane 10, Gazimağusa 15, Lefkoşa 35, Ercan 45, Girne 45. Ad: "Lagoon Verde Rezidansları ve Tatil Köyü" / "Residences & Holiday Village". Teslim Aralık 2028.
+- **Yeni sayfalar:** `/advantage` (DND Ayrıcalığı: inşaat kalitesi, sosyal yaşam, DND Maintenance, ev sahibi ayrıcalıkları, Ülfet Beach Club ücretsiz giriş + Ülfet Shu %10), `/payment-plans` (TL ödeme modeli, NeoCity 5 Sıfır, kampanyalar, kira geliri), blog 5 dilde ("DND'den Haberler"), Haberler sayfasında Etkinlikler.
+- **Hakkımızda:** Ozan Bey, Netice Hanım (satış sunumundaki portre, Kling ile HD + doğal renklendirme; saç koyu kahve), Aynur Hanım (Direktör & Mimar). Kartlar sağ-sol sırayla.
+- **Ödüller:** geniş akordiyon; panel = ödülün projesinin fotoğrafı, açılınca madalya yukarıdan iner, bilgi cam kartta; platin (Mariachi) ortada ve başta açık. Başlık "PropertyNC 2025'te üç ödül".
+- **Ödeme fırsatları kartları (ana sayfa ve /payment-plans):** tam fotoğraf + açık buzlu cam panel; 60 ay TL modeli Lagoon Verde VE NeoCity için.
+- **Görünüm kuralları uygulandı:** fotoğraf üstündeki proje logoları beyaz ve eşit görsel alan (`lib/azure/logos.ts`); üst görsellerde rakam kartları ve "— İLETİŞİM" gibi üst etiketler yok; galeri ve iç mekânda tam ekran (`Lightbox.tsx`); Ülfet ve Mariachi "kimlik doğrulaması" notları kaldırıldı; düşük kaliteli fotoğraflar (Ülfet, 4 etkinlik) Kling ile HD.
+- **Sitede hiçbir yerde fiyat yok** (kullanıcının kesin kuralı).
+
+### Kullanıcının bu iki günde netleşen tercihleri
+- Koyu/lacivert panel ve görsel üstü renk katmanı istemiyor; **tam fotoğraf + cam kart** seviyor.
+- "Kötü görüntü istemiyorum": bulanık görsel yerine Kling Nano Banana 2 (`gemini-3.1-flash-image`, 2k) ile aslına sadık HD. Gerçek kişilerde yüz birebir korunur; renklendirmede gerçek fotoğraflardan renk kontrolü.
+- Hizaya çok duyarlı; her düzeltmeyi ölçerek (getBoundingClientRect) doğrula.
+- Terfi komutunu kod bloğunda ver ve "soru çıkınca y yaz" de. Kullanıcı yanlış komutu çalıştırabiliyor: en güncel önizleme adını her seferinde açıkça yaz.
+- Kısa, Türkçe, ekran görüntüsüyle konuş; mesajlar Türkçe karaktersiz ve hızlı gelir ("bunu kaldır", "hizala").
+
+### Açık işler
+1. q4810ri6i'nin terfisi (yukarı bak).
+2. EN/DE/RU/PL çevirileri ana dili konuşan biri kontrol etmedi.
+3. Gerçek dndcyprus.com geçişi (GitHub `kblykply/dndcyprus` `main`'e birleştirme + push) — kullanıcı onayı bekliyor.
+4. Müşteriden bekleyen bilgi yok (`musteriden-istenecek-bilgiler.md`).
+
+---
+
+## Eski durum (16–17 Ekim)
+
 Son güncelleme: 16 Ekim 2026, 22:50 (İstanbul); §6 17 Ekim 2026 sabahı QA ile güncellendi. Bu dosya, projeyi hiç görmemiş biri (ya da yeni bir Claude hesabı) işe kaldığı yerden devam edebilsin diye yazıldı. Her şey yerel olarak commit'li, çalışma alanı temiz.
 
 ## 1. Kısa durum
