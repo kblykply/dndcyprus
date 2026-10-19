@@ -26,15 +26,18 @@
   filter: drop-shadow(0 18px 28px rgba(8, 14, 16, .4)); transform: translateY(-110%); opacity: 0;
   transition: transform .7s cubic-bezier(.34, 1.45, .64, 1) .25s, opacity .3s .25s; }
 .az-awacc .pn.on .medal { transform: none; opacity: 1; }
-.az-awacc .gl { flex: none; max-width: 480px; padding: clamp(18px, 2vw, 26px); border-radius: calc(var(--r) - 8px);
+/* cam kart panelin tüm genişliğinde ve alçak: bağlantı başlığın sağında, açıklama altta tam genişlikte
+   (kullanıcı: "yatay alanı kullan, dikey olarak neden yükseltiyorsun") */
+.az-awacc .gl { flex: none; align-self: stretch; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k k" "h a" "p p"; column-gap: 24px;
+  padding: clamp(18px, 2vw, 26px); border-radius: calc(var(--r) - 8px);
   background: var(--glass-clear); border: 1px solid var(--glass-clear-line); box-shadow: var(--glass-clear-shadow);
   -webkit-backdrop-filter: blur(24px) saturate(1.5) brightness(1.24); backdrop-filter: blur(24px) saturate(1.5) brightness(1.24);
   opacity: 0; transform: translateY(14px); transition: opacity .45s .35s, transform .6s var(--ease) .35s; }
 .az-awacc .pn.on .gl { opacity: 1; transform: none; }
-.az-awacc .gl small { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
-.az-awacc .gl h3 { margin-top: 8px; font-size: clamp(20px, 1.8vw, 26px); font-weight: 400; letter-spacing: -.02em; color: var(--ink); }
-.az-awacc .gl p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--ink-60); }
-.az-awacc .gl a { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--sea); }
+.az-awacc .gl small { grid-area: k; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
+.az-awacc .gl h3 { grid-area: h; margin-top: 8px; font-size: clamp(20px, 1.8vw, 26px); font-weight: 400; letter-spacing: -.02em; color: var(--ink); }
+.az-awacc .gl p { grid-area: p; margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--ink-60); }
+.az-awacc .gl > a { grid-area: a; align-self: center; justify-self: end; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--sea); }
 .az-aw-more { margin-top: 18px; }
 /* ödüllerden sonraki bölüm: kısa geçiş */
 #oduller + .az-section { padding-top: clamp(48px, 5vw, 72px); }
@@ -46,6 +49,9 @@
   .az-awacc .pn.on { height: clamp(520px, 138vw, 640px); }
   .az-awacc .hit { align-items: center; justify-content: flex-start; padding: 0 14px; }
   .az-awacc .medal { height: min(36%, 220px); }
+  /* dar camda bağlantı yine altta */
+  .az-awacc .gl { grid-template-columns: minmax(0, 1fr); grid-template-areas: "k" "h" "p" "a"; }
+  .az-awacc .gl > a { justify-self: start; margin-top: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .az-awacc .pn, .az-awacc .bg, .az-awacc .medal, .az-awacc .gl, .az-awacc .nm { transition: none; }
