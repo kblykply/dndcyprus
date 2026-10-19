@@ -89,16 +89,6 @@ const DATA: Project[] = [
     href: "/en/mariachi",
   },
 
-  // Land
-  {
-    id: "gecitkale-land",
-    title: "Geçitkale Land Project",
-    status: "Upcoming",
-    type: "Land",
-    location: "Geçitkale",
-    cover: "/gecitkaleimage.jpg",
-    href: "/en/gecitkale",
-  },
 ];
 
 /* ================== UI META ================== */
@@ -113,7 +103,6 @@ const TYPE_CHIPS: { key: ProjectType; label: string }[] = [
   { key: "All",         label: "All" },
   { key: "Residential", label: "Residential" },
   { key: "Beach",       label: "Beach" },
-  { key: "Land",        label: "Land" },
 ];
 
 const CTA = "View details";

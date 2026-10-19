@@ -48,7 +48,8 @@ export const SOCIALS = [
   { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
 ];
 
-export type ProjectSlug = "neocity" | "lagoon-verde" | "perla-ii" | "perla" | "la-joya" | "mariachi" | "gecitkale";
+// Geçitkale sitenin her yerinden kaldırıldı (kullanıcı, 19 Ekim 2026); eski adres /projects sayfasına yönlenir (next.config.ts)
+export type ProjectSlug = "neocity" | "lagoon-verde" | "perla-ii" | "perla" | "la-joya" | "mariachi";
 
 export type ProjectMeta = {
   slug: ProjectSlug;
@@ -138,17 +139,6 @@ export const PROJECTS: ProjectMeta[] = [
     thumb: "/azure/mb-1.jpg",
     logo: "/logos/web/mariachi.webp",
     cta: { tr: "Pavilyon rezervasyonu", en: "Book a pavilion", de: "Pavillon reservieren", ru: "Забронировать павильон", pl: "Zarezerwuj pawilon" },
-  },
-  {
-    slug: "gecitkale",
-    name: "Geçitkale",
-    short: { tr: "Arazi · Yakında", en: "Land · Coming soon", de: "Grundstück · Demnächst", ru: "Участок · Скоро", pl: "Działka · Wkrótce" },
-    location: { tr: "Geçitkale", en: "Geçitkale", de: "Geçitkale", ru: "Гечиткале", pl: "Geçitkale" },
-    status: { tr: "Yakında", en: "Coming soon", de: "Demnächst", ru: "Скоро", pl: "Wkrótce" },
-    blurb: { tr: "Ada'nın iç kesiminde yeni bir yatırım bölgesi.", en: "A new investment zone in the island's interior.", de: "Eine neue Investitionsregion im Landesinneren der Insel.", ru: "Новая инвестиционная зона в глубине острова.", pl: "Nowa strefa inwestycyjna w głębi wyspy." },
-    cover: "/gecitkaleimage.jpg",
-    thumb: "/gecitkale/gecitkale-1.jpg",
-    cta: { tr: "Ön kayıt", en: "Pre-register", de: "Vorab registrieren", ru: "Предварительная запись", pl: "Wstępna rejestracja" },
   },
 ];
 

@@ -89,16 +89,6 @@ const DATA: Project[] = [
     href: "/tr/mariachi",
   },
 
-  // Land
-  {
-    id: "gecitkale-land",
-    title: "Geçitkale Arazi Projesi",
-    status: "Upcoming",
-    type: "Land",
-    location: "Geçitkale",
-    cover: "/gecitkaleimage.jpg",
-    href: "/tr/gecitkale",
-  },
 ];
 
 /* ================== UI META ================== */
@@ -113,7 +103,6 @@ const TYPE_CHIPS: { key: ProjectType; label: string }[] = [
   { key: "All",         label: "Tümü" },
   { key: "Residential", label: "Konut" },
   { key: "Beach",       label: "Beach Club" },
-  { key: "Land",        label: "Arazi" },
 ];
 
 const CTA = "Detaylara bak";

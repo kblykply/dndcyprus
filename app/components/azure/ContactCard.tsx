@@ -188,7 +188,7 @@ export default function ContactCard({
   }
 
   const waHref = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(t.waText(projectName))}`;
-  const options = mode === "lead" ? unitTypes : PROJECTS.filter((p) => p.slug !== "gecitkale").map((p) => p.name);
+  const options = mode === "lead" ? unitTypes : PROJECTS.map((p) => p.name);
 
   return (
     <section className="az-section az-contact" id={id}>

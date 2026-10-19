@@ -89,16 +89,6 @@ const DATA: Project[] = [
     href: "/de/mariachi",
   },
 
-  // Land
-  {
-    id: "gecitkale-land",
-    title: "Grundstücksprojekt Geçitkale",
-    status: "Upcoming",
-    type: "Land",
-    location: "Geçitkale",
-    cover: "/gecitkaleimage.jpg",
-    href: "/de/gecitkale",
-  },
 ];
 
 /* ================== UI META ================== */
@@ -113,7 +103,6 @@ const TYPE_CHIPS: { key: ProjectType; label: string }[] = [
   { key: "All",         label: "Alle" },
   { key: "Residential", label: "Wohnen" },
   { key: "Beach",       label: "Beach Club" },
-  { key: "Land",        label: "Grundstück" },
 ];
 
 const CTA = "Details ansehen";

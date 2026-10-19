@@ -16,7 +16,7 @@ export type HomeContent = {
   };
   videos: { kicker: string; title: ReactNode };
   story: { kicker: string; title: ReactNode; steps: { t: string; h: string; p: string; tags: string[]; img: string }[] };
-  projects: { kicker: string; title: ReactNode; prev: string; next: string; soonKicker: string; soonCta: string };
+  projects: { kicker: string; title: ReactNode; prev: string; next: string };
   location: { kicker: string; title: ReactNode; p: string; dist: { label: string; v: string; w: number }[]; directions: string; tour: string };
   leadership: { kicker: string; title: ReactNode; people: { img: string; role: string; name: string; bio?: string; q: string; dl: [string, string][] }[]; team: string; teamCta: string; brandsLabel: string; career: string };
   timeline: { kicker: string; title: ReactNode; items: { year: string; tag: string; p: string; img: string }[] };
@@ -73,7 +73,7 @@ const TR: HomeContent = {
       { t: "22:00 · Gece", h: "Mariachi'de DJ gecesi", p: "700 metre ötede Mariachi Beach Club: sunset'ten geç saate uzanan canlı performanslar. Sakinlere ücretsiz giriş.", tags: ["DJ geceleri", "Latino menü", "2 bar"], img: "/azure/dj.jpg" },
     ],
   },
-  projects: { kicker: "Projelerimiz", title: <>Projelerimizi <b>keşfedin.</b></>, prev: "Önceki", next: "Sonraki", soonKicker: "Yakında", soonCta: "Ön kayıt" },
+  projects: { kicker: "Projelerimiz", title: <>Projelerimizi <b>keşfedin.</b></>, prev: "Önceki", next: "Sonraki" },
   location: {
     kicker: "Konum · Lagoon Verde",
     title: <>Denize, şehre ve havalimanına <b>yakın.</b></>,
@@ -164,7 +164,7 @@ const EN: HomeContent = {
       { t: "22:00 · Night", h: "DJ night at Mariachi", p: "Mariachi Beach Club, 700 metres away: live performances from sunset until late. Free entry for residents.", tags: ["DJ nights", "Latino menu", "2 bars"], img: "/azure/dj.jpg" },
     ],
   },
-  projects: { kicker: "Our projects", title: <>Explore <b>our projects.</b></>, prev: "Previous", next: "Next", soonKicker: "Coming soon", soonCta: "Pre-register" },
+  projects: { kicker: "Our projects", title: <>Explore <b>our projects.</b></>, prev: "Previous", next: "Next" },
   location: {
     kicker: "Location · Lagoon Verde",
     title: <>Close to the sea, the city <b>and the airport.</b></>,
@@ -255,7 +255,7 @@ const DE: HomeContent = {
       { t: "22:00 · Nacht", h: "DJ-Nacht im Mariachi", p: "Der Mariachi Beach Club, nur 700 Meter entfernt: Live-Auftritte vom Sonnenuntergang bis spät in die Nacht. Freier Eintritt für Bewohner.", tags: ["DJ-Abende", "Latino-Menü", "2 Bars"], img: "/azure/dj.jpg" },
     ],
   },
-  projects: { kicker: "Unsere Projekte", title: <>Entdecken Sie <b>unsere Projekte.</b></>, prev: "Zurück", next: "Weiter", soonKicker: "Demnächst", soonCta: "Vorab registrieren" },
+  projects: { kicker: "Unsere Projekte", title: <>Entdecken Sie <b>unsere Projekte.</b></>, prev: "Zurück", next: "Weiter" },
   location: {
     kicker: "Lage · Lagoon Verde",
     title: <>Nah an Meer, Stadt <b>und Flughafen.</b></>,
@@ -346,7 +346,7 @@ const RU: HomeContent = {
       { t: "22:00 · Ночь", h: "DJ-вечеринка в Mariachi", p: "Mariachi Beach Club в 700 метрах: живые выступления от заката до поздней ночи. Для жителей вход бесплатный.", tags: ["DJ-вечеринки", "Латиноамериканское меню", "2 бара"], img: "/azure/dj.jpg" },
     ],
   },
-  projects: { kicker: "Наши проекты", title: <>Откройте для себя <b>наши проекты.</b></>, prev: "Назад", next: "Далее", soonKicker: "Скоро", soonCta: "Предварительная запись" },
+  projects: { kicker: "Наши проекты", title: <>Откройте для себя <b>наши проекты.</b></>, prev: "Назад", next: "Далее" },
   location: {
     kicker: "Расположение · Lagoon Verde",
     title: <>Рядом море, город <b>и аэропорт.</b></>,
@@ -437,7 +437,7 @@ const PL: HomeContent = {
       { t: "22:00 · Noc", h: "Noc z DJ-em w Mariachi", p: "Mariachi Beach Club 700 metrów dalej: występy na żywo od zachodu słońca do późnej nocy. Dla mieszkańców wstęp bezpłatny.", tags: ["Wieczory z DJ-em", "Menu latino", "2 bary"], img: "/azure/dj.jpg" },
     ],
   },
-  projects: { kicker: "Nasze projekty", title: <>Poznaj <b>nasze projekty.</b></>, prev: "Poprzedni", next: "Następny", soonKicker: "Wkrótce", soonCta: "Wstępna rejestracja" },
+  projects: { kicker: "Nasze projekty", title: <>Poznaj <b>nasze projekty.</b></>, prev: "Poprzedni", next: "Następny" },
   location: {
     kicker: "Lokalizacja · Lagoon Verde",
     title: <>Blisko morza, miasta <b>i lotniska.</b></>,

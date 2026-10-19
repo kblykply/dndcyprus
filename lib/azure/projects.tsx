@@ -68,7 +68,7 @@ export const PROJECT_PAGES: Record<ProjectPage["slug"], ProjectPage> = {
     unitTypes: { tr: ["1+0 Stüdyo", "1+1", "2+1"], en: ["1+0 Studio", "1+1", "2+1"], de: ["1+0 Studio", "1+1", "2+1"], ru: ["Студия 1+0", "1+1", "2+1"], pl: ["1+0 Studio", "1+1", "2+1"] },
   },
   "la-joya": {
-    slug: "la-joya", name: "La Joya", logo: "/logos/web/lajoya.webp", image: "/azure/lj-2.jpg", ctaImage: "/azure/lj-5.jpg",
+    slug: "la-joya", name: "La Joya", logo: "/logos/web/lajoya.webp", image: "/azure/lj-pavyon.jpg", ctaImage: "/azure/lj-5.jpg",
     tagline: { tr: "Long Beach, İskele'de denize 500 m mesafede, yatay mimarili modern yaşam.", en: "Modern, low-rise living just 500 m from the sea in Long Beach, İskele.", de: "Modernes Wohnen in flacher Bauweise, nur 500 m vom Meer in Long Beach, İskele.", ru: "Современный малоэтажный комплекс всего в 500 m от моря в Long Beach, Искеле.", pl: "Nowoczesne życie w niskiej zabudowie, zaledwie 500 m od morza w Long Beach, İskele." },
     location: { tr: "Long Beach, İskele", en: "Long Beach, İskele", de: "Long Beach, İskele", ru: "Long Beach, Искеле", pl: "Long Beach, İskele" },
     status: { tr: "Tamamlanan Proje", en: "Completed Project", de: "Fertiggestelltes Projekt", ru: "Завершённый проект", pl: "Ukończony projekt" },

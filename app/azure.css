@@ -11,11 +11,12 @@
 .az-section.tight { padding-top: clamp(40px, 5vw, 72px); }
 .az-section.flush { padding-inline: 0; }
 
+/* bölüm üst etiketi: okunur boy (kullanıcı: "bu başlıklar çok küçük", 19 Ekim) */
 .az-kicker {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--sea);
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: clamp(14px, 1.1vw, 16px); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sea);
 }
-.az-kicker::before { content: ""; width: 18px; height: 2px; border-radius: 2px; background: var(--aqua); }
+.az-kicker::before { content: ""; flex: none; width: 24px; height: 2px; border-radius: 2px; background: var(--aqua); }
 .az-kicker.light { color: #9fe0e5; }
 .az-kicker.light::before { background: #9fe0e5; }
 

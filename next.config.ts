@@ -14,7 +14,7 @@ const LEGACY_REDIRECTS: [source: string, destination: string][] = [
   ["/perla", "/tr/perla"],
   ["/perla-ii", "/tr/perla-ii"],
   ["/la-joya", "/tr/la-joya"],
-  ["/gecitkale", "/tr/gecitkale"],
+  ["/gecitkale", "/tr/projects"], // Geçitkale kaldırıldı (19 Ekim 2026)
   ["/projects/perla2", "/tr/perla-ii"],
   ["/brochure/brochure.pdf", "/lagoonbrotr.pdf"],
   ["/wp-content/uploads/LAGOON-DIJITAL-KATALOG.pdf", "/lagoonbrotr.pdf"],
@@ -64,11 +64,12 @@ const nextConfig: NextConfig = {
   },
 
   async redirects() {
-    return LEGACY_REDIRECTS.map(([source, destination]) => ({
-      source,
-      destination,
-      permanent: true,
-    }));
+    return [
+      ...LEGACY_REDIRECTS.map(([source, destination]) => ({ source, destination, permanent: true })),
+      // Geçitkale sayfası sitenin her yerinden kaldırıldı (kullanıcı, 19 Ekim 2026): eski bağlantılar Projeler sayfasına.
+      // Geçici (307): proje ileride geri gelirse tarayıcılar yönlendirmeyi kalıcı olarak hatırlamasın.
+      ...(["tr", "en", "de", "ru", "pl"] as const).map((l) => ({ source: `/${l}/gecitkale`, destination: `/${l}/projects`, permanent: false })),
+    ];
   },
 };
 

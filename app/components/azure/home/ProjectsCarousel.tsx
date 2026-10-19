@@ -7,14 +7,6 @@ import { HOME } from "@/lib/azure/home";
 import { PROJECTS, href, type Locale } from "@/lib/azure/site";
 import GlassArrow from "../GlassArrow";
 
-const LAND_TITLE: Record<Locale, string> = {
-  tr: "Geçitkale Arazi Projesi",
-  en: "Geçitkale Land Project",
-  de: "Grundstücksprojekt Geçitkale",
-  ru: "Земельный проект Гечиткале",
-  pl: "Projekt gruntowy Geçitkale",
-};
-
 const Chevron = ({ dir }: { dir: 1 | -1 }) => (
   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden style={dir < 0 ? { transform: "scaleX(-1)" } : undefined}>
     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -163,14 +155,7 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
       <div className="rail">
       <button type="button" className="arw prev" aria-label={t.prev} onClick={() => go(-1)} disabled={atStart}><Chevron dir={-1} /></button>
       <div className="az-car" ref={car} tabIndex={0} role="region" aria-label={t.kicker} onKeyDown={onKey}>
-        {PROJECTS.map((p) => p.slug === "gecitkale" ? (
-          <Link key={p.slug} className="az-pc soon" href={href(locale, "/gecitkale")} prefetch={false} draggable={false}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.cover} alt="" loading="lazy" draggable={false} />
-            <div className="top"><span className="az-st gold">{t.soonKicker}</span></div>
-            <div className="in"><small>{p.location[locale]}</small><h3>{LAND_TITLE[locale]}</h3><p>{p.blurb[locale]}</p><div className="az-glassrow">{t.soonCta} <GlassArrow /></div></div>
-          </Link>
-        ) : (
+        {PROJECTS.map((p) => (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false} draggable={false}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.cover} alt="" loading="lazy" draggable={false} />

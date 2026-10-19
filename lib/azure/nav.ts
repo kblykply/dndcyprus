@@ -10,7 +10,7 @@ export type NavItem = { key: string; label: string; path: string; children: NavL
 export const PROJECT_GROUPS: { key: "ongoing" | "completed" | "upcoming"; slugs: ProjectSlug[] }[] = [
   { key: "ongoing", slugs: ["neocity", "lagoon-verde", "perla", "perla-ii"] },
   { key: "completed", slugs: ["la-joya"] },
-  { key: "upcoming", slugs: ["mariachi", "gecitkale"] },
+  { key: "upcoming", slugs: ["mariachi"] },
 ];
 
 /** /projects#… filtre çapaları (ProjectsFilters adresteki çapayla açılır) */

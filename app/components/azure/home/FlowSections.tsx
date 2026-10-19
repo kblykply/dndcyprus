@@ -6,9 +6,11 @@ import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
 import { PiCheckBold, PiGearSixDuotone, PiHouseLineDuotone, PiKeyDuotone, PiTrophyDuotone } from "react-icons/pi";
 import { HOME_FLOW } from "@/lib/azure/home-flow";
+import { SECTION_IDS } from "@/lib/azure/nav";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import { href, type Locale } from "@/lib/azure/site";
 import UlfetPerks from "../pages/UlfetPerks";
+import LazyYouTube from "@/app/components/LazyYouTube";
 import "./flow.css";
 
 // Ana sayfa akışının yeni bölümleri (Ekim 2026): 3 Neden DND · 4 Ödeme ve yatırım fırsatları · 5 Yaşam ve
@@ -17,13 +19,18 @@ import "./flow.css";
 const WHY_ICONS: Record<string, IconType> = { house: PiHouseLineDuotone, key: PiKeyDuotone, gear: PiGearSixDuotone, award: PiTrophyDuotone };
 
 /** 3 · Neden DND?: solda teslim edilen La Joya'nın fotoğrafı, sağda dört gerekçe */
+// La Joya resmi açılış videosu (DND Cyprus YouTube kanalı; lib/azure/videos.ts ile aynı)
+const LJ_OPENING = "GKH4VSPH57E";
+
 export function WhyDnd({ locale }: { locale: Locale }) {
   const t = HOME_FLOW[locale].why;
   return (
     <section className="az-section az-why" id="neden-dnd">
       <div className="az-wrap g">
+        {/* La Joya açılış videosu (kullanıcı isteği): sessiz, döngülü, kutuyu doldurur; diğer proje videoları gibi */}
         <div className="pic rv">
-          <Image src="/azure/lj-5.jpg" alt={t.imageAlt} fill quality={75} sizes="(min-width: 1000px) 44vw, 100vw" />
+          <LazyYouTube videoId={LJ_OPENING} query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${LJ_OPENING}`}
+            poster={`https://i.ytimg.com/vi/${LJ_OPENING}/maxresdefault.jpg`} title={t.videoTitle} posterAlt={t.imageAlt} playLabel={t.videoPlay} className="absolute inset-0" cover />
           <span className="az-tag">{t.imageTag}</span>
         </div>
         <div>
@@ -61,9 +68,9 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
           <h2 className="az-h2 sm rv d1">{title ?? t.title}</h2>
           <p className="az-lead rv d2">{lead ?? t.lead}</p>
         </div>
-        {/* proje kartlarının dili: tam fotoğraf, altta nötr hafif koyulaşma, kısa beyaz yazı, çağrı cam satırda (ayrıntı proje / ödeme sayfalarında) */}
+        {/* proje kartlarının dili: tam fotoğraf, altta nötr hafif koyulaşma, kısa beyaz yazı, çağrılar cam satırda (ayrıntı proje / ödeme sayfalarında).
+            Her kart tek proje (kullanıcı: "ikisini tek fotoda verme"): proje sayfası + ödeme planı */}
         <div className="cards">
-          {/* 60 ay TL: Lagoon Verde ve NeoCity'de geçerli; iki projeye ayrı cam satır (kart tıklanabilir değil) */}
           <div className="card tl rv">
             <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
             <div className="tx">
@@ -71,19 +78,22 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
               <h3 className="num"><span className="n">{t.tl.pre ? <i>{t.tl.pre}</i> : null}<b>60</b></span><span className="w">{t.tl.post}</span></h3>
               <div className="rows">
                 <Link className="az-glassrow" href={href(locale, "/lagoon-verde")} prefetch={false}>Lagoon Verde <GlassArrow /></Link>
-                <Link className="az-glassrow" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>NeoCity <GlassArrow /></Link>
+                <Link className="az-glassrow" href={`${href(locale, "/payment-plans")}#${SECTION_IDS[locale].tl}`} prefetch={false}>{t.neo.cta} <GlassArrow /></Link>
               </div>
             </div>
           </div>
-          <Link className="card neo rv d1" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>
+          <div className="card neo rv d1">
             <span className="bgph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
-            <span className="tx">
+            <div className="tx">
               <small>{t.neo.k}</small>
               <ul className="zeros">{t.neo.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}</ul>
               <h3>{t.neo.h}</h3>
-              <span className="az-glassrow">{t.neo.cta} <GlassArrow /></span>
-            </span>
-          </Link>
+              <div className="rows">
+                <Link className="az-glassrow" href={href(locale, "/neocity")} prefetch={false}>NeoCity <GlassArrow /></Link>
+                <Link className="az-glassrow" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>{t.neo.cta} <GlassArrow /></Link>
+              </div>
+            </div>
+          </div>
         </div>
         <p className="az-note-sm">{t.note}</p>
       </div>

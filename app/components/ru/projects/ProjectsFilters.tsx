@@ -89,16 +89,6 @@ const DATA: Project[] = [
     href: "/ru/mariachi",
   },
 
-  // Land
-  {
-    id: "gecitkale-land",
-    title: "Земельный участок в Гечиткале",
-    status: "Upcoming",
-    type: "Land",
-    location: "Гечиткале",
-    cover: "/gecitkaleimage.jpg",
-    href: "/ru/gecitkale",
-  },
 ];
 
 /* ================== UI META ================== */
@@ -113,7 +103,6 @@ const TYPE_CHIPS: { key: ProjectType; label: string }[] = [
   { key: "All",         label: "Все" },
   { key: "Residential", label: "Жильё" },
   { key: "Beach",       label: "Пляж" },
-  { key: "Land",        label: "Земля" },
 ];
 
 const CTA = "Подробнее";

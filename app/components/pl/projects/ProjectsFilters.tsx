@@ -89,16 +89,6 @@ const DATA: Project[] = [
     href: "/pl/mariachi",
   },
 
-  // Land
-  {
-    id: "gecitkale-land",
-    title: "Inwestycja gruntowa Geçitkale",
-    status: "Upcoming",
-    type: "Land",
-    location: "Geçitkale",
-    cover: "/gecitkaleimage.jpg",
-    href: "/pl/gecitkale",
-  },
 ];
 
 /* ================== UI META ================== */
@@ -113,7 +103,6 @@ const TYPE_CHIPS: { key: ProjectType; label: string }[] = [
   { key: "All",         label: "Wszystkie" },
   { key: "Residential", label: "Mieszkaniowe" },
   { key: "Beach",       label: "Klub plażowy" },
-  { key: "Land",        label: "Grunty" },
 ];
 
 const CTA = "Zobacz szczegóły";
