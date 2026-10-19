@@ -238,7 +238,7 @@ export default function ProjectsFilters() {
               <div className="in">
                 <small>{p.location}</small>
                 <h2>{p.title}</h2>
-                <div className="glassrow">{CTA} <GlassArrow /></div>
+                <div className="az-glassrow">{CTA} <GlassArrow /></div>
               </div>
             </Link>
           ))}

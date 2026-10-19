@@ -1,5 +1,5 @@
 /* Ödüller: geniş akordiyon. Paneller ödülün projesinin fotoğrafı (renk katmanı yok); etkin panel genişler,
-   madalya yukarıdan iner, altta cam kartta ödül bilgisi. Kapalı panellerde proje adı cam etikette. */
+   madalya yukarıdan iner, altta kısa beyaz bilgi ve cam satır. Kapalı panellerde proje adı cam hapta. */
 .az-awacc { display: flex; gap: 10px; height: clamp(540px, 66vh, 680px); }
 .az-awacc .pn { position: relative; flex: 1 1 0; min-width: 0; border-radius: var(--r); overflow: hidden; isolation: isolate;
   background: var(--sea-deep); box-shadow: 0 20px 60px rgba(13, 35, 38, .12); transition: flex-grow .75s var(--ease); }
@@ -7,58 +7,52 @@
 .az-awacc .bg { z-index: -1; object-fit: cover; transform: scale(1.06); transition: transform 1.2s var(--ease); }
 .az-awacc .pn.on .bg { transform: scale(1); }
 
-/* kapalı panel: tüm alan tıklanır, ad altta cam etikette */
+
+/* proje kartlarının dili: panelin alt kısmı nötr hafif koyulaşır (renk tonu yok), yazı beyaz, çağrı ortak cam satırda (.az-glassrow) */
+.az-awacc .pn::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; transition: opacity .5s var(--ease);
+  background: linear-gradient(180deg, rgba(8, 14, 16, 0) 52%, rgba(8, 14, 16, .55) 100%); }
+.az-awacc .pn.on::after { opacity: 0; } /* açık panelde koyulaşma bilgi bölgesinde (.body) */
+
+/* kapalı panel: tüm alan tıklanır, ad altta cam hapta (cam satırla aynı cam) */
 .az-awacc .hit { position: absolute; inset: 0; z-index: 1; display: flex; align-items: flex-end; justify-content: center; padding: 18px;
   border: 0; background: none; cursor: pointer; }
 .az-awacc .hit:focus-visible { outline: 2px solid var(--coral); outline-offset: -4px; }
-.az-awacc .nm { padding: 10px 16px; border-radius: 999px; background: var(--glass-clear); border: 1px solid var(--glass-clear-line);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5) brightness(1.24); backdrop-filter: blur(24px) saturate(1.5) brightness(1.24); box-shadow: var(--glass-clear-shadow);
-  font-size: 13.5px; font-weight: 600; color: var(--ink); white-space: nowrap; transition: opacity .35s, transform .5s var(--ease); }
+.az-awacc .nm { padding: 10px 16px; border-radius: 999px; background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .3);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  font-size: 13.5px; font-weight: 600; color: #fff; white-space: nowrap; transition: opacity .35s, transform .5s var(--ease); }
 .az-awacc .pn.on .hit { pointer-events: none; }
 .az-awacc .pn.on .nm { opacity: 0; transform: translateY(10px); }
 
-/* açık panel: madalya üstte iner, bilgi altta cam kartta */
+/* açık panel: madalya üstte iner, bilgi altta beyaz yazıyla */
 .az-awacc .body { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
-  padding: 0 clamp(16px, 2vw, 26px) clamp(16px, 2vw, 26px); visibility: hidden; pointer-events: none; }
+  padding: 0 clamp(16px, 2vw, 26px) clamp(16px, 2vw, 26px); visibility: hidden; pointer-events: none;
+  background: linear-gradient(180deg, rgba(8, 14, 16, 0) 50%, rgba(8, 14, 16, .62) 100%); }
 .az-awacc .pn.on .body { visibility: visible; pointer-events: auto; }
-/* madalya boyu panele göre sınırlı (kısa ekranda cam kartı aşağı itip kesmesin); kart hiç küçülmez */
+/* madalya boyu panele göre sınırlı (kısa ekranda bilgiyi aşağı itip kesmesin) */
 .az-awacc .medal { flex: 0 1 auto; min-height: 0; width: auto; height: min(40%, 300px); max-width: 40%; object-fit: contain; object-position: left top; margin-left: clamp(4px, 1vw, 14px);
   filter: drop-shadow(0 18px 28px rgba(8, 14, 16, .4)); transform: translateY(-110%); opacity: 0;
   transition: transform .7s cubic-bezier(.34, 1.45, .64, 1) .25s, opacity .3s .25s; }
 .az-awacc .pn.on .medal { transform: none; opacity: 1; }
-/* cam kart panelin tüm genişliğinde ve alçak: bağlantı başlığın sağında, açıklama altta tam genişlikte
-   (kullanıcı: "yatay alanı kullan, dikey olarak neden yükseltiyorsun") */
-.az-awacc .gl { flex: none; align-self: stretch; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "k k" "h a" "p p"; column-gap: 24px;
-  padding: clamp(18px, 2vw, 26px); border-radius: calc(var(--r) - 8px);
-  background: var(--glass-clear); border: 1px solid var(--glass-clear-line); box-shadow: var(--glass-clear-shadow);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5) brightness(1.24); backdrop-filter: blur(24px) saturate(1.5) brightness(1.24);
-  opacity: 0; transform: translateY(14px); transition: opacity .45s .35s, transform .6s var(--ease) .35s; }
+/* bilgi: kısa (ödül adı · kategori), kalın beyaz yazı; ayrıntı bağlantıda (kullanıcı: "kalın olursa daha iyi okunur") */
+.az-awacc .gl { flex: none; width: min(100%, 560px); opacity: 0; transform: translateY(14px); transition: opacity .45s .35s, transform .6s var(--ease) .35s; }
 .az-awacc .pn.on .gl { opacity: 1; transform: none; }
-.az-awacc .gl small { grid-area: k; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
-.az-awacc .gl h3 { grid-area: h; margin-top: 8px; font-size: clamp(20px, 1.8vw, 26px); font-weight: 400; letter-spacing: -.02em; color: var(--ink); }
-.az-awacc .gl p { grid-area: p; margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--ink-60); }
-.az-awacc .gl > a { grid-area: a; align-self: center; justify-self: end; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--sea); }
+.az-awacc .gl small { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 3px rgba(8, 14, 16, .45); }
+.az-awacc .gl h3 { margin-top: 8px; font-size: clamp(22px, 2vw, 28px); font-weight: 500; letter-spacing: -.02em; line-height: 1.15; color: #fff; }
+.az-awacc .gl p { margin-top: 4px; font-size: 15px; font-weight: 500; line-height: 1.45; color: #fff; }
+.az-awacc .gl .az-glassrow { margin-top: 16px; }
 .az-aw-more { margin-top: 18px; }
 /* ödüllerden sonraki bölüm: kısa geçiş */
 #oduller + .az-section { padding-top: clamp(48px, 5vw, 72px); }
 
-/* telefon / dar tablet: paneller alt alta, kapalı panel ince şerit */
+/* telefon / dar tablet: paneller alt alta, kapalı panel ince şerit (ad hapı solda; koyulaşma soldan) */
 @media (max-width: 760px) {
   .az-awacc { flex-direction: column; height: auto; gap: 8px; }
   .az-awacc .pn { flex: none; height: 84px; transition: height .7s var(--ease); }
   .az-awacc .pn.on { height: clamp(520px, 138vw, 640px); }
+  .az-awacc .pn::after { background: linear-gradient(90deg, rgba(8, 14, 16, .62) 0%, rgba(8, 14, 16, .4) 45%, rgba(8, 14, 16, .1) 80%); }
   .az-awacc .hit { align-items: center; justify-content: flex-start; padding: 0 14px; }
   .az-awacc .medal { height: min(36%, 220px); }
-  /* dar camda bağlantı yine altta */
-  .az-awacc .gl { grid-template-columns: minmax(0, 1fr); grid-template-areas: "k" "h" "p" "a"; }
-  .az-awacc .gl > a { justify-self: start; margin-top: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .az-awacc .pn, .az-awacc .bg, .az-awacc .medal, .az-awacc .gl, .az-awacc .nm { transition: none; }
+  .az-awacc .pn, .az-awacc .bg, .az-awacc .medal, .az-awacc .gl, .az-awacc .nm, .az-awacc .pn::after { transition: none; }
 }
-
-/* gerçek camda okunurluk: küçük etiket, bağlantı ve açıklama koyu tonda */
-.az-awacc .gl small { color: #052c33; }
-/* kapalı paneldeki ad hapı küçük ve koyu zeminde (kırmızı halı) durabilir: cam biraz daha yoğun */
-.az-awacc .nm { background: linear-gradient(145deg, rgba(255, 255, 255, .64), rgba(255, 255, 255, .5)); }
-.az-awacc .gl p, .az-awacc .gl a { color: var(--ink); }

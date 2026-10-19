@@ -86,14 +86,18 @@ export default function HeroSlider({ slides, brand, label, cta, prev, next, paus
           </div>
         ))}
 
+        {/* üst satır: solda sabit başlık + ödül etiketi, sağ üstte projenin logosu (proje sayfalarının üst görseliyle aynı) */}
         <div className="top">
-          <h1 className="brand">{brand}</h1>
-          {s.award ? <span className="az-tag gold">{s.award}</span> : null}
+          <div className="lt">
+            <h1 className="brand">{brand}</h1>
+            {s.award ? <span className="az-tag gold">{s.award}</span> : null}
+          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {s.logo ? <img key={s.key} className="logo" src={s.logo} alt="" draggable={false} style={{ ["--k" as string]: logoScale(s.logo) } as CSSProperties} /> : null}
         </div>
 
         <div className="c">
           <div className="txt" key={s.key} aria-live={paused ? "polite" : "off"}>
-            {s.logo ? <img className="logo" src={s.logo} alt="" draggable={false} style={{ ["--k" as string]: logoScale(s.logo) } as CSSProperties} /> : null}
             <p className="nm">{s.name}</p>
             <p className="h">{s.title}</p>
             <p className="sub">{s.sub}</p>

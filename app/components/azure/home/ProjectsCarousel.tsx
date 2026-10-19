@@ -168,14 +168,14 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.cover} alt="" loading="lazy" draggable={false} />
             <div className="top"><span className="az-st gold">{t.soonKicker}</span></div>
-            <div className="in"><small>{p.location[locale]}</small><h3>{LAND_TITLE[locale]}</h3><p>{p.blurb[locale]}</p><div className="glassrow">{t.soonCta} <GlassArrow /></div></div>
+            <div className="in"><small>{p.location[locale]}</small><h3>{LAND_TITLE[locale]}</h3><p>{p.blurb[locale]}</p><div className="az-glassrow">{t.soonCta} <GlassArrow /></div></div>
           </Link>
         ) : (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false} draggable={false}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.cover} alt="" loading="lazy" draggable={false} />
             <div className="top">{p.award && <span className="az-st gold">{p.award[locale]}</span>}<span className="az-st">{p.status[locale]}</span></div>
-            <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="glassrow">{p.cta[locale]} <GlassArrow /></div></div>
+            <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="az-glassrow">{p.cta[locale]} <GlassArrow /></div></div>
           </Link>
         ))}
       </div>

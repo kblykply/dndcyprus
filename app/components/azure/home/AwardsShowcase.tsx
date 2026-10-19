@@ -1,6 +1,6 @@
 "use client";
 
-import Arrow from "../Arrow";
+import GlassArrow from "../GlassArrow";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -20,13 +20,14 @@ const HEAD: Record<Locale, { h: string; p: string }> = {
 // her ödül kendi projesiyle: panel fotoğrafı, kısa ad, madalya (hafif WebP kurdele) ve proje sayfası
 const PROJECT: Record<string, { img: string; name: string; medal: string; path: string }> = {
   "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png": { img: "/azure/mb-1.jpg", name: "Mariachi Beach Club", medal: "/azure/awards/platinum-mariachi.webp", path: "/mariachi" },
-  "/BEST-NEWCOMER.png": { img: "/property_awards_2025-747.jpg", name: "DND Homes", medal: "/azure/awards/gold-newcomer.webp", path: "/about" },
+  // DND Homes: tören fotoğrafı sola ve yukarı genişletildi (tavan, duvar); kişiler özgün pikseller, kurdele yüzlerin üstünde kalır
+  "/BEST-NEWCOMER.png": { img: "/azure/awards/dnd-homes-odul-genis.jpg", name: "DND Homes", medal: "/azure/awards/gold-newcomer.webp", path: "/about" },
   "/BEST-SOCIOCULTURAL-GOLD.png": { img: "/azure/lv-7.jpg", name: "Lagoon Verde", medal: "/azure/awards/gold-lagoon-verde.webp", path: "/lagoon-verde" },
 };
 
 /**
  * Ödüller: geniş akordiyon (müşteri isteği, Ekim 2026). Her panel ödülün projesinin fotoğrafı; üzerine gelince /
- * dokununca panel genişler, madalya (kurdele) yukarıdan iner, altta cam kartta ödül adı, açıklama ve bağlantı.
+ * dokununca panel genişler, madalya (kurdele) yukarıdan iner, altta beyaz yazıyla ödül adı ve kategorisi, bağlantı ortak cam satırda.
  * Altın ödüllü Lagoon Verde ortada ve başta açık (kullanıcı isteği, 19 Ekim). Telefonda paneller alt alta.
  * withProjects: bağlantı proje sayfasına (ana sayfa); yoksa ödülün kendi bağlantısı ve altta Yılın CFO'su (Hakkımızda).
  */
@@ -68,10 +69,10 @@ export default function AwardsShowcase({ locale, kicker, withProjects = false }:
                   <div className="gl">
                     <small>{a.k}</small>
                     <h3>{it.title}</h3>
-                    <p>{it.text}</p>
+                    <p>{it.text.split(". ")[0].replace(/\.$/, "")}</p>
                     {external
-                      ? <a href={link} target="_blank" rel="noopener noreferrer" tabIndex={isOn ? undefined : -1}>{MORE[locale]} <Arrow /><span className="sr-only">: {it.title}</span></a>
-                      : <Link href={link} prefetch={false} tabIndex={isOn ? undefined : -1}>{MORE[locale]} <Arrow /><span className="sr-only">: {it.title}</span></Link>}
+                      ? <a className="az-glassrow" href={link} target="_blank" rel="noopener noreferrer" tabIndex={isOn ? undefined : -1}><span>{MORE[locale]}<span className="sr-only">: {it.title}</span></span> <GlassArrow /></a>
+                      : <Link className="az-glassrow" href={link} prefetch={false} tabIndex={isOn ? undefined : -1}><span>{MORE[locale]}<span className="sr-only">: {it.title}</span></span> <GlassArrow /></Link>}
                   </div>
                 </div>
               </div>

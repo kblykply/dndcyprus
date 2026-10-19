@@ -1,9 +1,9 @@
 /* Üst menü: 7 başlık (müşterinin akış belgesi). Temel pill / açılır menü stilleri app/azure.css (.az-nav). */
 
 /* başlıklar sığsın: yazı ve iç boşluk biraz daralır; uzun "Ödeme ve Yatırım Fırsatları" orta genişlikte kısalır.
-   Kapsül geniş, başlıklar logo ile "Bilgi Al" arasına eşit aralıkla yayılır (kullanıcı: "sıkışık olmasın, genişlet") */
-.az-nav .pill { width: min(1400px, 100%); }
-.az-nav ul { gap: 0; flex: 1 1 auto; justify-content: space-evenly; margin: 0 14px 0 0; } /* sağ pay = logonun sağ payı: iki yandaki boşluk eşit */
+   Kapsül geniş (üst görselin kenarlarıyla aynı hizada); başlıklar ortada toplu, aralar ölçülü: yayınca dağınık duruyordu (kullanıcı, 19 Ekim) */
+.az-nav .pill { width: 100%; } /* üst görselle aynı kenarlar (ikisi de sayfa kenarından --gutter içeride) */
+.az-nav ul { gap: 6px; flex: 1 1 auto; justify-content: center; margin: 0 14px 0 0; } /* sağ pay = logonun sağ payı: iki yandaki boşluk eşit */
 .az-nav li > a, .az-nav li > button { padding: 10px 11px; font-size: 13.5px; gap: 5px; white-space: nowrap; }
 @media (min-width: 1440px) { .az-nav li > a, .az-nav li > button { padding: 10px 14px; font-size: 14.5px; } }
 .az-nav li > a.on, .az-nav li > button.on { color: var(--ink); background: rgba(13, 35, 38, .06); }

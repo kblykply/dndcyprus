@@ -1,4 +1,5 @@
 import Arrow from "../Arrow";
+import GlassArrow from "../GlassArrow";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -60,28 +61,27 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
           <h2 className="az-h2 sm rv d1">{title ?? t.title}</h2>
           <p className="az-lead rv d2">{lead ?? t.lead}</p>
         </div>
+        {/* proje kartlarının dili: tam fotoğraf, altta nötr hafif koyulaşma, kısa beyaz yazı, çağrı cam satırda (ayrıntı proje / ödeme sayfalarında) */}
         <div className="cards">
-          {/* 60 ay TL: Lagoon Verde ve NeoCity'de geçerli; iki projeye ayrı bağlantı (kart tıklanabilir değil) */}
+          {/* 60 ay TL: Lagoon Verde ve NeoCity'de geçerli; iki projeye ayrı cam satır (kart tıklanabilir değil) */}
           <div className="card tl rv">
-            <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={72} sizes="(min-width: 900px) 46vw, 100vw" /></span>
-            <div className="gl">
-              <span className="k">{t.tl.k}</span>
-              <div className="hd"><div className="big">60</div><h3>{t.tl.h}</h3><p>{t.tl.p}</p></div>
-              <ul>{t.tl.rules.map((r) => <li key={r}><i><PiCheckBold size={12} aria-hidden /></i>{r}</li>)}</ul>
-              <div className="links">
-                <Link href={href(locale, "/lagoon-verde")} prefetch={false}>Lagoon Verde <Arrow /></Link>
-                <Link href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>NeoCity <Arrow /></Link>
+            <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <div className="tx">
+              <small>{t.tl.k}</small>
+              <h3 className="num"><span className="n">{t.tl.pre ? <i>{t.tl.pre}</i> : null}<b>60</b></span><span className="w">{t.tl.post}</span></h3>
+              <div className="rows">
+                <Link className="az-glassrow" href={href(locale, "/lagoon-verde")} prefetch={false}>Lagoon Verde <GlassArrow /></Link>
+                <Link className="az-glassrow" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>NeoCity <GlassArrow /></Link>
               </div>
             </div>
           </div>
           <Link className="card neo rv d1" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>
-            <span className="bgph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={72} sizes="(min-width: 900px) 46vw, 100vw" /></span>
-            <span className="gl">
-              <span className="k">{t.neo.k}</span>
+            <span className="bgph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <span className="tx">
+              <small>{t.neo.k}</small>
               <ul className="zeros">{t.neo.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}</ul>
               <h3>{t.neo.h}</h3>
-              <p>{t.neo.p}</p>
-              <span className="go">{t.neo.cta} <Arrow /></span>
+              <span className="az-glassrow">{t.neo.cta} <GlassArrow /></span>
             </span>
           </Link>
         </div>

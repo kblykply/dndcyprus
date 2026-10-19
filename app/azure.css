@@ -334,10 +334,16 @@ body.az-lock { overflow: hidden; }
 .az-pc .in small { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .8; font-weight: 600; }
 .az-pc :is(h2, h3) { font-size: 28px; margin: 6px 0 6px; color: #fff; }
 .az-pc p { font-size: 13px; opacity: .85; max-width: 32ch; }
-.az-pc .glassrow { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-radius: 16px; background: rgba(255, 255, 255, .14); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .3); font-size: 13px; font-weight: 500; }
-.az-pc .glassrow i { width: 30px; height: 30px; flex: none; border-radius: 50%; background: rgba(255, 255, 255, .2); border: 1px solid rgba(255, 255, 255, .5); color: #fff; display: grid; place-items: center; font-style: normal; transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease); }
-.az-pc:hover .glassrow i, .az-pc:focus-visible .glassrow i { background: #fff; border-color: #fff; color: var(--ink); }
-.az-pc:hover .glassrow i svg, .az-pc:focus-visible .glassrow i svg { transform: translateX(2px); }
+/* ortak cam satır: fotoğraf üstündeki her çağrı (proje kartları, ödeme fırsatları, ödüller) aynı dilde. Kullanıcı: "sitenin tek tasarım dili olsun".
+   Altındaki fotoğraf bölgesi her zaman nötr koyulaşmalı (beyaz yazı okunsun). Filtre değişkenle yazılmaz (derleyici önekli tek satıra indiriyor). */
+.az-glassrow { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px;
+  background: rgba(255, 255, 255, .14); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .3);
+  font-size: 13.5px; font-weight: 600; color: #fff; }
+.az-glassrow i { width: 30px; height: 30px; flex: none; border-radius: 50%; background: rgba(255, 255, 255, .2); border: 1px solid rgba(255, 255, 255, .5); color: #fff; display: grid; place-items: center; font-style: normal; transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease); }
+.az-glassrow i svg { transition: transform .4s var(--ease); }
+/* kart bütünüyle bağlantıysa kartın üstüne gelince, satır kendi bağlantısıysa satırın üstüne gelince ok beyazlaşır */
+:is(a:hover, a:focus-visible) .az-glassrow i, a.az-glassrow:is(:hover, :focus-visible) i { background: #fff; border-color: #fff; color: var(--ink); }
+:is(a:hover, a:focus-visible) .az-glassrow i svg, a.az-glassrow:is(:hover, :focus-visible) i svg { transform: translateX(2px); }
 .az-cdots { display: flex; gap: 6px; justify-content: center; padding: 0 var(--gutter); }
 .az-cdots i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-40); opacity: .4; transition: all .4s; }
 .az-cdots i.on { opacity: 1; background: var(--sea); width: 26px; border-radius: 4px; }
