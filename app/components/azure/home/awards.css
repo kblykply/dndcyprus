@@ -60,4 +60,4 @@
 /* proje logosu sağ üstte etiket olarak; yalnız açık panelde (kapalı ince panelde ad hapı yeter) */
 .az-awacc .awlogo { opacity: 0; transition: opacity .45s .3s; }
 .az-awacc .pn.on .awlogo { opacity: 1; }
-@media (max-width: 760px) { .az-awacc .awlogo { --tw: 112px; --th: 42px; } }
+@media (max-width: 760px) { .az-awacc .awlogo { --th: 42px; --mw: 104px; } }

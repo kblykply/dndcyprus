@@ -22,7 +22,7 @@ export const VENUES: Venue[] = [
   {
     key: "ulfet-shu",
     logo: "/azure/venues/ulfet-shu-logo.png",
-    // Ülfet Shu Instagram (Ekim 2026): dolu salon, DJ kabini, sahne gösterisi; dikey reel kareleri kartın 3:2 oranına Kling ile yanlardan
+    // Ülfet Shu Instagram (Ekim 2026): dolu salon, DJ kabini, boş sahne (dansçılı kare kurumsal sitede uygun değil, kişiler silindi); dikey reel kareleri kartın 3:2 oranına Kling ile yanlardan
     // genişletildi (salonda özgün pikseller ortada aynen; DJ karesi tamamen yeniden çizildi, mekân aynı)
     images: [
       { src: "/azure/venues/ulfet-shu-salon.jpg", logoAt: "tl" },
