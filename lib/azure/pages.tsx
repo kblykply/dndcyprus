@@ -3,7 +3,7 @@
 // Satış sonrası (DND Maintenance), peşinat indirimleri ve DND Kira Garantisi: DND Cyprus satış sunumu ("SATIŞ SUNUMM TR",
 // Eylül 2026). Ülfet ayrıcalıkları: kullanıcı + lajoyacyprus.com (Ülfet Shu %10, Ülfet Beach Club ücretsiz giriş, 2026 yazı).
 // Kiralama: La Joya (lajoyacyprus.com) ve DND Reserve. Etkinlikler Instagram gönderilerinden (CRT eğitimi, Halloween afişi);
-// Larnaka ve Friday Fun Day kartlarında gerçek fotoğraf gelene kadar La Joya görseli.
+// Larnaka ve Friday Fun Day fotoğrafları @dndcyprus gönderilerinden (Eylül 2026).
 import type { ReactNode } from "react";
 import type { Locale } from "./site";
 
@@ -88,8 +88,8 @@ const TR: PagesCopy = {
     items: [
       { date: "24–25 Ekim 2026", h: "Halloween Workshop · Joy Cafe", p: "La Joya’daki Joy Cafe’de çocuklu ve yetişkinli Halloween atölyesi: kova süsleme, slime atölyesi, hazine avı, kostüm defilesi ve disko. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Ekim 2026", h: "Takım çalışması: CRT ekibiyle satış eğitimi", p: "CRT ekibiyle DND Cyprus projeleri üzerine tanıtım ve satış eğitimi gerçekleştirdik. Güçlü ekip, ortak hedef.", img: "/azure/pages/ekip-egitimi.jpg" },
-      { date: "25 Eylül 2026", h: "Larnaka Gençlerbirliği La Joya’da", p: "Sponsoru olduğumuz Larnaka Gençlerbirliği’nin genç sporcularını La Joya’da ağırladık; takımımıza sezon boyunca başarılar diliyoruz.", img: "/azure/lj-2.jpg" },
-      { date: "12 Eylül 2026", h: "Friday, Fun Day: takım çalışması", p: "Eğitimci Zafer Erkoç liderliğinde La Joya’da ekip çalışması, iletişim ve iş birliği üzerine eğlenceli bir eğitim günü geçirdik.", img: "/azure/lj-1.jpg" },
+      { date: "25 Eylül 2026", h: "Larnaka Gençlerbirliği La Joya’da", p: "Sponsoru olduğumuz Larnaka Gençlerbirliği’nin genç sporcularını La Joya’da ağırladık; takımımıza sezon boyunca başarılar diliyoruz.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
+      { date: "12 Eylül 2026", h: "Friday, Fun Day: takım çalışması", p: "Eğitimci Zafer Erkoç liderliğinde La Joya’da ekip çalışması, iletişim ve iş birliği üzerine eğlenceli bir eğitim günü geçirdik.", img: "/azure/pages/friday-fun-day.jpg" },
       { date: "Nisan 2025", h: "PropertyNC 2025 Ödül Töreni", p: "DND Cyprus üç ödülle döndü: Lagoon Verde, Mariachi Beach Club ve En İyi Yeni Girişim.", img: "/property_awards_2025-747.jpg", href: "/blog/dnd-cyprus-gold-award-propertync-2025" },
       { date: "31 Ekim 2025", h: "La Joya açılışı", p: "La Joya, 74 konutuyla tamamlandı; açılışı ev sahipleri, emlak danışmanları ve iş ortaklarımızla kutladık.", img: "/news/mhacover.webp" },
       { date: "Aralık 2023", h: "Yeni Yıl Galası", p: "İş ortakları, acenteler ve sektör paydaşlarıyla yeni yılı birlikte karşıladık.", img: "/dndwhoweare.jpg", href: "/blog/dnd-cyprus-new-year-celebration-2023" },
@@ -158,8 +158,8 @@ const EN: PagesCopy = {
     items: [
       { date: "24–25 October 2026", h: "Halloween Workshop · Joy Cafe", p: "A Halloween workshop for children and adults at Joy Cafe, La Joya: bucket decorating, slime workshop, scavenger hunt, costume catwalk and disco. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "October 2026", h: "Teamwork: sales training with the CRT team", p: "We held a presentation and sales training on DND Cyprus projects with the CRT team. A strong team with a shared goal.", img: "/azure/pages/ekip-egitimi.jpg" },
-      { date: "25 September 2026", h: "Larnaka Gençlerbirliği at La Joya", p: "We hosted the young athletes of Larnaka Gençlerbirliği, the club we sponsor, at La Joya and wish the team a successful season.", img: "/azure/lj-2.jpg" },
-      { date: "12 September 2026", h: "Friday, Fun Day: teamwork", p: "Led by trainer Zafer Erkoç, we spent a fun training day at La Joya on teamwork, communication and collaboration.", img: "/azure/lj-1.jpg" },
+      { date: "25 September 2026", h: "Larnaka Gençlerbirliği at La Joya", p: "We hosted the young athletes of Larnaka Gençlerbirliği, the club we sponsor, at La Joya and wish the team a successful season.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
+      { date: "12 September 2026", h: "Friday, Fun Day: teamwork", p: "Led by trainer Zafer Erkoç, we spent a fun training day at La Joya on teamwork, communication and collaboration.", img: "/azure/pages/friday-fun-day.jpg" },
       { date: "April 2025", h: "PropertyNC 2025 Awards", p: "DND Cyprus came home with three awards: Lagoon Verde, Mariachi Beach Club and Best Newcomer.", img: "/property_awards_2025-747.jpg" },
       { date: "31 October 2025", h: "La Joya opening", p: "La Joya was completed with 74 homes; we celebrated the opening with homeowners, real estate agents and business partners.", img: "/news/mhacover.webp" },
       { date: "December 2023", h: "New Year Gala", p: "We welcomed the new year with business partners, agents and industry stakeholders.", img: "/dndwhoweare.jpg" },
@@ -228,8 +228,8 @@ const DE: PagesCopy = {
     items: [
       { date: "24.–25. Oktober 2026", h: "Halloween-Workshop · Joy Cafe", p: "Halloween-Workshop für Kinder und Erwachsene im Joy Cafe in La Joya: Eimer gestalten, Slime-Workshop, Schatzsuche, Kostümlaufsteg und Disco. 11:00–13:00 Uhr.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Oktober 2026", h: "Teamarbeit: Verkaufsschulung mit dem CRT-Team", p: "Mit dem CRT-Team haben wir eine Präsentation und Verkaufsschulung zu den Projekten von DND Cyprus durchgeführt. Ein starkes Team mit gemeinsamem Ziel.", img: "/azure/pages/ekip-egitimi.jpg" },
-      { date: "25. September 2026", h: "Larnaka Gençlerbirliği in La Joya", p: "Wir haben die jungen Sportler von Larnaka Gençlerbirliği, dem von uns gesponserten Verein, in La Joya empfangen und wünschen eine erfolgreiche Saison.", img: "/azure/lj-2.jpg" },
-      { date: "12. September 2026", h: "Friday, Fun Day: Teamarbeit", p: "Unter der Leitung von Trainer Zafer Erkoç verbrachten wir in La Joya einen unterhaltsamen Schulungstag zu Teamarbeit, Kommunikation und Zusammenarbeit.", img: "/azure/lj-1.jpg" },
+      { date: "25. September 2026", h: "Larnaka Gençlerbirliği in La Joya", p: "Wir haben die jungen Sportler von Larnaka Gençlerbirliği, dem von uns gesponserten Verein, in La Joya empfangen und wünschen eine erfolgreiche Saison.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
+      { date: "12. September 2026", h: "Friday, Fun Day: Teamarbeit", p: "Unter der Leitung von Trainer Zafer Erkoç verbrachten wir in La Joya einen unterhaltsamen Schulungstag zu Teamarbeit, Kommunikation und Zusammenarbeit.", img: "/azure/pages/friday-fun-day.jpg" },
       { date: "April 2025", h: "PropertyNC 2025 Awards", p: "DND Cyprus kehrte mit drei Auszeichnungen zurück: Lagoon Verde, Mariachi Beach Club und Best Newcomer.", img: "/property_awards_2025-747.jpg" },
       { date: "31. Oktober 2025", h: "Eröffnung von La Joya", p: "La Joya wurde mit 74 Wohnungen fertiggestellt; die Eröffnung feierten wir mit Eigentümern, Maklern und Geschäftspartnern.", img: "/news/mhacover.webp" },
       { date: "Dezember 2023", h: "Neujahrsgala", p: "Mit Geschäftspartnern, Maklern und Branchenvertretern haben wir das neue Jahr begrüßt.", img: "/dndwhoweare.jpg" },
@@ -298,8 +298,8 @@ const RU: PagesCopy = {
     items: [
       { date: "24–25 октября 2026", h: "Halloween Workshop · Joy Cafe", p: "Хэллоуин-мастер-класс для детей и взрослых в Joy Cafe в La Joya: украшение корзинок, слайм, поиск сокровищ, костюмированный показ и дискотека. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Октябрь 2026", h: "Командная работа: тренинг по продажам с командой CRT", p: "Вместе с командой CRT мы провели презентацию и тренинг по продажам проектов DND Cyprus. Сильная команда, общая цель.", img: "/azure/pages/ekip-egitimi.jpg" },
-      { date: "25 сентября 2026", h: "Larnaka Gençlerbirliği в La Joya", p: "Мы принимали в La Joya юных спортсменов клуба Larnaka Gençlerbirliği, спонсором которого являемся, и желаем команде успешного сезона.", img: "/azure/lj-2.jpg" },
-      { date: "12 сентября 2026", h: "Friday, Fun Day: командная работа", p: "Под руководством тренера Зафера Эркоча мы провели в La Joya весёлый день обучения командной работе, коммуникации и сотрудничеству.", img: "/azure/lj-1.jpg" },
+      { date: "25 сентября 2026", h: "Larnaka Gençlerbirliği в La Joya", p: "Мы принимали в La Joya юных спортсменов клуба Larnaka Gençlerbirliği, спонсором которого являемся, и желаем команде успешного сезона.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
+      { date: "12 сентября 2026", h: "Friday, Fun Day: командная работа", p: "Под руководством тренера Зафера Эркоча мы провели в La Joya весёлый день обучения командной работе, коммуникации и сотрудничеству.", img: "/azure/pages/friday-fun-day.jpg" },
       { date: "Апрель 2025", h: "Премия PropertyNC 2025", p: "DND Cyprus вернулась с тремя наградами: Lagoon Verde, Mariachi Beach Club и «Лучший новичок».", img: "/property_awards_2025-747.jpg" },
       { date: "31 октября 2025", h: "Открытие La Joya", p: "La Joya с 74 квартирами завершён; открытие мы отпраздновали с владельцами, риелторами и партнёрами.", img: "/news/mhacover.webp" },
       { date: "Декабрь 2023", h: "Новогодний гала-вечер", p: "Мы встретили новый год вместе с партнёрами, агентами и представителями отрасли.", img: "/dndwhoweare.jpg" },
@@ -368,8 +368,8 @@ const PL: PagesCopy = {
     items: [
       { date: "24–25 października 2026", h: "Halloween Workshop · Joy Cafe", p: "Halloweenowe warsztaty dla dzieci i dorosłych w Joy Cafe w La Joya: ozdabianie koszyczków, warsztaty slime, poszukiwanie skarbów, pokaz kostiumów i dyskoteka. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Październik 2026", h: "Praca zespołowa: szkolenie sprzedażowe z zespołem CRT", p: "Razem z zespołem CRT przeprowadziliśmy prezentację i szkolenie sprzedażowe dotyczące projektów DND Cyprus. Silny zespół, wspólny cel.", img: "/azure/pages/ekip-egitimi.jpg" },
-      { date: "25 września 2026", h: "Larnaka Gençlerbirliği w La Joya", p: "Gościliśmy w La Joya młodych sportowców klubu Larnaka Gençlerbirliği, którego jesteśmy sponsorem, i życzymy drużynie udanego sezonu.", img: "/azure/lj-2.jpg" },
-      { date: "12 września 2026", h: "Friday, Fun Day: praca zespołowa", p: "Pod przewodnictwem trenera Zafera Erkoça spędziliśmy w La Joya pełen energii dzień szkoleniowy o pracy zespołowej, komunikacji i współpracy.", img: "/azure/lj-1.jpg" },
+      { date: "25 września 2026", h: "Larnaka Gençlerbirliği w La Joya", p: "Gościliśmy w La Joya młodych sportowców klubu Larnaka Gençlerbirliği, którego jesteśmy sponsorem, i życzymy drużynie udanego sezonu.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
+      { date: "12 września 2026", h: "Friday, Fun Day: praca zespołowa", p: "Pod przewodnictwem trenera Zafera Erkoça spędziliśmy w La Joya pełen energii dzień szkoleniowy o pracy zespołowej, komunikacji i współpracy.", img: "/azure/pages/friday-fun-day.jpg" },
       { date: "Kwiecień 2025", h: "Nagrody PropertyNC 2025", p: "DND Cyprus wróciło z trzema nagrodami: Lagoon Verde, Mariachi Beach Club i Best Newcomer.", img: "/property_awards_2025-747.jpg" },
       { date: "31 października 2025", h: "Otwarcie La Joya", p: "La Joya została ukończona z 74 mieszkaniami; otwarcie świętowaliśmy z właścicielami, agentami nieruchomości i partnerami.", img: "/news/mhacover.webp" },
       { date: "Grudzień 2023", h: "Gala noworoczna", p: "Powitaliśmy nowy rok z partnerami biznesowymi, agentami i przedstawicielami branży.", img: "/dndwhoweare.jpg" },
