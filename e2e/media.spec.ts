@@ -157,3 +157,16 @@ test("NeoCity: galeri 5 kare; iç mekân ve galeri tam ekran açılır, Esc ile 
   await page.getByRole("dialog").getByRole("button", { name: "Kapat" }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
 });
+
+// S.S.S.: aynı anda tek soru açık kalır (biri açılınca diğeri kapanır)
+test("S.S.S.: bir soru açılınca diğeri kapanır (ana sayfa ve Ödeme sayfası)", async ({ page }) => {
+  for (const url of ["/tr", "/tr/payment-plans"]) {
+    await page.goto(url);
+    const items = page.locator(".az-faq details");
+    await items.nth(0).locator("summary").click();
+    await expect(items.nth(0)).toHaveAttribute("open", "");
+    await items.nth(1).locator("summary").click();
+    await expect(items.nth(1)).toHaveAttribute("open", "");
+    await expect(items.nth(0)).not.toHaveAttribute("open", "");
+  }
+});

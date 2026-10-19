@@ -15,36 +15,40 @@
 
 /* ---- 4 · Ödeme ve yatırım fırsatları ---- */
 .az-offers .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+/* İki kart da tam fotoğraf (renk katmanı yok); yazılar altta açık renkli buzlu cam kartta (kullanıcı: "cam kart, full foto") */
 .az-offers .card {
-  position: relative; display: flex; flex-direction: column; min-height: 420px; padding: clamp(24px, 3vw, 40px); border-radius: calc(var(--r) + 4px);
-  overflow: hidden; isolation: isolate; color: #fff; transition: transform .5s var(--ease), box-shadow .5s;
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: clamp(520px, 46vw, 640px);
+  padding: clamp(12px, 1.4vw, 18px); border-radius: calc(var(--r) + 4px); overflow: hidden; isolation: isolate; color: var(--ink);
+  background: var(--sky-2); box-shadow: 0 24px 60px rgba(13, 35, 38, .14); transition: transform .5s var(--ease), box-shadow .5s;
 }
-.az-offers .card:hover { transform: translateY(-4px); }
-.az-offers .card.tl { background: linear-gradient(135deg, var(--sea), var(--sea-deep)); box-shadow: 0 24px 60px rgba(13, 101, 112, .22); }
-.az-offers .card.neo { background: #0b2a3f; box-shadow: 0 24px 60px rgba(11, 42, 63, .24); }
-/* NeoCity kartı: üstte net fotoğraf (katman yok), altta düz koyu zeminde 5 Sıfır */
-.az-offers .card.neo { padding: 0; }
-.az-offers .card.neo .ph { position: relative; display: block; flex: none; aspect-ratio: 16 / 8; overflow: hidden; }
-.az-offers .card.neo .ph img { object-fit: cover; transition: transform .8s var(--ease); }
-.az-offers .card.neo:hover .ph img { transform: scale(1.04); }
-.az-offers .card.neo .b { display: flex; flex-direction: column; flex: 1; padding: clamp(22px, 2.6vw, 34px) clamp(24px, 3vw, 40px) clamp(24px, 3vw, 40px); }
-.az-offers .card.neo .zeros { margin-top: 14px; }
-.az-offers .k { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, .86); }
-.az-offers .big { margin-top: 14px; font-family: var(--font-display), sans-serif; font-size: clamp(72px, 8vw, 120px); line-height: .9; font-weight: 400; letter-spacing: -.04em; }
-.az-offers h3 { margin-top: 14px; font-size: clamp(22px, 2vw, 28px); font-weight: 400; letter-spacing: -.02em; color: #fff; max-width: 22ch; }
-.az-offers .card p { margin-top: 8px; font-size: 15px; line-height: 1.55; color: rgba(255, 255, 255, .84); max-width: 46ch; }
-.az-offers .card ul:not(.zeros) { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
-.az-offers .card ul:not(.zeros) li { display: flex; gap: 10px; align-items: center; font-size: 14.5px; color: rgba(255, 255, 255, .92); }
-.az-offers .card ul:not(.zeros) i { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(255, 255, 255, .18); }
-.az-offers .zeros { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 18px 0 4px; padding: 0; list-style: none; }
+.az-offers a.card:hover { transform: translateY(-4px); }
+.az-offers .bgph { position: absolute; inset: 0; z-index: -1; }
+.az-offers .bgph img { object-fit: cover; transition: transform 1.2s var(--ease); }
+.az-offers .card:hover .bgph img { transform: scale(1.04); }
+.az-offers .gl { display: flex; flex-direction: column; padding: clamp(20px, 2.2vw, 30px); border-radius: calc(var(--r) - 6px);
+  background: rgba(251, 250, 246, .84); border: 1px solid rgba(255, 255, 255, .75); box-shadow: 0 14px 40px rgba(8, 14, 16, .16);
+  backdrop-filter: blur(18px) saturate(1.2); -webkit-backdrop-filter: blur(18px) saturate(1.2); }
+.az-offers .k { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
+.az-offers .big { margin-top: 8px; font-family: var(--font-display), sans-serif; font-size: clamp(56px, 5.4vw, 84px); line-height: .9; font-weight: 400; letter-spacing: -.04em; color: var(--sea); }
+.az-offers h3 { margin-top: 10px; font-size: clamp(21px, 1.8vw, 26px); font-weight: 400; letter-spacing: -.02em; color: var(--ink); max-width: 24ch; }
+.az-offers .card p { margin-top: 6px; font-size: 14.5px; line-height: 1.55; color: var(--ink-60); max-width: 48ch; }
+.az-offers .card ul:not(.zeros) { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.az-offers .card ul:not(.zeros) li { display: flex; gap: 10px; align-items: center; font-size: 14px; color: var(--ink); }
+.az-offers .card ul:not(.zeros) i { flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--sky-2); color: var(--sea); }
+.az-offers .zeros { display: flex; flex-wrap: wrap; gap: 10px 14px; margin: 14px 0 2px; padding: 0; list-style: none; }
 .az-offers .zeros li { display: grid; justify-items: center; gap: 6px; }
-.az-offers .zeros b { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; font-family: var(--font-display), sans-serif; font-size: 22px; font-weight: 500; color: var(--ink);
-  background: radial-gradient(circle at 35% 30%, #fff6d8, #e6c56a 60%, #c9a242); box-shadow: 0 8px 20px rgba(0, 0, 0, .2); }
-.az-offers .zeros span { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 255, 255, .9); }
-.az-offers .go { margin-top: auto; padding-top: 22px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #fff; }
+.az-offers .zeros b { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; font-family: var(--font-display), sans-serif; font-size: 21px; font-weight: 500; color: var(--ink);
+  background: radial-gradient(circle at 35% 30%, #fff6d8, #e6c56a 60%, #c9a242); box-shadow: 0 6px 16px rgba(138, 104, 20, .25); }
+.az-offers .zeros span { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-60); }
+.az-offers .go { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--sea); }
+.az-offers .links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+.az-offers .links a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--sea); color: #fff; font-size: 13.5px; font-weight: 600; transition: background .25s; }
+.az-offers .links a + a { background: rgba(13, 101, 112, .1); color: var(--sea); }
+.az-offers .links a:hover { background: var(--sea-deep); color: #fff; }
 .az-offers .note, .az-offers .az-note-sm { margin-top: 14px; }
-@media (max-width: 900px) { .az-offers .cards { grid-template-columns: minmax(0, 1fr); } .az-offers .card { min-height: 0; } }
-@media (max-width: 420px) { .az-offers .zeros { justify-content: space-between; gap: 10px 4px; } .az-offers .zeros b { width: 42px; height: 42px; font-size: 19px; } .az-offers .zeros span { font-size: 9px; letter-spacing: .04em; } }
+/* telefonda fotoğraf panelin üstünde görünsün: kartın üstünde fotoğrafa ayrılmış alan */
+@media (max-width: 900px) { .az-offers .cards { grid-template-columns: minmax(0, 1fr); } .az-offers .card { min-height: 0; padding-top: clamp(190px, 52vw, 340px); } }
+@media (max-width: 420px) { .az-offers .zeros { justify-content: space-between; gap: 10px 4px; } .az-offers .zeros b { width: 40px; height: 40px; font-size: 18px; } .az-offers .zeros span { font-size: 9px; letter-spacing: .04em; } }
 
 /* ---- 5 · Yaşam ve ayrıcalıklar: Mariachi kartı ---- */
 .az-life .perk { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); border-radius: calc(var(--r) + 4px); overflow: hidden; background: var(--foam);

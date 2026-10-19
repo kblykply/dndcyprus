@@ -25,6 +25,7 @@ export type PagesCopy = {
     meta: { title: string; description: string };
     hero: { kicker: string; title: ReactNode; lead: string };
     faqTitle: string;
+    faqLead: string;
     campaigns: { kicker: string; title: ReactNode; lead: string; items: Card[]; note: string };
     rental: {
       kicker: string; title: ReactNode; lead: string; points: string[]; imageAlt: string; note: string; cta: string;
@@ -63,6 +64,7 @@ const TR: PagesCopy = {
     meta: { title: "Ödeme ve Yatırım Fırsatları | TL Ödeme Modeli, Kampanyalar – DND Cyprus", description: "Lagoon Verde’de 60 aya kadar faizsiz TL taksit, NeoCity’de 5 Sıfır ödeme planı: %35 peşinat, bankasız ve kefilsiz. Güncel kampanyalar ve yatırım için DND Cyprus." },
     hero: { kicker: "Ödeme ve yatırım fırsatları", title: <>Maaşınız TL, <b>taksitiniz de TL.</b></>, lead: "Bankasız, faizsiz ve kur riskinden uzak ödeme modelleriyle ev sahibi olmak artık daha kolay." },
     faqTitle: "Ödeme modeli hakkında",
+    faqLead: "Merak edilenleri yanıtladık; başka sorunuz için ekibimize ulaşın.",
     campaigns: {
       kicker: "Güncel kampanyalar", title: <>Şimdi geçerli <b>fırsatlar.</b></>, lead: "Sitede yayımlanan güncel ödeme modelleri ve ev sahiplerine özel ayrıcalıklar.",
       items: [
@@ -133,6 +135,7 @@ const EN: PagesCopy = {
     meta: { title: "Payment & Investment Opportunities | Lira Payment Model – DND Cyprus", description: "Up to 60 months of interest-free lira instalments at Lagoon Verde and the 5 Zeros plan at NeoCity: 35% down, no bank, no guarantor. Current campaigns and investment with DND Cyprus." },
     hero: { kicker: "Payment & investment opportunities", title: <>Your salary in lira, <b>your instalments too.</b></>, lead: "Payment models with no bank, no interest and no currency risk make owning a home easier." },
     faqTitle: "About the payment model",
+    faqLead: "Answers to common questions; for anything else, contact our team.",
     campaigns: {
       kicker: "Current campaigns", title: <>Offers <b>available now.</b></>, lead: "The current payment models published on our site and privileges reserved for homeowners.",
       items: [
@@ -203,6 +206,7 @@ const DE: PagesCopy = {
     meta: { title: "Zahlung & Investition | Lira-Zahlungsmodell – DND Cyprus", description: "Bis zu 60 Monate zinsfreie Lira-Raten bei Lagoon Verde und der 5-Null-Plan bei NeoCity: 35 % Anzahlung, ohne Bank, ohne Bürgen. Aktuelle Aktionen und Investition mit DND Cyprus." },
     hero: { kicker: "Zahlung & Investition", title: <>Gehalt in Lira, <b>Raten auch in Lira.</b></>, lead: "Zahlungsmodelle ohne Bank, ohne Zinsen und ohne Währungsrisiko machen den Hauskauf leichter." },
     faqTitle: "Zum Zahlungsmodell",
+    faqLead: "Antworten auf häufige Fragen; bei allem Weiteren hilft Ihnen unser Team.",
     campaigns: {
       kicker: "Aktuelle Aktionen", title: <>Jetzt <b>verfügbare Angebote.</b></>, lead: "Die auf unserer Website veröffentlichten Zahlungsmodelle und exklusive Vorteile für Eigentümer.",
       items: [
@@ -273,6 +277,7 @@ const RU: PagesCopy = {
     meta: { title: "Оплата и инвестиции | Оплата в лирах – DND Cyprus", description: "До 60 месяцев беспроцентной рассрочки в лирах в Lagoon Verde и план «5 нулей» в NeoCity: взнос 35 %, без банка и поручителя. Актуальные акции и инвестиции с DND Cyprus." },
     hero: { kicker: "Оплата и инвестиции", title: <>Зарплата в лирах — <b>и взносы в лирах.</b></>, lead: "Модели оплаты без банка, процентов и валютного риска упрощают покупку дома." },
     faqTitle: "О модели оплаты",
+    faqLead: "Ответы на частые вопросы; по остальным вопросам обращайтесь к нашей команде.",
     campaigns: {
       kicker: "Актуальные акции", title: <>Предложения, <b>доступные сейчас.</b></>, lead: "Актуальные модели оплаты, опубликованные на сайте, и привилегии для владельцев.",
       items: [
@@ -343,6 +348,7 @@ const PL: PagesCopy = {
     meta: { title: "Płatności i inwestycje | Płatność w lirach – DND Cyprus", description: "Do 60 miesięcy nieoprocentowanych rat w lirach w Lagoon Verde i plan „5 zer” w NeoCity: 35% wkładu, bez banku i poręczyciela. Aktualne promocje i inwestycje z DND Cyprus." },
     hero: { kicker: "Płatności i inwestycje", title: <>Pensja w lirach, <b>raty też w lirach.</b></>, lead: "Modele płatności bez banku, odsetek i ryzyka kursowego ułatwiają zakup domu." },
     faqTitle: "O modelu płatności",
+    faqLead: "Odpowiedzi na najczęstsze pytania; w innych sprawach skontaktuj się z naszym zespołem.",
     campaigns: {
       kicker: "Aktualne promocje", title: <>Oferty <b>dostępne teraz.</b></>, lead: "Aktualne modele płatności opublikowane na naszej stronie i przywileje dla właścicieli.",
       items: [

@@ -12,7 +12,7 @@ export type HomeFlow = {
   why: { kicker: string; title: ReactNode; lead: string; items: { icon: string; h: string; p: string }[]; imageAlt: string; imageTag: string };
   offers: {
     kicker: string; title: ReactNode; lead: string;
-    tl: { k: string; h: string; p: string; rules: string[]; cta: string };
+    tl: { k: string; h: string; p: string; rules: string[] };
     neo: { k: string; h: string; p: string; zeros: string[]; cta: string };
     note: string;
   };
@@ -52,7 +52,7 @@ const TR: HomeFlow = {
     kicker: "Size özel ödeme ve yatırım fırsatları",
     title: <>Maaşınız TL, <b>taksitiniz de TL.</b></>,
     lead: "Bankasız, faizsiz ve kur riskinden uzak ödeme modelleriyle ev sahibi olmak artık daha kolay.",
-    tl: { k: "Lagoon Verde · TL ödeme modeli", h: "60 aya kadar faizsiz TL taksit", p: "Sınırlı sayıdaki rezidansta tüm ödemeler Türk lirasıyla.", rules: ["Banka, faiz ve kefil yok", "Kur farkı ve vade farkı yok", "Taksitler KKTC asgari ücret artışına göre güncellenir"], cta: "Lagoon Verde’yi incele" },
+    tl: { k: "Lagoon Verde · NeoCity · TL ödeme modeli", h: "60 aya kadar faizsiz TL taksit", p: "Lagoon Verde’deki sınırlı sayıda rezidansta ve NeoCity villalarında ödemeler Türk lirasıyla.", rules: ["Banka, faiz ve kefil yok", "Kur farkı ve vade farkı yok", "Taksitler KKTC asgari ücret artışına göre güncellenir"] },
     neo: { k: "NeoCity · 5 Sıfır", h: "Villanızı bankasız, bugünkü TL fiyatla alın", p: "%35 peşinat, kalan tutar 60 ay vade ile doğrudan NeoCity’ye.", zeros: ["Faiz", "Banka", "Kefil", "Vade farkı", "Kur farkı"], cta: "Ödeme planını gör" },
     note: "* Ödeme modelleri tanıtım amaçlıdır. Güncel koşullar için satış ekibimizle iletişime geçiniz.",
   },
@@ -106,7 +106,7 @@ const EN: HomeFlow = {
     kicker: "Payment and investment opportunities for you",
     title: <>Your salary in lira, <b>your instalments too.</b></>,
     lead: "Payment models with no bank, no interest and no currency risk make owning a home easier.",
-    tl: { k: "Lagoon Verde · Lira payment model", h: "Up to 60 months of interest-free lira instalments", p: "For a limited number of residences, all payments are made in Turkish lira.", rules: ["No bank, interest or guarantor", "No exchange-rate or maturity charges", "Instalments updated in line with the TRNC minimum wage"], cta: "Explore Lagoon Verde" },
+    tl: { k: "Lagoon Verde · NeoCity · Lira payment model", h: "Up to 60 months of interest-free lira instalments", p: "Payments in Turkish lira for a limited number of Lagoon Verde residences and for NeoCity villas.", rules: ["No bank, interest or guarantor", "No exchange-rate or maturity charges", "Instalments updated in line with the TRNC minimum wage"] },
     neo: { k: "NeoCity · 5 Zeros", h: "Buy your villa without a bank, at today’s lira price", p: "35% down payment, the rest paid directly to NeoCity over 60 months.", zeros: ["Interest", "Bank", "Guarantor", "Maturity charge", "FX risk"], cta: "See the payment plan" },
     note: "* Payment models are for promotional purposes. Please contact our sales team for current terms.",
   },
@@ -160,7 +160,7 @@ const DE: HomeFlow = {
     kicker: "Zahlungs- und Investitionsangebote für Sie",
     title: <>Gehalt in Lira, <b>Raten auch in Lira.</b></>,
     lead: "Zahlungsmodelle ohne Bank, ohne Zinsen und ohne Währungsrisiko machen den Hauskauf leichter.",
-    tl: { k: "Lagoon Verde · Lira-Zahlungsmodell", h: "Bis zu 60 Monate zinsfreie Raten in Lira", p: "Für eine begrenzte Zahl von Residenzen werden alle Zahlungen in Türkischer Lira geleistet.", rules: ["Keine Bank, keine Zinsen, kein Bürge", "Kein Kurs- oder Laufzeitaufschlag", "Raten folgen dem Mindestlohn in der TRNZ"], cta: "Lagoon Verde ansehen" },
+    tl: { k: "Lagoon Verde · NeoCity · Lira-Zahlungsmodell", h: "Bis zu 60 Monate zinsfreie Raten in Lira", p: "Zahlung in Türkischer Lira für eine begrenzte Zahl von Residenzen in Lagoon Verde und für die Villen in NeoCity.", rules: ["Keine Bank, keine Zinsen, kein Bürge", "Kein Kurs- oder Laufzeitaufschlag", "Raten folgen dem Mindestlohn in der TRNZ"] },
     neo: { k: "NeoCity · 5 Null", h: "Ihre Villa ohne Bank, zum heutigen Lira-Preis", p: "35 % Anzahlung, der Rest über 60 Monate direkt an NeoCity.", zeros: ["Zinsen", "Bank", "Bürge", "Laufzeit", "Kursrisiko"], cta: "Zahlungsplan ansehen" },
     note: "* Die Zahlungsmodelle dienen Werbezwecken. Aktuelle Konditionen erhalten Sie von unserem Vertriebsteam.",
   },
@@ -214,7 +214,7 @@ const RU: HomeFlow = {
     kicker: "Особые условия оплаты и инвестиций",
     title: <>Зарплата в лирах — <b>и взносы в лирах.</b></>,
     lead: "Модели оплаты без банка, процентов и валютного риска упрощают покупку дома.",
-    tl: { k: "Lagoon Verde · Оплата в лирах", h: "До 60 месяцев беспроцентной рассрочки в лирах", p: "Для ограниченного числа резиденций все платежи — в турецких лирах.", rules: ["Без банка, процентов и поручителя", "Без курсовой разницы и надбавки за срок", "Взносы привязаны к минимальной зарплате ТРСК"], cta: "Смотреть Lagoon Verde" },
+    tl: { k: "Lagoon Verde · NeoCity · Оплата в лирах", h: "До 60 месяцев беспроцентной рассрочки в лирах", p: "Оплата в турецких лирах — для ограниченного числа резиденций Lagoon Verde и для вилл NeoCity.", rules: ["Без банка, процентов и поручителя", "Без курсовой разницы и надбавки за срок", "Взносы привязаны к минимальной зарплате ТРСК"] },
     neo: { k: "NeoCity · «5 нулей»", h: "Вилла без банка, по сегодняшней цене в лирах", p: "Взнос 35 %, остаток — напрямую NeoCity в течение 60 месяцев.", zeros: ["Проценты", "Банк", "Поручитель", "Надбавка", "Курс"], cta: "План оплаты" },
     note: "* Модели оплаты носят рекламный характер. Актуальные условия уточняйте у отдела продаж.",
   },
@@ -268,7 +268,7 @@ const PL: HomeFlow = {
     kicker: "Wyjątkowe możliwości płatności i inwestycji",
     title: <>Pensja w lirach, <b>raty też w lirach.</b></>,
     lead: "Modele płatności bez banku, odsetek i ryzyka kursowego ułatwiają zakup domu.",
-    tl: { k: "Lagoon Verde · Płatność w lirach", h: "Do 60 miesięcy nieoprocentowanych rat w lirach", p: "Dla ograniczonej liczby apartamentów wszystkie płatności w lirach tureckich.", rules: ["Bez banku, odsetek i poręczyciela", "Bez różnic kursowych i dopłat za okres", "Raty aktualizowane wg płacy minimalnej w TRCP"], cta: "Zobacz Lagoon Verde" },
+    tl: { k: "Lagoon Verde · NeoCity · Płatność w lirach", h: "Do 60 miesięcy nieoprocentowanych rat w lirach", p: "Płatności w lirach tureckich – dla ograniczonej liczby apartamentów w Lagoon Verde i dla willi w NeoCity.", rules: ["Bez banku, odsetek i poręczyciela", "Bez różnic kursowych i dopłat za okres", "Raty aktualizowane wg płacy minimalnej w TRCP"] },
     neo: { k: "NeoCity · „5 zer”", h: "Willa bez banku, po dzisiejszej cenie w lirach", p: "35% wkładu, reszta bezpośrednio na rzecz NeoCity przez 60 miesięcy.", zeros: ["Odsetki", "Bank", "Poręczyciel", "Dopłata", "Kurs"], cta: "Zobacz plan płatności" },
     note: "* Modele płatności mają charakter promocyjny. Aktualne warunki uzyskasz w naszym dziale sprzedaży.",
   },

@@ -80,9 +80,13 @@ export function PaymentSections({ locale }: { locale: Locale }) {
       <Payment d={neo} id={PROJECT_UI[locale].ids.payment} />
       <section className="az-section tight">
         <div className="az-wrap az-pfaq">
-          <h2 className="az-h2 sm rv">{t.faqTitle}</h2>
+          <div className="hd">
+            <span className="az-kicker rv">{HOME[locale].faq.kicker}</span>
+            <h2 className="az-h2 sm rv d1">{t.faqTitle}</h2>
+            <p className="az-lead rv d2">{t.faqLead}</p>
+          </div>
           <div className="az-faq rv d1">
-            {faq.map((f) => <details key={f.q}><summary>{f.q} <i>+</i></summary><div className="a">{f.a}</div></details>)}
+            {faq.map((f) => <details key={f.q} name="odeme-sss"><summary>{f.q} <i>+</i></summary><div className="a">{f.a}</div></details>)}
           </div>
         </div>
       </section>

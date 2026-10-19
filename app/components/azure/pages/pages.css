@@ -30,7 +30,12 @@
 @media (max-width: 1000px) { .az-camp .cards { grid-template-columns: minmax(0, 1fr); } .az-camp .pic { aspect-ratio: 16 / 9; } }
 
 /* ---- ödeme S.S.S. ---- */
-.az-pfaq { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 64px); align-items: start; }
+/* S.S.S.: solda etiket, başlık ve açıklama; sağda sorular aynı yükseklikte */
+.az-pfaq { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 64px); align-items: stretch; }
+/* sorular sol bloğun yüksekliğine yayılır (kartlar eşit boy): üst ve alt kenarlar hizalı */
+.az-pfaq .az-faq { align-content: stretch; }
+.az-pfaq .az-h2 { margin-top: 12px; }
+.az-pfaq .az-lead { margin-top: 12px; max-width: 40ch; }
 @media (max-width: 900px) { .az-pfaq { grid-template-columns: minmax(0, 1fr); } }
 
 /* ---- etkinlikler ---- */

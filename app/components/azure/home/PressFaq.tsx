@@ -8,6 +8,7 @@ const DATE_LOCALE: Record<Locale, string> = { tr: "tr-TR", en: "en-GB", de: "de-
 const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(DATE_LOCALE[locale], { year: "numeric", month: "long", day: "2-digit" }).format(new Date(iso));
 
 /** faq=false: yalnız haberler, tek sütun (ana sayfada S.S.S. haberlerin yanında gösterilir) */
+// S.S.S.: aynı name'li <details> grubu, biri açılınca diğerleri kendiliğinden kapanır (tarayıcı özelliği)
 export default function PressFaq({ locale, items, faq = true }: { locale: Locale; items: PressItem[]; faq?: boolean }) {
   const t = HOME[locale];
   const news = [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
@@ -33,7 +34,7 @@ export default function PressFaq({ locale, items, faq = true }: { locale: Locale
           <div className="hd"><div><span className="az-kicker rv">{t.faq.kicker}</span><h2 className="az-h2 sm rv d1">{t.faq.title}</h2></div></div>
           <div className="az-faq rv d2">
             {t.faq.items.map((f) => (
-              <details key={f.q}><summary>{f.q} <i>+</i></summary><div className="a">{f.a}</div></details>
+              <details key={f.q} name="sss"><summary>{f.q} <i>+</i></summary><div className="a">{f.a}</div></details>
             ))}
           </div>
         </div> : null}

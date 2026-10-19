@@ -61,18 +61,24 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
           <p className="az-lead rv d2">{lead ?? t.lead}</p>
         </div>
         <div className="cards">
-          <Link className="card tl rv" href={href(locale, "/lagoon-verde")} prefetch={false}>
-            <span className="k">{t.tl.k}</span>
-            <div className="big">60</div>
-            <h3>{t.tl.h}</h3>
-            <p>{t.tl.p}</p>
-            <ul>{t.tl.rules.map((r) => <li key={r}><i><PiCheckBold size={12} aria-hidden /></i>{r}</li>)}</ul>
-            <span className="go">{t.tl.cta} <Arrow /></span>
-          </Link>
+          {/* 60 ay TL: Lagoon Verde ve NeoCity'de geçerli; iki projeye ayrı bağlantı (kart tıklanabilir değil) */}
+          <div className="card tl rv">
+            <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={72} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <div className="gl">
+              <span className="k">{t.tl.k}</span>
+              <div className="big">60</div>
+              <h3>{t.tl.h}</h3>
+              <p>{t.tl.p}</p>
+              <ul>{t.tl.rules.map((r) => <li key={r}><i><PiCheckBold size={12} aria-hidden /></i>{r}</li>)}</ul>
+              <div className="links">
+                <Link href={href(locale, "/lagoon-verde")} prefetch={false}>Lagoon Verde <Arrow /></Link>
+                <Link href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>NeoCity <Arrow /></Link>
+              </div>
+            </div>
+          </div>
           <Link className="card neo rv d1" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>
-            {/* fotoğraf katmansız ve net (renk katmanı yok); 5 Sıfır anlatımı altında düz zeminde */}
-            <span className="ph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={72} sizes="(min-width: 900px) 46vw, 100vw" /></span>
-            <span className="b">
+            <span className="bgph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={72} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <span className="gl">
               <span className="k">{t.neo.k}</span>
               <ul className="zeros">{t.neo.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}</ul>
               <h3>{t.neo.h}</h3>
