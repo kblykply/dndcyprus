@@ -1,12 +1,12 @@
 // Ana sayfa "DND ile yaşam ve ayrıcalıklar": kaydırmalı üç büyük kart (La Joya sitesindeki oda kartları gibi).
-// Sıra kullanıcının isteği: Ülfet Shu → Ülfet Beach Club → Mariachi Beach Club. Her fotoğrafın üst köşesinde mekânın
-// logosu etiket olarak durur (logoAt: fotoğrafta boş kalan köşe). Bilgiler: ayrıcalıklar lib/azure/pages.tsx ve
+// Sıra kullanıcının isteği: Ülfet Shu → Ülfet Beach Club → Mariachi Beach Club. Her fotoğrafın sağ üst köşesinde mekânın
+// logosu etiket olarak durur (bütün kartlarda aynı yer). Bilgiler: ayrıcalıklar lib/azure/pages.tsx ve
 // home-flow.tsx ile aynı; adres, rezervasyon numarası, Instagram ve mekân bilgileri mekânların kendi Instagram
 // biyografileri ve paylaşımlarından (Ekim 2026). Fiyat yazılmaz.
 import type { Locale } from "./site";
 
 export type VenueKey = "ulfet-shu" | "ulfet-beach" | "mariachi";
-export type VenueImage = { src: string; logoAt?: "tl" | "tr" };
+export type VenueImage = { src: string };
 export type Venue = {
   key: VenueKey;
   /** mekânın kendi logosu; yoksa etiket gösterilmez (marka tipografisi uydurulmaz) */
@@ -25,9 +25,9 @@ export const VENUES: Venue[] = [
     // Ülfet Shu Instagram (Ekim 2026): dolu salon, DJ kabini, boş sahne (dansçılı kare kurumsal sitede uygun değil, kişiler silindi); dikey reel kareleri kartın 3:2 oranına Kling ile yanlardan
     // genişletildi (salonda özgün pikseller ortada aynen; DJ karesi tamamen yeniden çizildi, mekân aynı)
     images: [
-      { src: "/azure/venues/ulfet-shu-salon.jpg", logoAt: "tl" },
-      { src: "/azure/venues/ulfet-shu-dj.jpg", logoAt: "tl" },
-      { src: "/azure/venues/ulfet-shu-sahne.jpg", logoAt: "tr" },
+      { src: "/azure/venues/ulfet-shu-salon.jpg" },
+      { src: "/azure/venues/ulfet-shu-dj.jpg" },
+      { src: "/azure/venues/ulfet-shu-sahne.jpg" },
     ],
     instagram: { handle: "@ulfetshu", href: "https://www.instagram.com/ulfetshu/" },
     phone: { display: "0546 996 55 55", tel: "+905469965555" },
@@ -38,10 +38,10 @@ export const VENUES: Venue[] = [
     // havadan HD görünüm + Ülfet Beach Club Instagram (Ekim 2026): iskele ve kabanalar, giriş kapısı, yön tabelaları
     // (yanlardan genişletildi; girişteki kişi ve görsellerin üstündeki telefon/altyazı yazıları silindi)
     images: [
-      { src: "/azure/pages/ulfet-beach.jpg", logoAt: "tl" },
-      { src: "/azure/venues/ulfet-beach-iskele.jpg", logoAt: "tl" },
-      { src: "/azure/venues/ulfet-beach-giris.jpg", logoAt: "tr" },
-      { src: "/azure/venues/ulfet-beach-tabela.jpg", logoAt: "tl" },
+      { src: "/azure/pages/ulfet-beach.jpg" },
+      { src: "/azure/venues/ulfet-beach-iskele.jpg" },
+      { src: "/azure/venues/ulfet-beach-giris.jpg" },
+      { src: "/azure/venues/ulfet-beach-tabela.jpg" },
     ],
     instagram: { handle: "@ulfetbeachclub", href: "https://www.instagram.com/ulfetbeachclub/" },
     phone: { display: "0546 994 55 55", tel: "+905469945555" },
@@ -50,11 +50,11 @@ export const VENUES: Venue[] = [
     key: "mariachi",
     logo: "/logos/web/mariachi.webp",
     images: [
-      { src: "/azure/mb-6.jpg", logoAt: "tr" },
-      { src: "/azure/mb-1.jpg", logoAt: "tr" },
-      { src: "/azure/mb-5.jpg", logoAt: "tr" },
-      { src: "/azure/mb-3.jpg", logoAt: "tl" },
-      { src: "/azure/mb-7.jpg", logoAt: "tl" },
+      { src: "/azure/mb-6.jpg" },
+      { src: "/azure/mb-1.jpg" },
+      { src: "/azure/mb-5.jpg" },
+      { src: "/azure/mb-3.jpg" },
+      { src: "/azure/mb-7.jpg" },
     ],
     path: "/mariachi",
   },

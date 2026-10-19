@@ -41,8 +41,8 @@ export default function VenueCarousel({ locale }: { locale: Locale }) {
             <div className="media">
               <div className="main">
                 {img ? <Image key={img.src} src={img.src} alt={tx.name} fill quality={75} sizes="(min-width: 1000px) 56vw, 100vw" /> : null}
-                {/* mekânın logosu etiket olarak, fotoğrafta boş kalan üst köşede */}
-                {v.logo ? <LogoTag src={v.logo} at={img?.logoAt ?? "tl"} /> : null}
+                {/* mekânın logosu etiket olarak sağ üst köşede (bütün kartlarda aynı yer) */}
+                {v.logo ? <LogoTag src={v.logo} /> : null}
                 {many ? (
                   <>
                     <button type="button" className="arw prev" aria-label={t.ui.prev} onClick={() => show(k, j - 1)}><Chevron dir={-1} /></button>

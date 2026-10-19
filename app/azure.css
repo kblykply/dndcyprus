@@ -318,11 +318,11 @@ body.az-lock { overflow: hidden; }
 
 /* ---- fotoğraf üstü logo etiketi (LogoTag): koyu cam, beyaz logo. Yükseklik her logoda eşit (--th), genişlik içindeki logo kadar
    (kullanıcı: "boyları eşit", "içindeki yazı kadar geniş"); çok yatay logolar (NeoCity) --mw ile sınırlı, orantı korunur ---- */
-.az-logotag { --th: 48px; --px: 14px; --py: 8px; --mw: 120px; position: absolute; z-index: 3; top: clamp(12px, 1.4vw, 18px); display: flex; align-items: center; justify-content: center;
+.az-logotag { --th: 48px; --px: 14px; --py: 8px; --mw: 120px; position: absolute; z-index: 3; top: 18px; display: flex; align-items: center; justify-content: center;
   box-sizing: border-box; height: var(--th); padding: var(--py) var(--px); border-radius: 14px; pointer-events: none;
   background: rgba(8, 14, 16, .36); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, .3); }
-.az-logotag.tr { right: clamp(12px, 1.4vw, 18px); }
-.az-logotag.tl { left: clamp(12px, 1.4vw, 18px); }
+.az-logotag.tr { right: 18px; } /* her kartta aynı köşe ve aynı pay */
+.az-logotag.tl { left: 18px; }
 .az-logotag.inline { position: static; flex: none; margin-left: auto; }
 .az-logotag img { display: block; flex: none; height: calc(var(--th) - 2 * var(--py) - 2px); width: auto; max-width: var(--mw); object-fit: contain; filter: brightness(0) invert(1); }
 .az-logotag.color img { filter: none; }
@@ -339,7 +339,7 @@ body.az-lock { overflow: hidden; }
 .az-pc:hover > img { transform: scale(1.06); }
 .az-pc::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 14, 16, 0) 52%, rgba(8, 14, 16, .66) 100%); }
 /* üst satır: solda etiketler, sağda proje logosu (LogoTag inline) */
-.az-pc .top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; z-index: 2; }
+.az-pc .top { position: absolute; top: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; z-index: 2; }
 .az-pc .top .tags { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
 /* proje kartında yanındaki durum etiketleriyle (.az-st) aynı boy ve hap biçiminde (kullanıcı: "boyları eşit olmalı") */
 .az-pc .top .az-logotag { --th: 35px; --px: 14px; --py: 5px; --mw: 92px; border-radius: 999px; background: rgba(13, 35, 38, .34); border-color: rgba(255, 255, 255, .28); }
