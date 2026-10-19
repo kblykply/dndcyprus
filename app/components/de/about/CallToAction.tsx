@@ -16,7 +16,6 @@ type Props = {
 
 // Azure: single deep-sea card with image background, like the contact card (.az-contact .card), plus a coral pill button.
 export default function CallToAction({
-  kicker = "DND Cyprus",
   title = <>Gestalten wir die Zukunft <b>gemeinsam</b></>,
   subtitle = "Sie suchen einen verlässlichen und innovativen Partner für Ihre Projekte? Nehmen Sie Kontakt mit uns auf.",
   buttonLabel = "Kontakt aufnehmen",
@@ -30,7 +29,6 @@ export default function CallToAction({
         <div className="card single rv" style={{ minHeight: 400, alignContent: "center" }}>
           <Image className="bg" src={bgSrc} alt={bgAlt} fill sizes="100vw" quality={70} loading="lazy" />
           <div style={{ maxWidth: 640 }}>
-            <span className="az-kicker light">{kicker}</span>
             <h2>{title}</h2>
             <p className="lead">{subtitle}</p>
             <div className="cta">

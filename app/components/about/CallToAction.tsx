@@ -16,7 +16,6 @@ type Props = {
 
 // Azure: iletişim kartı gibi görsel arka planlı, koyu deniz yeşili tek kart + mercan pill buton (.az-contact .card).
 export default function CallToAction({
-  kicker = "DND Cyprus",
   title = <>Birlikte Geleceği <b>İnşa Edelim</b></>,
   subtitle = "Projeleriniz için güvenilir ve yenilikçi bir çözüm ortağı arıyorsanız, bizimle iletişime geçin.",
   buttonLabel = "İletişime Geçin",
@@ -30,7 +29,6 @@ export default function CallToAction({
         <div className="card single rv" style={{ minHeight: 400, alignContent: "center" }}>
           <Image className="bg" src={bgSrc} alt={bgAlt} fill sizes="100vw" quality={70} loading="lazy" />
           <div style={{ maxWidth: 640 }}>
-            <span className="az-kicker light">{kicker}</span>
             <h2>{title}</h2>
             <p className="lead">{subtitle}</p>
             <div className="cta">

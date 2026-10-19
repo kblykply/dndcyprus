@@ -122,6 +122,7 @@ type Props = {
   projectName?: string;
   unitTypes?: string[];
   image?: string;
+  /** fotoğraf üstündeki üst etiket kaldırıldı (Ekim 2026); sayfalar hâlâ geçebilir */
   kicker?: string;
   title?: React.ReactNode;
   lead?: string;
@@ -135,7 +136,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactCard({
   locale, mode = "home", project, projectName, unitTypes = [], image = "/azure/contact-sea.webp", // tüm formlarda aynı deniz arka planı (kum ve dalga kırpılmış)
-  kicker, title, lead, highlights = [], showOffices = true, brochureHref, id,
+  title, lead, highlights = [], showOffices = true, brochureHref, id,
 }: Props) {
   const t = COPY[locale];
   const uid = useId();
@@ -196,7 +197,6 @@ export default function ContactCard({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="bg" src={image} alt="" loading="lazy" />
           <div>
-            <span className="az-kicker light">{kicker ?? t.kicker}</span>
             <h2>{title ?? t.title}</h2>
             <p className="lead">{lead ?? t.lead}</p>
             {highlights.length > 0 && <div className="hl">{highlights.map((h) => <span key={h}>{h}</span>)}</div>}
