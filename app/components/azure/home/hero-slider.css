@@ -22,9 +22,9 @@
 @keyframes az-hs-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .az-hs .txt { animation: none; } }
 /* --k: logoların aynı alanı kaplaması için boy çarpanı (lib/azure/logos.ts). Logo sağ üstte, boyu proje sayfalarındaki gibi (.plogo) */
-.az-hs .top .lt { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; max-width: calc(100% - 190px); }
+.az-hs .top .lt { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; max-width: calc(100% - 300px); }
 /* logo etiketin dikey ortasında (etiket slaytlar arasında yerinden oynamaz): yükseklik --lh·k, yarısı kadar yukarı. Kullanıcı: "logolar biraz daha büyük" */
-.az-hs .top .logo { --lh: clamp(56px, 4.4vw, 68px); position: absolute; right: 0; top: 50%; margin-top: calc(var(--lh) * var(--k, 1) / -2); display: block; height: calc(var(--lh) * var(--k, 1)); width: auto; object-fit: contain; object-position: right center;
+.az-hs .top .logo { --lh: clamp(72px, 5.8vw, 96px); position: absolute; right: 0; top: 50%; margin-top: calc(var(--lh) * var(--k, 1) / -2); display: block; height: calc(var(--lh) * var(--k, 1)); width: auto; object-fit: contain; object-position: right center;
   filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0, 0, 0, .35)); animation: az-hs-in .9s var(--ease) both; }
 @media (prefers-reduced-motion: reduce) { .az-hs .top .logo { animation: none; } }
 /* alt metinler okunur: kalın, tam beyaz, hafif gölge (kullanıcı: "alt metinler daha okunabilir olacak") */

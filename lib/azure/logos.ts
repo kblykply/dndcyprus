@@ -1,24 +1,30 @@
-// Proje logoları aynı görsel büyüklükte: logolar çok farklı oranlarda (NeoCity yatay yazı 6,4 : 1, Lagoon 2 : 1),
-// aynı yükseklikte NeoCity üç kat geniş görünüyordu. Her logo aynı alanı kaplasın diye yükseklik çarpanı
-// k = √(2,5 / en-boy oranı); 2,5 : 1 oranlı logo (La Joya, Perla) temel yükseklikte kalır. Oranlar public/logos/web dosyalarından.
-const RATIO: Record<string, number> = {
-  "/logos/web/neocity-white.webp": 1530 / 240,
-  "/logos/web/neocity.webp": 1530 / 240,
-  "/logos/web/lagoon.webp": 470 / 240,
-  "/logos/web/lajoya.webp": 622 / 240,
-  "/logos/web/perla.webp": 611 / 240,
-  "/logos/web/perlaii.webp": 491 / 240,
-  "/logos/web/mariachi.webp": 326 / 240,
+// Proje logoları aynı görsel büyüklükte. Logo dosyalarının boyları eşit (240 px) ama içlerindeki boşluk ve oranlar çok
+// farklı (NeoCity yatay yazı, kenarda 3 px boşluk; La Joya'nın iki yanında 56 px boş). Çarpan dosyanın kendisine değil
+// mürekkebin kapladığı kutuya göre: her logonun mürekkep kutusu aynı alanı kaplar, k = √(ref / (en × boy)) × göz düzeltmesi.
+// Kutular public/logos/web dosyalarından ölçüldü (alfa > 20), 240 px dosya yüksekliğinde. Lagoon Verde k = 1 (referans).
+const INK: Record<string, [number, number]> = {
+  "/logos/web/neocity-white.webp": [1523, 233],
+  "/logos/web/neocity.webp": [1523, 233],
+  "/logos/web/lagoon.webp": [425, 212],
+  "/logos/web/lajoya.webp": [510, 184],
+  "/logos/web/perla.webp": [482, 197],
+  "/logos/web/perlaii.webp": [466, 191],
+  "/logos/web/mariachi.webp": [326, 240],
+  "/DND-LOGO-LIGHT.svg": [556, 240],
 };
+const REF = 425 * 212;
 
 // göz düzeltmesi: NeoCity kalın blok harfli (aynı alanda iri görünür), La Joya ailesi ince yazılı (küçük görünür)
 const OPTIC: Record<string, number> = {
-  "/logos/web/neocity-white.webp": 0.85,
-  "/logos/web/neocity.webp": 0.85,
-  "/logos/web/lajoya.webp": 1.12,
-  "/logos/web/perla.webp": 1.12,
-  "/logos/web/perlaii.webp": 1.08,
+  "/logos/web/neocity-white.webp": 0.9,
+  "/logos/web/neocity.webp": 0.9,
+  "/logos/web/lajoya.webp": 1.04,
+  "/logos/web/perla.webp": 1.04,
+  "/logos/web/perlaii.webp": 1.04,
 };
 
-/** CSS'te `height: calc(<temel yükseklik> * var(--k))` ile kullanılır */
-export const logoScale = (src: string) => (Math.sqrt(2.5 / (RATIO[src] ?? 2.5)) * (OPTIC[src] ?? 1)).toFixed(3);
+/** CSS'te `height: calc(<temel yükseklik> * var(--k))` ile kullanılır (temel yükseklik = 240 px'lik dosyanın gösterilen boyu) */
+export const logoScale = (src: string) => {
+  const ink = INK[src];
+  return ((ink ? Math.sqrt(REF / (ink[0] * ink[1])) : 1) * (OPTIC[src] ?? 1)).toFixed(3);
+};

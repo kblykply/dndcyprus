@@ -1,4 +1,5 @@
 import GlassArrow from "../GlassArrow";
+import LogoTag from "../LogoTag";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -29,7 +30,7 @@ export function WhyDnd({ locale }: { locale: Locale }) {
       <div className="az-wrap g">
         {/* La Joya açılış videosu (kullanıcı isteği): sessiz ve döngülü başlar, altyazı kapalı, ses düğmesi var (WhyVideo) */}
         <div className="pic rv">
-          <WhyVideo videoId={LJ_OPENING} title={t.videoTitle} mute={VIDEO_UI[locale].mute} unmute={VIDEO_UI[locale].unmute} />
+          <WhyVideo videoId={LJ_OPENING} title={t.videoTitle} mute={VIDEO_UI[locale].mute} unmute={VIDEO_UI[locale].unmute} pause={HOME_FLOW[locale].hero.pause} play={HOME_FLOW[locale].hero.play} />
           <span className="az-tag">{t.imageTag}</span>
         </div>
         <div>
@@ -72,6 +73,7 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
         <div className="cards">
           <div className="card tl rv">
             <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <LogoTag src="/logos/web/lagoon.webp" />
             <div className="tx">
               <small>{t.tl.k}</small>
               <h3 className="num"><span className="n">{t.tl.pre ? <i>{t.tl.pre}</i> : null}<b>60</b></span><span className="w">{t.tl.post}</span></h3>
@@ -83,6 +85,7 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
           </div>
           <div className="card neo rv d1">
             <span className="bgph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <LogoTag src="/logos/web/neocity.webp" />
             <div className="tx">
               <small>{t.neo.k}</small>
               <ul className="zeros">{t.neo.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}</ul>

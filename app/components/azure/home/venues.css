@@ -1,22 +1,22 @@
 /* DND ile yaşam ve ayrıcalıklar: kaydırmalı üç büyük mekân kartı (VenueCarousel). Açık kart, solda fotoğraf + küçük
    resimler, sağda bilgi; fotoğraf üstünde yalnız logo etiketi (renk katmanı yok). */
-.az-venues { position: relative; margin-top: 8px; }
-.az-venues .trk { display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; border-radius: calc(var(--r) + 4px); outline: none; }
-.az-venues .trk::-webkit-scrollbar { display: none; }
-.az-venues .trk:focus-visible { box-shadow: 0 0 0 2px var(--coral); }
-.az-venues .vc { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(20px, 3vw, 48px);
-  align-items: center; padding: clamp(14px, 1.6vw, 20px); border-radius: calc(var(--r) + 4px); background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 24px 60px rgba(13, 35, 38, .06); }
+/* La Joya rezidans kartları gibi: masaüstünde sayfa kaydırıldıkça kartlar üst üste biner (yapışkan yığın), telefonda alt alta */
+.az-venues { position: relative; margin-top: 8px; display: flex; flex-direction: column; gap: 26vh; }
+.az-venues .vc { position: sticky; top: calc(96px + 2vh); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(20px, 3vw, 48px);
+  align-items: center; padding: clamp(14px, 1.6vw, 20px); border-radius: calc(var(--r) + 4px); background: var(--foam); border: 1px solid rgba(255, 255, 255, .9);
+  box-shadow: 0 -14px 50px rgba(13, 35, 38, .08), 0 24px 60px rgba(13, 35, 38, .06); }
 
 .az-venues .main { position: relative; aspect-ratio: 16 / 10.5; border-radius: var(--r); overflow: hidden; background: var(--sea-deep); }
 .az-venues .main img { object-fit: cover; }
 .az-venues .main.noimg { display: grid; place-items: center; background: linear-gradient(140deg, var(--sea-deep), var(--sea)); }
 .az-venues .main.noimg .ltag { position: static; transform: scale(1.8); }
-/* logo etiketi: üst köşede, cam (fotoğrafın kendisine katman yok); logo beyaz */
-.az-venues .ltag { position: absolute; z-index: 2; top: clamp(12px, 1.4vw, 18px); display: grid; place-items: center; padding: 10px 14px; border-radius: 14px;
-  background: rgba(8, 14, 16, .36); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, .3); }
-.az-venues .ltag.tl { left: clamp(12px, 1.4vw, 18px); }
-.az-venues .ltag.tr { right: clamp(12px, 1.4vw, 18px); }
-.az-venues .ltag img { display: block; height: calc(clamp(26px, 2.2vw, 34px) * var(--k, 1)); width: auto; filter: brightness(0) invert(1); }
+/* fotoğrafın sağında ve solunda oklar (birden fazla fotoğraf varsa) */
+.az-venues .arw { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; display: grid; place-items: center; padding: 0; border-radius: 50%; cursor: pointer;
+  background: rgba(255, 255, 255, .92); border: 1px solid rgba(255, 255, 255, .9); color: var(--ink); box-shadow: 0 8px 24px rgba(13, 35, 38, .18); transition: background .3s, color .3s; }
+.az-venues .arw:hover { background: var(--sea); color: #fff; }
+.az-venues .arw:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.az-venues .arw.prev { left: 14px; }
+.az-venues .arw.next { right: 14px; }
 .az-venues .thumbs { display: flex; gap: 10px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; }
 .az-venues .thumbs::-webkit-scrollbar { display: none; }
 .az-venues .thumbs button { position: relative; flex: none; width: clamp(76px, 7vw, 104px); aspect-ratio: 4 / 3; padding: 0; border: 2px solid transparent; border-radius: 12px; overflow: hidden; background: var(--sky-2); cursor: pointer; opacity: .72; transition: opacity .3s, border-color .3s; }
@@ -26,7 +26,9 @@
 .az-venues .thumbs button:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
 
 .az-venues .tx { min-width: 0; padding: clamp(6px, 1.4vw, 20px) clamp(4px, 1vw, 16px); }
-.az-venues .ct { font-family: var(--font-display), sans-serif; font-size: clamp(20px, 1.6vw, 24px); color: var(--ink-60); font-variant-numeric: tabular-nums; }
+.az-venues .ct { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 0; font-family: var(--font-display), sans-serif; font-size: clamp(20px, 1.6vw, 24px); color: var(--ink-60); font-variant-numeric: tabular-nums; }
+/* açılış durumu etiketi (Yakında, 2027 yazında açılıyor) */
+.az-venues .ct .badge { padding: 7px 13px; border-radius: 999px; background: var(--coral); color: #fff; font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .az-venues .ct b { font-weight: 500; color: var(--coral); }
 .az-venues h3 { margin-top: 8px; font-family: var(--font-display), sans-serif; font-size: clamp(34px, 3.4vw, 54px); line-height: 1.05; font-weight: 500; letter-spacing: -.02em; color: var(--ink); }
 .az-venues .sub { margin-top: 10px; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.45; color: var(--ink-60); }
@@ -38,19 +40,15 @@
 .az-venues .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .az-venues .cta .az-btn { gap: 8px; }
 
-/* alt şerit: noktalar solda, oklar sağda */
-.az-venues .nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 16px; }
-.az-venues .dots { display: flex; gap: 8px; }
-.az-venues .dots button { width: 28px; height: 6px; padding: 0; border: 0; border-radius: 999px; background: rgba(13, 35, 38, .16); cursor: pointer; transition: width .4s var(--ease), background .3s; }
-.az-venues .dots button.on { width: 48px; background: var(--sea); }
-.az-venues .dots button:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
-.az-venues .az-ctrl button:disabled { opacity: .4; cursor: default; }
-
 @media (max-width: 1000px) {
-  .az-venues .vc { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .az-venues { gap: 16px; }
+  .az-venues .vc { position: relative; top: auto; grid-template-columns: minmax(0, 1fr); align-items: start; }
   .az-venues .tx { padding: 4px 6px 10px; }
 }
 @media (max-width: 560px) {
   .az-venues .main { aspect-ratio: 4 / 3.4; }
+  .az-venues .arw { width: 40px; height: 40px; }
+  .az-venues .arw.prev { left: 10px; }
+  .az-venues .arw.next { right: 10px; }
   .az-venues .cta .az-btn { flex: 1 1 100%; justify-content: center; }
 }

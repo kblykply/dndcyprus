@@ -56,3 +56,8 @@
 @media (prefers-reduced-motion: reduce) {
   .az-awacc .pn, .az-awacc .bg, .az-awacc .medal, .az-awacc .gl, .az-awacc .nm, .az-awacc .pn::after { transition: none; }
 }
+
+/* proje logosu sağ üstte etiket olarak; yalnız açık panelde (kapalı ince panelde ad hapı yeter) */
+.az-awacc .awlogo { opacity: 0; transition: opacity .45s .3s; }
+.az-awacc .pn.on .awlogo { opacity: 1; }
+@media (max-width: 760px) { .az-awacc .awlogo { --tw: 112px; --th: 48px; } }

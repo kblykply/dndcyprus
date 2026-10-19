@@ -1,6 +1,7 @@
 "use client";
 
 import GlassArrow from "../GlassArrow";
+import LogoTag from "../LogoTag";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -18,11 +19,11 @@ const HEAD: Record<Locale, { h: string; p: string }> = {
   pl: { h: "Trzy nagrody PropertyNC 2025", p: "Platyna dla Mariachi Beach Club, złoto dla DND Homes i Lagoon Verde." },
 };
 // her ödül kendi projesiyle: panel fotoğrafı, kısa ad, madalya (hafif WebP kurdele) ve proje sayfası
-const PROJECT: Record<string, { img: string; name: string; medal: string; path: string }> = {
-  "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png": { img: "/azure/mb-1.jpg", name: "Mariachi Beach Club", medal: "/azure/awards/platinum-mariachi.webp", path: "/mariachi" },
+const PROJECT: Record<string, { img: string; name: string; medal: string; path: string; logo: string; color?: boolean }> = {
+  "/BEST-PROPOSED-NEW-COMMERCIAL-PROJECT.png": { img: "/azure/mb-1.jpg", name: "Mariachi Beach Club", medal: "/azure/awards/platinum-mariachi.webp", path: "/mariachi", logo: "/logos/web/mariachi.webp" },
   // DND Homes: tören fotoğrafı sola ve yukarı genişletildi (tavan, duvar); kişiler özgün pikseller, kurdele yüzlerin üstünde kalır
-  "/BEST-NEWCOMER.png": { img: "/azure/awards/dnd-homes-odul-genis.jpg", name: "DND Homes", medal: "/azure/awards/gold-newcomer.webp", path: "/about" },
-  "/BEST-SOCIOCULTURAL-GOLD.png": { img: "/azure/lv-7.jpg", name: "Lagoon Verde", medal: "/azure/awards/gold-lagoon-verde.webp", path: "/lagoon-verde" },
+  "/BEST-NEWCOMER.png": { img: "/azure/awards/dnd-homes-odul-genis.jpg", name: "DND Homes", medal: "/azure/awards/gold-newcomer.webp", path: "/about", logo: "/DND-LOGO-LIGHT.svg", color: true },
+  "/BEST-SOCIOCULTURAL-GOLD.png": { img: "/azure/lv-7.jpg", name: "Lagoon Verde", medal: "/azure/awards/gold-lagoon-verde.webp", path: "/lagoon-verde", logo: "/logos/web/lagoon.webp" },
 };
 
 /**
@@ -63,6 +64,7 @@ export default function AwardsShowcase({ locale, kicker, withProjects = false }:
                 <button type="button" className="hit" aria-expanded={isOn} aria-controls={`odul-${k}`} onClick={() => setOn(k)} onFocus={() => setOn(k)}>
                   <span className="nm">{p?.name ?? it.title}</span>
                 </button>
+                {p ? <LogoTag src={p.logo} keepColor={p.color} className="awlogo" /> : null}
                 <div className="body" id={`odul-${k}`} aria-hidden={!isOn}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img className="medal" src={p?.medal ?? it.ribbon} alt={it.title} loading="lazy" decoding="async" draggable={false} />

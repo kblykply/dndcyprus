@@ -185,7 +185,7 @@ body.az-lock { overflow: hidden; }
 .az-hero .top .play:hover i { transform: scale(1.08); }
 /* proje logosu fotoğraf üstünde: renkli logolar (Lagoon laciverti) gökyüzünde okunmuyordu → ana sayfa vitrini gibi beyaz;
    --k ile her logo aynı alanı kaplar (lib/azure/logos.ts) */
-.az-hero .top .plogo { height: calc(48px * var(--k, 1)); width: auto; filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0,0,0,.35)); }
+.az-hero .top .plogo { height: calc(clamp(60px, 4.6vw, 76px) * var(--k, 1)); width: auto; filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0,0,0,.35)); }
 .az-hero .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
 @media (max-width: 900px) {
   .az-hero { padding-top: 80px; }
@@ -316,6 +316,16 @@ body.az-lock { overflow: hidden; }
   .az-step { opacity: 1; }
 }
 
+/* ---- fotoğraf üstü logo etiketi (LogoTag): koyu cam, beyaz logo; her logoda aynı ölçü (--tw × --th), logo içine sığar ---- */
+.az-logotag { --tw: 128px; --th: 54px; position: absolute; z-index: 3; top: clamp(12px, 1.4vw, 18px); display: grid; place-items: center; box-sizing: border-box;
+  width: var(--tw); height: var(--th); padding: 9px 13px; border-radius: 14px; pointer-events: none;
+  background: rgba(8, 14, 16, .36); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, .3); }
+.az-logotag.tr { right: clamp(12px, 1.4vw, 18px); }
+.az-logotag.tl { left: clamp(12px, 1.4vw, 18px); }
+.az-logotag.inline { position: static; flex: none; margin-left: auto; }
+.az-logotag img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; filter: brightness(0) invert(1); }
+.az-logotag.color img { filter: none; }
+
 /* ---- projects carousel ---- */
 .az-ctrl { display: flex; gap: 8px; }
 .az-ctrl button { width: 48px; height: 48px; border-radius: 50%; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 8px 24px rgba(13, 35, 38, .08); display: grid; place-items: center; transition: all .3s; cursor: pointer; color: var(--ink); font-family: inherit; }
@@ -327,14 +337,17 @@ body.az-lock { overflow: hidden; }
 .az-pc > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
 .az-pc:hover > img { transform: scale(1.06); }
 .az-pc::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 14, 16, 0) 52%, rgba(8, 14, 16, .66) 100%); }
-.az-pc .top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; gap: 6px; z-index: 2; flex-wrap: wrap; }
+/* üst satır: solda etiketler, sağda proje logosu (LogoTag inline) */
+.az-pc .top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; z-index: 2; }
+.az-pc .top .tags { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.az-pc .top .az-logotag { --tw: 116px; --th: 48px; padding: 8px 12px; }
 /* açık gökyüzü üstünde de okunsun: hap zemini koyu cam (görselin kendisine katman yok) */
 .az-st { padding: 8px 12px; border-radius: 999px; background: rgba(13, 35, 38, .34); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .28); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: #fff; }
 .az-st.gold { background: rgba(205, 72, 36, .9); border-color: transparent; }
 .az-pc .in { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; z-index: 2; }
-.az-pc .in small { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .8; font-weight: 600; }
+.az-pc .in small { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; opacity: .95; font-weight: 700; text-shadow: 0 1px 3px rgba(8, 14, 16, .45); } /* kullanıcı: "biraz daha büyük" */
 .az-pc :is(h2, h3) { font-size: 28px; margin: 6px 0 6px; color: #fff; }
-.az-pc p { font-size: 13px; opacity: .85; max-width: 32ch; }
+.az-pc p { font-size: 16px; line-height: 1.4; font-weight: 500; opacity: .95; max-width: 34ch; text-shadow: 0 1px 3px rgba(8, 14, 16, .45); }
 /* ortak cam satır: fotoğraf üstündeki her çağrı (proje kartları, ödeme fırsatları, ödüller) aynı dilde. Kullanıcı: "sitenin tek tasarım dili olsun".
    Altındaki fotoğraf bölgesi her zaman nötr koyulaşmalı (beyaz yazı okunsun). Filtre değişkenle yazılmaz (derleyici önekli tek satıra indiriyor). */
 .az-glassrow { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px;

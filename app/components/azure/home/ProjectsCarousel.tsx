@@ -6,6 +6,7 @@ import "./projects-carousel.css";
 import { HOME } from "@/lib/azure/home";
 import { PROJECTS, href, type Locale } from "@/lib/azure/site";
 import GlassArrow from "../GlassArrow";
+import LogoTag from "../LogoTag";
 
 const Chevron = ({ dir }: { dir: 1 | -1 }) => (
   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden style={dir < 0 ? { transform: "scaleX(-1)" } : undefined}>
@@ -159,7 +160,7 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false} draggable={false}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={p.cover} alt="" loading="lazy" draggable={false} />
-            <div className="top">{p.award && <span className="az-st gold">{p.award[locale]}</span>}<span className="az-st">{p.status[locale]}</span></div>
+            <div className="top"><span className="tags">{p.award && <span className="az-st gold">{p.award[locale]}</span>}<span className="az-st">{p.status[locale]}</span></span>{p.logo ? <LogoTag src={p.logo} inline /> : null}</div>
             <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="az-glassrow">{p.cta[locale]} <GlassArrow /></div></div>
           </Link>
         ))}

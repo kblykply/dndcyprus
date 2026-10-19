@@ -1,7 +1,7 @@
 // Yeni sayfa ve bölüm metinleri (Ekim 2026, müşterinin akış belgesi): DND Ayrıcalığı (/advantage), Ödeme ve Yatırım
 // Fırsatları (/payment-plans), Etkinlikler (/press), Hakkımızda'ya DND Homes Amerika, kurucu ortak ve rakamlar.
 // Satış sonrası (DND Maintenance), peşinat indirimleri ve DND Kira Garantisi: DND Cyprus satış sunumu ("SATIŞ SUNUMM TR",
-// Eylül 2026). Ülfet ayrıcalıkları: kullanıcı + lajoyacyprus.com (Ülfet Shu %10, Ülfet Beach Club ücretsiz giriş, 2026 yazı).
+// Eylül 2026). Ülfet ayrıcalıkları: kullanıcı + lajoyacyprus.com (Ülfet Shu %10, Ülfet Beach Club ücretsiz giriş; Ülfet Beach 2027 yazında açılıyor, kullanıcı 19 Ekim 2026).
 // Kiralama: La Joya (lajoyacyprus.com) ve DND Reserve. Etkinlikler Instagram gönderilerinden (CRT eğitimi, Halloween afişi);
 // Larnaka ve Friday Fun Day fotoğrafları @dndcyprus gönderilerinden (Eylül 2026).
 import type { ReactNode } from "react";
@@ -58,7 +58,7 @@ const TR: PagesCopy = {
     extra: {
       kicker: "Diğer ev sahibi ayrıcalıkları", title: <>Ülfet’te <b>DND ayrıcalığı.</b></>,
       lead: "DND Cyprus’un Girne Karaoğlanoğlu’ndaki iş ortağı Ülfet’te ev sahiplerine özel avantajlar.",
-      items: [{ h: "Ülfet Beach Club", p: "DND Cyprus ev sahiplerine 2026 yaz sezonu boyunca ücretsiz giriş.", tag: "Ücretsiz giriş" }, { h: "Ülfet Shu", p: "Yeni nesil meyhane Ülfet Shu’da DND ev sahiplerine ve La Joya misafirlerine %10 indirim.", tag: "%10 indirim" }],
+      items: [{ h: "Ülfet Beach Club", p: "DND Cyprus ev sahiplerine ücretsiz giriş; 2027 yaz sezonunda açılıyor.", tag: "Ücretsiz giriş" }, { h: "Ülfet Shu", p: "Yeni nesil meyhane Ülfet Shu’da DND ev sahiplerine ve La Joya misafirlerine %10 indirim.", tag: "%10 indirim" }],
       imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
@@ -74,7 +74,7 @@ const TR: PagesCopy = {
         { k: "Lagoon Verde · Sınırlı sayıda rezidans", h: "60 aya kadar faizsiz TL taksit", p: "Tüm ödemeler Türk lirasıyla; taksitler sterlin kuruna değil KKTC asgari ücretindeki artışa göre güncellenir.", img: "/azure/lv-7.jpg", path: "/lagoon-verde", cta: "Lagoon Verde’yi incele" },
         { k: "DND ev sahiplerine özel", h: "Mariachi Beach Club ayrıcalığı", p: "Ücretsiz giriş ve restoran, havuz barı, şezlong ve cabana harcamalarında %10 indirim.", img: "/azure/mb-1.jpg", path: "/mariachi", cta: "Mariachi’yi keşfet" },
         { k: "Lagoon Verde · Peşin ödeme", h: "Peşinata göre indirim", p: "Lagoon Verde’de %35 peşinatta %5, %50 peşinatta %10, %70 peşinatta %17, tamamı peşin ödemede %22 indirim.", img: "/azure/lv-1.jpg", path: "/lagoon-verde", cta: "Lagoon Verde’yi incele" },
-        { k: "DND ev sahipleri ve La Joya misafirleri · Girne", h: "Ülfet Beach Club ve Ülfet Shu", p: "DND ev sahiplerine Ülfet Beach Club’da 2026 yaz sezonu boyunca ücretsiz giriş; ev sahiplerine ve La Joya misafirlerine yeni nesil meyhane Ülfet Shu’da %10 indirim.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Ayrıcalıkları gör" },
+        { k: "DND ev sahipleri ve La Joya misafirleri · Girne", h: "Ülfet Beach Club ve Ülfet Shu", p: "DND ev sahiplerine Ülfet Beach Club’da ücretsiz giriş (2027 yazında açılıyor); ev sahiplerine ve La Joya misafirlerine yeni nesil meyhane Ülfet Shu’da %10 indirim.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Ayrıcalıkları gör" },
       ],
       note: "* Kampanya koşulları ve süreleri değişebilir. Peşinat indirimleri yalnız Lagoon Verde’de geçerlidir; güncel bilgi için satış ekibimizle görüşün.",
     },
@@ -134,7 +134,7 @@ const EN: PagesCopy = {
     extra: {
       kicker: "More homeowner privileges", title: <>DND privileges <b>at Ülfet.</b></>,
       lead: "Exclusive benefits for homeowners at Ülfet, DND Cyprus’s partner in Karaoğlanoğlu, Kyrenia.",
-      items: [{ h: "Ülfet Beach Club", p: "Free entry for DND Cyprus homeowners throughout the 2026 summer season.", tag: "Free entry" }, { h: "Ülfet Shu", p: "10% off for DND homeowners and La Joya guests at Ülfet Shu, a new-generation meyhane (tavern).", tag: "10% off" }],
+      items: [{ h: "Ülfet Beach Club", p: "Free entry for DND Cyprus homeowners; opening in summer 2027.", tag: "Free entry" }, { h: "Ülfet Shu", p: "10% off for DND homeowners and La Joya guests at Ülfet Shu, a new-generation meyhane (tavern).", tag: "10% off" }],
       imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
@@ -150,7 +150,7 @@ const EN: PagesCopy = {
         { k: "Lagoon Verde · Limited residences", h: "Up to 60 months interest-free in lira", p: "All payments in Turkish lira; instalments follow the TRNC minimum wage, not the sterling rate.", img: "/azure/lv-7.jpg", path: "/lagoon-verde", cta: "Explore Lagoon Verde" },
         { k: "Exclusive to DND homeowners", h: "Mariachi Beach Club privileges", p: "Free entry and 10% off at the restaurant, pool bar, sunbeds and cabanas.", img: "/azure/mb-1.jpg", path: "/mariachi", cta: "Discover Mariachi" },
         { k: "Lagoon Verde · Upfront payment", h: "Discounts by down payment", p: "At Lagoon Verde: 5% off with 35% down, 10% with 50% down, 17% with 70% down and 22% when paid in full.", img: "/azure/lv-1.jpg", path: "/lagoon-verde", cta: "Explore Lagoon Verde" },
-        { k: "DND homeowners & La Joya guests · Kyrenia", h: "Ülfet Beach Club & Ülfet Shu", p: "Free entry to Ülfet Beach Club for DND homeowners throughout the 2026 summer season; 10% off for homeowners and La Joya guests at the new-generation meyhane Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "See the privileges" },
+        { k: "DND homeowners & La Joya guests · Kyrenia", h: "Ülfet Beach Club & Ülfet Shu", p: "Free entry to Ülfet Beach Club for DND homeowners (opening summer 2027); 10% off for homeowners and La Joya guests at the new-generation meyhane Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "See the privileges" },
       ],
       note: "* Campaign terms and durations may change. Down-payment discounts apply only at Lagoon Verde; please contact our sales team for current information.",
     },
@@ -210,7 +210,7 @@ const DE: PagesCopy = {
     extra: {
       kicker: "Weitere Eigentümervorteile", title: <>DND-Vorteile <b>bei Ülfet.</b></>,
       lead: "Exklusive Vorteile für Eigentümer bei Ülfet, dem Partner von DND Cyprus in Karaoğlanoğlu, Kyrenia.",
-      items: [{ h: "Ülfet Beach Club", p: "Freier Eintritt für DND-Cyprus-Eigentümer in der gesamten Sommersaison 2026.", tag: "Freier Eintritt" }, { h: "Ülfet Shu", p: "10 % Rabatt für DND-Eigentümer und Gäste von La Joya im Ülfet Shu, einer Meyhane (Taverne) der neuen Generation.", tag: "10 % Rabatt" }],
+      items: [{ h: "Ülfet Beach Club", p: "Freier Eintritt für DND-Cyprus-Eigentümer; Eröffnung im Sommer 2027.", tag: "Freier Eintritt" }, { h: "Ülfet Shu", p: "10 % Rabatt für DND-Eigentümer und Gäste von La Joya im Ülfet Shu, einer Meyhane (Taverne) der neuen Generation.", tag: "10 % Rabatt" }],
       imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
@@ -226,7 +226,7 @@ const DE: PagesCopy = {
         { k: "Lagoon Verde · Begrenzte Residenzen", h: "Bis zu 60 Monate zinsfrei in Lira", p: "Alle Zahlungen in Türkischer Lira; die Raten folgen dem Mindestlohn der TRNZ, nicht dem Pfundkurs.", img: "/azure/lv-7.jpg", path: "/lagoon-verde", cta: "Lagoon Verde ansehen" },
         { k: "Exklusiv für DND-Eigentümer", h: "Vorteile im Mariachi Beach Club", p: "Freier Eintritt und 10 % Rabatt in Restaurant, Poolbar, auf Liegen und Cabanas.", img: "/azure/mb-1.jpg", path: "/mariachi", cta: "Mariachi entdecken" },
         { k: "Lagoon Verde · Vorauszahlung", h: "Rabatt nach Anzahlung", p: "In Lagoon Verde: 5 % Rabatt bei 35 % Anzahlung, 10 % bei 50 %, 17 % bei 70 % und 22 % bei Vollzahlung.", img: "/azure/lv-1.jpg", path: "/lagoon-verde", cta: "Lagoon Verde ansehen" },
-        { k: "DND-Eigentümer & La-Joya-Gäste · Kyrenia", h: "Ülfet Beach Club & Ülfet Shu", p: "Freier Eintritt in den Ülfet Beach Club für DND-Eigentümer in der Sommersaison 2026; 10 % Rabatt für Eigentümer und La-Joya-Gäste in der Meyhane Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Vorteile ansehen" },
+        { k: "DND-Eigentümer & La-Joya-Gäste · Kyrenia", h: "Ülfet Beach Club & Ülfet Shu", p: "Freier Eintritt in den Ülfet Beach Club für DND-Eigentümer (Eröffnung Sommer 2027); 10 % Rabatt für Eigentümer und La-Joya-Gäste in der Meyhane Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Vorteile ansehen" },
       ],
       note: "* Bedingungen und Laufzeiten der Aktionen können sich ändern. Die Anzahlungsrabatte gelten nur für Lagoon Verde; aktuelle Informationen erhalten Sie von unserem Vertriebsteam.",
     },
@@ -286,7 +286,7 @@ const RU: PagesCopy = {
     extra: {
       kicker: "Другие привилегии владельцев", title: <>Привилегии DND <b>в Ülfet.</b></>,
       lead: "Эксклюзивные преимущества для владельцев в Ülfet — партнёре DND Cyprus в Караогланоглу (Кирения).",
-      items: [{ h: "Ülfet Beach Club", p: "Бесплатный вход для владельцев DND Cyprus в течение всего летнего сезона 2026.", tag: "Бесплатный вход" }, { h: "Ülfet Shu", p: "Скидка 10 % для владельцев DND и гостей La Joya в Ülfet Shu — мейхане (таверне) нового поколения.", tag: "Скидка 10 %" }],
+      items: [{ h: "Ülfet Beach Club", p: "Бесплатный вход для владельцев DND Cyprus; открытие летом 2027 года.", tag: "Бесплатный вход" }, { h: "Ülfet Shu", p: "Скидка 10 % для владельцев DND и гостей La Joya в Ülfet Shu — мейхане (таверне) нового поколения.", tag: "Скидка 10 %" }],
       imageAlt: "Ülfet Beach Club, Караогланоглу",
     },
   },
@@ -302,7 +302,7 @@ const RU: PagesCopy = {
         { k: "Lagoon Verde · Ограниченное число резиденций", h: "До 60 месяцев без процентов в лирах", p: "Все платежи в турецких лирах; взносы привязаны к минимальной зарплате ТРСК, а не к курсу фунта.", img: "/azure/lv-7.jpg", path: "/lagoon-verde", cta: "Смотреть Lagoon Verde" },
         { k: "Только для владельцев DND", h: "Привилегии Mariachi Beach Club", p: "Бесплатный вход и скидка 10 % в ресторане, баре у бассейна, на шезлонгах и в кабанах.", img: "/azure/mb-1.jpg", path: "/mariachi", cta: "Узнать о Mariachi" },
         { k: "Lagoon Verde · Предоплата", h: "Скидка в зависимости от взноса", p: "В Lagoon Verde: скидка 5 % при взносе 35 %, 10 % при 50 %, 17 % при 70 % и 22 % при полной оплате.", img: "/azure/lv-1.jpg", path: "/lagoon-verde", cta: "Смотреть Lagoon Verde" },
-        { k: "Владельцам DND и гостям La Joya · Кирения", h: "Ülfet Beach Club и Ülfet Shu", p: "Бесплатный вход в Ülfet Beach Club для владельцев DND весь летний сезон 2026; скидка 10 % для владельцев и гостей La Joya в мейхане Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Смотреть привилегии" },
+        { k: "Владельцам DND и гостям La Joya · Кирения", h: "Ülfet Beach Club и Ülfet Shu", p: "Бесплатный вход в Ülfet Beach Club для владельцев DND (открытие летом 2027 года); скидка 10 % для владельцев и гостей La Joya в мейхане Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Смотреть привилегии" },
       ],
       note: "* Условия и сроки акций могут меняться. Скидки за взнос действуют только в Lagoon Verde; актуальную информацию уточняйте у отдела продаж.",
     },
@@ -362,7 +362,7 @@ const PL: PagesCopy = {
     extra: {
       kicker: "Więcej przywilejów właścicieli", title: <>Przywileje DND <b>w Ülfet.</b></>,
       lead: "Wyjątkowe korzyści dla właścicieli w Ülfet — partnerze DND Cyprus w Karaoğlanoğlu (Kyrenia).",
-      items: [{ h: "Ülfet Beach Club", p: "Bezpłatne wejście dla właścicieli DND Cyprus przez cały sezon letni 2026.", tag: "Bezpłatne wejście" }, { h: "Ülfet Shu", p: "10% zniżki dla właścicieli DND i gości La Joya w Ülfet Shu, meyhane (tawernie) nowej generacji.", tag: "10% zniżki" }],
+      items: [{ h: "Ülfet Beach Club", p: "Bezpłatne wejście dla właścicieli DND Cyprus; otwarcie latem 2027.", tag: "Bezpłatne wejście" }, { h: "Ülfet Shu", p: "10% zniżki dla właścicieli DND i gości La Joya w Ülfet Shu, meyhane (tawernie) nowej generacji.", tag: "10% zniżki" }],
       imageAlt: "Ülfet Beach Club, Karaoğlanoğlu",
     },
   },
@@ -378,7 +378,7 @@ const PL: PagesCopy = {
         { k: "Lagoon Verde · Ograniczona liczba apartamentów", h: "Do 60 miesięcy bez odsetek w lirach", p: "Wszystkie płatności w lirach tureckich; raty zależą od płacy minimalnej w TRCP, a nie od kursu funta.", img: "/azure/lv-7.jpg", path: "/lagoon-verde", cta: "Zobacz Lagoon Verde" },
         { k: "Tylko dla właścicieli DND", h: "Przywileje Mariachi Beach Club", p: "Bezpłatne wejście i 10% zniżki w restauracji, barze przy basenie, na leżakach i w kabanach.", img: "/azure/mb-1.jpg", path: "/mariachi", cta: "Poznaj Mariachi" },
         { k: "Lagoon Verde · Przedpłata", h: "Rabat zależny od wpłaty", p: "W Lagoon Verde: 5% rabatu przy wpłacie 35%, 10% przy 50%, 17% przy 70% i 22% przy płatności w całości.", img: "/azure/lv-1.jpg", path: "/lagoon-verde", cta: "Zobacz Lagoon Verde" },
-        { k: "Właściciele DND i goście La Joya · Kyrenia", h: "Ülfet Beach Club i Ülfet Shu", p: "Bezpłatne wejście do Ülfet Beach Club dla właścicieli DND przez sezon letni 2026; 10% zniżki dla właścicieli i gości La Joya w meyhane Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Zobacz przywileje" },
+        { k: "Właściciele DND i goście La Joya · Kyrenia", h: "Ülfet Beach Club i Ülfet Shu", p: "Bezpłatne wejście do Ülfet Beach Club dla właścicieli DND (otwarcie latem 2027); 10% zniżki dla właścicieli i gości La Joya w meyhane Ülfet Shu.", img: "/azure/pages/ulfet-beach.jpg", path: "/advantage", cta: "Zobacz przywileje" },
       ],
       note: "* Warunki i okresy promocji mogą się zmieniać. Rabaty za wpłatę obowiązują tylko w Lagoon Verde; aktualne informacje uzyskasz w dziale sprzedaży.",
     },

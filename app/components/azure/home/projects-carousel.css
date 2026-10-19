@@ -8,7 +8,7 @@
 .az-pcar .az-pc img { -webkit-user-drag: none; }
 
 /* alt şerit içerik kenarına hizalı */
-.az-pcar .nav { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); padding: 4px var(--edge) 0; }
+.az-pcar .nav { display: none; } /* alt ilerleme çizgisi kaldırıldı (kullanıcı: "bu çubuk görünmemeli"); kaydırma oklarla ve sayfa kaydırmasıyla */
 .az-pcar .count { font-family: var(--font-display), sans-serif; font-size: 15px; letter-spacing: .04em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .az-pcar .count i { font-style: normal; color: var(--ink-40); margin: 0 2px; }
 .az-pcar .bar { flex: 1; height: 2px; border-radius: 2px; background: rgba(13, 35, 38, .12); overflow: hidden; }
