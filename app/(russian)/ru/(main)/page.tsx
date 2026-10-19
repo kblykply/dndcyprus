@@ -100,7 +100,7 @@ export default function HomePage() {
   const t = HOME.ru;
   const f = HOME_FLOW.ru;
   // Akış (müşteri belgesi, Ekim 2026): vitrin · projeler · neden DND · ödeme fırsatları · yaşam ve ayrıcalıklar ·
-  // rakamlar · haberler ve ödüller · iletişim. Ana sayfada Amerika anılmaz (Hakkımızda'da).
+  // rakamlar · haberler ve ödüller (haberlerin yanında S.S.S., kullanıcı isteğiyle) · iletişim. Ana sayfada Amerika anılmaz (Hakkımızda'da).
   return (
     <>
       <HomeHero locale="ru" />
@@ -111,7 +111,7 @@ export default function HomePage() {
       <Story locale="ru" />
       <Numbers locale="ru" />
       <AwardsShowcase locale="ru" kicker={f.news.kicker} withProjects projectLabel={f.news.awardsProject} companyName={f.news.homesProject} />
-      <PressFaq locale="ru" items={PRESS_ITEMS} faq={false} />
+      <PressFaq locale="ru" items={PRESS_ITEMS} />
       <ContactCard locale="ru" mode="home" kicker={f.contact.kicker} title={f.contact.title} lead={f.contact.lead} highlights={t.contact.highlights} image="/azure/contact-sea.webp" id="iletisim" />
     </>
   );

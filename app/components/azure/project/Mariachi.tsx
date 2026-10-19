@@ -1,6 +1,6 @@
 import Arrow from "../Arrow";
 import Link from "next/link";
-import { PiInfoDuotone, PiSealPercentDuotone, PiTicketDuotone } from "react-icons/pi";
+import { PiSealPercentDuotone, PiTicketDuotone } from "react-icons/pi";
 import LazyYouTube from "@/app/components/LazyYouTube";
 import { MARIACHI_MEDIA, MARIACHI_PERKS } from "@/lib/azure/projects/mariachi";
 import type { Locale } from "@/lib/azure/site";
@@ -35,7 +35,6 @@ export default function Mariachi({ locale, id }: { locale: Locale; id: string })
                 </div>
               ))}
             </div>
-            <p className="mr-note mr-mono"><PiInfoDuotone size={15} aria-hidden /> {t.note}</p>
           </div>
         </div>
       </div>

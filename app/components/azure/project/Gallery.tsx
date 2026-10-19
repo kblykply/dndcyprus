@@ -1,19 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { PiCornersOutBold } from "react-icons/pi";
 import type { GalleryItem } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
+import Lightbox from "./Lightbox";
 
 // Çerçeveli (az-wrap içinde, 28px köşe) genişleyen galeri: üzerine gelince / dokununca panel büyür.
+// Sağ üstteki "Tam ekran" düğmesi son büyüyen paneli (yoksa ilkini) kırpılmadan tam ekranda açar; çift tıklama da açar.
 export default function Gallery({ items, locale }: { items: GalleryItem[]; locale: Locale }) {
   const t = PROJECT_UI[locale].gallery;
   const [hover, setHover] = useState<number | null>(null);
   const [active, setActive] = useState<number | null>(null);
   const on = active ?? hover;
+  const last = useRef(0);
+  if (on !== null) last.current = on;
+  const [full, setFull] = useState<number | null>(null);
   return (
     // Görünürlük (rv/in) sınıfı sabit dış kapta: React içteki sınıfı (has) değiştirdiğinde AzureFx'in eklediği "in" silinmesin
-    <div className="rv">
+    <div className="rv az-pg-wrap">
     <div className={`az-pg${on !== null ? " has" : ""}`} role="group" aria-label={t.aria} onMouseLeave={() => setHover(null)}>
       {items.map((g, i) => (
         <button
@@ -26,6 +32,7 @@ export default function Gallery({ items, locale }: { items: GalleryItem[]; local
           onFocus={() => setHover(i)}
           onBlur={() => setHover(null)}
           onClick={() => setActive(active === i ? null : i)}
+          onDoubleClick={() => setFull(i)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={g.src} alt={g.alt} loading="lazy" decoding="async" draggable={false} />
@@ -33,6 +40,16 @@ export default function Gallery({ items, locale }: { items: GalleryItem[]; local
         </button>
       ))}
     </div>
+    <button type="button" className="az-fs-btn" onClick={() => setFull(last.current)} aria-label={t.full}><PiCornersOutBold size={14} aria-hidden /><span>{t.full}</span></button>
+    {full !== null ? (
+      <Lightbox
+        images={items.map((g) => ({ src: g.src, alt: g.alt, label: g.label ?? undefined }))}
+        index={full}
+        onIndex={setFull}
+        onClose={() => setFull(null)}
+        ui={{ close: t.close, prev: t.prev, next: t.next, label: t.full }}
+      />
+    ) : null}
     </div>
   );
 }

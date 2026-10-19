@@ -7,7 +7,7 @@ import type { PressItem } from "@/app/components/PressSection";
 const DATE_LOCALE: Record<Locale, string> = { tr: "tr-TR", en: "en-GB", de: "de-DE", ru: "ru-RU", pl: "pl-PL" };
 const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(DATE_LOCALE[locale], { year: "numeric", month: "long", day: "2-digit" }).format(new Date(iso));
 
-/** faq=false: yalnız haberler (ana sayfa akışında S.S.S. yok) */
+/** faq=false: yalnız haberler, tek sütun (ana sayfada S.S.S. haberlerin yanında gösterilir) */
 export default function PressFaq({ locale, items, faq = true }: { locale: Locale; items: PressItem[]; faq?: boolean }) {
   const t = HOME[locale];
   const news = [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);

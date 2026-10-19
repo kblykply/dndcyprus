@@ -2,9 +2,11 @@
 
 import Arrow from "../Arrow";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { PiCornersOutBold } from "react-icons/pi";
 import type { InteriorGroup } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
+import Lightbox from "./Lightbox";
 import "./interiors.css";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -12,13 +14,15 @@ const pad = (n: number) => String(n).padStart(2, "0");
 /**
  * İç mekân — film şeridi: başlığın yanında daire tipi seçici (birden çok tip varsa), tam genişlikte büyük görsel
  * (oda adı sol altta), altında oda adlı küçük resim şeridi; sağda sayaç ve oklar. Kare / dikey kareler kırpılmaz,
- * yanları aynı görselin bulanık kopyasıyla dolar. Ok tuşları ve telefonda kaydırma ile gezilir.
+ * yanları aynı görselin bulanık kopyasıyla dolar. Ok tuşları ve telefonda kaydırma ile gezilir. "Tam ekran" düğmesi
+ * (ya da büyük görsele tıklama) görseli kırpılmadan tam ekranda açar.
  */
 export default function InteriorStage({ groups, locale, head }: { groups: InteriorGroup[]; locale: Locale; head: ReactNode }) {
   const t = PROJECT_UI[locale].interiors;
   const [g, setG] = useState(0);
   const [i, setI] = useState(0);
   const [more, setMore] = useState(false);
+  const [full, setFull] = useState(false);
   const strip = useRef<HTMLDivElement>(null);
   const touchX = useRef<number | null>(null);
   const shots = groups[Math.min(g, groups.length - 1)].shots;
@@ -66,6 +70,8 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
       aria-roledescription="carousel"
       aria-label={t.region}
       onKeyDown={(e) => {
+        // tam ekran penceresi portal olduğu için tuş olayı buraya da kabarır; o zaman pencere kendisi gezer
+        if (!e.currentTarget.contains(e.target as Node)) return;
         if (e.key === "ArrowRight") { e.preventDefault(); go(i + 1); }
         if (e.key === "ArrowLeft") { e.preventDefault(); go(i - 1); }
       }}
@@ -96,8 +102,9 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {s.vertical ? <img className="blur" src={s.thumb ?? s.image} alt="" aria-hidden /> : null}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img key={s.image} className={`main${s.vertical ? " fit" : ""}`} src={s.image} srcSet={s.srcSet} sizes="(max-width: 1600px) 92vw, 1460px" alt={s.alt} decoding="async" />
+        <img key={s.image} className={`main${s.vertical ? " fit" : ""}`} src={s.image} srcSet={s.srcSet} sizes="(max-width: 1600px) 92vw, 1460px" alt={s.alt} decoding="async" onClick={() => setFull(true)} />
         <span className="tag" aria-hidden>{s.label}</span>
+        <button type="button" className="az-fs-btn" onClick={() => setFull(true)} aria-label={t.full}><PiCornersOutBold size={14} aria-hidden /><span>{t.full}</span></button>
       </div>
 
       <div className="row">
@@ -119,6 +126,16 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
           </div>
         ) : null}
       </div>
+
+      {full ? (
+        <Lightbox
+          images={shots.map((x) => ({ src: x.image, srcSet: x.srcSet, alt: x.alt, label: x.label }))}
+          index={Math.min(i, n - 1)}
+          onIndex={go}
+          onClose={() => setFull(false)}
+          ui={{ close: t.close, prev: t.prev, next: t.next, label: t.fullLabel }}
+        />
+      ) : null}
     </div>
   );
 }

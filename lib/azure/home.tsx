@@ -108,7 +108,7 @@ const TR: HomeContent = {
     items: [
       { q: "Ödemeler hangi para birimiyle yapılıyor?", a: "Lagoon Verde'deki sınırlı sayıda rezidans için tüm ödemeler Türk Lirası ile yapılır. Banka, faiz, kefil, kur farkı ve vade farkı yoktur." },
       { q: "Taksitler nasıl güncelleniyor?", a: "Taksitler sterlin kuruna değil, KKTC asgari ücretindeki artış oranına göre dönemsel olarak güncellenir. 60 aya kadar vade seçeneği sunulur." },
-      { q: "Mariachi Beach Club ayrıcalıkları kimler için?", a: "La Joya, La Joya Perla, Perla II ve Lagoon Verde sakinleri için ücretsiz giriş ve restoran, havuz barı, şezlong/cabana harcamalarında %10 indirim. Yerinde kimlik doğrulaması gerekebilir." },
+      { q: "Mariachi Beach Club ayrıcalıkları kimler için?", a: "La Joya, La Joya Perla, Perla II ve Lagoon Verde sakinleri için ücretsiz giriş ve restoran, havuz barı, şezlong/cabana harcamalarında %10 indirim." },
       { q: "Lagoon Verde ne zaman teslim edilecek?", a: "Hedef teslim tarihi Aralık 2028. Proje 43.179 m² arsa üzerinde 354 birimden oluşuyor; 1+0, 1+1 ve 2+1 tipleri mevcut." },
       { q: "Hangi teknik donanımlar standart?", a: "Merkezi ısıtma-soğutma, merkezi jeneratör, akıllı ev sistemleri ve banyolarda yerden ısıtma tüm projelerde standarttır." },
     ],
@@ -199,7 +199,7 @@ const EN: HomeContent = {
     items: [
       { q: "Which currency are payments made in?", a: "For a limited number of residences at Lagoon Verde, all payments are made in Turkish lira. No bank, no interest, no guarantor, no exchange-rate or maturity difference." },
       { q: "How are instalments updated?", a: "Instalments are updated periodically in line with the TRNC minimum-wage increase, not the sterling exchange rate. Terms of up to 60 months are available." },
-      { q: "Who gets the Mariachi Beach Club privileges?", a: "Residents of La Joya, La Joya Perla, Perla II and Lagoon Verde enjoy free entry and 10% off restaurant, pool bar and sun lounger/cabana spending. ID verification may be required on site." },
+      { q: "Who gets the Mariachi Beach Club privileges?", a: "Residents of La Joya, La Joya Perla, Perla II and Lagoon Verde enjoy free entry and 10% off restaurant, pool bar and sun lounger/cabana spending." },
       { q: "When will Lagoon Verde be delivered?", a: "The target delivery date is December 2028. The project comprises 354 units on a 43,179 m² plot; 1+0, 1+1 and 2+1 types are available." },
       { q: "Which technical features are standard?", a: "Central heating & cooling, a central generator, smart-home systems and underfloor heating in bathrooms are standard in every project." },
     ],
@@ -290,7 +290,7 @@ const DE: HomeContent = {
     items: [
       { q: "In welcher Währung wird bezahlt?", a: "Für eine begrenzte Anzahl von Residenzen im Lagoon Verde erfolgen alle Zahlungen in Türkischer Lira – ohne Bank, ohne Zinsen, ohne Bürgen, ohne Kursdifferenz und ohne Laufzeitaufschlag." },
       { q: "Wie werden die Raten angepasst?", a: "Die Raten werden regelmäßig an die Erhöhung des Mindestlohns in Nordzypern angepasst – nicht an den Wechselkurs des Pfund Sterling. Laufzeiten von bis zu 60 Monaten sind möglich." },
-      { q: "Wer erhält die Vorteile im Mariachi Beach Club?", a: "Bewohner von La Joya, La Joya Perla, Perla II und Lagoon Verde erhalten freien Eintritt und 10% Rabatt auf Ausgaben im Restaurant, an der Poolbar sowie für Sonnenliegen und Cabanas. Vor Ort kann ein Ausweis verlangt werden." },
+      { q: "Wer erhält die Vorteile im Mariachi Beach Club?", a: "Bewohner von La Joya, La Joya Perla, Perla II und Lagoon Verde erhalten freien Eintritt und 10% Rabatt auf Ausgaben im Restaurant, an der Poolbar sowie für Sonnenliegen und Cabanas." },
       { q: "Wann wird Lagoon Verde übergeben?", a: "Die Übergabe ist für Dezember 2028 geplant. Das Projekt umfasst 354 Einheiten auf einem 43.179 m² großen Grundstück; erhältlich sind die Typen 1+0, 1+1 und 2+1." },
       { q: "Welche technische Ausstattung ist Standard?", a: "Zentrale Heizung und Kühlung, ein zentraler Generator, Smart-Home-Systeme und Fußbodenheizung in den Bädern sind in jedem Projekt Standard." },
     ],
@@ -381,7 +381,7 @@ const RU: HomeContent = {
     items: [
       { q: "В какой валюте производятся платежи?", a: "Для ограниченного числа резиденций в Lagoon Verde все платежи принимаются в турецких лирах. Без банка, процентов и поручителей, без курсовой разницы и наценки за срок." },
       { q: "Как индексируются платежи?", a: "Платежи периодически пересчитываются в соответствии с ростом минимальной зарплаты на Северном Кипре, а не по курсу фунта стерлингов. Рассрочка доступна на срок до 60 месяцев." },
-      { q: "Кому доступны привилегии Mariachi Beach Club?", a: "Жители La Joya, La Joya Perla, Perla II и Lagoon Verde получают бесплатный вход и скидку 10% в ресторане, баре у бассейна, а также на шезлонги и кабаны. На месте может потребоваться удостоверение личности." },
+      { q: "Кому доступны привилегии Mariachi Beach Club?", a: "Жители La Joya, La Joya Perla, Perla II и Lagoon Verde получают бесплатный вход и скидку 10% в ресторане, баре у бассейна, а также на шезлонги и кабаны." },
       { q: "Когда сдаётся Lagoon Verde?", a: "Плановый срок сдачи — декабрь 2028. Проект включает 354 квартиры на участке 43 179 m²; доступны планировки 1+0, 1+1 и 2+1." },
       { q: "Какое техническое оснащение входит в стандарт?", a: "Центральное отопление и кондиционирование, центральный генератор, системы умного дома и тёплые полы в ванных комнатах — стандарт в каждом проекте." },
     ],
@@ -472,7 +472,7 @@ const PL: HomeContent = {
     items: [
       { q: "W jakiej walucie dokonuje się płatności?", a: "W przypadku ograniczonej liczby apartamentów w Lagoon Verde wszystkie płatności realizowane są w lirach tureckich. Bez banku, odsetek i poręczyciela, bez różnic kursowych i dopłat za termin." },
       { q: "Jak aktualizowane są raty?", a: "Raty są okresowo aktualizowane zgodnie ze wzrostem płacy minimalnej na Cyprze Północnym, a nie według kursu funta szterlinga. Dostępne są okresy spłaty do 60 miesięcy." },
-      { q: "Kto korzysta z przywilejów Mariachi Beach Club?", a: "Mieszkańcy La Joya, La Joya Perla, Perla II i Lagoon Verde mają bezpłatny wstęp i 10% zniżki w restauracji, pool barze oraz na leżaki i cabany. Na miejscu może być wymagane okazanie dokumentu tożsamości." },
+      { q: "Kto korzysta z przywilejów Mariachi Beach Club?", a: "Mieszkańcy La Joya, La Joya Perla, Perla II i Lagoon Verde mają bezpłatny wstęp i 10% zniżki w restauracji, pool barze oraz na leżaki i cabany." },
       { q: "Kiedy Lagoon Verde zostanie oddany do użytku?", a: "Planowany termin oddania to grudzień 2028. Projekt obejmuje 354 lokale na działce o powierzchni 43 179 m²; dostępne są typy 1+0, 1+1 i 2+1." },
       { q: "Jakie wyposażenie techniczne jest standardem?", a: "Centralne ogrzewanie i chłodzenie, centralny generator, systemy inteligentnego domu oraz ogrzewanie podłogowe w łazienkach to standard w każdym projekcie." },
     ],

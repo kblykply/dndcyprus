@@ -182,7 +182,9 @@ body.az-lock { overflow: hidden; }
 .az-hero .top .play { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: #fff; }
 .az-hero .top .play i { width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--sea); display: grid; place-items: center; transition: transform .4s var(--ease); }
 .az-hero .top .play:hover i { transform: scale(1.08); }
-.az-hero .top .plogo { height: 44px; width: auto; filter: drop-shadow(0 4px 14px rgba(0,0,0,.35)); }
+/* proje logosu fotoğraf üstünde: renkli logolar (Lagoon laciverti) gökyüzünde okunmuyordu → ana sayfa vitrini gibi beyaz;
+   --k ile her logo aynı alanı kaplar (lib/azure/logos.ts) */
+.az-hero .top .plogo { height: calc(48px * var(--k, 1)); width: auto; filter: brightness(0) invert(1) drop-shadow(0 4px 14px rgba(0,0,0,.35)); }
 .az-hero .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
 @media (max-width: 900px) {
   .az-hero { padding-top: 80px; }
@@ -501,7 +503,7 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
   .az-person figure { max-width: 200px; }
 }
 .az-hero .top > div { max-width: calc(100% - 120px); }
-@media (max-width: 600px) { .az-hero .top .plogo { height: 34px; } .az-hero .top > div { max-width: 100%; } }
+@media (max-width: 600px) { .az-hero .top .plogo { height: calc(36px * var(--k, 1)); } .az-hero .top > div { max-width: 100%; } }
 /* mobil hero: etiketler tek sıra kaydırılabilir, logo/oynat gizli, içerik etiketlerin altında başlar */
 @media (max-width: 600px) {
   .az-hero .top { flex-wrap: nowrap; }

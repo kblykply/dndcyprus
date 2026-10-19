@@ -65,9 +65,6 @@ export default function MariachiUnifiedPerks({
                 </span>
                 <div>
                   <strong style={{ fontWeight: 600, fontSize: 15, lineHeight: 1.4, display: "block" }}>{note}</strong>
-                  <span style={{ display: "block", marginTop: 4, fontSize: 13, opacity: 0.8 }}>
-                    (*Yerinde kimlik / residence doğrulaması gerekebilir.)
-                  </span>
                 </div>
               </div>
             </div>
@@ -153,11 +150,6 @@ export default function MariachiUnifiedPerks({
             </div>
           </aside>
         </div>
-
-        {/* dipnot */}
-        <p className="rv d1" style={{ marginTop: 14, fontSize: 12, color: "var(--ink-40)" }}>
-          *Ayrıcalıklar kampanya ve sezon koşullarına göre güncellenebilir. Yerinde kimlik &amp; residence doğrulaması gerekebilir.
-        </p>
       </div>
     </section>
   );

@@ -65,9 +65,6 @@ export default function MariachiUnifiedPerks({
                 </span>
                 <div>
                   <strong style={{ fontWeight: 600, fontSize: 15, lineHeight: 1.4, display: "block" }}>{note}</strong>
-                  <span style={{ display: "block", marginTop: 4, fontSize: 13, opacity: 0.8 }}>
-                    (* Na miejscu może być wymagany dokument tożsamości lub potwierdzenie zamieszkania.)
-                  </span>
                 </div>
               </div>
             </div>
@@ -153,11 +150,6 @@ export default function MariachiUnifiedPerks({
             </div>
           </aside>
         </div>
-
-        {/* footnote */}
-        <p className="rv d1" style={{ marginTop: 14, fontSize: 12, color: "var(--ink-40)" }}>
-          *Przywileje mogą się zmieniać w zależności od kampanii i sezonu. Na miejscu może być wymagany dokument tożsamości i potwierdzenie zamieszkania.
-        </p>
       </div>
     </section>
   );

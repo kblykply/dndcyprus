@@ -5,9 +5,9 @@ import type { Locale } from "./site";
 export const PROJECT_UI = {
   tr: {
     ids: { gallery: "galeri", overview: "genel-bakis", facts: "bilgiler", tech: "teknik-donanim", interiors: "ic-mekan", floorPlans: "kat-planlari", mariachi: "mariachi", amenities: "olanaklar", tour: "sanal-tur", location: "konum", update: "guncelleme", sitePlan: "vaziyet-plani", payment: "odeme-plani" },
-    gallery: { aria: "Galeri", item: (i: number) => `Galeri görseli ${i}` },
+    gallery: { aria: "Galeri", full: "Tam ekran", close: "Kapat", prev: "Önceki görsel", next: "Sonraki görsel", item: (i: number) => `Galeri görseli ${i}` },
     tech: { prev: "Önceki", next: "Sonraki", list: "Teknik donanım listesi", page: (i: number) => `Sayfa ${i}` },
-    interiors: { tabs: "Odalar", types: "Daire tipi", prev: "Önceki görsel", next: "Sonraki görsel", region: "İç mekân görselleri" },
+    interiors: { tabs: "Odalar", types: "Daire tipi", prev: "Önceki görsel", next: "Sonraki görsel", region: "İç mekân görselleri", full: "Tam ekran", close: "Kapat", fullLabel: "Tam ekran görsel" },
     floor: {
       types: "Daire Tipleri", variants: "Varyantlar",
       enlarge: "Büyüt", enlargeAria: "Görseli büyüt", pdf: "PDF",
@@ -23,9 +23,9 @@ export const PROJECT_UI = {
   },
   en: {
     ids: { gallery: "gallery", overview: "overview", facts: "key-facts", tech: "technical-features", interiors: "interiors", floorPlans: "floor-plans", mariachi: "mariachi", amenities: "amenities", tour: "virtual-tour", location: "location", update: "update", sitePlan: "site-plan", payment: "payment-plan" },
-    gallery: { aria: "Gallery", item: (i: number) => `Gallery image ${i}` },
+    gallery: { aria: "Gallery", full: "Full screen", close: "Close", prev: "Previous image", next: "Next image", item: (i: number) => `Gallery image ${i}` },
     tech: { prev: "Previous", next: "Next", list: "Technical features list", page: (i: number) => `Page ${i}` },
-    interiors: { tabs: "Rooms", types: "Unit type", prev: "Previous image", next: "Next image", region: "Interior images" },
+    interiors: { tabs: "Rooms", types: "Unit type", prev: "Previous image", next: "Next image", region: "Interior images", full: "Full screen", close: "Close", fullLabel: "Full-screen image" },
     floor: {
       types: "Apartment types", variants: "Variants",
       enlarge: "Enlarge", enlargeAria: "Enlarge image", pdf: "PDF",
@@ -41,9 +41,9 @@ export const PROJECT_UI = {
   },
   de: {
     ids: { gallery: "galerie", overview: "ueberblick", facts: "fakten", tech: "technik", interiors: "innenraeume", floorPlans: "grundrisse", mariachi: "mariachi", amenities: "ausstattung", tour: "virtueller-rundgang", location: "lage", update: "bautenstand", sitePlan: "lageplan", payment: "zahlungsplan" },
-    gallery: { aria: "Galerie", item: (i: number) => `Galeriebild ${i}` },
+    gallery: { aria: "Galerie", full: "Vollbild", close: "Schließen", prev: "Vorheriges Bild", next: "Nächstes Bild", item: (i: number) => `Galeriebild ${i}` },
     tech: { prev: "Zurück", next: "Weiter", list: "Liste der technischen Ausstattung", page: (i: number) => `Seite ${i}` },
-    interiors: { tabs: "Räume", types: "Wohnungstyp", prev: "Vorheriges Bild", next: "Nächstes Bild", region: "Innenansichten" },
+    interiors: { tabs: "Räume", types: "Wohnungstyp", prev: "Vorheriges Bild", next: "Nächstes Bild", region: "Innenansichten", full: "Vollbild", close: "Schließen", fullLabel: "Bild im Vollbild" },
     floor: {
       types: "Wohnungstypen", variants: "Varianten",
       enlarge: "Vergrößern", enlargeAria: "Bild vergrößern", pdf: "PDF",
@@ -59,9 +59,9 @@ export const PROJECT_UI = {
   },
   ru: {
     ids: { gallery: "galereya", overview: "obzor", facts: "fakty", tech: "tekhnika", interiors: "interiery", floorPlans: "planirovki", mariachi: "mariachi", amenities: "infrastruktura", tour: "virtualnyy-tur", location: "raspolozhenie", update: "novosti-stroyki", sitePlan: "genplan", payment: "plan-oplaty" },
-    gallery: { aria: "Галерея", item: (i: number) => `Фото галереи ${i}` },
+    gallery: { aria: "Галерея", full: "Во весь экран", close: "Закрыть", prev: "Предыдущее фото", next: "Следующее фото", item: (i: number) => `Фото галереи ${i}` },
     tech: { prev: "Назад", next: "Далее", list: "Список технического оснащения", page: (i: number) => `Страница ${i}` },
-    interiors: { tabs: "Комнаты", types: "Тип квартиры", prev: "Предыдущее фото", next: "Следующее фото", region: "Фото интерьеров" },
+    interiors: { tabs: "Комнаты", types: "Тип квартиры", prev: "Предыдущее фото", next: "Следующее фото", region: "Фото интерьеров", full: "Во весь экран", close: "Закрыть", fullLabel: "Фото во весь экран" },
     floor: {
       types: "Типы квартир", variants: "Варианты",
       enlarge: "Увеличить", enlargeAria: "Увеличить изображение", pdf: "PDF",
@@ -77,9 +77,9 @@ export const PROJECT_UI = {
   },
   pl: {
     ids: { gallery: "galeria", overview: "przeglad", facts: "fakty", tech: "technika", interiors: "wnetrza", floorPlans: "plany", mariachi: "mariachi", amenities: "udogodnienia", tour: "wirtualny-spacer", location: "lokalizacja", update: "postep-budowy", sitePlan: "plan-osiedla", payment: "plan-platnosci" },
-    gallery: { aria: "Galeria", item: (i: number) => `Zdjęcie z galerii ${i}` },
+    gallery: { aria: "Galeria", full: "Pełny ekran", close: "Zamknij", prev: "Poprzednie zdjęcie", next: "Następne zdjęcie", item: (i: number) => `Zdjęcie z galerii ${i}` },
     tech: { prev: "Poprzedni", next: "Następny", list: "Lista wyposażenia technicznego", page: (i: number) => `Strona ${i}` },
-    interiors: { tabs: "Pomieszczenia", types: "Typ mieszkania", prev: "Poprzednie zdjęcie", next: "Następne zdjęcie", region: "Zdjęcia wnętrz" },
+    interiors: { tabs: "Pomieszczenia", types: "Typ mieszkania", prev: "Poprzednie zdjęcie", next: "Następne zdjęcie", region: "Zdjęcia wnętrz", full: "Pełny ekran", close: "Zamknij", fullLabel: "Zdjęcie na pełnym ekranie" },
     floor: {
       types: "Typy mieszkań", variants: "Warianty",
       enlarge: "Powiększ", enlargeAria: "Powiększ zdjęcie", pdf: "PDF",

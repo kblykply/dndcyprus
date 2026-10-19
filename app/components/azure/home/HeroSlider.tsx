@@ -3,6 +3,7 @@
 import Arrow from "../Arrow";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type FocusEvent, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
+import { logoScale } from "@/lib/azure/logos";
 import "./hero-slider.css";
 
 type Img = { src: string; srcSet: string; sizes: string };
@@ -93,7 +94,7 @@ export default function HeroSlider({ slides, brand, label, cta, prev, next, paus
 
         <div className="c">
           <div className="txt" key={s.key} aria-live={paused ? "polite" : "off"}>
-            {s.logo ? <img className="logo" src={s.logo} alt="" draggable={false} /> : null}
+            {s.logo ? <img className="logo" src={s.logo} alt="" draggable={false} style={{ ["--k" as string]: logoScale(s.logo) } as CSSProperties} /> : null}
             <p className="nm">{s.name}</p>
             <p className="h">{s.title}</p>
             <p className="sub">{s.sub}</p>

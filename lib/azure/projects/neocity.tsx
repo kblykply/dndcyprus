@@ -26,6 +26,10 @@ type Copy = {
   location: { kicker: string; title: string; lead: string; address: string; nearby: string[]; distances: [string, number][] };
 };
 
+// galeri (akordiyon) diğer projeler gibi 5 kare: genel site görünümü, tek ve ikiz villa ön cephe, iki bahçe/havuz karesi
+// (g-NN numaraları; galleryAlts tüm 12 render için sırayla)
+const GALLERY = [1, 2, 3, 4, 6];
+
 const ACC: Accent[] = ["sea", "coral"];
 const acc = (i: number): Accent => ACC[i % 2];
 
@@ -35,7 +39,7 @@ function build(locale: Locale, c: Copy): ProjectContent {
       kicker: c.galleryKicker,
       title: `NeoCity ${c.galleryKicker}`,
       lead: c.galleryLead,
-      items: c.galleryAlts.map((alt, i) => ({ src: G(i + 1), alt })),
+      items: GALLERY.map((n) => ({ src: G(n), alt: c.galleryAlts[n - 1] })),
       hint: c.hint,
     },
     overview: {

@@ -1,8 +1,9 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { getImageProps } from "next/image";
 import Link from "next/link";
 import { preload } from "react-dom";
 import { HERO_DIK } from "@/lib/azure/hero-dik";
+import { logoScale } from "@/lib/azure/logos";
 
 type Cta = { label: string; href: string; variant?: "coral" | "sea" | "glass" | "ghost"; track?: string };
 
@@ -16,6 +17,7 @@ type Props = {
   video?: string;              // mp4; image poster olur
   tags?: string[];             // sol üst etiketler (ilk altın renkte olabilir)
   goldTag?: string;
+  /** artık gösterilmiyor (sayfalar hâlâ geçebilir) */
   chips?: { big: string; label: string }[];
   ctas?: Cta[];
   logo?: string;               // proje logosu (sağ üst)
@@ -44,8 +46,8 @@ function HeroImage({ src, alt, position }: { src: string; alt: string; position?
   );
 }
 
-// İç sayfalar için Azure hero çerçevesi: 36px yuvarlatılmış görsel, cam etiketler, floating chips.
-export default function PageHero({ title, lead, image, imageAlt = "", video, tags = [], goldTag, chips, ctas = [], logo, size = "compact", id, imagePosition }: Props) {
+// İç sayfalar için Azure hero çerçevesi: 36px yuvarlatılmış görsel, cam etiketler.
+export default function PageHero({ title, lead, image, imageAlt = "", video, tags = [], goldTag, ctas = [], logo, size = "compact", id, imagePosition }: Props) {
   return (
     <section className={`az-hero ${size}`} id={id}>
       <div className="frame">
@@ -64,7 +66,7 @@ export default function PageHero({ title, lead, image, imageAlt = "", video, tag
               {tags.map((t) => <span key={t} role="listitem" className="az-tag">{t}</span>)}
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            {logo && <img className="plogo" src={logo} alt="" />}
+            {logo && <img className="plogo" src={logo} alt="" style={{ ["--k" as string]: logoScale(logo) } as CSSProperties} />}
           </div>
         ) : null}
         <div className="c">
@@ -83,11 +85,7 @@ export default function PageHero({ title, lead, image, imageAlt = "", video, tag
               </div>
             )}
           </div>
-          {chips && chips.length > 0 && (
-            <div className="chips rv d2">
-              {chips.map((ch) => <div key={ch.label} className="az-chip"><b>{ch.big}</b><span>{ch.label}</span></div>)}
-            </div>
-          )}
+          {/* sağdaki rakam kartları kaldırıldı (patron: "sağdaki rakamlardan kurtul"; rakamlar sayfadaki bilgi kutularında) */}
         </div>
       </div>
     </section>

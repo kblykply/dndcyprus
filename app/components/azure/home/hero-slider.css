@@ -20,7 +20,8 @@
 .az-hs .txt { animation: az-hs-in .9s var(--ease) both; max-width: 760px; }
 @keyframes az-hs-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .az-hs .txt { animation: none; } }
-.az-hs .logo { display: block; height: clamp(40px, 4.4vw, 60px); width: auto; max-width: 260px; object-fit: contain; object-position: left center;
+/* --k: logoların aynı alanı kaplaması için boy çarpanı (lib/azure/logos.ts) */
+.az-hs .logo { display: block; height: calc(clamp(40px, 4.4vw, 60px) * var(--k, 1)); width: auto; object-fit: contain; object-position: left center;
   filter: brightness(0) invert(1) drop-shadow(0 4px 18px rgba(0, 0, 0, .35)); }
 .az-hs .c p.nm { margin-top: 14px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255, 255, 255, .92); }
 .az-hs .c p.h { margin-top: 10px; font-family: var(--font-display), sans-serif; font-size: clamp(38px, 5.6vw, 88px); line-height: 1.02; font-weight: 300; letter-spacing: -.03em; max-width: 16ch; color: #fff; }

@@ -123,3 +123,24 @@ test("NeoCity: vaziyet planı anahtarı çalışır, ödeme planı var, Mariachi
   await expect(page.locator("#konum .btns a").first()).toHaveAttribute("href", /destination=35\.15406%2C33\.85201/);
   await expect(page.locator("#konum .az-dist li").first()).toContainText("dk");
 });
+
+// galeri (5 kare, diğer projelerle eşit) ve iç mekânda "Tam ekran": görsel kırpılmadan açılır, okla geçilir, Esc kapatır
+test("NeoCity: galeri 5 kare; iç mekân ve galeri tam ekran açılır, Esc ile kapanır", async ({ page }) => {
+  await page.goto("/tr/neocity");
+  await expect(page.locator(".az-pg > button")).toHaveCount(5);
+  const stage = page.locator(".az-int2");
+  await stage.scrollIntoViewIfNeeded();
+  await stage.getByRole("button", { name: "Tam ekran" }).click();
+  const dlg = page.getByRole("dialog", { name: "Tam ekran görsel" });
+  await expect(dlg).toBeVisible();
+  await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-01/);
+  await expect(dlg.locator(".cap")).toContainText("01 / 10");
+  await page.keyboard.press("ArrowRight");
+  await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-02/);
+  await page.keyboard.press("Escape");
+  await expect(dlg).toHaveCount(0);
+  await page.locator(".az-pg-wrap").getByRole("button", { name: "Tam ekran" }).click();
+  await expect(page.getByRole("dialog", { name: "Tam ekran" })).toBeVisible();
+  await page.getByRole("dialog").getByRole("button", { name: "Kapat" }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+});

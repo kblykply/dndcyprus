@@ -19,7 +19,6 @@ export const MARIACHI_PERKS: Record<Locale, {
   kicker: string;
   title: string;
   subtitle: string;
-  note: string;
   href: string;
   cta: string;
   ctaAria: string;
@@ -32,7 +31,6 @@ export const MARIACHI_PERKS: Record<Locale, {
     kicker: "Mariachi Beach Club",
     title: "DND Ev Sahiplerine Mariachi Beach Club Avantajları",
     subtitle: "Gündüz deniz & güneş, akşam ritim — tek adreste.",
-    note: "Kimlik doğrulaması gerekebilir. Kampanya tarihleri ve gün koşulları değişebilir.",
     href: "/tr/mariachi",
     cta: "Mariachi Sayfası",
     ctaAria: "Mariachi sayfasına git",
@@ -48,7 +46,6 @@ export const MARIACHI_PERKS: Record<Locale, {
     kicker: "Mariachi Beach Club",
     title: "Mariachi Beach Club Benefits for DND Homeowners",
     subtitle: "Sea & sun by day, rhythm by night — all in one place.",
-    note: "ID verification may be required. Campaign dates and applicable days are subject to change.",
     href: "/en/mariachi",
     cta: "Mariachi Page",
     ctaAria: "Go to the Mariachi page",
@@ -64,7 +61,6 @@ export const MARIACHI_PERKS: Record<Locale, {
     kicker: "Mariachi Beach Club",
     title: "Vorteile im Mariachi Beach Club für DND-Eigentümer",
     subtitle: "Tagsüber Meer & Sonne, abends Rhythmus – alles an einem Ort.",
-    note: "Ein Ausweis kann verlangt werden. Aktionszeiträume und gültige Tage können sich ändern.",
     href: "/de/mariachi",
     cta: "Mariachi-Seite",
     ctaAria: "Zur Mariachi-Seite wechseln",
@@ -80,7 +76,6 @@ export const MARIACHI_PERKS: Record<Locale, {
     kicker: "Mariachi Beach Club",
     title: "Привилегии Mariachi Beach Club для владельцев DND",
     subtitle: "Днём — море и солнце, вечером — ритм. Всё в одном месте.",
-    note: "Может потребоваться удостоверение личности. Сроки акций и дни их действия могут меняться.",
     href: "/ru/mariachi",
     cta: "Страница Mariachi",
     ctaAria: "Перейти на страницу Mariachi",
@@ -96,7 +91,6 @@ export const MARIACHI_PERKS: Record<Locale, {
     kicker: "Mariachi Beach Club",
     title: "Przywileje Mariachi Beach Club dla właścicieli DND",
     subtitle: "Za dnia morze i słońce, wieczorem rytm – wszystko w jednym miejscu.",
-    note: "Może być wymagane okazanie dokumentu tożsamości. Terminy promocji i obowiązujące dni mogą ulec zmianie.",
     href: "/pl/mariachi",
     cta: "Strona Mariachi",
     ctaAria: "Przejdź do strony Mariachi",
