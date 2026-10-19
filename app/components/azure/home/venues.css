@@ -50,5 +50,5 @@
   .az-venues .arw { width: 40px; height: 40px; }
   .az-venues .arw.prev { left: 10px; }
   .az-venues .arw.next { right: 10px; }
-  .az-venues .cta .az-btn { flex: 1 1 100%; justify-content: center; }
+  .az-venues .cta .az-btn { flex: 1 1 100%; justify-content: center; white-space: normal; text-align: center; min-width: 0; } /* uzun dillerde (Бронирование: …) taşmasın */
 }
