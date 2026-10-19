@@ -3,7 +3,8 @@ import "./neocity.css";
 
 /**
  * Ödeme modeli (NeoCity "5 Sıfır"): koyu deniz renginde kart. Solda başlık, açıklama ve beş "0" (faiz, banka, kefil,
- * vade farkı, kur farkı); sağda planın işleyişi adım adım ve talep düğmesi. Fiyat yazılmaz (diğer projelerde de yok).
+ * vade farkı, kur farkı) ve talep düğmesi; sağda planın işleyişi adım adım. Düğme solda: sağ sütunun altında kartı
+ * gereksiz uzatıyordu. Fiyat yazılmaz (diğer projelerde de yok).
  */
 export default function Payment({ d, id }: { d: ProjectPayment; id: string }) {
   return (
@@ -17,6 +18,7 @@ export default function Payment({ d, id }: { d: ProjectPayment; id: string }) {
             <ul className="zeros">
               {d.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}
             </ul>
+            <a className="az-btn" href="#fiyat-al" data-track="price_request_click">{d.cta}</a>
           </div>
           <div className="r">
             <ol className="steps">
@@ -26,7 +28,6 @@ export default function Payment({ d, id }: { d: ProjectPayment; id: string }) {
               <h3>{d.quote.h}</h3>
               <p>{d.quote.p}</p>
             </div>
-            <a className="az-btn" href="#fiyat-al" data-track="price_request_click">{d.cta}</a>
           </div>
         </div>
         <p className="az-note-sm">{d.note}</p>

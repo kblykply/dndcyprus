@@ -13,12 +13,13 @@ export type Slide = {
 };
 type Props = { slides: Slide[]; brand: string; label: string; cta: string; prev: string; next: string; pause: string; play: string; media: string };
 
-const DUR = 7000; // slayt başına süre (ms); ilerleme çizgisi bu sürede dolar
+const DUR = 3000; // slayt başına süre (ms; kullanıcı isteği: 3 sn'de bir); ilerleme çizgisi bu sürede dolar
 
 /**
  * Ana sayfa proje vitrini. Görseller üst üste, geçiş yumuşak kararma + hafif yaklaşma. Etkin slayt ve sonraki
- * slaytın görseli yüklenir (beşini birden indirmez). Kendiliğinden geçiş: fare üstündeyken, klavye odağı içerdeyken,
- * vitrin ekran dışındayken, sekme gizliyken ve "hareketi azalt" açıkken durur; durdur / oynat düğmesi var.
+ * slaytın görseli yüklenir (beşini birden indirmez). Kendiliğinden geçiş klavye odağı içerdeyken, vitrin ekran
+ * dışındayken, sekme gizliyken ve "hareketi azalt" açıkken durur; durdur / oynat düğmesi var. Fare üstündeyken
+ * durmaz: vitrin ekranı kapladığı için fare hep üstünde kalıyor, çubuk hiç dolmuyordu.
  * Telefonda yana kaydırma, klavyede sol / sağ ok.
  */
 export default function HeroSlider({ slides, brand, label, cta, prev, next, pause, play, media }: Props) {
@@ -26,7 +27,6 @@ export default function HeroSlider({ slides, brand, label, cta, prev, next, paus
   const [i, setI] = useState(0);
   const [seen, setSeen] = useState<Set<number>>(() => new Set([0, 1 % n]));
   const [user, setUser] = useState(true); // durdur / oynat düğmesi
-  const [hold, setHold] = useState(false); // fare üstünde
   const [kbd, setKbd] = useState(false); // klavye odağı içerde
   const [visible, setVisible] = useState(true);
   const [reduce, setReduce] = useState(false);
@@ -49,7 +49,7 @@ export default function HeroSlider({ slides, brand, label, cta, prev, next, paus
     setI(to);
   };
   const auto = user && !reduce && n > 1;
-  const paused = !auto || hold || kbd || !visible;
+  const paused = !auto || kbd || !visible;
 
   const onFocus = (e: FocusEvent<HTMLElement>) => {
     let k = false;
@@ -71,8 +71,7 @@ export default function HeroSlider({ slides, brand, label, cta, prev, next, paus
   const s = slides[i];
   return (
     <section ref={box} className="az-hero full az-hs" id="top" aria-roledescription="carousel" aria-label={label}
-      onKeyDown={onKey} onFocus={onFocus} onBlur={() => setKbd(false)}
-      onPointerEnter={(e) => { if (e.pointerType === "mouse") setHold(true); }} onPointerLeave={() => setHold(false)}>
+      onKeyDown={onKey} onFocus={onFocus} onBlur={() => setKbd(false)}>
       <div className="frame" onPointerDown={onDown} onPointerUp={onUp} onPointerCancel={() => { touch.current = null; }}>
         {slides.map((x, k) => (
           <div key={x.key} className={`sl${k === i ? " on" : ""}`} aria-hidden={k !== i}>

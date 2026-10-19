@@ -26,9 +26,10 @@ type Copy = {
   location: { kicker: string; title: string; lead: string; address: string; nearby: string[]; distances: [string, number][] };
 };
 
-// galeri (akordiyon) diğer projeler gibi 5 kare: genel site görünümü, tek ve ikiz villa ön cephe, iki bahçe/havuz karesi
+// galeri (akordiyon) diğer projeler gibi 5 kare: genel site görünümü, tek ve ikiz villa ön cephe, tek villa havuz/bahçe,
+// tek villanın tam karşıdan ön cephesi (kullanıcı isteği; ikiz villa arka bahçe karesi yerine)
 // (g-NN numaraları; galleryAlts tüm 12 render için sırayla)
-const GALLERY = [1, 2, 3, 4, 6];
+const GALLERY = [1, 2, 3, 4, 11];
 
 const ACC: Accent[] = ["sea", "coral"];
 const acc = (i: number): Accent => ACC[i % 2];

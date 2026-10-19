@@ -3,7 +3,8 @@
 /* slaytlar üst üste; etkin olan görünür, görsel 7 sn boyunca hafifçe uzaklaşır */
 .az-hs .sl { position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity 1s var(--ease), visibility 0s 1s; visibility: hidden; }
 .az-hs .sl.on { opacity: 1; visibility: visible; transition: opacity 1s var(--ease); }
-.az-hs .sl .bg { transform: scale(1.06); transition: transform 8s linear; }
+/* yaklaşma slayt süresinden (3 sn) biraz uzun: geçişe kadar hareket sürer */
+.az-hs .sl .bg { transform: scale(1.06); transition: transform 4s linear; }
 .az-hs .sl.on .bg { transform: scale(1); }
 @media (prefers-reduced-motion: reduce) { .az-hs .sl .bg, .az-hs .sl.on .bg { transform: none; transition: none; } }
 /* yazının altı koyulaşır (renk tonu yok) */

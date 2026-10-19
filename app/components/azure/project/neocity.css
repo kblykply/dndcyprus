@@ -1,7 +1,8 @@
 /* NeoCity bölümleri: vaziyet planı (az-site) ve 5 Sıfır ödeme modeli (az-pay). Sitenin cam kart / deniz rengi dili. */
 
 /* ---- Vaziyet planı ---- */
-.az-site .grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(18px, 2.6vw, 36px); align-items: start; }
+/* bilgi kartı plan görseliyle aynı yükseklikte: üst ve alt kenarlar hizalı, satırlar eşit aralıkla dağılır */
+.az-site .grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(18px, 2.6vw, 36px); align-items: stretch; }
 .az-site .pic { position: relative; margin: 0; border-radius: var(--r); overflow: hidden; background: var(--sky-2); box-shadow: 0 24px 60px rgba(13, 35, 38, .1); }
 .az-site .pic a { display: grid; cursor: zoom-in; }
 /* görseller üst üste: anahtar yalnız görünürlüğü değiştirir, kutu boyu oynamaz */
@@ -10,8 +11,8 @@
 .az-site .sw { position: absolute; left: 14px; top: 14px; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--glass-b); border: 1px solid rgba(255, 255, 255, .9); backdrop-filter: blur(12px); }
 .az-site .sw button { padding: 8px 14px; border: 0; border-radius: 999px; background: none; font: inherit; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-60); cursor: pointer; }
 .az-site .sw button.on { background: var(--sea); color: #fff; }
-.az-site .info { padding: clamp(20px, 2.4vw, 32px); border-radius: var(--r); background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 18px 50px rgba(13, 35, 38, .06); }
-.az-site dl { margin: 0; }
+.az-site .info { display: flex; flex-direction: column; padding: clamp(20px, 2.4vw, 32px); border-radius: var(--r); background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 18px 50px rgba(13, 35, 38, .06); }
+.az-site dl { margin: 0; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .az-site dl > div { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--hair); }
 .az-site dl > div:first-child { padding-top: 0; }
 .az-site dt { font-size: 14.5px; color: var(--ink-60); }
@@ -19,7 +20,8 @@
 .az-site .lg { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
 .az-site .lg li { padding: 8px 13px; border-radius: 999px; background: var(--sky-2); font-size: 13px; font-weight: 500; color: var(--ink); }
 .az-site .note { margin-top: 16px; font-size: 12px; color: var(--ink-40); }
-@media (max-width: 900px) { .az-site .grid { grid-template-columns: minmax(0, 1fr); } }
+/* dar ekranda kart plandan uzun kalıyordu: tek sütun, kart planın altında */
+@media (max-width: 1320px) { .az-site .grid { grid-template-columns: minmax(0, 1fr); } .az-site dl { flex: none; } }
 
 /* ---- 5 Sıfır ödeme modeli ---- */
 .az-pay .card {
@@ -41,10 +43,12 @@
 .az-pay .steps li { display: flex; gap: 14px; align-items: baseline; padding: 11px 0; border-top: 1px solid rgba(255, 255, 255, .18); font-size: 15px; color: rgba(255, 255, 255, .92); }
 .az-pay .steps li:first-child { border-top: 0; padding-top: 0; }
 .az-pay .steps i { flex: none; font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: .08em; color: #e6c56a; font-variant-numeric: tabular-nums; }
-.az-pay .q { margin: 22px 0 24px; padding: 18px 20px; border-radius: 18px; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .18); }
+.az-pay .q { margin: 22px 0 0; padding: 18px 20px; border-radius: 18px; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .18); }
 .az-pay .q h3 { font-size: clamp(19px, 1.7vw, 23px); font-weight: 400; letter-spacing: -.02em; color: #fff; }
 .az-pay .q p { margin-top: 8px; font-size: 14px; line-height: 1.55; color: rgba(255, 255, 255, .8); }
 .az-pay .az-note-sm { margin-top: 14px; }
+/* talep düğmesi sol sütunda sıfırların altında: kart sağ sütunun altına uzamasın */
+.az-pay .l > .az-btn { margin-top: 30px; }
 @media (max-width: 900px) { .az-pay .card { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 600px) {
   .az-pay .zeros { gap: 12px 8px; justify-content: space-between; }

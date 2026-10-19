@@ -81,7 +81,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
 
   const isActive = (path: string) => clean === path || (path !== "/" && clean.startsWith(path + "/"));
   const nav = NAV_TEXT[locale];
-  const items = navItems(locale, LOCALE_META[locale].blog);
+  const items = navItems(locale);
   const ph = PROJECT_HASH[locale];
   const linkOf = (c: NavLink) => c.external ?? `${href(locale, c.path)}${c.hash ? `#${c.hash}` : ""}`;
   const itemOn = (it: NavItem) => isActive(it.path) || it.children.some((c) => c.path && isActive(c.path));

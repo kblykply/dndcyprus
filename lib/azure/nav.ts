@@ -1,7 +1,7 @@
 // Üst menü (Ekim 2026, müşterinin "DND Cyprus web sitesi akış" belgesi): 7 başlık ve alt başlıkları.
 // Alt başlık bir sayfanın bölümüne (#id) bağlanır. Satış sonrası, kira geliri ve etkinlik metinleri genel ve rakamsız
 // (müşteriden ayrıntı bekleniyor); kampanyalar sitede yayımlanmış ödeme modelleri.
-import { CONTACT, type Locale, type ProjectSlug } from "./site";
+import type { Locale, ProjectSlug } from "./site";
 
 export type NavLink = { label: string; path: string; hash?: string; external?: string };
 export type NavItem = { key: string; label: string; path: string; children: NavLink[] };
@@ -86,38 +86,18 @@ export const NAV_TEXT: Record<Locale, Copy> = {
   },
 };
 
-/** Menü başlıkları (projeler hariç; projeler mega menüsü PROJECT_GROUPS'tan). blog: o dilde Yazılar var mı */
-export function navItems(locale: Locale, blog: boolean): NavItem[] {
+/**
+ * Menü başlıkları (projeler hariç; projeler mega menüsü PROJECT_GROUPS'tan). Akış belgesine göre (Ekim 2026) yalnız
+ * Projelerimiz açılır menü; diğer başlıklar doğrudan sayfaya gider, belgedeki "alt sayfalar" o sayfanın bölümleridir
+ * (bağlantıları SECTION_IDS'te: ör. /advantage#satis-sonrasi).
+ */
+export function navItems(locale: Locale): NavItem[] {
   const t = NAV_TEXT[locale];
-  const id = SECTION_IDS[locale];
   return [
-    { key: "advantage", label: t.advantage, path: "/advantage", children: [
-      { label: t.quality, path: "/advantage", hash: id.quality },
-      { label: t.social, path: "/advantage", hash: id.social },
-      { label: t.aftersales, path: "/advantage", hash: id.aftersales },
-      { label: t.perks, path: "/advantage", hash: id.perks },
-    ] },
-    { key: "payment", label: t.payment, path: "/payment-plans", children: [
-      { label: t.tl, path: "/payment-plans", hash: id.tl },
-      { label: t.campaigns, path: "/payment-plans", hash: id.campaigns },
-      { label: t.rental, path: "/payment-plans", hash: id.rental },
-    ] },
-    { key: "about", label: t.about, path: "/about", children: [
-      { label: t.story, path: "/about", hash: id.story },
-      { label: t.founders, path: "/about", hash: id.founders },
-      { label: t.usa, path: "/about", hash: id.usa },
-      { label: t.numbers, path: "/about", hash: id.numbers },
-      { label: t.awards, path: "/about", hash: id.awards },
-    ] },
-    { key: "news", label: t.news, path: "/press", children: [
-      ...(blog ? [{ label: t.dndNews, path: "/blog" }] : []),
-      { label: t.press, path: "/press" },
-      { label: t.events, path: "/press", hash: id.events },
-    ] },
-    { key: "contact", label: t.contact, path: "/contact", children: [
-      { label: t.offices, path: "/contact", hash: id.offices },
-      { label: t.form, path: "/contact", hash: id.form },
-      { label: t.whatsapp, path: "", external: `https://wa.me/${CONTACT.whatsapp}` },
-    ] },
+    { key: "advantage", label: t.advantage, path: "/advantage", children: [] },
+    { key: "payment", label: t.payment, path: "/payment-plans", children: [] },
+    { key: "about", label: t.about, path: "/about", children: [] },
+    { key: "news", label: t.news, path: "/press", children: [] },
+    { key: "contact", label: t.contact, path: "/contact", children: [] },
   ];
 }

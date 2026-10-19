@@ -70,12 +70,15 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
             <span className="go">{t.tl.cta} <Arrow /></span>
           </Link>
           <Link className="card neo rv d1" href={`${href(locale, "/neocity")}#${PROJECT_UI[locale].ids.payment}`} prefetch={false}>
-            <Image className="bg" src="/neocity/g-09.jpg" alt="" fill quality={70} sizes="(min-width: 900px) 46vw, 100vw" />
-            <span className="k">{t.neo.k}</span>
-            <ul className="zeros">{t.neo.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}</ul>
-            <h3>{t.neo.h}</h3>
-            <p>{t.neo.p}</p>
-            <span className="go">{t.neo.cta} <Arrow /></span>
+            {/* fotoğraf katmansız ve net (renk katmanı yok); 5 Sıfır anlatımı altında düz zeminde */}
+            <span className="ph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={72} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <span className="b">
+              <span className="k">{t.neo.k}</span>
+              <ul className="zeros">{t.neo.zeros.map((z) => <li key={z}><b>0</b><span>{z}</span></li>)}</ul>
+              <h3>{t.neo.h}</h3>
+              <p>{t.neo.p}</p>
+              <span className="go">{t.neo.cta} <Arrow /></span>
+            </span>
           </Link>
         </div>
         <p className="az-note-sm">{t.note}</p>

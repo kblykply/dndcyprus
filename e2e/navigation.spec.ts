@@ -18,14 +18,15 @@ test.describe("masaüstü menü", () => {
     await expect(drop).toBeHidden();
   });
 
-  // menü (müşterinin akış belgesi): alt başlık, ilgili sayfanın bölümüne gider
-  test("DND Ayrıcalığı → Satış Sonrası Hizmetler sayfanın o bölümünü açar", async ({ page }) => {
+  // menü (müşterinin akış belgesi): yalnız Projelerimiz açılır; diğer başlıklar doğrudan sayfaya gider
+  test("DND Ayrıcalığı ve İletişim doğrudan sayfaya gider (açılır liste yok)", async ({ page }) => {
     await page.goto("/tr");
     const nav = page.locator("#az-nav");
-    await nav.getByRole("button", { name: "DND Ayrıcalığı" }).hover();
-    await nav.getByRole("link", { name: "Satış Sonrası Hizmetler" }).click();
-    await expect(page).toHaveURL(/\/tr\/advantage#satis-sonrasi$/);
-    await expect(page.locator("#satis-sonrasi")).toBeInViewport();
+    await expect(nav.getByRole("button", { name: "DND Ayrıcalığı" })).toHaveCount(0);
+    await nav.getByRole("link", { name: "DND Ayrıcalığı", exact: true }).click();
+    await expect(page).toHaveURL(/\/tr\/advantage$/);
+    await nav.getByRole("link", { name: "İletişim", exact: true }).click();
+    await expect(page).toHaveURL(/\/tr\/contact$/);
   });
 
   test("ana sayfada logo sayfanın başına çıkarır", async ({ page }) => {
