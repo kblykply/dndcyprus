@@ -107,7 +107,7 @@ export default function HeroSlider({ slides, brand, label, cta, prev, next, paus
               {slides.map((x, k) => (
                 <button key={x.key} type="button" className={k === i ? "on" : undefined} aria-current={k === i ? "true" : undefined} aria-label={x.name} onClick={() => go(k)}>
                   <span>{x.short}</span>
-                  <i>{k === i ? <b key={`${i}-${auto}`} className={auto ? "run" : undefined} style={{ "--dur": `${DUR}ms`, animationPlayState: paused ? "paused" : "running" } as CSSProperties} onAnimationEnd={() => go(i + 1)} /> : null}</i>
+                  <i>{k === i ? <b key={`${i}-${auto}`} className={auto ? "run" : undefined} style={{ "--dur": `${DUR}ms`, animationPlayState: paused ? "paused" : "running" } as CSSProperties} onAnimationEnd={() => { if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) go(i + 1); }} /> : null}</i>
                 </button>
               ))}
             </div>
