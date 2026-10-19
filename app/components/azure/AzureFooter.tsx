@@ -23,7 +23,7 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
   const general = [
     { path: "/", label: n.home }, { path: "/advantage", label: NAV_TEXT[locale].advantage }, { path: "/payment-plans", label: NAV_TEXT[locale].paymentShort },
     { path: "/about", label: n.about }, { path: "/team", label: n.team }, { path: "/press", label: n.press },
-    ...(LOCALE_META[locale].blog ? [{ path: "/blog", label: n.blog }] : []),
+    ...(LOCALE_META[locale].blog ? [{ path: "/blog", label: NAV_TEXT[locale].dndNews }] : []),
     { path: "/dndcyprus", label: n.media }, { path: "/contact", label: n.contact },
   ];
   return (

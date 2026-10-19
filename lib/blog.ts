@@ -1,3 +1,6 @@
+import type { Locale } from "./azure/site";
+import { BLOG_I18N } from "./blog-i18n";
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -111,3 +114,16 @@ export const BLOG_POSTS: BlogPost[] = [
 },
 
 ];
+
+// ---- dillere göre yazılar (EN/DE/RU/PL çevirileri lib/blog-i18n.ts) ----
+
+/** Türkçe yazının o dildeki hali: başlık, özet, yazar ve metin çevrilir; slug, tarih ve kapak aynı */
+export function blogPosts(locale: Locale): BlogPost[] {
+  if (locale === "tr") return BLOG_POSTS;
+  const t = BLOG_I18N[locale];
+  return BLOG_POSTS.map((p) => {
+    const x = t[p.slug];
+    // "Admin" imzası çevrilmez, yalnız basın bülteni imzası dile göre (x.author)
+    return x ? { ...p, title: x.title, excerpt: x.excerpt, content: x.content, author: x.author ?? (p.author === "Admin" ? undefined : p.author) } : p;
+  });
+}

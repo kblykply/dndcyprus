@@ -30,7 +30,7 @@ export default function AzureHeader({ locale }: { locale: Locale }) {
 
   // dil değiştirince aynı sayfanın diğer dil sürümüne git
   const clean = stripLocale(pathname);
-  const langTarget = (target: Locale) => href(target, clean.startsWith("/blog") && !LOCALE_META[target].blog ? "/" : clean); // blog yalnızca Türkçe
+  const langTarget = (target: Locale) => href(target, clean.startsWith("/blog") && !LOCALE_META[target].blog ? "/" : clean); // blog artık her dilde (LOCALE_META.blog), kural yeni bir tek dilli bölüm için kalıyor
   const switchTo = (target: Locale) => {
     if (target === locale) return;
     router.push(langTarget(target));

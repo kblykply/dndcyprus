@@ -43,17 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
   });
 
-  // Yalnızca Türkçe olan blog
-  const blog: MetadataRoute.Sitemap = [
-    { url: abs("tr", "/blog"), changeFrequency: "weekly", priority: 0.6 },
-    ...BLOG_POSTS.map((post) => ({
-      url: abs("tr", `/blog/${post.slug}`),
-      lastModified: post.date ? new Date(post.date) : undefined,
-      images: post.cover ? [new URL(post.cover, SITE_URL).href] : undefined,
-      changeFrequency: "yearly" as const,
-      priority: 0.5,
-    })),
-  ];
+  // DND'den Haberler: her dilde liste ve yazılar
+  const blogPaths = [{ path: "/blog", lastModified: undefined as Date | undefined, images: undefined as string[] | undefined, priority: 0.6, changeFrequency: "weekly" as Freq },
+    ...BLOG_POSTS.map((post) => ({ path: `/blog/${post.slug}`, lastModified: post.date ? new Date(post.date) : undefined, images: post.cover ? [new URL(post.cover, SITE_URL).href] : undefined, priority: 0.5, changeFrequency: "yearly" as Freq }))];
+  const blog: MetadataRoute.Sitemap = blogPaths.flatMap(({ path, ...rest }) => {
+    const languages = { ...Object.fromEntries(LOCALES.map((l) => [l, abs(l, path)])), "x-default": abs("en", path) };
+    return LOCALES.map((locale) => ({ url: abs(locale, path), ...rest, alternates: { languages } }));
+  });
 
   return [...pages, ...blog];
 }

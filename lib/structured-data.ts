@@ -1,3 +1,4 @@
+import type { Locale } from "./azure/site";
 import type { BlogPost } from "./blog";
 import { SITE_NAME, SITE_URL } from "./seo";
 
@@ -26,8 +27,8 @@ export const ORGANIZATION_JSON_LD = {
   ],
 };
 
-export function blogPostingJsonLd(post: BlogPost) {
-  const url = `${SITE_URL}/tr/blog/${post.slug}`;
+export function blogPostingJsonLd(post: BlogPost, locale: Locale = "tr") {
+  const url = `${SITE_URL}/${locale}/blog/${post.slug}`;
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -36,7 +37,7 @@ export function blogPostingJsonLd(post: BlogPost) {
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     headline: post.title,
     description: post.excerpt,
-    inLanguage: "tr",
+    inLanguage: locale,
     ...(post.cover ? { image: [new URL(post.cover, SITE_URL).href] } : {}),
     datePublished: post.date,
     // Current bylines ("Admin", "Basın Bülteni") do not identify a person.

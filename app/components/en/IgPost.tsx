@@ -23,7 +23,6 @@ const fadeUp: Variants = {
 
 const IG_URLS = [
   "https://www.instagram.com/p/DP0mSn8gK1h/",
-  "https://www.instagram.com/reel/DNIOMH0MjBT/",
   "https://www.instagram.com/p/DQGqJSyDMM7/",
   "https://www.instagram.com/p/DPD0UpLjKdL/",
   "https://www.instagram.com/p/DOVeAdtDJDv/",
@@ -33,7 +32,6 @@ const IG_URLS = [
 const IG_MEDIA: Record<string, Omit<IgPost, "url">> = {
   DQoFlJHjIa5: { kind: "image", media: "/instagram/DQoFlJHjIa5.webp", poster: "/instagram/DQoFlJHjIa5.webp", caption: "✨ Hayaller Gerçek Oldu: DND Cyprus, La Joya Rezidansları ve Tatil Köyü’nün Tamamlandığını Duyurdu" },
   DP0mSn8gK1h: { kind: "image", media: "/instagram/DP0mSn8gK1h.webp", poster: "/instagram/DP0mSn8gK1h.webp", caption: "✨ Inspired by Nature, Designed for You 🌿" },
-  DNIOMH0MjBT: { kind: "reel", media: "/instagram/DNIOMH0MjBT.mp4", poster: "/instagram/DNIOMH0MjBT.webp", caption: "£900’DAN BAŞLAYAN TAKSİTLERLE!" },
   DQGqJSyDMM7: { kind: "reel", media: "/instagram/DQGqJSyDMM7.mp4", poster: "/instagram/DQGqJSyDMM7.webp", caption: "North Cyprus — The Rising Star of the Mediterranean" },
   DPD0UpLjKdL: { kind: "reel", media: "/instagram/DPD0UpLjKdL.mp4", poster: "/instagram/DPD0UpLjKdL.webp", caption: "La Joya: The First Project of the Collection, Trust in Investment, Prestige in Living" },
   DOVeAdtDJDv: { kind: "reel", media: "/instagram/DOVeAdtDJDv.mp4", poster: "/instagram/DOVeAdtDJDv.webp", caption: "The Real Campaign by DND Cyprus. The Real Opportunity. Your Place at Lagoon Verde is Ready" },

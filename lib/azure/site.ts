@@ -8,10 +8,10 @@ export const LOCALES = ["tr", "en", "de", "ru", "pl"] as const satisfies readonl
 export const DEFAULT_LOCALE: Locale = "tr";
 export const LOCALE_META: Record<Locale, { name: string; short: string; og: string; blog: boolean }> = {
   tr: { name: "Türkçe", short: "TR", og: "tr_TR", blog: true },
-  en: { name: "English", short: "EN", og: "en_GB", blog: false },
-  de: { name: "Deutsch", short: "DE", og: "de_DE", blog: false },
-  ru: { name: "Русский", short: "RU", og: "ru_RU", blog: false },
-  pl: { name: "Polski", short: "PL", og: "pl_PL", blog: false },
+  en: { name: "English", short: "EN", og: "en_GB", blog: true },
+  de: { name: "Deutsch", short: "DE", og: "de_DE", blog: true },
+  ru: { name: "Русский", short: "RU", og: "ru_RU", blog: true },
+  pl: { name: "Polski", short: "PL", og: "pl_PL", blog: true },
 };
 export const isLocale = (v: unknown): v is Locale => typeof v === "string" && (LOCALES as readonly string[]).includes(v);
 /** Yoldan dili ayıkla: "/de/about" → "de"; dil öneki yoksa "tr" */

@@ -23,7 +23,6 @@ const fadeUp: Variants = {
 
 const IG_URLS = [
   "https://www.instagram.com/p/DP0mSn8gK1h/",
-  "https://www.instagram.com/reel/DNIOMH0MjBT/",
   "https://www.instagram.com/p/DQGqJSyDMM7/",
   "https://www.instagram.com/p/DPD0UpLjKdL/",
   "https://www.instagram.com/p/DOVeAdtDJDv/",
@@ -33,7 +32,6 @@ const IG_URLS = [
 const IG_MEDIA: Record<string, Omit<IgPost, "url">> = {
   DQoFlJHjIa5: { kind: "image", media: "/instagram/DQoFlJHjIa5.webp", poster: "/instagram/DQoFlJHjIa5.webp", caption: "✨ Мечты сбылись: DND Cyprus объявила о завершении резиденций и курортного комплекса La Joya" },
   DP0mSn8gK1h: { kind: "image", media: "/instagram/DP0mSn8gK1h.webp", poster: "/instagram/DP0mSn8gK1h.webp", caption: "✨ Вдохновлено природой, создано для вас 🌿" },
-  DNIOMH0MjBT: { kind: "reel", media: "/instagram/DNIOMH0MjBT.mp4", poster: "/instagram/DNIOMH0MjBT.webp", caption: "РАССРОЧКА ОТ £900!" },
   DQGqJSyDMM7: { kind: "reel", media: "/instagram/DQGqJSyDMM7.mp4", poster: "/instagram/DQGqJSyDMM7.webp", caption: "Северный Кипр — восходящая звезда Средиземноморья" },
   DPD0UpLjKdL: { kind: "reel", media: "/instagram/DPD0UpLjKdL.mp4", poster: "/instagram/DPD0UpLjKdL.webp", caption: "La Joya: первый проект коллекции. Надёжность инвестиций, престиж жизни" },
   DOVeAdtDJDv: { kind: "reel", media: "/instagram/DOVeAdtDJDv.mp4", poster: "/instagram/DOVeAdtDJDv.webp", caption: "Настоящая кампания от DND Cyprus. Настоящая возможность. Ваше место в Lagoon Verde уже ждёт" },
