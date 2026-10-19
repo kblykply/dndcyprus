@@ -32,14 +32,15 @@ const PRESS_ITEMS: PressItem[] = [
     tags: ["Lagoon Verde", "Оплата в лирах"],
   },
   {
-    id: "cekicmagazin-2026-10-14",
-    outlet: "Çekiç Magazin",
-    title: "DND Cyprus предлагает местным жителям финансирование жилья в турецких лирах",
-    url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
-    excerpt: "DND Cyprus разработала новую модель финансирования, чтобы жителям Северного Кипра с доходом в турецких лирах было проще стать владельцами жилья. Система предусматривает рассрочку до 60 месяцев без процентов и без наценки за срок; взносы периодически пересматриваются вслед за ростом минимальной зарплаты в ТРСК.",
-    date: "2026-10-14",
-    cover: "/news/tl-konut-finansmani-v3.webp",
-    tags: ["Оплата в лирах", "DND Cyprus"],
+    // 19 Ekim 2026: Lagoon Verde TL modeli. Aynı içerikli Çekiç Magazin haberinin (MHA ile aynı başlık ve görsel) yerine
+    id: "fuardergisi-2026-10-19",
+    outlet: "Fuar Dergisi",
+    title: "DND Cyprus продаёт жильё на Северном Кипре за лиры вместо фунтов",
+    url: "https://www.fuardergisi.com.tr/dnd-cyprustan-kuzey-kibrista-sterlin-yerine-tl-ile-konut-satis-modeli",
+    excerpt: "DND Cyprus ввела модель оплаты в турецких лирах для ограниченного числа резиденций в Lagoon Verde. По плану с финансированием от компании сроком до 60 месяцев платежи вносятся в лирах, а взносы периодически пересматриваются вслед за ростом минимальной зарплаты в ТРСК, а не по курсу фунта.",
+    date: "2026-10-19",
+    cover: "/news/fuardergisi-lagoon-verde-tl.webp",
+    tags: ["Lagoon Verde", "Оплата в лирах"],
   },
   {
     id: "50fifty-2026-10-14",

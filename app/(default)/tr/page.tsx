@@ -33,14 +33,15 @@ const PRESS_ITEMS: PressItem[] = [
     tags: ["Lagoon Verde", "TL Ödeme Modeli"],
   },
   {
-    id: "cekicmagazin-2026-10-14",
-    outlet: "Çekiç Magazin",
-    title: "DND Cyprus’tan yerli halka Türk lirasıyla konut finansmanı",
-    url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
-    excerpt: "DND Cyprus, Kuzey Kıbrıs’ta gelirini Türk lirası üzerinden elde edenlerin konut sahibi olmasını kolaylaştırmak için yeni bir finansman modeli geliştirdi. 60 aya kadar faizsiz ve vade farksız ödeme imkânı sunan sistemde taksitler, KKTC asgari ücretindeki artış oranına göre dönemsel olarak güncelleniyor.",
-    date: "2026-10-14",
-    cover: "/news/tl-konut-finansmani-v3.webp",
-    tags: ["TL Ödeme Modeli", "DND Cyprus"],
+    // 19 Ekim 2026: Lagoon Verde TL modeli. Aynı içerikli Çekiç Magazin haberinin (MHA ile aynı başlık ve görsel) yerine
+    id: "fuardergisi-2026-10-19",
+    outlet: "Fuar Dergisi",
+    title: "DND Cyprus’tan Kuzey Kıbrıs’ta sterlin yerine TL ile konut satış modeli",
+    url: "https://www.fuardergisi.com.tr/dnd-cyprustan-kuzey-kibrista-sterlin-yerine-tl-ile-konut-satis-modeli",
+    excerpt: "DND Cyprus, Lagoon Verde projesindeki sınırlı sayıda rezidans için Türk lirası bazlı yeni bir ödeme modeli geliştirdi. Şirket finansmanıyla sunulan 60 aya kadar vadeli planda ödemeler Türk lirasıyla yapılıyor; taksitler sterlin kuru yerine KKTC asgari ücretindeki artış oranına göre dönemsel olarak güncelleniyor.",
+    date: "2026-10-19",
+    cover: "/news/fuardergisi-lagoon-verde-tl.webp",
+    tags: ["Lagoon Verde", "TL Ödeme Modeli"],
   },
   {
     id: "50fifty-2026-10-14",

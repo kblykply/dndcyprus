@@ -32,14 +32,15 @@ const PRESS_ITEMS: PressItem[] = [
     tags: ["Lagoon Verde", "Płatności w lirach"],
   },
   {
-    id: "cekicmagazin-2026-10-14",
-    outlet: "Çekiç Magazin",
-    title: "DND Cyprus wprowadza finansowanie zakupu domu w lirach tureckich dla mieszkańców wyspy",
-    url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
-    excerpt: "DND Cyprus opracował nowy model finansowania, który ułatwia zakup domu mieszkańcom Cypru Północnego zarabiającym w lirach tureckich. System przewiduje do 60 miesięcy nieoprocentowanych płatności bez dopłat za rozłożenie na raty, a wysokość rat jest okresowo aktualizowana zgodnie ze wzrostem płacy minimalnej w TRCP.",
-    date: "2026-10-14",
-    cover: "/news/tl-konut-finansmani-v3.webp",
-    tags: ["Płatności w lirach", "DND Cyprus"],
+    // 19 Ekim 2026: Lagoon Verde TL modeli. Aynı içerikli Çekiç Magazin haberinin (MHA ile aynı başlık ve görsel) yerine
+    id: "fuardergisi-2026-10-19",
+    outlet: "Fuar Dergisi",
+    title: "DND Cyprus sprzedaje domy na Cyprze Północnym za liry zamiast funtów",
+    url: "https://www.fuardergisi.com.tr/dnd-cyprustan-kuzey-kibrista-sterlin-yerine-tl-ile-konut-satis-modeli",
+    excerpt: "DND Cyprus wprowadził model płatności w lirach tureckich dla ograniczonej liczby apartamentów w Lagoon Verde. W planie finansowanym przez firmę, na okres do 60 miesięcy, płatności dokonuje się w lirach, a raty są okresowo aktualizowane zgodnie ze wzrostem płacy minimalnej w TRCP, a nie kursem funta.",
+    date: "2026-10-19",
+    cover: "/news/fuardergisi-lagoon-verde-tl.webp",
+    tags: ["Lagoon Verde", "Płatności w lirach"],
   },
   {
     id: "50fifty-2026-10-14",

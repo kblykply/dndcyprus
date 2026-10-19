@@ -32,14 +32,15 @@ const PRESS_ITEMS: PressItem[] = [
     tags: ["Lagoon Verde", "TL Payment Model"],
   },
   {
-    id: "cekicmagazin-2026-10-14",
-    outlet: "Çekiç Magazin",
-    title: "DND Cyprus Brings Turkish Lira Home Financing to Local Residents",
-    url: "https://cekicmagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani",
-    excerpt: "DND Cyprus has developed a new financing model to make home ownership easier for people in North Cyprus who earn in Turkish lira. The system offers up to 60 months of interest-free payments with no maturity difference, with instalments updated periodically in line with the TRNC minimum wage increase.",
-    date: "2026-10-14",
-    cover: "/news/tl-konut-finansmani-v3.webp",
-    tags: ["TL Payment Model", "DND Cyprus"],
+    // 19 Ekim 2026: Lagoon Verde TL modeli. Aynı içerikli Çekiç Magazin haberinin (MHA ile aynı başlık ve görsel) yerine
+    id: "fuardergisi-2026-10-19",
+    outlet: "Fuar Dergisi",
+    title: "DND Cyprus Offers Homes in North Cyprus in Turkish Lira Instead of Sterling",
+    url: "https://www.fuardergisi.com.tr/dnd-cyprustan-kuzey-kibrista-sterlin-yerine-tl-ile-konut-satis-modeli",
+    excerpt: "DND Cyprus has introduced a Turkish lira payment model for a limited number of residences at Lagoon Verde. Under the company-financed plan of up to 60 months, payments are made in lira and instalments are updated periodically in line with the TRNC minimum wage increase rather than the sterling exchange rate.",
+    date: "2026-10-19",
+    cover: "/news/fuardergisi-lagoon-verde-tl.webp",
+    tags: ["Lagoon Verde", "TL Payment Model"],
   },
   {
     id: "50fifty-2026-10-14",
