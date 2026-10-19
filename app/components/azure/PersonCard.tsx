@@ -81,7 +81,7 @@ export function OzanCard({ locale, heading }: { locale: Locale; heading?: "h2" |
   );
 }
 
-/** Aynur Zorba Güloğlu: portre sağda */
+/** Aynur Zorba Güloğlu (Hakkımızda'da Ozan Bey ve Netice Hanım'dan sonra: portre solda, kartlar sağ-sol sırayla) */
 export function AynurCard({ locale, heading }: { locale: Locale; heading?: "h2" | "h3" }) {
-  return <PersonCard person={HOME[locale].leadership.people[1]} heading={heading} flip />;
+  return <PersonCard person={HOME[locale].leadership.people[1]} heading={heading} />;
 }

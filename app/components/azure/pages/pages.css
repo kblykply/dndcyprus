@@ -1,5 +1,5 @@
 /* Yeni sayfa bölümleri: görsel + metin (az-split), kampanyalar (az-camp), etkinlikler (az-events), S.S.S. (az-pfaq),
-   DND Homes Amerika (az-usa), kurucu ortak (az-partner). Sitenin cam kart / deniz rengi dili. */
+   DND Homes Amerika (az-usa). Sitenin cam kart / deniz rengi dili. */
 
 /* ---- görsel + metin ---- */
 .az-split .g { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 4.4vw, 72px); align-items: center; }
@@ -62,16 +62,6 @@
 .az-usa .ph figure:nth-child(2) { margin-top: 40px; }
 @media (max-width: 1000px) { .az-usa .g { grid-template-columns: minmax(0, 1fr); } }
 
-/* ---- kurucu ortak ---- */
-.az-partner .card { display: flex; gap: clamp(18px, 3vw, 36px); align-items: center; padding: clamp(22px, 3vw, 36px); border-radius: calc(var(--r) + 4px);
-  background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 18px 50px rgba(13, 35, 38, .06); }
-.az-partner .ini { flex: none; display: grid; place-items: center; width: clamp(72px, 9vw, 104px); aspect-ratio: 1; border-radius: 50%;
-  background: linear-gradient(135deg, var(--sea), var(--sea-deep)); color: #fff; font-family: var(--font-display), sans-serif; font-size: clamp(24px, 3vw, 34px); letter-spacing: .02em; }
-.az-partner small { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
-.az-partner h2 { margin-top: 6px; font-size: clamp(24px, 2.4vw, 32px); font-weight: 400; letter-spacing: -.02em; }
-.az-partner p { margin-top: 8px; font-size: 15.5px; line-height: 1.6; color: var(--ink-60); max-width: 70ch; }
-@media (max-width: 560px) { .az-partner .card { flex-direction: column; align-items: flex-start; } }
-
 /* kira bölümü: "Neden Kuzey Kıbrıs?" rakamları ve iki düğme */
 .az-split .stats { margin: 4px 0 24px; padding: 16px 18px; border-radius: 18px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); }
 .az-split .stats small { display: block; margin-bottom: 10px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
@@ -107,5 +97,3 @@
 @media (max-width: 560px) { .az-ulfet-row .pic { width: 84px; } .az-ulfet-row b { font-size: 14px; } }
 
 /* kurucu ortak alıntısı */
-.az-partner blockquote { margin: 14px 0 0; padding-left: 14px; border-left: 2px solid var(--coral); }
-.az-partner q { font-size: 15.5px; line-height: 1.55; color: var(--ink); quotes: "“" "”"; }

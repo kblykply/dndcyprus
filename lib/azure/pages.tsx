@@ -34,7 +34,7 @@ export type PagesCopy = {
   events: { kicker: string; title: ReactNode; lead: string; items: Event[]; follow: string };
   about: {
     usa: { kicker: string; title: ReactNode; p: string[]; stat: string; photos: string[]; link: string };
-    partner: { role: string; p: string; quote: string; label: string };
+    partner: { role: string; bio: string; quote: string; dl: [string, string][] };
     numbersUsa: string;
     numbersTitle: ReactNode;
   };
@@ -104,7 +104,7 @@ const TR: PagesCopy = {
       p: ["DND Homes, 2017 yılında Boston’da kuruldu. Boston bölgesinde, özellikle Cambridge ve çevresinde konut projeleri geliştiren şirket, arsadan tasarıma, inşaattan teslimata kadar geliştirme sürecinin tamamını kendi bünyesinde yönetiyor.", "DND Cyprus, grubun Amerika’da edindiği gayrimenkul geliştirme deneyimini Kuzey Kıbrıs’a taşıyor; özellikle İskele bölgesinde resort yaşam anlayışını modern konut mimarisiyle bir araya getiriyor."],
       stat: "Massachusetts’te DND Homes imzalı tamamlanmış proje", photos: ["15 Tyler Road, Lexington, MA", "131 Dane Hill Road, Newton, MA"], link: "DND Homes web sitesi",
     },
-    partner: { role: "Kurucu Ortak & Yönetim Kurulu Başkan Yardımcısı", p: "Şirketin büyüme stratejisinde, kurumsal gelişiminde ve marka vizyonunda aktif rol üstleniyor. Kalite, tasarım ve müşteri deneyiminde yüksek standartlara odaklanıyor; DND Cyprus’u uluslararası platformlarda ve PropertyNC Awards’ta temsil ediyor.", quote: "Kalite, güven ve güçlü marka değerleriyle, insanların yaşamına ve yatırımına kalıcı değer katan projeler yaratmak.", label: "DND’nin arkasındaki isimler" },
+    partner: { role: "Kurucu Ortak & Yönetim Kurulu Başkan Yardımcısı", bio: "DND’nin kurucu ortağı olarak şirketin büyüme stratejisinde, kurumsal gelişiminde ve marka vizyonunda aktif rol üstleniyor; kalite, tasarım ve müşteri deneyiminde yüksek standartlara odaklanıyor.", quote: "Kalite, güven ve güçlü marka değerleriyle, insanların yaşamına ve yatırımına kalıcı değer katan projeler yaratmak.", dl: [["Liderlik", "Strateji · Denetim · Uygulama"], ["Temsil", "Uluslararası platformlar · PropertyNC Awards"], ["DND ödülleri", "PropertyNC Awards 2025 · 1 Platin · 2 Altın"]] },
     numbersUsa: "ABD’de tamamlanan proje (DND Homes)",
     numbersTitle: <>Boston’dan İskele’ye, <b>rakamlarla.</b></>,
   },
@@ -174,7 +174,7 @@ const EN: PagesCopy = {
       p: ["DND Homes was founded in Boston in 2017. Developing residential projects in the Boston area, particularly in and around Cambridge, the company manages the entire development process in-house — from land and design to construction and handover.", "DND Cyprus brings the group’s US development experience to North Cyprus, combining resort living with modern residential architecture, especially in the İskele region."],
       stat: "completed DND Homes projects in Massachusetts", photos: ["15 Tyler Road, Lexington, MA", "131 Dane Hill Road, Newton, MA"], link: "DND Homes website",
     },
-    partner: { role: "Co-founder & Vice Chair", p: "She plays an active role in the company’s growth strategy, corporate development and brand vision, focuses on high standards in quality, design and customer experience, and represents DND Cyprus on international platforms and at the PropertyNC Awards.", quote: "Creating projects that add lasting value to people’s lives and investments through quality, trust and strong brand values.", label: "The people behind DND" },
+    partner: { role: "Co-founder & Vice Chair", bio: "As co-founder of DND, she plays an active role in the company’s growth strategy, corporate development and brand vision, with a focus on high standards in quality, design and customer experience.", quote: "Creating projects that add lasting value to people’s lives and investments through quality, trust and strong brand values.", dl: [["Leadership", "Strategy · Oversight · Execution"], ["Representation", "International platforms · PropertyNC Awards"], ["DND awards", "PropertyNC Awards 2025 · 1 Platinum · 2 Gold"]] },
     numbersUsa: "completed projects in the USA (DND Homes)",
     numbersTitle: <>From Boston to İskele, <b>in numbers.</b></>,
   },
@@ -244,7 +244,7 @@ const DE: PagesCopy = {
       p: ["DND Homes wurde 2017 in Boston gegründet. Das Unternehmen entwickelt Wohnprojekte im Großraum Boston, vor allem in und um Cambridge, und steuert den gesamten Entwicklungsprozess selbst – vom Grundstück über Planung und Bau bis zur Übergabe.", "DND Cyprus bringt die in den USA gewonnene Erfahrung der Gruppe nach Nordzypern und verbindet vor allem in der Region İskele Resort-Leben mit moderner Wohnarchitektur."],
       stat: "fertiggestellte DND-Homes-Projekte in Massachusetts", photos: ["15 Tyler Road, Lexington, MA", "131 Dane Hill Road, Newton, MA"], link: "Website von DND Homes",
     },
-    partner: { role: "Mitgründerin & stellvertretende Vorsitzende", p: "Sie wirkt aktiv an Wachstumsstrategie, Unternehmensentwicklung und Markenvision mit, setzt auf hohe Standards in Qualität, Design und Kundenerlebnis und vertritt DND Cyprus auf internationalen Plattformen und bei den PropertyNC Awards.", quote: "Mit Qualität, Vertrauen und starken Markenwerten Projekte schaffen, die dem Leben und der Investition der Menschen bleibenden Wert verleihen.", label: "Die Menschen hinter DND" },
+    partner: { role: "Mitgründerin & stellvertretende Vorsitzende", bio: "Als Mitgründerin von DND wirkt sie aktiv an Wachstumsstrategie, Unternehmensentwicklung und Markenvision mit und setzt auf hohe Standards in Qualität, Design und Kundenerlebnis.", quote: "Mit Qualität, Vertrauen und starken Markenwerten Projekte schaffen, die dem Leben und der Investition der Menschen bleibenden Wert verleihen.", dl: [["Führung", "Strategie · Aufsicht · Umsetzung"], ["Repräsentation", "Internationale Plattformen · PropertyNC Awards"], ["DND-Auszeichnungen", "PropertyNC Awards 2025 · 1× Platin · 2× Gold"]] },
     numbersUsa: "fertiggestellte Projekte in den USA (DND Homes)",
     numbersTitle: <>Von Boston bis İskele, <b>in Zahlen.</b></>,
   },
@@ -314,7 +314,7 @@ const RU: PagesCopy = {
       p: ["DND Homes основана в Бостоне в 2017 году. Компания развивает жилые проекты в районе Бостона, прежде всего в Кембридже и окрестностях, и сама ведёт весь процесс — от участка и проектирования до строительства и сдачи.", "DND Cyprus переносит опыт группы, накопленный в США, на Северный Кипр, сочетая курортную жизнь с современной жилой архитектурой, прежде всего в регионе Искеле."],
       stat: "завершённых проектов DND Homes в Массачусетсе", photos: ["15 Tyler Road, Lexington, MA", "131 Dane Hill Road, Newton, MA"], link: "Сайт DND Homes",
     },
-    partner: { role: "Соучредитель и заместитель председателя совета директоров", p: "Принимает активное участие в стратегии роста, корпоративном развитии и видении бренда, уделяет особое внимание качеству, дизайну и клиентскому опыту и представляет DND Cyprus на международных площадках и на PropertyNC Awards.", quote: "Создавать проекты, которые благодаря качеству, доверию и сильным ценностям бренда приносят долговечную ценность жизни и инвестициям людей.", label: "Люди, стоящие за DND" },
+    partner: { role: "Соучредитель и заместитель председателя совета директоров", bio: "Как соучредитель DND принимает активное участие в стратегии роста, корпоративном развитии и формировании видения бренда, уделяя особое внимание высоким стандартам качества, дизайна и клиентского опыта.", quote: "Создавать проекты, которые благодаря качеству, доверию и сильным ценностям бренда приносят долговечную ценность жизни и инвестициям людей.", dl: [["Руководство", "Стратегия · Контроль · Реализация"], ["Представительство", "Международные площадки · PropertyNC Awards"], ["Награды DND", "PropertyNC Awards 2025 · 1 платиновая · 2 золотые"]] },
     numbersUsa: "завершённых проектов в США (DND Homes)",
     numbersTitle: <>От Бостона до Искеле — <b>в цифрах.</b></>,
   },
@@ -384,7 +384,7 @@ const PL: PagesCopy = {
       p: ["DND Homes powstało w Bostonie w 2017 roku. Firma rozwija projekty mieszkaniowe w okolicach Bostonu, zwłaszcza w Cambridge i okolicy, i sama prowadzi cały proces — od działki i projektu po budowę i odbiór.", "DND Cyprus przenosi doświadczenie grupy zdobyte w USA na Cypr Północny, łącząc życie w stylu resortu z nowoczesną architekturą mieszkaniową, zwłaszcza w regionie İskele."],
       stat: "ukończonych projektów DND Homes w Massachusetts", photos: ["15 Tyler Road, Lexington, MA", "131 Dane Hill Road, Newton, MA"], link: "Strona DND Homes",
     },
-    partner: { role: "Współzałożycielka i wiceprzewodnicząca zarządu", p: "Aktywnie uczestniczy w strategii rozwoju, rozwoju korporacyjnym i wizji marki, dba o wysokie standardy jakości, designu i obsługi klienta oraz reprezentuje DND Cyprus na platformach międzynarodowych i podczas PropertyNC Awards.", quote: "Tworzyć projekty, które dzięki jakości, zaufaniu i silnym wartościom marki dodają trwałej wartości życiu i inwestycjom ludzi.", label: "Ludzie stojący za DND" },
+    partner: { role: "Współzałożycielka i wiceprzewodnicząca zarządu", bio: "Jako współzałożycielka DND aktywnie uczestniczy w strategii rozwoju, rozwoju korporacyjnym i budowaniu wizji marki, dbając o wysokie standardy jakości, designu i obsługi klienta.", quote: "Tworzyć projekty, które dzięki jakości, zaufaniu i silnym wartościom marki dodają trwałej wartości życiu i inwestycjom ludzi.", dl: [["Przywództwo", "Strategia · Nadzór · Realizacja"], ["Reprezentacja", "Platformy międzynarodowe · PropertyNC Awards"], ["Nagrody DND", "PropertyNC Awards 2025 · 1 platynowa · 2 złote"]] },
     numbersUsa: "ukończonych projektów w USA (DND Homes)",
     numbersTitle: <>Od Bostonu po İskele, <b>w liczbach.</b></>,
   },

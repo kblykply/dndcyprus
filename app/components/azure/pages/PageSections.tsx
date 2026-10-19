@@ -14,6 +14,7 @@ import Mariachi from "../project/Mariachi";
 import Payment from "../project/Payment";
 import { Offers } from "../home/FlowSections";
 import UlfetPerks from "./UlfetPerks";
+import { PersonCard } from "../PersonCard";
 import "./pages.css";
 
 // Yeni sayfaların bölümleri (lib/azure/pages.tsx metinleri). Sitede olan bileşenler yeniden kullanılır:
@@ -173,21 +174,14 @@ export function AboutUsa({ locale }: { locale: Locale }) {
   );
 }
 
-/** Hakkımızda: kurucu ortak (sunumdaki metin; yüksek çözünürlüklü fotoğraf gelene kadar fotoğrafsız kart) */
+/** Hakkımızda: kurucu ortak Netice Dökmecioğlu (satış sunumundaki metin ve portre; portre sağda) */
 export function PartnerCard({ locale }: { locale: Locale }) {
   const t = PAGES[locale].about.partner;
+  const name = "Netice Dökmecioğlu";
   return (
-    <section className="az-section tight az-partner" aria-label={t.label}>
+    <section className="az-section" id={locale === "tr" ? "ortak" : "partner"} aria-label={name}>
       <div className="az-wrap">
-        <article className="card rv">
-          <span className="ini" aria-hidden>ND</span>
-          <div>
-            <small>{t.role}</small>
-            <h2>Netice Dökmecioğlu</h2>
-            <p>{t.p}</p>
-            <blockquote><q>{t.quote}</q></blockquote>
-          </div>
-        </article>
+        <PersonCard person={{ img: "/azure/netice.jpg", role: t.role, name, bio: t.bio, q: t.quote, dl: t.dl }} heading="h2" flip />
       </div>
     </section>
   );
