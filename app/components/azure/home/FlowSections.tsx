@@ -1,16 +1,16 @@
-import Arrow from "../Arrow";
 import GlassArrow from "../GlassArrow";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
-import { PiCheckBold, PiGearSixDuotone, PiHouseLineDuotone, PiKeyDuotone, PiTrophyDuotone } from "react-icons/pi";
+import { PiGearSixDuotone, PiHouseLineDuotone, PiKeyDuotone, PiTrophyDuotone } from "react-icons/pi";
 import { HOME_FLOW } from "@/lib/azure/home-flow";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import { href, type Locale } from "@/lib/azure/site";
-import UlfetPerks from "../pages/UlfetPerks";
-import LazyYouTube from "@/app/components/LazyYouTube";
+import WhyVideo from "./WhyVideo";
+import VenueCarousel from "./VenueCarousel";
+import { VIDEO_UI } from "@/lib/azure/videos";
 import "./flow.css";
 
 // Ana sayfa akışının yeni bölümleri (Ekim 2026): 3 Neden DND · 4 Ödeme ve yatırım fırsatları · 5 Yaşam ve
@@ -27,10 +27,9 @@ export function WhyDnd({ locale }: { locale: Locale }) {
   return (
     <section className="az-section az-why" id="neden-dnd">
       <div className="az-wrap g">
-        {/* La Joya açılış videosu (kullanıcı isteği): sessiz, döngülü, kutuyu doldurur; diğer proje videoları gibi */}
+        {/* La Joya açılış videosu (kullanıcı isteği): sessiz ve döngülü başlar, altyazı kapalı, ses düğmesi var (WhyVideo) */}
         <div className="pic rv">
-          <LazyYouTube videoId={LJ_OPENING} query={`autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&modestbranding=1&playlist=${LJ_OPENING}`}
-            poster={`https://i.ytimg.com/vi/${LJ_OPENING}/maxresdefault.jpg`} title={t.videoTitle} posterAlt={t.imageAlt} playLabel={t.videoPlay} className="absolute inset-0" cover />
+          <WhyVideo videoId={LJ_OPENING} title={t.videoTitle} mute={VIDEO_UI[locale].mute} unmute={VIDEO_UI[locale].unmute} />
           <span className="az-tag">{t.imageTag}</span>
         </div>
         <div>
@@ -112,17 +111,8 @@ export function LifePerks({ locale }: { locale: Locale }) {
           <h2 className="az-h2 sm rv d1">{t.title}</h2>
           <p className="az-lead rv d2">{t.lead}</p>
         </div>
-        <Link className="perk rv" href={href(locale, "/mariachi")} prefetch={false}>
-          <span className="pic"><Image src="/azure/mb-6.jpg" alt={t.perk.h} fill quality={75} sizes="(min-width: 900px) 52vw, 100vw" /></span>
-          <span className="tx">
-            <span className="k">{t.perk.k}</span>
-            <span className="h">{t.perk.h}</span>
-            <span className="p">{t.perk.p}</span>
-            <span className="ls">{t.perk.items.map((x) => <span key={x}><i><PiCheckBold size={12} aria-hidden /></i>{x}</span>)}</span>
-            <span className="go">{t.perk.cta} <Arrow /></span>
-          </span>
-        </Link>
-        <UlfetPerks locale={locale} compact />
+        {/* kaydırmalı üç mekân kartı: Ülfet Shu → Ülfet Beach Club → Mariachi (kullanıcının sırası) */}
+        <div className="rv d1"><VenueCarousel locale={locale} /></div>
       </div>
     </section>
   );

@@ -4,6 +4,16 @@
 .az-why .g { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 4.4vw, 72px); align-items: center; }
 .az-why .pic { position: relative; min-height: clamp(360px, 40vw, 560px); border-radius: var(--r); overflow: hidden; background: var(--sky-2); }
 .az-why .pic img { object-fit: cover; }
+/* açılış videosu: 16:9 video kutuyu doldurur (siyah bant yok), tıklama YouTube'a gitmez; ses düğmesi sağ altta cam */
+.az-ytbg { position: absolute; inset: 0; container-type: size; overflow: hidden; background: var(--sea-deep); }
+.az-ytbg .yt, .az-ytbg iframe { position: absolute; top: 50%; left: 50%; width: max(100cqw, 177.78cqh); height: max(100cqh, 56.25cqw); transform: translate(-50%, -50%); border: 0; pointer-events: none; }
+.az-ytbg .cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .8s var(--ease); }
+.az-ytbg .cover.off { opacity: 0; }
+.az-ytbg .snd { position: absolute; z-index: 3; right: 18px; bottom: 18px; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+  background: rgba(255, 255, 255, .14); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .3); color: #fff; transition: background .3s, color .3s; }
+.az-ytbg .snd:hover, .az-ytbg .snd[aria-pressed="true"] { background: #fff; color: var(--ink); }
+.az-ytbg .snd:disabled { opacity: .5; cursor: default; }
+.az-ytbg .snd:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
 .az-why .pic .az-tag { position: absolute; z-index: 2; left: 18px; bottom: 18px; background: rgba(9, 20, 22, .42); border-color: rgba(255, 255, 255, .26); }
 .az-why .items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
 .az-why .items li { padding: 20px 20px 22px; border-radius: 22px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 10px 34px rgba(13, 35, 38, .05); }
@@ -59,22 +69,7 @@
   .az-offers .zeros b { width: 40px; height: 40px; font-size: 18px; } .az-offers .zeros span { font-size: 9.5px; letter-spacing: .02em; white-space: nowrap; }
 }
 
-/* ---- 5 · Yaşam ve ayrıcalıklar: Mariachi kartı ---- */
-.az-life .perk { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); border-radius: calc(var(--r) + 4px); overflow: hidden; background: var(--foam);
-  border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 24px 60px rgba(13, 35, 38, .08); transition: transform .5s var(--ease); }
-.az-life .perk:hover { transform: translateY(-4px); }
-/* yalnız Mariachi kartı (.perk): altındaki Ülfet şeridinin (.az-ulfet-row) görseli ve metni bu kuralları almasın */
-.az-life .perk > .pic { position: relative; min-height: 380px; }
-.az-life .perk > .pic img { object-fit: cover; }
-.az-life .perk > .tx { display: flex; flex-direction: column; padding: clamp(24px, 3.4vw, 48px); }
-.az-life .k { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--coral); }
-.az-life .h { margin-top: 10px; font-family: var(--font-display), sans-serif; font-size: clamp(28px, 2.8vw, 40px); letter-spacing: -.02em; color: var(--ink); }
-.az-life .p { margin-top: 10px; font-size: 15.5px; line-height: 1.55; color: var(--ink-60); }
-.az-life .ls { display: grid; gap: 10px; margin-top: 20px; }
-.az-life .ls > span { display: flex; gap: 10px; align-items: center; font-size: 15px; color: var(--ink); }
-.az-life .ls i { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--sky-2); color: var(--sea); }
-.az-life .go { margin-top: auto; padding-top: 24px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--sea); }
-@media (max-width: 900px) { .az-life .perk { grid-template-columns: minmax(0, 1fr); } .az-life .perk > .pic { min-height: 0; aspect-ratio: 16 / 10; } }
+/* ---- 5 · Yaşam ve ayrıcalıklar: kaydırmalı mekân kartları (VenueCarousel, venues.css) ---- */
 
 /* ---- 6 · Rakamlarla DND ---- */
 .az-nums ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }

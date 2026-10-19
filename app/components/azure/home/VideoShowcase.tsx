@@ -6,50 +6,16 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from "re
 import { PiArrowsInDuotone, PiArrowsOutDuotone, PiSpeakerHighDuotone, PiSpeakerSlashDuotone } from "react-icons/pi";
 import { useNearViewport } from "@/app/components/performance/useNearViewport";
 import { VIDEO_SLIDES, VIDEO_UI, type VideoSlide } from "@/lib/azure/videos";
+import { loadYouTube, noCaptions, ytThumb, type YTPlayer } from "../youtube-api";
 import { href, type Locale } from "@/lib/azure/site";
 import "../meridian.css";
 import "./video-showcase.css";
 
 const AUTOPLAY_MS = 10000;
 const pad = (n: number) => String(n).padStart(2, "0");
-const ytThumb = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
 /* ---------- oynatıcı arayüzü (YouTube ve sitedeki mp4 aynı biçimde yönetilir) ---------- */
 type Player = { play(): void; pause(): void; mute(): void; unmute(): void };
-
-type YTPlayer = { playVideo(): void; pauseVideo(): void; mute(): void; unMute(): void; destroy(): void; unloadModule?(name: string): void };
-type YTGlobal = {
-  Player: new (el: HTMLElement, o: {
-    videoId: string; width: string; height: string; playerVars: Record<string, unknown>;
-    events: { onReady?: (e: { target: YTPlayer }) => void; onStateChange?: (e: { data: number }) => void };
-  }) => YTPlayer;
-};
-type WinYT = Window & { YT?: YTGlobal; onYouTubeIframeAPIReady?: () => void };
-
-let ytApi: Promise<YTGlobal | null> | null = null;
-function loadYouTube(): Promise<YTGlobal | null> {
-  const w = window as WinYT;
-  if (w.YT?.Player) return Promise.resolve(w.YT);
-  if (!ytApi) {
-    ytApi = new Promise((resolve) => {
-      if (!document.getElementById("youtube-iframe-api")) {
-        const tag = document.createElement("script");
-        tag.id = "youtube-iframe-api";
-        tag.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(tag);
-      }
-      const prev = w.onYouTubeIframeAPIReady;
-      w.onYouTubeIframeAPIReady = () => { prev?.(); resolve(w.YT ?? null); };
-      const until = Date.now() + 10000;
-      const check = () => (w.YT?.Player ? resolve(w.YT) : Date.now() < until ? setTimeout(check, 150) : resolve(null));
-      check();
-    });
-  }
-  return ytApi;
-}
-
-// Tarayıcı dili Türkçe olunca YouTube otomatik altyazıyı ("[müzik]") açıyor; sessiz vitrin videosunda kapalı kalsın
-const noCaptions = (p: YTPlayer) => { try { p.unloadModule?.("captions"); p.unloadModule?.("cc"); } catch {} };
 
 type MediaProps = { slide: VideoSlide; autoplay: boolean; onPlayer: (p: Player | null) => void };
 

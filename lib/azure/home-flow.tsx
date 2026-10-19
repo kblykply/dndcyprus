@@ -9,7 +9,7 @@ export type HeroSlide = { slug: ProjectSlug; name: string; title: ReactNode; sub
 
 export type HomeFlow = {
   hero: { brand: string; cta: string; prev: string; next: string; pause: string; play: string; slides: HeroSlide[]; label: string };
-  why: { kicker: string; title: ReactNode; lead: string; items: { icon: string; h: string; p: string }[]; imageAlt: string; imageTag: string; videoTitle: string; videoPlay: string };
+  why: { kicker: string; title: ReactNode; lead: string; items: { icon: string; h: string; p: string }[]; imageAlt: string; imageTag: string; videoTitle: string };
   offers: {
     kicker: string; title: ReactNode; lead: string;
     /** kart başlığı büyük "60" ile bölünür: pre (varsa, sayının üstünde) · 60 · post; ayrıntı proje ve ödeme sayfalarında */
@@ -17,7 +17,7 @@ export type HomeFlow = {
     neo: { k: string; h: string; zeros: string[]; cta: string };
     note: string;
   };
-  life: { kicker: string; title: ReactNode; lead: string; perk: { k: string; h: string; p: string; items: string[]; cta: string } };
+  life: { kicker: string; title: ReactNode; lead: string };
   numbers: { kicker: string; title: ReactNode; items: { n: number; suffix?: string; label: string }[] };
   news: { kicker: string; awardsProject: string; homesProject: string };
   contact: { kicker: string; title: ReactNode; lead: string };
@@ -48,7 +48,7 @@ const TR: HomeFlow = {
     ],
     imageAlt: "La Joya Resort & Residences, İskele",
     imageTag: "La Joya · 2025’te teslim edildi",
-    videoTitle: "La Joya açılış videosu", videoPlay: "Videoyu oynat",
+    videoTitle: "La Joya açılış videosu",
   },
   offers: {
     kicker: "DND’den Devrimsel TL Ödeme Modeli",
@@ -62,7 +62,6 @@ const TR: HomeFlow = {
     kicker: "DND ile yaşam ve ayrıcalıklar",
     title: <>Ev sahibi olmak, <b>bir yaşam tarzı.</b></>,
     lead: "Resort yaşamı, sosyal alanlar ve DND ev sahiplerine özel ayrıcalıklar.",
-    perk: { k: "DND ev sahiplerine özel", h: "Mariachi Beach Club", p: "Platin ödüllü plaj kulübünde DND ev sahiplerine ayrıcalık.", items: ["Ücretsiz giriş", "Restoran ve barda %10 indirim", "Plaj, 4 jakuzili havuz, pavilyonlar", "DJ geceleri"], cta: "Mariachi’yi keşfet" },
   },
   numbers: {
     kicker: "Rakamlarla DND",
@@ -103,7 +102,7 @@ const EN: HomeFlow = {
     ],
     imageAlt: "La Joya Resort & Residences, İskele",
     imageTag: "La Joya · Delivered in 2025",
-    videoTitle: "La Joya opening video", videoPlay: "Play video",
+    videoTitle: "La Joya opening video",
   },
   offers: {
     kicker: "DND’s Revolutionary Lira Payment Model",
@@ -117,7 +116,6 @@ const EN: HomeFlow = {
     kicker: "Life and privileges with DND",
     title: <>Owning a home is <b>a way of life.</b></>,
     lead: "Resort living, social spaces and privileges reserved for DND homeowners.",
-    perk: { k: "Exclusive to DND homeowners", h: "Mariachi Beach Club", p: "Privileges for DND homeowners at the platinum award-winning beach club.", items: ["Free entry", "10% off at the restaurant and bar", "Beach, pool with 4 jacuzzis, pavilions", "DJ nights"], cta: "Discover Mariachi" },
   },
   numbers: {
     kicker: "DND in numbers",
@@ -158,7 +156,7 @@ const DE: HomeFlow = {
     ],
     imageAlt: "La Joya Resort & Residences, İskele",
     imageTag: "La Joya · Übergeben 2025",
-    videoTitle: "Eröffnungsvideo von La Joya", videoPlay: "Video abspielen",
+    videoTitle: "Eröffnungsvideo von La Joya",
   },
   offers: {
     kicker: "Das revolutionäre Lira-Zahlungsmodell von DND",
@@ -172,7 +170,6 @@ const DE: HomeFlow = {
     kicker: "Leben und Vorteile mit DND",
     title: <>Eigentum ist <b>ein Lebensstil.</b></>,
     lead: "Resort-Leben, Gemeinschaftsflächen und exklusive Vorteile für DND-Eigentümer.",
-    perk: { k: "Exklusiv für DND-Eigentümer", h: "Mariachi Beach Club", p: "Vorteile für DND-Eigentümer im mit Platin ausgezeichneten Beach Club.", items: ["Freier Eintritt", "10 % Rabatt in Restaurant und Bar", "Strand, Pool mit 4 Whirlpools, Pavillons", "DJ-Abende"], cta: "Mariachi entdecken" },
   },
   numbers: {
     kicker: "DND in Zahlen",
@@ -213,7 +210,7 @@ const RU: HomeFlow = {
     ],
     imageAlt: "La Joya Resort & Residences, Искеле",
     imageTag: "La Joya · Сдан в 2025 году",
-    videoTitle: "Видео открытия La Joya", videoPlay: "Смотреть видео",
+    videoTitle: "Видео открытия La Joya",
   },
   offers: {
     kicker: "Революционная модель оплаты в лирах от DND",
@@ -227,7 +224,6 @@ const RU: HomeFlow = {
     kicker: "Жизнь и привилегии с DND",
     title: <>Свой дом — <b>это образ жизни.</b></>,
     lead: "Курортная жизнь, общественные пространства и привилегии для владельцев DND.",
-    perk: { k: "Только для владельцев DND", h: "Mariachi Beach Club", p: "Привилегии для владельцев DND в пляжном клубе с платиновой наградой.", items: ["Бесплатный вход", "Скидка 10 % в ресторане и баре", "Пляж, бассейн с 4 джакузи, павильоны", "DJ-вечеринки"], cta: "Узнать о Mariachi" },
   },
   numbers: {
     kicker: "DND в цифрах",
@@ -268,7 +264,7 @@ const PL: HomeFlow = {
     ],
     imageAlt: "La Joya Resort & Residences, İskele",
     imageTag: "La Joya · Oddane w 2025",
-    videoTitle: "Film z otwarcia La Joya", videoPlay: "Odtwórz film",
+    videoTitle: "Film z otwarcia La Joya",
   },
   offers: {
     kicker: "Rewolucyjny model płatności w lirach od DND",
@@ -282,7 +278,6 @@ const PL: HomeFlow = {
     kicker: "Życie i przywileje z DND",
     title: <>Własny dom to <b>styl życia.</b></>,
     lead: "Życie jak w kurorcie, przestrzenie wspólne i przywileje dla właścicieli DND.",
-    perk: { k: "Tylko dla właścicieli DND", h: "Mariachi Beach Club", p: "Przywileje dla właścicieli DND w nagrodzonym platyną klubie plażowym.", items: ["Bezpłatne wejście", "10% zniżki w restauracji i barze", "Plaża, basen z 4 jacuzzi, pawilony", "Wieczory DJ"], cta: "Poznaj Mariachi" },
   },
   numbers: {
     kicker: "DND w liczbach",
