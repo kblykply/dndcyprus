@@ -124,6 +124,8 @@ export type ProjectLocation = {
   lat?: number;
   lng?: number;
   embedSrc?: string;
+  /** "Google'da aç" araması; yoksa adres (adres tek noktayı göstermiyorsa koordinat ver) */
+  mapQuery?: string;
   mapImage?: string;
   mapAlt?: string;
   nearby: string[];

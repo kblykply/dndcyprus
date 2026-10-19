@@ -1,6 +1,7 @@
 // Azure proje verisi: NeoCity (TR/EN/DE/RU/PL). Kaynak: "NEOCITY PRESANTATION" sunumu (DND Cyprus, Ekim 2026)
 // ve onaylı render seti. Rakamlar sunumdan birebir; fiyatlar diğer projelerde olduğu gibi sayfada yazılmaz.
-// Konum koordinatı verilmediği için harita yerine sunumdaki uydu görseli, mesafeler dakika cinsinden.
+// Konum: sunumun 9. sayfasındaki uydu görselindeki arsa, Google uydu görüntüsüyle eşlenerek (DAÜ Bağlantı Yolu'nun kuzeyi,
+// Yasemin Sitesi yolunun doğusu) 35.15406, 33.85201; mesafeler sunumdaki gibi dakika. Teslim: Nisan 2029 (DND, 19 Ekim 2026).
 import type { ReactNode } from "react";
 import type { Locale } from "@/lib/azure/site";
 import type { Accent, ProjectContent, ProjectData, ProjectPayment } from "@/lib/azure/project-types";
@@ -22,7 +23,7 @@ type Copy = {
   };
   payment: ProjectPayment;
   amenities: { kicker: string; title: string; lead: string; items: [string, string, string][] };
-  location: { kicker: string; title: string; lead: string; address: string; mapAlt: string; nearby: string[]; distances: [string, number][] };
+  location: { kicker: string; title: string; lead: string; address: string; nearby: string[]; distances: [string, number][] };
 };
 
 const ACC: Accent[] = ["sea", "coral"];
@@ -63,6 +64,8 @@ function build(locale: Locale, c: Copy): ProjectContent {
         description: c.overview.lead,
         image: `${SITE_URL}/neocity/hero.jpg`,
         address: { "@type": "PostalAddress", addressLocality: "Tuzla", addressRegion: "Gazimağusa", addressCountry: "CY" },
+        geo: { "@type": "GeoCoordinates", latitude: 35.15406, longitude: 33.85201 },
+        numberOfAccommodationUnits: { "@type": "QuantitativeValue", value: 54 },
       },
     },
     sitePlan: {
@@ -123,8 +126,9 @@ function build(locale: Locale, c: Copy): ProjectContent {
       title: c.location.title,
       lead: c.location.lead,
       address: c.location.address,
-      mapImage: "/neocity/konum-uydu.jpg",
-      mapAlt: c.location.mapAlt,
+      lat: 35.15406,
+      lng: 33.85201,
+      mapQuery: "35.15406,33.85201",
       nearby: c.location.nearby,
       distances: c.location.distances.map(([label, min], i) => ({ label, min, accent: acc(i) })),
     },
@@ -172,7 +176,7 @@ const TR = build("tr", {
     kicker: "Öne çıkan bilgiler",
     title: "NeoCity Öne Çıkan Bilgiler",
     lead: "Projenin temel özelliklerine hızlıca göz atın.",
-    items: [["Lokasyon", "Tuzla, Gazimağusa"], ["Etap", "1. Etap (3 etaptan ilki)"], ["Tip", "Tek ve ikiz villa"], ["Villa Sayısı", "54 (18 tek · 36 ikiz)"], ["Arsa Alanı", "20.170 m²"], ["İnşaat Alanı", "8.556 m²"]],
+    items: [["Lokasyon", "Tuzla, Gazimağusa"], ["Teslim", "Nisan 2029"], ["Etap", "1. Etap (3 etaptan ilki)"], ["Villa Sayısı", "54 (18 tek · 36 ikiz)"], ["Arsa Alanı", "20.170 m²"], ["İnşaat Alanı", "8.556 m²"]],
     note: "* Bilgiler tanıtım amaçlıdır. Nihai teknik ve satış detayları için satış ekibimizle iletişime geçiniz.",
   },
   site: {
@@ -236,8 +240,7 @@ const TR = build("tr", {
     kicker: "Konum",
     title: "NeoCity Konum",
     lead: "Gazimağusa ve Tuzla’nın hemen yanı başında, Lefkoşa–DAÜ bağlantı yolu üzerinde: eğitim, sağlık ve günlük ihtiyaçlara birkaç dakika.",
-    address: "Tuzla, Gazimağusa, Kuzey Kıbrıs",
-    mapAlt: "NeoCity konumu, uydu görünümü",
+    address: "DAÜ Bağlantı Yolu, Tuzla, Gazimağusa, Kuzey Kıbrıs",
     nearby: ["Doğu Akdeniz Üniversitesi", "Doğa Koleji", "Tuzla Merkez", "Gazimağusa"],
     distances: zipMin(["Market", "Tuzla Merkez", "DAÜ", "Doğa Koleji", "Gazimağusa", "Hastane", "İskele", "Ercan Havalimanı"]),
   },
@@ -272,7 +275,7 @@ const EN = build("en", {
     kicker: "Key facts",
     title: "NeoCity Key Facts",
     lead: "A quick look at the project’s main features.",
-    items: [["Location", "Tuzla, Famagusta"], ["Phase", "Phase 1 (of 3)"], ["Type", "Single and twin villas"], ["Villas", "54 (18 single · 36 twin)"], ["Plot Area", "20,170 m²"], ["Construction Area", "8,556 m²"]],
+    items: [["Location", "Tuzla, Famagusta"], ["Delivery", "April 2029"], ["Phase", "Phase 1 (of 3)"], ["Villas", "54 (18 single · 36 twin)"], ["Plot Area", "20,170 m²"], ["Construction Area", "8,556 m²"]],
     note: "* Information is for promotional purposes. Please contact our sales team for final technical and sales details.",
   },
   site: {
@@ -336,8 +339,7 @@ const EN = build("en", {
     kicker: "Location",
     title: "NeoCity Location",
     lead: "Right beside Famagusta and Tuzla, on the Nicosia–EMU link road: schools, healthcare and daily needs are minutes away.",
-    address: "Tuzla, Famagusta, North Cyprus",
-    mapAlt: "NeoCity location, satellite view",
+    address: "DAÜ Bağlantı Yolu (EMU link road), Tuzla, Famagusta, North Cyprus",
     nearby: ["Eastern Mediterranean University", "Doğa College", "Tuzla Centre", "Famagusta"],
     distances: zipMin(["Market", "Tuzla Centre", "EMU", "Doğa College", "Famagusta", "Hospital", "İskele", "Ercan Airport"]),
   },
@@ -372,7 +374,7 @@ const DE = build("de", {
     kicker: "Wichtige Fakten",
     title: "NeoCity Wichtige Fakten",
     lead: "Die wichtigsten Merkmale des Projekts auf einen Blick.",
-    items: [["Lage", "Tuzla, Famagusta"], ["Bauabschnitt", "1. Bauabschnitt (von 3)"], ["Typ", "Freistehende und Doppelvillen"], ["Villen", "54 (18 freistehend · 36 Doppel)"], ["Grundstücksfläche", "20.170 m²"], ["Baufläche", "8.556 m²"]],
+    items: [["Lage", "Tuzla, Famagusta"], ["Übergabe", "April 2029"], ["Bauabschnitt", "1. Bauabschnitt (von 3)"], ["Villen", "54 (18 freistehend · 36 Doppel)"], ["Grundstücksfläche", "20.170 m²"], ["Baufläche", "8.556 m²"]],
     note: "* Die Angaben dienen Werbezwecken. Für endgültige technische und vertragliche Details wenden Sie sich bitte an unser Vertriebsteam.",
   },
   site: {
@@ -436,8 +438,7 @@ const DE = build("de", {
     kicker: "Lage",
     title: "NeoCity Lage",
     lead: "Direkt neben Famagusta und Tuzla, an der Verbindungsstraße Nikosia–EMU: Schulen, Gesundheitsversorgung und Einkauf in wenigen Minuten.",
-    address: "Tuzla, Famagusta, Nordzypern",
-    mapAlt: "Lage von NeoCity, Satellitenansicht",
+    address: "DAÜ Bağlantı Yolu (Zufahrt zur EMU), Tuzla, Famagusta, Nordzypern",
     nearby: ["Eastern Mediterranean University", "Doğa College", "Zentrum Tuzla", "Famagusta"],
     distances: zipMin(["Markt", "Zentrum Tuzla", "EMU", "Doğa College", "Famagusta", "Krankenhaus", "İskele", "Flughafen Ercan"]),
   },
@@ -472,7 +473,7 @@ const RU = build("ru", {
     kicker: "Ключевые факты",
     title: "NeoCity Ключевые факты",
     lead: "Основные характеристики проекта в кратком обзоре.",
-    items: [["Расположение", "Тузла, Фамагуста"], ["Очередь", "1-я очередь (из 3)"], ["Тип", "Отдельные и дуплекс-виллы"], ["Вилл", "54 (18 отдельных · 36 дуплекс)"], ["Площадь участка", "20 170 m²"], ["Площадь застройки", "8 556 m²"]],
+    items: [["Расположение", "Тузла, Фамагуста"], ["Сдача", "апрель 2029"], ["Очередь", "1-я очередь (из 3)"], ["Вилл", "54 (18 отдельных · 36 дуплекс)"], ["Площадь участка", "20 170 m²"], ["Площадь застройки", "8 556 m²"]],
     note: "* Информация носит рекламный характер. Окончательные технические и коммерческие условия уточняйте у отдела продаж.",
   },
   site: {
@@ -536,8 +537,7 @@ const RU = build("ru", {
     kicker: "Расположение",
     title: "NeoCity Расположение",
     lead: "Рядом с Фамагустой и Тузлой, на дороге Никосия — EMU: школы, медицина и магазины в нескольких минутах.",
-    address: "Тузла, Фамагуста, Северный Кипр",
-    mapAlt: "Расположение NeoCity, спутниковый вид",
+    address: "DAÜ Bağlantı Yolu (дорога к EMU), Тузла, Фамагуста, Северный Кипр",
     nearby: ["Eastern Mediterranean University", "Колледж Doğa", "Центр Тузлы", "Фамагуста"],
     distances: zipMin(["Магазин", "Центр Тузлы", "EMU", "Колледж Doğa", "Фамагуста", "Больница", "Искеле", "Аэропорт Эрджан"]),
   },
@@ -572,7 +572,7 @@ const PL = build("pl", {
     kicker: "Najważniejsze informacje",
     title: "NeoCity Najważniejsze informacje",
     lead: "Szybki przegląd głównych cech projektu.",
-    items: [["Lokalizacja", "Tuzla, Famagusta"], ["Etap", "Etap 1 (z 3)"], ["Typ", "Wille wolnostojące i bliźniacze"], ["Liczba willi", "54 (18 wolnost. · 36 bliźn.)"], ["Powierzchnia działki", "20 170 m²"], ["Powierzchnia zabudowy", "8 556 m²"]],
+    items: [["Lokalizacja", "Tuzla, Famagusta"], ["Oddanie", "kwiecień 2029"], ["Etap", "Etap 1 (z 3)"], ["Liczba willi", "54 (18 wolnost. · 36 bliźn.)"], ["Powierzchnia działki", "20 170 m²"], ["Powierzchnia zabudowy", "8 556 m²"]],
     note: "* Informacje mają charakter promocyjny. W sprawie ostatecznych szczegółów technicznych i handlowych skontaktuj się z naszym działem sprzedaży.",
   },
   site: {
@@ -636,8 +636,7 @@ const PL = build("pl", {
     kicker: "Lokalizacja",
     title: "NeoCity Lokalizacja",
     lead: "Tuż obok Famagusty i Tuzli, przy drodze Nikozja–EMU: szkoły, opieka zdrowotna i zakupy w kilka minut.",
-    address: "Tuzla, Famagusta, Cypr Północny",
-    mapAlt: "Lokalizacja NeoCity, widok satelitarny",
+    address: "DAÜ Bağlantı Yolu (droga do EMU), Tuzla, Famagusta, Cypr Północny",
     nearby: ["Eastern Mediterranean University", "Doğa College", "Centrum Tuzli", "Famagusta"],
     distances: zipMin(["Market", "Centrum Tuzli", "EMU", "Doğa College", "Famagusta", "Szpital", "İskele", "Lotnisko Ercan"]),
   },

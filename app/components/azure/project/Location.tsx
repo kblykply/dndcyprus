@@ -18,13 +18,13 @@ function formatDistance(d: Distance, minute: string) {
 const measure = (d: Distance) => (typeof d.min === "number" ? d.min : typeof d.m === "number" ? d.m : (d.km ?? 0) * 1000);
 
 // Konum: az-loc kartı — solda başlık, adres, mesafe çubukları ve yol tarifi; sağda Google harita.
-// Koordinat verilmemiş projede (NeoCity) harita yerine konum görseli durur, yol tarifi düğmeleri gösterilmez.
+// Koordinat verilmemiş projede harita yerine konum görseli (mapImage) durur, yol tarifi düğmeleri gösterilmez.
 export default function Location({ d, name, id, locale }: { d: ProjectLocation; name: string; id: string; locale: Locale }) {
   const t = PROJECT_UI[locale].location;
   const hasGeo = typeof d.lat === "number" && typeof d.lng === "number";
   const q = encodeURIComponent(`${d.lat},${d.lng}`);
   const googleDir = `https://www.google.com/maps/dir/?api=1&destination=${q}`;
-  const googleOpen = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.address)}`;
+  const googleOpen = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.mapQuery ?? d.address)}`;
   const appleDir = `https://maps.apple.com/?daddr=${q}`;
   const iframeSrc = d.embedSrc || `https://www.google.com/maps?q=${q}&z=14&output=embed`;
   const max = Math.max(...d.distances.map(measure), 1);

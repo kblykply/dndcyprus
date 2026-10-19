@@ -118,7 +118,8 @@ test("NeoCity: vaziyet planı anahtarı çalışır, ödeme planı var, Mariachi
   await expect(page.locator("#odeme-plani .zeros li")).toHaveCount(5);
   await expect(page.locator("#mariachi")).toHaveCount(0);
   await expect(page.locator("#teknik-donanim")).toHaveCount(0);
-  // konum: koordinat yok, harita yerine görsel; mesafeler dakika
-  await expect(page.locator("#konum .map.pic img")).toHaveCount(1);
+  // konum: sunumdaki arsanın koordinatı (canlı harita + yol tarifi); mesafeler dakika
+  await expect(page.locator("#konum .map.live iframe")).toHaveAttribute("src", /35\.15406%2C33\.85201/);
+  await expect(page.locator("#konum .btns a").first()).toHaveAttribute("href", /destination=35\.15406%2C33\.85201/);
   await expect(page.locator("#konum .az-dist li").first()).toContainText("dk");
 });
