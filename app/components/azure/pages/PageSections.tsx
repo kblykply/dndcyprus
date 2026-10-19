@@ -122,9 +122,11 @@ export function PaymentSections({ locale }: { locale: Locale }) {
   );
 }
 
-// kampanya kartının fotoğrafındaki logo (kullanıcı: "kartların hangi projeye ait olduğu anlaşılsın"): bağlantıdaki proje; Ülfet kartında Ülfet Beach
+// kampanya kartının fotoğrafındaki logo (kullanıcı: "kartların hangi projeye ait olduğu anlaşılsın"): bağlantıdaki proje; Ülfet kartlarında mekânın kendi logosu
 const campLogo = (c: { path: string; img: string }) =>
-  c.img.includes("ulfet") ? "/azure/venues/ulfet-beach-logo.png" : PROJECTS.find((x) => c.path.split("#")[0] === `/${x.slug}`)?.logo;
+  c.img.includes("ulfet-shu") ? "/azure/venues/ulfet-shu-logo.png"
+  : c.img.includes("ulfet") ? "/azure/venues/ulfet-beach-logo.png"
+  : PROJECTS.find((x) => c.path.split("#")[0] === `/${x.slug}`)?.logo;
 
 /** Haberler sayfası: Etkinlikler (gerçek fotoğraflar) */
 export function EventsSection({ locale }: { locale: Locale }) {
