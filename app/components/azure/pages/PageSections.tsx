@@ -13,14 +13,16 @@ import Amenities from "../project/Amenities";
 import Mariachi from "../project/Mariachi";
 import Payment from "../project/Payment";
 import { Offers } from "../home/FlowSections";
+import UlfetPerks from "./UlfetPerks";
 import "./pages.css";
 
 // Yeni sayfaların bölümleri (lib/azure/pages.tsx metinleri). Sitede olan bileşenler yeniden kullanılır:
 // teknik donanım kartları (Tech), olanaklar (Amenities), Mariachi ayrıcalıkları, NeoCity 5 Sıfır (Payment).
 
 /** görsel + metin + madde listesi + düğme (satış sonrası, kira geliri) */
-function Split({ id, kicker, title, lead, points, img, alt, note, cta, ctaHref, flip }: {
+function Split({ id, kicker, title, lead, points, img, alt, note, cta, ctaHref, flip, stats, statsLabel, links }: {
   id: string; kicker: string; title: React.ReactNode; lead: string; points: string[]; img: string; alt: string; note: string; cta: string; ctaHref: string; flip?: boolean;
+  stats?: { n: string; l: string }[]; statsLabel?: string; links?: { label: string; href: string }[];
 }) {
   return (
     <section className="az-section az-split" id={id}>
@@ -31,7 +33,16 @@ function Split({ id, kicker, title, lead, points, img, alt, note, cta, ctaHref, 
           <h2 className="az-h2 sm rv d1">{title}</h2>
           <p className="az-lead rv d2">{lead}</p>
           <ul className="rv d2">{points.map((p) => <li key={p}><i><PiCheckBold size={12} aria-hidden /></i>{p}</li>)}</ul>
-          <Link className="az-btn sea sm rv d3" href={ctaHref} prefetch={false}>{cta} <Arrow /></Link>
+          {stats?.length ? (
+            <div className="stats rv d2" aria-label={statsLabel}>
+              {statsLabel ? <small>{statsLabel}</small> : null}
+              <dl>{stats.map((x) => <div key={x.l}><dt>{x.n}</dt><dd>{x.l}</dd></div>)}</dl>
+            </div>
+          ) : null}
+          <div className="btns rv d3">
+            <Link className="az-btn sea sm" href={ctaHref} prefetch={false}>{cta} <Arrow /></Link>
+            {links?.map((l) => <a key={l.href} className="az-btn glass sm" href={l.href} target="_blank" rel="noopener noreferrer">{l.label} <Arrow /></a>)}
+          </div>
           <p className="az-note-sm">{note}</p>
         </div>
       </div>
@@ -51,6 +62,7 @@ export function AdvantageSections({ locale }: { locale: Locale }) {
       <Amenities d={{ ...amen, kicker: t.social.kicker, title: t.social.title, lead: t.social.lead }} name="DND" id={id.social} />
       <Split id={id.aftersales} kicker={t.after.kicker} title={t.after.title} lead={t.after.lead} points={t.after.points} img="/azure/pages/satis-sonrasi.jpg" alt={t.after.imageAlt} note={t.after.note} cta={t.after.cta} ctaHref={`${href(locale, "/contact")}#${id.form}`} />
       <Mariachi locale={locale} id={id.perks} />
+      <UlfetPerks locale={locale} />
     </>
   );
 }
@@ -96,7 +108,8 @@ export function PaymentSections({ locale }: { locale: Locale }) {
           <p className="az-note-sm">{t.campaigns.note}</p>
         </div>
       </section>
-      <Split id={id.rental} kicker={t.rental.kicker} title={t.rental.title} lead={t.rental.lead} points={t.rental.points} img="/azure/pages/kira-geliri.jpg" alt={t.rental.imageAlt} note={t.rental.note} cta={t.rental.cta} ctaHref={`${href(locale, "/contact")}#${id.form}`} flip />
+      <Split id={id.rental} kicker={t.rental.kicker} title={t.rental.title} lead={t.rental.lead} points={t.rental.points} img="/azure/pages/kira-geliri.jpg" alt={t.rental.imageAlt} note={t.rental.note} cta={t.rental.cta} ctaHref={`${href(locale, "/contact")}#${id.form}`} flip
+        stats={t.rental.stats} statsLabel={t.rental.statsLabel} links={t.rental.links} />
     </>
   );
 }
@@ -172,6 +185,7 @@ export function PartnerCard({ locale }: { locale: Locale }) {
             <small>{t.role}</small>
             <h2>Netice Dökmecioğlu</h2>
             <p>{t.p}</p>
+            <blockquote><q>{t.quote}</q></blockquote>
           </div>
         </article>
       </div>

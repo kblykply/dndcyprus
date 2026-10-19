@@ -7,6 +7,7 @@ import { PiCheckBold, PiGearSixDuotone, PiHouseLineDuotone, PiKeyDuotone, PiTrop
 import { HOME_FLOW } from "@/lib/azure/home-flow";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import { href, type Locale } from "@/lib/azure/site";
+import UlfetPerks from "../pages/UlfetPerks";
 import "./flow.css";
 
 // Ana sayfa akışının yeni bölümleri (Ekim 2026): 3 Neden DND · 4 Ödeme ve yatırım fırsatları · 5 Yaşam ve
@@ -104,6 +105,7 @@ export function LifePerks({ locale }: { locale: Locale }) {
             <span className="go">{t.perk.cta} <Arrow /></span>
           </span>
         </Link>
+        <UlfetPerks locale={locale} compact />
       </div>
     </section>
   );

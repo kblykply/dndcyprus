@@ -71,3 +71,41 @@
 .az-partner h2 { margin-top: 6px; font-size: clamp(24px, 2.4vw, 32px); font-weight: 400; letter-spacing: -.02em; }
 .az-partner p { margin-top: 8px; font-size: 15.5px; line-height: 1.6; color: var(--ink-60); max-width: 70ch; }
 @media (max-width: 560px) { .az-partner .card { flex-direction: column; align-items: flex-start; } }
+
+/* kira bölümü: "Neden Kuzey Kıbrıs?" rakamları ve iki düğme */
+.az-split .stats { margin: 4px 0 24px; padding: 16px 18px; border-radius: 18px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); }
+.az-split .stats small { display: block; margin-bottom: 10px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
+.az-split .stats dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; }
+.az-split .stats dt { font-family: var(--font-display), sans-serif; font-size: clamp(22px, 2vw, 28px); letter-spacing: -.02em; color: var(--ink); }
+.az-split .stats dd { margin: 4px 0 0; font-size: 12.5px; line-height: 1.4; color: var(--ink-60); }
+.az-split .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 600px) { .az-split .btns .az-btn { flex: 1 1 auto; } }
+
+/* Ülfet ayrıcalıkları */
+.az-ulfet .g { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 4.4vw, 72px); align-items: center; }
+.az-ulfet .pic { position: relative; aspect-ratio: 2 / 1; border-radius: var(--r); overflow: hidden; background: var(--sky-2); box-shadow: 0 24px 60px rgba(13, 35, 38, .1); }
+.az-ulfet .pic img { object-fit: cover; }
+.az-ulfet .az-h2 { margin-top: 12px; }
+.az-ulfet .az-lead { margin-top: 14px; }
+.az-ulfet ul { display: grid; gap: 10px; margin: 22px 0 14px; padding: 0; list-style: none; }
+.az-ulfet li { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; padding: 14px 16px; border-radius: 18px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); }
+.az-ulfet li .tag { grid-row: span 2; padding: 8px 12px; border-radius: 999px; background: var(--coral); color: #fff; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.az-ulfet li b { font-size: 16px; font-weight: 500; color: var(--ink); }
+.az-ulfet li > span:last-child { font-size: 14px; color: var(--ink-60); }
+@media (max-width: 1000px) { .az-ulfet .g { grid-template-columns: minmax(0, 1fr); } }
+
+/* ana sayfa: Mariachi kartının altında Ülfet satırı */
+.az-ulfet-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; padding: 10px 20px 10px 10px; border-radius: 22px; background: var(--foam);
+  border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 12px 36px rgba(13, 35, 38, .06); color: var(--ink); transition: transform .4s var(--ease); }
+.az-ulfet-row:hover { transform: translateY(-2px); }
+.az-ulfet-row .pic { position: relative; flex: none; width: 120px; aspect-ratio: 2 / 1; border-radius: 14px; overflow: hidden; }
+.az-ulfet-row .pic img { object-fit: cover; }
+.az-ulfet-row .tx { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.az-ulfet-row small { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--coral); }
+.az-ulfet-row b { font-size: 15px; font-weight: 500; }
+.az-ulfet-row em { font-style: normal; color: var(--sea); }
+@media (max-width: 560px) { .az-ulfet-row .pic { width: 84px; } .az-ulfet-row b { font-size: 14px; } }
+
+/* kurucu ortak alıntısı */
+.az-partner blockquote { margin: 14px 0 0; padding-left: 14px; border-left: 2px solid var(--coral); }
+.az-partner q { font-size: 15.5px; line-height: 1.55; color: var(--ink); quotes: "“" "”"; }
