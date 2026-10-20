@@ -37,7 +37,7 @@ const DATA: Project[] = [
     title: "NeoCity",
     status: "Ongoing", // 1. etap satışta (Ekim 2026)
     type: "Residential",
-    location: "Tuzla, Gazimağusa",
+    location: "Gazimağusa Bölgesi",
     cover: "/neocity/hero.jpg",
     href: "/tr/neocity",
   },

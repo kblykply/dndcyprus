@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "de",
   path: "/neocity",
-  title: "NeoCity Tuzla, Famagusta – Villen | DND Cyprus",
+  title: "NeoCity Famagusta – Villen | DND Cyprus",
   description:
-    "NeoCity neben Famagusta und Tuzla: 54 Villen mit Privatgarten, optionalem Privatpool, Markt und Sportanlage. 5-Null-Zahlungsplan in Lira: 35 % Anzahlung, 60 Monate zinsfrei.",
+    "NeoCity in der Region Famagusta: 54 Villen mit Privatgarten, optionalem Privatpool, Markt und Sportanlage. 5-Null-Zahlungsplan in Lira: 35 % Anzahlung, 60 Monate zinsfrei.",
   image: "/og/neocity.jpg",
   imageAlt: "NeoCity Doppelvillen mit Privatpools bei Sonnenuntergang",
 });

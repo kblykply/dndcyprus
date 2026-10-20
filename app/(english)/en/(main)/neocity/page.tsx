@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "en",
   path: "/neocity",
-  title: "NeoCity Tuzla, Famagusta – Single & Twin Villas | DND Cyprus",
+  title: "NeoCity Famagusta – Single & Twin Villas | DND Cyprus",
   description:
-    "NeoCity beside Famagusta and Tuzla: 54 villas with private gardens, optional private pools, on-site market and sports area. 5 Zeros lira payment plan: 35% down, 60 months interest-free.",
+    "NeoCity in the Famagusta region: 54 villas with private gardens, optional private pools, on-site market and sports area. 5 Zeros lira payment plan: 35% down, 60 months interest-free.",
   image: "/og/neocity.jpg",
   imageAlt: "NeoCity twin villas with private pools at sunset",
 });

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { IconType } from "react-icons";
-import { PiBuildingsDuotone, PiCalendarCheckDuotone, PiDoorOpenDuotone, PiFrameCornersDuotone, PiHardHatDuotone, PiMapPinDuotone, PiSealCheckDuotone } from "react-icons/pi";
+import { PiArrowUpRightBold, PiBuildingsDuotone, PiCalendarCheckDuotone, PiDoorOpenDuotone, PiFrameCornersDuotone, PiHardHatDuotone, PiMapPinDuotone, PiSealCheckDuotone } from "react-icons/pi";
 import type { ProjectFact } from "@/lib/azure/project-types";
 import "./cards.css";
 
@@ -48,15 +48,27 @@ function CountUp({ value }: { value: string }) {
  * Öne çıkan bilgiler: Azure kartları — simge, sırayla belirme, sayarak yükselen rakamlar, durum noktası
  * (devam ediyorsa nabız), üzerine gelince yükselme ve renkli alt çizgi. Olanaklar aynı kart dilini kullanır (cards.css).
  */
-export default function FactsGrid({ items, done }: { items: ProjectFact[]; done: boolean }) {
+export default function FactsGrid({ items, done, map }: { items: ProjectFact[]; done: boolean; map?: { href: string; label: string } }) {
   return (
     <div className="az-facts">
       {items.map((f, i) => {
         const last = i === items.length - 1;
         const Ic = last ? (done ? PiSealCheckDuotone : PiHardHatDuotone) : ICONS[i] ?? PiMapPinDuotone;
+        const cls = `az-fact rv d${i % 3} ${f.accent === "coral" ? "coral" : "sea"}`;
+        const no = <span className="no">{String(i + 1).padStart(2, "0")}</span>;
+        // ilk kart konum: bütün kart haritada (Google Haritalar, tam nokta) açılır; sağ üstte "Haritada Aç" etiketi
+        if (i === 0 && map) {
+          return (
+            <a key={f.label + i} className={`${cls} map`} href={map.href} target="_blank" rel="noopener noreferrer" aria-label={`${f.label}: ${f.value} · ${map.label}`}>
+              <div className="hd"><span className="ic"><Ic size={22} aria-hidden /></span><span className="hr"><span className="go">{map.label}<PiArrowUpRightBold size={13} aria-hidden /></span>{no}</span></div>
+              <small>{f.label}</small>
+              <CountUp value={f.value} />
+            </a>
+          );
+        }
         return (
-          <div key={f.label + i} className={`az-fact rv d${i % 3} ${f.accent === "coral" ? "coral" : "sea"}`}>
-            <div className="hd"><span className="ic"><Ic size={22} aria-hidden /></span><span className="no">{String(i + 1).padStart(2, "0")}</span></div>
+          <div key={f.label + i} className={cls}>
+            <div className="hd"><span className="ic"><Ic size={22} aria-hidden /></span>{no}</div>
             <small>{f.label}</small>
             {last
               ? <b><i className={`live${done ? " done" : ""}`} aria-hidden />{f.value}</b>

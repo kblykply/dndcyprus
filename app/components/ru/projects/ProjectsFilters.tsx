@@ -37,7 +37,7 @@ const DATA: Project[] = [
     title: "NeoCity",
     status: "Ongoing", // 1. etap satışta (Ekim 2026)
     type: "Residential",
-    location: "Тузла, Фамагуста",
+    location: "Район Фамагусты",
     cover: "/neocity/hero.jpg",
     href: "/ru/neocity",
   },

@@ -18,6 +18,12 @@
 .az-fact .hd { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .az-fact .ic { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #fff; color: var(--sea); box-shadow: 0 6px 18px rgba(13, 35, 38, .07); transition: transform .5s var(--ease); }
 .az-fact:hover .ic { transform: rotate(-8deg) scale(1.06); }
+/* konum kartı bağlantı: kart aynı, sağ üstte "Haritada Aç" etiketi (üzerine gelince dolar) */
+a.az-fact { display: block; color: inherit; text-decoration: none; }
+a.az-fact:focus-visible { outline: 2px solid var(--sea); outline-offset: 3px; }
+.az-fact .hr { display: inline-flex; align-items: center; gap: 12px; min-width: 0; }
+.az-fact .go { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; background: rgba(13, 101, 112, .08); color: var(--sea); font-size: 13px; font-weight: 700; line-height: 1; white-space: nowrap; transition: background .35s, color .35s; }
+a.az-fact:hover .go, a.az-fact:focus-visible .go { background: var(--sea); color: #fff; }
 .az-fact .no { font-size: 12px; letter-spacing: .1em; color: var(--ink-40); font-weight: 600; font-variant-numeric: tabular-nums; }
 .az-fact small { display: block; margin-top: clamp(16px, 1.8vw, 24px); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-60); font-weight: 600; }
 .az-fact b { display: flex; align-items: center; margin-top: 8px; font-family: var(--font-display), sans-serif; font-weight: 400; font-size: clamp(24px, 2.4vw, 38px); line-height: 1.1; letter-spacing: -.02em; color: var(--ink); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }

@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "tr",
   path: "/neocity",
-  title: "NeoCity Tuzla, Gazimağusa | Tek ve İkiz Villalar – DND Cyprus",
+  title: "NeoCity Gazimağusa | Tek ve İkiz Villalar – DND Cyprus",
   description:
-    "Gazimağusa ve Tuzla’nın yanı başında NeoCity: 54 villa, özel bahçe, opsiyonel özel havuz, site içi market ve spor alanı. 5 Sıfır TL ödeme planı: %35 peşinat, 60 ay faizsiz.",
+    "Gazimağusa bölgesinde NeoCity: 54 villa, özel bahçe, opsiyonel özel havuz, site içi market ve spor alanı. 5 Sıfır TL ödeme planı: %35 peşinat, 60 ay faizsiz.",
   image: "/og/neocity.jpg",
   imageAlt: "NeoCity ikiz villalar ve özel havuzlar, gün batımı",
 });

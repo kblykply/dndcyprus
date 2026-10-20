@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "ru",
   path: "/neocity",
-  title: "NeoCity Тузла, Фамагуста — виллы | DND Cyprus",
+  title: "NeoCity Фамагуста — виллы | DND Cyprus",
   description:
-    "NeoCity рядом с Фамагустой и Тузлой: 54 виллы с частными садами, бассейн по желанию, магазин и спортплощадка. План «5 нулей» в лирах: взнос 35 %, 60 месяцев без процентов.",
+    "NeoCity в районе Фамагусты: 54 виллы с частными садами, бассейн по желанию, магазин и спортплощадка. План «5 нулей» в лирах: взнос 35 %, 60 месяцев без процентов.",
   image: "/og/neocity.jpg",
   imageAlt: "Дуплекс-виллы NeoCity с частными бассейнами на закате",
 });

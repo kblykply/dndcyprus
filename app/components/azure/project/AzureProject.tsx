@@ -15,7 +15,7 @@ import FloorPlans from "./FloorPlans";
 import Mariachi from "./Mariachi";
 import Amenities from "./Amenities";
 import Tour from "./Tour";
-import Location from "./Location";
+import Location, { mapHref } from "./Location";
 import Update from "./Update";
 import SitePlan from "./SitePlan";
 import Payment from "./Payment";
@@ -45,7 +45,7 @@ export default function AzureProject({ slug, locale }: { slug: ProjectPage["slug
       </section>
 
       <Overview d={d.overview} name={name} id={ids.overview} />
-      <Facts d={d.facts} name={name} id={ids.facts} done={PROJECT_PAGES[slug].status.tr.startsWith("Tamamlan")} />
+      <Facts d={d.facts} name={name} id={ids.facts} done={PROJECT_PAGES[slug].status.tr.startsWith("Tamamlan")} map={{ href: mapHref(d.location), label: PROJECT_UI[locale].location.open }} />
       {d.sitePlan && <SitePlan d={d.sitePlan} name={name} id={ids.sitePlan} />}
       {d.tech && <Tech d={d.tech} name={name} id={ids.tech} locale={locale} />}
       <Interiors d={d.interiors} name={name} id={ids.interiors} locale={locale} />

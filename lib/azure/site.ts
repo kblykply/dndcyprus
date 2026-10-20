@@ -69,8 +69,8 @@ export const PROJECTS: ProjectMeta[] = [
   {
     slug: "neocity",
     name: "NeoCity",
-    short: { tr: "Tuzla · Yeni proje", en: "Tuzla · New project", de: "Tuzla · Neues Projekt", ru: "Тузла · Новый проект", pl: "Tuzla · Nowy projekt" },
-    location: { tr: "Tuzla, Gazimağusa", en: "Tuzla, Famagusta", de: "Tuzla, Famagusta", ru: "Тузла, Фамагуста", pl: "Tuzla, Famagusta" },
+    short: { tr: "Gazimağusa · Yeni proje", en: "Famagusta · New project", de: "Famagusta · Neues Projekt", ru: "Фамагуста · Новый проект", pl: "Famagusta · Nowy projekt" },
+    location: { tr: "Gazimağusa Bölgesi", en: "Famagusta Region", de: "Region Famagusta", ru: "Район Фамагусты", pl: "Region Famagusty" },
     status: { tr: "Yeni proje", en: "New project", de: "Neues Projekt", ru: "Новый проект", pl: "Nowy projekt" },
     blurb: { tr: "54 villa · Tek ve ikiz villa, özel bahçe", en: "54 villas · Single and twin villas, private gardens", de: "54 Villen · Freistehend und Doppelvilla, Privatgärten", ru: "54 виллы · Отдельные и дуплекс-виллы, частные сады", pl: "54 wille · Wolnostojące i bliźniacze, prywatne ogrody" },
     cover: "/neocity/hero.jpg",

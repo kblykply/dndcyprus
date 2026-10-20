@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "pl",
   path: "/neocity",
-  title: "NeoCity Tuzla, Famagusta – wille | DND Cyprus",
+  title: "NeoCity Famagusta – wille | DND Cyprus",
   description:
-    "NeoCity obok Famagusty i Tuzli: 54 wille z prywatnymi ogrodami, opcjonalnym basenem, marketem i obiektem sportowym. Plan „5 zer” w lirach: 35% wkładu, 60 miesięcy bez odsetek.",
+    "NeoCity w regionie Famagusty: 54 wille z prywatnymi ogrodami, opcjonalnym basenem, marketem i obiektem sportowym. Plan „5 zer” w lirach: 35% wkładu, 60 miesięcy bez odsetek.",
   image: "/og/neocity.jpg",
   imageAlt: "Wille bliźniacze NeoCity z prywatnymi basenami o zachodzie słońca",
 });

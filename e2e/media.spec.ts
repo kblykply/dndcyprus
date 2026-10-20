@@ -135,6 +135,8 @@ test("NeoCity: vaziyet planı anahtarı çalışır, ödeme planı var, Mariachi
   await expect(page.locator("#konum .map.live iframe")).toHaveAttribute("src", /35\.15406%2C33\.85201/);
   await expect(page.locator("#konum .btns a").first()).toHaveAttribute("href", /destination=35\.15406%2C33\.85201/);
   await expect(page.locator("#konum .az-dist li").first()).toContainText("dk");
+  // öne çıkan bilgilerde Lokasyon kartı haritada tam noktayı açar
+  await expect(page.locator("a.az-fact.map")).toHaveAttribute("href", /query=35\.15406%2C33\.85201/);
 });
 
 // galeri (5 kare, diğer projelerle eşit) ve iç mekânda "Tam ekran": görsel kırpılmadan açılır, okla geçilir, Esc kapatır
@@ -146,10 +148,11 @@ test("NeoCity: galeri 5 kare; iç mekân ve galeri tam ekran açılır, Esc ile 
   await stage.getByRole("button", { name: "Tam ekran" }).click();
   const dlg = page.getByRole("dialog", { name: "Tam ekran görsel" });
   await expect(dlg).toBeVisible();
-  await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-01/);
-  await expect(dlg.locator(".cap")).toContainText("01 / 10");
+  // sıra: dış cephe (in-00), giriş katı (in-08 salon ve merdiven …), üst kat
+  await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-00/);
+  await expect(dlg.locator(".cap")).toContainText("01 / 11");
   await page.keyboard.press("ArrowRight");
-  await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-02/);
+  await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-08/);
   await page.keyboard.press("Escape");
   await expect(dlg).toHaveCount(0);
   await page.locator(".az-pg-wrap").getByRole("button", { name: "Tam ekran" }).click();

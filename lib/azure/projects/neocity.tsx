@@ -15,7 +15,7 @@ type Copy = {
   overview: { kicker: string; title: string; lead: string; highlights: string[]; chips: string[]; imageAlt: string };
   facts: { kicker: string; title: string; lead: string; items: [string, string][]; note: string };
   site: { kicker: string; title: string; lead: string; day: string; night: string; dayAlt: string; nightAlt: string; stats: [string, string][]; legend: string[]; note: string };
-  interiors: { kicker: string; title: string; lead: ReactNode; labels: string[]; alt: (label: string) => string };
+  interiors: { kicker: string; title: string; lead: ReactNode; labels: string[]; alt: (label: string) => string; exteriorAlt: string };
   plans: {
     kicker: string; title: string; lead: string; note: string; ground: string; first: string;
     single: string; twin: string; singleSize: string; twinSize: string; singleNote: string; twinNote: string;
@@ -30,6 +30,9 @@ type Copy = {
 // tek villanın tam karşıdan ön cephesi (kullanıcı isteği; ikiz villa arka bahçe karesi yerine)
 // (g-NN numaraları; galleryAlts tüm 12 render için sırayla)
 const GALLERY = [1, 2, 3, 4, 11];
+// iç mekân sırası (patron: önce dış cephe, sonra giriş katı, sonra üst kat): in-00 dış cephe (g-07’den kırpıldı) · 08 salon ve merdiven,
+// 02 ve 05 salon, 04 yemek alanı, 09 ve 10 mutfak · 01 ve 07 yatak odası, 03 ve 06 banyo (etiket dizisinde n. sıra = in-n görseli)
+const IN_ORDER = [0, 8, 2, 5, 4, 9, 10, 1, 7, 3, 6];
 
 const ACC: Accent[] = ["sea", "coral"];
 const acc = (i: number): Accent => ACC[i % 2];
@@ -68,7 +71,7 @@ function build(locale: Locale, c: Copy): ProjectContent {
         url: `${SITE_URL}/${locale}/neocity`,
         description: c.overview.lead,
         image: `${SITE_URL}/neocity/hero.jpg`,
-        address: { "@type": "PostalAddress", addressLocality: "Tuzla", addressRegion: "Gazimağusa", addressCountry: "CY" },
+        address: { "@type": "PostalAddress", addressLocality: "Gazimağusa", addressRegion: "Gazimağusa", addressCountry: "CY" },
         geo: { "@type": "GeoCoordinates", latitude: 35.15406, longitude: 33.85201 },
         numberOfAccommodationUnits: { "@type": "QuantitativeValue", value: 54 },
       },
@@ -94,7 +97,7 @@ function build(locale: Locale, c: Copy): ProjectContent {
       groups: [{
         id: "neocity",
         name: "NeoCity",
-        shots: c.interiors.labels.map((label, i) => ({ image: `${IN(i + 1)}.jpg`, thumb: `${IN(i + 1)}-t.jpg`, label, alt: c.interiors.alt(label) })),
+        shots: IN_ORDER.map((n) => ({ image: `${IN(n)}.jpg`, thumb: `${IN(n)}-t.jpg`, label: c.interiors.labels[n], alt: n === 0 ? c.interiors.exteriorAlt : c.interiors.alt(c.interiors.labels[n]) })),
       }],
     },
     floorPlans: {
@@ -149,7 +152,7 @@ const A = {
   tf: ["17,7 m²", "4,8 m²", "14,2 m²", "14,2 m²", "5,9 m²", "10,7 m²", "3 m²"],
 };
 const zip = (labels: string[], values: string[]): [string, string][] => labels.map((l, i) => [l, values[i]]);
-const DIST = [2, 5, 6, 6, 8, 9, 15, 35];
+const DIST = [2, 6, 6, 8, 9, 15, 35];
 const zipMin = (labels: string[]): [string, number][] => labels.map((l, i) => [l, DIST[i]]);
 
 const TR = build("tr", {
@@ -167,7 +170,7 @@ const TR = build("tr", {
   overview: {
     kicker: "Genel bakış",
     title: "NeoCity Genel Bakış",
-    lead: "DND Cyprus’un yeni projesi NeoCity ile bu kez odağımızda yerli aileler ve villa yaşamı var. Gazimağusa ve Tuzla’nın hemen yanı başında konumlanan NeoCity, günlük yaşamın ihtiyaçlarına, eğitim ve sağlık olanaklarına kolay ulaşım sağlayan avantajlı bir lokasyonda yükseliyor.",
+    lead: "DND Cyprus’un yeni projesi NeoCity ile bu kez odağımızda yerli aileler ve villa yaşamı var. Gazimağusa bölgesinde konumlanan NeoCity, günlük yaşamın ihtiyaçlarına, eğitim ve sağlık olanaklarına kolay ulaşım sağlayan avantajlı bir lokasyonda yükseliyor.",
     highlights: [
       "3 etaptan birincisi hayata geçiyor: 18 tek villa ve 36 ikiz villa, toplam 54 villa",
       "Her villada özel bahçe; opsiyonel özel yüzme havuzu",
@@ -181,7 +184,7 @@ const TR = build("tr", {
     kicker: "Öne çıkan bilgiler",
     title: "NeoCity Öne Çıkan Bilgiler",
     lead: "Projenin temel özelliklerine hızlıca göz atın.",
-    items: [["Lokasyon", "Tuzla, Gazimağusa"], ["Teslim", "Nisan 2029"], ["Etap", "1. Etap (3 etaptan ilki)"], ["Villa Sayısı", "54 (18 tek · 36 ikiz)"], ["Arsa Alanı", "20.170 m²"], ["İnşaat Alanı", "8.556 m²"]],
+    items: [["Lokasyon", "Gazimağusa Bölgesi"], ["Teslim", "Nisan 2029"], ["Etap", "1. Etap (3 etaptan ilki)"], ["Villa Sayısı", "54 (18 tek · 36 ikiz)"], ["Arsa Alanı", "20.170 m²"], ["İnşaat Alanı", "8.556 m²"]],
     note: "* Bilgiler tanıtım amaçlıdır. Nihai teknik ve satış detayları için satış ekibimizle iletişime geçiniz.",
   },
   site: {
@@ -198,8 +201,9 @@ const TR = build("tr", {
     kicker: "İç mekân",
     title: "NeoCity İç Mekân & Tasarım",
     lead: <>Ferah salonlar, ahşap dokular ve aydınlık odalar: <strong>NeoCity</strong> villalarından örnek iç mekânlar.</>,
-    labels: ["Yatak Odası", "Salon", "Banyo", "Yemek Alanı", "Salon", "Banyo", "Yatak Odası", "Salon ve Merdiven", "Mutfak", "Mutfak"],
+    labels: ["Dış Cephe", "Yatak Odası", "Salon", "Banyo", "Yemek Alanı", "Salon", "Banyo", "Yatak Odası", "Salon ve Merdiven", "Mutfak", "Mutfak"],
     alt: (l) => `NeoCity ${l.toLocaleLowerCase("tr")} iç mekân görseli`,
+    exteriorAlt: "NeoCity tek villa dış cephe görseli",
   },
   plans: {
     kicker: "Kat planları",
@@ -244,10 +248,10 @@ const TR = build("tr", {
   location: {
     kicker: "Konum",
     title: "NeoCity Konum",
-    lead: "Gazimağusa ve Tuzla’nın hemen yanı başında, Lefkoşa–DAÜ bağlantı yolu üzerinde: eğitim, sağlık ve günlük ihtiyaçlara birkaç dakika.",
-    address: "DAÜ Bağlantı Yolu, Tuzla, Gazimağusa, Kuzey Kıbrıs",
-    nearby: ["Doğu Akdeniz Üniversitesi", "Doğa Koleji", "Tuzla Merkez", "Gazimağusa"],
-    distances: zipMin(["Market", "Tuzla Merkez", "DAÜ", "Doğa Koleji", "Gazimağusa", "Hastane", "İskele", "Ercan Havalimanı"]),
+    lead: "Gazimağusa bölgesinde, Lefkoşa–DAÜ bağlantı yolu üzerinde: eğitim, sağlık ve günlük ihtiyaçlara birkaç dakika.",
+    address: "DAÜ Bağlantı Yolu, Gazimağusa Bölgesi, Kuzey Kıbrıs",
+    nearby: ["Doğu Akdeniz Üniversitesi", "Doğa Koleji", "Gazimağusa"],
+    distances: zipMin(["Market", "DAÜ", "Doğa Koleji", "Gazimağusa", "Hastane", "İskele", "Ercan Havalimanı"]),
   },
 });
 
@@ -266,7 +270,7 @@ const EN = build("en", {
   overview: {
     kicker: "Overview",
     title: "NeoCity Overview",
-    lead: "With NeoCity, DND Cyprus’s newest project, our focus is on local families and villa living. Set right beside Famagusta and Tuzla, NeoCity rises in an advantageous location with easy access to daily needs, schools and healthcare.",
+    lead: "With NeoCity, DND Cyprus’s newest project, our focus is on local families and villa living. Set in the Famagusta region, NeoCity rises in an advantageous location with easy access to daily needs, schools and healthcare.",
     highlights: [
       "Phase 1 of 3 is under way: 18 single and 36 twin villas, 54 villas in total",
       "A private garden with every villa; optional private swimming pool",
@@ -280,7 +284,7 @@ const EN = build("en", {
     kicker: "Key facts",
     title: "NeoCity Key Facts",
     lead: "A quick look at the project’s main features.",
-    items: [["Location", "Tuzla, Famagusta"], ["Delivery", "April 2029"], ["Phase", "Phase 1 (of 3)"], ["Villas", "54 (18 single · 36 twin)"], ["Plot Area", "20,170 m²"], ["Construction Area", "8,556 m²"]],
+    items: [["Location", "Famagusta Region"], ["Delivery", "April 2029"], ["Phase", "Phase 1 (of 3)"], ["Villas", "54 (18 single · 36 twin)"], ["Plot Area", "20,170 m²"], ["Construction Area", "8,556 m²"]],
     note: "* Information is for promotional purposes. Please contact our sales team for final technical and sales details.",
   },
   site: {
@@ -297,8 +301,9 @@ const EN = build("en", {
     kicker: "Interiors",
     title: "NeoCity Interiors & Design",
     lead: <>Airy living rooms, wood textures and bright bedrooms: sample interiors from <strong>NeoCity</strong> villas.</>,
-    labels: ["Bedroom", "Living Room", "Bathroom", "Dining Area", "Living Room", "Bathroom", "Bedroom", "Living Room & Stairs", "Kitchen", "Kitchen"],
+    labels: ["Exterior", "Bedroom", "Living Room", "Bathroom", "Dining Area", "Living Room", "Bathroom", "Bedroom", "Living Room & Stairs", "Kitchen", "Kitchen"],
     alt: (l) => `NeoCity ${l.toLowerCase()} interior image`,
+    exteriorAlt: "NeoCity single villa exterior",
   },
   plans: {
     kicker: "Floor plans",
@@ -343,10 +348,10 @@ const EN = build("en", {
   location: {
     kicker: "Location",
     title: "NeoCity Location",
-    lead: "Right beside Famagusta and Tuzla, on the Nicosia–EMU link road: schools, healthcare and daily needs are minutes away.",
-    address: "DAÜ Bağlantı Yolu (EMU link road), Tuzla, Famagusta, North Cyprus",
-    nearby: ["Eastern Mediterranean University", "Doğa College", "Tuzla Centre", "Famagusta"],
-    distances: zipMin(["Market", "Tuzla Centre", "EMU", "Doğa College", "Famagusta", "Hospital", "İskele", "Ercan Airport"]),
+    lead: "In the Famagusta region, on the Nicosia–EMU link road: schools, healthcare and daily needs are minutes away.",
+    address: "DAÜ Bağlantı Yolu (EMU link road), Famagusta Region, North Cyprus",
+    nearby: ["Eastern Mediterranean University", "Doğa College", "Famagusta"],
+    distances: zipMin(["Market", "EMU", "Doğa College", "Famagusta", "Hospital", "İskele", "Ercan Airport"]),
   },
 });
 
@@ -365,7 +370,7 @@ const DE = build("de", {
   overview: {
     kicker: "Überblick",
     title: "NeoCity Überblick",
-    lead: "Mit NeoCity, dem neuesten Projekt von DND Cyprus, stehen diesmal einheimische Familien und das Leben in der Villa im Mittelpunkt. Direkt neben Famagusta und Tuzla entsteht NeoCity in vorteilhafter Lage mit kurzen Wegen zu allem für den täglichen Bedarf, zu Schulen und zur Gesundheitsversorgung.",
+    lead: "Mit NeoCity, dem neuesten Projekt von DND Cyprus, stehen diesmal einheimische Familien und das Leben in der Villa im Mittelpunkt. In der Region Famagusta entsteht NeoCity in vorteilhafter Lage mit kurzen Wegen zu allem für den täglichen Bedarf, zu Schulen und zur Gesundheitsversorgung.",
     highlights: [
       "Der erste von 3 Bauabschnitten entsteht: 18 freistehende und 36 Doppelvillen, insgesamt 54 Villen",
       "Privatgarten bei jeder Villa; optionaler privater Pool",
@@ -379,7 +384,7 @@ const DE = build("de", {
     kicker: "Wichtige Fakten",
     title: "NeoCity Wichtige Fakten",
     lead: "Die wichtigsten Merkmale des Projekts auf einen Blick.",
-    items: [["Lage", "Tuzla, Famagusta"], ["Übergabe", "April 2029"], ["Bauabschnitt", "1. Bauabschnitt (von 3)"], ["Villen", "54 (18 freistehend · 36 Doppel)"], ["Grundstücksfläche", "20.170 m²"], ["Baufläche", "8.556 m²"]],
+    items: [["Lage", "Region Famagusta"], ["Übergabe", "April 2029"], ["Bauabschnitt", "1. Bauabschnitt (von 3)"], ["Villen", "54 (18 freistehend · 36 Doppel)"], ["Grundstücksfläche", "20.170 m²"], ["Baufläche", "8.556 m²"]],
     note: "* Die Angaben dienen Werbezwecken. Für endgültige technische und vertragliche Details wenden Sie sich bitte an unser Vertriebsteam.",
   },
   site: {
@@ -396,8 +401,9 @@ const DE = build("de", {
     kicker: "Innenräume",
     title: "NeoCity Innenräume & Design",
     lead: <>Helle Wohnräume, Holzakzente und lichtdurchflutete Zimmer: Beispiel-Innenräume der <strong>NeoCity</strong>-Villen.</>,
-    labels: ["Schlafzimmer", "Wohnzimmer", "Badezimmer", "Essbereich", "Wohnzimmer", "Badezimmer", "Schlafzimmer", "Wohnzimmer & Treppe", "Küche", "Küche"],
+    labels: ["Außenansicht", "Schlafzimmer", "Wohnzimmer", "Badezimmer", "Essbereich", "Wohnzimmer", "Badezimmer", "Schlafzimmer", "Wohnzimmer & Treppe", "Küche", "Küche"],
     alt: (l) => `NeoCity ${l} – Innenansicht`,
+    exteriorAlt: "NeoCity: Außenansicht einer freistehenden Villa",
   },
   plans: {
     kicker: "Grundrisse",
@@ -442,10 +448,10 @@ const DE = build("de", {
   location: {
     kicker: "Lage",
     title: "NeoCity Lage",
-    lead: "Direkt neben Famagusta und Tuzla, an der Verbindungsstraße Nikosia–EMU: Schulen, Gesundheitsversorgung und Einkauf in wenigen Minuten.",
-    address: "DAÜ Bağlantı Yolu (Zufahrt zur EMU), Tuzla, Famagusta, Nordzypern",
-    nearby: ["Eastern Mediterranean University", "Doğa College", "Zentrum Tuzla", "Famagusta"],
-    distances: zipMin(["Markt", "Zentrum Tuzla", "EMU", "Doğa College", "Famagusta", "Krankenhaus", "İskele", "Flughafen Ercan"]),
+    lead: "In der Region Famagusta, an der Verbindungsstraße Nikosia–EMU: Schulen, Gesundheitsversorgung und Einkauf in wenigen Minuten.",
+    address: "DAÜ Bağlantı Yolu (Zufahrt zur EMU), Region Famagusta, Nordzypern",
+    nearby: ["Eastern Mediterranean University", "Doğa College", "Famagusta"],
+    distances: zipMin(["Markt", "EMU", "Doğa College", "Famagusta", "Krankenhaus", "İskele", "Flughafen Ercan"]),
   },
 });
 
@@ -464,7 +470,7 @@ const RU = build("ru", {
   overview: {
     kicker: "Обзор",
     title: "NeoCity Обзор",
-    lead: "В новом проекте DND Cyprus — NeoCity — в центре внимания местные семьи и жизнь в вилле. NeoCity строится рядом с Фамагустой и Тузлой, в удобном месте с быстрым доступом ко всему необходимому, школам и медицине.",
+    lead: "В новом проекте DND Cyprus — NeoCity — в центре внимания местные семьи и жизнь в вилле. NeoCity строится в районе Фамагусты, в удобном месте с быстрым доступом ко всему необходимому, школам и медицине.",
     highlights: [
       "Начинается первая из 3 очередей: 18 отдельных и 36 дуплекс-вилл, всего 54 виллы",
       "Частный сад у каждой виллы; частный бассейн по желанию",
@@ -478,7 +484,7 @@ const RU = build("ru", {
     kicker: "Ключевые факты",
     title: "NeoCity Ключевые факты",
     lead: "Основные характеристики проекта в кратком обзоре.",
-    items: [["Расположение", "Тузла, Фамагуста"], ["Сдача", "апрель 2029"], ["Очередь", "1-я очередь (из 3)"], ["Вилл", "54 (18 отдельных · 36 дуплекс)"], ["Площадь участка", "20 170 m²"], ["Площадь застройки", "8 556 m²"]],
+    items: [["Расположение", "Район Фамагусты"], ["Сдача", "апрель 2029"], ["Очередь", "1-я очередь (из 3)"], ["Вилл", "54 (18 отдельных · 36 дуплекс)"], ["Площадь участка", "20 170 m²"], ["Площадь застройки", "8 556 m²"]],
     note: "* Информация носит рекламный характер. Окончательные технические и коммерческие условия уточняйте у отдела продаж.",
   },
   site: {
@@ -495,8 +501,9 @@ const RU = build("ru", {
     kicker: "Интерьеры",
     title: "NeoCity Интерьеры и дизайн",
     lead: <>Просторные гостиные, фактура дерева и светлые спальни: примеры интерьеров вилл <strong>NeoCity</strong>.</>,
-    labels: ["Спальня", "Гостиная", "Ванная", "Столовая", "Гостиная", "Ванная", "Спальня", "Гостиная и лестница", "Кухня", "Кухня"],
+    labels: ["Фасад", "Спальня", "Гостиная", "Ванная", "Столовая", "Гостиная", "Ванная", "Спальня", "Гостиная и лестница", "Кухня", "Кухня"],
     alt: (l) => `NeoCity, ${l.toLowerCase()} — интерьер`,
+    exteriorAlt: "NeoCity: фасад отдельной виллы",
   },
   plans: {
     kicker: "Планировки",
@@ -541,10 +548,10 @@ const RU = build("ru", {
   location: {
     kicker: "Расположение",
     title: "NeoCity Расположение",
-    lead: "Рядом с Фамагустой и Тузлой, на дороге Никосия — EMU: школы, медицина и магазины в нескольких минутах.",
-    address: "DAÜ Bağlantı Yolu (дорога к EMU), Тузла, Фамагуста, Северный Кипр",
-    nearby: ["Eastern Mediterranean University", "Колледж Doğa", "Центр Тузлы", "Фамагуста"],
-    distances: zipMin(["Магазин", "Центр Тузлы", "EMU", "Колледж Doğa", "Фамагуста", "Больница", "Искеле", "Аэропорт Эрджан"]),
+    lead: "В районе Фамагусты, на дороге Никосия — EMU: школы, медицина и магазины в нескольких минутах.",
+    address: "DAÜ Bağlantı Yolu (дорога к EMU), район Фамагусты, Северный Кипр",
+    nearby: ["Eastern Mediterranean University", "Колледж Doğa", "Фамагуста"],
+    distances: zipMin(["Магазин", "EMU", "Колледж Doğa", "Фамагуста", "Больница", "Искеле", "Аэропорт Эрджан"]),
   },
 });
 
@@ -563,7 +570,7 @@ const PL = build("pl", {
   overview: {
     kicker: "Przegląd",
     title: "NeoCity Przegląd",
-    lead: "W NeoCity, najnowszym projekcie DND Cyprus, w centrum uwagi są tym razem lokalne rodziny i życie w willi. NeoCity powstaje tuż obok Famagusty i Tuzli, w dogodnej lokalizacji z łatwym dostępem do codziennych potrzeb, szkół i opieki zdrowotnej.",
+    lead: "W NeoCity, najnowszym projekcie DND Cyprus, w centrum uwagi są tym razem lokalne rodziny i życie w willi. NeoCity powstaje w regionie Famagusty, w dogodnej lokalizacji z łatwym dostępem do codziennych potrzeb, szkół i opieki zdrowotnej.",
     highlights: [
       "Rusza pierwszy z 3 etapów: 18 willi wolnostojących i 36 bliźniaczych, łącznie 54 wille",
       "Prywatny ogród przy każdej willi; opcjonalny prywatny basen",
@@ -577,7 +584,7 @@ const PL = build("pl", {
     kicker: "Najważniejsze informacje",
     title: "NeoCity Najważniejsze informacje",
     lead: "Szybki przegląd głównych cech projektu.",
-    items: [["Lokalizacja", "Tuzla, Famagusta"], ["Oddanie", "kwiecień 2029"], ["Etap", "Etap 1 (z 3)"], ["Liczba willi", "54 (18 wolnost. · 36 bliźn.)"], ["Powierzchnia działki", "20 170 m²"], ["Powierzchnia zabudowy", "8 556 m²"]],
+    items: [["Lokalizacja", "Region Famagusty"], ["Oddanie", "kwiecień 2029"], ["Etap", "Etap 1 (z 3)"], ["Liczba willi", "54 (18 wolnost. · 36 bliźn.)"], ["Powierzchnia działki", "20 170 m²"], ["Powierzchnia zabudowy", "8 556 m²"]],
     note: "* Informacje mają charakter promocyjny. W sprawie ostatecznych szczegółów technicznych i handlowych skontaktuj się z naszym działem sprzedaży.",
   },
   site: {
@@ -594,8 +601,9 @@ const PL = build("pl", {
     kicker: "Wnętrza",
     title: "NeoCity Wnętrza i design",
     lead: <>Przestronne salony, drewniane akcenty i jasne sypialnie: przykładowe wnętrza willi <strong>NeoCity</strong>.</>,
-    labels: ["Sypialnia", "Salon", "Łazienka", "Jadalnia", "Salon", "Łazienka", "Sypialnia", "Salon i schody", "Kuchnia", "Kuchnia"],
+    labels: ["Elewacja", "Sypialnia", "Salon", "Łazienka", "Jadalnia", "Salon", "Łazienka", "Sypialnia", "Salon i schody", "Kuchnia", "Kuchnia"],
     alt: (l) => `NeoCity, ${l.toLowerCase()} — wnętrze`,
+    exteriorAlt: "NeoCity: elewacja willi wolnostojącej",
   },
   plans: {
     kicker: "Plany pięter",
@@ -640,10 +648,10 @@ const PL = build("pl", {
   location: {
     kicker: "Lokalizacja",
     title: "NeoCity Lokalizacja",
-    lead: "Tuż obok Famagusty i Tuzli, przy drodze Nikozja–EMU: szkoły, opieka zdrowotna i zakupy w kilka minut.",
-    address: "DAÜ Bağlantı Yolu (droga do EMU), Tuzla, Famagusta, Cypr Północny",
-    nearby: ["Eastern Mediterranean University", "Doğa College", "Centrum Tuzli", "Famagusta"],
-    distances: zipMin(["Market", "Centrum Tuzli", "EMU", "Doğa College", "Famagusta", "Szpital", "İskele", "Lotnisko Ercan"]),
+    lead: "W regionie Famagusty, przy drodze Nikozja–EMU: szkoły, opieka zdrowotna i zakupy w kilka minut.",
+    address: "DAÜ Bağlantı Yolu (droga do EMU), region Famagusty, Cypr Północny",
+    nearby: ["Eastern Mediterranean University", "Doğa College", "Famagusta"],
+    distances: zipMin(["Market", "EMU", "Doğa College", "Famagusta", "Szpital", "İskele", "Lotnisko Ercan"]),
   },
 });
 

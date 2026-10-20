@@ -17,6 +17,10 @@ function formatDistance(d: Distance, minute: string) {
 // çubuk uzunluğu: dakikalı listede dakika, diğerlerinde metre
 const measure = (d: Distance) => (typeof d.min === "number" ? d.min : typeof d.m === "number" ? d.m : (d.km ?? 0) * 1000);
 
+// "Haritada aç" bağlantısı (öne çıkan bilgilerdeki Lokasyon kartı): koordinat varsa tam nokta, yoksa adres araması
+export const mapHref = (d: Pick<ProjectLocation, "lat" | "lng" | "mapQuery" | "address">) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(typeof d.lat === "number" && typeof d.lng === "number" ? `${d.lat},${d.lng}` : d.mapQuery ?? d.address)}`;
+
 // Konum: az-loc kartı — solda başlık, adres, mesafe çubukları ve yol tarifi; sağda Google harita.
 // Koordinat verilmemiş projede harita yerine konum görseli (mapImage) durur, yol tarifi düğmeleri gösterilmez.
 export default function Location({ d, name, id, locale }: { d: ProjectLocation; name: string; id: string; locale: Locale }) {
