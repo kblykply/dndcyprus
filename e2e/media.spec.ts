@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
 import { isMobile, prepare, settle } from "./helpers";
 
 test.beforeEach(async ({ page }) => {
@@ -145,9 +145,15 @@ test("NeoCity: galeri 5 kare; iç mekân ve galeri tam ekran açılır, Esc ile 
   await expect(page.locator(".az-pg > button")).toHaveCount(5);
   const stage = page.locator(".az-int2");
   await stage.scrollIntoViewIfNeeded();
-  await stage.getByRole("button", { name: "Tam ekran" }).click();
+  // Firefox'ta yük altında ilk tıklama ara sıra boşa düşüyor (S.S.S. testindeki gibi): pencere açılana kadar tıklamayı yenile
+  const openUntil = async (btn: Locator, dialog: Locator) => {
+    await expect(async () => {
+      if (!(await dialog.isVisible())) await btn.click();
+      await expect(dialog).toBeVisible({ timeout: 1500 });
+    }).toPass({ timeout: 10000 });
+  };
   const dlg = page.getByRole("dialog", { name: "Tam ekran görsel" });
-  await expect(dlg).toBeVisible();
+  await openUntil(stage.getByRole("button", { name: "Tam ekran" }), dlg);
   // sıra: dış cephe (in-00), giriş katı (in-08 salon ve merdiven …), üst kat
   await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-00/);
   await expect(dlg.locator(".cap")).toContainText("01 / 11");
@@ -155,8 +161,7 @@ test("NeoCity: galeri 5 kare; iç mekân ve galeri tam ekran açılır, Esc ile 
   await expect(dlg.locator("img")).toHaveAttribute("src", /\/neocity\/in-08/);
   await page.keyboard.press("Escape");
   await expect(dlg).toHaveCount(0);
-  await page.locator(".az-pg-wrap").getByRole("button", { name: "Tam ekran" }).click();
-  await expect(page.getByRole("dialog", { name: "Tam ekran" })).toBeVisible();
+  await openUntil(page.locator(".az-pg-wrap").getByRole("button", { name: "Tam ekran" }), page.getByRole("dialog", { name: "Tam ekran" }));
   await page.getByRole("dialog").getByRole("button", { name: "Kapat" }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
 });
