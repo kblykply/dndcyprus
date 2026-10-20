@@ -56,10 +56,10 @@ export default function FactsGrid({ items, done, map }: { items: ProjectFact[]; 
         const Ic = last ? (done ? PiSealCheckDuotone : PiHardHatDuotone) : ICONS[i] ?? PiMapPinDuotone;
         const cls = `az-fact rv d${i % 3} ${f.accent === "coral" ? "coral" : "sea"}`;
         const no = <span className="no">{String(i + 1).padStart(2, "0")}</span>;
-        // ilk kart konum: bütün kart haritada (Google Haritalar, tam nokta) açılır; sağ üstte "Haritada Aç" etiketi
+        // ilk kart konum: bütün kart haritada (Google Haritalar, tam nokta) açılır; sağ üstte "Haritada Aç" etiketi (erişilebilir ad görünen metinden: etiket + değer + "Haritada Aç")
         if (i === 0 && map) {
           return (
-            <a key={f.label + i} className={`${cls} map`} href={map.href} target="_blank" rel="noopener noreferrer" aria-label={`${f.label}: ${f.value} · ${map.label}`}>
+            <a key={f.label + i} className={`${cls} map`} href={map.href} target="_blank" rel="noopener noreferrer">
               <div className="hd"><span className="ic"><Ic size={22} aria-hidden /></span><span className="hr"><span className="go">{map.label}<PiArrowUpRightBold size={13} aria-hidden /></span>{no}</span></div>
               <small>{f.label}</small>
               <CountUp value={f.value} />
