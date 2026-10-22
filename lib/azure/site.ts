@@ -94,8 +94,8 @@ export const PROJECTS: ProjectMeta[] = [
   {
     slug: "la-joya",
     name: "La Joya",
-    short: { tr: "Long Beach · 2025", en: "Long Beach · 2025", de: "Long Beach · 2025", ru: "Long Beach · 2025", pl: "Long Beach · 2025" },
-    location: { tr: "Long Beach, İskele · Denize 500 m", en: "Long Beach, İskele · 500 m to the sea", de: "Long Beach, İskele · 500 m zum Meer", ru: "Long Beach, Искеле · 500 m до моря", pl: "Long Beach, İskele · 500 m od morza" },
+    short: { tr: "Bahçeler · 2025", en: "Bahçeler · 2025", de: "Bahçeler · 2025", ru: "Bahçeler · 2025", pl: "Bahçeler · 2025" },
+    location: { tr: "Bahçeler, İskele · Denize 500 m", en: "Bahçeler, İskele · 500 m to the sea", de: "Bahçeler, İskele · 500 m zum Meer", ru: "Bahçeler, Искеле · 500 m до моря", pl: "Bahçeler, İskele · 500 m od morza" },
     status: { tr: "Tamamlandı · 2025", en: "Completed · 2025", de: "Fertiggestellt · 2025", ru: "Завершён · 2025", pl: "Ukończony · 2025" },
     blurb: { tr: "Yatay mimari, 74 konut, loft ve penthouse", en: "Low-rise architecture, 74 homes, lofts and penthouses", de: "Flache Bauweise, 74 Wohnungen, Lofts und Penthouses", ru: "Малоэтажная архитектура, 74 квартиры, лофты и пентхаусы", pl: "Niska zabudowa, 74 mieszkania, lofty i penthouse’y" },
     cover: "/azure/lj-5.jpg",

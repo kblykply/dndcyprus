@@ -38,7 +38,7 @@ export const VIDEO_SLIDES: Record<Locale, VideoSlide[]> = {
     { ...TL_2, tag: "Lagoon Verde", title: ["Lagoon Verde'de", "TL ile ev sahibi olun"], lead: "Maaşınız TL ise, hayalinizdeki eve giden yol da TL ile olsun.",
       bullets: ["Tüm ödemeler Türk Lirası ile", "Banka, faiz ve kur farkı yok", "Sınırlı sayıda rezidans"],
       primary: { label: "Lagoon Verde'yi incele", path: "/lagoon-verde" }, secondary: { label: "İletişime geç", path: "/contact" } },
-    { ...OPEN, tag: "La Joya · Açılış", title: ["La Joya", "açıldı"], lead: "İskele Long Beach'teki 74 rezidanslık La Joya, resmi açılışla sahiplerini ağırlamaya başladı.",
+    { ...OPEN, tag: "La Joya · Açılış", title: ["La Joya", "açıldı"], lead: "İskele Bahçeler'deki 74 rezidanslık La Joya, resmi açılışla sahiplerini ağırlamaya başladı.",
       bullets: ["Resmi açılış: 1 Kasım 2025, İskele", "Ev sahipleri, iş ortakları ve ekibimizle kutlama", "Yalın mimari çizgiler, sosyal alanlar ve sahil atmosferi"],
       primary: { label: "La Joya'yı keşfet", path: "/la-joya" }, secondary: { label: "İletişime geç", path: "/contact" } },
     { ...TOUR, tag: "La Joya · Tur", title: ["La Joya", "rezidans turu"], lead: "Denizle iç içe, yalın ve modern hatların buluştuğu bir sahne.",

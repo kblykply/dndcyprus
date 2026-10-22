@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "en",
   path: "/la-joya",
-  title: "La Joya Long Beach Iskele – Lofts & Penthouses | DND Cyprus",
+  title: "La Joya Bahçeler Iskele – Lofts & Penthouses | DND Cyprus",
   description:
-    "Completed in 2025, La Joya in Long Beach, Iskele offers 74 low-rise homes, lofts and penthouses, 500 m from the sea, with Mariachi Beach Club membership.",
+    "Completed in 2025, La Joya in Bahçeler, Iskele offers 74 low-rise homes, lofts and penthouses, 500 m from the sea, with Mariachi Beach Club membership.",
   image: "/og/la-joya.jpg",
   imageAlt: "La Joya poolside loft residences",
 });

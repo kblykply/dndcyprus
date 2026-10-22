@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "ru",
   path: "/la-joya",
-  title: "La Joya, Long Beach, Искеле – лофты и пентхаусы | DND Cyprus",
+  title: "La Joya, Bahçeler, Искеле – лофты и пентхаусы | DND Cyprus",
   description:
-    "La Joya в Long Beach (Искеле), завершён в 2025 году: 74 дома малой этажности, лофты и пентхаусы в 500 м от моря и членство в Mariachi Beach Club.",
+    "La Joya в Bahçeler (Искеле), завершён в 2025 году: 74 дома малой этажности, лофты и пентхаусы в 500 м от моря и членство в Mariachi Beach Club.",
   image: "/og/la-joya.jpg",
   imageAlt: "Лофт-резиденции La Joya у бассейна",
 });

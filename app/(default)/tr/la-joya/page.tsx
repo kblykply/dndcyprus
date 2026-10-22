@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "tr",
   path: "/la-joya",
-  title: "La Joya Long Beach İskele | Loft ve Penthouse – DND Cyprus",
+  title: "La Joya Bahçeler İskele | Loft ve Penthouse – DND Cyprus",
   description:
-    "2025’te tamamlanan La Joya, Long Beach, İskele’de denize 500 m: 74 konut, loft ve penthouse daireler, havuz ve Mariachi Beach Club üyeliği. Bilgi alın.",
+    "2025’te tamamlanan La Joya, Bahçeler, İskele’de denize 500 m: 74 konut, loft ve penthouse daireler, havuz ve Mariachi Beach Club üyeliği. Bilgi alın.",
   image: "/og/la-joya.jpg",
   imageAlt: "La Joya havuz kenarındaki loft konutlar",
 });

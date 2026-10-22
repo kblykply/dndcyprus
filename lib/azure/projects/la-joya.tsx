@@ -20,7 +20,7 @@ export const LA_JOYA: ProjectData = {
     overview: {
       kicker: "Genel bakış",
       title: "La Joya Genel Bakış",
-      lead: "La Joya; 2025 yılında tamamlanmış, Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir konut projesidir. Mariachi Beach Club’a özel üyelik ayrıcalıkları, açık yüzme havuzları, restoran & pool bar, spor salonu ve akıllı ev/merkezi sistemlerle tatil konforunu günlük yaşama taşır.",
+      lead: "La Joya; 2025 yılında tamamlanmış, Bahçeler, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan butik bir konut projesidir. Mariachi Beach Club’a özel üyelik ayrıcalıkları, açık yüzme havuzları, restoran & pool bar, spor salonu ve akıllı ev/merkezi sistemlerle tatil konforunu günlük yaşama taşır.",
       highlights: [
         "Denize 500 m; Mariachi Beach Club üyeliği ve indirimli hizmetler",
         "Yatay mimari: 74 konut (1+1 loft, 2+1 penthouse, stüdyo penthouse)",
@@ -43,7 +43,7 @@ export const LA_JOYA: ProjectData = {
       title: "La Joya Öne Çıkan Bilgiler",
       lead: "Projenin temel özelliklerine hızlıca göz atın.",
       items: [
-        { label: "Lokasyon", value: "Long Beach, İskele", accent: "sea" },
+        { label: "Lokasyon", value: "Bahçeler, İskele", accent: "sea" },
         { label: "Tamamlanma Yılı", value: "2025", accent: "coral" },
         { label: "Tip", value: "Rezidans & Beach Club", accent: "sea" },
         { label: "Birim Sayısı", value: "74", accent: "coral" },
@@ -57,11 +57,11 @@ export const LA_JOYA: ProjectData = {
         name: "La Joya",
         url: `${SITE_URL}/tr/la-joya`,
         description:
-          "La Joya; Long Beach, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan, 2025 yılında tamamlanmış butik bir konut projesidir.",
+          "La Joya; Bahçeler, İskele’de denize 500 m mesafede, yatay mimarili 74 konuttan oluşan, 2025 yılında tamamlanmış butik bir konut projesidir.",
         image: `${SITE_URL}/la-joya/2.jpg`,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Long Beach",
+          addressLocality: "Bahçeler",
           addressRegion: "İskele",
           addressCountry: "CY",
         },
@@ -225,8 +225,8 @@ export const LA_JOYA: ProjectData = {
     location: {
       kicker: "Konum",
       title: "La Joya Konum",
-      lead: "Long Beach, İskele — denize ve günlük ihtiyaçlara yakın konum.",
-      address: "Long Beach, İskele, Kuzey Kıbrıs",
+      lead: "Bahçeler, İskele — denize ve günlük ihtiyaçlara yakın konum.",
+      address: "Bahçeler, İskele, Kuzey Kıbrıs",
       lat: 35.272493,
       lng: 33.911998,
       embedSrc: "https://www.google.com/maps?q=35.272493,33.911998&z=15&output=embed",
@@ -278,7 +278,7 @@ export const LA_JOYA: ProjectData = {
     overview: {
       kicker: "Overview",
       title: "La Joya Overview",
-      lead: "Completed in 2025, La Joya is a boutique project of 74 residences with low-rise architecture, located just 500 m from the sea in Long Beach, İskele. With exclusive membership privileges at Mariachi Beach Club, outdoor swimming pools, a restaurant & pool bar, a gym, and smart home/central systems, it brings holiday comfort into everyday living.",
+      lead: "Completed in 2025, La Joya is a boutique project of 74 residences with low-rise architecture, located just 500 m from the sea in Bahçeler, İskele. With exclusive membership privileges at Mariachi Beach Club, outdoor swimming pools, a restaurant & pool bar, a gym, and smart home/central systems, it brings holiday comfort into everyday living.",
       highlights: [
         "500 m to the sea; Mariachi Beach Club membership and discounted services",
         "Low-rise architecture: 74 residences (1+1 loft, 2+1 penthouse, studio penthouse)",
@@ -301,7 +301,7 @@ export const LA_JOYA: ProjectData = {
       title: "La Joya Key Facts",
       lead: "Take a quick look at the project’s core features.",
       items: [
-        { label: "Location", value: "Long Beach, İskele", accent: "sea" },
+        { label: "Location", value: "Bahçeler, İskele", accent: "sea" },
         { label: "Completion Year", value: "2025", accent: "coral" },
         { label: "Type", value: "Residence & Beach Club", accent: "sea" },
         { label: "Number of Units", value: "74", accent: "coral" },
@@ -315,11 +315,11 @@ export const LA_JOYA: ProjectData = {
         name: "La Joya",
         url: `${SITE_URL}/en/la-joya`,
         description:
-          "La Joya is a boutique residential project completed in 2025, with 74 low-rise homes located just 500 m from the sea in Long Beach, İskele.",
+          "La Joya is a boutique residential project completed in 2025, with 74 low-rise homes located just 500 m from the sea in Bahçeler, İskele.",
         image: `${SITE_URL}/la-joya/2.jpg`,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Long Beach",
+          addressLocality: "Bahçeler",
           addressRegion: "İskele",
           addressCountry: "CY",
         },
@@ -483,8 +483,8 @@ export const LA_JOYA: ProjectData = {
     location: {
       kicker: "Location",
       title: "La Joya Location",
-      lead: "Long Beach, İskele — a location close to the sea and daily amenities.",
-      address: "Long Beach, İskele, North Cyprus",
+      lead: "Bahçeler, İskele — a location close to the sea and daily amenities.",
+      address: "Bahçeler, İskele, North Cyprus",
       lat: 35.272493,
       lng: 33.911998,
       embedSrc: "https://www.google.com/maps?q=35.272493,33.911998&z=15&output=embed",
@@ -536,7 +536,7 @@ export const LA_JOYA: ProjectData = {
     overview: {
       kicker: "Überblick",
       title: "La Joya im Überblick",
-      lead: "La Joya wurde 2025 fertiggestellt: ein Boutique-Projekt mit 74 Wohneinheiten in flacher Bauweise, nur 500 m vom Meer entfernt in Long Beach, İskele. Exklusive Mitgliedsvorteile im Mariachi Beach Club, Außenpools, Restaurant & Poolbar, Fitnessstudio sowie Smart-Home- und Zentralsysteme holen den Urlaubskomfort in Ihren Alltag.",
+      lead: "La Joya wurde 2025 fertiggestellt: ein Boutique-Projekt mit 74 Wohneinheiten in flacher Bauweise, nur 500 m vom Meer entfernt in Bahçeler, İskele. Exklusive Mitgliedsvorteile im Mariachi Beach Club, Außenpools, Restaurant & Poolbar, Fitnessstudio sowie Smart-Home- und Zentralsysteme holen den Urlaubskomfort in Ihren Alltag.",
       highlights: [
         "Nur 500 m zum Meer; Mitgliedschaft im Mariachi Beach Club und vergünstigte Leistungen",
         "Flache Bauweise: 74 Wohneinheiten (1+1 Loft, 2+1 Penthouse, Studio Penthouse)",
@@ -559,7 +559,7 @@ export const LA_JOYA: ProjectData = {
       title: "Eckdaten zu La Joya",
       lead: "Die wichtigsten Merkmale des Projekts auf einen Blick.",
       items: [
-        { label: "Lage", value: "Long Beach, İskele", accent: "sea" },
+        { label: "Lage", value: "Bahçeler, İskele", accent: "sea" },
         { label: "Fertigstellung", value: "2025", accent: "coral" },
         { label: "Typ", value: "Wohnanlage & Beach Club", accent: "sea" },
         { label: "Wohneinheiten", value: "74", accent: "coral" },
@@ -573,11 +573,11 @@ export const LA_JOYA: ProjectData = {
         name: "La Joya",
         url: `${SITE_URL}/de/la-joya`,
         description:
-          "La Joya ist ein 2025 fertiggestelltes Boutique-Wohnprojekt mit 74 Wohneinheiten in flacher Bauweise, nur 500 m vom Meer entfernt in Long Beach, İskele.",
+          "La Joya ist ein 2025 fertiggestelltes Boutique-Wohnprojekt mit 74 Wohneinheiten in flacher Bauweise, nur 500 m vom Meer entfernt in Bahçeler, İskele.",
         image: `${SITE_URL}/la-joya/2.jpg`,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Long Beach",
+          addressLocality: "Bahçeler",
           addressRegion: "İskele",
           addressCountry: "CY",
         },
@@ -741,8 +741,8 @@ export const LA_JOYA: ProjectData = {
     location: {
       kicker: "Lage",
       title: "Lage von La Joya",
-      lead: "Long Beach, İskele – nah am Meer und an allem, was Sie für den Alltag brauchen.",
-      address: "Long Beach, İskele, Nordzypern",
+      lead: "Bahçeler, İskele – nah am Meer und an allem, was Sie für den Alltag brauchen.",
+      address: "Bahçeler, İskele, Nordzypern",
       lat: 35.272493,
       lng: 33.911998,
       embedSrc: "https://www.google.com/maps?q=35.272493,33.911998&z=15&output=embed",
@@ -794,7 +794,7 @@ export const LA_JOYA: ProjectData = {
     overview: {
       kicker: "Обзор",
       title: "Обзор La Joya",
-      lead: "La Joya — бутик-проект из 74 резиденций малоэтажной застройки, завершённый в 2025 году, всего в 500 м от моря в Long Beach, Искеле. Привилегии членства в Mariachi Beach Club, открытые бассейны, ресторан и пул-бар, тренажёрный зал, «умный дом» и центральные инженерные системы приносят курортный комфорт в вашу повседневную жизнь.",
+      lead: "La Joya — бутик-проект из 74 резиденций малоэтажной застройки, завершённый в 2025 году, всего в 500 м от моря в Bahçeler, Искеле. Привилегии членства в Mariachi Beach Club, открытые бассейны, ресторан и пул-бар, тренажёрный зал, «умный дом» и центральные инженерные системы приносят курортный комфорт в вашу повседневную жизнь.",
       highlights: [
         "500 м до моря; членство в Mariachi Beach Club и скидки на услуги",
         "Малоэтажная застройка: 74 резиденции (1+1 Loft, 2+1 Penthouse, Studio Penthouse)",
@@ -817,7 +817,7 @@ export const LA_JOYA: ProjectData = {
       title: "Ключевые факты о La Joya",
       lead: "Кратко об основных характеристиках проекта.",
       items: [
-        { label: "Расположение", value: "Long Beach, Искеле", accent: "sea" },
+        { label: "Расположение", value: "Bahçeler, Искеле", accent: "sea" },
         { label: "Год завершения", value: "2025", accent: "coral" },
         { label: "Тип", value: "Жилой комплекс и бич-клуб", accent: "sea" },
         { label: "Количество квартир", value: "74", accent: "coral" },
@@ -831,11 +831,11 @@ export const LA_JOYA: ProjectData = {
         name: "La Joya",
         url: `${SITE_URL}/ru/la-joya`,
         description:
-          "La Joya — жилой бутик-проект из 74 резиденций малоэтажной застройки, завершённый в 2025 году, всего в 500 м от моря в Long Beach, Искеле.",
+          "La Joya — жилой бутик-проект из 74 резиденций малоэтажной застройки, завершённый в 2025 году, всего в 500 м от моря в Bahçeler, Искеле.",
         image: `${SITE_URL}/la-joya/2.jpg`,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Long Beach",
+          addressLocality: "Bahçeler",
           addressRegion: "İskele",
           addressCountry: "CY",
         },
@@ -999,8 +999,8 @@ export const LA_JOYA: ProjectData = {
     location: {
       kicker: "Расположение",
       title: "Расположение La Joya",
-      lead: "Long Beach, Искеле — рядом с морем и всем необходимым для повседневной жизни.",
-      address: "Long Beach, Искеле, Северный Кипр",
+      lead: "Bahçeler, Искеле — рядом с морем и всем необходимым для повседневной жизни.",
+      address: "Bahçeler, Искеле, Северный Кипр",
       lat: 35.272493,
       lng: 33.911998,
       embedSrc: "https://www.google.com/maps?q=35.272493,33.911998&z=15&output=embed",
@@ -1052,7 +1052,7 @@ export const LA_JOYA: ProjectData = {
     overview: {
       kicker: "Przegląd",
       title: "La Joya w skrócie",
-      lead: "La Joya to ukończona w 2025 roku butikowa inwestycja obejmująca 74 rezydencje w niskiej zabudowie, położona zaledwie 500 m od morza w Long Beach, İskele. Ekskluzywne przywileje członkowskie w Mariachi Beach Club, odkryte baseny, restauracja i pool bar, siłownia oraz inteligentny dom i systemy centralne przenoszą wakacyjny komfort do codziennego życia.",
+      lead: "La Joya to ukończona w 2025 roku butikowa inwestycja obejmująca 74 rezydencje w niskiej zabudowie, położona zaledwie 500 m od morza w Bahçeler, İskele. Ekskluzywne przywileje członkowskie w Mariachi Beach Club, odkryte baseny, restauracja i pool bar, siłownia oraz inteligentny dom i systemy centralne przenoszą wakacyjny komfort do codziennego życia.",
       highlights: [
         "500 m do morza; członkostwo w Mariachi Beach Club i usługi w obniżonych cenach",
         "Niska zabudowa: 74 rezydencje (1+1 Loft, 2+1 Penthouse, Studio Penthouse)",
@@ -1075,7 +1075,7 @@ export const LA_JOYA: ProjectData = {
       title: "La Joya – kluczowe fakty",
       lead: "Szybki przegląd najważniejszych cech projektu.",
       items: [
-        { label: "Lokalizacja", value: "Long Beach, İskele", accent: "sea" },
+        { label: "Lokalizacja", value: "Bahçeler, İskele", accent: "sea" },
         { label: "Rok ukończenia", value: "2025", accent: "coral" },
         { label: "Typ", value: "Rezydencje i beach club", accent: "sea" },
         { label: "Liczba lokali", value: "74", accent: "coral" },
@@ -1089,11 +1089,11 @@ export const LA_JOYA: ProjectData = {
         name: "La Joya",
         url: `${SITE_URL}/pl/la-joya`,
         description:
-          "La Joya to butikowa inwestycja mieszkaniowa ukończona w 2025 roku: 74 lokale w niskiej zabudowie, zaledwie 500 m od morza w Long Beach, İskele.",
+          "La Joya to butikowa inwestycja mieszkaniowa ukończona w 2025 roku: 74 lokale w niskiej zabudowie, zaledwie 500 m od morza w Bahçeler, İskele.",
         image: `${SITE_URL}/la-joya/2.jpg`,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Long Beach",
+          addressLocality: "Bahçeler",
           addressRegion: "İskele",
           addressCountry: "CY",
         },
@@ -1257,8 +1257,8 @@ export const LA_JOYA: ProjectData = {
     location: {
       kicker: "Lokalizacja",
       title: "Lokalizacja La Joya",
-      lead: "Long Beach, İskele – blisko morza i wszystkiego, czego potrzeba na co dzień.",
-      address: "Long Beach, İskele, Cypr Północny",
+      lead: "Bahçeler, İskele – blisko morza i wszystkiego, czego potrzeba na co dzień.",
+      address: "Bahçeler, İskele, Cypr Północny",
       lat: 35.272493,
       lng: 33.911998,
       embedSrc: "https://www.google.com/maps?q=35.272493,33.911998&z=15&output=embed",

@@ -51,7 +51,7 @@ const TR: HomeContent = {
     tl: { k: "Yeni ödeme modeli", h: "Maaşınız TL, taksitiniz de TL.", upto: "aya kadar faizsiz", rules: ["Banka, faiz ve kefil yok", "Kur farkı ve vade farkı yok", "Taksitler KKTC asgari ücret artışına göre güncellenir"], months: "ay", cta: "Lagoon Verde'yi incele" },
     usa: { k: "Massachusetts, ABD", count: 120, p: "DND Homes imzalı tamamlanmış proje" },
     mariachi: { k: "DND ev sahiplerine özel", h: "Mariachi Beach Club", p: "Ücretsiz giriş ve %10 restoran-bar indirimi. Plaj, 4 jakuzili havuz, pavilyonlar, DJ geceleri.", pill: "Platin Ödül" },
-    lajoya: { k: "Long Beach · Denize 500 m", h: "La Joya", p: "74 rezidans, sahiplerine teslim edildi.", pill: "Tamamlandı · 2025" },
+    lajoya: { k: "Bahçeler · Denize 500 m", h: "La Joya", p: "74 rezidans, sahiplerine teslim edildi.", pill: "Tamamlandı · 2025" },
     tech: { k: "Teknik donanım", h: "Her projede standart", p: "Merkezi ısıtma-soğutma · Jeneratör · Akıllı ev · Yerden ısıtma" },
     awards: {
       k: "PropertyNC 2025", h: "Üç ödül, tek yıl",
@@ -142,7 +142,7 @@ const EN: HomeContent = {
     tl: { k: "New payment model", h: "Earn in lira, pay in lira.", upto: "months interest-free", rules: ["No bank, no interest, no guarantor", "No exchange-rate or maturity difference", "Instalments follow the TRNC minimum-wage increase"], months: "months", cta: "Explore Lagoon Verde" },
     usa: { k: "Massachusetts, USA", count: 120, p: "Completed projects by DND Homes" },
     mariachi: { k: "Exclusive to DND homeowners", h: "Mariachi Beach Club", p: "Free entry and 10% off at the restaurant and bars. Beach, pool with 4 jacuzzis, pavilions, DJ nights.", pill: "Platinum Award" },
-    lajoya: { k: "Long Beach · 500 m to the sea", h: "La Joya", p: "74 residences, handed over to their owners.", pill: "Completed · 2025" },
+    lajoya: { k: "Bahçeler · 500 m to the sea", h: "La Joya", p: "74 residences, handed over to their owners.", pill: "Completed · 2025" },
     tech: { k: "Technical equipment", h: "Standard in every project", p: "Central heating & cooling · Generator · Smart home · Underfloor heating" },
     awards: {
       k: "PropertyNC 2025", h: "Three awards, one year",
@@ -233,7 +233,7 @@ const DE: HomeContent = {
     tl: { k: "Neues Zahlungsmodell", h: "Einkommen in Lira, Raten in Lira.", upto: "Monate zinsfrei", rules: ["Keine Bank, keine Zinsen, kein Bürge", "Keine Kursdifferenz, kein Laufzeitaufschlag", "Raten folgen der Mindestlohnerhöhung in Nordzypern"], months: "Monate", cta: "Lagoon Verde ansehen" },
     usa: { k: "Massachusetts, USA", count: 120, p: "Abgeschlossene Projekte von DND Homes" },
     mariachi: { k: "Exklusiv für DND-Eigentümer", h: "Mariachi Beach Club", p: "Freier Eintritt und 10% Rabatt in Restaurant und Bars. Strand, Pool mit 4 Whirlpools, Pavillons, DJ-Abende.", pill: "Platinpreis" },
-    lajoya: { k: "Long Beach · 500 m zum Meer", h: "La Joya", p: "74 Residenzen, an ihre Eigentümer übergeben.", pill: "Fertiggestellt · 2025" },
+    lajoya: { k: "Bahçeler · 500 m zum Meer", h: "La Joya", p: "74 Residenzen, an ihre Eigentümer übergeben.", pill: "Fertiggestellt · 2025" },
     tech: { k: "Technische Ausstattung", h: "Standard in jedem Projekt", p: "Zentrale Heizung & Kühlung · Generator · Smart Home · Fußbodenheizung" },
     awards: {
       k: "PropertyNC 2025", h: "Drei Auszeichnungen, ein Jahr",
@@ -324,7 +324,7 @@ const RU: HomeContent = {
     tl: { k: "Новая схема оплаты", h: "Зарплата в лирах — и платежи в лирах.", upto: "мес. без процентов", rules: ["Без банка, процентов и поручителей", "Без курсовой разницы и наценки за срок", "Платежи индексируются по росту минимальной зарплаты на Северном Кипре"], months: "мес.", cta: "Смотреть Lagoon Verde" },
     usa: { k: "Массачусетс, США", count: 120, p: "Завершённых проектов DND Homes" },
     mariachi: { k: "Только для владельцев жилья DND", h: "Mariachi Beach Club", p: "Бесплатный вход и скидка 10% в ресторане и барах. Пляж, бассейн с 4 джакузи, павильоны, DJ-вечеринки.", pill: "Платиновая награда" },
-    lajoya: { k: "Long Beach · 500 m до моря", h: "La Joya", p: "74 резиденции переданы владельцам.", pill: "Завершён · 2025" },
+    lajoya: { k: "Bahçeler · 500 m до моря", h: "La Joya", p: "74 резиденции переданы владельцам.", pill: "Завершён · 2025" },
     tech: { k: "Техническое оснащение", h: "Стандарт в каждом проекте", p: "Центральный климат-контроль · Генератор · Умный дом · Тёплый пол" },
     awards: {
       k: "PropertyNC 2025", h: "Три награды за один год",
@@ -415,7 +415,7 @@ const PL: HomeContent = {
     tl: { k: "Nowy model płatności", h: "Pensja w lirach, raty w lirach.", upto: "mies. bez odsetek", rules: ["Bez banku, odsetek i poręczyciela", "Bez różnic kursowych i dopłat za termin", "Raty rosną wraz z płacą minimalną na Cyprze Północnym"], months: "mies.", cta: "Zobacz Lagoon Verde" },
     usa: { k: "Massachusetts, USA", count: 120, p: "Zrealizowanych projektów DND Homes" },
     mariachi: { k: "Wyłącznie dla właścicieli nieruchomości DND", h: "Mariachi Beach Club", p: "Bezpłatny wstęp i 10% zniżki w restauracji i barach. Plaża, basen z 4 jacuzzi, pawilony, wieczory z DJ-em.", pill: "Platynowa Nagroda" },
-    lajoya: { k: "Long Beach · 500 m od morza", h: "La Joya", p: "74 apartamenty przekazane właścicielom.", pill: "Ukończony · 2025" },
+    lajoya: { k: "Bahçeler · 500 m od morza", h: "La Joya", p: "74 apartamenty przekazane właścicielom.", pill: "Ukończony · 2025" },
     tech: { k: "Wyposażenie techniczne", h: "Standard w każdym projekcie", p: "Centralne ogrzewanie i chłodzenie · Generator · Inteligentny dom · Ogrzewanie podłogowe" },
     awards: {
       k: "PropertyNC 2025", h: "Trzy nagrody w jednym roku",
