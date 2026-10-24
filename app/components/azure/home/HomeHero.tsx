@@ -13,7 +13,7 @@ const DIK = "(max-aspect-ratio: 2/3)";
 const IMG: Partial<Record<ProjectSlug, string>> = {
   neocity: "/neocity/hero.jpg",
   "lagoon-verde": "/azure/lv-5.jpg",
-  "la-joya": "/azure/lj-pavyon.jpg", // Joy Cafe & Bar havuz pavyonu (La Joya sitesindeki görsel, kullanıcı seçti)
+  "la-joya": "/azure/lj-joy.jpg", // Joy Cafe & Bar havuz pavyonu, ön saçakta yuvarlak Joy tabelası (logo vektöründen, saçağın ışığına uydurularak eklendi)
   perla: "/azure/p1-7.jpg",
   "perla-ii": "/perla-ii/3.jpg",
 };
