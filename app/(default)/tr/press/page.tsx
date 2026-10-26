@@ -12,6 +12,17 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  // 25 Ekim 2026: NeoCity ilk etap satışta (MHA ve Ya Haber aynı içerik; birini aldık)
+  {
+    id: "kibrisvizyon-2026-10-25",
+    outlet: "Kıbrıs Vizyon",
+    title: "DND Cyprus’tan Yerli Ailelere Özel NeoCity Projesi",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprustan-yerli-ailelere-ozel-neocity-projesi-4695",
+    excerpt: "DND Cyprus, Gazimağusa bölgesinde Doğu Akdeniz Üniversitesi’ne yakın geliştirdiği NeoCity projesinin ilk etabını satışa çıkardı. Modern Akdeniz mimarisi, özel bahçeler ve aile odaklı mahalle konseptiyle tasarlanan villalarda ödemeler, faiz, banka, kefil, kur farkı ve vade farkı olmadan 5 Sıfır modeliyle Türk lirası üzerinden yapılıyor.",
+    date: "2026-10-25",
+    cover: "/news/kibrisvizyon-neocity.webp",
+    tags: ["NeoCity", "5 Sıfır"],
+  },
   {
     id: "bestlife-2026-10-14",
     outlet: "Bestlife Magazin",
@@ -72,6 +83,16 @@ const PRESS_ITEMS: PressItem[] = [
     date: "2026-09-26",
     cover: "/news/halkinsesi-larnaka-u17.webp",
     tags: ["Spor", "Sponsorluk"],
+  },
+  {
+    id: "kibrisvizyon-2026-09-24",
+    outlet: "Kıbrıs Vizyon",
+    title: "DND Cyprus ile İskele’de Yeni Bir Yaşam Anlayışı",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprus-ile-iskelede-yeni-bir-yasam-anlayisi-4690",
+    excerpt: "Boston’daki gayrimenkul deneyimini Kuzey Kıbrıs’a taşıyan Netice ve Ozan Dökmecioğlu’nun İskele’deki projeleri anlatılıyor. DND Cyprus’un kurucu ortağı Netice Dökmecioğlu’nun görüşleriyle La Joya, La Joya Perla, La Joya Perla II ve Lagoon Verde ile La Joya’daki Joy Cafe öne çıkıyor; konut yatırımı sosyal yaşam ve turizmle buluşuyor.",
+    date: "2026-09-24",
+    cover: "/news/kibrisvizyon-iskele-yasam.webp",
+    tags: ["Röportaj", "İskele"],
   },
   {
     id: "yeniduzen-2026-09-16",

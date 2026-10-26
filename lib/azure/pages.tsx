@@ -96,7 +96,8 @@ const TR: PagesCopy = {
   events: {
     kicker: "Etkinlikler", title: <>DND Cyprus’la <b>bir arada.</b></>, lead: "Ödül törenlerinden kutlamalara, DND Cyprus ailesinin bir araya geldiği anlar.",
     items: [
-      { date: "24–25 Ekim 2026", h: "Halloween Workshop · Joy Cafe", p: "La Joya’daki Joy Cafe’de çocuklu ve yetişkinli Halloween atölyesi: kova süsleme, slime atölyesi, hazine avı, kostüm defilesi ve disko. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
+      { date: "7 Kasım 2026", h: "Parfüm Atölyesi · Joy Cafe", p: "Gloria Botanis ile La Joya’daki Joy Cafe’de parfüm atölyesi: parfüm notalarını ve esansları keşfedip kendi imza kokunuzu tasarlayın. 14:00–16:00, kontenjan sınırlı.", img: "/azure/pages/parfum-atolyesi.jpg" },
+      { date: "24–25 Ekim 2026", h: "Halloween Workshop · Joy Cafe", p: "La Joya’daki Joy Cafe’de minik misafirlerimiz ve aileleriyle kostümler, balkabağı süsleme, slime atölyesi ve bol kahkahayla dolu bir Cadılar Bayramı geçirdik.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Ekim 2026", h: "Takım çalışması: CRT ekibiyle satış eğitimi", p: "CRT ekibiyle DND Cyprus projeleri üzerine tanıtım ve satış eğitimi gerçekleştirdik. Güçlü ekip, ortak hedef.", img: "/azure/pages/ekip-egitimi.jpg" },
       { date: "25 Eylül 2026", h: "Larnaka Gençlerbirliği La Joya’da", p: "Sponsoru olduğumuz Larnaka Gençlerbirliği’nin genç sporcularını La Joya’da ağırladık; takımımıza sezon boyunca başarılar diliyoruz.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
       { date: "12 Eylül 2026", h: "Friday, Fun Day: takım çalışması", p: "Eğitimci Zafer Erkoç liderliğinde La Joya’da ekip çalışması, iletişim ve iş birliği üzerine eğlenceli bir eğitim günü geçirdik.", img: "/azure/pages/friday-fun-day.jpg" },
@@ -173,7 +174,8 @@ const EN: PagesCopy = {
   events: {
     kicker: "Events", title: <>Together with <b>DND Cyprus.</b></>, lead: "From award ceremonies to celebrations — moments when the DND Cyprus family came together.",
     items: [
-      { date: "24–25 October 2026", h: "Halloween Workshop · Joy Cafe", p: "A Halloween workshop for children and adults at Joy Cafe, La Joya: bucket decorating, slime workshop, scavenger hunt, costume catwalk and disco. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
+      { date: "7 November 2026", h: "Perfume Workshop · Joy Cafe", p: "A perfume workshop with Gloria Botanis at Joy Cafe, La Joya: explore fragrance notes and essences and create your own signature scent. 14:00–16:00, limited places.", img: "/azure/pages/parfum-atolyesi.jpg" },
+      { date: "24–25 October 2026", h: "Halloween Workshop · Joy Cafe", p: "Costumes, pumpkin decorating, a slime workshop and plenty of laughter: we celebrated Halloween with our little guests and their families at Joy Cafe, La Joya.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "October 2026", h: "Teamwork: sales training with the CRT team", p: "We held a presentation and sales training on DND Cyprus projects with the CRT team. A strong team with a shared goal.", img: "/azure/pages/ekip-egitimi.jpg" },
       { date: "25 September 2026", h: "Larnaka Gençlerbirliği at La Joya", p: "We hosted the young athletes of Larnaka Gençlerbirliği, the club we sponsor, at La Joya and wish the team a successful season.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
       { date: "12 September 2026", h: "Friday, Fun Day: teamwork", p: "Led by trainer Zafer Erkoç, we spent a fun training day at La Joya on teamwork, communication and collaboration.", img: "/azure/pages/friday-fun-day.jpg" },
@@ -250,7 +252,8 @@ const DE: PagesCopy = {
   events: {
     kicker: "Veranstaltungen", title: <>Gemeinsam mit <b>DND Cyprus.</b></>, lead: "Von Preisverleihungen bis zu Feiern – Momente, in denen die DND-Cyprus-Familie zusammenkam.",
     items: [
-      { date: "24.–25. Oktober 2026", h: "Halloween-Workshop · Joy Cafe", p: "Halloween-Workshop für Kinder und Erwachsene im Joy Cafe in La Joya: Eimer gestalten, Slime-Workshop, Schatzsuche, Kostümlaufsteg und Disco. 11:00–13:00 Uhr.", img: "/azure/pages/halloween-workshop.jpg" },
+      { date: "7. November 2026", h: "Parfüm-Workshop · Joy Cafe", p: "Parfüm-Workshop mit Gloria Botanis im Joy Cafe in La Joya: Duftnoten und Essenzen entdecken und den eigenen Signature-Duft kreieren. 14:00–16:00 Uhr, begrenzte Plätze.", img: "/azure/pages/parfum-atolyesi.jpg" },
+      { date: "24.–25. Oktober 2026", h: "Halloween-Workshop · Joy Cafe", p: "Kostüme, Kürbisse verzieren, Slime-Workshop und viel Lachen: Wir haben Halloween mit unseren kleinen Gästen und ihren Familien im Joy Cafe in La Joya gefeiert.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Oktober 2026", h: "Teamarbeit: Verkaufsschulung mit dem CRT-Team", p: "Mit dem CRT-Team haben wir eine Präsentation und Verkaufsschulung zu den Projekten von DND Cyprus durchgeführt. Ein starkes Team mit gemeinsamem Ziel.", img: "/azure/pages/ekip-egitimi.jpg" },
       { date: "25. September 2026", h: "Larnaka Gençlerbirliği in La Joya", p: "Wir haben die jungen Sportler von Larnaka Gençlerbirliği, dem von uns gesponserten Verein, in La Joya empfangen und wünschen eine erfolgreiche Saison.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
       { date: "12. September 2026", h: "Friday, Fun Day: Teamarbeit", p: "Unter der Leitung von Trainer Zafer Erkoç verbrachten wir in La Joya einen unterhaltsamen Schulungstag zu Teamarbeit, Kommunikation und Zusammenarbeit.", img: "/azure/pages/friday-fun-day.jpg" },
@@ -327,7 +330,8 @@ const RU: PagesCopy = {
   events: {
     kicker: "Мероприятия", title: <>Вместе <b>с DND Cyprus.</b></>, lead: "От церемоний награждения до праздников — моменты, когда семья DND Cyprus собиралась вместе.",
     items: [
-      { date: "24–25 октября 2026", h: "Halloween Workshop · Joy Cafe", p: "Хэллоуин-мастер-класс для детей и взрослых в Joy Cafe в La Joya: украшение корзинок, слайм, поиск сокровищ, костюмированный показ и дискотека. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
+      { date: "7 ноября 2026", h: "Парфюмерный мастер-класс · Joy Cafe", p: "Мастер-класс с Gloria Botanis в Joy Cafe в La Joya: знакомство с нотами и эссенциями и создание собственного аромата. 14:00–16:00, количество мест ограничено.", img: "/azure/pages/parfum-atolyesi.jpg" },
+      { date: "24–25 октября 2026", h: "Halloween Workshop · Joy Cafe", p: "Костюмы, украшение тыкв, мастер-класс по слайму и много смеха: мы отметили Хэллоуин с маленькими гостями и их семьями в Joy Cafe в La Joya.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Октябрь 2026", h: "Командная работа: тренинг по продажам с командой CRT", p: "Вместе с командой CRT мы провели презентацию и тренинг по продажам проектов DND Cyprus. Сильная команда, общая цель.", img: "/azure/pages/ekip-egitimi.jpg" },
       { date: "25 сентября 2026", h: "Larnaka Gençlerbirliği в La Joya", p: "Мы принимали в La Joya юных спортсменов клуба Larnaka Gençlerbirliği, спонсором которого являемся, и желаем команде успешного сезона.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
       { date: "12 сентября 2026", h: "Friday, Fun Day: командная работа", p: "Под руководством тренера Зафера Эркоча мы провели в La Joya весёлый день обучения командной работе, коммуникации и сотрудничеству.", img: "/azure/pages/friday-fun-day.jpg" },
@@ -404,7 +408,8 @@ const PL: PagesCopy = {
   events: {
     kicker: "Wydarzenia", title: <>Razem <b>z DND Cyprus.</b></>, lead: "Od gal nagród po świętowanie — chwile, w których rodzina DND Cyprus była razem.",
     items: [
-      { date: "24–25 października 2026", h: "Halloween Workshop · Joy Cafe", p: "Halloweenowe warsztaty dla dzieci i dorosłych w Joy Cafe w La Joya: ozdabianie koszyczków, warsztaty slime, poszukiwanie skarbów, pokaz kostiumów i dyskoteka. 11:00–13:00.", img: "/azure/pages/halloween-workshop.jpg" },
+      { date: "7 listopada 2026", h: "Warsztaty perfumeryjne · Joy Cafe", p: "Warsztaty z Gloria Botanis w Joy Cafe w La Joya: poznaj nuty zapachowe i esencje i stwórz własny, niepowtarzalny zapach. 14:00–16:00, liczba miejsc ograniczona.", img: "/azure/pages/parfum-atolyesi.jpg" },
+      { date: "24–25 października 2026", h: "Halloween Workshop · Joy Cafe", p: "Kostiumy, ozdabianie dyń, warsztaty slime i mnóstwo śmiechu: świętowaliśmy Halloween z małymi gośćmi i ich rodzinami w Joy Cafe w La Joya.", img: "/azure/pages/halloween-workshop.jpg" },
       { date: "Październik 2026", h: "Praca zespołowa: szkolenie sprzedażowe z zespołem CRT", p: "Razem z zespołem CRT przeprowadziliśmy prezentację i szkolenie sprzedażowe dotyczące projektów DND Cyprus. Silny zespół, wspólny cel.", img: "/azure/pages/ekip-egitimi.jpg" },
       { date: "25 września 2026", h: "Larnaka Gençlerbirliği w La Joya", p: "Gościliśmy w La Joya młodych sportowców klubu Larnaka Gençlerbirliği, którego jesteśmy sponsorem, i życzymy drużynie udanego sezonu.", img: "/azure/pages/larnaka-genclerbirligi.jpg" },
       { date: "12 września 2026", h: "Friday, Fun Day: praca zespołowa", p: "Pod przewodnictwem trenera Zafera Erkoça spędziliśmy w La Joya pełen energii dzień szkoleniowy o pracy zespołowej, komunikacji i współpracy.", img: "/azure/pages/friday-fun-day.jpg" },

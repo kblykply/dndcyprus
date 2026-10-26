@@ -20,9 +20,24 @@ const S1 = "dnd-usa-quality-in-cyprus-interview-2025";
 const S2 = "dnd-cyprus-gold-award-propertync-2025";
 const S3 = "dnd-cyprus-new-year-celebration-2023";
 const S4 = "dnd-homes-30000-konut-buyume-plani-2024";
+const S5 = "lagoon-verde-ilk-temel-2026";
+const IG_LV = "https://www.instagram.com/dndcyprus/reel/De9gHlGsXHa/";
 
 export const BLOG_I18N: Record<Lang, Record<string, Tr>> = {
   en: {
+    [S5]: {
+      title: "Groundbreaking at Lagoon Verde",
+      excerpt: "Construction has begun at Lagoon Verde in Ötüken, İskele: DND Cyprus has laid the first foundation.",
+      content: `
+      <p>On <strong>26 October 2026</strong> we laid the first foundation at Lagoon Verde. In Ötüken, İskele, DND Cyprus has begun building a privileged way of life, close to nature.</p>
+
+      <p>Winner of a Gold Award at the 2025 PropertyNC Awards, Lagoon Verde comprises 354 residences, with its lagoon pool and Aqua Park at the heart of the project’s social life. Delivery is planned for December 2028.</p>
+
+      <blockquote>“Where you will one day say ‘home’, a new story begins today.”</blockquote>
+
+      <p>See the first footage from the site on ${a(IG_LV, "DND Cyprus Instagram")}. For the project and payment options, visit the <a href="/en/lagoon-verde">Lagoon Verde</a> page.</p>
+    `,
+    },
     [S1]: {
       title: "USA Quality in Cyprus: Interview with Ozan Dökmecioğlu",
       excerpt: "An interview with PropertyNC on DND’s vision and projects.",
@@ -82,6 +97,19 @@ export const BLOG_I18N: Record<Lang, Record<string, Tr>> = {
     },
   },
   de: {
+    [S5]: {
+      title: "Grundsteinlegung bei Lagoon Verde",
+      excerpt: "Bei Lagoon Verde in Ötüken, İskele, haben die Bauarbeiten begonnen: DND Cyprus hat das erste Fundament gelegt.",
+      content: `
+      <p>Am <strong>26. Oktober 2026</strong> haben wir bei Lagoon Verde das erste Fundament gelegt. In Ötüken, İskele, hat DND Cyprus mit dem Bau eines besonderen Lebens im Einklang mit der Natur begonnen.</p>
+
+      <p>Lagoon Verde, ausgezeichnet mit Gold bei den PropertyNC Awards 2025, umfasst 354 Residenzen; Lagunenpool und Aqua Park bilden das Herz des gemeinsamen Lebens im Projekt. Die Übergabe ist für Dezember 2028 geplant.</p>
+
+      <blockquote>„Dort, wo Sie morgen ‚Zuhause‘ sagen werden, beginnt heute eine neue Geschichte.“</blockquote>
+
+      <p>Erste Bilder von der Baustelle zeigt ${a(IG_LV, "DND Cyprus auf Instagram")}. Projekt und Zahlungsoptionen finden Sie auf der Seite <a href="/de/lagoon-verde">Lagoon Verde</a>.</p>
+    `,
+    },
     [S1]: {
       title: "USA Quality in Cyprus: Interview mit Ozan Dökmecioğlu",
       excerpt: "Im Gespräch mit PropertyNC ging es um die Vision und die Projekte von DND.",
@@ -141,6 +169,19 @@ export const BLOG_I18N: Record<Lang, Record<string, Tr>> = {
     },
   },
   ru: {
+    [S5]: {
+      title: "Закладка фундамента в Lagoon Verde",
+      excerpt: "В Lagoon Verde в Ötüken, Искеле, началось строительство: DND Cyprus заложила первый фундамент.",
+      content: `
+      <p><strong>26 октября 2026 года</strong> мы заложили первый фундамент Lagoon Verde. В Ötüken, Искеле, DND Cyprus начала строить особую жизнь в гармонии с природой.</p>
+
+      <p>Lagoon Verde — обладатель золотой награды PropertyNC Awards 2025 — это 354 резиденции; бассейн-лагуна и Aqua Park — центр общественной жизни проекта. Сдача запланирована на декабрь 2028 года.</p>
+
+      <blockquote>«Там, где завтра вы скажете „мой дом“, сегодня начинается новая история».</blockquote>
+
+      <p>Первые кадры со стройки — в ${a(IG_LV, "Instagram DND Cyprus")}. О проекте и вариантах оплаты — на странице <a href="/ru/lagoon-verde">Lagoon Verde</a>.</p>
+    `,
+    },
     [S1]: {
       title: "USA Quality in Cyprus: интервью с Озаном Докмеджиоглу",
       excerpt: "В интервью PropertyNC речь шла о видении и проектах DND.",
@@ -200,6 +241,19 @@ export const BLOG_I18N: Record<Lang, Record<string, Tr>> = {
     },
   },
   pl: {
+    [S5]: {
+      title: "Wmurowanie fundamentów w Lagoon Verde",
+      excerpt: "W Lagoon Verde w Ötüken, İskele, ruszyła budowa: DND Cyprus położyła pierwszy fundament.",
+      content: `
+      <p><strong>26 października 2026</strong> położyliśmy pierwszy fundament w Lagoon Verde. W Ötüken, İskele, DND Cyprus rozpoczęła budowę wyjątkowego życia w otoczeniu natury.</p>
+
+      <p>Lagoon Verde, nagrodzone złotem na PropertyNC Awards 2025, obejmuje 354 rezydencje; basen-laguna i Aqua Park są sercem życia towarzyskiego projektu. Oddanie planowane jest na grudzień 2028.</p>
+
+      <blockquote>„Tam, gdzie jutro powiesz ‚dom’, dziś zaczyna się nowa historia.”</blockquote>
+
+      <p>Pierwsze ujęcia z budowy: ${a(IG_LV, "DND Cyprus na Instagramie")}. Projekt i opcje płatności znajdziesz na stronie <a href="/pl/lagoon-verde">Lagoon Verde</a>.</p>
+    `,
+    },
     [S1]: {
       title: "USA Quality in Cyprus: wywiad z Ozanem Dökmecioğlu",
       excerpt: "W rozmowie z PropertyNC omówiono wizję i projekty DND.",

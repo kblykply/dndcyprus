@@ -23,6 +23,16 @@ export const metadata = pageMetadata({
 
 const PRESS_ITEMS: PressItem[] = [
   {
+    id: "kibrisvizyon-2026-10-25",
+    outlet: "Kıbrıs Vizyon",
+    title: "DND Cyprus’tan Yerli Ailelere Özel NeoCity Projesi",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprustan-yerli-ailelere-ozel-neocity-projesi-4695",
+    excerpt: "DND Cyprus, Gazimağusa bölgesinde Doğu Akdeniz Üniversitesi’ne yakın geliştirdiği NeoCity projesinin ilk etabını satışa çıkardı. Modern Akdeniz mimarisi, özel bahçeler ve aile odaklı mahalle konseptiyle tasarlanan villalarda ödemeler, faiz, banka, kefil, kur farkı ve vade farkı olmadan 5 Sıfır modeliyle Türk lirası üzerinden yapılıyor.",
+    date: "2026-10-25",
+    cover: "/news/kibrisvizyon-neocity.webp",
+    tags: ["NeoCity", "5 Sıfır"],
+  },
+  {
     id: "bestlife-2026-10-14",
     outlet: "Bestlife Magazin",
     title: "Kuzey Kıbrıs’ta sterlinle borçlanmadan ev sahibi olma fırsatı!",

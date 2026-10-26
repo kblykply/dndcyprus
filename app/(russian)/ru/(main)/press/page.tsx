@@ -12,6 +12,17 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  // 25 Ekim 2026: NeoCity ilk etap satışta (MHA ve Ya Haber aynı içerik; birini aldık)
+  {
+    id: "kibrisvizyon-2026-10-25",
+    outlet: "Kıbrıs Vizyon",
+    title: "NeoCity: новый проект DND Cyprus для местных семей",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprustan-yerli-ailelere-ozel-neocity-projesi-4695",
+    excerpt: "DND Cyprus открыла продажи первой очереди NeoCity в районе Фамагусты, рядом с Eastern Mediterranean University. Виллы в современном средиземноморском стиле с частными садами и концепцией семейного квартала; оплата в турецких лирах по модели «5 нулей» — без процентов, банка, поручителя, курсовой разницы и надбавки за рассрочку.",
+    date: "2026-10-25",
+    cover: "/news/kibrisvizyon-neocity.webp",
+    tags: ["NeoCity", "«5 нулей»"],
+  },
   {
     id: "bestlife-2026-10-14",
     outlet: "Bestlife Magazin",
@@ -72,6 +83,16 @@ const PRESS_ITEMS: PressItem[] = [
     date: "2026-09-26",
     cover: "/news/halkinsesi-larnaka-u17.webp",
     tags: ["Спорт", "Спонсорство"],
+  },
+  {
+    id: "kibrisvizyon-2026-09-24",
+    outlet: "Kıbrıs Vizyon",
+    title: "Новый образ жизни в Искеле с DND Cyprus",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprus-ile-iskelede-yeni-bir-yasam-anlayisi-4690",
+    excerpt: "Статья рассказывает, как Netice и Ozan Dökmecioğlu перенесли опыт работы с недвижимостью в Бостоне на Северный Кипр и сосредоточились на Искеле. Со слов соучредителя DND Cyprus Netice Dökmecioğlu — о проектах La Joya, La Joya Perla, La Joya Perla II и Lagoon Verde, а также о Joy Cafe в La Joya: жильё, общение и туризм в одном месте.",
+    date: "2026-09-24",
+    cover: "/news/kibrisvizyon-iskele-yasam.webp",
+    tags: ["Интервью", "Искеле"],
   },
   {
     id: "yeniduzen-2026-09-16",

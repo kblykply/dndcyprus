@@ -22,6 +22,16 @@ export const metadata = pageMetadata({
 
 const PRESS_ITEMS: PressItem[] = [
   {
+    id: "kibrisvizyon-2026-10-25",
+    outlet: "Kıbrıs Vizyon",
+    title: "NeoCity: A New DND Cyprus Project for Local Families",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprustan-yerli-ailelere-ozel-neocity-projesi-4695",
+    excerpt: "DND Cyprus has put the first phase of NeoCity on sale, near Eastern Mediterranean University in the Famagusta region. The villas combine modern Mediterranean architecture, private gardens and a family-focused neighbourhood concept; payments are made in Turkish lira under the 5 Zeros model, with no interest, bank, guarantor, exchange-rate difference or maturity charge.",
+    date: "2026-10-25",
+    cover: "/news/kibrisvizyon-neocity.webp",
+    tags: ["NeoCity", "5 Zeros"],
+  },
+  {
     id: "bestlife-2026-10-14",
     outlet: "Bestlife Magazin",
     title: "A Chance to Own a Home in North Cyprus Without Borrowing in Sterling",

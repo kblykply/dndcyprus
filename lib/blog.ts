@@ -13,6 +13,23 @@ export type BlogPost = {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "lagoon-verde-ilk-temel-2026",
+    title: "Lagoon Verde’de ilk temel atıldı",
+    excerpt: "Ötüken, İskele’deki Lagoon Verde’de inşaat başladı; DND Cyprus ilk temeli attı.",
+    cover: "/news/lagoon-verde-ilk-temel.jpg",
+    date: "2026-10-26",
+    author: "Admin",
+    content: `
+      <p><strong>26 Ekim 2026</strong>’da Lagoon Verde’de ilk temeli attık. Ötüken, İskele’de doğayla iç içe, ayrıcalıklı bir yaşamın inşasına DND Cyprus imzasıyla başladık.</p>
+
+      <p>2025 PropertyNC Ödülleri’nde Altın Ödül alan Lagoon Verde 354 rezidanstan oluşuyor; lagün havuzu ve Aqua Park projenin sosyal yaşamının merkezinde. Teslim Aralık 2028’de planlanıyor.</p>
+
+      <blockquote>“Yarın ‘evim’ diyeceğiniz yerde, bugün yeni bir hikâye başlıyor.”</blockquote>
+
+      <p>Şantiyeden ilk görüntüler <a href="https://www.instagram.com/dndcyprus/reel/De9gHlGsXHa/" target="_blank" rel="noopener">DND Cyprus Instagram</a> hesabında. Proje ve ödeme seçenekleri için <a href="/tr/lagoon-verde">Lagoon Verde</a> sayfasına göz atın.</p>
+    `,
+  },
+  {
     slug: "dnd-usa-quality-in-cyprus-interview-2025",
     title: "USA Quality in Cyprus: Ozan Dökmecioğlu ile Röportaj",
     excerpt:

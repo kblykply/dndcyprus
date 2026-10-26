@@ -22,6 +22,16 @@ export const metadata = pageMetadata({
 
 const PRESS_ITEMS: PressItem[] = [
   {
+    id: "kibrisvizyon-2026-10-25",
+    outlet: "Kıbrıs Vizyon",
+    title: "NeoCity: новый проект DND Cyprus для местных семей",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprustan-yerli-ailelere-ozel-neocity-projesi-4695",
+    excerpt: "DND Cyprus открыла продажи первой очереди NeoCity в районе Фамагусты, рядом с Eastern Mediterranean University. Виллы в современном средиземноморском стиле с частными садами и концепцией семейного квартала; оплата в турецких лирах по модели «5 нулей» — без процентов, банка, поручителя, курсовой разницы и надбавки за рассрочку.",
+    date: "2026-10-25",
+    cover: "/news/kibrisvizyon-neocity.webp",
+    tags: ["NeoCity", "«5 нулей»"],
+  },
+  {
     id: "bestlife-2026-10-14",
     outlet: "Bestlife Magazin",
     title: "Шанс стать владельцем дома на Северном Кипре без долгов в фунтах стерлингов",

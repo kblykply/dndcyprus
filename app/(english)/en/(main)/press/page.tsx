@@ -12,6 +12,17 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  // 25 Ekim 2026: NeoCity ilk etap satışta (MHA ve Ya Haber aynı içerik; birini aldık)
+  {
+    id: "kibrisvizyon-2026-10-25",
+    outlet: "Kıbrıs Vizyon",
+    title: "NeoCity: A New DND Cyprus Project for Local Families",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprustan-yerli-ailelere-ozel-neocity-projesi-4695",
+    excerpt: "DND Cyprus has put the first phase of NeoCity on sale, near Eastern Mediterranean University in the Famagusta region. The villas combine modern Mediterranean architecture, private gardens and a family-focused neighbourhood concept; payments are made in Turkish lira under the 5 Zeros model, with no interest, bank, guarantor, exchange-rate difference or maturity charge.",
+    date: "2026-10-25",
+    cover: "/news/kibrisvizyon-neocity.webp",
+    tags: ["NeoCity", "5 Zeros"],
+  },
   {
     id: "bestlife-2026-10-14",
     outlet: "Bestlife Magazin",
@@ -72,6 +83,16 @@ const PRESS_ITEMS: PressItem[] = [
     date: "2026-09-26",
     cover: "/news/halkinsesi-larnaka-u17.webp",
     tags: ["Sport", "Sponsorship"],
+  },
+  {
+    id: "kibrisvizyon-2026-09-24",
+    outlet: "Kıbrıs Vizyon",
+    title: "A New Way of Living in İskele with DND Cyprus",
+    url: "https://www.kibrisvizyon.com/haber/dnd-cyprus-ile-iskelede-yeni-bir-yasam-anlayisi-4690",
+    excerpt: "The article tells the story of Netice and Ozan Dökmecioğlu, who brought their Boston real estate experience to North Cyprus and focused on İskele. With insights from DND Cyprus co-founder Netice Dökmecioğlu, it highlights La Joya, La Joya Perla, La Joya Perla II and Lagoon Verde, as well as Joy Cafe at La Joya, where home ownership meets social life and tourism.",
+    date: "2026-09-24",
+    cover: "/news/kibrisvizyon-iskele-yasam.webp",
+    tags: ["Interview", "İskele"],
   },
   {
     id: "yeniduzen-2026-09-16",
