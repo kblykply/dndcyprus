@@ -31,9 +31,9 @@ export default function HomeHero({ locale }: { locale: Locale }) {
     const p = PROJECTS.find((x) => x.slug === s.slug)!;
     const page = PROJECT_PAGES[s.slug as keyof typeof PROJECT_PAGES];
     const first = k === 0;
-    const { srcSet, sizes, ...img } = getImageProps({ src, alt: "", fill: true, quality: 75, sizes: "100vw", ...(first ? { loading: "eager" as const, fetchPriority: "high" as const } : {}) }).props;
+    const { srcSet, sizes, ...img } = getImageProps({ src, alt: "", fill: true, quality: 65, sizes: "100vw", ...(first ? { loading: "eager" as const, fetchPriority: "high" as const } : {}) }).props;
     const d = HERO_DIK[src];
-    const dik = d ? getImageProps({ src: d.src, alt: "", width: d.w, height: d.h, quality: 75, sizes: "66vh" }).props : null; // görünen genişlik ≈ çerçeve boyu × kesit oranı
+    const dik = d ? getImageProps({ src: d.src, alt: "", width: d.w, height: d.h, quality: 65, sizes: "66vh" }).props : null; // görünen genişlik ≈ çerçeve boyu × kesit oranı
     if (first) {
       if (dik) preload(dik.src, { as: "image", imageSrcSet: dik.srcSet, imageSizes: dik.sizes, fetchPriority: "high", media: DIK });
       preload(img.src, { as: "image", imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: "high", media: dik ? `not all and ${DIK}` : undefined });
