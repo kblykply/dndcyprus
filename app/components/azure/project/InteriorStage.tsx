@@ -2,6 +2,7 @@
 
 import Img from "../Img";
 import Arrow from "../Arrow";
+import { getImageProps } from "next/image";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { PiCornersOutBold } from "react-icons/pi";
 import type { InteriorGroup } from "@/lib/azure/project-types";
@@ -25,6 +26,8 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
   const [more, setMore] = useState(false);
   const [full, setFull] = useState(false);
   const strip = useRef<HTMLDivElement>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const [near, setNear] = useState(false); // sahne ekrana yaklaştı mı (önden yükleme ancak o zaman)
   const touchX = useRef<number | null>(null);
   const shots = groups[Math.min(g, groups.length - 1)].shots;
   const n = shots.length;
@@ -53,19 +56,32 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
     return () => { el.removeEventListener("scroll", upd); ro.disconnect(); };
   }, [g]);
 
-  // sonraki ve önceki büyük kareyi önceden yükle
   useEffect(() => {
+    const el = root.current; if (!el) return;
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setNear(true); io.disconnect(); } }, { rootMargin: "300px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // sonraki ve önceki büyük kareyi önceden yükle: sahne ekrana yaklaşınca, ekrandaki <Img> ile aynı (optimize) boyutta
+  useEffect(() => {
+    if (!near) return;
+    const SIZES = "(max-width: 1600px) 92vw, 1460px";
     for (const k of [i + 1, i - 1]) {
       const x = shots[((k % n) + n) % n];
       if (!x || x === s) continue;
       const im = new Image();
-      if (x.srcSet) { im.sizes = "(max-width: 1600px) 92vw, 1460px"; im.srcset = x.srcSet; }
-      im.src = x.image;
+      im.sizes = SIZES;
+      if (x.srcSet) { im.srcset = x.srcSet; im.src = x.image; continue; }
+      const p = getImageProps({ src: x.image, alt: "", fill: true, sizes: SIZES, quality: 75 }).props;
+      if (p.srcSet) im.srcset = p.srcSet;
+      im.src = p.src;
     }
-  }, [i, shots, n, s]);
+  }, [near, i, shots, n, s]);
 
   return (
     <div
+      ref={root}
       className="az-int2 rv"
       role="region"
       aria-roledescription="carousel"

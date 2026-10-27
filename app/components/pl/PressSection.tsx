@@ -259,7 +259,7 @@ description = 'Publikacje w mediach i komunikaty prasowe o naszej marce.',
         {/* All News (Link always visible if moreHref is provided) */}
         <div className="mt-8 flex justify-center">
           {moreHref ? (
-            <Link
+            <Link prefetch={false}
               href={moreHref}
               aria-label="Zobacz wszystkie aktualności"
               className="az-btn glass sm"

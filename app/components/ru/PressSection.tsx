@@ -259,7 +259,7 @@ description = 'Публикации в СМИ и пресс-релизы о на
         {/* All News (Link always visible if moreHref is provided) */}
         <div className="mt-8 flex justify-center">
           {moreHref ? (
-            <Link
+            <Link prefetch={false}
               href={moreHref}
               aria-label="Все новости"
               className="az-btn glass sm"

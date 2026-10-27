@@ -167,7 +167,7 @@ export default function PaymentModelPopup() {
             ))}
           </ul>
           <div className="mt-1 flex flex-wrap gap-2 sm:mt-2 sm:gap-3">
-            <Link
+            <Link prefetch={false}
               href="/tr/lagoon-verde"
               onClick={dismiss}
               className="rounded-full px-4 py-2 text-sm font-medium transition-transform hover:-translate-y-0.5 sm:px-6 sm:py-2.5"
@@ -175,7 +175,7 @@ export default function PaymentModelPopup() {
             >
               Lagoon Verde&apos;yi İncele
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/tr/contact"
               onClick={dismiss}
               className="rounded-full px-4 py-2 text-sm font-medium sm:px-6 sm:py-2.5"

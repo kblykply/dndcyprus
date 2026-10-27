@@ -259,7 +259,7 @@ description = 'News coverage and press releases featuring our brand.',
         {/* All News (Link always visible if moreHref is provided) */}
         <div className="mt-8 flex justify-center">
           {moreHref ? (
-            <Link
+            <Link prefetch={false}
               href={moreHref}
               aria-label="View all news"
               className="az-btn glass sm"

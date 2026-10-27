@@ -258,7 +258,7 @@ description = "Markamızın yer aldığı haberler ve basın duyuruları.",
         {/* Tüm Haberler (Link always visible if moreHref is provided) */}
         <div className="mt-8 flex justify-center">
           {moreHref ? (
-            <Link
+            <Link prefetch={false}
               href={moreHref}
               aria-label="Tüm haberleri gör"
               className="az-btn glass sm"
