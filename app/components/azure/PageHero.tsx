@@ -31,12 +31,13 @@ type Props = {
 // (scripts/hero-dik.mjs). Kesiti olmayan görsel (short çerçeve) tam çözünürlükte WebP iner.
 const DIK = "(max-aspect-ratio: 3/5)";
 
-function HeroImage({ src, alt, position }: { src: string; alt: string; position?: string }) {
+function HeroImage({ src, alt, position, short }: { src: string; alt: string; position?: string; short?: boolean }) {
   const k = HERO_DIK[src];
   // kesit çerçeve yüksekliğinde gösterilir: görünen genişlik ≈ çerçeve boyu (78vh / 56vh) × kesit oranı ≈ 0,65 ekran yüksekliği
   const dik = k ? getImageProps({ src: k.src, alt, width: k.w, height: k.h, quality: 75, sizes: "66vh" }).props : null;
-  // dik ve kareye yakın ekranlarda çerçeve fotoğrafın enini aşıyor (cover): tam çözünürlük insin diye 200vw
-  const { srcSet, sizes, ...img } = getImageProps({ src, alt, fill: true, quality: 75, sizes: "(max-aspect-ratio: 1/1) 200vw, 100vw", loading: "eager", fetchPriority: "high" }).props;
+  // dik ve kareye yakın ekranlarda çerçeve fotoğrafın enini aşıyor (cover): tam çözünürlük insin diye 200vw; kısa (40vh) çerçevede
+  // fotoğrafın neredeyse tamamı göründüğü için 125vw yeter (telefonda 2560 yerine 1440 iner)
+  const { srcSet, sizes, ...img } = getImageProps({ src, alt, fill: true, quality: 75, sizes: short ? "(max-aspect-ratio: 1/1) 125vw, 100vw" : "(max-aspect-ratio: 1/1) 200vw, 100vw", loading: "eager", fetchPriority: "high" }).props;
   if (dik) preload(dik.src, { as: "image", imageSrcSet: dik.srcSet, imageSizes: dik.sizes, fetchPriority: "high", media: DIK });
   preload(img.src, { as: "image", imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: "high", media: dik ? `not all and ${DIK}` : undefined });
   return (
@@ -57,7 +58,7 @@ export default function PageHero({ title, lead, image, imageAlt = "", video, tag
             <source src={video} type="video/mp4" />
           </video>
         ) : (
-          <HeroImage src={image} alt={imageAlt} position={imagePosition} />
+          <HeroImage src={image} alt={imageAlt} position={imagePosition} short={size === "short"} />
         )}
         {(goldTag || tags.length || logo) ? (
           <div className="top">
