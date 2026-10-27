@@ -25,7 +25,8 @@ const DUR = 3000; // slayt başına süre (ms; kullanıcı isteği: 3 sn'de bir)
 export default function HeroSlider({ slides, brand, label, cta, prev, next, pause, play, media }: Props) {
   const n = slides.length;
   const [i, setI] = useState(0);
-  const [seen, setSeen] = useState<Set<number>>(() => new Set([0, 1 % n]));
+  // ilk açılışta yalnız ilk slaytın görseli iner (üst üste duran slaytlar lazy olsa da ekranda sayıldığı için hemen iniyordu, LCP'yi yavaşlatıyordu)
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([0]));
   const [user, setUser] = useState(true); // durdur / oynat düğmesi
   const [kbd, setKbd] = useState(false); // klavye odağı içerde
   const [visible, setVisible] = useState(true);
@@ -34,6 +35,14 @@ export default function HeroSlider({ slides, brand, label, cta, prev, next, paus
   const touch = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => { setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches); }, []);
+  // ikinci slayt: sayfa yüklendikten kısa süre sonra arka planda hazırlanır (otomatik geçişten önce hazır olur)
+  useEffect(() => {
+    if (n < 2) return;
+    let t = 0;
+    const start = () => { t = window.setTimeout(() => setSeen((s) => (s.has(1) ? s : new Set([...s, 1]))), 1200); };
+    if (document.readyState === "complete") start(); else window.addEventListener("load", start, { once: true });
+    return () => { window.removeEventListener("load", start); window.clearTimeout(t); };
+  }, [n]);
   useEffect(() => {
     const el = box.current; if (!el) return;
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.25 });

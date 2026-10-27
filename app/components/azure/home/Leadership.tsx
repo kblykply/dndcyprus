@@ -1,3 +1,4 @@
+import Img from "../Img";
 import Arrow from "../Arrow";
 import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
@@ -46,8 +47,7 @@ export default function Leadership({ locale }: { locale: Locale }) {
         <div className="az-lrow">
           {others.map((p) => (
             <article key={p.name} className="az-person rv d1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <figure><img src={p.img} alt={p.name} loading="lazy" /></figure>
+              <figure><Img src={p.img} sizes="(min-width: 1000px) 30vw, 90vw" alt={p.name} /></figure>
               <div>
                 <small>{p.role}</small><h3>{p.name}</h3><q>{p.q}</q>
                 <dl>{p.dl.map(([k2, v]) => <div key={k2} style={{ display: "contents" }}><dt>{k2}</dt><dd>{v}</dd></div>)}</dl>

@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "../Img";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import type { ProjectTech } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
@@ -130,8 +131,7 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
             {d.items.map((c, k) => (
               <article key={c.title + k} className={`az-tcard rv d${k % 3}`}>
                 <figure>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.image} alt={c.title} loading="lazy" decoding="async" draggable={false} />
+                  <Img src={c.image} sizes="(min-width: 1000px) 34vw, 90vw" alt={c.title} draggable={false} />
                 </figure>
                 <div className="cap">
                   <span className="lb"><i><Icon name={c.icon} size={18} /></i>{pad(k + 1)} · {KIND[locale][c.icon] ?? d.badge}</span>

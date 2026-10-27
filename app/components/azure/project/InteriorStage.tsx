@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "../Img";
 import Arrow from "../Arrow";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { PiCornersOutBold } from "react-icons/pi";
@@ -99,10 +100,11 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
           if (Math.abs(dx) > 44) go(i + (dx < 0 ? 1 : -1));
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        {s.vertical ? <img className="blur" src={s.thumb ?? s.image} alt="" aria-hidden /> : null}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img key={s.image} className={`main${s.vertical ? " fit" : ""}`} src={s.image} srcSet={s.srcSet} sizes="(max-width: 1600px) 92vw, 1460px" alt={s.alt} decoding="async" onClick={() => setFull(true)} />
+        {s.vertical ? <Img className="blur" src={s.thumb ?? s.image} sizes="320px" quality={65} alt="" aria-hidden /> : null}
+        {s.srcSet
+          // eslint-disable-next-line @next/next/no-img-element
+          ? <img key={s.image} className={`main${s.vertical ? " fit" : ""}`} src={s.image} srcSet={s.srcSet} sizes="(max-width: 1600px) 92vw, 1460px" alt={s.alt} decoding="async" onClick={() => setFull(true)} />
+          : <Img key={s.image} className={`main${s.vertical ? " fit" : ""}`} src={s.image} sizes="(max-width: 1600px) 92vw, 1460px" alt={s.alt} onClick={() => setFull(true)} />}
         <span className="tag" aria-hidden>{s.label}</span>
         <button type="button" className="az-fs-btn" onClick={() => setFull(true)} aria-label={t.full}><PiCornersOutBold size={14} aria-hidden /><span>{t.full}</span></button>
       </div>
@@ -111,8 +113,7 @@ export default function InteriorStage({ groups, locale, head }: { groups: Interi
         <div className={`strip${more ? " more" : ""}`} ref={strip} role="tablist" aria-label={t.tabs}>
           {shots.map((x, k) => (
             <button key={`${groups[g].id}-${x.image}`} type="button" role="tab" aria-selected={k === i} className={k === i ? "on" : undefined} onClick={() => go(k)}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={x.thumb ?? x.image} alt="" loading="lazy" decoding="async" />
+              <Img src={x.thumb ?? x.image} sizes="160px" alt="" />
               <i aria-hidden />
               <span>{x.label}</span>
             </button>

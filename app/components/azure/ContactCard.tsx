@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "./Img";
 import Link from "next/link";
 import { useId, useState } from "react";
 import { submitLead } from "@/lib/lead-submit";
@@ -194,8 +195,7 @@ export default function ContactCard({
     <section className="az-section az-contact" id={id}>
       <div className="az-wrap">
         <div className="card rv">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="bg" src={image} alt="" loading="lazy" />
+          <Img className="bg" src={image} sizes="(min-width: 1000px) 50vw, 100vw" alt="" />
           <div>
             <h2>{title ?? t.title}</h2>
             <p className="lead">{lead ?? t.lead}</p>

@@ -26,13 +26,18 @@ const nextConfig: NextConfig = {
   images: {
     // Photographic backgrounds use 65; plans and text-heavy images keep 75.
     qualities: [65, 75],
+    // AVIF önce (aynı kalitede WebP'den belirgin küçük), desteklemeyen tarayıcıya WebP
+    formats: ["image/avif", "image/webp"],
+    // telefon hero kesitleri için 1440 basamağı; en büyük 2560 (3840 genişlik ekranda fark etmiyor, boyutu ikiye katlıyordu)
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2560],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
 
       },
-
+      // YouTube kapakları siteden (optimize) iner: telefonda küçük, çerez onayından önce YouTube'a istek yok
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
     ],
   },
 

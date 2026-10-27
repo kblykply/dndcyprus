@@ -1,3 +1,4 @@
+import Img from "../Img";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import "./timeline-meridian.css";
@@ -116,8 +117,7 @@ export default function Timeline({ locale, id, about }: { locale: Locale; id?: s
             {items.map((it, i) => (
               <li key={it.tag + it.year} className={`stop s${i}`}>
                 <figure>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={it.img} alt="" loading="lazy" />
+                  <Img src={it.img} sizes="(min-width: 1000px) 30vw, 90vw" alt="" />
                   <i>{i + 1}</i>
                 </figure>
                 <div>

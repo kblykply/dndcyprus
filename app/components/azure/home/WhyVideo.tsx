@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "../Img";
 import { useEffect, useRef, useState } from "react";
 import { PiPauseDuotone, PiPlayDuotone, PiSpeakerHighDuotone, PiSpeakerSlashDuotone } from "react-icons/pi";
 import { useNearViewport } from "@/app/components/performance/useNearViewport";
@@ -85,8 +86,7 @@ export default function WhyVideo({ videoId, title, mute, unmute, pause, play }: 
   return (
     <div ref={box} className="az-ytbg" role="group" aria-label={title}>
       <div ref={host} className="yt" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={`cover${revealed ? " off" : ""}`} src={ytThumb(videoId)} alt="" aria-hidden />
+      <Img className={`cover${revealed ? " off" : ""}`} src={ytThumb(videoId)} sizes="(min-width: 1000px) 60vw, 100vw" loading="eager" alt="" aria-hidden />
       <div className="ctl">
       <button type="button" onClick={togglePlay} disabled={!ready} aria-pressed={!playing} aria-label={playing ? pause : play} title={playing ? pause : play}>
         {playing ? <PiPauseDuotone size={20} aria-hidden /> : <PiPlayDuotone size={20} aria-hidden />}

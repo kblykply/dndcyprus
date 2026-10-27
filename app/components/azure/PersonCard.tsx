@@ -1,3 +1,4 @@
+import Img from "./Img";
 import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import "./home/leadership.css";
@@ -35,8 +36,7 @@ export function PersonCard({ person, badge, career, flip, heading = "h3" }: Prop
   return (
     <article className={`az-ozan rv${flip ? " flip" : ""}`}>
       <figure>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={person.img} alt={person.name} loading="lazy" decoding="async" draggable={false} />
+        <Img src={person.img} sizes="(min-width: 1000px) 25vw, 50vw" alt={person.name} draggable={false} />
         {badge ? (
           <figcaption>
             <i aria-hidden><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5L2.6 9.3l6.5-.9z" /></svg></i>

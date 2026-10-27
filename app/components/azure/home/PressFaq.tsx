@@ -1,3 +1,4 @@
+import Img from "../Img";
 import Arrow from "../Arrow";
 import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
@@ -23,8 +24,7 @@ export default function PressFaq({ locale, items, faq = true }: { locale: Locale
           <div className="az-news">
             {news.map((n, k) => (
               <a key={n.id} className={`rv d${Math.min(k, 3)}`} href={n.url} target="_blank" rel="noopener noreferrer nofollow">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={typeof n.cover === "string" ? n.cover : "/azure/news-1.jpg"} alt="" loading="lazy" />
+                <Img src={typeof n.cover === "string" ? n.cover : "/azure/news-1.jpg"} sizes="(min-width: 1000px) 30vw, 90vw" alt="" />
                 <span><small>{n.outlet}</small><b>{n.title}</b><span className="d">{fmt(n.date, locale)}</span></span>
               </a>
             ))}

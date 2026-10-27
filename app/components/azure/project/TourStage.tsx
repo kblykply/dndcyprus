@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "../Img";
 import { useEffect, useRef, useState } from "react";
 import { PiArrowUpRightBold, PiArrowsInDuotone, PiArrowsOutDuotone, PiPlayFill } from "react-icons/pi";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
@@ -39,8 +40,7 @@ export default function TourStage({ src, poster, iframeTitle, locale }: { src: s
           </>
         ) : (
           <button type="button" onClick={() => setPlaying(true)} aria-label={t.start} data-track="tour_start">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={poster} alt="" loading="lazy" />
+            <Img src={poster} sizes="100vw" alt="" />
             <span className="play"><i><PiPlayFill size={30} /></i><em>{t.start}</em></span>
           </button>
         )}

@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "../Img";
 import { useRef, useState } from "react";
 import { PiCornersOutBold } from "react-icons/pi";
 import type { GalleryItem } from "@/lib/azure/project-types";
@@ -34,8 +35,7 @@ export default function Gallery({ items, locale }: { items: GalleryItem[]; local
           onClick={() => setActive(active === i ? null : i)}
           onDoubleClick={() => setFull(i)}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={g.src} alt={g.alt} loading="lazy" decoding="async" draggable={false} />
+          <Img src={g.src} sizes="(min-width: 1000px) 50vw, 100vw" alt={g.alt} draggable={false} />
           <span className="n" aria-hidden>{g.label ?? `${i + 1} / ${items.length}`}</span>
         </button>
       ))}

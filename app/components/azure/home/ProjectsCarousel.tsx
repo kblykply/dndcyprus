@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "../Img";
 import Link from "next/link";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import "./projects-carousel.css";
@@ -158,8 +159,7 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
       <div className="az-car" ref={car} tabIndex={0} role="region" aria-label={t.kicker} onKeyDown={onKey}>
         {PROJECTS.map((p) => (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false} draggable={false}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.cover} alt="" loading="lazy" draggable={false} />
+            <Img src={p.cover} sizes="(min-width: 1000px) 460px, 86vw" alt="" draggable={false} />
             <div className="top"><span className="tags">{p.award && <span className="az-st gold">{p.award[locale]}</span>}<span className="az-st">{p.status[locale]}</span></span>{p.logo ? <LogoTag src={p.logo} inline /> : null}</div>
             <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="az-glassrow">{p.cta[locale]} <GlassArrow /></div></div>
           </Link>

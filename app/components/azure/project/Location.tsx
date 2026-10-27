@@ -1,3 +1,4 @@
+import Img from "../Img";
 import type { Distance, ProjectLocation } from "@/lib/azure/project-types";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
@@ -70,8 +71,7 @@ export default function Location({ d, name, id, locale }: { d: ProjectLocation; 
             </div>
           ) : d.mapImage ? (
             <div className="map pic">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={d.mapImage} alt={d.mapAlt ?? t.mapTitle} loading="lazy" decoding="async" />
+              <Img src={d.mapImage} sizes="(min-width: 1000px) 50vw, 100vw" alt={d.mapAlt ?? t.mapTitle} />
             </div>
           ) : null}
         </div>

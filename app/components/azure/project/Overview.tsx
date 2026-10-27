@@ -1,3 +1,4 @@
+import Img from "../Img";
 import LazyYouTube from "@/app/components/LazyYouTube";
 import type { ProjectOverview } from "@/lib/azure/project-types";
 import ProjectHead, { splitTitle } from "./ProjectHead";
@@ -24,8 +25,7 @@ export default function Overview({ d, name, id }: { d: ProjectOverview; name: st
             {d.youtubeId ? (
               <LazyYouTube videoId={d.youtubeId} query={q} title={d.videoTitle} posterAlt={d.videoPosterAlt} playLabel={d.videoPlayLabel} className="absolute inset-0" cover />
             ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={d.image} alt={d.imageAlt} loading="lazy" />
+              <Img src={d.image} sizes="(min-width: 1000px) 50vw, 100vw" alt={d.imageAlt} />
             )}
           </div>
         </div>

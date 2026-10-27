@@ -1,5 +1,6 @@
 "use client";
 
+import Img from "../Img";
 import Arrow from "../Arrow";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
@@ -68,8 +69,7 @@ function YouTubeMedia({ slide, autoplay, onPlayer }: MediaProps) {
   return (
     <>
       <div ref={host} className="yt" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={`cover${revealed ? " off" : ""}`} src={ytThumb(id)} alt="" aria-hidden />
+      <Img className={`cover${revealed ? " off" : ""}`} src={ytThumb(id)} sizes="(min-width: 1000px) 70vw, 100vw" loading="eager" alt="" aria-hidden />
     </>
   );
 }
@@ -112,10 +112,8 @@ function Poster({ slide }: { slide: VideoSlide }) {
   if (!src) return null;
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      {slide.vertical ? <img className="blur" src={src} alt="" aria-hidden loading="lazy" /> : null}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={slide.vertical ? "main" : "cover"} src={src} alt="" aria-hidden loading="lazy" />
+      {slide.vertical ? <Img className="blur" src={src} sizes="320px" quality={65} alt="" aria-hidden /> : null}
+      <Img className={slide.vertical ? "main" : "cover"} src={src} sizes="(min-width: 1000px) 50vw, 100vw" alt="" aria-hidden />
     </>
   );
 }
