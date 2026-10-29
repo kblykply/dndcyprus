@@ -8,6 +8,15 @@ export const ORGANIZATION_JSON_LD = {
   "@id": `${SITE_URL}/#organization`,
   name: SITE_NAME,
   legalName: "CY-DND HOMES LTD.",
+  description: "Property developer in North Cyprus (İskele and Famagusta); the North Cyprus company of DND Homes, founded in Boston in 2017.",
+  // Yapay zekâ ve arama motorları şirketi ana şirketle ve ödülleriyle tek kayıt olarak eşleştirsin
+  parentOrganization: { "@type": "Organization", name: "DND Homes", address: { "@type": "PostalAddress", addressLocality: "Boston", addressCountry: "US" } },
+  areaServed: ["İskele", "Gazimağusa (Famagusta)", "North Cyprus"],
+  award: [
+    "PropertyNC Awards 2025 – Best Newcomer (Gold)",
+    "PropertyNC Awards 2025 – Gold Award: Lagoon Verde",
+    "PropertyNC Awards 2025 – Platinum Award: Mariachi Beach Club",
+  ],
   url: SITE_URL,
   logo: `${SITE_URL}/DND.png`,
   email: "info@dndcyprus.com",
