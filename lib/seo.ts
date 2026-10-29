@@ -42,6 +42,8 @@ export function pageMetadata({
   return {
     title: { absolute: title },
     description,
+    // Bing Webmaster Tools site doğrulaması (www.dndcyprus.com, HTML meta yöntemi)
+    verification: { other: { "msvalidate.01": "4E6090F0AF0E8884CE2F80D25598ECED" } },
     alternates: {
       canonical: url,
       ...(singleLanguage
