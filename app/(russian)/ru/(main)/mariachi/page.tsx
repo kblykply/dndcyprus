@@ -20,7 +20,7 @@ export const metadata = pageMetadata({
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-<PageHero size="full" title={<>Mariachi <b>Beach Club</b></>} lead="Эксклюзивный отдых, где средиземноморское солнце встречается с латиноамериканскими ритмами: комфорт павильонов, пляж весь день и DJ-сеты по вечерам." image="/azure/mb-6.jpg" imageAlt="Mariachi Beach Club" logo="/logos/mariachi.png" goldTag="Платиновая награда · PropertyNC 2025" tags={["Пляжный клуб", "Бассейн и пляж", "Павильоны", "DJ-вечера"]} chips={[{ big: "4", label: "бассейна-джакузи" }, { big: "10%", label: "Скидка для жителей DND" }, { big: "2", label: "бара" }]} ctas={[{ label: "Забронировать павильон", href: "/ru/contact" }, { label: "Смотреть меню", href: "/ru/contact", variant: "ghost" }]} />
+<PageHero size="full" title={<>Mariachi <b>Beach Club</b></>} lead="Эксклюзивный отдых, где средиземноморское солнце встречается с латиноамериканскими ритмами: комфорт павильонов, пляж весь день и DJ-сеты по вечерам." image="/azure/mb-6.jpg" imageAlt="Mariachi Beach Club" logo="/logos/mariachi.png" goldTag="Платиновая награда · PropertyNC 2025" tags={["Скоро", "Пляжный клуб", "Бассейн и пляж", "Павильоны", "DJ-вечера"]} chips={[{ big: "4", label: "бассейна-джакузи" }, { big: "10%", label: "Скидка для жителей DND" }, { big: "2", label: "бара" }]} ctas={[{ label: "Забронировать павильон", href: "/ru/contact" }, { label: "Смотреть меню", href: "/ru/contact", variant: "ghost" }]} />
 <MariachiVideoSpotlight />
 <MariachiHighlights />
 <MariachiGalleryExpanding />
