@@ -4,6 +4,8 @@ import Link from "next/link";
 import { HOME } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 import type { PressItem } from "@/app/components/PressSection";
+import JsonLd from "@/app/components/seo/JsonLd";
+import { faqPageJsonLd } from "@/lib/structured-data";
 
 const DATE_LOCALE: Record<Locale, string> = { tr: "tr-TR", en: "en-GB", de: "de-DE", ru: "ru-RU", pl: "pl-PL" };
 const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(DATE_LOCALE[locale], { year: "numeric", month: "long", day: "2-digit" }).format(new Date(iso));
@@ -12,7 +14,8 @@ const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(DATE_LOCALE
 // S.S.S.: aynı name'li <details> grubu, biri açılınca diğerleri kendiliğinden kapanır (tarayıcı özelliği)
 export default function PressFaq({ locale, items, faq = true }: { locale: Locale; items: PressItem[]; faq?: boolean }) {
   const t = HOME[locale];
-  const news = [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
+  // S.S.S. yanında 5 haber: 8 kapalı soruyla iki sütunun alt kenarı hizalı kalır (aralık azure.css’te 16px)
+  const news = [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, faq ? 5 : 4);
   return (
     <section className="az-section" id="basin">
       <div className={`az-wrap az-pf${faq ? "" : " solo"}`}>
@@ -37,6 +40,7 @@ export default function PressFaq({ locale, items, faq = true }: { locale: Locale
               <details key={f.q} name="sss"><summary>{f.q} <i>+</i></summary><div className="a">{f.a}</div></details>
             ))}
           </div>
+          <JsonLd data={faqPageJsonLd(t.faq.items, locale)} />
         </div> : null}
       </div>
     </section>

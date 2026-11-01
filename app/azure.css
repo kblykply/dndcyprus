@@ -423,6 +423,7 @@ body.az-lock { overflow: hidden; }
 .az-pf .hd { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 24px; }
 .az-pf .hd .az-btn { flex: none; margin-bottom: 6px; }
 .az-news { display: grid; gap: 12px; }
+.az-pf:not(.solo) .az-news { gap: 16px; }
 .az-news a { display: grid; grid-template-columns: clamp(80px, 30%, 120px) minmax(0, 1fr); gap: 16px; align-items: center; padding: 12px; border-radius: 22px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); transition: transform .4s var(--ease), box-shadow .4s; color: var(--ink); }
 .az-news a:hover { transform: translateX(6px); box-shadow: 0 16px 40px rgba(13, 35, 38, .1); }
 .az-news a img { width: 100%; height: auto; aspect-ratio: 120 / 84; object-fit: cover; border-radius: 14px; }

@@ -55,6 +55,17 @@ export function blogPostingJsonLd(post: BlogPost, locale: Locale = "tr") {
   };
 }
 
+// Ana sayfadaki S.S.S. sayfada görünür olduğu için FAQPage olarak işaretlenir; yapay zekâ cevapları doğrudan buradan okuyabilsin
+export function faqPageJsonLd(items: { q: string; a: string }[], locale: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}/${locale}#faq`,
+    inLanguage: locale,
+    mainEntity: items.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  };
+}
+
 // A title containing </script> must remain data when embedded in an HTML script.
 export function serializeJsonLd(data: object) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
