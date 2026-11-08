@@ -72,7 +72,7 @@ export const PROJECTS: ProjectMeta[] = [
     short: { tr: "Gazimağusa · Yeni proje", en: "Famagusta · New project", de: "Famagusta · Neues Projekt", ru: "Фамагуста · Новый проект", pl: "Famagusta · Nowy projekt" },
     location: { tr: "Gazimağusa Bölgesi", en: "Famagusta Region", de: "Region Famagusta", ru: "Район Фамагусты", pl: "Region Famagusty" },
     status: { tr: "Yeni proje", en: "New project", de: "Neues Projekt", ru: "Новый проект", pl: "Nowy projekt" },
-    blurb: { tr: "54 villa · Tek ve ikiz villa, özel bahçe", en: "54 villas · Single and twin villas, private gardens", de: "54 Villen · Freistehend und Doppelvilla, Privatgärten", ru: "54 виллы · Отдельные и дуплекс-виллы, частные сады", pl: "54 wille · Wolnostojące i bliźniacze, prywatne ogrody" },
+    blurb: { tr: "50 villa · Tek ve ikiz villa, özel bahçe", en: "50 villas · Single and twin villas, private gardens", de: "50 Villen · Freistehend und Doppelvilla, Privatgärten", ru: "50 вилл · Отдельные и дуплекс-виллы, частные сады", pl: "50 willi · Wolnostojące i bliźniacze, prywatne ogrody" },
     cover: "/neocity/hero.jpg",
     thumb: "/neocity/g-02.jpg",
     logo: "/logos/web/neocity.webp",

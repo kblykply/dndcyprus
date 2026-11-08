@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   path: "/neocity",
   title: "NeoCity Famagusta – wille | DND Cyprus",
   description:
-    "NeoCity w regionie Famagusty: 54 wille z prywatnymi ogrodami, opcjonalnym basenem, marketem i obiektem sportowym. Plan „5 zer” w lirach: 35% wkładu, 60 miesięcy bez odsetek.",
+    "NeoCity w regionie Famagusty: 50 willi z prywatnymi ogrodami, opcjonalnym basenem, marketem i obiektem sportowym. Plan „5 zer” w lirach: 35% wkładu, 60 miesięcy bez odsetek.",
   image: "/og/neocity.jpg",
   imageAlt: "Wille bliźniacze NeoCity z prywatnymi basenami o zachodzie słońca",
 });

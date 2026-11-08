@@ -29,7 +29,7 @@ const TR: HomeFlow = {
     label: "Projelerimiz",
     cta: "Projeyi keşfet", prev: "Önceki proje", next: "Sonraki proje", pause: "Durdur", play: "Oynat",
     slides: [
-      { slug: "neocity", name: "NeoCity", title: <>Yerli aileler için <b>villa yaşamı.</b></>, sub: "Gazimağusa Bölgesi · 54 villa · 5 Sıfır ödeme" },
+      { slug: "neocity", name: "NeoCity", title: <>Yerli aileler için <b>villa yaşamı.</b></>, sub: "Gazimağusa Bölgesi · 50 villa · 5 Sıfır ödeme" },
       { slug: "lagoon-verde", name: "Lagoon Verde Rezidansları ve Tatil Köyü", title: <>Akdeniz’de yeni bir <b>yaşam ritmi.</b></>, sub: "Ötüken, İskele · 3.500 m² lagün" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Tamamlandı, <b>yaşam başladı.</b></>, sub: "Bahçeler, İskele · 74 konut · 2025’te teslim edildi" },
       { slug: "perla", name: "La Joya Perla", title: <>Dört mevsim <b>resort yaşamı.</b></>, sub: "Bahçeler, İskele · Denize 700 m · Sand pool ve spa" },
@@ -83,7 +83,7 @@ const EN: HomeFlow = {
     label: "Our projects",
     cta: "Explore the project", prev: "Previous project", next: "Next project", pause: "Pause", play: "Play",
     slides: [
-      { slug: "neocity", name: "NeoCity", title: <>Villa living for <b>local families.</b></>, sub: "Famagusta Region · 54 villas · 5 Zeros payment" },
+      { slug: "neocity", name: "NeoCity", title: <>Villa living for <b>local families.</b></>, sub: "Famagusta Region · 50 villas · 5 Zeros payment" },
       { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>A new rhythm of life <b>on the Mediterranean.</b></>, sub: "Ötüken, İskele · 3,500 m² lagoon" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Completed, <b>and life has begun.</b></>, sub: "Bahçeler, İskele · 74 homes · Delivered in 2025" },
       { slug: "perla", name: "La Joya Perla", title: <>Resort living <b>all year round.</b></>, sub: "Bahçeler, İskele · 700 m to the sea · Sand pool and spa" },
@@ -137,7 +137,7 @@ const DE: HomeFlow = {
     label: "Unsere Projekte",
     cta: "Projekt entdecken", prev: "Vorheriges Projekt", next: "Nächstes Projekt", pause: "Pausieren", play: "Abspielen",
     slides: [
-      { slug: "neocity", name: "NeoCity", title: <>Villenleben für <b>einheimische Familien.</b></>, sub: "Region Famagusta · 54 Villen · 5-Null-Zahlung" },
+      { slug: "neocity", name: "NeoCity", title: <>Villenleben für <b>einheimische Familien.</b></>, sub: "Region Famagusta · 50 Villen · 5-Null-Zahlung" },
       { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>Ein neuer Lebensrhythmus <b>am Mittelmeer.</b></>, sub: "Ötüken, İskele · 3.500 m² Lagune" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Fertiggestellt – <b>das Leben hat begonnen.</b></>, sub: "Bahçeler, İskele · 74 Wohnungen · Übergeben 2025" },
       { slug: "perla", name: "La Joya Perla", title: <>Resort-Leben <b>zu jeder Jahreszeit.</b></>, sub: "Bahçeler, İskele · 700 m zum Meer · Sand pool und Spa" },
@@ -191,7 +191,7 @@ const RU: HomeFlow = {
     label: "Наши проекты",
     cta: "Узнать о проекте", prev: "Предыдущий проект", next: "Следующий проект", pause: "Пауза", play: "Воспроизвести",
     slides: [
-      { slug: "neocity", name: "NeoCity", title: <>Жизнь в вилле <b>для местных семей.</b></>, sub: "Район Фамагусты · 54 виллы · Оплата «5 нулей»" },
+      { slug: "neocity", name: "NeoCity", title: <>Жизнь в вилле <b>для местных семей.</b></>, sub: "Район Фамагусты · 50 вилл · Оплата «5 нулей»" },
       { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>Новый ритм жизни <b>на Средиземном море.</b></>, sub: "Ötüken, Искеле · лагуна 3 500 m²" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Построено — <b>жизнь началась.</b></>, sub: "Bahçeler, Искеле · 74 квартиры · Сдан в 2025 году" },
       { slug: "perla", name: "La Joya Perla", title: <>Курортная жизнь <b>круглый год.</b></>, sub: "Bahçeler, Искеле · 700 m до моря · Sand pool и спа" },
@@ -245,7 +245,7 @@ const PL: HomeFlow = {
     label: "Nasze projekty",
     cta: "Poznaj projekt", prev: "Poprzedni projekt", next: "Następny projekt", pause: "Wstrzymaj", play: "Odtwórz",
     slides: [
-      { slug: "neocity", name: "NeoCity", title: <>Życie w willi <b>dla lokalnych rodzin.</b></>, sub: "Region Famagusty · 54 wille · Płatność „5 zer”" },
+      { slug: "neocity", name: "NeoCity", title: <>Życie w willi <b>dla lokalnych rodzin.</b></>, sub: "Region Famagusty · 50 willi · Płatność „5 zer”" },
       { slug: "lagoon-verde", name: "Lagoon Verde Residences & Holiday Village", title: <>Nowy rytm życia <b>nad Morzem Śródziemnym.</b></>, sub: "Ötüken, İskele · laguna 3 500 m²" },
       { slug: "la-joya", name: "La Joya Resort & Residences", title: <>Ukończone — <b>życie się zaczęło.</b></>, sub: "Bahçeler, İskele · 74 mieszkania · Oddane w 2025" },
       { slug: "perla", name: "La Joya Perla", title: <>Życie jak w kurorcie <b>przez cały rok.</b></>, sub: "Bahçeler, İskele · 700 m od morza · Sand pool i spa" },

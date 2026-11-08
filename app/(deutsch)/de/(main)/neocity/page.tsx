@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   path: "/neocity",
   title: "NeoCity Famagusta – Villen | DND Cyprus",
   description:
-    "NeoCity in der Region Famagusta: 54 Villen mit Privatgarten, optionalem Privatpool, Markt und Sportanlage. 5-Null-Zahlungsplan in Lira: 35 % Anzahlung, 60 Monate zinsfrei.",
+    "NeoCity in der Region Famagusta: 50 Villen mit Privatgarten, optionalem Privatpool, Markt und Sportanlage. 5-Null-Zahlungsplan in Lira: 35 % Anzahlung, 60 Monate zinsfrei.",
   image: "/og/neocity.jpg",
   imageAlt: "NeoCity Doppelvillen mit Privatpools bei Sonnenuntergang",
 });

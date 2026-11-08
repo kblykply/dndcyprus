@@ -6,7 +6,7 @@ export const metadata = pageMetadata({
   path: "/neocity",
   title: "NeoCity Gazimağusa | Tek ve İkiz Villalar – DND Cyprus",
   description:
-    "Gazimağusa bölgesinde NeoCity: 54 villa, özel bahçe, opsiyonel özel havuz, site içi market ve spor alanı. 5 Sıfır TL ödeme planı: %35 peşinat, 60 ay faizsiz.",
+    "Gazimağusa bölgesinde NeoCity: 50 villa, özel bahçe, opsiyonel özel havuz, site içi market ve spor alanı. 5 Sıfır TL ödeme planı: %35 peşinat, 60 ay faizsiz.",
   image: "/og/neocity.jpg",
   imageAlt: "NeoCity ikiz villalar ve özel havuzlar, gün batımı",
 });
