@@ -16,6 +16,9 @@
 .az-ytbg .ctl button:disabled { opacity: .5; cursor: default; }
 .az-ytbg .ctl button:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
 .az-why .pic .az-tag { position: absolute; z-index: 2; left: 18px; bottom: 18px; background: rgba(9, 20, 22, .42); border-color: rgba(255, 255, 255, .26); }
+/* yeni metin (9 Kasım 2026): üç paragraf ve kapanış sloganı */
+.az-why .az-head .az-lead.more { margin-top: 12px; }
+.az-why .motto { margin-top: 22px; font-family: var(--font-display), sans-serif; font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; letter-spacing: -.01em; color: var(--sea); }
 .az-why .items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
 .az-why .items li { padding: 20px 20px 22px; border-radius: 22px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); box-shadow: 0 10px 34px rgba(13, 35, 38, .05); }
 .az-why .items i { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--sky-2); color: var(--sea); }

@@ -38,6 +38,7 @@ export function WhyDnd({ locale }: { locale: Locale }) {
             <span className="az-kicker rv">{t.kicker}</span>
             <h2 className="az-h2 sm rv d1">{t.title}</h2>
             <p className="az-lead rv d2">{t.lead}</p>
+            {t.more.map((m) => <p key={m} className="az-lead more rv d2">{m}</p>)}
           </div>
           <ul className="items">
             {t.items.map((it, k) => {
@@ -51,6 +52,7 @@ export function WhyDnd({ locale }: { locale: Locale }) {
               );
             })}
           </ul>
+          <p className="motto rv">{t.motto}</p>
         </div>
       </div>
     </section>

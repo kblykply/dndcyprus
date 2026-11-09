@@ -9,7 +9,7 @@ export type HeroSlide = { slug: ProjectSlug; name: string; title: ReactNode; sub
 
 export type HomeFlow = {
   hero: { brand: string; cta: string; prev: string; next: string; pause: string; play: string; slides: HeroSlide[]; label: string };
-  why: { kicker: string; title: ReactNode; lead: string; items: { icon: string; h: string; p: string }[]; imageAlt: string; imageTag: string; videoTitle: string };
+  why: { kicker: string; title: ReactNode; lead: string; more: string[]; motto: string; items: { icon: string; h: string; p: string }[]; imageAlt: string; imageTag: string; videoTitle: string };
   offers: {
     kicker: string; title: ReactNode; lead: string;
     /** kart başlığı büyük "60" ile bölünür: pre (varsa, sayının üstünde) · 60 · post; ayrıntı proje ve ödeme sayfalarında */
@@ -37,9 +37,11 @@ const TR: HomeFlow = {
     ],
   },
   why: {
-    kicker: "Neden DND?",
-    title: <>Sözünü tutan bir <b>geliştirici.</b></>,
-    lead: "Kuzey Kıbrıs’ta arsadan teslimata kadar her adımı kendi bünyemizde yönetiyoruz.",
+    kicker: "Neden DND Cyprus?",
+    title: <>Çünkü biz sadece ev değil, <b>gelecek inşa ediyoruz.</b></>,
+    lead: "Boston’dan Kuzey Kıbrıs’a uzanan uluslararası deneyimimizle, mimari kaliteyi, güveni ve yenilikçi yaşam konseptlerini bir araya getiriyoruz.",
+    more: ["DND Cyprus olarak yalnızca konut değil, sosyal alanları, zengin olanakları ve ayrıcalıklı yaşam tarzlarıyla fark yaratan destinasyonlar geliştiriyoruz.", "Zamanında teslim ettiğimiz projelerimiz, yatırımcılarımıza sunduğumuz yenilikçi ödeme modellerimiz ve satış sonrası hizmetlerimizle verdiğimiz sözlerin arkasında duruyoruz."],
+    motto: "DND Cyprus. Güvenle yatırım yapın, ayrıcalıkla yaşayın.",
     items: [
       { icon: "house", h: "Tasarımdan teslimata tek çatı", p: "Konut, ticari ve karma projelerde planlamadan teslime uçtan uca çözüm." },
       { icon: "key", h: "Zamanında teslim", p: "La Joya, 74 konutuyla 2025’te sahiplerine teslim edildi; yaşam başladı." },
@@ -91,9 +93,11 @@ const EN: HomeFlow = {
     ],
   },
   why: {
-    kicker: "Why DND?",
-    title: <>A developer that <b>keeps its word.</b></>,
-    lead: "In North Cyprus we manage every step in-house, from the land to the keys.",
+    kicker: "Why DND Cyprus?",
+    title: <>Because we don’t just build homes, <b>we build the future.</b></>,
+    lead: "With international experience stretching from Boston to North Cyprus, we bring together architectural quality, trust and innovative living concepts.",
+    more: ["At DND Cyprus we don’t just develop homes; we create destinations that stand out for their social spaces, rich amenities and exclusive lifestyles.", "With projects delivered on time, innovative payment models for our investors and dedicated after-sales service, we stand behind every promise we make."],
+    motto: "DND Cyprus. Invest with confidence, live with privilege.",
     items: [
       { icon: "house", h: "From design to delivery, under one roof", p: "End-to-end solutions for residential, commercial and mixed-use projects." },
       { icon: "key", h: "On-time delivery", p: "La Joya and its 74 homes were handed over in 2025 — life has begun." },
@@ -145,9 +149,11 @@ const DE: HomeFlow = {
     ],
   },
   why: {
-    kicker: "Warum DND?",
-    title: <>Ein Bauträger, der <b>Wort hält.</b></>,
-    lead: "In Nordzypern steuern wir jeden Schritt selbst – vom Grundstück bis zur Schlüsselübergabe.",
+    kicker: "Warum DND Cyprus?",
+    title: <>Denn wir bauen nicht nur Häuser, <b>wir bauen Zukunft.</b></>,
+    lead: "Mit internationaler Erfahrung von Boston bis Nordzypern vereinen wir architektonische Qualität, Vertrauen und innovative Wohnkonzepte.",
+    more: ["Bei DND Cyprus entwickeln wir nicht nur Wohnungen, sondern Destinationen, die sich durch Gemeinschaftsflächen, vielfältige Annehmlichkeiten und einen exklusiven Lebensstil auszeichnen.", "Mit pünktlich übergebenen Projekten, innovativen Zahlungsmodellen für unsere Investoren und unserem After-Sales-Service stehen wir zu unserem Wort."],
+    motto: "DND Cyprus. Mit Vertrauen investieren, mit Privilegien leben.",
     items: [
       { icon: "house", h: "Von der Planung bis zur Übergabe aus einer Hand", p: "Komplettlösungen für Wohn-, Gewerbe- und Mischprojekte." },
       { icon: "key", h: "Pünktliche Übergabe", p: "La Joya wurde 2025 mit 74 Wohnungen übergeben – das Leben hat begonnen." },
@@ -199,9 +205,11 @@ const RU: HomeFlow = {
     ],
   },
   why: {
-    kicker: "Почему DND?",
-    title: <>Застройщик, который <b>держит слово.</b></>,
-    lead: "На Северном Кипре мы ведём каждый этап сами — от участка до передачи ключей.",
+    kicker: "Почему DND Cyprus?",
+    title: <>Потому что мы строим не просто дома, <b>мы строим будущее.</b></>,
+    lead: "Опираясь на международный опыт — от Бостона до Северного Кипра, — мы объединяем архитектурное качество, надёжность и инновационные концепции жизни.",
+    more: ["DND Cyprus создаёт не просто жильё, а места притяжения с общественными пространствами, богатой инфраструктурой и особым образом жизни.", "Проекты, сданные в срок, инновационные модели оплаты для инвесторов и послепродажное обслуживание — так мы держим своё слово."],
+    motto: "DND Cyprus. Инвестируйте с уверенностью, живите с привилегиями.",
     items: [
       { icon: "house", h: "От проекта до сдачи — в одних руках", p: "Комплексные решения для жилых, коммерческих и смешанных проектов." },
       { icon: "key", h: "Сдача в срок", p: "La Joya с 74 квартирами передана владельцам в 2025 году — жизнь началась." },
@@ -253,9 +261,11 @@ const PL: HomeFlow = {
     ],
   },
   why: {
-    kicker: "Dlaczego DND?",
-    title: <>Deweloper, który <b>dotrzymuje słowa.</b></>,
-    lead: "Na Cyprze Północnym prowadzimy każdy etap sami — od działki po przekazanie kluczy.",
+    kicker: "Dlaczego DND Cyprus?",
+    title: <>Bo budujemy nie tylko domy, <b>budujemy przyszłość.</b></>,
+    lead: "Dzięki międzynarodowemu doświadczeniu — od Bostonu po Cypr Północny — łączymy jakość architektury, zaufanie i innowacyjne koncepcje życia.",
+    more: ["W DND Cyprus tworzymy nie tylko mieszkania, ale miejsca, które wyróżniają się przestrzeniami wspólnymi, bogatymi udogodnieniami i wyjątkowym stylem życia.", "Projekty oddawane na czas, innowacyjne modele płatności dla inwestorów i obsługa posprzedażowa — tak dotrzymujemy słowa."],
+    motto: "DND Cyprus. Inwestuj z zaufaniem, żyj z przywilejami.",
     items: [
       { icon: "house", h: "Od projektu do odbioru w jednych rękach", p: "Kompleksowe rozwiązania dla projektów mieszkaniowych, komercyjnych i mieszanych." },
       { icon: "key", h: "Terminowe oddanie", p: "La Joya z 74 mieszkaniami została oddana w 2025 roku — życie się zaczęło." },

@@ -12,7 +12,7 @@ test("ana sayfa vitrini: tek H1, ilk slayt NeoCity ve öncelikli görsel, oklar 
   await page.goto("/tr");
   const hero = page.locator("section.az-hs");
   await expect(page.locator("h1")).toHaveCount(1);
-  await expect(page.locator("h1")).toHaveText("DND Cyprus — Hayalinizdeki yaşam burada başlıyor");
+  await expect(page.locator("h1")).toHaveText("DND Cyprus — Yaşamı yeniden tanımlıyoruz");
   await expect(hero.locator(".sl")).toHaveCount(5);
   // ilk slayt öncelikli iner; dik telefon ekranında yalnız görünen orta bölge (hero-dik.jpg)
   const first = hero.locator(".sl").first().locator("img.bg");

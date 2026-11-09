@@ -330,6 +330,10 @@ body.az-lock { overflow: hidden; }
 .az-logotag.round { --rd: 92px; width: var(--rd); height: var(--rd); padding: 0; border-radius: 50%; }
 .az-logotag.round img { width: 76%; height: auto; max-width: none; max-height: 70%; }
 .az-pc .top .az-logotag.round { --rd: 96px; border-radius: 50%; }
+/* kartlardaki hap etiketleri hep aynı ölçüde (kullanıcı: "Lagoon Verde, NeoCity aynı size olmalı"); logo içine ortalı sığar */
+.az-pc .top .az-logotag:not(.round) { width: calc(var(--mw) + 2 * var(--px) + 2px); }
+/* Perla logolarında alttaki iri yazı ağırlığı aşağı çekiyor: göz için biraz yukarı (ölçülen ağırlık merkezi ~3 px aşağıdaydı) */
+.az-logotag.round img[src^="/logos/perla"] { transform: translateY(-5%); }
 
 /* ---- projects carousel ---- */
 .az-ctrl { display: flex; gap: 8px; }
