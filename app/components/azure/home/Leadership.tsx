@@ -10,9 +10,9 @@ import "./leadership.css";
 // Sıra bilerek karışık: birbirine benzeyen logolar (Perla / Perla II / La Joya, DND Group / DND Homes) yan yana gelmesin
 const BRANDS = [
   { name: "DND Group", logo: "/azure/brands/dndgroup.webp", path: "/contact" },
-  { name: "Perla", logo: "/azure/brands/perla.webp", path: "/perla" },
+  { name: "Perla", logo: "/logos/perla.svg", path: "/perla" },
   { name: "Lagoon Verde", logo: "/azure/brands/lagoon.webp", path: "/lagoon-verde" },
-  { name: "Perla II", logo: "/azure/brands/perlaii.webp", path: "/perla-ii" },
+  { name: "Perla II", logo: "/logos/perlaii.svg", path: "/perla-ii" },
   { name: "DND Homes", logo: "/azure/brands/dndhomes.webp", href: "http://dnd-homes.com/" },
   { name: "La Joya", logo: "/azure/brands/lajoya.webp", path: "/la-joya" },
   { name: "Mariachi Beach Club", logo: "/azure/brands/mariachi.webp", path: "/mariachi" },

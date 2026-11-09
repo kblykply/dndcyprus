@@ -9,8 +9,6 @@ const TRIM: Record<string, string> = {
   "/logos/web/neocity-white.webp": "/logos/web/tag/neocity.webp",
   "/logos/web/lagoon.webp": "/logos/web/tag/lagoon.webp",
   "/logos/web/lajoya.webp": "/logos/web/tag/lajoya.webp",
-  "/logos/web/perla.webp": "/logos/web/tag/perla.webp",
-  "/logos/web/perlaii.webp": "/logos/web/tag/perlaii.webp",
   "/logos/web/mariachi.webp": "/logos/web/tag/mariachi.webp",
 };
 
@@ -19,8 +17,8 @@ const DIMS: Record<string, [number, number]> = {
   "/logos/web/tag/neocity.webp": [1523, 233],
   "/logos/web/tag/lagoon.webp": [425, 212],
   "/logos/web/tag/lajoya.webp": [510, 184],
-  "/logos/web/tag/perla.webp": [482, 197],
-  "/logos/web/tag/perlaii.webp": [466, 191],
+  "/logos/perla.svg": [1718, 1389],
+  "/logos/perlaii.svg": [2065, 1628],
   "/logos/web/tag/mariachi.webp": [326, 240],
   "/DND-LOGO-LIGHT.svg": [418, 180],
   "/azure/venues/ulfet-beach-logo.png": [854, 420],

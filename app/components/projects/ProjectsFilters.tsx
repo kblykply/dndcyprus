@@ -93,7 +93,7 @@ const DATA: Project[] = [
 ];
 
 // proje kartının logosu (ana sayfadaki proje kartları gibi sağ üstte)
-const LOGO: Record<string, string> = { neocity: "/logos/web/neocity.webp", "lagoon-verde": "/logos/web/lagoon.webp", "la-joya": "/logos/web/lajoya.webp", perla: "/logos/web/perla.webp", "perla-ii": "/logos/web/perlaii.webp", mariachi: "/logos/web/mariachi.webp" };
+const LOGO: Record<string, string> = { neocity: "/logos/web/neocity.webp", "lagoon-verde": "/logos/web/lagoon.webp", "la-joya": "/logos/web/lajoya.webp", perla: "/logos/perla.svg", "perla-ii": "/logos/perlaii.svg", mariachi: "/logos/web/mariachi.webp" };
 const logoOf = (href: string) => LOGO[href.split("#")[0].split("/").filter(Boolean).pop() ?? ""];
 
 /* ================== UI META ================== */

@@ -112,7 +112,7 @@ export const PROJECTS: ProjectMeta[] = [
     blurb: { tr: "Sand pool, kapalı havuz ve spa", en: "Sand pool, indoor pool and spa", de: "Sand pool, Hallenbad und Spa", ru: "Sand pool, крытый бассейн и спа", pl: "Sand pool, kryty basen i spa" },
     cover: "/azure/p1-9.jpg",
     thumb: "/azure/p1-7.jpg",
-    logo: "/logos/web/perla.webp",
+    logo: "/logos/perla.svg",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {
@@ -124,7 +124,7 @@ export const PROJECTS: ProjectMeta[] = [
     blurb: { tr: "Stüdyo, 1+1 loft, çatı teraslı veya bahçeli 2+1", en: "Studio, 1+1 loft, 2+1 with roof terrace or garden", de: "Studio, 1+1 Loft, 2+1 mit Dachterrasse oder Garten", ru: "Студия, лофт 1+1, 2+1 с террасой на крыше или садом", pl: "Studio, loft 1+1, 2+1 z tarasem na dachu lub ogrodem" },
     cover: "/azure/p2-9.jpg",
     thumb: "/azure/p2-2.jpg",
-    logo: "/logos/web/perlaii.webp",
+    logo: "/logos/perlaii.svg",
     cta: { tr: "Detaylara bak", en: "View details", de: "Details ansehen", ru: "Подробнее", pl: "Zobacz szczegóły" },
   },
   {

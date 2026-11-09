@@ -7,8 +7,8 @@ const INK: Record<string, [number, number]> = {
   "/logos/web/neocity.webp": [1523, 233],
   "/logos/web/lagoon.webp": [425, 212],
   "/logos/web/lajoya.webp": [510, 184],
-  "/logos/web/perla.webp": [482, 197],
-  "/logos/web/perlaii.webp": [466, 191],
+  "/logos/perla.svg": [297, 240], // kabuk + inci + perla (Kasım 2026 yeni logo, SVG; oran viewBox 1718×1389)
+  "/logos/perlaii.svg": [304, 240], // viewBox 2065×1628
   "/logos/web/mariachi.webp": [326, 240],
   "/DND-LOGO-LIGHT.svg": [556, 240],
 };
@@ -19,8 +19,6 @@ const OPTIC: Record<string, number> = {
   "/logos/web/neocity-white.webp": 0.9,
   "/logos/web/neocity.webp": 0.9,
   "/logos/web/lajoya.webp": 1.04,
-  "/logos/web/perla.webp": 1.04,
-  "/logos/web/perlaii.webp": 1.04,
 };
 
 /** CSS'te `height: calc(<temel yükseklik> * var(--k))` ile kullanılır (temel yükseklik = 240 px'lik dosyanın gösterilen boyu) */
