@@ -134,7 +134,30 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  try {
+  const akisLead = {
+    name,
+    email,
+    phone: phone || undefined,
+    project: project || undefined,
+    message: visitorMessage || undefined,
+    subject: visitorSubject || undefined,
+    unitType: unitType || undefined,
+    form: form || undefined,
+    pageUrl: pageUrl || undefined,
+    source,
+    campaign,
+  };
+  // Sitenin kendi veritabanı yoksa (DATABASE_URL tanımsız) talebin tek kaydı DND Akış'tır:
+  // iletim beklenir; DND Akış almadıysa ziyaretçiye hata döner, talep sessizce kaybolmaz.
+  const hasDatabase = !!(process.env.DATABASE_URL || "").trim();
+
+  if (!hasDatabase) {
+    const sent = dndAkisLeadConfigured() ? await sendDndAkisLead(akisLead) : null;
+    if (!sent || !("ok" in sent) || !sent.ok) {
+      console.error("CONTACT_API_ERROR", { code: sent ? "DND_AKIS_UNAVAILABLE" : "NO_LEAD_STORE" });
+      return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
+  } else try {
     try {
       await prisma.contactMessage.create({
         data: {
@@ -166,23 +189,11 @@ export async function POST(req: NextRequest) {
   }
   if (eventId) rememberEvent(eventId, now);
 
-  // DND Akış: talep satış panosuna kart olarak iletilir (yalnız sunucudan, anahtar env'de).
+  // DND Akış: veritabanına kaydedilen talep satış panosuna kart olarak da iletilir (yalnız sunucudan, anahtar env'de).
   // Değişkenler yoksa atlanır; yanıt döndükten sonra çalışır, hatası formun sonucunu etkilemez.
-  if (dndAkisLeadConfigured()) {
+  if (hasDatabase && dndAkisLeadConfigured()) {
     after(async () => {
-      await sendDndAkisLead({
-        name,
-        email,
-        phone: phone || undefined,
-        project: project || undefined,
-        message: visitorMessage || undefined,
-        subject: visitorSubject || undefined,
-        unitType: unitType || undefined,
-        form: form || undefined,
-        pageUrl: pageUrl || undefined,
-        source,
-        campaign,
-      });
+      await sendDndAkisLead(akisLead);
     });
   }
 

@@ -11,7 +11,9 @@ const validLead = {
   eventId: "11111111-1111-4111-8111-111111111111",
 };
 
-function apiHarness({ create, env = {}, fetch } = {}) {
+// Varsayılan: sitenin veritabanı var (canlıdaki eski düzen). noDb: true → DATABASE_URL tanımsız.
+function apiHarness({ create, env: extraEnv = {}, fetch, noDb = false } = {}) {
+  const env = noDb ? { ...extraEnv } : { DATABASE_URL: "postgres://test.invalid/db", ...extraEnv };
   const writes = [];
   const events = [];
   const deferred = [];
@@ -303,5 +305,54 @@ test("contact API does not contact DND Akış without config, for bots, duplicat
     await api.post(validLead);
     assert.equal(api.writes.length, 1);
     assert.equal(api.deferred.length, 1);
+  });
+});
+
+test("without a site database, DND Akış is the lead store: forwarded before responding", async () => {
+  const api = apiHarness({ env: akisEnv, noDb: true });
+  const res = await api.post({ ...validLead, project: "perla-ii", message: "Merhaba", pageUrl: "https://dndcyprus-azure.vercel.app/ru/projects/perla-ii" });
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true });
+  assert.equal(api.writes.length, 0);
+  assert.equal(api.requests.length, 1);
+  assert.equal(api.deferred.length, 0);
+  assert.equal(api.requests[0].body.proje, "La Joya Perla II");
+  assert.equal(api.requests[0].body.dil, "ru");
+  assert.equal(api.requests[0].body.mesaj, "Merhaba");
+});
+
+test("without a site database, a failed DND Akış delivery is an error the visitor sees", async t => {
+  for (const [label, fetch] of [
+    ["401", async () => Response.json({ hata: "yetkisiz" }, { status: 401 })],
+    ["500", async () => new Response("down", { status: 500 })],
+    ["network", async () => { throw new TypeError("fetch failed"); }],
+  ]) {
+    await t.test(label, async () => {
+      const api = apiHarness({ env: akisEnv, noDb: true, fetch });
+      const res = await api.post({ ...validLead, message: "Merhaba" });
+      assert.equal(res.status, 500);
+      assert.equal(api.writes.length, 0);
+      assert.equal(JSON.stringify(api.logs).includes(validLead.email), false);
+      assert.equal(JSON.stringify(api.logs).includes(akisEnv.DND_AKIS_LEAD_ANAHTAR), false);
+    });
+  }
+  await t.test("no database and no DND Akış config", async () => {
+    const api = apiHarness({ noDb: true });
+    const res = await api.post(validLead);
+    assert.equal(res.status, 500);
+    assert.equal(api.requests.length, 0);
+  });
+  await t.test("failed delivery is not remembered: the visitor can retry", async () => {
+    let fail = true;
+    const api = apiHarness({ env: akisEnv, noDb: true, fetch: async () => fail ? new Response("down", { status: 503 }) : Response.json({ ok: true, id: "k" }) });
+    assert.equal((await api.post(validLead)).status, 500);
+    fail = false;
+    assert.equal((await api.post(validLead)).status, 200);
+    assert.equal(api.requests.length, 2);
+  });
+  await t.test("honeypot still skips delivery", async () => {
+    const api = apiHarness({ env: akisEnv, noDb: true });
+    assert.equal((await api.post({ ...validLead, company: "bot" })).status, 200);
+    assert.equal(api.requests.length, 0);
   });
 });
