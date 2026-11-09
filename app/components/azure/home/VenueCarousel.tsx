@@ -41,9 +41,8 @@ export default function VenueCarousel({ locale }: { locale: Locale }) {
             <div className="media">
               <div className="main">
                 {img?.video ? (
-                  // dikey video kartta ortalı; iki yanı aynı karenin bulanık kopyası (renk katmanı yok). Hareketi azalt açıksa oynamaz.
+                  // video kartla aynı oranda (3:2), kartı doldurur. Hareketi azalt açıksa oynamaz.
                   <span key={img.video} className="vid">
-                    <Image className="blur" src={img.src} alt="" fill quality={40} sizes="40vw" aria-hidden />
                     <video src={img.video} poster={img.src} muted loop playsInline autoPlay preload="metadata" aria-label={tx.name}
                       onLoadedData={(e) => { if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) e.currentTarget.pause(); }} />
                   </span>
