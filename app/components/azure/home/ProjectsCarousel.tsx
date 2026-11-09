@@ -160,7 +160,7 @@ export default function ProjectsCarousel({ locale }: { locale: Locale }) {
         {PROJECTS.map((p) => (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false} draggable={false}>
             <Img src={p.cover} sizes="(min-width: 1000px) 460px, 86vw" alt="" draggable={false} />
-            <div className="top"><span className="tags">{p.award && <span className="az-st gold">{p.award[locale]}</span>}<span className="az-st">{p.status[locale]}</span></span>{p.logo ? <LogoTag src={p.logo} inline /> : null}</div>
+            <div className="top"><span className="tags">{p.award && <span className="az-st gold">{p.award[locale]}</span>}{p.slug !== "lagoon-verde" && <span className="az-st">{p.status[locale]}</span>}</span>{p.logo ? <LogoTag src={p.logo} inline /> : null}</div>
             <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="az-glassrow">{p.cta[locale]} <GlassArrow /></div></div>
           </Link>
         ))}
