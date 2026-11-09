@@ -38,11 +38,14 @@ Kopyalanabilir örnek dosya: repo kökündeki `.env.example`.
 | `META_CAPI_TOKEN` (sunucu, **gizli**) | Events Manager → Pixel → Ayarlar → Dönüşüm API'si → "Erişim anahtarı oluştur" | `EAAG…` (uzun metin) |
 | `META_GRAPH_API_VERSION` (sunucu) | developers.facebook.com/docs/graph-api/changelog → güncel sürüm | `v2X.0` biçiminde |
 | `META_TEST_EVENT_CODE` (sunucu, isteğe bağlı) | Events Manager → Pixel → Test olayları → Sunucu olayları için test kodu | `TEST12345` |
+| `DND_AKIS_LEAD_URL` (sunucu) | DND Akış lead ucu: form talebi satış panosunda "Yeni Lead" kartı olur | `https://takip.dndcyprus.com/api/disari/lead` |
+| `DND_AKIS_LEAD_ANAHTAR` (sunucu, **gizli**) | DND Akış Vercel projesindeki `LEAD_WEBHOOK_SECRET` değerinin aynısı | uzun rastgele metin |
 
 Notlar:
 - `META_CAPI_TOKEN` için Vercel'de "Sensitive" seçin; `NEXT_PUBLIC_` önekiyle **asla** tanımlamayın. Kod anahtarı loglamaz.
 - `META_GRAPH_API_VERSION` boşsa CAPI gönderilmez ve logda bir kez `META_CAPI_SKIPPED` uyarısı görünür (sürüm koda gömülmedi; Meta eski sürümleri kapattıkça bu değeri güncelleyin).
 - `META_TEST_EVENT_CODE` yalnızca test sırasında tanımlı olmalı; testten sonra silip yeniden deploy edin.
+- `DND_AKIS_LEAD_URL` ve `DND_AKIS_LEAD_ANAHTAR` ikisi birden tanımlıysa `/api/contact` talebi kaydettikten sonra (yanıt döndükten sonra, sunucudan) DND Akış'a iletir; biri yoksa iletim yapılmaz. Anahtarı "Sensitive" seçin, `NEXT_PUBLIC_` önekiyle tanımlamayın. DND Akış hata verirse ya da 5 sn'de yanıt vermezse form yine başarılı döner, logda yalnızca `DND_AKIS_LEAD_FAILED` ve durum kodu görünür.
 - Önce **Preview** ortamında tanımlayıp test edin, sonra **Production**'a ekleyin.
 
 ## 3. Çerez izni nasıl çalışır

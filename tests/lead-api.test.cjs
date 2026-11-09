@@ -11,16 +11,23 @@ const validLead = {
   eventId: "11111111-1111-4111-8111-111111111111",
 };
 
-function apiHarness({ create } = {}) {
+function apiHarness({ create, env = {}, fetch } = {}) {
   const writes = [];
   const events = [];
   const deferred = [];
   const logs = [];
+  const requests = [];
   const { POST } = loadTypeScript("app/api/contact/route.ts", {
+    env,
     globals: {
       console: {
         warn: (...args) => logs.push(args),
         error: (...args) => logs.push(args),
+      },
+      // DND Akış ucu (gerçek ağ yok)
+      fetch: async (url, init) => {
+        requests.push({ url, ...init, body: JSON.parse(init.body) });
+        return fetch ? fetch(url, init) : Response.json({ ok: true, id: "kart-1", tekrar: false });
       },
     },
     mocks: {
@@ -44,7 +51,7 @@ function apiHarness({ create } = {}) {
     },
   });
   return {
-    writes, events, deferred, logs,
+    writes, events, deferred, logs, requests,
     post: (body, { headers = {}, cookies = {}, malformed = false } = {}) => POST({
       json: async () => {
         if (malformed) throw new SyntaxError("Invalid JSON");
@@ -215,4 +222,86 @@ test("contact API defers consented CAPI with the shared event ID until after the
     fbclid: "fake-click-id", fbclidTs: 1700000000000,
     contentName: "La Joya", locale: "en",
   }]);
+});
+
+const akisEnv = {
+  DND_AKIS_LEAD_URL: "https://takip.example.test/api/disari/lead",
+  DND_AKIS_LEAD_ANAHTAR: "test-key-never-a-real-secret",
+};
+
+test("contact API forwards the saved lead to DND Akış after responding, with the visitor's own text", async () => {
+  const api = apiHarness({ env: akisEnv });
+  const res = await api.post({
+    ...validLead, project: "neocity", unitType: "3+1",
+    pageUrl: "https://www.dndcyprus.com/de/projects/neocity?utm_source=meta",
+    attribution: { current: { utm_source: "facebook", utm_medium: "paid_social", utm_campaign: "neo", ts: 1700000000000 } },
+  });
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true });
+  assert.equal(api.writes.length, 1);
+  assert.equal(api.requests.length, 0);
+  assert.equal(api.deferred.length, 1);
+  await api.deferred[0]();
+  assert.equal(api.requests.length, 1);
+  const [r] = api.requests;
+  assert.equal(r.url, akisEnv.DND_AKIS_LEAD_URL);
+  assert.equal(r.headers["x-dnd-anahtar"], akisEnv.DND_AKIS_LEAD_ANAHTAR);
+  // Varsayılan konu/mesaj ("Daire tipi: 3+1") DND Akış'a gitmez; daire tipi ayrı alan
+  assert.deepEqual(r.body, {
+    ad: validLead.name, telefon: validLead.phone, eposta: validLead.email,
+    proje: "NeoCity", kaynak: "web", dil: "de",
+    "Form türü": "Fiyat / kat planı talebi (proje sayfası)", "Daire tipi": "3+1",
+    Sayfa: "/de/projects/neocity", "Trafik kaynağı": "facebook / paid_social", Kampanya: "neo",
+  });
+});
+
+test("contact API keeps succeeding when DND Akış rejects or is unreachable", async t => {
+  for (const [label, fetch] of [
+    ["401", async () => Response.json({ hata: "yetkisiz" }, { status: 401 })],
+    ["500", async () => new Response("down", { status: 500 })],
+    ["network", async () => { throw new TypeError("fetch failed"); }],
+  ]) {
+    await t.test(label, async () => {
+      const api = apiHarness({ env: akisEnv, fetch });
+      const res = await api.post({ ...validLead, message: "Merhaba" });
+      assert.equal(res.status, 200);
+      assert.deepEqual(await res.json(), { ok: true });
+      await api.deferred[0]();
+      assert.equal(api.requests.length, 1);
+      assert.equal(api.logs.length, 1);
+      assert.equal(JSON.stringify(api.logs).includes(validLead.email), false);
+      assert.equal(JSON.stringify(api.logs).includes(akisEnv.DND_AKIS_LEAD_ANAHTAR), false);
+    });
+  }
+});
+
+test("contact API does not contact DND Akış without config, for bots, duplicates or unsaved leads", async t => {
+  await t.test("missing env", async () => {
+    for (const env of [{}, { DND_AKIS_LEAD_URL: akisEnv.DND_AKIS_LEAD_URL }, { DND_AKIS_LEAD_ANAHTAR: akisEnv.DND_AKIS_LEAD_ANAHTAR }]) {
+      const api = apiHarness({ env });
+      const res = await api.post(validLead);
+      assert.equal(res.status, 200);
+      assert.equal(api.deferred.length, 0);
+      assert.equal(api.requests.length, 0);
+    }
+  });
+  await t.test("honeypot", async () => {
+    const api = apiHarness({ env: akisEnv });
+    await api.post({ ...validLead, company: "bot" });
+    assert.equal(api.deferred.length, 0);
+  });
+  await t.test("database failure", async () => {
+    const api = apiHarness({ env: akisEnv, create: () => { throw { code: "P1001" }; } });
+    const res = await api.post(validLead);
+    assert.equal(res.status, 500);
+    assert.equal(api.deferred.length, 0);
+    assert.equal(api.requests.length, 0);
+  });
+  await t.test("repeated event ID", async () => {
+    const api = apiHarness({ env: akisEnv });
+    await api.post(validLead);
+    await api.post(validLead);
+    assert.equal(api.writes.length, 1);
+    assert.equal(api.deferred.length, 1);
+  });
 });

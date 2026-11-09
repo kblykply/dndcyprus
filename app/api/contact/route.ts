@@ -5,6 +5,7 @@ import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sanitizeAttribution, sourceFromAttribution } from "@/lib/attribution";
 import { sendMetaLeadEvent } from "@/lib/meta-capi";
+import { dndAkisLeadConfigured, sendDndAkisLead } from "@/lib/dnd-akis-lead";
 
 export const runtime = "nodejs";
 
@@ -116,6 +117,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid phone" }, { status: 400 });
   }
 
+  // DND Akış'a ziyaretçinin kendi yazdıkları gider (varsayılan metinler değil)
+  const visitorSubject = subject;
+  const visitorMessage = message;
+
   // Lead formunda konu/mesaj alanı yok → okunur varsayılanlar
   if (!subject) subject = project ? `${project} – Fiyat/Bilgi talebi` : "Web sitesi – Bilgi talebi";
   if (!message) message = unitType ? `Daire tipi: ${unitType}` : "Fiyat ve kat planı bilgisi talebi.";
@@ -160,6 +165,26 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
   if (eventId) rememberEvent(eventId, now);
+
+  // DND Akış: talep satış panosuna kart olarak iletilir (yalnız sunucudan, anahtar env'de).
+  // Değişkenler yoksa atlanır; yanıt döndükten sonra çalışır, hatası formun sonucunu etkilemez.
+  if (dndAkisLeadConfigured()) {
+    after(async () => {
+      await sendDndAkisLead({
+        name,
+        email,
+        phone: phone || undefined,
+        project: project || undefined,
+        message: visitorMessage || undefined,
+        subject: visitorSubject || undefined,
+        unitType: unitType || undefined,
+        form: form || undefined,
+        pageUrl: pageUrl || undefined,
+        source,
+        campaign,
+      });
+    });
+  }
 
   // Meta CAPI: yalnızca reklam izni varsa; yanıt döndükten sonra çalışır
   const consent = body.consent as { ads?: unknown } | null | undefined;
