@@ -37,8 +37,8 @@ test("ana sayfa vitrini 8 sn'de bir geçer, fare üstündeyken de", async ({ pag
   const hero = page.locator("section.az-hs");
   await expect(hero.locator(".nm")).toHaveText("NeoCity");
   await hero.locator(".frame").hover();
-  await expect(hero.locator(".nm")).toHaveText("Lagoon Verde Rezidansları ve Tatil Köyü", { timeout: 10000 });
-  await expect(hero.locator(".nm")).toHaveText("La Joya Resort & Residences", { timeout: 10000 });
+  await expect(hero.locator(".nm")).toHaveText("Lagoon Verde", { timeout: 10000 });
+  await expect(hero.locator(".nm")).toHaveText("La Joya", { timeout: 10000 });
 });
 
 test("video dosyaları parça parça (Range) sunulur", async ({ request }, info) => {

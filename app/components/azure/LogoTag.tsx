@@ -25,11 +25,14 @@ const DIMS: Record<string, [number, number]> = {
   "/azure/venues/ulfet-shu-logo.png": [366, 192],
 };
 
+// dik oranlı, ince yazılı logolar yatay hapta küçük kalıyordu ("okunmuyor"): yuvarlak ve büyük etikette (kullanıcı, 9 Kasım 2026)
+const ROUND = new Set(["/logos/web/mariachi.webp", "/logos/perla.svg", "/logos/perlaii.svg"]);
+
 export default function LogoTag({ src, at = "tr", inline, keepColor, className = "" }: { src: string; at?: "tr" | "tl"; inline?: boolean; keepColor?: boolean; className?: string }) {
   const file = TRIM[src] ?? src;
   const dims = DIMS[file];
   return (
-    <span className={`az-logotag ${inline ? "inline" : at}${keepColor ? " color" : ""} ${className}`.trim()} aria-hidden>
+    <span className={`az-logotag ${inline ? "inline" : at}${keepColor ? " color" : ""}${ROUND.has(src) ? " round" : ""} ${className}`.trim()} aria-hidden>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={file} alt="" width={dims?.[0]} height={dims?.[1]} loading="lazy" decoding="async" />
     </span>

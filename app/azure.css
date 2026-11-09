@@ -326,6 +326,10 @@ body.az-lock { overflow: hidden; }
 .az-logotag.inline { position: static; flex: none; margin-left: auto; }
 .az-logotag img { display: block; flex: none; height: calc(var(--th) - 2 * var(--py) - 2px); width: auto; max-width: var(--mw); object-fit: contain; filter: brightness(0) invert(1); }
 .az-logotag.color img { filter: none; }
+/* yuvarlak etiket (Mariachi): daire, logo içine büyük sığar */
+.az-logotag.round { --rd: 92px; width: var(--rd); height: var(--rd); padding: 0; border-radius: 50%; }
+.az-logotag.round img { width: 76%; height: auto; max-width: none; max-height: 70%; }
+.az-pc .top .az-logotag.round { --rd: 96px; border-radius: 50%; }
 
 /* ---- projects carousel ---- */
 .az-ctrl { display: flex; gap: 8px; }
@@ -342,7 +346,7 @@ body.az-lock { overflow: hidden; }
 .az-pc .top { position: absolute; top: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; z-index: 2; }
 .az-pc .top .tags { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
 /* proje kartında yanındaki durum etiketleriyle (.az-st) aynı boy ve hap biçiminde (kullanıcı: "boyları eşit olmalı") */
-.az-pc .top .az-logotag { --th: 35px; --px: 14px; --py: 5px; --mw: 92px; border-radius: 999px; background: rgba(13, 35, 38, .34); border-color: rgba(255, 255, 255, .28); }
+.az-pc .top .az-logotag { --th: 46px; --px: 16px; --py: 7px; --mw: 128px; border-radius: 999px; /* 9 Kasım: logolar büyüdü (35 → 46 px) */ background: rgba(13, 35, 38, .34); border-color: rgba(255, 255, 255, .28); }
 /* açık gökyüzü üstünde de okunsun: hap zemini koyu cam (görselin kendisine katman yok) */
 .az-st { padding: 8px 12px; border-radius: 999px; background: rgba(13, 35, 38, .34); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .28); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: #fff; }
 .az-st.gold { background: rgba(205, 72, 36, .9); border-color: transparent; }
