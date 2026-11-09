@@ -87,6 +87,6 @@
 /* ana sayfa bölüm başlıkları (kullanıcı, 9 Kasım 2026; vitrinin olduğu sayfa = ana sayfa): üst yazılar iki katı,
    bölüm başlıklarının hepsi aynı boy (eski küçük başlık + 2 px), başlık altındaki ilk cümleler her bölümde aynı boy */
 :root:has(section.az-hs) .az-kicker { font-size: clamp(22px, 2.2vw, 32px); gap: 14px; }
-:root:has(section.az-hs) .az-kicker::before { width: 40px; height: 3px; }
+:root:has(section.az-hs) .az-kicker::before { display: none; } /* üst yazıların önündeki çizgi kalktı (kullanıcı, 9 Kasım) */
 :root:has(section.az-hs) :is(.az-h2, .az-h2.sm, .az-h2.statement) { font-size: clamp(30px, calc(3.4vw + 2px), 50px); }
 :root:has(section.az-hs) :is(.az-lead, .az-vs .lead) { font-size: 17px; }
