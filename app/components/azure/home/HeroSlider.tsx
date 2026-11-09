@@ -13,7 +13,7 @@ export type Slide = {
 };
 type Props = { slides: Slide[]; brand: string; label: string; cta: string; prev: string; next: string; pause: string; play: string; media: string };
 
-const DUR = 3000; // slayt başına süre (ms; kullanıcı isteği: 3 sn'de bir); ilerleme çizgisi bu sürede dolar
+const DUR = 8000; // slayt başına süre (ms; kullanıcı isteği: önce 3 sn, 9 Kasım 2026'da her biri 5 sn uzatıldı); ilerleme çizgisi bu sürede dolar
 
 /**
  * Ana sayfa proje vitrini. Görseller üst üste, geçiş yumuşak kararma + hafif yaklaşma. Etkin slayt ve sonraki

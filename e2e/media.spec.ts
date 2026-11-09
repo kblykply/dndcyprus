@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 
 // ana sayfa vitrini (Ekim 2026): video yerine projeler sırayla döner — NeoCity, Lagoon Verde, La Joya, Perla, Perla II
 test("ana sayfa vitrini: tek H1, ilk slayt NeoCity ve öncelikli görsel, oklar sıradaki projeye geçer", async ({ page }) => {
-  // "hareketi azalt": kendiliğinden geçiş (3 sn) ok testini bozmasın (telefonda durdur düğmesi gizli)
+  // "hareketi azalt": kendiliğinden geçiş (8 sn) ok testini bozmasın (telefonda durdur düğmesi gizli)
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/tr");
   const hero = page.locator("section.az-hs");
@@ -30,15 +30,15 @@ test("ana sayfa vitrini: tek H1, ilk slayt NeoCity ve öncelikli görsel, oklar 
   await expect(hero.locator(".nm")).toHaveText("NeoCity");
 });
 
-// 3 sn'de bir kendiliğinden geçer; fare vitrinin üstündeyken de durmaz (vitrin ekranı kaplıyor)
-test("ana sayfa vitrini 3 sn'de bir geçer, fare üstündeyken de", async ({ page }, info) => {
+// 8 sn'de bir kendiliğinden geçer; fare vitrinin üstündeyken de durmaz (vitrin ekranı kaplıyor)
+test("ana sayfa vitrini 8 sn'de bir geçer, fare üstündeyken de", async ({ page }, info) => {
   test.skip(info.project.name !== "chromium-desktop", "tek projede yeter");
   await page.goto("/tr");
   const hero = page.locator("section.az-hs");
   await expect(hero.locator(".nm")).toHaveText("NeoCity");
   await hero.locator(".frame").hover();
-  await expect(hero.locator(".nm")).toHaveText("Lagoon Verde Rezidansları ve Tatil Köyü", { timeout: 5000 });
-  await expect(hero.locator(".nm")).toHaveText("La Joya Resort & Residences", { timeout: 5000 });
+  await expect(hero.locator(".nm")).toHaveText("Lagoon Verde Rezidansları ve Tatil Köyü", { timeout: 10000 });
+  await expect(hero.locator(".nm")).toHaveText("La Joya Resort & Residences", { timeout: 10000 });
 });
 
 test("video dosyaları parça parça (Range) sunulur", async ({ request }, info) => {
