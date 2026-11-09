@@ -137,7 +137,7 @@ test("DND Akış errors and timeouts are logged without personal data and never 
       }),
     });
     assert.deepEqual(plain(await h.sendDndAkisLead(lead)), { ok: false, reason: "timeout" });
-    assert.deepEqual(delays, [5000]);
+    assert.deepEqual(delays, [10000]);
     assert.deepEqual(plain(h.logs), [["DND_AKIS_LEAD_FAILED", { reason: "timeout" }]]);
   });
 });

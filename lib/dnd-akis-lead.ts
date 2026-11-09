@@ -30,7 +30,8 @@ export type DndAkisLeadResult =
   | { ok: true; status: number; id?: string; repeat?: boolean }
   | { ok: false; status?: number; reason?: "timeout" | "network" };
 
-const TIMEOUT_MS = 5000;
+// İletim kullanıcıya yanıt döndükten sonra (after) çalışır; soğuk başlangıçta DND Akış yanıtı 5 sn’yi aşabildiği için 10 sn.
+const TIMEOUT_MS = 10000;
 
 const FORM_LABEL: Record<string, string> = {
   lead: "Fiyat / kat planı talebi (proje sayfası)",
