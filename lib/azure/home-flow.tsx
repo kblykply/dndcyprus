@@ -43,9 +43,7 @@ const TR: HomeFlow = {
     more: ["DND Cyprus olarak yalnızca konut değil, sosyal alanları, zengin olanakları ve ayrıcalıklı yaşam tarzlarıyla fark yaratan destinasyonlar geliştiriyoruz.", "Zamanında teslim ettiğimiz projelerimiz, yatırımcılarımıza sunduğumuz yenilikçi ödeme modellerimiz ve satış sonrası hizmetlerimizle verdiğimiz sözlerin arkasında duruyoruz."],
     motto: "DND Cyprus. Güvenle yatırım yapın, ayrıcalıkla yaşayın.",
     items: [
-      { icon: "house", h: "Tasarımdan teslimata tek çatı", p: "Konut, ticari ve karma projelerde planlamadan teslime uçtan uca çözüm." },
       { icon: "key", h: "Zamanında teslim", p: "La Joya, 74 konutuyla 2025’te sahiplerine teslim edildi; yaşam başladı." },
-      { icon: "gear", h: "Her projede standart donanım", p: "Merkezi ısıtma-soğutma, jeneratör, akıllı ev ve banyolarda yerden ısıtma." },
       { icon: "award", h: "Ödüllü projeler", p: "PropertyNC 2025’te üç ödül: Lagoon Verde, Mariachi Beach Club ve En İyi Yeni Girişim." },
     ],
     imageAlt: "La Joya Resort & Residences, İskele",
@@ -99,9 +97,7 @@ const EN: HomeFlow = {
     more: ["At DND Cyprus we don’t just develop homes; we create destinations that stand out for their social spaces, rich amenities and exclusive lifestyles.", "With projects delivered on time, innovative payment models for our investors and dedicated after-sales service, we stand behind every promise we make."],
     motto: "DND Cyprus. Invest with confidence, live with privilege.",
     items: [
-      { icon: "house", h: "From design to delivery, under one roof", p: "End-to-end solutions for residential, commercial and mixed-use projects." },
       { icon: "key", h: "On-time delivery", p: "La Joya and its 74 homes were handed over in 2025 — life has begun." },
-      { icon: "gear", h: "Standard features in every project", p: "Central heating and cooling, generator, smart home and underfloor heating in bathrooms." },
       { icon: "award", h: "Award-winning projects", p: "Three awards at PropertyNC 2025: Lagoon Verde, Mariachi Beach Club and Best Newcomer." },
     ],
     imageAlt: "La Joya Resort & Residences, İskele",
@@ -155,9 +151,7 @@ const DE: HomeFlow = {
     more: ["Bei DND Cyprus entwickeln wir nicht nur Wohnungen, sondern Destinationen, die sich durch Gemeinschaftsflächen, vielfältige Annehmlichkeiten und einen exklusiven Lebensstil auszeichnen.", "Mit pünktlich übergebenen Projekten, innovativen Zahlungsmodellen für unsere Investoren und unserem After-Sales-Service stehen wir zu unserem Wort."],
     motto: "DND Cyprus. Mit Vertrauen investieren, mit Privilegien leben.",
     items: [
-      { icon: "house", h: "Von der Planung bis zur Übergabe aus einer Hand", p: "Komplettlösungen für Wohn-, Gewerbe- und Mischprojekte." },
       { icon: "key", h: "Pünktliche Übergabe", p: "La Joya wurde 2025 mit 74 Wohnungen übergeben – das Leben hat begonnen." },
-      { icon: "gear", h: "Standardausstattung in jedem Projekt", p: "Zentrale Heizung und Kühlung, Generator, Smart Home und Fußbodenheizung im Bad." },
       { icon: "award", h: "Preisgekrönte Projekte", p: "Drei Auszeichnungen bei PropertyNC 2025: Lagoon Verde, Mariachi Beach Club und Best Newcomer." },
     ],
     imageAlt: "La Joya Resort & Residences, İskele",
@@ -211,9 +205,7 @@ const RU: HomeFlow = {
     more: ["DND Cyprus создаёт не просто жильё, а места притяжения с общественными пространствами, богатой инфраструктурой и особым образом жизни.", "Проекты, сданные в срок, инновационные модели оплаты для инвесторов и послепродажное обслуживание — так мы держим своё слово."],
     motto: "DND Cyprus. Инвестируйте с уверенностью, живите с привилегиями.",
     items: [
-      { icon: "house", h: "От проекта до сдачи — в одних руках", p: "Комплексные решения для жилых, коммерческих и смешанных проектов." },
       { icon: "key", h: "Сдача в срок", p: "La Joya с 74 квартирами передана владельцам в 2025 году — жизнь началась." },
-      { icon: "gear", h: "Стандартное оснащение в каждом проекте", p: "Центральное отопление и кондиционирование, генератор, умный дом и тёплый пол в ванных." },
       { icon: "award", h: "Проекты-лауреаты", p: "Три награды PropertyNC 2025: Lagoon Verde, Mariachi Beach Club и «Лучший новичок»." },
     ],
     imageAlt: "La Joya Resort & Residences, Искеле",
@@ -267,9 +259,7 @@ const PL: HomeFlow = {
     more: ["W DND Cyprus tworzymy nie tylko mieszkania, ale miejsca, które wyróżniają się przestrzeniami wspólnymi, bogatymi udogodnieniami i wyjątkowym stylem życia.", "Projekty oddawane na czas, innowacyjne modele płatności dla inwestorów i obsługa posprzedażowa — tak dotrzymujemy słowa."],
     motto: "DND Cyprus. Inwestuj z zaufaniem, żyj z przywilejami.",
     items: [
-      { icon: "house", h: "Od projektu do odbioru w jednych rękach", p: "Kompleksowe rozwiązania dla projektów mieszkaniowych, komercyjnych i mieszanych." },
       { icon: "key", h: "Terminowe oddanie", p: "La Joya z 74 mieszkaniami została oddana w 2025 roku — życie się zaczęło." },
-      { icon: "gear", h: "Standardowe wyposażenie w każdym projekcie", p: "Centralne ogrzewanie i chłodzenie, generator, inteligentny dom i ogrzewanie podłogowe w łazienkach." },
       { icon: "award", h: "Nagradzane projekty", p: "Trzy nagrody PropertyNC 2025: Lagoon Verde, Mariachi Beach Club i Best Newcomer." },
     ],
     imageAlt: "La Joya Resort & Residences, İskele",

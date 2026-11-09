@@ -1,7 +1,7 @@
 /* Ana sayfa akışı: Neden DND (az-why), ödeme fırsatları (az-offers), yaşam ve ayrıcalıklar (az-life), rakamlar (az-nums). */
 
 /* ---- 3 · Neden DND ---- */
-.az-why .g { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 4.4vw, 72px); align-items: center; }
+.az-why .g { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 4.4vw, 72px); align-items: stretch; } /* video ile metin sütunu aynı hizada başlar ve biter (kullanıcı, 9 Kasım) */
 .az-why .pic { position: relative; min-height: clamp(360px, 40vw, 560px); border-radius: var(--r); overflow: hidden; background: var(--sky-2); }
 .az-why .pic img { object-fit: cover; }
 /* açılış videosu: 16:9 video kutuyu doldurur (siyah bant yok), tıklama YouTube'a gitmez; ses düğmesi sağ altta cam */
@@ -83,3 +83,10 @@
 .az-nums li b { display: block; font-family: var(--font-display), sans-serif; font-size: clamp(48px, 5vw, 76px); line-height: 1; font-weight: 400; letter-spacing: -.04em; color: var(--sea); font-variant-numeric: tabular-nums; }
 .az-nums li span { display: block; margin-top: 10px; font-size: 14.5px; line-height: 1.45; color: var(--ink-60); }
 @media (max-width: 900px) { .az-nums ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ana sayfa bölüm başlıkları (kullanıcı, 9 Kasım 2026; vitrinin olduğu sayfa = ana sayfa): üst yazılar iki katı,
+   bölüm başlıklarının hepsi aynı boy (eski küçük başlık + 2 px), başlık altındaki ilk cümleler her bölümde aynı boy */
+:root:has(section.az-hs) .az-kicker { font-size: clamp(22px, 2.2vw, 32px); gap: 14px; }
+:root:has(section.az-hs) .az-kicker::before { width: 40px; height: 3px; }
+:root:has(section.az-hs) :is(.az-h2, .az-h2.sm, .az-h2.statement) { font-size: clamp(30px, calc(3.4vw + 2px), 50px); }
+:root:has(section.az-hs) :is(.az-lead, .az-vs .lead) { font-size: 17px; }

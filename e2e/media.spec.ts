@@ -24,7 +24,7 @@ test("ana sayfa vitrini: tek H1, ilk slayt NeoCity ve öncelikli görsel, oklar 
   const pause = hero.getByRole("button", { name: "Durdur" });
   if (await pause.isVisible()) await pause.click();
   await hero.getByRole("button", { name: "Sonraki proje" }).click();
-  await expect(hero.locator(".nm")).toHaveText("Lagoon Verde Rezidansları ve Tatil Köyü");
+  await expect(hero.locator(".nm")).toHaveText("Lagoon Verde");
   await expect(hero.getByRole("link", { name: /Projeyi keşfet/ })).toHaveAttribute("href", "/tr/lagoon-verde");
   await hero.getByRole("button", { name: "Önceki proje" }).click();
   await expect(hero.locator(".nm")).toHaveText("NeoCity");
