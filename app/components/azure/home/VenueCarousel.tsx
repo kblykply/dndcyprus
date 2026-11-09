@@ -40,7 +40,14 @@ export default function VenueCarousel({ locale }: { locale: Locale }) {
           <article key={v.key} className="vc" aria-label={`${pad(k + 1)} / ${pad(n)} · ${tx.name}`} style={{ ["--i" as string]: k } as CSSProperties}>
             <div className="media">
               <div className="main">
-                {img ? <Image key={img.src} src={img.src} alt={tx.name} fill quality={75} sizes="(min-width: 1000px) 56vw, 100vw" /> : null}
+                {img?.video ? (
+                  // dikey video kartta ortalı; iki yanı aynı karenin bulanık kopyası (renk katmanı yok). Hareketi azalt açıksa oynamaz.
+                  <span key={img.video} className="vid">
+                    <Image className="blur" src={img.src} alt="" fill quality={40} sizes="40vw" aria-hidden />
+                    <video src={img.video} poster={img.src} muted loop playsInline autoPlay preload="metadata" aria-label={tx.name}
+                      onLoadedData={(e) => { if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) e.currentTarget.pause(); }} />
+                  </span>
+                ) : img ? <Image key={img.src} src={img.src} alt={tx.name} fill quality={75} sizes="(min-width: 1000px) 56vw, 100vw" /> : null}
                 {/* mekânın logosu etiket olarak sağ üst köşede (bütün kartlarda aynı yer) */}
                 {v.logo ? <LogoTag src={v.logo} /> : null}
                 {many ? (
@@ -53,7 +60,7 @@ export default function VenueCarousel({ locale }: { locale: Locale }) {
               {many ? (
                 <div className="thumbs">
                   {v.images.map((m, q) => (
-                    <button key={m.src} type="button" className={q === j ? "on" : undefined} aria-pressed={q === j} aria-label={t.ui.photo(q + 1)} onClick={() => show(k, q)}>
+                    <button key={m.src} type="button" className={`${q === j ? "on" : ""}${m.video ? " v" : ""}`.trim() || undefined} aria-pressed={q === j} aria-label={m.video ? "Video" : t.ui.photo(q + 1)} onClick={() => show(k, q)}>
                       <Image src={m.src} alt="" fill quality={60} sizes="104px" />
                     </button>
                   ))}

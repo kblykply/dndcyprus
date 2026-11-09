@@ -6,7 +6,7 @@
 import type { Locale } from "./site";
 
 export type VenueKey = "ulfet-shu" | "ulfet-beach" | "mariachi";
-export type VenueImage = { src: string };
+export type VenueImage = { src: string; /** varsa kart bu videoyu oynatır (sessiz, döngülü); src kapak karesi */ video?: string };
 export type Venue = {
   key: VenueKey;
   /** mekânın kendi logosu; yoksa etiket gösterilmez (marka tipografisi uydurulmaz) */
@@ -28,6 +28,8 @@ export const VENUES: Venue[] = [
       { src: "/azure/venues/ulfet-shu-salon.jpg" },
       { src: "/azure/venues/ulfet-shu-dj.jpg" },
       { src: "/azure/venues/ulfet-shu-keman.jpg" },
+      // 4. öğe video (kullanıcı, 9 Kasım 2026): @ulfetshu reel Dd04728tmPE, yalnız dansözlerin göründüğü 13. saniyeden sonu (14 sn), sessiz, 540×960 H.264
+      { src: "/azure/venues/ulfet-shu-dans.jpg", video: "/videos/ulfet-shu-dans.mp4" },
     ],
     instagram: { handle: "@ulfetshu", href: "https://www.instagram.com/ulfetshu/" },
     phone: { display: "0546 996 55 55", tel: "+905469965555" },

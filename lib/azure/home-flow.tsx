@@ -59,9 +59,10 @@ const TR: HomeFlow = {
     note: "* Ödeme modelleri tanıtım amaçlıdır. Güncel koşullar için satış ekibimizle iletişime geçiniz.",
   },
   life: {
-    kicker: "DND ile yaşam ve ayrıcalıklar",
-    title: <>Ev sahibi olmak, <b>bir yaşam tarzı.</b></>,
-    lead: "Resort yaşamı, sosyal alanlar ve DND ev sahiplerine özel ayrıcalıklar.",
+    // Netice Hanım'ın üç ifadesi (9 Kasım 2026): başlık, üst yazı ve alt cümle
+    kicker: "DND Beach Club Ayrıcalıkları",
+    title: <>DND Lifestyle – <b>Sahilde de Ayrıcalıklısınız</b></>,
+    lead: "DND ile hayat sahilde de güzel: resort yaşamı, sosyal alanlar ve DND ev sahiplerine özel ayrıcalıklar.",
   },
   numbers: {
     kicker: "Rakamlarla DND",
@@ -113,9 +114,9 @@ const EN: HomeFlow = {
     note: "* Payment models are for promotional purposes. Please contact our sales team for current terms.",
   },
   life: {
-    kicker: "Life and privileges with DND",
-    title: <>Owning a home is <b>a way of life.</b></>,
-    lead: "Resort living, social spaces and privileges reserved for DND homeowners.",
+    kicker: "DND Beach Club Privileges",
+    title: <>DND Lifestyle – <b>Privileged on the Beach, Too</b></>,
+    lead: "With DND, life is beautiful on the beach too: resort living, social spaces and privileges reserved for DND homeowners.",
   },
   numbers: {
     kicker: "DND in numbers",
@@ -167,9 +168,9 @@ const DE: HomeFlow = {
     note: "* Die Zahlungsmodelle dienen Werbezwecken. Aktuelle Konditionen erhalten Sie von unserem Vertriebsteam.",
   },
   life: {
-    kicker: "Leben und Vorteile mit DND",
-    title: <>Eigentum ist <b>ein Lebensstil.</b></>,
-    lead: "Resort-Leben, Gemeinschaftsflächen und exklusive Vorteile für DND-Eigentümer.",
+    kicker: "DND Beach-Club-Vorteile",
+    title: <>DND Lifestyle – <b>auch am Strand privilegiert</b></>,
+    lead: "Mit DND ist das Leben auch am Strand schön: Resort-Leben, Gemeinschaftsflächen und exklusive Vorteile für DND-Eigentümer.",
   },
   numbers: {
     kicker: "DND in Zahlen",
@@ -221,9 +222,9 @@ const RU: HomeFlow = {
     note: "* Модели оплаты носят рекламный характер. Актуальные условия уточняйте у отдела продаж.",
   },
   life: {
-    kicker: "Жизнь и привилегии с DND",
-    title: <>Свой дом — <b>это образ жизни.</b></>,
-    lead: "Курортная жизнь, общественные пространства и привилегии для владельцев DND.",
+    kicker: "Привилегии DND Beach Club",
+    title: <>DND Lifestyle — <b>привилегии и на пляже</b></>,
+    lead: "С DND жизнь прекрасна и на пляже: курортная жизнь, общественные пространства и привилегии для владельцев DND.",
   },
   numbers: {
     kicker: "DND в цифрах",
@@ -275,9 +276,9 @@ const PL: HomeFlow = {
     note: "* Modele płatności mają charakter promocyjny. Aktualne warunki uzyskasz w naszym dziale sprzedaży.",
   },
   life: {
-    kicker: "Życie i przywileje z DND",
-    title: <>Własny dom to <b>styl życia.</b></>,
-    lead: "Życie jak w kurorcie, przestrzenie wspólne i przywileje dla właścicieli DND.",
+    kicker: "Przywileje DND Beach Club",
+    title: <>DND Lifestyle – <b>przywileje także na plaży</b></>,
+    lead: "Z DND życie jest piękne także na plaży: życie jak w kurorcie, przestrzenie wspólne i przywileje dla właścicieli DND.",
   },
   numbers: {
     kicker: "DND w liczbach",
