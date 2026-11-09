@@ -19,7 +19,7 @@ const IMG: Partial<Record<ProjectSlug, string>> = {
 };
 
 /**
- * Ana sayfa vitrini: "DND Cyprus — Hayalinizdeki yaşam burada başlıyor" sabit başlığı altında projeler sırayla döner
+ * Ana sayfa vitrini: "DND Cyprus — Yaşamı yeniden tanımlıyoruz" sabit başlığı altında projeler sırayla döner
  * (oklar, proje adlı noktalar, kendiliğinden geçiş). Her slaytta proje logosu, adı, tek cümlelik başlık ve
  * "Projeyi keşfet"; ödüllü projede ödül etiketi. Sağdaki rakam kartları ve ikinci bağlantı yok (müşteri isteği,
  * Ekim 2026). Görseller burada hazırlanır (ekrana göre srcset; dik telefonda kesit), yalnız ilk slayt önceden yüklenir.

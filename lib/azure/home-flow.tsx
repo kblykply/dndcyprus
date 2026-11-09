@@ -25,7 +25,7 @@ export type HomeFlow = {
 
 const TR: HomeFlow = {
   hero: {
-    brand: "DND Cyprus — Hayalinizdeki yaşam burada başlıyor",
+    brand: "DND Cyprus — Yaşamı yeniden tanımlıyoruz",
     label: "Projelerimiz",
     cta: "Projeyi keşfet", prev: "Önceki proje", next: "Sonraki proje", pause: "Durdur", play: "Oynat",
     slides: [
@@ -79,7 +79,7 @@ const TR: HomeFlow = {
 
 const EN: HomeFlow = {
   hero: {
-    brand: "DND Cyprus — Your dream life starts here",
+    brand: "DND Cyprus — Redefining how you live",
     label: "Our projects",
     cta: "Explore the project", prev: "Previous project", next: "Next project", pause: "Pause", play: "Play",
     slides: [
@@ -133,7 +133,7 @@ const EN: HomeFlow = {
 
 const DE: HomeFlow = {
   hero: {
-    brand: "DND Cyprus — Ihr Traumleben beginnt hier",
+    brand: "DND Cyprus — Wir definieren das Leben neu",
     label: "Unsere Projekte",
     cta: "Projekt entdecken", prev: "Vorheriges Projekt", next: "Nächstes Projekt", pause: "Pausieren", play: "Abspielen",
     slides: [
@@ -187,7 +187,7 @@ const DE: HomeFlow = {
 
 const RU: HomeFlow = {
   hero: {
-    brand: "DND Cyprus — жизнь вашей мечты начинается здесь",
+    brand: "DND Cyprus — мы заново определяем жизнь",
     label: "Наши проекты",
     cta: "Узнать о проекте", prev: "Предыдущий проект", next: "Следующий проект", pause: "Пауза", play: "Воспроизвести",
     slides: [
@@ -241,7 +241,7 @@ const RU: HomeFlow = {
 
 const PL: HomeFlow = {
   hero: {
-    brand: "DND Cyprus — życie Twoich marzeń zaczyna się tutaj",
+    brand: "DND Cyprus — na nowo definiujemy życie",
     label: "Nasze projekty",
     cta: "Poznaj projekt", prev: "Poprzedni projekt", next: "Następny projekt", pause: "Wstrzymaj", play: "Odtwórz",
     slides: [
