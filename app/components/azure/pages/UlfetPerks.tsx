@@ -19,7 +19,7 @@ export default function UlfetPerks({ locale, compact }: { locale: Locale; compac
     );
   }
   return (
-    <section className="az-section az-ulfet">
+    <section className="az-section az-ulfet" id={SECTION_IDS[locale].ulfet}>
       <div className="az-wrap g">
         <div className="pic rv"><Image src="/azure/pages/ulfet-beach.jpg" alt={t.imageAlt} fill quality={75} sizes="(min-width: 1000px) 50vw, 100vw" /></div>
         <div className="tx">
