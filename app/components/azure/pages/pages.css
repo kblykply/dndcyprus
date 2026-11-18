@@ -77,17 +77,20 @@
 @media (max-width: 600px) { .az-split .btns .az-btn { flex: 1 1 auto; } }
 
 /* Ülfet ayrıcalıkları */
-.az-ulfet .g { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 4.4vw, 72px); align-items: center; }
-.az-ulfet .pic { position: relative; aspect-ratio: 2 / 1; border-radius: var(--r); overflow: hidden; background: var(--sky-2); box-shadow: 0 24px 60px rgba(13, 35, 38, .1); }
+/* görsel ile metin sütunu aynı çizgide başlar ve biter (kullanıcı, 18 Kasım 2026): görsel sütun boyunca uzar */
+.az-ulfet .g { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 4.4vw, 72px); align-items: stretch; }
+.az-ulfet .pic { position: relative; min-height: 320px; border-radius: var(--r); overflow: hidden; background: var(--sky-2); box-shadow: 0 24px 60px rgba(13, 35, 38, .1); }
 .az-ulfet .pic img { object-fit: cover; }
+.az-ulfet .tx > .az-kicker { line-height: 1; vertical-align: top; } /* üst yazının üstü görselin üstüyle aynı çizgide */
 .az-ulfet .az-h2 { margin-top: 12px; }
 .az-ulfet .az-lead { margin-top: 14px; }
-.az-ulfet ul { display: grid; gap: 10px; margin: 22px 0 14px; padding: 0; list-style: none; }
-.az-ulfet li { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; padding: 14px 16px; border-radius: 18px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); }
-.az-ulfet li .tag { grid-row: span 2; padding: 8px 12px; border-radius: 999px; background: var(--coral); color: #fff; font-size: 12px; font-weight: 600; white-space: nowrap; }
+/* kartlarda rozet sütunu ortak (en geniş rozet kadar, ikisi eşit): başlık ve metinler aynı çizgiden başlar */
+.az-ulfet ul { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+.az-ulfet li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; column-gap: 14px; align-items: center; padding: 14px 16px; border-radius: 18px; background: var(--foam); border: 1px solid rgba(255, 255, 255, .9); }
+.az-ulfet li .tag { grid-row: span 2; justify-self: stretch; text-align: center; padding: 8px 12px; border-radius: 999px; background: var(--coral); color: #fff; font-size: 12px; font-weight: 600; white-space: nowrap; }
 .az-ulfet li b { font-size: 16px; font-weight: 500; color: var(--ink); }
 .az-ulfet li > span:last-child { font-size: 14px; color: var(--ink-60); }
-@media (max-width: 1000px) { .az-ulfet .g { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1000px) { .az-ulfet .g { grid-template-columns: minmax(0, 1fr); } .az-ulfet .pic { min-height: 0; aspect-ratio: 2 / 1; } }
 
 /* ana sayfa: Mariachi kartının altında Ülfet satırı */
 .az-ulfet-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; padding: 10px 20px 10px 10px; border-radius: 22px; background: var(--foam);
