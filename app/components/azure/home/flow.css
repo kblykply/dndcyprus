@@ -85,9 +85,10 @@
 @media (max-width: 900px) {
   .az-nums ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   /* iki sütunda rakam kartın genişliğine göre (21.11.2026): "1.000+" 48 px'te 393 px telefonda kartı taşıyordu
-     (kart içi ~126 px, metin ~158 px). 28cqi = altı karakterlik rakam kartın içine sığar; masaüstü değişmez. */
-  .az-nums li { container-type: inline-size; }
-  .az-nums li b { font-size: min(48px, 28cqi); }
+     (kart içi ~126 px, metin ~158 px); masaüstü değişmez. */
+  /* 33cqi: "1.000+" ~2.95em -> kart icinin ~%97'si (olculdu 320/375/393). Dolgu 18 px: rakam daha iri kalir. */
+  .az-nums li { container-type: inline-size; padding: 18px; }
+  .az-nums li b { font-size: min(48px, 33cqi); }
 }
 
 /* ana sayfa bölüm başlıkları (kullanıcı, 9 Kasım 2026; vitrinin olduğu sayfa = ana sayfa): üst yazılar iki katı,
