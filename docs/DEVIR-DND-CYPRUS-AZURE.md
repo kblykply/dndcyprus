@@ -74,7 +74,7 @@ Son güncelleme: 16 Ekim 2026, 22:50 (İstanbul); §6 17 Ekim 2026 sabahı QA il
   - Ana dil "Azure" (konsept-3): kıyı, cam, bento, mercan CTA.
   - Azure'da karşılığı olmayan bölümler "Meridian" (konsept-2) düzeniyle yapılır: ince çizgiler, büyük harfli aralıklı küçük etiketler, büyük grotesk rakamlar, görsel temiz ve açıklaması altta.
   - Kullanıcı "meridyen tarzı" derken bu konsepti kastediyor, küre ya da meridyen çizgisini değil.
-  - Kaynaklar: `/Users/nymboo/Downloads/LAGOON VERDE/DND-TASARIM-SUNUM/konsept-2` ve `konsept-3`. Sunum canlıda: https://dnd-tasarim-sunum.vercel.app
+  - Kaynaklar: `/Users/nymboo/Desktop/DND Kurumsal/DND-TASARIM-SUNUM/konsept-2` ve `konsept-3`. Sunum canlıda: https://dnd-tasarim-sunum.vercel.app
 - **Yazı tipleri:** Yalnız sitenin kendi tipleri. Başlık Outfit, metin ve etiket Albert Sans. Meridian'ın JetBrains Mono'su KULLANILMAZ (kullanıcı: "fontlar bizim tasarım dilimiz olmalı"). `.mr-mono` sınıf adı kaldı ama artık Albert Sans 600, .12em, büyük harf.
 - **Renkler:** `app/globals.css` içinde tanımlı. `--sea #0d6570`, `--sea-deep #063a42`, `--coral #f15c34`, `--ink #0d2326`, `--sky #eef5f6`, `--sand #f4ecdd`. Köşe yarıçapı `--r 28px`.
 - **Görsel üstüne renk katmanı yok:** Turkuaz ya da renkli katman konmaz (kullanıcı: "arkada görsel olmasının anlamı ne"). Yazı gerekiyorsa yalnız yazı bölgesinde nötr, hafif bir koyuluk.
@@ -163,7 +163,7 @@ npm test
 
 Beklenen sonuçlar: tsc 0 hata, lint 0 hata (uyarılar var), testler 78/78.
 
-Önizleme ayarları `/Users/nymboo/Downloads/LAGOON VERDE/.claude/launch.json` dosyasında. `dndcyprus-web` 3102'de geliştirme sunucusu açar. `dndcyprus-prod` 3112'de `next start` çalıştırır, önce derleme gerekir.
+Önizleme ayarları `/Users/nymboo/Desktop/.claude/launch.json` dosyasında. `dndcyprus-web` 3102'de geliştirme sunucusu açar. `dndcyprus-prod` 3112'de `next start` çalıştırır, önce derleme gerekir.
 
 ## 6. Test ve doğrulama
 
