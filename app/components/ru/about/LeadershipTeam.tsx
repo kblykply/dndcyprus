@@ -425,6 +425,7 @@ members = [
 
  return (
   <section
+    id="komanda"
     aria-label="Руководство и команда"
     className="relative overflow-hidden bg-white"
   style={{

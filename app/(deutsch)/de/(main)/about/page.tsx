@@ -7,6 +7,7 @@ import WhyChooseUs from "@/app/components/de/about/WhyChooseUs";
 import CallToAction from "@/app/components/de/about/CallToAction";
 import { OzanCard, AynurCard } from "@/app/components/azure/PersonCard";
 
+import LeadershipTeam from "@/app/components/de/about/LeadershipTeam";
 import AboutDndHomes from "@/app/components/de/about/AboutDndHomes";
 import { AboutUsa, PartnerCard } from "@/app/components/azure/pages/PageSections";
 import { Numbers } from "@/app/components/azure/home/FlowSections";
@@ -41,6 +42,8 @@ export default function HomePage() {
   }}
   
   />
+{/* 22.11.2026: ekip Biz Kimiz bölümünün altında açık (ayrı sayfaya gitmeden) */}
+<LeadershipTeam />
 <AboutDndHomes
    videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
   poster="/homesthumb.webp"

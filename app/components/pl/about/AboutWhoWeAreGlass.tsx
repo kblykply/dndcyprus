@@ -59,7 +59,7 @@ export default function AboutWhoWeAreGlass({
             </ul>
             <div className="rv d3 mt-8 flex flex-wrap gap-3">
               <Link className="az-btn sea sm" href="/pl/projects" prefetch={false}>Zobacz nasze projekty</Link>
-              <Link className="az-btn glass sm" href="/pl/team" prefetch={false}>Nasz zespół</Link>
+              <a className="az-btn glass sm" href="#zespol">Nasz zespół</a>
             </div>
           </div>
 

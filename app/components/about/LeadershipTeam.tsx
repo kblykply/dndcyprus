@@ -450,6 +450,7 @@ export default function LeadershipTeam({
 
  return (
   <section
+    id="ekibimiz"
     aria-label="Liderlik ve Ekip"
     className="relative overflow-hidden bg-white"
   style={{
