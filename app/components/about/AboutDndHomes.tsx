@@ -18,6 +18,7 @@ const POINTS: ReactNode[] = [
   <>Boston kökenli marka; Massachusetts’te 120 tamamlanmış proje</>,
   <>Kuzey Kıbrıs’ta <strong className="font-medium" style={{ color: "var(--ink)" }}>30.000+ konut</strong> vizyonu.</>,
   <>Bafra turizm yatırımı ve <strong className="font-medium" style={{ color: "var(--ink)" }}>Mariachi Beach Club</strong> ayrıcalıkları.</>,
+  <><strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Beach Club</strong> ve <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Shu</strong> ile iş birliği.</>,
   <>ABD &amp; KKTC merkez ofisleri; Amerikan kalite standartları.</>,
 ];
 

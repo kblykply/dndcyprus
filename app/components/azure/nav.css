@@ -10,8 +10,8 @@
 .az-nav li > button .sh { display: none; }
 @media (max-width: 1439px) { .az-nav li > button .lg { display: none; } .az-nav li > button .sh { display: inline; } }
 
-/* projeler mega menüsü: üç durum sütunu (Devam Eden / Tamamlanan / Gelecek) + "Tüm Projeler" */
-.az-nav .drop.mega { width: min(900px, 100%); grid-template-columns: 1.4fr 1fr 1fr; gap: 6px 10px; align-items: start; }
+/* projeler mega menüsü: üç durum sütunu (Devam Eden / Tamamlanan / Gelecek) + "Tüm Projeler". İlk sütun biraz geniş: Lagoon notu (Altın Ödül · İnşaat devam eden) her dilde tek satır (22 Kasım 2026) */
+.az-nav .drop.mega { width: min(900px, 100%); grid-template-columns: 1.55fr 1fr 1fr; gap: 6px 10px; align-items: start; }
 .az-nav .drop.mega .grp { display: grid; gap: 4px; min-width: 0; }
 .az-nav .drop.mega .gh { display: flex; align-items: center; gap: 6px; grid-template-columns: none; padding: 8px 10px 6px; font-size: 11px; font-weight: 600;
   letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }

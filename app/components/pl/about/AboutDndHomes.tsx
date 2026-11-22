@@ -18,6 +18,7 @@ const POINTS: ReactNode[] = [
   <>Marka z Bostonu; 120 zrealizowanych projektów w Massachusetts.</>,
   <>Nasza wizja: <strong className="font-medium" style={{ color: "var(--ink)" }}>ponad 30 000 domów</strong> na Cyprze Północnym.</>,
   <>Inwestycja turystyczna w Bafrze i ekskluzywne przywileje w <strong className="font-medium" style={{ color: "var(--ink)" }}>Mariachi Beach Club</strong>.</>,
+  <>Współpraca z <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Beach Club</strong> i <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Shu</strong>.</>,
   <>Siedziby w USA i TRCP; amerykańskie standardy jakości.</>,
 ];
 

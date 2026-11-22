@@ -18,6 +18,7 @@ const POINTS: ReactNode[] = [
   <>Marke aus Boston; 120 abgeschlossene Projekte in Massachusetts.</>,
   <>Die Vision: <strong className="font-medium" style={{ color: "var(--ink)" }}>über 30.000 Wohneinheiten</strong> in Nordzypern.</>,
   <>Tourismusinvestition in Bafra und exklusive Vorteile im <strong className="font-medium" style={{ color: "var(--ink)" }}>Mariachi Beach Club</strong>.</>,
+  <>Partnerschaft mit <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Beach Club</strong> und <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Shu</strong>.</>,
   <>Hauptsitze in den USA &amp; in der TRNZ; amerikanische Qualitätsstandards.</>,
 ];
 

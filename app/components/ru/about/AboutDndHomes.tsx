@@ -18,6 +18,7 @@ const POINTS: ReactNode[] = [
   <>Бренд из Бостона: 120 завершённых проектов в Массачусетсе.</>,
   <>Цель — <strong className="font-medium" style={{ color: "var(--ink)" }}>более 30 000 домов</strong> на Северном Кипре.</>,
   <>Туристические инвестиции в Бафре и эксклюзивные привилегии <strong className="font-medium" style={{ color: "var(--ink)" }}>Mariachi Beach Club</strong>.</>,
+  <>Сотрудничество с <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Beach Club</strong> и <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Shu</strong>.</>,
   <>Головные офисы в США и ТРСК; американские стандарты качества.</>,
 ];
 

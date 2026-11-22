@@ -18,6 +18,7 @@ const POINTS: ReactNode[] = [
   <>Boston-based brand; 120 completed projects in Massachusetts.</>,
   <>A vision of <strong className="font-medium" style={{ color: "var(--ink)" }}>30,000+ homes</strong> in North Cyprus.</>,
   <>Bafra tourism investment and the exclusive <strong className="font-medium" style={{ color: "var(--ink)" }}>Mariachi Beach Club</strong> privileges.</>,
+  <>Partnership with <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Beach Club</strong> and <strong className="font-medium" style={{ color: "var(--ink)" }}>Ülfet Shu</strong>.</>,
   <>Head offices in the USA &amp; TRNC; American quality standards.</>,
 ];
 
