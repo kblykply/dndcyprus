@@ -463,6 +463,8 @@ body.az-lock { overflow: hidden; }
 .az-contact .off { display: grid; gap: 14px; margin-top: 28px; font-size: 14px; }
 .az-contact .off div { padding: 14px 16px; border-radius: 16px; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .2); }
 .az-contact .off b { display: block; font-weight: 600; margin-bottom: 2px; }
+/* iletişim sayfası (#form): sol sütun formla aynı yerde biter — iletişim kartları sütunun altına yaslanır (22 Kasım 2026) */
+@media (min-width: 901px) { #form.az-contact .card > div:not(.az-f):first-of-type { display: flex; flex-direction: column; } #form.az-contact .off { margin-top: auto; padding-top: 28px; } }
 .az-contact .off span { opacity: .8; }
 .az-contact .off a { color: #fff; }
 .az-contact .hl { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
