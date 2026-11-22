@@ -7,7 +7,7 @@ import "./about-video-reel.css";
 
 /**
  * Hakkımızda · DND Homes kartındaki video alanı (22 Kasım 2026): tek kurumsal video yerine 5 videoluk liste.
- * Önce ödeme modeli ve projeleri anlatan güncel videolar (DND Cyprus YouTube kanalı, Kasım 2026), kurumsal video en sonda
+ * İlk video La Joya açılışı (yatay, tam ekran; kullanıcı 22.11), ardından ödeme modeli ve projeler (DND Cyprus YouTube kanalı, Kasım 2026), kurumsal video en sonda
  * (kurumsal video ileride değişecek; yalnız `corporate` değeri güncellenir). Dikey videolar (Shorts, Instagram reel)
  * sahnenin ortasında 9:16 çerçevede, yanlar kapağın bulanık kopyasıyla dolar.
  */
@@ -22,33 +22,33 @@ const LJ_TOUR = { key: "lj-tur", youtube: "hMbzVAJMzXo" };
 
 const LIST: Record<Locale, { region: string; play: string; corporate: string; clips: Clip[] }> = {
   tr: { region: "DND videoları", play: "Videoyu oynat", corporate: "Kurumsal video", clips: [
+    { ...LJ_OPEN, label: "La Joya açıldı" },
     { ...TL, label: "Ödeme modeli: Maaşınız TL, taksitiniz de TL" },
     { ...LV_BUILD, label: "Lagoon Verde’de inşaat başladı" },
     { ...NEO, label: "NeoCity: Güzel bir hayat nasıl başlar?" },
-    { ...LJ_OPEN, label: "La Joya açıldı" },
   ] },
   en: { region: "DND videos", play: "Play video", corporate: "Corporate video", clips: [
+    { ...LJ_OPEN, label: "La Joya is open" },
     { ...LV_FILM, label: "Lagoon Verde: the project" },
     { ...LV_BUILD, label: "Lagoon Verde: construction has begun" },
-    { ...LJ_OPEN, label: "La Joya is open" },
     { ...LJ_TOUR, label: "La Joya: residence tour" },
   ] },
   de: { region: "DND-Videos", play: "Video abspielen", corporate: "Unternehmensvideo", clips: [
+    { ...LJ_OPEN, label: "La Joya ist eröffnet" },
     { ...LV_FILM, label: "Lagoon Verde: das Projekt" },
     { ...LV_BUILD, label: "Lagoon Verde: Baubeginn" },
-    { ...LJ_OPEN, label: "La Joya ist eröffnet" },
     { ...LJ_TOUR, label: "La Joya: Rundgang" },
   ] },
   ru: { region: "Видео DND", play: "Смотреть видео", corporate: "Корпоративное видео", clips: [
+    { ...LJ_OPEN, label: "La Joya открыт" },
     { ...LV_FILM, label: "Lagoon Verde: о проекте" },
     { ...LV_BUILD, label: "Lagoon Verde: стройка началась" },
-    { ...LJ_OPEN, label: "La Joya открыт" },
     { ...LJ_TOUR, label: "La Joya: обзор резиденций" },
   ] },
   pl: { region: "Filmy DND", play: "Odtwórz film", corporate: "Film korporacyjny", clips: [
+    { ...LJ_OPEN, label: "La Joya otwarta" },
     { ...LV_FILM, label: "Lagoon Verde: o projekcie" },
     { ...LV_BUILD, label: "Lagoon Verde: ruszyła budowa" },
-    { ...LJ_OPEN, label: "La Joya otwarta" },
     { ...LJ_TOUR, label: "La Joya: wizyta w rezydencjach" },
   ] },
 };

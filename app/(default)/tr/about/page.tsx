@@ -42,8 +42,6 @@ export default function HomePage() {
   }}
   
   />
-{/* 22.11.2026: ekip Biz Kimiz bölümünün altında açık (ayrı sayfaya gitmeden) */}
-<LeadershipTeam embedded />
 <AboutDndHomes
    videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
   poster="/homesthumb.webp"
@@ -53,6 +51,8 @@ export default function HomePage() {
 <section className="az-section" id="kurucu" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="tr" heading="h2" /></div></section>
     <PartnerCard locale="tr" />
     <section className="az-section" id="direktor" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="tr" heading="h2" /></div></section>
+    {/* 22.11.2026: önce yöneticiler (kurucu, kurucu ortak, direktör), ardından tüm ekip */}
+    <LeadershipTeam embedded />
     <Timeline locale="tr" id="timeline" about />
     <AboutUsa locale="tr" />
     <Numbers locale="tr" id={SECTION_IDS.tr.numbers} usa={PAGES.tr.about.numbersUsa} title={PAGES.tr.about.numbersTitle} />

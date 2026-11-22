@@ -253,42 +253,6 @@ export default function LeadershipTeam({
         sortOrder: 16,
 
   },
-  {
-    id: "meryem",
-    name: "Meryem Hürmek",
-    role: "Mimar",
-    category: "Architecture",
-    photo: "/teams/meryem.png",
-    bio: "Mimari projelerde görevli.",
-    socials: {},
-    accent: "teal",
-        sortOrder: 17,
-
-  },
-  {
-    id: "ebru",
-    name: "Ebru Atçı",
-    role: "Reklam Sorumlusu",
-    category: "Marketing",
-    photo: "/teams/ebru.png",
-    bio: "Reklam ve tanıtım süreçlerinden sorumlu.",
-    socials: {},
-    accent: "orange",
-        sortOrder: 18,
-
-  },
-  {
-    id: "Parmida",
-    name: "Parmida Mesgari",
-    role: "Videographer",
-    category: "Marketing",
-    photo: "/teams/placeholder.svg", // Portrait file is not available yet.
-    bio: "Video prodüksiyon ve görsel içerik uzmanı.",
-    socials: {},
-    accent: "teal",
-        sortOrder: 19,
-
-  },
  
   {
     id: "mustafa",
