@@ -392,7 +392,7 @@ export default function LeadershipTeam({
   {
     id: "mehmet-alp",
     name: "Mehmet Alp Artıkoğlu",
-    role: "Grafik Tasarımcı ve Video Prodüksiyon Tasarımcısı",
+    role: "Grafik Tasarım ve Video Prodüksiyon",
     category: "Marketing",
     photo: "/teams/placeholder-erkek.png",
     bio: "Marka iletişimi için grafik tasarım, video çekim ve kurgudan sorumlu.",

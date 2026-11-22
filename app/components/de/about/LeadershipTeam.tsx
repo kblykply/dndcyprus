@@ -369,7 +369,7 @@ members = [
   {
     id: "mehmet-alp",
     name: "Mehmet Alp Artıkoğlu",
-    role: "Grafikdesigner & Videoproduktion-Designer",
+    role: "Grafikdesign & Videoproduktion",
     category: "Marketing",
     photo: "/teams/placeholder-erkek.png",
     bio: "Verantwortlich für Grafikdesign, Videoaufnahmen und Schnitt in der Markenkommunikation.",
