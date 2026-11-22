@@ -21,6 +21,27 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  // 22 Kasım 2026: internette bulunan yeni haberler (aynı içerikli kopyalardan biri alındı)
+  {
+    id: "businessworldglobal-2026-11-16",
+    outlet: "Business World Global",
+    title: "Озан Дёкмеджиоглу: те, кто зарабатывает в турецких лирах, должны иметь возможность купить жильё в лирах",
+    url: "https://businessworldglobal.com/ozan-dokmecioglu-turk-lirasiyla-kazananlar-turk-lirasiyla-ev-sahibi-olabilmeli/",
+    excerpt: "Основатель DND Cyprus Озан Дёкмеджиоглу рассказывает о модели оплаты в турецких лирах на срок до 60 месяцев в Lagoon Verde, а Нетидже Дёкмеджиоглу — о потенциале Искеле.",
+    date: "2026-11-16",
+    cover: "/news/bwg-ozan-tl-roportaj.webp",
+    tags: ["Интервью", "Оплата в лирах"],
+  },
+  {
+    id: "mha-2026-11-14",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "Особая встреча в DND Cyprus: инвестиции на Северном Кипре и в США",
+    url: "https://www.mhahaber.com/dnd-cyprusta-ozel-bulusma-kuzey-kibris-ve-abd-yatirimlari-masaya-yatirildi",
+    excerpt: "DND Cyprus принимала Месута и Ферду Яр, а также Умута Челика из Business World Global; обсуждались проекты компании, инвестиции на Северном Кипре и в США и стратегия роста.",
+    date: "2026-11-14",
+    cover: "/news/mha-dnd-ozel-bulusma.webp",
+    tags: ["DND Cyprus", "Инвестиции"],
+  },
   {
     id: "kibrisvizyon-2026-10-25",
     outlet: "Kıbrıs Vizyon",

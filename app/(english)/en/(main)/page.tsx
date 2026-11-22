@@ -21,6 +21,27 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  // 22 Kasım 2026: internette bulunan yeni haberler (aynı içerikli kopyalardan biri alındı)
+  {
+    id: "businessworldglobal-2026-11-16",
+    outlet: "Business World Global",
+    title: "Ozan Dökmecioğlu: Those who earn in Turkish lira should be able to buy a home in Turkish lira",
+    url: "https://businessworldglobal.com/ozan-dokmecioglu-turk-lirasiyla-kazananlar-turk-lirasiyla-ev-sahibi-olabilmeli/",
+    excerpt: "DND Cyprus founder Ozan Dökmecioğlu explains the Turkish-lira payment model of up to 60 months at Lagoon Verde, while Netice Dökmecioğlu talks about İskele’s potential.",
+    date: "2026-11-16",
+    cover: "/news/bwg-ozan-tl-roportaj.webp",
+    tags: ["Interview", "TL Payment Model"],
+  },
+  {
+    id: "mha-2026-11-14",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "A special meeting at DND Cyprus: investments in North Cyprus and the US on the agenda",
+    url: "https://www.mhahaber.com/dnd-cyprusta-ozel-bulusma-kuzey-kibris-ve-abd-yatirimlari-masaya-yatirildi",
+    excerpt: "DND Cyprus hosted Mesut and Ferda Yar and Umut Çelik of Business World Global; the meeting covered the company’s projects, its investments in North Cyprus and the US, and its growth strategy.",
+    date: "2026-11-14",
+    cover: "/news/mha-dnd-ozel-bulusma.webp",
+    tags: ["DND Cyprus", "Investment"],
+  },
   {
     id: "kibrisvizyon-2026-10-25",
     outlet: "Kıbrıs Vizyon",

@@ -12,6 +12,67 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  // 22 Kasım 2026: internette bulunan yeni haberler (aynı içerikli kopyalardan biri alındı)
+  {
+    id: "businessworldglobal-2026-11-16",
+    outlet: "Business World Global",
+    title: "Ozan Dökmecioğlu: Those who earn in Turkish lira should be able to buy a home in Turkish lira",
+    url: "https://businessworldglobal.com/ozan-dokmecioglu-turk-lirasiyla-kazananlar-turk-lirasiyla-ev-sahibi-olabilmeli/",
+    excerpt: "DND Cyprus founder Ozan Dökmecioğlu explains the Turkish-lira payment model of up to 60 months at Lagoon Verde, while Netice Dökmecioğlu talks about İskele’s potential.",
+    date: "2026-11-16",
+    cover: "/news/bwg-ozan-tl-roportaj.webp",
+    tags: ["Interview", "TL Payment Model"],
+  },
+  {
+    id: "mha-2026-11-14",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "A special meeting at DND Cyprus: investments in North Cyprus and the US on the agenda",
+    url: "https://www.mhahaber.com/dnd-cyprusta-ozel-bulusma-kuzey-kibris-ve-abd-yatirimlari-masaya-yatirildi",
+    excerpt: "DND Cyprus hosted Mesut and Ferda Yar and Umut Çelik of Business World Global; the meeting covered the company’s projects, its investments in North Cyprus and the US, and its growth strategy.",
+    date: "2026-11-14",
+    cover: "/news/mha-dnd-ozel-bulusma.webp",
+    tags: ["DND Cyprus", "Investment"],
+  },
+  {
+    id: "mha-2026-08-08",
+    outlet: "Mağusa Haber Ajansı (MHA)",
+    title: "DND Larnaka Gençler Birliği meets at İskele Municipality after a successful season",
+    url: "https://www.mhahaber.com/dnd-larnaka-gencler-birligi-basarili-sezonun-ardindan-iskele-belediyesinde-bir-araya-geldi",
+    excerpt: "DND Larnaka Gençler Birliği Sports Club, sponsored by DND Cyprus, reviewed its 2025–2026 season at a meeting hosted by İskele Mayor Hasan Sadıkoğlu.",
+    date: "2026-08-08",
+    cover: "/news/mha-gencler-birligi-sezon.webp",
+    tags: ["Sport", "Sponsorship"],
+  },
+  {
+    id: "halkinsesi-2025-09-30",
+    outlet: "Halkın Sesi",
+    title: "DND Cyprus becomes Gençler Birliği’s name sponsor for the second time",
+    url: "https://www.halkinsesikibris.com/gencler-birliginin-isim-sponsoru-ikinci-kez-dnd-cyprus",
+    excerpt: "DND Cyprus is again Gençler Birliği’s name sponsor for the 2025–26 season; the teams play as “DND Larnaka Gençler Birliği”.",
+    date: "2025-09-30",
+    cover: "/news/halkinsesi-isim-sponsoru.webp",
+    tags: ["Sport", "Sponsorship"],
+  },
+  {
+    id: "yeniduzen-2025-08-07",
+    outlet: "YENİDÜZEN",
+    title: "DND Cyprus continues to grow with its Türkiye office",
+    url: "https://www.yeniduzen.com/dnd-kibris-turkiye-ofisi-ile-buyumesini-surduruyor-185586h.htm",
+    excerpt: "DND Cyprus founder Ozan Dökmecioğlu announced the opening of the DND Türkiye office, which will focus on residential development and business partnerships.",
+    date: "2025-08-07",
+    cover: "/news/yeniduzen-turkiye-ofisi.webp",
+    tags: ["DND Cyprus", "Türkiye"],
+  },
+  {
+    id: "gundemkibris-2023-05-11",
+    outlet: "Gündem Kıbrıs",
+    title: "Famagusta Municipality dog shelter gets an equipped operating room",
+    url: "https://www.gundemkibris.com/gmb-barinaginin-ameliyathanesi-donanimli-altyapiya-kavustu",
+    excerpt: "With DND Homes’ sponsorship, the operating room at Famagusta Municipality’s Dog Shelter and Rehabilitation Centre was equipped; Mayor Süleyman Uluçay thanked Ozan Dökmecioğlu.",
+    date: "2023-05-11",
+    cover: "/news/gundemkibris-gmb-barinak.webp",
+    tags: ["DND Homes", "Social responsibility"],
+  },
   // 25 Ekim 2026: NeoCity ilk etap satışta (MHA ve Ya Haber aynı içerik; birini aldık)
   {
     id: "kibrisvizyon-2026-10-25",
