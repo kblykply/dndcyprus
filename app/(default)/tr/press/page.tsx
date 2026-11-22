@@ -12,6 +12,17 @@ export const metadata = pageMetadata({
 });
 
 const PRESS_ITEMS: PressItem[] = [
+  // 22 Kasım 2026: Kıbrıs Genç TV, Perspektif programı (18.11.2026 canlı yayın, Facebook)
+  {
+    id: "genctv-2026-11-18",
+    outlet: "Kıbrıs Genç TV",
+    title: "Yağmur Çal ile Perspektif: Ozan Dökmecioğlu",
+    url: "https://www.facebook.com/watch/?v=1824013762175367",
+    excerpt: "DND Cyprus Kurucusu Ozan Dökmecioğlu, Kıbrıs Genç TV’de Yağmur Çal’ın konuğu oldu; Boston’dan Kuzey Kıbrıs’a uzanan yolculuğunu, NeoCity’yi ve Türk lirasıyla faizsiz, vade farksız ödeme modelini anlattı. Programda Maraş vizyonu, planlı şehirleşme ve uzun vadeli konut kredisinin önemi de konuşuldu.",
+    date: "2026-11-18",
+    cover: "/news/genctv-perspektif-ozan.webp",
+    tags: ["Röportaj", "TV"],
+  },
   // 22 Kasım 2026: internette bulunan yeni haberler (aynı içerikli kopyalardan biri alındı)
   {
     id: "businessworldglobal-2026-11-16",
