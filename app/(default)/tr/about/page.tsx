@@ -43,7 +43,7 @@ export default function HomePage() {
   
   />
 {/* 22.11.2026: ekip Biz Kimiz bölümünün altında açık (ayrı sayfaya gitmeden) */}
-<LeadershipTeam />
+<LeadershipTeam embedded />
 <AboutDndHomes
    videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
   poster="/homesthumb.webp"

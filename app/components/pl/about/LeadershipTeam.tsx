@@ -46,6 +46,8 @@ type Props = {
   subtitle?: string;
   members?: Member[];
   showHeader?: boolean;
+  /** Hakkımızda içinde: sayfanın diğer bölümleriyle aynı hiza (az-wrap) ve Azure başlık dili */
+  embedded?: boolean;
 };
 
 // ✅ Presence variants for filter add/remove
@@ -93,6 +95,7 @@ title = "Nasz zespół",
 subtitle =
   "Za każdym projektem stoi profesjonalizm naszego zespołu – to nasz najmocniejszy fundament.",
   showHeader = true,
+  embedded = false,
 members = [
   {
     id: "ozan",
@@ -427,7 +430,7 @@ members = [
   <section
     id="zespol"
     aria-label="Zarząd i zespół"
-    className="relative overflow-hidden bg-white"
+    className={embedded ? "az-section relative overflow-hidden" : "relative overflow-hidden bg-white"}
   style={{
   background: "transparent",
   color: "#0d2326",
@@ -447,9 +450,15 @@ members = [
       }}
     />
 
-    <div className="relative mx-auto max-w-[1560px] px-[var(--gutter)] py-10 lg:py-14">
+    <div className={embedded ? "relative az-wrap" : "relative mx-auto max-w-[1560px] px-[var(--gutter)] py-10 lg:py-14"}>
       {/* Header */}
-      {showHeader && (<div
+      {embedded ? (
+        <div className="az-head" style={{ marginBottom: 24 }}>
+          <span className="az-kicker rv">{kicker}</span>
+          <h2 className="az-h2 sm rv d1">{title}</h2>
+          <p className="az-lead rv d2">{subtitle}</p>
+        </div>
+      ) : showHeader && (<div
         className="text-left"
       >
         <span
