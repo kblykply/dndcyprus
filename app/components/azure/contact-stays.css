@@ -1,6 +1,7 @@
 /* İletişim · La Joya ve DND Reserve kartları (22 Kasım 2026): merkez ofis kartının hemen altında, iki eşit kart; görsel üstte,
    iletişim satırları ve düğmeler altta. Kartlar aynı yükseklikte biter (düğmeler en alta yaslanır). */
-.az-stays { padding-top: 0; }
+/* üstteki ofis kartının altında zaten ~32 px iç boşluk var; toplam aralık diğer bölümlerinkiyle eşit olsun (masaüstü ~115, telefon ~64 px) */
+.az-stays { padding-top: clamp(32px, 5.6vw, 88px); }
 .az-stays .g { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
 .az-stays .az-card { display: flex; flex-direction: column; }
 .az-stays .pic { position: relative; display: block; margin: 12px 12px 0; border-radius: 22px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--sky-2); }
