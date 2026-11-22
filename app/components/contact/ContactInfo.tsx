@@ -111,7 +111,7 @@ export default function ContactInfo({
                     {mapSrc && (
                       <div className={`relative h-48 overflow-hidden rounded-[22px]${single ? " sm:h-72" : ""}`} style={{ background: "var(--sky-2)" }}>
                         <DeferredIframe
-                          activation="click"
+                          activation="visible"
                           poster={o.mapImage}
                           posterSizes="(max-width: 639px) calc(100vw - 56px), (max-width: 899px) calc(50vw - 40px), 360px"
                           posterQuality={75}
