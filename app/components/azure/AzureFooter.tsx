@@ -39,8 +39,8 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
                   const C = SOCIAL_ICONS[s.label.toLowerCase()];
                   return <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}>{C ? <C size={18} aria-hidden /> : s.label}</a>;
                 })}
-                {/* 22.11.2026: DND Cyprus WhatsApp hattı (sosyal simgelerle aynı tasarım, yeşil) */}
-                <a className="wa" href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><PiWhatsappLogoDuotone size={18} aria-hidden /></a>
+                {/* 22.11.2026: DND Cyprus WhatsApp hattı (sosyal simgelerle aynı tasarım ve renk) */}
+                <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><PiWhatsappLogoDuotone size={18} aria-hidden /></a>
               </nav>
             </div>
             <p>{t.tagline} {CONTACT.hq[locale]}</p>
