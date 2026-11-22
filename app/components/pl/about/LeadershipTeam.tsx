@@ -107,7 +107,7 @@ members = [
   },
   {
     id: "aynur",
-    name: "Aynur Zorba Güloğlu",
+    name: "Aynur Zorba Gülol",
     role: "Dyrektor i architekt",
     category: "Leadership",
     photo: "/teams/aynurzorbagulol.png",

@@ -50,7 +50,7 @@ description = "Entdecken Sie unsere Projekte und unser Wohnkonzept."
 />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="de" heading="h2" /></div></section>
     <PartnerCard locale="de" />
-    <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="de" heading="h2" /></div></section>
+    <section className="az-section" id="director" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="de" heading="h2" /></div></section>
     <Timeline locale="de" id="timeline" about />
     <AboutUsa locale="de" />
     <Numbers locale="de" id={SECTION_IDS.de.numbers} usa={PAGES.de.about.numbersUsa} title={PAGES.de.about.numbersTitle} />

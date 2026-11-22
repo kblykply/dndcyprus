@@ -15,7 +15,7 @@ type Props = {
 
 // Azure: kicker / name / role / quote / fact cards / pill buttons on the left, 3:4 framed portrait on the right.
 export default function AynurSpotlightAlt({
-  title = "Aynur Zorba Güloğlu",
+  title = "Aynur Zorba Gülol",
   role = "Директор DND Cyprus",
   subtitle = "Обеспечивает стратегическое руководство: операционное совершенство, клиентский опыт и устойчивые проекты.",
   quote = "«Доверие, прозрачность и командный дух — в основе нашего успеха».",
@@ -29,7 +29,7 @@ export default function AynurSpotlightAlt({
   contactHref = "/ru/contact",
 }: Props) {
   return (
-    <section id="director" className="az-section" aria-label="Aynur Zorba Güloğlu — портрет">
+    <section id="director" className="az-section" aria-label="Aynur Zorba Gülol — портрет">
       <div className="az-wrap">
         <div className="grid grid-cols-1 items-center gap-8 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:gap-14">
           <div>

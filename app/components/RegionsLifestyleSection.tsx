@@ -35,7 +35,7 @@ type Props = {
 };
 
 export default function AynurSpotlightAlt({
-  title = "Aynur Zorba Güloğlu",
+  title = "Aynur Zorba Gülol",
   role = "DND Cyprus Direktörü",
   subtitle = "Operasyonel mükemmeliyet, müşteri deneyimi ve sürdürülebilir projeler için stratejik liderlik sağlıyor.",
   quote = "“Güven, şeffaflık ve ekip ruhu — başarılarımızın temelinde bunlar var.”",
@@ -50,7 +50,7 @@ export default function AynurSpotlightAlt({
 }: Props) {
   return (
         <section
-      aria-label="Aynur Zorba Güloğlu — Spotlight"
+      aria-label="Aynur Zorba Gülol — Spotlight"
       className="relative overflow-visible bg-white"  // ⬅ remove -mb-8 / lg:-mb-12
       style={{ color: "#0d2326" }}
       data-bg="light"

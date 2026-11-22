@@ -107,7 +107,7 @@ export default function LeadershipTeam({
   },
   {
     id: "aynur",
-    name: "Aynur Zorba Güloğlu",
+    name: "Aynur Zorba Gülol",
     role: "Direktör & Mimar",
     category: "Leadership",
     photo: "/teams/aynurzorbagulol.png",

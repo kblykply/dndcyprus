@@ -49,7 +49,7 @@ export default function HomePage() {
 />
 <section className="az-section" id="kurucu" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="tr" heading="h2" /></div></section>
     <PartnerCard locale="tr" />
-    <section className="az-section" id="direktor" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="tr" heading="h2" /></div></section>
+    <section className="az-section" id="direktor" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="tr" heading="h2" /></div></section>
     <Timeline locale="tr" id="timeline" about />
     <AboutUsa locale="tr" />
     <Numbers locale="tr" id={SECTION_IDS.tr.numbers} usa={PAGES.tr.about.numbersUsa} title={PAGES.tr.about.numbersTitle} />

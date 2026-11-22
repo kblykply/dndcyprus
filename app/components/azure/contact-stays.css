@@ -17,7 +17,7 @@
 .az-stays li a { color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
 .az-stays li a:hover { color: var(--sea); }
 .az-stays .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 22px; }
-.az-stays .cta .wa { color: #128C4A; }
+.az-stays .cta .wa { color: #0B6B38; }
 @media (max-width: 900px) {
   .az-stays .g { grid-template-columns: minmax(0, 1fr); }
   .az-stays .bd { padding: 18px 20px 22px; }

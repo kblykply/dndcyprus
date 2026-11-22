@@ -241,7 +241,7 @@ const PRESS_ITEMS: PressItem[] = [
     outlet: "Kıbrıs Postası",
     title: "DND North Cyprus Launches La Joya Perla Residences & Beach Resort",
     url: "https://www.kibrispostasi.com/c68-ISKELE/n494500-dnd-kuzey-kibris-la-joya-perla-residences-beach-resortu-satisa-sundu",
-    excerpt: "DND North Cyprus has put La Joya Perla Residences & Beach Resort, a 384-unit project in İskele Bahçeler, on sale. The story features comments from founder Ozan Dökmecioğlu and director Aynur Zorba Güloğlu and outlines the project’s amenities.",
+    excerpt: "DND North Cyprus has put La Joya Perla Residences & Beach Resort, a 384-unit project in İskele Bahçeler, on sale. The story features comments from founder Ozan Dökmecioğlu and director Aynur Zorba Gülol and outlines the project’s amenities.",
     date: "2023-11-08",
     cover: "/news/kibrispostasi-la-joya-perla-lansman.webp",
     tags: ["La Joya Perla", "Launch"],

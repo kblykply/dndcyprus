@@ -50,7 +50,7 @@ description = "Откройте для себя наши проекты и ко�
 />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="ru" heading="h2" /></div></section>
     <PartnerCard locale="ru" />
-    <section className="az-section" id="director" aria-label="Aynur Zorba Güloğlu"><div className="az-wrap"><AynurCard locale="ru" heading="h2" /></div></section>
+    <section className="az-section" id="director" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="ru" heading="h2" /></div></section>
     <Timeline locale="ru" id="timeline" about />
     <AboutUsa locale="ru" />
     <Numbers locale="ru" id={SECTION_IDS.ru.numbers} usa={PAGES.ru.about.numbersUsa} title={PAGES.ru.about.numbersTitle} />
