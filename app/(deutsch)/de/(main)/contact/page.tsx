@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "de",
   path: "/contact",
-  title: "Kontakt – Büros in Famagusta & İskele | DND Cyprus",
+  title: "Kontakt – Hauptsitz in Famagusta | DND Cyprus",
   description:
-    "Besuchen Sie DND Cyprus im Hauptsitz in Famagusta oder im Verkaufsbüro in İskele. Rufen Sie +90 392 444 03 63 an oder schreiben Sie an info@dndcyprus.com.",
+    "Besuchen Sie DND Cyprus im Hauptsitz in Famagusta. Rufen Sie +90 392 444 03 63 an oder schreiben Sie an info@dndcyprus.com.",
 });
 export default function HomePage() {
   return (

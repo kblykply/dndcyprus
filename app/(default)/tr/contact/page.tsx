@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "tr",
   path: "/contact",
-  title: "İletişim | Gazimağusa ve İskele Satış Ofisleri – DND Cyprus",
+  title: "İletişim | Gazimağusa Merkez Ofis – DND Cyprus",
   description:
-    "DND Cyprus merkez ofisi Gazimağusa'da, satış ofisimiz İskele'de. Projeler ve yatırım fırsatları için +90 392 444 03 63 veya info@dndcyprus.com ile ulaşın.",
+    "DND Cyprus merkez ofisi Gazimağusa'da. Projeler ve yatırım fırsatları için +90 392 444 03 63 veya info@dndcyprus.com ile ulaşın.",
 });
 export default function HomePage() {
   return (

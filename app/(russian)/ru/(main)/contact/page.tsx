@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "ru",
   path: "/contact",
-  title: "Контакты – офисы в Фамагусте и Искеле | DND Cyprus",
+  title: "Контакты – головной офис в Фамагусте | DND Cyprus",
   description:
-    "Приходите в головной офис DND Cyprus в Фамагусте или офис продаж в Искеле. Звоните +90 392 444 03 63 или пишите на info@dndcyprus.com о проектах и инвестициях.",
+    "Приходите в головной офис DND Cyprus в Фамагусте. Звоните +90 392 444 03 63 или пишите на info@dndcyprus.com о проектах и инвестициях.",
 });
 export default function HomePage() {
   return (

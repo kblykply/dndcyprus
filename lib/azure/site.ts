@@ -36,7 +36,6 @@ export const CONTACT = {
     pl: "Alasya Park Sitesi, II etap, lokal nr 2/3, bulwar Gazi Mustafa Kemal, Sakarya, Famagusta, Cypr, 99450",
   },
   hours: { tr: "Hafta içi 08:30–17:30, Cumartesi 08:30–13:00", en: "Weekdays 08:30–17:30, Saturday 08:30–13:00", de: "Montag bis Freitag 08:30–17:30, Samstag 08:30–13:00", ru: "По будням 08:30–17:30, в субботу 08:30–13:00", pl: "Poniedziałek–piątek 08:30–17:30, sobota 08:30–13:00" },
-  sales: { tr: "Sahil Yolu 45, İskele, Kuzey Kıbrıs", en: "Sahil Yolu 45, İskele, North Cyprus", de: "Sahil Yolu 45, İskele, Nordzypern", ru: "Sahil Yolu 45, Искеле, Северный Кипр", pl: "Sahil Yolu 45, İskele, Cypr Północny" },
   hqMap: "https://maps.app.goo.gl/xwGdVsU3TxJymkVK8",
   salesMap: "https://maps.app.goo.gl/V2ainR6Rs2JkLaN27",
 };

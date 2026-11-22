@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   locale: "pl",
   path: "/contact",
-  title: "Kontakt – biura w Famaguście i İskele | DND Cyprus",
+  title: "Kontakt – siedziba główna w Famaguście | DND Cyprus",
   description:
-    "Zapraszamy do siedziby głównej DND Cyprus w Famaguście lub biura sprzedaży w İskele. Prosimy dzwonić pod numer +90 392 444 03 63 lub pisać na info@dndcyprus.com w sprawie naszych inwestycji.",
+    "Zapraszamy do siedziby głównej DND Cyprus w Famaguście. Prosimy dzwonić pod numer +90 392 444 03 63 lub pisać na info@dndcyprus.com w sprawie naszych inwestycji.",
 });
 export default function HomePage() {
   return (

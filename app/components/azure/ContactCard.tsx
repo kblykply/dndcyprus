@@ -12,7 +12,7 @@ const COPY = {
     kicker: "İletişim",
     title: <>Birlikte değer <b>yaratalım.</b></>,
     lead: "Talebinizi iletin, ekibimiz 24–48 saat içinde dönüş yapsın. Bilgileriniz KVKK kapsamında korunur.",
-    hq: "DND Cyprus Merkez Ofis", sales: "Lagoon Verde Satış Ofisi",
+    hq: "DND Cyprus Merkez Ofis",
     name: "Ad Soyad *", phone: "Telefon *", email: "E-posta *", project: "Proje", unit: "Daire tipi", message: "Mesaj", subject: "Konu *",
     undecided: "Henüz karar vermedim",
     consentPre: "", consentLink: "Kişisel verilerimin", consentPost: " iletişim amacıyla işlenmesini kabul ediyorum.",
@@ -33,7 +33,7 @@ const COPY = {
     kicker: "Contact",
     title: <>Let’s create value <b>together.</b></>,
     lead: "Send us your request and our team will get back to you within 24–48 hours. Your data is protected.",
-    hq: "DND Cyprus Head Office", sales: "Lagoon Verde Sales Office",
+    hq: "DND Cyprus Head Office",
     name: "Full name *", phone: "Phone *", email: "Email *", project: "Project", unit: "Unit type", message: "Message", subject: "Subject *",
     undecided: "Not decided yet",
     consentPre: "I agree to the processing of ", consentLink: "my personal data", consentPost: " for the purpose of contacting me.",
@@ -54,7 +54,7 @@ const COPY = {
     kicker: "Kontakt",
     title: <>Gemeinsam Werte <b>schaffen.</b></>,
     lead: "Senden Sie uns Ihre Anfrage – unser Team meldet sich innerhalb von 24–48 Stunden bei Ihnen. Ihre Daten sind geschützt.",
-    hq: "DND Cyprus Hauptsitz", sales: "Lagoon Verde Verkaufsbüro",
+    hq: "DND Cyprus Hauptsitz",
     name: "Vor- und Nachname *", phone: "Telefon *", email: "E-Mail *", project: "Projekt", unit: "Wohnungstyp", message: "Nachricht", subject: "Betreff *",
     undecided: "Noch nicht entschieden",
     consentPre: "Ich bin mit der Verarbeitung ", consentLink: "meiner personenbezogenen Daten", consentPost: " zur Kontaktaufnahme einverstanden.",
@@ -75,7 +75,7 @@ const COPY = {
     kicker: "Контакты",
     title: <>Создадим ценность <b>вместе.</b></>,
     lead: "Отправьте заявку, и наша команда свяжется с вами в течение 24–48 часов. Ваши данные под защитой.",
-    hq: "Головной офис DND Cyprus", sales: "Офис продаж Lagoon Verde",
+    hq: "Головной офис DND Cyprus",
     name: "Имя и фамилия *", phone: "Телефон *", email: "Эл. почта *", project: "Проект", unit: "Тип квартиры", message: "Сообщение", subject: "Тема *",
     undecided: "Пока не выбрано",
     consentPre: "Даю согласие на обработку ", consentLink: "моих персональных данных", consentPost: " для связи со мной.",
@@ -96,7 +96,7 @@ const COPY = {
     kicker: "Kontakt",
     title: <>Twórzmy wartość <b>razem.</b></>,
     lead: "Prosimy przesłać zapytanie – nasz zespół skontaktuje się z Państwem w ciągu 24–48 godzin. Państwa dane są chronione.",
-    hq: "Siedziba główna DND Cyprus", sales: "Biuro sprzedaży Lagoon Verde",
+    hq: "Siedziba główna DND Cyprus",
     name: "Imię i nazwisko *", phone: "Telefon *", email: "E-mail *", project: "Projekt", unit: "Typ mieszkania", message: "Wiadomość", subject: "Temat *",
     undecided: "Jeszcze nie wybrano",
     consentPre: "Wyrażam zgodę na przetwarzanie ", consentLink: "moich danych osobowych", consentPost: " w celu kontaktu.",
@@ -203,7 +203,6 @@ export default function ContactCard({
             {showOffices && (
               <div className="off">
                 <div><b>{t.hq}</b><span>{CONTACT.hq[locale]} · {CONTACT.hours[locale]}</span></div>
-                <div><b>{t.sales}</b><span>{CONTACT.sales[locale]}</span></div>
                 <div><b><a href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a href={`tel:+${CONTACT.whatsapp}`}>{CONTACT.mobile}</a></b><span><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={waHref} target="_blank" rel="noopener noreferrer">WhatsApp</a></span></div>
               </div>
             )}

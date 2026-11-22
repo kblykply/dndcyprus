@@ -50,7 +50,7 @@ export const NAV_TEXT: Record<Locale, Copy> = {
     payment: "Ödeme ve Yatırım Fırsatları", paymentShort: "Ödeme ve Yatırım", tl: "TL Ödeme Modeli", campaigns: "Güncel Kampanyalar", rental: "Yatırım ve Kira Geliri", events: "Etkinlikler",
     about: "Hakkımızda", story: "Hikâyemiz", founders: "Kurucularımız ve Yönetimimiz", usa: "DND Homes Amerika", numbers: "Rakamlarla DND", awards: "Ödüllerimiz",
     news: "Haberler", dndNews: "DND’den Haberler", press: "Basında DND",
-    contact: "İletişim", offices: "Satış Ofislerimiz", form: "İletişim Formu", whatsapp: "WhatsApp",
+    contact: "İletişim", offices: "Merkez Ofis", form: "İletişim Formu", whatsapp: "WhatsApp",
   },
   en: {
     home: "Home", projects: "Our Projects", groups: { ongoing: "Ongoing Projects", completed: "Completed Projects", upcoming: "Upcoming Projects" }, allProjects: "All Projects",
@@ -58,7 +58,7 @@ export const NAV_TEXT: Record<Locale, Copy> = {
     payment: "Payment & Investment", paymentShort: "Payment & Investment", tl: "Lira Payment Model", campaigns: "Current Campaigns", rental: "Investment & Rental Income", events: "Events",
     about: "About Us", story: "Our Story", founders: "Founders & Management", usa: "DND Homes USA", numbers: "DND in Numbers", awards: "Our Awards",
     news: "News", dndNews: "News from DND", press: "DND in the Press",
-    contact: "Contact", offices: "Sales Offices", form: "Contact Form", whatsapp: "WhatsApp",
+    contact: "Contact", offices: "Head Office", form: "Contact Form", whatsapp: "WhatsApp",
   },
   de: {
     home: "Startseite", projects: "Unsere Projekte", groups: { ongoing: "Laufende Projekte", completed: "Abgeschlossene Projekte", upcoming: "Kommende Projekte" }, allProjects: "Alle Projekte",
@@ -66,7 +66,7 @@ export const NAV_TEXT: Record<Locale, Copy> = {
     payment: "Zahlung & Investition", paymentShort: "Zahlung & Investition", tl: "Lira-Zahlungsmodell", campaigns: "Aktuelle Aktionen", rental: "Investition & Mieteinnahmen", events: "Veranstaltungen",
     about: "Über uns", story: "Unsere Geschichte", founders: "Gründer & Management", usa: "DND Homes USA", numbers: "DND in Zahlen", awards: "Unsere Auszeichnungen",
     news: "Aktuelles", dndNews: "Neues von DND", press: "DND in der Presse",
-    contact: "Kontakt", offices: "Verkaufsbüros", form: "Kontaktformular", whatsapp: "WhatsApp",
+    contact: "Kontakt", offices: "Hauptsitz", form: "Kontaktformular", whatsapp: "WhatsApp",
   },
   ru: {
     home: "Главная", projects: "Наши проекты", groups: { ongoing: "Текущие проекты", completed: "Завершённые проекты", upcoming: "Будущие проекты" }, allProjects: "Все проекты",
@@ -74,7 +74,7 @@ export const NAV_TEXT: Record<Locale, Copy> = {
     payment: "Оплата и инвестиции", paymentShort: "Оплата и инвестиции", tl: "Оплата в лирах", campaigns: "Актуальные акции", rental: "Инвестиции и арендный доход", events: "Мероприятия",
     about: "О компании", story: "Наша история", founders: "Основатели и руководство", usa: "DND Homes США", numbers: "DND в цифрах", awards: "Наши награды",
     news: "Новости", dndNews: "Новости DND", press: "DND в прессе",
-    contact: "Контакты", offices: "Офисы продаж", form: "Форма обратной связи", whatsapp: "WhatsApp",
+    contact: "Контакты", offices: "Головной офис", form: "Форма обратной связи", whatsapp: "WhatsApp",
   },
   pl: {
     home: "Strona główna", projects: "Nasze projekty", groups: { ongoing: "Projekty w realizacji", completed: "Projekty ukończone", upcoming: "Projekty przyszłe" }, allProjects: "Wszystkie projekty",
@@ -82,7 +82,7 @@ export const NAV_TEXT: Record<Locale, Copy> = {
     payment: "Płatności i inwestycje", paymentShort: "Płatności i inwestycje", tl: "Płatność w lirach", campaigns: "Aktualne promocje", rental: "Inwestycje i dochód z najmu", events: "Wydarzenia",
     about: "O nas", story: "Nasza historia", founders: "Założyciele i zarząd", usa: "DND Homes USA", numbers: "DND w liczbach", awards: "Nasze nagrody",
     news: "Aktualności", dndNews: "Wiadomości od DND", press: "DND w prasie",
-    contact: "Kontakt", offices: "Biura sprzedaży", form: "Formularz kontaktowy", whatsapp: "WhatsApp",
+    contact: "Kontakt", offices: "Siedziba główna", form: "Formularz kontaktowy", whatsapp: "WhatsApp",
   },
 };
 

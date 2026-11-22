@@ -66,23 +66,6 @@ export default function ContactInfo({
       coords: [35.1310, 33.9193],
       mapImage: "/maps/ofis-gazimagusa.webp",
     },
-    {
-      id: "sales",
-      label: "Biuro sprzedaży Lagoon Verde",
-      addressLines: ["Sahil Yolu 45", "İskele, Cypr Północny"],
-      city: "İskele",
-      country: "Cypr Północny",
-      phone: "+90 392 444 03 63",
-      phoneDisplay: "+90 392 444 03 63",
-      email: "mailto:info@dndcyprus.com",
-      hours: ["Poniedziałek–piątek 08:30–17:30, sobota 08:30–13:00"],
-      mapUrl: "https://maps.app.goo.gl/V2ainR6Rs2JkLaN27",
-      image: "/ofis.jpg",
-      imageAlt: "Biuro sprzedaży DND Cyprus",
-      mapEmbedUrl:
-        "https://www.google.com/maps?q=35.287,33.917&z=15&output=embed",
-      mapImage: "/maps/ofis-iskele.webp",
-    },
   ],
   socials = [
     { label: "LinkedIn", href: "https://cy.linkedin.com/company/dndcyprus" },
@@ -91,6 +74,8 @@ export default function ContactInfo({
     { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
   ],
 }: Props) {
+  // tek ofis kaldı (Lagoon Verde satış ofisi 22 Kasım 2026’da kaldırıldı): kart tam genişlik, görseller daha yüksek
+  const single = offices.length === 1;
   // Organization JSON-LD is now emitted in the site-wide layouts (tr/layout, en/(main)/layout)
 
   return (
@@ -103,7 +88,7 @@ export default function ContactInfo({
         </div>
 
         {/* Offices */}
-        <div className="grid grid-cols-1 gap-4 min-[900px]:grid-cols-2">
+        <div className={`grid grid-cols-1 gap-4${single ? "" : " min-[900px]:grid-cols-2"}`}>
           {offices.map((o, idx) => {
             const mapSrc = o.mapEmbedUrl || (o.coords ? buildGmapsEmbedSrc(o.coords) : null);
 
@@ -113,7 +98,7 @@ export default function ContactInfo({
                 {(o.image || mapSrc) && (
                   <div className="grid grid-cols-1 gap-3 p-3 sm:grid-cols-2">
                     {o.image && (
-                      <div className="relative h-48 overflow-hidden rounded-[22px]" style={{ background: "var(--sky-2)" }}>
+                      <div className={`relative h-48 overflow-hidden rounded-[22px]${single ? " sm:h-72" : ""}`} style={{ background: "var(--sky-2)" }}>
                         <Image
                           src={o.image}
                           alt={o.imageAlt || o.label}
@@ -126,7 +111,7 @@ export default function ContactInfo({
                       </div>
                     )}
                     {mapSrc && (
-                      <div className="relative h-48 overflow-hidden rounded-[22px]" style={{ background: "var(--sky-2)" }}>
+                      <div className={`relative h-48 overflow-hidden rounded-[22px]${single ? " sm:h-72" : ""}`} style={{ background: "var(--sky-2)" }}>
                         <DeferredIframe
                           activation="click"
                           poster={o.mapImage}
