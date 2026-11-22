@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import AboutVideoReel from "@/app/components/azure/AboutVideoReel";
 import { useState, type ReactNode } from "react";
 
 type Props = {
@@ -46,7 +47,8 @@ export default function AboutDndHomes({
             className="rv m-0 w-full max-w-full overflow-hidden rounded-[28px]"
             style={{ background: "var(--sea-deep)", boxShadow: "0 24px 60px rgba(13,35,38,.14)" }}
           >
-            <VideoHeroCard id={videoId} title={videoTitle} poster={poster} startAt={startAt} />
+            {/* 22.11.2026: 5 videoluk liste (ödeme modeli ve projeler önce, kurumsal video en sonda) */}
+            <AboutVideoReel locale="de" corporate={{ youtube: videoId, poster }} />
           </figure>
 
           <aside className="az-panel rv d1 flex flex-col">
