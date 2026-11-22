@@ -29,7 +29,7 @@ const PRESS_ITEMS: PressItem[] = [
     url: "https://www.facebook.com/watch/?v=1824013762175367",
     excerpt: "Основатель DND Cyprus Озан Дёкмеджиоглу стал гостем Ягмур Чал на Kıbrıs Genç TV: он рассказал о пути из Бостона на Северный Кипр, о проекте NeoCity и беспроцентной модели оплаты в турецких лирах. Также обсуждались проект Мараш, планирование застройки и роль долгосрочной ипотеки.",
     date: "2026-11-18",
-    cover: "/news/genctv-perspektif-ozan.webp",
+    cover: "/news/genctv-perspektif-ozan-2.webp",
     tags: ["Интервью", "ТВ"],
   },
   // 22 Kasım 2026: internette bulunan yeni haberler (aynı içerikli kopyalardan biri alındı)

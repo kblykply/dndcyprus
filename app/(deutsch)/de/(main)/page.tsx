@@ -29,7 +29,7 @@ const PRESS_ITEMS: PressItem[] = [
     url: "https://www.facebook.com/watch/?v=1824013762175367",
     excerpt: "DND-Cyprus-Gründer Ozan Dökmecioğlu war bei Kıbrıs Genç TV zu Gast bei Yağmur Çal und sprach über seinen Weg von Boston nach Nordzypern, NeoCity und das zinsfreie Lira-Zahlungsmodell. Themen waren außerdem die Maraş-Vision, geplante Stadtentwicklung und langfristige Hypothekenkredite.",
     date: "2026-11-18",
-    cover: "/news/genctv-perspektif-ozan.webp",
+    cover: "/news/genctv-perspektif-ozan-2.webp",
     tags: ["Interview", "TV"],
   },
   // 22 Kasım 2026: internette bulunan yeni haberler (aynı içerikli kopyalardan biri alındı)
