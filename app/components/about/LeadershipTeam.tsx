@@ -388,7 +388,17 @@ export default function LeadershipTeam({
         sortOrder:27,
 
   },
-  
+  // 22.11.2026: yeni grafik tasarımcı ve videografer; fotoğraf gelene kadar nötr silüet
+  {
+    id: "mehmet-alp",
+    name: "Mehmet Alp Artıkoğlu",
+    role: "Grafik Tasarımcı ve Video Prodüksiyon Tasarımcısı",
+    category: "Marketing",
+    photo: "/teams/placeholder-erkek.png",
+    bio: "Marka iletişimi için grafik tasarım, video çekim ve kurgudan sorumlu.",
+    socials: {},
+    accent: "teal",
+  },
 ],
 
 

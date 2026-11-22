@@ -365,8 +365,17 @@ members = [
     accent: "teal",
     sortOrder: 27,
   },
-
-
+  // 22.11.2026: yeni grafik tasarımcı ve videografer; fotoğraf gelene kadar nötr silüet
+  {
+    id: "mehmet-alp",
+    name: "Mehmet Alp Artıkoğlu",
+    role: "Графический дизайнер и дизайнер видеопродакшна",
+    category: "Marketing",
+    photo: "/teams/placeholder-erkek.png",
+    bio: "Отвечает за графический дизайн, видеосъёмку и монтаж для коммуникаций бренда.",
+    socials: {},
+    accent: "teal",
+  },
 ],
 
 
