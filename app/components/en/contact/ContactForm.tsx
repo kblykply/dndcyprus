@@ -329,7 +329,7 @@ export default function ContactForm() {
                     <span className="opacity-80">WhatsApp:</span>{" "}
                     <a
                       className="underline-offset-2 hover:underline"
-                      href="https://wa.me/905488880363"
+                      href="https://wa.me/905488390363"
                       target="_blank"
                     >
                       Send a Quick Message

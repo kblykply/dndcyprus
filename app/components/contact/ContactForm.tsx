@@ -314,7 +314,7 @@ export default function ContactForm() {
                   </div>
                   <div className="rounded-lg px-3 py-2 bg-white/10">
                     <span className="opacity-80">WhatsApp:</span>{" "}
-                    <a className="underline-offset-2 hover:underline" href="https://wa.me/905488880363" target="_blank">
+                    <a className="underline-offset-2 hover:underline" href="https://wa.me/905488390363" target="_blank">
                       Hızlı Mesaj Gönderin
                     </a>
                   </div>

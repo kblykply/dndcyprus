@@ -43,7 +43,7 @@ secondary = { label: "Our Projects", href: "/en/projects" },
 
   quick = {
     phone: "+90 392 444 03 63",
-    whatsapp: "+90 548 888 03 63",
+    whatsapp: "+90 548 839 03 63",
     email: "info@dndcyprus.com",
   },
 }: Props) {

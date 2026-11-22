@@ -58,7 +58,7 @@ export default function ContactInfo({
       email: "mailto:info@dndcyprus.com",
       hours: ["Hafta içi 08:30–17:30 , Cumartesi 8:30–13:00 "],
       mapUrl: "https://maps.app.goo.gl/xwGdVsU3TxJymkVK8",
-      whatsapp: "https://wa.me/905488880363",
+      whatsapp: "https://wa.me/905488390363",
       image: "/dndofis.JPG",
       imageAlt: "DND Cyprus Merkez Ofis",
       coords: [35.1310, 33.9193],

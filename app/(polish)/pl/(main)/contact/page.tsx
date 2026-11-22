@@ -1,5 +1,6 @@
 import PageHero from "@/app/components/azure/PageHero";
 import ContactCard from "@/app/components/azure/ContactCard";
+import ContactStays from "@/app/components/azure/ContactStays";
 import ContactInfo from "@/app/components/pl/contact/ContactInfo";
 import { pageMetadata } from "@/lib/seo";
 
@@ -16,6 +17,7 @@ export default function HomePage() {
 
 <PageHero size="short" kicker="Kontakt" title={<>Zapraszamy <b>do kontaktu.</b></>} lead="Chętnie opowiemy Państwu więcej o naszych projektach i możliwościach inwestycyjnych." image="/azure/lv-3.jpg" imageAlt="DND Cyprus" ctas={[{ label: "Wyślij wiadomość", href: "#form" }, { label: "Nasze projekty", href: "/pl/projects", variant: "ghost" }]} />
 <ContactInfo />
+<ContactStays locale="pl" />
 <ContactCard locale="pl" mode="contact" id="form" title={<>Zrealizujmy Państwa marzenia <b>wspólnie.</b></>} lead="Zespół DND Cyprus jest gotów wesprzeć Państwa inwestycję. Prosimy zostawić wiadomość – wkrótce się odezwiemy." showOffices={false} />
     
     </main>

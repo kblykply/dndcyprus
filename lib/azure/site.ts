@@ -25,8 +25,8 @@ export const stripLocale = (pathname: string) => pathname.replace(/^\/(tr|en|de|
 export const CONTACT = {
   phone: "+90 392 444 03 63",
   phoneHref: "tel:+903924440363",
-  mobile: "+90 548 888 03 63",
-  whatsapp: "905488880363",
+  mobile: "+90 548 839 03 63",
+  whatsapp: "905488390363",
   email: "info@dndcyprus.com",
   hq: {
     tr: "Alasya Park Sitesi 2. Etap, Dükkan No: 2/3, Gazi Mustafa Kemal Bulvarı, Sakarya, Gazimağusa, Kıbrıs, 99450",

@@ -10,7 +10,7 @@ import { attributionRef } from "@/lib/attribution";
 
 const TEAL = "#0d6570";
 const ORANGE = "#f15c34";
-const WHATSAPP = "905488880363";
+const WHATSAPP = "905488390363";
 
 type Props = {
   locale: "tr" | "en";

@@ -41,7 +41,7 @@ export default function ContactHeroGlass({
   secondary = { label: "Projelerimiz", href: "/tr/projects" },
   quick = {
     phone: "+90 392 444 03 63",
-    whatsapp: "+90 548 888 03 63",
+    whatsapp: "+90 548 839 03 63",
     email: "info@dndcyprus.com",
   },
 }: Props) {
