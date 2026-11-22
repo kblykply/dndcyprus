@@ -8,7 +8,7 @@ import "./contact-stays.css";
 /**
  * İletişim sayfası: merkez ofisin altında La Joya Resort & Residences ve DND Reserve tanıtım kartları (22 Kasım 2026,
  * Lagoon Verde satış ofisinin yerine). Bilgiler kendi sitelerinden: lajoyacyprus.com/iletisim ve dndreserve.com/contact
- * (ikisinin rezervasyon ve WhatsApp hattı +90 548 888 03 63).
+ * (ikisinin rezervasyon ve WhatsApp hattı +90 548 888 03 63). DND Reserve görseli: La Joya gece havuz başı lounge (gerçek foto, n-lounge).
  */
 const LJ_WA = "905488880363";
 const LJ_TEL = "+90 548 888 03 63";
@@ -17,7 +17,7 @@ type Stay = { key: string; img: string; tag: string; name: string; text: string;
 type Copy = { kicker: string; title: ReactNode; lead: string; wa: string; stays: Stay[] };
 
 const LJ = { img: "/azure/lj-5.jpg", href: "https://lajoyacyprus.com/", mail: "info@lajoyacyprus.com", ig: "lajoyaresort" };
-const RS = { img: "/azure/contact/dnd-reserve.jpg", href: "https://www.dndreserve.com", mail: "info@dndreserve.com" };
+const RS = { img: "/azure/contact/dnd-reserve-gece.jpg", href: "https://www.dndreserve.com", mail: "info@dndreserve.com" };
 
 const T: Record<Locale, Copy> = {
   tr: {
