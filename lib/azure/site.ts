@@ -81,7 +81,7 @@ export const PROJECTS: ProjectMeta[] = [
   {
     slug: "lagoon-verde",
     name: "Lagoon Verde",
-    short: { tr: "İskele · Altın Ödül", en: "İskele · Gold Award", de: "İskele · Goldpreis", ru: "Искеле · Золотая награда", pl: "İskele · Złota Nagroda" },
+    short: { tr: "İskele · Altın Ödül · İnşaat devam eden", en: "İskele · Gold Award · Under construction", de: "İskele · Goldpreis · Im Bau", ru: "Искеле · Золотая награда · Строится", pl: "İskele · Złota Nagroda · W budowie" },
     location: { tr: "Ötüken, İskele", en: "Ötüken, İskele", de: "Ötüken, İskele", ru: "Ötüken, Искеле", pl: "Ötüken, İskele" },
     status: { tr: "Devam eden", en: "Ongoing", de: "Im Bau", ru: "Строится", pl: "W budowie" },
     award: { tr: "Altın Ödül", en: "Gold Award", de: "Goldpreis", ru: "Золотая награда", pl: "Złota Nagroda" },

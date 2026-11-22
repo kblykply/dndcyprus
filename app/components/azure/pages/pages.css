@@ -108,3 +108,6 @@
 
 /* ---- Haberler: DND'den Haberler kartları (Etkinlikler kartlarıyla aynı), özet en çok 3 satır ---- */
 .az-dndnews .b > span { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* DND Ayrıcalığı · Sosyal yaşam: başlığın altındaki yazı daha iri (kullanıcı, 22 Kasım 2026) */
+.az-proj.az-social .az-head .az-lead { font-size: clamp(18px, 1.45vw, 21px); line-height: 1.5; max-width: 60ch; }

@@ -5,9 +5,9 @@ import "../meridian.css";
 import "./cards.css";
 
 // Olanaklar: Öne çıkan bilgilerle aynı Azure kartları (simge, numara, başlık, açıklama; sırayla belirme, üzerine gelince yükselme).
-export default function Amenities({ d, name, id }: { d: ProjectAmenities; name: string; id: string }) {
+export default function Amenities({ d, name, id, className = "" }: { d: ProjectAmenities; name: string; id: string; className?: string }) {
   return (
-    <section className="az-section az-proj mr" id={id}>
+    <section className={`az-section az-proj mr ${className}`.trim()} id={id}>
       <div className="az-wrap">
         <ProjectHead kicker={d.kicker} title={splitTitle(d.title, name)} lead={d.lead} />
         <ul className="az-amen">

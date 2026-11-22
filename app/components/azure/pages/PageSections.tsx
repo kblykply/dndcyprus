@@ -63,7 +63,7 @@ export function AdvantageSections({ locale }: { locale: Locale }) {
   return (
     <>
       <Tech d={{ ...tech, kicker: t.quality.kicker, title: t.quality.title, lead: t.quality.lead }} name="DND" id={id.quality} locale={locale} />
-      <Amenities d={{ ...amen, kicker: t.social.kicker, title: t.social.title, lead: t.social.lead }} name="DND" id={id.social} />
+      <Amenities d={{ ...amen, kicker: t.social.kicker, title: t.social.title, lead: t.social.lead }} name="DND" id={id.social} className="az-social" />
       <Split id={id.aftersales} kicker={t.after.kicker} title={t.after.title} lead={t.after.lead} points={t.after.points} img="/azure/pages/satis-sonrasi.jpg" alt={t.after.imageAlt} note={t.after.note} cta={t.after.cta} ctaHref={`${href(locale, "/contact")}#${id.form}`} />
       <Mariachi locale={locale} id={id.perks} />
       <UlfetPerks locale={locale} />
