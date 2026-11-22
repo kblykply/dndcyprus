@@ -80,7 +80,7 @@ export default function ContactStays({ locale }: { locale: Locale }) {
         <div className="g">
           {t.stays.map((s, i) => (
             <article key={s.key} className={`az-card rv d${i + 1}`}>
-              <a className="pic" href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+              <a className="pic" href={s.href} target="_blank" rel="noopener noreferrer">
                 <Img src={s.img} sizes="(min-width: 900px) 600px, 100vw" alt={s.name} />
                 <span className="tag">{s.tag}</span>
               </a>
