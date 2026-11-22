@@ -3,8 +3,8 @@ import { HOME } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import "./timeline-meridian.css";
 
-// Meridyen haritası: küre ızgarası üzerinde Boston → İskele uçuş rotası; kilometre taşları rotadaki
-// numaralı duraklar (ABD üçlüsü batıda, Kıbrıs üçlüsü doğuda), altta fotoğraflı kartlar ve duraklara
+// Meridyen haritası: küre ızgarası üzerinde Boston → İskele uçuş rotası (22.11.2026: Lexington kartı çıktı, sona NeoCity 2026); kilometre taşları rotadaki
+// numaralı duraklar (ABD ikilisi batıda, Kıbrıs dörtlüsü doğuda), altta fotoğraflı kartlar ve duraklara
 // inen kesikli çizgiler. Tablet: kartlar 3'lü ızgara; telefon: dikey meridyen çizgisi boyunca liste.
 
 const MAP: Record<Locale, { from: string; to: string; fromXY: string; toXY: string; dist: string; route: string }> = {
