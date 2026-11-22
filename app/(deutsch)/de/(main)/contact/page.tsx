@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
 
-<PageHero size="short" kicker="Kontakt" title={<>Nehmen Sie <b>Kontakt auf.</b></>} lead="Kontaktieren Sie uns, um mehr über unsere Projekte und Investitionsmöglichkeiten zu erfahren." image="/azure/lv-3.jpg" imageAlt="DND Cyprus" ctas={[{ label: "Nachricht senden", href: "#form" }, { label: "Unsere Projekte", href: "/de/projects", variant: "ghost" }]} />
+<PageHero size="short" kicker="Kontakt" title={<>Nehmen Sie <b>Kontakt auf.</b></>} lead="Kontaktieren Sie uns, um mehr über unsere Projekte und Investitionsmöglichkeiten zu erfahren." image="/azure/contact/iletisim-banner.jpg" imageAlt="Hausschlüssel, Grundriss und Kaffee auf einem Tisch mit Meerblick" imagePosition="50% 60%" ctas={[{ label: "Nachricht senden", href: "#form" }, { label: "Unsere Projekte", href: "/de/projects", variant: "ghost" }]} />
 <ContactInfo />
 <ContactStays locale="de" />
 <ContactCard locale="de" mode="contact" id="form" title={<>Verwirklichen wir Ihre Träume <b>gemeinsam.</b></>} lead="Das Team von DND Cyprus begleitet Sie bei Ihrer Investition. Hinterlassen Sie uns eine Nachricht – wir melden uns in Kürze bei Ihnen." showOffices={false} />
