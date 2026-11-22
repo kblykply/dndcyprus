@@ -18,7 +18,7 @@ export default function HomePage() {
 <PageHero size="short" kicker="Contact" title={<>Get in <b>touch.</b></>} lead="Contact us to learn more about our projects and investment opportunities." image="/azure/contact/iletisim-banner.jpg" imageAlt="House keys, a floor plan and coffee on a table overlooking the sea" imagePosition="50% 60%" ctas={[{ label: "Send Message", href: "#form" }, { label: "Our Projects", href: "/en/projects", variant: "ghost" }]} />
 <ContactInfo />
 <ContactStays locale="en" />
-<ContactCard locale="en" mode="contact" id="form" title={<>Let’s bring your dreams <b>to life together.</b></>} lead="The DND Cyprus team is ready to support your investment. Leave a message and we will get back to you shortly." showOffices={false} />
+<ContactCard locale="en" mode="contact" id="form" title={<>Let’s bring your dreams <b>to life together.</b></>} lead="The DND Cyprus team is ready to support your investment. Leave a message and we will get back to you shortly." />
     
     </main>
   );

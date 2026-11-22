@@ -18,7 +18,7 @@ export default function HomePage() {
 <PageHero size="short" kicker="Контакты" title={<>Свяжитесь <b>с нами.</b></>} lead="Свяжитесь с нами, чтобы узнать больше о наших проектах и инвестиционных возможностях." image="/azure/contact/iletisim-banner.jpg" imageAlt="Ключи от дома, план квартиры и кофе на столе с видом на море" imagePosition="50% 60%" ctas={[{ label: "Написать нам", href: "#form" }, { label: "Наши проекты", href: "/ru/projects", variant: "ghost" }]} />
 <ContactInfo />
 <ContactStays locale="ru" />
-<ContactCard locale="ru" mode="contact" id="form" title={<>Воплотим вашу мечту <b>вместе.</b></>} lead="Команда DND Cyprus готова поддержать ваши инвестиции. Оставьте сообщение — мы скоро с вами свяжемся." showOffices={false} />
+<ContactCard locale="ru" mode="contact" id="form" title={<>Воплотим вашу мечту <b>вместе.</b></>} lead="Команда DND Cyprus готова поддержать ваши инвестиции. Оставьте сообщение — мы скоро с вами свяжемся." />
     
     </main>
   );

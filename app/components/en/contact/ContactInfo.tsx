@@ -133,7 +133,6 @@ export default function ContactInfo({
                 <div className="px-6 pb-6 pt-3 sm:px-8 sm:pb-8">
                   <div className="flex items-start justify-between gap-3">
                     <h3 style={{ fontSize: "clamp(22px, 2vw, 28px)" }}>{o.label}</h3>
-                    <div className="az-tags" style={{ marginTop: 0 }}><span>Office</span></div>
                   </div>
 
                   {/* Address */}
