@@ -72,6 +72,7 @@ export default function ContactInfo({
     { label: "Instagram", href: "https://www.instagram.com/dndcyprus/" },
     { label: "Facebook", href: "https://www.facebook.com/dndcyprus/?locale=tr_TR" },
     { label: "YouTube", href: "https://www.youtube.com/@dndcyprus" },
+    { label: "WhatsApp", href: "https://wa.me/905488390363" },
   ],
 }: Props) {
   // tek ofis kaldı (Lagoon Verde satış ofisi 22 Kasım 2026’da kaldırıldı): kart tam genişlik, görseller daha yüksek

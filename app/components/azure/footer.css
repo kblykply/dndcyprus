@@ -8,6 +8,7 @@
 .az-footer .brand img { display: block; height: 36px; width: auto; }
 .az-footer p { font-size: 14px; color: var(--ink-60); max-width: 48ch; }
 .az-footer p a { color: var(--ink); }
+.az-footer .adr { margin-top: 6px; }
 .az-footer .ct { margin-top: 10px; }
 .az-footer .soc { display: flex; gap: 8px; }
 .az-footer .soc a {

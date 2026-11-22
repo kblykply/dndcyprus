@@ -43,7 +43,9 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
                 <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><PiWhatsappLogoDuotone size={18} aria-hidden /></a>
               </nav>
             </div>
-            <p>{t.tagline} {CONTACT.hq[locale]}</p>
+            {/* slogan tek satır, adres altında ayrı satır (22.11.2026) */}
+            <p>{t.tagline}</p>
+            <p className="adr">{CONTACT.hq[locale]}</p>
             <p className="ct">
               <a href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp {CONTACT.mobile}</a> · <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
             </p>

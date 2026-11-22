@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiYoutubeLogoDuotone } from "react-icons/pi";
+import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiWhatsappLogoDuotone, PiYoutubeLogoDuotone } from "react-icons/pi";
 import "./social-icons.css";
 
 // Ofis kartının altındaki küçük ikonlu sosyal medya satırı (İletişim sayfası).
@@ -8,6 +8,7 @@ const ICONS: Record<string, IconType> = {
   instagram: PiInstagramLogoDuotone,
   facebook: PiFacebookLogoDuotone,
   youtube: PiYoutubeLogoDuotone,
+  whatsapp: PiWhatsappLogoDuotone,
 };
 
 export default function SocialIcons({ items, label }: { items: { label: string; href: string }[]; label: string }) {
