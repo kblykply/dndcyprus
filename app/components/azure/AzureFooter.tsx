@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
-import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiYoutubeLogoDuotone } from "react-icons/pi";
+import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiWhatsappLogoDuotone, PiYoutubeLogoDuotone } from "react-icons/pi";
 import { CONTACT, FOOTER_COPY, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
 import { NAV_TEXT } from "@/lib/azure/nav";
 import CookiePrefsLink from "./CookiePrefsLink";
@@ -39,11 +39,13 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
                   const C = SOCIAL_ICONS[s.label.toLowerCase()];
                   return <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label}>{C ? <C size={18} aria-hidden /> : s.label}</a>;
                 })}
+                {/* 22.11.2026: DND Cyprus WhatsApp hattı (sosyal simgelerle aynı tasarım, yeşil) */}
+                <a className="wa" href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><PiWhatsappLogoDuotone size={18} aria-hidden /></a>
               </nav>
             </div>
             <p>{t.tagline} {CONTACT.hq[locale]}</p>
             <p className="ct">
-              <a href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+              <a href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp {CONTACT.mobile}</a> · <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
             </p>
             <FooterFit />
           </div>
