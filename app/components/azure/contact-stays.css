@@ -23,3 +23,9 @@
   .az-stays .g { grid-template-columns: minmax(0, 1fr); }
   .az-stays .bd { padding: 18px 20px 22px; }
 }
+
+/* İletişim sayfası (main.az-contactpage): bölüm başlıkları ana sayfadaki ölçülerde — üst yazı büyük ve çizgisiz, başlık ve alt yazı aynı boy (22.11.2026) */
+.az-contactpage .az-section .az-kicker { font-size: clamp(22px, 2.2vw, 32px); gap: 14px; }
+.az-contactpage .az-section .az-kicker::before { display: none; }
+.az-contactpage .az-section :is(.az-h2, .az-h2.sm) { font-size: clamp(30px, calc(3.4vw + 2px), 50px); }
+.az-contactpage .az-section .az-lead { font-size: 17px; }
