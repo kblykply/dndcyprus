@@ -18,7 +18,8 @@ export default async function CollectionPage({ params, searchParams }: { params:
   if (!isCollectionKey(col)) notFound();
   const def = COLLECTIONS[col];
   const { seeded, items } = await listItems(col);
-  const isPress = col === "basin";
+  const round = col === "ekip"; // kişi fotoğrafı yuvarlak, diğerleri yatay kapak
+  const sortable = col === "ekip" || col === "etkinlik"; // haberler ve yazılar sitede tarihe göre dizilir
   const btn = "inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50";
 
   return (
@@ -45,15 +46,14 @@ export default async function CollectionPage({ params, searchParams }: { params:
       <ul className="mt-5 divide-y divide-slate-100 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
         {items.map((it, i) => {
           const d = it.data as Record<string, unknown>;
-          const tr = (k: string) => String((d[k] as Record<string, string> | undefined)?.tr ?? "");
-          const img = String((isPress ? d.cover : d.photo) ?? "");
-          const title = isPress ? tr("title") : String(d.name ?? "");
-          const sub = isPress ? `${d.outlet ?? ""} · ${d.date ?? ""}` : tr("role");
+          const img = String(d[def.imageKey] ?? "");
+          const title = def.title(d);
+          const sub = def.sub(d);
           const hidden = !it.published;
           return (
             <li key={it.key} id={`k-${it.key}`} className={`flex items-center gap-3 px-4 py-3 ${hidden ? "bg-slate-50 opacity-70" : ""} ${sp.kaydedildi === it.key ? "bg-teal-50/60" : ""}`}>
               <span className="w-6 shrink-0 text-right text-xs text-slate-400">{i + 1}</span>
-              <span className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 ${isPress ? "h-12 w-20" : "h-12 w-12 rounded-full"}`}>
+              <span className={`flex shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 ${round ? "h-12 w-12 rounded-full" : "h-12 w-20"}`}>
                 {img ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={img} alt="" className="h-full w-full object-cover" loading="lazy" />
@@ -69,7 +69,7 @@ export default async function CollectionPage({ params, searchParams }: { params:
                 </span>
               </span>
               <span className="flex shrink-0 items-center gap-1">
-                {!isPress ? (
+                {sortable ? (
                   <>
                     <form action={moveItemUp}>
                       <input type="hidden" name="collection" value={col} />

@@ -2,6 +2,7 @@ import PageHero from "@/app/components/azure/PageHero";
 import ContactCard from "@/app/components/azure/ContactCard";
 import ProjectsFilters from "@/app/components/de/projects/ProjectsFilters";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "de",
@@ -14,9 +15,9 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
 
-<PageHero size="compact" kicker="Projekte" title={<>Sechs Adressen, <b>ein Standard.</b></>} lead="NeoCity, Lagoon Verde, La Joya, La Joya Perla, Perla II und Mariachi Beach Club: Vergleichen Sie alle Projekte von DND Cyprus an einem Ort." image="/azure/lv-7.jpg" imageAlt="DND Cyprus" chips={[{ big: "6", label: "Projekte" }, { big: "2", label: "Auszeichnungen · 2025" }]} />
+<CmsSection scope="projelerSayfasi" section="hero" lang="de" as={PageHero} size="compact" />
 <ProjectsFilters />
-<ContactCard locale="de" mode="home" id="iletisim" kicker="DND Cyprus" title={<>Erfahren Sie mehr <b>über unsere Projekte.</b></>} lead="Sie interessieren sich für unsere laufenden oder kommenden Projekte? Unser Vertriebsteam informiert Sie gern ausführlich über Details und Möglichkeiten." />
+<CmsSection scope="projelerSayfasi" section="form" lang="de" as={ContactCard} locale="de" mode="home" id="iletisim" />
     </main>
   );
 }

@@ -17,6 +17,18 @@ export type Field = { path: string; kind: FieldKind; value: string };
 const SKIP_KEYS = new Set(["slug", "icon", "href", "id", "url", "w", "accent", "sortOrder", "category"]);
 const IMAGE_RE = /^(\/[^\s]*|https:\/\/[^\s]+)\.(jpe?g|png|webp|avif|gif|svg)(\?.*)?$/i;
 
+/** Türkçe karakterleri sadeleştirerek adres/anahtar üretir: "Lagoon Verde’de ilk temel" → "lagoon-verdede-ilk-temel" */
+export function slugify(s: string) {
+  return s
+    .toLocaleLowerCase("tr-TR")
+    .replace(/ı/g, "i")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+}
+
 export const isImageValue = (v: unknown) => typeof v === "string" && IMAGE_RE.test(v.trim());
 
 /** JSX → işaretli metin: <b>/<strong> → **…**, <br/> → satır sonu; diğer etiketlerin yalnız yazısı alınır */
@@ -47,6 +59,28 @@ export function fromMarkup(text: string): ReactElement {
     });
   });
   return createElement(Fragment, null, ...out);
+}
+
+/**
+ * Blog yazısı metni → HTML: düz metinde boş satır paragraf, tek satır sonu <br/>, **kalın** → <strong>.
+ * HTML yazılmışsa olduğu gibi alınır; her durumda betik/iframe, olay öznitelikleri (onclick…) ve javascript: bağlantıları atılır.
+ */
+export function postHtml(v: string): string {
+  if (!v) return v;
+  let h = /<\s*(p|div|h[1-6]|ul|ol|blockquote|figure|table)\b/i.test(v)
+    ? v
+    : v
+        .split(/\n\s*\n/)
+        .map((par) => par.trim())
+        .filter(Boolean)
+        .map((par) => `<p>${par.replace(/\n/g, "<br/>")}</p>`)
+        .join("\n\n");
+  h = h.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  return h
+    .replace(/<\s*(script|style|iframe|object|embed)\b[\s\S]*?<\s*\/\s*\1\s*>/gi, "")
+    .replace(/<\s*\/?\s*(script|style|iframe|object|embed)\b[^>]*>/gi, "")
+    .replace(/\son[a-z]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+    .replace(/(href|src)\s*=\s*(["'])\s*javascript:[^"']*\2/gi, '$1="#"');
 }
 
 export function walkFields(obj: unknown, prefix = "", out: Field[] = []): Field[] {
@@ -144,10 +178,27 @@ const KEY_LABELS: Record<string, string> = {
   awardsProject: "Ödül bölümü proje adı", homesProject: "Ödül bölümü şirket adı", role: "Görev", bio: "Kısa tanıtım", outlet: "Yayın",
   excerpt: "Özet", date: "Tarih", cover: "Kapak görseli", photo: "Fotoğraf", upto: "Sayının yanındaki yazı", months: "Ay yazısı",
   tl: "TL kartı", neo: "NeoCity kartı", strip: "Ödül şeridi", kartlar: "Ödül kartları", press: "Basın", faq: "S.S.S.",
+  // proje sayfaları
+  tagline: "Kısa tanıtım", status: "Durum", location: "Konum", delivery: "Teslim", award: "Ödül", big: "Büyük yazı", ctaLead: "Teklif formu açıklaması",
+  ctaImage: "Teklif formu görseli", image: "Görsel", alt: "Görsel açıklaması", src: "Görsel", value: "Değer", desc: "Açıklama", description: "Açıklama",
+  address: "Adres", km: "Kilometre", m: "Metre", min: "Dakika (araçla)", size: "Büyüklük", closed: "Kapalı alan", usage: "Kullanım alanı", totals: "Toplam",
+  thumb: "Küçük görsel", poster: "Kapak görseli", bg: "Arka plan görseli", iframeTitle: "Tur başlığı", eyebrow: "Üst başlık", badge: "Kart rozeti",
+  hint: "Not", youtubeId: "YouTube video kimliği", videoId: "YouTube video kimliği", videoPosterAlt: "Video kapağı açıklaması", videoPlayLabel: "Oynat düğmesi",
+  mapImage: "Harita görseli", mapAlt: "Harita açıklaması", quote: "Alıntı", video: "Video", placeholderText: "Hazırlanıyor yazısı", placeholderSub: "Hazırlanıyor alt yazısı",
+  gallery: "Galeri", overview: "Genel bakış", facts: "Bilgiler", amenities: "Olanaklar", interiors: "İç mekân", floorPlans: "Kat planları",
+  // sayfalar
+  subtitle: "Alt başlık", missionTitle: "Misyon başlığı", missionText: "Misyon metni", visionTitle: "Vizyon başlığı", visionText: "Vizyon metni",
+  valuesTitle: "Değerler başlığı", buttonLabel: "Düğme yazısı", bgSrc: "Arka plan görseli", bgAlt: "Arka plan açıklaması", heading: "Başlık",
+  images: "Görseller", main: "Ana görsel", sideTop: "Yan görsel (üst)", sideBottom: "Yan görsel (alt)", city: "Şehir", country: "Ülke", phone: "Telefon",
+  phoneDisplay: "Telefon (görünen)", stat: "Rakamın yanındaki yazı", link: "Bağlantı yazısı", follow: "Takip düğmesi", faqTitle: "S.S.S. başlığı",
+  faqLead: "S.S.S. açıklaması", statsLabel: "Rakamlar başlığı", usa: "ABD satırı",
 };
 const LIST_LABELS: Record<string, string> = {
   items: "Madde", slides: "Slayt", steps: "Adım", more: "Ek paragraf", zeros: "Sıfır maddesi", tags: "Etiket", highlights: "Öne çıkan madde",
   rules: "Kural", chips: "Rozet", people: "Kişi", dist: "Mesafe", dl: "Bilgi",
+  unitTypes: "Daire tipi", nearby: "Yakındaki yer", distances: "Mesafe", areas: "Alan", plans: "Plan", variants: "Seçenek", legend: "Lejant maddesi",
+  stats: "Bilgi", views: "Görünüm", angles: "Açı", groups: "Daire tipi", shots: "Kare", bullets: "Madde", values: "Değer", strengths: "Güçlü yan",
+  offices: "Ofis", addressLines: "Adres satırı", hours: "Saat", points: "Madde", ctas: "Düğme", photos: "Fotoğraf", p: "Paragraf", links: "Bağlantı",
 };
 
 export function fieldLabel(path: string): string {

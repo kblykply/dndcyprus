@@ -3,6 +3,7 @@ import ContactCard from "@/app/components/azure/ContactCard";
 import ContactStays from "@/app/components/azure/ContactStays";
 import ContactInfo from "@/app/components/de/contact/ContactInfo";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "de",
@@ -15,10 +16,10 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip az-contactpage">
 
-<PageHero size="short" kicker="Kontakt" title={<>Nehmen Sie <b>Kontakt auf</b></>} lead="Kontaktieren Sie uns, um mehr über unsere Projekte und Investitionsmöglichkeiten zu erfahren." image="/azure/contact/iletisim-banner.jpg" imageAlt="Hausschlüssel, Grundriss und Kaffee auf einem Tisch mit Meerblick" imagePosition="50% 60%" ctas={[{ label: "Nachricht senden", href: "#form" }, { label: "Unsere Projekte", href: "/de/projects", variant: "ghost" }]} />
-<ContactInfo />
+<CmsSection scope="iletisim" section="hero" lang="de" as={PageHero} size="short" imagePosition="50% 60%" />
+<CmsSection scope="iletisim" section="bilgi" lang="de" as={ContactInfo} />
 <ContactStays locale="de" />
-<ContactCard locale="de" mode="contact" id="form" title={<>Verwirklichen wir Ihre Träume <b>gemeinsam</b></>} lead="Das Team von DND Cyprus begleitet Sie bei Ihrer Investition. Hinterlassen Sie uns eine Nachricht – wir melden uns in Kürze bei Ihnen." />
+<CmsSection scope="iletisim" section="form" lang="de" as={ContactCard} locale="de" mode="contact" id="form" />
     
     </main>
   );

@@ -4,14 +4,15 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageHero from "@/app/components/azure/PageHero";
 import JsonLd from "@/app/components/seo/JsonLd";
-import { blogPosts, BLOG_POSTS, type BlogPost } from "@/lib/blog";
+import type { BlogPost } from "@/lib/blog";
+import { getBlogPosts } from "@/lib/content/store";
 import { NAV_TEXT } from "@/lib/azure/nav";
 import { href, type Locale } from "@/lib/azure/site";
 import { pageMetadata } from "@/lib/seo";
 import { blogPostingJsonLd } from "@/lib/structured-data";
 
 // "DND'den Haberler" (blog): 5 dilde aynı yazılar (çeviriler lib/blog-i18n.ts). Liste ve yazı sayfası her dilin
-// rotasında bu bileşenlerle kurulur.
+// rotasında bu bileşenlerle kurulur. Yazılar panelden yönetilir (İçerik → DND'den Haberler; lib/content/store getBlogPosts).
 
 const DATE_LOCALE: Record<Locale, string> = { tr: "tr-TR", en: "en-GB", de: "de-DE", ru: "ru-RU", pl: "pl-PL" };
 const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(DATE_LOCALE[locale], { year: "numeric", month: "long", day: "numeric" }).format(new Date(iso));
@@ -33,9 +34,9 @@ export function blogIndexMetadata(locale: Locale): Metadata {
   return pageMetadata({ locale, path: "/blog", title: t.metaTitle, description: t.metaDesc });
 }
 
-export function BlogIndex({ locale }: { locale: Locale }) {
+export async function BlogIndex({ locale }: { locale: Locale }) {
   const t = UI[locale];
-  const posts = sorted(blogPosts(locale));
+  const posts = sorted(await getBlogPosts(locale));
   return (
     <main className="min-h-svh">
       <PageHero size="short" kicker={NAV_TEXT[locale].news} title={<>{NAV_TEXT[locale].dndNews}</>} lead={t.lead} image="/azure/p1-3.jpg" />
@@ -66,7 +67,8 @@ export function BlogIndex({ locale }: { locale: Locale }) {
   );
 }
 
-export const blogStaticParams = () => BLOG_POSTS.map((p) => ({ slug: p.slug }));
+/** derlemede üretilecek yazılar; panelden sonradan eklenenler ilk ziyarette üretilir (dynamicParams) */
+export const blogStaticParams = async () => (await getBlogPosts("tr")).map((p) => ({ slug: p.slug }));
 
 /** Özet 120 karakterden kısaysa yazının ilk cümleleriyle ~155 karaktere tamamlanır */
 function blogDescription(excerpt: string, html: string) {
@@ -79,8 +81,8 @@ function blogDescription(excerpt: string, html: string) {
   return `${cut.slice(0, cut.lastIndexOf(" "))}…`;
 }
 
-export function blogPostMetadata(locale: Locale, slug: string): Metadata {
-  const post = blogPosts(locale).find((p) => p.slug === slug);
+export async function blogPostMetadata(locale: Locale, slug: string): Promise<Metadata> {
+  const post = (await getBlogPosts(locale)).find((p) => p.slug === slug);
   if (!post) notFound();
   const title = post.title.includes("DND") ? post.title : `${post.title} | DND Cyprus`;
   const meta = pageMetadata({ locale, path: `/blog/${post.slug}`, title, description: blogDescription(post.excerpt, post.content) });
@@ -93,9 +95,9 @@ export function blogPostMetadata(locale: Locale, slug: string): Metadata {
   };
 }
 
-export function BlogPostPage({ locale, slug }: { locale: Locale; slug: string }) {
+export async function BlogPostPage({ locale, slug }: { locale: Locale; slug: string }) {
   const t = UI[locale];
-  const posts = blogPosts(locale);
+  const posts = await getBlogPosts(locale);
   const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
   const { title, cover, content } = post;

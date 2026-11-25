@@ -3,6 +3,7 @@ import ContactCard from "@/app/components/azure/ContactCard";
 import { AdvantageSections } from "@/app/components/azure/pages/PageSections";
 import { PAGES } from "@/lib/azure/pages";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 const t = PAGES.de.advantage;
 
@@ -19,7 +20,7 @@ export const metadata = pageMetadata({
 export default function Page() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <PageHero size="compact" kicker={t.hero.kicker} title={t.hero.title} lead={t.hero.lead} image="/azure/lv-1.jpg" imageAlt="DND Cyprus" />
+      <CmsSection scope="ayricalik" section="hero" lang="de" as={PageHero} size="compact" />
       <AdvantageSections locale="de" />
       <ContactCard locale="de" mode="home" id="iletisim" />
     </main>

@@ -13,9 +13,9 @@ import AboutDndHomes from "@/app/components/pl/about/AboutDndHomes";
 import { AboutUsa, PartnerCard } from "@/app/components/azure/pages/PageSections";
 import { Numbers } from "@/app/components/azure/home/FlowSections";
 import AwardsShowcase from "@/app/components/azure/home/AwardsShowcase";
-import { PAGES } from "@/lib/azure/pages";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "pl",
@@ -31,26 +31,9 @@ export default async function HomePage() {
   const team = await getTeam("pl"); // panelden düzenlenebilir (lib/content)
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <PageHero size="compact" kicker="O nas" title={<>DND <b>Cyprus</b></>} lead="Dzięki innowacyjnej wizji, wieloletniemu doświadczeniu i dbałości o jakość wykonania budujemy przyszłość Cypru." image="/azure/about-uu.jpg" imageAlt="DND Cyprus" />
-    <AboutUs
-    
-      youtubeId="jxjWP9L0SwQ"        // replace with your real ID
-  poster="/DND Beach Parti 24-59.jpg" // optional
-  videoTitle="DND Cyprus – film o firmie"
-  images={{
-    main: "/dndwhoweare.jpg",   // used only if no youtubeId or as poster fallback
-    sideTop: "/dndwhoweare.jpg",
-    sideBottom: "/dndtoplu.jpg",
-  }}
-  
-  />
-<AboutDndHomes
-   videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
-  poster="/homesthumb.webp"
-heading = "DND Homes — wizja dla Cypru"
-description = "Zapraszamy do poznania naszych projektów i koncepcji życia."
-
-/>
+      <CmsSection scope="hakkimizda" section="hero" lang="pl" as={PageHero} size="compact" />
+    <CmsSection scope="hakkimizda" section="kim" lang="pl" as={AboutUs} />
+<CmsSection scope="hakkimizda" section="dndHomes" lang="pl" as={AboutDndHomes} />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="pl" heading="h2" /></div></section>
     <PartnerCard locale="pl" />
     <section className="az-section" id="director" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="pl" heading="h2" /></div></section>
@@ -58,14 +41,14 @@ description = "Zapraszamy do poznania naszych projektów i koncepcji życia."
     <LeadershipTeam embedded members={team} />
     <Timeline locale="pl" id="timeline" about />
     <AboutUsa locale="pl" />
-    <Numbers locale="pl" id={SECTION_IDS.pl.numbers} usa={PAGES.pl.about.numbersUsa} title={PAGES.pl.about.numbersTitle} />
+    <CmsSection scope="hakkimizda" section="rakamlar" lang="pl" as={Numbers} locale="pl" id={SECTION_IDS.pl.numbers} />
     <AwardsShowcase locale="pl" />
 
 
-        <MissionVisionValues />
+        <CmsSection scope="hakkimizda" section="misyon" lang="pl" as={MissionVisionValues} />
 
-    <WhyChooseUs />
-    <CallToAction />
+    <CmsSection scope="hakkimizda" section="neden" lang="pl" as={WhyChooseUs} />
+    <CmsSection scope="hakkimizda" section="cagri" lang="pl" as={CallToAction} />
     
     </main>
   );

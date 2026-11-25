@@ -15,6 +15,10 @@ const LABEL = "block text-[13px] font-medium text-slate-700";
 
 function Input({ f, name, value, required }: { f: ItemFieldDef; name: string; value: string; required?: boolean }) {
   const id = `f-${name}`;
+  if (f.kind === "html")
+    return (
+      <textarea id={id} name={name} defaultValue={value} rows={16} required={required} spellCheck className="mt-1.5 block w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 font-mono text-[13px] leading-relaxed text-slate-800 shadow-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20" />
+    );
   if (f.kind === "long")
     return (
       <textarea id={id} name={name} defaultValue={value} rows={4} required={required} className="mt-1.5 block w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-800 shadow-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20" />
@@ -40,7 +44,8 @@ function Input({ f, name, value, required }: { f: ItemFieldDef; name: string; va
       defaultValue={value}
       required={required}
       type={f.kind === "url" ? "url" : f.kind === "date" ? "date" : "text"}
-      placeholder={f.hint && f.kind !== "tags" ? f.hint : undefined}
+      inputMode={f.kind === "link" ? "url" : undefined}
+      placeholder={f.hint && f.kind !== "tags" && f.kind !== "link" ? f.hint : undefined}
       className={INPUT}
     />
   );
@@ -80,12 +85,12 @@ export default function ItemForm({
 
       <div className="grid gap-5 sm:grid-cols-2">
         {shared.map((f) => (
-          <div key={f.key} className={f.kind === "image" || f.kind === "url" ? "sm:col-span-2" : ""}>
+          <div key={f.key} className={f.kind === "image" || f.kind === "url" || f.kind === "link" ? "sm:col-span-2" : ""}>
             <label htmlFor={`f-${f.key}`} className={LABEL}>
               {f.label} {f.required ? <span className="text-red-500">*</span> : null}
             </label>
             {f.kind === "image" ? <ImageField id={`f-${f.key}`} name={f.key} defaultValue={v[f.key] ?? ""} uploadEnabled={uploadEnabled} /> : <Input f={f} name={f.key} value={v[f.key] ?? ""} required={f.required} />}
-            {f.hint && f.kind === "image" ? <p className="mt-1 text-xs text-slate-500">{f.hint}</p> : null}
+            {f.hint && (f.kind === "image" || f.kind === "link") ? <p className="mt-1 text-xs text-slate-500">{f.hint}</p> : null}
           </div>
         ))}
       </div>
@@ -118,7 +123,7 @@ export default function ItemForm({
                   {f.label} {f.required && l === "tr" ? <span className="text-red-500">*</span> : null}
                 </label>
                 <Input f={f} name={`${l}.${f.key}`} value={v[`${l}.${f.key}`] ?? ""} />
-                {f.hint && f.kind === "tags" ? <p className="mt-1 text-xs text-slate-500">{f.hint}</p> : null}
+                {f.hint && f.kind !== "image" ? <p className="mt-1 text-xs text-slate-500">{f.hint}</p> : null}
               </div>
             ))}
             {l !== "tr" ? <p className="text-xs text-slate-500">Boş bırakılan alan sitede İngilizce (o da yoksa Türkçe) metinle görünür.</p> : null}

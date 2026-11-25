@@ -1,7 +1,7 @@
 // app/sitemap.ts
 // /sitemap.xml: TR ve EN sayfalar (hreflang alternatifleriyle) ve TR blog yazıları.
 import type { MetadataRoute } from "next";
-import { BLOG_POSTS } from "@/lib/blog";
+import { getBlogPosts } from "@/lib/content/store";
 import { SITE_URL, localePath, type Locale } from "@/lib/seo";
 import { LOCALES } from "@/lib/azure/site";
 
@@ -30,7 +30,8 @@ const BILINGUAL: { path: string; priority: number; changeFrequency: Freq }[] = [
 
 const abs = (locale: Locale, path: string) => `${SITE_URL}${localePath(locale, path)}`;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getBlogPosts("tr"); // panelden eklenen yazılar dahil
   const pages: MetadataRoute.Sitemap = BILINGUAL.flatMap(({ path, priority, changeFrequency }) => {
     // pageMetadata ile aynı: x-default İngilizce sürüm
     const languages = { ...Object.fromEntries(LOCALES.map((l) => [l, abs(l, path)])), "x-default": abs("en", path) };
@@ -44,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // DND'den Haberler: her dilde liste ve yazılar
   const blogPaths = [{ path: "/blog", lastModified: undefined as Date | undefined, images: undefined as string[] | undefined, priority: 0.6, changeFrequency: "weekly" as Freq },
-    ...BLOG_POSTS.map((post) => ({ path: `/blog/${post.slug}`, lastModified: post.date ? new Date(post.date) : undefined, images: post.cover ? [new URL(post.cover, SITE_URL).href] : undefined, priority: 0.5, changeFrequency: "yearly" as Freq }))];
+    ...posts.map((post) => ({ path: `/blog/${post.slug}`, lastModified: post.date ? new Date(post.date) : undefined, images: post.cover ? [new URL(post.cover, SITE_URL).href] : undefined, priority: 0.5, changeFrequency: "yearly" as Freq }))];
   const blog: MetadataRoute.Sitemap = blogPaths.flatMap(({ path, ...rest }) => {
     const languages = { ...Object.fromEntries(LOCALES.map((l) => [l, abs(l, path)])), "x-default": abs("en", path) };
     return LOCALES.map((locale) => ({ url: abs(locale, path), ...rest, alternates: { languages } }));

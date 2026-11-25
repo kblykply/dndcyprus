@@ -2,7 +2,7 @@ import { DeferredCatalog } from "@/app/components/performance/DeferredCatalog";
 import ProjectHero from "@/app/components/azure/ProjectHero";
 import ProjectCTA from "@/app/components/azure/ProjectCTA";
 import { PROJECT_PAGES, type ProjectPage } from "@/lib/azure/projects";
-import { PROJECT_DATA } from "@/lib/azure/projects/index";
+import { getProject } from "@/lib/content/store";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import type { Locale } from "@/lib/azure/site";
 import Gallery from "./Gallery";
@@ -23,18 +23,19 @@ import Payment from "./Payment";
 /**
  * Ortak Azure proje sayfası: hero → galeri → genel bakış → bilgiler → teknik donanım → iç mekân →
  * kat planları → Mariachi → olanaklar → 360° tur → konum → katalog → son güncelleme → talep formu.
- * Bölüm sırası eski sayfalarla aynı; içerik lib/azure/projects/<slug>.tsx dosyasından gelir.
+ * Bölüm sırası eski sayfalarla aynı; içerik lib/azure/projects/<slug>.tsx dosyasından gelir, panelde değiştirilen
+ * alanlar (İçerik → proje) üstüne yazılır (lib/content/store getProject).
  */
-export default function AzureProject({ slug, locale }: { slug: ProjectPage["slug"]; locale: Locale }) {
+export default async function AzureProject({ slug, locale }: { slug: ProjectPage["slug"]; locale: Locale }) {
   const name = PROJECT_PAGES[slug].name;
-  const d = PROJECT_DATA[slug][locale];
+  const { page, data: d } = await getProject(slug, locale);
   const ids = PROJECT_UI[locale].ids;
   // "Galeri" gibi kicker ile aynı olan başlıklara proje adı eklenir: "Lagoon Verde <b>Galeri</b>"
   const galleryTitle = d.gallery.title.trim().toLowerCase() === d.gallery.kicker.trim().toLowerCase()
     ? `${name} ${d.gallery.title.trim()}` : d.gallery.title;
   return (
     <>
-      <ProjectHero slug={slug} locale={locale} />
+      <ProjectHero slug={slug} locale={locale} page={page} />
 
       <section className="az-section az-proj" id={ids.gallery}>
         <div className="az-wrap">
@@ -58,7 +59,7 @@ export default function AzureProject({ slug, locale }: { slug: ProjectPage["slug
       {d.catalog && (slug === "lagoon-verde" || slug === "perla" || slug === "perla-ii") && <div className="az-catalog"><DeferredCatalog locale={locale} project={slug} /></div>}
       {d.update && <Update d={d.update} id={ids.update} locale={locale} />}
 
-      <ProjectCTA slug={slug} locale={locale} />
+      <ProjectCTA slug={slug} locale={locale} page={page} />
     </>
   );
 }

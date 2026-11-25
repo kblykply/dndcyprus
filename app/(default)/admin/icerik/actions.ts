@@ -7,18 +7,53 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { authorFromCookies, requireAdmin } from "@/lib/admin-auth";
-import { CONTENT_LOCALES, type ContentLocale } from "@/lib/content/core";
-import { SCOPES, isScopeKey } from "@/lib/content/scopes";
+import { CONTENT_LOCALES, fieldLabel, postHtml, type ContentLocale } from "@/lib/content/core";
+import { SCOPES, isScopeKey, type ScopeKey } from "@/lib/content/scopes";
 import { COLLECTIONS, allRoutes, ensureSeeded, isCollectionKey, sectionFields, slugify } from "@/lib/content/admin";
+import type { CollectionKey } from "@/lib/content/store";
 
 const isLocale = (v: unknown): v is ContentLocale => typeof v === "string" && (CONTENT_LOCALES as readonly string[]).includes(v);
 const str = (fd: FormData, k: string, max = 5000) => String(fd.get(k) ?? "").replace(/\r\n?/g, "\n").trim().slice(0, max);
 
-function refresh(routes: string[]) {
-  for (const r of new Set(routes)) revalidatePath(r);
+/** "[slug]" içeren yol o şablondaki tüm sayfaları yeniler; siteWide tüm siteyi (alt bilgi her sayfada) */
+function refresh(routes: string[], siteWide = false) {
+  if (siteWide) revalidatePath("/", "layout");
+  for (const r of new Set(routes)) {
+    if (r.includes("[")) revalidatePath(r, "page");
+    else revalidatePath(r);
+  }
 }
 
+
 /* ---------------- Sayfa metinleri ---------------- */
+
+const isSiteWide = (scope: ScopeKey) => "siteWide" in SCOPES[scope] && !!SCOPES[scope].siteWide;
+
+async function setOverride(scope: string, locale: string, path: string, value: string | null, author: string) {
+  if (value === null) await prisma.contentOverride.deleteMany({ where: { scope, locale, path } });
+  else
+    await prisma.contentOverride.upsert({
+      where: { scope_locale_path: { scope, locale, path } },
+      create: { scope, locale, path, value, updatedBy: author },
+      update: { value, updatedBy: author },
+    });
+}
+
+/**
+ * Görsel tüm dillerde ortaktır: bir dilde değişen görsel, aynı yerde aynı görseli gösteren diğer dillere de yazılır
+ * (o dilde ayrıca başka bir görsel seçilmişse dokunulmaz). Değişen diller döner.
+ */
+async function propagateImage(scope: ScopeKey, locale: ContentLocale, section: string, path: string, original: string, oldValue: string, next: string, author: string) {
+  const touched: ContentLocale[] = [];
+  for (const l2 of CONTENT_LOCALES) {
+    if (l2 === locale) continue;
+    const g = (await sectionFields(scope, l2, section)).find((x) => x.path === path);
+    if (!g || g.kind !== "image" || g.original !== original || g.value !== oldValue || g.value === next) continue;
+    await setOverride(scope, l2, path, next === g.original ? null : next, author);
+    touched.push(l2);
+  }
+  return touched;
+}
 
 export async function saveSection(formData: FormData) {
   const store = await requireAdmin("/admin/icerik");
@@ -29,28 +64,25 @@ export async function saveSection(formData: FormData) {
   const author = authorFromCookies(store);
   const fields = await sectionFields(scope, locale, section);
   let changed = 0;
+  const locales = new Set<ContentLocale>([locale]);
   for (const f of fields) {
     if (!formData.has(`f:${f.path}`)) continue;
     let v = str(formData, `f:${f.path}`, 5000);
     if (f.kind === "number" && !Number.isFinite(Number(v.replace(",", ".")))) continue;
     if (f.kind !== "long" && f.kind !== "rich") v = v.replace(/\n+/g, " ");
+    if (f.kind === "image" && v && !/^(\/|https:\/\/)\S+$/i.test(v)) continue; // geçersiz görsel yolu kaydedilmez
     const same = v === f.original;
-    if (same && f.overridden) {
-      await prisma.contentOverride.deleteMany({ where: { scope, locale, path: f.path } });
+    if ((same && f.overridden) || (!same && v !== f.value)) {
+      await setOverride(scope, locale, f.path, same ? null : v, author);
       changed++;
-    } else if (!same && v !== f.value) {
-      await prisma.contentOverride.upsert({
-        where: { scope_locale_path: { scope, locale, path: f.path } },
-        create: { scope, locale, path: f.path, value: v, updatedBy: author },
-        update: { value: v, updatedBy: author },
-      });
-      changed++;
+      if (f.kind === "image") for (const l2 of await propagateImage(scope, locale, section, f.path, f.original, f.value, v, author)) locales.add(l2);
     }
   }
   if (changed) {
     const label = SCOPES[scope].sections.find(([k]) => k === section)?.[1] ?? section;
-    await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "düzenleme", detail: `${label} (${locale.toUpperCase()}): ${changed} alan`, author } });
-    refresh(SCOPES[scope].routes(locale));
+    const extra = locales.size > 1 ? " · görsel diğer dillerde de" : "";
+    await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "düzenleme", detail: `${label} (${locale.toUpperCase()}): ${changed} alan${extra}`, author } });
+    refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
   redirect(`/admin/icerik/sayfa/${scope}?dil=${locale}&bolum=${section}&kaydedildi=${changed}`);
 }
@@ -62,35 +94,43 @@ export async function resetField(path: string, formData: FormData) {
   const locale = formData.get("locale");
   const section = String(formData.get("section"));
   if (!isScopeKey(scope) || !isLocale(locale) || !path.startsWith(`${section}.`)) redirect("/admin/icerik");
+  const author = authorFromCookies(store);
+  const f = (await sectionFields(scope, locale, section)).find((x) => x.path === path);
   const n = await prisma.contentOverride.deleteMany({ where: { scope, locale, path } });
   if (n.count) {
-    await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "orijinale dönüş", detail: `${path} (${locale.toUpperCase()})`, author: authorFromCookies(store) } });
-    refresh(SCOPES[scope].routes(locale));
+    const locales = new Set<ContentLocale>([locale]);
+    if (f?.kind === "image") for (const l2 of await propagateImage(scope, locale, section, path, f.original, f.value, f.original, author)) locales.add(l2);
+    const label = SCOPES[scope].sections.find(([k]) => k === section)?.[1] ?? section;
+    await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "orijinale dönüş", detail: `${label} · ${fieldLabel(path.slice(section.length + 1))} (${locale.toUpperCase()})`, author } });
+    refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
   redirect(`/admin/icerik/sayfa/${scope}?dil=${locale}&bolum=${section}&geri=1`);
 }
 
-/* ---------------- Listeler (Basında DND, Ekip) ---------------- */
+/* ---------------- Listeler (Basında DND, Ekip, Etkinlikler, DND'den Haberler) ---------------- */
 
 export type ItemFormState = { error?: string; values?: Record<string, string>; at?: number } | undefined;
 
-function itemFromForm(collection: "basin" | "ekip", fd: FormData): { data: Record<string, unknown>; error?: string } {
+const maxLen = (kind: string) => (kind === "html" ? 60000 : kind === "long" ? 5000 : 600);
+
+async function itemFromForm(collection: CollectionKey, fd: FormData): Promise<{ data: Record<string, unknown>; error?: string }> {
   const def = COLLECTIONS[collection];
   const data: Record<string, unknown> = {};
   for (const f of def.shared) {
-    const v = str(fd, f.key, f.kind === "long" ? 5000 : 600);
+    const v = str(fd, f.key, maxLen(f.kind));
     if (f.required && !v) return { data, error: `${f.label} gerekli.` };
     if (f.kind === "url" && v && !/^https?:\/\/\S+$/i.test(v)) return { data, error: `${f.label} geçerli bir bağlantı olmalı (https://…).` };
     if (f.kind === "date" && v && !/^\d{4}-\d{2}-\d{2}$/.test(v)) return { data, error: `${f.label} geçersiz.` };
     if (f.kind === "image" && v && !/^(\/|https:\/\/)\S+$/i.test(v)) return { data, error: `${f.label} için site içi yol (/…) ya da https bağlantısı girin.` };
+    if (f.kind === "link" && v && !/^(\/[^\s]*|https?:\/\/\S+)$/i.test(v)) return { data, error: `${f.label}: site içi yol (/…) ya da https bağlantısı olmalı.` };
     if (f.kind === "select" && v && f.options && !f.options.includes(v)) return { data, error: `${f.label} geçersiz.` };
     if (v) data[f.key] = v;
   }
   for (const f of def.perLocale) {
     const per: Record<string, unknown> = {};
     for (const l of CONTENT_LOCALES) {
-      const v = str(fd, `${l}.${f.key}`, f.kind === "long" ? 5000 : 600);
-      per[l] = f.kind === "tags" ? v.split(",").map((t) => t.trim()).filter(Boolean).slice(0, 12) : v;
+      const v = str(fd, `${l}.${f.key}`, maxLen(f.kind));
+      per[l] = f.kind === "tags" ? v.split(",").map((t) => t.trim()).filter(Boolean).slice(0, 12) : f.kind === "html" ? postHtml(v) : v;
     }
     if (f.required && !per.tr) return { data, error: `${f.label} (Türkçe) gerekli.` };
     data[f.key] = per;
@@ -109,7 +149,7 @@ export async function saveItem(_prev: ItemFormState, formData: FormData): Promis
   const collection = String(formData.get("collection"));
   if (!isCollectionKey(collection)) return failed("Liste bulunamadı.", formData);
   const author = authorFromCookies(store);
-  const { data, error } = itemFromForm(collection, formData);
+  const { data, error } = await itemFromForm(collection, formData);
   if (error) return failed(error, formData);
   await ensureSeeded(collection, author);
   const existing = String(formData.get("key") || "");
@@ -120,7 +160,7 @@ export async function saveItem(_prev: ItemFormState, formData: FormData): Promis
     if (!row) return failed("Kayıt bulunamadı (silinmiş olabilir).", formData);
     await prisma.contentItem.update({ where: { id: row.id }, data: { data: { ...(data as object), id: existing }, published, updatedBy: author } });
   } else {
-    const baseKey = slugify(collection === "basin" ? `${data.outlet}-${data.date}` : String(data.name)) || `${collection}-${Date.now()}`;
+    const baseKey = slugify(COLLECTIONS[collection].keyFrom(data)) || `${collection}-${Date.now()}`;
     key = baseKey;
     for (let i = 2; await prisma.contentItem.findUnique({ where: { collection_key: { collection, key } } }); i++) key = `${baseKey}-${i}`;
     const first = await prisma.contentItem.findFirst({ where: { collection }, orderBy: { sortOrder: "asc" }, select: { sortOrder: true } });
@@ -128,9 +168,9 @@ export async function saveItem(_prev: ItemFormState, formData: FormData): Promis
     await prisma.contentItem.create({ data: { collection, key, data: { ...(data as object), id: key }, published, sortOrder: (first?.sortOrder ?? 10) - 10, updatedBy: author } });
   }
   const def = COLLECTIONS[collection];
-  const title = collection === "basin" ? String((data.title as Record<string, string>).tr) : String(data.name);
+  const title = def.title(data);
   await prisma.contentLog.create({ data: { area: def.label, action: existing ? "düzenleme" : "ekleme", detail: title.slice(0, 160), author } });
-  refresh(allRoutes(def.routes));
+  refresh([...allRoutes(def.routes), ...(collection === "haber" ? ["/sitemap.xml"] : [])]);
   redirect(`/admin/icerik/liste/${collection}?kaydedildi=${encodeURIComponent(key)}`);
 }
 
@@ -146,7 +186,7 @@ async function itemAction(formData: FormData, op: "delete" | "toggle" | "up" | "
   if (idx < 0) redirect(`/admin/icerik/liste/${collection}`);
   const row = rows[idx];
   const def = COLLECTIONS[collection];
-  const name = collection === "basin" ? String(((row.data as Record<string, unknown>).title as Record<string, string>)?.tr ?? key) : String((row.data as Record<string, unknown>).name ?? key);
+  const name = def.title(row.data as Record<string, unknown>) || key;
   if (op === "delete") {
     await prisma.contentItem.delete({ where: { id: row.id } });
     await prisma.contentLog.create({ data: { area: def.label, action: "silme", detail: name.slice(0, 160), author } });
@@ -162,7 +202,7 @@ async function itemAction(formData: FormData, op: "delete" | "toggle" | "up" | "
       await prisma.$transaction(order.map((id, i) => prisma.contentItem.update({ where: { id }, data: { sortOrder: (i + 1) * 10 } })));
     }
   }
-  refresh(allRoutes(def.routes));
+  refresh([...allRoutes(def.routes), ...(collection === "haber" ? ["/sitemap.xml"] : [])]);
   redirect(`/admin/icerik/liste/${collection}${op === "up" || op === "down" ? `#k-${key}` : ""}`);
 }
 

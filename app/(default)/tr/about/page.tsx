@@ -13,9 +13,9 @@ import AboutDndHomes from "@/app/components/about/AboutDndHomes";
 import { AboutUsa, PartnerCard } from "@/app/components/azure/pages/PageSections";
 import { Numbers } from "@/app/components/azure/home/FlowSections";
 import AwardsShowcase from "@/app/components/azure/home/AwardsShowcase";
-import { PAGES } from "@/lib/azure/pages";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "tr",
@@ -31,25 +31,9 @@ export default async function HomePage() {
   const team = await getTeam("tr"); // panelden düzenlenebilir (lib/content)
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <PageHero size="compact" kicker="Hakkımızda" title={<>DND <b>Cyprus</b></>} lead="Yenilikçi vizyonumuz, köklü tecrübemiz ve kaliteli inşaat anlayışımız ile Kıbrıs’ın geleceğini inşa ediyoruz." image="/azure/about-uu.jpg" imageAlt="DND Cyprus" />
-    <AboutUs
-    
-      youtubeId="jxjWP9L0SwQ"        // replace with your real ID
-  poster="/DND Beach Parti 24-59.jpg" // optional
-  videoTitle="DND Cyprus Tanıtım"
-  images={{
-    main: "/dndwhoweare.jpg",   // used only if no youtubeId or as poster fallback
-    sideTop: "/dndwhoweare.jpg",
-    sideBottom: "/dndtoplu.jpg",
-  }}
-  
-  />
-<AboutDndHomes
-   videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
-  poster="/homesthumb.webp"
-  heading="DND Homes — Kıbrıs Vizyonu"
-  description="Projelerimizi ve yaşam konseptimizi keşfedin."
-/>
+      <CmsSection scope="hakkimizda" section="hero" lang="tr" as={PageHero} size="compact" />
+    <CmsSection scope="hakkimizda" section="kim" lang="tr" as={AboutUs} />
+<CmsSection scope="hakkimizda" section="dndHomes" lang="tr" as={AboutDndHomes} />
 <section className="az-section" id="kurucu" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="tr" heading="h2" /></div></section>
     <PartnerCard locale="tr" />
     <section className="az-section" id="direktor" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="tr" heading="h2" /></div></section>
@@ -57,14 +41,14 @@ export default async function HomePage() {
     <LeadershipTeam embedded members={team} />
     <Timeline locale="tr" id="timeline" about />
     <AboutUsa locale="tr" />
-    <Numbers locale="tr" id={SECTION_IDS.tr.numbers} usa={PAGES.tr.about.numbersUsa} title={PAGES.tr.about.numbersTitle} />
+    <CmsSection scope="hakkimizda" section="rakamlar" lang="tr" as={Numbers} locale="tr" id={SECTION_IDS.tr.numbers} />
     <AwardsShowcase locale="tr" />
 
 
-        <MissionVisionValues />
+        <CmsSection scope="hakkimizda" section="misyon" lang="tr" as={MissionVisionValues} />
 
-    <WhyChooseUs />
-    <CallToAction />
+    <CmsSection scope="hakkimizda" section="neden" lang="tr" as={WhyChooseUs} />
+    <CmsSection scope="hakkimizda" section="cagri" lang="tr" as={CallToAction} />
     
     </main>
   );

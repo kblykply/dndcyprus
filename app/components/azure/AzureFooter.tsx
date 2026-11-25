@@ -2,8 +2,9 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiWhatsappLogoDuotone, PiYoutubeLogoDuotone } from "react-icons/pi";
-import { CONTACT, FOOTER_COPY, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
+import { CONTACT, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
 import { NAV_TEXT } from "@/lib/azure/nav";
+import { getFooter } from "@/lib/content/store";
 import CookiePrefsLink from "./CookiePrefsLink";
 import "./footer.css";
 import FooterFit from "./FooterFit";
@@ -16,8 +17,9 @@ const SOCIAL_ICONS: Record<string, IconType> = {
 // iki sütunlu listeler sütun sütun okunur: satır sayısı öğe sayısının yarısı (yukarı yuvarlanır)
 const rows = (n: number) => ({ "--rows": Math.ceil(n / 2) }) as CSSProperties;
 
-export default function AzureFooter({ locale }: { locale: Locale }) {
-  const t = FOOTER_COPY[locale];
+export default async function AzureFooter({ locale }: { locale: Locale }) {
+  const f = await getFooter(locale); // slogan ve adres panelden (İçerik → İletişim ve alt bilgi)
+  const t = f.copy;
   const n = NAV_COPY[locale];
   const year = new Date().getFullYear();
   const general = [
@@ -45,7 +47,7 @@ export default function AzureFooter({ locale }: { locale: Locale }) {
             </div>
             {/* slogan tek satır, adres altında ayrı satır (22.11.2026) */}
             <p>{t.tagline}</p>
-            <p className="adr">{CONTACT.hq[locale]}</p>
+            <p className="adr">{f.address}</p>
             <p className="ct">
               <a href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp {CONTACT.mobile}</a> · <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
             </p>

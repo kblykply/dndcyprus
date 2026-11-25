@@ -10,8 +10,8 @@ const CTA: Record<Locale, { price: string; brochure: string }> = {
   pl: { price: "Poproś o ceny i plany", brochure: "Broszura (PDF)" },
 };
 
-export default function ProjectHero({ slug, locale }: { slug: ProjectPage["slug"]; locale: Locale }) {
-  const p = PROJECT_PAGES[slug];
+export default function ProjectHero({ slug, locale, page }: { slug: ProjectPage["slug"]; locale: Locale; page?: ProjectPage }) {
+  const p = page ?? PROJECT_PAGES[slug]; // panel değişiklikleriyle (AzureProject → getProject)
   const brochure = p.brochure?.[locale];
   return (
     <PageHero

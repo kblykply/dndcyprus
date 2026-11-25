@@ -2,6 +2,7 @@ import { getTeam } from "@/lib/content/store";
 import PageHero from "@/app/components/azure/PageHero";
 import LeadershipTeam from "@/app/components/pl/about/LeadershipTeam";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "pl",
@@ -17,7 +18,7 @@ export default async function HomePage() {
   const team = await getTeam("pl"); // panelden düzenlenebilir (lib/content)
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <PageHero size="short" title={<>Nasz zespół</>} lead="Za rozwojem każdego projektu stoi profesjonalizm naszego zespołu – to nasz najmocniejszy fundament." image="/property_awards_2025-747.jpg" imagePosition="50% 16%" />
+      <CmsSection scope="ekipSayfasi" section="hero" lang="pl" as={PageHero} size="short" imagePosition="50% 16%" />
       <LeadershipTeam showHeader={false} members={team} />
    
     

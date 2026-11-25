@@ -3,6 +3,7 @@ import ContactCard from "@/app/components/azure/ContactCard";
 import ContactStays from "@/app/components/azure/ContactStays";
 import ContactInfo from "@/app/components/contact/ContactInfo";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "tr",
@@ -15,10 +16,10 @@ export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip az-contactpage">
 
-<PageHero size="short" kicker="İletişim" title={<>Bize <b>ulaşın</b></>} lead="Projelerimiz ve yatırım fırsatları hakkında daha fazla bilgi almak için bizimle iletişime geçin." image="/azure/contact/iletisim-banner.jpg" imageAlt="Deniz manzaralı masada ev anahtarları, kat planı ve kahve" imagePosition="50% 60%" ctas={[{ label: "Mesaj Gönder", href: "#form" }, { label: "Projelerimiz", href: "/tr/projects", variant: "ghost" }]} />
-<ContactInfo />
+<CmsSection scope="iletisim" section="hero" lang="tr" as={PageHero} size="short" imagePosition="50% 60%" />
+<CmsSection scope="iletisim" section="bilgi" lang="tr" as={ContactInfo} />
 <ContactStays locale="tr" />
-<ContactCard locale="tr" mode="contact" id="form" title={<>Hadi hayallerinizi birlikte <b>hayata geçirelim</b></>} lead="DND Cyprus ekibi, yatırımlarınız için size destek olmaya hazır. Mesajınızı bırakın, en kısa sürede dönüş yapalım." />
+<CmsSection scope="iletisim" section="form" lang="tr" as={ContactCard} locale="tr" mode="contact" id="form" />
     
     </main>
   );

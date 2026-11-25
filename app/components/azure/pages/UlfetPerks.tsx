@@ -1,14 +1,14 @@
 import Arrow from "../Arrow";
 import Image from "next/image";
 import Link from "next/link";
-import { PAGES } from "@/lib/azure/pages";
+import { getPages } from "@/lib/content/store";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { href, type Locale } from "@/lib/azure/site";
 import "./pages.css";
 
 /** Ülfet (Girne Karaoğlanoğlu) ev sahibi ayrıcalıkları: Ülfet Beach Club ücretsiz giriş, Ülfet Shu %10 */
-export default function UlfetPerks({ locale, compact }: { locale: Locale; compact?: boolean }) {
-  const t = PAGES[locale].advantage.extra;
+export default async function UlfetPerks({ locale, compact }: { locale: Locale; compact?: boolean }) {
+  const t = (await getPages(locale)).advantage.extra;
   if (compact) {
     return (
       <Link className="az-ulfet-row rv" href={`${href(locale, "/advantage")}#${SECTION_IDS[locale].perks}`} prefetch={false}>

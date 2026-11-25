@@ -1,18 +1,23 @@
 // lib/content/admin.ts
 // Panelin içerik yardımcıları (yalnız sunucu): bölüm alanları, listelerin tanımı ve ilk aktarım, sitede yenilenecek adresler.
 import { prisma } from "@/lib/prisma";
-import { CONTENT_LOCALES, getAt, walkFields, type ContentLocale, type Field } from "./core";
-import { SCOPES, type ScopeKey } from "./scopes";
+import { CONTENT_LOCALES, getAt, slugify, walkFields, type ContentLocale, type Field } from "./core";
+export { slugify };
+import { SCOPES, isHiddenPath, type ScopeKey } from "./scopes";
 import { PRESS_DEFAULTS } from "./defaults/press";
 import { TEAM_DEFAULTS } from "./defaults/team";
+import { EVENT_DEFAULTS } from "./defaults/events";
+import { BLOG_DEFAULTS } from "./defaults/blog";
 import type { CollectionKey } from "./store";
 
 export type EditorField = Field & { original: string; overridden: boolean };
 
 /** Bir bölümün alanları: koddaki değer (orijinal) + varsa panelde yazılan değer */
 export async function sectionFields(scope: ScopeKey, locale: ContentLocale, section: string): Promise<EditorField[]> {
-  const base = SCOPES[scope].build(locale);
-  const fields = walkFields(getAt(base, section), section);
+  const def = SCOPES[scope];
+  const base = def.build(locale);
+  const hide = "hide" in def ? def.hide : undefined;
+  const fields = walkFields(getAt(base, section), section).filter((f) => !isHiddenPath(f.path, hide));
   const rows = await prisma.contentOverride.findMany({ where: { scope, locale, path: { startsWith: `${section}.` } }, select: { path: true, value: true } });
   const ov = new Map(rows.map((r) => [r.path, r.value]));
   return fields.map((f) => ({ ...f, original: f.value, value: ov.get(f.path) ?? f.value, overridden: ov.has(f.path) }));
@@ -30,13 +35,49 @@ export async function overrideCounts(scope: ScopeKey, locale: ContentLocale) {
 
 /* ---------------- Listeler ---------------- */
 
-export type ItemFieldDef = { key: string; label: string; kind: "text" | "long" | "url" | "date" | "image" | "tags" | "select"; required?: boolean; options?: string[]; hint?: string };
+export type ItemFieldDef = {
+  key: string;
+  label: string;
+  /** link: site içi yol (/…) ya da https bağlantısı; html: yazı metni (paragraflar, **kalın**, HTML) */
+  kind: "text" | "long" | "url" | "link" | "date" | "image" | "tags" | "select" | "html";
+  required?: boolean;
+  options?: string[];
+  hint?: string;
+};
 
-export const COLLECTIONS: Record<CollectionKey, { label: string; singular: string; desc: string; shared: ItemFieldDef[]; perLocale: ItemFieldDef[]; routes: (l: ContentLocale) => string[] }> = {
+type Data = Record<string, unknown>;
+const trOf = (d: Data, k: string) => String(((d[k] as Record<string, string> | undefined) ?? {}).tr ?? "");
+
+export type CollectionDef = {
+  label: string;
+  singular: string;
+  /** düzenleme sayfası başlığı */
+  editTitle: string;
+  desc: string;
+  shared: ItemFieldDef[];
+  perLocale: ItemFieldDef[];
+  /** listede küçük görsel olarak gösterilen alan */
+  imageKey: string;
+  title: (d: Data) => string;
+  sub: (d: Data) => string;
+  /** yeni kaydın anahtarı (blogda yazının adresi olur) */
+  keyFrom: (d: Data) => string;
+  /** sitede yenilenecek adresler; "[slug]" içeren yol tüm yazı sayfalarını yeniler */
+  routes: (l: ContentLocale) => string[];
+  /** kayıt sitede nerede (panelde "sitede gör" bağlantısı) */
+  viewHref?: (key: string) => string;
+};
+
+export const COLLECTIONS: Record<CollectionKey, CollectionDef> = {
   basin: {
     label: "Basında DND",
     singular: "haber",
+    editTitle: "Haberi düzenle",
     desc: "Ana sayfada en yeni 5 haber, Basın sayfasında hepsi tarihe göre görünür.",
+    imageKey: "cover",
+    title: (d) => trOf(d, "title"),
+    sub: (d) => `${d.outlet ?? ""} · ${d.date ?? ""}`,
+    keyFrom: (d) => `${d.outlet}-${d.date}`,
     shared: [
       { key: "outlet", label: "Yayın adı", kind: "text", required: true, hint: "Örnek: Kıbrıs Postası" },
       { key: "url", label: "Haberin bağlantısı", kind: "url", required: true },
@@ -53,6 +94,11 @@ export const COLLECTIONS: Record<CollectionKey, { label: string; singular: strin
   ekip: {
     label: "Ekip",
     singular: "kişi",
+    editTitle: "Kişiyi düzenle",
+    imageKey: "photo",
+    title: (d) => String(d.name ?? ""),
+    sub: (d) => trOf(d, "role"),
+    keyFrom: (d) => String(d.name ?? ""),
     desc: "Ekip ve Hakkımızda sayfalarında listedeki sırayla görünür.",
     shared: [
       { key: "name", label: "Ad soyad", kind: "text", required: true },
@@ -66,11 +112,53 @@ export const COLLECTIONS: Record<CollectionKey, { label: string; singular: strin
     ],
     routes: (l) => [`/${l}/team`, `/${l}/about`],
   },
+  etkinlik: {
+    label: "Etkinlikler",
+    singular: "etkinlik",
+    editTitle: "Etkinliği düzenle",
+    desc: "Haberler sayfasındaki Etkinlikler bölümünde listedeki sırayla görünür (en yeni en üstte).",
+    imageKey: "img",
+    title: (d) => trOf(d, "h"),
+    sub: (d) => trOf(d, "date"),
+    keyFrom: (d) => trOf(d, "h"),
+    shared: [
+      { key: "img", label: "Fotoğraf", kind: "image", required: true, hint: "Yatay fotoğraf (kartta kırpılarak gösterilir)" },
+      { key: "href", label: "Bağlantı (isteğe bağlı)", kind: "link", hint: "Site içi yol (/blog/…) ya da https://… — boşsa kart tıklanmaz" },
+    ],
+    perLocale: [
+      { key: "date", label: "Tarih yazısı", kind: "text", required: true, hint: "Örnek: 7 Kasım 2026" },
+      { key: "h", label: "Başlık", kind: "text", required: true },
+      { key: "p", label: "Metin", kind: "long" },
+    ],
+    routes: (l) => [`/${l}/press`],
+  },
+  haber: {
+    label: "DND'den Haberler",
+    singular: "yazı",
+    editTitle: "Yazıyı düzenle",
+    desc: "Blog yazıları: Haberler sayfasında en yeni 3 yazı, /blog sayfasında hepsi tarihe göre görünür. Yazının adresi ilk kayıtta başlıktan oluşur.",
+    imageKey: "cover",
+    title: (d) => trOf(d, "title"),
+    sub: (d) => String(d.date ?? ""),
+    keyFrom: (d) => trOf(d, "title"),
+    shared: [
+      { key: "date", label: "Tarih", kind: "date", required: true },
+      { key: "cover", label: "Kapak görseli", kind: "image" },
+    ],
+    perLocale: [
+      { key: "title", label: "Başlık", kind: "text", required: true },
+      { key: "excerpt", label: "Özet", kind: "long", hint: "Listede ve arama sonuçlarında görünen 1–2 cümle" },
+      { key: "content", label: "Yazı", kind: "html", required: true, hint: "Paragrafları boş satırla ayırın; **kalın** yazabilirsiniz. HTML de kullanılabilir (<p>, <a href=…>, <blockquote>)." },
+      { key: "author", label: "İmza (isteğe bağlı)", kind: "text", hint: "Örnek: Basın bülteni — boşsa imza görünmez" },
+    ],
+    routes: (l) => [`/${l}/blog`, `/${l}/press`, `/${l}/blog/[slug]`],
+    viewHref: (key) => `/tr/blog/${key}`,
+  },
 };
 
-export const isCollectionKey = (v: string): v is CollectionKey => v in COLLECTIONS;
+export const isCollectionKey = (v: string): v is CollectionKey => Object.prototype.hasOwnProperty.call(COLLECTIONS, v);
 
-const DEFAULTS: Record<CollectionKey, { id: string }[]> = { basin: PRESS_DEFAULTS, ekip: TEAM_DEFAULTS };
+const DEFAULTS: Record<CollectionKey, { id: string }[]> = { basin: PRESS_DEFAULTS, ekip: TEAM_DEFAULTS, etkinlik: EVENT_DEFAULTS, haber: BLOG_DEFAULTS };
 
 /** Liste veritabanında yoksa koddaki listeyi aktarır (ilk değişiklikten önce; tekrar çalışırsa bir şey yapmaz) */
 export async function ensureSeeded(collection: CollectionKey, author: string) {
@@ -93,13 +181,3 @@ export async function listItems(collection: CollectionKey) {
 
 export const allRoutes = (fn: (l: ContentLocale) => string[]) => CONTENT_LOCALES.flatMap(fn);
 
-export function slugify(s: string) {
-  return s
-    .toLocaleLowerCase("tr-TR")
-    .replace(/ı/g, "i")
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 60);
-}

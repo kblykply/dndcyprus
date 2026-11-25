@@ -4,10 +4,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { PiCheckBold } from "react-icons/pi";
 import { HOME } from "@/lib/azure/home";
-import { PAGES } from "@/lib/azure/pages";
-import { blogPosts } from "@/lib/blog";
+import { getBlogPosts, getPages, getProject } from "@/lib/content/store";
 import { SECTION_IDS } from "@/lib/azure/nav";
-import { PROJECT_DATA } from "@/lib/azure/projects/index";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import { PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
 import LogoTag from "../LogoTag";
@@ -55,11 +53,11 @@ function Split({ id, kicker, title, lead, points, img, alt, note, cta, ctaHref, 
 }
 
 /** DND Ayrıcalığı sayfası: inşaat kalitesi · sosyal yaşam · satış sonrası · ev sahibi ayrıcalıkları */
-export function AdvantageSections({ locale }: { locale: Locale }) {
-  const t = PAGES[locale].advantage;
+export async function AdvantageSections({ locale }: { locale: Locale }) {
+  const t = (await getPages(locale)).advantage;
   const id = SECTION_IDS[locale];
-  const tech = PROJECT_DATA.perla[locale].tech!;
-  const amen = PROJECT_DATA["lagoon-verde"][locale].amenities;
+  const tech = (await getProject("perla", locale)).data.tech!;
+  const amen = (await getProject("lagoon-verde", locale)).data.amenities;
   return (
     <>
       <Tech d={{ ...tech, kicker: t.quality.kicker, title: t.quality.title, lead: t.quality.lead }} name="DND" id={id.quality} locale={locale} />
@@ -72,10 +70,10 @@ export function AdvantageSections({ locale }: { locale: Locale }) {
 }
 
 /** Ödeme ve Yatırım Fırsatları sayfası: TL ödeme modeli (+ NeoCity 5 Sıfır, S.S.S.) · kampanyalar · kira geliri */
-export function PaymentSections({ locale }: { locale: Locale }) {
-  const t = PAGES[locale].payment;
+export async function PaymentSections({ locale }: { locale: Locale }) {
+  const t = (await getPages(locale)).payment;
   const id = SECTION_IDS[locale];
-  const neo = PROJECT_DATA.neocity[locale].payment!;
+  const neo = (await getProject("neocity", locale)).data.payment!;
   const faq = HOME[locale].faq.items.slice(0, 2);
   return (
     <>
@@ -129,8 +127,8 @@ const campLogo = (c: { path: string; img: string }) =>
   : PROJECTS.find((x) => c.path.split("#")[0] === `/${x.slug}`)?.logo;
 
 /** Haberler sayfası: Etkinlikler (gerçek fotoğraflar) */
-export function EventsSection({ locale }: { locale: Locale }) {
-  const t = PAGES[locale].events;
+export async function EventsSection({ locale }: { locale: Locale }) {
+  const t = (await getPages(locale)).events;
   const ig = SOCIALS.find((s) => s.label === "Instagram")!.href;
   return (
     <section className="az-section az-events" id={SECTION_IDS[locale].events}>
@@ -164,10 +162,10 @@ export function EventsSection({ locale }: { locale: Locale }) {
 const NEWS_DATE: Record<Locale, string> = { tr: "tr-TR", en: "en-GB", de: "de-DE", ru: "ru-RU", pl: "pl-PL" };
 
 /** Haberler sayfası: DND'den Haberler (son 3 yazı; kartlar Etkinlikler ile aynı, tümü /blog'da) */
-export function DndNewsSection({ locale }: { locale: Locale }) {
-  const t = PAGES[locale].news.blog;
+export async function DndNewsSection({ locale }: { locale: Locale }) {
+  const t = (await getPages(locale)).news.blog;
   const fmt = new Intl.DateTimeFormat(NEWS_DATE[locale], { year: "numeric", month: "long", day: "numeric" });
-  const posts = [...blogPosts(locale)].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
+  const posts = [...(await getBlogPosts(locale))].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
   return (
     <section className="az-section az-events az-dndnews" id={SECTION_IDS[locale].dndNews}>
       <div className="az-wrap">
@@ -193,8 +191,8 @@ export function DndNewsSection({ locale }: { locale: Locale }) {
 }
 
 /** Haberler sayfası: Basında DND. Haber listesi sayfanın kendi PressSection'ı (bare); başlık ve hiza bu bölümden */
-export function PressBlock({ locale, children }: { locale: Locale; children: ReactNode }) {
-  const t = PAGES[locale].news.press;
+export async function PressBlock({ locale, children }: { locale: Locale; children: ReactNode }) {
+  const t = (await getPages(locale)).news.press;
   return (
     <section className="az-section az-pressblock" id={SECTION_IDS[locale].press}>
       <div className="az-wrap">
@@ -210,8 +208,8 @@ export function PressBlock({ locale, children }: { locale: Locale; children: Rea
 }
 
 /** Hakkımızda: DND Homes Amerika (sunum metni + ABD'de teslim edilen iki proje) */
-export function AboutUsa({ locale }: { locale: Locale }) {
-  const t = PAGES[locale].about.usa;
+export async function AboutUsa({ locale }: { locale: Locale }) {
+  const t = (await getPages(locale)).about.usa;
   return (
     <section className="az-section az-usa" id={SECTION_IDS[locale].usa}>
       <div className="az-wrap g">
@@ -236,8 +234,8 @@ export function AboutUsa({ locale }: { locale: Locale }) {
 }
 
 /** Hakkımızda: kurucu ortak Netice Dökmecioğlu (satış sunumundaki metin ve portre; portre sağda) */
-export function PartnerCard({ locale }: { locale: Locale }) {
-  const t = PAGES[locale].about.partner;
+export async function PartnerCard({ locale }: { locale: Locale }) {
+  const t = (await getPages(locale)).about.partner;
   const name = "Netice Dökmecioğlu";
   return (
     <section className="az-section" id={locale === "tr" ? "ortak" : "partner"} aria-label={name}>

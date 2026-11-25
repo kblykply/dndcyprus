@@ -11,8 +11,8 @@ const T: Record<Locale, { kicker: string; title: React.ReactNode }> = {
 };
 
 // Proje sayfası sonu: fiyat / kat planı talep formu (reklam kampanyalarının ana dönüşümü, form="lead")
-export default function ProjectCTA({ slug, locale }: { slug: ProjectPage["slug"]; locale: Locale }) {
-  const p = PROJECT_PAGES[slug];
+export default function ProjectCTA({ slug, locale, page }: { slug: ProjectPage["slug"]; locale: Locale; page?: ProjectPage }) {
+  const p = page ?? PROJECT_PAGES[slug]; // panel değişiklikleriyle (AzureProject → getProject)
   return (
     <ContactCard
       locale={locale}

@@ -13,9 +13,9 @@ import AboutDndHomes from "@/app/components/de/about/AboutDndHomes";
 import { AboutUsa, PartnerCard } from "@/app/components/azure/pages/PageSections";
 import { Numbers } from "@/app/components/azure/home/FlowSections";
 import AwardsShowcase from "@/app/components/azure/home/AwardsShowcase";
-import { PAGES } from "@/lib/azure/pages";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "de",
@@ -31,26 +31,9 @@ export default async function HomePage() {
   const team = await getTeam("de"); // panelden düzenlenebilir (lib/content)
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <PageHero size="compact" kicker="Über uns" title={<>DND <b>Cyprus</b></>} lead="Mit innovativer Vision, langjähriger Erfahrung und dem Anspruch an hochwertige Bauqualität gestalten wir die Zukunft Zyperns." image="/azure/about-uu.jpg" imageAlt="DND Cyprus" />
-    <AboutUs
-    
-      youtubeId="jxjWP9L0SwQ"        // replace with your real ID
-  poster="/DND Beach Parti 24-59.jpg" // optional
-  videoTitle="Vorstellung von DND Cyprus"
-  images={{
-    main: "/dndwhoweare.jpg",   // used only if no youtubeId or as poster fallback
-    sideTop: "/dndwhoweare.jpg",
-    sideBottom: "/dndtoplu.jpg",
-  }}
-  
-  />
-<AboutDndHomes
-   videoId="4oSQ67UeyXQ"             // e.g. "dQw4w9WgXcQ"
-  poster="/homesthumb.webp"
-heading = "DND Homes – Vision für Zypern"
-description = "Entdecken Sie unsere Projekte und unser Wohnkonzept."
-
-/>
+      <CmsSection scope="hakkimizda" section="hero" lang="de" as={PageHero} size="compact" />
+    <CmsSection scope="hakkimizda" section="kim" lang="de" as={AboutUs} />
+<CmsSection scope="hakkimizda" section="dndHomes" lang="de" as={AboutDndHomes} />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="de" heading="h2" /></div></section>
     <PartnerCard locale="de" />
     <section className="az-section" id="director" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="de" heading="h2" /></div></section>
@@ -58,14 +41,14 @@ description = "Entdecken Sie unsere Projekte und unser Wohnkonzept."
     <LeadershipTeam embedded members={team} />
     <Timeline locale="de" id="timeline" about />
     <AboutUsa locale="de" />
-    <Numbers locale="de" id={SECTION_IDS.de.numbers} usa={PAGES.de.about.numbersUsa} title={PAGES.de.about.numbersTitle} />
+    <CmsSection scope="hakkimizda" section="rakamlar" lang="de" as={Numbers} locale="de" id={SECTION_IDS.de.numbers} />
     <AwardsShowcase locale="de" />
 
 
-        <MissionVisionValues />
+        <CmsSection scope="hakkimizda" section="misyon" lang="de" as={MissionVisionValues} />
 
-    <WhyChooseUs />
-    <CallToAction />
+    <CmsSection scope="hakkimizda" section="neden" lang="de" as={WhyChooseUs} />
+    <CmsSection scope="hakkimizda" section="cagri" lang="de" as={CallToAction} />
     
     </main>
   );

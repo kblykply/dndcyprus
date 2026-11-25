@@ -42,7 +42,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
       <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">{def.label}</h1>
-          <p className="mt-1.5 text-sm text-slate-500">Alanı değiştirip kaydedin; sitede yalnız seçili dil güncellenir. Kalın yazı için **iki yıldız** kullanın.</p>
+          <p className="mt-1.5 text-sm text-slate-500">Alanı değiştirip kaydedin; yazılar yalnız seçili dilde, görseller tüm dillerde güncellenir. Kalın yazı için **iki yıldız** kullanın.</p>
         </div>
         <a href={def.routes(locale)[0]} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">
           Sitede gör <ExternalLink className="h-4 w-4" aria-hidden />
@@ -129,6 +129,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
                     <input id={id} name={name} defaultValue={f.value} type={f.kind === "number" ? "number" : "text"} step={f.kind === "number" ? "any" : undefined} className={`${INPUT} h-10`} />
                   )}
                   {f.kind === "rich" ? <p className="mt-1 text-[11px] text-slate-400">**kalın** · yeni satır için Enter</p> : null}
+                  {f.kind === "image" ? <p className="mt-1 text-[11px] text-slate-400">Görsel tüm dillerde ortak: aynı görseli gösteren diğer dillerde de değişir.</p> : null}
                   {f.overridden ? (
                     <p className="mt-1.5 truncate text-[11px] text-slate-400" title={f.original}>
                       Orijinal: {f.original}
