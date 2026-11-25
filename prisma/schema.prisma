@@ -98,3 +98,10 @@ model ContentLog {
 
   @@index([createdAt])
 }
+
+/// Dış sistemlerle eşitleme durumu (ör. "meta-leads": Meta reklam formu talepleri): son çalışma, sonuç, işlenen kayıtlar
+model SyncState {
+  key       String   @id
+  data      Json
+  updatedAt DateTime @updatedAt
+}

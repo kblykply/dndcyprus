@@ -9,6 +9,7 @@ import { ArrowDownRight, ArrowUpRight, BadgeCheck, CheckCircle2, Clock3, PhoneCa
 import { prisma } from "@/lib/prisma";
 import { ga4Configured } from "@/lib/ga4";
 import { clarityConfigured } from "@/lib/clarity";
+import { loadMetaSyncState, metaLeadsConfigured } from "@/lib/meta-leads";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { LEAD_STATUSES, cyprusDateTime, sourceGroup, statusInfo } from "@/lib/lead-status";
 import { bucketCounts, changePct, groupLeads, inRange, isQualified, overviewPeriod, periodBuckets, sourceColor } from "@/lib/lead-stats";
@@ -75,7 +76,17 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
     }));
   const noProject = cur.filter((l) => !l.project).length;
   const statusCounts = LEAD_STATUSES.map((s) => ({ key: s.key, label: s.label, count: cur.filter((l) => statusInfo(l.status).key === s.key).length }));
-  const lastWeb = all.find((l) => l.form && l.form !== "panel");
+  const lastWeb = all.find((l) => l.form && l.form !== "panel" && l.form !== "meta-lead");
+  const metaOn = metaLeadsConfigured();
+  const metaState = metaOn ? await loadMetaSyncState() : null;
+  const metaTotal = all.filter((l) => l.form === "meta-lead").length;
+  const metaNote = !metaOn
+    ? "Reklam formu talepleri için Meta onayı bekleniyor"
+    : !metaState?.lastRunAt
+      ? "Bağlandı, ilk çekim birkaç dakika içinde"
+      : metaState.error
+        ? `Son denemede hata: ${metaState.error}`
+        : `${metaTotal} reklam talebi · son kontrol ${cyprusDateTime(new Date(metaState.lastRunAt)).time}`;
   const periodLabel = { "30g": "son 30 gün", "90g": "son 90 gün", "12a": "son 12 ay", tumu: "tüm zamanlar" }[period];
 
   return (
@@ -183,7 +194,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
             { name: "Web sitesi formları", ok: true, note: lastWeb ? `Son talep ${cyprusDateTime(lastWeb.createdAt).date}` : "Bağlı, henüz talep yok" },
             { name: "Google Analytics 4", ok: ga4Configured(), note: ga4Configured() ? "Site Trafiği sayfasında" : "Site trafiği için okuma izni bekleniyor" },
             { name: "Microsoft Clarity", ok: clarityConfigured(), note: clarityConfigured() ? "Isı Haritası sayfasında" : "Isı haritası için API anahtarı bekleniyor" },
-            { name: "Meta (Instagram / Facebook)", ok: false, note: "Reklam formu talepleri için erişim bekleniyor" },
+            { name: "Meta (Instagram / Facebook)", ok: metaOn && !metaState?.error, connected: metaOn, note: metaNote },
           ].map((d) => (
             <li key={d.name} className="flex items-start gap-3 rounded-lg border border-slate-200 p-3.5">
               {d.ok ? (
@@ -193,7 +204,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
               )}
               <span>
                 <span className="block text-[13px] font-medium text-slate-900">{d.name}</span>
-                <span className="block text-xs text-slate-500">{d.ok ? d.note : `Kurulum bekliyor · ${d.note}`}</span>
+                <span className="block text-xs text-slate-500">{d.ok || ("connected" in d && d.connected) ? d.note : `Kurulum bekliyor · ${d.note}`}</span>
               </span>
             </li>
           ))}

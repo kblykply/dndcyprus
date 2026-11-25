@@ -47,3 +47,8 @@ export type ContentItem = Prisma.ContentItemModel
  * İçerik işlem geçmişi (kim, neyi, ne zaman)
  */
 export type ContentLog = Prisma.ContentLogModel
+/**
+ * Model SyncState
+ * Dış sistemlerle eşitleme durumu (ör. "meta-leads": Meta reklam formu talepleri): son çalışma, sonuç, işlenen kayıtlar
+ */
+export type SyncState = Prisma.SyncStateModel

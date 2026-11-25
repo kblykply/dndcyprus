@@ -56,7 +56,8 @@ export const ModelName = {
   ClaritySnapshot: 'ClaritySnapshot',
   ContentOverride: 'ContentOverride',
   ContentItem: 'ContentItem',
-  ContentLog: 'ContentLog'
+  ContentLog: 'ContentLog',
+  SyncState: 'SyncState'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -159,6 +160,15 @@ export const ContentLogScalarFieldEnum = {
 } as const
 
 export type ContentLogScalarFieldEnum = (typeof ContentLogScalarFieldEnum)[keyof typeof ContentLogScalarFieldEnum]
+
+
+export const SyncStateScalarFieldEnum = {
+  key: 'key',
+  data: 'data',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SyncStateScalarFieldEnum = (typeof SyncStateScalarFieldEnum)[keyof typeof SyncStateScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -9,6 +9,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, safeAdminNext, verifyAdminSession } from "@/lib/admin-session";
 import { MANUAL_CHANNELS, isLeadStatus, manualChannel, parseLeadForm, statusInfo } from "@/lib/lead-status";
+import { metaLeadsConfigured, syncMetaLeads } from "@/lib/meta-leads";
 
 const AUTHOR_COOKIE = "admin_author";
 
@@ -235,4 +236,17 @@ export async function deleteLeadNoteLive(_prev: LiveState, formData: FormData): 
   await prisma.leadNote.deleteMany({ where: { id: noteId, kind: "not" } });
   revalidatePath("/admin/leads");
   return { ok: true, message: "Not silindi.", at: Date.now() };
+}
+
+/** Meta reklam formlarındaki yeni talepleri hemen çeker (normalde 10 dakikada bir kendiliğinden çekilir) */
+export async function pullMetaLeadsLive(): Promise<LiveState> {
+  await requireAdmin();
+  if (!metaLeadsConfigured()) return { error: "Meta bağlantısı henüz kurulmadı (anahtar bekleniyor).", at: Date.now() };
+  const r = await syncMetaLeads();
+  revalidatePath("/admin", "layout");
+  if (r.error) return { error: `Meta: ${r.error}`, at: Date.now() };
+  const n = r.inserted ?? 0;
+  const m = r.merged ?? 0;
+  const msg = n || m ? [n ? `${n} yeni talep eklendi` : "", m ? `${m} talep mevcut kişiye not düşüldü` : ""].filter(Boolean).join(", ") + "." : "Meta'da yeni talep yok.";
+  return { ok: true, message: msg, at: Date.now() };
 }

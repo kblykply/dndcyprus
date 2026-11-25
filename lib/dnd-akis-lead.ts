@@ -37,6 +37,7 @@ const FORM_LABEL: Record<string, string> = {
   lead: "Fiyat / kat planı talebi (proje sayfası)",
   home: "Bilgi talebi",
   contact: "İletişim formu",
+  "meta-lead": "Meta reklam formu (Facebook / Instagram)",
 };
 
 let warnedBadUrl = false;

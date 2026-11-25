@@ -3,8 +3,8 @@
 "use client";
 
 import { useActionState, useEffect, useState, useTransition, type ReactNode } from "react";
-import { CheckCircle2, ChevronDown, Loader2, TriangleAlert, X } from "lucide-react";
-import { addLeadNoteLive, deleteLeadNoteLive, setLeadStatusLive, type LiveState } from "./actions";
+import { CheckCircle2, ChevronDown, Loader2, RefreshCw, TriangleAlert, X } from "lucide-react";
+import { addLeadNoteLive, deleteLeadNoteLive, pullMetaLeadsLive, setLeadStatusLive, type LiveState } from "./actions";
 
 /** Panelin her yerinden bildirim göster: showAdminToast({ message } | { error }) — AdminToastHost (AdminShell) gösterir */
 export function showAdminToast(state: LiveState) {
@@ -139,5 +139,24 @@ export function NoteDelete({ noteId, children }: { noteId: number; children: Rea
     >
       {pending ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden /> : children}
     </button>
+  );
+}
+
+/** "Meta'dan çek": reklam formu taleplerini hemen panele alır; çekim sürerken düğme kilitli */
+export function MetaPullButton() {
+  const [state, action, pending] = useActionState<LiveState, FormData>(pullMetaLeadsLive, undefined);
+  useToastOn(state);
+  return (
+    <form action={action}>
+      <button
+        type="submit"
+        disabled={pending}
+        title="Facebook / Instagram reklam formlarındaki yeni talepleri şimdi getir (normalde 10 dakikada bir kendiliğinden gelir)"
+        className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 disabled:cursor-wait disabled:opacity-60"
+      >
+        {pending ? <Loader2 className="h-[15px] w-[15px] animate-spin" aria-hidden /> : <RefreshCw className="h-[15px] w-[15px]" strokeWidth={1.7} aria-hidden />}
+        {pending ? "Meta'dan çekiliyor…" : "Meta'dan çek"}
+      </button>
+    </form>
   );
 }

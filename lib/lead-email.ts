@@ -34,6 +34,7 @@ const FORM_LABEL: Record<string, string> = {
   lead: "Fiyat / kat planı talebi (proje sayfası)",
   home: "Bilgi talebi (ana sayfa)",
   contact: "İletişim formu",
+  "meta-lead": "Meta reklam formu (Facebook / Instagram)",
 };
 
 export function leadEmailConfigured() {

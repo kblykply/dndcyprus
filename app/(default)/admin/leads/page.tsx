@@ -24,7 +24,8 @@ import {
   type LeadFilters,
 } from "@/lib/lead-status";
 import { setLeadStatusBulk } from "./actions";
-import { NoteDelete, NoteForm, StatusForm } from "./LiveForms";
+import { MetaPullButton, NoteDelete, NoteForm, StatusForm } from "./LiveForms";
+import { metaLeadsConfigured } from "@/lib/meta-leads";
 import { AutoSubmitSelect, SelectAll, SelectedCount } from "./LeadControls";
 import { pageLabelText } from "@/lib/page-label";
 
@@ -277,7 +278,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">Satış Talepleri</h1>
           <p className="mt-1.5 text-sm text-slate-500">Web sitesi formlarından ve reklamlardan gelen bütün alıcı talepleri.</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600">Toplam: {summary.total}</span>
           <a
             href={excelHref}
@@ -286,6 +287,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
             <Download className="h-[15px] w-[15px]" strokeWidth={1.7} aria-hidden />
             Excel indir
           </a>
+          {!legacy && metaLeadsConfigured() ? <MetaPullButton /> : null}
           {!legacy ? (
             <Link
               href="/admin/leads/yeni"

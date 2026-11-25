@@ -48,6 +48,10 @@
     {
       "path": "/api/cron/clarity",
       "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/meta-leads",
+      "schedule": "*/10 * * * *"
     }
   ]
 }
