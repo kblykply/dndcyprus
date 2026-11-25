@@ -112,3 +112,8 @@ test("translation model is picked from Google's list: newest stable Flash, never
   assert.equal(tr.pickFlashModel(["models/gemini-4.0-flash-preview-01"]), "gemini-4.0-flash-preview-01"); // yalnız önizleme varsa o
   assert.equal(tr.pickFlashModel(["models/gemini-3.8-pro"]), null);
 });
+
+test("fallback order when a model is busy: newest stable flash, older flash versions, then flash-lite", () => {
+  const names = ["models/gemini-2.5-flash", "models/gemini-3.8-flash", "models/gemini-3.8-flash-001", "models/gemini-3.5-flash", "models/gemini-3.8-flash-lite", "models/gemini-3.9-flash-preview", "models/gemini-3.8-flash-tts"];
+  assert.deepEqual(JSON.parse(JSON.stringify(tr.rankFlashModels(names))), ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-2.5-flash", "gemini-3.8-flash-lite"]);
+});

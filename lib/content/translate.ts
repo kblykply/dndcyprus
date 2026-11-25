@@ -115,7 +115,7 @@ async function callGemini(model: string, key: string, prompt: string): Promise<{
       generationConfig: { temperature: 0.3, responseMimeType: "application/json" },
     }),
     cache: "no-store",
-    signal: AbortSignal.timeout(90_000),
+    signal: AbortSignal.timeout(60_000),
   });
   const body = (await r.json().catch(() => null)) as { candidates?: { content?: { parts?: { text?: string }[] } }[]; error?: { message?: string } } | null;
   if (!r.ok) return { ok: false, status: r.status, error: body?.error?.message || `Gemini ${r.status}` };
@@ -129,34 +129,43 @@ async function callGemini(model: string, key: string, prompt: string): Promise<{
  * Model adı koda sabitlenmez: Google eski modelleri yeni kullanıcılara kapatınca (ör. gemini-2.5-flash) çeviri bozulmasın.
  */
 export function pickFlashModel(names: string[]): string | null {
-  const ver = (n: string) => parseFloat(n.match(/gemini-(\d+(?:\.\d+)?)/)?.[1] ?? "0");
-  const cands = names
-    .map((n) => n.replace(/^models\//, ""))
-    .filter((n) => /^gemini-\d+(\.\d+)?-flash/.test(n) && !/lite|image|tts|audio|live|thinking|8b|native|embedding|robotics|computer/i.test(n));
-  if (!cands.length) return null;
-  const stable = cands.filter((n) => !/preview|exp/i.test(n));
-  const pool = stable.length ? stable : cands;
-  // en yüksek sürüm; eşitse sürüm ekisiz ad (ör. gemini-3.8-flash) tarihli/numaralı olandan önce
-  pool.sort((a, b) => ver(b) - ver(a) || a.length - b.length);
-  return pool[0];
+  return rankFlashModels(names)[0] ?? null;
 }
 
-let modelCache: { name: string; at: number } | null = null;
+/**
+ * Yedekli sıra: önce en yeni kararlı Flash, sonra bir önceki kararlı Flash sürümleri, en sonda en yeni Flash-Lite.
+ * Google "yoğunluk" (503) ya da kapanmış model hatası verirse çeviri sıradakiyle sürer.
+ */
+export function rankFlashModels(names: string[]): string[] {
+  const ver = (n: string) => parseFloat(n.match(/gemini-(\d+(?:\.\d+)?)/)?.[1] ?? "0");
+  const clean = names.map((n) => n.replace(/^models\//, "")).filter((n) => /^gemini-\d+(\.\d+)?-flash/.test(n));
+  const bad = /image|tts|audio|live|thinking|8b|native|embedding|robotics|computer/i;
+  const sortV = (a: string, b: string) => ver(b) - ver(a) || a.length - b.length;
+  const flash = clean.filter((n) => !bad.test(n) && !/lite/i.test(n));
+  const stable = flash.filter((n) => !/preview|exp/i.test(n)).sort(sortV);
+  const preview = flash.filter((n) => /preview|exp/i.test(n)).sort(sortV);
+  const lite = clean.filter((n) => !bad.test(n) && /lite/i.test(n) && !/preview|exp/i.test(n)).sort(sortV);
+  // her sürümden bir model (aynı sürümün tarihli kopyaları ayrı denenmez)
+  const perVersion = (list: string[]) => list.filter((n, i) => list.findIndex((m) => ver(m) === ver(n)) === i);
+  return [...perVersion(stable).slice(0, 3), ...(stable.length ? [] : perVersion(preview).slice(0, 1)), ...lite.slice(0, 1)];
+}
+
+let modelCache: { names: string[]; at: number } | null = null;
 
 async function resolveModels(key: string): Promise<string[]> {
   const list: string[] = [];
   const env = (process.env.GEMINI_MODEL || "").trim();
   if (env) list.push(env);
-  if (modelCache && Date.now() - modelCache.at < 6 * 3600_000) list.push(modelCache.name);
+  if (modelCache && Date.now() - modelCache.at < 6 * 3600_000) list.push(...modelCache.names);
   else {
     try {
       const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000", { headers: { "x-goog-api-key": key }, cache: "no-store", signal: AbortSignal.timeout(15_000) });
       const body = (await r.json().catch(() => null)) as { models?: { name: string; supportedGenerationMethods?: string[] }[] } | null;
       const names = (body?.models ?? []).filter((m) => m.supportedGenerationMethods?.includes("generateContent")).map((m) => m.name);
-      const best = pickFlashModel(names);
-      if (best) {
-        modelCache = { name: best, at: Date.now() };
-        list.push(best);
+      const ranked = rankFlashModels(names);
+      if (ranked.length) {
+        modelCache = { names: ranked, at: Date.now() };
+        list.push(...ranked);
       }
     } catch {
       /* liste alınamazsa takma ad denenir */
@@ -190,8 +199,12 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
           if (!r.ok) {
             last = r.status === 429 ? "Çeviri servisinin dakikalık/günlük ücretsiz sınırı doldu; biraz sonra yeniden kaydedin." : r.error;
             if (r.status === 404 || r.status === 400 || /no longer available|not found|not supported/i.test(r.error)) {
-              if (modelCache?.name === model) modelCache = null; // kapanan model: bir dahakine liste yeniden alınır
+              if (modelCache?.names.includes(model)) modelCache = null; // kapanan model: bir dahakine liste yeniden alınır
               break; // bu model yok/kapalı → sıradaki model
+            }
+            if (r.status === 503 || /high demand|overloaded|unavailable/i.test(r.error)) {
+              last = "Çeviri servisi şu an yoğun; biraz sonra yeniden kaydedin.";
+              break; // yoğun model: beklemeden sıradaki modele geç
             }
             if (r.status === 429 && attempt === 0) {
               await new Promise((res) => setTimeout(res, 6000));
