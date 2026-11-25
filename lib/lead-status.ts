@@ -277,6 +277,7 @@ export const FORM_LABELS: Record<string, string> = {
   lead: "Proje formu",
   form: "Proje formu",
   "meta-lead": "Meta reklam formu",
+  "meta-mesaj": "Meta reklam mesajı (Instagram/Facebook)",
   panel: "Panelden eklendi",
 };
 

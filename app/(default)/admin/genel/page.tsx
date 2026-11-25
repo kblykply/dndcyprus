@@ -56,7 +56,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
   const now = new Date();
 
   const all = await prisma.contactMessage.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
     select: { id: true, createdAt: true, name: true, status: true, source: true, campaign: true, project: true, unitType: true, form: true },
   });
   const b = periodBuckets(period, now, all);

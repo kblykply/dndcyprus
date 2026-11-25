@@ -55,11 +55,11 @@ function isMissingColumnError(err: unknown) {
 async function loadRows(): Promise<{ rows: Row[]; legacy: boolean }> {
   const select = { id: true, createdAt: true, name: true, email: true, phone: true, project: true, unitType: true, source: true, campaign: true, form: true };
   try {
-    const rows = await prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" }, select: { ...select, status: true } });
+    const rows = await prisma.contactMessage.findMany({ orderBy: [{ createdAt: "desc" }, { id: "desc" }], select: { ...select, status: true } });
     return { rows, legacy: false };
   } catch (err) {
     if (!isMissingColumnError(err)) throw err;
-    const rows = await prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" }, select });
+    const rows = await prisma.contactMessage.findMany({ orderBy: [{ createdAt: "desc" }, { id: "desc" }], select });
     return { rows: rows.map((r) => ({ ...r, status: "yeni" })), legacy: true };
   }
 }
@@ -490,7 +490,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           <td className={`${TD} whitespace-nowrap`}>
                             <Link href={href} className="block hover:text-teal-800" scroll={false}>
                               <span className="block font-medium">{r.name}</span>
-                              <span className="text-xs text-slate-500">{r.phone || r.email}</span>
+                              <span className="text-xs text-slate-500">{r.phone || r.email || "—"}</span>
                             </Link>
                           </td>
                           <td className={`${TD} whitespace-nowrap`}>
@@ -534,7 +534,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           {r.unitType ? <span className="text-slate-500"> · {r.unitType}</span> : null}
                         </span>
                         <span className="mt-1 block text-xs text-slate-500">
-                          {r.phone || r.email}
+                          {r.phone || r.email || "—"}
                           {r.source ? ` · ${sourceGroup(r.source).label}` : ""}
                         </span>
                       </Link>
@@ -620,7 +620,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                   label: "WhatsApp",
                   icon: <MessageCircle className="h-[18px] w-[18px] text-[#1f9d55]" strokeWidth={1.7} aria-hidden />,
                 },
-                { href: `mailto:${detail.email}`, label: "E-posta", icon: <Mail className="h-[18px] w-[18px] text-[#0d6570]" strokeWidth={1.7} aria-hidden /> },
+                { href: detail.email ? `mailto:${detail.email}` : "", label: "E-posta", icon: <Mail className="h-[18px] w-[18px] text-[#0d6570]" strokeWidth={1.7} aria-hidden /> },
               ].map((b) =>
                 b.href ? (
                   <a
@@ -634,7 +634,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                     {b.label}
                   </a>
                 ) : (
-                  <span key={b.label} className="flex flex-col items-center gap-1 rounded-lg border border-dashed border-slate-200 py-2.5 text-xs text-slate-400" title="Telefon yok">
+                  <span key={b.label} className="flex flex-col items-center gap-1 rounded-lg border border-dashed border-slate-200 py-2.5 text-xs text-slate-400" title="Bilgi yok">
                     {b.icon}
                     {b.label}
                   </span>
@@ -647,9 +647,13 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
               <dd className="break-words">{detail.phone || <span className="text-slate-400">—</span>}</dd>
               <dt className="text-slate-500">E-posta</dt>
               <dd className="break-all">
-                <a href={`mailto:${detail.email}`} className="text-teal-700 hover:underline">
-                  {detail.email}
-                </a>
+                {detail.email ? (
+                  <a href={`mailto:${detail.email}`} className="text-teal-700 hover:underline">
+                    {detail.email}
+                  </a>
+                ) : (
+                  <span className="text-slate-400">—</span>
+                )}
               </dd>
               <dt className="text-slate-500">Proje</dt>
               <dd>{[detail.project, detail.unitType].filter(Boolean).join(" · ") || <span className="text-slate-400">—</span>}</dd>
@@ -718,7 +722,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                 ))}
                 <li className="relative">
                   <span className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full bg-slate-300 ring-4 ring-white" />
-                  <p className="text-slate-500">Talep geldi ({formLabel(detail.form).toLocaleLowerCase("tr-TR")}).</p>
+                  <p className="text-slate-500">Talep geldi · {formLabel(detail.form)}</p>
                   <p className="mt-0.5 text-xs text-slate-400">
                     Sistem · {cyprusDateTime(detail.createdAt).date} {cyprusDateTime(detail.createdAt).time}
                   </p>
