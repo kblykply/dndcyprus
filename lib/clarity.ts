@@ -70,9 +70,24 @@ export function dimensionValue(r: Record<string, unknown>, dimension: ClarityDim
   return v === undefined || v === null || v === "" ? "(bilinmiyor)" : String(v);
 }
 
+/**
+ * Sayfa adresini tek biçime indirir: Clarity aynı sayfayı http/https, www'siz, sonda "/" ya da reklam parametreleriyle
+ * (?utm_…) ayrı satırlar olarak verebiliyor → https://www.dndcyprus.com/<yol>
+ */
+export function canonicalPageUrl(raw: string): string {
+  try {
+    const u = new URL(raw);
+    const path = u.pathname.replace(/\/+$/, "") || "/";
+    return `https://www.dndcyprus.com${path === "/" ? "" : path}`;
+  } catch {
+    return raw;
+  }
+}
+
 /** Bir ya da daha çok ham yanıtı boyut değerine göre toplar; yüzdeler oturum sayısıyla ağırlıklandırılır */
 export function clarityAggregate(responses: ClarityResponse[], dimension: ClarityDimension): ClarityRow[] {
   const m = new Map<string, ClarityRow>();
+  const keyOf = (raw: string) => (dimension === "URL" && raw !== "(bilinmiyor)" ? canonicalPageUrl(raw) : raw);
   const row = (v: string) => {
     let s = m.get(v);
     if (!s) {
@@ -86,19 +101,19 @@ export function clarityAggregate(responses: ClarityResponse[], dimension: Clarit
     for (const block of res) {
       if (block.metricName !== "Traffic") continue;
       for (const r of block.information || []) {
-        const v = dimensionValue(r, dimension);
+        const raw = dimensionValue(r, dimension);
         const n = first(r, ["totalSessionCount", "sessionsCount"]) || 0;
-        sessions.set(v, (sessions.get(v) || 0) + n);
-        const s = row(v);
+        sessions.set(raw, (sessions.get(raw) || 0) + n); // ağırlık ham satırın kendi oturumu (birleşen satırlar ayrı ağırlıklanır)
+        const s = row(keyOf(raw));
         s.sessions += n;
         s.bots += first(r, ["totalBotSessionCount"]) || 0;
       }
     }
     for (const block of res) {
       for (const r of block.information || []) {
-        const v = dimensionValue(r, dimension);
-        const s = row(v);
-        const w = sessions.get(v) || first(r, ["sessionsCount", "totalSessionCount"]) || 0;
+        const raw = dimensionValue(r, dimension);
+        const s = row(keyOf(raw));
+        const w = sessions.get(raw) || first(r, ["sessionsCount", "totalSessionCount"]) || 0;
         const pct = first(r, ["sessionsWithMetricPercentage", "percentage"]);
         const total = first(r, ["subTotal", "total", "count", "sessionsWithMetric"]);
         switch (block.metricName) {

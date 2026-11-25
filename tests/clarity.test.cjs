@@ -66,3 +66,29 @@ test("real Clarity responses name the URL dimension \"Url\": pages are grouped, 
   assert.equal(m.dimensionValue({ device: "Mobile" }, "Device"), "Mobile");
   assert.equal(m.dimensionValue({}, "Channel"), "(bilinmiyor)");
 });
+
+test("same page written differently by Clarity (http, no www, trailing slash, utm) is one row with correct weights", () => {
+  const m = loadTypeScript("lib/clarity.ts");
+  const res = [
+    { metricName: "Traffic", information: [
+      { Url: "https://www.dndcyprus.com/tr/contact", totalSessionCount: 1 },
+      { Url: "http://dndcyprus.com/tr/contact/", totalSessionCount: 1 },
+      { Url: "https://www.dndcyprus.com/en?utm_source=ig&utm_campaign=1", totalSessionCount: 2 },
+      { Url: "https://www.dndcyprus.com/en", totalSessionCount: 2 },
+    ] },
+    { metricName: "ScrollDepth", information: [
+      { Url: "https://www.dndcyprus.com/tr/contact", averageScrollDepth: 96 },
+      { Url: "http://dndcyprus.com/tr/contact/", averageScrollDepth: 100 },
+      { Url: "https://www.dndcyprus.com/en?utm_source=ig&utm_campaign=1", averageScrollDepth: 10 },
+      { Url: "https://www.dndcyprus.com/en", averageScrollDepth: 30 },
+    ] },
+  ];
+  const rows = JSON.parse(JSON.stringify(m.clarityAggregate([res], "URL")));
+  assert.deepEqual(rows.map((r) => r.value).sort(), ["https://www.dndcyprus.com/en", "https://www.dndcyprus.com/tr/contact"]);
+  const c = rows.find((r) => r.value.endsWith("/tr/contact"));
+  assert.equal(c.sessions, 2);
+  assert.equal(m.weighted(c.scrollW, c.sessions), 98);
+  const en = rows.find((r) => r.value.endsWith("/en"));
+  assert.equal(m.weighted(en.scrollW, en.sessions), 20);
+  assert.equal(m.canonicalPageUrl("https://www.dndcyprus.com/"), "https://www.dndcyprus.com");
+});
