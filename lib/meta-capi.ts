@@ -26,12 +26,16 @@ let warnedMissingVersion = false;
 
 const sha256 = (v: string) => createHash("sha256").update(v).digest("hex");
 
+// NEXT_PUBLIC_META_PIXEL_ID virgülle birden fazla piksel taşıyabilir; CAPI ilk pikseli kullanır
+// (anahtar o piksel için üretilir: sitenin "DND Cyprus" pikseli listenin başında).
+const capiPixelId = () => (process.env.NEXT_PUBLIC_META_PIXEL_ID || "").split(",")[0].trim();
+
 export function metaCapiConfigured() {
-  return !!(process.env.NEXT_PUBLIC_META_PIXEL_ID || "").trim() && !!(process.env.META_CAPI_TOKEN || "").trim();
+  return !!capiPixelId() && !!(process.env.META_CAPI_TOKEN || "").trim();
 }
 
 export async function sendMetaLeadEvent(input: MetaLeadInput): Promise<void> {
-  const pixelId = (process.env.NEXT_PUBLIC_META_PIXEL_ID || "").trim();
+  const pixelId = capiPixelId();
   const token = (process.env.META_CAPI_TOKEN || "").trim();
   if (!pixelId || !token) return;
 

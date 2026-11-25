@@ -106,3 +106,10 @@ test("CAPI failures are contained and do not log tokens or customer identifiers"
     });
   }
 });
+
+test("CAPI uses the first pixel when several are configured", async () => {
+  const capi = capiHarness({ env: { ...configuredEnv, NEXT_PUBLIC_META_PIXEL_ID: "1234567890,999999999" } });
+  await capi.sendMetaLeadEvent(lead);
+  assert.equal(capi.requests.length, 1);
+  assert.match(String(capi.requests[0].url), /\/1234567890\/events/);
+});

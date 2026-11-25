@@ -174,3 +174,13 @@ for (const [name, value, expectGrant] of [
     else assert(!updates.some(c=>Object.values(c[2]).includes('granted')),'malformed or absent consent must never grant tracking');
   });
 }
+
+test('comma-separated Meta pixel IDs: every valid pixel is initialised once, invalid parts ignored', () => {
+  const b=browser();
+  const api=loadTypeScript('lib/analytics.ts',{globals:b.globals,env:{...env,NEXT_PUBLIC_META_PIXEL_ID:' 111111111 , bad, 222222222 '}});
+  api.saveConsent({analytics:false,ads:true});
+  assert.equal(api.loadMetaPixel(),true);
+  const inits=b.window.fbq.queue.filter(c=>c[0]==='init').map(c=>c[1]);
+  assert.deepEqual(plain(inits),['111111111','222222222']);
+  assert.equal(api.ANALYTICS_ENV.metaPixelId,'111111111');
+});

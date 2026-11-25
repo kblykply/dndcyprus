@@ -548,6 +548,11 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
   .az-mobile { background: rgba(238, 245, 246, .97); }
 }
 @media (max-width: 1000px) { .az-mobile { background: rgba(238, 245, 246, .97); } }
+/* yatay telefon / alçak ekran: üst etiketler mutlak konumlu, içerik alttan büyüyünce başlık etiketlerin üstüne biniyordu (25.11.2026);
+   içerik etiketlerin altından başlar, gerekirse çerçeve uzar */
+@media (orientation: landscape) and (max-height: 520px) and (min-width: 601px) {
+  .az-hero .c { padding-top: 128px; }
+}
 .az-hero .top .tagrow { display: flex; gap: 8px; flex-wrap: wrap; }
 /* telefonda etiketler yana kaymaz: tek satıra tam sığanlar görünür, sığmayan alt satıra iner ve satır yüksekliğiyle
    tamamen gizlenir (kaydırılan satırda son etiket bannerın kenarında yarım kalıyordu, 18 Ekim). Konum ve teslim

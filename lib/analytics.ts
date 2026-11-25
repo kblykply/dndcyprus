@@ -18,7 +18,10 @@ export const ANALYTICS_ENV = {
   adsLeadLabel: envId(process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL, /^[\w-]+$/),
   adsWhatsappLabel: envId(process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_LABEL, /^[\w-]+$/),
   adsPhoneLabel: envId(process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_LABEL, /^[\w-]+$/),
-  metaPixelId: envId(process.env.NEXT_PUBLIC_META_PIXEL_ID, /^\d+$/),
+  // Virgülle birden fazla piksel verilebilir (25.11.2026: sitenin "DND Cyprus" pikseli + reklamların kullandığı "DND Homes Pixel");
+  // tarayıcı olayları hepsine gider. Geçersiz parça yok sayılır; ilk geçerli kimlik metaPixelId.
+  metaPixelIds: (process.env.NEXT_PUBLIC_META_PIXEL_ID || "").split(",").map((s) => s.trim()).filter((s) => /^\d+$/.test(s)),
+  get metaPixelId() { return this.metaPixelIds[0] || ""; },
   gtmId: envId(process.env.NEXT_PUBLIC_GTM_ID, /^GTM-[A-Z0-9]+$/i),
   clarityId: envId(process.env.NEXT_PUBLIC_CLARITY_ID, /^[a-z0-9]{6,20}$/i),
 };
@@ -305,7 +308,7 @@ export function loadMetaPixel() {
   if (!window._fbq) window._fbq = n;
 
   n("consent", "grant");
-  n("init", ANALYTICS_ENV.metaPixelId);
+  for (const id of ANALYTICS_ENV.metaPixelIds) n("init", id);
   injectScript("dnd-meta-pixel", "https://connect.facebook.net/en_US/fbevents.js");
   return true;
 }
