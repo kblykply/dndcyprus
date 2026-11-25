@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { Volume2, VolumeX, X } from "lucide-react";
 
@@ -14,6 +15,8 @@ const DISMISS_KEY = "dnd_tl_payment_popup_v1";
   - Sayfa `load` olduktan ve tarayıcı boşta kalınca açılır (LCP ile yarışmaz).
   - Dialog semantiği: role/aria-modal, açılışta odak kapat düğmesinde, ESC ve arka plana tıklama kapatır.
   - Video sessiz başlar (tarayıcı otomatik oynatma kuralı); ses düğmesiyle açılır.
+  - document.body'ye portal ile çizilir (25.11.2026): sayfa içeriği .az-page (z-index:1) kendi katman bağlamını açtığı için pencere
+    sabit menü çubuğunun (z-index:100) altında kalıyor, kapat düğmesine tıklanamıyordu.
 */
 export default function PaymentModelPopup() {
   const [open, setOpen] = useState(false);
@@ -79,7 +82,7 @@ export default function PaymentModelPopup() {
   // "Hareketi azalt" açıksa video kendiliğinden oynamaz; afiş görünür, oynatma denetimleri kullanıcıda
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  return (
+  return createPortal(
     <div
       role="dialog"
       aria-modal="true"
@@ -186,6 +189,7 @@ export default function PaymentModelPopup() {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
