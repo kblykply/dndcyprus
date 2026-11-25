@@ -11,6 +11,7 @@ import { overrideCounts, sectionState } from "@/lib/content/admin";
 import { translationConfigured } from "@/lib/content/translate";
 import { ConfirmButton } from "../../../leads/LeadControls";
 import ImageField from "../../ImageField";
+import VideoField from "../../VideoField";
 import { listAction, resetField, resetList, saveSection } from "../../actions";
 
 export const dynamic = "force-dynamic";
@@ -220,6 +221,8 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
                   </div>
                   {f.kind === "image" ? (
                     <ImageField id={id} name={name} defaultValue={f.value} uploadEnabled={uploadEnabled} />
+                  ) : f.kind === "video" ? (
+                    <VideoField id={id} name={name} defaultValue={f.value} />
                   ) : f.kind === "long" || f.kind === "rich" ? (
                     <textarea id={id} name={name} defaultValue={f.value} rows={f.kind === "rich" ? 2 : 4} className={`${INPUT} py-2.5`} />
                   ) : (

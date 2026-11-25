@@ -2,7 +2,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ImageUp, Loader2 } from "lucide-react";
+import { ImageUp, Loader2, Maximize2, X } from "lucide-react";
 import { uploadImage } from "./actions";
 
 /** Görsel alanı: önizleme + yol/bağlantı kutusu + (depo bağlıysa) bilgisayardan yükleme. Değer formdaki `name` ile gider. */
@@ -10,6 +10,10 @@ export default function ImageField({ name, defaultValue, uploadEnabled, id }: { 
   const [value, setValue] = useState(defaultValue);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [zoom, setZoom] = useState(false);
+  const [broken, setBroken] = useState(false);
+  // beyaz logolar beyaz zeminde görünmez: logo ve SVG koyu zeminde, sığdırılarak gösterilir
+  const isLogo = /logo|\.svg(\?|$)/i.test(value);
   const fileRef = useRef<HTMLInputElement>(null);
 
   async function onFile(file: File | undefined) {
@@ -20,7 +24,10 @@ export default function ImageField({ name, defaultValue, uploadEnabled, id }: { 
       const fd = new FormData();
       fd.set("file", file);
       const r = await uploadImage(fd);
-      if (r.ok) setValue(r.url);
+      if (r.ok) {
+        setValue(r.url);
+        setBroken(false);
+      }
       else setError(r.error);
     } catch {
       setError("Yükleme başarısız. Tekrar deneyin.");
@@ -31,21 +38,45 @@ export default function ImageField({ name, defaultValue, uploadEnabled, id }: { 
   }
 
   return (
-    <div className="mt-1.5 flex gap-3">
-      <div className="flex h-20 w-28 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
-        {value ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={value} alt="" className="h-full w-full object-cover" />
+    <div className="mt-1.5 flex flex-col gap-3 sm:flex-row">
+      <button
+        type="button"
+        onClick={() => value && !broken && setZoom(true)}
+        className={`group relative flex h-32 w-full shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 sm:w-56 ${isLogo ? "bg-slate-700" : "bg-slate-50"}`}
+        aria-label="Görseli büyüt"
+        title={value ? "Büyütmek için tıklayın" : undefined}
+      >
+        {value && !broken ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={value} alt="" onError={() => setBroken(true)} onLoad={() => setBroken(false)} className={`h-full w-full ${isLogo ? "object-contain p-3" : "object-cover"}`} />
+            <span className="absolute right-1.5 top-1.5 rounded-md bg-black/50 p-1 text-white opacity-0 transition group-hover:opacity-100">
+              <Maximize2 className="h-3.5 w-3.5" aria-hidden />
+            </span>
+          </>
         ) : (
-          <span className="text-[11px] text-slate-400">Görsel yok</span>
+          <span className="px-2 text-center text-[11px] text-slate-400">{value ? "Görsel açılamadı: yolu kontrol edin" : "Görsel yok"}</span>
         )}
-      </div>
+      </button>
+      {zoom ? (
+        <div role="dialog" aria-modal="true" aria-label="Görsel önizleme" className="fixed inset-0 z-[300] flex items-center justify-center bg-black/80 p-4" onClick={() => setZoom(false)}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={value} alt="" className={`max-h-[88vh] max-w-[92vw] rounded-lg shadow-2xl ${isLogo ? "bg-slate-700 p-6" : ""}`} />
+          <button type="button" onClick={() => setZoom(false)} className="absolute right-4 top-4 rounded-full bg-white/15 p-2 text-white hover:bg-white/25" aria-label="Kapat">
+            <X className="h-5 w-5" aria-hidden />
+          </button>
+          <span className="absolute bottom-4 left-1/2 max-w-[90vw] -translate-x-1/2 truncate rounded bg-black/60 px-2 py-1 text-xs text-white/80">{value}</span>
+        </div>
+      ) : null}
       <div className="min-w-0 flex-1">
         <input
           id={id}
           name={name}
           value={value}
-          onChange={(e) => setValue(e.currentTarget.value)}
+          onChange={(e) => {
+            setValue(e.currentTarget.value);
+            setBroken(false);
+          }}
           placeholder="/azure/gorsel.jpg ya da https://…"
           className="block h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 shadow-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20"
         />

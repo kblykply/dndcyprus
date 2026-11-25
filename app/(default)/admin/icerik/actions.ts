@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { authorFromCookies, requireAdmin } from "@/lib/admin-auth";
-import { CONTENT_LOCALES, applyOverrides, fieldLabel, getAt, listOperation, listSources, postHtml, type ContentLocale, type ListOp } from "@/lib/content/core";
+import { CONTENT_LOCALES, applyOverrides, fieldLabel, getAt, listOperation, listSources, postHtml, youtubeIdOf, type ContentLocale, type ListOp } from "@/lib/content/core";
 import { AUTO_TRANSLATOR, TARGET_LOCALES, isTranslatable, translateFromTurkish, translationConfigured, type TargetLocale } from "@/lib/content/translate";
 import { SCOPES, isScopeKey, type ScopeDef, type ScopeKey } from "@/lib/content/scopes";
 import { COLLECTIONS, allRoutes, ensureSeeded, isCollectionKey, sectionFields, slugify } from "@/lib/content/admin";
@@ -119,6 +119,11 @@ async function saveFields(c: SectionCtx, formData: FormData) {
     if (f.kind === "number" && !Number.isFinite(Number(v.replace(",", ".")))) continue;
     if (f.kind !== "long" && f.kind !== "rich") v = v.replace(/\n+/g, " ");
     if (f.kind === "image" && v && !/^(\/|https:\/\/)\S+$/i.test(v)) continue; // geçersiz görsel yolu kaydedilmez
+    if (f.kind === "video" && v) {
+      const norm = normalizeVideo(f.original, f.path, v);
+      if (norm === null) continue; // tanınmayan video kaydedilmez
+      v = norm;
+    }
     if (/\.email$/.test(f.path) && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) continue; // geçersiz e-posta kaydedilmez
     if (/\.(whatsapp|phone|mobile)$/.test(f.path) && v && v.replace(/\D/g, "").length < 8) continue; // eksik numara kaydedilmez
     const same = v === f.original;
@@ -147,6 +152,15 @@ async function saveFields(c: SectionCtx, formData: FormData) {
     refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
   return { changed, translated: tr.count, translateError: "error" in tr ? tr.error : undefined };
+}
+
+/** Video alanı: kimlik alanına YouTube kimliği, gömme bağlantısı alanına gömme bağlantısı, dosya alanına site içi yol */
+function normalizeVideo(original: string, path: string, v: string): string | null {
+  const id = youtubeIdOf(v);
+  const key = path.split(".").pop() ?? "";
+  if (key === "youtubeId" || key === "videoId") return id;
+  if (/youtube(-nocookie)?\.com\/embed\//i.test(original) || youtubeIdOf(original)) return id ? `https://www.youtube.com/embed/${id}` : /^\/\S+\.(mp4|webm|mov)$/i.test(v) ? v : null;
+  return /^(\/\S+|https:\/\/\S+)\.(mp4|webm|mov)(\?\S*)?$/i.test(v) ? v : id ? `https://www.youtube.com/embed/${id}` : null;
 }
 
 function resultParams(r: { changed: number; translated: number; translateError?: string }) {

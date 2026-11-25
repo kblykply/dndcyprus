@@ -10,7 +10,7 @@ export const CONTENT_LOCALES = ["tr", "en", "de", "ru", "pl"] as const;
 export type ContentLocale = (typeof CONTENT_LOCALES)[number];
 export const LOCALE_LABELS: Record<ContentLocale, string> = { tr: "Türkçe", en: "English", de: "Deutsch", ru: "Русский", pl: "Polski" };
 
-export type FieldKind = "text" | "long" | "rich" | "number" | "image";
+export type FieldKind = "text" | "long" | "rich" | "number" | "image" | "video";
 export type Field = { path: string; kind: FieldKind; value: string };
 
 /** Düzenlemeye açılmayan teknik anahtarlar (bağlantı, ikon, kimlik, yerleşim değerleri) */
@@ -30,6 +30,16 @@ export function slugify(s: string) {
 }
 
 export const isImageValue = (v: unknown) => typeof v === "string" && IMAGE_RE.test(v.trim());
+
+/** YouTube kimliği: yalın kimlik ya da watch/embed/kısa bağlantı ("…/embed/ID?si=…", "youtu.be/ID") */
+export function youtubeIdOf(v: string): string | null {
+  const t = String(v ?? "").trim();
+  if (/^[\w-]{11}$/.test(t)) return t;
+  const m = t.match(/(?:youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?(?:.*&)?v=|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/i);
+  return m ? m[1] : null;
+}
+const VIDEO_KEYS = new Set(["youtubeId", "videoId"]);
+const isVideoValue = (key: string, v: string) => VIDEO_KEYS.has(key) || /\.(mp4|webm|mov)(\?.*)?$/i.test(v.trim()) || /youtube(-nocookie)?\.com\/embed\/|youtu\.be\//i.test(v);
 
 /** JSX → işaretli metin: <b>/<strong> → **…**, <br/> → satır sonu; diğer etiketlerin yalnız yazısı alınır */
 export function toMarkup(node: ReactNode): string {
@@ -90,7 +100,8 @@ export function walkFields(obj: unknown, prefix = "", out: Field[] = []): Field[
     return out;
   }
   if (typeof obj === "string") {
-    out.push({ path: prefix, kind: isImageValue(obj) ? "image" : obj.length > 90 ? "long" : "text", value: obj });
+    const key = prefix.split(".").pop() ?? "";
+    out.push({ path: prefix, kind: isImageValue(obj) ? "image" : isVideoValue(key, obj) ? "video" : obj.length > 90 ? "long" : "text", value: obj });
     return out;
   }
   if (typeof obj === "number") {

@@ -169,7 +169,6 @@ function projectScope(slug: ProjectPage["slug"]): ScopeDef {
       "location.lat",
       "location.lng",
       "location.mapQuery",
-      "update.video.src",
       "update.video.type",
       "floorPlans.plans.*.variants.*.pdf",
     ],
