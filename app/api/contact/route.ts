@@ -1,5 +1,5 @@
 // app/api/contact/route.ts
-import { localeFromPathname } from "@/lib/azure/site";
+import { PROJECTS, localeFromPathname } from "@/lib/azure/site";
 import { NextResponse, after } from "next/server";
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
@@ -27,6 +27,13 @@ const LIMITS = {
 function str(v: unknown, max: number) {
   if (typeof v !== "string" && typeof v !== "number") return "";
   return String(v).trim().slice(0, max);
+}
+
+/** Proje sayfasındaki form kısa adı ("neocity") gönderir: panelde tek proje görünsün diye resmî ada çevrilir */
+function projectName(v: string) {
+  const k = v.trim().toLowerCase();
+  if (!k) return "";
+  return PROJECTS.find((p) => p.slug === k || p.name.toLowerCase() === k)?.name ?? v.trim();
 }
 
 function cleanPageUrl(v: unknown) {
@@ -97,7 +104,7 @@ export async function POST(req: NextRequest) {
   const name = str(body.name, LIMITS.name);
   const email = str(body.email, 1000);
   const phone = str(body.phone, LIMITS.phone);
-  const project = str(body.project, LIMITS.project);
+  const project = projectName(str(body.project, LIMITS.project));
   const unitType = str(body.unitType, LIMITS.unitType);
   const form = str(body.form, LIMITS.form);
   const pageUrl = cleanPageUrl(body.pageUrl);

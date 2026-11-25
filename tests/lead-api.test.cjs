@@ -378,3 +378,12 @@ test("without database or DND Akış: email is the lead store and its failure re
   const bad = apiHarness({ env: { RESEND_API_KEY: "test-key-never-real" }, noDb: true, fetch: async () => new Response("no", { status: 500 }) });
   assert.equal((await bad.post({ ...validLead, eventId: "22222222-2222-4222-8222-222222222222" })).status, 500);
 });
+
+test("project page forms send the slug; the panel stores the official project name", async () => {
+  for (const [sent, stored] of [["neocity", "NeoCity"], ["lagoon-verde", "Lagoon Verde"], ["perla-ii", "La Joya Perla II"], ["NEOCITY", "NeoCity"], ["Başka Proje", "Başka Proje"]]) {
+    const api = apiHarness();
+    const res = await api.post({ ...validLead, project: sent, eventId: undefined });
+    assert.equal(res.status, 200);
+    assert.equal(api.writes[0].data.project, stored, sent);
+  }
+});
