@@ -16,7 +16,8 @@ const DISMISS_KEY = "dnd_tl_payment_popup_v1";
   - Dialog semantiği: role/aria-modal, açılışta odak kapat düğmesinde, ESC ve arka plana tıklama kapatır.
   - Video sessiz başlar (tarayıcı otomatik oynatma kuralı); ses düğmesiyle açılır.
   - document.body'ye portal ile çizilir (25.11.2026): sayfa içeriği .az-page (z-index:1) kendi katman bağlamını açtığı için pencere
-    sabit menü çubuğunun (z-index:100) altında kalıyor, kapat düğmesine tıklanamıyordu.
+    sabit menü çubuğunun (z-index:100) altında kalıyor, kapat düğmesine tıklanamıyordu. Pencere menünün altından başlar
+    (menü tepeden 76 px'te biter → üst pay 96 px), kalan alanda ortalanır; 500 px'ten kısa ekranda yer olmadığı için tam yüksekliği kullanır.
 */
 export default function PaymentModelPopup() {
   const [open, setOpen] = useState(false);
@@ -87,12 +88,12 @@ export default function PaymentModelPopup() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="tl-payment-popup-title"
-      className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/70 px-4 pb-5 pt-[96px] backdrop-blur-sm [@media(max-height:500px)]:p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) dismiss();
       }}
     >
-      <div className="relative flex max-h-[calc(100svh-2rem)] w-full max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 md:w-auto md:flex-row">
+      <div className="relative flex max-h-[calc(100svh-116px)] w-full [@media(max-height:500px)]:max-h-[calc(100svh-2rem)] max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 md:w-auto md:flex-row">
         <button
           ref={closeRef}
           type="button"
@@ -122,7 +123,7 @@ export default function PaymentModelPopup() {
             loop
             playsInline
             preload={reduce ? "metadata" : "auto"}
-            className="relative aspect-[9/16] h-[32svh] w-auto object-cover min-[400px]:h-[38svh] sm:h-[44svh] md:h-[min(560px,calc(100svh-2rem))]"
+            className="relative aspect-[9/16] h-[32svh] w-auto object-cover min-[400px]:h-[38svh] sm:h-[44svh] md:h-[min(560px,calc(100svh-116px))] md:[@media(max-height:500px)]:h-[calc(100svh-2rem)]"
           />
           <button
             type="button"
