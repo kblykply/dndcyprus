@@ -1,4 +1,5 @@
 // app/(default)/admin/icerik/sayfa/[scope]/page.tsx — sayfa metni düzenleyici: dil sekmeleri, bölümler, alanlar, orijinale dön
+import { blobUploadConfigured } from "@/lib/content/blob";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
@@ -26,7 +27,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
   const section = def.sections.some(([k]) => k === sp.bolum) ? (sp.bolum as string) : def.sections[0][0];
   const sectionLabel = def.sections.find(([k]) => k === section)![1];
   const [fields, counts] = await Promise.all([sectionFields(scope, locale, section), overrideCounts(scope, locale)]);
-  const uploadEnabled = !!(process.env.BLOB_READ_WRITE_TOKEN || "").trim();
+  const uploadEnabled = blobUploadConfigured();
   const url = (patch: Record<string, string>) => {
     const q = new URLSearchParams({ dil: locale, bolum: section, ...patch });
     return `/admin/icerik/sayfa/${scope}?${q}`;

@@ -2,6 +2,7 @@
 // app/(default)/admin/icerik/actions.ts
 // İçerik yönetimi eylemleri: sayfa metni kaydet / orijinale dön, liste kaydı ekle-düzenle-sil-yayınla-sırala, görsel yükle.
 // Her eylem oturumu doğrular; değişiklik sonrası ilgili sayfalar yeniden üretilir (revalidatePath) ve işlem geçmişine yazılır.
+import { blobUploadConfigured } from "@/lib/content/blob";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
@@ -185,7 +186,7 @@ const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/avi
 
 export async function uploadImage(formData: FormData): Promise<{ ok: true; url: string } | { ok: false; error: string }> {
   await requireAdmin("/admin/icerik");
-  if (!(process.env.BLOB_READ_WRITE_TOKEN || "").trim()) return { ok: false, error: "Görsel deposu bağlı değil (Vercel Blob)." };
+  if (!blobUploadConfigured()) return { ok: false, error: "Görsel deposu bağlı değil (Vercel Blob)." };
   const file = formData.get("file");
   if (!(file instanceof File) || !file.size) return { ok: false, error: "Dosya seçilmedi." };
   if (!IMAGE_TYPES.has(file.type)) return { ok: false, error: "Yalnız JPG, PNG, WebP, AVIF ya da GIF yüklenebilir." };

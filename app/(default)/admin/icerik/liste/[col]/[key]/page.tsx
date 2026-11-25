@@ -1,4 +1,5 @@
 // app/(default)/admin/icerik/liste/[col]/[key]/page.tsx — liste kaydı ekle ("yeni") / düzenle
+import { blobUploadConfigured } from "@/lib/content/blob";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
@@ -48,7 +49,7 @@ export default async function ItemPage({ params }: { params: Promise<{ col: stri
           perLocale={def.perLocale}
           initial={initial}
           published={item ? item.published : true}
-          uploadEnabled={!!(process.env.BLOB_READ_WRITE_TOKEN || "").trim()}
+          uploadEnabled={blobUploadConfigured()}
           cancelHref={`/admin/icerik/liste/${col}`}
         />
       </div>
