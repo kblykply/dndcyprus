@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { sanitizeAttribution, sourceFromAttribution } from "@/lib/attribution";
 import { sendMetaLeadEvent } from "@/lib/meta-capi";
 import { dndAkisLeadConfigured, sendDndAkisLead } from "@/lib/dnd-akis-lead";
+import { leadEmailConfigured, sendLeadEmail } from "@/lib/lead-email";
 
 export const runtime = "nodejs";
 
@@ -147,14 +148,41 @@ export async function POST(req: NextRequest) {
     source,
     campaign,
   };
-  // Sitenin kendi veritabanı yoksa (DATABASE_URL tanımsız) talebin tek kaydı DND Akış'tır:
-  // iletim beklenir; DND Akış almadıysa ziyaretçiye hata döner, talep sessizce kaybolmaz.
+  // info@dndcyprus.com bildirimi (25.11.2026): talep panele kaydedildikten sonra kurumsal e-posta (RESEND_API_KEY varsa)
+  const emailLead = {
+    name,
+    email,
+    phone: phone || undefined,
+    project: project || undefined,
+    unitType: unitType || undefined,
+    subject: visitorSubject || undefined,
+    message: visitorMessage || undefined,
+    form: form || undefined,
+    pageUrl: pageUrl || undefined,
+    source,
+    campaign,
+    eventId: eventId || undefined,
+    receivedAt: new Date(now),
+  };
+  // Talebin asıl kaydı sitenin veritabanı (yönetim paneli /admin/leads). Veritabanı yoksa (DATABASE_URL tanımsız) yedek yol:
+  // DND Akış (yapılandırıldıysa) ya da yalnız e-posta; iletim beklenir, ulaşmazsa ziyaretçiye hata döner, talep sessizce kaybolmaz.
   const hasDatabase = !!(process.env.DATABASE_URL || "").trim();
 
   if (!hasDatabase) {
-    const sent = dndAkisLeadConfigured() ? await sendDndAkisLead(akisLead) : null;
-    if (!sent || !("ok" in sent) || !sent.ok) {
-      console.error("CONTACT_API_ERROR", { code: sent ? "DND_AKIS_UNAVAILABLE" : "NO_LEAD_STORE" });
+    if (dndAkisLeadConfigured()) {
+      const sent = await sendDndAkisLead(akisLead);
+      if (!sent || !("ok" in sent) || !sent.ok) {
+        console.error("CONTACT_API_ERROR", { code: "DND_AKIS_UNAVAILABLE" });
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+      }
+      if (leadEmailConfigured()) after(async () => { await sendLeadEmail(emailLead); });
+    } else if (leadEmailConfigured()) {
+      if (!(await sendLeadEmail(emailLead))) {
+        console.error("CONTACT_API_ERROR", { code: "LEAD_EMAIL_UNAVAILABLE" });
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+      }
+    } else {
+      console.error("CONTACT_API_ERROR", { code: "NO_LEAD_STORE" });
       return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
   } else try {
@@ -188,6 +216,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
   if (eventId) rememberEvent(eventId, now);
+
+  // Panele kaydedilen talep info@dndcyprus.com'a e-postayla bildirilir; yanıt döndükten sonra çalışır, hatası formu etkilemez.
+  if (hasDatabase && leadEmailConfigured()) {
+    after(async () => {
+      await sendLeadEmail(emailLead);
+    });
+  }
 
   // DND Akış: veritabanına kaydedilen talep satış panosuna kart olarak da iletilir (yalnız sunucudan, anahtar env'de).
   // Değişkenler yoksa atlanır; yanıt döndükten sonra çalışır, hatası formun sonucunu etkilemez.

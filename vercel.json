@@ -2,7 +2,12 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "dndcyprus.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "dndcyprus.com"
+        }
+      ],
       "destination": "https://www.dndcyprus.com/:path*",
       "permanent": true
     }
@@ -10,8 +15,24 @@
   "headers": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": ".*\\.vercel\\.app" }],
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "has": [
+        {
+          "type": "host",
+          "value": ".*\\.vercel\\.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/yedek",
+      "schedule": "0 6 * * 1"
     }
   ]
 }

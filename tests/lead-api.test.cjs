@@ -356,3 +356,25 @@ test("without a site database, a failed DND Akış delivery is an error the visi
     assert.equal(api.requests.length, 0);
   });
 });
+
+test("with a site database and RESEND_API_KEY: saved to the panel first, info@ email sent after responding", async () => {
+  const api = apiHarness({ env: { RESEND_API_KEY: "test-key-never-real" } });
+  const res = await api.post({ ...validLead, project: "La Joya", message: "Bilgi" });
+  assert.equal(res.status, 200);
+  assert.equal(api.writes.length, 1);
+  assert.equal(api.requests.length, 0); // e-posta yanıttan sonra
+  for (const run of api.deferred) await run();
+  const mails = api.requests.filter(r => r.url === "https://api.resend.com/emails");
+  assert.equal(mails.length, 1);
+  assert.deepEqual(mails[0].body.to, ["info@dndcyprus.com"]);
+  assert.equal(mails[0].body.reply_to, validLead.email);
+  assert.match(mails[0].body.subject, /La Joya/);
+});
+
+test("without database or DND Akış: email is the lead store and its failure returns 500", async () => {
+  const ok = apiHarness({ env: { RESEND_API_KEY: "test-key-never-real" }, noDb: true });
+  assert.equal((await ok.post({ ...validLead })).status, 200);
+  assert.equal(ok.requests.filter(r => r.url === "https://api.resend.com/emails").length, 1);
+  const bad = apiHarness({ env: { RESEND_API_KEY: "test-key-never-real" }, noDb: true, fetch: async () => new Response("no", { status: 500 }) });
+  assert.equal((await bad.post({ ...validLead, eventId: "22222222-2222-4222-8222-222222222222" })).status, 500);
+});
