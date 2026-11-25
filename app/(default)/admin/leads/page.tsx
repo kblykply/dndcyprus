@@ -435,8 +435,8 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           ) : (
             <>
               {/* Masaüstü tablo + toplu durum */}
-              <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm md:block">
-              <form id="toplu" action={setLeadStatusBulk}>
+              <div className="hidden h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm md:flex">
+              <form id="toplu" action={setLeadStatusBulk} className="flex-1">
                 <input type="hidden" name="back" value={here} />
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 px-3 py-2">
                   <SelectedCount formId="toplu" />
@@ -549,7 +549,8 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
 
         {/* Seçili talep */}
         {detail ? (
-          <aside className={`${explicit ? "block" : "hidden xl:block"} self-start rounded-xl border border-slate-200 bg-white shadow-sm`} aria-label="Talep ayrıntısı">
+          <aside className={`${explicit ? "block" : "hidden xl:block"} rounded-xl border border-slate-200 bg-white shadow-sm`} aria-label="Talep ayrıntısı">
+            <div className="xl:sticky xl:top-4">
             {explicit ? (
               <Link href={qs(sp, { id: undefined })} className="flex items-center gap-2 border-b border-slate-100 px-5 py-3 text-sm font-medium text-teal-700 xl:hidden">
                 <ArrowLeft className="h-4 w-4" aria-hidden /> Bütün talepler
@@ -751,6 +752,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                   </div>
                 </form>
               ) : null}
+            </div>
             </div>
           </aside>
         ) : null}
