@@ -3,6 +3,7 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
+import { AdminToastHost } from "./leads/LiveForms";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -154,6 +155,7 @@ export default function AdminShell({ children, waiting, user }: { children: Reac
         ) : null}
 
         <main className="flex-1 px-4 py-7 sm:px-8 lg:py-9 2xl:px-10">{children}</main>
+        <AdminToastHost />
       </div>
     </div>
   );

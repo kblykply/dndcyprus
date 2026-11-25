@@ -23,8 +23,9 @@ import {
   waNumber,
   type LeadFilters,
 } from "@/lib/lead-status";
-import { addLeadNote, deleteLeadNote, setLeadStatus, setLeadStatusBulk } from "./actions";
-import { AutoSubmitSelect, ConfirmButton, SelectAll, SelectedCount } from "./LeadControls";
+import { setLeadStatusBulk } from "./actions";
+import { NoteDelete, NoteForm, StatusForm } from "./LiveForms";
+import { AutoSubmitSelect, SelectAll, SelectedCount } from "./LeadControls";
 import { pageLabelText } from "@/lib/page-label";
 
 export const dynamic = "force-dynamic";
@@ -583,34 +584,12 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
             </div>
 
             {!legacy ? (
-              <form action={setLeadStatus} className="flex items-center justify-between gap-3 px-5 pt-4 text-[13px]">
-                <input type="hidden" name="id" value={detail.id} />
-                <input type="hidden" name="back" value={qs(sp, { id: String(detail.id) })} />
-                <label htmlFor="durum-sec" className="text-slate-500">
-                  Durum
-                </label>
-                <span className="relative">
-                  <AutoSubmitSelect
-                    id="durum-sec"
-                    name="status"
-                    defaultValue={statusInfo(detail.status).key}
-                    key={`${detail.id}-${detail.status}`}
-                    className="h-9 w-44 appearance-none rounded-lg border border-slate-200 bg-white pl-3 pr-9 text-[13px] font-medium text-slate-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20"
-                  >
-                    {LEAD_STATUSES.map((s) => (
-                      <option key={s.key} value={s.key}>
-                        {s.label}
-                      </option>
-                    ))}
-                  </AutoSubmitSelect>
-                  <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden />
-                </span>
-                <noscript>
-                  <button type="submit" className="rounded-md bg-slate-900 px-3 py-1.5 text-xs text-white">
-                    Kaydet
-                  </button>
-                </noscript>
-              </form>
+              <StatusForm
+                leadId={detail.id}
+                status={statusInfo(detail.status).key}
+                options={LEAD_STATUSES.map((s) => ({ key: s.key, label: s.label }))}
+                className="h-9 w-44 appearance-none rounded-lg border border-slate-200 bg-white pl-3 pr-9 text-[13px] font-medium text-slate-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 disabled:opacity-60"
+              />
             ) : null}
 
             <div className="grid grid-cols-3 gap-2 px-5 pb-4 pt-3">
@@ -707,13 +686,9 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                     <div className="flex items-start gap-2">
                       <p className={`min-w-0 flex-1 whitespace-pre-wrap break-words ${n.kind === "not" ? "text-slate-700" : "text-slate-500"}`}>{n.text}</p>
                       {n.kind === "not" ? (
-                        <form action={deleteLeadNote}>
-                          <input type="hidden" name="noteId" value={n.id} />
-                          <input type="hidden" name="back" value={qs(sp, { id: String(detail.id) })} />
-                          <ConfirmButton message="Bu not silinsin mi?" aria-label="Notu sil" title="Notu sil" className="rounded p-0.5 text-slate-300 hover:bg-slate-100 hover:text-red-500">
-                            <X className="h-3.5 w-3.5" aria-hidden />
-                          </ConfirmButton>
-                        </form>
+                        <NoteDelete noteId={n.id}>
+                          <X className="h-3.5 w-3.5" aria-hidden />
+                        </NoteDelete>
                       ) : null}
                     </div>
                     <p className="mt-0.5 text-xs text-slate-400">
@@ -730,32 +705,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                 </li>
               </ol>
               {!legacy ? (
-                <form action={addLeadNote} className="mt-4 rounded-lg border border-slate-200 p-2.5 focus-within:border-teal-600 focus-within:ring-2 focus-within:ring-teal-500/20">
-                  <input type="hidden" name="id" value={detail.id} />
-                  <input type="hidden" name="back" value={qs(sp, { id: String(detail.id) })} />
-                  <textarea
-                    name="text"
-                    required
-                    rows={2}
-                    maxLength={2000}
-                    placeholder="Not ekle…"
-                    aria-label="Not"
-                    className="block w-full resize-y bg-transparent px-1 text-[13px] text-slate-800 outline-none placeholder:text-slate-400"
-                  />
-                  <div className="mt-2 flex items-center justify-between gap-2">
-                    <input
-                      name="author"
-                      defaultValue={author}
-                      maxLength={60}
-                      placeholder="Adınız"
-                      aria-label="Notu yazan"
-                      className="h-8 w-32 rounded-md border border-slate-200 px-2 text-xs text-slate-700 outline-none focus:border-teal-600"
-                    />
-                    <button type="submit" className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800">
-                      Kaydet
-                    </button>
-                  </div>
-                </form>
+                <NoteForm leadId={detail.id} author={author} />
               ) : null}
             </div>
             </div>

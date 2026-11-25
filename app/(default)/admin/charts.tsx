@@ -2,6 +2,7 @@
 // Panel grafikleri (WowDash şablonunun grafik dili, panelin beyaz/teal stiline uyarlanmış). Kütüphane yok: çizgiler SVG,
 // yazılar HTML (telefonda küçülmesin diye). İpuçları CSS ile, JavaScript gerektirmez. Veri yoksa boş durum yazısı çıkar.
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { niceTicks } from "@/lib/lead-stats";
 
 export function ChartCard({ title, sub, right, children, className = "" }: { title: string; sub?: ReactNode; right?: ReactNode; children: ReactNode; className?: string }) {
@@ -210,6 +211,83 @@ export function Columns({ items, height = 200, color = "#2aa9b3" }: { items: { k
           <span className="w-full truncate text-center text-[11px] text-slate-500">{it.label}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+/**
+ * Proje dağılımı: her proje bir satır. Çubuğun uzunluğu en çok talep alan projeye göre, içi durumlara göre bölünür
+ * (yeni, arandı, görüşülüyor, satış, olumsuz); küçük sayılar da görünür kalır. Satır tıklanınca talepler o projeyle süzülür.
+ */
+export function ProjectBreakdown({
+  items,
+  total,
+  parts,
+  hrefOf,
+}: {
+  items: { key: string; label: string; count: number; byStatus: Record<string, number> }[];
+  total: number;
+  parts: { key: string; label: string; color: string }[];
+  hrefOf?: (key: string) => string;
+}) {
+  if (!items.length) return <Empty />;
+  const max = Math.max(...items.map((i) => i.count));
+  return (
+    <div>
+      <ul className="mb-4 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-500" aria-label="Renkler">
+        {parts.map((p) => (
+          <li key={p.key} className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full" style={{ background: p.color }} />
+            {p.label}
+          </li>
+        ))}
+      </ul>
+      <ul className="space-y-4">
+        {items.map((it) => {
+          const share = total ? Math.round((it.count / total) * 100) : 0;
+          const width = Math.max(4, (it.count / max) * 100);
+          const talked = (it.byStatus.gorusuluyor ?? 0) + (it.byStatus.satis ?? 0);
+          const row = (
+            <>
+              <div className="mb-1.5 flex items-baseline justify-between gap-3">
+                <span className="min-w-0 truncate text-[14px] font-medium text-slate-800">{it.label}</span>
+                <span className="shrink-0 text-[13px] text-slate-500">
+                  <b className="text-[15px] font-semibold text-slate-900">{it.count.toLocaleString("tr-TR")}</b> talep · %{share}
+                </span>
+              </div>
+              <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100">
+                <div className="flex h-full overflow-hidden rounded-full" style={{ width: `${width}%` }}>
+                  {parts.map((p) => {
+                    const n = it.byStatus[p.key] ?? 0;
+                    return n ? <span key={p.key} className="h-full" style={{ width: `${(n / it.count) * 100}%`, background: p.color }} title={`${p.label}: ${n}`} /> : null;
+                  })}
+                </div>
+              </div>
+              <p className="mt-1 text-[11px] text-slate-500">
+                {[
+                  it.byStatus.yeni ? `${it.byStatus.yeni} yeni` : "",
+                  talked ? `${talked} görüşülen` : "",
+                  it.byStatus.satis ? `${it.byStatus.satis} satış` : "",
+                  it.byStatus.olumsuz ? `${it.byStatus.olumsuz} olumsuz` : "",
+                ]
+                  .filter(Boolean)
+                  .join(" · ") || "—"}
+              </p>
+            </>
+          );
+          return (
+            <li key={it.key}>
+              {hrefOf ? (
+                <Link href={hrefOf(it.key)} className="block rounded-lg p-1 -m-1 hover:bg-slate-50">
+                  {row}
+                </Link>
+              ) : (
+                row
+              )}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

@@ -196,3 +196,43 @@ export async function deleteLeadNote(formData: FormData) {
   revalidatePath("/admin/leads");
   redirect(backTo(formData));
 }
+
+/* ---------------- Sayfa yenilenmeden çalışan eylemler (talep ayrıntısı) ----------------
+ * Form istemcide çalışır: düğme kayıt sürerken kilitlenir, sonuç bildirim olarak görünür, sayfa yönlendirilmeden
+ * güncellenir (revalidatePath aynı yanıtta yeni görünümü getirir). Aynı not 2 dakika içinde ikinci kez kaydedilmez.
+ */
+export type LiveState = { ok?: boolean; message?: string; error?: string; at?: number } | undefined;
+
+export async function addLeadNoteLive(_prev: LiveState, formData: FormData): Promise<LiveState> {
+  const store = await requireAdmin();
+  const id = Number(formData.get("id"));
+  const text = String(formData.get("text") || "").trim().slice(0, 2000);
+  if (!Number.isSafeInteger(id) || id <= 0) return { error: "Talep bulunamadı.", at: Date.now() };
+  if (!text) return { error: "Not boş olamaz.", at: Date.now() };
+  const exists = await prisma.contactMessage.findUnique({ where: { id }, select: { id: true } });
+  if (!exists) return { error: "Talep bulunamadı (silinmiş olabilir).", at: Date.now() };
+  const recent = await prisma.leadNote.findFirst({ where: { leadId: id, kind: "not", text, createdAt: { gte: new Date(Date.now() - 120_000) } }, select: { id: true } });
+  if (recent) return { ok: true, message: "Bu not zaten eklendi.", at: Date.now() };
+  await prisma.leadNote.create({ data: { leadId: id, kind: "not", text, author: authorName(store, formData) } });
+  revalidatePath("/admin/leads");
+  return { ok: true, message: "Not eklendi.", at: Date.now() };
+}
+
+export async function setLeadStatusLive(_prev: LiveState, formData: FormData): Promise<LiveState> {
+  const store = await requireAdmin();
+  const id = Number(formData.get("id"));
+  const status = String(formData.get("status"));
+  if (!Number.isSafeInteger(id) || id <= 0 || !isLeadStatus(status)) return { error: "Durum değiştirilemedi.", at: Date.now() };
+  await changeStatus([id], status, authorName(store));
+  revalidatePath("/admin", "layout");
+  return { ok: true, message: `Durum: ${statusInfo(status).label}`, at: Date.now() };
+}
+
+export async function deleteLeadNoteLive(_prev: LiveState, formData: FormData): Promise<LiveState> {
+  await requireAdmin();
+  const noteId = Number(formData.get("noteId"));
+  if (!Number.isSafeInteger(noteId) || noteId <= 0) return { error: "Not bulunamadı.", at: Date.now() };
+  await prisma.leadNote.deleteMany({ where: { id: noteId, kind: "not" } });
+  revalidatePath("/admin/leads");
+  return { ok: true, message: "Not silindi.", at: Date.now() };
+}

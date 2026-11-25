@@ -12,7 +12,7 @@ import { clarityConfigured } from "@/lib/clarity";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { LEAD_STATUSES, cyprusDateTime, sourceGroup, statusInfo } from "@/lib/lead-status";
 import { bucketCounts, changePct, groupLeads, inRange, isQualified, overviewPeriod, periodBuckets, sourceColor } from "@/lib/lead-stats";
-import { AreaChart, BarList, ChartCard, Columns, Donut } from "../charts";
+import { AreaChart, BarList, ChartCard, Donut, ProjectBreakdown } from "../charts";
 import PeriodTabs from "../PeriodTabs";
 
 export const dynamic = "force-dynamic";
@@ -67,7 +67,12 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
   const sold = cur.filter((l) => statusInfo(l.status).key === "satis").length;
   const waitingAll = all.filter((l) => statusInfo(l.status).key === "yeni").length;
   const sources = groupLeads(cur, (l) => sourceGroup(l.source)).map((g, i) => ({ ...g, color: sourceColor(g.key, i) }));
-  const projects = groupLeads(cur, (l) => (l.project ? { key: l.project, label: l.project } : null)).slice(0, 6);
+  const projects = groupLeads(cur, (l) => (l.project ? { key: l.project, label: l.project } : null))
+    .slice(0, 6)
+    .map((g) => ({
+      ...g,
+      byStatus: Object.fromEntries(LEAD_STATUSES.map((st) => [st.key, cur.filter((l) => l.project === g.key && statusInfo(l.status).key === st.key).length])),
+    }));
   const noProject = cur.filter((l) => !l.project).length;
   const statusCounts = LEAD_STATUSES.map((s) => ({ key: s.key, label: s.label, count: cur.filter((l) => statusInfo(l.status).key === s.key).length }));
   const lastWeb = all.find((l) => l.form && l.form !== "panel");
@@ -112,7 +117,12 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2 2xl:grid-cols-3">
         <ChartCard title="Projeler" sub={noProject ? `${noProject} talepte proje seçilmemiş` : "Talep edilen proje"}>
-          <Columns items={projects.map((p) => ({ key: p.key, label: p.label, count: p.count }))} />
+          <ProjectBreakdown
+            items={projects}
+            total={cur.length}
+            parts={LEAD_STATUSES.map((st) => ({ key: st.key, label: st.label, color: STATUS_HEX[st.key] }))}
+            hrefOf={(k) => `/admin/leads?proje=${encodeURIComponent(k)}`}
+          />
         </ChartCard>
         <ChartCard title="Satış hunisi" sub="Dönemde gelen taleplerin şu anki durumu">
           <BarList items={statusCounts} total={cur.length || undefined} colorOf={(k) => STATUS_HEX[k]} />
