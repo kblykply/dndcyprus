@@ -34,7 +34,7 @@ const GROUPS: { title: string; items: NavItem[] }[] = [
   {
     title: "Site",
     items: [
-      { label: "Site Trafiği", href: "/admin/trafik", icon: TrendingUp, soon: true },
+      { label: "Site Trafiği", href: "/admin/trafik", icon: TrendingUp },
       { label: "Isı Haritası", href: "/admin/isi-haritasi", icon: Flame, soon: true },
       { label: "İçerik", href: "/admin/icerik", icon: FileText, soon: true },
     ],
