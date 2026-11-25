@@ -152,7 +152,6 @@ export default function ContactCard({
   const uid = useId();
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, boolean>>({});
-  const [toast, setToast] = useState(false);
   const [done, setDone] = useState<Done | null>(null);
   // teşekkür kutusu formdan kısa: ekran dışında kalırsa (telefonda) görünür yere kaydır
   const doneRef = useRef<HTMLDivElement>(null);
@@ -204,8 +203,6 @@ export default function ContactCard({
         subject: mode === "contact" ? subject : undefined,
       });
       setStatus("success");
-      setToast(true);
-      setTimeout(() => setToast(false), 4000);
       form.reset();
     } else {
       setStatus("error");
@@ -276,7 +273,7 @@ export default function ContactCard({
           )}
         </div>
       </div>
-      <div className={`az-toast${toast ? " on" : ""}`} aria-hidden={!toast}>{t.ok}</div>
+      {/* alttaki "Talebiniz alındı" bildirimi kaldırıldı: teşekkür kartıyla aynı şeyi söylüyor ve kartın üstüne biniyordu (25.11.2026) */}
     </section>
   );
 }
