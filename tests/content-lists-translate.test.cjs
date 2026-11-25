@@ -105,3 +105,10 @@ test("readable page labels", () => {
   assert.ok(pl.pageLabelText("/tr/blog/lagoon-verde-ilk-temel-2026").startsWith("Blog: Lagoon Verde"));
   assert.equal(pl.pageLabelText("/xx/bilinmeyen"), "/xx/bilinmeyen");
 });
+
+test("translation model is picked from Google's list: newest stable Flash, never lite/preview/audio", () => {
+  const names = ["models/gemini-2.5-flash", "models/gemini-3.8-flash", "models/gemini-3.8-flash-lite", "models/gemini-3.9-flash-preview-11-2026", "models/gemini-3.8-flash-image", "models/gemini-3.8-pro", "models/gemini-3.8-flash-tts", "models/text-embedding-005"];
+  assert.equal(tr.pickFlashModel(names), "gemini-3.8-flash");
+  assert.equal(tr.pickFlashModel(["models/gemini-4.0-flash-preview-01"]), "gemini-4.0-flash-preview-01"); // yalnız önizleme varsa o
+  assert.equal(tr.pickFlashModel(["models/gemini-3.8-pro"]), null);
+});
