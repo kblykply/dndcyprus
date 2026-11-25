@@ -68,9 +68,9 @@ function Setup({ denied = false }: { denied?: boolean }) {
           </span>
         </li>
         <li className="flex gap-3">
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold text-white">2</span>
+          <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white ${denied ? "bg-teal-600" : "bg-slate-900"}`}>{denied ? "✓" : "2"}</span>
           <span>
-            <b className="font-medium text-slate-900">Vercel&apos;e anahtar:</b> dndcyprus-azure → Settings → Environment Variables →{" "}
+            <b className="font-medium text-slate-900">Vercel&apos;e anahtar{denied ? " (tamam, çalışıyor)" : ""}:</b> dndcyprus-azure → Settings → Environment Variables →{" "}
             <code className="rounded bg-slate-100 px-1 text-xs">GA4_SERVICE_ACCOUNT_JSON</code> (okuyucu hesabın JSON anahtar dosyasının tamamı, Sensitive) ve{" "}
             <code className="rounded bg-slate-100 px-1 text-xs">GA4_PROPERTY_ID</code> {id ? <>(şu an: {id})</> : "(DND Cyprus GA4 mülk numarası)"}.
           </span>

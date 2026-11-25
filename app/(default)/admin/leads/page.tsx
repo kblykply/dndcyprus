@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ChevronDown, Download, Mail, MessageCircle, Phone, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Download, Mail, MessageCircle, Phone, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { ATTRIBUTION_KEYS, sanitizeAttribution, type Touch } from "@/lib/attribution";
@@ -28,9 +28,9 @@ import { AutoSubmitSelect, ConfirmButton, SelectAll, SelectedCount } from "./Lea
 
 export const dynamic = "force-dynamic";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZES = [10, 25, 50] as const;
 
-type SP = { durum?: string; q?: string; proje?: string; kaynak?: string; donem?: string; sayfa?: string; id?: string };
+type SP = { durum?: string; q?: string; proje?: string; kaynak?: string; donem?: string; adet?: string; sayfa?: string; id?: string };
 
 type Row = {
   id: number;
@@ -78,12 +78,95 @@ async function loadDetail(id: number, legacy: boolean) {
 function qs(base: SP, patch: Partial<Record<keyof SP, string | undefined>>) {
   const p = new URLSearchParams();
   const merged = { ...base, ...patch };
-  for (const k of ["durum", "q", "proje", "kaynak", "donem", "sayfa", "id"] as const) {
+  for (const k of ["durum", "q", "proje", "kaynak", "donem", "adet", "sayfa", "id"] as const) {
     const v = merged[k];
-    if (v && !(k === "durum" && v === "tumu") && !(k === "sayfa" && v === "1")) p.set(k, v);
+    if (v && !(k === "durum" && v === "tumu") && !(k === "sayfa" && v === "1") && !(k === "adet" && v === "10")) p.set(k, v);
   }
   const s = p.toString();
   return s ? `/admin/leads?${s}` : "/admin/leads";
+}
+
+/** 1 … 4 5 6 … 12 biçiminde sayfa numaraları */
+function pageList(page: number, pages: number): (number | "…")[] {
+  if (pages <= 7) return Array.from({ length: pages }, (_, i) => i + 1);
+  const set = new Set([1, pages, page - 1, page, page + 1].filter((n) => n >= 1 && n <= pages));
+  if (page <= 3) [2, 3, 4].forEach((n) => set.add(n));
+  if (page >= pages - 2) [pages - 1, pages - 2, pages - 3].forEach((n) => set.add(n));
+  const nums = [...set].sort((a, b) => a - b);
+  const out: (number | "…")[] = [];
+  nums.forEach((n, i) => {
+    if (i && n - nums[i - 1] > 1) out.push("…");
+    out.push(n);
+  });
+  return out;
+}
+
+function Pagination({ sp, page, pages, total, from, to, size, idp }: { sp: SP; page: number; pages: number; total: number; from: number; to: number; size: number; idp: string }) {
+  const btn = "flex h-8 min-w-8 items-center justify-center rounded-md px-2 text-[13px]";
+  return (
+    <div className="flex flex-col gap-3 border-t border-slate-100 px-4 py-3 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-wrap items-center gap-3">
+        <span>
+          {total} talepten {from}–{to} gösteriliyor
+        </span>
+        <form method="GET" action="/admin/leads" className="flex items-center gap-1.5">
+          {(["durum", "q", "proje", "kaynak", "donem"] as const).map((k) => (sp[k] ? <input key={k} type="hidden" name={k} value={sp[k]} /> : null))}
+          <label htmlFor={idp}>Sayfada</label>
+          <span className="relative">
+            <AutoSubmitSelect id={idp} name="adet" defaultValue={String(size)} className="h-8 appearance-none rounded-md border border-slate-200 bg-white pl-2.5 pr-7 text-xs text-slate-700">
+              {PAGE_SIZES.map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </AutoSubmitSelect>
+            <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" aria-hidden />
+          </span>
+          <noscript>
+            <button type="submit" className="rounded border border-slate-200 px-2 py-1">Uygula</button>
+          </noscript>
+        </form>
+      </div>
+      {pages > 1 ? (
+        <nav className="flex flex-wrap items-center gap-1" aria-label="Sayfalar">
+          {page > 1 ? (
+            <Link href={qs(sp, { sayfa: String(page - 1), id: undefined })} className={`${btn} border border-slate-200 text-slate-700 hover:bg-slate-50`} aria-label="Önceki sayfa">
+              <ChevronLeft className="h-4 w-4" aria-hidden />
+            </Link>
+          ) : (
+            <span className={`${btn} border border-slate-100 text-slate-300`} aria-hidden>
+              <ChevronLeft className="h-4 w-4" />
+            </span>
+          )}
+          {pageList(page, pages).map((n, i) =>
+            n === "…" ? (
+              <span key={`e${i}`} className="px-1 text-slate-400">
+                …
+              </span>
+            ) : (
+              <Link
+                key={n}
+                href={qs(sp, { sayfa: String(n), id: undefined })}
+                aria-current={n === page ? "page" : undefined}
+                className={`${btn} ${n === page ? "bg-slate-900 font-medium text-white" : "border border-slate-200 text-slate-700 hover:bg-slate-50"}`}
+              >
+                {n}
+              </Link>
+            ),
+          )}
+          {page < pages ? (
+            <Link href={qs(sp, { sayfa: String(page + 1), id: undefined })} className={`${btn} border border-slate-200 text-slate-700 hover:bg-slate-50`} aria-label="Sonraki sayfa">
+              <ChevronRight className="h-4 w-4" aria-hidden />
+            </Link>
+          ) : (
+            <span className={`${btn} border border-slate-100 text-slate-300`} aria-hidden>
+              <ChevronRight className="h-4 w-4" />
+            </span>
+          )}
+        </nav>
+      ) : null}
+    </div>
+  );
 }
 
 function StatusPill({ status }: { status: string }) {
@@ -150,9 +233,13 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
   const base = filterLeads(rows, f, now, false); // durum hariç: sekme sayıları
   const counts = statusCounts(base);
   const filtered = f.durum && f.durum !== "tumu" ? base.filter((r) => statusInfo(r.status).key === f.durum) : base;
-  const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const pageSize = (PAGE_SIZES as readonly number[]).includes(Number(sp.adet)) ? Number(sp.adet) : 10;
+  const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const page = Math.min(pages, Math.max(1, Number(sp.sayfa) || 1));
-  const pageRows = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const pageRows = filtered.slice((page - 1) * pageSize, page * pageSize);
+  const pager = (idp: string) => (
+    <Pagination sp={sp} page={page} pages={pages} total={filtered.length} from={(page - 1) * pageSize + 1} to={(page - 1) * pageSize + pageRows.length} size={pageSize} idp={idp} />
+  );
 
   const idParam = Number(sp.id);
   const explicit = Number.isSafeInteger(idParam) && idParam > 0;
@@ -348,7 +435,8 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           ) : (
             <>
               {/* Masaüstü tablo + toplu durum */}
-              <form id="toplu" action={setLeadStatusBulk} className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm md:block">
+              <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm md:block">
+              <form id="toplu" action={setLeadStatusBulk}>
                 <input type="hidden" name="back" value={here} />
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 px-3 py-2">
                   <SelectedCount formId="toplu" />
@@ -421,26 +509,9 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                     })}
                   </tbody>
                 </table>
-                <div className="flex items-center justify-between border-t border-slate-100 px-4 py-3 text-xs text-slate-500">
-                  <span>
-                    {filtered.length} talepten {(page - 1) * PAGE_SIZE + 1}–{(page - 1) * PAGE_SIZE + pageRows.length} gösteriliyor
-                  </span>
-                  {pages > 1 ? (
-                    <span className="flex gap-1">
-                      {page > 1 ? (
-                        <Link href={qs(sp, { sayfa: String(page - 1), id: undefined })} className="rounded-md border border-slate-200 px-2.5 py-1 text-slate-700 hover:bg-slate-50">
-                          Önceki
-                        </Link>
-                      ) : null}
-                      {page < pages ? (
-                        <Link href={qs(sp, { sayfa: String(page + 1), id: undefined })} className="rounded-md border border-slate-200 px-2.5 py-1 text-slate-700 hover:bg-slate-50">
-                          Sonraki
-                        </Link>
-                      ) : null}
-                    </span>
-                  ) : null}
-                </div>
               </form>
+              {pager("adet-sec")}
+              </div>
 
               {/* Telefon: kartlar */}
               <ul className="space-y-2.5 md:hidden">
@@ -470,12 +541,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                     </li>
                   );
                 })}
-                {pages > 1 ? (
-                  <li className="flex justify-between pt-1 text-sm">
-                    {page > 1 ? <Link href={qs(sp, { sayfa: String(page - 1), id: undefined })} className="font-medium text-teal-700">Önceki</Link> : <span />}
-                    {page < pages ? <Link href={qs(sp, { sayfa: String(page + 1), id: undefined })} className="font-medium text-teal-700">Sonraki</Link> : null}
-                  </li>
-                ) : null}
+                <li className="overflow-hidden rounded-xl border border-slate-200 bg-white">{pager("adet-sec-m")}</li>
               </ul>
             </>
           )}
