@@ -10,6 +10,17 @@
       ],
       "destination": "https://www.dndcyprus.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/:path((?!api/).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "dndcyprus-azure.vercel.app"
+        }
+      ],
+      "destination": "https://www.dndcyprus.com/:path",
+      "permanent": true
     }
   ],
   "headers": [
