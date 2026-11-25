@@ -117,3 +117,34 @@ test("fallback order when a model is busy: newest stable flash, older flash vers
   const names = ["models/gemini-2.5-flash", "models/gemini-3.8-flash", "models/gemini-3.8-flash-001", "models/gemini-3.5-flash", "models/gemini-3.8-flash-lite", "models/gemini-3.9-flash-preview", "models/gemini-3.8-flash-tts"];
   assert.deepEqual(JSON.parse(JSON.stringify(tr.rankFlashModels(names))), ["gemini-3.8-flash", "gemini-3.5-flash", "gemini-2.5-flash", "gemini-3.8-flash-lite"]);
 });
+
+test("translation: short thinking per model, a silent model is skipped once, polish rule in the guide", async () => {
+  assert.deepEqual(JSON.parse(JSON.stringify(tr.thinkingFor("gemini-3.1-flash"))), { thinkingLevel: "low" });
+  assert.deepEqual(JSON.parse(JSON.stringify(tr.thinkingFor("gemini-2.5-flash-lite"))), { thinkingBudget: 0 });
+  assert.equal(tr.thinkingFor("gemini-flash-latest"), null);
+
+  const calls = [];
+  const answer = JSON.stringify([{ id: "x", en: "Hello", de: "Hallo", ru: "Привет", pl: "Cześć" }]);
+  const fetch = async (url, init) => {
+    const u = String(url);
+    if (u.includes("/models?")) return Response.json({ models: [{ name: "models/gemini-3.1-flash", supportedGenerationMethods: ["generateContent"] }, { name: "models/gemini-2.5-flash", supportedGenerationMethods: ["generateContent"] }] });
+    const model = u.match(/models\/([^:]+):/)[1];
+    const body = JSON.parse(init.body);
+    calls.push({ model, thinking: body.generationConfig.thinkingConfig ?? null });
+    if (model === "gemini-3.1-flash") { const e = new Error("The operation was aborted due to timeout"); e.name = "TimeoutError"; throw e; }
+    if (model === "gemini-2.5-flash" && body.generationConfig.thinkingConfig) return Response.json({ error: { message: "thinking_budget is not supported" } }, { status: 400 });
+    return Response.json({ candidates: [{ content: { parts: [{ text: "düşünce", thought: true }, { text: answer }] } }] });
+  };
+  const live = loadTypeScript("lib/content/translate.ts", { env: { GEMINI_API_KEY: "deneme" }, globals: { fetch, console: { ...console, info: () => {} } } });
+  const r = await live.translateFromTurkish([{ id: "x", text: "Merhaba", kind: "text" }]);
+  assert.equal(r.ok, true);
+  assert.equal(r.out.x.pl, "Cześć");
+  // zaman aşımına uğrayan model bir kez denenir; düşünme ayarını tanımayan model ayarsız yeniden denenir
+  assert.deepEqual(JSON.parse(JSON.stringify(calls)), [
+    { model: "gemini-3.1-flash", thinking: { thinkingLevel: "low" } },
+    { model: "gemini-2.5-flash", thinking: { thinkingBudget: 0 } },
+    { model: "gemini-2.5-flash", thinking: null },
+  ]);
+  const guide = loadTypeScript("lib/content/translate-guide.ts", { mocks: { "@/lib/azure/home": { HOME: {} }, "@/lib/azure/home-flow": { HOME_FLOW: {} }, "@/lib/azure/pages": { PAGES: {} }, "@/lib/azure/projects": { PROJECT_PAGES: {} } } });
+  assert.match(guide.TRANSLATION_SYSTEM, /NEVER the informal 2nd person singular/);
+});

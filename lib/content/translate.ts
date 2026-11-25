@@ -104,7 +104,21 @@ function chunk(items: TranslateItem[]) {
   return groups;
 }
 
-async function callGemini(model: string, key: string, prompt: string): Promise<{ ok: true; text: string } | { ok: false; status: number; error: string }> {
+/** Çeviri için düşünme süresi: Flash modellerde kısa tutulur (yanıt saniyeler içinde gelsin) */
+export function thinkingFor(model: string): Record<string, unknown> | null {
+  const v = parseFloat(model.match(/gemini-(\d+(?:\.\d+)?)/)?.[1] ?? "0");
+  if (v >= 3) return { thinkingLevel: "low" };
+  if (v >= 2.5) return { thinkingBudget: 0 };
+  return null;
+}
+
+async function callGemini(
+  model: string,
+  key: string,
+  prompt: string,
+  timeoutMs: number,
+  thinking: Record<string, unknown> | null,
+): Promise<{ ok: true; text: string } | { ok: false; status: number; error: string }> {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
   const r = await fetch(url, {
     method: "POST",
@@ -112,14 +126,14 @@ async function callGemini(model: string, key: string, prompt: string): Promise<{
     body: JSON.stringify({
       systemInstruction: { parts: [{ text: systemInstruction() }] },
       contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.3, responseMimeType: "application/json" },
+      generationConfig: { temperature: 0.3, responseMimeType: "application/json", ...(thinking ? { thinkingConfig: thinking } : {}) },
     }),
     cache: "no-store",
-    signal: AbortSignal.timeout(60_000),
+    signal: AbortSignal.timeout(timeoutMs),
   });
-  const body = (await r.json().catch(() => null)) as { candidates?: { content?: { parts?: { text?: string }[] } }[]; error?: { message?: string } } | null;
+  const body = (await r.json().catch(() => null)) as { candidates?: { content?: { parts?: { text?: string; thought?: boolean }[] } }[]; error?: { message?: string } } | null;
   if (!r.ok) return { ok: false, status: r.status, error: body?.error?.message || `Gemini ${r.status}` };
-  const text = body?.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
+  const text = body?.candidates?.[0]?.content?.parts?.filter((p) => !p.thought).map((p) => p.text ?? "").join("") ?? "";
   if (!text) return { ok: false, status: 502, error: "Gemini boş yanıt verdi." };
   return { ok: true, text };
 }
@@ -188,26 +202,40 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
   if (!key) return { ok: false, error: "Otomatik çeviri kapalı: GEMINI_API_KEY tanımlı değil." };
   const models = await resolveModels(key);
   const out: Record<string, Record<TargetLocale, string>> = {};
-  for (const group of chunk(todo)) {
+  const groups = chunk(todo);
+  // Süre sınırı: kayıt düğmesi dakikalarca beklemesin. Tek istek en çok 30 sn; bütün çeviri 40 sn (+20 sn / ek parça, en çok 4 dk).
+  const deadline = Date.now() + Math.min(240_000, 40_000 + 20_000 * (groups.length - 1));
+  const slow = "Çeviri servisi zamanında yanıt vermedi; Türkçe kaydedildi, biraz sonra yeniden kaydedin.";
+  for (const group of groups) {
     const prompt = buildPrompt(group, context);
     let last = "";
     let done = false;
     for (const model of models) {
+      let thinking = thinkingFor(model);
       for (let attempt = 0; attempt < 2 && !done; attempt++) {
+        const left = deadline - Date.now();
+        if (left < 3000) return { ok: false, error: last && last !== slow ? `${slow} (${last})` : slow };
+        const t0 = Date.now();
         try {
-          const r = await callGemini(model, key, prompt);
+          const r = await callGemini(model, key, prompt, Math.min(30_000, left), thinking);
+          console.info("TRANSLATE_CALL", { model, ok: r.ok, status: r.ok ? 200 : r.status, ms: Date.now() - t0 });
           if (!r.ok) {
             last = r.status === 429 ? "Çeviri servisinin dakikalık/günlük ücretsiz sınırı doldu; biraz sonra yeniden kaydedin." : r.error;
+            if (r.status === 400 && thinking && /thinking/i.test(r.error)) {
+              thinking = null; // bu model düşünme ayarını tanımıyor → ayarsız yeniden dene
+              attempt--;
+              continue;
+            }
             if (r.status === 404 || r.status === 400 || /no longer available|not found|not supported/i.test(r.error)) {
               if (modelCache?.names.includes(model)) modelCache = null; // kapanan model: bir dahakine liste yeniden alınır
               break; // bu model yok/kapalı → sıradaki model
             }
-            if (r.status === 503 || /high demand|overloaded|unavailable/i.test(r.error)) {
+            if (r.status === 503 || r.status === 500 || r.status === 504 || /high demand|overloaded|unavailable|deadline/i.test(r.error)) {
               last = "Çeviri servisi şu an yoğun; biraz sonra yeniden kaydedin.";
               break; // yoğun model: beklemeden sıradaki modele geç
             }
             if (r.status === 429 && attempt === 0) {
-              await new Promise((res) => setTimeout(res, 6000));
+              await new Promise((res) => setTimeout(res, 4000));
               continue;
             }
             if (r.status === 401 || r.status === 403) return { ok: false, error: "Çeviri anahtarı geçersiz (GEMINI_API_KEY)." };
@@ -221,7 +249,10 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
           Object.assign(out, parsed.out);
           done = true;
         } catch (e) {
-          last = `Çeviri servisine ulaşılamadı: ${(e as Error).message}`;
+          const timedOut = /timeout|aborted/i.test(`${(e as Error).name} ${(e as Error).message}`);
+          console.info("TRANSLATE_CALL", { model, ok: false, status: timedOut ? "timeout" : "network", ms: Date.now() - t0 });
+          last = timedOut ? slow : `Çeviri servisine ulaşılamadı: ${(e as Error).message}`;
+          break; // yanıt vermeyen model aynı istekle yeniden beklenmez → sıradaki model
         }
       }
       if (done) break;

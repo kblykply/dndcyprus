@@ -23,6 +23,10 @@ STYLE (most important) — this is TRANSCREATION, not machine translation
   RU: natural Russian real-estate copy, no calques; PL: natural Polish marketing copy. Premium but trustworthy developer tone: short sentences,
   concrete numbers, no exaggeration. Headlines stay short (max two lines). Buttons use the usual phrasing of that language.
 - Address: EN natural "you"; DE formal "Sie"; RU "вы" (lower case, formal but warm); PL formal "Państwo" (3rd person plural verbs).
+- PL in sentences and paragraphs: NEVER the informal 2nd person singular (no "ty", "Zrób", "Sprawdź", "Twój"). Use "Państwo"
+  forms or the inviting "Zapraszamy do…" / "Prosimy o…", e.g. "İlk adımı bugün atın." → "Pierwszy krok mogą Państwo zrobić już
+  dziś." Only a short button label (max 4 words) uses the usual Polish UI imperative, as on the site: "Zobacz szczegóły",
+  "Poznaj projekt", "Skontaktuj się z nami".
 - Capitalisation follows the target language (DE nouns capitalised; RU/PL sentence case; EN headlines may keep Title Case only
   if the Turkish is a headline).
 - Keep the meaning exactly: do not add claims, numbers, promises or facts that are not in the Turkish text; do not drop any.
