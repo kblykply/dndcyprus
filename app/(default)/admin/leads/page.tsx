@@ -73,7 +73,7 @@ function TouchList({ title, touch }: { title: string; touch: Touch | null }) {
   }
   if (touch.landing) rows.push(["landing", touch.landing]);
   if (touch.referrer) rows.push(["referrer", touch.referrer]);
-  if (touch.ts) rows.push(["zaman", new Date(touch.ts).toLocaleString("tr-TR")]);
+  if (touch.ts) rows.push(["zaman", new Date(touch.ts).toLocaleString("tr-TR", { timeZone: "Asia/Famagusta" })]);
   return (
     <div className="mt-2">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{title}</p>
@@ -150,7 +150,7 @@ export default async function AdminLeadsPage() {
                       className="border-t border-slate-100 align-top hover:bg-slate-50/60"
                     >
                       <td className="px-3 py-2 whitespace-nowrap text-xs text-slate-500">
-                        {lead.createdAt.toLocaleString("tr-TR")}
+                        {lead.createdAt.toLocaleString("tr-TR", { timeZone: "Asia/Famagusta" })}
                       </td>
                       <td className="px-3 py-2 whitespace-nowrap">{lead.name}</td>
                       <td className="px-3 py-2 whitespace-nowrap">
