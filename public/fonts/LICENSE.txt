@@ -1,0 +1,4 @@
+Bu klasördeki yazı tipleri SIL Open Font License 1.1 ile lisanslıdır (https://openfontlicense.org).
+- Albert Sans — Copyright 2021 The Albert Sans Project Authors (https://github.com/usted/albert-sans)
+- Outfit — Copyright 2021 The Outfit Project Authors (https://github.com/Outfitio/Outfit-Fonts)
+Dosyalar Google Fonts'un web alt kümeleridir (latin, latin-ext; değişken ağırlık).

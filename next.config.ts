@@ -65,6 +65,10 @@ const nextConfig: NextConfig = {
       source: "/optimized/:path*",
       headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
     }, {
+      // yazı tipleri: dosya adında sürüm var (….v1.woff2), içerik değişirse ad da değişir
+      source: "/fonts/:path*",
+      headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+    }, {
       source: "/admin/:path*",
       headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
     }];
