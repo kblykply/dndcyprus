@@ -38,13 +38,19 @@ function Problem({ r }: { r: Ga4Result<unknown> }) {
   return <p className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">GA4 verisi alınamadı: {r.error}</p>;
 }
 
-function Setup() {
+function Setup({ denied = false }: { denied?: boolean }) {
   const email = ga4ServiceEmail();
   const id = ga4PropertyId();
   return (
     <section className="mt-7 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="text-xl text-slate-900">GA4 verisini panele bağlama</h2>
-      <p className="mt-1.5 max-w-3xl text-sm text-slate-500">
+      <h2 className="text-xl text-slate-900">{denied ? "Son adım: GA4'te okuma izni" : "GA4 verisini panele bağlama"}</h2>
+      {denied ? (
+        <p className="mt-1.5 max-w-3xl text-sm text-amber-700">
+          Anahtar çalışıyor, ancak okuyucu hesabın DND Cyprus GA4 mülkünde izni yok. GA4&apos;te yönetici yetkisi olan biri aşağıdaki 1. adımı yapınca bu sayfa
+          kendiliğinden dolar.
+        </p>
+      ) : null}
+      <p className={`mt-1.5 max-w-3xl text-sm text-slate-500 ${denied ? "hidden" : ""}`}>
         Site ziyaret verisini GA4&apos;e gönderiyor. Panelin bu veriyi okuyabilmesi için Google&apos;ın bir okuma izni vermesi gerekiyor. Aşağıdaki iki adım
         tamamlanınca bu sayfa kendiliğinden dolar.
       </p>
@@ -132,6 +138,15 @@ export default async function TrafficPage(props: { searchParams?: Promise<{ done
   const deviceRows = rowsOf(devices);
   const deviceTotal = deviceRows.reduce((s, r) => s + r.vals[0], 0);
   const failed = [totals, series, channels, sources, pages, countries, devices, events].find((r) => !r.ok);
+  // Okuma izni yoksa ya da ana rapor alınamadıysa sıfır basılmaz: kurulum/izin adımı ve hata gösterilir
+  if (!totals.ok) {
+    return (
+      <div className="mx-auto max-w-[1600px]">
+        {header}
+        {/okuma izni yok/.test(totals.error) ? <Setup denied /> : <div className="mt-5"><Problem r={totals} /></div>}
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-[1600px]">
