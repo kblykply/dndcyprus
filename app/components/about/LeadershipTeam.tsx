@@ -253,6 +253,17 @@ export default function LeadershipTeam({
         sortOrder: 16,
 
   },
+  {
+    id: "digdem",
+    name: "Diğdem Kutgün",
+    role: "Mimar",
+    category: "Architecture",
+    photo: "/teams/digdem.png",
+    bio: "Proje tasarımı ve uygulamasında görevli.",
+    socials: {},
+    accent: "teal",
+    sortOrder: 16.5,
+  },
  
   {
     id: "mustafa",

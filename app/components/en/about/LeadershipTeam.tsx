@@ -231,6 +231,17 @@ members = [
     sortOrder: 16,
   },
   {
+    id: "digdem",
+    name: "Diğdem Kutgün",
+    role: "Architect",
+    category: "Architecture",
+    photo: "/teams/digdem.png",
+    bio: "Works on project design and implementation.",
+    socials: {},
+    accent: "teal",
+    sortOrder: 16.5,
+  },
+  {
     id: "mustafa",
     name: "Mustafa Muhtaroğlu",
     role: "Land Sales Specialist",
