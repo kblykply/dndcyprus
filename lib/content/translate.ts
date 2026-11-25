@@ -5,7 +5,10 @@
 //   GEMINI_API_KEY  → Google AI Studio → API key (Vercel, Production)
 //   GEMINI_MODEL    → isteğe bağlı; varsayılan "gemini-flash-latest" (Google'ın güncel Flash modeli), olmazsa gemini-2.5-flash
 //   CONTENT_TRANSLATE_MOCK=1 → yalnız yerel testlerde: ağ yok, metnin sonuna [en] gibi etiket ekler
-import { TRANSLATION_SYSTEM } from "./translate-guide";
+import { TRANSLATION_SYSTEM, houseStyleExamples } from "./translate-guide";
+
+let systemText: string | null = null;
+const systemInstruction = () => (systemText ??= TRANSLATION_SYSTEM + houseStyleExamples());
 
 export const TARGET_LOCALES = ["en", "de", "ru", "pl"] as const;
 export type TargetLocale = (typeof TARGET_LOCALES)[number];
@@ -39,6 +42,8 @@ const KIND_NOTE: Record<TranslateKind, string> = {
 };
 
 /** Modele giden kullanıcı mesajı: bağlam + alanlar (JSON) */
+export { systemInstruction };
+
 export function buildPrompt(items: TranslateItem[], context?: string) {
   const payload = items.map((i) => ({ id: i.id, type: KIND_NOTE[i.kind], tr: i.text }));
   return [
@@ -105,7 +110,7 @@ async function callGemini(model: string, key: string, prompt: string): Promise<{
     method: "POST",
     headers: { "Content-Type": "application/json", "x-goog-api-key": key },
     body: JSON.stringify({
-      systemInstruction: { parts: [{ text: TRANSLATION_SYSTEM }] },
+      systemInstruction: { parts: [{ text: systemInstruction() }] },
       contents: [{ role: "user", parts: [{ text: prompt }] }],
       generationConfig: { temperature: 0.3, responseMimeType: "application/json" },
     }),

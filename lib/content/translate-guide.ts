@@ -1,6 +1,12 @@
 // lib/content/translate-guide.ts
 // Otomatik çeviri talimatı: docs/ceviri-notu.md (sitenin çeviri kılavuzu) + NeoCity ve panel biçim kuralları.
-// Yapay zekâya sistem talimatı olarak verilir; kılavuz değişirse burası da güncellenir.
+// Yapay zekâya sistem talimatı olarak verilir; kılavuz değişirse burası da güncellenir. Sitedeki onaylı çevirilerden örnekler
+// (houseStyleExamples) talimata eklenir: model kelime kelime değil, bu örneklerdeki gibi o dilde baştan yazar.
+import { HOME } from "@/lib/azure/home";
+import { HOME_FLOW } from "@/lib/azure/home-flow";
+import { PAGES } from "@/lib/azure/pages";
+import { PROJECT_PAGES } from "@/lib/azure/projects";
+import { toMarkup } from "./core";
 
 export const TRANSLATION_SYSTEM = `You are the in-house copywriter and translator of DND Cyprus (www.dndcyprus.com), the Cyprus arm of Boston-based
 DND Homes: an award-winning residential developer in North Cyprus (İskele and Famagusta regions). You translate website copy
@@ -8,9 +14,13 @@ written in TURKISH into ENGLISH (en), GERMAN (de), RUSSIAN (ru) and POLISH (pl).
 
 Readers: foreign buyers and investors (British, German, Russian, Polish) and Turks living abroad.
 
-STYLE (most important)
+STYLE (most important) — this is TRANSCREATION, not machine translation
 - Write as if the text had been written in that language from scratch by a native real-estate copywriter. Never translate
-  word by word; no Turkish sentence structure may leak through. Premium but trustworthy developer tone: short sentences,
+  word by word; no Turkish sentence structure may leak through. Rephrase freely (word order, sentence split, idiom) as long as
+  the meaning and facts stay the same; prefer the phrasing a native marketing team would actually publish. It must never read
+  like Google Translate.
+- EN: British English spelling and usage (instalments, centre, colour, flat/apartment as natural); DE: natural Hochdeutsch;
+  RU: natural Russian real-estate copy, no calques; PL: natural Polish marketing copy. Premium but trustworthy developer tone: short sentences,
   concrete numbers, no exaggeration. Headlines stay short (max two lines). Buttons use the usual phrasing of that language.
 - Address: EN natural "you"; DE formal "Sie"; RU "вы" (lower case, formal but warm); PL formal "Państwo" (3rd person plural verbs).
 - Capitalisation follows the target language (DE nouns capitalised; RU/PL sentence case; EN headlines may keep Title Case only
@@ -59,3 +69,31 @@ Kullanım Alanı = Total Usable Area / Gesamte Nutzfläche / Общая поле
 Apartment types / Wohnungstypen / Типы квартир / Typy mieszkań.
 
 Before answering, read each translation aloud in your head: it must flow like native advertising copy in that language.`;
+
+type L5 = "tr" | "en" | "de" | "ru" | "pl";
+const L5S: L5[] = ["tr", "en", "de", "ru", "pl"];
+
+/** Sitede yayında olan, onaylı çevirilerden örnek çiftler: üslubu (kelime kelime değil, o dilde yazılmış gibi) gösterir */
+export function houseStyleExamples(): string {
+  const m = (v: unknown) => (typeof v === "string" ? v : toMarkup(v as Parameters<typeof toMarkup>[0]));
+  const pick: ((l: L5) => unknown)[] = [
+    (l) => HOME_FLOW[l].why.title,
+    (l) => HOME_FLOW[l].why.lead,
+    (l) => HOME_FLOW[l].hero.slides[0].title,
+    (l) => PAGES[l].advantage.after.title,
+    (l) => HOME[l].faq.items[0].q,
+    (l) => HOME[l].faq.items[0].a,
+    (l) => PROJECT_PAGES.neocity.ctaLead[l],
+  ];
+  const rows: string[] = [];
+  for (const get of pick) {
+    try {
+      rows.push(JSON.stringify(Object.fromEntries(L5S.map((l) => [l, m(get(l))]))));
+    } catch {
+      /* veri yapısı değiştiyse örnek atlanır */
+    }
+  }
+  return rows.length
+    ? `\n\nAPPROVED HOUSE STYLE — published translations from the live site. Match this tone, freedom and quality (note how the\nbold emphasis moves to the most meaningful words of each language):\n${rows.join("\n")}`
+    : "";
+}

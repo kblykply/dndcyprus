@@ -2,7 +2,10 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Building2, CalendarDays, ChevronRight, FileText, Newspaper, PenLine, Users } from "lucide-react";
+import {
+  CalendarDays, ChevronRight, Crown, FileText, Gem, House, IdCard, Landmark, LayoutGrid, Megaphone, Newspaper, PenLine, Phone, Shell, Sparkles,
+  TreePalm, Trees, Users, Wallet, Waves, type LucideIcon,
+} from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { SCOPES } from "@/lib/content/scopes";
@@ -12,6 +15,24 @@ import { translationConfigured } from "@/lib/content/translate";
 import TranslateTester from "./TranslateTester";
 
 export const dynamic = "force-dynamic";
+
+/** Her sayfa ve proje kendi ikonuyla (aynı ikon iki kartta kullanılmaz) */
+const SCOPE_ICONS: Record<string, LucideIcon> = {
+  anasayfa: House,
+  hakkimizda: Landmark,
+  ayricalik: Crown,
+  odeme: Wallet,
+  haberler: Megaphone,
+  projelerSayfasi: LayoutGrid,
+  ekipSayfasi: IdCard,
+  iletisim: Phone,
+  mariachi: TreePalm,
+  "proje-neocity": Trees,
+  "proje-lagoon-verde": Waves,
+  "proje-la-joya": Gem,
+  "proje-perla": Shell,
+  "proje-perla-ii": Sparkles,
+};
 
 
 export default async function ContentHome() {
@@ -35,10 +56,10 @@ export default async function ContentHome() {
 
       {(
         [
-          ["sayfa", "Sayfa metinleri", FileText],
-          ["proje", "Proje sayfaları", Building2],
+          ["sayfa", "Sayfa metinleri", "bg-[#eef5f6] text-[#0d6570]"],
+          ["proje", "Proje sayfaları", "bg-[#fbefe9] text-[#cd4824]"],
         ] as const
-      ).map(([group, title, Icon]) => (
+      ).map(([group, title, tint]) => (
         <section key={group}>
           <h2 className="mt-8 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">{title}</h2>
           <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -46,9 +67,10 @@ export default async function ContentHome() {
               .filter(([, s]) => s.group === group)
               .map(([key, s]) => {
                 const o = ov.get(key);
+                const Icon = SCOPE_ICONS[key] ?? FileText;
                 return (
                   <Link key={key} href={`/admin/icerik/sayfa/${key}`} className={card}>
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#eef5f6] text-[#0d6570]">
+                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg ${tint}`}>
                       <Icon className="h-5 w-5" strokeWidth={1.8} aria-hidden />
                     </span>
                     <span className="min-w-0 flex-1">
