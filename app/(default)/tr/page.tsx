@@ -1,5 +1,4 @@
 import { type PressItem } from "@/app/components/PressSection";
-import PaymentModelPopup from "@/app/components/PaymentModelPopup";
 import { pageMetadata } from "@/lib/seo";
 import { HOME } from "@/lib/azure/home";
 
@@ -147,7 +146,6 @@ export default function HomePage() {
   // rakamlar · haberler ve ödüller (haberlerin yanında S.S.S., kullanıcı isteğiyle) · iletişim. Ana sayfada Amerika anılmaz (Hakkımızda'da).
   return (
     <>
-      <PaymentModelPopup />
       <HomeHero locale="tr" />
       <ProjectsCarousel locale="tr" />
       <WhyDnd locale="tr" />

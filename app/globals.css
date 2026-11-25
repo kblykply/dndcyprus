@@ -194,3 +194,13 @@ html[data-dnd-consent="saved"] [data-consent-initial] { display: none; }
 }
 .hero-carousel button:focus-visible { outline: 2px solid white; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) { .hero-carousel-slide { transition: none; } }
+
+/* TL ödeme modeli penceresi (25.11.2026): ilk HTML'le gelir, CSS ile solarak açılır; kapatılmışsa ön komut gizler */
+.tl-pop-off #tl-odeme-popup { display: none !important; }
+@keyframes tl-pop-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes tl-pop-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes tl-pop-rise { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+.tl-pop-in { animation: tl-pop-fade-in .35s ease-out both; }
+.tl-pop-in .tl-pop-card { animation: tl-pop-rise .55s cubic-bezier(.22, 1, .36, 1) .05s both; }
+.tl-pop-out { animation: tl-pop-fade-out .2s ease-in both; }
+@media (prefers-reduced-motion: reduce) { .tl-pop-in, .tl-pop-in .tl-pop-card, .tl-pop-out { animation: none; } }

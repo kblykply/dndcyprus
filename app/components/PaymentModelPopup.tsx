@@ -1,67 +1,75 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Volume2, VolumeX, X } from "lucide-react";
+import { TL_POPUP_DISMISS_KEY, TL_POPUP_ID } from "@/lib/tl-popup";
 
 const TEAL = "#0d6570";
 const ORANGE = "#cd4824";
-// Oturum başına bir kez; kampanya değişirse anahtarın sürümü artırılır
-const DISMISS_KEY = "dnd_tl_payment_popup_v1";
-
 /*
-  Yeni TL ödeme modeli tanıtımı — ana sayfa ilk açıldığında video popup'ı.
-  - Sayfa ilk çizildiği anda yumuşak bir geçişle açılır (25.11.2026: eskiden `load` + boşta bekleniyordu; site görünüp 1-3 sn sonra
-    pencere geçişsiz belirince "hata gibi" duruyordu). Video ilk anda kapak görseliyle durur, `load` sonrası oynar: hıza etkisi yok.
+  Yeni TL ödeme modeli tanıtımı — ana sayfa (/tr) açıldığında video penceresi.
+  - Sayfanın İLK HTML'iyle birlikte gelir ve siteyle aynı karede, CSS geçişiyle (solma + hafif yükselme) görünür (25.11.2026).
+    Eskiden `load` + boşta bekleniyordu: site görünüp 1-3 sn sonra pencere geçişsiz belirince "hata gibi" duruyordu; JavaScript'le
+    açmak da yavaş telefonda ~1 sn bekletiyordu. Video ilk anda kapak görseliyle durur, `load` sonrası oynar: site hızına etkisi yok.
+  - TR yerleşiminde <main class="az-page"> DIŞINDA çizilir: .az-page (z-index:1) kendi katman bağlamını açtığı için içindeyken pencere
+    sabit menü çubuğunun (z-index:100) altında kalıyor, kapat düğmesine tıklanamıyordu.
+  - Bu oturumda kapatıldıysa TL_POPUP_PRESCRIPT <html>'e "tl-pop-off" ekler, globals.css pencereyi gizler (görünüp kaybolma yok).
   - Dialog semantiği: role/aria-modal, açılışta odak kapat düğmesinde, ESC ve arka plana tıklama kapatır.
-  - Video sessiz başlar (tarayıcı otomatik oynatma kuralı); ses düğmesiyle açılır.
-  - document.body'ye portal ile çizilir (25.11.2026): sayfa içeriği .az-page (z-index:1) kendi katman bağlamını açtığı için pencere
-    sabit menü çubuğunun (z-index:100) altında kalıyor, kapat düğmesine tıklanamıyordu. Pencere menünün altından başlar
-    (menü tepeden 76 px'te biter → üst pay 96 px), kalan alanda ortalanır; 500 px'ten kısa ekranda yer olmadığı için tam yüksekliği kullanır.
+  - Pencere menünün altından başlar (menü tepeden 76 px'te biter → üst pay 96 px), kalan alanda ortalanır; 500 px'ten kısa ekranda tam yükseklik.
 */
 export default function PaymentModelPopup() {
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/tr" || pathname === "/tr/";
+  const [open, setOpen] = useState(true);
+  const [closing, setClosing] = useState(false);
   const [muted, setMuted] = useState(true);
-  // visible: giriş/çıkış geçişi için (açık + görünür); videoOn: sayfa yüklenince video kaynağı verilir
-  const [visible, setVisible] = useState(false);
   const [videoOn, setVideoOn] = useState(false);
+  const [reduce, setReduce] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    let dismissed = false;
     try {
-      if (sessionStorage.getItem(DISMISS_KEY)) return;
+      dismissed = !!sessionStorage.getItem(TL_POPUP_DISMISS_KEY);
     } catch {}
-    // İlk karede kapalı çizilir, bir sonraki karede açılır → geçiş görünür (hidrasyonla aynı anda)
-    let raf2 = 0;
-    const raf1 = requestAnimationFrame(() => {
-      setOpen(true);
-      raf2 = requestAnimationFrame(() => setVisible(true));
-    });
     const startVideo = () => setVideoOn(true);
+    const raf = requestAnimationFrame(() => {
+      if (dismissed) setOpen(false);
+      setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    });
     if (document.readyState === "complete") startVideo();
     else window.addEventListener("load", startVideo, { once: true });
     return () => {
-      cancelAnimationFrame(raf1);
-      cancelAnimationFrame(raf2);
+      cancelAnimationFrame(raf);
       window.removeEventListener("load", startVideo);
     };
   }, []);
 
   const dismiss = useCallback(() => {
     try {
-      sessionStorage.setItem(DISMISS_KEY, "1");
+      sessionStorage.setItem(TL_POPUP_DISMISS_KEY, "1");
     } catch {}
     videoRef.current?.pause();
-    setVisible(false);
-    // çıkış geçişi bitince kaldır (hareketi azalt açıksa hemen)
+    // çıkışta solarak kapanır (hareketi azalt açıksa hemen)
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.setTimeout(() => setOpen(false), reduceMotion ? 0 : 220);
+    if (reduceMotion) {
+      setOpen(false);
+      return;
+    }
+    setClosing(true);
+    window.setTimeout(() => {
+      setOpen(false);
+      setClosing(false);
+    }, 200);
   }, []);
 
+  const shown = open && isHome;
+
   useEffect(() => {
-    if (!open) return;
+    if (!shown) return;
     closeRef.current?.focus();
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") dismiss();
@@ -73,7 +81,7 @@ export default function PaymentModelPopup() {
       document.body.style.overflow = prevOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open, dismiss]);
+  }, [shown, dismiss]);
 
   const toggleMute = () => {
     const el = videoRef.current;
@@ -83,22 +91,22 @@ export default function PaymentModelPopup() {
     setMuted(!muted);
   };
 
-  if (!open) return null;
+  if (!shown) return null;
   // "Hareketi azalt" açıksa video kendiliğinden oynamaz; afiş görünür, oynatma denetimleri kullanıcıda
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  return createPortal(
+  return (
     <div
+      id={TL_POPUP_ID}
       role="dialog"
       aria-modal="true"
       aria-labelledby="tl-payment-popup-title"
-      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-black/70 px-4 pb-5 pt-[96px] backdrop-blur-sm transition-opacity duration-300 ease-out motion-reduce:transition-none [@media(max-height:500px)]:p-4 ${visible ? "opacity-100" : "opacity-0"}`}
+      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-black/70 px-4 pb-5 pt-[96px] backdrop-blur-sm [@media(max-height:500px)]:p-4 ${closing ? "tl-pop-out" : "tl-pop-in"}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) dismiss();
       }}
     >
       <div
-        className={`relative flex max-h-[calc(100svh-116px)] w-full max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 transition duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none md:w-auto md:flex-row [@media(max-height:500px)]:max-h-[calc(100svh-2rem)] ${visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-[.98] opacity-0"}`}
+        className={`relative flex max-h-[calc(100svh-116px)] w-full max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 tl-pop-card md:w-auto md:flex-row [@media(max-height:500px)]:max-h-[calc(100svh-2rem)]`}
       >
         <button
           ref={closeRef}
@@ -196,7 +204,6 @@ export default function PaymentModelPopup() {
           </div>
         </div>
       </div>
-    </div>,
-    document.body,
+    </div>
   );
 }

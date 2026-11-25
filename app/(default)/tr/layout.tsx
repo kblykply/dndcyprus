@@ -9,6 +9,8 @@ import AzureFx from "@/app/components/azure/AzureFx";
 import WhatsAppAzure from "@/app/components/azure/WhatsAppAzure";
 import { ORGANIZATION_JSON_LD } from "@/lib/structured-data";
 import JsonLd from "@/app/components/seo/JsonLd";
+import PaymentModelPopup from "@/app/components/PaymentModelPopup";
+import { TL_POPUP_PRESCRIPT } from "@/lib/tl-popup";
 
 // Başlık sayfalarda (pageMetadata) verilir; burada yalnızca varsayılan açıklama kalır
 export const metadata: Metadata = {
@@ -33,6 +35,11 @@ export default function TRLayout({ children }: { children: React.ReactNode }) {
       <AzureFx />
 
       <AzureHeader locale="tr" />
+
+      {/* Ana sayfa TL ödeme modeli penceresi: ilk HTML'de gelir, <main class="az-page"> dışında (menünün üstünde kalsın diye).
+          Önündeki komut bu oturumda kapatıldıysa pencereyi çizilmeden gizler. Bileşen yalnız /tr'de görünür. */}
+      <script dangerouslySetInnerHTML={{ __html: TL_POPUP_PRESCRIPT }} />
+      <PaymentModelPopup />
 
       <main id="main" className="az-page min-h-[60vh]">
         {children}
