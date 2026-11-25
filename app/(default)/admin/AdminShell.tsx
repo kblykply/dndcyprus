@@ -26,9 +26,9 @@ const GROUPS: { title: string; items: NavItem[] }[] = [
   {
     title: "Satış",
     items: [
-      { label: "Genel Bakış", href: "/admin/genel", icon: LayoutDashboard, soon: true },
+      { label: "Genel Bakış", href: "/admin/genel", icon: LayoutDashboard },
       { label: "Satış Talepleri", href: "/admin/leads", icon: Users, badge: true },
-      { label: "Reklam Raporu", href: "/admin/reklam", icon: Megaphone, soon: true },
+      { label: "Reklam Raporu", href: "/admin/reklam", icon: Megaphone },
     ],
   },
   {
