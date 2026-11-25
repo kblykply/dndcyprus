@@ -517,7 +517,7 @@ members = [
 
                   {/* Info box on image */}
                   <div className="absolute inset-x-0 bottom-0 p-2 sm:p-5">
-                    <div className="rounded-[18px] bg-white/85 backdrop-blur-md ring-1 ring-white/70 shadow-[0_8px_24px_rgba(13,35,38,0.14)] group-hover:translate-y-0 translate-y-1 transition-transform p-2.5 sm:p-4 sm:h-[110px]">
+                    <div className="rounded-[18px] bg-white/85 backdrop-blur-md ring-1 ring-white/70 shadow-[0_8px_24px_rgba(13,35,38,0.14)] group-hover:translate-y-0 translate-y-1 transition-transform p-2.5 sm:p-4 sm:min-h-[110px]">
                       <h2 className="text-[13px] sm:text-[15px] leading-tight text-[var(--ink)]">{m.name}</h2>
                       <div className="text-[9.5px] sm:text-[11px] mt-1 uppercase tracking-[0.06em] sm:tracking-[0.08em] font-semibold text-[var(--sea)]">{m.role}</div>
                       {m.bio ? (
