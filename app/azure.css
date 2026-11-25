@@ -500,9 +500,13 @@ form.az-f { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 2
 .az-note { grid-column: 1 / -1; font-size: 12px; opacity: .8; }
 .az-toast { position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 20px); background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 999px; font-size: 13px; opacity: 0; transition: all .5s var(--ease); z-index: 2000; pointer-events: none; max-width: calc(100vw - 32px); text-align: center; }
 .az-toast.on { opacity: 1; transform: translate(-50%, 0); }
-.az-done { grid-column: 1 / -1; display: grid; gap: 10px; place-items: center; text-align: center; padding: 30px 10px; }
-.az-done h3 { color: #fff; font-size: 28px; }
-.az-done p { color: rgba(255,255,255,.85); max-width: 40ch; }
+/* teşekkür: formun yerinde, formla aynı cam kartta, içerik dikeyde ortada (25.11.2026: kartsızdı, iki sütuna yayılıp altta yüzüyordu) */
+.az-done { display: grid; gap: 12px; place-items: center; align-content: center; text-align: center; align-self: stretch; min-height: 320px;
+  padding: clamp(28px, 4vw, 44px) 24px; border-radius: 26px; background: rgba(255, 255, 255, .14); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, .3); }
+.az-done .ok { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .5); }
+.az-done h3 { color: #fff; font-size: 28px; margin: 4px 0 0; }
+.az-done p { color: rgba(255,255,255,.88); max-width: 36ch; margin: 0; }
+.az-done .az-btn { margin-top: 8px; }
 @media (max-width: 900px) { .az-contact .card { grid-template-columns: 1fr; } form.az-f { grid-template-columns: 1fr; grid-template-rows: none; } }
 
 /* ---- generic glass panels for inner pages ---- */

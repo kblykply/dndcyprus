@@ -2,8 +2,9 @@
 
 import Img from "./Img";
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { submitLead } from "@/lib/lead-submit";
+import { attributionRef } from "@/lib/attribution";
 import { CONTACT, PROJECTS, href, type Locale } from "@/lib/azure/site";
 import PhoneField, { joinPhone } from "./PhoneField";
 
@@ -25,6 +26,7 @@ const COPY = {
     phoneHint: "Ülke kodunu seçip numaranızı yazın; listede yoksa numarayı + ile başlatın.",
     note: "Bilgileriniz yalnızca talebinizi yanıtlamak için kullanılır.",
     waText: (p?: string) => p ? `Merhaba! ${p} hakkında fiyat ve kat planı bilgisi almak istiyorum.` : "Merhaba! Bilgi almak istiyorum.",
+    waDone: (d: Done) => `Merhaba, ben ${d.name}. Web sitenizdeki formu doldurdum. ${d.project ? `${d.project}${d.unit ? ` (${d.unit})` : ""} hakkında bilgi almak istiyorum.` : d.subject ? `Konu: ${d.subject}.` : "Bilgi almak istiyorum."}`,
     namePh: "Adınız ve soyadınız", emailPh: "ad@eposta.com", subjectPh: "Örn. Lagoon Verde fiyat bilgisi",
     messagePh: "Bütçe, teslim tarihi veya sorularınızı yazabilirsiniz.", messagePhContact: "Size nasıl yardımcı olabiliriz?",
     brochure: "Broşür (PDF)",
@@ -46,6 +48,7 @@ const COPY = {
     phoneHint: "Choose your country code and enter your number; if your country is not listed, start the number with +.",
     note: "Your details are only used to respond to your request.",
     waText: (p?: string) => p ? `Hello! I would like to receive prices and floor plans for ${p}.` : "Hello! I would like more information.",
+    waDone: (d: Done) => `Hello, I'm ${d.name}. I filled in the form on your website. ${d.project ? `I would like information about ${d.project}${d.unit ? ` (${d.unit})` : ""}.` : d.subject ? `Subject: ${d.subject}.` : "I would like more information."}`,
     namePh: "Your full name", emailPh: "you@email.com", subjectPh: "E.g. Lagoon Verde prices",
     messagePh: "Budget, preferred delivery date or any questions.", messagePhContact: "How can we help you?",
     brochure: "Brochure (PDF)",
@@ -67,6 +70,7 @@ const COPY = {
     phoneHint: "Wählen Sie die Ländervorwahl und geben Sie Ihre Nummer ein; fehlt Ihr Land, beginnen Sie die Nummer mit +.",
     note: "Ihre Angaben werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet.",
     waText: (p?: string) => p ? `Hallo! Ich hätte gerne Preise und Grundrisse für ${p}.` : "Hallo! Ich hätte gerne weitere Informationen.",
+    waDone: (d: Done) => `Hallo, ich bin ${d.name}. Ich habe das Formular auf Ihrer Website ausgefüllt. ${d.project ? `Ich hätte gerne Informationen zu ${d.project}${d.unit ? ` (${d.unit})` : ""}.` : d.subject ? `Betreff: ${d.subject}.` : "Ich hätte gerne weitere Informationen."}`,
     namePh: "Ihr Name", emailPh: "name@mail.de", subjectPh: "z. B. Preise Lagoon Verde",
     messagePh: "Budget, gewünschter Übergabetermin oder Ihre Fragen.", messagePhContact: "Wie können wir Ihnen helfen?",
     brochure: "Broschüre (PDF)",
@@ -88,6 +92,7 @@ const COPY = {
     phoneHint: "Выберите код страны и введите номер; если вашей страны нет в списке, начните номер с +.",
     note: "Ваши данные используются только для ответа на вашу заявку.",
     waText: (p?: string) => p ? `Здравствуйте! Хочу получить цены и планировки по проекту ${p}.` : "Здравствуйте! Хочу получить больше информации.",
+    waDone: (d: Done) => `Здравствуйте, меня зовут ${d.name}. Я оставил(а) заявку через форму на вашем сайте. ${d.project ? `Хочу получить информацию о проекте ${d.project}${d.unit ? ` (${d.unit})` : ""}.` : d.subject ? `Тема: ${d.subject}.` : "Хочу получить больше информации."}`,
     namePh: "Ваше имя и фамилия", emailPh: "name@mail.ru", subjectPh: "Напр. цены Lagoon Verde",
     messagePh: "Бюджет, желаемый срок сдачи или ваши вопросы.", messagePhContact: "Чем мы можем помочь?",
     brochure: "Брошюра (PDF)",
@@ -109,6 +114,7 @@ const COPY = {
     phoneHint: "Wybierz kierunkowy kraju i wpisz numer; jeśli kraju nie ma na liście, zacznij numer od +.",
     note: "Państwa dane wykorzystujemy wyłącznie do odpowiedzi na zapytanie.",
     waText: (p?: string) => p ? `Dzień dobry! Proszę o ceny i plany mieszkań w projekcie ${p}.` : "Dzień dobry! Proszę o więcej informacji.",
+    waDone: (d: Done) => `Dzień dobry, nazywam się ${d.name}. Wysłałem(-am) zapytanie przez formularz na Państwa stronie. ${d.project ? `Proszę o informacje o projekcie ${d.project}${d.unit ? ` (${d.unit})` : ""}.` : d.subject ? `Temat: ${d.subject}.` : "Proszę o więcej informacji."}`,
     namePh: "Imię i nazwisko", emailPh: "ty@poczta.pl", subjectPh: "Np. ceny Lagoon Verde",
     messagePh: "Budżet, preferowany termin oddania lub pytania.", messagePhContact: "W czym możemy pomóc?",
     brochure: "Broszura (PDF)",
@@ -133,6 +139,9 @@ type Props = {
   id?: string;
 };
 
+/** gönderilen formdan WhatsApp mesajına giden bilgiler */
+type Done = { name: string; project?: string; unit?: string; subject?: string };
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactCard({
@@ -144,6 +153,14 @@ export default function ContactCard({
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, boolean>>({});
   const [toast, setToast] = useState(false);
+  const [done, setDone] = useState<Done | null>(null);
+  // teşekkür kutusu formdan kısa: ekran dışında kalırsa (telefonda) görünür yere kaydır
+  const doneRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (status !== "success" || !doneRef.current) return;
+    const r = doneRef.current.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > window.innerHeight) doneRef.current.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [status]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -179,6 +196,13 @@ export default function ContactCard({
       company: v("company"),
     });
     if (result.ok) {
+      // teşekkür ekranındaki WhatsApp mesajı formdaki bilgilerle (ad + proje / daire tipi ya da konu)
+      setDone({
+        name,
+        project: mode === "lead" ? projectName || undefined : (mode === "home" ? choice || undefined : undefined),
+        unit: mode === "lead" ? choice || undefined : undefined,
+        subject: mode === "contact" ? subject : undefined,
+      });
       setStatus("success");
       setToast(true);
       setTimeout(() => setToast(false), 4000);
@@ -189,6 +213,8 @@ export default function ContactCard({
   }
 
   const waHref = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(t.waText(projectName))}`;
+  // reklam kaynağı da eklenir (sağ alttaki WhatsApp düğmesindeki gibi): satış ekibi mesajı formdaki talebin devamı olarak eşleştirir
+  const waDoneHref = done ? `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(t.waDone(done) + attributionRef())}` : waHref;
   const options = mode === "lead" ? unitTypes : PROJECTS.map((p) => p.name);
 
   return (
@@ -212,10 +238,11 @@ export default function ContactCard({
           </div>
 
           {status === "success" ? (
-            <div className="az-f az-done" role="status" aria-live="polite" style={{ display: "grid" }}>
+            <div ref={doneRef} className="az-f az-done" role="status" aria-live="polite">
+              <span className="ok" aria-hidden><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
               <h3>{t.okTitle}</h3>
               <p>{t.okText}</p>
-              <a className="az-btn sea sm" href={waHref} target="_blank" rel="noopener noreferrer">{t.wa}</a>
+              <a className="az-btn sea sm" href={waDoneHref} target="_blank" rel="noopener noreferrer">{t.wa}</a>
             </div>
           ) : (
             <form className="az-f" onSubmit={onSubmit} noValidate aria-describedby={Object.keys(errors).length ? `${uid}-err` : undefined}>
