@@ -12,7 +12,8 @@ const DISMISS_KEY = "dnd_tl_payment_popup_v1";
 
 /*
   Yeni TL ödeme modeli tanıtımı — ana sayfa ilk açıldığında video popup'ı.
-  - Sayfa `load` olduktan ve tarayıcı boşta kalınca açılır (LCP ile yarışmaz).
+  - Sayfa ilk çizildiği anda yumuşak bir geçişle açılır (25.11.2026: eskiden `load` + boşta bekleniyordu; site görünüp 1-3 sn sonra
+    pencere geçişsiz belirince "hata gibi" duruyordu). Video ilk anda kapak görseliyle durur, `load` sonrası oynar: hıza etkisi yok.
   - Dialog semantiği: role/aria-modal, açılışta odak kapat düğmesinde, ESC ve arka plana tıklama kapatır.
   - Video sessiz başlar (tarayıcı otomatik oynatma kuralı); ses düğmesiyle açılır.
   - document.body'ye portal ile çizilir (25.11.2026): sayfa içeriği .az-page (z-index:1) kendi katman bağlamını açtığı için pencere
@@ -22,6 +23,9 @@ const DISMISS_KEY = "dnd_tl_payment_popup_v1";
 export default function PaymentModelPopup() {
   const [open, setOpen] = useState(false);
   const [muted, setMuted] = useState(true);
+  // visible: giriş/çıkış geçişi için (açık + görünür); videoOn: sayfa yüklenince video kaynağı verilir
+  const [visible, setVisible] = useState(false);
+  const [videoOn, setVideoOn] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -29,22 +33,19 @@ export default function PaymentModelPopup() {
     try {
       if (sessionStorage.getItem(DISMISS_KEY)) return;
     } catch {}
-    let idleId: number | undefined;
-    let timerId: ReturnType<typeof setTimeout> | undefined;
-    const show = () => setOpen(true);
-    const schedule = () => {
-      if (typeof window.requestIdleCallback === "function") {
-        idleId = window.requestIdleCallback(show, { timeout: 2500 });
-      } else {
-        timerId = setTimeout(show, 800);
-      }
-    };
-    if (document.readyState === "complete") schedule();
-    else window.addEventListener("load", schedule, { once: true });
+    // İlk karede kapalı çizilir, bir sonraki karede açılır → geçiş görünür (hidrasyonla aynı anda)
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      setOpen(true);
+      raf2 = requestAnimationFrame(() => setVisible(true));
+    });
+    const startVideo = () => setVideoOn(true);
+    if (document.readyState === "complete") startVideo();
+    else window.addEventListener("load", startVideo, { once: true });
     return () => {
-      window.removeEventListener("load", schedule);
-      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
-      if (timerId !== undefined) clearTimeout(timerId);
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+      window.removeEventListener("load", startVideo);
     };
   }, []);
 
@@ -53,7 +54,10 @@ export default function PaymentModelPopup() {
       sessionStorage.setItem(DISMISS_KEY, "1");
     } catch {}
     videoRef.current?.pause();
-    setOpen(false);
+    setVisible(false);
+    // çıkış geçişi bitince kaldır (hareketi azalt açıksa hemen)
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.setTimeout(() => setOpen(false), reduceMotion ? 0 : 220);
   }, []);
 
   useEffect(() => {
@@ -88,12 +92,14 @@ export default function PaymentModelPopup() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="tl-payment-popup-title"
-      className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/70 px-4 pb-5 pt-[96px] backdrop-blur-sm [@media(max-height:500px)]:p-4"
+      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-black/70 px-4 pb-5 pt-[96px] backdrop-blur-sm transition-opacity duration-300 ease-out motion-reduce:transition-none [@media(max-height:500px)]:p-4 ${visible ? "opacity-100" : "opacity-0"}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) dismiss();
       }}
     >
-      <div className="relative flex max-h-[calc(100svh-116px)] w-full [@media(max-height:500px)]:max-h-[calc(100svh-2rem)] max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 md:w-auto md:flex-row">
+      <div
+        className={`relative flex max-h-[calc(100svh-116px)] w-full max-w-[860px] flex-col overflow-hidden rounded-3xl bg-[#0f1416] text-white shadow-2xl ring-1 ring-white/10 transition duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none md:w-auto md:flex-row [@media(max-height:500px)]:max-h-[calc(100svh-2rem)] ${visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-[.98] opacity-0"}`}
+      >
         <button
           ref={closeRef}
           type="button"
@@ -115,7 +121,7 @@ export default function PaymentModelPopup() {
           />
           <video
             ref={videoRef}
-            src="/videos/tl-odeme-modeli.mp4"
+            src={videoOn ? "/videos/tl-odeme-modeli.mp4" : undefined}
             poster="/videos/tl-odeme-modeli.jpg"
             autoPlay={!reduce}
             controls={reduce || undefined}
