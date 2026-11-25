@@ -120,7 +120,6 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
           <ProjectBreakdown
             items={projects}
             total={cur.length}
-            parts={LEAD_STATUSES.map((st) => ({ key: st.key, label: st.label, color: STATUS_HEX[st.key] }))}
             hrefOf={(k) => `/admin/leads?proje=${encodeURIComponent(k)}`}
           />
         </ChartCard>
