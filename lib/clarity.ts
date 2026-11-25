@@ -62,6 +62,14 @@ export type ClarityRow = {
   errors: number;
 };
 
+/** Satırdaki boyut değeri: Clarity anahtarı istekteki adla aynı yazılmıyor (URL → "Url"), büyük/küçük harf duyarsız aranır */
+export function dimensionValue(r: Record<string, unknown>, dimension: ClarityDimension): string {
+  const want = dimension.toLowerCase();
+  const key = dimension in r ? dimension : Object.keys(r).find((k) => k.toLowerCase() === want);
+  const v = key ? r[key] : undefined;
+  return v === undefined || v === null || v === "" ? "(bilinmiyor)" : String(v);
+}
+
 /** Bir ya da daha çok ham yanıtı boyut değerine göre toplar; yüzdeler oturum sayısıyla ağırlıklandırılır */
 export function clarityAggregate(responses: ClarityResponse[], dimension: ClarityDimension): ClarityRow[] {
   const m = new Map<string, ClarityRow>();
@@ -78,7 +86,7 @@ export function clarityAggregate(responses: ClarityResponse[], dimension: Clarit
     for (const block of res) {
       if (block.metricName !== "Traffic") continue;
       for (const r of block.information || []) {
-        const v = String(r[dimension] ?? "(bilinmiyor)");
+        const v = dimensionValue(r, dimension);
         const n = first(r, ["totalSessionCount", "sessionsCount"]) || 0;
         sessions.set(v, (sessions.get(v) || 0) + n);
         const s = row(v);
@@ -88,7 +96,7 @@ export function clarityAggregate(responses: ClarityResponse[], dimension: Clarit
     }
     for (const block of res) {
       for (const r of block.information || []) {
-        const v = String(r[dimension] ?? "(bilinmiyor)");
+        const v = dimensionValue(r, dimension);
         const s = row(v);
         const w = sessions.get(v) || first(r, ["sessionsCount", "totalSessionCount"]) || 0;
         const pct = first(r, ["sessionsWithMetricPercentage", "percentage"]);

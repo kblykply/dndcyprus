@@ -48,3 +48,21 @@ test("links and fetch errors in Turkish; no token means no request", async () =>
   assert.equal(r.status, 429);
   assert.match(r.error, /günlük sorgu sınırı/);
 });
+
+test("real Clarity responses name the URL dimension \"Url\": pages are grouped, not lumped as unknown", () => {
+  const m = loadTypeScript("lib/clarity.ts");
+  const real = [
+    { metricName: "Traffic", information: [{ Url: "https://www.dndcyprus.com/tr/mariachi", totalSessionCount: 1, totalBotSessionCount: 0 }, { Url: "https://www.dndcyprus.com/en/advantage", totalSessionCount: 3 }] },
+    { metricName: "ScrollDepth", information: [{ Url: "https://www.dndcyprus.com/tr/mariachi", averageScrollDepth: 100 }, { Url: "https://www.dndcyprus.com/en/advantage", averageScrollDepth: 40 }] },
+    { metricName: "DeadClickCount", information: [{ Url: "https://www.dndcyprus.com/en/advantage", sessionsCount: 3, sessionsWithMetricPercentage: 33.3, subTotal: 2 }] },
+  ];
+  const rows = JSON.parse(JSON.stringify(m.clarityAggregate([real], "URL")));
+  assert.equal(rows.length, 2);
+  assert.ok(rows.every((r) => r.value !== "(bilinmiyor)"));
+  const adv = rows.find((r) => r.value.endsWith("/en/advantage"));
+  assert.equal(adv.sessions, 3);
+  assert.equal(m.weighted(adv.scrollW, adv.sessions), 40);
+  assert.equal(adv.dead, 2);
+  assert.equal(m.dimensionValue({ device: "Mobile" }, "Device"), "Mobile");
+  assert.equal(m.dimensionValue({}, "Channel"), "(bilinmiyor)");
+});
