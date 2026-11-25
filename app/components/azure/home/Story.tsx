@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { HOME } from "@/lib/azure/home";
+import { HOME, type HomeContent } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import Image from "next/image";
 
@@ -11,8 +11,8 @@ import Image from "next/image";
  * İlk adım görselin üst kenarıyla, son adım görselin alt kenarıyla aynı çizgide başlar/biter (adımların altında
  * boşluk yok). Son adım, görsel yapışıklıktan çıkıp alt kenarı son adımla hizalandığında etkinleşir.
  */
-export default function Story({ locale }: { locale: Locale }) {
-  const t = HOME[locale].story;
+export default function Story({ locale, content }: { locale: Locale; content?: HomeContent["story"] }) {
+  const t = content ?? HOME[locale].story;
   const [i, setI] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const stickRef = useRef<HTMLDivElement>(null);

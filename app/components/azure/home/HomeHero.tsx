@@ -1,7 +1,7 @@
 import { getImageProps } from "next/image";
 import { preload } from "react-dom";
 import { HERO_DIK } from "@/lib/azure/hero-dik";
-import { HOME_FLOW } from "@/lib/azure/home-flow";
+import { HOME_FLOW, type HomeFlow } from "@/lib/azure/home-flow";
 import { PROJECT_PAGES } from "@/lib/azure/projects";
 import { href, PROJECTS, type Locale, type ProjectSlug } from "@/lib/azure/site";
 import HeroSlider, { type Slide } from "./HeroSlider";
@@ -24,8 +24,8 @@ const IMG: Partial<Record<ProjectSlug, string>> = {
  * "Projeyi keşfet"; ödüllü projede ödül etiketi. Sağdaki rakam kartları ve ikinci bağlantı yok (müşteri isteği,
  * Ekim 2026). Görseller burada hazırlanır (ekrana göre srcset; dik telefonda kesit), yalnız ilk slayt önceden yüklenir.
  */
-export default function HomeHero({ locale }: { locale: Locale }) {
-  const t = HOME_FLOW[locale].hero;
+export default function HomeHero({ locale, content }: { locale: Locale; content?: HomeFlow["hero"] }) {
+  const t = content ?? HOME_FLOW[locale].hero; // content: panelde düzenlenmiş metin (lib/content)
   const slides: Slide[] = t.slides.map((s, k) => {
     const src = IMG[s.slug]!;
     const p = PROJECTS.find((x) => x.slug === s.slug)!;

@@ -57,3 +57,44 @@ model ClaritySnapshot {
   @@unique([day, dimension])
   @@index([day])
 }
+
+/// İçerik yönetimi: koddaki varsayılanın üstüne yazılan alan (20261126000000_content). value = düz yazı ya da **kalın** işaretli metin
+model ContentOverride {
+  id        Int      @id @default(autoincrement())
+  scope     String
+  locale    String
+  path      String
+  value     String
+  updatedAt DateTime @default(now()) @updatedAt
+  updatedBy String?
+
+  @@unique([scope, locale, path])
+}
+
+/// İçerik listeleri (collection: "basin" | "ekip"); data dile göre alanları ({ tr, en, de, ru, pl }) taşır
+model ContentItem {
+  id         Int      @id @default(autoincrement())
+  collection String
+  key        String
+  data       Json
+  sortOrder  Int      @default(0)
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+  updatedBy  String?
+
+  @@unique([collection, key])
+  @@index([collection])
+}
+
+/// İçerik işlem geçmişi (kim, neyi, ne zaman)
+model ContentLog {
+  id        Int      @id @default(autoincrement())
+  area      String
+  action    String
+  detail    String
+  author    String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

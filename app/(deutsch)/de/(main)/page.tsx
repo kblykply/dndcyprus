@@ -1,6 +1,5 @@
-import { type PressItem } from "@/app/components/PressSection";
+import { getPress, getScopeContent } from "@/lib/content/store";
 import { pageMetadata } from "@/lib/seo";
-import { HOME } from "@/lib/azure/home";
 
 // Azure tasarımı — ana sayfa bölümleri
 import HomeHero from "@/app/components/azure/home/HomeHero";
@@ -10,7 +9,6 @@ import ProjectsCarousel from "@/app/components/azure/home/ProjectsCarousel";
 import PressFaq from "@/app/components/azure/home/PressFaq";
 import ContactCard from "@/app/components/azure/ContactCard";
 import { WhyDnd, Offers, LifePerks, Numbers } from "@/app/components/azure/home/FlowSections";
-import { HOME_FLOW } from "@/lib/azure/home-flow";
 
 export const metadata = pageMetadata({
   locale: "de",
@@ -20,142 +18,24 @@ export const metadata = pageMetadata({
     "NeoCity, Lagoon Verde, La Joya, La Joya Perla und Perla II: preisgekrönte Projekte in Nordzypern, zinsfreie Lira-Zahlungsmodelle bis 60 Monate und Vorteile im Mariachi Beach Club.",
 });
 
-const PRESS_ITEMS: PressItem[] = [
-  // 22 Kasım 2026: Kıbrıs Genç TV, Perspektif programı (18.11.2026 canlı yayın; 23.11 YouTube kaydı)
-  {
-    id: "genctv-2026-11-18",
-    outlet: "Kıbrıs Genç TV",
-    title: "Perspektif mit Yağmur Çal: Ozan Dökmecioğlu",
-    url: "https://www.youtube.com/watch?v=wcKVmNq05PA",
-    excerpt: "DND-Cyprus-Gründer Ozan Dökmecioğlu war bei Kıbrıs Genç TV zu Gast bei Yağmur Çal und sprach über seinen Weg von Boston nach Nordzypern, NeoCity und das zinsfreie Lira-Zahlungsmodell. Themen waren außerdem die Maraş-Vision, geplante Stadtentwicklung und langfristige Hypothekenkredite.",
-    date: "2026-11-18",
-    cover: "/news/genctv-perspektif-ikili.webp",
-    tags: ["Interview", "TV"],
-  },
-  // 22 Kasım 2026: internette bulunan yeni haberler (aynı içerikli kopyalardan biri alındı)
-  {
-    id: "businessworldglobal-2026-11-16",
-    outlet: "Business World Global",
-    title: "Ozan Dökmecioğlu: Wer in Türkischer Lira verdient, soll auch in Lira ein Eigenheim kaufen können",
-    url: "https://businessworldglobal.com/ozan-dokmecioglu-turk-lirasiyla-kazananlar-turk-lirasiyla-ev-sahibi-olabilmeli/",
-    excerpt: "DND-Cyprus-Gründer Ozan Dökmecioğlu erläutert das Lira-Zahlungsmodell mit bis zu 60 Monaten bei Lagoon Verde; Netice Dökmecioğlu spricht über das Potenzial von İskele.",
-    date: "2026-11-16",
-    cover: "/news/bwg-ozan-tl-roportaj.webp",
-    tags: ["Interview", "TL-Zahlungsmodell"],
-  },
-  {
-    id: "mha-2026-11-14",
-    outlet: "Mağusa Haber Ajansı (MHA)",
-    title: "Besonderes Treffen bei DND Cyprus: Investitionen in Nordzypern und den USA im Fokus",
-    url: "https://www.mhahaber.com/dnd-cyprusta-ozel-bulusma-kuzey-kibris-ve-abd-yatirimlari-masaya-yatirildi",
-    excerpt: "DND Cyprus empfing Mesut und Ferda Yar sowie Umut Çelik von Business World Global; Thema waren die Projekte, die Investitionen in Nordzypern und den USA und die Wachstumsstrategie.",
-    date: "2026-11-14",
-    cover: "/news/mha-dnd-ozel-bulusma.webp",
-    tags: ["DND Cyprus", "Investition"],
-  },
-  {
-    id: "kibrisvizyon-2026-10-25",
-    outlet: "Kıbrıs Vizyon",
-    title: "NeoCity: Neues Projekt von DND Cyprus für einheimische Familien",
-    url: "https://www.kibrisvizyon.com/haber/dnd-cyprustan-yerli-ailelere-ozel-neocity-projesi-4695",
-    excerpt: "DND Cyprus hat die erste Bauphase von NeoCity in der Region Famagusta, nahe der Eastern Mediterranean University, in den Verkauf gebracht. Die Villen verbinden moderne mediterrane Architektur, Privatgärten und ein familienorientiertes Nachbarschaftskonzept; gezahlt wird in türkischer Lira nach dem 5-Null-Modell – ohne Zinsen, Bank, Bürgen, Wechselkurs- oder Laufzeitaufschlag.",
-    date: "2026-10-25",
-    cover: "/news/kibrisvizyon-neocity.webp",
-    tags: ["NeoCity", "5-Null-Modell"],
-  },
-  {
-    id: "bestlife-2026-10-14",
-    outlet: "Bestlife Magazin",
-    title: "Eigentum in Nordzypern – ohne Schulden in Pfund Sterling",
-    url: "https://www.bestlifemagazin.com/kuzey-kibris-ta-sterlinle-borclanmadan-ev-sahibi-olma-firsati/6618/",
-    excerpt: "Ozan Dökmecioğlu, Gründer von DND Cyprus, hat ein neues Finanzierungsmodell für Käufer mit Einkommen in Türkischer Lira entwickelt. Für eine begrenzte Zahl von Wohnungen im preisgekrönten Projekt Lagoon Verde wird in Türkischer Lira gezahlt; die Raten über bis zu 60 Monate sind zinsfrei und ohne Laufzeitaufschlag und werden regelmäßig an die Erhöhung des Mindestlohns in der TRNZ angepasst – nicht an den Wechselkurs des Pfund Sterling. So bietet das Modell einen alternativen Weg zum Eigenheim in Nordzypern – für den Urlaub, zum Wohnen oder als Investition – ohne Währungsrisiko.",
-    date: "2026-10-14",
-    cover: "/news/bestlife-tl-konut-modeli-v3.webp",
-    tags: ["Lagoon Verde", "TL-Zahlungsmodell"],
-  },
-  {
-    // 19 Ekim 2026: Lagoon Verde TL modeli. Aynı içerikli Çekiç Magazin haberinin (MHA ile aynı başlık ve görsel) yerine
-    id: "fuardergisi-2026-10-19",
-    outlet: "Fuar Dergisi",
-    title: "DND Cyprus verkauft Wohnungen in Nordzypern in Lira statt in Pfund",
-    url: "https://www.fuardergisi.com.tr/dnd-cyprustan-kuzey-kibrista-sterlin-yerine-tl-ile-konut-satis-modeli",
-    excerpt: "DND Cyprus hat für eine begrenzte Zahl von Residenzen in Lagoon Verde ein Zahlungsmodell in Türkischer Lira eingeführt. Beim vom Unternehmen finanzierten Plan mit bis zu 60 Monaten Laufzeit wird in Lira gezahlt; die Raten werden regelmäßig an die Erhöhung des Mindestlohns in der TRNZ statt an den Pfundkurs angepasst.",
-    date: "2026-10-19",
-    cover: "/news/fuardergisi-lagoon-verde-tl.webp",
-    tags: ["Lagoon Verde", "TL-Zahlungsmodell"],
-  },
-  {
-    id: "50fifty-2026-10-14",
-    outlet: "50fifty Magazin",
-    title: "Bis zu 60 Monate zinsfrei: die Lira-Finanzierung von DND Cyprus",
-    url: "https://50fiftymagazin.com/dnd-cyprustan-yerli-halka-turk-lirasiyla-konut-finansmani-h27457.html",
-    excerpt: "Das von Gründer Ozan Dökmecioğlu vorgestellte Modell ermöglicht Käufern die Zahlung in Türkischer Lira; die Raten orientieren sich an den Mindestlohnerhöhungen in der TRNZ statt am Pfund Sterling. Das Angebot gilt für eine begrenzte Zahl von Wohnungen in Lagoon Verde und umfasst bis zu 60 Monate zinsfreie Zahlung ohne Laufzeitaufschlag.",
-    date: "2026-10-14",
-    cover: "/news/50fifty-haber-kapak-v2.webp",
-    tags: ["TL-Zahlungsmodell", "DND Cyprus"],
-  },
-  {
-    id: "mha-2025-11-04",
-    outlet: "Mağusa Haber Ajansı (MHA)",
-    title: "DND verkündet die gute Nachricht: La Joya ist fertiggestellt",
-    url: "https://www.mhahaber.com/dnd-mujdeyi-verdi-la-joya-tamamlandi",
-    excerpt: "DND Cyprus hat die Fertigstellung der La Joya Residences and Holiday Village in İskele Long Beach bekannt gegeben. Das Projekt mit 74 privaten Wohnungen ist nun bereit für seine Eigentümer.",
-    date: "2025-11-04",
-    cover: "/news/mhacover.webp",
-    tags: ["La Joya", "DND Cyprus"],
-  },
-  {
-    id: "kibrispostasi-2025-11-04",
-    outlet: "Kıbrıs Postası",
-    title:
-      "Träume wurden wahr: DND Cyprus meldet die Fertigstellung der La Joya Residences and Holiday Village",
-    url: "https://www.kibrispostasi.com/c35-KIBRIS_HABERLERI/n580748-hayaller-gercek-oldu-dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu",
-    excerpt: "DND Cyprus hat bekannt gegeben, dass die La Joya Residences and Holiday Village in İskele Long Beach fertiggestellt sind. Das Projekt mit 74 privaten Wohnungen in niedriger Bauweise ist bereit zur Übergabe.",
-    date: "2025-11-04",
-    cover: "/news/kpcover.jpg",
-    tags: ["La Joya", "İskele Long Beach"],
-  },
-  {
-    id: "yeniduzen-2025-11-04",
-    outlet: "YENİDÜZEN",
-    title:
-      "DND Cyprus meldet die Fertigstellung der La Joya Residences and Holiday Village",
-    url: "https://www.yeniduzen.com/dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu-188492h.htm",
-    excerpt: "DND Cyprus hat bekannt gegeben, dass die mit Spannung erwarteten La Joya Residences and Holiday Village offiziell fertiggestellt und nun bereit für ihre Eigentümer sind.",
-    date: "2025-11-04",
-    cover: "/news/ydcover.jpg",
-    tags: ["La Joya"],
-  },
-  {
-    id: "haberkibris-2025-11-04",
-    outlet: "Haber Kıbrıs",
-    title:
-      "DND Cyprus meldet die Fertigstellung der La Joya Residences and Holiday Village",
-    url: "https://haberkibris.com/dnd-cyprus-la-joya-rezidanslari-ve-tatil-koyunun-tamamlandigini-duyurdu-0957-2025-11-04.html",
-    excerpt: "Die La Joya Residences and Holiday Village sind fertig: DND Cyprus meldet, dass das Projekt in İskele Long Beach bereit für seine Eigentümer ist.",
-    date: "2025-11-04",
-    cover: "/news/hkcover.jpg",
-    tags: ["La Joya"],
-  },
-];
-
-export default function HomePage() {
-  const t = HOME.de;
-  const f = HOME_FLOW.de;
+export default async function HomePage() {
+  // Metinler ve basın listesi panelden düzenlenebilir (lib/content): veritabanındaki değişiklik koddakinin üstüne yazılır
+  const c = await getScopeContent("anasayfa", "de");
+  const press = await getPress("de");
   // Akış (müşteri belgesi, Ekim 2026): vitrin · projeler · neden DND · ödeme fırsatları · yaşam ve ayrıcalıklar ·
   // rakamlar · haberler ve ödüller (haberlerin yanında S.S.S., kullanıcı isteğiyle) · iletişim. Ana sayfada Amerika anılmaz (Hakkımızda'da).
   return (
     <>
-      <HomeHero locale="de" />
-      <ProjectsCarousel locale="de" />
-      <WhyDnd locale="de" />
-      <Offers locale="de" />
-      <LifePerks locale="de" />
-      <Story locale="de" />
-      <Numbers locale="de" />
-      <AwardsShowcase locale="de" kicker={f.news.kicker} withProjects projectLabel={f.news.awardsProject} companyName={f.news.homesProject} />
-      <PressFaq locale="de" items={PRESS_ITEMS} />
-      <ContactCard locale="de" mode="home" kicker={f.contact.kicker} title={f.contact.title} lead={f.contact.lead} highlights={t.contact.highlights} image="/azure/contact-sea.webp" id="iletisim" />
+      <HomeHero locale="de" content={c.vitrin} />
+      <ProjectsCarousel locale="de" content={c.projeler} />
+      <WhyDnd locale="de" content={c.neden} />
+      <Offers locale="de" content={c.odeme} />
+      <LifePerks locale="de" content={c.yasam} />
+      <Story locale="de" content={c.gun} />
+      <Numbers locale="de" content={c.rakamlar} />
+      <AwardsShowcase locale="de" kicker={c.oduller.kicker} withProjects projectLabel={c.oduller.awardsProject} companyName={c.oduller.homesProject} awards={c.oduller.kartlar} strip={c.oduller.strip} />
+      <PressFaq locale="de" items={press} content={{ press: c.basin, faq: c.sss }} />
+      <ContactCard locale="de" mode="home" kicker={c.iletisim.kicker} title={c.iletisim.title} lead={c.iletisim.lead} highlights={c.iletisim.highlights} image="/azure/contact-sea.webp" id="iletisim" />
     </>
   );
 }

@@ -5,7 +5,7 @@ import LogoTag from "../LogoTag";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { HOME } from "@/lib/azure/home";
+import { HOME, type HomeContent } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 import "../meridian.css";
 import "./awards.css";
@@ -32,11 +32,13 @@ const PROJECT: Record<string, { img: string; name: string; medal: string; path: 
  * Altın ödüllü Lagoon Verde ortada ve başta açık (kullanıcı isteği, 19 Ekim). Telefonda paneller alt alta.
  * withProjects: bağlantı proje sayfasına (ana sayfa); yoksa ödülün kendi bağlantısı ve altta Yılın CFO'su (Hakkımızda).
  */
-export default function AwardsShowcase({ locale, kicker, withProjects = false }: {
+export default function AwardsShowcase({ locale, kicker, withProjects = false, awards, strip: stripIn }: {
   locale: Locale; kicker?: string; withProjects?: boolean; projectLabel?: string; companyName?: string;
+  /** panelde düzenlenmiş ödül kartları ve şerit (lib/content); yoksa koddaki */
+  awards?: HomeContent["bento"]["awards"]; strip?: HomeContent["awards"];
 }) {
-  const a = HOME[locale].bento.awards;
-  const strip = HOME[locale].awards;
+  const a = awards ?? HOME[locale].bento.awards;
+  const strip = stripIn ?? HOME[locale].awards;
   const order = [0, 2, 1].filter((k) => k < a.items.length); // Mariachi (platin) · Lagoon Verde (altın, ortada) · DND Homes
   const [on, setOn] = useState(2); // a.items içindeki sıra: 2 = Lagoon Verde
   // Yılın CFO'su (Boston) yalnız Hakkımızda'da: ana sayfada Amerika anılmaz

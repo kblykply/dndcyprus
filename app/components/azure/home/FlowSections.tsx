@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
 import { PiGearSixDuotone, PiHouseLineDuotone, PiKeyDuotone, PiTrophyDuotone } from "react-icons/pi";
-import { HOME_FLOW } from "@/lib/azure/home-flow";
+import { HOME_FLOW, type HomeFlow } from "@/lib/azure/home-flow";
 import { SECTION_IDS } from "@/lib/azure/nav";
 import { PROJECT_UI } from "@/lib/azure/project-ui";
 import { href, type Locale } from "@/lib/azure/site";
@@ -23,8 +23,8 @@ const WHY_ICONS: Record<string, IconType> = { house: PiHouseLineDuotone, key: Pi
 // La Joya resmi açılış videosu (DND Cyprus YouTube kanalı; lib/azure/videos.ts ile aynı)
 const LJ_OPENING = "GKH4VSPH57E";
 
-export function WhyDnd({ locale }: { locale: Locale }) {
-  const t = HOME_FLOW[locale].why;
+export function WhyDnd({ locale, content }: { locale: Locale; content?: HomeFlow["why"] }) {
+  const t = content ?? HOME_FLOW[locale].why;
   return (
     <section className="az-section az-why" id="neden-dnd">
       <div className="az-wrap g">
@@ -60,8 +60,8 @@ export function WhyDnd({ locale }: { locale: Locale }) {
 }
 
 /** 4 · Size özel ödeme ve yatırım fırsatları: Lagoon Verde TL modeli + NeoCity 5 Sıfır */
-export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }: { locale: Locale; id?: string; kicker?: string; title?: ReactNode; lead?: string }) {
-  const t = HOME_FLOW[locale].offers;
+export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead, content }: { locale: Locale; id?: string; kicker?: string; title?: ReactNode; lead?: string; content?: HomeFlow["offers"] }) {
+  const t = content ?? HOME_FLOW[locale].offers;
   return (
     <section className="az-section az-offers" id={id}>
       <div className="az-wrap">
@@ -106,8 +106,8 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead }:
 }
 
 /** 5 · DND ile yaşam ve ayrıcalıklar: Mariachi Beach Club ayrıcalığı (ardından sayfada "Lagoon Verde'de bir gün") */
-export function LifePerks({ locale }: { locale: Locale }) {
-  const t = HOME_FLOW[locale].life;
+export function LifePerks({ locale, content }: { locale: Locale; content?: HomeFlow["life"] }) {
+  const t = content ?? HOME_FLOW[locale].life;
   return (
     <section className="az-section az-life" id="yasam">
       <div className="az-wrap">
@@ -125,8 +125,8 @@ export function LifePerks({ locale }: { locale: Locale }) {
 
 /** 6 · Rakamlarla DND: yalnız Kıbrıs rakamları (sayaç: AzureFx [data-count]) */
 /** usa: Hakkımızda sürümü — ABD'deki 120 proje başa eklenir, ödeme rakamı çıkar (ana sayfada Amerika anılmaz) */
-export function Numbers({ locale, id = "rakamlar", usa, title }: { locale: Locale; id?: string; usa?: string; title?: ReactNode }) {
-  const t = HOME_FLOW[locale].numbers;
+export function Numbers({ locale, id = "rakamlar", usa, title, content }: { locale: Locale; id?: string; usa?: string; title?: ReactNode; content?: HomeFlow["numbers"] }) {
+  const t = content ?? HOME_FLOW[locale].numbers;
   const items = usa ? [{ n: 120, label: usa } as { n: number; suffix?: string; label: string }, ...t.items.filter((x) => x.n !== 60)] : t.items;
   return (
     <section className="az-section az-nums" id={id}>

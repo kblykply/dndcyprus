@@ -38,6 +38,8 @@ const nextConfig: NextConfig = {
       },
       // YouTube kapakları siteden (optimize) iner: telefonda küçük, çerez onayından önce YouTube'a istek yok
       { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+      // panelden yüklenen görseller (Vercel Blob, içerik yönetimi 26.11.2026)
+      { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
     ],
   },
 

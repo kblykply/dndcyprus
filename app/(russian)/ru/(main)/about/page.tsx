@@ -1,3 +1,4 @@
+import { getTeam } from "@/lib/content/store";
 import PageHero from "@/app/components/azure/PageHero";
 import AboutUs from "@/app/components/ru/about/AboutWhoWeAreGlass";
 import MissionVisionValues from "@/app/components/ru/about/MissionVisionValues";
@@ -26,7 +27,8 @@ export const metadata = pageMetadata({
 
 
 
-export default function HomePage() {
+export default async function HomePage() {
+  const team = await getTeam("ru"); // panelden düzenlenebilir (lib/content)
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
       <PageHero size="compact" kicker="О нас" title={<>DND <b>Cyprus</b></>} lead="Инновационное видение, многолетний опыт и приверженность качественному строительству — так мы создаём будущее Кипра." image="/azure/about-uu.jpg" imageAlt="DND Cyprus" />
@@ -53,7 +55,7 @@ description = "Откройте для себя наши проекты и ко�
     <PartnerCard locale="ru" />
     <section className="az-section" id="director" aria-label="Aynur Zorba Gülol"><div className="az-wrap"><AynurCard locale="ru" heading="h2" /></div></section>
     {/* 22.11.2026: önce yöneticiler (kurucu, kurucu ortak, direktör), ardından tüm ekip */}
-    <LeadershipTeam embedded />
+    <LeadershipTeam embedded members={team} />
     <Timeline locale="ru" id="timeline" about />
     <AboutUsa locale="ru" />
     <Numbers locale="ru" id={SECTION_IDS.ru.numbers} usa={PAGES.ru.about.numbersUsa} title={PAGES.ru.about.numbersTitle} />

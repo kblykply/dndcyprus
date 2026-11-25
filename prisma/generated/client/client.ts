@@ -54,3 +54,18 @@ export type LeadNote = Prisma.LeadNoteModel
  * Clarity günlük birikimi (20261125200000_clarity_snapshots): day = Kıbrıs günü ya da "anlik"; dimension = URL | Device | Channel
  */
 export type ClaritySnapshot = Prisma.ClaritySnapshotModel
+/**
+ * Model ContentOverride
+ * İçerik yönetimi: koddaki varsayılanın üstüne yazılan alan (20261126000000_content). value = düz yazı ya da **kalın** işaretli metin
+ */
+export type ContentOverride = Prisma.ContentOverrideModel
+/**
+ * Model ContentItem
+ * İçerik listeleri (collection: "basin" | "ekip"); data dile göre alanları ({ tr, en, de, ru, pl }) taşır
+ */
+export type ContentItem = Prisma.ContentItemModel
+/**
+ * Model ContentLog
+ * İçerik işlem geçmişi (kim, neyi, ne zaman)
+ */
+export type ContentLog = Prisma.ContentLogModel

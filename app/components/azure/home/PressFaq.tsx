@@ -1,7 +1,7 @@
 import Img from "../Img";
 import Arrow from "../Arrow";
 import Link from "next/link";
-import { HOME } from "@/lib/azure/home";
+import { HOME, type HomeContent } from "@/lib/azure/home";
 import { href, type Locale } from "@/lib/azure/site";
 import type { PressItem } from "@/app/components/PressSection";
 import JsonLd from "@/app/components/seo/JsonLd";
@@ -12,8 +12,8 @@ const fmt = (iso: string, locale: Locale) => new Intl.DateTimeFormat(DATE_LOCALE
 
 /** faq=false: yalnız haberler, tek sütun (ana sayfada S.S.S. haberlerin yanında gösterilir) */
 // S.S.S.: aynı name'li <details> grubu, biri açılınca diğerleri kendiliğinden kapanır (tarayıcı özelliği)
-export default function PressFaq({ locale, items, faq = true }: { locale: Locale; items: PressItem[]; faq?: boolean }) {
-  const t = HOME[locale];
+export default function PressFaq({ locale, items, faq = true, content }: { locale: Locale; items: PressItem[]; faq?: boolean; content?: Pick<HomeContent, "press" | "faq"> }) {
+  const t = { press: content?.press ?? HOME[locale].press, faq: content?.faq ?? HOME[locale].faq };
   // S.S.S. yanında 5 haber: 8 kapalı soruyla iki sütunun alt kenarı hizalı kalır (aralık azure.css’te 16px)
   const news = [...items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, faq ? 5 : 4);
   return (

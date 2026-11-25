@@ -4,7 +4,7 @@ import Img from "../Img";
 import Link from "next/link";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import "./projects-carousel.css";
-import { HOME } from "@/lib/azure/home";
+import { HOME, type HomeContent } from "@/lib/azure/home";
 import { PROJECTS, href, type Locale } from "@/lib/azure/site";
 import GlassArrow from "../GlassArrow";
 import LogoTag from "../LogoTag";
@@ -24,8 +24,8 @@ const Chevron = ({ dir }: { dir: 1 | -1 }) => (
  * sayfayı aşağı kaydırmak kartları yana kaydırır (1px aşağı = 1px yana); son karttan sonra sayfa normal devam eder.
  * Dokunmatik ekranlarda parmakla yana kaydırma (mıknatıslı) olduğu gibi kalır.
  */
-export default function ProjectsCarousel({ locale }: { locale: Locale }) {
-  const t = HOME[locale].projects;
+export default function ProjectsCarousel({ locale, content }: { locale: Locale; content?: HomeContent["projects"] }) {
+  const t = content ?? HOME[locale].projects;
   const car = useRef<HTMLDivElement>(null);
   const sec = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);

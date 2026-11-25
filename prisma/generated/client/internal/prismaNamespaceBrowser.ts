@@ -53,7 +53,10 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   ContactMessage: 'ContactMessage',
   LeadNote: 'LeadNote',
-  ClaritySnapshot: 'ClaritySnapshot'
+  ClaritySnapshot: 'ClaritySnapshot',
+  ContentOverride: 'ContentOverride',
+  ContentItem: 'ContentItem',
+  ContentLog: 'ContentLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -116,6 +119,46 @@ export const ClaritySnapshotScalarFieldEnum = {
 } as const
 
 export type ClaritySnapshotScalarFieldEnum = (typeof ClaritySnapshotScalarFieldEnum)[keyof typeof ClaritySnapshotScalarFieldEnum]
+
+
+export const ContentOverrideScalarFieldEnum = {
+  id: 'id',
+  scope: 'scope',
+  locale: 'locale',
+  path: 'path',
+  value: 'value',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ContentOverrideScalarFieldEnum = (typeof ContentOverrideScalarFieldEnum)[keyof typeof ContentOverrideScalarFieldEnum]
+
+
+export const ContentItemScalarFieldEnum = {
+  id: 'id',
+  collection: 'collection',
+  key: 'key',
+  data: 'data',
+  sortOrder: 'sortOrder',
+  published: 'published',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type ContentItemScalarFieldEnum = (typeof ContentItemScalarFieldEnum)[keyof typeof ContentItemScalarFieldEnum]
+
+
+export const ContentLogScalarFieldEnum = {
+  id: 'id',
+  area: 'area',
+  action: 'action',
+  detail: 'detail',
+  author: 'author',
+  createdAt: 'createdAt'
+} as const
+
+export type ContentLogScalarFieldEnum = (typeof ContentLogScalarFieldEnum)[keyof typeof ContentLogScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -11,4 +11,7 @@
 export type * from './models/ContactMessage'
 export type * from './models/LeadNote'
 export type * from './models/ClaritySnapshot'
+export type * from './models/ContentOverride'
+export type * from './models/ContentItem'
+export type * from './models/ContentLog'
 export type * from './commonInputTypes'
