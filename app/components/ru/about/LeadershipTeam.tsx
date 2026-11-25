@@ -276,17 +276,6 @@ members = [
     sortOrder: 30,
   },
 
-  {
-    id: "emineg",
-    name: "Emine Güngör",
-    role: "Сотрудник сервиса La Joya",
-    category: "Сервис",
-    photo: "/teams/placeholder.svg", // Portrait file is not available yet.
-    bio: "Отвечает за сервис и поддержку жителей.",
-    socials: {},
-    accent: "orange",
-    sortOrder: 30,
-  },
   
   {
     id: "bulent",

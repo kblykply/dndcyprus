@@ -289,18 +289,6 @@ export default function LeadershipTeam({
         sortOrder: 30,
 
   },
-  {
-    id: "emine-gungor",
-    name: "Emine Güngör",
-    role: "La Joya Servis Personeli",
-    category: "Operations",
-    photo: "/teams/placeholder.svg", // Portrait file is not available yet.
-    bio: "Servis ve destek hizmetleri sorumlusu.",
-    socials: {},
-    accent: "orange",
-        sortOrder: 31,
-
-  },
   
   {
     id: "bulent",

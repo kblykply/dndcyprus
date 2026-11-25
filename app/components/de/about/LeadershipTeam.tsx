@@ -276,17 +276,6 @@ members = [
     sortOrder: 30,
   },
 
-  {
-    id: "emineg",
-    name: "Emine Güngör",
-    role: "Servicemitarbeiterin La Joya",
-    category: "Betrieb",
-    photo: "/teams/placeholder.svg", // Portrait file is not available yet.
-    bio: "Verantwortlich für Service und Betreuung.",
-    socials: {},
-    accent: "orange",
-    sortOrder: 30,
-  },
   
   {
     id: "bulent",
