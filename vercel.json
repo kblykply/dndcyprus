@@ -44,6 +44,10 @@
     {
       "path": "/api/cron/yedek",
       "schedule": "0 6 * * 1"
+    },
+    {
+      "path": "/api/cron/clarity",
+      "schedule": "0 3 * * *"
     }
   ]
 }

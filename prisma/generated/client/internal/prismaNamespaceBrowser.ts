@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   ContactMessage: 'ContactMessage',
-  LeadNote: 'LeadNote'
+  LeadNote: 'LeadNote',
+  ClaritySnapshot: 'ClaritySnapshot'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -106,6 +107,17 @@ export const LeadNoteScalarFieldEnum = {
 export type LeadNoteScalarFieldEnum = (typeof LeadNoteScalarFieldEnum)[keyof typeof LeadNoteScalarFieldEnum]
 
 
+export const ClaritySnapshotScalarFieldEnum = {
+  id: 'id',
+  day: 'day',
+  dimension: 'dimension',
+  data: 'data',
+  fetchedAt: 'fetchedAt'
+} as const
+
+export type ClaritySnapshotScalarFieldEnum = (typeof ClaritySnapshotScalarFieldEnum)[keyof typeof ClaritySnapshotScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -120,6 +132,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: 'JsonNull'
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

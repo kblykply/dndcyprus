@@ -10,4 +10,5 @@
  */
 export type * from './models/ContactMessage'
 export type * from './models/LeadNote'
+export type * from './models/ClaritySnapshot'
 export type * from './commonInputTypes'

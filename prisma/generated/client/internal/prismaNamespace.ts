@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   ContactMessage: 'ContactMessage',
-  LeadNote: 'LeadNote'
+  LeadNote: 'LeadNote',
+  ClaritySnapshot: 'ClaritySnapshot'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "contactMessage" | "leadNote"
+    modelProps: "contactMessage" | "leadNote" | "claritySnapshot"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ClaritySnapshot: {
+      payload: Prisma.$ClaritySnapshotPayload<ExtArgs>
+      fields: Prisma.ClaritySnapshotFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ClaritySnapshotFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ClaritySnapshotFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>
+        }
+        findFirst: {
+          args: Prisma.ClaritySnapshotFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ClaritySnapshotFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>
+        }
+        findMany: {
+          args: Prisma.ClaritySnapshotFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>[]
+        }
+        create: {
+          args: Prisma.ClaritySnapshotCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>
+        }
+        createMany: {
+          args: Prisma.ClaritySnapshotCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ClaritySnapshotCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>[]
+        }
+        delete: {
+          args: Prisma.ClaritySnapshotDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>
+        }
+        update: {
+          args: Prisma.ClaritySnapshotUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>
+        }
+        deleteMany: {
+          args: Prisma.ClaritySnapshotDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ClaritySnapshotUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ClaritySnapshotUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>[]
+        }
+        upsert: {
+          args: Prisma.ClaritySnapshotUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClaritySnapshotPayload>
+        }
+        aggregate: {
+          args: Prisma.ClaritySnapshotAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClaritySnapshot>
+        }
+        groupBy: {
+          args: Prisma.ClaritySnapshotGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClaritySnapshotGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ClaritySnapshotCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClaritySnapshotCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -627,6 +702,17 @@ export const LeadNoteScalarFieldEnum = {
 export type LeadNoteScalarFieldEnum = (typeof LeadNoteScalarFieldEnum)[keyof typeof LeadNoteScalarFieldEnum]
 
 
+export const ClaritySnapshotScalarFieldEnum = {
+  id: 'id',
+  day: 'day',
+  dimension: 'dimension',
+  data: 'data',
+  fetchedAt: 'fetchedAt'
+} as const
+
+export type ClaritySnapshotScalarFieldEnum = (typeof ClaritySnapshotScalarFieldEnum)[keyof typeof ClaritySnapshotScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -641,6 +727,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -824,6 +917,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   contactMessage?: Prisma.ContactMessageOmit
   leadNote?: Prisma.LeadNoteOmit
+  claritySnapshot?: Prisma.ClaritySnapshotOmit
 }
 
 /* Types for Logging */

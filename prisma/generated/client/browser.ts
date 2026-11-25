@@ -27,3 +27,8 @@ export type ContactMessage = Prisma.ContactMessageModel
  * Talebe ekip notu ya da durum değişikliği kaydı (kind: "not" | "durum")
  */
 export type LeadNote = Prisma.LeadNoteModel
+/**
+ * Model ClaritySnapshot
+ * Clarity günlük birikimi (20261125200000_clarity_snapshots): day = Kıbrıs günü ya da "anlik"; dimension = URL | Device | Channel
+ */
+export type ClaritySnapshot = Prisma.ClaritySnapshotModel

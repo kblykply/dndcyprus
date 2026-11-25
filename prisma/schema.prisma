@@ -45,3 +45,15 @@ model LeadNote {
 
   @@index([leadId])
 }
+
+/// Clarity günlük birikimi (20261125200000_clarity_snapshots): day = Kıbrıs günü ya da "anlik"; dimension = URL | Device | Channel
+model ClaritySnapshot {
+  id        Int      @id @default(autoincrement())
+  day       String
+  dimension String
+  data      Json
+  fetchedAt DateTime @default(now())
+
+  @@unique([day, dimension])
+  @@index([day])
+}

@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { ArrowDownRight, ArrowUpRight, BadgeCheck, CheckCircle2, Clock3, PhoneCall, UserCheck, Users } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ga4Configured } from "@/lib/ga4";
+import { clarityConfigured } from "@/lib/clarity";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { LEAD_STATUSES, cyprusDateTime, sourceGroup, statusInfo } from "@/lib/lead-status";
 import { bucketCounts, changePct, groupLeads, inRange, isQualified, overviewPeriod, periodBuckets, sourceColor } from "@/lib/lead-stats";
@@ -172,7 +173,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
           {[
             { name: "Web sitesi formları", ok: true, note: lastWeb ? `Son talep ${cyprusDateTime(lastWeb.createdAt).date}` : "Bağlı, henüz talep yok" },
             { name: "Google Analytics 4", ok: ga4Configured(), note: ga4Configured() ? "Site Trafiği sayfasında" : "Site trafiği için okuma izni bekleniyor" },
-            { name: "Microsoft Clarity", ok: false, note: "Isı haritası için API anahtarı bekleniyor" },
+            { name: "Microsoft Clarity", ok: clarityConfigured(), note: clarityConfigured() ? "Isı Haritası sayfasında" : "Isı haritası için API anahtarı bekleniyor" },
             { name: "Meta (Instagram / Facebook)", ok: false, note: "Reklam formu talepleri için erişim bekleniyor" },
           ].map((d) => (
             <li key={d.name} className="flex items-start gap-3 rounded-lg border border-slate-200 p-3.5">
