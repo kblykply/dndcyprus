@@ -166,6 +166,15 @@ export function rankFlashModels(names: string[]): string[] {
 
 let modelCache: { names: string[]; at: number } | null = null;
 
+/** Kotası dolan (429) ya da yoğun (503) model bir süre sona alınır: her kayıtta aynı hatayı beklemeyelim */
+const cooldown = new Map<string, number>();
+const COOL_MS = { quota: 15 * 60_000, busy: 2 * 60_000 };
+export function orderByCooldown(models: string[], now = Date.now()): string[] {
+  const ready = models.filter((m) => (cooldown.get(m) ?? 0) <= now);
+  const cooling = models.filter((m) => (cooldown.get(m) ?? 0) > now).sort((a, b) => (cooldown.get(a) ?? 0) - (cooldown.get(b) ?? 0));
+  return [...ready, ...cooling];
+}
+
 async function resolveModels(key: string): Promise<string[]> {
   const list: string[] = [];
   const env = (process.env.GEMINI_MODEL || "").trim();
@@ -200,7 +209,7 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
   }
   const key = (process.env.GEMINI_API_KEY || "").trim();
   if (!key) return { ok: false, error: "Otomatik çeviri kapalı: GEMINI_API_KEY tanımlı değil." };
-  const models = await resolveModels(key);
+  const models = orderByCooldown(await resolveModels(key));
   const out: Record<string, Record<TargetLocale, string>> = {};
   const groups = chunk(todo);
   // Süre sınırı: kayıt düğmesi dakikalarca beklemesin. Tek istek en çok 30 sn; bütün çeviri 40 sn (+20 sn / ek parça, en çok 4 dk).
@@ -232,11 +241,12 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
             }
             if (r.status === 503 || r.status === 500 || r.status === 504 || /high demand|overloaded|unavailable|deadline/i.test(r.error)) {
               last = "Çeviri servisi şu an yoğun; biraz sonra yeniden kaydedin.";
+              cooldown.set(model, Date.now() + COOL_MS.busy);
               break; // yoğun model: beklemeden sıradaki modele geç
             }
-            if (r.status === 429 && attempt === 0) {
-              await new Promise((res) => setTimeout(res, 4000));
-              continue;
+            if (r.status === 429) {
+              cooldown.set(model, Date.now() + COOL_MS.quota);
+              break; // bu modelin ücretsiz kotası dolu: beklemeden sıradaki modele geç
             }
             if (r.status === 401 || r.status === 403) return { ok: false, error: "Çeviri anahtarı geçersiz (GEMINI_API_KEY)." };
             continue;

@@ -148,3 +148,25 @@ test("translation: short thinking per model, a silent model is skipped once, pol
   const guide = loadTypeScript("lib/content/translate-guide.ts", { mocks: { "@/lib/azure/home": { HOME: {} }, "@/lib/azure/home-flow": { HOME_FLOW: {} }, "@/lib/azure/pages": { PAGES: {} }, "@/lib/azure/projects": { PROJECT_PAGES: {} } } });
   assert.match(guide.TRANSLATION_SYSTEM, /NEVER the informal 2nd person singular/);
 });
+
+test("translation: a model out of free quota is skipped at once and moved to the end next time", async () => {
+  const calls = [];
+  const answer = JSON.stringify([{ id: "x", en: "Hi", de: "Hallo", ru: "Привет", pl: "Cześć" }]);
+  const fetch = async (url) => {
+    const u = String(url);
+    if (u.includes("/models?")) return Response.json({ models: ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.5-flash-lite"].map((n) => ({ name: `models/${n}`, supportedGenerationMethods: ["generateContent"] })) });
+    const model = u.match(/models\/([^:]+):/)[1];
+    calls.push(model);
+    if (model === "gemini-3.8-flash") return Response.json({ error: { message: "Quota exceeded, limit: 0" } }, { status: 429 });
+    if (model === "gemini-3.7-flash") return Response.json({ error: { message: "The model is overloaded" } }, { status: 503 });
+    return Response.json({ candidates: [{ content: { parts: [{ text: answer }] } }] });
+  };
+  const live = loadTypeScript("lib/content/translate.ts", { env: { GEMINI_API_KEY: "deneme" }, globals: { fetch, console: { ...console, info: () => {} } } });
+  const t0 = Date.now();
+  assert.equal((await live.translateFromTurkish([{ id: "x", text: "Merhaba", kind: "text" }])).ok, true);
+  assert.ok(Date.now() - t0 < 1000, "kota hatasında beklenmez");
+  assert.deepEqual(calls, ["gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.5-flash-lite"]);
+  calls.length = 0;
+  assert.equal((await live.translateFromTurkish([{ id: "x", text: "Selam", kind: "text" }])).ok, true);
+  assert.deepEqual(calls, ["gemini-3.5-flash-lite"]);
+});
