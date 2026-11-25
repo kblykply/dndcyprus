@@ -192,6 +192,10 @@ const KEY_LABELS: Record<string, string> = {
   images: "Görseller", main: "Ana görsel", sideTop: "Yan görsel (üst)", sideBottom: "Yan görsel (alt)", city: "Şehir", country: "Ülke", phone: "Telefon",
   phoneDisplay: "Telefon (görünen)", stat: "Rakamın yanındaki yazı", link: "Bağlantı yazısı", follow: "Takip düğmesi", faqTitle: "S.S.S. başlığı",
   faqLead: "S.S.S. açıklaması", statsLabel: "Rakamlar başlığı", usa: "ABD satırı",
+  // Mariachi
+  v: "Değer", primaryCta: "Ana düğme", secondaryCta: "İkinci düğme", sideImage: "Yan görsel", sideImageAlt: "Yan görsel açıklaması",
+  sideBadge: "Yan kart rozeti", sideTitle: "Yan kart başlığı", sideSubtitle: "Yan kart yazısı", bgImage: "Arka plan görseli", logo: "Logo",
+  goldTag: "Ödül rozeti",
 };
 const LIST_LABELS: Record<string, string> = {
   items: "Madde", slides: "Slayt", steps: "Adım", more: "Ek paragraf", zeros: "Sıfır maddesi", tags: "Etiket", highlights: "Öne çıkan madde",
@@ -201,15 +205,33 @@ const LIST_LABELS: Record<string, string> = {
   offices: "Ofis", addressLines: "Adres satırı", hours: "Saat", points: "Madde", ctas: "Düğme", photos: "Fotoğraf", p: "Paragraf", links: "Bağlantı",
 };
 
-export function fieldLabel(path: string): string {
+/** Bölüme göre farklı anlam taşıyan anahtarlar (kişi kartında q = alıntı, soru değil) */
+const SECTION_LABELS: Record<string, Record<string, string>> = {
+  ozan: { q: "Alıntı", career: "Kariyer satırı başlığı", img: "Portre" },
+  aynur: { q: "Alıntı", img: "Portre" },
+  partner: { quote: "Alıntı" },
+  zaman: { year: "Yıl", tag: "Etiket", from: "Başlangıç noktası", to: "Varış noktası", dist: "Mesafe yazısı", harita: "Harita" },
+  telefon: {
+    phone: "Sabit telefon (menü, alt bilgi, iletişim kartları)",
+    mobile: "Cep telefonu (görünen yazı)",
+    whatsapp: "WhatsApp numarası (ülke koduyla, örn. 905488390363)",
+    email: "E-posta",
+  },
+  altbilgi: { tagline: "Slogan", address: "Merkez ofis adresi", hours: "Çalışma saatleri" },
+};
+
+export function fieldLabel(path: string, section?: string): string {
   const segs = path.split(".");
+  const ctx = (section && SECTION_LABELS[section]) || {};
   const parts: string[] = [];
   segs.forEach((s, i) => {
     if (/^\d+$/.test(s)) {
       const listKey = segs[i - 1];
-      parts.push(`${LIST_LABELS[listKey] ?? "Öğe"} ${Number(s) + 1}`);
+      // [başlık, değer] çiftleri (dl): ikinci sayı çiftin hangi parçası olduğunu söyler
+      if (/^\d+$/.test(listKey ?? "") && segs[i - 2] === "dl") parts.push(s === "0" ? "Başlık" : "Değer");
+      else parts.push(`${LIST_LABELS[listKey] ?? "Öğe"} ${Number(s) + 1}`);
     } else if (!/^\d+$/.test(segs[i + 1] ?? "")) {
-      parts.push(KEY_LABELS[s] ?? s);
+      parts.push(ctx[s] ?? KEY_LABELS[s] ?? s);
     }
   });
   return parts.join(" · ") || path;

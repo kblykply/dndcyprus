@@ -7,6 +7,8 @@ import AzureHeader from "@/app/components/azure/AzureHeader";
 import AzureFooter from "@/app/components/azure/AzureFooter";
 import AzureFx from "@/app/components/azure/AzureFx";
 import WhatsAppAzure from "@/app/components/azure/WhatsAppAzure";
+import { SiteContactProvider } from "@/app/components/cms/SiteContact";
+import { getSiteContact } from "@/lib/content/store";
 
 // Başlık sayfalarda (pageMetadata) verilir; burada yalnızca varsayılan açıklama kalır
 export const metadata: Metadata = {
@@ -14,8 +16,10 @@ export const metadata: Metadata = {
     "Discover DND Cyprus, a leading real-estate developer in Cyprus with innovative residential and commercial projects.",
 };
 
-export default function ENLayout({ children }: { children: ReactNode }) {
+export default async function ENLayout({ children }: { children: ReactNode }) {
+  const contact = await getSiteContact("en"); // telefon/e-posta/adres panelden
   return (
+    <SiteContactProvider value={contact}>
     <div>
       {/* Accessibility: skip link */}
       <a
@@ -36,5 +40,6 @@ export default function ENLayout({ children }: { children: ReactNode }) {
 
       <AzureFooter locale="en" />
     </div>
+    </SiteContactProvider>
   );
 }

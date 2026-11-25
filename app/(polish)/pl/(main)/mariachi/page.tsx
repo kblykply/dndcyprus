@@ -5,6 +5,7 @@ import MariachiPerksSection from "@/app/components/pl/mariachi/MariachiPerksSect
 import MariachiGalleryExpanding from "@/app/components/pl/mariachi/MariachiGalleryExpanding";
 import ContactCTAMariachi from "@/app/components/pl/mariachi/ContactCTAMariachi";
 import { pageMetadata } from "@/lib/seo";
+import CmsSection from "@/app/components/cms/CmsSection";
 
 export const metadata = pageMetadata({
   locale: "pl",
@@ -20,13 +21,13 @@ export const metadata = pageMetadata({
 export default function HomePage() {
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-<PageHero size="full" title={<>Mariachi <b>Beach Club</b></>} lead="Wyjątkowe miejsce, w którym śródziemnomorskie słońce spotyka latynoski rytm: komfortowe pawilony, cały dzień na plaży i wieczorne występy DJ-ów." image="/azure/mb-6.jpg" imageAlt="Mariachi Beach Club" logo="/logos/mariachi.png" goldTag="Platynowa Nagroda · PropertyNC 2025" tags={["Wkrótce", "Beach club", "Basen i plaża", "Pawilony", "Wieczory z DJ-em"]} chips={[{ big: "4", label: "Baseny z jacuzzi" }, { big: "10%", label: "Zniżki dla mieszkańców DND" }, { big: "2", label: "Bary" }]} ctas={[{ label: "Zarezerwuj pawilon", href: "/pl/contact" }, { label: "Zobacz menu", href: "/pl/contact", variant: "ghost" }]} />
-<MariachiVideoSpotlight />
-<MariachiHighlights />
-<MariachiGalleryExpanding />
+<CmsSection scope="mariachi" section="hero" lang="pl" as={PageHero} size="full" />
+<CmsSection scope="mariachi" section="video" lang="pl" as={MariachiVideoSpotlight} />
+<CmsSection scope="mariachi" section="olanaklar" lang="pl" as={MariachiHighlights} />
+<CmsSection scope="mariachi" section="galeri" lang="pl" as={MariachiGalleryExpanding} />
 
-<MariachiPerksSection />
-<ContactCTAMariachi />
+<CmsSection scope="mariachi" section="ayricaliklar" lang="pl" as={MariachiPerksSection} />
+<CmsSection scope="mariachi" section="iletisim" lang="pl" as={ContactCTAMariachi} />
     </main>
   );
 }

@@ -92,6 +92,9 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
           <input type="hidden" name="section" value={section} />
           <div className="border-b border-slate-100 px-5 py-4">
             <h2 className="text-xl text-slate-900">{sectionLabel}</h2>
+            {"shared" in def && (def.shared as string[] | undefined)?.includes(section) ? (
+              <p className="mt-1 rounded-md bg-teal-50 px-2 py-1 text-xs text-teal-800">Bu bölüm tüm dillerde ortaktır: kaydedince 5 dilde birden değişir.</p>
+            ) : null}
             <p className="mt-0.5 text-xs text-slate-500">
               {LOCALE_LABELS[locale]} · {fields.length} alan{counts[section] ? ` · ${counts[section]} alan değiştirilmiş` : ""}
             </p>
@@ -105,7 +108,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
                 <div key={f.path} className={`px-5 py-4 ${f.overridden ? "bg-amber-50/40" : ""}`}>
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <label htmlFor={id} className="text-[13px] font-medium text-slate-700">
-                      {fieldLabel(rel)}
+                      {fieldLabel(rel, section)}
                     </label>
                     {f.overridden ? (
                       <span className="flex items-center gap-2">

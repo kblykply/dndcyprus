@@ -6,10 +6,11 @@ import { prisma } from "@/lib/prisma";
 import { PAGES, type PagesCopy } from "@/lib/azure/pages";
 import { PROJECT_PAGES, type ProjectPage } from "@/lib/azure/projects";
 import type { ProjectContent } from "@/lib/azure/project-types";
-import { CONTACT, FOOTER_COPY } from "@/lib/azure/site";
+import { FOOTER_COPY } from "@/lib/azure/site";
 import type { BlogPost } from "@/lib/blog";
 import { applyOverrides, type ContentLocale } from "./core";
-import { SCOPES, projectScopeKey, type ProjectScopeContent, type ScopeKey } from "./scopes";
+import { SCOPES, projectScopeKey, type ProjectScopeContent, type ScopeDef, type ScopeKey } from "./scopes";
+import { siteContact, type SiteContact } from "./site-contact";
 import { PRESS_DEFAULTS, pressItemFor, type PressRecord } from "./defaults/press";
 import { TEAM_DEFAULTS, memberFor, type TeamRecord } from "./defaults/team";
 import { EVENT_DEFAULTS, eventFor, type EventRecord } from "./defaults/events";
@@ -30,8 +31,9 @@ export const getOverrides = cache(async (scope: string, locale: string): Promise
 type ScopeContent<K extends ScopeKey> = ReturnType<(typeof SCOPES)[K]["build"]>;
 
 export async function getScopeContent<K extends ScopeKey>(scope: K, locale: ContentLocale): Promise<ScopeContent<K>> {
-  const base = SCOPES[scope].build(locale) as ScopeContent<K>;
-  return applyOverrides(base, await getOverrides(scope, locale));
+  const def = SCOPES[scope] as ScopeDef;
+  const out = applyOverrides(def.build(locale), await getOverrides(scope, locale));
+  return (def.finalize ? def.finalize(out) : out) as ScopeContent<K>;
 }
 
 /* ---------------- Sayfa metinleri (lib/azure/pages.tsx biçiminde) ---------------- */
@@ -56,10 +58,17 @@ export const getPages = cache(async (locale: ContentLocale): Promise<PagesCopy> 
   };
 });
 
-/** Alt bilgi: kısa slogan, merkez ofis adresi ve çalışma saatleri */
+/** Site geneli telefon, cep/WhatsApp, e-posta, merkez ofis adresi ve saatleri (menü, iletişim kartları, alt bilgi, WhatsApp düğmesi) */
+export const getSiteContact = cache(async (locale: ContentLocale): Promise<SiteContact> => {
+  const c = await getScopeContent("iletisim", locale);
+  return siteContact(c.telefon, c.altbilgi.address, c.altbilgi.hours);
+});
+
+/** Alt bilgi: kısa slogan + site iletişim bilgisi */
 export async function getFooter(locale: ContentLocale) {
   const c = await getScopeContent("iletisim", locale);
-  return { copy: { ...FOOTER_COPY[locale], tagline: c.altbilgi.tagline }, address: c.altbilgi.address, hours: c.altbilgi.hours, contact: CONTACT };
+  const contact = await getSiteContact(locale);
+  return { copy: { ...FOOTER_COPY[locale], tagline: c.altbilgi.tagline }, address: contact.hq, hours: contact.hours, contact };
 }
 
 /* ---------------- Proje sayfaları ---------------- */

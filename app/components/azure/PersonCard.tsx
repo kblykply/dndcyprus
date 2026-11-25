@@ -1,5 +1,6 @@
 import Img from "./Img";
 import { HOME } from "@/lib/azure/home";
+import { getScopeContent } from "@/lib/content/store";
 import type { Locale } from "@/lib/azure/site";
 import "./home/leadership.css";
 
@@ -71,17 +72,18 @@ export function PersonCard({ person, badge, career, flip, heading = "h3" }: Prop
 }
 
 /** Ozan Dökmecioğlu: "Yılın CFO'su" rozeti ve kariyerindeki kurumlarla */
-export function OzanCard({ locale, heading }: { locale: Locale; heading?: "h2" | "h3" }) {
-  const t = HOME[locale].leadership;
+export async function OzanCard({ locale, heading }: { locale: Locale; heading?: "h2" | "h3" }) {
+  // metinler panelden (İçerik → Hakkımızda → Ozan Dökmecioğlu); rozet ana sayfa ödül şeridindeki CFO ödülünden
+  const { career, ...person } = (await getScopeContent("hakkimizda", locale)).ozan;
   const cfo = HOME[locale].awards.items.find((x) => !x.ribbon);
   return (
-    <PersonCard person={t.people[0]} heading={heading}
+    <PersonCard person={person} heading={heading}
       badge={cfo ? { b: cfo.b, rest: cfo.rest.replace(/^\s*·\s*/, "") } : undefined}
-      career={{ label: t.career, logos: CAREER }} />
+      career={{ label: career, logos: CAREER }} />
   );
 }
 
 /** Aynur Zorba Gülol (Hakkımızda'da Ozan Bey ve Netice Hanım'dan sonra: portre solda, kartlar sağ-sol sırayla) */
-export function AynurCard({ locale, heading }: { locale: Locale; heading?: "h2" | "h3" }) {
-  return <PersonCard person={HOME[locale].leadership.people[1]} heading={heading} />;
+export async function AynurCard({ locale, heading }: { locale: Locale; heading?: "h2" | "h3" }) {
+  return <PersonCard person={(await getScopeContent("hakkimizda", locale)).aynur} heading={heading} />;
 }

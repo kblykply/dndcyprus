@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { IconType } from "react-icons";
 import { PiFacebookLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiWhatsappLogoDuotone, PiYoutubeLogoDuotone } from "react-icons/pi";
-import { CONTACT, LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
+import { LOCALE_META, NAV_COPY, PROJECTS, SOCIALS, href, type Locale } from "@/lib/azure/site";
 import { NAV_TEXT } from "@/lib/azure/nav";
 import { getFooter } from "@/lib/content/store";
 import CookiePrefsLink from "./CookiePrefsLink";
@@ -20,6 +20,7 @@ const rows = (n: number) => ({ "--rows": Math.ceil(n / 2) }) as CSSProperties;
 export default async function AzureFooter({ locale }: { locale: Locale }) {
   const f = await getFooter(locale); // slogan ve adres panelden (İçerik → İletişim ve alt bilgi)
   const t = f.copy;
+  const CONTACT = f.contact; // telefon, WhatsApp, e-posta panelden (tüm dillerde ortak)
   const n = NAV_COPY[locale];
   const year = new Date().getFullYear();
   const general = [

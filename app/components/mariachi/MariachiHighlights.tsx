@@ -33,7 +33,8 @@ export default function MariachiHighlights({
   subtitle = "Gün boyu plaj keyfi, cabana konforu, restoran & havuz barı ve akşam DJ performansları.",
   items,
 }: Props) {
-  const data = items ?? DEFAULT_ITEMS;
+  // panelden gelen kartlarda ikon yok: aynı sıradaki varsayılan kartın ikonu kullanılır
+  const data = (items ?? DEFAULT_ITEMS).map((it, i) => ({ ...it, icon: it.icon ?? DEFAULT_ITEMS[i]?.icon }));
 
   return (
     <section className="az-section" aria-label="Mariachi Beach Club — Öne Çıkanlar">

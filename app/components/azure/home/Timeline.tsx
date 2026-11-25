@@ -1,5 +1,7 @@
 import Img from "../Img";
 import { HOME } from "@/lib/azure/home";
+import { TIMELINE_ABOUT_HEAD, TIMELINE_MAP } from "@/lib/azure/timeline";
+import { getScopeContent } from "@/lib/content/store";
 import type { Locale } from "@/lib/azure/site";
 import "./timeline-meridian.css";
 
@@ -7,13 +9,6 @@ import "./timeline-meridian.css";
 // numaralı duraklar (ABD ikilisi batıda, Kıbrıs dörtlüsü doğuda), altta fotoğraflı kartlar ve duraklara
 // inen kesikli çizgiler. Tablet: kartlar 3'lü ızgara; telefon: dikey meridyen çizgisi boyunca liste.
 
-const MAP: Record<Locale, { from: string; to: string; fromXY: string; toXY: string; dist: string; route: string }> = {
-  tr: { from: "Boston", to: "İskele", fromXY: "42°21′ K · 71°03′ B", toXY: "35°17′ K · 33°53′ D", dist: "≈ 8.500 km", route: "Boston’dan İskele’ye rota" },
-  en: { from: "Boston", to: "İskele", fromXY: "42°21′ N · 71°03′ W", toXY: "35°17′ N · 33°53′ E", dist: "≈ 8,500 km", route: "Route from Boston to İskele" },
-  de: { from: "Boston", to: "İskele", fromXY: "42°21′ N · 71°03′ W", toXY: "35°17′ N · 33°53′ O", dist: "≈ 8.500 km", route: "Route von Boston nach İskele" },
-  ru: { from: "Бостон", to: "Искеле", fromXY: "42°21′ с. ш. · 71°03′ з. д.", toXY: "35°17′ с. ш. · 33°53′ в. д.", dist: "≈ 8 500 км", route: "Маршрут из Бостона в Искеле" },
-  pl: { from: "Boston", to: "İskele", fromXY: "42°21′ N · 71°03′ W", toXY: "35°17′ N · 33°53′ E", dist: "≈ 8500 km", route: "Trasa z Bostonu do İskele" },
-};
 
 // Rota: viewBox 1000×280 içinde ikinci derece Bézier (rotanın tepesi kuzeye kavislenir)
 const P0 = [40, 204], P1 = [500, -84], P2 = [960, 204];
@@ -37,22 +32,16 @@ const PARALLELS = [10, 22, 34, 46, 58, 70].map((d) => {
   return { cy: G.cy - G.r * Math.sin(p) * Math.cos(G.tilt), rx: G.r * Math.cos(p), ry: G.r * Math.cos(p) * Math.sin(G.tilt) };
 });
 
-// Hakkımızda başlığı: eski "Yolculuğumuz" bölümünün etiket, başlık ve açıklaması
-const ABOUT_HEAD: Record<Locale, { kicker: string; title: string; lead: string }> = {
-  tr: { kicker: "DND Cyprus", title: "Yolculuğumuz", lead: "Önemli kilometre taşlarımızı gezinerek keşfedin." },
-  en: { kicker: "DND Cyprus", title: "Our Journey", lead: "Explore our key milestones." },
-  de: { kicker: "DND Cyprus", title: "Unser Weg", lead: "Entdecken Sie unsere wichtigsten Meilensteine." },
-  ru: { kicker: "DND Cyprus", title: "Наш путь", lead: "Ключевые вехи нашей истории." },
-  pl: { kicker: "DND Cyprus", title: "Nasza historia", lead: "Najważniejsze etapy naszego rozwoju." },
-};
 
 // Ana sayfada ve Hakkımızda'da ("Yolculuğumuz" kartlarının yerine, about + id="timeline") aynı bileşen.
-export default function Timeline({ locale, id, about }: { locale: Locale; id?: string; about?: boolean }) {
-  const t = HOME[locale].timeline;
-  const m = MAP[locale];
+// Hakkımızda'da metinler, kartlar ve harita etiketleri panelden (İçerik → Hakkımızda → Zaman çizelgesi)
+export default async function Timeline({ locale, id, about }: { locale: Locale; id?: string; about?: boolean }) {
+  const z = about ? (await getScopeContent("hakkimizda", locale)).zaman : null;
+  const t = z ? { ...HOME[locale].timeline, items: z.items } : HOME[locale].timeline;
+  const m = z ? { ...TIMELINE_MAP[locale], ...z.harita } : TIMELINE_MAP[locale];
   const items = t.items.slice(0, STOPS.length);
   const pts = items.map((_, i) => at(STOPS[i]));
-  const head = about ? ABOUT_HEAD[locale] : null;
+  const head = z ? { kicker: z.kicker, title: z.title, lead: z.lead } : about ? TIMELINE_ABOUT_HEAD[locale] : null;
 
   return (
     <section className="az-section" id={id}>

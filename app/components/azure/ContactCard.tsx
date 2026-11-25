@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { submitLead } from "@/lib/lead-submit";
 import { attributionRef } from "@/lib/attribution";
-import { CONTACT, PROJECTS, href, type Locale } from "@/lib/azure/site";
+import { PROJECTS, href, type Locale } from "@/lib/azure/site";
+import { useSiteContact } from "@/app/components/cms/SiteContact";
 import PhoneField, { joinPhone } from "./PhoneField";
 
 const COPY = {
@@ -148,6 +149,7 @@ export default function ContactCard({
   locale, mode = "home", project, projectName, unitTypes = [], image = "/azure/contact-sea.webp", // tüm formlarda aynı deniz arka planı (kum ve dalga kırpılmış)
   title, lead, highlights = [], showOffices = true, brochureHref, id,
 }: Props) {
+  const CONTACT = useSiteContact(locale); // panelden (İçerik → İletişim ve alt bilgi)
   const t = COPY[locale];
   const uid = useId();
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -225,7 +227,7 @@ export default function ContactCard({
             {highlights.length > 0 && <div className="hl">{highlights.map((h) => <span key={h}>{h}</span>)}</div>}
             {showOffices && (
               <div className="off">
-                <div><b>{t.hq}</b><span>{CONTACT.hq[locale]} · {CONTACT.hours[locale]}</span></div>
+                <div><b>{t.hq}</b><span>{CONTACT.hq} · {CONTACT.hours}</span></div>
                 <div><b><a href={CONTACT.phoneHref}>{CONTACT.phone}</a> · <a href={`tel:+${CONTACT.whatsapp}`}>{CONTACT.mobile}</a></b><span><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={waHref} target="_blank" rel="noopener noreferrer">WhatsApp</a></span></div>
               </div>
             )}

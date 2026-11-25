@@ -8,7 +8,9 @@ import { PAGES } from "@/lib/azure/pages";
 import { PROJECT_PAGES, type ProjectPage } from "@/lib/azure/projects";
 import { PROJECT_DATA } from "@/lib/azure/projects/index";
 import { CONTACT, FOOTER_COPY } from "@/lib/azure/site";
+import { TIMELINE_ABOUT_HEAD, TIMELINE_MAP } from "@/lib/azure/timeline";
 import { PAGE_DEFAULTS } from "./defaults/pages";
+import { MARIACHI_DEFAULTS } from "./defaults/mariachi";
 import type { ContentLocale } from "./core";
 
 export type ScopeGroup = "sayfa" | "proje";
@@ -23,7 +25,11 @@ export type ScopeDef = {
   /** Bölüm anahtarı → panelde görünen ad (sıra sitedeki sırayla aynı) */
   sections: [key: string, label: string][];
   hide?: string[];
+  /** dilden bağımsız bölümler: bir dilde kaydedilen değer 5 dile birden yazılır (telefon, e-posta) */
+  shared?: string[];
   build: (l: ContentLocale) => Record<string, unknown>;
+  /** panel değişiklikleri uygulandıktan sonra bölümler arası eşitleme (ör. ofis kartındaki telefon = site telefonu) */
+  finalize?: (c: Record<string, unknown>) => Record<string, unknown>;
 };
 
 function buildHome(l: ContentLocale) {
@@ -48,12 +54,17 @@ export type HomeScopeContent = ReturnType<typeof buildHome>;
 function buildAbout(l: ContentLocale) {
   const d = PAGE_DEFAULTS[l].hakkimizda;
   const a = PAGES[l].about;
+  const h = HOME[l];
+  const { from, to, dist } = TIMELINE_MAP[l];
   return {
     hero: d.hero,
     kim: d.kim,
     dndHomes: d.dndHomes,
+    ozan: { ...h.leadership.people[0], career: h.leadership.career },
     partner: a.partner,
+    aynur: h.leadership.people[1],
     usa: a.usa,
+    zaman: { ...TIMELINE_ABOUT_HEAD[l], items: h.timeline.items, harita: { from, to, dist } },
     rakamlar: { title: a.numbersTitle, usa: a.numbersUsa },
     misyon: d.misyon,
     neden: d.neden,
@@ -83,8 +94,24 @@ function buildContact(l: ContentLocale) {
     hero: d.hero,
     bilgi: d.bilgi,
     form: d.form,
+    telefon: { phone: CONTACT.phone, mobile: CONTACT.mobile, whatsapp: CONTACT.whatsapp, email: CONTACT.email },
     altbilgi: { tagline: FOOTER_COPY[l].tagline as string, address: CONTACT.hq[l], hours: CONTACT.hours[l] },
   };
+}
+
+type Office = { id?: string; phone?: string; phoneDisplay?: string; email?: string; whatsapp?: string };
+/** Merkez ofis kartı site telefonunu, e-postasını ve WhatsApp'ı kullanır (iki yerden ayrı ayrı düzenlenmesin) */
+function syncContact(c: Record<string, unknown>) {
+  const t = c.telefon as { phone: string; mobile: string; whatsapp: string; email: string };
+  const bilgi = c.bilgi as { offices?: Office[] } | undefined;
+  for (const o of bilgi?.offices ?? []) {
+    if (o.id !== "hq") continue;
+    o.phone = t.phone;
+    o.phoneDisplay = t.phone;
+    o.email = `mailto:${t.email}`;
+    o.whatsapp = `https://wa.me/${t.whatsapp.replace(/\D/g, "")}`;
+  }
+  return c;
 }
 
 /* ---------------- Proje sayfaları ---------------- */
@@ -178,7 +205,10 @@ export const SCOPES = {
       ["hero", "Sayfa başı"],
       ["kim", "Biz kimiz (tanıtım videosu)"],
       ["dndHomes", "DND Homes videosu"],
+      ["ozan", "Kurucu (Ozan Dökmecioğlu)"],
       ["partner", "Kurucu ortak (Netice Dökmecioğlu)"],
+      ["aynur", "Direktör (Aynur Zorba Gülol)"],
+      ["zaman", "Zaman çizelgesi (Yolculuğumuz)"],
       ["usa", "DND Homes Amerika"],
       ["rakamlar", "Rakamlar başlığı"],
       ["misyon", "Misyon, vizyon ve değerler"],
@@ -250,10 +280,35 @@ export const SCOPES = {
       ["hero", "Sayfa başı"],
       ["bilgi", "Ofis bilgileri"],
       ["form", "İletişim formu"],
-      ["altbilgi", "Alt bilgi (her sayfada)"],
+      ["telefon", "Telefon ve e-posta (tüm site, tüm diller)"],
+      ["altbilgi", "Alt bilgi ve merkez ofis adresi (her sayfada)"],
     ],
-    hide: ["bilgi.offices.*.email", "bilgi.offices.*.whatsapp", "bilgi.offices.*.mapUrl", "bilgi.offices.*.coords", "bilgi.offices.*.mapEmbedUrl"],
+    hide: [
+      "bilgi.offices.*.email",
+      "bilgi.offices.*.whatsapp",
+      "bilgi.offices.*.phone",
+      "bilgi.offices.*.phoneDisplay",
+      "bilgi.offices.*.mapUrl",
+      "bilgi.offices.*.coords",
+      "bilgi.offices.*.mapEmbedUrl",
+    ],
+    shared: ["telefon"],
     build: buildContact,
+    finalize: syncContact,
+  },
+  mariachi: {
+    label: "Mariachi Beach Club",
+    group: "proje",
+    routes: (l) => [`/${l}/mariachi`],
+    sections: [
+      ["hero", "Sayfa başı"],
+      ["video", "Tanıtım videosu"],
+      ["olanaklar", "Olanaklar (kartlar)"],
+      ["galeri", "Galeri"],
+      ["ayricaliklar", "Üyelik ve sakin ayrıcalıkları"],
+      ["iletisim", "İletişim ve rezervasyon"],
+    ],
+    build: (l) => MARIACHI_DEFAULTS[l],
   },
   "proje-neocity": projectScope("neocity"),
   "proje-lagoon-verde": projectScope("lagoon-verde"),

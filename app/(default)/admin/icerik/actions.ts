@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { authorFromCookies, requireAdmin } from "@/lib/admin-auth";
 import { CONTENT_LOCALES, fieldLabel, postHtml, type ContentLocale } from "@/lib/content/core";
-import { SCOPES, isScopeKey, type ScopeKey } from "@/lib/content/scopes";
+import { SCOPES, isScopeKey, type ScopeDef, type ScopeKey } from "@/lib/content/scopes";
 import { COLLECTIONS, allRoutes, ensureSeeded, isCollectionKey, sectionFields, slugify } from "@/lib/content/admin";
 import type { CollectionKey } from "@/lib/content/store";
 
@@ -65,22 +65,32 @@ export async function saveSection(formData: FormData) {
   const fields = await sectionFields(scope, locale, section);
   let changed = 0;
   const locales = new Set<ContentLocale>([locale]);
+  const def = SCOPES[scope] as ScopeDef;
+  const shared = !!def.shared?.includes(section); // telefon/e-posta: 5 dile birden
   for (const f of fields) {
     if (!formData.has(`f:${f.path}`)) continue;
     let v = str(formData, `f:${f.path}`, 5000);
     if (f.kind === "number" && !Number.isFinite(Number(v.replace(",", ".")))) continue;
     if (f.kind !== "long" && f.kind !== "rich") v = v.replace(/\n+/g, " ");
     if (f.kind === "image" && v && !/^(\/|https:\/\/)\S+$/i.test(v)) continue; // geçersiz görsel yolu kaydedilmez
+    if (/\.email$/.test(f.path) && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) continue; // geçersiz e-posta kaydedilmez
+    if (/\.(whatsapp|phone|mobile)$/.test(f.path) && v && v.replace(/\D/g, "").length < 8) continue; // eksik numara kaydedilmez
     const same = v === f.original;
     if ((same && f.overridden) || (!same && v !== f.value)) {
       await setOverride(scope, locale, f.path, same ? null : v, author);
       changed++;
-      if (f.kind === "image") for (const l2 of await propagateImage(scope, locale, section, f.path, f.original, f.value, v, author)) locales.add(l2);
+      if (shared) {
+        for (const l2 of CONTENT_LOCALES) {
+          if (l2 === locale) continue;
+          await setOverride(scope, l2, f.path, same ? null : v, author);
+          locales.add(l2);
+        }
+      } else if (f.kind === "image") for (const l2 of await propagateImage(scope, locale, section, f.path, f.original, f.value, v, author)) locales.add(l2);
     }
   }
   if (changed) {
     const label = SCOPES[scope].sections.find(([k]) => k === section)?.[1] ?? section;
-    const extra = locales.size > 1 ? " · görsel diğer dillerde de" : "";
+    const extra = shared ? " · tüm dillerde" : locales.size > 1 ? " · görsel diğer dillerde de" : "";
     await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "düzenleme", detail: `${label} (${locale.toUpperCase()}): ${changed} alan${extra}`, author } });
     refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
@@ -96,12 +106,13 @@ export async function resetField(path: string, formData: FormData) {
   if (!isScopeKey(scope) || !isLocale(locale) || !path.startsWith(`${section}.`)) redirect("/admin/icerik");
   const author = authorFromCookies(store);
   const f = (await sectionFields(scope, locale, section)).find((x) => x.path === path);
-  const n = await prisma.contentOverride.deleteMany({ where: { scope, locale, path } });
+  const sharedReset = !!(SCOPES[scope] as ScopeDef).shared?.includes(section);
+  const n = await prisma.contentOverride.deleteMany({ where: sharedReset ? { scope, path } : { scope, locale, path } });
   if (n.count) {
-    const locales = new Set<ContentLocale>([locale]);
+    const locales = new Set<ContentLocale>(sharedReset ? CONTENT_LOCALES : [locale]);
     if (f?.kind === "image") for (const l2 of await propagateImage(scope, locale, section, path, f.original, f.value, f.original, author)) locales.add(l2);
     const label = SCOPES[scope].sections.find(([k]) => k === section)?.[1] ?? section;
-    await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "orijinale dönüş", detail: `${label} · ${fieldLabel(path.slice(section.length + 1))} (${locale.toUpperCase()})`, author } });
+    await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "orijinale dönüş", detail: `${label} · ${fieldLabel(path.slice(section.length + 1), section)} (${locale.toUpperCase()})`, author } });
     refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
   redirect(`/admin/icerik/sayfa/${scope}?dil=${locale}&bolum=${section}&geri=1`);

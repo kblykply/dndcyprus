@@ -1,12 +1,13 @@
 "use client";
 
+import { useSiteContact } from "@/app/components/cms/SiteContact";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useMenuDialog } from "@/app/components/performance/useMenuDialog";
 import { NAV_TEXT, PROJECT_GROUPS, PROJECT_HASH, navItems, type NavItem, type NavLink } from "@/lib/azure/nav";
-import { CONTACT, LOCALES, LOCALE_META, NAV_COPY, PROJECTS, href, stripLocale, type Locale } from "@/lib/azure/site";
+import { LOCALES, LOCALE_META, NAV_COPY, PROJECTS, href, stripLocale, type Locale } from "@/lib/azure/site";
 import Arrow from "./Arrow";
 import "./lang.css";
 import "./nav.css";
@@ -14,6 +15,7 @@ import "./nav.css";
 // Azure: yüzen cam pill menü (7 başlık: Ana Sayfa, Projelerimiz mega menüsü, DND Ayrıcalığı, Ödeme ve Yatırım, Hakkımızda,
 // Haberler, İletişim — lib/azure/nav.ts) + açılır bölümlü mobil menü.
 export default function AzureHeader({ locale }: { locale: Locale }) {
+  const CONTACT = useSiteContact(locale); // panelden (İçerik → İletişim ve alt bilgi → Telefon ve e-posta)
   const t = NAV_COPY[locale];
   const pathname = usePathname() || "/";
   const router = useRouter();

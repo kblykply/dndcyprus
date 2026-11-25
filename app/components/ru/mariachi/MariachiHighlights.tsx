@@ -33,7 +33,8 @@ export default function MariachiHighlights({
   subtitle = "Пляжный отдых весь день, комфорт кабан, ресторан и бар у бассейна, а вечером — DJ-сеты.",
   items,
 }: Props) {
-  const data = items ?? DEFAULT_ITEMS;
+  // panelden gelen kartlarda ikon yok: aynı sıradaki varsayılan kartın ikonu kullanılır
+  const data = (items ?? DEFAULT_ITEMS).map((it, i) => ({ ...it, icon: it.icon ?? DEFAULT_ITEMS[i]?.icon }));
 
   return (
     <section className="az-section" aria-label="Mariachi Beach Club — главное">

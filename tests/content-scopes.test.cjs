@@ -23,9 +23,9 @@ test("every scope builds in 5 languages and each section has editable fields", (
   }
 });
 
-test("project scopes: 5 projects, technical fields hidden, sections only where data exists", () => {
+test("project scopes: 5 projects + Mariachi, technical fields hidden, sections only where data exists", () => {
   const projects = Object.entries(sc.SCOPES).filter(([, d]) => d.group === "proje");
-  assert.deepEqual(projects.map(([k]) => k).sort(), ["proje-la-joya", "proje-lagoon-verde", "proje-neocity", "proje-perla", "proje-perla-ii"]);
+  assert.deepEqual(projects.map(([k]) => k).sort(), ["mariachi", "proje-la-joya", "proje-lagoon-verde", "proje-neocity", "proje-perla", "proje-perla-ii"]);
   const lv = sc.SCOPES["proje-lagoon-verde"];
   const facts = core.walkFields(lv.build("tr").facts, "facts").filter((f) => !sc.isHiddenPath(f.path, lv.hide));
   assert.ok(facts.every((f) => !f.path.startsWith("facts.jsonLd")));
@@ -88,4 +88,44 @@ test("blog defaults keep translations and per-language signature", () => {
   const lv = bl.BLOG_DEFAULTS.find((p) => p.id === "lagoon-verde-ilk-temel-2026");
   assert.equal(bl.postFor(lv, "en").title, "Groundbreaking at Lagoon Verde");
   assert.ok(bl.postFor(lv, "tr").content.startsWith("<p>"));
+});
+
+test("site contact: digits-only WhatsApp, tel: link, defaults when empty", () => {
+  const sc2 = loadTypeScript("lib/content/site-contact.ts");
+  const c = sc2.siteContact({ phone: "+90 392 111 22 33", mobile: "+90 555 111 22 33", whatsapp: "+90 555-111 22 33", email: " a@b.com " }, "Adres", "Saat");
+  assert.equal(c.phoneHref, "tel:+903921112233");
+  assert.equal(c.whatsapp, "905551112233");
+  assert.equal(c.email, "a@b.com");
+  const d = sc2.defaultSiteContact("en");
+  assert.equal(d.phone, "+90 392 444 03 63");
+  assert.equal(d.whatsapp, "905488390363");
+  assert.ok(d.hq.includes("Famagusta"));
+});
+
+test("contact scope: phone section is shared, head-office card follows the site phone", () => {
+  const def = sc.SCOPES.iletisim;
+  assert.deepEqual([...def.shared], ["telefon"]);
+  const out = def.finalize(core.applyOverrides(def.build("de"), { "telefon.phone": "+90 392 111 22 33", "telefon.whatsapp": "905551112233", "telefon.email": "x@dndcyprus.com" }));
+  const hq = out.bilgi.offices.find((o) => o.id === "hq");
+  assert.equal(hq.phone, "+90 392 111 22 33");
+  assert.equal(hq.phoneDisplay, "+90 392 111 22 33");
+  assert.equal(hq.email, "mailto:x@dndcyprus.com");
+  assert.equal(hq.whatsapp, "https://wa.me/905551112233");
+  const hidden = core.walkFields(def.build("tr").bilgi, "bilgi").filter((f) => sc.isHiddenPath(f.path, def.hide)).map((f) => f.path);
+  assert.ok(hidden.includes("bilgi.offices.0.phone") && hidden.includes("bilgi.offices.0.phoneDisplay"));
+});
+
+test("about scope has founder/director cards and timeline; Mariachi scope keeps card text but no icons", () => {
+  const a = sc.SCOPES.hakkimizda.build("tr");
+  assert.equal(a.ozan.name, "Ozan Dökmecioğlu");
+  assert.equal(typeof a.ozan.career, "string");
+  assert.ok(a.aynur.name.startsWith("Aynur"));
+  assert.equal(a.zaman.items.length >= 6, true);
+  assert.ok(a.zaman.harita.dist.includes("km"));
+  const m = sc.SCOPES.mariachi.build("en");
+  assert.ok(m.olanaklar.items.length >= 6 && m.olanaklar.items.every((x) => x.title && x.image && !("icon" in x)));
+  assert.ok(m.galeri.items.every((x) => /^\/.+\.(jpg|webp|png)$/.test(x.src)));
+  assert.equal(core.fieldLabel("q", "ozan"), "Alıntı");
+  assert.equal(core.fieldLabel("dl.0.1", "ozan"), "Bilgi 1 · Değer");
+  assert.equal(core.fieldLabel("whatsapp", "telefon"), "WhatsApp numarası (ülke koduyla, örn. 905488390363)");
 });

@@ -11,6 +11,8 @@ import { ORGANIZATION_JSON_LD } from "@/lib/structured-data";
 import JsonLd from "@/app/components/seo/JsonLd";
 import PaymentModelPopup from "@/app/components/PaymentModelPopup";
 import { TL_POPUP_PRESCRIPT } from "@/lib/tl-popup";
+import { SiteContactProvider } from "@/app/components/cms/SiteContact";
+import { getSiteContact } from "@/lib/content/store";
 
 // Başlık sayfalarda (pageMetadata) verilir; burada yalnızca varsayılan açıklama kalır
 export const metadata: Metadata = {
@@ -18,9 +20,11 @@ export const metadata: Metadata = {
     "Kıbrıs'ın önde gelen gayrimenkul geliştiricisi DND Cyprus ile tanışın. Yenilikçi konut ve ticari projelerimizle yaşam alanlarını yeniden tanımlıyoruz.",
 };
 
-export default function TRLayout({ children }: { children: React.ReactNode }) {
+export default async function TRLayout({ children }: { children: React.ReactNode }) {
+  const contact = await getSiteContact("tr"); // telefon/e-posta/adres panelden
   return (
     <MotionProvider>
+    <SiteContactProvider value={contact}>
       {/* Erişilebilirlik: İçeriğe atla */}
       <a
         href="#main"
@@ -29,7 +33,7 @@ export default function TRLayout({ children }: { children: React.ReactNode }) {
         İçeriğe atla
       </a>
 
-      <JsonLd data={ORGANIZATION_JSON_LD} />
+      <JsonLd data={{ ...ORGANIZATION_JSON_LD, email: contact.email, telephone: contact.phone }} />
 
       {/* Azure: arka plan ışık lekeleri + kaydırma efektleri */}
       <AzureFx />
@@ -47,6 +51,7 @@ export default function TRLayout({ children }: { children: React.ReactNode }) {
       </main>
 
       <AzureFooter locale="tr" />
+    </SiteContactProvider>
     </MotionProvider>
   );
 }
