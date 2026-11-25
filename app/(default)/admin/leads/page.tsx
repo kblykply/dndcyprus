@@ -25,6 +25,7 @@ import {
 } from "@/lib/lead-status";
 import { addLeadNote, deleteLeadNote, setLeadStatus, setLeadStatusBulk } from "./actions";
 import { AutoSubmitSelect, ConfirmButton, SelectAll, SelectedCount } from "./LeadControls";
+import { pageLabelText } from "@/lib/page-label";
 
 export const dynamic = "force-dynamic";
 
@@ -201,7 +202,7 @@ function TouchList({ title, touch }: { title: string; touch: Touch | null }) {
     const v = touch[k];
     if (v) rows.push([k, v]);
   }
-  if (touch.landing) rows.push(["giriş sayfası", touch.landing]);
+  if (touch.landing) rows.push(["giriş sayfası", pageLabelText(touch.landing)]);
   if (touch.referrer) rows.push(["yönlendiren", touch.referrer]);
   if (touch.ts) rows.push(["zaman", new Date(touch.ts).toLocaleString("tr-TR", { timeZone: "Asia/Famagusta" })]);
   if (!rows.length) return null;

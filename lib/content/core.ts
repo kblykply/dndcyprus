@@ -147,23 +147,209 @@ export function coerceLike(original: unknown, value: string): unknown {
   return value;
 }
 
+function locate(root: unknown, path: string): { parent: Record<string, unknown>; last: string } | null {
+  const segs = path.split(".");
+  let parent: unknown = root;
+  for (const seg of segs.slice(0, -1)) {
+    if (parent === null || typeof parent !== "object" || isValidElement(parent)) return null;
+    parent = (parent as Record<string, unknown>)[seg];
+  }
+  const last = segs[segs.length - 1];
+  if (!parent || typeof parent !== "object" || isValidElement(parent) || !(last in (parent as object))) return null;
+  return { parent: parent as Record<string, unknown>, last };
+}
+
+/* ---------------- Listeler (madde ekle / sil / taşı) ----------------
+ * Bir listenin yapısı değişince (madde eklendi, silindi, yer değişti) listenin tamamı tek kayıt olarak saklanır: yol = liste yolu,
+ * değer = JSON dizi. JSX başlıklar **işaretli** metin olarak yazılır; her nesne maddesi koddaki hangi maddeden geldiğini "__i" ile
+ * taşır (ikon gibi panelde olmayan JSX değerleri o maddeden alınır). Liste kaydı önce, alan kayıtları sonra uygulanır.
+ */
+export const LIST_SOURCE_KEY = "__i";
+
+/** Çalışan değer → saklanabilir değer (JSX → işaretli metin; panelde düzenlenmeyen JSX alanları, ör. ikon, atlanır) */
+export function toStorable(v: unknown): unknown {
+  if (isValidElement(v)) return toMarkup(v as ReactNode);
+  if (Array.isArray(v)) return v.map(toStorable);
+  if (v && typeof v === "object" && isPlainObject(v)) {
+    const o: Record<string, unknown> = {};
+    for (const [k, x] of Object.entries(v as Record<string, unknown>)) {
+      if (typeof x === "function" || (SKIP_KEYS.has(k) && isValidElement(x))) continue;
+      o[k] = toStorable(x);
+    }
+    return o;
+  }
+  return v;
+}
+
+/** Saklanan değeri koddaki örneğin türüne çevirir (JSX başlık, sayı, iç içe nesne/dizi); eksik anahtarlar örnekten gelir */
+export function coerceDeep(template: unknown, v: unknown): unknown {
+  if (isValidElement(template)) return fromMarkup(String(v ?? ""));
+  if (typeof template === "number") {
+    const n = Number(String(v ?? "").replace(",", "."));
+    return Number.isFinite(n) ? n : template;
+  }
+  if (Array.isArray(template)) {
+    if (!Array.isArray(v)) return cloneData(template);
+    return v.map((x, i) => coerceDeep(template[i] ?? template[template.length - 1], x));
+  }
+  if (template && typeof template === "object" && isPlainObject(template)) {
+    if (!v || typeof v !== "object" || Array.isArray(v)) return cloneData(template);
+    const t = template as Record<string, unknown>;
+    const val = v as Record<string, unknown>;
+    const o: Record<string, unknown> = {};
+    for (const k of new Set([...Object.keys(t), ...Object.keys(val)])) {
+      if (k === LIST_SOURCE_KEY) continue;
+      o[k] = k in val ? coerceDeep(t[k], val[k]) : cloneData(t[k]);
+    }
+    return o;
+  }
+  return v === undefined ? template : v;
+}
+
+/** Liste kaydını (JSON) koddaki diziye uygular */
+function applyListOverride(original: unknown[], value: string): unknown[] | null {
+  let arr: unknown;
+  try {
+    arr = JSON.parse(value);
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(arr) || !original.length) return null;
+  return arr.map((item, i) => {
+    const src = item && typeof item === "object" && !Array.isArray(item) ? Number((item as Record<string, unknown>)[LIST_SOURCE_KEY]) : NaN;
+    const template = original[Number.isInteger(src) && src >= 0 && src < original.length ? src : Math.min(i, original.length - 1)];
+    return coerceDeep(template, item);
+  });
+}
+
+/** Saklanan liste kaydındaki maddelerin koddaki kaynak sırası (liste kaydı yoksa 0..n-1) */
+export function listSources(value: string | undefined, length: number): (number | null)[] {
+  if (value) {
+    try {
+      const arr = JSON.parse(value);
+      if (Array.isArray(arr))
+        return arr.map((it) => (it && typeof it === "object" && !Array.isArray(it) && Number.isInteger(Number(it[LIST_SOURCE_KEY])) ? Number(it[LIST_SOURCE_KEY]) : null));
+    } catch {
+      /* bozuk kayıt */
+    }
+  }
+  return Array.from({ length }, (_, i) => i);
+}
+
+export type ListOp = "add" | "delete" | "up" | "down";
+
+/**
+ * Listeye işlem uygular ve saklanacak JSON'u döndürür. items: listenin şu anki (panel değişiklikleri işlenmiş) maddeleri,
+ * sources: her maddenin koddaki kaynak sırası. "add": index'teki maddenin kopyası hemen arkasına eklenir (kimlik benzersizleşir).
+ */
+export function listOperation(items: unknown[], sources: (number | null)[], op: ListOp, index: number): string | null {
+  const rows = items.map((it, i) => ({ v: toStorable(it), src: sources[i] ?? null }));
+  if (index < 0 || index >= rows.length) return null;
+  if (op === "delete") {
+    if (rows.length <= 1) return null; // son madde silinmez
+    rows.splice(index, 1);
+  } else if (op === "up" || op === "down") {
+    const j = op === "up" ? index - 1 : index + 1;
+    if (j < 0 || j >= rows.length) return null;
+    [rows[index], rows[j]] = [rows[j], rows[index]];
+  } else {
+    const copy = { v: JSON.parse(JSON.stringify(rows[index].v)), src: rows[index].src };
+    if (copy.v && typeof copy.v === "object" && !Array.isArray(copy.v) && typeof (copy.v as Record<string, unknown>).id === "string") {
+      const ids = new Set(rows.map((r) => (r.v as Record<string, unknown>)?.id));
+      const base = String((copy.v as Record<string, unknown>).id);
+      let n = 2;
+      while (ids.has(`${base}-${n}`)) n++;
+      (copy.v as Record<string, unknown>).id = `${base}-${n}`;
+    }
+    rows.splice(index + 1, 0, copy);
+  }
+  return JSON.stringify(
+    rows.map((r) => (r.v && typeof r.v === "object" && !Array.isArray(r.v) && r.src !== null ? { ...(r.v as object), [LIST_SOURCE_KEY]: r.src } : r.v)),
+  );
+}
+
+/** Panelde madde ekle/sil/taşı yapılabilen listeler: nesne, yazı ya da [başlık, değer] çiftlerinden oluşan diziler */
+export function editableLists(obj: unknown, prefix = "", out: { path: string; length: number }[] = []) {
+  if (obj === null || obj === undefined || isValidElement(obj) || typeof obj !== "object") return out;
+  if (Array.isArray(obj)) {
+    const kinds = new Set(obj.map((x) => (isValidElement(x) ? "rich" : Array.isArray(x) ? (x.length === 2 && x.every((y) => typeof y === "string") ? "pair" : "array") : typeof x)));
+    const ok = obj.length > 0 && kinds.size === 1 && ["object", "string", "pair"].includes([...kinds][0]);
+    if (ok) out.push({ path: prefix, length: obj.length });
+    if (!kinds.has("pair")) obj.forEach((v, i) => editableLists(v, prefix ? `${prefix}.${i}` : String(i), out));
+    return out;
+  }
+  for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
+    if (SKIP_KEYS.has(k) || typeof v === "function") continue;
+    editableLists(v, prefix ? `${prefix}.${k}` : k, out);
+  }
+  return out;
+}
+
+export type PlanEntry =
+  | { t: "field"; path: string }
+  | { t: "item"; list: string; index: number; depth: number; count: number }
+  | { t: "end"; list: string; depth: number; count: number };
+
+/**
+ * Düzenleyici sırası: alanların arasına liste maddesi başlıkları (madde N · ↑ ↓ kopyala sil) ve liste sonları (madde ekle)
+ * yerleştirir. İç içe listeler (kat planı → seçenek → alan) kendi başlıklarını alır.
+ */
+export function editorPlan(fieldPaths: string[], lists: { path: string; length: number }[]): PlanEntry[] {
+  const len = new Map(lists.map((l) => [l.path, l.length]));
+  const out: PlanEntry[] = [];
+  let stack: { list: string; index: number }[] = [];
+  const chainOf = (path: string) => {
+    const segs = path.split(".");
+    const chain: { list: string; index: number }[] = [];
+    for (let j = 1; j < segs.length; j++) {
+      const lp = segs.slice(0, j).join(".");
+      if (len.has(lp) && /^\d+$/.test(segs[j])) chain.push({ list: lp, index: Number(segs[j]) });
+    }
+    return chain;
+  };
+  const close = (keep: number, next: { list: string; index: number }[]) => {
+    while (stack.length > keep) {
+      const top = stack.pop()!;
+      const depth = stack.length;
+      if (next[depth]?.list !== top.list) out.push({ t: "end", list: top.list, depth, count: len.get(top.list)! });
+    }
+  };
+  for (const path of fieldPaths) {
+    const chain = chainOf(path);
+    let c = 0;
+    while (c < stack.length && c < chain.length && stack[c].list === chain[c].list && stack[c].index === chain[c].index) c++;
+    close(c, chain);
+    stack = stack.slice(0, c);
+    for (let d = c; d < chain.length; d++) {
+      out.push({ t: "item", list: chain[d].list, index: chain[d].index, depth: d, count: len.get(chain[d].list)! });
+      stack.push(chain[d]);
+    }
+    out.push({ t: "field", path });
+  }
+  close(0, []);
+  return out;
+}
+
 export function applyOverrides<T>(base: T, overrides: Record<string, string>): T {
   const copy = cloneData(base);
-  for (const [path, value] of Object.entries(overrides)) {
-    const segs = path.split(".");
-    let parent: unknown = copy;
-    for (const seg of segs.slice(0, -1)) {
-      if (parent === null || typeof parent !== "object" || isValidElement(parent)) {
-        parent = undefined;
-        break;
-      }
-      parent = (parent as Record<string, unknown>)[seg];
-    }
-    const last = segs[segs.length - 1];
-    if (!parent || typeof parent !== "object" || isValidElement(parent) || !(last in (parent as object))) continue; // yol artık yok
-    const original = (parent as Record<string, unknown>)[last];
+  const entries = Object.entries(overrides);
+  // 1) liste yapıları (kısa yoldan uzuna: dış liste önce)
+  const lists = entries.filter(([, v]) => v.startsWith("[")).sort((a, b) => a[0].split(".").length - b[0].split(".").length);
+  for (const [path, value] of lists) {
+    const at = locate(copy, path);
+    if (!at) continue;
+    const original = at.parent[at.last];
+    if (!Array.isArray(original)) continue;
+    const next = applyListOverride(original, value);
+    if (next) at.parent[at.last] = next;
+  }
+  // 2) tek tek alanlar
+  for (const [path, value] of entries) {
+    const at = locate(copy, path);
+    if (!at) continue; // yol artık yok
+    const original = at.parent[at.last];
     if (original !== null && typeof original === "object" && !isValidElement(original)) continue; // yalnız yaprak alanlar
-    (parent as Record<string, unknown>)[last] = coerceLike(original, value);
+    at.parent[at.last] = coerceLike(original, value);
   }
   return copy;
 }

@@ -12,6 +12,7 @@ import { clarityAggregate, clarityConfigured, clarityLink, clarityTotals, cyprus
 import { loadClarity } from "@/lib/clarity-sync";
 import { BarList, ChartCard, Donut, Empty } from "../charts";
 import { refreshClarity } from "./actions";
+import { pageLabel } from "@/lib/page-label";
 
 export const dynamic = "force-dynamic";
 
@@ -215,9 +216,15 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
                       return (
                         <tr key={s.value} className="border-t border-slate-100">
                           <td className="max-w-[22rem] px-3 py-2.5">
-                            <span className="block truncate font-medium text-slate-800" title={s.value}>
-                              {pathOf(s.value)}
-                            </span>
+                            {(() => {
+                              const pl = pageLabel(s.value);
+                              return (
+                                <span className="flex min-w-0 items-center gap-2" title={pathOf(s.value)}>
+                                  <span className="truncate font-medium text-slate-800">{pl.name}</span>
+                                  {pl.lang ? <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-600">{pl.lang}</span> : null}
+                                </span>
+                              );
+                            })()}
                             <span className="mt-1 block h-1.5 overflow-hidden rounded-full bg-slate-100" title={`Kaydırma ${pct(scroll)}`}>
                               <span className="block h-full rounded-full bg-[#2aa9b3]" style={{ width: `${Math.min(100, scroll ?? 0)}%` }} />
                             </span>

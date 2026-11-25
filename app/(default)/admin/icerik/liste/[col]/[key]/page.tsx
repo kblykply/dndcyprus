@@ -8,6 +8,7 @@ import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { CONTENT_LOCALES } from "@/lib/content/core";
 import { COLLECTIONS, isCollectionKey, listItems } from "@/lib/content/admin";
 import ItemForm from "../../../ItemForm";
+import { translationConfigured } from "@/lib/content/translate";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +56,7 @@ export default async function ItemPage({ params }: { params: Promise<{ col: stri
           initial={initial}
           published={item ? item.published : true}
           uploadEnabled={blobUploadConfigured()}
+          autoTranslate={translationConfigured()}
           cancelHref={`/admin/icerik/liste/${col}`}
         />
       </div>

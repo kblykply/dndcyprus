@@ -7,7 +7,8 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { authorFromCookies, requireAdmin } from "@/lib/admin-auth";
-import { CONTENT_LOCALES, fieldLabel, postHtml, type ContentLocale } from "@/lib/content/core";
+import { CONTENT_LOCALES, applyOverrides, fieldLabel, getAt, listOperation, listSources, postHtml, type ContentLocale, type ListOp } from "@/lib/content/core";
+import { AUTO_TRANSLATOR, TARGET_LOCALES, isTranslatable, translateFromTurkish, translationConfigured, type TargetLocale } from "@/lib/content/translate";
 import { SCOPES, isScopeKey, type ScopeDef, type ScopeKey } from "@/lib/content/scopes";
 import { COLLECTIONS, allRoutes, ensureSeeded, isCollectionKey, sectionFields, slugify } from "@/lib/content/admin";
 import type { CollectionKey } from "@/lib/content/store";
@@ -55,18 +56,63 @@ async function propagateImage(scope: ScopeKey, locale: ContentLocale, section: s
   return touched;
 }
 
-export async function saveSection(formData: FormData) {
+type SectionCtx = { scope: ScopeKey; locale: ContentLocale; section: string; author: string };
+
+async function sectionCtx(formData: FormData): Promise<SectionCtx> {
   const store = await requireAdmin("/admin/icerik");
   const scope = String(formData.get("scope"));
   const locale = formData.get("locale");
   const section = String(formData.get("section"));
   if (!isScopeKey(scope) || !isLocale(locale) || !SCOPES[scope].sections.some(([k]) => k === section)) redirect("/admin/icerik");
-  const author = authorFromCookies(store);
+  return { scope, locale, section, author: authorFromCookies(store) };
+}
+
+const editorUrl = (c: SectionCtx, extra: Record<string, string>) =>
+  `/admin/icerik/sayfa/${c.scope}?${new URLSearchParams({ dil: c.locale, bolum: c.section, ...extra })}`;
+
+const TRANSLATE_KINDS = new Set(["text", "long", "rich"]);
+
+/**
+ * Türkçede değişen yazıları 4 dile çevirip o dillerin aynı alanına "otomatik çeviri" olarak yazar. Türkçe orijinaline dönen
+ * alanda diğer dillerin otomatik çevirisi silinir (o dilin kendi orijinal metni geri gelir). Elle yazılmış çeviri, Türkçe
+ * değiştiğinde yenisiyle değiştirilir (kaynak değişti).
+ */
+async function translateSection(c: SectionCtx, changed: { path: string; kind: string; value: string; reverted: boolean }[]) {
+  if (c.locale !== "tr") return { count: 0 };
+  const others = CONTENT_LOCALES.filter((l) => l !== "tr");
+  const reverted = changed.filter((x) => x.reverted).map((x) => x.path);
+  if (reverted.length)
+    await prisma.contentOverride.deleteMany({ where: { scope: c.scope, locale: { in: others }, path: { in: reverted }, updatedBy: AUTO_TRANSLATOR } });
+  const items = changed.filter((x) => !x.reverted && TRANSLATE_KINDS.has(x.kind) && isTranslatable(x.value)).map((x) => ({ id: x.path, text: x.value, kind: x.kind as "text" | "long" | "rich" }));
+  if (!items.length) return { count: 0 };
+  if (!translationConfigured()) return { count: 0, error: "Otomatik çeviri kapalı (GEMINI_API_KEY tanımlı değil); diğer diller eski metinle kaldı." };
+  const def = SCOPES[c.scope];
+  const label = def.sections.find(([k]) => k === c.section)?.[1] ?? c.section;
+  const r = await translateFromTurkish(items, `${def.label} page, section "${label}" of www.dndcyprus.com`);
+  if (!r.ok) return { count: 0, error: r.error };
+  let count = 0;
+  for (const l2 of others) {
+    const fields = new Map((await sectionFields(c.scope, l2, c.section)).map((f) => [f.path, f]));
+    for (const [path, rec] of Object.entries(r.out)) {
+      const f = fields.get(path);
+      if (!f) continue; // bu dilde aynı yer yok (liste farklı)
+      const v = rec[l2 as TargetLocale];
+      await setOverride(c.scope, l2, path, v === f.original ? null : v, AUTO_TRANSLATOR);
+      count++;
+    }
+  }
+  return { count: items.length, langs: count ? others.length : 0 };
+}
+
+/** Formdaki alanları kaydeder (sayfa yönlendirmesi yapmaz): görsel diğer dillere, ortak bölüm 5 dile, Türkçe yazı çeviriye */
+async function saveFields(c: SectionCtx, formData: FormData) {
+  const { scope, locale, section, author } = c;
   const fields = await sectionFields(scope, locale, section);
   let changed = 0;
   const locales = new Set<ContentLocale>([locale]);
   const def = SCOPES[scope] as ScopeDef;
   const shared = !!def.shared?.includes(section); // telefon/e-posta: 5 dile birden
+  const toTranslate: { path: string; kind: string; value: string; reverted: boolean }[] = [];
   for (const f of fields) {
     if (!formData.has(`f:${f.path}`)) continue;
     let v = str(formData, `f:${f.path}`, 5000);
@@ -85,37 +131,128 @@ export async function saveSection(formData: FormData) {
           await setOverride(scope, l2, f.path, same ? null : v, author);
           locales.add(l2);
         }
-      } else if (f.kind === "image") for (const l2 of await propagateImage(scope, locale, section, f.path, f.original, f.value, v, author)) locales.add(l2);
+      } else if (f.kind === "image") {
+        for (const l2 of await propagateImage(scope, locale, section, f.path, f.original, f.value, v, author)) locales.add(l2);
+      } else {
+        toTranslate.push({ path: f.path, kind: f.kind, value: v, reverted: same });
+      }
     }
   }
+  const tr = shared ? { count: 0 } : await translateSection(c, toTranslate);
+  if (tr.count) for (const l of CONTENT_LOCALES) locales.add(l);
   if (changed) {
     const label = SCOPES[scope].sections.find(([k]) => k === section)?.[1] ?? section;
-    const extra = shared ? " · tüm dillerde" : locales.size > 1 ? " · görsel diğer dillerde de" : "";
+    const extra = shared ? " · tüm dillerde" : tr.count ? ` · ${tr.count} alan 4 dile çevrildi` : locales.size > 1 ? " · görsel diğer dillerde de" : "";
     await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "düzenleme", detail: `${label} (${locale.toUpperCase()}): ${changed} alan${extra}`, author } });
     refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
-  redirect(`/admin/icerik/sayfa/${scope}?dil=${locale}&bolum=${section}&kaydedildi=${changed}`);
+  return { changed, translated: tr.count, translateError: "error" in tr ? tr.error : undefined };
+}
+
+function resultParams(r: { changed: number; translated: number; translateError?: string }) {
+  const p: Record<string, string> = { kaydedildi: String(r.changed) };
+  if (r.translated) p.ceviri = String(r.translated);
+  if (r.translateError) p.cevirihata = r.translateError.slice(0, 200);
+  return p;
+}
+
+export async function saveSection(formData: FormData) {
+  const c = await sectionCtx(formData);
+  const r = await saveFields(c, formData);
+  redirect(editorUrl(c, resultParams(r)));
 }
 
 /** Düğmeye bağlanır: resetField.bind(null, alanYolu) (React, formAction düğmesinin name/value'sunu forma eklemiyor) */
 export async function resetField(path: string, formData: FormData) {
-  const store = await requireAdmin("/admin/icerik");
-  const scope = String(formData.get("scope"));
-  const locale = formData.get("locale");
-  const section = String(formData.get("section"));
-  if (!isScopeKey(scope) || !isLocale(locale) || !path.startsWith(`${section}.`)) redirect("/admin/icerik");
-  const author = authorFromCookies(store);
+  const c = await sectionCtx(formData);
+  const { scope, locale, section, author } = c;
+  if (!path.startsWith(`${section}.`)) redirect("/admin/icerik");
   const f = (await sectionFields(scope, locale, section)).find((x) => x.path === path);
   const sharedReset = !!(SCOPES[scope] as ScopeDef).shared?.includes(section);
   const n = await prisma.contentOverride.deleteMany({ where: sharedReset ? { scope, path } : { scope, locale, path } });
   if (n.count) {
     const locales = new Set<ContentLocale>(sharedReset ? CONTENT_LOCALES : [locale]);
     if (f?.kind === "image") for (const l2 of await propagateImage(scope, locale, section, path, f.original, f.value, f.original, author)) locales.add(l2);
+    else if (locale === "tr" && !sharedReset) {
+      // Türkçe orijinaline döndü: o alanın otomatik çevirileri de kalkar
+      const m = await prisma.contentOverride.deleteMany({ where: { scope, locale: { not: "tr" }, path, updatedBy: AUTO_TRANSLATOR } });
+      if (m.count) for (const l of CONTENT_LOCALES) locales.add(l);
+    }
     const label = SCOPES[scope].sections.find(([k]) => k === section)?.[1] ?? section;
     await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "orijinale dönüş", detail: `${label} · ${fieldLabel(path.slice(section.length + 1), section)} (${locale.toUpperCase()})`, author } });
     refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
-  redirect(`/admin/icerik/sayfa/${scope}?dil=${locale}&bolum=${section}&geri=1`);
+  redirect(editorUrl(c, { geri: "1" }));
+}
+
+/* ---------------- Bölüm içindeki listeler: madde ekle / sil / taşı ---------------- */
+
+async function listItemsOf(scope: ScopeKey, locale: ContentLocale, listPath: string) {
+  const base = SCOPES[scope].build(locale);
+  const rows = await prisma.contentOverride.findMany({ where: { scope, locale }, select: { path: true, value: true } });
+  const ov = Object.fromEntries(rows.map((r) => [r.path, r.value]));
+  const items = getAt(applyOverrides(base, ov), listPath);
+  return Array.isArray(items) ? { items, sources: listSources(ov[listPath]?.startsWith("[") ? ov[listPath] : undefined, items.length) } : null;
+}
+
+/** Listeye işlem uygular ve listeyi tek kayıt olarak yazar; listenin altındaki tek tek alan kayıtları kayda katılmıştır, silinir */
+async function writeListOp(scope: ScopeKey, locale: ContentLocale, listPath: string, op: ListOp, index: number, author: string, expectLength?: number) {
+  const cur = await listItemsOf(scope, locale, listPath);
+  if (!cur || (expectLength !== undefined && cur.items.length !== expectLength)) return null;
+  const json = listOperation(cur.items, cur.sources, op, index);
+  if (!json) return null;
+  await prisma.$transaction([
+    prisma.contentOverride.deleteMany({ where: { scope, locale, path: { startsWith: `${listPath}.` } } }),
+    prisma.contentOverride.upsert({
+      where: { scope_locale_path: { scope, locale, path: listPath } },
+      create: { scope, locale, path: listPath, value: json, updatedBy: author },
+      update: { value: json, updatedBy: author },
+    }),
+  ]);
+  return cur.items.length;
+}
+
+/**
+ * Düğmeye bağlanır: listAction.bind(null, işlem, listeYolu, sıra). Önce formdaki yazılar kaydedilir (yazılan kaybolmasın),
+ * sonra işlem bu dilde ve listesi aynı uzunlukta olan diğer dillerde aynı yere uygulanır (maddeler dillerde hizalı kalır;
+ * eklenen maddenin Türkçe metni değişince çeviriyle dolar).
+ */
+export async function listAction(op: ListOp, listPath: string, index: number, formData: FormData) {
+  const c = await sectionCtx(formData);
+  if (!listPath.startsWith(`${c.section}`) || !["add", "delete", "up", "down"].includes(op)) redirect("/admin/icerik");
+  const saved = await saveFields(c, formData);
+  const before = await writeListOp(c.scope, c.locale, listPath, op, index, c.author);
+  const skipped: string[] = [];
+  if (before !== null) {
+    for (const l2 of CONTENT_LOCALES) {
+      if (l2 === c.locale) continue;
+      const r = await writeListOp(c.scope, l2, listPath, op, index, c.author, before);
+      if (r === null) skipped.push(l2.toUpperCase());
+    }
+    const def = SCOPES[c.scope];
+    const label = def.sections.find(([k]) => k === c.section)?.[1] ?? c.section;
+    const what = { add: "madde eklendi", delete: "madde silindi", up: "madde yukarı taşındı", down: "madde aşağı taşındı" }[op];
+    await prisma.contentLog.create({ data: { area: def.label, action: "liste", detail: `${label} · ${fieldLabel(listPath.slice(c.section.length + 1), c.section)}: ${what}`, author: c.author } });
+    refresh(CONTENT_LOCALES.flatMap((l) => def.routes(l)), isSiteWide(c.scope));
+  }
+  const newIndex = op === "add" ? index + 1 : op === "up" ? index - 1 : op === "down" ? index + 1 : Math.max(0, index - 1);
+  const extra: Record<string, string> = { ...resultParams(saved), liste: op };
+  if (before === null) extra.listehata = "1";
+  if (skipped.length) extra.atlanan = skipped.join(",");
+  redirect(`${editorUrl(c, extra)}#m-${listPath}.${newIndex}`);
+}
+
+/** Listenin madde yapısını koddaki haline döndürür (tüm dillerde; listedeki yazı değişiklikleri de kalkar) */
+export async function resetList(listPath: string, formData: FormData) {
+  const c = await sectionCtx(formData);
+  if (!listPath.startsWith(`${c.section}`)) redirect("/admin/icerik");
+  const n = await prisma.contentOverride.deleteMany({ where: { scope: c.scope, OR: [{ path: listPath }, { path: { startsWith: `${listPath}.` } }] } });
+  if (n.count) {
+    const def = SCOPES[c.scope];
+    await prisma.contentLog.create({ data: { area: def.label, action: "orijinale dönüş", detail: `${fieldLabel(listPath.slice(c.section.length + 1), c.section)} listesi (tüm diller)`, author: c.author } });
+    refresh(CONTENT_LOCALES.flatMap((l) => def.routes(l)), isSiteWide(c.scope));
+  }
+  redirect(editorUrl(c, { geri: "1" }));
 }
 
 /* ---------------- Listeler (Basında DND, Ekip, Etkinlikler, DND'den Haberler) ---------------- */
@@ -166,9 +303,11 @@ export async function saveItem(_prev: ItemFormState, formData: FormData): Promis
   const existing = String(formData.get("key") || "");
   const published = formData.get("published") === "on";
   let key = existing;
+  const prevRow = existing ? await prisma.contentItem.findUnique({ where: { collection_key: { collection, key: existing } } }) : null;
+  if (existing && !prevRow) return failed("Kayıt bulunamadı (silinmiş olabilir).", formData);
+  const tr = await translateItem(collection, data, (prevRow?.data ?? null) as Record<string, unknown> | null);
   if (existing) {
-    const row = await prisma.contentItem.findUnique({ where: { collection_key: { collection, key: existing } } });
-    if (!row) return failed("Kayıt bulunamadı (silinmiş olabilir).", formData);
+    const row = prevRow!;
     await prisma.contentItem.update({ where: { id: row.id }, data: { data: { ...(data as object), id: existing }, published, updatedBy: author } });
   } else {
     const baseKey = slugify(COLLECTIONS[collection].keyFrom(data)) || `${collection}-${Date.now()}`;
@@ -182,7 +321,47 @@ export async function saveItem(_prev: ItemFormState, formData: FormData): Promis
   const title = def.title(data);
   await prisma.contentLog.create({ data: { area: def.label, action: existing ? "düzenleme" : "ekleme", detail: title.slice(0, 160), author } });
   refresh([...allRoutes(def.routes), ...(collection === "haber" ? ["/sitemap.xml"] : [])]);
-  redirect(`/admin/icerik/liste/${collection}?kaydedildi=${encodeURIComponent(key)}`);
+  const q = new URLSearchParams({ kaydedildi: key });
+  if (tr.count) q.set("ceviri", String(tr.count));
+  if (tr.error) q.set("cevirihata", tr.error.slice(0, 200));
+  redirect(`/admin/icerik/liste/${collection}?${q}`);
+}
+
+/**
+ * Liste kaydında Türkçesi değişen (ya da yeni) alanları 4 dile çevirip data'ya yazar. O dilde bu kayıtta elle değiştirilmiş
+ * metin korunur; değiştirilmemiş ya da boş olan çeviriyle dolar. data yerinde güncellenir.
+ */
+async function translateItem(collection: CollectionKey, data: Record<string, unknown>, prev: Record<string, unknown> | null) {
+  const def = COLLECTIONS[collection];
+  const items: { id: string; text: string; kind: "text" | "long" | "html" | "tags" }[] = [];
+  const asText = (v: unknown) => (Array.isArray(v) ? v.join(", ") : String(v ?? ""));
+  for (const f of def.perLocale) {
+    const now = (data[f.key] ?? {}) as Record<string, unknown>;
+    const old = (prev?.[f.key] ?? {}) as Record<string, unknown>;
+    const trNow = asText(now.tr).trim();
+    if (!trNow || (prev && trNow === asText(old.tr).trim())) continue; // Türkçe aynı → çeviri gerekmez
+    items.push({ id: f.key, text: trNow, kind: f.kind === "html" ? "html" : f.kind === "tags" ? "tags" : f.kind === "long" ? "long" : "text" });
+  }
+  if (!items.length) return { count: 0 };
+  if (!translationConfigured()) return { count: 0, error: "Otomatik çeviri kapalı (GEMINI_API_KEY tanımlı değil); diğer diller elle girilmeli ya da boş kalır." };
+  const r = await translateFromTurkish(items, `${def.label} list item on www.dndcyprus.com`);
+  if (!r.ok) return { count: 0, error: r.error };
+  let count = 0;
+  for (const it of items) {
+    const rec = r.out[it.id];
+    if (!rec) continue;
+    const now = (data[it.id] ?? {}) as Record<string, unknown>;
+    const old = (prev?.[it.id] ?? {}) as Record<string, unknown>;
+    for (const l of TARGET_LOCALES) {
+      const typed = asText(now[l]).trim();
+      const touched = prev ? typed !== "" && typed !== asText(old[l]).trim() : typed !== "";
+      if (touched) continue; // bu kayıtta o dil elle yazıldı/değiştirildi
+      now[l] = it.kind === "tags" ? rec[l].split(",").map((t) => t.trim()).filter(Boolean).slice(0, 12) : it.kind === "html" ? postHtml(rec[l]) : rec[l];
+    }
+    data[it.id] = now;
+    count++;
+  }
+  return { count };
 }
 
 async function itemAction(formData: FormData, op: "delete" | "toggle" | "up" | "down") {
@@ -247,4 +426,18 @@ export async function uploadImage(formData: FormData): Promise<{ ok: true; url: 
   const base = slugify(file.name.replace(/\.[^.]+$/, "")) || "gorsel";
   const res = await put(`icerik/${base}.${ext}`, file, { access: "public", addRandomSuffix: true, contentType: file.type });
   return { ok: true, url: res.url };
+}
+
+/* ---------------- Çeviriyi dene (kaydetmeden) ---------------- */
+
+export type TryState = { tr?: string; out?: Record<string, string>; error?: string } | undefined;
+
+export async function tryTranslation(_prev: TryState, formData: FormData): Promise<TryState> {
+  await requireAdmin("/admin/icerik");
+  const tr = str(formData, "tr", 3000);
+  if (!tr) return { error: "Türkçe bir metin yazın." };
+  if (!translationConfigured()) return { tr, error: "Otomatik çeviri kapalı: GEMINI_API_KEY tanımlı değil." };
+  const r = await translateFromTurkish([{ id: "x", text: tr, kind: tr.includes("**") || tr.includes("\n") ? "rich" : tr.length > 90 ? "long" : "text" }], "Test sentence typed in the admin panel of www.dndcyprus.com");
+  if (!r.ok) return { tr, error: r.error };
+  return { tr, out: r.out.x ?? {} };
 }

@@ -1,7 +1,7 @@
 // app/(default)/admin/leads/LeadControls.tsx
 "use client";
 
-import type { ReactNode, SelectHTMLAttributes } from "react";
+import type { ReactNode, SelectHTMLAttributes, ButtonHTMLAttributes } from "react";
 import { useRef, useState } from "react";
 
 /** Seçim değişince bulunduğu formu gönderir (durum, proje, kaynak, dönem) */
@@ -45,7 +45,7 @@ export function SelectedCount({ formId }: { formId: string }) {
 }
 
 /** Gönderimden önce onay ister (silme düğmeleri) */
-export function ConfirmButton({ message, className, children, ...rest }: { message: string; className?: string; children: ReactNode; "aria-label"?: string; title?: string }) {
+export function ConfirmButton({ message, className, children, ...rest }: { message: string; className?: string; children: ReactNode } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type" | "onClick" | "className" | "children">) {
   return (
     <button
       type="submit"

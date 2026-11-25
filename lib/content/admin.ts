@@ -1,7 +1,8 @@
 // lib/content/admin.ts
 // Panelin içerik yardımcıları (yalnız sunucu): bölüm alanları, listelerin tanımı ve ilk aktarım, sitede yenilenecek adresler.
 import { prisma } from "@/lib/prisma";
-import { CONTENT_LOCALES, getAt, slugify, walkFields, type ContentLocale, type Field } from "./core";
+import { CONTENT_LOCALES, applyOverrides, editableLists, getAt, slugify, walkFields, type ContentLocale, type Field } from "./core";
+import { AUTO_TRANSLATOR } from "./translate";
 export { slugify };
 import { SCOPES, isHiddenPath, type ScopeKey } from "./scopes";
 import { PRESS_DEFAULTS } from "./defaults/press";
@@ -10,17 +11,39 @@ import { EVENT_DEFAULTS } from "./defaults/events";
 import { BLOG_DEFAULTS } from "./defaults/blog";
 import type { CollectionKey } from "./store";
 
-export type EditorField = Field & { original: string; overridden: boolean };
+export type EditorField = Field & { original: string; overridden: boolean; /** başka dilde otomatik çeviriyle yazıldı */ auto: boolean };
+export type EditorList = { path: string; length: number; /** madde eklendi/silindi/taşındı */ overridden: boolean };
 
-/** Bir bölümün alanları: koddaki değer (orijinal) + varsa panelde yazılan değer */
-export async function sectionFields(scope: ScopeKey, locale: ContentLocale, section: string): Promise<EditorField[]> {
+/**
+ * Bir bölümün düzenleyici durumu: liste yapısı değişiklikleri uygulanmış içerik üzerinden alanlar (orijinal = liste yapısıyla
+ * birlikte koddaki değer, değer = panelde yazılan), madde eklenip silinebilen listeler ve bu dildeki tüm kayıtlar.
+ */
+export async function sectionState(scope: ScopeKey, locale: ContentLocale, section: string) {
   const def = SCOPES[scope];
   const base = def.build(locale);
   const hide = "hide" in def ? def.hide : undefined;
-  const fields = walkFields(getAt(base, section), section).filter((f) => !isHiddenPath(f.path, hide));
-  const rows = await prisma.contentOverride.findMany({ where: { scope, locale, path: { startsWith: `${section}.` } }, select: { path: true, value: true } });
-  const ov = new Map(rows.map((r) => [r.path, r.value]));
-  return fields.map((f) => ({ ...f, original: f.value, value: ov.get(f.path) ?? f.value, overridden: ov.has(f.path) }));
+  const rows = await prisma.contentOverride.findMany({
+    where: { scope, locale, OR: [{ path: section }, { path: { startsWith: `${section}.` } }] },
+    select: { path: true, value: true, updatedBy: true },
+  });
+  const structural = applyOverrides(base, Object.fromEntries(rows.filter((r) => r.value.startsWith("[")).map((r) => [r.path, r.value])));
+  const listRows = new Map(rows.filter((r) => r.value.startsWith("[") && Array.isArray(getAt(structural, r.path))).map((r) => [r.path, r.value]));
+  const leaf = new Map(rows.filter((r) => !listRows.has(r.path)).map((r) => [r.path, r]));
+  const fields: EditorField[] = walkFields(getAt(structural, section), section)
+    .filter((f) => !isHiddenPath(f.path, hide))
+    .map((f) => {
+      const o = leaf.get(f.path);
+      return { ...f, original: f.value, value: o?.value ?? f.value, overridden: !!o, auto: o?.updatedBy === AUTO_TRANSLATOR };
+    });
+  const lists: EditorList[] = editableLists(getAt(structural, section), section)
+    .filter((l) => !isHiddenPath(l.path, hide))
+    .map((l) => ({ ...l, overridden: listRows.has(l.path) }));
+  return { base, rows, fields, lists, listRows };
+}
+
+/** Bir bölümün alanları: koddaki değer (orijinal) + varsa panelde yazılan değer */
+export async function sectionFields(scope: ScopeKey, locale: ContentLocale, section: string): Promise<EditorField[]> {
+  return (await sectionState(scope, locale, section)).fields;
 }
 
 export async function overrideCounts(scope: ScopeKey, locale: ContentLocale) {

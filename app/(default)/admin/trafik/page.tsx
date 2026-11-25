@@ -11,6 +11,7 @@ import { CHANNEL_TR, DEVICE_TR, EVENT_TR, ga4Configured, ga4PropertyId, ga4Range
 import { inRange, overviewPeriod, periodBuckets } from "@/lib/lead-stats";
 import { AreaChart, BarList, ChartCard, Donut, Empty } from "../charts";
 import PeriodTabs from "../PeriodTabs";
+import { pageLabelText } from "@/lib/page-label";
 
 export const dynamic = "force-dynamic";
 
@@ -198,7 +199,7 @@ export default async function TrafficPage(props: { searchParams?: Promise<{ done
           <BarList items={rowsOf(events).map((r) => ({ key: r.dims[0], label: EVENT_TR[r.dims[0]] ?? r.dims[0], count: r.vals[0] }))} color="#f4a100" />
         </ChartCard>
         <ChartCard title="En çok bakılan sayfalar" sub="Sayfa görüntüleme" className="lg:col-span-2 2xl:col-span-2">
-          <BarList items={rowsOf(pages).map((r) => ({ key: r.dims[0], label: r.dims[0], count: r.vals[0] }))} />
+          <BarList items={rowsOf(pages).map((r) => ({ key: r.dims[0], label: pageLabelText(r.dims[0]), count: r.vals[0] }))} />
         </ChartCard>
         <ChartCard title="Ülkeler" sub="Ziyaretçi">
           <BarList

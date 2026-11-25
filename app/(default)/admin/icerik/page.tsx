@@ -8,6 +8,8 @@ import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { SCOPES } from "@/lib/content/scopes";
 import { COLLECTIONS, listItems } from "@/lib/content/admin";
 import { cyprusDateTime } from "@/lib/lead-status";
+import { translationConfigured } from "@/lib/content/translate";
+import TranslateTester from "./TranslateTester";
 
 export const dynamic = "force-dynamic";
 
@@ -89,6 +91,10 @@ export default async function ContentHome() {
       </div>
 
       <div className="mt-8">
+        <TranslateTester enabled={translationConfigured()} />
+      </div>
+
+      <div className="mt-5">
         <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <h2 className="text-lg text-slate-900">Son değişiklikler</h2>
           {logs.length ? (

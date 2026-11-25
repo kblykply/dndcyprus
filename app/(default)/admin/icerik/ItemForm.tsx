@@ -59,6 +59,7 @@ export default function ItemForm({
   initial,
   published,
   uploadEnabled,
+  autoTranslate,
   cancelHref,
 }: {
   collection: string;
@@ -68,6 +69,7 @@ export default function ItemForm({
   initial: Record<string, string>;
   published: boolean;
   uploadEnabled: boolean;
+  autoTranslate: boolean;
   cancelHref: string;
 }) {
   const [state, action, pending] = useActionState<ItemFormState, FormData>(saveItem, undefined);
@@ -97,6 +99,11 @@ export default function ItemForm({
 
       <div className="mt-7 border-t border-slate-100 pt-5">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Dillere göre metinler</p>
+        <p className="mt-1 text-xs text-slate-500">
+          {autoTranslate
+            ? "Türkçe yazmanız yeterli: kaydedince İngilizce, Almanca, Rusça ve Lehçe otomatik çevrilir (bu kayıtta elle yazdığınız çeviri korunur)."
+            : "Otomatik çeviri kapalı: diğer dilleri kendi sekmelerinden girin; boş kalan dil İngilizce (o da yoksa Türkçe) görünür."}
+        </p>
         <div className="mt-3 flex flex-wrap gap-1 text-sm" role="tablist" aria-label="Dil">
           {CONTENT_LOCALES.map((l) => {
             const missing = perLocale.some((f) => f.required && !(v[`${l}.${f.key}`] ?? "").trim());
@@ -141,7 +148,7 @@ export default function ItemForm({
             Vazgeç
           </Link>
           <button type="submit" disabled={pending} className="rounded-lg bg-slate-900 px-5 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-60">
-            {pending ? "Kaydediliyor…" : "Kaydet"}
+            {pending ? (autoTranslate ? "Kaydediliyor ve çevriliyor…" : "Kaydediliyor…") : "Kaydet"}
           </button>
         </span>
       </div>

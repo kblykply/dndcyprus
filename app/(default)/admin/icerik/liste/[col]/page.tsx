@@ -10,7 +10,7 @@ import { deleteItem, moveItemDown, moveItemUp, toggleItem } from "../../actions"
 
 export const dynamic = "force-dynamic";
 
-export default async function CollectionPage({ params, searchParams }: { params: Promise<{ col: string }>; searchParams: Promise<{ kaydedildi?: string }> }) {
+export default async function CollectionPage({ params, searchParams }: { params: Promise<{ col: string }>; searchParams: Promise<{ kaydedildi?: string; ceviri?: string; cevirihata?: string }> }) {
   const { col } = await params;
   const sp = await searchParams;
   const store = await cookies();
@@ -36,7 +36,12 @@ export default async function CollectionPage({ params, searchParams }: { params:
           <Plus className="h-4 w-4" aria-hidden /> Yeni {def.singular}
         </Link>
       </div>
-      {sp.kaydedildi ? <p className="mt-4 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-sm text-teal-800">Kaydedildi; sitedeki sayfalar yenilendi.</p> : null}
+      {sp.kaydedildi ? (
+        <p className="mt-4 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-sm text-teal-800">
+          Kaydedildi; sitedeki sayfalar yenilendi.{sp.ceviri ? ` Türkçe ${sp.ceviri} alan İngilizce, Almanca, Rusça ve Lehçeye otomatik çevrildi.` : ""}
+        </p>
+      ) : null}
+      {sp.cevirihata ? <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">Kaydedildi ama çeviri yapılamadı: {sp.cevirihata}</p> : null}
       {!seeded ? (
         <p className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
           Liste şu an sitenin kodundaki haliyle gösteriliyor. İlk değişiklikte bütün kayıtlar panele aktarılır, sonra liste buradan yönetilir.

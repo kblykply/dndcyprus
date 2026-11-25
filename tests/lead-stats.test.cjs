@@ -42,8 +42,9 @@ test("grouping with qualified/sold/lost and ad dimensions from attribution", () 
   assert.deepEqual(camp, [{ key: "lagoon-kasim", label: "lagoon-kasim", count: 2, qualified: 1, sold: 1, lost: 0 }]);
   assert.equal(m.adKey("reklam", leads[0]).label, "video-1");
   assert.equal(m.adKey("kelime", leads[1]).label, "kıbrıs villa");
-  assert.equal(m.adKey("sayfa", leads[1]).label, "/tr/neocity");
-  assert.equal(m.adKey("sayfa", leads[3]).label, "/tr/contact");
+  assert.equal(m.adKey("sayfa", leads[1]).label, "NeoCity · Türkçe"); // panelde okunur ad, anahtar yol
+  assert.equal(m.adKey("sayfa", leads[1]).key, "/tr/neocity");
+  assert.equal(m.adKey("sayfa", leads[3]).label, "İletişim · Türkçe");
   assert.equal(m.adKey("proje", leads[4]).label, "Proje seçilmemiş");
   assert.equal(m.adKey("kanal", leads[0]).label, "Meta reklam");
 });

@@ -4,6 +4,7 @@
 
 import { sanitizeAttribution, type Touch } from "./attribution";
 import { cyprusMonthStart, sourceGroup, statusInfo } from "./lead-status";
+import { pageLabelText } from "./page-label";
 
 const TZ = "Asia/Famagusta";
 
@@ -193,7 +194,7 @@ export function adKey(dim: AdDimension, l: StatLead): { key: string; label: stri
       return t?.utm_term ? { key: t.utm_term, label: t.utm_term } : null;
     case "sayfa": {
       const p = t?.landing || pathOf(l.pageUrl);
-      return p ? { key: p, label: p } : null;
+      return p ? { key: p, label: pageLabelText(p) } : null;
     }
     case "proje":
       return l.project ? { key: l.project, label: l.project } : { key: "-", label: "Proje seçilmemiş" };
