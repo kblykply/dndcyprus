@@ -310,7 +310,7 @@ test("contact API does not contact DND Akış without config, for bots, duplicat
 
 test("without a site database, DND Akış is the lead store: forwarded before responding", async () => {
   const api = apiHarness({ env: akisEnv, noDb: true });
-  const res = await api.post({ ...validLead, project: "perla-ii", message: "Merhaba", pageUrl: "https://dndcyprus-azure.vercel.app/ru/projects/perla-ii" });
+  const res = await api.post({ ...validLead, project: "perla-ii", message: "Merhaba", pageUrl: "https://www.dndcyprus.com/ru/projects/perla-ii" });
   assert.equal(res.status, 200);
   assert.deepEqual(await res.json(), { ok: true });
   assert.equal(api.writes.length, 0);

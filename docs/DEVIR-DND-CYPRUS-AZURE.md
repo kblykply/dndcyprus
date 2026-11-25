@@ -1,5 +1,14 @@
 # DND Cyprus — Azure tasarımı devir notu
 
+## 00. YAYINDA — 25 Kasım 2026
+
+**Bu bölüm aşağıdaki tüm notlardan önce gelir.**
+- Site **https://www.dndcyprus.com** adresinde yayında. Vercel projesi `dndcyprus-azure` (scope `zubeyruygur-5267s-projects`); `dndcyprus.com` kalıcı (308) olarak www'ye yönlenir. Eski tasarım (`configgo-web` ekibi, GitHub `kblykply/dndcyprus` `main`) alan adından kaldırıldı; `main` hâlâ eski tasarım ve push yapılmadı.
+- **Yayın akışı:** commit → `git archive HEAD` ile temiz kopya (+ `.vercel/project.json`) → derleme ve Playwright testleri → `vercel deploy` → `vercel promote <önizleme>`. Promote yeniden derler; Google font hatasıyla düşerse tekrarla, `vercel ls dndcyprus-azure` ile Production'ın Ready olduğunu gör. Doğrulama www.dndcyprus.com'da.
+- **Arama motorları:** `vercel.json` artık depoda; `X-Robots-Tag: noindex` yalnız `*.vercel.app` adreslerinde. Yayın kopyasına ayrıca noindex `vercel.json` koyma: gerçek siteyi dizinden çıkarır.
+- **DNS:** NameHero (müşteri paneli › Web Hosting - Turbo Cloud › Log in to cPanel › Zone Editor). `@` A `216.150.1.1`, `www` CNAME Vercel'in verdiği adres; e-posta (MX, `mail`) ve `takip` (DND Akış) kayıtlarına dokunma.
+- Aşağıdaki "Paylaşılan adres: dndcyprus-azure.vercel.app" ve "noindex vercel.json koy" notları 25 Kasım'dan önceki durumdur.
+
 ## 0. SON DURUM — 19 Ekim 2026, 16:30 (İstanbul)
 
 **Önce bu bölümü oku.** Aşağıdaki eski bölümlerle (16–17 Ekim) çelişirse bu bölüm geçerlidir.
