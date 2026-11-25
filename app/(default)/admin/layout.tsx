@@ -1,42 +1,35 @@
-// app/admin/layout.tsx
-"use client";
-
+// app/(default)/admin/layout.tsx
+// Panel kabuğu: sol menü + içerik. Menüdeki "aranmayı bekleyen" sayısı yalnız geçerli oturumda sunucuda okunur.
 import type { ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import AdminNav from "@/app/(default)/admin/AdminNav";
+import type { Metadata } from "next";
+import { cookies } from "next/headers";
+import AdminShell from "@/app/(default)/admin/AdminShell";
+import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
+import { prisma } from "@/lib/prisma";
 
-export default function AdminLayout({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
+export const dynamic = "force-dynamic";
 
-  const isLoginPage = pathname.startsWith("/admin/login");
+export const metadata: Metadata = {
+  title: "Yönetim Paneli | DND Cyprus",
+  robots: { index: false, follow: false },
+};
 
-  // LOGIN SAYFASI → NAV YOK, sadece child render
-  if (isLoginPage) {
-    return <>{children}</>;
+async function waitingCount(): Promise<number | null> {
+  if (!(process.env.DATABASE_URL || "").trim()) return null;
+  const store = await cookies();
+  if (!(await verifyAdminSession(store.get(ADMIN_SESSION_COOKIE)?.value))) return null;
+  try {
+    return await prisma.contactMessage.count({ where: { status: "yeni" } });
+  } catch {
+    return null; // durum kolonu henüz yoksa menü sayısız görünür
   }
+}
 
-  // DİĞER ADMIN SAYFALARI → NAV + İÇERİK
+export default async function AdminLayout({ children }: { children: ReactNode }) {
+  const waiting = await waitingCount();
   return (
-    <div className="flex min-h-screen bg-slate-100" data-clarity-mask="true">
-      {/* Sidebar */}
-      <aside className="hidden w-64 border-r border-slate-200 bg-white md:block">
-        <AdminNav />
-      </aside>
-
-      {/* Main content */}
-      <div className="flex flex-1 flex-col bg-white">
-        {/* Mobile top bar */}
-        <header className="block border-b border-slate-200 bg-white px-4 py-3 md:hidden">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-              DND Cyprus
-            </p>
-            <p className="text-sm font-semibold text-slate-900">Admin Panel</p>
-          </div>
-        </header>
-
-        <main className="flex-1 px-6 py-8">{children}</main>
-      </div>
-    </div>
+    <AdminShell waiting={waiting} user={(process.env.ADMIN_USER || "Yönetici").slice(0, 40)}>
+      {children}
+    </AdminShell>
   );
 }

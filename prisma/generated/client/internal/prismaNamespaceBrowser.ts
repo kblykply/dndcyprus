@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  ContactMessage: 'ContactMessage'
+  ContactMessage: 'ContactMessage',
+  LeadNote: 'LeadNote'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,10 +86,24 @@ export const ContactMessageScalarFieldEnum = {
   pageUrl: 'pageUrl',
   eventId: 'eventId',
   attribution: 'attribution',
+  status: 'status',
+  statusAt: 'statusAt',
   createdAt: 'createdAt'
 } as const
 
 export type ContactMessageScalarFieldEnum = (typeof ContactMessageScalarFieldEnum)[keyof typeof ContactMessageScalarFieldEnum]
+
+
+export const LeadNoteScalarFieldEnum = {
+  id: 'id',
+  leadId: 'leadId',
+  kind: 'kind',
+  text: 'text',
+  author: 'author',
+  createdAt: 'createdAt'
+} as const
+
+export type LeadNoteScalarFieldEnum = (typeof LeadNoteScalarFieldEnum)[keyof typeof LeadNoteScalarFieldEnum]
 
 
 export const SortOrder = {

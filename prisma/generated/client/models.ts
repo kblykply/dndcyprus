@@ -9,4 +9,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/ContactMessage'
+export type * from './models/LeadNote'
 export type * from './commonInputTypes'

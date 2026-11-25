@@ -44,3 +44,8 @@ export { Prisma }
  * 
  */
 export type ContactMessage = Prisma.ContactMessageModel
+/**
+ * Model LeadNote
+ * Talebe ekip notu ya da durum değişikliği kaydı (kind: "not" | "durum")
+ */
+export type LeadNote = Prisma.LeadNoteModel

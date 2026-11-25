@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
   if (Date.now() - lastRun < 12 * 3600 * 1000) return NextResponse.json({ ok: true, skipped: "recent" });
   lastRun = Date.now();
   try {
-    const rows = (await prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" } })) as BackupRow[];
+    const rows = (await prisma.contactMessage.findMany({ orderBy: { createdAt: "desc" }, include: { notes: { orderBy: { createdAt: "asc" } } } })) as BackupRow[];
     const sent = await sendLeadBackup(rows);
     return NextResponse.json({ ok: sent === true, count: rows.length });
   } catch (error) {

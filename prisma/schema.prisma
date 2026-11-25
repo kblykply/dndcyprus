@@ -23,5 +23,25 @@ model ContactMessage {
   pageUrl     String?
   eventId     String?
   attribution Json?
-  createdAt   DateTime @default(now())
+  // Satış takibi (20261125180000_lead_status_notes): yeni | arandi | gorusuluyor | satis | olumsuz
+  status      String     @default("yeni")
+  statusAt    DateTime?
+  notes       LeadNote[]
+  createdAt   DateTime   @default(now())
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+/// Talebe ekip notu ya da durum değişikliği kaydı (kind: "not" | "durum")
+model LeadNote {
+  id        Int            @id @default(autoincrement())
+  leadId    Int
+  lead      ContactMessage @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  kind      String         @default("not")
+  text      String
+  author    String?
+  createdAt DateTime       @default(now())
+
+  @@index([leadId])
 }

@@ -149,7 +149,7 @@ export async function POST(req: NextRequest) {
     campaign,
   };
   // info@dndcyprus.com bildirimi (25.11.2026): talep panele kaydedildikten sonra kurumsal e-posta (RESEND_API_KEY varsa)
-  const emailLead = {
+  const emailLead: Parameters<typeof sendLeadEmail>[0] = {
     name,
     email,
     phone: phone || undefined,
@@ -187,7 +187,7 @@ export async function POST(req: NextRequest) {
     }
   } else try {
     try {
-      await prisma.contactMessage.create({
+      const created = await prisma.contactMessage.create({
         data: {
           ...legacyData,
           project: project || null,
@@ -202,12 +202,14 @@ export async function POST(req: NextRequest) {
         // Yalnızca id: RETURNING eski şemada olmayan kolonları istemesin
         select: { id: true },
       });
+      if (created && typeof created.id === "number") emailLead.leadId = created.id;
     } catch (err) {
       if (!isMissingColumnError(err)) throw err;
       console.warn(
         "CONTACT_API_LEGACY_COLUMNS: 20260915120000_lead_attribution migration'ı uygulanmamış; kayıt kaynak bilgisi olmadan yapıldı",
       );
-      await prisma.contactMessage.create({ data: legacyData, select: { id: true } });
+      const created = await prisma.contactMessage.create({ data: legacyData, select: { id: true } });
+      if (created && typeof created.id === "number") emailLead.leadId = created.id;
     }
   } catch (error) {
     // Prisma hata metni form verisini içerebilir → yalnızca kod

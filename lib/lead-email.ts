@@ -20,6 +20,8 @@ export type LeadEmailInput = {
   campaign?: string | null;
   eventId?: string;
   receivedAt?: Date;
+  /** Paneldeki kaydın numarası: "Panelde aç" doğrudan bu talebi açar */
+  leadId?: number;
 };
 
 export const R = { teal: "#27959B", turuncu: "#F15C34", lac: "#0E3A5C", yazi: "#1D293D", gri: "#45556C", acik: "#EEF3F4" };
@@ -92,7 +94,7 @@ export function leadEmailHtml(v: LeadEmailInput) {
     digits ? button(`tel:+${digits}`, "Ara") : "",
     digits ? button(`https://wa.me/${digits}`, "WhatsApp'tan yaz", "#0B6B38") : "",
     button(`mailto:${v.email}`, "E-posta ile yanıtla", R.teal),
-    button(`${SITE_URL}/admin/leads`, "Panelde aç"),
+    button(`${SITE_URL}/admin/leads${v.leadId ? `?id=${v.leadId}` : ""}`, "Panelde aç"),
   ].join("");
   const what = [v.project, v.unitType].filter(Boolean).join(" · ");
   const govde = `<tr><td class="px" style="padding:26px 40px 4px;font-family:${F};">
@@ -136,7 +138,7 @@ export function leadEmailText(v: LeadEmailInput) {
     `Kaynak: ${v.source || "Doğrudan / organik"}${v.campaign ? " · " + v.campaign : ""}`,
     v.pageUrl ? `Sayfa: ${v.pageUrl}` : "",
     "",
-    `Panel: ${SITE_URL}/admin/leads`,
+    `Panel: ${SITE_URL}/admin/leads${v.leadId ? `?id=${v.leadId}` : ""}`,
   ];
   return lines.filter((l, i) => l || lines[i - 1]).join("\n");
 }

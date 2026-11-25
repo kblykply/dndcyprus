@@ -5,6 +5,7 @@
 
 import { Buffer } from "node:buffer";
 import { F, R, cyprusTime, esc, kabuk, recipients } from "./lead-email";
+import { sourceGroup, statusInfo } from "./lead-status";
 
 export type BackupRow = {
   createdAt: Date | string;
@@ -19,6 +20,8 @@ export type BackupRow = {
   source?: string | null;
   campaign?: string | null;
   pageUrl?: string | null;
+  status?: string | null;
+  notes?: { text: string; author?: string | null; createdAt: Date | string }[];
 };
 
 const COLS: [string, (r: BackupRow) => unknown][] = [
@@ -28,10 +31,12 @@ const COLS: [string, (r: BackupRow) => unknown][] = [
   ["E-posta", (r) => r.email],
   ["Proje", (r) => r.project],
   ["Daire tipi", (r) => r.unitType],
+  ["Durum", (r) => statusInfo(r.status).label],
   ["Konu", (r) => r.subject],
   ["Mesaj", (r) => r.message],
+  ["Notlar", (r) => (r.notes || []).map((n) => `${cyprusTime(new Date(n.createdAt))} ${n.author || ""}: ${n.text}`).join("\n")],
   ["Form", (r) => r.form],
-  ["Kaynak", (r) => r.source],
+  ["Kaynak", (r) => (r.source ? `${sourceGroup(r.source).label} (${r.source})` : "")],
   ["Kampanya", (r) => r.campaign],
   ["Sayfa", (r) => r.pageUrl],
 ];

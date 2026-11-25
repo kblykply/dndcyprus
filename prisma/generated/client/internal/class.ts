@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.0.0",
   "engineVersion": "0c19ccc313cf9911a90d99d2ac2eb0280c76c513",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel ContactMessage {\n  id          Int      @id @default(autoincrement())\n  name        String\n  email       String\n  phone       String?\n  subject     String\n  message     String\n  // Reklam ölçümü ve kaynak takibi (20260915120000_lead_attribution)\n  project     String?\n  unitType    String?\n  form        String?\n  source      String?\n  campaign    String?\n  pageUrl     String?\n  eventId     String?\n  attribution Json?\n  createdAt   DateTime @default(now())\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel ContactMessage {\n  id          Int        @id @default(autoincrement())\n  name        String\n  email       String\n  phone       String?\n  subject     String\n  message     String\n  // Reklam ölçümü ve kaynak takibi (20260915120000_lead_attribution)\n  project     String?\n  unitType    String?\n  form        String?\n  source      String?\n  campaign    String?\n  pageUrl     String?\n  eventId     String?\n  attribution Json?\n  // Satış takibi (20261125180000_lead_status_notes): yeni | arandi | gorusuluyor | satis | olumsuz\n  status      String     @default(\"yeni\")\n  statusAt    DateTime?\n  notes       LeadNote[]\n  createdAt   DateTime   @default(now())\n\n  @@index([createdAt])\n  @@index([status])\n}\n\n/// Talebe ekip notu ya da durum değişikliği kaydı (kind: \"not\" | \"durum\")\nmodel LeadNote {\n  id        Int            @id @default(autoincrement())\n  leadId    Int\n  lead      ContactMessage @relation(fields: [leadId], references: [id], onDelete: Cascade)\n  kind      String         @default(\"not\")\n  text      String\n  author    String?\n  createdAt DateTime       @default(now())\n\n  @@index([leadId])\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"ContactMessage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subject\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"project\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"unitType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"form\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"source\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"campaign\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"attribution\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"ContactMessage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subject\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"project\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"unitType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"form\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"source\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"campaign\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"attribution\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"statusAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"notes\",\"kind\":\"object\",\"type\":\"LeadNote\",\"relationName\":\"ContactMessageToLeadNote\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"LeadNote\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"leadId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"lead\",\"kind\":\"object\",\"type\":\"ContactMessage\",\"relationName\":\"ContactMessageToLeadNote\"},{\"name\":\"kind\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"text\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"author\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -183,6 +183,16 @@ export interface PrismaClient<
     * ```
     */
   get contactMessage(): Prisma.ContactMessageDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.leadNote`: Exposes CRUD operations for the **LeadNote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LeadNotes
+    * const leadNotes = await prisma.leadNote.findMany()
+    * ```
+    */
+  get leadNote(): Prisma.LeadNoteDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {
