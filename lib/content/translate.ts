@@ -171,6 +171,42 @@ const cooldown = new Map<string, number>();
 const COOL_MS = { quota: 15 * 60_000, busy: 2 * 60_000, silent: 10 * 60_000 };
 /** Son başarılı model öne alınır: ücretsiz katmanda en yeni modeller sık sık kota/yoğunluk hatası veriyor */
 let lastGood: string | null = null;
+/** Model durumu sunucu örnekleri arasında paylaşılır (SyncState "translate-models"); veritabanı yoksa yalnız bellekte kalır */
+const STATE_KEY = "translate-models";
+type ModelState = { lastGood: string | null; cool: Record<string, number> };
+async function stateStore() {
+  if (!(process.env.DATABASE_URL || "").trim()) return null;
+  try {
+    return (await import("@/lib/prisma")).prisma;
+  } catch {
+    return null;
+  }
+}
+async function pullModelState() {
+  const db = await stateStore();
+  if (!db) return;
+  try {
+    const row = await db.syncState.findUnique({ where: { key: STATE_KEY } });
+    const st = row?.data as ModelState | undefined;
+    if (!st) return;
+    if (st.lastGood) lastGood = st.lastGood;
+    for (const [m, until] of Object.entries(st.cool ?? {})) if (until > (cooldown.get(m) ?? 0)) cooldown.set(m, until);
+  } catch {
+    /* durum okunamazsa bellektekiyle devam */
+  }
+}
+async function pushModelState() {
+  const db = await stateStore();
+  if (!db) return;
+  const now = Date.now();
+  const data: ModelState = { lastGood, cool: Object.fromEntries([...cooldown].filter(([, until]) => until > now)) };
+  try {
+    await db.syncState.upsert({ where: { key: STATE_KEY }, create: { key: STATE_KEY, data }, update: { data } });
+  } catch {
+    /* yazılamazsa sorun değil */
+  }
+}
+
 export function orderByCooldown(models: string[], now = Date.now()): string[] {
   const list = lastGood && models.includes(lastGood) ? [lastGood, ...models.filter((m) => m !== lastGood)] : models;
   const ready = list.filter((m) => (cooldown.get(m) ?? 0) <= now);
@@ -212,6 +248,12 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
   }
   const key = (process.env.GEMINI_API_KEY || "").trim();
   if (!key) return { ok: false, error: "Otomatik çeviri kapalı: GEMINI_API_KEY tanımlı değil." };
+  await pullModelState();
+  const before = JSON.stringify([lastGood, [...cooldown]]);
+  const finish = async (r: TranslateResult): Promise<TranslateResult> => {
+    if (JSON.stringify([lastGood, [...cooldown]]) !== before) await pushModelState();
+    return r;
+  };
   const models = orderByCooldown(await resolveModels(key));
   const out: Record<string, Record<TargetLocale, string>> = {};
   const groups = chunk(todo);
@@ -226,10 +268,12 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
       let thinking = thinkingFor(model);
       for (let attempt = 0; attempt < 2 && !done; attempt++) {
         const left = deadline - Date.now();
-        if (left < 3000) return { ok: false, error: last && last !== slow ? `${slow} (${last})` : slow };
+        if (left < 3000) return finish({ ok: false, error: last && last !== slow ? `${slow} (${last})` : slow });
         const t0 = Date.now();
         try {
-          const r = await callGemini(model, key, prompt, Math.min(prompt.length < 4000 ? 20_000 : 30_000, left), thinking);
+          // çalıştığı bilinen modele daha uzun, denenmekte olana kısa süre (sessiz kalan model kaydı bekletmesin)
+          const limit = (prompt.length < 4000 ? 10_000 : 20_000) * (model === lastGood ? 2 : 1);
+          const r = await callGemini(model, key, prompt, Math.min(limit, left), thinking);
           console.info("TRANSLATE_CALL", { model, ok: r.ok, status: r.ok ? 200 : r.status, ms: Date.now() - t0 });
           if (!r.ok) {
             last = r.status === 429 ? "Çeviri servisinin dakikalık/günlük ücretsiz sınırı doldu; biraz sonra yeniden kaydedin." : r.error;
@@ -251,7 +295,7 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
               cooldown.set(model, Date.now() + COOL_MS.quota);
               break; // bu modelin ücretsiz kotası dolu: beklemeden sıradaki modele geç
             }
-            if (r.status === 401 || r.status === 403) return { ok: false, error: "Çeviri anahtarı geçersiz (GEMINI_API_KEY)." };
+            if (r.status === 401 || r.status === 403) return finish({ ok: false, error: "Çeviri anahtarı geçersiz (GEMINI_API_KEY)." });
             continue;
           }
           const parsed = parseTranslation(r.text, group);
@@ -273,7 +317,7 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
       }
       if (done) break;
     }
-    if (!done) return { ok: false, error: last || "Çeviri yapılamadı." };
+    if (!done) return finish({ ok: false, error: last || "Çeviri yapılamadı." });
   }
-  return { ok: true, out };
+  return finish({ ok: true, out });
 }

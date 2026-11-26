@@ -191,3 +191,27 @@ test("translation: the last model that worked is tried first, a silent model wai
   assert.deepEqual(calls, ["gemini-3.5-flash-lite"]);
   assert.deepEqual([...live.orderByCooldown(["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"])], ["gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.8-flash"]);
 });
+
+test("translation: which model works is shared through the database between server instances", async () => {
+  let saved = null;
+  const prisma = { syncState: { findUnique: async () => (saved ? { data: saved } : null), upsert: async ({ create }) => { saved = JSON.parse(JSON.stringify(create.data)); } } };
+  const answer = JSON.stringify([{ id: "x", en: "Hi", de: "Hallo", ru: "Привет", pl: "Cześć" }]);
+  const mk = (calls) => async (url) => {
+    const u = String(url);
+    if (u.includes("/models?")) return Response.json({ models: ["gemini-3.8-flash", "gemini-3.5-flash-lite"].map((n) => ({ name: `models/${n}`, supportedGenerationMethods: ["generateContent"] })) });
+    const model = u.match(/models\/([^:]+):/)[1];
+    calls.push(model);
+    if (model === "gemini-3.8-flash") return Response.json({ error: { message: "quota" } }, { status: 429 });
+    return Response.json({ candidates: [{ content: { parts: [{ text: answer }] } }] });
+  };
+  const opts = (calls) => ({ env: { GEMINI_API_KEY: "k", DATABASE_URL: "postgres://x" }, globals: { fetch: mk(calls), console: { ...console, info: () => {} } }, mocks: { "@/lib/prisma": { prisma } } });
+  const a = [];
+  await loadTypeScript("lib/content/translate.ts", opts(a)).translateFromTurkish([{ id: "x", text: "Merhaba", kind: "text" }]);
+  assert.deepEqual(a, ["gemini-3.8-flash", "gemini-3.5-flash-lite"]);
+  assert.equal(saved.lastGood, "gemini-3.5-flash-lite");
+  assert.ok(saved.cool["gemini-3.8-flash"] > Date.now());
+  // yeni sunucu örneği (bellek boş): veritabanındaki durumla doğrudan çalışan modele gider
+  const b = [];
+  await loadTypeScript("lib/content/translate.ts", opts(b)).translateFromTurkish([{ id: "x", text: "Selam", kind: "text" }]);
+  assert.deepEqual(b, ["gemini-3.5-flash-lite"]);
+});
