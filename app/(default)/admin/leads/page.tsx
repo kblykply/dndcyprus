@@ -25,6 +25,8 @@ import {
 } from "@/lib/lead-status";
 import { setLeadStatusBulk } from "./actions";
 import { FollowUpForm, MetaPullButton, NoteDelete, NoteForm, StatusForm } from "./LiveForms";
+import WaQuick from "./WaQuick";
+import { guessWaLang } from "@/lib/wa-templates";
 import { dateToCyprusInputs, dueFollowUps, followUpLabel, followUpState } from "@/lib/lead-followup";
 import { metaLeadsConfigured } from "@/lib/meta-leads";
 import { AutoSubmitSelect, SelectAll, SelectedCount } from "./LeadControls";
@@ -696,6 +698,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                 ),
               )}
             </div>
+            {waNumber(detail.phone) ? <WaQuick number={waNumber(detail.phone)} name={detail.name} project={detail.project} lang={guessWaLang(detail.phone)} /> : null}
 
             {!legacy && fu ? (
               <FollowUpForm
