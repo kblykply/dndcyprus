@@ -82,12 +82,18 @@ export async function ga4Report(body: Record<string, unknown>, kind: "runReport"
       const denied = j.error.status === "PERMISSION_DENIED";
       return { ok: false, error: denied ? "Servis hesabının bu GA4 mülkünde okuma izni yok." : `GA4: ${j.error.status || ""} ${j.error.message || ""}`.trim() };
     }
+    const rows = (j.rows || []).map((row) => ({
+      dims: (row.dimensionValues || []).map((d) => d.value),
+      vals: (row.metricValues || []).map((m) => Number(m.value) || 0),
+    }));
+    // Boyutsuz sorguda GA4 toplamı `totals` alanında değil tek satırda döndürüyor (metricAggregations istenmedikçe);
+    // panel toplamları 0 gösteriyordu (26.11.2026, ilk gerçek veriyle görüldü)
+    const hasDims = Array.isArray(body.dimensions) && body.dimensions.length > 0;
     const data: Ga4Report = {
-      rows: (j.rows || []).map((row) => ({
-        dims: (row.dimensionValues || []).map((d) => d.value),
-        vals: (row.metricValues || []).map((m) => Number(m.value) || 0),
-      })),
-      totals: (j.totals?.[0]?.metricValues || []).map((m) => Number(m.value) || 0),
+      rows,
+      totals: j.totals?.[0]?.metricValues?.length
+        ? j.totals[0].metricValues.map((m) => Number(m.value) || 0)
+        : !hasDims && rows.length === 1 ? rows[0].vals : [],
     };
     cache.set(cacheKey, { until: Date.now() + (kind === "runRealtimeReport" ? 30_000 : CACHE_MS), data });
     return { ok: true, data };

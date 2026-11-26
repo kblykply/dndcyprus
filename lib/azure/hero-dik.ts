@@ -7,7 +7,7 @@ export const HERO_DIK: Record<string, { src: string; w: number; h: number }> = {
   "/perla-ii/3.jpg": { src: "/perla-ii/3-dik.jpg", w: 2140, h: 2560 },
   "/azure/lj-2.jpg": { src: "/azure/lj-2-dik.jpg", w: 1792, h: 2144 },
   "/azure/lv-7.jpg": { src: "/azure/lv-7-dik.jpg", w: 2402, h: 2144 },
-  "/azure/about-uu.jpg": { src: "/azure/about-uu-dik.jpg", w: 1202, h: 1072 },
+  "/azure/about-uu.jpg": { src: "/azure/about-uu-dik.jpg", w: 2562, h: 2287 },
   "/neocity/hero.jpg": { src: "/neocity/hero-dik.jpg", w: 1806, h: 2160 },
   "/azure/lj-joy-tabela.jpg": { src: "/azure/lj-joy-tabela-dik.jpg", w: 1792, h: 2143 },
 };
