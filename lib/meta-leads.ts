@@ -113,9 +113,11 @@ async function graph<T>(path: string, token: string, params: Record<string, stri
   const url = path.startsWith("https://") ? new URL(path) : new URL(`https://graph.facebook.com/${graphVersion()}/${path}`);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
   const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store", signal: AbortSignal.timeout(20_000) });
-  const body = (await r.json().catch(() => null)) as (T & { error?: { message?: string; code?: number } }) | null;
+  const body = (await r.json().catch(() => null)) as (T & { error?: { message?: string; code?: number; error_subcode?: number; type?: string } }) | null;
   if (!r.ok || !body || body.error) {
     const code = body?.error?.code;
+    // Teşhis: hangi adımın neden reddedildiği (yalnız yol ve Meta'nın mesajı; sorgu dizesi ve jeton yazılmaz)
+    console.warn("META_GRAPH_ERROR", { step: url.pathname.replace(/\/\d{6,}/g, "/:id"), status: r.status, code, subcode: body?.error?.error_subcode, type: body?.error?.type, message: (body?.error?.message || "").slice(0, 240) });
     const msg = code === 190 ? "Meta anahtarı geçersiz ya da iptal edilmiş." : code === 10 || code === 200 ? "Meta izni eksik (talep erişimi verilmemiş olabilir)." : body?.error?.message || `Meta ${r.status}`;
     throw new Error(msg);
   }
