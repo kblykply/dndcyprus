@@ -220,7 +220,7 @@ export default function ContactCard({
     <section className="az-section az-contact" id={id}>
       <div className="az-wrap">
         <div className="card rv">
-          <Img className="bg" src={image} sizes="(min-width: 1000px) 50vw, 100vw" alt="" />
+          <Img className="bg" src={image} sizes="(min-width: 1640px) 1500px, (min-width: 1000px) 92vw, 100vw" alt="" /* görsel kartın tamamına yayılıyor (50vw bulanıktı) */ />
           <div>
             <h2>{title ?? t.title}</h2>
             <p className="lead">{lead ?? t.lead}</p>

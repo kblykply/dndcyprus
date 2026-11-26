@@ -97,7 +97,13 @@ export default function LazyYouTube({
   }, [mounted, rootMargin, background]);
 
   const src = `https://www.youtube-nocookie.com/embed/${videoId}${query ? `?${query}` : ""}`;
-  const posterSrc = poster ?? local?.poster ?? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  // YouTube kapağı HD (1280×720, 26.11.2026): hqdefault 480×360 büyük kutuda bulanıktı. HD kapağı olmayan videoda
+  // (YouTube 120×90 yer tutucu ya da 404 döner) hqdefault'a düşülür.
+  const posterSrc = poster ?? local?.poster ?? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  const ytFallback = (e: { currentTarget: HTMLImageElement }) => {
+    const i = e.currentTarget;
+    if (i.src.includes("/maxresdefault.") && (!i.complete || i.naturalWidth <= 120)) i.src = i.src.replace("/maxresdefault.", "/hqdefault.");
+  };
 
   // yerel video: React `muted`ı öznitelik olarak yazmıyor, otomatik oynatma için özellik ayarlanır;
   // ekran dışındayken durur (veri ve pil), görününce oynar
@@ -132,6 +138,8 @@ export default function LazyYouTube({
           decoding="async"
           width={480}
           height={360}
+          onError={ytFallback}
+          onLoad={ytFallback}
           className="absolute inset-0 h-full w-full object-cover"
         />
 
@@ -166,6 +174,8 @@ export default function LazyYouTube({
               src={posterSrc}
               alt=""
               aria-hidden
+              onError={ytFallback}
+              onLoad={ytFallback}
               className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${shown ? "opacity-0" : "opacity-100"}`}
             />
             <div aria-hidden className="absolute inset-0" />

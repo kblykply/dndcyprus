@@ -53,7 +53,18 @@ const LIST: Record<Locale, { region: string; play: string; corporate: string; cl
   ] },
 };
 
-const thumb = (c: Clip) => c.poster ?? `https://i.ytimg.com/vi/${c.youtube}/hqdefault.jpg`;
+// HD kapak (1280×720, 26.11.2026; hqdefault 480×360 büyük oynatıcıda 1920 ekranda bile bulanıktı). HD kapağı olmayan
+// videoda görsel servisi hata verir → onError hqdefault'a düşer.
+const thumb = (c: Clip) => c.poster ?? `https://i.ytimg.com/vi/${c.youtube}/maxresdefault.jpg`;
+const ytFallback = (e: { currentTarget: HTMLImageElement }) => {
+  const i = e.currentTarget;
+  if (i.dataset.fb || !/maxresdefault/.test(decodeURIComponent(i.currentSrc || i.src))) return;
+  i.dataset.fb = "1";
+  const hq = decodeURIComponent(i.currentSrc || i.src).match(/i\.ytimg\.com\/vi\/([\w-]{11})\//)?.[1];
+  if (!hq) return;
+  i.removeAttribute("srcset");
+  i.src = `/_next/image?url=${encodeURIComponent(`https://i.ytimg.com/vi/${hq}/hqdefault.jpg`)}&w=640&q=65`;
+};
 const Play = () => (
   <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" /></svg>
 );
@@ -78,11 +89,11 @@ export default function AboutVideoReel({ locale, corporate }: { locale: Locale; 
     <div className="az-vreel" aria-label={t.region}>
       <div className={`stage${c.vertical ? " v" : ""}`}>
         {/* dikey videoda yanlar kapağın bulanık kopyası */}
-        {c.vertical ? <Img className="blur" src={thumb(c)} sizes="60vw" alt="" quality={65} /> : null}
+        {c.vertical ? <Img className="blur" src={thumb(c)} sizes="60vw" alt="" quality={65} onError={ytFallback} /> : null}
         <div className="frame">
           {on ? player : (
             <button type="button" className="cover" onClick={() => setOn(true)} aria-label={`${t.play}: ${c.label}`}>
-              <Img src={thumb(c)} sizes="(min-width: 1440px) 900px, 100vw" alt="" quality={65} />
+              <Img src={thumb(c)} sizes="(min-width: 1440px) 900px, 100vw" alt="" quality={65} onError={ytFallback} />
               <span className="pl"><Play /></span>
             </button>
           )}
@@ -93,7 +104,7 @@ export default function AboutVideoReel({ locale, corporate }: { locale: Locale; 
         {clips.map((x, k) => (
           <li key={x.key}>
             <button type="button" className={k === i ? "on" : undefined} aria-pressed={k === i} onClick={() => pick(k)}>
-              <span className="im"><Img src={thumb(x)} sizes="160px" alt="" quality={65} /><span className="pl"><Play /></span></span>
+              <span className="im"><Img src={thumb(x)} sizes="160px" alt="" quality={65} onError={ytFallback} /><span className="pl"><Play /></span></span>
               <span className="lb">{x.label}</span>
             </button>
           </li>

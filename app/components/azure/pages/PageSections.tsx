@@ -223,7 +223,7 @@ export async function AboutUsa({ locale }: { locale: Locale }) {
         <div className="ph rv d1">
           {["/azure/usa/15-tyler-road.webp", "/azure/usa/131-dane-hill-road.webp"].map((src, k) => (
             <figure key={src}>
-              <span><Image src={src} alt={`${t.photos[k]} · DND Homes`} fill quality={75} sizes="(min-width: 1000px) 24vw, 50vw" /></span>
+              <span><Image src={src} alt={`${t.photos[k]} · DND Homes`} fill quality={75} sizes="(min-width: 1000px) 52vw, 100vw" /* dik kutu, yatay ev fotoğrafı: ~2,2 × kutu genişliği */ /></span>
               <figcaption>{t.photos[k]}</figcaption>
             </figure>
           ))}

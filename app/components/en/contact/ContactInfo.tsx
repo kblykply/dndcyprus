@@ -105,7 +105,7 @@ export default function ContactInfo({
                           alt={o.imageAlt || o.label}
                           width={800}
                           height={600}
-                          sizes="(max-width: 639px) calc(100vw - 56px), (max-width: 899px) calc(50vw - 40px), 360px"
+                          sizes="(max-width: 639px) calc(100vw - 56px), (max-width: 899px) calc(50vw - 40px), 720px"
                           quality={65}
                           className="h-full w-full object-cover"
                         />
@@ -116,7 +116,7 @@ export default function ContactInfo({
                         <DeferredIframe
                           activation="visible"
                           poster={o.mapImage}
-                          posterSizes="(max-width: 639px) calc(100vw - 56px), (max-width: 899px) calc(50vw - 40px), 360px"
+                          posterSizes="(max-width: 639px) calc(100vw - 56px), (max-width: 899px) calc(50vw - 40px), 720px"
                           posterQuality={75}
                           posterCredit={<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap</a>}
                           src={mapSrc}

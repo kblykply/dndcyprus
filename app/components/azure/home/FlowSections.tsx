@@ -14,6 +14,10 @@ import VenueCarousel from "./VenueCarousel";
 import { VIDEO_UI } from "@/lib/azure/videos";
 import "./flow.css";
 
+// Ödeme kartı kareye yakın (≈1,1:1), fotoğraf 16:9 ve kartı doldurmak için yanlardan kırpılır: gereken genişlik ~1,6 × kart
+// (46vw bulanık kalıyordu, 26.11.2026). Telefonda kart dik; 150vw dosyayı şişirmeden yeterli.
+const OFFER_SIZES = "(min-width: 900px) 74vw, 150vw";
+
 // Ana sayfa akışının yeni bölümleri (Ekim 2026): 3 Neden DND · 4 Ödeme ve yatırım fırsatları · 5 Yaşam ve
 // ayrıcalıklar · 6 Rakamlarla DND. Metinler lib/azure/home-flow.tsx; yalnız Kıbrıs (Amerika Hakkımızda'da).
 
@@ -74,7 +78,7 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead, c
             Her kart tek proje (kullanıcı: "ikisini tek fotoda verme"): proje sayfası + ödeme planı */}
         <div className="cards">
           <div className="card tl rv">
-            <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <span className="bgph"><Image src="/azure/lv-5.jpg" alt="Lagoon Verde" fill quality={75} sizes={OFFER_SIZES} /></span>
             <LogoTag src="/logos/web/lagoon.webp" />
             <div className="tx">
               <small>{t.tl.k}</small>
@@ -86,7 +90,7 @@ export function Offers({ locale, id = "odeme-firsatlari", kicker, title, lead, c
             </div>
           </div>
           <div className="card neo rv d1">
-            <span className="bgph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={75} sizes="(min-width: 900px) 46vw, 100vw" /></span>
+            <span className="bgph"><Image src="/neocity/g-01.jpg" alt="NeoCity" fill quality={75} sizes={OFFER_SIZES} /></span>
             <LogoTag src="/logos/web/neocity.webp" />
             <div className="tx">
               <small>{t.neo.k}</small>

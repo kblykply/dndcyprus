@@ -13,7 +13,7 @@ import LogoTag from "../LogoTag";
 // Kart 4:5 dikey, kapak fotoğrafı 16:9 yatay ve kartı doldurmak için yanlardan kesiliyor: gereken görsel genişliği kart
 // genişliğinin ~2,2 katı (yükseklik × 16/9). Eski değer (460px) kart genişliğini veriyordu, fotoğraf her ekranda ~1,7 kat
 // büyütülüp bulanık görünüyordu (26.11.2026 tasarımcı geri bildirimi). Masaüstü kart ≤ 472 px → 1050 px.
-const CARD_SIZES = "(min-width: 1100px) 1050px, (min-width: 700px) 107vw, 180vw";
+const CARD_SIZES = "(min-width: 1100px) 1050px, (min-width: 700px) 107vw, 150vw"; // telefonda 150vw: 3x ekranda ~1920 px, dosya şişmez
 
 const Chevron = ({ dir }: { dir: 1 | -1 }) => (
   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden style={dir < 0 ? { transform: "scaleX(-1)" } : undefined}>

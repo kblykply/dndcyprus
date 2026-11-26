@@ -219,7 +219,7 @@ export default function ProjectsFilters() {
               <DeferredFillImage
                 fill
                 quality={65}
-                sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 999px) 50vw, 480px"
+                sizes="(max-width: 639px) 150vw, (max-width: 999px) 111vw, 1070px" /* 4:5 kart, 16:9 kapak yanlardan kırpılır: gereken genişlik ~2,2 × kart (26.11.2026) */
                 src={p.cover}
                 alt=""
                 className="object-cover"
