@@ -612,34 +612,6 @@ export const TEAM_DEFAULTS: TeamRecord[] = [
     }
   },
   {
-    "id": "yusuf",
-    "name": "Yusuf Yalçın",
-    "photo": "/teams/yusuf.png",
-    "accent": "teal",
-    "sortOrder": 24,
-    "role": {
-      "tr": "Mühendis",
-      "en": "Engineer",
-      "de": "Ingenieur",
-      "ru": "Инженер",
-      "pl": "Inżynier"
-    },
-    "bio": {
-      "tr": "Mühendislik projelerinde görevli.",
-      "en": "Works on engineering projects.",
-      "de": "Arbeitet an Ingenieurprojekten.",
-      "ru": "Работает над инженерными проектами.",
-      "pl": "Pracuje przy projektach inżynieryjnych."
-    },
-    "category": {
-      "tr": "Engineering",
-      "en": "Engineering",
-      "de": "Technik",
-      "ru": "Инжиниринг",
-      "pl": "Engineering"
-    }
-  },
-  {
     "id": "rojina",
     "name": "Rojina",
     "photo": "/teams/rojina.png",

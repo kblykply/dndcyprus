@@ -16,7 +16,6 @@ const LIST = [
   ["/azure/lj-2.jpg", "full", 0.5],
   ["/azure/lv-7.jpg", "compact", 0.5],
   ["/azure/about-uu.jpg", "compact", 0.5],
-  ["/gecitkaleimage.jpg", "compact", 0.5],
   ["/neocity/hero.jpg", "full", 0.5],
   ["/azure/lj-joy-tabela.jpg", "full", 0.62], // telefonda Joy tabelası kesilmeden görünsün (bar ve tabela ortada)
 ];

@@ -28,8 +28,10 @@ const nextConfig: NextConfig = {
     qualities: [65, 75],
     // AVIF önce (aynı kalitede WebP'den belirgin küçük), desteklemeyen tarayıcıya WebP
     formats: ["image/avif", "image/webp"],
-    // telefon hero kesitleri için 1440 basamağı; en büyük 2560 (3840 genişlik ekranda fark etmiyor, boyutu ikiye katlıyordu)
-    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2560],
+    // telefon hero kesitleri için 1440 basamağı. 3840 (26.11.2026): ultra geniş / 4K ekran ve projeksiyonda tam genişlik
+    // fotoğraflar 2560'tan büyütülüp bulanık görünüyordu; tarayıcı bu boyu yalnız gerçekten gereken ekranda ister,
+    // normal ekranlarda inen dosya değişmez. Tam genişlik kaynak görseller 3840'a çıkarıldı (Real-ESRGAN + aslı karışımı).
+    deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2560, 3840],
     remotePatterns: [
       {
         protocol: "https",

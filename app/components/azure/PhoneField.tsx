@@ -4,6 +4,7 @@ import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type Keyb
 import { COUNTRIES, COUNTRY_HEAD, COUNTRY_UI, DEFAULT_DIAL, phoneSample, type Country } from "@/lib/azure/countries";
 import type { Locale } from "@/lib/azure/site";
 import "./phone-field.css";
+import { pageZoom } from "@/lib/page-zoom";
 
 /**
  * Numara "+" ya da "00" ile tam yazıldıysa olduğu gibi; değilse seçilen ülke kodu eklenir, baştaki 0 atılır
@@ -89,15 +90,16 @@ export default function PhoneField({ id, locale, invalid }: Props) {
     if (!open || !p || !w) return;
     p.style.left = ""; p.style.width = "";
     const host = (w.closest(".card") as HTMLElement | null)?.getBoundingClientRect();
-    const vw = document.documentElement.clientWidth;
+    const z = pageZoom(); // ölçümler ekran pikseli, style değerleri sayfa pikseli (büyük ekran ölçeği)
+    const vw = document.documentElement.getBoundingClientRect().width;
     const minL = Math.max(12, host ? host.left + 8 : 12), maxR = Math.min(vw - 12, host ? host.right - 8 : vw - 12);
     const r = p.getBoundingClientRect(), wr = w.getBoundingClientRect();
     const width = Math.min(r.width, maxR - minL);
     let left = r.left;
     if (left + width > maxR) left = maxR - width;
     if (left < minL) left = minL;
-    if (width < r.width) p.style.width = `${width}px`;
-    if (left !== r.left) p.style.left = `${left - wr.left}px`;
+    if (width < r.width) p.style.width = `${width / z}px`;
+    if (left !== r.left) p.style.left = `${(left - wr.left) / z}px`;
     search.current?.focus({ preventScroll: true });
   }, [open]);
 

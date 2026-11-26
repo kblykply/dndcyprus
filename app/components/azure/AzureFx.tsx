@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { fitAllSizes } from "@/lib/fit-sizes";
+import { pageZoom } from "@/lib/page-zoom";
 
 // Sayfa geneli Azure etkileşimleri: kaydırınca belirme (.rv), sayaçlar ([data-count]),
 // mesafe çubukları (.az-dist) ve otomatik oynatma engellenen hero videosunu başlatma.
@@ -48,7 +50,12 @@ export default function AzureFx() {
     // Yeni içerik (dinamik bölümler) için gözlemi tazele; sayaç gibi her karede değişen içerik sayfayı
     // kare başına bir kereden fazla taramasın
     let moRaf = 0;
-    const mo = new MutationObserver(() => { if (!moRaf) moRaf = requestAnimationFrame(() => { moRaf = 0; observeAll(); }); });
+    // Büyük ekran ölçeğinde (globals.css zoom) görsellerin `sizes` değeri ölçekle büyür, srcset keskin kaynağı seçer (lib/fit-sizes.ts)
+    fitAllSizes();
+    const mo = new MutationObserver(() => { if (!moRaf) moRaf = requestAnimationFrame(() => { moRaf = 0; observeAll(); fitAllSizes(); }); });
+    let fitRaf = 0;
+    const onResize = () => { cancelAnimationFrame(fitRaf); fitRaf = requestAnimationFrame(() => fitAllSizes()); };
+    addEventListener("resize", onResize, { passive: true });
     mo.observe(document.body, { childList: true, subtree: true });
 
     // Kaydırırken titreme: fare yerinde dururken altından geçen kartlar hover'a girip kalkıyor, galeri
@@ -109,7 +116,8 @@ export default function AzureFx() {
     document.addEventListener("visibilitychange", onVis);
 
     return () => {
-      io.disconnect(); cio.disconnect(); mo.disconnect(); cancelAnimationFrame(moRaf);
+      io.disconnect(); cio.disconnect(); mo.disconnect(); cancelAnimationFrame(moRaf); cancelAnimationFrame(fitRaf);
+      removeEventListener("resize", onResize);
       removeEventListener("scroll", onScroll); removeEventListener("pointermove", onMove);
       removeEventListener("pointerdown", onDown, true); removeEventListener("click", onClickRescue, true);
       removeEventListener("pointerup", onUp, true); removeEventListener("pointercancel", onUp, true);
@@ -134,8 +142,9 @@ export default function AzureFx() {
       // belgedeki düzen konumu: offsetTop zinciri (görünme animasyonundaki translateY'den etkilenmez)
       const pos = (el: HTMLElement) => { let y = 0; for (let e: HTMLElement | null = el; e; e = e.offsetParent as HTMLElement | null) y += e.offsetTop; return y; };
       // hedefe en iyi ulaşılabilecek kaydırma (sayfa sonundaki hedef ekranın tepesine gelemez)
+      // offsetTop ve scroll-margin sayfa pikseli; sayfa kaydırması ekran pikseli (büyük ekran ölçeğinde × zoom, lib/page-zoom.ts)
       const best = (el: HTMLElement) => Math.min(document.documentElement.scrollHeight - window.innerHeight,
-        Math.max(0, pos(el) - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)));
+        Math.max(0, (pos(el) - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0)) * pageZoom()));
       const align = (smooth: boolean) => {
         const el = document.getElementById(id);
         if (done || !el) return;

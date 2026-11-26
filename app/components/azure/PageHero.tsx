@@ -30,11 +30,14 @@ type Props = {
 // Dik telefon ekranı: çerçeve fotoğrafın yalnız ortasını gösteriyor; HERO_DIK'te kesiti olan görselde o bölge iner
 // (scripts/hero-dik.mjs). Kesiti olmayan görsel (short çerçeve) tam çözünürlükte WebP iner.
 const DIK = "(max-aspect-ratio: 3/5)";
+// Telefon kesiti (26.11.2026 4K kaynaklar): 3x ekranda tam yoğunluk ~1920 px kesit indiriyordu (118 KB AVIF); 1200 px (71 KB)
+// gözle aynı net, ilk açılış hızlı kalır. 2x telefonda 66vh × 2 ≈ 1200 px seçilir.
+const DIK_SIZES = "(min-resolution: 2.5dppx) 44vh, 66vh";
 
 function HeroImage({ src, alt, position, short }: { src: string; alt: string; position?: string; short?: boolean }) {
   const k = HERO_DIK[src];
   // kesit çerçeve yüksekliğinde gösterilir: görünen genişlik ≈ çerçeve boyu (78vh / 56vh) × kesit oranı ≈ 0,65 ekran yüksekliği
-  const dik = k ? getImageProps({ src: k.src, alt, width: k.w, height: k.h, quality: 65, sizes: "66vh" }).props : null;
+  const dik = k ? getImageProps({ src: k.src, alt, width: k.w, height: k.h, quality: 65, sizes: DIK_SIZES }).props : null;
   // dik ve kareye yakın ekranlarda çerçeve fotoğrafın enini aşıyor (cover): tam çözünürlük insin diye 200vw; kısa (40vh) çerçevede
   // fotoğrafın neredeyse tamamı göründüğü için 125vw yeter (telefonda 2560 yerine 1440 iner)
   const { srcSet, sizes, ...img } = getImageProps({ src, alt, fill: true, quality: 65, sizes: short ? "(max-aspect-ratio: 1/1) 125vw, 100vw" : "(max-aspect-ratio: 1/1) 200vw, 100vw", loading: "eager", fetchPriority: "high" }).props;

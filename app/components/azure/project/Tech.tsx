@@ -10,6 +10,7 @@ import { Icon } from "./icons";
 import ProjectHead, { splitTitle } from "./ProjectHead";
 import "../meridian.css";
 import "./tech.css";
+import { pageZoom } from "@/lib/page-zoom";
 
 // Kart etiketi: "Özellik" yerine özelliğin kendisi (simge anahtarına göre)
 const KIND: Record<Locale, Record<string, string>> = {
@@ -36,7 +37,8 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
   const [prog, setProg] = useState(0);
   const n = d.items.length;
   const GAP = 18;
-  const step = () => (car.current?.querySelector<HTMLElement>(".az-tcard")?.getBoundingClientRect().width ?? 300) + GAP;
+  // sayfa pikseliyle (scrollLeft birimi); büyük ekran ölçeğinde getBoundingClientRect ekran pikseli verir (lib/page-zoom.ts)
+  const step = () => (car.current?.querySelector<HTMLElement>(".az-tcard")?.getBoundingClientRect().width ?? 300) / pageZoom() + GAP;
 
   // konum → ilerleme çizgisi
   useEffect(() => {
@@ -68,13 +70,14 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
     const layout = () => {
       // sahne ekrana sığsın: taşma kadar görsel kısalır (en az 160px)
       s.style.removeProperty("--fig");
-      const room = window.innerHeight - 88 - 16;
+      const z = pageZoom(); // ekran ölçüleri sayfa pikseline çevrilir
+      const room = window.innerHeight / z - 88 - 16;
       const over = st.offsetHeight - room;
       const fig = el.querySelector("figure");
-      if (over > 0 && fig) s.style.setProperty("--fig", `${Math.max(160, Math.floor(fig.getBoundingClientRect().height - over))}px`);
+      if (over > 0 && fig) s.style.setProperty("--fig", `${Math.max(160, Math.floor(fig.getBoundingClientRect().height / z - over))}px`);
       const max = Math.max(0, el.scrollWidth - el.clientWidth);
       const padTop = parseFloat(getComputedStyle(s).paddingTop) || 0;
-      const top = Math.max(88, (window.innerHeight - st.offsetHeight) / 2);
+      const top = Math.max(88, (window.innerHeight / z - st.offsetHeight) / 2);
       st.style.top = `${top}px`;
       s.style.height = `${padTop + st.offsetHeight + max}px`;
       return { max, padTop, top };
@@ -82,7 +85,7 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
     let geo = layout();
     const sync = () => {
       raf = 0;
-      const dd = geo.top - (s.getBoundingClientRect().top + geo.padTop); // sahne yapıştığından beri aşağı kaydırılan
+      const dd = geo.top - (s.getBoundingClientRect().top / pageZoom() + geo.padTop); // sahne yapıştığından beri aşağı kaydırılan
       el.scrollLeft = Math.min(geo.max, Math.max(0, dd));
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(sync); };
@@ -106,7 +109,7 @@ export default function Tech({ d, name, id, locale }: { d: ProjectTech; name: st
       const max = Math.max(0, el.scrollWidth - el.clientWidth);
       const target = Math.min(max, Math.max(0, (Math.round(el.scrollLeft / w) + dir) * w));
       const padTop = parseFloat(getComputedStyle(s).paddingTop) || 0;
-      window.scrollTo({ top: s.getBoundingClientRect().top + window.scrollY + padTop - (parseFloat(st.style.top) || 0) + target, behavior: "smooth" });
+      window.scrollTo({ top: s.getBoundingClientRect().top + window.scrollY + (padTop - (parseFloat(st.style.top) || 0) + target) * pageZoom(), behavior: "smooth" });
     } else el.scrollBy({ left: dir * w, behavior: "smooth" });
   };
   // klavye: şerit odaktayken ← → bir kart

@@ -5,9 +5,15 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import "./projects-carousel.css";
 import { HOME, type HomeContent } from "@/lib/azure/home";
+import { pageZoom } from "@/lib/page-zoom";
 import { PROJECTS, href, type Locale } from "@/lib/azure/site";
 import GlassArrow from "../GlassArrow";
 import LogoTag from "../LogoTag";
+
+// Kart 4:5 dikey, kapak fotoğrafı 16:9 yatay ve kartı doldurmak için yanlardan kesiliyor: gereken görsel genişliği kart
+// genişliğinin ~2,2 katı (yükseklik × 16/9). Eski değer (460px) kart genişliğini veriyordu, fotoğraf her ekranda ~1,7 kat
+// büyütülüp bulanık görünüyordu (26.11.2026 tasarımcı geri bildirimi). Masaüstü kart ≤ 472 px → 1050 px.
+const CARD_SIZES = "(min-width: 1100px) 1050px, (min-width: 700px) 107vw, 180vw";
 
 const Chevron = ({ dir }: { dir: 1 | -1 }) => (
   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden style={dir < 0 ? { transform: "scaleX(-1)" } : undefined}>
@@ -32,7 +38,8 @@ export default function ProjectsCarousel({ locale, content }: { locale: Locale; 
   const [pin, setPin] = useState(false); // fareli ekran: aşağı kaydırma kartları yana kaydırır
   const pinRef = useRef(false);
   const [prog, setProg] = useState(0); // 0–1 gerçek kaydırma konumu
-  const step = () => (car.current?.querySelector<HTMLElement>(".az-pc")?.getBoundingClientRect().width ?? 300) + 16;
+  // kart adımı sayfa pikseliyle (scrollLeft birimi); getBoundingClientRect büyük ekran ölçeğinde ekran pikseli verir (lib/page-zoom.ts)
+  const step = () => (car.current?.querySelector<HTMLElement>(".az-pc")?.getBoundingClientRect().width ?? 300) / pageZoom() + 16;
 
   useEffect(() => {
     const el = car.current; if (!el) return;
@@ -65,7 +72,7 @@ export default function ProjectsCarousel({ locale, content }: { locale: Locale; 
     const layout = () => {
       const max = Math.max(0, el.scrollWidth - el.clientWidth);
       const padTop = parseFloat(getComputedStyle(s).paddingTop) || 0;
-      const top = Math.max(88, (window.innerHeight - st.offsetHeight) / 2); // sahne ekranın ortasında (menünün altında)
+      const top = Math.max(88, (window.innerHeight / pageZoom() - st.offsetHeight) / 2); // sahne ekranın ortasında (menünün altında); hepsi sayfa pikseli
       st.style.top = `${top}px`;
       s.style.height = `${padTop + st.offsetHeight + max}px`;
       return { max, padTop, top };
@@ -73,7 +80,7 @@ export default function ProjectsCarousel({ locale, content }: { locale: Locale; 
     let geo = layout();
     const sync = () => {
       raf = 0;
-      const d = geo.top - (s.getBoundingClientRect().top + geo.padTop); // sahne yapıştığından beri aşağı kaydırılan
+      const d = geo.top - (s.getBoundingClientRect().top / pageZoom() + geo.padTop); // sahne yapıştığından beri aşağı kaydırılan (sayfa pikseli)
       el.scrollLeft = Math.min(geo.max, Math.max(0, d));
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(sync); };
@@ -104,7 +111,7 @@ export default function ProjectsCarousel({ locale, content }: { locale: Locale; 
       drag.moved = Math.max(drag.moved, Math.abs(dx));
       if (drag.moved <= 6) return; // basıp bırakmak normal tıklama: sürükleme modu yalnız gerçek harekette açılır
       el.classList.add("is-drag");
-      el.scrollLeft = drag.sl - dx;
+      el.scrollLeft = drag.sl - dx / pageZoom(); // fare ekran pikseli, scrollLeft sayfa pikseli
       const now = performance.now(), dt = now - drag.t;
       if (dt > 4) drag.v = drag.v * 0.6 + ((e.clientX - drag.lx) / dt) * 0.4;
       drag.t = now; drag.lx = e.clientX;
@@ -116,7 +123,7 @@ export default function ProjectsCarousel({ locale, content }: { locale: Locale; 
       // sürüklemenin hemen ardından gelen tıklama iptal; tıklama hiç gelmezse işaret takılı kalmasın
       suppress = true; window.setTimeout(() => { suppress = false; }, 120);
       const w = step(), max = el.scrollWidth - el.clientWidth;
-      const fling = performance.now() - d.t < 80 ? Math.max(-w, Math.min(w, -d.v * 220)) : 0;
+      const fling = performance.now() - d.t < 80 ? Math.max(-w, Math.min(w, (-d.v * 220) / pageZoom())) : 0;
       const target = Math.min(max, Math.max(0, Math.round((el.scrollLeft + fling) / w) * w));
       el.scrollTo({ left: target, behavior: "smooth" });
       window.setTimeout(() => el.classList.remove("is-drag"), 450);
@@ -138,7 +145,8 @@ export default function ProjectsCarousel({ locale, content }: { locale: Locale; 
       const target = Math.min(max, Math.max(0, (Math.round(el.scrollLeft / w) + d) * w));
       const padTop = parseFloat(getComputedStyle(s).paddingTop) || 0;
       const top = parseFloat(st.style.top) || 0;
-      window.scrollTo({ top: s.getBoundingClientRect().top + window.scrollY + padTop - top + target, behavior: "smooth" });
+      // sayfa kaydırması ekran pikseli: sayfa pikselindeki pay ve hedef ölçekle çarpılır
+      window.scrollTo({ top: s.getBoundingClientRect().top + window.scrollY + (padTop - top + target) * pageZoom(), behavior: "smooth" });
       return;
     }
     el.scrollBy({ left: d * w, behavior: "smooth" });
@@ -159,7 +167,7 @@ export default function ProjectsCarousel({ locale, content }: { locale: Locale; 
       <div className="az-car" ref={car} tabIndex={0} role="region" aria-label={t.kicker} onKeyDown={onKey}>
         {PROJECTS.map((p) => (
           <Link key={p.slug} className="az-pc" href={href(locale, `/${p.slug}`)} prefetch={false} draggable={false}>
-            <Img src={p.cover} sizes="(min-width: 1000px) 460px, 86vw" alt="" draggable={false} />
+            <Img src={p.cover} sizes={CARD_SIZES} alt="" draggable={false} />
             <div className="top"><span className="tags">{p.award && <span className="az-st gold">{p.award[locale]}</span>}{p.slug !== "lagoon-verde" && <span className="az-st">{p.status[locale]}</span>}</span>{p.logo ? <LogoTag src={p.logo} inline /> : null}</div>
             <div className="in"><small>{p.location[locale]}</small><h3>{p.name}</h3><p>{p.blurb[locale]}</p><div className="az-glassrow">{p.cta[locale]} <GlassArrow /></div></div>
           </Link>

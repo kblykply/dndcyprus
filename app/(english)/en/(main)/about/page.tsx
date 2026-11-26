@@ -31,7 +31,7 @@ export default async function HomePage() {
   const team = await getTeam("en"); // panelden düzenlenebilir (lib/content)
   return (
     <main className="relative w-full min-h-screen overflow-x-clip">
-      <CmsSection scope="hakkimizda" section="hero" lang="en" as={PageHero} size="compact" />
+      <CmsSection scope="hakkimizda" section="hero" lang="en" as={PageHero} size="compact" imagePosition="50% 35%" /> {/* grup fotoğrafı: geniş ekranda başlar kesilmesin (26.11.2026) */}
     <CmsSection scope="hakkimizda" section="kim" lang="en" as={AboutUs} />
 <CmsSection scope="hakkimizda" section="dndHomes" lang="en" as={AboutDndHomes} />
 <section className="az-section" id="founder" aria-label="Ozan Dökmecioğlu"><div className="az-wrap"><OzanCard locale="en" heading="h2" /></div></section>

@@ -6,6 +6,7 @@ import type { PageFlip } from "page-flip/dist/js/page-flip.module.js";
 import { PROJECT_PAGES } from "@/lib/azure/projects";
 import type { Locale } from "@/lib/azure/site";
 import "./catalog.css";
+import { pageZoom } from "@/lib/page-zoom";
 
 // Sayfa çevirme motoru: page-flip, La Joya sitesindeki menü kitabıyla aynı kurulum (React sarmalayıcısı yok).
 // Kitap bir kez kurulur; yalnız genişlik değişince (telefon döndürme, pencere boyutu) yeniden kurulur.
@@ -80,7 +81,8 @@ export default function AzureCatalog({ locale, project, near = true }: { locale:
       if (Math.abs(cw - lastW) < 2) return;
       lastW = cw;
       const two = cw >= 700;
-      const maxH = Math.max(300, Math.min(window.innerHeight * 0.74, window.innerHeight - 140, 900));
+      const vh = window.innerHeight / pageZoom(); // sayfa pikseli (büyük ekran ölçeği, lib/page-zoom.ts)
+      const maxH = Math.max(300, Math.min(vh * 0.74, vh - 140, 900));
       let pw = two ? cw / 2 : cw, ph = pw / def.aspect;
       if (ph > maxH) { ph = maxH; pw = ph * def.aspect; }
       const next = { w: Math.floor(pw), h: Math.floor(ph), two };

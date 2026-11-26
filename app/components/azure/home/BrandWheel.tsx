@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import "./brand-wheel.css";
+import { pageZoom } from "@/lib/page-zoom";
 
 export type WheelItem = { name: string; logo: string; href?: string; external?: boolean; muted?: boolean };
 
@@ -73,10 +74,10 @@ export default function BrandWheel({ items, label }: { items: WheelItem[]; label
       if (!drag) return;
       const dx = e.clientX - drag.x;
       drag.moved = Math.max(drag.moved, Math.abs(dx));
-      offset = drag.o - dx;
+      offset = drag.o - dx / pageZoom(); // fare ekran pikseli, kayma sayfa pikseli
       const now = performance.now();
       const dts = (now - drag.t) / 1000;
-      if (dts > 0) vel = Math.max(-2400, Math.min(2400, -(e.clientX - drag.lx) / dts));
+      if (dts > 0) vel = Math.max(-2400, Math.min(2400, -(e.clientX - drag.lx) / pageZoom() / dts));
       drag.t = now;
       drag.lx = e.clientX;
       if (!raf) layout();

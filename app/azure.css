@@ -149,13 +149,19 @@ body.az-lock { overflow: hidden; }
 
 /* ---- hero (home + inner pages) ---- */
 .az-hero { padding: 96px var(--gutter) 0; }
+/* Giriş çerçevesi oranı (26.11.2026, tasarımcı: geniş ekranda fotoğraf ince şerit olup başlar kesiliyor). Yükseklik eskiden yalnız
+   ekran yüksekliğine bağlıydı; ekran genişledikçe çerçeve 4:1–5:1 şeride dönüyordu. Artık genişlik de yüksekliği büyütür (ekran
+   yüksekliğinin belli oranını aşmadan) ve 32:9 gibi aşırı geniş ekranda çerçeve en çok ~3,2–4,5:1 olur, ortada durur.
+   1920 ve altı genişlikte değerler eskisiyle aynı çıkar (bölümlerin 1920'deki boyları değişmez); telefon kuralları aşağıda ayrı. */
+.az-hero { --hw: calc(100vw - 2 * var(--gutter)); }
 .az-hero .frame {
-  position: relative; border-radius: 36px; overflow: hidden; min-height: min(86vh, 860px);
+  --hh: max(min(86vh, 860px), min(var(--hw) / 2.3, 88vh));
+  position: relative; border-radius: 36px; overflow: hidden; min-height: var(--hh);
   display: flex; align-items: flex-end; isolation: isolate; background: var(--sea-deep);
-  max-width: 100%;
+  max-width: min(100%, var(--hh) * 3.2); margin-inline: auto;
 }
-.az-hero.compact .frame { min-height: min(62vh, 640px); }
-.az-hero.short .frame { min-height: min(46vh, 480px); }
+.az-hero.compact .frame { --hh: max(min(62vh, 640px), min(var(--hw) / 3, 78vh)); max-width: min(100%, var(--hh) * 3.4); }
+.az-hero.short .frame { --hh: max(min(46vh, 480px), min(var(--hw) / 4, 60vh)); max-width: min(100%, var(--hh) * 4.5); }
 .az-hero .frame .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 /* ana sayfa: afiş videonun altındaki görsel; "hareketi azalt" açıkken duran video ilk karesini göstermesin, afiş görünsün */
 @media (prefers-reduced-motion: reduce) { #top.az-hero video.bg { visibility: hidden; } }

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { HOME, type HomeContent } from "@/lib/azure/home";
 import type { Locale } from "@/lib/azure/site";
 import Image from "next/image";
+import { pageZoom } from "@/lib/page-zoom";
 
 /**
  * Scrollytelling: sol sütunda adımlar kayar, sağda yapışkan görsel değişir.
@@ -44,7 +45,7 @@ export default function Story({ locale, content }: { locale: Locale; content?: H
         // Masaüstü: çizgi görselle birlikte iner; yapışkan kaydırma mesafesi kısa kalırsa (uzun görsel, kısa metin)
         // çizgi orantılı hızlanır, böylece her adım sırayla etkinleşir ve son adım tam bölüm sonunda etkin olur.
         const b = box.getBoundingClientRect();
-        const off = offset();
+        const off = offset() * pageZoom(); // offsetTop/offsetHeight sayfa pikseli, getBoundingClientRect ekran pikseli
         const tops = steps.map((s) => s.getBoundingClientRect().top - b.top);
         const travel = b.height - r.height;
         const t = Math.max(0, r.top - b.top);

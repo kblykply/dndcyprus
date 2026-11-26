@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { pageZoom } from "@/lib/page-zoom";
 
 /**
  * Altbilgi: logo + sosyal simge satırı, adres metninin gerçekte bittiği yerde biter.
@@ -23,7 +24,8 @@ export default function FooterFit() {
         range.selectNodeContents(p);
         for (const r of range.getClientRects()) right = Math.max(right, r.right);
       });
-      if (right > left) top.style.maxWidth = `${Math.ceil(right - left)}px`;
+      // ölçüler ekran pikseli, maxWidth sayfa pikseli (büyük ekran ölçeği, lib/page-zoom.ts)
+      if (right > left) top.style.maxWidth = `${Math.ceil((right - left) / pageZoom())}px`;
     };
     fit();
     const ro = new ResizeObserver(fit);

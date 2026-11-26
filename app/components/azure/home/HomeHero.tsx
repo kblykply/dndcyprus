@@ -8,6 +8,9 @@ import HeroSlider, { type Slide } from "./HeroSlider";
 
 // Dik telefon ekranı: çerçeve fotoğrafın yalnız ortasını gösteriyor; oraya aynı bölgenin kesilmiş kopyası iner
 const DIK = "(max-aspect-ratio: 2/3)";
+// Telefon kesiti (26.11.2026 4K kaynaklar): 3x ekranda tam yoğunluk ~1920 px kesit indiriyordu (118 KB AVIF); 1200 px (71 KB)
+// gözle aynı net, ilk açılış hızlı kalır. 2x telefonda 66vh × 2 ≈ 1200 px seçilir.
+const DIK_SIZES = "(min-resolution: 2.5dppx) 44vh, 66vh";
 
 // Vitrin görselleri (müşterinin istediği sıra: NeoCity → Lagoon Verde → La Joya → Perla → Perla II)
 const IMG: Partial<Record<ProjectSlug, string>> = {
@@ -33,7 +36,7 @@ export default function HomeHero({ locale, content }: { locale: Locale; content?
     const first = k === 0;
     const { srcSet, sizes, ...img } = getImageProps({ src, alt: "", fill: true, quality: 65, sizes: "100vw", ...(first ? { loading: "eager" as const, fetchPriority: "high" as const } : {}) }).props;
     const d = HERO_DIK[src];
-    const dik = d ? getImageProps({ src: d.src, alt: "", width: d.w, height: d.h, quality: 65, sizes: "66vh" }).props : null; // görünen genişlik ≈ çerçeve boyu × kesit oranı
+    const dik = d ? getImageProps({ src: d.src, alt: "", width: d.w, height: d.h, quality: 65, sizes: DIK_SIZES }).props : null; // görünen genişlik ≈ çerçeve boyu × kesit oranı
     if (first) {
       if (dik) preload(dik.src, { as: "image", imageSrcSet: dik.srcSet, imageSizes: dik.sizes, fetchPriority: "high", media: DIK });
       preload(img.src, { as: "image", imageSrcSet: srcSet, imageSizes: sizes, fetchPriority: "high", media: dik ? `not all and ${DIK}` : undefined });
