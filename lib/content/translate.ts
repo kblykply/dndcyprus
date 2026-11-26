@@ -168,10 +168,13 @@ let modelCache: { names: string[]; at: number } | null = null;
 
 /** Kotası dolan (429) ya da yoğun (503) model bir süre sona alınır: her kayıtta aynı hatayı beklemeyelim */
 const cooldown = new Map<string, number>();
-const COOL_MS = { quota: 15 * 60_000, busy: 2 * 60_000 };
+const COOL_MS = { quota: 15 * 60_000, busy: 2 * 60_000, silent: 10 * 60_000 };
+/** Son başarılı model öne alınır: ücretsiz katmanda en yeni modeller sık sık kota/yoğunluk hatası veriyor */
+let lastGood: string | null = null;
 export function orderByCooldown(models: string[], now = Date.now()): string[] {
-  const ready = models.filter((m) => (cooldown.get(m) ?? 0) <= now);
-  const cooling = models.filter((m) => (cooldown.get(m) ?? 0) > now).sort((a, b) => (cooldown.get(a) ?? 0) - (cooldown.get(b) ?? 0));
+  const list = lastGood && models.includes(lastGood) ? [lastGood, ...models.filter((m) => m !== lastGood)] : models;
+  const ready = list.filter((m) => (cooldown.get(m) ?? 0) <= now);
+  const cooling = list.filter((m) => (cooldown.get(m) ?? 0) > now).sort((a, b) => (cooldown.get(a) ?? 0) - (cooldown.get(b) ?? 0));
   return [...ready, ...cooling];
 }
 
@@ -212,7 +215,7 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
   const models = orderByCooldown(await resolveModels(key));
   const out: Record<string, Record<TargetLocale, string>> = {};
   const groups = chunk(todo);
-  // Süre sınırı: kayıt düğmesi dakikalarca beklemesin. Tek istek en çok 30 sn; bütün çeviri 40 sn (+20 sn / ek parça, en çok 4 dk).
+  // Süre sınırı: kayıt düğmesi dakikalarca beklemesin. Tek istek en çok 20 sn (uzun metinde 30); bütün çeviri 40 sn (+20 sn / ek parça, en çok 4 dk).
   const deadline = Date.now() + Math.min(240_000, 40_000 + 20_000 * (groups.length - 1));
   const slow = "Çeviri servisi zamanında yanıt vermedi; Türkçe kaydedildi, biraz sonra yeniden kaydedin.";
   for (const group of groups) {
@@ -226,7 +229,7 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
         if (left < 3000) return { ok: false, error: last && last !== slow ? `${slow} (${last})` : slow };
         const t0 = Date.now();
         try {
-          const r = await callGemini(model, key, prompt, Math.min(30_000, left), thinking);
+          const r = await callGemini(model, key, prompt, Math.min(prompt.length < 4000 ? 20_000 : 30_000, left), thinking);
           console.info("TRANSLATE_CALL", { model, ok: r.ok, status: r.ok ? 200 : r.status, ms: Date.now() - t0 });
           if (!r.ok) {
             last = r.status === 429 ? "Çeviri servisinin dakikalık/günlük ücretsiz sınırı doldu; biraz sonra yeniden kaydedin." : r.error;
@@ -257,11 +260,14 @@ export async function translateFromTurkish(items: TranslateItem[], context?: str
             continue;
           }
           Object.assign(out, parsed.out);
+          lastGood = model;
+          cooldown.delete(model);
           done = true;
         } catch (e) {
           const timedOut = /timeout|aborted/i.test(`${(e as Error).name} ${(e as Error).message}`);
           console.info("TRANSLATE_CALL", { model, ok: false, status: timedOut ? "timeout" : "network", ms: Date.now() - t0 });
           last = timedOut ? slow : `Çeviri servisine ulaşılamadı: ${(e as Error).message}`;
+          if (timedOut) cooldown.set(model, Date.now() + COOL_MS.silent);
           break; // yanıt vermeyen model aynı istekle yeniden beklenmez → sıradaki model
         }
       }

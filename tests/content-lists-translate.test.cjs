@@ -170,3 +170,24 @@ test("translation: a model out of free quota is skipped at once and moved to the
   assert.equal((await live.translateFromTurkish([{ id: "x", text: "Selam", kind: "text" }])).ok, true);
   assert.deepEqual(calls, ["gemini-3.5-flash-lite"]);
 });
+
+test("translation: the last model that worked is tried first, a silent model waits its turn", async () => {
+  const calls = [];
+  const answer = JSON.stringify([{ id: "x", en: "Hi", de: "Hallo", ru: "Привет", pl: "Cześć" }]);
+  const fetch = async (url) => {
+    const u = String(url);
+    if (u.includes("/models?")) return Response.json({ models: ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"].map((n) => ({ name: `models/${n}`, supportedGenerationMethods: ["generateContent"] })) });
+    const model = u.match(/models\/([^:]+):/)[1];
+    calls.push(model);
+    if (model === "gemini-3.8-flash") { const e = new Error("timeout"); e.name = "TimeoutError"; throw e; }
+    if (model === "gemini-3.6-flash") return Response.json({ error: { message: "overloaded" } }, { status: 503 });
+    return Response.json({ candidates: [{ content: { parts: [{ text: answer }] } }] });
+  };
+  const live = loadTypeScript("lib/content/translate.ts", { env: { GEMINI_API_KEY: "deneme" }, globals: { fetch, console: { ...console, info: () => {} } } });
+  assert.equal((await live.translateFromTurkish([{ id: "x", text: "Merhaba", kind: "text" }])).ok, true);
+  assert.deepEqual(calls, ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"]);
+  calls.length = 0;
+  assert.equal((await live.translateFromTurkish([{ id: "x", text: "Selam", kind: "text" }])).ok, true);
+  assert.deepEqual(calls, ["gemini-3.5-flash-lite"]);
+  assert.deepEqual([...live.orderByCooldown(["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"])], ["gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.8-flash"]);
+});
