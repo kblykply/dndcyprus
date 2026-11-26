@@ -132,6 +132,10 @@ export default async function TrafficPage(props: { searchParams?: Promise<{ done
   const leadsInPeriod = inRange(all, b.from).length;
   const t = totals.ok ? totals.data.totals : [];
   const sessions = t[2] ?? 0;
+  // Dönüşüm GA4'ün kendi ölçtüğü site içi iletişimden: paneldeki talepler Meta formu, telefon vb. tüm kaynakları içerdiği ve GA4 yalnız
+  // çerez izni verenleri saydığı için ikisini bölmek %1200 gibi anlamsız oran veriyordu (26.11.2026)
+  const evCount = (name: string) => (events.ok ? events.data.rows.find((r) => r.dims[0] === name)?.vals[0] ?? 0 : 0);
+  const siteContacts = ["generate_lead", "contact_whatsapp", "contact_phone", "contact_email"].reduce((n, e) => n + evCount(e), 0);
   const byKey = new Map((series.ok ? series.data.rows : []).map((r) => [ga4TimeKey(r.dims[0]), r.vals[0]]));
   const seriesData = b.keys.map((k) => ({ label: k.label, title: k.title, count: byKey.get(k.key) ?? 0 }));
   const regionTr = new Intl.DisplayNames(["tr"], { type: "region" });
@@ -159,9 +163,9 @@ export default async function TrafficPage(props: { searchParams?: Promise<{ done
         <Kpi label="Oturum" value={fmt(sessions)} icon={<Activity className="h-5 w-5" strokeWidth={1.8} aria-hidden />} sub={`${fmt(t[3] ?? 0)} sayfa görüntüleme`} />
         <Kpi
           label="Talebe dönüşüm"
-          value={sessions ? `%${((leadsInPeriod / sessions) * 100).toFixed(2).replace(".", ",")}` : "—"}
+          value={sessions ? `%${((siteContacts / sessions) * 100).toFixed(2).replace(".", ",")}` : "—"}
           icon={<MousePointerClick className="h-5 w-5" strokeWidth={1.8} aria-hidden />}
-          sub={`${leadsInPeriod} talep / ${fmt(sessions)} oturum`}
+          sub={`${fmt(evCount("generate_lead"))} form + ${fmt(siteContacts - evCount("generate_lead"))} WhatsApp/telefon/e-posta · ${fmt(sessions)} oturum · panelde tüm kaynaklardan ${fmt(leadsInPeriod)} talep`}
         />
         <Kpi
           label="Şu an sitede"
