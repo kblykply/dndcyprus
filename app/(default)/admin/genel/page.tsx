@@ -12,7 +12,7 @@ import { clarityConfigured } from "@/lib/clarity";
 import { loadMetaSyncState, metaLeadsConfigured } from "@/lib/meta-leads";
 import { dueFollowUps, followUpLabel, followUpState } from "@/lib/lead-followup";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
-import { LEAD_STATUSES, cyprusDateTime, sourceGroup, statusInfo } from "@/lib/lead-status";
+import { LEAD_STATUSES, cyprusDateTime, sourceGroup, statusInfo, isSalesLead } from "@/lib/lead-status";
 import { bucketCounts, changePct, groupLeads, inRange, isQualified, overviewPeriod, periodBuckets, sourceColor } from "@/lib/lead-stats";
 import { AreaChart, BarList, ChartCard, Donut, ProjectBreakdown } from "../charts";
 import PeriodTabs from "../PeriodTabs";
@@ -62,8 +62,10 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
     select: { id: true, createdAt: true, name: true, status: true, source: true, campaign: true, project: true, unitType: true, form: true, assignee: true, followUpAt: true },
   });
   const b = periodBuckets(period, now, all);
-  const cur = inRange(all, b.from);
-  const prev = b.prevFrom ? inRange(all, b.prevFrom, b.prevTo) : [];
+  const curAll = inRange(all, b.from);
+  // satış rakamları yalnız alıcı talepleri: "Satış dışı" (tedarikçi, iş başvurusu…) sayılmaz
+  const cur = curAll.filter(isSalesLead);
+  const prev = b.prevFrom ? inRange(all.filter(isSalesLead), b.prevFrom, b.prevTo) : [];
   const series = bucketCounts(cur, b);
   const qualified = cur.filter((l) => isQualified(l.status)).length;
   const sold = cur.filter((l) => statusInfo(l.status).key === "satis").length;
@@ -76,7 +78,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
       byStatus: Object.fromEntries(LEAD_STATUSES.map((st) => [st.key, cur.filter((l) => l.project === g.key && statusInfo(l.status).key === st.key).length])),
     }));
   const noProject = cur.filter((l) => !l.project).length;
-  const statusCounts = LEAD_STATUSES.map((s) => ({ key: s.key, label: s.label, count: cur.filter((l) => statusInfo(l.status).key === s.key).length }));
+  const statusCounts = LEAD_STATUSES.map((s) => ({ key: s.key, label: s.label, count: curAll.filter((l) => statusInfo(l.status).key === s.key).length }));
   const lastWeb = all.find((l) => l.form && l.form !== "panel" && l.form !== "meta-lead");
   const metaOn = metaLeadsConfigured();
   const metaState = metaOn ? await loadMetaSyncState() : null;

@@ -116,6 +116,7 @@ export type Group = { key: string; label: string; count: number; qualified: numb
 export function groupLeads<T extends StatLead>(leads: T[], keyOf: (l: T) => { key: string; label: string } | null): Group[] {
   const m = new Map<string, Group>();
   for (const l of leads) {
+    if (statusInfo(l.status).key === "satis_disi") continue; // alıcı olmayan kayıt raporlara girmez
     const k = keyOf(l);
     if (!k) continue;
     const g = m.get(k.key) ?? { key: k.key, label: k.label, count: 0, qualified: 0, sold: 0, lost: 0 };

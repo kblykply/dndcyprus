@@ -8,6 +8,8 @@ export const LEAD_STATUSES = [
   { key: "gorusuluyor", label: "Görüşülüyor", pill: "border-blue-200 bg-blue-50 text-blue-700", dot: "bg-blue-500" },
   { key: "satis", label: "Satış", pill: "border-teal-200 bg-teal-50 text-teal-700", dot: "bg-teal-500" },
   { key: "olumsuz", label: "Olumsuz", pill: "border-rose-200 bg-rose-50 text-rose-600", dot: "bg-rose-400" },
+  // Alıcı olmayan kayıt (tedarikçi teklifi, iş başvurusu, reklam/hizmet satışı…): listede kalır, satış rakamlarına girmez (26.11.2026)
+  { key: "satis_disi", label: "Satış dışı", pill: "border-violet-200 bg-violet-50 text-violet-700", dot: "bg-violet-400" },
 ] as const;
 
 export type LeadStatus = (typeof LEAD_STATUSES)[number]["key"];
@@ -18,6 +20,16 @@ export function isLeadStatus(v: unknown): v is LeadStatus {
 
 export function statusInfo(v: string | null | undefined) {
   return LEAD_STATUSES.find((s) => s.key === v) ?? LEAD_STATUSES[0];
+}
+
+/** Satış talebi mi? "Satış dışı" işaretlenenler (tedarikçi, iş başvurusu vb.) özet, dönüşüm, rapor ve takipte sayılmaz */
+export const isSalesLead = (l: { status: string | null }) => statusInfo(l.status).key !== "satis_disi";
+
+/** Talebin geldiği yer, ekibin okuyacağı biçimde: "Web sitesi · İletişim formu", "Meta reklam formu", "Panelden eklendi" */
+export function formOrigin(form: string | null | undefined) {
+  if (!form) return "Web sitesi formu";
+  if (form === "meta-lead" || form === "meta-mesaj" || form === "panel") return formLabel(form);
+  return `Web sitesi · ${formLabel(form)}`;
 }
 
 /** Kaynak: formun kaydettiği "utm_source / utm_medium" metninden ekibin okuyacağı gruba */
@@ -225,7 +237,8 @@ export function statusCounts(leads: { status: string }[]) {
 }
 
 /** Özet kartları: tüm talepler üzerinden (filtreden bağımsız) */
-export function leadSummary(leads: LeadLike[], now = new Date()) {
+export function leadSummary(allLeads: LeadLike[], now = new Date()) {
+  const leads = allLeads.filter(isSalesLead);
   const thisMonth = cyprusMonthStart(now);
   const lastMonth = cyprusMonthStart(now, -1);
   const months = Array.from({ length: 7 }, (_, i) => cyprusMonthStart(now, i - 6));

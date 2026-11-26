@@ -78,7 +78,7 @@ export function dueFollowUps<T extends { followUpAt?: Date | null; status?: stri
   const today = cyprusDayKey(now);
   return leads
     .filter((l) => l.followUpAt && (l.followUpAt.getTime() < now.getTime() || cyprusDayKey(l.followUpAt) === today))
-    .filter((l) => l.status !== "satis" && l.status !== "olumsuz")
+    .filter((l) => l.status !== "satis" && l.status !== "olumsuz" && l.status !== "satis_disi")
     .sort((a, b) => a.followUpAt!.getTime() - b.followUpAt!.getTime());
 }
 

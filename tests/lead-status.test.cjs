@@ -43,7 +43,7 @@ test("filters: status, Turkish-insensitive search, phone digits, project, source
   assert.deepEqual(ids({ donem: "30g" }), [1, 2, 3]);
   // Bu ay: Kıbrıs saatiyle 1 Kasım 00:00 = 31 Ekim 22:00 UTC; 30 Ekim 21:59 UTC dahil değil
   assert.deepEqual(ids({ donem: "bu-ay" }), [1, 2]);
-  assert.equal(JSON.stringify(m.statusCounts(leads)), JSON.stringify({ tumu: 4, yeni: 2, arandi: 1, gorusuluyor: 0, satis: 1, olumsuz: 0 }));
+  assert.equal(JSON.stringify(m.statusCounts(leads)), JSON.stringify({ tumu: 4, yeni: 2, arandi: 1, gorusuluyor: 0, satis: 1, olumsuz: 0, satis_disi: 0 }));
 });
 
 test("summary cards", () => {

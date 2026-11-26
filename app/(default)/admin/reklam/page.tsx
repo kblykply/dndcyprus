@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { Megaphone, BadgeCheck, UserCheck, PieChart } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
-import { sourceGroup, statusInfo } from "@/lib/lead-status";
+import { isSalesLead, sourceGroup, statusInfo } from "@/lib/lead-status";
 import { AD_DIMENSIONS, adKey, groupLeads, inRange, isQualified, overviewPeriod, periodBuckets, sourceColor, type AdDimension } from "@/lib/lead-stats";
 import { BarList, ChartCard, Empty } from "../charts";
 import PeriodTabs from "../PeriodTabs";
@@ -30,7 +30,7 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
     select: { id: true, createdAt: true, name: true, status: true, source: true, campaign: true, project: true, form: true, pageUrl: true, attribution: true },
   });
   const b = periodBuckets(period, now, all);
-  const cur = inRange(all, b.from);
+  const cur = inRange(all, b.from).filter(isSalesLead); // "Satış dışı" (tedarikçi, iş başvurusu…) reklam rakamlarına girmez
   const paid = cur.filter((l) => PAID.has(sourceGroup(l.source).key));
   const paidQualified = paid.filter((l) => isQualified(l.status)).length;
   const paidSold = paid.filter((l) => statusInfo(l.status).key === "satis").length;

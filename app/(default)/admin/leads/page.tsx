@@ -16,6 +16,7 @@ import {
   filterLeads,
   formLabel,
   leadSummary,
+  formOrigin,
   sourceGroup,
   statusCounts,
   statusInfo,
@@ -576,6 +577,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           </td>
                           <td className={`${TD} whitespace-nowrap text-slate-700`}>
                             {r.source ? sourceGroup(r.source).label : <span className="text-slate-400">—</span>}
+                            <span className="block text-xs text-slate-500">{formOrigin(r.form)}</span>
                             {r.campaign ? <span className="block max-w-[11rem] truncate text-xs text-slate-400">{r.campaign}</span> : null}
                           </td>
                           <td className={TD}>
@@ -614,6 +616,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                         <span className="mt-1 block text-xs text-slate-500">
                           {r.phone || r.email || "—"}
                           {r.source ? ` · ${sourceGroup(r.source).label}` : ""}
+                          {` · ${formOrigin(r.form)}`}
                         </span>
                         <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
                       </Link>
@@ -647,7 +650,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
               <div className="min-w-0 flex-1">
                 <h2 className="break-words text-xl leading-tight">{detail.name}</h2>
                 <p className="mt-0.5 text-xs text-slate-500">
-                  {cyprusDateTime(detail.createdAt).date} {cyprusDateTime(detail.createdAt).time} · {formLabel(detail.form)}
+                  {cyprusDateTime(detail.createdAt).date} {cyprusDateTime(detail.createdAt).time} · {formOrigin(detail.form)}
                 </p>
               </div>
               {!legacy ? (
