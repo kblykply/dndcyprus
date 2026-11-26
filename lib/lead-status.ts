@@ -26,9 +26,13 @@ export function statusInfo(v: string | null | undefined) {
 export const isSalesLead = (l: { status: string | null }) => statusInfo(l.status).key !== "satis_disi";
 
 /** Talebin geldiği yer, ekibin okuyacağı biçimde: "Web sitesi · İletişim formu", "Meta reklam formu", "Panelden eklendi" */
-export function formOrigin(form: string | null | undefined) {
+export function formOrigin(form: string | null | undefined, source?: string | null) {
   if (!form) return "Web sitesi formu";
-  if (form === "meta-lead" || form === "meta-mesaj" || form === "panel") return formLabel(form);
+  if (form === "meta-mesaj") {
+    const src = (source || "").toLowerCase();
+    return src.startsWith("instagram") ? "Instagram mesajı" : src.startsWith("facebook") ? "Messenger mesajı" : formLabel(form);
+  }
+  if (form === "meta-lead" || form === "panel") return formLabel(form);
   return `Web sitesi · ${formLabel(form)}`;
 }
 
@@ -290,7 +294,7 @@ export const FORM_LABELS: Record<string, string> = {
   lead: "Proje formu",
   form: "Proje formu",
   "meta-lead": "Meta reklam formu",
-  "meta-mesaj": "Meta reklam mesajı (Instagram/Facebook)",
+  "meta-mesaj": "Meta mesajı (Messenger / Instagram)",
   panel: "Panelden eklendi",
 };
 

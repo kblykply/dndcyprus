@@ -54,6 +54,10 @@
       "schedule": "*/10 * * * *"
     },
     {
+      "path": "/api/cron/meta-mesaj",
+      "schedule": "5-59/10 * * * *"
+    },
+    {
       "path": "/api/cron/ceviri",
       "schedule": "*/10 * * * *"
     }

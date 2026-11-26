@@ -109,7 +109,7 @@ export const phoneKey = (p: string | null | undefined) => {
 
 /* ---------------- Graph API ---------------- */
 
-async function graph<T>(path: string, token: string, params: Record<string, string> = {}): Promise<T> {
+export async function graph<T>(path: string, token: string, params: Record<string, string> = {}): Promise<T> {
   const url = path.startsWith("https://") ? new URL(path) : new URL(`https://graph.facebook.com/${graphVersion()}/${path}`);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
   const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store", signal: AbortSignal.timeout(20_000) });
@@ -119,12 +119,12 @@ async function graph<T>(path: string, token: string, params: Record<string, stri
     // Teşhis: hangi adımın neden reddedildiği (yalnız yol ve Meta'nın mesajı; sorgu dizesi ve jeton yazılmaz)
     console.warn("META_GRAPH_ERROR", { step: url.pathname.replace(/\/\d{6,}/g, "/:id"), status: r.status, code, subcode: body?.error?.error_subcode, type: body?.error?.type, message: (body?.error?.message || "").slice(0, 240) });
     const msg = code === 190 ? "Meta anahtarı geçersiz ya da iptal edilmiş." : code === 10 || code === 200 ? "Meta izni eksik (talep erişimi verilmemiş olabilir)." : body?.error?.message || `Meta ${r.status}`;
-    throw new Error(msg);
+    throw Object.assign(new Error(msg), { code, subcode: body?.error?.error_subcode });
   }
   return body;
 }
 
-async function allPages<T>(path: string, token: string, params: Record<string, string>, max = 50): Promise<T[]> {
+export async function allPages<T>(path: string, token: string, params: Record<string, string>, max = 50): Promise<T[]> {
   const out: T[] = [];
   let next: string | null = null;
   let first = true;

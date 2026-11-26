@@ -10,6 +10,7 @@ import { prisma } from "@/lib/prisma";
 import { ga4Configured } from "@/lib/ga4";
 import { clarityConfigured } from "@/lib/clarity";
 import { loadMetaSyncState, metaLeadsConfigured } from "@/lib/meta-leads";
+import { loadMetaMsgState } from "@/lib/meta-messages";
 import { dueFollowUps, followUpLabel, followUpState } from "@/lib/lead-followup";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { LEAD_STATUSES, cyprusDateTime, sourceGroup, statusInfo, isSalesLead } from "@/lib/lead-status";
@@ -79,17 +80,19 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
     }));
   const noProject = cur.filter((l) => !l.project).length;
   const statusCounts = LEAD_STATUSES.map((s) => ({ key: s.key, label: s.label, count: curAll.filter((l) => statusInfo(l.status).key === s.key).length }));
-  const lastWeb = all.find((l) => l.form && l.form !== "panel" && l.form !== "meta-lead");
+  const lastWeb = all.find((l) => l.form && l.form !== "panel" && l.form !== "meta-lead" && l.form !== "meta-mesaj");
   const metaOn = metaLeadsConfigured();
-  const metaState = metaOn ? await loadMetaSyncState() : null;
+  const [metaState, msgState] = metaOn ? await Promise.all([loadMetaSyncState(), loadMetaMsgState()]) : [null, null];
   const metaTotal = all.filter((l) => l.form === "meta-lead").length;
+  const msgTotal = all.filter((l) => l.form === "meta-mesaj").length;
+  const msgNote = !msgState?.lastRunAt ? "" : msgState.error ? ` · Mesajlar: ${msgState.error}` : ` · ${msgTotal} mesaj talebi (Messenger / Instagram)`;
   const metaNote = !metaOn
     ? "Reklam formu talepleri için Meta onayı bekleniyor"
     : !metaState?.lastRunAt
       ? "Bağlandı, ilk çekim birkaç dakika içinde"
       : metaState.error
         ? `Son denemede hata: ${metaState.error}`
-        : `${metaTotal} reklam talebi · son kontrol ${cyprusDateTime(new Date(metaState.lastRunAt)).time}`;
+        : `${metaTotal} reklam formu talebi${msgNote} · son kontrol ${cyprusDateTime(new Date(metaState.lastRunAt)).time}`;
   const due = dueFollowUps(all, now);
   const periodLabel = { "30g": "son 30 gün", "90g": "son 90 gün", "12a": "son 12 ay", tumu: "tüm zamanlar" }[period];
 

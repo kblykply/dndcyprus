@@ -10,6 +10,7 @@ import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, safeAdminNext, verifyAdminSession } from "@/lib/admin-session";
 import { MANUAL_CHANNELS, isLeadStatus, manualChannel, parseLeadForm, statusInfo } from "@/lib/lead-status";
 import { metaLeadsConfigured, syncMetaLeads } from "@/lib/meta-leads";
+import { syncMetaMessages } from "@/lib/meta-messages";
 import { cleanAssignee, cyprusLocalToDate, dateToCyprusInputs } from "@/lib/lead-followup";
 
 const AUTHOR_COOKIE = "admin_author";
@@ -239,17 +240,23 @@ export async function deleteLeadNoteLive(_prev: LiveState, formData: FormData): 
   return { ok: true, message: "Not silindi.", at: Date.now() };
 }
 
-/** Meta reklam formlarındaki yeni talepleri hemen çeker (normalde 10 dakikada bir kendiliğinden çekilir) */
+/** Meta'daki yeni talepleri hemen çeker: reklam formları + Messenger / Instagram mesajları (normalde 10 dakikada bir kendiliğinden) */
 export async function pullMetaLeadsLive(): Promise<LiveState> {
   await requireAdmin();
   if (!metaLeadsConfigured()) return { error: "Meta bağlantısı henüz kurulmadı (anahtar bekleniyor).", at: Date.now() };
-  const r = await syncMetaLeads();
+  const [r, s] = await Promise.all([syncMetaLeads(), syncMetaMessages()]);
   revalidatePath("/admin", "layout");
-  if (r.error) return { error: `Meta: ${r.error}`, at: Date.now() };
-  const n = r.inserted ?? 0;
-  const m = r.merged ?? 0;
-  const msg = n || m ? [n ? `${n} yeni talep eklendi` : "", m ? `${m} talep mevcut kişiye not düşüldü` : ""].filter(Boolean).join(", ") + "." : "Meta'da yeni talep yok.";
-  return { ok: true, message: msg, at: Date.now() };
+  const parts = [
+    r.inserted ? `${r.inserted} form talebi` : "",
+    s.inserted ? `${s.inserted} mesaj talebi eklendi` : "",
+    s.updated ? `${s.updated} mesaj talebi güncellendi` : "",
+    (r.merged ?? 0) + (s.merged ?? 0) ? `${(r.merged ?? 0) + (s.merged ?? 0)} talep mevcut kişiye not düşüldü` : "",
+  ].filter(Boolean);
+  const msg = parts.length ? `${parts.join(", ")}.` : "Meta'da yeni talep yok.";
+  if (r.error && s.error) return { error: `Meta: ${r.error} · Mesajlar: ${s.error}`, at: Date.now() };
+  if (r.error) return { error: `Meta formları: ${r.error}`, at: Date.now() };
+  // mesaj izni henüz yoksa form çekimi yine çalışır; uyarı mesajın sonuna eklenir
+  return { ok: true, message: s.error ? `${msg} Mesajlar okunamadı: ${s.error}` : msg, at: Date.now() };
 }
 
 const absolute = (d: Date) => {
