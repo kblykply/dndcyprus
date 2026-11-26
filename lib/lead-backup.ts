@@ -21,6 +21,8 @@ export type BackupRow = {
   campaign?: string | null;
   pageUrl?: string | null;
   status?: string | null;
+  assignee?: string | null;
+  followUpAt?: Date | string | null;
   notes?: { text: string; author?: string | null; createdAt: Date | string }[];
 };
 
@@ -32,6 +34,8 @@ const COLS: [string, (r: BackupRow) => unknown][] = [
   ["Proje", (r) => r.project],
   ["Daire tipi", (r) => r.unitType],
   ["Durum", (r) => statusInfo(r.status).label],
+  ["Sorumlu", (r) => r.assignee],
+  ["Sonraki arama (Kıbrıs)", (r) => (r.followUpAt ? cyprusTime(new Date(r.followUpAt)) : "")],
   ["Konu", (r) => r.subject],
   ["Mesaj", (r) => r.message],
   ["Notlar", (r) => (r.notes || []).map((n) => `${cyprusTime(new Date(n.createdAt))} ${n.author || ""}: ${n.text}`).join("\n")],

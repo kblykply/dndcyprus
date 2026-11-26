@@ -26,11 +26,15 @@ model ContactMessage {
   // Satış takibi (20261125180000_lead_status_notes): yeni | arandi | gorusuluyor | satis | olumsuz
   status      String     @default("yeni")
   statusAt    DateTime?
+  // Takip (20261126060000_lead_followup): talebi kim arayacak, bir sonraki arama ne zaman
+  assignee    String?
+  followUpAt  DateTime?
   notes       LeadNote[]
   createdAt   DateTime   @default(now())
 
   @@index([createdAt])
   @@index([status])
+  @@index([followUpAt])
 }
 
 /// Talebe ekip notu ya da durum değişikliği kaydı (kind: "not" | "durum")

@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ChevronDown, ChevronLeft, ChevronRight, Download, Mail, MessageCircle, Phone, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
+import { AlarmClock, ChevronDown, ChevronLeft, ChevronRight, Download, Mail, MessageCircle, Phone, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { ATTRIBUTION_KEYS, sanitizeAttribution, type Touch } from "@/lib/attribution";
@@ -24,7 +24,8 @@ import {
   type LeadFilters,
 } from "@/lib/lead-status";
 import { setLeadStatusBulk } from "./actions";
-import { MetaPullButton, NoteDelete, NoteForm, StatusForm } from "./LiveForms";
+import { FollowUpForm, MetaPullButton, NoteDelete, NoteForm, StatusForm } from "./LiveForms";
+import { dateToCyprusInputs, dueFollowUps, followUpLabel, followUpState } from "@/lib/lead-followup";
 import { metaLeadsConfigured } from "@/lib/meta-leads";
 import { AutoSubmitSelect, SelectAll, SelectedCount } from "./LeadControls";
 import { pageLabelText } from "@/lib/page-label";
@@ -33,7 +34,7 @@ export const dynamic = "force-dynamic";
 
 const PAGE_SIZES = [10, 25, 50] as const;
 
-type SP = { durum?: string; q?: string; proje?: string; kaynak?: string; donem?: string; adet?: string; sayfa?: string; id?: string };
+type SP = { durum?: string; q?: string; proje?: string; kaynak?: string; donem?: string; adet?: string; sayfa?: string; id?: string; takip?: string; sorumlu?: string };
 
 type Row = {
   id: number;
@@ -47,6 +48,8 @@ type Row = {
   campaign: string | null;
   form: string | null;
   status: string;
+  assignee?: string | null;
+  followUpAt?: Date | null;
 };
 
 function isMissingColumnError(err: unknown) {
@@ -57,6 +60,13 @@ function isMissingColumnError(err: unknown) {
 
 async function loadRows(): Promise<{ rows: Row[]; legacy: boolean }> {
   const select = { id: true, createdAt: true, name: true, email: true, phone: true, project: true, unitType: true, source: true, campaign: true, form: true };
+  try {
+    const rows = await prisma.contactMessage.findMany({ orderBy: [{ createdAt: "desc" }, { id: "desc" }], select: { ...select, status: true, assignee: true, followUpAt: true } });
+    return { rows, legacy: false };
+  } catch (err) {
+    if (!isMissingColumnError(err)) throw err;
+  }
+  // takip kolonları henüz yoksa (20261126060000_lead_followup) durumlu liste
   try {
     const rows = await prisma.contactMessage.findMany({ orderBy: [{ createdAt: "desc" }, { id: "desc" }], select: { ...select, status: true } });
     return { rows, legacy: false };
@@ -75,13 +85,25 @@ async function loadDetail(id: number, legacy: boolean) {
     });
     return lead ? { ...lead, status: "yeni", notes: [] as { id: number; kind: string; text: string; author: string | null; createdAt: Date }[] } : null;
   }
-  return prisma.contactMessage.findUnique({ where: { id }, include: { notes: { orderBy: { createdAt: "desc" } } } });
+  try {
+    return await prisma.contactMessage.findUnique({ where: { id }, include: { notes: { orderBy: { createdAt: "desc" } } } });
+  } catch (err) {
+    if (!isMissingColumnError(err)) throw err;
+    // takip kolonları henüz yoksa takipsiz ayrıntı
+    return prisma.contactMessage.findUnique({
+      where: { id },
+      select: {
+        id: true, createdAt: true, name: true, email: true, phone: true, subject: true, message: true, project: true, unitType: true, form: true, source: true, campaign: true, pageUrl: true,
+        attribution: true, status: true, statusAt: true, eventId: true, notes: { orderBy: { createdAt: "desc" } },
+      },
+    });
+  }
 }
 
 function qs(base: SP, patch: Partial<Record<keyof SP, string | undefined>>) {
   const p = new URLSearchParams();
   const merged = { ...base, ...patch };
-  for (const k of ["durum", "q", "proje", "kaynak", "donem", "adet", "sayfa", "id"] as const) {
+  for (const k of ["durum", "q", "proje", "kaynak", "donem", "takip", "sorumlu", "adet", "sayfa", "id"] as const) {
     const v = merged[k];
     if (v && !(k === "durum" && v === "tumu") && !(k === "sayfa" && v === "1") && !(k === "adet" && v === "10")) p.set(k, v);
   }
@@ -172,6 +194,19 @@ function Pagination({ sp, page, pages, total, from, to, size, idp }: { sp: SP; p
   );
 }
 
+/** Listede takip etiketi: "Bugün 14:00 · Talha" (gecikmişse kırmızı) */
+function FollowUpTag({ at, who, now }: { at?: Date | null; who?: string | null; now: Date }) {
+  if (!at && !who) return null;
+  const st = followUpState(at, now);
+  const tone = st === "gecikti" ? "text-red-600" : st === "bugun" ? "text-amber-700" : "text-slate-500";
+  return (
+    <span className={`mt-1 flex items-center gap-1 text-[11px] font-medium ${tone}`}>
+      {at ? <AlarmClock className="h-3 w-3 shrink-0" aria-hidden /> : null}
+      <span className="truncate">{[at ? followUpLabel(at, now) : "", who ?? ""].filter(Boolean).join(" · ")}</span>
+    </span>
+  );
+}
+
 function StatusPill({ status }: { status: string }) {
   const s = statusInfo(status);
   return (
@@ -233,7 +268,11 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
   const { rows, legacy } = await loadRows();
 
   const summary = leadSummary(rows, now);
-  const base = filterLeads(rows, f, now, false); // durum hariç: sekme sayıları
+  const due = new Set(dueFollowUps(rows, now).map((r) => r.id));
+  const base = filterLeads(rows, f, now, false) // durum hariç: sekme sayıları
+    .filter((r) => sp.takip !== "1" || due.has(r.id))
+    .filter((r) => !sp.sorumlu || (sp.sorumlu === "-" ? !r.assignee : r.assignee === sp.sorumlu));
+  const assignees = [...new Set(rows.map((r) => r.assignee).filter((a): a is string => !!a))].sort((a, b) => a.localeCompare(b, "tr"));
   const counts = statusCounts(base);
   const filtered = f.durum && f.durum !== "tumu" ? base.filter((r) => statusInfo(r.status).key === f.durum) : base;
   const pageSize = (PAGE_SIZES as readonly number[]).includes(Number(sp.adet)) ? Number(sp.adet) : 10;
@@ -248,6 +287,10 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
   const explicit = Number.isSafeInteger(idParam) && idParam > 0;
   const selectedId = explicit ? idParam : pageRows[0]?.id;
   const detail = selectedId ? await loadDetail(selectedId, legacy) : null;
+  const fu =
+    detail && "followUpAt" in detail
+      ? { assignee: (detail as { assignee?: string | null }).assignee ?? null, followUpAt: (detail as { followUpAt?: Date | null }).followUpAt ?? null }
+      : null;
 
   const projects = [...new Set(rows.map((r) => r.project).filter((p): p is string => !!p))].sort((a, b) => a.localeCompare(b, "tr"));
   const sources = new Map<string, string>();
@@ -255,7 +298,11 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
     const g = sourceGroup(r.source);
     sources.set(g.key, g.label);
   }
-  const hasFilter = !!(f.q || f.proje || f.kaynak || (f.donem && f.donem !== "tumu"));
+  const hasFilter = !!(f.q || f.proje || f.kaynak || (f.donem && f.donem !== "tumu") || sp.takip || sp.sorumlu);
+  // takip formundaki öneriler: sorumlu olarak yazılmış ve not düşmüş kişiler (yalnız ayrıntı açıkken)
+  const noteAuthors =
+    legacy || !fu ? [] : await prisma.leadNote.findMany({ distinct: ["author"], select: { author: true }, take: 30 }).then((r) => r.map((n) => n.author ?? ""), () => [] as string[]);
+  const people = [...new Set([...assignees, ...noteAuthors].map((x) => x.trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b, "tr"));
   const here = qs(sp, {});
   const excelHref = `/admin/leads/excel${here.includes("?") ? here.slice(here.indexOf("?")) : ""}`;
   const monthName = (d: Date) => d.toLocaleDateString("tr-TR", { month: "long", year: "numeric", timeZone: "Asia/Famagusta" });
@@ -409,6 +456,30 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           </AutoSubmitSelect>
           <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden />
         </span>
+        {assignees.length ? (
+          <span className="relative">
+            <AutoSubmitSelect name="sorumlu" defaultValue={sp.sorumlu || ""} aria-label="Sorumlu" className={`${SELECT} w-full`}>
+              <option value="">Tüm sorumlular</option>
+              {assignees.map((a) => (
+                <option key={a} value={a}>
+                  {a}
+                </option>
+              ))}
+              <option value="-">Sorumlusu yok</option>
+            </AutoSubmitSelect>
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden />
+          </span>
+        ) : null}
+        {sp.takip === "1" ? <input type="hidden" name="takip" value="1" /> : null}
+        <Link
+          href={qs(sp, { takip: sp.takip === "1" ? undefined : "1", sayfa: undefined, id: undefined })}
+          aria-pressed={sp.takip === "1"}
+          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-3.5 text-sm font-medium shadow-sm sm:col-span-1 ${sp.takip === "1" ? "border-amber-300 bg-amber-50 text-amber-900" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
+        >
+          <AlarmClock className="h-4 w-4" strokeWidth={1.8} aria-hidden />
+          Bugün aranacaklar
+          <span className={`rounded-full px-1.5 text-[11px] ${due.size ? "bg-amber-500 text-white" : "bg-slate-100 text-slate-500"}`}>{due.size}</span>
+        </Link>
         <button type="submit" className="sr-only">
           Ara
         </button>
@@ -507,6 +578,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           </td>
                           <td className={TD}>
                             <StatusPill status={r.status} />
+                            <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
                           </td>
                         </tr>
                       );
@@ -541,6 +613,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           {r.phone || r.email || "—"}
                           {r.source ? ` · ${sourceGroup(r.source).label}` : ""}
                         </span>
+                        <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
                       </Link>
                     </li>
                   );
@@ -624,6 +697,17 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
               )}
             </div>
 
+            {!legacy && fu ? (
+              <FollowUpForm
+                leadId={detail.id}
+                assignee={fu.assignee ?? ""}
+                {...dateToCyprusInputs(fu.followUpAt)}
+                label={followUpLabel(fu.followUpAt, now)}
+                late={followUpState(fu.followUpAt, now) === "gecikti"}
+                people={people}
+              />
+            ) : null}
+
             <dl className="grid grid-cols-[88px_1fr] gap-x-3 gap-y-2.5 px-5 text-[13px]">
               <dt className="text-slate-500">Telefon</dt>
               <dd className="break-words">{detail.phone || <span className="text-slate-400">—</span>}</dd>
@@ -684,7 +768,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
               <ol className="mt-3 space-y-3 border-l border-slate-200 pl-4 text-[13px]">
                 {detail.notes.map((n) => (
                   <li key={n.id} className="relative">
-                    <span className={`absolute -left-[21px] top-1.5 h-2 w-2 rounded-full ring-4 ring-white ${n.kind === "not" ? "bg-[#2aa9b3]" : "bg-slate-300"}`} />
+                    <span className={`absolute -left-[21px] top-1.5 h-2 w-2 rounded-full ring-4 ring-white ${n.kind === "not" ? "bg-[#2aa9b3]" : n.kind === "takip" ? "bg-amber-400" : "bg-slate-300"}`} />
                     <div className="flex items-start gap-2">
                       <p className={`min-w-0 flex-1 whitespace-pre-wrap break-words ${n.kind === "not" ? "text-slate-700" : "text-slate-500"}`}>{n.text}</p>
                       {n.kind === "not" ? (

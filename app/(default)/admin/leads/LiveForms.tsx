@@ -2,9 +2,9 @@
 // Talep ayrıntısındaki formlar: sayfa yenilenmeden kaydeder, kayıt sürerken düğmeyi kilitler, sonucu bildirimle gösterir.
 "use client";
 
-import { useActionState, useEffect, useState, useTransition, type ReactNode } from "react";
-import { CheckCircle2, ChevronDown, Loader2, RefreshCw, TriangleAlert, X } from "lucide-react";
-import { addLeadNoteLive, deleteLeadNoteLive, pullMetaLeadsLive, setLeadStatusLive, type LiveState } from "./actions";
+import { useActionState, useEffect, useRef, useState, useTransition, type ReactNode } from "react";
+import { AlarmClock, CheckCircle2, ChevronDown, Loader2, RefreshCw, TriangleAlert, X } from "lucide-react";
+import { addLeadNoteLive, deleteLeadNoteLive, pullMetaLeadsLive, setFollowUpLive, setLeadStatusLive, type LiveState } from "./actions";
 
 /** Panelin her yerinden bildirim göster: showAdminToast({ message } | { error }) — AdminToastHost (AdminShell) gösterir */
 export function showAdminToast(state: LiveState) {
@@ -157,6 +157,75 @@ export function MetaPullButton() {
         {pending ? <Loader2 className="h-[15px] w-[15px] animate-spin" aria-hidden /> : <RefreshCw className="h-[15px] w-[15px]" strokeWidth={1.7} aria-hidden />}
         {pending ? "Meta'dan çekiliyor…" : "Meta'dan çek"}
       </button>
+    </form>
+  );
+}
+
+/** Takip: sorumlu + sonraki arama (Kıbrıs saati). Kayıt sürerken kilitli, sonuç bildirimle; sayfa yenilenmeden güncellenir. */
+export function FollowUpForm({
+  leadId,
+  assignee,
+  date,
+  time,
+  label,
+  late,
+  people,
+}: {
+  leadId: number;
+  assignee: string;
+  date: string;
+  time: string;
+  /** mevcut takibin kısa etiketi ("Bugün 14:00", "2 gün gecikti") */
+  label: string;
+  late: boolean;
+  people: string[];
+}) {
+  const [state, action, pending] = useActionState<LiveState, FormData>(setFollowUpLive, undefined);
+  useToastOn(state);
+  const op = useRef<HTMLInputElement>(null);
+  const input = "h-9 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-[13px] text-slate-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20";
+  return (
+    <form action={action} key={`${assignee}|${date}|${time}`} className="border-t border-slate-100 px-5 py-4">
+      <input type="hidden" name="id" value={leadId} />
+      <input type="hidden" name="islem" defaultValue="kaydet" ref={op} />
+      <p className="flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+        <span className="flex items-center gap-1.5">
+          <AlarmClock className="h-3.5 w-3.5" aria-hidden /> Takip
+        </span>
+        {label ? (
+          <span className={`rounded-full px-2 py-0.5 text-[11px] normal-case tracking-normal ${late ? "bg-red-50 text-red-700" : "bg-amber-50 text-amber-800"}`}>{label}</span>
+        ) : null}
+      </p>
+      <div className="mt-2 grid grid-cols-2 gap-2">
+        <label className="col-span-2 text-xs text-slate-500">
+          Sorumlu
+          <input name="assignee" defaultValue={assignee} list={`kisiler-${leadId}`} placeholder="Arayacak kişi" maxLength={40} className={`${input} mt-1`} />
+          <datalist id={`kisiler-${leadId}`}>
+            {people.map((p) => (
+              <option key={p} value={p} />
+            ))}
+          </datalist>
+        </label>
+        <label className="text-xs text-slate-500">
+          Sonraki arama
+          <input type="date" name="date" defaultValue={date} className={`${input} mt-1`} />
+        </label>
+        <label className="text-xs text-slate-500">
+          Saat (Kıbrıs)
+          <input type="time" name="time" defaultValue={time || "10:00"} className={`${input} mt-1`} />
+        </label>
+      </div>
+      <div className="mt-2.5 flex items-center gap-2">
+        <button type="submit" onClick={() => op.current && (op.current.value = "kaydet")} disabled={pending} className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-slate-900 px-3 text-xs font-medium text-white hover:bg-slate-800 disabled:opacity-60">
+          {pending ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden /> : null}
+          {pending ? "Kaydediliyor…" : "Takibi kaydet"}
+        </button>
+        {assignee || date ? (
+          <button type="submit" onClick={() => op.current && (op.current.value = "temizle")} disabled={pending} className="h-8 rounded-lg px-2.5 text-xs font-medium text-slate-500 hover:bg-slate-100 disabled:opacity-60">
+            Takibi kaldır
+          </button>
+        ) : null}
+      </div>
     </form>
   );
 }

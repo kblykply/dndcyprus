@@ -93,6 +93,8 @@ export const ContactMessageScalarFieldEnum = {
   attribution: 'attribution',
   status: 'status',
   statusAt: 'statusAt',
+  assignee: 'assignee',
+  followUpAt: 'followUpAt',
   createdAt: 'createdAt'
 } as const
 

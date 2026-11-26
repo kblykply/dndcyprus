@@ -10,6 +10,7 @@ import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, safeAdminNext, verifyAdminSession } from "@/lib/admin-session";
 import { MANUAL_CHANNELS, isLeadStatus, manualChannel, parseLeadForm, statusInfo } from "@/lib/lead-status";
 import { metaLeadsConfigured, syncMetaLeads } from "@/lib/meta-leads";
+import { cleanAssignee, cyprusLocalToDate, dateToCyprusInputs } from "@/lib/lead-followup";
 
 const AUTHOR_COOKIE = "admin_author";
 
@@ -249,4 +250,38 @@ export async function pullMetaLeadsLive(): Promise<LiveState> {
   const m = r.merged ?? 0;
   const msg = n || m ? [n ? `${n} yeni talep eklendi` : "", m ? `${m} talep mevcut kişiye not düşüldü` : ""].filter(Boolean).join(", ") + "." : "Meta'da yeni talep yok.";
   return { ok: true, message: msg, at: Date.now() };
+}
+
+const absolute = (d: Date) => {
+  const { date, time } = dateToCyprusInputs(d);
+  return `${date.split("-").reverse().join(".")} ${time}`;
+};
+
+/** Takip: sorumlu kişi ve sonraki arama (Kıbrıs saati). "temizle" ile takip kalkar. Değişiklik talebin geçmişine yazılır. */
+export async function setFollowUpLive(_prev: LiveState, formData: FormData): Promise<LiveState> {
+  const store = await requireAdmin();
+  const id = Number(formData.get("id"));
+  if (!Number.isSafeInteger(id) || id <= 0) return { error: "Talep bulunamadı.", at: Date.now() };
+  const lead = await prisma.contactMessage.findUnique({ where: { id }, select: { id: true, assignee: true, followUpAt: true } });
+  if (!lead) return { error: "Talep bulunamadı (silinmiş olabilir).", at: Date.now() };
+  const clear = formData.get("islem") === "temizle";
+  const assignee = clear ? null : cleanAssignee(formData.get("assignee")) || null;
+  const date = String(formData.get("date") || "").trim();
+  let followUpAt: Date | null = null;
+  if (!clear && date) {
+    followUpAt = cyprusLocalToDate(date, String(formData.get("time") || "10:00"));
+    if (!followUpAt) return { error: "Tarih ya da saat geçersiz.", at: Date.now() };
+  }
+  if (!clear && !assignee && !followUpAt) return { error: "Sorumlu kişi ya da arama tarihi girin.", at: Date.now() };
+  const same = (lead.assignee ?? null) === assignee && (lead.followUpAt?.getTime() ?? null) === (followUpAt?.getTime() ?? null);
+  if (same) return { ok: true, message: "Değişiklik yok.", at: Date.now() };
+  const text = clear
+    ? "Takip kaldırıldı"
+    : [followUpAt ? `Sonraki arama: ${absolute(followUpAt)}` : "", assignee ? `Sorumlu: ${assignee}` : ""].filter(Boolean).join(" · ");
+  await prisma.$transaction([
+    prisma.contactMessage.update({ where: { id }, data: { assignee, followUpAt } }),
+    prisma.leadNote.create({ data: { leadId: id, kind: "takip", text, author: authorName(store) } }),
+  ]);
+  revalidatePath("/admin", "layout");
+  return { ok: true, message: clear ? "Takip kaldırıldı." : "Takip kaydedildi.", at: Date.now() };
 }

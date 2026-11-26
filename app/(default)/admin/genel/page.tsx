@@ -5,11 +5,12 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ArrowDownRight, ArrowUpRight, BadgeCheck, CheckCircle2, Clock3, PhoneCall, UserCheck, Users } from "lucide-react";
+import { AlarmClock, ArrowDownRight, ArrowUpRight, BadgeCheck, CheckCircle2, Clock3, PhoneCall, UserCheck, Users } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ga4Configured } from "@/lib/ga4";
 import { clarityConfigured } from "@/lib/clarity";
 import { loadMetaSyncState, metaLeadsConfigured } from "@/lib/meta-leads";
+import { dueFollowUps, followUpLabel, followUpState } from "@/lib/lead-followup";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { LEAD_STATUSES, cyprusDateTime, sourceGroup, statusInfo } from "@/lib/lead-status";
 import { bucketCounts, changePct, groupLeads, inRange, isQualified, overviewPeriod, periodBuckets, sourceColor } from "@/lib/lead-stats";
@@ -58,7 +59,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
 
   const all = await prisma.contactMessage.findMany({
     orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-    select: { id: true, createdAt: true, name: true, status: true, source: true, campaign: true, project: true, unitType: true, form: true },
+    select: { id: true, createdAt: true, name: true, status: true, source: true, campaign: true, project: true, unitType: true, form: true, assignee: true, followUpAt: true },
   });
   const b = periodBuckets(period, now, all);
   const cur = inRange(all, b.from);
@@ -87,6 +88,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
       : metaState.error
         ? `Son denemede hata: ${metaState.error}`
         : `${metaTotal} reklam talebi · son kontrol ${cyprusDateTime(new Date(metaState.lastRunAt)).time}`;
+  const due = dueFollowUps(all, now);
   const periodLabel = { "30g": "son 30 gün", "90g": "son 90 gün", "12a": "son 12 ay", tumu: "tüm zamanlar" }[period];
 
   return (
@@ -116,6 +118,40 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
           Dönüşüm %{cur.length ? ((sold / cur.length) * 100).toFixed(1).replace(".", ",") : "0"} · {periodLabel}
         </Kpi>
       </div>
+
+      {due.length ? (
+        <ChartCard
+          title="Bugün aranacaklar"
+          sub="Takip tarihi bugün olan ya da geciken talepler (satış ve olumsuz hariç)"
+          className="mt-5"
+          right={
+            <Link href="/admin/leads?takip=1" className="text-sm font-medium text-teal-700 hover:underline">
+              Hepsini aç ({due.length})
+            </Link>
+          }
+        >
+          <ul className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+            {due.slice(0, 6).map((l) => {
+              const late = followUpState(l.followUpAt, now) === "gecikti";
+              return (
+                <li key={l.id}>
+                  <Link href={`/admin/leads?id=${l.id}`} className="flex items-start gap-3 rounded-lg border border-slate-200 p-3 hover:border-teal-300 hover:bg-teal-50/40">
+                    <AlarmClock className={`mt-0.5 h-4 w-4 shrink-0 ${late ? "text-red-500" : "text-amber-500"}`} aria-hidden />
+                    <span className="min-w-0">
+                      <span className="block truncate text-[13px] font-medium text-slate-900">{l.name}</span>
+                      <span className={`block text-xs ${late ? "text-red-600" : "text-amber-700"}`}>
+                        {followUpLabel(l.followUpAt, now)}
+                        {l.assignee ? <span className="text-slate-500"> · {l.assignee}</span> : null}
+                      </span>
+                      {l.project ? <span className="block truncate text-xs text-slate-500">{l.project}</span> : null}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </ChartCard>
+      ) : null}
 
       <div className="mt-5 grid gap-5 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <ChartCard title="Talep akışı" sub={`${b.granularity === "day" ? "Günlük" : "Aylık"} gelen talep · ${periodLabel}`} right={<span className="font-display text-2xl">{cur.length}</span>}>

@@ -50,6 +50,8 @@ export type ContactMessageMinAggregateOutputType = {
   eventId: string | null
   status: string | null
   statusAt: Date | null
+  assignee: string | null
+  followUpAt: Date | null
   createdAt: Date | null
 }
 
@@ -69,6 +71,8 @@ export type ContactMessageMaxAggregateOutputType = {
   eventId: string | null
   status: string | null
   statusAt: Date | null
+  assignee: string | null
+  followUpAt: Date | null
   createdAt: Date | null
 }
 
@@ -89,6 +93,8 @@ export type ContactMessageCountAggregateOutputType = {
   attribution: number
   status: number
   statusAt: number
+  assignee: number
+  followUpAt: number
   createdAt: number
   _all: number
 }
@@ -118,6 +124,8 @@ export type ContactMessageMinAggregateInputType = {
   eventId?: true
   status?: true
   statusAt?: true
+  assignee?: true
+  followUpAt?: true
   createdAt?: true
 }
 
@@ -137,6 +145,8 @@ export type ContactMessageMaxAggregateInputType = {
   eventId?: true
   status?: true
   statusAt?: true
+  assignee?: true
+  followUpAt?: true
   createdAt?: true
 }
 
@@ -157,6 +167,8 @@ export type ContactMessageCountAggregateInputType = {
   attribution?: true
   status?: true
   statusAt?: true
+  assignee?: true
+  followUpAt?: true
   createdAt?: true
   _all?: true
 }
@@ -264,6 +276,8 @@ export type ContactMessageGroupByOutputType = {
   attribution: runtime.JsonValue | null
   status: string
   statusAt: Date | null
+  assignee: string | null
+  followUpAt: Date | null
   createdAt: Date
   _count: ContactMessageCountAggregateOutputType | null
   _avg: ContactMessageAvgAggregateOutputType | null
@@ -307,6 +321,8 @@ export type ContactMessageWhereInput = {
   attribution?: Prisma.JsonNullableFilter<"ContactMessage">
   status?: Prisma.StringFilter<"ContactMessage"> | string
   statusAt?: Prisma.DateTimeNullableFilter<"ContactMessage"> | Date | string | null
+  assignee?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  followUpAt?: Prisma.DateTimeNullableFilter<"ContactMessage"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ContactMessage"> | Date | string
   notes?: Prisma.LeadNoteListRelationFilter
 }
@@ -328,6 +344,8 @@ export type ContactMessageOrderByWithRelationInput = {
   attribution?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   statusAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  assignee?: Prisma.SortOrderInput | Prisma.SortOrder
+  followUpAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   notes?: Prisma.LeadNoteOrderByRelationAggregateInput
 }
@@ -352,6 +370,8 @@ export type ContactMessageWhereUniqueInput = Prisma.AtLeast<{
   attribution?: Prisma.JsonNullableFilter<"ContactMessage">
   status?: Prisma.StringFilter<"ContactMessage"> | string
   statusAt?: Prisma.DateTimeNullableFilter<"ContactMessage"> | Date | string | null
+  assignee?: Prisma.StringNullableFilter<"ContactMessage"> | string | null
+  followUpAt?: Prisma.DateTimeNullableFilter<"ContactMessage"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ContactMessage"> | Date | string
   notes?: Prisma.LeadNoteListRelationFilter
 }, "id">
@@ -373,6 +393,8 @@ export type ContactMessageOrderByWithAggregationInput = {
   attribution?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   statusAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  assignee?: Prisma.SortOrderInput | Prisma.SortOrder
+  followUpAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ContactMessageCountOrderByAggregateInput
   _avg?: Prisma.ContactMessageAvgOrderByAggregateInput
@@ -401,6 +423,8 @@ export type ContactMessageScalarWhereWithAggregatesInput = {
   attribution?: Prisma.JsonNullableWithAggregatesFilter<"ContactMessage">
   status?: Prisma.StringWithAggregatesFilter<"ContactMessage"> | string
   statusAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ContactMessage"> | Date | string | null
+  assignee?: Prisma.StringNullableWithAggregatesFilter<"ContactMessage"> | string | null
+  followUpAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ContactMessage"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContactMessage"> | Date | string
 }
 
@@ -420,6 +444,8 @@ export type ContactMessageCreateInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
   statusAt?: Date | string | null
+  assignee?: string | null
+  followUpAt?: Date | string | null
   createdAt?: Date | string
   notes?: Prisma.LeadNoteCreateNestedManyWithoutLeadInput
 }
@@ -441,6 +467,8 @@ export type ContactMessageUncheckedCreateInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
   statusAt?: Date | string | null
+  assignee?: string | null
+  followUpAt?: Date | string | null
   createdAt?: Date | string
   notes?: Prisma.LeadNoteUncheckedCreateNestedManyWithoutLeadInput
 }
@@ -461,6 +489,8 @@ export type ContactMessageUpdateInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   statusAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.LeadNoteUpdateManyWithoutLeadNestedInput
 }
@@ -482,6 +512,8 @@ export type ContactMessageUncheckedUpdateInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   statusAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   notes?: Prisma.LeadNoteUncheckedUpdateManyWithoutLeadNestedInput
 }
@@ -503,6 +535,8 @@ export type ContactMessageCreateManyInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
   statusAt?: Date | string | null
+  assignee?: string | null
+  followUpAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -522,6 +556,8 @@ export type ContactMessageUpdateManyMutationInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   statusAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -542,6 +578,8 @@ export type ContactMessageUncheckedUpdateManyInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   statusAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -562,6 +600,8 @@ export type ContactMessageCountOrderByAggregateInput = {
   attribution?: Prisma.SortOrder
   status?: Prisma.SortOrder
   statusAt?: Prisma.SortOrder
+  assignee?: Prisma.SortOrder
+  followUpAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -585,6 +625,8 @@ export type ContactMessageMaxOrderByAggregateInput = {
   eventId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   statusAt?: Prisma.SortOrder
+  assignee?: Prisma.SortOrder
+  followUpAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -604,6 +646,8 @@ export type ContactMessageMinOrderByAggregateInput = {
   eventId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   statusAt?: Prisma.SortOrder
+  assignee?: Prisma.SortOrder
+  followUpAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -670,6 +714,8 @@ export type ContactMessageCreateWithoutNotesInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
   statusAt?: Date | string | null
+  assignee?: string | null
+  followUpAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -690,6 +736,8 @@ export type ContactMessageUncheckedCreateWithoutNotesInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
   statusAt?: Date | string | null
+  assignee?: string | null
+  followUpAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -725,6 +773,8 @@ export type ContactMessageUpdateWithoutNotesInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   statusAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -745,6 +795,8 @@ export type ContactMessageUncheckedUpdateWithoutNotesInput = {
   attribution?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
   statusAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignee?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -796,6 +848,8 @@ export type ContactMessageSelect<ExtArgs extends runtime.Types.Extensions.Intern
   attribution?: boolean
   status?: boolean
   statusAt?: boolean
+  assignee?: boolean
+  followUpAt?: boolean
   createdAt?: boolean
   notes?: boolean | Prisma.ContactMessage$notesArgs<ExtArgs>
   _count?: boolean | Prisma.ContactMessageCountOutputTypeDefaultArgs<ExtArgs>
@@ -818,6 +872,8 @@ export type ContactMessageSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   attribution?: boolean
   status?: boolean
   statusAt?: boolean
+  assignee?: boolean
+  followUpAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["contactMessage"]>
 
@@ -838,6 +894,8 @@ export type ContactMessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   attribution?: boolean
   status?: boolean
   statusAt?: boolean
+  assignee?: boolean
+  followUpAt?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["contactMessage"]>
 
@@ -858,10 +916,12 @@ export type ContactMessageSelectScalar = {
   attribution?: boolean
   status?: boolean
   statusAt?: boolean
+  assignee?: boolean
+  followUpAt?: boolean
   createdAt?: boolean
 }
 
-export type ContactMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "subject" | "message" | "project" | "unitType" | "form" | "source" | "campaign" | "pageUrl" | "eventId" | "attribution" | "status" | "statusAt" | "createdAt", ExtArgs["result"]["contactMessage"]>
+export type ContactMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "subject" | "message" | "project" | "unitType" | "form" | "source" | "campaign" | "pageUrl" | "eventId" | "attribution" | "status" | "statusAt" | "assignee" | "followUpAt" | "createdAt", ExtArgs["result"]["contactMessage"]>
 export type ContactMessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   notes?: boolean | Prisma.ContactMessage$notesArgs<ExtArgs>
   _count?: boolean | Prisma.ContactMessageCountOutputTypeDefaultArgs<ExtArgs>
@@ -891,6 +951,8 @@ export type $ContactMessagePayload<ExtArgs extends runtime.Types.Extensions.Inte
     attribution: runtime.JsonValue | null
     status: string
     statusAt: Date | null
+    assignee: string | null
+    followUpAt: Date | null
     createdAt: Date
   }, ExtArgs["result"]["contactMessage"]>
   composites: {}
@@ -1332,6 +1394,8 @@ export interface ContactMessageFieldRefs {
   readonly attribution: Prisma.FieldRef<"ContactMessage", 'Json'>
   readonly status: Prisma.FieldRef<"ContactMessage", 'String'>
   readonly statusAt: Prisma.FieldRef<"ContactMessage", 'DateTime'>
+  readonly assignee: Prisma.FieldRef<"ContactMessage", 'String'>
+  readonly followUpAt: Prisma.FieldRef<"ContactMessage", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"ContactMessage", 'DateTime'>
 }
     
