@@ -13,6 +13,8 @@ import { COLLECTIONS, listItems } from "@/lib/content/admin";
 import { cyprusDateTime } from "@/lib/lead-status";
 import { translationConfigured } from "@/lib/content/translate";
 import TranslateTester from "./TranslateTester";
+import TranslateQueue from "./TranslateQueue";
+import { translationQueueSummary } from "@/lib/content/translate-jobs";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +40,13 @@ const SCOPE_ICONS: Record<string, LucideIcon> = {
 export default async function ContentHome() {
   const store = await cookies();
   if (!(await verifyAdminSession(store.get(ADMIN_SESSION_COOKIE)?.value))) redirect("/admin/login?next=/admin/icerik");
+  const queue = await translationQueueSummary();
+  const queueDetail = [
+    "Google'ın ücretsiz çeviri servisi yoğun olduğu için bekliyor; 10 dakikada bir kendiliğinden deneniyor.",
+    queue.lastRunAt ? `Son deneme ${cyprusDateTime(new Date(queue.lastRunAt)).time}.` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
   const [overrides, press, team, events, posts, logs] = await Promise.all([
     prisma.contentOverride.groupBy({ by: ["scope"], _count: { _all: true }, _max: { updatedAt: true } }),
     listItems("basin"),
@@ -53,6 +62,7 @@ export default async function ContentHome() {
     <div className="mx-auto max-w-[1200px]">
       <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">İçerik</h1>
       <p className="mt-1.5 text-sm text-slate-500">Sitedeki yazıları, görselleri ve listeleri 5 dilde buradan değiştirin. Kaydedince sayfa birkaç saniye içinde güncellenir.</p>
+      <TranslateQueue count={queue.count} detail={queueDetail} />
 
       {(
         [

@@ -21,7 +21,7 @@ export type TranslateResult =
 /** Panelde otomatik çeviri işaretinin yazanı (ContentOverride.updatedBy) */
 export const AUTO_TRANSLATOR = "otomatik çeviri";
 
-export const translationConfigured = () => !!(process.env.GEMINI_API_KEY || "").trim() || process.env.CONTENT_TRANSLATE_MOCK === "1";
+export const translationConfigured = () => !!(process.env.GEMINI_API_KEY || "").trim() || ["1", "ilk-yogun"].includes(process.env.CONTENT_TRANSLATE_MOCK || "");
 
 /** Çevrilecek gerçek yazı mı (boş, sayı, adres, görsel yolu, e-posta değil) */
 export function isTranslatable(text: string) {
@@ -237,11 +237,18 @@ async function resolveModels(key: string): Promise<string[]> {
   return list.filter((m, i, a) => a.indexOf(m) === i);
 }
 
+let mockBusyDone = false;
+
 /** Türkçe alanları 4 dile çevirir. Çevrilecek bir şey yoksa boş sonuç döner. */
 export async function translateFromTurkish(items: TranslateItem[], context?: string): Promise<TranslateResult> {
   const todo = items.filter((i) => isTranslatable(i.text));
   if (!todo.length) return { ok: true, out: {} };
-  if (process.env.CONTENT_TRANSLATE_MOCK === "1") {
+  // yerel deneme: "ilk-yogun" → ilk çağrı yoğunluk hatası verir (kuyruğu denemek için), sonrakiler deneme çevirisi
+  if (process.env.CONTENT_TRANSLATE_MOCK === "ilk-yogun" && !mockBusyDone) {
+    mockBusyDone = true;
+    return { ok: false, error: "Çeviri servisi şu an yoğun; biraz sonra yeniden kaydedin." };
+  }
+  if (process.env.CONTENT_TRANSLATE_MOCK === "1" || process.env.CONTENT_TRANSLATE_MOCK === "ilk-yogun") {
     const out: Record<string, Record<TargetLocale, string>> = {};
     for (const i of todo) out[i.id] = Object.fromEntries(TARGET_LOCALES.map((l) => [l, i.kind === "tags" ? i.text.split(",").map((t) => `${t.trim()} [${l}]`).join(", ") : `${i.text} [${l}]`])) as Record<TargetLocale, string>;
     return { ok: true, out };

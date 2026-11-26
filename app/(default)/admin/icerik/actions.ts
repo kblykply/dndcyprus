@@ -8,7 +8,8 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { authorFromCookies, requireAdmin } from "@/lib/admin-auth";
 import { CONTENT_LOCALES, applyOverrides, fieldLabel, getAt, listOperation, listSources, postHtml, youtubeIdOf, type ContentLocale, type ListOp } from "@/lib/content/core";
-import { AUTO_TRANSLATOR, TARGET_LOCALES, isTranslatable, translateFromTurkish, translationConfigured, type TargetLocale } from "@/lib/content/translate";
+import { AUTO_TRANSLATOR, translateFromTurkish, translationConfigured } from "@/lib/content/translate";
+import { enqueueTranslation, processTranslationQueue, translateItemData, translateSectionFields, type Changed } from "@/lib/content/translate-jobs";
 import { SCOPES, isScopeKey, type ScopeDef, type ScopeKey } from "@/lib/content/scopes";
 import { COLLECTIONS, allRoutes, ensureSeeded, isCollectionKey, sectionFields, slugify } from "@/lib/content/admin";
 import type { CollectionKey } from "@/lib/content/store";
@@ -70,38 +71,18 @@ async function sectionCtx(formData: FormData): Promise<SectionCtx> {
 const editorUrl = (c: SectionCtx, extra: Record<string, string>) =>
   `/admin/icerik/sayfa/${c.scope}?${new URLSearchParams({ dil: c.locale, bolum: c.section, ...extra })}`;
 
-const TRANSLATE_KINDS = new Set(["text", "long", "rich"]);
-
 /**
- * Türkçede değişen yazıları 4 dile çevirip o dillerin aynı alanına "otomatik çeviri" olarak yazar. Türkçe orijinaline dönen
- * alanda diğer dillerin otomatik çevirisi silinir (o dilin kendi orijinal metni geri gelir). Elle yazılmış çeviri, Türkçe
- * değiştiğinde yenisiyle değiştirilir (kaynak değişti).
+ * Türkçede değişen yazıları 4 dile çevirir (lib/content/translate-jobs). Çeviri servisi o an yanıt vermezse Türkçe kayıt
+ * bozulmaz; iş kuyruğa girer ve 10 dakikada bir kendiliğinden yeniden denenir.
  */
-async function translateSection(c: SectionCtx, changed: { path: string; kind: string; value: string; reverted: boolean }[]) {
+async function translateSection(c: SectionCtx, changed: Changed[]): Promise<{ count: number; error?: string; queued?: boolean }> {
   if (c.locale !== "tr") return { count: 0 };
-  const others = CONTENT_LOCALES.filter((l) => l !== "tr");
-  const reverted = changed.filter((x) => x.reverted).map((x) => x.path);
-  if (reverted.length)
-    await prisma.contentOverride.deleteMany({ where: { scope: c.scope, locale: { in: others }, path: { in: reverted }, updatedBy: AUTO_TRANSLATOR } });
-  const items = changed.filter((x) => !x.reverted && TRANSLATE_KINDS.has(x.kind) && isTranslatable(x.value)).map((x) => ({ id: x.path, text: x.value, kind: x.kind as "text" | "long" | "rich" }));
-  if (!items.length) return { count: 0 };
-  if (!translationConfigured()) return { count: 0, error: "Otomatik çeviri kapalı (GEMINI_API_KEY tanımlı değil); diğer diller eski metinle kaldı." };
-  const def = SCOPES[c.scope];
-  const label = def.sections.find(([k]) => k === c.section)?.[1] ?? c.section;
-  const r = await translateFromTurkish(items, `${def.label} page, section "${label}" of www.dndcyprus.com`);
-  if (!r.ok) return { count: 0, error: r.error };
-  let count = 0;
-  for (const l2 of others) {
-    const fields = new Map((await sectionFields(c.scope, l2, c.section)).map((f) => [f.path, f]));
-    for (const [path, rec] of Object.entries(r.out)) {
-      const f = fields.get(path);
-      if (!f) continue; // bu dilde aynı yer yok (liste farklı)
-      const v = rec[l2 as TargetLocale];
-      await setOverride(c.scope, l2, path, v === f.original ? null : v, AUTO_TRANSLATOR);
-      count++;
-    }
+  const r = await translateSectionFields(c.scope, c.section, changed);
+  if (r.error && !("off" in r && r.off) && r.paths.length) {
+    await enqueueTranslation({ kind: "section", scope: c.scope, section: c.section, paths: r.paths, at: Date.now(), tries: 0, error: r.error });
+    return { count: 0, queued: true };
   }
-  return { count: items.length, langs: count ? others.length : 0 };
+  return { count: r.count, error: r.error };
 }
 
 /** Formdaki alanları kaydeder (sayfa yönlendirmesi yapmaz): görsel diğer dillere, ortak bölüm 5 dile, Türkçe yazı çeviriye */
@@ -112,7 +93,7 @@ async function saveFields(c: SectionCtx, formData: FormData) {
   const locales = new Set<ContentLocale>([locale]);
   const def = SCOPES[scope] as ScopeDef;
   const shared = !!def.shared?.includes(section); // telefon/e-posta: 5 dile birden
-  const toTranslate: { path: string; kind: string; value: string; reverted: boolean }[] = [];
+  const toTranslate: Changed[] = [];
   for (const f of fields) {
     if (!formData.has(`f:${f.path}`)) continue;
     let v = str(formData, `f:${f.path}`, 5000);
@@ -151,7 +132,7 @@ async function saveFields(c: SectionCtx, formData: FormData) {
     await prisma.contentLog.create({ data: { area: SCOPES[scope].label, action: "düzenleme", detail: `${label} (${locale.toUpperCase()}): ${changed} alan${extra}`, author } });
     refresh([...locales].flatMap((l) => SCOPES[scope].routes(l)), isSiteWide(scope));
   }
-  return { changed, translated: tr.count, translateError: "error" in tr ? tr.error : undefined };
+  return { changed, translated: tr.count, translateError: "error" in tr ? tr.error : undefined, queued: "queued" in tr && !!tr.queued };
 }
 
 /** Video alanı: kimlik alanına YouTube kimliği, gömme bağlantısı alanına gömme bağlantısı, dosya alanına site içi yol */
@@ -163,9 +144,10 @@ function normalizeVideo(original: string, path: string, v: string): string | nul
   return /^(\/\S+|https:\/\/\S+)\.(mp4|webm|mov)(\?\S*)?$/i.test(v) ? v : id ? `https://www.youtube.com/embed/${id}` : null;
 }
 
-function resultParams(r: { changed: number; translated: number; translateError?: string }) {
+function resultParams(r: { changed: number; translated: number; translateError?: string; queued?: boolean }) {
   const p: Record<string, string> = { kaydedildi: String(r.changed) };
   if (r.translated) p.ceviri = String(r.translated);
+  if (r.queued) p.cevirisira = "1";
   if (r.translateError) p.cevirihata = r.translateError.slice(0, 200);
   return p;
 }
@@ -319,7 +301,7 @@ export async function saveItem(_prev: ItemFormState, formData: FormData): Promis
   let key = existing;
   const prevRow = existing ? await prisma.contentItem.findUnique({ where: { collection_key: { collection, key: existing } } }) : null;
   if (existing && !prevRow) return failed("Kayıt bulunamadı (silinmiş olabilir).", formData);
-  const tr = await translateItem(collection, data, (prevRow?.data ?? null) as Record<string, unknown> | null);
+  const tr = await translateItemData(collection, data, (prevRow?.data ?? null) as Record<string, unknown> | null);
   if (existing) {
     const row = prevRow!;
     await prisma.contentItem.update({ where: { id: row.id }, data: { data: { ...(data as object), id: existing }, published, updatedBy: author } });
@@ -337,45 +319,11 @@ export async function saveItem(_prev: ItemFormState, formData: FormData): Promis
   refresh([...allRoutes(def.routes), ...(collection === "haber" ? ["/sitemap.xml"] : [])]);
   const q = new URLSearchParams({ kaydedildi: key });
   if (tr.count) q.set("ceviri", String(tr.count));
-  if (tr.error) q.set("cevirihata", tr.error.slice(0, 200));
+  if ("pending" in tr && tr.pending?.length) {
+    await enqueueTranslation({ kind: "item", collection, key, fields: tr.pending, snapshot: tr.snapshot ?? {}, at: Date.now(), tries: 0, error: tr.error });
+    q.set("cevirisira", "1");
+  } else if (tr.error) q.set("cevirihata", tr.error.slice(0, 200));
   redirect(`/admin/icerik/liste/${collection}?${q}`);
-}
-
-/**
- * Liste kaydında Türkçesi değişen (ya da yeni) alanları 4 dile çevirip data'ya yazar. O dilde bu kayıtta elle değiştirilmiş
- * metin korunur; değiştirilmemiş ya da boş olan çeviriyle dolar. data yerinde güncellenir.
- */
-async function translateItem(collection: CollectionKey, data: Record<string, unknown>, prev: Record<string, unknown> | null) {
-  const def = COLLECTIONS[collection];
-  const items: { id: string; text: string; kind: "text" | "long" | "html" | "tags" }[] = [];
-  const asText = (v: unknown) => (Array.isArray(v) ? v.join(", ") : String(v ?? ""));
-  for (const f of def.perLocale) {
-    const now = (data[f.key] ?? {}) as Record<string, unknown>;
-    const old = (prev?.[f.key] ?? {}) as Record<string, unknown>;
-    const trNow = asText(now.tr).trim();
-    if (!trNow || (prev && trNow === asText(old.tr).trim())) continue; // Türkçe aynı → çeviri gerekmez
-    items.push({ id: f.key, text: trNow, kind: f.kind === "html" ? "html" : f.kind === "tags" ? "tags" : f.kind === "long" ? "long" : "text" });
-  }
-  if (!items.length) return { count: 0 };
-  if (!translationConfigured()) return { count: 0, error: "Otomatik çeviri kapalı (GEMINI_API_KEY tanımlı değil); diğer diller elle girilmeli ya da boş kalır." };
-  const r = await translateFromTurkish(items, `${def.label} list item on www.dndcyprus.com`);
-  if (!r.ok) return { count: 0, error: r.error };
-  let count = 0;
-  for (const it of items) {
-    const rec = r.out[it.id];
-    if (!rec) continue;
-    const now = (data[it.id] ?? {}) as Record<string, unknown>;
-    const old = (prev?.[it.id] ?? {}) as Record<string, unknown>;
-    for (const l of TARGET_LOCALES) {
-      const typed = asText(now[l]).trim();
-      const touched = prev ? typed !== "" && typed !== asText(old[l]).trim() : typed !== "";
-      if (touched) continue; // bu kayıtta o dil elle yazıldı/değiştirildi
-      now[l] = it.kind === "tags" ? rec[l].split(",").map((t) => t.trim()).filter(Boolean).slice(0, 12) : it.kind === "html" ? postHtml(rec[l]) : rec[l];
-    }
-    data[it.id] = now;
-    count++;
-  }
-  return { count };
 }
 
 async function itemAction(formData: FormData, op: "delete" | "toggle" | "up" | "down") {
@@ -454,4 +402,16 @@ export async function tryTranslation(_prev: TryState, formData: FormData): Promi
   const r = await translateFromTurkish([{ id: "x", text: tr, kind: tr.includes("**") || tr.includes("\n") ? "rich" : tr.length > 90 ? "long" : "text" }], "Test sentence typed in the admin panel of www.dndcyprus.com");
   if (!r.ok) return { tr, error: r.error };
   return { tr, out: r.out.x ?? {} };
+}
+
+/** Bekleyen çevirileri hemen dener (normalde 10 dakikada bir kendiliğinden) */
+export async function runTranslationQueue(): Promise<{ message?: string; error?: string; at: number }> {
+  await requireAdmin("/admin/icerik");
+  if (!translationConfigured()) return { error: "Otomatik çeviri kapalı (anahtar yok).", at: Date.now() };
+  const r = await processTranslationQueue(45_000);
+  revalidatePath("/admin/icerik");
+  if (r.done && !r.left) return { message: `Bekleyen çevirilerin hepsi yapıldı (${r.done}).`, at: Date.now() };
+  if (r.done) return { message: `${r.done} çeviri yapıldı, ${r.left} tanesi sırada.`, at: Date.now() };
+  if (r.left) return { error: "Çeviri servisi hâlâ yoğun; sıradakiler 10 dakikada bir kendiliğinden denenecek.", at: Date.now() };
+  return { message: "Sırada bekleyen çeviri yok.", at: Date.now() };
 }

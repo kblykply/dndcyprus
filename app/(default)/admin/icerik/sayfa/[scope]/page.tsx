@@ -19,7 +19,7 @@ export const dynamic = "force-dynamic";
 const INPUT =
   "mt-1.5 block w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 shadow-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20";
 
-export default async function ScopeEditor({ params, searchParams }: { params: Promise<{ scope: string }>; searchParams: Promise<{ dil?: string; bolum?: string; kaydedildi?: string; geri?: string; ceviri?: string; cevirihata?: string; liste?: string; listehata?: string; atlanan?: string }> }) {
+export default async function ScopeEditor({ params, searchParams }: { params: Promise<{ scope: string }>; searchParams: Promise<{ dil?: string; bolum?: string; kaydedildi?: string; geri?: string; ceviri?: string; cevirihata?: string; cevirisira?: string; liste?: string; listehata?: string; atlanan?: string }> }) {
   const { scope } = await params;
   const sp = await searchParams;
   const store = await cookies();
@@ -87,6 +87,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
       ) : sp.geri ? (
         <p className="mt-4 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-sm text-teal-800">Orijinale döndü.</p>
       ) : null}
+      {sp.cevirisira ? <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">Türkçe kaydedildi. Çeviri servisi şu an yoğun; İngilizce, Almanca, Rusça ve Lehçe birkaç dakika içinde kendiliğinden çevrilecek (yeniden kaydetmenize gerek yok).</p> : null}
       {sp.cevirihata ? <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">Türkçe kaydedildi ama çeviri yapılamadı: {sp.cevirihata}</p> : null}
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
