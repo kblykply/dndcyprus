@@ -165,13 +165,13 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
               <label className={LABEL} htmlFor="name">
                 Ad (notlarda görünür)
               </label>
-              <input id="name" name="name" required maxLength={60} placeholder="Talha" className={INPUT} />
+              <input id="name" name="name" required maxLength={60} placeholder="örn. Ahmet" className={INPUT} />
             </div>
             <div>
               <label className={LABEL} htmlFor="user">
                 Kullanıcı adı
               </label>
-              <input id="user" name="user" required maxLength={30} autoComplete="off" placeholder="talha" className={INPUT} />
+              <input id="user" name="user" required maxLength={30} autoComplete="off" placeholder="örn. ahmet" className={INPUT} />
             </div>
             <div>
               <label className={LABEL} htmlFor="role">
@@ -186,7 +186,7 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
               <label className={LABEL} htmlFor="email">
                 E-posta (isteğe bağlı · sabah özeti)
               </label>
-              <input id="email" name="email" type="email" maxLength={254} className={INPUT} />
+              <input id="email" name="email" type="email" maxLength={254} placeholder="örn. ahmet@gmail.com" className={INPUT} />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
@@ -203,8 +203,8 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
               </div>
             </div>
             <p className="text-xs text-slate-500">
-              Şifreyi <b>boş bırakın</b>: kişi şifresini kendisi belirlesin diye size bir bağlantı verilir, WhatsApp&apos;tan gönderirsiniz. Ya da siz
-              belirleyin (en az 8 karakter, bir harf ve bir rakam).
+              Şifreyi <b>boş bırakın</b>: şifre belirleme bağlantısı kişinin e-postasına gider (size de gösterilir, isterseniz WhatsApp&apos;tan
+              iletirsiniz); kişi şifresini kendisi belirler. Ya da siz belirleyin (en az 8 karakter, bir harf ve bir rakam).
             </p>
             <button type="submit" className={BTN}>
               <UserPlus className="h-4 w-4" aria-hidden /> Kullanıcıyı ekle
