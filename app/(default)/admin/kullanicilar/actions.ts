@@ -32,40 +32,31 @@ export async function createUser(formData: FormData) {
   const name = String(formData.get("name") || "").replace(/\s+/g, " ").trim().slice(0, 60);
   const role = formData.get("role") === "admin" ? "admin" : "satis";
   const email = String(formData.get("email") || "").trim().toLowerCase().slice(0, 254);
-  const pw = String(formData.get("password") || "");
-  const pw2 = String(formData.get("password2") || "");
   if (!user) back({ hata: "Kullanıcı adı 3–30 karakter olmalı: harf, rakam, nokta, tire." });
   if (!name) back({ hata: "Ad gerekli (notlarda bu ad görünür)." });
   if (email && !EMAIL_RE.test(email)) back({ hata: "E-posta adresi geçersiz." });
-  // şifre boşsa kişi kendi şifresini davet bağlantısıyla belirler
-  if (pw) {
-    const problem = passwordProblem(pw);
-    if (problem) back({ hata: problem });
-    if (pw !== pw2) back({ hata: "Şifreler aynı değil." });
-  }
   if (user === (process.env.ADMIN_USER || "").toLowerCase()) back({ hata: "Bu kullanıcı adı ana yöneticinin adı." });
   const users = await loadPanelUsers();
   if (users.some((u) => u.user === user)) back({ hata: "Bu kullanıcı adı zaten var." });
-  const inv = pw ? null : newInvite();
+  // kişi şifresini davet bağlantısıyla kendisi belirler (yönetici şifre girmez)
+  const inv = newInvite();
   const row: PanelUser = {
     user: user!,
     name,
     role,
     ...(email ? { email } : {}),
     active: true,
-    hash: pw ? await hashPassword(pw) : "",
-    ...(inv ? { invite: inv.invite } : {}),
+    hash: "",
+    invite: inv.invite,
     createdAt: new Date().toISOString(),
   };
   await savePanelUsers([...users, row]);
-  const mailed = inv ? await flashInvite(row, inv.token) : false;
+  const mailed = await flashInvite(row, inv.token);
   revalidatePath("/admin/kullanicilar");
   back({
-    tamam: !inv
-      ? `${name} eklendi. Kullanıcı adı: ${user}`
-      : mailed
-        ? `${name} eklendi. Şifre belirleme bağlantısı ${row.email} adresine gönderildi.`
-        : `${name} eklendi. Aşağıdaki bağlantıyı kişiye gönderin; şifresini kendisi belirleyecek.`,
+    tamam: mailed
+      ? `${name} eklendi. Şifre belirleme bağlantısı ${row.email} adresine gönderildi.`
+      : `${name} eklendi. Aşağıdaki bağlantıyı kişiye gönderin; şifresini kendisi belirleyecek.`,
   });
 }
 

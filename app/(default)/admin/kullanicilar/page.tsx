@@ -1,6 +1,6 @@
 // app/(default)/admin/kullanicilar/page.tsx
-// Kullanıcılar (27.11.2026): yöneticinin panele kişi eklediği sayfa (ör. Talha — satış rolü). Şifreyi yönetici kendisi belirler
-// ve kişiye iletir; panel şifreyi hiçbir yerde göstermez. Satış rolü: Bugün, Genel Bakış, Satış Talepleri, Reklam Raporu.
+// Kullanıcılar (27.11.2026): yöneticinin panele kişi eklediği sayfa (ör. Talha — satış rolü). Kişi şifresini davet
+// bağlantısıyla kendisi belirler; panel şifreyi hiçbir yerde göstermez. Satış rolü: Bugün, Genel Bakış, Satış Talepleri, Reklam Raporu.
 import { cookies } from "next/headers";
 import { CheckCircle2, KeyRound, Link2, Mail, MessageCircle, ShieldCheck, TriangleAlert, UserPlus } from "lucide-react";
 import { requireRole } from "@/lib/admin-auth";
@@ -41,7 +41,7 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
       <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Kullanıcılar</h1>
       <p className="mt-1.5 max-w-2xl text-sm text-slate-500">
         Panele girecek kişileri buradan ekleyin. Satış rolü yalnız Bugün, Genel Bakış, Satış Talepleri ve Reklam Raporu&apos;nu görür; talep durumunu ve
-        notları kendi adıyla değiştirir. Şifre boş bırakılırsa kişi şifresini e-postasına gelen bağlantıyla kendisi belirler.
+        notları kendi adıyla değiştirir. Kişi şifresini e-postasına gelen bağlantıyla kendisi belirler.
       </p>
 
       {sp.tamam ? (
@@ -191,23 +191,9 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
               </label>
               <input id="email" name="email" type="email" maxLength={254} placeholder="örn. ahmet@gmail.com" className={INPUT} />
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className={LABEL} htmlFor="password">
-                  Şifre (isteğe bağlı)
-                </label>
-                <input id="password" name="password" type="password" minLength={8} autoComplete="new-password" className={INPUT} />
-              </div>
-              <div>
-                <label className={LABEL} htmlFor="password2">
-                  Şifre (tekrar)
-                </label>
-                <input id="password2" name="password2" type="password" minLength={8} autoComplete="new-password" className={INPUT} />
-              </div>
-            </div>
             <p className="text-xs text-slate-500">
-              Şifreyi <b>boş bırakın</b>: şifre belirleme bağlantısı kişinin e-postasına gider (size de gösterilir, isterseniz WhatsApp&apos;tan
-              iletirsiniz); kişi şifresini kendisi belirler. Ya da siz belirleyin (en az 8 karakter, bir harf ve bir rakam).
+              Kişi eklenince şifre belirleme bağlantısı e-postasına gider (size de gösterilir, isterseniz WhatsApp&apos;tan iletirsiniz); kişi
+              şifresini kendisi belirler.
             </p>
             <button type="submit" className={BTN}>
               <UserPlus className="h-4 w-4" aria-hidden /> Kullanıcıyı ekle
