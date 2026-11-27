@@ -21,22 +21,20 @@ const dur = (ms: number | null) => (ms === null ? "—" : durationText(ms));
 /** Bu kadar az sohbetli hafta grafikte "az veri" sayılır (çizgiye katılmaz) */
 const MIN_WEEK = 10;
 
-/** Haftalık grafik: sütun gelen sohbet, çizgi gündüz medyan ilk yanıt süresi, kesik çizgi hedef (kütüphanesiz SVG) */
+/** Haftalık grafik: çizgi gündüz medyan ilk yanıt süresi, kesik çizgi hedef; sohbet sayısı alt etikette (kütüphanesiz SVG) */
 function WeeklyChart({ weeks }: { weeks: WeekPoint[] }) {
   const W = 900;
   const H = 320;
   const L = 58;
-  const R = 58;
+  const R = 24;
   const T = 28;
   const B = 76;
   const plotW = W - L - R;
   const plotH = H - T - B;
   const band = plotW / weeks.length;
   const cx = (i: number) => L + band * i + band / 2;
-  const vMax = Math.max(10, ...weeks.map((w) => w.count)) * 1.15;
   const ok = (w: WeekPoint) => w.median !== null && w.count >= MIN_WEEK;
   const mMax = Math.max(TARGET_MS * 1.6, ...weeks.filter(ok).map((w) => w.median as number)) * 1.15;
-  const yV = (v: number) => T + plotH - (v / vMax) * plotH;
   const yM = (m: number) => T + plotH - (m / mMax) * plotH;
   const pts = weeks.map((w, i) => (ok(w) ? { x: cx(i), y: yM(w.median as number), w } : null));
   // çizgi: az veri haftalarında kesilir
@@ -51,11 +49,10 @@ function WeeklyChart({ weeks }: { weeks: WeekPoint[] }) {
   }
   if (cur.length) segs.push(cur.join(" "));
   const ticks = [0, 0.5, 1].map((f) => f * mMax);
-  const vTicks = [0, 0.5, 1].map((f) => Math.round((f * vMax) / 1.15));
   const label = (d: number) => new Date(d).toLocaleDateString("tr-TR", { timeZone: "Asia/Famagusta", day: "numeric", month: "short" });
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full min-w-[640px]" role="img" aria-label="Haftalık gelen sohbet ve medyan yanıt süresi">
+    <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full min-w-[640px]" role="img" aria-label="Haftalık medyan yanıt süresi">
       <defs>
         <linearGradient id="perf-alan" x1="0" x2="0" y1="0" y2="1">
           <stop offset="0%" stopColor="#0d6570" stopOpacity="0.16" />
@@ -71,24 +68,9 @@ function WeeklyChart({ weeks }: { weeks: WeekPoint[] }) {
           </text>
         </g>
       ))}
-      {/* sağ eksen (sohbet) */}
-      {vTicks.map((v) => (
-        <text key={`v${v}`} x={W - R + 10} y={yV(v) + 4} fontSize="12" fill="#94a3b8">
-          {v}
-        </text>
-      ))}
-      <text x={W - R + 10} y={T - 10} fontSize="11" fill="#94a3b8">
-        sohbet
-      </text>
       <text x={L - 10} y={T - 10} textAnchor="end" fontSize="11" fill="#64748b">
         süre
       </text>
-      {/* sütunlar: gelen sohbet */}
-      {weeks.map((w, i) => {
-        const bw = band * 0.46;
-        const y = yV(w.count);
-        return <rect key={`b${w.from}`} x={cx(i) - bw / 2} y={y} width={bw} height={Math.max(0, T + plotH - y)} rx="7" fill={w.count >= MIN_WEEK ? "#e2e8f0" : "#f1f5f9"} />;
-      })}
       {/* hedef */}
       <line x1={L} x2={W - R} y1={yM(TARGET_MS)} y2={yM(TARGET_MS)} stroke="#f47a20" strokeWidth="1.6" strokeDasharray="6 6" />
       <text x={L + 6} y={yM(TARGET_MS) - 8} textAnchor="start" fontSize="12" fontWeight="600" fill="#c2410c">
@@ -105,16 +87,32 @@ function WeeklyChart({ weeks }: { weeks: WeekPoint[] }) {
           </g>
         );
       })}
-      {pts.map((p) =>
-        p ? (
+      {pts.map((p, i) => {
+        if (!p) return null;
+        // dip noktada (iki yanı daha yukarıda) etiket noktanın altına: çizgiye binmesin; alt sınıra yakınsa sağına
+        const near = [pts[i - 1], pts[i + 1]].filter((q): q is NonNullable<typeof q> => !!q);
+        const valley = near.length > 0 && near.every((q) => q.y < p.y);
+        const below = valley && p.y + 24 <= T + plotH - 2;
+        const side = valley && !below;
+        return (
           <g key={`p${p.w.from}`}>
             <circle cx={p.x} cy={p.y} r="6" fill="#fff" stroke={(p.w.median as number) <= TARGET_MS ? "#0d6570" : "#c2410c"} strokeWidth="3" />
-            <text x={p.x} y={p.y - 14} textAnchor="middle" fontSize="13" fontWeight="700" fill="#0f172a">
+            <text
+              x={side ? p.x + 12 : p.x}
+              y={side ? p.y + 5 : below ? p.y + 26 : p.y - 14}
+              textAnchor={side ? "start" : "middle"}
+              fontSize="13"
+              fontWeight="700"
+              fill="#0f172a"
+              paintOrder="stroke"
+              stroke="#ffffff"
+              strokeWidth="4"
+            >
               {dur(p.w.median)}
             </text>
           </g>
-        ) : null,
-      )}
+        );
+      })}
       {/* alt etiketler */}
       {weeks.map((w, i) => (
         <g key={`x${w.from}`}>
@@ -250,9 +248,6 @@ export default async function PerformancePage(props: { searchParams?: Promise<{ 
               <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600">
                 <li className="flex items-center gap-1.5">
                   <span className="h-[3px] w-5 rounded bg-[#0d6570]" /> Gündüz medyan yanıt süresi
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <span className="h-3 w-3 rounded-sm bg-slate-200" /> Gelen sohbet
                 </li>
                 <li className="flex items-center gap-1.5">
                   <span className="w-5 border-t-2 border-dashed border-[#f47a20]" /> Hedef {Math.round(TARGET_MS / MIN)} dk
