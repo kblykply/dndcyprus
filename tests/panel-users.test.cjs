@@ -201,3 +201,16 @@ test("the password link page opens without a session; other admin pages still re
   const closed = await middleware(new NextRequest("https://local.test/admin/sifre/baska"));
   assert.equal(new URL(closed.headers.get("location")).pathname, "/admin/login");
 });
+
+test("invite e-mail carries the username and the one-time link, escaped", () => {
+  const m = loadTypeScript("lib/invite-email.ts");
+  const v = { name: "Talha <b>", user: "talha", email: "t@example.com", url: "https://www.dndcyprus.com/admin/sifre?u=talha&t=ABCDEFGHIJKLMNOPQRSTUVWX" };
+  const html = m.inviteHtml(v);
+  assert.match(html, /PANEL DAVETİ/);
+  assert.match(html, /Merhaba Talha &lt;b&gt;,/);
+  assert.match(html, /Kullanıcı adın: <b>talha<\/b>/);
+  assert.match(html, /href="https:\/\/www\.dndcyprus\.com\/admin\/sifre\?u=talha&amp;t=ABCDEFGHIJKLMNOPQRSTUVWX"/);
+  assert.equal(m.inviteSubject(v), "DND Cyprus yönetim paneline davetlisin");
+  assert.equal(m.inviteSubject({ ...v, reset: true }), "DND Cyprus panel · şifre yenileme bağlantın");
+  assert.match(m.inviteText(v), /talha&t=ABCDEFGHIJKLMNOPQRSTUVWX/);
+});

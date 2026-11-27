@@ -87,6 +87,8 @@ export async function authenticatePanelUser(username: string, password: string) 
 /* ---------------- Davet bağlantısı: kişi şifresini kendisi belirler ---------------- */
 
 export const INVITE_HOURS = 72;
+/** Davet bağlantısı yöneticiye bir kez gösterilir: 10 dakikalık, yalnız Kullanıcılar sayfasına giden çerez */
+export const INVITE_FLASH = "davet_baglanti";
 const sha256 = (t: string) => createHash("sha256").update(t).digest("hex");
 
 /** Yeni davet: düz bağlantı yalnız bir kez yöneticiye gösterilir, saklanan özettir */

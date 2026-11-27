@@ -4,9 +4,9 @@
 import { cookies } from "next/headers";
 import { CheckCircle2, KeyRound, Link2, Mail, MessageCircle, ShieldCheck, TriangleAlert, UserPlus } from "lucide-react";
 import { requireRole } from "@/lib/admin-auth";
-import { ROLE_LABEL, loadPanelUsers } from "@/lib/panel-users";
+import { INVITE_FLASH, ROLE_LABEL, loadPanelUsers } from "@/lib/panel-users";
 import { cyprusDateTime } from "@/lib/lead-status";
-import { INVITE_FLASH, createUser, inviteUser, resetPassword, updateUser } from "./actions";
+import { createUser, inviteUser, resetPassword, updateUser } from "./actions";
 import { ConfirmButton } from "../leads/LeadControls";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,7 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
   const users = await loadPanelUsers();
   const owner = process.env.ADMIN_USER || "Yönetici";
   // az önce oluşturulan davet bağlantısı (10 dk'lık çerezden; adres çubuğunda görünmez)
-  let invite: { user: string; name: string; url: string } | null = null;
+  let invite: { user: string; name: string; url: string; mailed?: string | null } | null = null;
   try {
     const raw = (await cookies()).get(INVITE_FLASH)?.value;
     invite = raw ? JSON.parse(raw) : null;
@@ -57,7 +57,10 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
           <p className="flex items-center gap-2 text-[15px] font-semibold text-slate-900">
             <Link2 className="h-4 w-4 text-[#0d6570]" aria-hidden /> {invite.name} için şifre belirleme bağlantısı
           </p>
-          <p className="mt-1 text-[13px] text-slate-600">3 gün geçerli, tek kullanımlık. Bu bağlantı yalnız şimdi gösterilir; kaybolursa &quot;Yeni bağlantı&quot; ile tekrar oluşturun.</p>
+          <p className="mt-1 text-[13px] text-slate-600">
+            {invite.mailed ? `${invite.mailed} adresine e-postayla gönderildi. ` : ""}3 gün geçerli, tek kullanımlık. Bu bağlantı yalnız şimdi gösterilir;
+            kaybolursa &quot;Yeni bağlantı&quot; ile tekrar oluşturun.
+          </p>
           <label className="sr-only" htmlFor="davet-url">
             Bağlantı
           </label>

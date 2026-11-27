@@ -4,14 +4,23 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { requireRole } from "@/lib/admin-auth";
-import { cleanUsername, hashPassword, loadPanelUsers, newInvite, passwordProblem, savePanelUsers, type PanelUser } from "@/lib/panel-users";
+import { INVITE_FLASH, cleanUsername, hashPassword, loadPanelUsers, newInvite, passwordProblem, savePanelUsers, type PanelUser } from "@/lib/panel-users";
+import { sendInviteEmail } from "@/lib/invite-email";
 import { SITE_URL } from "@/lib/seo";
 
-/** Davet bağlantısı yöneticiye bir kez gösterilir: 10 dakikalık, yalnız bu sayfaya giden çerezle (adres çubuğuna düşmez) */
-export const INVITE_FLASH = "davet_baglanti";
-async function flashInvite(user: string, name: string, token: string) {
-  const url = `${SITE_URL}/admin/sifre?u=${encodeURIComponent(user)}&t=${token}`;
-  (await cookies()).set(INVITE_FLASH, JSON.stringify({ user, name, url }), { httpOnly: true, secure: true, sameSite: "strict", path: "/admin/kullanicilar", maxAge: 600 });
+// "use server" dosyası yalnız async fonksiyon dışa aktarabilir: sabitler lib/panel-users'ta
+/** Bağlantı yöneticiye bir kez gösterilir (adres çubuğuna düşmez); kişinin e-postası varsa doğrudan ona da gider */
+async function flashInvite(u: { user: string; name: string; email?: string }, token: string, reset = false) {
+  const url = `${SITE_URL}/admin/sifre?u=${encodeURIComponent(u.user)}&t=${token}`;
+  const mailed = u.email ? await sendInviteEmail({ name: u.name, user: u.user, email: u.email, url, reset }).catch(() => false) : null;
+  (await cookies()).set(INVITE_FLASH, JSON.stringify({ user: u.user, name: u.name, url, mailed: mailed === true ? u.email : null }), {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+    path: "/admin/kullanicilar",
+    maxAge: 600,
+  });
+  return mailed === true;
 }
 
 const back = (q: Record<string, string>) => redirect(`/admin/kullanicilar?${new URLSearchParams(q)}`);
@@ -49,9 +58,15 @@ export async function createUser(formData: FormData) {
     createdAt: new Date().toISOString(),
   };
   await savePanelUsers([...users, row]);
-  if (inv) await flashInvite(row.user, name, inv.token);
+  const mailed = inv ? await flashInvite(row, inv.token) : false;
   revalidatePath("/admin/kullanicilar");
-  back({ tamam: inv ? `${name} eklendi. Aşağıdaki bağlantıyı kişiye gönderin; şifresini kendisi belirleyecek.` : `${name} eklendi. Kullanıcı adı: ${user}` });
+  back({
+    tamam: !inv
+      ? `${name} eklendi. Kullanıcı adı: ${user}`
+      : mailed
+        ? `${name} eklendi. Şifre belirleme bağlantısı ${row.email} adresine gönderildi.`
+        : `${name} eklendi. Aşağıdaki bağlantıyı kişiye gönderin; şifresini kendisi belirleyecek.`,
+  });
 }
 
 export async function resetPassword(formData: FormData) {
@@ -102,7 +117,7 @@ export async function inviteUser(formData: FormData) {
   const inv = newInvite();
   found!.invite = inv.invite;
   await savePanelUsers(users);
-  await flashInvite(found!.user, found!.name, inv.token);
+  const mailed = await flashInvite(found!, inv.token, !!found!.hash);
   revalidatePath("/admin/kullanicilar");
-  back({ tamam: `${found!.name} için yeni bağlantı hazır.` });
+  back({ tamam: mailed ? `${found!.name} için bağlantı ${found!.email} adresine gönderildi.` : `${found!.name} için yeni bağlantı hazır.` });
 }
