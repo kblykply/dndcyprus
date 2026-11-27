@@ -586,7 +586,8 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
       </div>
 
       {/* Liste + ayrıntı */}
-      <div className="mt-4 grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px] 2xl:grid-cols-[minmax(0,1fr)_380px]">
+      {/* xl: liste kendi içeriği kadar (boş alan kalmasın); ayrıntı ekran yüksekliğinde sabit, kendi içinde kayar (27.11) */}
+      <div className="mt-4 grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px] xl:items-start 2xl:grid-cols-[minmax(0,1fr)_380px]">
         <div className={`min-w-0 ${explicit ? "hidden xl:block" : ""}`}>
           {rows.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
@@ -603,7 +604,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           ) : (
             <>
               {/* Masaüstü tablo + toplu durum */}
-              <div className="hidden h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white md:flex">
+              <div className="hidden flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white md:flex">
               <form id="toplu" action={setLeadStatusBulk} className="flex-1">
                 <input type="hidden" name="back" value={here} />
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 px-3 py-2">
@@ -723,8 +724,11 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
 
         {/* Seçili talep */}
         {detail ? (
-          <aside className={`${explicit ? "block" : "hidden xl:block"} rounded-3xl border border-slate-200 bg-white`} aria-label="Talep ayrıntısı">
-            <div className="xl:sticky xl:top-4">
+          <aside
+            className={`${explicit ? "block" : "hidden xl:block"} rounded-3xl border border-slate-200 bg-white xl:sticky xl:top-4 xl:max-h-[calc(100vh-2rem)] xl:overflow-y-auto xl:overscroll-contain`}
+            aria-label="Talep ayrıntısı"
+          >
+            <div>
             {explicit ? (
               <Link href={qs(sp, { id: undefined })} className="flex items-center gap-2 border-b border-slate-100 px-5 py-3 text-sm font-medium text-teal-700 xl:hidden">
                 <ArrowLeft className="h-4 w-4" aria-hidden /> Bütün talepler
