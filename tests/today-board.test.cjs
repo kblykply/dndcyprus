@@ -29,20 +29,29 @@ const lead = (o = {}) => ({
 test("meta-msg-view: waiting needs no status change after the message; labels and Business Suite link", () => {
   const v = loadTypeScript("lib/meta-msg-view.ts");
   const th = { conv: "c1", l: 1, t: 0, c: "i", p: "igsid-9", w: NOW.getTime() - 2 * H };
-  assert.equal(v.waitingSince(th, { id: 1, status: "yeni", statusAt: null }), NOW.getTime() - 2 * H);
+  const T = NOW.getTime();
+  assert.equal(v.waitingSince(th, { id: 1, status: "yeni", statusAt: null }, T), NOW.getTime() - 2 * H);
   // ekip mesajdan sonra durumu "Arandı" yaptıysa bekleyen sayılmaz
-  assert.equal(v.waitingSince(th, { id: 1, status: "arandi", statusAt: ago(1 * H) }), null);
+  assert.equal(v.waitingSince(th, { id: 1, status: "arandi", statusAt: ago(1 * H) }, T), null);
   // durum değişikliği mesajdan önceyse hâlâ bekliyor
-  assert.equal(v.waitingSince(th, { id: 1, status: "arandi", statusAt: ago(5 * H) }), NOW.getTime() - 2 * H);
-  assert.equal(v.waitingSince(th, { id: 1, status: "satis_disi", statusAt: null }), null);
+  assert.equal(v.waitingSince(th, { id: 1, status: "arandi", statusAt: ago(5 * H) }, T), NOW.getTime() - 2 * H);
+  assert.equal(v.waitingSince(th, { id: 1, status: "satis_disi", statusAt: null }, T), null);
   assert.equal(v.durationLabel(4 * 60_000), "4 dk");
   assert.equal(v.durationLabel(2 * H + 10 * 60_000), "2 sa");
   assert.equal(v.durationLabel(3 * DAY + H), "3 gün");
+  // Business Suite: doğru sekme (yorum sekmesi değil), PSID ile sohbet açılmaz
   const url = new URL(v.inboxUrl("104484445978084", th));
-  assert.equal(url.pathname, "/latest/inbox/instagram");
+  assert.equal(url.pathname, "/latest/inbox/instagram_direct");
   assert.equal(url.searchParams.get("asset_id"), "104484445978084");
-  assert.equal(url.searchParams.get("selected_item_id"), "igsid-9");
-  assert.equal(new URL(v.inboxUrl(null, { c: "m" })).pathname, "/latest/inbox/facebook");
+  assert.equal(url.searchParams.get("selected_item_id"), null);
+  assert.equal(new URL(v.inboxUrl(null, { c: "m" })).pathname, "/latest/inbox/messenger");
+  // Meta'nın sohbet bağlantısı varsa doğrudan o; yabancı alan adı kabul edilmez
+  assert.equal(v.inboxUrl("1", { c: "m", u: "https://business.facebook.com/latest/inbox/messenger?selected_item_id=6157" }), "https://business.facebook.com/latest/inbox/messenger?selected_item_id=6157");
+  assert.equal(v.inboxUrl("1", { c: "m", u: "/104484445978084/inbox/123/" }), "https://business.facebook.com/104484445978084/inbox/123/");
+  assert.equal(new URL(v.inboxUrl("1", { c: "m", u: "https://kotu.example/x" })).pathname, "/latest/inbox/messenger");
+  // 14 günden eski cevapsız sohbet bekleyen sayılmaz
+  assert.equal(v.waitingSince({ conv: "x", t: 0, w: NOW.getTime() - 15 * DAY }, { id: 1, status: "yeni" }, NOW.getTime()), null);
+  assert.equal(v.waitingSince({ conv: "x", t: 0, w: NOW.getTime() - 13 * DAY }, { id: 1, status: "yeni" }, NOW.getTime()), NOW.getTime() - 13 * DAY);
   assert.equal(v.noContact({ id: 1, status: "yeni", form: "meta-mesaj", phone: null, email: "" }), true);
   assert.equal(v.noContact({ id: 1, status: "yeni", form: "contact", phone: null, email: "" }), false);
 

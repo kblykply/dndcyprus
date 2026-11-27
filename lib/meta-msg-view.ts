@@ -7,6 +7,8 @@ const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
 /** Bu kadar süredir cevapsız müşteri kırmızı görünür */
 export const WAIT_ALERT_MS = HOUR;
+/** Bundan eski cevapsız sohbet "cevap bekliyor" sayılmaz (iş listesini eski sohbetler doldurmasın; talep listede kalır) */
+export const WAIT_MAX_MS = 14 * DAY;
 
 export type Thread = ConvMemo & { conv: string };
 type LeadLite = { id: number; status: string | null; statusAt?: Date | null; form?: string | null; phone?: string | null; email?: string | null };
@@ -26,8 +28,9 @@ export function threadsByLead(state: MetaMsgState | null | undefined) {
  * Müşteri cevap bekliyor mu: sohbette ekibin son cevabından sonra yazdı ve ekip o zamandan beri talebin durumunu da
  * değiştirmedi (ör. telefonla aradıysa ve durumu "Arandı" yaptıysa bekleyen sayılmaz). Satış dışı kayıtlar sayılmaz.
  */
-export function waitingSince(th: Thread | undefined, lead: LeadLite): number | null {
+export function waitingSince(th: Thread | undefined, lead: LeadLite, now = Date.now()): number | null {
   if (!th?.w || lead.status === "satis_disi") return null;
+  if (now - th.w > WAIT_MAX_MS) return null;
   if (lead.statusAt && lead.statusAt.getTime() >= th.w) return null;
   return th.w;
 }
@@ -43,18 +46,30 @@ export function durationLabel(ms: number) {
 export const noContact = (l: LeadLite) => l.form === "meta-mesaj" && !l.phone && !(l.email || "").trim();
 
 /**
- * Business Suite gelen kutusu: Messenger ya da Instagram sekmesi; kişinin kimliği de eklenir (Business Suite seçili
- * sohbeti adrese yazmıyor; açmazsa kişi adıyla aranır).
+ * Business Suite: Meta sohbet bağlantısı verdiyse doğrudan o sohbet; yoksa doğru gelen kutusu sekmesi (Messenger =
+ * /inbox/messenger, Instagram mesajları = /inbox/instagram_direct; "facebook" ve "instagram" yorum sekmeleridir).
+ * Business Suite kendi kişi kimliğini kullanır, Meta'nın sayfaya özel kimliğiyle (PSID) sohbet açılmaz — hata sayfası verir.
  */
-export function inboxUrl(pageId: string | null | undefined, th: Pick<Thread, "c" | "p"> | undefined) {
-  const tab = th?.c === "i" ? "instagram" : th?.c === "m" ? "facebook" : "all";
+export function inboxUrl(pageId: string | null | undefined, th: Pick<Thread, "c" | "u"> | undefined) {
+  const link = th?.u ? conversationLink(th.u) : null;
+  if (link) return link;
+  const tab = th?.c === "i" ? "instagram_direct" : th?.c === "m" ? "messenger" : "all";
   const u = new URL(`https://business.facebook.com/latest/inbox/${tab}`);
-  if (pageId) u.searchParams.set("asset_id", pageId);
-  if (th?.p) {
-    u.searchParams.set("selected_item_id", th.p);
-    u.searchParams.set("thread_type", th.c === "i" ? "IG_MESSAGE" : "FB_MESSAGE");
+  if (pageId) {
+    u.searchParams.set("asset_id", pageId);
+    u.searchParams.set("mailbox_id", pageId);
   }
   return u.toString();
+}
+
+/** Meta'nın sohbet bağlantısı yalnız facebook.com alan adlarında kabul edilir; göreli yol Business Suite'e bağlanır */
+export function conversationLink(raw: string) {
+  try {
+    const u = new URL(raw, "https://business.facebook.com");
+    return u.protocol === "https:" && /(^|\.)facebook\.com$/.test(u.hostname) ? u.toString() : null;
+  } catch {
+    return null;
+  }
 }
 
 /** Dönemde ilk mesajı gelen sohbetlerin ilk cevap istatistiği */

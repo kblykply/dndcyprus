@@ -96,7 +96,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
         : `${metaTotal} reklam formu talebi${msgNote} · son kontrol ${cyprusDateTime(new Date(metaState.lastRunAt)).time}`;
   const due = dueFollowUps(all, now);
   const threads = threadsByLead(msgState);
-  const msgWaiting = all.filter((l) => waitingSince(threads.get(l.id), l) !== null).length;
+  const msgWaiting = all.filter((l) => waitingSince(threads.get(l.id), l, now.getTime()) !== null).length;
   const msgNoNumber = all.filter((l) => noContact(l) && isSalesLead(l) && statusInfo(l.status).key !== "olumsuz").length;
   const rs = replyStats(msgState, b.from ? b.from.getTime() : null, now.getTime());
   const msgReady = !!msgState?.convs && Object.keys(msgState.convs).length > 0;

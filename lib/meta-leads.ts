@@ -109,10 +109,10 @@ export const phoneKey = (p: string | null | undefined) => {
 
 /* ---------------- Graph API ---------------- */
 
-export async function graph<T>(path: string, token: string, params: Record<string, string> = {}): Promise<T> {
+export async function graph<T>(path: string, token: string, params: Record<string, string> = {}, timeoutMs = 20_000): Promise<T> {
   const url = path.startsWith("https://") ? new URL(path) : new URL(`https://graph.facebook.com/${graphVersion()}/${path}`);
   for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-  const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store", signal: AbortSignal.timeout(20_000) });
+  const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store", signal: AbortSignal.timeout(timeoutMs) });
   const body = (await r.json().catch(() => null)) as (T & { error?: { message?: string; code?: number; error_subcode?: number; type?: string } }) | null;
   if (!r.ok || !body || body.error) {
     const code = body?.error?.code;

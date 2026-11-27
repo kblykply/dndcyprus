@@ -39,7 +39,7 @@ export function agenda(leads: BoardLead[], threads: Map<number, Thread>, now: Da
   const cevap: AgendaItem[] = [];
   for (const l of leads) {
     const th = threads.get(l.id);
-    const w = waitingSince(th, l);
+    const w = waitingSince(th, l, t);
     if (w === null) continue;
     seen.add(l.id);
     cevap.push({ kind: "cevap", lead: l, since: w, thread: th, label: `${channelOf(l, th)} · cevap bekliyor · ${durationLabel(t - w)}` });

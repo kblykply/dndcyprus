@@ -160,6 +160,30 @@ test("sync creates one lead per chat, merges a known person, and later picks up 
   assert.match(mails[1], /^meta-mesaj:c2:\d+$/);
 });
 
+test("conversation lists: Messenger asks for the chat link, Instagram uses small pages; a timeout is explained, not thrown", async () => {
+  const db = fakePrisma();
+  const seen = {};
+  const base = graphFetch({ messenger: [], instagram: [] });
+  const fetch = async (url, init) => {
+    const u = new URL(String(url));
+    if (u.pathname.endsWith(`/${PAGE}/conversations`)) {
+      const p = u.searchParams.get("platform");
+      seen[p] = { fields: u.searchParams.get("fields"), limit: u.searchParams.get("limit") };
+      if (p === "instagram") throw Object.assign(new Error("The operation was aborted due to timeout"), { name: "TimeoutError" });
+    }
+    return base(url, init);
+  };
+  const m = load({ env: { META_LEADS_TOKEN: "x" }, globals: { fetch }, prisma: db.prisma });
+  const r = await m.syncMetaMessages();
+  assert.match(seen.messenger.fields, /^id,updated_time,link,participants,messages/);
+  assert.equal(seen.messenger.limit, "25");
+  assert.doesNotMatch(seen.instagram.fields, /link/);
+  assert.equal(seen.instagram.limit, "10");
+  assert.equal(r.error, "Instagram: Meta zamanında cevap vermedi; sonraki çalışmada tekrar denenecek.");
+  assert.equal(db.state.lastTs.instagram, undefined); // Instagram'ın kaldığı yer ilerlemez
+  assert.ok(db.state.lastTs.messenger > 0);
+});
+
 test("missing message permission is reported per platform without throwing", async () => {
   const db = fakePrisma();
   const m = load({
@@ -208,12 +232,13 @@ test("sync remembers who the customer is, when they wait and clears it once the 
   const u1 = { id: "psid-1", name: "Mehmet Kaya" };
   const z = { id: "psid-2", name: "Zeynep Arslan" };
   let chats = [
-    conv("c1", 120_000, [u1, page], [msg("m1", u1, "NeoCity fiyatı?", 120_000)]),
+    { ...conv("c1", 120_000, [u1, page], [msg("m1", u1, "NeoCity fiyatı?", 120_000)]), link: "https://business.facebook.com/latest/inbox/messenger?selected_item_id=61570000000001" },
     conv("c9", 300_000, [z, page], [msg("z1", z, "Lagoon için numaram 0533 222 33 44", 300_000)]),
   ];
   const m = load({ env: { META_LEADS_TOKEN: "x" }, globals: { fetch: graphFetch({ messenger: () => chats, instagram: [] }) }, prisma: db.prisma });
   await m.syncMetaMessages();
   const memo = db.state.convs.c1;
+  assert.equal(memo.u, "https://business.facebook.com/latest/inbox/messenger?selected_item_id=61570000000001");
   assert.equal(memo.p, "psid-1");
   assert.equal(memo.c, "m");
   assert.ok(memo.w > 0);

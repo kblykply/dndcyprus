@@ -326,7 +326,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
   const now = new Date();
   const [{ rows, legacy }, msgState] = await Promise.all([loadRows(), loadMetaMsgState()]);
   const threads = threadsByLead(msgState);
-  const waitOf = (r: Row) => waitingSince(threads.get(r.id), r);
+  const waitOf = (r: Row) => waitingSince(threads.get(r.id), r, now.getTime());
   const waitingIds = new Set(rows.filter((r) => waitOf(r) !== null).map((r) => r.id));
   const noNumberIds = new Set(rows.filter((r) => noContact(r) && statusInfo(r.status).key !== "satis_disi").map((r) => r.id));
 
@@ -791,7 +791,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
             {detail.form === "meta-mesaj" || threads.has(detail.id) ? (
               <ChatBox
                 th={threads.get(detail.id)}
-                wait={waitingSince(threads.get(detail.id), { id: detail.id, status: detail.status, statusAt: "statusAt" in detail ? (detail.statusAt as Date | null) : null })}
+                wait={waitingSince(threads.get(detail.id), { id: detail.id, status: detail.status, statusAt: "statusAt" in detail ? (detail.statusAt as Date | null) : null }, now.getTime())}
                 pageId={msgState?.pageId ?? null}
                 instagram={(detail.source || "").toLowerCase().startsWith("instagram")}
                 noNumber={noContact(detail)}

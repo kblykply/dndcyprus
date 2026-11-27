@@ -23,15 +23,16 @@ const NO_NUMBER = " · numara vermedi";
 export type MsgPlatform = "messenger" | "instagram";
 export type GraphPerson = { id: string; name?: string; username?: string };
 export type GraphMsg = { id: string; message?: string; created_time?: string; from?: GraphPerson };
-export type GraphConv = { id: string; updated_time: string; participants?: { data?: GraphPerson[] }; messages?: { data?: GraphMsg[] } };
+export type GraphConv = { id: string; updated_time: string; link?: string; participants?: { data?: GraphPerson[] }; messages?: { data?: GraphMsg[] } };
 
 /**
  * Sohbet hafızası (kısa anahtarlar: hafıza tek satırda en çok 3000 sohbet tutar)
  *   l = talep kimliği · t = işlenen son müşteri mesajının zamanı · p = müşterinin Meta kimliği (PSID / IGSID)
  *   c = platform (m Messenger, i Instagram) · f = görülen ilk müşteri mesajı · w = cevap bekleyen ilk müşteri mesajının zamanı
  *   (ekip cevap verince silinir) · r = ilk cevap süresi (ms) · a = ekibin son cevabı · e = Meta'ya gönderilen olaylar (bit)
+ *   u = Meta'nın verdiği sohbet bağlantısı (Business Suite'te doğrudan o sohbeti açar; yalnız Messenger)
  */
-export type ConvMemo = { l?: number; t: number; p?: string; c?: "m" | "i"; f?: number; w?: number | null; r?: number | null; a?: number | null; e?: number };
+export type ConvMemo = { l?: number; t: number; p?: string; c?: "m" | "i"; f?: number; w?: number | null; r?: number | null; a?: number | null; e?: number; u?: string };
 export type MetaMsgState = {
   lastRunAt?: string;
   /** platform başına: bu zamandan sonra güncellenen sohbetlere bakılır */
@@ -169,7 +170,8 @@ export function replyState(conv: GraphConv, ownIds: string[]) {
 
 /** Meta hatasını ekibin anlayacağı cümleye çevirir */
 export function messageError(e: unknown) {
-  const err = e as { code?: number; message?: string } | null;
+  const err = e as { code?: number; message?: string; name?: string } | null;
+  if (err?.name === "TimeoutError" || err?.name === "AbortError" || /aborted due to timeout/i.test(err?.message || "")) return "Meta zamanında cevap vermedi; sonraki çalışmada tekrar denenecek.";
   if (err?.code === 190) return "Meta anahtarı geçersiz ya da iptal edilmiş.";
   if (err?.code === 10 || err?.code === 200 || err?.code === 230 || err?.code === 3) return "mesaj okuma izni yok (anahtar yeni izinlerle oluşturulmalı).";
   return (err?.message || "bilinmeyen hata").slice(0, 200);
@@ -177,15 +179,28 @@ export function messageError(e: unknown) {
 
 /* ---------------- Graph API ---------------- */
 
-const CONV_FIELDS = "id,updated_time,participants,messages.limit(20){id,message,from,created_time}";
+const MSG_FIELDS = "messages.limit(20){id,message,from,created_time}";
+/**
+ * Messenger sohbetinde "link" (Business Suite'te doğrudan o sohbeti açan adres) da istenir; Instagram sohbet listesi Meta'da
+ * yavaş: sayfa başına 10 sohbet ve daha uzun bekleme (27.11 ilk çekimde 20 sn'de zaman aşımı oldu).
+ */
+const LIST = {
+  messenger: { fields: `id,updated_time,link,participants,${MSG_FIELDS}`, limit: "25", timeout: 30_000 },
+  instagram: { fields: `id,updated_time,participants,${MSG_FIELDS}`, limit: "10", timeout: 45_000 },
+} as const;
 
-/** `since` sonrasında güncellenen sohbetler (Meta yeniden eskiye verir; sınıra gelince durulur) */
-async function recentConversations(pageId: string, token: string, platform: MsgPlatform, since: number) {
+/**
+ * `since` sonrasında güncellenen sohbetler (Meta yeniden eskiye verir; sınıra gelince durulur). Süre sınırına yaklaşınca
+ * eldekiyle döner (ilk geçmiş aktarımında en yeni sohbetler alınmış olur).
+ */
+async function recentConversations(pageId: string, token: string, platform: MsgPlatform, since: number, deadline = Number.POSITIVE_INFINITY) {
   const out: GraphConv[] = [];
+  const cfg = LIST[platform];
   let next: string | null = null;
   for (let i = 0; i < 20; i++) {
+    if (i > 0 && Date.now() > deadline - cfg.timeout) break;
     const page: { data?: GraphConv[]; paging?: { next?: string } } =
-      i === 0 ? await graph(`${pageId}/conversations`, token, { platform, fields: CONV_FIELDS, limit: "25" }) : await graph(next!, token);
+      i === 0 ? await graph(`${pageId}/conversations`, token, { platform, fields: cfg.fields, limit: cfg.limit }, cfg.timeout) : await graph(next!, token, {}, cfg.timeout);
     let stop = false;
     for (const c of page.data ?? []) {
       if (Date.parse(c.updated_time) < since) {
@@ -302,6 +317,7 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
     // ilk cevap süresi bir kez yazılır; Meta sohbetin başını vermediyse (20+ mesaj) bilinemez
     const firstReply = memo?.r ?? (rs.complete || (memo?.f !== undefined && memo.f === rs.firstCustomer) ? rs.firstReplyMs : null);
     const info: Omit<ConvMemo, "t"> = {
+      ...(typeof conv.link === "string" && conv.link ? { u: conv.link.slice(0, 400) } : {}),
       p: person?.id ?? memo?.p,
       c: platform === "instagram" ? "i" : "m",
       ...(Number.isFinite(firstSeen) ? { f: firstSeen } : {}),
@@ -416,7 +432,7 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
         try {
           const since = (lastTs[t.platform] ?? now - BACKFILL_DAYS * DAY) - 3600_000;
           // eskiden yeniye: süre ya da okuma sınırı dolarsa kalan yer kaydedilir, sonraki çalışma oradan sürer
-          const list = (await recentConversations(page.id, pageToken, t.platform, since)).sort((a, b) => Date.parse(a.updated_time) - Date.parse(b.updated_time));
+          const list = (await recentConversations(page.id, pageToken, t.platform, since, deadline)).sort((a, b) => Date.parse(a.updated_time) - Date.parse(b.updated_time));
           let reached = lastTs[t.platform] ?? 0;
           let complete = true;
           for (const conv of list) {
