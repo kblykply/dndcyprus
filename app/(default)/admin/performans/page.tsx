@@ -4,9 +4,11 @@
 import Link from "next/link";
 import { CircleSlash, Clock3, Gauge, Moon, Timer, TrendingUp } from "lucide-react";
 import { requireRole } from "@/lib/admin-auth";
+import { prisma } from "@/lib/prisma";
+import { statusInfo } from "@/lib/lead-status";
 import { loadLiveMsgState } from "@/lib/meta-messages";
 import { MSG_RESPONDER } from "@/lib/meta-msg-view";
-import { TARGET_MS, WEIGHTS, durationText, responderScore, weeklyTrend, type WeekPoint } from "@/lib/responder-score";
+import { TARGET_MS, WEIGHTS, durationText, isNight, responderScore, unansweredConvs, weeklyTrend, type WeekPoint } from "@/lib/responder-score";
 
 export const dynamic = "force-dynamic";
 
@@ -140,6 +142,14 @@ export default async function PerformancePage(props: { searchParams?: Promise<{ 
   const state = await loadLiveMsgState();
   const convs = state?.convs ?? {};
   const res = responderScore(convs, now, days);
+  // "Yanıtsız sohbet" sayısının arkasındakiler: talebe bağlantıyla listelenir
+  const missed = unansweredConvs(convs, now, days);
+  const missedIds = missed.map((m) => m.l).filter((l): l is number => typeof l === "number");
+  const missedLeads = missedIds.length
+    ? await prisma.contactMessage.findMany({ where: { id: { in: missedIds } }, select: { id: true, name: true, status: true } }).catch(() => [])
+    : [];
+  const leadOf = new Map(missedLeads.map((l) => [l.id, l]));
+  const when = (t: number) => new Date(t).toLocaleString("tr-TR", { timeZone: "Asia/Famagusta", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
   const trend = weeklyTrend(convs, now, 8);
   const ring = res.grade.tone === "teal" ? "#0d6570" : res.grade.tone === "amber" ? "#d97706" : "#e11d48";
   const C = 2 * Math.PI * 54;
@@ -237,6 +247,45 @@ export default async function PerformancePage(props: { searchParams?: Promise<{ 
               </div>
             ))}
           </div>
+
+          {missed.length ? (
+            <section className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="yanitsiz">
+              <h2 id="yanitsiz" className="flex items-center gap-2 text-lg font-semibold text-slate-900">
+                <CircleSlash className="h-5 w-5 text-[#0d6570]" aria-hidden /> Yanıtsız sohbetler ({missed.length})
+              </h2>
+              <p className="mt-1 text-xs text-slate-500">Bu dönemde ekipten hiç yazılı cevap almayan sohbetler; en yenisi üstte. Talebi açıp durumuna bakabilirsiniz.</p>
+              <ul className="mt-4 divide-y divide-slate-100">
+                {missed.slice(0, 30).map((m) => {
+                  const lead = m.l ? leadOf.get(m.l) : undefined;
+                  const st = lead ? statusInfo(lead.status) : null;
+                  return (
+                    <li key={m.id} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1.5 py-3 text-sm">
+                      <span className="min-w-0">
+                        {lead ? (
+                          <Link href={`/admin/leads?id=${lead.id}`} className="font-semibold text-slate-900 underline-offset-2 hover:underline">
+                            {lead.name || "İsimsiz"}
+                          </Link>
+                        ) : (
+                          <span className="font-semibold text-slate-500">Talebe bağlı değil</span>
+                        )}
+                        <span className="ml-2 text-xs text-slate-500">
+                          {m.c === "i" ? "Instagram" : "Messenger"} · ilk mesaj {when(m.f)}
+                          {isNight(m.f) ? " · mesai dışı" : ""}
+                        </span>
+                      </span>
+                      {st ? (
+                        <span className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 text-xs font-medium ${st.pill}`}>
+                          <span className={`h-1.5 w-1.5 rounded-full ${st.dot}`} />
+                          {st.label}
+                        </span>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ul>
+              {missed.length > 30 ? <p className="mt-2 text-xs text-slate-500">+{missed.length - 30} sohbet daha</p> : null}
+            </section>
+          ) : null}
 
           <section className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 sm:p-6" aria-labelledby="egilim">
             <div className="flex flex-wrap items-start justify-between gap-3">

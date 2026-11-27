@@ -86,9 +86,11 @@ export function grade(score: number) {
  * Puan: gündüz yanıt hızı 40 + gündüz 1 saat içinde yanıt 25 + gece mesajlarına sabah 10:00'a kadar yanıt 20 + yanıtsız
  * bırakmama 15.
  */
+/** Dönemde ilk mesajı gelen sohbet mi (son 1 saat hariç) */
+const inPeriod = (c: ConvMemo, now: number, days: number) => typeof c.f === "number" && c.f >= now - days * DAY && c.f <= now - HOUR;
+
 export function responderScore(convs: Record<string, ConvMemo>, now: number, days = 30) {
-  const from = now - days * DAY;
-  const list = Object.values(convs).filter((c) => typeof c.f === "number" && c.f >= from && c.f <= now - HOUR);
+  const list = Object.values(convs).filter((c) => inPeriod(c, now, days));
   const day = list.filter((c) => !isNight(c.f!));
   const night = list.filter((c) => isNight(c.f!));
   const answered = (c: ConvMemo) => typeof c.r === "number";
@@ -151,6 +153,14 @@ export function responderScore(convs: Record<string, ConvMemo>, now: number, day
       neverAnswered,
     },
   };
+}
+
+/** "Yanıtsız sohbet" sayısının arkasındaki sohbetler (ekip hiç yazmadı), en yeni önce: panelde hangileri olduğu görünsün */
+export function unansweredConvs(convs: Record<string, ConvMemo>, now: number, days = 30) {
+  return Object.entries(convs)
+    .filter(([, c]) => inPeriod(c, now, days) && typeof c.r !== "number" && !c.a)
+    .map(([id, c]) => ({ id, l: c.l, f: c.f as number, c: c.c }))
+    .sort((a, b) => b.f - a.f);
 }
 
 export type WeekPoint = { from: number; count: number; median: number | null; withinHour: number | null };

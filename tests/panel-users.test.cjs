@@ -223,3 +223,20 @@ test("deleted leads leave the statistics; conversations without a lead stay", ()
   const convs = { a: { l: 1, t: 1 }, b: { l: 2, t: 2 }, c: { t: 3 } };
   assert.deepEqual(Object.keys(v.withoutDeleted(convs, new Set([1]))), ["a", "c"]);
 });
+
+test("unanswered conversations behind the score count, newest first, last hour excluded", () => {
+  const r = loadTypeScript("lib/responder-score.ts");
+  const H = 3600_000;
+  const now = Date.parse("2026-11-27T20:00:00Z");
+  const convs = {
+    a: { l: 1, t: 1, f: now - 2 * H, r: null, a: null, c: "m" },
+    b: { l: 2, t: 1, f: now - 30 * H, r: null, a: null, c: "i" },
+    c: { l: 3, t: 1, f: now - 3 * H, r: 60_000 },
+    d: { l: 4, t: 1, f: now - 4 * H, r: null, a: now - H },
+    e: { l: 5, t: 1, f: now - 10 * 60_000, r: null },
+    f: { l: 6, t: 1, f: now - 9 * 24 * H, r: null },
+  };
+  const list = r.unansweredConvs(convs, now, 7);
+  assert.deepEqual(JSON.parse(JSON.stringify(list.map((x) => x.id))), ["a", "b"]);
+  assert.equal(r.responderScore(convs, now, 7).stats.neverAnswered, list.length);
+});
