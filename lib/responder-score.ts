@@ -153,16 +153,6 @@ export function responderScore(convs: Record<string, ConvMemo>, now: number, day
   };
 }
 
-/**
- * Bir kişinin sohbetleri: ilk cevabı panelden ona işaretlenenler; işaretsizler (cevapsızlar dahil) varsayılan yanıtlayana
- * (fallback) sayılır. Meta cevabı yazan kişiyi bildirmediği için ayrım bu işaretle yapılır.
- */
-export function convsOf(convs: Record<string, ConvMemo>, by: Record<string, string>, person: string, fallback: string) {
-  const out: Record<string, ConvMemo> = {};
-  for (const [id, c] of Object.entries(convs)) if (((c.l ? by[String(c.l)] : undefined) || fallback) === person) out[id] = c;
-  return out;
-}
-
 export type WeekPoint = { from: number; count: number; median: number | null; withinHour: number | null };
 
 /** Haftalık eğilim: son N haftada gelen sohbet sayısı, gündüz medyan ilk yanıt süresi ve 1 saat içinde yanıt oranı (eski önce) */

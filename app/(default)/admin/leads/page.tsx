@@ -24,7 +24,7 @@ import {
   waNumber,
   type LeadFilters,
 } from "@/lib/lead-status";
-import { setLeadStatusBulk, setMsgResponder } from "./actions";
+import { setLeadStatusBulk } from "./actions";
 import { FollowUpForm, MetaPullButton, NoteDelete, NoteForm, StatusForm } from "./LiveForms";
 import WaQuick from "./WaQuick";
 import { guessWaLang } from "@/lib/wa-templates";
@@ -33,8 +33,7 @@ import { metaLeadsConfigured } from "@/lib/meta-leads";
 import { AutoSubmitSelect, SelectAll, SelectedCount } from "./LeadControls";
 import { pageLabelText } from "@/lib/page-label";
 import { loadMetaMsgState } from "@/lib/meta-messages";
-import { MSG_TEAM, WAIT_ALERT_MS, answeredAt, durationLabel, inboxUrl, noContact, responderOf, threadsByLead, waitingSince, type Thread } from "@/lib/meta-msg-view";
-import { loadResponderMap } from "@/lib/msg-responder";
+import { MSG_RESPONDER, WAIT_ALERT_MS, answeredAt, durationLabel, inboxUrl, noContact, threadsByLead, waitingSince, type Thread } from "@/lib/meta-msg-view";
 
 export const dynamic = "force-dynamic";
 
@@ -215,7 +214,7 @@ function FollowUpTag({ at, who, now }: { at?: Date | null; who?: string | null; 
 }
 
 /** Mesaj talebi etiketi: müşteri cevap bekliyor (1 saati geçtiyse kırmızı) ya da numara bırakmadı */
-function MsgTag({ wait, answered, who, noNumber, now }: { wait: number | null; answered: number | null; who: string; noNumber: boolean; now: Date }) {
+function MsgTag({ wait, answered, noNumber, now }: { wait: number | null; answered: number | null; noNumber: boolean; now: Date }) {
   return (
     <>
       {wait !== null ? (
@@ -224,9 +223,9 @@ function MsgTag({ wait, answered, who, noNumber, now }: { wait: number | null; a
           Cevap bekliyor · {durationLabel(now.getTime() - wait)}
         </span>
       ) : answered !== null ? (
-        <span className="mt-1 flex items-center gap-1 text-[11px] font-semibold text-teal-700" title={`${who} mesajla cevap verdi`}>
+        <span className="mt-1 flex items-center gap-1 text-[11px] font-semibold text-teal-700" title={`${MSG_RESPONDER} mesajla cevap verdi`}>
           <CheckCheck className="h-3 w-3 shrink-0" aria-hidden />
-          {who} cevap verdi · {durationLabel(Math.max(0, now.getTime() - answered))} önce
+          {MSG_RESPONDER} cevap verdi · {durationLabel(Math.max(0, now.getTime() - answered))} önce
         </span>
       ) : null}
       {noNumber ? (
@@ -240,27 +239,7 @@ function MsgTag({ wait, answered, who, noNumber, now }: { wait: number | null; a
 }
 
 /** Ayrıntıda mesaj sohbeti: cevap durumu, ilk cevap süresi ve Business Suite'te açma */
-function ChatBox({
-  th,
-  wait,
-  pageId,
-  instagram,
-  noNumber,
-  now,
-  leadId,
-  who,
-  back,
-}: {
-  th?: Thread;
-  wait: number | null;
-  pageId: string | null;
-  instagram: boolean;
-  noNumber: boolean;
-  now: Date;
-  leadId: number;
-  who: string;
-  back: string;
-}) {
+function ChatBox({ th, wait, pageId, instagram, noNumber, now }: { th?: Thread; wait: number | null; pageId: string | null; instagram: boolean; noNumber: boolean; now: Date }) {
   const late = wait !== null && now.getTime() - wait >= WAIT_ALERT_MS;
   const channel = th ? (th.c === "i" ? "Instagram" : "Messenger") : instagram ? "Instagram" : "Messenger";
   return (
@@ -273,33 +252,13 @@ function ChatBox({
         {wait !== null
           ? `Müşteri cevap bekliyor (${durationLabel(now.getTime() - wait)}).`
           : th?.a
-            ? `Son cevap: ${cyprusDateTime(new Date(th.a)).date} ${cyprusDateTime(new Date(th.a)).time}.`
+            ? `${MSG_RESPONDER} cevap verdi: ${cyprusDateTime(new Date(th.a)).date} ${cyprusDateTime(new Date(th.a)).time}.`
             : th
               ? "Ekipten henüz yazılı cevap yok."
               : "Sohbet bilgisi Meta bağlantısı açılınca gelir."}
         {typeof th?.r === "number" ? ` İlk cevap ${durationLabel(th.r)} içinde verildi.` : ""}
       </p>
       {noNumber ? <p className="mt-1 text-xs text-slate-600">Numara bırakmadı: sohbetten numara istenebilir.</p> : null}
-      {th?.a && MSG_TEAM.length > 1 ? (
-        // Meta cevabı yazan kişiyi bildirmez: varsayılan Talha, başkası cevapladıysa buradan seçilir (Performans kişi başına ayrılır)
-        <form action={setMsgResponder} className="mt-2.5 flex flex-wrap items-center gap-1.5">
-          <input type="hidden" name="id" value={leadId} />
-          <input type="hidden" name="back" value={back} />
-          <span className="mr-1 text-xs text-slate-600">İlk cevabı veren:</span>
-          {MSG_TEAM.map((n) => (
-            <button
-              key={n}
-              type="submit"
-              name="kisi"
-              value={n}
-              aria-pressed={n === who}
-              className={`inline-flex h-8 items-center rounded-full px-3 text-xs font-semibold ${n === who ? "bg-[#0d6570] text-white" : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
-            >
-              {n}
-            </button>
-          ))}
-        </form>
-      ) : null}
       <a
         href={inboxUrl(pageId, th ?? { c: instagram ? "i" : "m" })}
         target="_blank"
@@ -370,7 +329,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
   const sp: SP = (await props.searchParams) ?? {};
   const f: LeadFilters = { durum: sp.durum, q: sp.q, proje: sp.proje, kaynak: sp.kaynak, donem: sp.donem };
   const now = new Date();
-  const [{ rows, legacy }, msgState, msgBy] = await Promise.all([loadRows(), loadMetaMsgState(), loadResponderMap()]);
+  const [{ rows, legacy }, msgState] = await Promise.all([loadRows(), loadMetaMsgState()]);
   const threads = threadsByLead(msgState);
   const waitOf = (r: Row) => waitingSince(threads.get(r.id), r, now.getTime());
   const waitingIds = new Set(rows.filter((r) => waitOf(r) !== null).map((r) => r.id));
@@ -714,7 +673,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           <td className={TD}>
                             <StatusPill status={r.status} />
                             <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
-                            <MsgTag wait={waitOf(r)} answered={answeredAt(threads.get(r.id))} who={responderOf(r.id, msgBy)} noNumber={noNumberIds.has(r.id)} now={now} />
+                            <MsgTag wait={waitOf(r)} answered={answeredAt(threads.get(r.id))} noNumber={noNumberIds.has(r.id)} now={now} />
                           </td>
                         </tr>
                       );
@@ -751,7 +710,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           {` · ${formOrigin(r.form, r.source)}`}
                         </span>
                         <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
-                        <MsgTag wait={waitOf(r)} answered={answeredAt(threads.get(r.id))} who={responderOf(r.id, msgBy)} noNumber={noNumberIds.has(r.id)} now={now} />
+                        <MsgTag wait={waitOf(r)} answered={answeredAt(threads.get(r.id))} noNumber={noNumberIds.has(r.id)} now={now} />
                       </Link>
                     </li>
                   );
@@ -842,9 +801,6 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                 instagram={(detail.source || "").toLowerCase().startsWith("instagram")}
                 noNumber={noContact(detail)}
                 now={now}
-                leadId={detail.id}
-                who={responderOf(detail.id, msgBy)}
-                back={here}
               />
             ) : null}
             {waNumber(detail.phone) ? <WaQuick number={waNumber(detail.phone)} name={detail.name} project={detail.project} lang={guessWaLang(detail.phone)} /> : null}

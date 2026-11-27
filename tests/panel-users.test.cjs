@@ -218,20 +218,6 @@ test("invite e-mail carries the username and the one-time link, escaped", () => 
   assert.match(m.inviteText(v), /talha&t=ABCDEFGHIJKLMNOPQRSTUVWX/);
 });
 
-test("responder split: marked conversations go to that person, unmarked (also unanswered) to the default responder", () => {
-  const r = loadTypeScript("lib/responder-score.ts");
-  const v = loadTypeScript("lib/meta-msg-view.ts", { env: { META_MSG_RESPONDER: "Talha" } });
-  const J = (x) => JSON.parse(JSON.stringify(x));
-  assert.deepEqual(J(v.MSG_TEAM), ["Talha", "Muhammed"]);
-  const convs = { a: { l: 1, t: 1, f: 1, r: 60_000 }, b: { l: 2, t: 2, f: 2, r: 120_000 }, c: { l: 3, t: 3, f: 3 }, d: { t: 4, f: 4 } };
-  const by = { 2: "Muhammed" };
-  assert.deepEqual(Object.keys(r.convsOf(convs, by, "Muhammed", "Talha")), ["b"]);
-  assert.deepEqual(Object.keys(r.convsOf(convs, by, "Talha", "Talha")), ["a", "c", "d"]);
-  assert.equal(v.responderOf(2, by), "Muhammed");
-  assert.equal(v.responderOf(1, by), "Talha");
-  assert.equal(v.responderOf(undefined, by), "Talha");
-});
-
 test("deleted leads leave the statistics; conversations without a lead stay", () => {
   const v = loadTypeScript("lib/meta-msg-view.ts");
   const convs = { a: { l: 1, t: 1 }, b: { l: 2, t: 2 }, c: { t: 3 } };

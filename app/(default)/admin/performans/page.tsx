@@ -1,14 +1,12 @@
 // app/(default)/admin/performans/page.tsx
-// Performans (27.11.2026): Messenger / Instagram mesajlarına yanıt verenlerin 100 üzerinden puanı, dökümü ve haftalık eğilimi;
-// ekip toplamı ve kişi başına (Talha, Muhammed). Meta cevabı yazan kişiyi bildirmez: sohbetler varsayılan olarak Talha'ya
-// sayılır, başkasının cevapladıkları Satış Talepleri'nden işaretlenir. Yalnız yönetici. Hesap lib/responder-score.ts.
+// Performans (27.11.2026): Messenger / Instagram mesajlarına yanıt veren kişinin (Talha) 100 üzerinden puanı, dökümü ve haftalık
+// eğilimi. Yalnız yönetici. Hesap lib/responder-score.ts; veri mesaj senkronunun sohbet hafızası.
 import Link from "next/link";
 import { CircleSlash, Clock3, Gauge, Moon, Timer, TrendingUp } from "lucide-react";
 import { requireRole } from "@/lib/admin-auth";
 import { loadLiveMsgState } from "@/lib/meta-messages";
-import { MSG_RESPONDER, MSG_TEAM } from "@/lib/meta-msg-view";
-import { loadResponderMap } from "@/lib/msg-responder";
-import { TARGET_MS, WEIGHTS, convsOf, durationText, responderScore, weeklyTrend, type WeekPoint } from "@/lib/responder-score";
+import { MSG_RESPONDER } from "@/lib/meta-msg-view";
+import { TARGET_MS, WEIGHTS, durationText, responderScore, weeklyTrend, type WeekPoint } from "@/lib/responder-score";
 
 export const dynamic = "force-dynamic";
 
@@ -133,32 +131,16 @@ function WeeklyChart({ weeks }: { weeks: WeekPoint[] }) {
   );
 }
 
-const TEAM_KEY = "ekip";
-
-export default async function PerformancePage(props: { searchParams?: Promise<{ donem?: string; kisi?: string }> } = {}) {
+export default async function PerformancePage(props: { searchParams?: Promise<{ donem?: string }> } = {}) {
   await requireRole("admin", "/admin/performans");
   const sp = (await props.searchParams) ?? {};
   const days = Number(PERIODS.find((p) => p.key === sp.donem)?.key ?? "30");
   const now = Date.now();
-  const [state, by] = await Promise.all([loadLiveMsgState(), loadResponderMap()]);
-  const all = state?.convs ?? {};
-  // kişiler: ekip listesi + daha önce işaretlenmiş başka adlar
-  const people = [...new Set([...MSG_TEAM, ...Object.values(by)])];
-  const person = people.includes(sp.kisi ?? "") ? sp.kisi! : TEAM_KEY;
-  const convsFor = (p: string) => (p === TEAM_KEY ? all : convsOf(all, by, p, MSG_RESPONDER));
-  const chips = [TEAM_KEY, ...people].map((p) => ({ key: p, label: p === TEAM_KEY ? "Ekip" : p, res: responderScore(convsFor(p), now, days) }));
-  const convs = convsFor(person);
-  const res = chips.find((c) => c.key === person)!.res;
+  // silinen taleplerin sohbetleri hesaba girmez
+  const state = await loadLiveMsgState();
+  const convs = state?.convs ?? {};
+  const res = responderScore(convs, now, days);
   const trend = weeklyTrend(convs, now, 8);
-  const href = (q: { donem?: string; kisi?: string }) => {
-    const u = new URLSearchParams();
-    const d = q.donem ?? String(days);
-    const k = q.kisi ?? person;
-    if (d !== "30") u.set("donem", d);
-    if (k !== TEAM_KEY) u.set("kisi", k);
-    const t = u.toString();
-    return t ? `/admin/performans?${t}` : "/admin/performans";
-  };
   const ring = res.grade.tone === "teal" ? "#0d6570" : res.grade.tone === "amber" ? "#d97706" : "#e11d48";
   const C = 2 * Math.PI * 54;
 
@@ -167,15 +149,13 @@ export default async function PerformancePage(props: { searchParams?: Promise<{ 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Performans</h1>
-          <p className="mt-1.5 text-sm text-slate-500">
-            {person === TEAM_KEY ? "Ekip toplamı" : person} · Messenger ve Instagram mesajlarına yanıt performansı
-          </p>
+          <p className="mt-1.5 text-sm text-slate-500">{MSG_RESPONDER} · Messenger ve Instagram mesajlarına yanıt performansı</p>
         </div>
         <div className="flex gap-1 text-sm" role="tablist" aria-label="Dönem">
           {PERIODS.map((p) => (
             <Link
               key={p.key}
-              href={href({ donem: p.key })}
+              href={p.key === "30" ? "/admin/performans" : `/admin/performans?donem=${p.key}`}
               role="tab"
               aria-selected={Number(p.key) === days}
               className={`shrink-0 rounded-full px-4 py-2 font-medium ${Number(p.key) === days ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
@@ -186,42 +166,13 @@ export default async function PerformancePage(props: { searchParams?: Promise<{ 
         </div>
       </div>
 
-      <nav className="mt-6 flex flex-wrap gap-2" aria-label="Kişi">
-        {chips.map((c) => {
-          const on = c.key === person;
-          const has = c.res.stats.conversations > 0;
-          return (
-            <Link
-              key={c.key}
-              href={href({ kisi: c.key })}
-              aria-current={on ? "page" : undefined}
-              className={`inline-flex h-11 items-center gap-2.5 rounded-full px-4 text-sm font-medium ${on ? "bg-[#0d6570] text-white" : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
-            >
-              {c.label}
-              <span className={`rounded-full px-2 py-0.5 text-xs font-bold ${on ? "bg-white/20 text-white" : "bg-slate-100 text-slate-800"}`}>{has ? c.res.score : "—"}</span>
-              <span className={`text-xs ${on ? "text-white/80" : "text-slate-500"}`}>{c.res.stats.conversations} sohbet</span>
-            </Link>
-          );
-        })}
-      </nav>
-
       {!res.stats.conversations ? (
-        <p className="mt-6 rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center text-sm text-slate-500">
-          {person === TEAM_KEY ? (
-            "Bu dönemde mesaj sohbeti yok. Meta mesajları her 10 dakikada bir çekilir."
-          ) : (
-            <>
-              Bu dönemde {person} adına işaretlenmiş sohbet yok. {person} bir mesaja cevap verdiyse{" "}
-              <Link href="/admin/leads" className="font-semibold text-[#0d6570] underline underline-offset-2">
-                Satış Talepleri
-              </Link>
-              &apos;nde o talebi açıp sohbet kutusunda <b>İlk cevabı veren: {person}</b> seçin; puanı buraya geçer.
-            </>
-          )}
+        <p className="mt-8 rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center text-sm text-slate-500">
+          Bu dönemde mesaj sohbeti yok. Meta mesajları her 10 dakikada bir çekilir.
         </p>
       ) : (
         <>
-          <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)]">
+          <div className="mt-7 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)]">
             <section className="flex flex-col items-center justify-center rounded-3xl bg-[#eef5f6] p-6 text-center" aria-label="Toplam puan">
               <svg viewBox="0 0 120 120" className="h-44 w-44" role="img" aria-label={`${res.score} puan`}>
                 <circle cx="60" cy="60" r="54" fill="none" stroke="#d6e6e8" strokeWidth="10" />
@@ -320,8 +271,6 @@ export default async function PerformancePage(props: { searchParams?: Promise<{ 
         {WEIGHTS.gece} + yanıtsız bırakmama {WEIGHTS.cevapsiz} = 100. Medyan, yanıt sürelerinin tam ortasıdır: yanıtların yarısı bu süreden kısa, yarısı
         uzundur (tek tük çok geç yanıtlar ortalamayı bozmasın diye). Sayfanın 20 saniye içinde verdiği otomatik yanıtlar (anında yanıt, mesai dışı
         mesajı) yanıt sayılmaz; son 1 saatte gelen sohbetler henüz puana girmez. Instagram mesajları Meta tarafındaki sorun giderilince hesaba katılır.
-        Meta, sayfa adına yazılan cevabın kimden geldiğini bildirmez: sohbetler (cevapsızlar dahil) varsayılan olarak {MSG_RESPONDER}&apos;a sayılır;
-        başkası cevapladıysa Satış Talepleri&apos;nde sohbet kutusundaki &quot;İlk cevabı veren&quot; seçimiyle işaretlenir. Ekip, herkesin toplamıdır.
       </p>
     </div>
   );
