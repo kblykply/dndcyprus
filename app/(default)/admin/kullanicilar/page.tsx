@@ -38,7 +38,7 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
       <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Kullanıcılar</h1>
       <p className="mt-1.5 max-w-2xl text-sm text-slate-500">
         Panele girecek kişileri buradan ekleyin. Satış rolü yalnız Bugün, Genel Bakış, Satış Talepleri ve Reklam Raporu&apos;nu görür; talep durumunu ve
-        notları kendi adıyla değiştirir. Şifreyi siz belirleyip kişiye iletin.
+        notları kendi adıyla değiştirir. Şifre boş bırakılırsa kişi şifresini e-postasına gelen bağlantıyla kendisi belirler.
       </p>
 
       {sp.tamam ? (
