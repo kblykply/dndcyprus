@@ -12,7 +12,7 @@ import { leadEmailConfigured, sendLeadEmail } from "@/lib/lead-email";
 import { dndAkisLeadConfigured, sendDndAkisLead } from "@/lib/dnd-akis-lead";
 import { allPages, graph, phoneKey, projectOf } from "@/lib/meta-leads";
 import { capiCandidateLeadIds, capiErrorText, pageDataset, pendingConversions, sendConversions } from "@/lib/meta-msg-capi";
-import { MSG_RESPONDER } from "@/lib/meta-msg-view";
+import { MSG_RESPONDER, withoutDeleted } from "@/lib/meta-msg-view";
 
 export const META_MSG_SYNC_KEY = "meta-mesaj";
 const DAY = 86_400_000;
@@ -253,6 +253,19 @@ export async function loadMetaMsgState(): Promise<MetaMsgState | null> {
     return (row?.data as MetaMsgState | undefined) ?? null;
   } catch {
     return null;
+  }
+}
+
+/** Panel ve e-posta hesapları için: silinmiş taleplerin sohbetleri çıkarılmış durum (senkron tam listeyi kullanır) */
+export async function loadLiveMsgState(): Promise<MetaMsgState | null> {
+  const state = await loadMetaMsgState();
+  if (!state?.convs) return state;
+  const ids = [...new Set(Object.values(state.convs).map((c) => c.l).filter((l): l is number => typeof l === "number"))];
+  try {
+    const rows = ids.length ? await prisma.contactMessage.findMany({ where: { id: { in: ids } }, select: { id: true } }) : [];
+    return { ...state, convs: withoutDeleted(state.convs, new Set(rows.map((r) => r.id))) };
+  } catch {
+    return state;
   }
 }
 

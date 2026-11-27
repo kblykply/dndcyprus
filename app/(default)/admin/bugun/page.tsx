@@ -9,7 +9,7 @@ import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, readAdminSession, verifyAdminSession } from "@/lib/admin-session";
 import { cyprusMonthStart, isSalesLead, statusInfo, telHref, waNumber } from "@/lib/lead-status";
 import { followUpLabel } from "@/lib/lead-followup";
-import { loadMetaMsgState } from "@/lib/meta-messages";
+import { loadLiveMsgState } from "@/lib/meta-messages";
 import { durationLabel, inboxUrl, replyStats, threadsByLead } from "@/lib/meta-msg-view";
 import { agenda, funnel, greeting, noNumberLeads, teamLoad, upcoming, weekStrip, type AgendaItem, type BoardLead } from "@/lib/today-board";
 
@@ -84,7 +84,7 @@ export default async function TodayPage() {
       orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       select: { id: true, createdAt: true, name: true, phone: true, email: true, project: true, source: true, form: true, status: true, statusAt: true, assignee: true, followUpAt: true },
     }),
-    loadMetaMsgState(),
+    loadLiveMsgState(),
   ]);
   const leads = rows as BoardLead[];
   const threads = threadsByLead(msgState);

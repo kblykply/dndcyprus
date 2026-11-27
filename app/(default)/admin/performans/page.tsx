@@ -5,7 +5,7 @@
 import Link from "next/link";
 import { CircleSlash, Clock3, Gauge, Moon, Timer, TrendingUp } from "lucide-react";
 import { requireRole } from "@/lib/admin-auth";
-import { loadMetaMsgState } from "@/lib/meta-messages";
+import { loadLiveMsgState } from "@/lib/meta-messages";
 import { MSG_RESPONDER, MSG_TEAM } from "@/lib/meta-msg-view";
 import { loadResponderMap } from "@/lib/msg-responder";
 import { TARGET_MS, WEIGHTS, convsOf, durationText, responderScore, weeklyTrend, type WeekPoint } from "@/lib/responder-score";
@@ -140,7 +140,7 @@ export default async function PerformancePage(props: { searchParams?: Promise<{ 
   const sp = (await props.searchParams) ?? {};
   const days = Number(PERIODS.find((p) => p.key === sp.donem)?.key ?? "30");
   const now = Date.now();
-  const [state, by] = await Promise.all([loadMetaMsgState(), loadResponderMap()]);
+  const [state, by] = await Promise.all([loadLiveMsgState(), loadResponderMap()]);
   const all = state?.convs ?? {};
   // kişiler: ekip listesi + daha önce işaretlenmiş başka adlar
   const people = [...new Set([...MSG_TEAM, ...Object.values(by)])];

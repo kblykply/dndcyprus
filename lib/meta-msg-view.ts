@@ -23,6 +23,16 @@ export const MSG_TEAM: string[] = [
   ...new Set([MSG_RESPONDER, ...(process.env.META_MSG_TEAM ?? "Muhammed").split(",").map((s) => s.trim().slice(0, 40)).filter(Boolean)]),
 ];
 
+/**
+ * Panelden silinen talebin sohbeti istatistiğe girmez (27.11 kullanıcı: "silinenler hesaptan da çıksın"). Sohbet hafızada
+ * kalır (silinen talep senkronda yeniden açılmasın diye); yalnız hesaplardan çıkarılır. Talebe bağlanmamış sohbet kalır.
+ */
+export function withoutDeleted(convs: Record<string, ConvMemo>, existing: Set<number>) {
+  const out: Record<string, ConvMemo> = {};
+  for (const [id, c] of Object.entries(convs)) if (!c.l || existing.has(c.l)) out[id] = c;
+  return out;
+}
+
 /** Sohbetin ilk cevabını veren: panelden işaretlenen, yoksa MSG_RESPONDER */
 export const responderOf = (leadId: number | null | undefined, by: Record<string, string>) => (leadId ? by[String(leadId)] : undefined) || MSG_RESPONDER;
 

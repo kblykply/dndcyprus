@@ -231,3 +231,9 @@ test("responder split: marked conversations go to that person, unmarked (also un
   assert.equal(v.responderOf(1, by), "Talha");
   assert.equal(v.responderOf(undefined, by), "Talha");
 });
+
+test("deleted leads leave the statistics; conversations without a lead stay", () => {
+  const v = loadTypeScript("lib/meta-msg-view.ts");
+  const convs = { a: { l: 1, t: 1 }, b: { l: 2, t: 2 }, c: { t: 3 } };
+  assert.deepEqual(Object.keys(v.withoutDeleted(convs, new Set([1]))), ["a", "c"]);
+});

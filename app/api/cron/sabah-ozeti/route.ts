@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { cyprusDayKey } from "@/lib/lead-followup";
-import { loadMetaMsgState, syncMetaMessages } from "@/lib/meta-messages";
+import { loadLiveMsgState, syncMetaMessages } from "@/lib/meta-messages";
 import { metaLeadsConfigured } from "@/lib/meta-leads";
 import { buildDigest, digestRecipients, responderEmails, sendDigest, sendWaiting, waitingMessages } from "@/lib/morning-digest";
 import { loadPanelUsers } from "@/lib/panel-users";
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
         orderBy: [{ createdAt: "desc" }, { id: "desc" }],
         select: { id: true, createdAt: true, name: true, phone: true, email: true, project: true, source: true, form: true, status: true, statusAt: true, assignee: true, followUpAt: true, subject: true },
       }),
-      loadMetaMsgState(),
+      loadLiveMsgState(),
       loadPanelUsers(),
     ]);
     const leads = rows as BoardLead[];
