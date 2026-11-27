@@ -181,12 +181,13 @@ export function messageError(e: unknown) {
 
 const MSG_FIELDS = "messages.limit(20){id,message,from,created_time}";
 /**
- * Messenger sohbetinde "link" (Business Suite'te doğrudan o sohbeti açan adres) da istenir; Instagram sohbet listesi Meta'da
- * yavaş: sayfa başına 10 sohbet ve daha uzun bekleme (27.11 ilk çekimde 20 sn'de zaman aşımı oldu).
+ * Messenger sohbetinde "link" (Business Suite'te o sohbete giden adres) da istenir. Instagram sohbet listesi mesajlarla
+ * birlikte istenince Meta kendi tarafında zaman aşımı veriyor (27.11: önce 20 sn, sonra Meta "Timeout" kod -2): Instagram
+ * listesi mesajsız ve hafif alınır, mesajlar sohbet başına ayrı okunur (withMessageDetails).
  */
 const LIST = {
   messenger: { fields: `id,updated_time,link,participants,${MSG_FIELDS}`, limit: "25", timeout: 30_000 },
-  instagram: { fields: `id,updated_time,participants,${MSG_FIELDS}`, limit: "10", timeout: 45_000 },
+  instagram: { fields: "id,updated_time,participants", limit: "25", timeout: 30_000 },
 } as const;
 
 /**
@@ -215,8 +216,16 @@ async function recentConversations(pageId: string, token: string, platform: MsgP
   return out;
 }
 
-/** Instagram bazen mesaj ayrıntısını sohbet listesinde vermez (yalnız kimlik): o zaman mesajlar tek tek okunur */
+/**
+ * Mesajsız gelen sohbetin (Instagram listesi) son 20 mesajı tek istekle okunur; Instagram bazen mesaj ayrıntısını vermez
+ * (yalnız kimlik): o zaman mesajlar tek tek okunur. Her istek okuma sınırından düşer.
+ */
 async function withMessageDetails(conv: GraphConv, token: string, budget: { left: number }) {
+  if (!conv.messages) {
+    budget.left -= 1;
+    const full = await graph<GraphConv>(conv.id, token, { fields: MSG_FIELDS }, 30_000);
+    conv = { ...conv, messages: full.messages ?? { data: [] } };
+  }
   const ms = conv.messages?.data ?? [];
   if (!ms.some((m) => !m.from || !m.created_time)) return conv;
   const take = ms.slice(0, Math.min(20, Math.max(0, budget.left)));

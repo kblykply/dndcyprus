@@ -177,11 +177,34 @@ test("conversation lists: Messenger asks for the chat link, Instagram uses small
   const r = await m.syncMetaMessages();
   assert.match(seen.messenger.fields, /^id,updated_time,link,participants,messages/);
   assert.equal(seen.messenger.limit, "25");
-  assert.doesNotMatch(seen.instagram.fields, /link/);
-  assert.equal(seen.instagram.limit, "10");
+  assert.equal(seen.instagram.fields, "id,updated_time,participants"); // Instagram listesi mesajsız (Meta zaman aşımı)
+  assert.equal(seen.instagram.limit, "25");
   assert.equal(r.error, "Instagram: Meta zamanında cevap vermedi; sonraki çalışmada tekrar denenecek.");
   assert.equal(db.state.lastTs.instagram, undefined); // Instagram'ın kaldığı yer ilerlemez
   assert.ok(db.state.lastTs.messenger > 0);
+});
+
+test("Instagram chats listed without messages are read one by one", async () => {
+  const db = fakePrisma();
+  const u2 = { id: "igsid-2", username: "ayse.k" };
+  const reads = [];
+  const base = graphFetch({ messenger: [], instagram: [{ id: "ig1", updated_time: iso(60_000), participants: { data: [u2, { id: IG }] } }] });
+  const fetch = async (url, init) => {
+    const u = new URL(String(url));
+    if (u.pathname.endsWith("/ig1")) {
+      reads.push(u.searchParams.get("fields"));
+      return Response.json({ id: "ig1", messages: { data: [msg("i1", u2, "Lagoon fiyatı? 0533 444 55 66", 60_000)] } });
+    }
+    return base(url, init);
+  };
+  const m = load({ env: { META_LEADS_TOKEN: "x" }, globals: { fetch }, prisma: db.prisma });
+  const r = await m.syncMetaMessages();
+  assert.equal(r.ok, true);
+  assert.deepEqual(reads, ["messages.limit(20){id,message,from,created_time}"]);
+  assert.equal(db.rows.length, 1);
+  assert.equal(db.rows[0].phone, "05334445566");
+  assert.equal(db.rows[0].source, "instagram / mesaj");
+  assert.equal(db.state.convs.ig1.c, "i");
 });
 
 test("missing message permission is reported per platform without throwing", async () => {
