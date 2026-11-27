@@ -59,6 +59,14 @@ export async function middleware(req: NextRequest) {
       return res;
     }
 
+    // /admin → Bugün ekranı (sunucu yönlendirmesi: sayfanın iskeleti görünmeden)
+    if (pathname === "/admin" || pathname === "/admin/") {
+      const url = req.nextUrl.clone();
+      url.pathname = "/admin/bugun";
+      url.search = "";
+      return NextResponse.redirect(url);
+    }
+
     return NextResponse.next();
   }
 

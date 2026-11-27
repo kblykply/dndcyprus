@@ -161,6 +161,8 @@ test("middleware accepts signed sessions and skips the login form for authentica
   const { middleware } = loadTypeScript("middleware.ts", { env: ENV, globals });
   const headers = { cookie: `admin_session=${signedToken(NOW + 60_000)}` };
   const allowed = await middleware(new NextRequest("https://local.test/admin/leads", { headers }));
+  const home = await middleware(new NextRequest("https://local.test/admin", { headers }));
+  assert.equal(home.headers.get("location"), "https://local.test/admin/bugun");
   assert.equal(allowed.headers.get("x-middleware-next"), "1");
   const login = await middleware(new NextRequest("https://local.test/admin/login?next=/tr", { headers }));
   assert.equal(login.headers.get("location"), "https://local.test/admin/bugun");
