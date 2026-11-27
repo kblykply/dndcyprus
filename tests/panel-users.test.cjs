@@ -172,3 +172,32 @@ test("morning waiting-messages mail lists night chats first with the customer's 
   assert.deepEqual(J(d.responderEmails()), ["talha@example.com"]);
   assert.deepEqual(J(d.digestRecipients(["T@example.com", "netice@example.com"])), ["info@dndcyprus.com", "talha@example.com", "t@example.com", "netice@example.com"]);
 });
+
+test("invite link: the person sets their own password once; expired, reused or wrong links fail", async () => {
+  const db = fakeUsersPrisma();
+  const u = loadTypeScript("lib/panel-users.ts", { globals: { Buffer }, mocks: { "@/lib/prisma": { prisma: db.prisma } } });
+  const inv = u.newInvite(Date.now());
+  assert.match(inv.token, /^[A-Za-z0-9_-]{32}$/);
+  assert.doesNotMatch(JSON.stringify(inv.invite), new RegExp(inv.token)); // yalnız özet saklanır
+  await u.savePanelUsers([{ user: "talha", name: "Talha", role: "satis", active: true, hash: "", invite: inv.invite, createdAt: "x" }]);
+  // şifresi olmayan kişi giriş yapamaz
+  assert.equal(await u.authenticatePanelUser("talha", ""), null);
+  assert.equal(u.inviteValid({ invite: inv.invite }, inv.token), true);
+  assert.equal(u.inviteValid({ invite: inv.invite }, inv.token.slice(0, -1) + (inv.token.endsWith("A") ? "B" : "A")), false);
+  assert.equal(u.inviteValid({ invite: inv.invite }, inv.token, Date.now() + 73 * 3600_000), false); // 3 gün sonra
+  assert.equal((await u.setPasswordByInvite("talha", inv.token, "kisa", "kisa")).ok, false);
+  assert.equal((await u.setPasswordByInvite("talha", inv.token, "Deneme123", "Deneme124")).error, "Şifreler aynı değil.");
+  assert.deepEqual(J(await u.setPasswordByInvite("Talha", inv.token, "Deneme123", "Deneme123")), { ok: true, user: "talha" });
+  assert.equal(db.data.users[0].invite, undefined);
+  assert.deepEqual(J(await u.authenticatePanelUser("talha", "Deneme123")), { user: "talha", name: "Talha", role: "satis" });
+  // aynı bağlantı ikinci kez kullanılamaz
+  assert.equal((await u.setPasswordByInvite("talha", inv.token, "Baska1234", "Baska1234")).ok, false);
+});
+
+test("the password link page opens without a session; other admin pages still require login", async () => {
+  const { middleware } = loadTypeScript("middleware.ts", { env: ENV, globals });
+  const open = await middleware(new NextRequest("https://local.test/admin/sifre?u=talha&t=x"));
+  assert.equal(open.headers.get("x-middleware-next"), "1");
+  const closed = await middleware(new NextRequest("https://local.test/admin/sifre/baska"));
+  assert.equal(new URL(closed.headers.get("location")).pathname, "/admin/login");
+});

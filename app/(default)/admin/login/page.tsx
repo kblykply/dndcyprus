@@ -8,6 +8,9 @@ export const metadata: Metadata = {
 type SearchParams = {
   error?: string;
   next?: string;
+  /** şifre belirleme bağlantısından dönüş */
+  sifre?: string;
+  kullanici?: string;
 };
 
 export default async function AdminLoginPage({
@@ -35,6 +38,12 @@ export default async function AdminLoginPage({
           </p>
         </div>
 
+        {params.sifre === "1" && (
+          <div className="mb-5 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-xs text-teal-800">
+            Şifren kaydedildi. Şimdi kullanıcı adın ve yeni şifrenle giriş yap.
+          </div>
+        )}
+
         {hasError && (
           <div className="mb-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700">
             Kullanıcı adı veya şifre hatalı.
@@ -55,6 +64,7 @@ export default async function AdminLoginPage({
               id="username"
               name="username"
               required
+              defaultValue={params.kullanici ? String(params.kullanici).slice(0, 30) : undefined}
               autoComplete="username"
               className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20"
             />

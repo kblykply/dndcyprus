@@ -2,7 +2,7 @@
 // Panel kullanıcıları (27.11.2026): ortamdaki yöneticinin (ADMIN_USER) dışında, yöneticinin panelden açtığı kişiler
 // (ör. mesajlara cevap veren Talha). Ayrı tablo gerekmesin diye SyncState "panel-users" satırında durur; şifre scrypt ile
 // tuzlanmış özet olarak saklanır, hiçbir yerde düz yazılmaz. Yalnız sunucu (Node).
-import { randomBytes, scrypt as scryptCb, timingSafeEqual } from "node:crypto";
+import { createHash, randomBytes, scrypt as scryptCb, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 import { prisma } from "@/lib/prisma";
 import type { PanelRole } from "@/lib/admin-session";
@@ -17,7 +17,10 @@ export type PanelUser = {
   /** sabah özeti ve cevap bekleyen mesaj e-postaları buraya da gider (boşsa gitmez) */
   email?: string;
   active: boolean;
+  /** boşsa kişi henüz şifresini belirlemedi (davet bağlantısı bekliyor) */
   hash: string;
+  /** davet / şifre yenileme bağlantısı: yalnız özeti saklanır, tek kullanımlık, süreli */
+  invite?: { h: string; exp: string };
   createdAt: string;
   lastLoginAt?: string;
 };
@@ -79,6 +82,40 @@ export async function authenticatePanelUser(username: string, password: string) 
   found.lastLoginAt = new Date().toISOString();
   await savePanelUsers(users).catch(() => null);
   return { user: found.user, name: found.name || found.user, role: found.role };
+}
+
+/* ---------------- Davet bağlantısı: kişi şifresini kendisi belirler ---------------- */
+
+export const INVITE_HOURS = 72;
+const sha256 = (t: string) => createHash("sha256").update(t).digest("hex");
+
+/** Yeni davet: düz bağlantı yalnız bir kez yöneticiye gösterilir, saklanan özettir */
+export function newInvite(now = Date.now()) {
+  const token = randomBytes(24).toString("base64url");
+  return { token, invite: { h: sha256(token), exp: new Date(now + INVITE_HOURS * 3_600_000).toISOString() } };
+}
+
+export function inviteValid(u: Pick<PanelUser, "invite"> | undefined, token: string, now = Date.now()) {
+  if (!u?.invite || !token || !/^[A-Za-z0-9_-]{20,64}$/.test(token)) return false;
+  if (!(Date.parse(u.invite.exp) > now)) return false;
+  const a = Buffer.from(sha256(token), "hex");
+  const b = Buffer.from(u.invite.h, "hex");
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
+/** Davet bağlantısıyla şifre belirleme: bağlantı kullanılınca geçersiz olur */
+export async function setPasswordByInvite(username: string, token: string, pw: string, pw2: string): Promise<{ ok: true; user: string } | { ok: false; error: string }> {
+  const u = cleanUsername(username);
+  const users = await loadPanelUsers();
+  const found = users.find((x) => x.user === u && x.active);
+  if (!found || !inviteValid(found, token)) return { ok: false, error: "Bağlantı geçersiz ya da süresi dolmuş. Yöneticiden yeni bağlantı isteyin." };
+  const problem = passwordProblem(pw);
+  if (problem) return { ok: false, error: problem };
+  if (pw !== pw2) return { ok: false, error: "Şifreler aynı değil." };
+  found.hash = await hashPassword(pw);
+  delete found.invite;
+  await savePanelUsers(users);
+  return { ok: true, user: found.user };
 }
 
 /** Sabah özeti alacak panel kullanıcılarının e-postaları */

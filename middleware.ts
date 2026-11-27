@@ -40,6 +40,9 @@ export async function middleware(req: NextRequest) {
     const session = await readAdminSession(req.cookies.get(ADMIN_SESSION_COOKIE)?.value);
     const isLoggedIn = !!session;
 
+    // şifre belirleme bağlantısı girişsiz açılır (bağlantıdaki tek kullanımlık anahtar sayfada doğrulanır)
+    if (pathname === "/admin/sifre") return NextResponse.next();
+
     if (pathname.startsWith("/admin/login") || pathname.startsWith("/admin/logout")) {
       if (pathname.startsWith("/admin/login") && isLoggedIn) {
         const url = req.nextUrl.clone();

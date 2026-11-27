@@ -130,7 +130,7 @@ export default function AdminShell({ children, waiting, user, role = "admin" }: 
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [pathname]);
 
-  if (pathname.startsWith("/admin/login")) return <>{children}</>;
+  if (pathname.startsWith("/admin/login") || pathname === "/admin/sifre") return <>{children}</>;
 
   return (
     <div className="flex min-h-screen bg-slate-100 text-slate-900" data-clarity-mask="true">

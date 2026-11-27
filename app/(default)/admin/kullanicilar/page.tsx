@@ -1,11 +1,12 @@
 // app/(default)/admin/kullanicilar/page.tsx
 // Kullanıcılar (27.11.2026): yöneticinin panele kişi eklediği sayfa (ör. Talha — satış rolü). Şifreyi yönetici kendisi belirler
 // ve kişiye iletir; panel şifreyi hiçbir yerde göstermez. Satış rolü: Bugün, Genel Bakış, Satış Talepleri, Reklam Raporu.
-import { CheckCircle2, KeyRound, Mail, ShieldCheck, TriangleAlert, UserPlus } from "lucide-react";
+import { cookies } from "next/headers";
+import { CheckCircle2, KeyRound, Link2, Mail, MessageCircle, ShieldCheck, TriangleAlert, UserPlus } from "lucide-react";
 import { requireRole } from "@/lib/admin-auth";
 import { ROLE_LABEL, loadPanelUsers } from "@/lib/panel-users";
 import { cyprusDateTime } from "@/lib/lead-status";
-import { createUser, resetPassword, updateUser } from "./actions";
+import { INVITE_FLASH, createUser, inviteUser, resetPassword, updateUser } from "./actions";
 import { ConfirmButton } from "../leads/LeadControls";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +21,17 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
   const sp = (await props.searchParams) ?? {};
   const users = await loadPanelUsers();
   const owner = process.env.ADMIN_USER || "Yönetici";
+  // az önce oluşturulan davet bağlantısı (10 dk'lık çerezden; adres çubuğunda görünmez)
+  let invite: { user: string; name: string; url: string } | null = null;
+  try {
+    const raw = (await cookies()).get(INVITE_FLASH)?.value;
+    invite = raw ? JSON.parse(raw) : null;
+  } catch {
+    invite = null;
+  }
+  const waText = invite
+    ? `Merhaba ${invite.name}, DND Cyprus yönetim paneline hesabın açıldı. Kullanıcı adın: ${invite.user}\nŞifreni bu bağlantıdan kendin belirle (3 gün geçerli, tek kullanımlık):\n${invite.url}\nSonra www.dndcyprus.com/admin adresinden giriş yapabilirsin.`
+    : "";
 
   return (
     <div className="mx-auto max-w-[1200px]">
@@ -38,6 +50,22 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
         <p className="mt-5 flex items-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           <TriangleAlert className="h-4 w-4 shrink-0" aria-hidden /> {sp.hata}
         </p>
+      ) : null}
+
+      {invite ? (
+        <section className="mt-5 rounded-3xl border border-teal-200 bg-[#eef5f6] p-5" aria-label="Davet bağlantısı">
+          <p className="flex items-center gap-2 text-[15px] font-semibold text-slate-900">
+            <Link2 className="h-4 w-4 text-[#0d6570]" aria-hidden /> {invite.name} için şifre belirleme bağlantısı
+          </p>
+          <p className="mt-1 text-[13px] text-slate-600">3 gün geçerli, tek kullanımlık. Bu bağlantı yalnız şimdi gösterilir; kaybolursa &quot;Yeni bağlantı&quot; ile tekrar oluşturun.</p>
+          <label className="sr-only" htmlFor="davet-url">
+            Bağlantı
+          </label>
+          <input id="davet-url" readOnly value={invite.url} className={`${INPUT} font-mono text-xs`} />
+          <a href={`https://wa.me/?text=${encodeURIComponent(waText)}`} target="_blank" rel="noreferrer" className={`${BTN} mt-3 bg-[#1f9d55] hover:bg-[#178246]`}>
+            <MessageCircle className="h-4 w-4" aria-hidden /> WhatsApp&apos;tan gönder
+          </a>
+        </section>
       ) : null}
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
@@ -65,6 +93,8 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
                     <p className="text-[13px] text-slate-500">
                       {ROLE_LABEL[u.role]}
                       {u.active ? "" : " · giriş kapalı"}
+                      {!u.hash ? " · şifresini henüz belirlemedi" : ""}
+                      {u.invite ? ` · bağlantı ${cyprusDateTime(new Date(u.invite.exp)).date} ${cyprusDateTime(new Date(u.invite.exp)).time}'e kadar geçerli` : ""}
                       {u.lastLoginAt ? ` · son giriş ${cyprusDateTime(new Date(u.lastLoginAt)).date} ${cyprusDateTime(new Date(u.lastLoginAt)).time}` : " · henüz girmedi"}
                     </p>
                     <p className="mt-0.5 flex items-center gap-1 text-[13px] text-slate-500">
@@ -72,6 +102,12 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
+                    <form action={inviteUser}>
+                      <input type="hidden" name="user" value={u.user} />
+                      <button type="submit" className={SMALL} title="Kişi şifresini kendisi belirlesin / unuttuysa yenilesin">
+                        <Link2 className="h-3.5 w-3.5" aria-hidden /> {u.hash ? "Şifre yenileme bağlantısı" : "Yeni bağlantı"}
+                      </button>
+                    </form>
                     <form action={updateUser}>
                       <input type="hidden" name="user" value={u.user} />
                       <input type="hidden" name="op" value={u.active ? "kapat" : "ac"} />
@@ -152,18 +188,21 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className={LABEL} htmlFor="password">
-                  Şifre
+                  Şifre (isteğe bağlı)
                 </label>
-                <input id="password" name="password" type="password" required minLength={8} autoComplete="new-password" className={INPUT} />
+                <input id="password" name="password" type="password" minLength={8} autoComplete="new-password" className={INPUT} />
               </div>
               <div>
                 <label className={LABEL} htmlFor="password2">
                   Şifre (tekrar)
                 </label>
-                <input id="password2" name="password2" type="password" required minLength={8} autoComplete="new-password" className={INPUT} />
+                <input id="password2" name="password2" type="password" minLength={8} autoComplete="new-password" className={INPUT} />
               </div>
             </div>
-            <p className="text-xs text-slate-500">En az 8 karakter; en az bir harf ve bir rakam.</p>
+            <p className="text-xs text-slate-500">
+              Şifreyi <b>boş bırakın</b>: kişi şifresini kendisi belirlesin diye size bir bağlantı verilir, WhatsApp&apos;tan gönderirsiniz. Ya da siz
+              belirleyin (en az 8 karakter, bir harf ve bir rakam).
+            </p>
             <button type="submit" className={BTN}>
               <UserPlus className="h-4 w-4" aria-hidden /> Kullanıcıyı ekle
             </button>
