@@ -11,6 +11,7 @@ import { prisma } from "@/lib/prisma";
 import { leadEmailConfigured, sendLeadEmail } from "@/lib/lead-email";
 import { dndAkisLeadConfigured, sendDndAkisLead } from "@/lib/dnd-akis-lead";
 import { allPages, graph, phoneKey, projectOf } from "@/lib/meta-leads";
+import { capiCandidateLeadIds, capiErrorText, pageDataset, pendingConversions, sendConversions } from "@/lib/meta-msg-capi";
 
 export const META_MSG_SYNC_KEY = "meta-mesaj";
 const DAY = 86_400_000;
@@ -24,8 +25,13 @@ export type GraphPerson = { id: string; name?: string; username?: string };
 export type GraphMsg = { id: string; message?: string; created_time?: string; from?: GraphPerson };
 export type GraphConv = { id: string; updated_time: string; participants?: { data?: GraphPerson[] }; messages?: { data?: GraphMsg[] } };
 
-/** Sohbet hafızası: l = talep kimliği, t = işlenen son müşteri mesajının zamanı */
-type ConvMemo = { l?: number; t: number };
+/**
+ * Sohbet hafızası (kısa anahtarlar: hafıza tek satırda en çok 3000 sohbet tutar)
+ *   l = talep kimliği · t = işlenen son müşteri mesajının zamanı · p = müşterinin Meta kimliği (PSID / IGSID)
+ *   c = platform (m Messenger, i Instagram) · f = görülen ilk müşteri mesajı · w = cevap bekleyen ilk müşteri mesajının zamanı
+ *   (ekip cevap verince silinir) · r = ilk cevap süresi (ms) · a = ekibin son cevabı · e = Meta'ya gönderilen olaylar (bit)
+ */
+export type ConvMemo = { l?: number; t: number; p?: string; c?: "m" | "i"; f?: number; w?: number | null; r?: number | null; a?: number | null; e?: number };
 export type MetaMsgState = {
   lastRunAt?: string;
   /** platform başına: bu zamandan sonra güncellenen sohbetlere bakılır */
@@ -35,7 +41,13 @@ export type MetaMsgState = {
   merged?: number;
   conversations?: number;
   instagram?: string | null;
+  /** Business Suite bağlantıları için Facebook sayfası */
+  pageId?: string | null;
   error?: string | null;
+  /** Meta'ya mesaj dönüşümü bildirimi (Messenger): veri seti, son hata, toplam gönderilen */
+  datasetId?: string | null;
+  capiError?: string | null;
+  capiSent?: number;
   convs?: Record<string, ConvMemo>;
 };
 
@@ -119,6 +131,42 @@ export function conversationLead(conv: GraphConv, platform: MsgPlatform, ownIds:
   };
 }
 
+/** Sayfanın bu kadar kısa sürede verdiği cevap otomatiktir (anında yanıt, mesai dışı mesajı, SSS düğmesi): cevap sayılmaz */
+export const AUTO_REPLY_MS = 20_000;
+
+/**
+ * Sohbetin cevap durumu: müşterinin ilk mesajı, ekibin ilk cevabına kadar geçen süre, ekibin son cevabı ve şu an cevap
+ * bekleyen ilk müşteri mesajı (ekibin son cevabından sonra yazılan ilk mesaj). complete: Meta sohbetin tamamını verdi mi
+ * (20 mesajdan az); değilse ilk cevap süresi bilinemez.
+ */
+export function replyState(conv: GraphConv, ownIds: string[]) {
+  const own = new Set(ownIds);
+  const raw = conv.messages?.data ?? [];
+  const list = raw
+    .filter((m) => m.from)
+    .map((m) => ({ ts: new Date(m.created_time || "").getTime(), own: own.has(m.from!.id) }))
+    .filter((m) => Number.isFinite(m.ts))
+    .sort((a, b) => a.ts - b.ts);
+  let firstCustomer: number | null = null;
+  let lastCustomer = Number.NEGATIVE_INFINITY;
+  let firstReplyMs: number | null = null;
+  let lastTeam: number | null = null;
+  let waitingSince: number | null = null;
+  for (const m of list) {
+    if (!m.own) {
+      firstCustomer ??= m.ts;
+      lastCustomer = m.ts;
+      waitingSince ??= m.ts;
+      continue;
+    }
+    if (m.ts - lastCustomer < AUTO_REPLY_MS) continue; // otomatik cevap
+    lastTeam = m.ts;
+    waitingSince = null;
+    if (firstCustomer !== null && firstReplyMs === null) firstReplyMs = m.ts - firstCustomer;
+  }
+  return { firstCustomer, firstReplyMs, lastTeam, waitingSince, complete: raw.length < 20 };
+}
+
 /** Meta hatasını ekibin anlayacağı cümleye çevirir */
 export function messageError(e: unknown) {
   const err = e as { code?: number; message?: string } | null;
@@ -189,6 +237,27 @@ async function findPerson(phone: string | null, email: string) {
 }
 
 /**
+ * Çağrı merkezi listesinden elle aktarılan mesaj talepleri (25.11; eventId meta-lv-… / meta-neo-…) çoğunda numara yok:
+ * aynı sohbet ilk çekimde ikinci kez açılmasın diye bu taleplerde birebir aynı adla eşleşilir. Kısa ya da genel adlar
+ * ("Messenger kullanıcısı") eşleşmez.
+ */
+export function nameMatchable(name: string) {
+  const n = name.trim();
+  return n.length >= 5 && /\s/.test(n) && !/kullanıcısı$/i.test(n);
+}
+
+async function findImported(name: string) {
+  if (!nameMatchable(name)) return null;
+  const rows = await prisma.contactMessage.findMany({
+    where: { form: "meta-mesaj", name: { equals: name.trim(), mode: "insensitive" as const }, NOT: { eventId: { startsWith: "meta-mesaj:" } } },
+    select: { id: true, phone: true, email: true },
+    orderBy: { createdAt: "desc" },
+    take: 2,
+  });
+  return rows.length === 1 ? rows[0] : null; // aynı adlı iki kişi varsa tahmin edilmez
+}
+
+/**
  * Yeni ve değişen sohbetleri panele işler. 90 sn ve 300 tekil mesaj okuma sınırı var; sınıra gelinirse kalan sohbetler bir
  * sonraki çalışmada işlenir (platformun kaldığı yer işlenen son sohbetin zamanı olur).
  */
@@ -227,20 +296,41 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
     const v = conversationLead(full, platform, ownIds);
     if (!v) return;
     const memo = convs[conv.id];
-    const { msgs } = customerSide(full, ownIds);
+    const { person, msgs } = customerSide(full, ownIds);
+    const rs = replyState(full, ownIds);
+    const firstSeen = Math.min(memo?.f ?? Number.POSITIVE_INFINITY, rs.firstCustomer ?? Number.POSITIVE_INFINITY);
+    // ilk cevap süresi bir kez yazılır; Meta sohbetin başını vermediyse (20+ mesaj) bilinemez
+    const firstReply = memo?.r ?? (rs.complete || (memo?.f !== undefined && memo.f === rs.firstCustomer) ? rs.firstReplyMs : null);
+    const info: Omit<ConvMemo, "t"> = {
+      p: person?.id ?? memo?.p,
+      c: platform === "instagram" ? "i" : "m",
+      ...(Number.isFinite(firstSeen) ? { f: firstSeen } : {}),
+      w: rs.waitingSince,
+      r: firstReply ?? null,
+      a: rs.lastTeam ?? memo?.a ?? null,
+    };
     const fresh = msgs.filter((m) => m.ts > (memo?.t ?? 0));
-    if (!fresh.length) return;
+    if (!fresh.length) {
+      // yeni müşteri mesajı yok (ör. ekip cevap verdi): yalnız cevap durumu güncellenir
+      if (memo) convs[conv.id] = { ...memo, ...info };
+      return;
+    }
     let leadId = memo?.l;
     if (!leadId) leadId = (await prisma.contactMessage.findFirst({ where: { eventId: v.eventId }, select: { id: true } }))?.id;
 
     if (!leadId) {
-      const match = await findPerson(v.phone, v.email);
+      const match = (await findPerson(v.phone, v.email)) ?? (await findImported(v.name));
       if (match) {
+        // adla eşleşen aktarılmış talepte numara yoksa sohbetteki numara yazılır
+        const fill: { phone?: string; email?: string } = {};
+        if (!match.phone && v.phone) fill.phone = v.phone;
+        if (!match.email && v.email) fill.email = v.email;
+        if (Object.keys(fill).length) await prisma.contactMessage.update({ where: { id: match.id }, data: fill });
         await prisma.leadNote.create({
           data: { leadId: match.id, kind: "not", text: `${platformLabel(platform)} ile yazdı:\n${transcript(msgs, 1500)}`, author: "Meta", createdAt: new Date(v.lastTs) },
         });
         state.merged = (state.merged ?? 0) + 1;
-        convs[conv.id] = { l: match.id, t: v.lastTs };
+        convs[conv.id] = { ...memo, ...info, l: match.id, t: v.lastTs };
         return;
       }
       const created = await prisma.contactMessage.create({
@@ -261,7 +351,7 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
         select: { id: true },
       });
       state.inserted = (state.inserted ?? 0) + 1;
-      convs[conv.id] = { l: created.id, t: v.lastTs };
+      convs[conv.id] = { ...info, l: created.id, t: v.lastTs };
       if (v.phone || v.email) notify.push({ leadId: created.id, at: new Date(v.lastTs), v });
       return;
     }
@@ -269,7 +359,7 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
     // Bilinen sohbet: yeni mesajda telefon / e-posta varsa talebe işle; uzun aradan sonra yazdıysa not düş
     const lead = await prisma.contactMessage.findUnique({ where: { id: leadId }, select: { id: true, name: true, phone: true, email: true, subject: true, project: true, message: true } });
     const lastFresh = fresh[fresh.length - 1].ts;
-    convs[conv.id] = { l: leadId, t: lastFresh };
+    convs[conv.id] = { ...memo, ...info, l: leadId, t: lastFresh };
     if (!lead) return; // ekip talebi silmiş: yeniden açılmaz
     const found = extractContacts(fresh.map((m) => m.text).join("\n"));
     const newPhones = found.phones.filter((p) => phoneKey(p) !== phoneKey(lead.phone));
@@ -309,6 +399,7 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
     const pages = await allPages<{ id: string; name: string; access_token?: string }>("me/accounts", token, { fields: "id,name,access_token", limit: "100" }, 5);
     for (const page of pages) {
       const pageToken = page.access_token || token;
+      state.pageId ??= page.id;
       const targets: { platform: MsgPlatform; ownIds: string[] }[] = [{ platform: "messenger", ownIds: [page.id] }];
       try {
         const p = await graph<{ instagram_business_account?: { id: string; username?: string } }>(page.id, pageToken, { fields: "instagram_business_account{id,username}" });
@@ -341,6 +432,25 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
         } catch (e) {
           errors.push(`${label}: ${messageError(e)}`);
         }
+      }
+    }
+    // Meta'ya mesaj dönüşümleri (Messenger, ilk sayfa): numara verdi / görüşülüyor-satış
+    const primary = pages[0];
+    if (primary) {
+      try {
+        const ids = capiCandidateLeadIds(convs, now);
+        if (ids.length) {
+          const leads = await prisma.contactMessage.findMany({ where: { id: { in: ids } }, select: { id: true, phone: true, email: true, status: true, statusAt: true } });
+          const events = pendingConversions(convs, new Map(leads.map((l) => [l.id, l])), Date.now());
+          if (events.length) {
+            const pageToken = primary.access_token || token;
+            if (events.some((e) => e.send)) state.datasetId ||= await pageDataset(primary.id, pageToken);
+            state.capiSent = (state.capiSent ?? 0) + (await sendConversions(events, convs, primary.id, pageToken, state.datasetId ?? ""));
+          }
+        }
+        state.capiError = null;
+      } catch (e) {
+        state.capiError = capiErrorText(e);
       }
     }
   } catch (e) {

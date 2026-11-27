@@ -11,6 +11,7 @@ import {
   ExternalLink,
   FileText,
   Flame,
+  Sun,
   LayoutDashboard,
   LogOut,
   Megaphone,
@@ -27,6 +28,7 @@ const GROUPS: { title: string; items: NavItem[] }[] = [
   {
     title: "Satış",
     items: [
+      { label: "Bugün", href: "/admin/bugun", icon: Sun },
       { label: "Genel Bakış", href: "/admin/genel", icon: LayoutDashboard },
       { label: "Satış Talepleri", href: "/admin/leads", icon: Users, badge: true },
       { label: "Reklam Raporu", href: "/admin/reklam", icon: Megaphone },

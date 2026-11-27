@@ -12,12 +12,14 @@ const load = (opts = {}) =>
   });
 
 function fakePrisma(existing = []) {
-  const rows = existing.map((r, i) => ({ id: i + 1, email: "", phone: null, eventId: null, subject: "", message: "", project: null, ...r }));
+  const rows = existing.map((r, i) => ({ id: i + 1, email: "", phone: null, eventId: null, subject: "", message: "", project: null, form: null, status: "yeni", statusAt: null, ...r }));
   const notes = [];
   let state = null;
   const match = (r, where) => {
     if (where.eventId) return r.eventId === where.eventId;
     if (where.OR) return where.OR.some((c) => (c.email ? r.email.toLowerCase() === c.email.equals.toLowerCase() : c.phone ? String(r.phone || "").endsWith(c.phone.endsWith) : false));
+    if (where.id && where.id.in) return where.id.in.includes(r.id);
+    if (where.name) return r.form === where.form && r.name.toLowerCase() === where.name.equals.toLowerCase() && !String(r.eventId || "").startsWith(where.NOT.eventId.startsWith);
     return true;
   };
   return {
@@ -30,7 +32,7 @@ function fakePrisma(existing = []) {
       contactMessage: {
         findFirst: async ({ where }) => rows.find((r) => match(r, where)) ?? null,
         findUnique: async ({ where }) => rows.find((r) => r.id === where.id) ?? null,
-        findMany: async ({ where }) => (where.OR.length ? rows.filter((r) => match(r, where)) : []),
+        findMany: async ({ where }) => (where.OR && !where.OR.length ? [] : rows.filter((r) => match(r, where))),
         create: async ({ data }) => { const r = { id: rows.length + 1, ...data }; rows.push(r); return { id: r.id }; },
         update: async ({ where, data }) => { Object.assign(rows.find((r) => r.id === where.id), data); return {}; },
       },
@@ -172,4 +174,106 @@ test("missing message permission is reported per platform without throwing", asy
   assert.equal(db.rows.length, 0);
   // izin yokken kaldığı yer ilerlemez: izin gelince son 60 gün yine aktarılır
   assert.equal(db.state.lastTs.messenger, undefined);
+});
+
+test("replyState ignores instant automatic replies and tracks who is waiting", () => {
+  const m = load();
+  const page = { id: PAGE, name: "DND Cyprus" };
+  const u = { id: "u1", name: "Ali Veli" };
+  const H = 3600_000;
+  // müşteri 3 sa önce yazdı, sayfa 5 sn sonra otomatik cevap verdi, ekip 25 dk sonra yazdı, müşteri 1 sa önce yine yazdı
+  const c = conv("c1", 0, [u, page], [
+    msg("4", u, "Peki fiyat?", H),
+    msg("3", page, "Merhaba, ben Talha", 3 * H - 25 * 60_000),
+    msg("2", page, "Otomatik: size dönüş yapacağız", 3 * H - 5000),
+    msg("1", u, "Merhaba", 3 * H),
+  ]);
+  const before = Date.now();
+  const rs = J(m.replyState(c, [PAGE]));
+  assert.equal(rs.firstReplyMs, 25 * 60_000);
+  assert.ok(Math.abs(rs.waitingSince - (before - H)) < 1000);
+  assert.ok(Math.abs(rs.lastTeam - (before - 3 * H + 25 * 60_000)) < 1000);
+  assert.equal(rs.complete, true);
+  // yalnız otomatik cevap varsa müşteri hâlâ bekliyor
+  const c2 = conv("c2", 0, [u, page], [msg("2", page, "Otomatik", 60_000 - 3000), msg("1", u, "Selam", 60_000)]);
+  const rs2 = J(m.replyState(c2, [PAGE]));
+  assert.equal(rs2.firstReplyMs, null);
+  assert.ok(rs2.waitingSince);
+  assert.equal(rs2.lastTeam, null);
+});
+
+test("sync remembers who the customer is, when they wait and clears it once the team answers", async () => {
+  const db = fakePrisma([{ name: "Zeynep Arslan", form: "meta-mesaj", eventId: "meta-lv-012", source: "facebook / paid_social" }]);
+  const page = { id: PAGE, name: "DND Cyprus" };
+  const u1 = { id: "psid-1", name: "Mehmet Kaya" };
+  const z = { id: "psid-2", name: "Zeynep Arslan" };
+  let chats = [
+    conv("c1", 120_000, [u1, page], [msg("m1", u1, "NeoCity fiyatı?", 120_000)]),
+    conv("c9", 300_000, [z, page], [msg("z1", z, "Lagoon için numaram 0533 222 33 44", 300_000)]),
+  ];
+  const m = load({ env: { META_LEADS_TOKEN: "x" }, globals: { fetch: graphFetch({ messenger: () => chats, instagram: [] }) }, prisma: db.prisma });
+  await m.syncMetaMessages();
+  const memo = db.state.convs.c1;
+  assert.equal(memo.p, "psid-1");
+  assert.equal(memo.c, "m");
+  assert.ok(memo.w > 0);
+  assert.equal(memo.r, null);
+  assert.equal(db.state.pageId, PAGE);
+  // çağrı merkezi listesinden aktarılan numarasız talep adla bulundu: yeni talep açılmadı, numara yazıldı
+  assert.equal(db.rows.length, 2);
+  assert.equal(db.state.convs.c9.l, 1);
+  assert.equal(db.rows[0].phone, "05332223344");
+  assert.match(db.notes[0].text, /^Messenger mesajı ile yazdı:/);
+
+  // ekip 10 dk sonra cevap verdi (müşteriden yeni mesaj yok): bekleme kalkar, ilk cevap süresi yazılır
+  chats = [conv("c1", 1000, [u1, page], [msg("p1", page, "Merhaba Mehmet Bey, fiyat listesi ekte", 120_000 - 10 * 60_000), msg("m1", u1, "NeoCity fiyatı?", 120_000)])];
+  chats[0].messages.data[0].created_time = iso(120_000 - 10 * 60_000);
+  await m.syncMetaMessages();
+  const after = db.state.convs.c1;
+  assert.equal(after.w, null);
+  assert.equal(after.r, 10 * 60_000);
+  assert.ok(after.a > 0);
+  assert.equal(after.l, memo.l);
+});
+
+test("Messenger conversions: dataset once, LeadSubmitted when a number arrives, QualifiedLead after status change, never twice", async () => {
+  const db = fakePrisma();
+  const page = { id: PAGE, name: "DND Cyprus" };
+  const u1 = { id: "psid-1", name: "Mehmet Kaya" };
+  const posts = [];
+  const base = graphFetch({ messenger: [conv("c1", 60_000, [u1, page], [msg("m1", u1, "Numaram 0533 765 43 21", 60_000)])], instagram: [] });
+  const fetch = async (url, init) => {
+    if (init && init.method === "POST") {
+      const u = new URL(String(url));
+      const body = JSON.parse(init.body);
+      posts.push({ path: u.pathname, body, auth: init.headers.Authorization });
+      if (u.pathname.endsWith(`/${PAGE}/dataset`)) return Response.json({ id: "777" });
+      return Response.json({ events_received: body.data.length });
+    }
+    return base(url, init);
+  };
+  const m = load({ env: { META_LEADS_TOKEN: "x" }, globals: { fetch }, prisma: db.prisma });
+  await m.syncMetaMessages();
+  assert.equal(posts.length, 2);
+  assert.match(posts[0].path, /\/111\/dataset$/);
+  assert.match(posts[1].path, /\/777\/events$/);
+  const ev = posts[1].body.data[0];
+  assert.equal(ev.event_name, "LeadSubmitted");
+  assert.equal(ev.action_source, "business_messaging");
+  assert.equal(ev.messaging_channel, "messenger");
+  assert.deepEqual(ev.user_data, { page_id: PAGE, page_scoped_user_id: "psid-1" });
+  assert.equal(posts[1].auth, "Bearer sayfa-anahtari");
+  assert.equal(db.state.capiSent, 1);
+  assert.equal(db.state.datasetId, "777");
+
+  // tekrar çalışınca aynı olay gitmez
+  await m.syncMetaMessages();
+  assert.equal(posts.length, 2);
+  // ekip "Görüşülüyor" yaptı → QualifiedLead bir kez
+  db.rows[0].status = "gorusuluyor";
+  db.rows[0].statusAt = new Date();
+  await m.syncMetaMessages();
+  await m.syncMetaMessages();
+  assert.equal(posts.length, 3);
+  assert.equal(posts[2].body.data[0].event_name, "QualifiedLead");
 });

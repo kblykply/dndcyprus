@@ -1,4 +1,7 @@
 {
+  "regions": [
+    "fra1"
+  ],
   "redirects": [
     {
       "source": "/:path*",
@@ -60,6 +63,10 @@
     {
       "path": "/api/cron/ceviri",
       "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/api/cron/sabah-ozeti",
+      "schedule": "0 6,7 * * *"
     }
   ]
 }

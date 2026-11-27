@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { Megaphone, BadgeCheck, UserCheck, PieChart } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
-import { isSalesLead, sourceGroup, statusInfo } from "@/lib/lead-status";
+import { isSalesLead, originGroup, sourceGroup, statusInfo } from "@/lib/lead-status";
 import { AD_DIMENSIONS, adKey, groupLeads, inRange, isQualified, overviewPeriod, periodBuckets, sourceColor, type AdDimension } from "@/lib/lead-stats";
 import { BarList, ChartCard, Empty } from "../charts";
 import PeriodTabs from "../PeriodTabs";
@@ -27,7 +27,7 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
 
   const all = await prisma.contactMessage.findMany({
     orderBy: { createdAt: "desc" },
-    select: { id: true, createdAt: true, name: true, status: true, source: true, campaign: true, project: true, form: true, pageUrl: true, attribution: true },
+    select: { id: true, createdAt: true, name: true, phone: true, email: true, status: true, source: true, campaign: true, project: true, form: true, pageUrl: true, attribution: true },
   });
   const b = periodBuckets(period, now, all);
   const cur = inRange(all, b.from).filter(isSalesLead); // "Satış dışı" (tedarikçi, iş başvurusu…) reklam rakamlarına girmez
@@ -39,6 +39,14 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
   const covered = rows.reduce((s, r) => s + r.count, 0);
   const dimLabel = AD_DIMENSIONS.find((d) => d.key === dim)!.label;
   const periodLabel = { "30g": "son 30 gün", "90g": "son 90 gün", "12a": "son 12 ay", tumu: "tüm zamanlar" }[period];
+  // geliş yolu: web formu / Messenger / Instagram / Meta formu / panel; numara bırakma oranıyla
+  const origins = groupLeads(cur, (l) => originGroup(l.form, l.source)).map((g) => {
+    const list = cur.filter((l) => originGroup(l.form, l.source).key === g.key);
+    return { ...g, withContact: list.filter((l) => l.phone || l.email.trim()).length };
+  });
+  const originProjects = groupLeads(cur, (l) => (l.project ? { key: l.project, label: l.project } : null))
+    .slice(0, 6)
+    .map((p) => ({ ...p, parts: groupLeads(cur.filter((l) => l.project === p.key), (l) => originGroup(l.form, l.source)) }));
 
   const kpis = [
     { label: "Reklamdan gelen", value: paid.length, sub: "Meta reklam + Google Ads", icon: Megaphone, tint: "bg-[#eef5f6] text-[#0d6570]" },
@@ -138,6 +146,63 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
             </div>
           ) : (
             <Empty>Bu dönemde {dimLabel.toLocaleLowerCase("tr-TR")} bilgisi olan talep yok.</Empty>
+          )}
+        </ChartCard>
+      </div>
+
+      <div className="mt-5 grid gap-5 xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <ChartCard title="Geliş yolu" sub={`Talep nereden yazdı, kaçı numara bıraktı · ${periodLabel}`}>
+          {origins.length ? (
+            <div className="overflow-x-auto rounded-lg border border-slate-200">
+              <table className="w-full min-w-[520px] text-sm">
+                <thead className="bg-slate-50">
+                  <tr>
+                    {["Geliş yolu", "Talep", "Numara bıraktı", "Nitelikli", "Satış"].map((h, i) => (
+                      <th key={h} className={`px-3 py-2.5 text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-500 ${i ? "text-right" : "text-left"}`}>
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {origins.map((o) => (
+                    <tr key={o.key} className="border-t border-slate-100">
+                      <td className="px-3 py-2.5 font-medium text-slate-800">{o.label}</td>
+                      <td className="px-3 py-2.5 text-right font-medium">{o.count}</td>
+                      <td className="px-3 py-2.5 text-right text-slate-700">
+                        {o.withContact} <span className="text-xs text-slate-500">({pct(o.withContact, o.count)})</span>
+                      </td>
+                      <td className="px-3 py-2.5 text-right text-blue-700">{o.qualified}</td>
+                      <td className="px-3 py-2.5 text-right text-teal-700">{o.sold}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <Empty>Bu dönemde talep yok.</Empty>
+          )}
+        </ChartCard>
+        <ChartCard title="Projeye göre geliş yolu" sub="En çok talep alan projeler">
+          {originProjects.length ? (
+            <ul className="space-y-3.5">
+              {originProjects.map((p) => (
+                <li key={p.key}>
+                  <div className="flex items-baseline justify-between gap-3 text-[13px]">
+                    <span className="truncate font-medium text-slate-800">{p.label}</span>
+                    <span className="font-semibold">{p.count}</span>
+                  </div>
+                  <div className="mt-1.5 flex h-2 overflow-hidden rounded-full bg-slate-100">
+                    {p.parts.map((x, i) => (
+                      <span key={x.key} style={{ width: `${(x.count / p.count) * 100}%`, background: ["#2aa9b3", "#0d6570", "#f47a20", "#94a3b8", "#c4b5fd"][i % 5] }} title={`${x.label}: ${x.count}`} />
+                    ))}
+                  </div>
+                  <p className="mt-1 text-[11px] text-slate-500">{p.parts.map((x) => `${x.label} ${x.count}`).join(" · ")}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <Empty>Proje bilgisi olan talep yok.</Empty>
           )}
         </ChartCard>
       </div>

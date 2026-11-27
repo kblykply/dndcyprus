@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AlarmClock, ArrowDownRight, ArrowUpRight, BadgeCheck, CheckCircle2, Clock3, PhoneCall, UserCheck, Users } from "lucide-react";
+import { durationLabel, noContact, replyStats, threadsByLead, waitingSince } from "@/lib/meta-msg-view";
 import { prisma } from "@/lib/prisma";
 import { ga4Configured } from "@/lib/ga4";
 import { clarityConfigured } from "@/lib/clarity";
@@ -60,7 +61,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
 
   const all = await prisma.contactMessage.findMany({
     orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-    select: { id: true, createdAt: true, name: true, status: true, source: true, campaign: true, project: true, unitType: true, form: true, assignee: true, followUpAt: true },
+    select: { id: true, createdAt: true, name: true, phone: true, email: true, status: true, statusAt: true, source: true, campaign: true, project: true, unitType: true, form: true, assignee: true, followUpAt: true },
   });
   const b = periodBuckets(period, now, all);
   const curAll = inRange(all, b.from);
@@ -94,6 +95,11 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
         ? `Son denemede hata: ${metaState.error}`
         : `${metaTotal} reklam formu talebi${msgNote} · son kontrol ${cyprusDateTime(new Date(metaState.lastRunAt)).time}`;
   const due = dueFollowUps(all, now);
+  const threads = threadsByLead(msgState);
+  const msgWaiting = all.filter((l) => waitingSince(threads.get(l.id), l) !== null).length;
+  const msgNoNumber = all.filter((l) => noContact(l) && isSalesLead(l) && statusInfo(l.status).key !== "olumsuz").length;
+  const rs = replyStats(msgState, b.from ? b.from.getTime() : null, now.getTime());
+  const msgReady = !!msgState?.convs && Object.keys(msgState.convs).length > 0;
   const periodLabel = { "30g": "son 30 gün", "90g": "son 90 gün", "12a": "son 12 ay", tumu: "tüm zamanlar" }[period];
 
   return (
@@ -154,6 +160,40 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
                 </li>
               );
             })}
+          </ul>
+        </ChartCard>
+      ) : null}
+
+      {metaOn ? (
+        <ChartCard
+          title="Mesajlar (Messenger / Instagram)"
+          sub={msgReady ? `Ekibin ilk cevap süresi, dönemde ilk kez yazan sohbetler · ${periodLabel}` : "Meta mesaj izni onaylanınca sohbetler buraya gelir"}
+          className="mt-5"
+          right={
+            <Link href="/admin/bugun" className="text-sm font-medium text-teal-700 hover:underline">
+              Bugün ekranı
+            </Link>
+          }
+        >
+          <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {[
+              { label: "İlk cevap (ortanca)", value: rs.median !== null ? durationLabel(rs.median) : "—", note: `${rs.answered} cevaplı sohbet`, href: null },
+              { label: "1 saat içinde cevap", value: rs.withinHourPct !== null ? `%${rs.withinHourPct}` : "—", note: rs.unanswered ? `${rs.unanswered} sohbete yazılı cevap yok` : "Cevapsız sohbet yok", href: null },
+              { label: "Şu an cevap bekleyen", value: String(msgWaiting), note: "Listeyi aç", href: "/admin/leads?mesaj=cevap", alert: msgWaiting > 0 },
+              { label: "Numara vermedi", value: String(msgNoNumber), note: "Listeyi aç", href: "/admin/leads?mesaj=numarasiz" },
+            ].map((k) => (
+              <li key={k.label} className="rounded-lg border border-slate-200 p-3.5">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{k.label}</p>
+                <p className={`mt-1.5 font-display text-2xl leading-none ${"alert" in k && k.alert ? "text-red-600" : "text-slate-900"}`}>{k.value}</p>
+                {k.href ? (
+                  <Link href={k.href} className="mt-2 inline-block text-xs font-medium text-teal-700 hover:underline">
+                    {k.note}
+                  </Link>
+                ) : (
+                  <p className="mt-2 text-xs text-slate-500">{k.note}</p>
+                )}
+              </li>
+            ))}
           </ul>
         </ChartCard>
       ) : null}

@@ -36,6 +36,16 @@ export function formOrigin(form: string | null | undefined, source?: string | nu
   return `Web sitesi · ${formLabel(form)}`;
 }
 
+/** Talebin geliş yolu (rapor grubu): web formu, Messenger / Instagram mesajı, Meta reklam formu, panelden elle */
+export function originGroup(form: string | null | undefined, source?: string | null): SourceGroup {
+  if (form === "meta-mesaj") {
+    return (source || "").toLowerCase().startsWith("instagram") ? { key: "instagram-mesaj", label: "Instagram mesajı" } : { key: "messenger-mesaj", label: "Messenger mesajı" };
+  }
+  if (form === "meta-lead") return { key: "meta-form", label: "Meta reklam formu" };
+  if (form === "panel") return { key: "panel", label: "Panelden eklendi" };
+  return { key: "web", label: "Web sitesi formu" };
+}
+
 /** Kaynak: formun kaydettiği "utm_source / utm_medium" metninden ekibin okuyacağı gruba */
 export type SourceGroup = { key: string; label: string };
 

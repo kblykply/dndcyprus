@@ -14,7 +14,7 @@ export const META_SYNC_KEY = "meta-leads";
 const DAY = 86_400_000;
 
 export const metaLeadsConfigured = () => !!(process.env.META_LEADS_TOKEN || "").trim();
-const graphVersion = () => {
+export const graphVersion = () => {
   const v = (process.env.META_GRAPH_API_VERSION || "").trim();
   return /^v\d+\.\d+$/.test(v) ? v : "v23.0";
 };

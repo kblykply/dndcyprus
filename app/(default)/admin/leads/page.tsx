@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AlarmClock, ChevronDown, ChevronLeft, ChevronRight, Download, Mail, MessageCircle, Phone, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
+import { AlarmClock, ChevronDown, ChevronLeft, ChevronRight, Download, ExternalLink, Hourglass, Mail, MessageCircle, MessageSquareWarning, Phone, PhoneOff, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { ATTRIBUTION_KEYS, sanitizeAttribution, type Touch } from "@/lib/attribution";
@@ -32,12 +32,14 @@ import { dateToCyprusInputs, dueFollowUps, followUpLabel, followUpState } from "
 import { metaLeadsConfigured } from "@/lib/meta-leads";
 import { AutoSubmitSelect, SelectAll, SelectedCount } from "./LeadControls";
 import { pageLabelText } from "@/lib/page-label";
+import { loadMetaMsgState } from "@/lib/meta-messages";
+import { WAIT_ALERT_MS, durationLabel, inboxUrl, noContact, threadsByLead, waitingSince, type Thread } from "@/lib/meta-msg-view";
 
 export const dynamic = "force-dynamic";
 
 const PAGE_SIZES = [10, 25, 50] as const;
 
-type SP = { durum?: string; q?: string; proje?: string; kaynak?: string; donem?: string; adet?: string; sayfa?: string; id?: string; takip?: string; sorumlu?: string };
+type SP = { durum?: string; q?: string; proje?: string; kaynak?: string; donem?: string; adet?: string; sayfa?: string; id?: string; takip?: string; sorumlu?: string; mesaj?: string };
 
 type Row = {
   id: number;
@@ -53,6 +55,7 @@ type Row = {
   status: string;
   assignee?: string | null;
   followUpAt?: Date | null;
+  statusAt?: Date | null;
 };
 
 function isMissingColumnError(err: unknown) {
@@ -64,7 +67,7 @@ function isMissingColumnError(err: unknown) {
 async function loadRows(): Promise<{ rows: Row[]; legacy: boolean }> {
   const select = { id: true, createdAt: true, name: true, email: true, phone: true, project: true, unitType: true, source: true, campaign: true, form: true };
   try {
-    const rows = await prisma.contactMessage.findMany({ orderBy: [{ createdAt: "desc" }, { id: "desc" }], select: { ...select, status: true, assignee: true, followUpAt: true } });
+    const rows = await prisma.contactMessage.findMany({ orderBy: [{ createdAt: "desc" }, { id: "desc" }], select: { ...select, status: true, statusAt: true, assignee: true, followUpAt: true } });
     return { rows, legacy: false };
   } catch (err) {
     if (!isMissingColumnError(err)) throw err;
@@ -106,7 +109,7 @@ async function loadDetail(id: number, legacy: boolean) {
 function qs(base: SP, patch: Partial<Record<keyof SP, string | undefined>>) {
   const p = new URLSearchParams();
   const merged = { ...base, ...patch };
-  for (const k of ["durum", "q", "proje", "kaynak", "donem", "takip", "sorumlu", "adet", "sayfa", "id"] as const) {
+  for (const k of ["durum", "q", "proje", "kaynak", "donem", "takip", "sorumlu", "mesaj", "adet", "sayfa", "id"] as const) {
     const v = merged[k];
     if (v && !(k === "durum" && v === "tumu") && !(k === "sayfa" && v === "1") && !(k === "adet" && v === "10")) p.set(k, v);
   }
@@ -210,6 +213,59 @@ function FollowUpTag({ at, who, now }: { at?: Date | null; who?: string | null; 
   );
 }
 
+/** Mesaj talebi etiketi: müşteri cevap bekliyor (1 saati geçtiyse kırmızı) ya da numara bırakmadı */
+function MsgTag({ wait, noNumber, now }: { wait: number | null; noNumber: boolean; now: Date }) {
+  if (wait !== null) {
+    const late = now.getTime() - wait >= WAIT_ALERT_MS;
+    return (
+      <span className={`mt-1 flex items-center gap-1 text-[11px] font-semibold ${late ? "text-red-600" : "text-amber-700"}`}>
+        <Hourglass className="h-3 w-3 shrink-0" aria-hidden />
+        Cevap bekliyor · {durationLabel(now.getTime() - wait)}
+      </span>
+    );
+  }
+  if (!noNumber) return null;
+  return (
+    <span className="mt-1 flex items-center gap-1 text-[11px] font-medium text-slate-500">
+      <PhoneOff className="h-3 w-3 shrink-0" aria-hidden />
+      Numara yok
+    </span>
+  );
+}
+
+/** Ayrıntıda mesaj sohbeti: cevap durumu, ilk cevap süresi ve Business Suite'te açma */
+function ChatBox({ th, wait, pageId, instagram, noNumber, now }: { th?: Thread; wait: number | null; pageId: string | null; instagram: boolean; noNumber: boolean; now: Date }) {
+  const late = wait !== null && now.getTime() - wait >= WAIT_ALERT_MS;
+  const channel = th ? (th.c === "i" ? "Instagram" : "Messenger") : instagram ? "Instagram" : "Messenger";
+  return (
+    <div className={`mx-5 mb-4 rounded-lg border p-3 text-[13px] ${wait !== null ? (late ? "border-red-200 bg-red-50" : "border-amber-200 bg-amber-50") : "border-slate-200 bg-slate-50"}`}>
+      <p className="flex items-center gap-2 font-medium text-slate-900">
+        <MessageCircle className="h-4 w-4 text-[#0d6570]" strokeWidth={1.8} aria-hidden />
+        {channel} sohbeti
+      </p>
+      <p className={`mt-1 text-xs ${wait !== null ? (late ? "font-semibold text-red-700" : "font-semibold text-amber-800") : "text-slate-600"}`}>
+        {wait !== null
+          ? `Müşteri cevap bekliyor (${durationLabel(now.getTime() - wait)}).`
+          : th?.a
+            ? `Ekip en son ${cyprusDateTime(new Date(th.a)).date} ${cyprusDateTime(new Date(th.a)).time} tarihinde yazdı.`
+            : th
+              ? "Ekipten henüz yazılı cevap yok."
+              : "Sohbet bilgisi Meta bağlantısı açılınca gelir."}
+        {typeof th?.r === "number" ? ` İlk cevap ${durationLabel(th.r)} içinde verildi.` : ""}
+      </p>
+      {noNumber ? <p className="mt-1 text-xs text-slate-600">Numara bırakmadı: sohbetten numara istenebilir.</p> : null}
+      <a
+        href={inboxUrl(pageId, th ?? { c: instagram ? "i" : "m" })}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-2.5 inline-flex h-8 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+      >
+        <ExternalLink className="h-3.5 w-3.5" aria-hidden /> Business Suite&apos;te aç
+      </a>
+    </div>
+  );
+}
+
 function StatusPill({ status }: { status: string }) {
   const s = statusInfo(status);
   return (
@@ -268,13 +324,21 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
   const sp: SP = (await props.searchParams) ?? {};
   const f: LeadFilters = { durum: sp.durum, q: sp.q, proje: sp.proje, kaynak: sp.kaynak, donem: sp.donem };
   const now = new Date();
-  const { rows, legacy } = await loadRows();
+  const [{ rows, legacy }, msgState] = await Promise.all([loadRows(), loadMetaMsgState()]);
+  const threads = threadsByLead(msgState);
+  const waitOf = (r: Row) => waitingSince(threads.get(r.id), r);
+  const waitingIds = new Set(rows.filter((r) => waitOf(r) !== null).map((r) => r.id));
+  const noNumberIds = new Set(rows.filter((r) => noContact(r) && statusInfo(r.status).key !== "satis_disi").map((r) => r.id));
 
   const summary = leadSummary(rows, now);
   const due = new Set(dueFollowUps(rows, now).map((r) => r.id));
   const base = filterLeads(rows, f, now, false) // durum hariç: sekme sayıları
     .filter((r) => sp.takip !== "1" || due.has(r.id))
-    .filter((r) => !sp.sorumlu || (sp.sorumlu === "-" ? !r.assignee : r.assignee === sp.sorumlu));
+    .filter((r) => !sp.sorumlu || (sp.sorumlu === "-" ? !r.assignee : r.assignee === sp.sorumlu))
+    .filter((r) => sp.mesaj !== "cevap" || waitingIds.has(r.id))
+    .filter((r) => sp.mesaj !== "numarasiz" || noNumberIds.has(r.id));
+  // cevap bekleyenler: en uzun bekleyen en üstte
+  if (sp.mesaj === "cevap") base.sort((a, b) => (waitOf(a) ?? 0) - (waitOf(b) ?? 0));
   const assignees = [...new Set(rows.map((r) => r.assignee).filter((a): a is string => !!a))].sort((a, b) => a.localeCompare(b, "tr"));
   const counts = statusCounts(base);
   const filtered = f.durum && f.durum !== "tumu" ? base.filter((r) => statusInfo(r.status).key === f.durum) : base;
@@ -301,7 +365,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
     const g = sourceGroup(r.source);
     sources.set(g.key, g.label);
   }
-  const hasFilter = !!(f.q || f.proje || f.kaynak || (f.donem && f.donem !== "tumu") || sp.takip || sp.sorumlu);
+  const hasFilter = !!(f.q || f.proje || f.kaynak || (f.donem && f.donem !== "tumu") || sp.takip || sp.sorumlu || sp.mesaj);
   // takip formundaki öneriler: sorumlu olarak yazılmış ve not düşmüş kişiler (yalnız ayrıntı açıkken)
   const noteAuthors =
     legacy || !fu ? [] : await prisma.leadNote.findMany({ distinct: ["author"], select: { author: true }, take: 30 }).then((r) => r.map((n) => n.author ?? ""), () => [] as string[]);
@@ -483,6 +547,27 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           Bugün aranacaklar
           <span className={`rounded-full px-1.5 text-[11px] ${due.size ? "bg-amber-500 text-white" : "bg-slate-100 text-slate-500"}`}>{due.size}</span>
         </Link>
+        {sp.mesaj === "cevap" || sp.mesaj === "numarasiz" ? <input type="hidden" name="mesaj" value={sp.mesaj} /> : null}
+        <Link
+          href={qs(sp, { mesaj: sp.mesaj === "cevap" ? undefined : "cevap", sayfa: undefined, id: undefined })}
+          aria-pressed={sp.mesaj === "cevap"}
+          title="Messenger / Instagram'dan yazıp ekipten cevap bekleyen müşteriler"
+          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-3.5 text-sm font-medium shadow-sm sm:col-span-1 ${sp.mesaj === "cevap" ? "border-red-300 bg-red-50 text-red-800" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
+        >
+          <MessageSquareWarning className="h-4 w-4" strokeWidth={1.8} aria-hidden />
+          Cevap bekleyenler
+          <span className={`rounded-full px-1.5 text-[11px] ${waitingIds.size ? "bg-red-500 text-white" : "bg-slate-100 text-slate-500"}`}>{waitingIds.size}</span>
+        </Link>
+        <Link
+          href={qs(sp, { mesaj: sp.mesaj === "numarasiz" ? undefined : "numarasiz", sayfa: undefined, id: undefined })}
+          aria-pressed={sp.mesaj === "numarasiz"}
+          title="Mesajla yazıp telefon ya da e-posta bırakmayan kişiler: Business Suite'ten numara istenir"
+          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-3.5 text-sm font-medium shadow-sm sm:col-span-1 ${sp.mesaj === "numarasiz" ? "border-slate-400 bg-slate-100 text-slate-900" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
+        >
+          <PhoneOff className="h-4 w-4" strokeWidth={1.8} aria-hidden />
+          Numara vermedi
+          <span className="rounded-full bg-slate-100 px-1.5 text-[11px] text-slate-600">{noNumberIds.size}</span>
+        </Link>
         <button type="submit" className="sr-only">
           Ara
         </button>
@@ -583,6 +668,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           <td className={TD}>
                             <StatusPill status={r.status} />
                             <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
+                            <MsgTag wait={waitOf(r)} noNumber={noNumberIds.has(r.id)} now={now} />
                           </td>
                         </tr>
                       );
@@ -619,6 +705,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           {` · ${formOrigin(r.form, r.source)}`}
                         </span>
                         <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
+                        <MsgTag wait={waitOf(r)} noNumber={noNumberIds.has(r.id)} now={now} />
                       </Link>
                     </li>
                   );
@@ -701,6 +788,16 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                 ),
               )}
             </div>
+            {detail.form === "meta-mesaj" || threads.has(detail.id) ? (
+              <ChatBox
+                th={threads.get(detail.id)}
+                wait={waitingSince(threads.get(detail.id), { id: detail.id, status: detail.status, statusAt: "statusAt" in detail ? (detail.statusAt as Date | null) : null })}
+                pageId={msgState?.pageId ?? null}
+                instagram={(detail.source || "").toLowerCase().startsWith("instagram")}
+                noNumber={noContact(detail)}
+                now={now}
+              />
+            ) : null}
             {waNumber(detail.phone) ? <WaQuick number={waNumber(detail.phone)} name={detail.name} project={detail.project} lang={guessWaLang(detail.phone)} /> : null}
 
             {!legacy && fu ? (
