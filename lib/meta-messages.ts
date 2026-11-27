@@ -12,6 +12,7 @@ import { leadEmailConfigured, sendLeadEmail } from "@/lib/lead-email";
 import { dndAkisLeadConfigured, sendDndAkisLead } from "@/lib/dnd-akis-lead";
 import { allPages, graph, phoneKey, projectOf } from "@/lib/meta-leads";
 import { capiCandidateLeadIds, capiErrorText, pageDataset, pendingConversions, sendConversions } from "@/lib/meta-msg-capi";
+import { MSG_RESPONDER } from "@/lib/meta-msg-view";
 
 export const META_MSG_SYNC_KEY = "meta-mesaj";
 const DAY = 86_400_000;
@@ -19,6 +20,8 @@ const BACKFILL_DAYS = 60;
 /** Bu kadar sessizlikten sonra yazan kişi için "tekrar yazdı" notu düşülür */
 const REVISIT_GAP = 3 * DAY;
 const NO_NUMBER = " · numara vermedi";
+/** Bu kadar sessizlikten sonra yazılan mesaj yeni bir yazışma sayılır (talep tarihi için) */
+const SESSION_GAP = 30 * DAY;
 
 export type MsgPlatform = "messenger" | "instagram";
 export type GraphPerson = { id: string; name?: string; username?: string };
@@ -41,6 +44,8 @@ export type MetaMsgState = {
   updated?: number;
   merged?: number;
   conversations?: number;
+  /** cevap verilen mesaj taleplerine sorumlu (MSG_RESPONDER) yazılanlar */
+  assigned?: number;
   instagram?: string | null;
   /** Business Suite bağlantıları için Facebook sayfası */
   pageId?: string | null;
@@ -108,11 +113,14 @@ export function conversationLead(conv: GraphConv, platform: MsgPlatform, ownIds:
   const all = msgs.map((m) => m.text).join("\n");
   const { phones, emails } = extractContacts(all);
   const project = projectOf(all);
+  // talep tarihi son yazışmanın başı: aylar sonra yeniden yazan kişinin talebi yıllar öncesine düşmesin
+  let start = 0;
+  for (let i = 1; i < msgs.length; i++) if (msgs[i].ts - msgs[i - 1].ts > SESSION_GAP) start = i;
   const name =
     platform === "instagram"
       ? person?.username ? `@${person.username}` : person?.name || "Instagram kullanıcısı"
       : person?.name || "Messenger kullanıcısı";
-  const first = new Date(msgs[0].ts);
+  const first = new Date(msgs[start].ts);
   const extra = [...phones.slice(1), ...emails.slice(1)];
   const src = platform === "instagram" ? "instagram" : "facebook";
   return {
@@ -297,6 +305,7 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
   const errors: string[] = [];
   const notify: Notify[] = [];
   const budget = { left: 300 };
+  const replies: { leadId: number; at: number; platform: MsgPlatform }[] = [];
   const deadline = now + 90_000;
 
   const save = async () => {
@@ -451,8 +460,12 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
               complete = false;
               break;
             }
+            const before = convs[conv.id];
             await handle(conv, t.platform, t.ownIds, pageToken);
             state.conversations = (state.conversations ?? 0) + 1;
+            // ekibin yeni cevabı (ilk geçmiş aktarımı değil, son 24 saat): talebe "Talha cevap verdi" notu
+            const after = convs[conv.id];
+            if (before && after?.l && after.a && after.a !== before.a && Date.now() - after.a < DAY) replies.push({ leadId: after.l, at: after.a, platform: t.platform });
             reached = Math.max(reached, Date.parse(conv.updated_time));
           }
           lastTs[t.platform] = complete ? Math.max(reached, now - 3600_000) : reached;
@@ -461,6 +474,22 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
         }
       }
     }
+    // cevap verilen mesaj talepleri: sorumlu boşsa cevap veren (Talha); yeni cevaplar talebin geçmişine not
+    try {
+      const answered = [...new Set(Object.values(convs).filter((m) => m.l && m.a).map((m) => m.l!))];
+      if (answered.length) {
+        const r = await prisma.contactMessage.updateMany({ where: { id: { in: answered }, assignee: null }, data: { assignee: MSG_RESPONDER } });
+        state.assigned = r.count;
+      }
+      for (const x of replies.slice(0, 50)) {
+        await prisma.leadNote
+          .create({ data: { leadId: x.leadId, kind: "not", text: `${MSG_RESPONDER} ${x.platform === "instagram" ? "Instagram" : "Messenger"}'dan cevap verdi.`, author: "Meta", createdAt: new Date(x.at) } })
+          .catch(() => null); // talep silinmişse
+      }
+    } catch (e) {
+      errors.push(`Sorumlu atama: ${messageError(e)}`);
+    }
+
     // Meta'ya mesaj dönüşümleri (Messenger, ilk sayfa): numara verdi / görüşülüyor-satış
     const primary = pages[0];
     if (primary) {

@@ -79,12 +79,12 @@ function Nav({ pathname, waiting, user }: { pathname: string; waiting: number | 
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={clsx(
-                        "flex items-center gap-3 rounded-full px-3.5 py-2.5 font-medium",
+                        "flex items-center gap-3 whitespace-nowrap rounded-full px-3 py-2.5 font-medium",
                         active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
                       )}
                     >
-                      <Icon className="h-[18px] w-[18px]" strokeWidth={1.7} aria-hidden />
-                      {item.label}
+                      <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.7} aria-hidden />
+                      <span className="min-w-0 truncate">{item.label}</span>
                       {item.badge && waiting ? (
                         <span className="ml-auto rounded-full bg-amber-400 px-2 py-0.5 text-[11px] font-semibold text-slate-900" title="Aranmayı bekleyen">
                           {waiting}

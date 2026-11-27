@@ -35,6 +35,11 @@ function fakePrisma(existing = []) {
         findMany: async ({ where }) => (where.OR && !where.OR.length ? [] : rows.filter((r) => match(r, where))),
         create: async ({ data }) => { const r = { id: rows.length + 1, ...data }; rows.push(r); return { id: r.id }; },
         update: async ({ where, data }) => { Object.assign(rows.find((r) => r.id === where.id), data); return {}; },
+        updateMany: async ({ where, data }) => {
+          let count = 0;
+          for (const r of rows) if (where.id.in.includes(r.id) && (where.assignee !== null || !r.assignee)) { Object.assign(r, data); count++; }
+          return { count };
+        },
       },
       leadNote: { create: async ({ data }) => { notes.push(data); return {}; } },
     },
@@ -99,6 +104,14 @@ test("conversationLead maps a Messenger chat with a number and an Instagram chat
   assert.equal(ig.phone, null);
   assert.equal(ig.subject, "Instagram mesajı · Lagoon Verde · numara vermedi");
   assert.equal(ig.source, "instagram / mesaj");
+
+  // aylar sonra yeniden yazan kişi: talep tarihi son yazışmanın başı, metinde eski mesaj da durur
+  const back = J(m.conversationLead(conv("c5", 1000, [{ id: "u5", name: "Eski Yazan" }, page], [
+    msg("n2", { id: "u5", name: "Eski Yazan" }, "Tekrar merhaba, fiyat?", 2 * 86_400_000),
+    msg("n1", { id: "u5", name: "Eski Yazan" }, "Merhaba", 400 * 86_400_000),
+  ]), "messenger", [PAGE]));
+  assert.ok(Math.abs(new Date(back.createdAt).getTime() - (Date.now() - 2 * 86_400_000)) < 5000);
+  assert.match(back.message, /Merhaba\n.*Tekrar merhaba/);
 
   // yalnız sayfanın yazdığı sohbet talep değildir
   assert.equal(m.conversationLead(conv("c3", 1000, [page], [msg("p1", page, "Kampanya duyurusu", 1000)]), "messenger", [PAGE]), null);
@@ -283,6 +296,15 @@ test("sync remembers who the customer is, when they wait and clears it once the 
   assert.equal(after.r, 10 * 60_000);
   assert.ok(after.a > 0);
   assert.equal(after.l, memo.l);
+  // cevap veren Talha: sorumlu boşsa yazılır, yeni cevap talebin geçmişine not olarak düşer
+  const lead = db.rows.find((r) => r.id === memo.l);
+  assert.equal(lead.assignee, "Talha");
+  assert.equal(db.notes.at(-1).text, "Talha Messenger'dan cevap verdi.");
+  assert.equal(db.notes.at(-1).leadId, memo.l);
+  // sorumlusu olan talebe dokunulmaz
+  lead.assignee = "Netice";
+  await m.syncMetaMessages();
+  assert.equal(lead.assignee, "Netice");
 });
 
 test("Messenger conversions: dataset once, LeadSubmitted when a number arrives, QualifiedLead after status change, never twice", async () => {

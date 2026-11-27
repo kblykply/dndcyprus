@@ -11,6 +11,14 @@ export const WAIT_ALERT_MS = HOUR;
 export const WAIT_MAX_MS = 14 * DAY;
 
 export type Thread = ConvMemo & { conv: string };
+
+/** Messenger / Instagram mesajlarına cevap veren (27.11 kullanıcı: "bütün mesajlara Talha cevap veriyor") */
+export const MSG_RESPONDER = (process.env.META_MSG_RESPONDER || "Talha").trim() || "Talha";
+
+/** Ekip sohbette cevap verdiyse son cevabın zamanı (müşteri o zamandan beri yazmadıysa) */
+export function answeredAt(th: Thread | undefined): number | null {
+  return th?.a && !th.w ? th.a : null;
+}
 type LeadLite = { id: number; status: string | null; statusAt?: Date | null; form?: string | null; phone?: string | null; email?: string | null };
 
 /** Talep → sohbeti (aynı kişinin birden çok sohbeti varsa en son yazılanı) */

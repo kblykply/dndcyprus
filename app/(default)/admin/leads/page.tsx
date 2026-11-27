@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AlarmClock, ChevronDown, ChevronLeft, ChevronRight, Download, ExternalLink, Hourglass, Mail, MessageCircle, MessageSquareWarning, Phone, PhoneOff, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
+import { AlarmClock, CheckCheck, ChevronDown, ChevronLeft, ChevronRight, Download, ExternalLink, Hourglass, Mail, MessageCircle, MessageSquareWarning, Phone, PhoneOff, Search, ArrowLeft, Pencil, Plus, X } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
 import { ATTRIBUTION_KEYS, sanitizeAttribution, type Touch } from "@/lib/attribution";
@@ -33,7 +33,7 @@ import { metaLeadsConfigured } from "@/lib/meta-leads";
 import { AutoSubmitSelect, SelectAll, SelectedCount } from "./LeadControls";
 import { pageLabelText } from "@/lib/page-label";
 import { loadMetaMsgState } from "@/lib/meta-messages";
-import { WAIT_ALERT_MS, durationLabel, inboxUrl, noContact, threadsByLead, waitingSince, type Thread } from "@/lib/meta-msg-view";
+import { MSG_RESPONDER, WAIT_ALERT_MS, answeredAt, durationLabel, inboxUrl, noContact, threadsByLead, waitingSince, type Thread } from "@/lib/meta-msg-view";
 
 export const dynamic = "force-dynamic";
 
@@ -214,22 +214,27 @@ function FollowUpTag({ at, who, now }: { at?: Date | null; who?: string | null; 
 }
 
 /** Mesaj talebi etiketi: müşteri cevap bekliyor (1 saati geçtiyse kırmızı) ya da numara bırakmadı */
-function MsgTag({ wait, noNumber, now }: { wait: number | null; noNumber: boolean; now: Date }) {
-  if (wait !== null) {
-    const late = now.getTime() - wait >= WAIT_ALERT_MS;
-    return (
-      <span className={`mt-1 flex items-center gap-1 text-[11px] font-semibold ${late ? "text-red-600" : "text-amber-700"}`}>
-        <Hourglass className="h-3 w-3 shrink-0" aria-hidden />
-        Cevap bekliyor · {durationLabel(now.getTime() - wait)}
-      </span>
-    );
-  }
-  if (!noNumber) return null;
+function MsgTag({ wait, answered, noNumber, now }: { wait: number | null; answered: number | null; noNumber: boolean; now: Date }) {
   return (
-    <span className="mt-1 flex items-center gap-1 text-[11px] font-medium text-slate-500">
-      <PhoneOff className="h-3 w-3 shrink-0" aria-hidden />
-      Numara yok
-    </span>
+    <>
+      {wait !== null ? (
+        <span className={`mt-1 flex items-center gap-1 text-[11px] font-semibold ${now.getTime() - wait >= WAIT_ALERT_MS ? "text-red-600" : "text-amber-700"}`}>
+          <Hourglass className="h-3 w-3 shrink-0" aria-hidden />
+          Cevap bekliyor · {durationLabel(now.getTime() - wait)}
+        </span>
+      ) : answered !== null ? (
+        <span className="mt-1 flex items-center gap-1 text-[11px] font-semibold text-teal-700" title={`${MSG_RESPONDER} mesajla cevap verdi`}>
+          <CheckCheck className="h-3 w-3 shrink-0" aria-hidden />
+          {MSG_RESPONDER} cevap verdi · {durationLabel(Math.max(0, now.getTime() - answered))} önce
+        </span>
+      ) : null}
+      {noNumber ? (
+        <span className="mt-1 flex items-center gap-1 text-[11px] font-medium text-slate-500">
+          <PhoneOff className="h-3 w-3 shrink-0" aria-hidden />
+          Numara yok
+        </span>
+      ) : null}
+    </>
   );
 }
 
@@ -247,7 +252,7 @@ function ChatBox({ th, wait, pageId, instagram, noNumber, now }: { th?: Thread; 
         {wait !== null
           ? `Müşteri cevap bekliyor (${durationLabel(now.getTime() - wait)}).`
           : th?.a
-            ? `Ekip en son ${cyprusDateTime(new Date(th.a)).date} ${cyprusDateTime(new Date(th.a)).time} tarihinde yazdı.`
+            ? `${MSG_RESPONDER} cevap verdi: ${cyprusDateTime(new Date(th.a)).date} ${cyprusDateTime(new Date(th.a)).time}.`
             : th
               ? "Ekipten henüz yazılı cevap yok."
               : "Sohbet bilgisi Meta bağlantısı açılınca gelir."}
@@ -668,7 +673,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           <td className={TD}>
                             <StatusPill status={r.status} />
                             <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
-                            <MsgTag wait={waitOf(r)} noNumber={noNumberIds.has(r.id)} now={now} />
+                            <MsgTag wait={waitOf(r)} answered={answeredAt(threads.get(r.id))} noNumber={noNumberIds.has(r.id)} now={now} />
                           </td>
                         </tr>
                       );
@@ -705,7 +710,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                           {` · ${formOrigin(r.form, r.source)}`}
                         </span>
                         <FollowUpTag at={r.followUpAt} who={r.assignee} now={now} />
-                        <MsgTag wait={waitOf(r)} noNumber={noNumberIds.has(r.id)} now={now} />
+                        <MsgTag wait={waitOf(r)} answered={answeredAt(threads.get(r.id))} noNumber={noNumberIds.has(r.id)} now={now} />
                       </Link>
                     </li>
                   );
