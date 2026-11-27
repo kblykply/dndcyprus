@@ -15,6 +15,17 @@ export type Thread = ConvMemo & { conv: string };
 /** Messenger / Instagram mesajlarına cevap veren (27.11 kullanıcı: "bütün mesajlara Talha cevap veriyor") */
 export const MSG_RESPONDER = (process.env.META_MSG_RESPONDER || "Talha").trim() || "Talha";
 
+/**
+ * Mesajlara cevap verebilen ekip (27.11 kullanıcı: "Muhammed de cevap veriyor"). Meta sayfa adına yazılan cevabın hangi
+ * kişiden geldiğini API'de bildirmez: sohbetler varsayılan olarak MSG_RESPONDER'a sayılır, başkası cevapladıysa panelden işaretlenir.
+ */
+export const MSG_TEAM: string[] = [
+  ...new Set([MSG_RESPONDER, ...(process.env.META_MSG_TEAM ?? "Muhammed").split(",").map((s) => s.trim().slice(0, 40)).filter(Boolean)]),
+];
+
+/** Sohbetin ilk cevabını veren: panelden işaretlenen, yoksa MSG_RESPONDER */
+export const responderOf = (leadId: number | null | undefined, by: Record<string, string>) => (leadId ? by[String(leadId)] : undefined) || MSG_RESPONDER;
+
 /** Ekip sohbette cevap verdiyse son cevabın zamanı (müşteri o zamandan beri yazmadıysa) */
 export function answeredAt(th: Thread | undefined): number | null {
   return th?.a && !th.w ? th.a : null;

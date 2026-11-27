@@ -11,6 +11,8 @@ import { ADMIN_SESSION_COOKIE, readAdminSession, safeAdminNext, verifyAdminSessi
 import { MANUAL_CHANNELS, isLeadStatus, manualChannel, parseLeadForm, statusInfo } from "@/lib/lead-status";
 import { metaLeadsConfigured, syncMetaLeads } from "@/lib/meta-leads";
 import { syncMetaMessages } from "@/lib/meta-messages";
+import { MSG_TEAM } from "@/lib/meta-msg-view";
+import { setResponderFor } from "@/lib/msg-responder";
 import { cleanAssignee, cyprusLocalToDate, dateToCyprusInputs } from "@/lib/lead-followup";
 
 const AUTHOR_COOKIE = "admin_author";
@@ -197,6 +199,22 @@ export async function deleteLead(formData: FormData) {
   if (Number.isSafeInteger(id) && id > 0) await prisma.contactMessage.deleteMany({ where: { id } }); // notlar ON DELETE CASCADE
   revalidatePath("/admin", "layout");
   redirect("/admin/leads");
+}
+
+/** Mesaj sohbetinin ilk cevabını veren (Meta kişiyi bildirmez; Performans'ta kişi başına puan bu işaretle ayrılır) */
+export async function setMsgResponder(formData: FormData) {
+  const store = await requireAdmin();
+  const id = Number(formData.get("id"));
+  const name = String(formData.get("kisi") || "");
+  if (Number.isSafeInteger(id) && id > 0 && MSG_TEAM.includes(name)) {
+    const exists = await prisma.contactMessage.findUnique({ where: { id }, select: { id: true } });
+    if (exists && (await setResponderFor(id, name))) {
+      await prisma.leadNote.create({ data: { leadId: id, kind: "not", text: `Mesajın ilk cevabını ${name} verdi (panelden işaretlendi).`, author: await authorName(store, formData) } });
+    }
+  }
+  revalidatePath("/admin/leads");
+  revalidatePath("/admin/performans");
+  redirect(backTo(formData));
 }
 
 export async function deleteLeadNote(formData: FormData) {
