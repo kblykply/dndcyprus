@@ -187,7 +187,8 @@ const MSG_FIELDS = "messages.limit(20){id,message,from,created_time}";
  */
 const LIST = {
   messenger: { fields: `id,updated_time,link,participants,${MSG_FIELDS}`, limit: "25", timeout: 30_000 },
-  instagram: { fields: "id,updated_time,participants", limit: "25", timeout: 30_000 },
+  // 27.11 10:35: participants'lı 25'lik liste de "Please reduce the amount of data" (kod 1) → yalnız kimlik + zaman, 10'ar
+  instagram: { fields: "id,updated_time", limit: "10", timeout: 30_000 },
 } as const;
 
 /**
@@ -223,8 +224,8 @@ async function recentConversations(pageId: string, token: string, platform: MsgP
 async function withMessageDetails(conv: GraphConv, token: string, budget: { left: number }) {
   if (!conv.messages) {
     budget.left -= 1;
-    const full = await graph<GraphConv>(conv.id, token, { fields: MSG_FIELDS }, 30_000);
-    conv = { ...conv, messages: full.messages ?? { data: [] } };
+    const full = await graph<GraphConv>(conv.id, token, { fields: `participants,${MSG_FIELDS}` }, 30_000);
+    conv = { ...conv, participants: conv.participants ?? full.participants, messages: full.messages ?? { data: [] } };
   }
   const ms = conv.messages?.data ?? [];
   if (!ms.some((m) => !m.from || !m.created_time)) return conv;
