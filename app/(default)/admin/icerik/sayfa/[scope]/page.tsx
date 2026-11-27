@@ -50,10 +50,10 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
       </Link>
       <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">{def.label}</h1>
+          <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">{def.label}</h1>
           <p className="mt-1.5 text-sm text-slate-500">Alanı değiştirip kaydedin; yazılar yalnız seçili dilde, görseller tüm dillerde güncellenir. Kalın yazı için **iki yıldız** kullanın.</p>
         </div>
-        <a href={def.routes(locale)[0]} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50">
+        <a href={def.routes(locale)[0]} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
           Sitede gör <ExternalLink className="h-4 w-4" aria-hidden />
         </a>
       </div>
@@ -65,7 +65,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
             href={`/admin/icerik/sayfa/${scope}?dil=${l}&bolum=${section}`}
             role="tab"
             aria-selected={l === locale}
-            className={`shrink-0 rounded-lg px-3.5 py-2 font-medium ${l === locale ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
+            className={`shrink-0 rounded-full px-4 py-2 font-medium ${l === locale ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
           >
             {LOCALE_LABELS[l]}
           </Link>
@@ -91,7 +91,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
       {sp.cevirihata ? <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">Türkçe kaydedildi ama çeviri yapılamadı: {sp.cevirihata}</p> : null}
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
-        <nav aria-label="Bölümler" className="self-start rounded-xl border border-slate-200 bg-white p-2 shadow-sm lg:sticky lg:top-6">
+        <nav aria-label="Bölümler" className="self-start rounded-2xl border border-slate-200 bg-white p-2 lg:sticky lg:top-6">
           {def.sections.map(([k, label]) => (
             <Link
               key={k}
@@ -105,7 +105,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
           ))}
         </nav>
 
-        <form action={saveSection} className="min-w-0 rounded-xl border border-slate-200 bg-white shadow-sm">
+        <form action={saveSection} className="min-w-0 rounded-3xl border border-slate-200 bg-white">
           <input type="hidden" name="scope" value={scope} />
           <input type="hidden" name="locale" value={locale} />
           <input type="hidden" name="section" value={section} />
@@ -242,7 +242,7 @@ export default async function ScopeEditor({ params, searchParams }: { params: Pr
           </div>
           <div className="sticky bottom-0 flex items-center justify-between gap-3 rounded-b-xl border-t border-slate-100 bg-white/95 px-5 py-3 backdrop-blur">
             <span className="text-xs text-slate-500">Kaydedince sitedeki {LOCALE_LABELS[locale]} sayfa yenilenir.</span>
-            <button type="submit" className="rounded-lg bg-slate-900 px-5 py-2 text-sm font-medium text-white hover:bg-slate-800">
+            <button type="submit" className="rounded-full bg-[#0d6570] px-5 py-2 text-sm font-semibold text-white hover:bg-[#0a5159]">
               Kaydet
             </button>
           </div>

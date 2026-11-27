@@ -17,7 +17,7 @@ export default function PeriodTabs({ base, active, extra = {} }: { base: string;
             href={href}
             role="tab"
             aria-selected={on}
-            className={`shrink-0 rounded-lg px-3.5 py-2 font-medium ${on ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
+            className={`shrink-0 rounded-full px-4 py-2 font-medium ${on ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
           >
             {p.label}
           </Link>

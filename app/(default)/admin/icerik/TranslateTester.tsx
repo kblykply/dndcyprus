@@ -10,7 +10,7 @@ const NAMES: Record<string, string> = { en: "İngilizce", de: "Almanca", ru: "Ru
 export default function TranslateTester({ enabled }: { enabled: boolean }) {
   const [state, action, pending] = useActionState<TryState, FormData>(tryTranslation, undefined);
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <section className="rounded-3xl border border-slate-200 bg-white p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="flex items-center gap-2 text-lg text-slate-900">
           <Languages className="h-5 w-5 text-teal-700" aria-hidden /> Otomatik çeviri
@@ -30,7 +30,7 @@ export default function TranslateTester({ enabled }: { enabled: boolean }) {
           placeholder="Örnek: Lagoon Verde'de **60 aya kadar** TL taksit, faizsiz ve bankasız."
           className="min-h-[44px] flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20"
         />
-        <button type="submit" disabled={pending || !enabled} className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-50">
+        <button type="submit" disabled={pending || !enabled} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0d6570] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a5159] disabled:opacity-50">
           {pending ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden /> : null}
           {pending ? "Çevriliyor…" : "Çeviriyi dene"}
         </button>

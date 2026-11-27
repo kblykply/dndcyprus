@@ -43,13 +43,13 @@ const fmt = (n: number) => Math.round(n).toLocaleString("tr-TR");
 
 function Kpi({ label, value, icon, sub }: { label: string; value: ReactNode; icon: ReactNode; sub?: ReactNode }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+    <div className="rounded-3xl border border-slate-200 bg-white p-4 sm:p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
           <p className="mt-2 font-display text-3xl leading-none">{value}</p>
         </div>
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#eef5f6] text-[#0d6570]">{icon}</span>
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#eef5f6] text-[#0d6570]">{icon}</span>
       </div>
       {sub ? <p className="mt-3 text-xs text-slate-500">{sub}</p> : null}
     </div>
@@ -76,7 +76,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
   const header = (
     <div className="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">Isı Haritası</h1>
+        <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Isı Haritası</h1>
         <p className="mt-1.5 text-sm text-slate-500">Microsoft Clarity: ziyaretçiler sayfalarda ne kadar ilerliyor, nereye tıklıyor, nerede takılıyor.</p>
       </div>
       <div className="flex flex-wrap items-center gap-2">
@@ -84,7 +84,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
           href={clarityLink("heatmaps", { days: daysNum })}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800"
+          className="inline-flex items-center gap-2 rounded-full bg-[#0d6570] px-3.5 py-2 text-sm font-semibold text-white hover:bg-[#0a5159]"
         >
           <Flame className="h-4 w-4" aria-hidden /> Isı haritalarını aç
         </a>
@@ -92,7 +92,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
           href={clarityLink("recordings", { days: daysNum })}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50"
+          className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
         >
           <Video className="h-4 w-4" aria-hidden /> Oturum kayıtları
         </a>
@@ -104,7 +104,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
     return (
       <div className="mx-auto max-w-[1600px]">
         {header}
-        <section className="mt-7 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <section className="mt-7 rounded-3xl border border-slate-200 bg-white p-6">
           <h2 className="text-xl text-slate-900">Clarity verisini panele bağlama</h2>
           <p className="mt-1.5 max-w-3xl text-sm text-slate-500">
             Site ziyaret kayıtlarını ve ısı haritası verisini Clarity&apos;ye gönderiyor; yukarıdaki düğmelerle Clarity&apos;de şimdi de görebilirsiniz. Sayfa
@@ -161,7 +161,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
               href={p.key === "30g" ? "/admin/isi-haritasi" : `/admin/isi-haritasi?donem=${p.key}`}
               role="tab"
               aria-selected={p.key === period.key}
-              className={`shrink-0 rounded-lg px-3.5 py-2 font-medium ${p.key === period.key ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
+              className={`shrink-0 rounded-full px-4 py-2 font-medium ${p.key === period.key ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
             >
               {p.label}
             </Link>
@@ -181,7 +181,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
       {message ? <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">{message}</p> : null}
 
       {!rows.length ? (
-        <div className="mt-5 rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+        <div className="mt-5 rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
           <p className="font-display text-xl">Bu dönem için henüz veri yok</p>
           <p className="mt-1 text-sm text-slate-500">
             Panel Clarity verisini her sabah 06:00&apos;da çeker. Hemen görmek için “Şimdi güncelle” ile son 24 saati alabilirsiniz.
@@ -199,7 +199,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
 
           <ChartCard title="Sayfalar" sub="Her sayfanın ısı haritası Clarity'de açılır" className="mt-5">
             {pages.length ? (
-              <div className="overflow-x-auto rounded-lg border border-slate-200">
+              <div className="overflow-x-auto rounded-2xl border border-slate-200">
                 <table className="w-full min-w-[760px] text-sm">
                   <thead className="bg-slate-50">
                     <tr>
@@ -272,7 +272,7 @@ export default async function HeatmapPage(props: { searchParams?: Promise<{ done
             </ChartCard>
           </div>
 
-          <p className="mt-5 rounded-xl border border-dashed border-slate-300 bg-white px-5 py-4 text-[13px] text-slate-500">
+          <p className="mt-5 rounded-3xl border border-dashed border-slate-300 bg-white px-5 py-4 text-[13px] text-slate-500">
             Isı haritasının görüntüsü Clarity&apos;nin kendi ekranında açılır (Clarity başka sitelere gömülmeye izin vermiyor). Öfkeli tıklama: aynı yere art arda
             tıklama; boşa tıklama: tıklanınca bir şey olmayan yer; hızlı geri dönüş: sayfaya gelip hemen geri dönme.
           </p>

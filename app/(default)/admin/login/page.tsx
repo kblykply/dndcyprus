@@ -18,7 +18,7 @@ export default async function AdminLoginPage({
   // Promise olan searchParams'i çöz
   const params = (await searchParams) ?? {};
   const hasError = params.error === "1";
-  const nextPath = params.next || "/admin/leads";
+  const nextPath = params.next || "/admin/bugun";
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
@@ -79,7 +79,7 @@ export default async function AdminLoginPage({
 
           <button
             type="submit"
-            className="mt-2 w-full rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-slate-800"
+            className="mt-2 w-full rounded-full bg-[#0d6570] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0a5159]"
           >
             Giriş Yap
           </button>

@@ -76,7 +76,7 @@ export function NoteForm({ leadId, author }: { leadId: number; author: string })
             aria-label="Notu yazan"
             className="h-8 w-32 rounded-md border border-slate-200 px-2 text-xs text-slate-700 outline-none focus:border-teal-600"
           />
-          <button type="submit" disabled={pending} className="inline-flex items-center gap-1.5 rounded-md bg-slate-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-slate-800 disabled:cursor-wait disabled:opacity-70">
+          <button type="submit" disabled={pending} className="inline-flex items-center gap-1.5 rounded-full bg-[#0d6570] px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-[#0a5159] disabled:cursor-wait disabled:opacity-70">
             {pending ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden /> : null}
             {pending ? "Kaydediliyor…" : "Kaydet"}
           </button>
@@ -152,7 +152,7 @@ export function MetaPullButton() {
         type="submit"
         disabled={pending}
         title="Facebook / Instagram reklam formlarındaki yeni talepleri şimdi getir (normalde 10 dakikada bir kendiliğinden gelir)"
-        className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 disabled:cursor-wait disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-wait disabled:opacity-60"
       >
         {pending ? <Loader2 className="h-[15px] w-[15px] animate-spin" aria-hidden /> : <RefreshCw className="h-[15px] w-[15px]" strokeWidth={1.7} aria-hidden />}
         {pending ? "Meta'dan çekiliyor…" : "Meta'dan çek"}
@@ -216,7 +216,7 @@ export function FollowUpForm({
         </label>
       </div>
       <div className="mt-2.5 flex items-center gap-2">
-        <button type="submit" onClick={() => op.current && (op.current.value = "kaydet")} disabled={pending} className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-slate-900 px-3 text-xs font-medium text-white hover:bg-slate-800 disabled:opacity-60">
+        <button type="submit" onClick={() => op.current && (op.current.value = "kaydet")} disabled={pending} className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[#0d6570] px-3.5 text-xs font-medium text-white hover:bg-[#0a5159] disabled:opacity-60">
           {pending ? <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden /> : null}
           {pending ? "Kaydediliyor…" : "Takibi kaydet"}
         </button>

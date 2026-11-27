@@ -7,10 +7,10 @@ import { niceTicks } from "@/lib/lead-stats";
 
 export function ChartCard({ title, sub, right, children, className = "" }: { title: string; sub?: ReactNode; right?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={`min-w-0 rounded-xl border border-slate-200 bg-white p-5 shadow-sm ${className}`}>
+    <section className={`min-w-0 rounded-3xl border border-slate-200 bg-white p-5 sm:p-6 ${className}`}>
       <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h2 className="text-lg leading-tight text-slate-900">{title}</h2>
+          <h2 className="text-lg font-semibold leading-tight text-slate-900">{title}</h2>
           {sub ? <p className="mt-1 text-xs text-slate-500">{sub}</p> : null}
         </div>
         {right}

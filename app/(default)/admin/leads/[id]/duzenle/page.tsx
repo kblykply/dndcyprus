@@ -29,7 +29,7 @@ export default async function EditLeadPage({ params }: { params: Promise<{ id: s
       <Link href={back} className="inline-flex items-center gap-2 text-sm font-medium text-teal-700 hover:underline">
         <ArrowLeft className="h-4 w-4" aria-hidden /> Talebe dön
       </Link>
-      <h1 className="mt-4 text-[28px] leading-tight text-black sm:text-[32px]">Talebi düzenle</h1>
+      <h1 className="mt-4 text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Talebi düzenle</h1>
       <p className="mt-1.5 text-sm text-slate-500">
         {manual ? "Panelden eklenen talep." : "Web sitesinden gelen talep; reklam ve ziyaret kaynağı korunur."}
       </p>
@@ -56,7 +56,7 @@ export default async function EditLeadPage({ params }: { params: Promise<{ id: s
         />
       </div>
 
-      <form action={deleteLead} className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-red-200 bg-red-50/50 p-5">
+      <form action={deleteLead} className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-red-200 bg-red-50/50 p-5">
         <input type="hidden" name="id" value={lead.id} />
         <div>
           <p className="text-sm font-medium text-red-700">Talebi sil</p>

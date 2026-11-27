@@ -29,10 +29,10 @@ export default async function CollectionPage({ params, searchParams }: { params:
       </Link>
       <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">{def.label}</h1>
+          <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">{def.label}</h1>
           <p className="mt-1.5 text-sm text-slate-500">{def.desc}</p>
         </div>
-        <Link href={`/admin/icerik/liste/${col}/yeni`} className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800">
+        <Link href={`/admin/icerik/liste/${col}/yeni`} className="inline-flex items-center gap-2 rounded-full bg-[#0d6570] px-3.5 py-2 text-sm font-semibold text-white hover:bg-[#0a5159]">
           <Plus className="h-4 w-4" aria-hidden /> Yeni {def.singular}
         </Link>
       </div>
@@ -49,7 +49,7 @@ export default async function CollectionPage({ params, searchParams }: { params:
         </p>
       ) : null}
 
-      <ul className="mt-5 divide-y divide-slate-100 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+      <ul className="mt-5 divide-y divide-slate-100 overflow-hidden rounded-3xl border border-slate-200 bg-white">
         {items.map((it, i) => {
           const d = it.data as Record<string, unknown>;
           const img = String(d[def.imageKey] ?? "");

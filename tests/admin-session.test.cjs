@@ -86,7 +86,7 @@ test("login return targets stay within the normalized admin path", () => {
     "/admin/login", "/admin/login?error=1", "/admin/login/extra",
     "/admin\n/../tr",
   ]) {
-    assert.equal(safeAdminNext(target), "/admin/leads", `must reject ${target}`);
+    assert.equal(safeAdminNext(target), "/admin/bugun", `must reject ${target}`);
   }
   assert.equal(safeAdminNext("/admin"), "/admin");
   assert.equal(safeAdminNext("/admin/leads?source=test#latest"), "/admin/leads?source=test#latest");
@@ -121,7 +121,7 @@ test("login sanitizes unsafe return targets even when credentials are valid", as
   const response = await POST(loginRequest({
     username: ENV.ADMIN_USER, password: ENV.ADMIN_PASSWORD, next: "/admin/../tr",
   }));
-  assert.equal(response.headers.get("location"), "https://local.test/admin/leads");
+  assert.equal(response.headers.get("location"), "https://local.test/admin/bugun");
 });
 
 test("wrong or absent configured credentials issue no session and keep the retry delay", async () => {
@@ -137,7 +137,7 @@ test("wrong or absent configured credentials issue no session and keep the retry
     const target = new URL(response.headers.get("location"));
     assert.equal(target.pathname, "/admin/login");
     assert.equal(target.searchParams.get("error"), "1");
-    assert.equal(target.searchParams.get("next"), "/admin/leads");
+    assert.equal(target.searchParams.get("next"), "/admin/bugun");
     assert.deepEqual(delays, [800]);
   }
 });
@@ -163,7 +163,7 @@ test("middleware accepts signed sessions and skips the login form for authentica
   const allowed = await middleware(new NextRequest("https://local.test/admin/leads", { headers }));
   assert.equal(allowed.headers.get("x-middleware-next"), "1");
   const login = await middleware(new NextRequest("https://local.test/admin/login?next=/tr", { headers }));
-  assert.equal(login.headers.get("location"), "https://local.test/admin/leads");
+  assert.equal(login.headers.get("location"), "https://local.test/admin/bugun");
 });
 
 test("leads page checks the signature before querying any customer data", async () => {

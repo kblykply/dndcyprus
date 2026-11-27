@@ -40,7 +40,7 @@ export default async function ItemPage({ params }: { params: Promise<{ col: stri
       <Link href={`/admin/icerik/liste/${col}`} className="inline-flex items-center gap-2 text-sm font-medium text-teal-700 hover:underline">
         <ArrowLeft className="h-4 w-4" aria-hidden /> {def.label}
       </Link>
-      <h1 className="mt-4 text-[28px] leading-tight text-black sm:text-[32px]">{isNew ? `Yeni ${def.singular}` : def.editTitle}</h1>
+      <h1 className="mt-4 text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">{isNew ? `Yeni ${def.singular}` : def.editTitle}</h1>
       <p className="mt-1.5 text-sm text-slate-500">{def.desc}</p>
       {!isNew && def.viewHref ? (
         <a href={def.viewHref(key)} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-medium text-teal-700 hover:underline">

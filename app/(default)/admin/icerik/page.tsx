@@ -57,10 +57,10 @@ export default async function ContentHome() {
   ]);
   const ov = new Map(overrides.map((o) => [o.scope, o]));
 
-  const card = "group flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-teal-300 hover:shadow";
+  const card = "group flex items-center gap-4 rounded-3xl border border-slate-200 bg-white p-5 transition hover:border-teal-300";
   return (
     <div className="mx-auto max-w-[1200px]">
-      <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">İçerik</h1>
+      <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">İçerik</h1>
       <p className="mt-1.5 text-sm text-slate-500">Sitedeki yazıları, görselleri ve listeleri 5 dilde buradan değiştirin. Kaydedince sayfa birkaç saniye içinde güncellenir.</p>
       <TranslateQueue count={queue.count} detail={queueDetail} />
 
@@ -127,7 +127,7 @@ export default async function ContentHome() {
       </div>
 
       <div className="mt-5">
-        <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <section className="rounded-3xl border border-slate-200 bg-white p-5">
           <h2 className="text-lg text-slate-900">Son değişiklikler</h2>
           {logs.length ? (
             <ul className="mt-3 divide-y divide-slate-100 text-[13px]">

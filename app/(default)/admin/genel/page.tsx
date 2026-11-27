@@ -25,13 +25,13 @@ const STATUS_HEX: Record<string, string> = { yeni: "#f59e0b", arandi: "#94a3b8",
 
 function Kpi({ label, value, icon, tint, children }: { label: string; value: ReactNode; icon: ReactNode; tint: string; children?: ReactNode }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+    <div className="rounded-3xl border border-slate-200 bg-white p-4 sm:p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
           <p className="mt-2 font-display text-3xl leading-none">{value}</p>
         </div>
-        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${tint}`}>{icon}</span>
+        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl ${tint}`}>{icon}</span>
       </div>
       {children ? <div className="mt-3 text-xs text-slate-500">{children}</div> : null}
     </div>
@@ -106,7 +106,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
     <div className="mx-auto max-w-[1600px]">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">Genel Bakış</h1>
+          <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Genel Bakış</h1>
           <p className="mt-1.5 text-sm text-slate-500">Satış taleplerinin özeti: nereden geliyor, hangi projeye, ne kadarı satışa dönüyor.</p>
         </div>
         <PeriodTabs base="/admin/genel" active={period} />
@@ -146,7 +146,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
               const late = followUpState(l.followUpAt, now) === "gecikti";
               return (
                 <li key={l.id}>
-                  <Link href={`/admin/leads?id=${l.id}`} className="flex items-start gap-3 rounded-lg border border-slate-200 p-3 hover:border-teal-300 hover:bg-teal-50/40">
+                  <Link href={`/admin/leads?id=${l.id}`} className="flex items-start gap-3 rounded-2xl border border-slate-200 p-3 hover:border-teal-300 hover:bg-teal-50/40">
                     <AlarmClock className={`mt-0.5 h-4 w-4 shrink-0 ${late ? "text-red-500" : "text-amber-500"}`} aria-hidden />
                     <span className="min-w-0">
                       <span className="block truncate text-[13px] font-medium text-slate-900">{l.name}</span>
@@ -182,7 +182,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
               { label: "Şu an cevap bekleyen", value: String(msgWaiting), note: "Listeyi aç", href: "/admin/leads?mesaj=cevap", alert: msgWaiting > 0 },
               { label: "Numara vermedi", value: String(msgNoNumber), note: "Listeyi aç", href: "/admin/leads?mesaj=numarasiz" },
             ].map((k) => (
-              <li key={k.label} className="rounded-lg border border-slate-200 p-3.5">
+              <li key={k.label} className="rounded-2xl border border-slate-200 p-3.5">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{k.label}</p>
                 <p className={`mt-1.5 font-display text-2xl leading-none ${"alert" in k && k.alert ? "text-red-600" : "text-slate-900"}`}>{k.value}</p>
                 {k.href ? (
@@ -277,7 +277,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
             { name: "Microsoft Clarity", ok: clarityConfigured(), note: clarityConfigured() ? "Isı Haritası sayfasında" : "Isı haritası için API anahtarı bekleniyor" },
             { name: "Meta (Instagram / Facebook)", ok: metaOn && !metaState?.error, connected: metaOn, note: metaNote },
           ].map((d) => (
-            <li key={d.name} className="flex items-start gap-3 rounded-lg border border-slate-200 p-3.5">
+            <li key={d.name} className="flex items-start gap-3 rounded-2xl border border-slate-200 p-3.5">
               {d.ok ? (
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-teal-600" aria-hidden />
               ) : (

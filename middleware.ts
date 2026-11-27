@@ -42,7 +42,7 @@ export async function middleware(req: NextRequest) {
     if (pathname.startsWith("/admin/login") || pathname.startsWith("/admin/logout")) {
       if (pathname.startsWith("/admin/login") && isLoggedIn) {
         const url = req.nextUrl.clone();
-        url.pathname = "/admin/leads";
+        url.pathname = "/admin/bugun";
         url.search = "";
         return NextResponse.redirect(url);
       }

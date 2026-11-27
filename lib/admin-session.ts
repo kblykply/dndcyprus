@@ -62,7 +62,7 @@ export async function verifyAdminSession(value: string | undefined | null): Prom
 
 /** Girişten sonra yalnız /admin altındaki yollara dönülebilir (açık yönlendirme engeli) */
 export function safeAdminNext(next: string | null | undefined) {
-  const fallback = "/admin/leads";
+  const fallback = "/admin/bugun";
   if (!next || !next.startsWith("/") || next.startsWith("//")) return fallback;
   // Tarayıcının yol olarak yeniden yorumlayabileceği karakterleri reddet.
   if (/[\\\u0000-\u001f\u007f]/.test(next)) return fallback;

@@ -133,7 +133,7 @@ function pageList(page: number, pages: number): (number | "…")[] {
 }
 
 function Pagination({ sp, page, pages, total, from, to, size, idp }: { sp: SP; page: number; pages: number; total: number; from: number; to: number; size: number; idp: string }) {
-  const btn = "flex h-8 min-w-8 items-center justify-center rounded-md px-2 text-[13px]";
+  const btn = "flex h-8 min-w-8 items-center justify-center rounded-full px-2.5 text-[13px]";
   return (
     <div className="flex flex-col gap-3 border-t border-slate-100 px-4 py-3 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-wrap items-center gap-3">
@@ -258,7 +258,7 @@ function ChatBox({ th, wait, pageId, instagram, noNumber, now }: { th?: Thread; 
         href={inboxUrl(pageId, th ?? { c: instagram ? "i" : "m" })}
         target="_blank"
         rel="noreferrer"
-        className="mt-2.5 inline-flex h-8 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
+        className="mt-2.5 inline-flex h-8 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
       >
         <ExternalLink className="h-3.5 w-3.5" aria-hidden /> Business Suite&apos;te aç
       </a>
@@ -278,7 +278,7 @@ function StatusPill({ status }: { status: string }) {
 
 function Card({ label, children, sub }: { label: string; children: ReactNode; sub: ReactNode }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+    <div className="rounded-3xl border border-slate-200 bg-white p-4 sm:p-5">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
       {children}
       <p className="mt-1.5 text-xs text-slate-500">{sub}</p>
@@ -289,7 +289,7 @@ function Card({ label, children, sub }: { label: string; children: ReactNode; su
 const TH = "px-3 py-2.5 text-left text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-500 whitespace-nowrap";
 const TD = "px-3 py-3 align-middle";
 const SELECT =
-  "h-10 appearance-none rounded-lg border border-slate-200 bg-white pl-3 pr-9 text-sm text-slate-700 shadow-sm outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20";
+  "h-10 appearance-none rounded-full border border-slate-200 bg-white pl-4 pr-9 text-sm text-slate-700 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20";
 
 function TouchList({ title, touch }: { title: string; touch: Touch | null }) {
   if (!touch) return null;
@@ -389,14 +389,14 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
       {/* Başlık */}
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">Satış Talepleri</h1>
+          <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Satış Talepleri</h1>
           <p className="mt-1.5 text-sm text-slate-500">Web sitesi formlarından ve reklamlardan gelen bütün alıcı talepleri.</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600">Toplam: {summary.total}</span>
           <a
             href={excelHref}
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"
           >
             <Download className="h-[15px] w-[15px]" strokeWidth={1.7} aria-hidden />
             Excel indir
@@ -405,7 +405,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           {!legacy ? (
             <Link
               href="/admin/leads/yeni"
-              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0d6570] px-3.5 py-2 text-sm font-semibold text-white hover:bg-[#0a5159]"
             >
               <Plus className="h-[15px] w-[15px]" strokeWidth={2} aria-hidden />
               Yeni talep
@@ -467,7 +467,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
               href={qs(sp, { durum: t.key, sayfa: undefined, id: undefined })}
               role="tab"
               aria-selected={active}
-              className={`flex shrink-0 items-center gap-2 rounded-lg px-3.5 py-2 font-medium ${active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+              className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 font-medium ${active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
             >
               {t.label}
               <span className={`rounded-full px-1.5 text-[11px] ${active ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}`}>{counts[t.key] ?? 0}</span>
@@ -479,7 +479,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
       {/* Filtreler */}
       <form method="GET" action="/admin/leads" className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
         {f.durum && f.durum !== "tumu" ? <input type="hidden" name="durum" value={f.durum} /> : null}
-        <label className="col-span-2 flex h-10 min-w-0 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 shadow-sm focus-within:border-teal-600 focus-within:ring-2 focus-within:ring-teal-500/20 sm:w-80">
+        <label className="col-span-2 flex h-10 min-w-0 items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 focus-within:border-teal-600 focus-within:ring-2 focus-within:ring-teal-500/20 sm:w-80">
           <Search className="h-[15px] w-[15px] shrink-0 text-slate-400" strokeWidth={1.7} aria-hidden />
           <input
             type="search"
@@ -541,7 +541,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
         <Link
           href={qs(sp, { takip: sp.takip === "1" ? undefined : "1", sayfa: undefined, id: undefined })}
           aria-pressed={sp.takip === "1"}
-          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-3.5 text-sm font-medium shadow-sm sm:col-span-1 ${sp.takip === "1" ? "border-amber-300 bg-amber-50 text-amber-900" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
+          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-full border px-3.5 text-sm font-medium sm:col-span-1 ${sp.takip === "1" ? "border-amber-300 bg-amber-50 text-amber-900" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
         >
           <AlarmClock className="h-4 w-4" strokeWidth={1.8} aria-hidden />
           Bugün aranacaklar
@@ -552,7 +552,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           href={qs(sp, { mesaj: sp.mesaj === "cevap" ? undefined : "cevap", sayfa: undefined, id: undefined })}
           aria-pressed={sp.mesaj === "cevap"}
           title="Messenger / Instagram'dan yazıp ekipten cevap bekleyen müşteriler"
-          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-3.5 text-sm font-medium shadow-sm sm:col-span-1 ${sp.mesaj === "cevap" ? "border-red-300 bg-red-50 text-red-800" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
+          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-full border px-3.5 text-sm font-medium sm:col-span-1 ${sp.mesaj === "cevap" ? "border-red-300 bg-red-50 text-red-800" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
         >
           <MessageSquareWarning className="h-4 w-4" strokeWidth={1.8} aria-hidden />
           Cevap bekleyenler
@@ -562,7 +562,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           href={qs(sp, { mesaj: sp.mesaj === "numarasiz" ? undefined : "numarasiz", sayfa: undefined, id: undefined })}
           aria-pressed={sp.mesaj === "numarasiz"}
           title="Mesajla yazıp telefon ya da e-posta bırakmayan kişiler: Business Suite'ten numara istenir"
-          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-3.5 text-sm font-medium shadow-sm sm:col-span-1 ${sp.mesaj === "numarasiz" ? "border-slate-400 bg-slate-100 text-slate-900" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
+          className={`col-span-2 inline-flex h-10 items-center justify-center gap-2 rounded-full border px-3.5 text-sm font-medium sm:col-span-1 ${sp.mesaj === "numarasiz" ? "border-slate-400 bg-slate-100 text-slate-900" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}`}
         >
           <PhoneOff className="h-4 w-4" strokeWidth={1.8} aria-hidden />
           Numara vermedi
@@ -584,12 +584,12 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
       <div className="mt-4 grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px] 2xl:grid-cols-[minmax(0,1fr)_380px]">
         <div className={`min-w-0 ${explicit ? "hidden xl:block" : ""}`}>
           {rows.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+            <div className="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
               <p className="font-display text-xl">Henüz talep yok</p>
               <p className="mt-1 text-sm text-slate-500">Siteden gelen form talepleri burada listelenecek ve info@dndcyprus.com&apos;a bildirilecek.</p>
             </div>
           ) : filtered.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+            <div className="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
               <p className="font-display text-xl">Bu filtrelerle talep bulunamadı</p>
               <Link href="/admin/leads" className="mt-2 inline-block text-sm font-medium text-teal-700 hover:underline">
                 Bütün talepleri göster
@@ -598,7 +598,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
           ) : (
             <>
               {/* Masaüstü tablo + toplu durum */}
-              <div className="hidden h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm md:flex">
+              <div className="hidden h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white md:flex">
               <form id="toplu" action={setLeadStatusBulk} className="flex-1">
                 <input type="hidden" name="back" value={here} />
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 px-3 py-2">
@@ -615,7 +615,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                         </select>
                         <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" aria-hidden />
                       </span>
-                      <button type="submit" className="h-8 rounded-md bg-slate-900 px-3 text-xs font-medium text-white hover:bg-slate-800">
+                      <button type="submit" className="h-8 rounded-full bg-slate-900 px-3.5 text-xs font-semibold text-white hover:bg-slate-800">
                         Seçilenlere uygula
                       </button>
                     </span>
@@ -685,7 +685,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                   const { date, time } = cyprusDateTime(r.createdAt);
                   return (
                     <li key={r.id}>
-                      <Link href={qs(sp, { id: String(r.id) })} className="block rounded-xl border border-slate-200 bg-white p-4 shadow-sm active:bg-slate-50">
+                      <Link href={qs(sp, { id: String(r.id) })} className="block rounded-2xl border border-slate-200 bg-white p-4 active:bg-slate-50">
                         <span className="flex items-start justify-between gap-3">
                           <span>
                             <span className="block font-medium">{r.name}</span>
@@ -710,7 +710,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
                     </li>
                   );
                 })}
-                <li className="overflow-hidden rounded-xl border border-slate-200 bg-white">{pager("adet-sec-m")}</li>
+                <li className="overflow-hidden rounded-3xl border border-slate-200 bg-white">{pager("adet-sec-m")}</li>
               </ul>
             </>
           )}
@@ -718,7 +718,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
 
         {/* Seçili talep */}
         {detail ? (
-          <aside className={`${explicit ? "block" : "hidden xl:block"} rounded-xl border border-slate-200 bg-white shadow-sm`} aria-label="Talep ayrıntısı">
+          <aside className={`${explicit ? "block" : "hidden xl:block"} rounded-3xl border border-slate-200 bg-white`} aria-label="Talep ayrıntısı">
             <div className="xl:sticky xl:top-4">
             {explicit ? (
               <Link href={qs(sp, { id: undefined })} className="flex items-center gap-2 border-b border-slate-100 px-5 py-3 text-sm font-medium text-teal-700 xl:hidden">
@@ -743,7 +743,7 @@ export default async function AdminLeadsPage(props: { searchParams?: Promise<SP>
               {!legacy ? (
                 <Link
                   href={`/admin/leads/${detail.id}/duzenle`}
-                  className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
+                  className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-slate-200 px-2.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
                 >
                   <Pencil className="h-3.5 w-3.5" aria-hidden /> Düzenle
                 </Link>

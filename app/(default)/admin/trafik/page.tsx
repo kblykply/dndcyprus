@@ -21,13 +21,13 @@ const DEVICE_COLORS: Record<string, string> = { mobile: "#2aa9b3", desktop: "#0d
 
 function Kpi({ label, value, icon, sub }: { label: string; value: ReactNode; icon: ReactNode; sub?: ReactNode }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+    <div className="rounded-3xl border border-slate-200 bg-white p-4 sm:p-5">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
           <p className="mt-2 font-display text-3xl leading-none">{value}</p>
         </div>
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#eef5f6] text-[#0d6570]">{icon}</span>
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#eef5f6] text-[#0d6570]">{icon}</span>
       </div>
       {sub ? <p className="mt-3 text-xs text-slate-500">{sub}</p> : null}
     </div>
@@ -43,7 +43,7 @@ function Setup({ denied = false }: { denied?: boolean }) {
   const email = ga4ServiceEmail();
   const id = ga4PropertyId();
   return (
-    <section className="mt-7 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <section className="mt-7 rounded-3xl border border-slate-200 bg-white p-6">
       <h2 className="text-xl text-slate-900">{denied ? "Son adım: GA4'te okuma izni" : "GA4 verisini panele bağlama"}</h2>
       {denied ? (
         <p className="mt-1.5 max-w-3xl text-sm text-amber-700">
@@ -91,7 +91,7 @@ export default async function TrafficPage(props: { searchParams?: Promise<{ done
   const header = (
     <div className="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">Site Trafiği</h1>
+        <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Site Trafiği</h1>
         <p className="mt-1.5 text-sm text-slate-500">Google Analytics 4: kim geliyor, nereden geliyor, hangi sayfaya bakıyor, kaçı talebe dönüyor.</p>
       </div>
       <PeriodTabs base="/admin/trafik" active={period} />
@@ -221,7 +221,7 @@ export default async function TrafficPage(props: { searchParams?: Promise<{ done
         </ChartCard>
       </div>
 
-      <p className="mt-5 flex items-start gap-2 rounded-xl border border-dashed border-slate-300 bg-white px-5 py-4 text-[13px] text-slate-500">
+      <p className="mt-5 flex items-start gap-2 rounded-2xl border border-dashed border-slate-300 bg-white px-5 py-4 text-[13px] text-slate-500">
         <Eye className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
         GA4 yalnız çerez iznini kabul eden ziyaretçileri sayar; gerçek ziyaretçi sayısı buradakinden yüksektir. Talep sayısı panelin kendi kaydından gelir.
       </p>

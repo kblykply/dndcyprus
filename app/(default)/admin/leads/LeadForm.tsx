@@ -66,7 +66,7 @@ export default function LeadForm({
   const projectNames = projects.map((p) => p.name);
 
   return (
-    <form key={state?.at ?? 0} action={formAction} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
+    <form key={state?.at ?? 0} action={formAction} className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-7">
       {initial.id ? <input type="hidden" name="id" value={initial.id} /> : null}
       {state?.error ? (
         <p role="alert" className="mb-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -162,7 +162,7 @@ export default function LeadForm({
         <Link href={cancelHref} className="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">
           Vazgeç
         </Link>
-        <button type="submit" disabled={pending} className="rounded-lg bg-slate-900 px-5 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-60">
+        <button type="submit" disabled={pending} className="rounded-full bg-[#0d6570] px-5 py-2 text-sm font-semibold text-white hover:bg-[#0a5159] disabled:opacity-60">
           {pending ? "Kaydediliyor…" : submitLabel}
         </button>
       </div>

@@ -59,7 +59,7 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
     <div className="mx-auto max-w-[1600px]">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-[28px] leading-tight text-black sm:text-[32px]">Reklam Raporu</h1>
+          <h1 className="text-[30px] font-bold leading-tight tracking-tight text-slate-950 sm:text-[36px]">Reklam Raporu</h1>
           <p className="mt-1.5 text-sm text-slate-500">Hangi kanal ve kampanya talep getiriyor, hangisi satışa dönüyor.</p>
         </div>
         <PeriodTabs base="/admin/reklam" active={period} extra={{ boyut: dim === "kanal" ? undefined : dim }} />
@@ -67,13 +67,13 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
 
       <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4 xl:gap-4">
         {kpis.map((k) => (
-          <div key={k.label} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+          <div key={k.label} className="rounded-3xl border border-slate-200 bg-white p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{k.label}</p>
                 <p className="mt-2 font-display text-3xl leading-none">{k.value}</p>
               </div>
-              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${k.tint}`}>
+              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl ${k.tint}`}>
                 <k.icon className="h-5 w-5" strokeWidth={1.8} aria-hidden />
               </span>
             </div>
@@ -104,7 +104,7 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
                   href={q.toString() ? `/admin/reklam?${q}` : "/admin/reklam"}
                   role="tab"
                   aria-selected={on}
-                  className={`shrink-0 rounded-lg px-3 py-1.5 font-medium ${on ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
+                  className={`shrink-0 rounded-full px-3.5 py-1.5 font-medium ${on ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100"}`}
                 >
                   {d.label}
                 </Link>
@@ -112,7 +112,7 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
             })}
           </div>
           {rows.length ? (
-            <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <div className="overflow-x-auto rounded-2xl border border-slate-200">
               <table className="w-full min-w-[560px] text-sm">
                 <thead className="bg-slate-50">
                   <tr>
@@ -153,7 +153,7 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
       <div className="mt-5 grid gap-5 xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <ChartCard title="Geliş yolu" sub={`Talep nereden yazdı, kaçı numara bıraktı · ${periodLabel}`}>
           {origins.length ? (
-            <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <div className="overflow-x-auto rounded-2xl border border-slate-200">
               <table className="w-full min-w-[520px] text-sm">
                 <thead className="bg-slate-50">
                   <tr>
@@ -207,7 +207,7 @@ export default async function AdReportPage(props: { searchParams?: Promise<{ don
         </ChartCard>
       </div>
 
-      <p className="mt-5 rounded-xl border border-dashed border-slate-300 bg-white px-5 py-4 text-[13px] text-slate-500">
+      <p className="mt-5 rounded-3xl border border-dashed border-slate-300 bg-white px-5 py-4 text-[13px] text-slate-500">
         Reklam harcaması, gösterim ve tıklama sayıları Meta ve Google Ads hesapları panele bağlandığında bu sayfaya eklenecek. Şu an gösterilen her sayı
         panele düşen gerçek taleplerden hesaplanıyor.
       </p>

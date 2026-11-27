@@ -76,7 +76,7 @@ export default function ItemForm({
   const [lang, setLang] = useState<ContentLocale>("tr");
   const v = { ...initial, ...(state?.values ?? {}) };
   return (
-    <form key={state?.at ?? 0} action={action} className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
+    <form key={state?.at ?? 0} action={action} className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-7">
       <input type="hidden" name="collection" value={collection} />
       <input type="hidden" name="key" value={itemKey} />
       {state?.error ? (
@@ -114,7 +114,7 @@ export default function ItemForm({
                 role="tab"
                 aria-selected={lang === l}
                 onClick={() => setLang(l)}
-                className={`rounded-lg px-3 py-1.5 font-medium ${lang === l ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
+                className={`rounded-full px-3.5 py-1.5 font-medium ${lang === l ? "bg-slate-900 text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
               >
                 {LOCALE_LABELS[l]}
                 {missing && l !== "tr" ? <span className="ml-1.5 text-amber-500" title="Çeviri boş: sitede İngilizce/Türkçe görünür">•</span> : null}
@@ -147,7 +147,7 @@ export default function ItemForm({
           <Link href={cancelHref} className="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100">
             Vazgeç
           </Link>
-          <button type="submit" disabled={pending} className="rounded-lg bg-slate-900 px-5 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-60">
+          <button type="submit" disabled={pending} className="rounded-full bg-[#0d6570] px-5 py-2 text-sm font-semibold text-white hover:bg-[#0a5159] disabled:opacity-60">
             {pending ? (autoTranslate ? "Kaydediliyor ve çevriliyor…" : "Kaydediliyor…") : "Kaydet"}
           </button>
         </span>
