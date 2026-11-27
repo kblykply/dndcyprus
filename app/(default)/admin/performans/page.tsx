@@ -91,7 +91,7 @@ function WeeklyChart({ weeks }: { weeks: WeekPoint[] }) {
       })}
       {/* hedef */}
       <line x1={L} x2={W - R} y1={yM(TARGET_MS)} y2={yM(TARGET_MS)} stroke="#f47a20" strokeWidth="1.6" strokeDasharray="6 6" />
-      <text x={W - R - 4} y={yM(TARGET_MS) - 8} textAnchor="end" fontSize="12" fontWeight="600" fill="#c2410c">
+      <text x={L + 6} y={yM(TARGET_MS) - 8} textAnchor="start" fontSize="12" fontWeight="600" fill="#c2410c">
         Hedef {Math.round(TARGET_MS / MIN)} dk
       </text>
       {/* medyan çizgisi + alan */}
