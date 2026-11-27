@@ -21,6 +21,8 @@ export type BoardLead = {
   statusAt: Date | null;
   assignee: string | null;
   followUpAt: Date | null;
+  /** talep konusu (sabah e-postasında mesaj metni yoksa) */
+  subject?: string;
 };
 
 export type AgendaKind = "cevap" | "arama" | "yeni";

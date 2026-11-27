@@ -1,6 +1,6 @@
 // middleware.ts
 import { NextResponse, type NextRequest } from "next/server";
-import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "./lib/admin-session";
+import { ADMIN_SESSION_COOKIE, readAdminSession, roleAllows } from "./lib/admin-session";
 
 const LOCALE_COOKIE = "locale";
 
@@ -37,7 +37,8 @@ export async function middleware(req: NextRequest) {
   /* ---------------- ADMIN GUARD ---------------- */
   if (pathname.startsWith("/admin")) {
     // Eskiden çerezin yalnızca varlığına bakılıyordu; artık imza doğrulanıyor.
-    const isLoggedIn = await verifyAdminSession(req.cookies.get(ADMIN_SESSION_COOKIE)?.value);
+    const session = await readAdminSession(req.cookies.get(ADMIN_SESSION_COOKIE)?.value);
+    const isLoggedIn = !!session;
 
     if (pathname.startsWith("/admin/login") || pathname.startsWith("/admin/logout")) {
       if (pathname.startsWith("/admin/login") && isLoggedIn) {
@@ -57,6 +58,14 @@ export async function middleware(req: NextRequest) {
       const res = NextResponse.redirect(loginUrl);
       res.cookies.delete(ADMIN_SESSION_COOKIE);
       return res;
+    }
+
+    // satış rolü yalnız satış sayfalarına (sunucu eylemleri de aynı yola POST edilir: onlar da kapanır)
+    if (session && !roleAllows(session.role, pathname)) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/admin/bugun";
+      url.search = "";
+      return NextResponse.redirect(url);
     }
 
     // /admin → Bugün ekranı (sunucu yönlendirmesi: sayfanın iskeleti görünmeden)

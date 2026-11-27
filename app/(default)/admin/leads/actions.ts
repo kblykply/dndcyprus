@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { ADMIN_SESSION_COOKIE, safeAdminNext, verifyAdminSession } from "@/lib/admin-session";
+import { ADMIN_SESSION_COOKIE, readAdminSession, safeAdminNext, verifyAdminSession } from "@/lib/admin-session";
 import { MANUAL_CHANNELS, isLeadStatus, manualChannel, parseLeadForm, statusInfo } from "@/lib/lead-status";
 import { metaLeadsConfigured, syncMetaLeads } from "@/lib/meta-leads";
 import { syncMetaMessages } from "@/lib/meta-messages";
@@ -25,7 +25,14 @@ function backTo(formData: FormData) {
   return safeAdminNext(String(formData.get("back") || "/admin/leads"));
 }
 
-function authorName(store: Awaited<ReturnType<typeof cookies>>, formData?: FormData) {
+async function authorName(store: Awaited<ReturnType<typeof cookies>>, formData?: FormData) {
+  // panelden açılan kullanıcı (ör. Talha) her zaman kendi adıyla yazar
+  const session = await readAdminSession(store.get(ADMIN_SESSION_COOKIE)?.value);
+  if (session && session.user !== (process.env.ADMIN_USER || "")) return session.name.slice(0, 60);
+  return authorNameTyped(store, formData);
+}
+
+function authorNameTyped(store: Awaited<ReturnType<typeof cookies>>, formData?: FormData) {
   const typed = String(formData?.get("author") || "").trim().slice(0, 60);
   if (typed) {
     store.set(AUTHOR_COOKIE, encodeURIComponent(typed), { httpOnly: true, sameSite: "lax", secure: true, path: "/admin", maxAge: 60 * 60 * 24 * 365 });
@@ -65,7 +72,7 @@ async function changeStatus(ids: number[], status: string, author: string) {
 export async function setLeadStatus(formData: FormData) {
   const store = await requireAdmin();
   const id = Number(formData.get("id"));
-  if (Number.isSafeInteger(id) && id > 0) await changeStatus([id], String(formData.get("status")), authorName(store));
+  if (Number.isSafeInteger(id) && id > 0) await changeStatus([id], String(formData.get("status")), await authorName(store));
   revalidatePath("/admin", "layout");
   redirect(backTo(formData));
 }
@@ -77,7 +84,7 @@ export async function setLeadStatusBulk(formData: FormData) {
     .map((v) => Number(v))
     .filter((n) => Number.isSafeInteger(n) && n > 0)
     .slice(0, 500);
-  await changeStatus(ids, String(formData.get("status")), authorName(store));
+  await changeStatus(ids, String(formData.get("status")), await authorName(store));
   revalidatePath("/admin", "layout");
   redirect(backTo(formData));
 }
@@ -88,7 +95,7 @@ export async function addLeadNote(formData: FormData) {
   const text = String(formData.get("text") || "").trim().slice(0, 2000);
   if (Number.isSafeInteger(id) && id > 0 && text) {
     const exists = await prisma.contactMessage.findUnique({ where: { id }, select: { id: true } });
-    if (exists) await prisma.leadNote.create({ data: { leadId: id, kind: "not", text, author: authorName(store, formData) } });
+    if (exists) await prisma.leadNote.create({ data: { leadId: id, kind: "not", text, author: await authorName(store, formData) } });
   }
   revalidatePath("/admin/leads");
   redirect(backTo(formData));
@@ -116,7 +123,7 @@ export async function createLead(_prev: LeadFormState, formData: FormData): Prom
   const v = parsed.value;
   const channel = v.channel ?? "telefon";
   const channelLabel = MANUAL_CHANNELS.find((c) => c.key === channel)?.label ?? "Diğer";
-  const author = authorName(store);
+  const author = await authorName(store);
   const lead = await prisma.contactMessage.create({
     data: {
       name: v.name,
@@ -148,7 +155,7 @@ export async function updateLead(_prev: LeadFormState, formData: FormData): Prom
   const parsed = parseLeadForm(formGetter(formData));
   if (!parsed.ok) return failed(parsed.error, formData);
   const v = parsed.value;
-  const author = authorName(store);
+  const author = await authorName(store);
   const statusChanged = v.status !== current.status;
   // Kaynak yalnız elle eklenen taleplerde değişir; siteden gelenin reklam kaynağı korunur
   const source = current.form === "panel" || manualChannel(current.source) ? `${v.channel ?? manualChannel(current.source) ?? "diger"} / manuel` : undefined;
@@ -216,7 +223,7 @@ export async function addLeadNoteLive(_prev: LiveState, formData: FormData): Pro
   if (!exists) return { error: "Talep bulunamadı (silinmiş olabilir).", at: Date.now() };
   const recent = await prisma.leadNote.findFirst({ where: { leadId: id, kind: "not", text, createdAt: { gte: new Date(Date.now() - 120_000) } }, select: { id: true } });
   if (recent) return { ok: true, message: "Bu not zaten eklendi.", at: Date.now() };
-  await prisma.leadNote.create({ data: { leadId: id, kind: "not", text, author: authorName(store, formData) } });
+  await prisma.leadNote.create({ data: { leadId: id, kind: "not", text, author: await authorName(store, formData) } });
   revalidatePath("/admin/leads");
   return { ok: true, message: "Not eklendi.", at: Date.now() };
 }
@@ -226,7 +233,7 @@ export async function setLeadStatusLive(_prev: LiveState, formData: FormData): P
   const id = Number(formData.get("id"));
   const status = String(formData.get("status"));
   if (!Number.isSafeInteger(id) || id <= 0 || !isLeadStatus(status)) return { error: "Durum değiştirilemedi.", at: Date.now() };
-  await changeStatus([id], status, authorName(store));
+  await changeStatus([id], status, await authorName(store));
   revalidatePath("/admin", "layout");
   return { ok: true, message: `Durum: ${statusInfo(status).label}`, at: Date.now() };
 }
@@ -287,7 +294,7 @@ export async function setFollowUpLive(_prev: LiveState, formData: FormData): Pro
     : [followUpAt ? `Sonraki arama: ${absolute(followUpAt)}` : "", assignee ? `Sorumlu: ${assignee}` : ""].filter(Boolean).join(" · ");
   await prisma.$transaction([
     prisma.contactMessage.update({ where: { id }, data: { assignee, followUpAt } }),
-    prisma.leadNote.create({ data: { leadId: id, kind: "takip", text, author: authorName(store) } }),
+    prisma.leadNote.create({ data: { leadId: id, kind: "takip", text, author: await authorName(store) } }),
   ]);
   revalidatePath("/admin", "layout");
   return { ok: true, message: clear ? "Takip kaldırıldı." : "Takip kaydedildi.", at: Date.now() };

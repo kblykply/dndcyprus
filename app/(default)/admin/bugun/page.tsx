@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ArrowRight, CalendarDays, MessageCircle, Phone, PhoneOff, Sparkles } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
+import { ADMIN_SESSION_COOKIE, readAdminSession, verifyAdminSession } from "@/lib/admin-session";
 import { cyprusMonthStart, isSalesLead, statusInfo, telHref, waNumber } from "@/lib/lead-status";
 import { followUpLabel } from "@/lib/lead-followup";
 import { loadMetaMsgState } from "@/lib/meta-messages";
@@ -108,9 +108,11 @@ export default async function TodayPage() {
   const msgReady = !!msgState?.convs && Object.keys(msgState.convs).length > 0;
 
   const authorCookie = store.get("admin_author")?.value;
+  const session = await readAdminSession(store.get(ADMIN_SESSION_COOKIE)?.value);
   let who = "";
   try {
-    who = authorCookie ? decodeURIComponent(authorCookie).split(/\s+/)[0] : "";
+    // panelden açılan kullanıcı (ör. Talha) kendi adıyla; ana yönetici notlarda yazdığı adla
+    who = session && session.user !== (process.env.ADMIN_USER || "") ? session.name.split(/\s+/)[0] : authorCookie ? decodeURIComponent(authorCookie).split(/\s+/)[0] : "";
   } catch {
     who = "";
   }

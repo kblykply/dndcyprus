@@ -39,25 +39,68 @@ export function safeEqual(a: string, b: string) {
   return diff === 0;
 }
 
-export async function createAdminSession(): Promise<string | null> {
+/**
+ * Panel rolleri (27.11.2026): "admin" her şeyi görür; "satis" (ör. mesajlara cevap veren Talha) yalnız satış sayfalarını
+ * (Bugün, Genel Bakış, Satış Talepleri, Reklam Raporu) görür ve talep durumunu/notunu kendi adıyla değiştirir.
+ */
+export type PanelRole = "admin" | "satis";
+export type AdminSession = { user: string; name: string; role: PanelRole };
+
+const b64 = (s: string) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+const unb64 = (s: string) =>
+  new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4)), (c) => c.charCodeAt(0)));
+
+/**
+ * Oturum çerezi. Ortamdaki yönetici (ADMIN_USER) eski biçimi kullanır: "<bitiş>.<imza>". Panel kullanıcısı:
+ * "<bitiş>.<kullanıcı b64>.<ad b64>.<rol>.<imza>" — rol imzanın içinde, değiştirilemez.
+ */
+export async function createAdminSession(who?: AdminSession): Promise<string | null> {
   const secret = sessionSecret();
   if (!secret) return null;
   const expires = Date.now() + ADMIN_SESSION_MAX_AGE * 1000;
-  const sig = await hmacHex(secret, `admin:${expires}`);
-  return `${expires}.${sig}`;
+  if (!who) {
+    const sig = await hmacHex(secret, `admin:${expires}`);
+    return `${expires}.${sig}`;
+  }
+  const u = b64(who.user);
+  const n = b64(who.name || who.user);
+  const sig = await hmacHex(secret, `admin:${expires}:${u}:${n}:${who.role}`);
+  return `${expires}.${u}.${n}.${who.role}.${sig}`;
+}
+
+export async function readAdminSession(value: string | undefined | null): Promise<AdminSession | null> {
+  if (!value) return null;
+  const secret = sessionSecret();
+  if (!secret) return null;
+  const old = /^([1-9]\d*)\.([a-f0-9]{64})$/.exec(value);
+  if (old && old[0] === value) {
+    const expires = Number(old[1]);
+    if (!Number.isSafeInteger(expires) || expires <= Date.now()) return null;
+    if (!safeEqual(old[2], await hmacHex(secret, `admin:${expires}`))) return null;
+    const user = (process.env.ADMIN_USER || "Yönetici").slice(0, 60);
+    return { user, name: user, role: "admin" };
+  }
+  const m = /^([1-9]\d*)\.([A-Za-z0-9_-]{1,120})\.([A-Za-z0-9_-]{1,240})\.(admin|satis)\.([a-f0-9]{64})$/.exec(value);
+  if (!m || m[0] !== value) return null;
+  const expires = Number(m[1]);
+  if (!Number.isSafeInteger(expires) || expires <= Date.now()) return null;
+  if (!safeEqual(m[5], await hmacHex(secret, `admin:${expires}:${m[2]}:${m[3]}:${m[4]}`))) return null;
+  try {
+    return { user: unb64(m[2]).slice(0, 60), name: unb64(m[3]).slice(0, 60), role: m[4] as PanelRole };
+  } catch {
+    return null;
+  }
 }
 
 export async function verifyAdminSession(value: string | undefined | null): Promise<boolean> {
-  if (!value) return false;
-  const secret = sessionSecret();
-  if (!secret) return false;
-  const parts = /^([1-9]\d*)\.([a-f0-9]{64})$/.exec(value);
-  if (!parts || parts[0] !== value) return false;
-  const expires = Number(parts[1]);
-  const sig = parts[2];
-  if (!Number.isSafeInteger(expires) || expires <= Date.now()) return false;
-  const expected = await hmacHex(secret, `admin:${expires}`);
-  return safeEqual(sig, expected);
+  return !!(await readAdminSession(value));
+}
+
+/** Satış rolünün açabildiği panel yolları; diğerleri (İçerik, Trafik, Kullanıcılar, Performans…) yalnız yönetici */
+const SALES_PATHS = ["/admin/bugun", "/admin/genel", "/admin/leads", "/admin/reklam", "/admin/logout"];
+export function roleAllows(role: PanelRole, pathname: string) {
+  if (role === "admin") return true;
+  return pathname === "/admin" || pathname === "/admin/" || SALES_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
 }
 
 /** Girişten sonra yalnız /admin altındaki yollara dönülebilir (açık yönlendirme engeli) */

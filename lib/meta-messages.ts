@@ -34,8 +34,9 @@ export type GraphConv = { id: string; updated_time: string; link?: string; parti
  *   c = platform (m Messenger, i Instagram) · f = görülen ilk müşteri mesajı · w = cevap bekleyen ilk müşteri mesajının zamanı
  *   (ekip cevap verince silinir) · r = ilk cevap süresi (ms) · a = ekibin son cevabı · e = Meta'ya gönderilen olaylar (bit)
  *   u = Meta'nın verdiği sohbet bağlantısı (Business Suite'te doğrudan o sohbeti açar; yalnız Messenger)
+ *   x = müşterinin son mesajı (en çok 240 harf; sabah "cevap bekleyen mesajlar" e-postası için)
  */
-export type ConvMemo = { l?: number; t: number; p?: string; c?: "m" | "i"; f?: number; w?: number | null; r?: number | null; a?: number | null; e?: number; u?: string };
+export type ConvMemo = { l?: number; t: number; p?: string; c?: "m" | "i"; f?: number; w?: number | null; r?: number | null; a?: number | null; e?: number; u?: string; x?: string };
 export type MetaMsgState = {
   lastRunAt?: string;
   /** platform başına: bu zamandan sonra güncellenen sohbetlere bakılır */
@@ -339,6 +340,8 @@ export async function syncMetaMessages(): Promise<MetaMsgState & { ok: boolean }
     const info: Omit<ConvMemo, "t"> = {
       ...(typeof conv.link === "string" && conv.link ? { u: conv.link.slice(0, 400) } : {}),
       p: person?.id ?? memo?.p,
+      // son mesaj yalnız cevap beklerken tutulur (hafıza şişmesin; cevap gelince silinir)
+      x: rs.waitingSince && msgs.length ? (msgs[msgs.length - 1].text || "(fotoğraf / ek)").slice(0, 240) : undefined,
       c: platform === "instagram" ? "i" : "m",
       ...(Number.isFinite(firstSeen) ? { f: firstSeen } : {}),
       w: rs.waitingSince,

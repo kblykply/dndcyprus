@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import AdminShell from "@/app/(default)/admin/AdminShell";
-import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "@/lib/admin-session";
+import { ADMIN_SESSION_COOKIE, readAdminSession, verifyAdminSession } from "@/lib/admin-session";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -26,9 +26,9 @@ async function waitingCount(): Promise<number | null> {
 }
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {
-  const waiting = await waitingCount();
+  const [waiting, session] = await Promise.all([waitingCount(), cookies().then((s) => readAdminSession(s.get(ADMIN_SESSION_COOKIE)?.value))]);
   return (
-    <AdminShell waiting={waiting} user={(process.env.ADMIN_USER || "Yönetici").slice(0, 40)}>
+    <AdminShell waiting={waiting} user={(session?.name || process.env.ADMIN_USER || "Yönetici").slice(0, 40)} role={session?.role ?? "admin"}>
       {children}
     </AdminShell>
   );

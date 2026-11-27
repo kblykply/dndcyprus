@@ -24,7 +24,14 @@ export async function POST(req: NextRequest) {
     safeEqual(username, ADMIN_USER) &&
     safeEqual(password, ADMIN_PASSWORD);
 
-  const session = valid ? await createAdminSession() : null;
+  // ortamdaki yönetici değilse panelden açılan kullanıcılar (ör. Talha, satış rolü)
+  let session = valid ? await createAdminSession() : null;
+  if (!session && !valid && username && password && process.env.DATABASE_URL) {
+    // veritabanı yalnız gerektiğinde yüklenir (ortam yöneticisi girişi veritabanına dokunmaz)
+    const { authenticatePanelUser } = await import("../../../lib/panel-users");
+    const who = await authenticatePanelUser(username, password).catch(() => null);
+    if (who) session = await createAdminSession(who);
+  }
 
   if (session) {
     // 303: POST sonrası hedefe GET ile git

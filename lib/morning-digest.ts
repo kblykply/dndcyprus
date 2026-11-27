@@ -1,12 +1,14 @@
 // lib/morning-digest.ts
 // Sabah özeti (27.11.2026): her sabah 09:00 (Kıbrıs) info@dndcyprus.com'a tek e-posta — dün gelen talepler, cevap bekleyen
 // mesajlar, bugünün aramaları, aranmamış yeni talepler ve haftanın kısa özeti. "Bugün" sayfasıyla aynı hesap (lib/today-board).
-// Yalnız sabit alıcıya gider (LEAD_EMAIL_TO, yoksa info@); müşteriye hiçbir şey gönderilmez.
+// Alıcılar: info@ (LEAD_EMAIL_TO) + mesajlara cevap veren (MSG_RESPONDER_EMAIL) + e-postası girilmiş panel kullanıcıları;
+// müşteriye hiçbir şey gönderilmez. Ayrıca cevap veren kişiye "cevap bekleyen mesajlar" e-postası (gece gelenler önce,
+// müşterinin son mesajı ve Business Suite'te cevap yaz bağlantısı).
 import { SITE_URL } from "./seo";
 import { F, R, esc, kabuk, recipients } from "./lead-email";
 import { cyprusDayKey } from "./lead-followup";
 import { isSalesLead, originGroup, statusInfo } from "./lead-status";
-import { durationLabel, replyStats, threadsByLead } from "./meta-msg-view";
+import { MSG_RESPONDER, durationLabel, inboxUrl, replyStats, threadsByLead, waitingSince, type Thread } from "./meta-msg-view";
 import type { MetaMsgState } from "./meta-messages";
 import { agenda, funnel, noNumberLeads, type AgendaItem, type BoardLead } from "./today-board";
 
@@ -116,27 +118,104 @@ export function digestText(d: Digest) {
   return lines.join("\n");
 }
 
-/** true gönderildi, false gönderilemedi, null yapılandırılmamış */
-export async function sendDigest(d: Digest, dayKey: string): Promise<boolean | null> {
+/** Mesajlara cevap veren kişinin e-postası (ortam: MSG_RESPONDER_EMAIL, virgülle birden çok) */
+export const responderEmails = () =>
+  (process.env.MSG_RESPONDER_EMAIL || "")
+    .split(",")
+    .map((x) => x.trim().toLowerCase())
+    .filter((x) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x));
+
+/** Sabah özeti alıcıları: info@ + cevap veren + panel kullanıcıları (tekrarsız) */
+export const digestRecipients = (extra: string[] = []) => [...new Set([...recipients(), ...responderEmails(), ...extra].map((x) => x.toLowerCase()))];
+
+async function send(to: string[], subject: string, html: string, text: string, idem: string): Promise<boolean | null> {
   const key = (process.env.RESEND_API_KEY || "").trim();
-  if (!key) return null;
+  if (!key || !to.length) return null;
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       signal: AbortSignal.timeout(10_000),
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json", "Idempotency-Key": `sabah-ozeti-${dayKey}` },
-      body: JSON.stringify({
-        from: process.env.LEAD_EMAIL_FROM || "DND Cyprus Web <bildirim@takip.dndcyprus.com>",
-        to: recipients(),
-        subject: digestSubject(d),
-        html: digestHtml(d),
-        text: digestText(d),
-      }),
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json", "Idempotency-Key": idem },
+      body: JSON.stringify({ from: process.env.LEAD_EMAIL_FROM || "DND Cyprus Web <bildirim@takip.dndcyprus.com>", to, subject, html, text }),
     });
-    if (!res.ok) console.error("MORNING_DIGEST_ERROR", { status: res.status });
+    if (!res.ok) console.error("MORNING_DIGEST_ERROR", { status: res.status, idem: idem.split("-").slice(0, 2).join("-") });
     return res.ok;
   } catch (err) {
     console.error("MORNING_DIGEST_ERROR", { reason: (err as { name?: string })?.name === "TimeoutError" ? "timeout" : "network" });
     return false;
   }
+}
+
+/** true gönderildi, false gönderilemedi, null yapılandırılmamış */
+export async function sendDigest(d: Digest, dayKey: string, to: string[] = digestRecipients()): Promise<boolean | null> {
+  return send(to, digestSubject(d), digestHtml(d), digestText(d), `sabah-ozeti-${dayKey}`);
+}
+
+/* ---------------- Cevap bekleyen mesajlar (cevap veren kişiye) ---------------- */
+
+export type WaitingMsg = { lead: BoardLead; since: number; night: boolean; text: string; channel: string; link: string };
+
+/**
+ * Şu an cevap bekleyen sohbetler (14 güne kadar), en eski önce. night: dün 23:00'ten sonra gelen (e-posta 09:00'da gittiği
+ * için son 10 saat). text: müşterinin son mesajı (yoksa talep konusu).
+ */
+export function waitingMessages(leads: BoardLead[], state: MetaMsgState | null, now: Date): WaitingMsg[] {
+  const threads = threadsByLead(state);
+  const t = now.getTime();
+  const out: WaitingMsg[] = [];
+  for (const l of leads) {
+    const th: Thread | undefined = threads.get(l.id);
+    const w = waitingSince(th, l, t);
+    if (w === null) continue;
+    out.push({
+      lead: l,
+      since: w,
+      night: t - w <= 10 * 3_600_000,
+      text: (th?.x || l.subject || "").slice(0, 240),
+      channel: th?.c === "i" || (l.source || "").toLowerCase().startsWith("instagram") ? "Instagram" : "Messenger",
+      link: inboxUrl(state?.pageId ?? null, th),
+    });
+  }
+  return out.sort((a, b) => a.since - b.since);
+}
+
+export function waitingSubject(items: WaitingMsg[]) {
+  const night = items.filter((i) => i.night).length;
+  return `Cevap bekleyen ${items.length} mesaj${night ? ` · ${night} tanesi gece geldi` : ""}`;
+}
+
+export function waitingHtml(items: WaitingMsg[], now: Date) {
+  const t = now.getTime();
+  const card = (i: WaitingMsg) =>
+    `<tr><td style="padding:12px 0;border-bottom:1px solid #EDF1F4;font-family:${F};">
+<p style="margin:0;font-size:15px;line-height:21px;font-weight:700;color:${R.yazi};">${esc(i.lead.name)} <span style="font-weight:400;color:${R.gri};">· ${esc(i.channel)} · ${esc(durationLabel(t - i.since))} bekliyor${i.lead.project ? ` · ${esc(i.lead.project)}` : ""}</span></p>
+${i.text ? `<p style="margin:6px 0 0;font-size:14px;line-height:21px;color:${R.yazi};background:#F4F7F8;border-radius:8px;padding:8px 12px;">“${esc(i.text)}”</p>` : ""}
+<p style="margin:8px 0 0;"><a href="${esc(i.link)}" style="display:inline-block;background:${R.teal};color:#FFFFFF;font-size:13px;font-weight:700;line-height:34px;padding:0 14px;border-radius:7px;text-decoration:none;margin-right:6px;">Cevap yaz</a><a href="${SITE_URL}/admin/leads?id=${i.lead.id}" style="font-size:13px;color:${R.teal};font-weight:700;text-decoration:none;">Panelde aç</a></p></td></tr>`;
+  const night = items.filter((i) => i.night);
+  const older = items.filter((i) => !i.night);
+  const block = (title: string, list: WaitingMsg[]) =>
+    list.length
+      ? `<tr><td class="px" style="padding:20px 40px 0;"><p style="margin:0 0 4px;font-family:${F};font-size:11px;letter-spacing:1px;font-weight:800;color:${R.turuncu};">${esc(title.toLocaleUpperCase("tr-TR"))} (${list.length})</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${list.slice(0, 40).map(card).join("")}</table></td></tr>`
+      : "";
+  const govde = `<tr><td class="px" style="padding:26px 40px 4px;font-family:${F};">
+<p style="margin:0 0 10px;"><span style="display:inline-block;background:${R.turuncu};color:#FFFFFF;border-radius:6px;padding:4px 10px;font-size:11px;letter-spacing:1px;font-weight:800;">CEVAP BEKLEYEN MESAJLAR</span></p>
+<p style="margin:0;font-size:22px;line-height:29px;font-weight:800;color:${R.yazi};">Günaydın ${esc(MSG_RESPONDER)}, ${items.length} müşteri cevap bekliyor</p>
+<p style="margin:6px 0 0;font-size:14.5px;line-height:22px;color:${R.gri};">Messenger ve Instagram'da ekipten cevap bekleyen sohbetler, en eskisi önce. "Cevap yaz" Business Suite gelen kutusunu açar.</p></td></tr>
+${block("Gece gelenler", night)}
+${block("Daha önceden bekleyenler", older)}`;
+  return kabuk("MESAJLAR", govde, "Bu e-posta DND Cyprus yönetim panelinden her sabah 09:00'da (Kıbrıs) otomatik gönderilir; mesajlar gönderimden hemen önce Meta'dan yeniden çekilir.");
+}
+
+export function waitingText(items: WaitingMsg[], now: Date) {
+  const t = now.getTime();
+  return [
+    `Cevap bekleyen ${items.length} mesaj`,
+    "",
+    ...items.map((i) => `${i.night ? "[gece] " : ""}${i.lead.name} · ${i.channel} · ${durationLabel(t - i.since)} bekliyor${i.text ? `\n  "${i.text}"` : ""}\n  ${i.link}`),
+  ].join("\n");
+}
+
+export async function sendWaiting(items: WaitingMsg[], now: Date, dayKey: string, to: string[]) {
+  if (!items.length) return null;
+  return send(to, waitingSubject(items), waitingHtml(items, now), waitingText(items, now), `gece-mesaj-${dayKey}`);
 }

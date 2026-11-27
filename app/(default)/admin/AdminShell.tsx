@@ -11,6 +11,8 @@ import {
   ExternalLink,
   FileText,
   Flame,
+  Gauge,
+  ShieldCheck,
   Sun,
   LayoutDashboard,
   LogOut,
@@ -22,7 +24,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-type NavItem = { label: string; href: string; icon: LucideIcon; soon?: boolean; badge?: boolean };
+type NavItem = { label: string; href: string; icon: LucideIcon; soon?: boolean; badge?: boolean; adminOnly?: boolean };
 
 const GROUPS: { title: string; items: NavItem[] }[] = [
   {
@@ -32,19 +34,21 @@ const GROUPS: { title: string; items: NavItem[] }[] = [
       { label: "Genel Bakış", href: "/admin/genel", icon: LayoutDashboard },
       { label: "Satış Talepleri", href: "/admin/leads", icon: Users, badge: true },
       { label: "Reklam Raporu", href: "/admin/reklam", icon: Megaphone },
+      { label: "Performans", href: "/admin/performans", icon: Gauge, adminOnly: true },
     ],
   },
   {
     title: "Site",
     items: [
-      { label: "Site Trafiği", href: "/admin/trafik", icon: TrendingUp },
-      { label: "Isı Haritası", href: "/admin/isi-haritasi", icon: Flame },
-      { label: "İçerik", href: "/admin/icerik", icon: FileText },
+      { label: "Site Trafiği", href: "/admin/trafik", icon: TrendingUp, adminOnly: true },
+      { label: "Isı Haritası", href: "/admin/isi-haritasi", icon: Flame, adminOnly: true },
+      { label: "İçerik", href: "/admin/icerik", icon: FileText, adminOnly: true },
+      { label: "Kullanıcılar", href: "/admin/kullanicilar", icon: ShieldCheck, adminOnly: true },
     ],
   },
 ];
 
-function Nav({ pathname, waiting, user }: { pathname: string; waiting: number | null; user: string }) {
+function Nav({ pathname, waiting, user, role }: { pathname: string; waiting: number | null; user: string; role: "admin" | "satis" }) {
   return (
     <div className="flex h-full flex-col">
       <div className="border-b border-slate-100 px-6 pb-5 pt-6">
@@ -55,7 +59,7 @@ function Nav({ pathname, waiting, user }: { pathname: string; waiting: number | 
         <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Yönetim Paneli</p>
       </div>
       <nav className="flex-1 overflow-y-auto px-3 py-5 text-sm" aria-label="Panel menüsü">
-        {GROUPS.map((g, gi) => (
+        {GROUPS.map((g) => ({ ...g, items: g.items.filter((i) => role === "admin" || !i.adminOnly) })).filter((g) => g.items.length).map((g, gi) => (
           <div key={g.title} className={gi ? "pt-6" : ""}>
             <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-400">{g.title}</p>
             <ul className="space-y-1">
@@ -105,7 +109,7 @@ function Nav({ pathname, waiting, user }: { pathname: string; waiting: number | 
           </span>
           <div className="leading-tight">
             <p className="text-[13px] font-medium text-slate-900">{user}</p>
-            <p className="text-[11px] text-slate-400">Yönetici</p>
+            <p className="text-[11px] text-slate-400">{role === "admin" ? "Yönetici" : "Satış"}</p>
           </div>
         </div>
         <Link href="/tr" className="flex items-center gap-3 rounded-lg px-3 py-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900">
@@ -121,7 +125,7 @@ function Nav({ pathname, waiting, user }: { pathname: string; waiting: number | 
   );
 }
 
-export default function AdminShell({ children, waiting, user }: { children: ReactNode; waiting: number | null; user: string }) {
+export default function AdminShell({ children, waiting, user, role = "admin" }: { children: ReactNode; waiting: number | null; user: string; role?: "admin" | "satis" }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [pathname]);
@@ -131,7 +135,7 @@ export default function AdminShell({ children, waiting, user }: { children: Reac
   return (
     <div className="flex min-h-screen bg-slate-100 text-slate-900" data-clarity-mask="true">
       <aside className="sticky top-0 hidden h-screen w-[232px] shrink-0 border-r border-slate-200 bg-white lg:block 2xl:w-[248px]">
-        <Nav pathname={pathname} waiting={waiting} user={user} />
+        <Nav pathname={pathname} waiting={waiting} user={user} role={role} />
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col bg-white">
@@ -152,7 +156,7 @@ export default function AdminShell({ children, waiting, user }: { children: Reac
         </header>
         {open ? (
           <div className="fixed inset-x-0 bottom-0 top-[57px] z-20 overflow-y-auto bg-white lg:hidden">
-            <Nav pathname={pathname} waiting={waiting} user={user} />
+            <Nav pathname={pathname} waiting={waiting} user={user} role={role} />
           </div>
         ) : null}
 
