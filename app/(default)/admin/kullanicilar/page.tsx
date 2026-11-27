@@ -15,6 +15,9 @@ const INPUT = "mt-1.5 block h-10 w-full rounded-full border border-slate-200 bg-
 const LABEL = "text-[12px] font-semibold uppercase tracking-wide text-slate-500";
 const BTN = "inline-flex h-10 items-center justify-center gap-2 rounded-full bg-[#0d6570] px-5 text-sm font-semibold text-white hover:bg-[#0a5159]";
 const SMALL = "inline-flex h-8 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-700 hover:bg-slate-50";
+/** Satır içi kutu + düğme: ikisi de 40 px, aynı çizgide (çakışan boşluk/yükseklik sınıfı yok) */
+const INLINE_INPUT = "block h-10 min-w-0 flex-1 rounded-full border border-slate-200 bg-white px-4 text-sm text-slate-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20";
+const INLINE_BTN = "inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-700 hover:bg-slate-50";
 
 export default async function UsersPage(props: { searchParams?: Promise<{ tamam?: string; hata?: string }> } = {}) {
   await requireRole("admin", "/admin/kullanicilar");
@@ -127,26 +130,26 @@ export default async function UsersPage(props: { searchParams?: Promise<{ tamam?
                     </form>
                   </div>
                 </div>
-                <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                  <form action={resetPassword} className="flex gap-2">
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  <form action={resetPassword} className="flex items-center gap-2">
                     <input type="hidden" name="user" value={u.user} />
                     <label className="sr-only" htmlFor={`pw-${u.user}`}>
                       Yeni şifre
                     </label>
-                    <input id={`pw-${u.user}`} name="password" type="password" autoComplete="new-password" placeholder="Yeni şifre" className={`${INPUT} mt-0 h-9`} required minLength={8} />
-                    <button type="submit" className={SMALL}>
+                    <input id={`pw-${u.user}`} name="password" type="password" autoComplete="new-password" placeholder="Yeni şifre" className={INLINE_INPUT} required minLength={8} />
+                    <button type="submit" className={INLINE_BTN}>
                       <KeyRound className="h-3.5 w-3.5" aria-hidden /> Kaydet
                     </button>
                   </form>
-                  <form action={updateUser} className="flex gap-2">
+                  <form action={updateUser} className="flex items-center gap-2">
                     <input type="hidden" name="user" value={u.user} />
                     <input type="hidden" name="op" value="eposta" />
                     <label className="sr-only" htmlFor={`em-${u.user}`}>
                       E-posta
                     </label>
-                    <input id={`em-${u.user}`} name="email" type="email" defaultValue={u.email ?? ""} placeholder="E-posta (sabah özeti)" className={`${INPUT} mt-0 h-9`} />
-                    <button type="submit" className={SMALL}>
-                      Kaydet
+                    <input id={`em-${u.user}`} name="email" type="email" defaultValue={u.email ?? ""} placeholder="E-posta (sabah özeti)" className={INLINE_INPUT} />
+                    <button type="submit" className={INLINE_BTN}>
+                      <Mail className="h-3.5 w-3.5" aria-hidden /> Kaydet
                     </button>
                   </form>
                 </div>
