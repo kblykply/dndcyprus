@@ -107,44 +107,47 @@ test("login accepts a panel user when the database is configured and signs a sal
   assert.deepEqual(J(await s.readAdminSession(res.cookies.get("admin_session").value)), { user: "talha", name: "Talha", role: "satis" });
 });
 
-test("responder score: night messages are judged by the 10:00 deadline, not by speed", () => {
+test("responder score: only what the responder controls; night messages judged by the 10:00 deadline, not by speed", () => {
   const r = loadTypeScript("lib/responder-score.ts");
   const H = 3600_000;
   const MIN = 60_000;
   // 27.11.2026 Kıbrıs (UTC+2)
   const at = (iso) => new Date(iso).getTime();
   const now = at("2026-11-27T12:00:00Z");
-  assert.equal(r.speedPoints(4 * MIN), 35);
-  assert.equal(r.speedPoints(15 * MIN), 31);
-  assert.ok(r.speedPoints(45 * MIN) < 27 && r.speedPoints(45 * MIN) > 22);
+  assert.equal(r.speedPoints(4 * MIN), 40);
+  assert.ok(Math.abs(r.speedPoints(15 * MIN) - 35.44) < 0.01);
   assert.equal(r.speedPoints(30 * H), 0);
+  assert.equal(r.WEIGHTS.hiz + r.WEIGHTS.saat + r.WEIGHTS.gece + r.WEIGHTS.cevapsiz, 100);
   assert.equal(r.isNight(at("2026-11-26T22:30:00Z")), true); // 00:30 Kıbrıs
   assert.equal(r.isNight(at("2026-11-27T07:00:00Z")), false); // 09:00 Kıbrıs
   assert.equal(new Date(r.morningDeadline(at("2026-11-26T21:30:00Z"))).toISOString(), "2026-11-27T08:00:00.000Z"); // 23:30 → ertesi 10:00
   assert.equal(new Date(r.morningDeadline(at("2026-11-27T01:00:00Z"))).toISOString(), "2026-11-27T08:00:00.000Z"); // 03:00 → aynı gün 10:00
   const convs = {
-    a: { t: 0, f: at("2026-11-26T08:00:00Z"), r: 4 * MIN, l: 1 }, // gündüz, hızlı, numaralı
+    a: { t: 0, f: at("2026-11-26T08:00:00Z"), r: 4 * MIN, l: 1 },
     b: { t: 0, f: at("2026-11-26T09:00:00Z"), r: 10 * MIN, l: 2 },
     c: { t: 0, f: at("2026-11-26T10:00:00Z"), r: 2 * H, l: 3 },
-    d: { t: 0, f: at("2026-11-26T23:00:00Z"), r: 8 * H, l: 4 }, // 01:00 Kıbrıs, 09:00'da cevap: zamanında
-    e: { t: 0, f: at("2026-11-27T00:00:00Z"), r: 10 * H, l: 5 }, // 02:00, 12:00'de cevap: geç
-    f: { t: 0, f: at("2026-11-26T12:00:00Z"), r: null, a: null, l: 6 }, // hiç cevap yok
+    d: { t: 0, f: at("2026-11-26T23:00:00Z"), r: 8 * H, l: 4 }, // 01:00 Kıbrıs, 09:00'da yanıt: zamanında
+    e: { t: 0, f: at("2026-11-27T00:00:00Z"), r: 10 * H, l: 5 }, // 02:00, 12:00'de yanıt: geç
+    f: { t: 0, f: at("2026-11-26T12:00:00Z"), r: null, a: null, l: 6 }, // hiç yanıt yok
     yeni: { t: 0, f: now - 10 * MIN, r: null }, // son 1 saat: puana girmez
   };
-  const leads = new Map([1, 2, 3, 4, 5, 6].map((id) => [id, { phone: id <= 3 ? "0533" : null, email: "", status: "yeni" }]));
-  const res = J(r.responderScore(convs, leads, now, 30));
+  const res = J(r.responderScore(convs, now, 30));
   assert.equal(res.stats.conversations, 6);
   assert.equal(res.stats.night, 2);
   assert.equal(res.stats.dayMedian, 10 * MIN);
   const p = Object.fromEntries(res.parts.map((x) => [x.key, x.points]));
-  assert.equal(p.hiz, 32.5); // 10 dk (5 ile 15 dk arası logaritmik)
-  assert.equal(p.saat, 10); // 4 gündüz sohbetin 2'si 1 saat içinde
-  assert.equal(p.gece, 7.5); // 2 gecenin 1'i zamanında
-  assert.equal(p.cevapsiz, 8.3); // 6'da 1 hiç cevapsız
-  assert.equal(p.numara, 20); // %50 numara → tam
-  assert.equal(res.score, 78);
-  assert.equal(res.grade.label, "Çok iyi");
-  assert.equal(J(r.weeklyTrend(convs, now, 2)).length, 2);
+  assert.deepEqual(Object.keys(p), ["hiz", "saat", "gece", "cevapsiz"]); // numara alma yok
+  assert.equal(p.hiz, 37.1); // 10 dk
+  assert.equal(p.saat, 12.5); // 4 gündüz sohbetin 2'si 1 saat içinde
+  assert.equal(p.gece, 10); // 2 gecenin 1'i zamanında
+  assert.equal(p.cevapsiz, 12.5); // 6'da 1 hiç yanıtsız
+  assert.equal(res.score, 72);
+  assert.equal(res.grade.label, "İyi");
+  assert.match(res.parts[0].value, /^medyan 10 dk$/);
+  const tr = J(r.weeklyTrend(convs, now, 2));
+  assert.equal(tr.length, 2);
+  assert.equal(tr[1].count, 6); // son 1 saatteki sohbet sayılmaz
+  assert.equal(tr[1].withinHour, 0.5);
 });
 
 test("morning waiting-messages mail lists night chats first with the customer's last message and a reply link", () => {

@@ -88,7 +88,7 @@ export function digestHtml(d: Digest) {
     `<b>${w.withContact}</b> kişi numara / e-posta bıraktı`,
     `<b>${w.talking}</b> kişiyle görüşülüyor`,
     w.sold ? `<b>${w.sold}</b> satış` : "",
-    d.replyMedian !== null ? `mesajlara ilk cevap ortanca <b>${esc(durationLabel(d.replyMedian))}</b>` : "",
+    d.replyMedian !== null ? `mesajlara medyan ilk yanıt süresi <b>${esc(durationLabel(d.replyMedian))}</b>` : "",
   ].filter(Boolean);
   const govde = `<tr><td class="px" style="padding:26px 40px 4px;font-family:${F};">
 <p style="margin:0 0 10px;"><span style="display:inline-block;background:${R.teal};color:#FFFFFF;border-radius:6px;padding:4px 10px;font-size:11px;letter-spacing:1px;font-weight:800;">SABAH ÖZETİ</span></p>

@@ -177,7 +177,7 @@ export default async function OverviewPage(props: { searchParams?: Promise<{ don
         >
           <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {[
-              { label: "İlk cevap (ortanca)", value: rs.median !== null ? durationLabel(rs.median) : "—", note: `${rs.answered} cevaplı sohbet`, href: null },
+              { label: "Medyan ilk yanıt", value: rs.median !== null ? durationLabel(rs.median) : "—", note: `${rs.answered} yanıtlanan sohbet`, href: null },
               { label: "1 saat içinde cevap", value: rs.withinHourPct !== null ? `%${rs.withinHourPct}` : "—", note: rs.unanswered ? `${rs.unanswered} sohbete yazılı cevap yok` : "Cevapsız sohbet yok", href: null },
               { label: "Şu an cevap bekleyen", value: String(msgWaiting), note: "Listeyi aç", href: "/admin/leads?mesaj=cevap", alert: msgWaiting > 0 },
               { label: "Numara vermedi", value: String(msgNoNumber), note: "Listeyi aç", href: "/admin/leads?mesaj=numarasiz" },

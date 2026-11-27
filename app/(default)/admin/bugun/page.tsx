@@ -243,7 +243,7 @@ export default async function TodayPage() {
             {msgReady ? (
               <dl className="mt-4 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-white p-3.5">
-                  <dt className="text-xs text-slate-500">İlk cevap (ortanca)</dt>
+                  <dt className="text-xs text-slate-500">Medyan ilk yanıt</dt>
                   <dd className="mt-1 font-display text-2xl text-slate-900">{rs.median !== null ? durationLabel(rs.median) : "—"}</dd>
                 </div>
                 <div className="rounded-2xl bg-white p-3.5">
