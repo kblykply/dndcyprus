@@ -178,7 +178,7 @@ test("conversation lists: Messenger asks for the chat link, Instagram uses small
   assert.match(seen.messenger.fields, /^id,updated_time,link,participants,messages/);
   assert.equal(seen.messenger.limit, "25");
   assert.equal(seen.instagram.fields, "id,updated_time"); // Instagram listesi hafif (Meta zaman aşımı / veri sınırı)
-  assert.equal(seen.instagram.limit, "10");
+  assert.equal(seen.instagram.limit, "3");
   assert.equal(r.error, "Instagram: Meta zamanında cevap vermedi; sonraki çalışmada tekrar denenecek.");
   assert.equal(db.state.lastTs.instagram, undefined); // Instagram'ın kaldığı yer ilerlemez
   assert.ok(db.state.lastTs.messenger > 0);

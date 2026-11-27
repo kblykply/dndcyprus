@@ -188,7 +188,8 @@ const MSG_FIELDS = "messages.limit(20){id,message,from,created_time}";
 const LIST = {
   messenger: { fields: `id,updated_time,link,participants,${MSG_FIELDS}`, limit: "25", timeout: 30_000 },
   // 27.11 10:35: participants'lı 25'lik liste de "Please reduce the amount of data" (kod 1) → yalnız kimlik + zaman, 10'ar
-  instagram: { fields: "id,updated_time", limit: "10", timeout: 30_000 },
+  // 10:45: 10'luk yalın liste de Meta "Timeout" (kod -2, alt kod 2534084; forumlarda sayfaya özgü Meta sorunu) → 3'er
+  instagram: { fields: "id,updated_time", limit: "3", timeout: 30_000 },
 } as const;
 
 /**
